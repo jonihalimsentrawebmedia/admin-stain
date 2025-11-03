@@ -121,7 +121,7 @@ export default function DashboardLayout() {
       <div className="flex flex-1 overflow-hidden!">
         {/* Sidebar */}
         <aside
-          className={`fixed sm:static z-50 top-0 left-0 h-full sm:h-auto bg-green-700 text-white flex flex-col justify-between
+          className={`fixed sm:static z-50 top-0 left-0 h-full sm:h-auto border border-green-700 bg-green-700 text-white flex flex-col justify-between
     ${sidebarSmall ? "w-16" : "w-64"} 
     transform transition-all duration-300 ease-in-out
     ${sidebarOpen ? "translate-x-0" : "-translate-x-full sm:translate-x-0"}
@@ -134,8 +134,9 @@ export default function DashboardLayout() {
                 label={item.label}
                 link={item.link}
                 key={item.link}
-                active={pathname == item.link}
+                active={pathname.includes(item.link)}
                 hiddenLabel={sidebarSmall}
+                path={pathname}
                 children={item.children}
                 dropdown={item.children.length !== 0}
               />
@@ -176,9 +177,10 @@ function SidebarItem({
   link,
   hiddenLabel,
   children,
+  path,
 }: any) {
   const [open, setOpen] = useState(false);
-  const isActive = active || open;
+
   return (
     <>
       {children.length == 0 ? (
@@ -198,17 +200,19 @@ function SidebarItem({
           {dropdown && <ChevronDown size={14} className="opacity-70" />}
         </Link>
       ) : (
-        <div>
+        <div
+          className={`flex flex-col  gap-2 px-3  cursor-pointer text-sm font-medium
+      ${
+        active
+          ? "border-l-white bg-[#F5FFFA] text-primary"
+          : " text-green-50"
+      }`}
+        >
           <div
             onClick={() => {
               setOpen(!open);
             }}
-            className={`flex  items-center gap-2 px-3 py-2 cursor-pointer text-sm font-medium
-      ${
-        active
-          ? "border-l-white bg-[#F5FFFA] text-primary"
-          : "hover:bg-green-600 text-green-50"
-      }`}
+            className="flex py-2   gap-4 justify-between"
           >
             <div className="flex  items-center gap-2 flex-1">
               {icon}
@@ -223,19 +227,23 @@ function SidebarItem({
               }`}
             >
               {children.map((row: any) => (
-                <div className="flex items-end gap-1">
+                <div className="flex  items-end gap-1">
                   <div
-                    className={`w-5 h-px  ${
+                    className={`w-2 h-px  ${
                       active && open ? "bg-primary" : "bg-white"
                     }`}
                   ></div>
                   <Link
                     to={row.link}
                     key={row.link}
-                    className={`flex gap-2 relative top-3 w-full   items-end ${
+                    className={`flex gap-2 relative top-2 w-full   items-end ${
                       active
-                        ? "border-l-white bg-[#F5FFFA] text-primary"
-                        : "hover:bg-green-600 text-green-50"
+                        ? `border-l-white bg-[#F5FFFA] ${
+                            path.includes(row.link)
+                              ? "text-primary"
+                              : "text-gray-500"
+                          } hover:bg-green-600 hover:text-green-50 `
+                        : "hover:bg-green-600 hover:text-green-50"
                     }`}
                   >
                     <div className="">{row.label}</div>
