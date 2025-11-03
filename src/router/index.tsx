@@ -12,6 +12,10 @@ import MainDataUniversityView from "@/pages/modules/settings/main-data-universit
 import LevelCreateView from "@/pages/modules/settings/management-users/level/create/LevelCreateView";
 import LevelEditView from "@/pages/modules/settings/management-users/level/edit/LevelEditView";
 import LevelView from "@/pages/modules/settings/management-users/level/LevelView";
+import UsersCreateView from "@/pages/modules/settings/management-users/users/create/UsersCreateView";
+import UsersDetailView from "@/pages/modules/settings/management-users/users/detail/UsersDetailView";
+import UsersEditView from "@/pages/modules/settings/management-users/users/edit/UsersEditView";
+import UsersView from "@/pages/modules/settings/management-users/users/UsersView";
 import ProdiCreateView from "@/pages/modules/settings/prodi/create/ProdiCreateView";
 import ProdiDetailView from "@/pages/modules/settings/prodi/detail/ProdiDetailView";
 import ProdiEditView from "@/pages/modules/settings/prodi/edit/ProdiEditView";
@@ -152,6 +156,27 @@ export const Router = createBrowserRouter([
                   {
                     path: "edit/:id",
                     element: <LevelEditView />,
+                  },
+                ],
+              },
+              {
+                path: "users",
+                children: [
+                  {
+                    index: true,
+                    element: <UsersView />,
+                  },
+                  {
+                    path: "add",
+                    element: <UsersCreateView />,
+                  },
+                  {
+                    path: "edit/:id",
+                    element: <UsersEditView />,
+                  },
+                  {
+                    path: "detail/:id",
+                    element: <UsersDetailView />,
                   },
                 ],
               },

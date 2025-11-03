@@ -1,10 +1,5 @@
 import Select, { type StylesConfig } from "react-select";
 
-const options = [
-  { value: "semua", label: "Semua" },
-  { value: "teknik", label: "Fakultas Teknik" },
-  { value: "ekonomi", label: "Fakultas Ekonomi" },
-];
 
 const customStyles: StylesConfig = {
   control: (provided, state) => ({

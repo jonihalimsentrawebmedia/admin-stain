@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, type ChangeEvent } from "react";
-import { Edit, ImagePlus, Pencil, Trash2 } from "lucide-react";
+import {  ImagePlus, Pencil, Trash2 } from "lucide-react";
 import {
   FormField,
   FormItem,

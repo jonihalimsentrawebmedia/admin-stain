@@ -171,7 +171,7 @@ export function InputText({
               value={displayValue || field.value || ''}
               defaultValue={defaultValue}
               prefix={prefix}
-              className={clsx(`text-[16px] h-12 ${inputClassName}`)}
+              className={clsx(`text-[16px] disabled:bg-[#E9E9E9] h-12 ${inputClassName}`)}
               suffix={suffix}
               handlerClick={handlerClick}
               disabled={isDisabled}

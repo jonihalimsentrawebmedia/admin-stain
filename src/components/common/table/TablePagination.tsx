@@ -14,13 +14,13 @@ interface Props {
 const TablePaginate = ({ meta }: Props) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = parseInt(searchParams.get("page") ?? "1");
-  const limit = Number(searchParams.get("limit") ?? "10");
+  // const limit = Number(searchParams.get("limit") ?? "10");
 
-  const total = meta?.total ?? 0;
+  // const total = meta?.total ?? 0;
   const lastPage = meta?.last_page ?? 1;
 
-  const start = limit * (currentPage - 1) + 1;
-  const end = Math.min(currentPage * limit, total);
+  // const start = limit * (currentPage - 1) + 1;
+  // const end = Math.min(currentPage * limit, total);
 
   const updatePage = (page: number) => {
     const newParams = new URLSearchParams(searchParams);
