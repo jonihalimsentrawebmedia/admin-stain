@@ -1,9 +1,9 @@
 import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup";
-import FacultyDetailViewModel from "./FacultyDetailViewModel";
+import UnitDetailViewModel from "./UnitDetailViewModel";
 import DetailField from "@/components/common/field/DetailField";
 import CardInput from "@/components/common/card/CardInput";
 
-const FacultyDetailView = () => {
+const UnitDetailView = () => {
   const {
     fieldAddress,
     fieldContact,
@@ -12,9 +12,10 @@ const FacultyDetailView = () => {
     fieldUniversity,
     form,
     goToEdit,
-  } = FacultyDetailViewModel();
+  } = UnitDetailViewModel();
   return (
     <div className="flex flex-col gap-4">
+        
       <ButtonTitleGroup
       isBack
         buttonGroup={[
@@ -26,7 +27,7 @@ const FacultyDetailView = () => {
             type: "edit",
           },
         ]}
-        label="Detail Data Fakultas"
+        label="Detail Data Prodi"
       />
       <div className="flex flex-col gap-4">
         <div>
@@ -37,7 +38,7 @@ const FacultyDetailView = () => {
             isRow={false}
           />
         </div>
-        <CardInput title="Identitas Fakultas">
+        <CardInput title="Identitas Unit">
           <DetailField data={fieldUniversity} form={form} />
         </CardInput>
         <CardInput title="Alamat Lengkap">
@@ -52,6 +53,6 @@ const FacultyDetailView = () => {
       </div>
     </div>
   );
-};
+}
 
-export default FacultyDetailView;
+export default UnitDetailView

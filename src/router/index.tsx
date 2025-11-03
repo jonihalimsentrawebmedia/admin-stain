@@ -9,6 +9,10 @@ import ProdiCreateView from "@/pages/modules/settings/prodi/create/ProdiCreateVi
 import ProdiDetailView from "@/pages/modules/settings/prodi/detail/ProdiDetailView";
 import ProdiEditView from "@/pages/modules/settings/prodi/edit/ProdiEditView";
 import ProdiView from "@/pages/modules/settings/prodi/ProdiView";
+import UnitCreateView from "@/pages/modules/settings/unit/create/UnitCreateView";
+import UnitDetailView from "@/pages/modules/settings/unit/detail/UnitDetailView";
+import UnitEditView from "@/pages/modules/settings/unit/edit/UnitEditView";
+import UnitView from "@/pages/modules/settings/unit/UnitView";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
 export const Router = createBrowserRouter([
@@ -79,6 +83,27 @@ export const Router = createBrowserRouter([
               {
                 path: "detail/:id",
                 element: <ProdiDetailView />,
+              },
+            ],
+          },
+          {
+            path: "unit",
+            children: [
+              {
+                index: true,
+                element: <UnitView />,
+              },
+              {
+                path: "add",
+                element: <UnitCreateView />,
+              },
+              {
+                path: "edit/:id",
+                element: <UnitEditView />,
+              },
+              {
+                path: "detail/:id",
+                element: <UnitDetailView />,
               },
             ],
           },

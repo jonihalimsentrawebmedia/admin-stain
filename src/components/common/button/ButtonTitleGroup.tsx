@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Save, X } from "lucide-react";
 import { type ReactNode } from "react";
 import { HiPencil, HiPlus } from "react-icons/hi";
+import { useNavigate } from "react-router-dom";
+import { IconBackTitle } from "../icon";
 
 interface Props {
   label: string;
@@ -12,12 +14,25 @@ interface Props {
     element?: ReactNode;
     isDisabled?: boolean;
   }[];
+  isBack?: boolean;
 }
 const ButtonTitleGroup = (props: Props) => {
-  const { buttonGroup, label } = props;
+  const { buttonGroup, label, isBack } = props;
+  const navigate = useNavigate();
   return (
     <div className="flex gap-4 items-center justify-between">
-      <p className="text-3xl font-semibold text-neutral">{label}</p>
+      <div className="flex items-center">
+        {isBack && (
+          <button
+            onClick={() => {
+              navigate(-1);
+            }}
+          >
+            <IconBackTitle />
+          </button>
+        )}
+        <p className="text-3xl font-semibold text-neutral">{label}</p>
+      </div>
       <div className="flex gap-4 items-center">
         {buttonGroup.map((row, K) => {
           if (row.element) {

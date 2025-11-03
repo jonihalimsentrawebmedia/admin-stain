@@ -17,6 +17,7 @@ const ProdiDetailView = () => {
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
+      isBack
         buttonGroup={[
           {
             label: "Edit Data",
@@ -37,7 +38,7 @@ const ProdiDetailView = () => {
             isRow={false}
           />
         </div>
-        <CardInput title="Identitas Institusi">
+        <CardInput title="Identitas Prodi">
           <DetailField data={fieldUniversity} form={form} />
         </CardInput>
         <CardInput title="Alamat Lengkap">

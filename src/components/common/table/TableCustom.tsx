@@ -1,17 +1,4 @@
-interface Props {
-  data: any;
-  columns: any;
-  className?: string;
-  thClassName?: string;
-  tdClassName?: string;
-  isShowFilter?: boolean;
-  isShowPagination?: boolean;
-  tdFooterClassName?: string;
-  isShowFooterTable?: boolean;
-  addFilter?: ReactNode;
-  addRowColumn?: ReactNode;
-  classNameSearch?: string;
-}
+
 import {
   flexRender,
   getCoreRowModel,
@@ -33,7 +20,21 @@ import type { ReactNode } from "react";
 import SetLimitList from "./SetLimitList";
 import Search from "./Search";
 import TablePaginate from "./TablePagination";
-
+interface Props {
+  data: any;
+  columns: any;
+  className?: string;
+  thClassName?: string;
+  tdClassName?: string;
+  isShowFilter?: boolean;
+  isShowPagination?: boolean;
+  tdFooterClassName?: string;
+  isShowFooterTable?: boolean;
+  addFilter?: ReactNode;
+  addRowColumn?: ReactNode;
+  classNameSearch?: string;
+  placeHolderSearch?:string
+}
 const TableCustom = (props: Props) => {
   const {
     className,
@@ -47,7 +48,7 @@ const TableCustom = (props: Props) => {
     isShowFooterTable,
     addFilter,
     addRowColumn,
-    classNameSearch = "rounded-lg",
+    classNameSearch = "rounded-lg",placeHolderSearch="Cari..."
   } = props;
   const table = useReactTable({
     data,
@@ -79,6 +80,8 @@ const TableCustom = (props: Props) => {
               innerClassName={classNameSearch}
               className="rounded-lg w-full"
               position="start"
+              placeholder={placeHolderSearch}
+              
             />
           </div>
         </div>
