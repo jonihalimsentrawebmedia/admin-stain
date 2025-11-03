@@ -4,6 +4,10 @@ import FacultyCreateView from "@/pages/modules/settings/faculty/create/FacultyCr
 import FacultyDetailView from "@/pages/modules/settings/faculty/detail/FacultyDetailView";
 import FacultyEditView from "@/pages/modules/settings/faculty/edit/FacultyEditView";
 import FacultyView from "@/pages/modules/settings/faculty/FacultyView";
+import InstitutionCreateView from "@/pages/modules/settings/institution/create/InstitutionCreateView";
+import InstitutionDetailView from "@/pages/modules/settings/institution/detail/InstitutionDetailView";
+import InstitutionEditView from "@/pages/modules/settings/institution/edit/InstitutionEditView";
+import InstitutionView from "@/pages/modules/settings/institution/InstitutionView";
 import MainDataUniversityView from "@/pages/modules/settings/main-data-university/MainDataUniversityView";
 import ProdiCreateView from "@/pages/modules/settings/prodi/create/ProdiCreateView";
 import ProdiDetailView from "@/pages/modules/settings/prodi/detail/ProdiDetailView";
@@ -104,6 +108,27 @@ export const Router = createBrowserRouter([
               {
                 path: "detail/:id",
                 element: <UnitDetailView />,
+              },
+            ],
+          },
+          {
+            path: "institution",
+            children: [
+              {
+                index: true,
+                element: <InstitutionView />,
+              },
+              {
+                path: "add",
+                element: <InstitutionCreateView />,
+              },
+              {
+                path: "edit/:id",
+                element: <InstitutionEditView />,
+              },
+              {
+                path: "detail/:id",
+                element: <InstitutionDetailView />,
               },
             ],
           },

@@ -20,41 +20,62 @@ export default function DashboardLayout() {
       link: "/modules/settings/dashboard",
       label: "Dashboard",
       icon: <CiGrid42 size={24} />,
+      children: [],
     },
     {
       link: "/modules/settings/main-data-university",
       label: "Data Utama Universitas",
       icon: <IoSchool size={24} />,
+      children: [],
     },
     {
       link: "/modules/settings/faculty",
       label: "Data Fakultas",
       icon: <MdBusiness size={24} />,
+      children: [],
     },
     {
       link: "/modules/settings/prodi",
       label: "Data Prodi",
       icon: <MdBusiness size={24} />,
+      children: [],
     },
     {
       link: "/modules/settings/unit",
       label: "Data Unit",
       icon: <MdBusinessCenter size={24} />,
+      children: [],
     },
     {
       link: "/modules/settings/institution",
       label: "Data Lembaga",
       icon: <MdBusinessCenter size={24} />,
+      children: [],
     },
     {
       link: "/modules/settings/management-users",
       label: "Manajemen User",
       icon: <MdPeople size={24} />,
+      children: [
+        {
+          link: "/modules/settings/management-users/level",
+          label: "Level User",
+        },
+        {
+          link: "/modules/settings/management-users/users",
+          label: "Data User",
+        },
+        {
+          link: "/modules/settings/management-users/users",
+          label: "Histori Login",
+        },
+      ],
     },
     {
       link: "/modules/settings/reference",
       label: "Tabel Referensi",
       icon: <MdRoomPreferences size={24} />,
+      children: [],
     },
   ];
   return (
@@ -115,6 +136,8 @@ export default function DashboardLayout() {
                 key={item.link}
                 active={pathname == item.link}
                 hiddenLabel={sidebarSmall}
+                children={item.children}
+                dropdown={item.children.length !== 0}
               />
             ))}
           </div>
@@ -152,22 +175,77 @@ function SidebarItem({
   dropdown,
   link,
   hiddenLabel,
+  children,
 }: any) {
+  const [open, setOpen] = useState(false);
+  const isActive = active || open;
   return (
-    <Link
-      to={link}
-      className={`flex items-center gap-2 px-3 py-2 cursor-pointer text-sm font-medium
+    <>
+      {children.length == 0 ? (
+        <Link
+          to={link}
+          className={`flex items-center gap-2 px-3 py-2 cursor-pointer text-sm font-medium
       ${
         active
           ? "border-l-white bg-[#F5FFFA] text-primary"
           : "hover:bg-green-600 text-green-50"
       }`}
-    >
-      <div className="flex items-center gap-2 flex-1">
-        {icon}
-        {!hiddenLabel && <span>{label}</span>}
-      </div>
-      {dropdown && <ChevronDown size={14} className="opacity-70" />}
-    </Link>
+        >
+          <div className="flex items-center gap-2 flex-1">
+            {icon}
+            {!hiddenLabel && <span>{label}</span>}
+          </div>
+          {dropdown && <ChevronDown size={14} className="opacity-70" />}
+        </Link>
+      ) : (
+        <div>
+          <div
+            onClick={() => {
+              setOpen(!open);
+            }}
+            className={`flex  items-center gap-2 px-3 py-2 cursor-pointer text-sm font-medium
+      ${
+        active
+          ? "border-l-white bg-[#F5FFFA] text-primary"
+          : "hover:bg-green-600 text-green-50"
+      }`}
+          >
+            <div className="flex  items-center gap-2 flex-1">
+              {icon}
+              {!hiddenLabel && <span>{label}</span>}
+            </div>
+            {dropdown && <ChevronDown size={14} className="opacity-70" />}
+          </div>
+          {open && (
+            <div
+              className={`pt-2   mb-4 transition-all ease-in-out duration-500  flex ml-6 flex-col gap-2 border-l ${
+                active && open ? "border-l-primary" : "border-l-white "
+              }`}
+            >
+              {children.map((row: any) => (
+                <div className="flex items-end gap-1">
+                  <div
+                    className={`w-5 h-px  ${
+                      active && open ? "bg-primary" : "bg-white"
+                    }`}
+                  ></div>
+                  <Link
+                    to={row.link}
+                    key={row.link}
+                    className={`flex gap-2 relative top-3 w-full   items-end ${
+                      active
+                        ? "border-l-white bg-[#F5FFFA] text-primary"
+                        : "hover:bg-green-600 text-green-50"
+                    }`}
+                  >
+                    <div className="">{row.label}</div>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </>
   );
 }

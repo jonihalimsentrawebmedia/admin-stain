@@ -21,9 +21,10 @@ const ButtonTitleGroup = (props: Props) => {
   const navigate = useNavigate();
   return (
     <div className="flex gap-4 items-center justify-between">
-      <div className="flex items-center">
+      <div className="flex gap-4 items-center">
         {isBack && (
           <button
+          className="cursor-pointer"
             onClick={() => {
               navigate(-1);
             }}
