@@ -1,6 +1,14 @@
 import ModulesView from "@/pages/modules/ModulesView";
 import LayoutSetting from "@/pages/modules/settings/components/layout/LayoutSetting";
+import FacultyCreateView from "@/pages/modules/settings/faculty/create/FacultyCreateView";
+import FacultyDetailView from "@/pages/modules/settings/faculty/detail/FacultyDetailView";
+import FacultyEditView from "@/pages/modules/settings/faculty/edit/FacultyEditView";
+import FacultyView from "@/pages/modules/settings/faculty/FacultyView";
 import MainDataUniversityView from "@/pages/modules/settings/main-data-university/MainDataUniversityView";
+import ProdiCreateView from "@/pages/modules/settings/prodi/create/ProdiCreateView";
+import ProdiDetailView from "@/pages/modules/settings/prodi/detail/ProdiDetailView";
+import ProdiEditView from "@/pages/modules/settings/prodi/edit/ProdiEditView";
+import ProdiView from "@/pages/modules/settings/prodi/ProdiView";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
 export const Router = createBrowserRouter([
@@ -31,6 +39,48 @@ export const Router = createBrowserRouter([
           {
             path: "main-data-university",
             element: <MainDataUniversityView />,
+          },
+          {
+            path: "faculty",
+            children: [
+              {
+                index: true,
+                element: <FacultyView />,
+              },
+              {
+                path: "add",
+                element: <FacultyCreateView />,
+              },
+              {
+                path: "edit/:id",
+                element: <FacultyEditView />,
+              },
+              {
+                path: "detail/:id",
+                element: <FacultyDetailView />,
+              },
+            ],
+          },
+          {
+            path: "prodi",
+            children: [
+              {
+                index: true,
+                element: <ProdiView />,
+              },
+              {
+                path: "add",
+                element: <ProdiCreateView />,
+              },
+              {
+                path: "edit/:id",
+                element: <ProdiEditView />,
+              },
+              {
+                path: "detail/:id",
+                element: <ProdiDetailView />,
+              },
+            ],
           },
         ],
       },

@@ -1,9 +1,5 @@
 import { useState } from "react";
-import {
- 
-  ChevronDown,
-  Menu,
-} from "lucide-react";
+import { ChevronDown, Menu } from "lucide-react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { CiGrid42 } from "react-icons/ci";
 import { IoSchool } from "react-icons/io5";
@@ -29,6 +25,11 @@ export default function DashboardLayout() {
       link: "/modules/settings/main-data-university",
       label: "Data Utama Universitas",
       icon: <IoSchool size={24} />,
+    },
+    {
+      link: "/modules/settings/faculty",
+      label: "Data Fakultas",
+      icon: <MdBusiness size={24} />,
     },
     {
       link: "/modules/settings/prodi",
@@ -57,7 +58,7 @@ export default function DashboardLayout() {
     },
   ];
   return (
-    <div className="flex flex-col h-screen bg-gray-100">
+    <div className="flex flex-col h-screen overflow-hidden! bg-gray-100">
       {/* Header */}
       <header className="flex items-center justify-between bg-green-50 px-4 sm:px-6 py-3 border-b border-green-100">
         <div>
@@ -96,10 +97,10 @@ export default function DashboardLayout() {
       </header>
 
       {/* Body */}
-      <div className="flex flex-1 overflow-hidden">
+      <div className="flex flex-1 overflow-hidden!">
         {/* Sidebar */}
         <aside
-           className={`fixed sm:static z-50 top-0 left-0 h-full sm:h-auto bg-green-700 text-white flex flex-col justify-between
+          className={`fixed sm:static z-50 top-0 left-0 h-full sm:h-auto bg-green-700 text-white flex flex-col justify-between
     ${sidebarSmall ? "w-16" : "w-64"} 
     transform transition-all duration-300 ease-in-out
     ${sidebarOpen ? "translate-x-0" : "-translate-x-full sm:translate-x-0"}
@@ -130,7 +131,9 @@ export default function DashboardLayout() {
         {/* Main Content */}
         <main className="flex-1  bg-white p-4 sm:p-6 overflow-y-auto rounded-tr-lg">
           <div className="h-full  rounded-lg pb-32  text-gray-400">
-            <Outlet />
+            <div className=" pb-20">
+              <Outlet />
+            </div>
           </div>
         </main>
       </div>

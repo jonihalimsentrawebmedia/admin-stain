@@ -8,13 +8,13 @@ const MainDataUniversityView = () => {
   const { form, handleSave, loadingSubmit, isDetail, setIsDetail } =
     MainDataUniversityViewModel();
   return (
-    <div className=" pb-20">
+    <>
       <div
         className="flex gap-4 items-center justify-between
         "
       >
         <div
-          className="text-2xl !text-[#464646] font-medium
+          className="text-2xl text-[#464646]! font-medium
             "
         >
           Data Utama Universitas
@@ -42,7 +42,7 @@ const MainDataUniversityView = () => {
           loading={loadingSubmit}
         />
       )}
-    </div>
+    </>
   );
 };
 
