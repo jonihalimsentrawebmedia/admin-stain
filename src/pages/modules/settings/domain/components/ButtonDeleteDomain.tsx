@@ -1,38 +1,47 @@
 import { DialogCustom } from "@/components/common/dialog/DialogCustom";
 import { IconDelete } from "@/components/common/table/icon";
 import { Button } from "@/components/ui/button";
-import {  Trash2, X } from "lucide-react";
+import { Trash2, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import GEAR from "@/assets/img/gear.png";
 import { useForm } from "react-hook-form";
 import DetailField from "@/components/common/field/DetailField";
-const ButtonDeleteModule = () => {
+const ButtonDeleteDomain = () => {
   const [open, setOpen] = useState(false);
   const form = useForm();
   const fieldsConfig = [
     {
-      name: "nama_modul",
-      label: "Nama Modul",
+      name: "jenis_modul",
+      label: "Jenis Modul",
     },
     {
-      name: "controller",
-      label: "Controller",
+      name: "kelompok",
+      label: "Kelompok",
     },
     {
-      name: "kategori",
-      label: "Kategori",
+      name: "nama",
+      label: "Nama",
     },
     {
-      name: "urutan",
-      label: "Urutan",
+      name: "domain",
+      label: "Domain",
+    },
+    {
+      name: "ip_server",
+      label: "IP Server",
+    },
+    {
+      name: "endpoint_be",
+      label: "Endpoint BE",
     },
   ];
   useEffect(() => {
     form.reset({
-      nama_modul: "Pengaturan",
-      controller: "pengaturan",
-      kategori: "Pengaturan",
-      urutan: "1",
+      jenis_modul: "Website Utama",
+      kelompok: "Universitas",
+      nama: "Sekolah Tinggi Agama Islam Negeri Mandailing Natal",
+      domain: "https://stain-madina.ac.id",
+      ip_server: "115.103.5.55.2",
+      endpoint_be: "https://be.stain-madina.ac.id",
     });
   }, []);
   return (
@@ -49,14 +58,15 @@ const ButtonDeleteModule = () => {
         className="max-w-2xl! w-full!"
         open={open}
         setOpen={setOpen}
-        title={<p className="text-2xl text-red-500">Hapus Modul?</p>}
+        title={
+          <p className="text-2xl text-red-500">
+            Hapus Pengaturan Domain Public
+          </p>
+        }
       >
-        <p>Apakah anda yakin untuk menghapus modul yang dipilih?</p>
+        <p>Apakah anda yakin untuk menghapus domain yang dipilih?</p>
         <div className="my-4 ">
-          <div className="mx-auto max-w-[200px] mb-4 bg-[#F5FFFA] border border-primary rounded-xl p-4 flex justify-center items-center">
-            <img src={GEAR} alt="" />
-          </div>
-          <DetailField data={fieldsConfig} form={form} isRow={false}/>
+          <DetailField data={fieldsConfig} form={form}  />
         </div>
 
         <div className="flex gap-4 items-center justify-end">
@@ -77,4 +87,4 @@ const ButtonDeleteModule = () => {
   );
 };
 
-export default ButtonDeleteModule;
+export default ButtonDeleteDomain;

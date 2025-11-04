@@ -1,5 +1,6 @@
 import ModulesView from "@/pages/modules/ModulesView";
 import LayoutSetting from "@/pages/modules/settings/components/layout/LayoutSetting";
+import DomainView from "@/pages/modules/settings/domain/DomainView";
 import FacultyCreateView from "@/pages/modules/settings/faculty/create/FacultyCreateView";
 import FacultyDetailView from "@/pages/modules/settings/faculty/detail/FacultyDetailView";
 import FacultyEditView from "@/pages/modules/settings/faculty/edit/FacultyEditView";
@@ -226,7 +227,16 @@ export const Router = createBrowserRouter([
                 element:<ModuleView/>
               }
             ]
-          }
+          },
+          {
+            path:"domain",
+            children:[
+              {
+                index:true,
+                element:<DomainView/>
+              }
+            ]
+          },
         ],
       },
     ],
