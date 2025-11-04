@@ -76,7 +76,20 @@ export default function DashboardLayout() {
       link: "/modules/settings/reference",
       label: "Tabel Referensi",
       icon: <MdRoomPreferences size={24} />,
-      children: [],
+      children: [
+        {
+          link: "/modules/settings/reference/news-category",
+          label: "Kategori Berita",
+        },
+        {
+          link: "/modules/settings/reference/group-rank",
+          label: "Pangkat Golongan",
+        },
+        {
+          link: "/modules/settings/reference/academic-rank",
+          label: "Pangkat Akademik",
+        },
+      ],
     },
   ];
   return (

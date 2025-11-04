@@ -22,6 +22,9 @@ import ProdiCreateView from "@/pages/modules/settings/prodi/create/ProdiCreateVi
 import ProdiDetailView from "@/pages/modules/settings/prodi/detail/ProdiDetailView";
 import ProdiEditView from "@/pages/modules/settings/prodi/edit/ProdiEditView";
 import ProdiView from "@/pages/modules/settings/prodi/ProdiView";
+import AcademicRankView from "@/pages/modules/settings/reference/academic-rank/AcademicRankView";
+import GroupRankView from "@/pages/modules/settings/reference/group-rank/GroupRankView";
+import NewsCategoryView from "@/pages/modules/settings/reference/news-category/NewsCategoryView";
 import UnitCreateView from "@/pages/modules/settings/unit/create/UnitCreateView";
 import UnitDetailView from "@/pages/modules/settings/unit/detail/UnitDetailView";
 import UnitEditView from "@/pages/modules/settings/unit/edit/UnitEditView";
@@ -197,6 +200,23 @@ export const Router = createBrowserRouter([
               },
             ],
           },
+          {
+            path:"reference",
+            children:[
+              {
+                path:"news-category",
+                element:<NewsCategoryView/>
+              },
+              {
+                path:"group-rank",
+                element:<GroupRankView/>
+              },
+              {
+                path:"academic-rank",
+                element:<AcademicRankView/>
+              }
+            ]
+          }
         ],
       },
     ],
