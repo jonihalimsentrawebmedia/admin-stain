@@ -67,7 +67,7 @@ export default function DashboardLayout() {
           label: "Data User",
         },
         {
-          link: "/modules/settings/management-users/users",
+          link: "/modules/settings/management-users/history",
           label: "Histori Login",
         },
       ],

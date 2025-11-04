@@ -8,7 +8,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Pencil, Plus, Trash } from "lucide-react";
+import { Pencil,  Trash } from "lucide-react";
 import ButtonAddLevelUser from "./components/ButtonAddLevelUser";
 import ButtonSettingLevelUser from "./components/ButtonSettingLevelUser";
 const UsersViewModel = () => {

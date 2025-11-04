@@ -4,7 +4,6 @@ import { InputCheckbox } from "@/components/common/form/InputCheckbox";
 import { InputText } from "@/components/common/form/InputText";
 import { SelectCustom } from "@/components/common/form/SelectCustom";
 import { Form } from "@/components/ui/form";
-import { Plus } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { optionSatuan } from "../data";

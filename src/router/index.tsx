@@ -9,6 +9,8 @@ import InstitutionDetailView from "@/pages/modules/settings/institution/detail/I
 import InstitutionEditView from "@/pages/modules/settings/institution/edit/InstitutionEditView";
 import InstitutionView from "@/pages/modules/settings/institution/InstitutionView";
 import MainDataUniversityView from "@/pages/modules/settings/main-data-university/MainDataUniversityView";
+import HistoryLoginDetailView from "@/pages/modules/settings/management-users/history-login/detail/HistoryLoginDetailView";
+import HistoryLoginView from "@/pages/modules/settings/management-users/history-login/HistoryLoginView";
 import LevelCreateView from "@/pages/modules/settings/management-users/level/create/LevelCreateView";
 import LevelEditView from "@/pages/modules/settings/management-users/level/edit/LevelEditView";
 import LevelView from "@/pages/modules/settings/management-users/level/LevelView";
@@ -177,6 +179,19 @@ export const Router = createBrowserRouter([
                   {
                     path: "detail/:id",
                     element: <UsersDetailView />,
+                  },
+                ],
+              },
+              {
+                path: "history",
+                children: [
+                  {
+                    index: true,
+                    element: <HistoryLoginView />,
+                  },
+                  {
+                    path: "detail/:id",
+                    element: <HistoryLoginDetailView />,
                   },
                 ],
               },
