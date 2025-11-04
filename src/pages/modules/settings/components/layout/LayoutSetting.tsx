@@ -9,6 +9,7 @@ import {
   MdPeople,
   MdRoomPreferences,
 } from "react-icons/md";
+import { IconSettings } from "../icon";
 
 export default function DashboardLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -82,13 +83,16 @@ export default function DashboardLayout() {
     <div className="flex flex-col h-screen overflow-hidden! bg-gray-100">
       {/* Header */}
       <header className="flex items-center justify-between bg-green-50 px-4 sm:px-6 py-3 border-b border-green-100">
-        <div>
-          <h1 className="text-xs sm:text-sm text-green-700 font-medium">
-            Manajemen Pengelolaan Website
-          </h1>
-          <h2 className="text-base sm:text-lg font-semibold text-green-900">
-            Pengaturan
-          </h2>
+        <div className="flex items-center gap-4">
+          <IconSettings />
+          <div>
+            <h1 className="text-xs sm:text-sm text-green-700 font-medium">
+              Manajemen Pengelolaan Website
+            </h1>
+            <h2 className="text-base sm:text-lg font-semibold text-green-900">
+              Pengaturan
+            </h2>
+          </div>
         </div>
 
         <div className="flex items-center gap-3">
@@ -203,9 +207,7 @@ function SidebarItem({
         <div
           className={`flex flex-col  gap-2 px-3  cursor-pointer text-sm font-medium
       ${
-        active
-          ? "border-l-white bg-[#F5FFFA] text-primary"
-          : " text-green-50"
+        active ? "border-l-white bg-[#F5FFFA] text-primary" : " text-green-50"
       }`}
         >
           <div

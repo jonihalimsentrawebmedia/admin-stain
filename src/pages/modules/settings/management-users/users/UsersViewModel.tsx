@@ -9,6 +9,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Pencil, Plus, Trash } from "lucide-react";
+import ButtonAddLevelUser from "./components/ButtonAddLevelUser";
+import ButtonSettingLevelUser from "./components/ButtonSettingLevelUser";
 const UsersViewModel = () => {
   const navigate = useNavigate();
   const columns: ColumnDef<any>[] = [
@@ -88,26 +90,40 @@ const UsersViewModel = () => {
       header: "", // Header kosong
       cell: (row) => {
         const values = row.row.original;
-        console.log(values)
+        console.log(values);
         // Diwakili oleh menu dropdown/ellipsis
         return (
           <Popover>
             <PopoverTrigger>...</PopoverTrigger>
             <PopoverContent side="right">
               <div className="flex flex-col gap-4">
-                <div className="flex gap-4 items-center text-black">
+                <button
+                  onClick={() => {
+                    navigate(
+                      `/modules/settings/management-users/users/detail/1`
+                    );
+                  }}
+                  className="flex gap-4 items-center cursor-pointer text-[#464646]"
+                >
                   <IoIosInformationCircle className="text-blue-500 size-4" />
                   Detail User
-                </div>
-                <div className="flex gap-4 items-center">
+                </button>
+                <ButtonAddLevelUser />
+                <ButtonSettingLevelUser />
+                {/* <div className="flex gap-4 items-center">
                   <Plus className="text-green-500 size-4" />
                   Tambah Level
-                </div>
-                <div className="flex gap-4 items-center">
+                </div> */}
+                <button
+                  onClick={() => {
+                    navigate(`/modules/settings/management-users/users/edit/1`);
+                  }}
+                  className="flex gap-4 items-center text-[#464646] cursor-pointer"
+                >
                   <Pencil className="text-orange-500 size-4" />
                   Edit
-                </div>
-                <div className="flex gap-4 items-center">
+                </button>
+                <div className="flex gap-4 items-center text-[#464646] cursor-pointer">
                   <Trash className="text-red-500 size-4" />
                   Hapus
                 </div>

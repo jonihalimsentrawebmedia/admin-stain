@@ -123,3 +123,37 @@ export const optionSatuan= [
   { label: "Fakultas Bahasa", value: "fakultas_bahasa_4" },
   { label: "Fakultas Komputer", value: "fakultas_komputer_4" },
 ];
+
+export const dummyDataLevelUser = [
+  {
+    id: 1, // Tambahan untuk kebutuhan internal
+    level: "Admin Fakultas",
+    // Baris 1: Satuan Kerja adalah string tunggal
+    satuan_kerja: "Fakultas Ilmu Bahasa",
+    status: "Aktif",
+    aktif_sejak: "09-11-2025\n14:10:00",
+    diubah: "-",
+  },
+  {
+    id: 2, // Tambahan untuk kebutuhan internal
+    level: "Editor Website",
+    // Baris 2: Satuan Kerja adalah array/list
+    satuan_kerja: [
+      "Pusat Penjaminan Mutu (P2M)",
+      "Fakultas Ilmu Budaya",
+      "Fakultas Ekonomi",
+    ],
+    status: "Aktif",
+    aktif_sejak: "09-11-2025\n14:10:00",
+    diubah: "09-11-2025\n14:10:00",
+  },
+  // Contoh data tambahan (Tidak Aktif)
+  {
+    id: 3,
+    level: "Staf Umum",
+    satuan_kerja: "Biro Administrasi Akademik",
+    status: "Tidak Aktif",
+    aktif_sejak: "01-01-2025\n08:00:00",
+    diubah: "10-10-2025\n12:30:00",
+  },
+];
