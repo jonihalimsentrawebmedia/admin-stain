@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ChevronDown, Menu } from "lucide-react";
+import { Book, ChevronDown, Menu } from "lucide-react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { CiGrid42 } from "react-icons/ci";
 import { IoSchool } from "react-icons/io5";
@@ -10,6 +10,7 @@ import {
   MdRoomPreferences,
 } from "react-icons/md";
 import { IconSettings } from "../icon";
+import { FaGear } from "react-icons/fa6";
 
 export default function DashboardLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -21,6 +22,18 @@ export default function DashboardLayout() {
       link: "/modules/settings/dashboard",
       label: "Dashboard",
       icon: <CiGrid42 size={24} />,
+      children: [],
+    },
+    {
+      link: "/modules/settings/module",
+      label: "Modul",
+      icon: <Book size={24} />,
+      children: [],
+    },
+    {
+      link: "/modules/settings/domain",
+      label: "Pengaturan Domain",
+      icon: <FaGear size={24} />,
       children: [],
     },
     {

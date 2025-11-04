@@ -1,5 +1,6 @@
 import ModulesView from "@/pages/modules/ModulesView";
 import LayoutSetting from "@/pages/modules/settings/components/layout/LayoutSetting";
+import DashboardView from "@/pages/modules/settings/dashboard/DashboardView";
 import DomainView from "@/pages/modules/settings/domain/DomainView";
 import FacultyCreateView from "@/pages/modules/settings/faculty/create/FacultyCreateView";
 import FacultyDetailView from "@/pages/modules/settings/faculty/detail/FacultyDetailView";
@@ -56,7 +57,7 @@ export const Router = createBrowserRouter([
         children: [
           {
             path: "dashboard",
-            element: <></>,
+            element: <DashboardView />,
           },
           {
             path: "main-data-university",
@@ -203,39 +204,39 @@ export const Router = createBrowserRouter([
             ],
           },
           {
-            path:"reference",
-            children:[
+            path: "reference",
+            children: [
               {
-                path:"news-category",
-                element:<NewsCategoryView/>
+                path: "news-category",
+                element: <NewsCategoryView />,
               },
               {
-                path:"group-rank",
-                element:<GroupRankView/>
+                path: "group-rank",
+                element: <GroupRankView />,
               },
               {
-                path:"academic-rank",
-                element:<AcademicRankView/>
-              }
-            ]
+                path: "academic-rank",
+                element: <AcademicRankView />,
+              },
+            ],
           },
           {
-            path:"module",
-            children:[
+            path: "module",
+            children: [
               {
-                index:true,
-                element:<ModuleView/>
-              }
-            ]
+                index: true,
+                element: <ModuleView />,
+              },
+            ],
           },
           {
-            path:"domain",
-            children:[
+            path: "domain",
+            children: [
               {
-                index:true,
-                element:<DomainView/>
-              }
-            ]
+                index: true,
+                element: <DomainView />,
+              },
+            ],
           },
         ],
       },

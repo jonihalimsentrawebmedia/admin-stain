@@ -1,0 +1,50 @@
+import DashboardViewModel from "./DashboardViewModel";
+
+const DashboardView = () => {
+  const { data } = DashboardViewModel();
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="text-2xl">
+        Selamat Datang, <span className="text-primary">John Doe</span>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {data.map((item) => (
+          <div
+            style={{
+              color: item.bgLabel,
+              borderColor: item.bgLabel,
+            }}
+            className={`border rounded-lg `}
+          >
+            <div
+              style={{
+                backgroundColor: item.bg,
+              }}
+              className={` p-4 h-[120px] rounded-t-lg flex gap-4 items-center `}
+            >
+              <div className="absolute">{item.icon}</div>
+              <div
+                style={{
+                  color: item.bgLabel,
+                }}
+                className="w-full text-center text-2xl font-bold"
+              >
+                {item.count}
+              </div>
+            </div>
+            <div
+              style={{
+                backgroundColor: item.bgLabel,
+              }}
+              className={`py-2 px-4 rounded-b-lg text-center bg-[${item.bgLabel}] text-white`}
+            >
+              {item.label}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default DashboardView;
