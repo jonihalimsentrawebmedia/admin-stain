@@ -18,6 +18,7 @@ import UsersCreateView from "@/pages/modules/settings/management-users/users/cre
 import UsersDetailView from "@/pages/modules/settings/management-users/users/detail/UsersDetailView";
 import UsersEditView from "@/pages/modules/settings/management-users/users/edit/UsersEditView";
 import UsersView from "@/pages/modules/settings/management-users/users/UsersView";
+import ModuleView from "@/pages/modules/settings/module/ModuleView";
 import ProdiCreateView from "@/pages/modules/settings/prodi/create/ProdiCreateView";
 import ProdiDetailView from "@/pages/modules/settings/prodi/detail/ProdiDetailView";
 import ProdiEditView from "@/pages/modules/settings/prodi/edit/ProdiEditView";
@@ -214,6 +215,15 @@ export const Router = createBrowserRouter([
               {
                 path:"academic-rank",
                 element:<AcademicRankView/>
+              }
+            ]
+          },
+          {
+            path:"module",
+            children:[
+              {
+                index:true,
+                element:<ModuleView/>
               }
             ]
           }
