@@ -52,6 +52,7 @@ const SelectFilter = ({label,options}:Props) => {
         options={options}
         styles={customStyles}
         className="min-w-xs"
+        placeholder="Pilih"
       />
     </div>
   );

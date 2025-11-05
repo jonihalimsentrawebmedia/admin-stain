@@ -1,9 +1,9 @@
-import { IconDelete, IconEdit } from "@/components/common/table/icon";
 import type { ColumnDef } from "@tanstack/react-table";
-
+import ButtonEditAcademicRank from "./components/ButtonEditAcademicRank";
+import ButtonDeleteAcademicRank from "./components/ButtonDeleteAcademicRank";
 
 const AcademicRankViewModel = () => {
-    const columns: ColumnDef<any>[] = [
+  const columns: ColumnDef<any>[] = [
     // ✅ Nomor (#)
     {
       accessorKey: "no",
@@ -25,22 +25,16 @@ const AcademicRankViewModel = () => {
         const values = row.row.original;
         return (
           <div className="flex gap-2 items-center">
-            <button onClick={() => console.log("edit", values.id)}>
-              {/* Asumsi IconEdit adalah ikon pensil/edit berwarna kuning */}
-              <IconEdit  />
-            </button>
-            <button onClick={() => console.log("delete", values.id)}>
-              {/* Asumsi IconDelete adalah ikon tong sampah/hapus berwarna merah */}
-              <IconDelete  />
-            </button>
+            <ButtonEditAcademicRank data={values} />
+            <ButtonDeleteAcademicRank />
           </div>
         );
       },
     },
-];
-  return{
-    columns
-  }
-}
+  ];
+  return {
+    columns,
+  };
+};
 
-export default AcademicRankViewModel
+export default AcademicRankViewModel;

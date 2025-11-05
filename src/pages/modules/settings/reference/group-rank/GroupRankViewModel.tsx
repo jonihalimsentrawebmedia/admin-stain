@@ -1,8 +1,9 @@
-import { IconDelete, IconEdit } from '@/components/common/table/icon';
-import type { ColumnDef } from '@tanstack/react-table';
+import type { ColumnDef } from "@tanstack/react-table";
+import ButtonDeleteGroupRank from "./components/ButtonDeleteGroupRank";
+import ButtonEditGroupRank from "./components/ButtonEditGroupRank";
 
 const GroupRankViewModel = () => {
-    const columns: ColumnDef<any>[] = [
+  const columns: ColumnDef<any>[] = [
     // ✅ Nomor (#)
     {
       accessorKey: "no",
@@ -24,22 +25,16 @@ const GroupRankViewModel = () => {
         const values = row.row.original;
         return (
           <div className="flex gap-2 items-center">
-            <button onClick={() => console.log("edit", values.id)}>
-              {/* Asumsi IconEdit adalah ikon pensil/edit berwarna kuning */}
-              <IconEdit />
-            </button>
-            <button onClick={() => console.log("delete", values.id)}>
-              {/* Asumsi IconDelete adalah ikon tong sampah/hapus berwarna merah */}
-              <IconDelete  />
-            </button>
+            <ButtonEditGroupRank data={values} />
+            <ButtonDeleteGroupRank />
           </div>
         );
       },
     },
-];
+  ];
   return {
-    columns
-  }
-}
+    columns,
+  };
+};
 
-export default GroupRankViewModel
+export default GroupRankViewModel;

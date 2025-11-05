@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Book, ChevronDown, Menu } from "lucide-react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { CiGrid42 } from "react-icons/ci";
@@ -151,13 +151,13 @@ export default function DashboardLayout() {
       <div className="flex flex-1 overflow-hidden!">
         {/* Sidebar */}
         <aside
-          className={`fixed sm:static z-50 top-0 left-0 h-full sm:h-auto border border-green-700 bg-green-700 text-white flex flex-col justify-between
+          className={`fixed sm:static z-50  top-0 left-0 h-full overflow-y-auto sm:h-auto border border-green-700 bg-green-700 text-white flex flex-col justify-between
     ${sidebarSmall ? "w-16" : "w-64"} 
     transform transition-all duration-300 ease-in-out
     ${sidebarOpen ? "translate-x-0" : "-translate-x-full sm:translate-x-0"}
   `}
         >
-          <div className=" space-y-1 mt-16 pt-8 sm:mt-0">
+          <div className=" space-y-1 overflow-y-auto pb-8 pt-8 sm:mt-0">
             {menu.map((item) => (
               <SidebarItem
                 icon={item.icon}
@@ -210,7 +210,14 @@ function SidebarItem({
   path,
 }: any) {
   const [open, setOpen] = useState(false);
-
+  const isActive = active || open;
+  useEffect(() => {
+    if (active) {
+      setOpen(true);
+    } else {
+      setOpen(false);
+    }
+  }, [path]);
   return (
     <>
       {children.length == 0 ? (
@@ -233,7 +240,7 @@ function SidebarItem({
         <div
           className={`flex flex-col  gap-2 px-3  cursor-pointer text-sm font-medium
       ${
-        active ? "border-l-white bg-[#F5FFFA] text-primary" : " text-green-50"
+        isActive ? "border-l-white bg-[#F5FFFA] text-primary" : " text-green-50"
       }`}
         >
           <div
@@ -250,28 +257,28 @@ function SidebarItem({
           </div>
           {open && (
             <div
-              className={`pt-2   mb-4 transition-all ease-in-out duration-500  flex ml-6 flex-col gap-2 border-l ${
-                active && open ? "border-l-primary" : "border-l-white "
+              className={`   mb-4 transition-all ease-in-out duration-500  flex ml-6 flex-col gap-2 border-l ${
+                isActive ? "border-l-primary" : "border-l-white "
               }`}
             >
               {children.map((row: any) => (
                 <div className="flex  items-end gap-1">
                   <div
                     className={`w-2 h-px  ${
-                      active && open ? "bg-primary" : "bg-white"
+                      isActive ? "bg-primary" : "bg-white"
                     }`}
                   ></div>
                   <Link
                     to={row.link}
                     key={row.link}
                     className={`flex gap-2 relative top-2 w-full   items-end ${
-                      active
+                      isActive
                         ? `border-l-white bg-[#F5FFFA] ${
                             path.includes(row.link)
                               ? "text-primary"
                               : "text-gray-500"
-                          } hover:bg-green-600 hover:text-green-50 `
-                        : "hover:bg-green-600 hover:text-green-50"
+                          } hover:text-primary `
+                        : "hover:text-primary"
                     }`}
                   >
                     <div className="">{row.label}</div>
