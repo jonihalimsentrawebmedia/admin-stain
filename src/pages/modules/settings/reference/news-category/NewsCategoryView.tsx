@@ -2,12 +2,23 @@ import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup";
 import NewsCategoryViewModel from "./NewsCategoryViewModel";
 import TableCustom from "@/components/common/table/TableCustom";
 import { dummyData } from "./data";
+import ButtonAddNewsCategory from "./components/ButtonAddNewsCategory";
 
 const NewsCategoryView = () => {
   const { columns } = NewsCategoryViewModel();
   return (
     <div className="flex flex-col gap-4">
-      <ButtonTitleGroup label="Kategori Berita" buttonGroup={[]} />
+      <ButtonTitleGroup
+        label="Kategori Berita"
+        buttonGroup={[
+          {
+            label: "",
+            onClick: () => {},
+            type: "add",
+            element: <ButtonAddNewsCategory />,
+          },
+        ]}
+      />
 
       <TableCustom
         columns={columns}

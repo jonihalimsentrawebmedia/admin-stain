@@ -1,5 +1,7 @@
-import { IconDelete, IconEdit } from "@/components/common/table/icon";
+
 import type { ColumnDef } from "@tanstack/react-table";
+import ButtonEditNewsCategory from "./components/ButtonEditNewsCategory";
+import ButtonDeleteNewsCategory from "./components/ButtonDeleteNewsCategory";
 
 
 const NewsCategoryViewModel = () => {
@@ -25,14 +27,8 @@ const NewsCategoryViewModel = () => {
         const values = row.row.original;
         return (
           <div className="flex gap-2 items-center">
-            <button onClick={() => console.log("edit", values.id)}>
-              {/* Asumsi IconEdit adalah ikon pensil/edit berwarna kuning */}
-              <IconEdit  />
-            </button>
-            <button onClick={() => console.log("delete", values.id)}>
-              {/* Asumsi IconDelete adalah ikon tong sampah/hapus berwarna merah */}
-              <IconDelete  />
-            </button>
+            <ButtonEditNewsCategory data={values}/>
+           <ButtonDeleteNewsCategory/>
           </div>
         );
       },
