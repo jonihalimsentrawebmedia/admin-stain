@@ -1,3 +1,4 @@
+import LoginView from "@/pages/login/LoginView";
 import ModulesView from "@/pages/modules/ModulesView";
 import LayoutSetting from "@/pages/modules/settings/components/layout/LayoutSetting";
 import DashboardView from "@/pages/modules/settings/dashboard/DashboardView";
@@ -41,7 +42,7 @@ export const Router = createBrowserRouter([
   },
   {
     path: "login",
-    element: <></>,
+    element: <LoginView />,
   },
   {
     path: "modules",
