@@ -10,7 +10,7 @@ import clsx from "clsx";
 import type { UseFormReturn } from "react-hook-form";
 import { useMobile } from "@/utils/useMobile";
 import { Input } from "./Input";
-import { Eye, EyeClosed, EyeOff } from "lucide-react";
+import { Eye,  EyeOff } from "lucide-react";
 
 export function InputText({
   form,
