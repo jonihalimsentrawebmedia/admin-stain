@@ -4,12 +4,12 @@ import LOGO from "@/assets/img/logo.png";
 import {Card, CardContent} from "@/components/ui/card";
 import {Button} from "@/components/ui/button";
 import {FaUser} from "react-icons/fa";
-import ModulesViewModel from "./ModulesViewModel";
 import ButtonLogOut from "@/pages/modules/components/buttonLogOut.tsx";
+import {ModulesViewModel} from "@/pages/modules/ModulesViewModel.tsx";
 
 const ModulesView = () => {
 
-  const {modules, module, setModule} = ModulesViewModel();
+  const {modules, moduleSelect, setModuleSelect} = ModulesViewModel();
 
   return (
     <div
@@ -55,20 +55,20 @@ const ModulesView = () => {
               <div className="grid w-full text-center grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
                 {modules.map((item, k) => (
                   <div key={k} onClick={() => {
-                    setModule(item)
+                    setModuleSelect(item)
                   }}
-                       className={`shadow ${module?.label == item.label ? "bg-[#CCE6D9]" : "bg-[#E9E9E9]"} border-[#E9E9E9] text-center border rounded-lg p-4 flex flex-col items-center justify-center`}>
-                    <div className="mx-auto"> {item.icon}</div>
-                    <div className="text-[14px]">{item.label}</div>
+                       className={`shadow ${moduleSelect?.id_module === item.id_module ? "bg-[#CCE6D9]" : "bg-[#E9E9E9]"} border-[#E9E9E9] text-center border rounded-lg p-4 flex flex-col items-center justify-center`}>
+                    {/*<div className="mx-auto"> {item.icon}</div>*/}
+                    <div className="text-[14px]">{item.nama_module}</div>
                     <div className="text-blue-400 text-[10px]">
-                      {item.linkWebsite}
+                      {}
                     </div>
                   </div>
                 ))}
               </div>
             </div>
             <div className="bg-[#E9E9E9] p-4 col-span-12 rounded-r-lg lg:col-span-4 ">
-              {module && (
+              {moduleSelect && (
                 <div className="flex flex-col gap-4">
                   <div className="font-bold text-black text-xl">
                     Daftar Role
@@ -77,7 +77,7 @@ const ModulesView = () => {
                     className="font-medium
                         "
                   >
-                    {module.label}
+                    {moduleSelect.nama_module}
                   </div>
                   <Card>
                     <CardContent>

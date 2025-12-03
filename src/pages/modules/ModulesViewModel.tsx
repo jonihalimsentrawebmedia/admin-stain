@@ -1,67 +1,32 @@
-import { useState, type ReactNode } from "react";
-import {
-  IconManagement,
-  IconReport,
-  IconSetting,
-  IconWebsite,
-} from "./components/icon";
+import {useState, useEffect} from "react";
+import {useQuery} from "@tanstack/react-query";
+import AxiosClient from "@/provider/axios.tsx";
+import type {IModulesList} from "@/pages/modules/interface";
 
-const ModulesViewModel = () => {
-  const [modules, setModules] = useState([
-    {
-      icon: <IconSetting />,
-      label: "Pengaturan",
-      link: "#",
-      linkWebsite: "",
-    },
-    {
-      icon: <IconWebsite />,
-      label: "Website Utama",
-      link: "#",
-      linkWebsite: "https://stain-madina.ac.id",
-    },
-    {
-      icon: <IconWebsite />,
-      label: "Website Prodi",
-      link: "#",
-      linkWebsite: "",
-    },
-    {
-      icon: <IconWebsite />,
-      label: "Website Unit",
-      link: "#",
-      linkWebsite: "",
-    },
-    {
-      icon: <IconWebsite />,
-      label: "Website Lembaga",
-      link: "#",
-      linkWebsite: "",
-    },
-    {
-      icon: <IconManagement />,
-      label: "Manajemen Editor",
-      link: "#",
-      linkWebsite: "",
-    },
-    {
-      icon: <IconReport />,
-      label: "Laporan & Statistik",
-      link: "#",
-      linkWebsite: "",
-    },
-  ]);
-  const [module, setModule] = useState<{
-    icon: ReactNode;
-    label: string;
-    link: string;
-    linkWebsite: string;
-  }>();
+export const ModulesViewModel = () => {
+  const [modules, setModules] = useState<IModulesList[]>([]);
+
+  const [moduleSelect, setModuleSelect] = useState<IModulesList>()
+
+  const {data, isLoading, isFetching} = useQuery({
+    refetchOnWindowFocus: false,
+    queryKey: ['modules-list'],
+    queryFn: () => AxiosClient.get('/pengaturan/modules').then(res => res.data.data)
+  })
+
+  const loading = isLoading || isFetching;
+
+  useEffect(() => {
+    if (data) {
+      setModules(data)
+    }
+  }, [data]);
+
   return {
     modules,
-    setModules,
-    module,setModule
+    loading,
+    moduleSelect,
+    setModuleSelect
   };
 };
 
-export default ModulesViewModel;
