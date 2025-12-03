@@ -3,7 +3,7 @@ import { IconDelete } from "@/components/common/table/icon";
 import { Button } from "@/components/ui/button";
 import AxiosClient from "@/provider/axios";
 import { useQueryClient } from "@tanstack/react-query";
-import { Save, Trash2Icon, X } from "lucide-react";
+import {  Trash2Icon, X } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { toast } from "react-toastify";
 
