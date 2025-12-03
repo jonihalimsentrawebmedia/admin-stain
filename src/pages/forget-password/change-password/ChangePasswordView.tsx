@@ -10,17 +10,17 @@ import { Button } from "@/components/ui/button";
 import { Check, X } from "lucide-react";
 
 const ChangePasswordView = () => {
-  const { form, getClass, handleSave, loading, validations } =
+  const { form, getClass, handleSave, loading, validations, isDisabled } =
     ChangePasswordViewModel();
   return (
     <div
       style={{
         backgroundImage: `url(${BG})`,
       }}
-      className={`w-screen h-screen object-cover bg-cover bg-fixed relative  flex justify-center items-center `}
+      className={`w-screen h-dvh p-8 mx-auto  overflow-y-auto object-cover bg-cover       `}
     >
-      <Card className="max-w-3xl w-full backdrop-blur-md bg-white/40 ">
-        <CardContent className="flex flex-col gap-4">
+      <Card className="max-w-3xl mx-auto  w-full backdrop-blur-md bg-white/40 ">
+        <CardContent className="flex flex-col gap-4 overflow-y-auto">
           <div className="bg-green-800 rounded-lg">
             <div
               style={{
@@ -44,7 +44,7 @@ const ChangePasswordView = () => {
               </div>
             </div>
           </div>
-          <div className="rounded-lg bg-white flex flex-col gap-4 p-4">
+          <div className="rounded-lg  bg-white flex flex-col gap-4 p-4">
             <ButtonBack />
             <p className="text-neutral font-medium text-3xl">
               Buat Password Baru
@@ -73,8 +73,8 @@ const ChangePasswordView = () => {
                 />
 
                 <Button
-                  disabled={loading}
-                  className="bg-primary w-fit mx-auto text-white                "
+                  disabled={loading || isDisabled}
+                  className="bg-primary w-fit mx-auto text-white   "
                 >
                   Simpan
                 </Button>

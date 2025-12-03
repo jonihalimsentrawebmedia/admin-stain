@@ -79,7 +79,7 @@ export default function InputImage2<T extends FieldValues>({
           <FormControl>
             <div
               onClick={preview ? undefined : handleClick}
-              className="bg-green-50 border border-green-200 min-w-[300px] rounded-md flex flex-col items-center justify-center cursor-pointer text-center p-6 hover:bg-green-100 transition relative"
+              className="bg-green-50 border rel border-green-200 min-w-[300px] rounded-md flex flex-col items-center justify-center cursor-pointer text-center p-6 hover:bg-green-100 transition relative"
             >
               {previewEnabled && preview ? (
                 <>

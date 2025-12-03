@@ -1,20 +1,49 @@
 import { DialogCustom } from "@/components/common/dialog/DialogCustom";
 import { IconDelete } from "@/components/common/table/icon";
 import { Button } from "@/components/ui/button";
-import { Save, X } from "lucide-react";
+import AxiosClient from "@/provider/axios";
+import { useQueryClient } from "@tanstack/react-query";
+import { Save, Trash2Icon, X } from "lucide-react";
 import { useState, type ReactNode } from "react";
-interface Props{
-    title:string,
-    description:ReactNode
-    urlDelete?:string
+import { toast } from "react-toastify";
+
+interface Props {
+  title: string;
+  description: ReactNode;
+  urlDelete?: string;
+  queryKey?: string;
 }
-const ButtonDelete = ({description,title,urlDelete}:Props) => {
+const ButtonDelete = ({ description, title, urlDelete, queryKey }: Props) => {
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const queryClient = useQueryClient();
+  async function handleDelete() {
+    setLoading(true);
+    try {
+      const res = await AxiosClient.delete(urlDelete ?? "");
+
+      if (res.data.status) {
+        toast.success(res.data.message);
+
+        await queryClient.invalidateQueries({
+          queryKey: [queryKey],
+        });
+      }
+    } catch (err: any) {
+      toast.error(
+        err?.response?.data?.error || "Terjadi kesalahan, silakan coba lagi."
+      );
+    } finally {
+      setLoading(false);
+      setOpen(false);
+    }
+  }
   return (
     <>
       <button
         onClick={() => {
-            console.log(urlDelete)
+          console.log(urlDelete);
           setOpen(true);
         }}
       >
@@ -27,7 +56,7 @@ const ButtonDelete = ({description,title,urlDelete}:Props) => {
         setOpen={setOpen}
         title={<p className="text-2xl text-red-500">{title}</p>}
       >
-       {description}
+        {description}
 
         <div className="flex gap-4 items-center justify-end">
           <Button
@@ -37,9 +66,13 @@ const ButtonDelete = ({description,title,urlDelete}:Props) => {
             <X />
             Batal
           </Button>
-          <Button className="bg-red-500 hover:bg-red-500/90 text-white">
-            <Save />
-            Simpan
+          <Button
+            onClick={handleDelete}
+            disabled={loading}
+            className="bg-red-500 hover:bg-red-500/90 text-white"
+          >
+            <Trash2Icon />
+            Hapus
           </Button>
         </div>
       </DialogCustom>

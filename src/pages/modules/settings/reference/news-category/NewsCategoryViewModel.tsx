@@ -1,18 +1,20 @@
-
 import type { ColumnDef } from "@tanstack/react-table";
 import ButtonEditNewsCategory from "./components/ButtonEditNewsCategory";
 import ButtonDeleteNewsCategory from "./components/ButtonDeleteNewsCategory";
-
+import { useSearchParams } from "react-router-dom";
 
 const NewsCategoryViewModel = () => {
-    const columns: ColumnDef<any>[] = [
+  const [searchParams] = useSearchParams();
+  const page = Number(searchParams.get("page") || 1);
+  const limit = Number(searchParams.get("limit") || 10);
+  const columns: ColumnDef<any>[] = [
     // ✅ Nomor (#)
     {
       accessorKey: "no",
       header: "#",
       cell: (row) => {
-        // Menggunakan index + 1 untuk nomor urut
-        return <div>{row.row.index + 1}</div>;
+        const idx = row.row.index;
+        return <div className="">{(page - 1) * limit + idx + 1}</div>;
       },
     },
 
@@ -27,16 +29,16 @@ const NewsCategoryViewModel = () => {
         const values = row.row.original;
         return (
           <div className="flex gap-2 items-center">
-            <ButtonEditNewsCategory data={values}/>
-           <ButtonDeleteNewsCategory/>
+            <ButtonEditNewsCategory data={values} />
+            <ButtonDeleteNewsCategory data={values} />
           </div>
         );
       },
     },
-];
+  ];
   return {
-    columns
-  }
-}
+    columns,
+  };
+};
 
-export default NewsCategoryViewModel
+export default NewsCategoryViewModel;

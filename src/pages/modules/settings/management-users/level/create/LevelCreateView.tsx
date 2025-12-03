@@ -1,10 +1,8 @@
-
 import LevelCreateViewModel from "./LevelCreateViewModel";
 import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup";
 import LevelForm from "../components/LevelForm";
 import ButtonForm from "@/components/common/button/ButtonForm";
 import { Form } from "@/components/ui/form";
-
 
 const LevelCreateView = () => {
   const { form, handleSave, loading, goToBack } = LevelCreateViewModel();
@@ -28,6 +26,7 @@ const LevelCreateView = () => {
                 type: "save",
                 label: "Simpan",
                 onClick: () => {},
+                isDisabled: loading,
               },
             ]}
             label="Tambah Level User"
@@ -38,6 +37,6 @@ const LevelCreateView = () => {
       </Form>
     </div>
   );
-}
+};
 
-export default LevelCreateView
+export default LevelCreateView;

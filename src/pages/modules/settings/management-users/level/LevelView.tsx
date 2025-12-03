@@ -1,10 +1,11 @@
 import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup";
 import LevelViewModel from "./LevelViewModel";
-import { dummyData } from "./data";
 import TableCustom from "@/components/common/table/TableCustom";
+import useGetLevelUser from "./controller/useGetLevelUser";
 
 const LevelView = () => {
   const { columns, goToAdd } = LevelViewModel();
+  const {levelUser,loading}=useGetLevelUser()
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
@@ -20,7 +21,8 @@ const LevelView = () => {
 
       <TableCustom
         columns={columns}
-        data={dummyData}
+        data={levelUser}
+        loading={loading}
         placeHolderSearch="Cari Level User"
       />
     </div>

@@ -1,11 +1,12 @@
 import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup";
 import NewsCategoryViewModel from "./NewsCategoryViewModel";
 import TableCustom from "@/components/common/table/TableCustom";
-import { dummyData } from "./data";
 import ButtonAddNewsCategory from "./components/ButtonAddNewsCategory";
+import useGetNewsCategory from "./controller/useGetNewsCategory";
 
 const NewsCategoryView = () => {
   const { columns } = NewsCategoryViewModel();
+  const { loading, newsCategory } = useGetNewsCategory();
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
@@ -22,7 +23,10 @@ const NewsCategoryView = () => {
 
       <TableCustom
         columns={columns}
-        data={dummyData}
+        data={newsCategory}
+        thClassName="text-start"
+        tdClassName="text-start"
+        loading={loading}
         placeHolderSearch="Cari Kategori Berita"
       />
     </div>
