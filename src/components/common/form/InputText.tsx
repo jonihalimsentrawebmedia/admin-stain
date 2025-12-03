@@ -5,69 +5,70 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { useEffect, useState, type JSX, type ReactNode } from "react";
+import {useEffect, useState, type JSX, type ReactNode} from "react";
 import clsx from "clsx";
-import type { UseFormReturn } from "react-hook-form";
-import { useMobile } from "@/utils/useMobile";
-import { Input } from "./Input";
-import { Eye,  EyeOff } from "lucide-react";
+import type {UseFormReturn} from "react-hook-form";
+import {useMobile} from "@/utils/useMobile";
+import {Input} from "./Input";
+import {Eye, EyeOff} from "lucide-react";
 
-export function InputText({
-  form,
-  label,
-  placeholder = "",
-  name,
-  prefix,
-  suffix,
-  type,
-  handlerClick,
-  className,
-  isDisabled,
-  isNumber,
-  isFloat,
-  isRow,
-  defaultValue,
-  inputClassName,
-  onChange,
-  isRupiah,
-  minDate,
-  onChangeFile,
-  classNameLabel,
-  isRequired,
-}: {
-  form: UseFormReturn | undefined | any;
-  label?: string | ReactNode;
-  placeholder?: string;
-  name: string;
-  isRow?: boolean;
-  prefix?: JSX.Element;
-  suffix?: JSX.Element;
-  type?:
-    | "text"
-    | "number"
-    | "password"
-    | "date"
-    | "file"
-    | "time"
-    | "email"
-    | "url"
-    | "datetime-local"
-    | "color";
-  handlerClick?: () => void;
-  className?: string;
-  isDisabled?: boolean;
-  classNameLabel?: string;
-  isNumber?: boolean;
-  isFloat?: boolean;
-  defaultValue?: string;
-  inputClassName?: string;
-  onChange?: (value: string) => void;
-  onChangeFile?: (value: any) => void;
-  isRupiah?: boolean;
-  minDate?: string;
-  isRequired?: boolean;
-}) {
-  const { isMobile } = useMobile();
+export function InputText(
+  {
+    form,
+    label,
+    placeholder = "",
+    name,
+    prefix,
+    suffix,
+    type,
+    handlerClick,
+    className,
+    isDisabled,
+    isNumber,
+    isFloat,
+    isRow,
+    defaultValue,
+    inputClassName,
+    onChange,
+    isRupiah,
+    minDate,
+    onChangeFile,
+    classNameLabel,
+    isRequired,
+  }: {
+    form: UseFormReturn | undefined | any;
+    label?: string | ReactNode;
+    placeholder?: string;
+    name: string;
+    isRow?: boolean;
+    prefix?: JSX.Element;
+    suffix?: JSX.Element;
+    type?:
+      | "text"
+      | "number"
+      | "password"
+      | "date"
+      | "file"
+      | "time"
+      | "email"
+      | "url"
+      | "datetime-local"
+      | "color";
+    handlerClick?: () => void;
+    className?: string;
+    isDisabled?: boolean;
+    classNameLabel?: string;
+    isNumber?: boolean;
+    isFloat?: boolean;
+    defaultValue?: string;
+    inputClassName?: string;
+    onChange?: (value: string) => void;
+    onChangeFile?: (value: any) => void;
+    isRupiah?: boolean;
+    minDate?: string;
+    isRequired?: boolean;
+  }) {
+  const {isMobile} = useMobile();
   const [displayValue, setDisplayValue] = useState("");
   const [openEye, setOpenEye] = useState(false);
   // Format nilai saat pertama kali render atau ketika nilai berubah dari luar
@@ -115,7 +116,7 @@ export function InputText({
     // Update form value (raw value tanpa format)
     if (form) {
       if (type !== "file") {
-        form.setValue(name, rawValue, { shouldValidate: true });
+        form.setValue(name, rawValue, {shouldValidate: true});
       }
     }
 
@@ -139,7 +140,7 @@ export function InputText({
     <FormField
       control={form?.control}
       name={name}
-      render={({ field }) => (
+      render={({field}) => (
         <FormItem
           className={clsx(
             `flex w-full `,
@@ -175,8 +176,8 @@ export function InputText({
                 type === "number" && (isRupiah || isNumber)
                   ? "text"
                   : openEye
-                  ? "text"
-                  : type
+                    ? "text"
+                    : type
               }
               placeholder={placeholder}
               value={displayValue || field.value || ""}
@@ -212,7 +213,7 @@ export function InputText({
               onBlur={handleBlur}
               min={type != "date" ? undefined : minDate ?? undefined}
             />
-            <FormMessage />
+            <FormMessage/>
           </div>
         </FormItem>
       )}

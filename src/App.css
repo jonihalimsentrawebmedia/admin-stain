@@ -40,3 +40,33 @@
 .read-the-docs {
   color: #888;
 }
+
+
+@layer base {
+    /* Hilangkan spinner di Chrome, Safari, Edge */
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none !important;
+        appearance: none !important;
+        margin: 0;
+    }
+
+    /* Hilangkan spinner di Hover */
+    input[type="number"]:hover::-webkit-inner-spin-button,
+    input[type="number"]:hover::-webkit-outer-spin-button {
+        -webkit-appearance: none !important;
+        appearance: none !important;
+    }
+
+    /* Hilangkan spinner di Focus */
+    input[type="number"]:focus::-webkit-inner-spin-button,
+    input[type="number"]:focus::-webkit-outer-spin-button {
+        -webkit-appearance: none !important;
+        appearance: none !important;
+    }
+
+    /* Firefox */
+    input[type="number"] {
+        -moz-appearance: textfield !important;
+    }
+}
