@@ -2,11 +2,11 @@ import {z} from "zod";
 
 export const ResetPasswordResolver = z
   .object({
-    email: z.string({ error: "email Wajib Diisi" }),
-
-    password: z.string({ error: "password Wajib Diisi" }),
-
-    confirm_password: z.string({ error: "password Wajib Diisi" }),
+    email: z.string({error: "email Wajib Diisi"}),
+    
+    password: z.string({error: "password Wajib Diisi"}),
+    
+    confirm_password: z.string({error: "password Wajib Diisi"}),
   })
   .refine((data) => data.password === data.confirm_password, {
     message: "Konfirmasi password tidak sesuai",

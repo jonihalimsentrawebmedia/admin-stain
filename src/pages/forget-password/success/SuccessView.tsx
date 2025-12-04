@@ -1,9 +1,10 @@
 import BG from "@/assets/img/bg-modules.png";
 import PATERN from "@/assets/img/patern.png";
 import LOGO from "@/assets/img/logo.png";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import {Card, CardContent} from "@/components/ui/card";
+import {Button} from "@/components/ui/button";
 import ButtonBack from "@/components/common/button/ButtonBack";
+import {Link} from "react-router-dom";
 
 const SuccessView = () => {
   return (
@@ -24,7 +25,7 @@ const SuccessView = () => {
             >
               <div className="flex gap-2 items-center">
                 <div className="w-[100px] bg-white h-[100px] rounded-xl flex justify-center items-center">
-                  <img src={LOGO} alt="logo" width={52} height={52} />
+                  <img src={LOGO} alt="logo" width={52} height={52}/>
                 </div>
                 <div>
                   {" "}
@@ -39,14 +40,16 @@ const SuccessView = () => {
             </div>
           </div>
           <div className="rounded-lg bg-white flex flex-col gap-4 p-4">
-            <ButtonBack />
+            <ButtonBack/>
             <p className="text-neutral font-medium text-3xl">
               Password Baru Berhasil Dibuat
             </p>
             <p>Silahkan login dengan menggunakan password baru anda.</p>
-            <Button className="bg-primary w-fit mx-auto text-white                ">
-              Login
-            </Button>
+            <Link to={'/'} className={'mx-auto'}>
+              <Button className="bg-primary w-fit mx-auto text-white">
+                Login
+              </Button>
+            </Link>
           </div>
         </CardContent>
       </Card>

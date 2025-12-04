@@ -12,6 +12,8 @@ import { Check, X } from "lucide-react";
 const ChangePasswordView = () => {
   const { form, getClass, handleSave, loading, validations, isDisabled } =
     ChangePasswordViewModel();
+  
+  console.log(form.formState.errors)
   return (
     <div
       style={{
@@ -44,6 +46,7 @@ const ChangePasswordView = () => {
               </div>
             </div>
           </div>
+          
           <div className="rounded-lg  bg-white flex flex-col gap-4 p-4">
             <ButtonBack />
             <p className="text-neutral font-medium text-3xl">

@@ -1,25 +1,31 @@
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useNavigate,  useSearchParams } from "react-router-dom";
-import { ResetPasswordResolver, type ResetPasswordType } from "./model";
+import {useState} from "react";
+import {useForm} from "react-hook-form";
+import {useNavigate} from "react-router-dom";
+import {ResetPasswordResolver, type ResetPasswordType} from "./model";
 import AxiosClient from "@/provider/axios";
-import { toast } from "react-toastify";
-import { zodResolver } from "@hookform/resolvers/zod";
+import {toast} from "react-toastify";
+import {zodResolver} from "@hookform/resolvers/zod";
+import Cookies from "js-cookie";
 
 const ChangePasswordViewModel = () => {
   const navigate = useNavigate();
   const form = useForm<ResetPasswordType>({
     resolver: zodResolver(ResetPasswordResolver),
+    defaultValues: {
+      email: Cookies.get('email')
+    }
   });
+  
   const [loading, setLoading] = useState(false);
-  const [searchParam] = useSearchParams();
+  
   async function handleSave(data: ResetPasswordType) {
     setLoading(true);
-
+    
     await AxiosClient.post("auth/reset-password", {
-      ...data,
-      token: searchParam.get("token"),
-    })
+        password: data.password,
+        email: Cookies.get("email"),
+        token: Cookies.get("session"),
+      })
       .then((res) => {
         if (res?.data?.status) {
           toast.success(res.data.message);
@@ -31,11 +37,12 @@ const ChangePasswordViewModel = () => {
         setLoading(false);
         toast.error(err?.response?.data?.message || "Terjadi Kesalahan");
       });
-
+    
     setLoading(false);
   }
+  
   const password = form.watch("password", "");
-
+  
   // Validasi password
   const validations = {
     length: password.length >= 8,
@@ -48,7 +55,7 @@ const ChangePasswordViewModel = () => {
     valid
       ? "text-green-600 flex gap-2 items-center"
       : "text-gray-400 flex gap-2 items-center";
-
+  
   const isDisabled =
     !validations.length ||
     !validations.upper ||
@@ -60,7 +67,7 @@ const ChangePasswordViewModel = () => {
     handleSave,
     form,
     validations,
-    getClass,isDisabled
+    getClass, isDisabled
   };
 };
 
