@@ -1,49 +1,54 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { FieldPath, FieldValues, UseControllerProps, UseFormReturn } from "react-hook-form"
-import type { StylesConfig } from "react-select"
-
+import type {
+  FieldPath,
+  FieldValues,
+  UseControllerProps,
+  UseFormReturn,
+} from "react-hook-form";
+import type { StylesConfig } from "react-select";
 
 export type DataSelectType = {
-  value: number | string | undefined
-  label: string | undefined
-}
-export interface FormInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  headerLabel?: string
-  useFormReturn: UseFormReturn | any | undefined
-  formName?: string
-  isDisabled?: boolean
+  value: number | string | undefined;
+  label: string | undefined;
+};
+export interface FormInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  headerLabel?: string;
+  useFormReturn: UseFormReturn | any | undefined;
+  formName?: string;
+  isDisabled?: boolean;
 }
 
 export type FormInputPropsType<
   TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 > = {
-  headerLabel?: string
-  useFormReturn: UseFormReturn
-  formName?: string
-  isDisabled?: boolean
-  className?: string
-} & UseControllerProps<TFieldValues, TName>
+  headerLabel?: string;
+  useFormReturn: UseFormReturn;
+  formName?: string;
+  isDisabled?: boolean;
+  className?: string;
+} & UseControllerProps<TFieldValues, TName>;
 
 export const customStyles: StylesConfig = {
   control: (base, state) => {
     return {
       ...base,
-      background: state.isDisabled ? '#f2f2f2' : 'white',
-      opacity: state.isDisabled ? '0.5' : base.opacity,
-      cursor: state.isDisabled ? 'not-allowed' : base.cursor,
-      pointerEvents: state.isDisabled ? 'auto' : base.pointerEvents,
-    }
+      background: state.isDisabled ? "#f2f2f2" : "white",
+      opacity: state.isDisabled ? "0.5" : base.opacity,
+      cursor: state.isDisabled ? "not-allowed" : base.cursor,
+      pointerEvents: state.isDisabled ? "auto" : base.pointerEvents,
+    };
   },
-}
+};
 
 export type ResReferensiType = {
-  value?: string
-  label?: string
-}
+  value?: any;
+  label?: string;
+};
 
 export type ResReferensiNameType = {
-  id: string
-  nama: string
-}
+  id: string;
+  nama: string;
+};

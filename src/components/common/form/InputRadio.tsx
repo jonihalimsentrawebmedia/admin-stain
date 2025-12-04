@@ -85,7 +85,7 @@ export function InputRadio({
                       onChange={() => field.onChange(item?.value)}
                       disabled={isDisabled}
                       defaultValue={defaultValue?.value}
-                      className="h-5 w-5"
+                      className="h-5 w-5 accent-primary"
                     />
                     <p className="text-nowrap">{item?.label}</p>
                   </label>

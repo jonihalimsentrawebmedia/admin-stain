@@ -1,11 +1,13 @@
 import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup";
 import GroupRankViewModel from "./GroupRankViewModel";
 import TableCustom from "@/components/common/table/TableCustom";
-import { dummyData } from "./data";
 import ButtonAddGroupRank from "./components/ButtonAddGroupRank";
+import useGetGroupRank from "./controller/useGetGroupRank";
 
 const GroupRankView = () => {
   const { columns } = GroupRankViewModel();
+
+  const { groupRank, loading } = useGetGroupRank();
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
@@ -21,8 +23,9 @@ const GroupRankView = () => {
       />
 
       <TableCustom
+        loading={loading}
         columns={columns}
-        data={dummyData}
+        data={groupRank}
         placeHolderSearch="Cari Pangkat Golongan"
       />
     </div>

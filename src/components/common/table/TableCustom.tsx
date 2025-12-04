@@ -1,4 +1,3 @@
-
 import {
   flexRender,
   getCoreRowModel,
@@ -20,6 +19,7 @@ import type { ReactNode } from "react";
 import SetLimitList from "./SetLimitList";
 import Search from "./Search";
 import TablePaginate from "./TablePagination";
+import { Skeleton } from "@/components/ui/skeleton";
 interface Props {
   data: any;
   columns: any;
@@ -33,7 +33,8 @@ interface Props {
   addFilter?: ReactNode;
   addRowColumn?: ReactNode;
   classNameSearch?: string;
-  placeHolderSearch?:string
+  placeHolderSearch?: string;
+  loading?: boolean;
 }
 const TableCustom = (props: Props) => {
   const {
@@ -48,7 +49,9 @@ const TableCustom = (props: Props) => {
     isShowFooterTable,
     addFilter,
     addRowColumn,
-    classNameSearch = "rounded-lg",placeHolderSearch="Cari..."
+    loading,
+    classNameSearch = "rounded-lg",
+    placeHolderSearch = "Cari...",
   } = props;
   const table = useReactTable({
     data,
@@ -64,6 +67,7 @@ const TableCustom = (props: Props) => {
       return newParams;
     });
   };
+  const columnCount = columns?.length || 5;
 
   return (
     <div className="flex flex-col w-full gap-4 ">
@@ -81,7 +85,6 @@ const TableCustom = (props: Props) => {
               className="rounded-lg w-full"
               position="start"
               placeholder={placeHolderSearch}
-              
             />
           </div>
         </div>
@@ -109,6 +112,16 @@ const TableCustom = (props: Props) => {
           ))}
         </TableHeader>
         <TableBody>
+          {loading &&
+            Array.from({ length: 5 }).map((_, rowIndex) => (
+              <TableRow key={`skeleton-${rowIndex}`}>
+                {Array.from({ length: columnCount }).map((_, colIndex) => (
+                  <TableCell key={colIndex} className={`${tdClassName}`}>
+                    <Skeleton className="h-4 w-full" />
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
           {table.getRowModel().rows.map((row) => (
             <TableRow key={row.id}>
               {row.getVisibleCells().map((cell) => (

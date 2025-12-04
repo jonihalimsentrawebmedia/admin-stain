@@ -140,7 +140,7 @@ export function SelectCustom({
                     // zIndex: 9999,
                     minHeight: "48px", // ubah dari height tetap ke minHeight
                     backgroundColor: isDisabled
-                      ? "#0E874E"
+                      ? "#e5e7eb"
                       : bgColor
                       ? bgColor
                       : "#ffffff",

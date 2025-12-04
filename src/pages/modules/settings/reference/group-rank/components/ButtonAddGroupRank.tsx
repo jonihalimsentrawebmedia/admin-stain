@@ -7,14 +7,46 @@ import { HiPlus } from "react-icons/hi";
 
 import ButtonForm from "@/components/common/button/ButtonForm";
 import { InputText } from "@/components/common/form/InputText";
+import { GroupRankResolver, type GroupRankType } from "../model";
+import { useQueryClient } from "@tanstack/react-query";
+import AxiosClient from "@/provider/axios";
+import { toast } from "react-toastify";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const ButtonAddGroupRank = () => {
   const [open, setOpen] = useState(false);
-  const form = useForm();
+  const form = useForm<GroupRankType>({
+    resolver: zodResolver(GroupRankResolver),
+  });
+
   const [loading, setLoading] = useState(false);
-  async function handleSave() {
+
+  const queryClient = useQueryClient();
+  async function handleSave(data: GroupRankType) {
     setLoading(true);
-    setLoading(false);
+    try {
+      const res = await AxiosClient.post(
+        `/pengaturan/referensi/pangkat-golongan`,
+        data
+      );
+
+      if (res.data.status) {
+        toast.success(res.data.message);
+
+        await queryClient.invalidateQueries({
+          queryKey: ["settings-group-rank"],
+        });
+        setOpen(false);
+      }
+    } catch (err: any) {
+      toast.error(
+        err?.response?.data?.error || "Terjadi kesalahan, silakan coba lagi."
+      );
+    } finally {
+      setLoading(false);
+      setOpen(false);
+      form.reset();
+    }
   }
   return (
     <>
@@ -43,12 +75,13 @@ const ButtonAddGroupRank = () => {
             >
               <InputText
                 form={form}
-                name=""
+                name="nama_golongan"
                 isRow
                 label="Nama Pangkat Golongan"
                 placeholder="Nama Pangkat Golongan"
               />
               <ButtonForm
+
                 loading={loading}
                 onCancel={() => {
                   setOpen(false);

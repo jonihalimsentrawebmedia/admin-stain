@@ -3,10 +3,43 @@ import { IconDelete } from "@/components/common/table/icon";
 import { Button } from "@/components/ui/button";
 import { Trash2, X } from "lucide-react";
 import { useState } from "react";
-
-const ButtonDeleteNewsCategory = () => {
+import type { NewsCategoryList } from "../model";
+import { useQueryClient } from "@tanstack/react-query";
+import AxiosClient from "@/provider/axios";
+import { toast } from "react-toastify";
+interface Props {
+  data: NewsCategoryList;
+}
+const ButtonDeleteNewsCategory = ({ data }: Props) => {
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
+  const queryClient = useQueryClient();
+  async function handleDelete() {
+    setLoading(true);
+    try {
+      const res = await AxiosClient.delete(
+        `/pengaturan/referensi/kategori-berita/${data.id_kategori}`
+      );
+
+      if (res.data.status) {
+        toast.success(res.data.message);
+
+        await queryClient.invalidateQueries({
+          queryKey: ["settings-news-category"],
+        });
+        setOpen(false);
+      }
+    } catch (err: any) {
+      toast.error(
+        err?.response?.data?.error || "Terjadi kesalahan, silakan coba lagi."
+      );
+    } finally {
+      setLoading(false);
+      setOpen(false);
+    }
+    setLoading(false);
+  }
   return (
     <>
       <button
@@ -26,7 +59,7 @@ const ButtonDeleteNewsCategory = () => {
       >
         <p>
           Anda akan menghapus kategori berita{" "}
-          <span className="font-bold">“Berita Akademik”</span>. Apakah Anda
+          <span className="font-bold">“{data.nama_kategori}”</span>. Apakah Anda
           yakin untuk menghapus kategori berita yang dipilih?
         </p>
 
@@ -38,7 +71,11 @@ const ButtonDeleteNewsCategory = () => {
             <X />
             Batal
           </Button>
-          <Button className="bg-red-500 hover:bg-red-500/90 text-white">
+          <Button
+            onClick={handleDelete}
+            disabled={loading}
+            className="bg-red-500 hover:bg-red-500/90 text-white"
+          >
             <Trash2 />
             Hapus
           </Button>

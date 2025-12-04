@@ -1,11 +1,13 @@
 import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup";
 import AcademicRankViewModel from "./AcademicRankViewModel";
 import TableCustom from "@/components/common/table/TableCustom";
-import { dummyData } from "./data";
 import ButtonAddAcademicRank from "./components/ButtonAddAcademicRank";
+import useGetAcademicRank from "./controller/useGetAcademicRank";
 
 const AcademicRankView = () => {
   const { columns } = AcademicRankViewModel();
+  const { academicRank, loading } = useGetAcademicRank();
+
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
@@ -22,7 +24,8 @@ const AcademicRankView = () => {
 
       <TableCustom
         columns={columns}
-        data={dummyData}
+        data={academicRank}
+        loading={loading}
         placeHolderSearch="Cari Pangkat Akademik"
       />
     </div>

@@ -29,6 +29,7 @@ const ButtonForm = ({ loading, onCancel }: Props) => {
         Batal
       </Button>
       <Button
+     
         disabled={loading}
         className="border-primary text-white bg-primary hover:text-white hover:bg-primary/80"
       >
