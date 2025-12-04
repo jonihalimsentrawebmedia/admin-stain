@@ -1,4 +1,3 @@
-import FacultyCreateViewModel from "./FacultyCreateViewModel";
 import { Form } from "@/components/ui/form";
 import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup";
 import ButtonForm from "@/components/common/button/ButtonForm";
@@ -6,8 +5,8 @@ import usePostSatuanOrganisasi from "../../controller/usePostSatuanOrganisasi";
 import SatuanOrganisasiForm from "../../components/form/SatuanOrganisasiForm";
 
 const FacultyCreateView = () => {
-  const { goToBack } = FacultyCreateViewModel();
-  const { form, handleSave, loading } = usePostSatuanOrganisasi({
+
+  const { form, handleSave, loading ,goToBack} = usePostSatuanOrganisasi({
     kelompok: "FAKULTAS",
   });
   return (

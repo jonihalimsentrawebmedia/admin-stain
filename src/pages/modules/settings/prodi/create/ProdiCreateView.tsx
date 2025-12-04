@@ -6,7 +6,6 @@ import usePostSatuanOrganisasi from "../../controller/usePostSatuanOrganisasi";
 import SatuanOrganisasiForm from "../../components/form/SatuanOrganisasiForm";
 
 const ProdiCreateView = () => {
-  //  const { form, handleSave, loading, goToBack } = ProdiCreateViewModel();
   const { form, handleSave, loading, goToBack } = usePostSatuanOrganisasi({
     kelompok: "PRODI",
   });

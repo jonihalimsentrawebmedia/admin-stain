@@ -1,7 +1,6 @@
 import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup";
 import ModuleViewModel from "./ModuleViewModel";
 import TableCustom from "@/components/common/table/TableCustom";
-import { dummyData } from "./data";
 import ButtonAddModule from "./components/ButtonAddModule";
 import useGetModules from "./conntroller/useGetModules";
 

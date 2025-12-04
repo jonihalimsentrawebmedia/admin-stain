@@ -1,7 +1,6 @@
 import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup";
 import UsersViewModel from "./UsersViewModel";
 import TableCustom from "@/components/common/table/TableCustom";
-import { dummyData } from "./data";
 import SelectFilter from "@/components/common/filter/SelectFilter";
 import useGetUsers from "./controller/useGetUsers";
 import useGetLevelUser from "../level/controller/useGetLevelUser";
