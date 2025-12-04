@@ -2,17 +2,17 @@ import LoginViewModel from "./LoginViewModel";
 import BG from "@/assets/img/bg-modules.png";
 import PATERN from "@/assets/img/patern.png";
 import LOGO from "@/assets/img/logo.png";
-import { Card, CardContent } from "@/components/ui/card";
-import { InputText } from "@/components/common/form/InputText";
-import { Form } from "@/components/ui/form";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@radix-ui/react-label";
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Eye } from "lucide-react";
+import {Card, CardContent} from "@/components/ui/card";
+import {InputText} from "@/components/common/form/InputText";
+import {Form} from "@/components/ui/form";
+import {Checkbox} from "@/components/ui/checkbox";
+import {Label} from "@radix-ui/react-label";
+import {Link} from "react-router-dom";
+import {Button} from "@/components/ui/button";
+import {Eye} from "lucide-react";
 
 const LoginView = () => {
-  const { form, handleSave, loading } = LoginViewModel();
+  const {form, handleSave, loading} = LoginViewModel();
   return (
     <div
       style={{
@@ -31,7 +31,7 @@ const LoginView = () => {
             >
               <div className="flex gap-2 items-center">
                 <div className="w-[100px] bg-white h-[100px] rounded-xl flex justify-center items-center">
-                  <img src={LOGO} alt="logo" width={52} height={52} />
+                  <img src={LOGO} alt="logo" width={52} height={52}/>
                 </div>
                 <div>
                   {" "}
@@ -80,7 +80,7 @@ const LoginView = () => {
                 />
                 <div className="flex gap-4 items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <Checkbox id="isRemember" />
+                    <Checkbox id="isRemember"/>
                     <Label
                       htmlFor="isRemember"
                       className="text-neutral font-normal"
@@ -95,13 +95,15 @@ const LoginView = () => {
                     Lupa Password?
                   </Link>
                 </div>
-
-                <Button
-                  disabled={loading}
-                  className="bg-primary w-fit mx-auto text-white                "
-                >
-                  Login
-                </Button>
+                
+                <Link to={'/modules'} className={'mx-auto'}>
+                  <Button
+                    disabled={loading}
+                    className="bg-primary w-fit mx-auto text-white                "
+                  >
+                    Login
+                  </Button>
+                </Link>
               </form>
             </Form>
           </div>
