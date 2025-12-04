@@ -1,33 +1,33 @@
-import {
- 
-  IconDetail,
-  IconEdit,
-} from "@/components/common/table/icon";
+import { IconDetail, IconEdit } from "@/components/common/table/icon";
 import type { ColumnDef } from "@tanstack/react-table";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import ButtonDelete from "./components/ButtonDelete";
+import type { SatuanOrganisasiList } from "../model";
 
 const FacultyViewModel = () => {
+  const [searchParams] = useSearchParams();
+  const page = Number(searchParams.get("page") || 1);
+  const limit = Number(searchParams.get("limit") || 10);
   const navigate = useNavigate();
-  const columns: ColumnDef<any>[] = [
+  const columns: ColumnDef<SatuanOrganisasiList>[] = [
     // ✅ No (Menggunakan index dari data)
     {
       accessorKey: "no",
       header: "No",
       cell: (row) => {
-        // row.row.index adalah index berbasis 0
-        return row.row.index + 1;
+        const idx = row.row.index;
+        return <div>{(page - 1) * limit + idx + 1}</div>;
       },
     },
 
     // ✅ ID
-    { accessorKey: "id", header: "ID" },
+    { accessorKey: "id_satuan_organisasi", header: "ID" },
 
     // ✅ ID Parent
-    { accessorKey: "id_parent", header: "ID Parent" },
+    { accessorKey: "parent_id", header: "ID Parent" },
 
     // ✅ Nama Fakultas
-    { accessorKey: "nama_fakultas", header: "Nama Fakultas" },
+    { accessorKey: "nama", header: "Nama Fakultas" },
 
     // ✅ Singkatan
     { accessorKey: "singkatan", header: "Singkatan" },
@@ -38,18 +38,20 @@ const FacultyViewModel = () => {
       header: "Aksi",
       cell: (row) => {
         const values = row.row.original;
-        console.log(values)
-        // Asumsi IconDetail, IconEdit, IconDelete telah didefinisikan
+
         return (
           <div className="flex gap-2 items-center">
-            <Link to={"/modules/settings/faculty/detail/1"}>
-              {/* Mengganti IconGear dengan IconEdit sesuai gambar */}
+            <Link
+              to={`/modules/settings/faculty/detail/${values.id_satuan_organisasi}`}
+            >
               <IconDetail />
             </Link>
-            <Link to={"/modules/settings/faculty/edit/1"}>
+            <Link
+              to={`/modules/settings/faculty/edit/${values.id_satuan_organisasi}`}
+            >
               <IconEdit />
             </Link>
-            <ButtonDelete />
+            <ButtonDelete data={values} />
           </div>
         );
       },

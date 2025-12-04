@@ -1,10 +1,13 @@
 import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup";
 import InstitutionViewModel from "./InstitutionViewModel";
 import TableCustom from "@/components/common/table/TableCustom";
-import { dummyData } from "./data";
+import useGetSatuanOrganisasi from "../controller/useGetSatuanOrganisasi";
 
 const InstitutionView = () => {
   const { columns, goToAdd } = InstitutionViewModel();
+  const { loading, satuanOrganisasi } = useGetSatuanOrganisasi({
+    kelompok: "LEMBAGA",
+  });
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
@@ -18,7 +21,11 @@ const InstitutionView = () => {
         ]}
       />
 
-      <TableCustom columns={columns} data={dummyData} />
+      <TableCustom
+        columns={columns}
+        loading={loading}
+        data={satuanOrganisasi}
+      />
     </div>
   );
 };

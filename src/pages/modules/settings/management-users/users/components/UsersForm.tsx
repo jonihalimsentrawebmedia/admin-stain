@@ -1,20 +1,36 @@
 import CardInput from "@/components/common/card/CardInput";
-import { InputCheckbox } from "@/components/common/form/InputCheckbox";
+
 import InputImage from "@/components/common/form/InputImage";
 import { InputRadio } from "@/components/common/form/InputRadio";
 import { InputText } from "@/components/common/form/InputText";
 import { SelectCustom } from "@/components/common/form/SelectCustom";
 import type { UseFormReturn } from "react-hook-form";
-import { optionSatuan } from "../data";
+
+import type { UsersType } from "../model";
+import useGetLevelUser from "../../level/controller/useGetLevelUser";
+import { useEffect, useState } from "react";
+import { InputCheckbox } from "@/components/common/form/InputCheckbox";
+import useGetSatuanOrganisasiAll from "../../../controller/useGetSatuanOrganisasiAll";
 
 interface Props {
-  form: UseFormReturn<any>;
+  form: UseFormReturn<UsersType>;
 }
 const UsersForm = ({ form }: Props) => {
+  const { levelUser } = useGetLevelUser();
+  const idLevelUser = form.watch("level_user.id_level_user");
+  const [isSatuanKerja, setIsSatuanKerja] = useState(false);
+  const { satuanOrganisasi } = useGetSatuanOrganisasiAll();
+  useEffect(() => {
+    if (idLevelUser) {
+      const temp = levelUser.filter((item) => item.id_level == idLevelUser)[0];
+
+      setIsSatuanKerja(temp.is_satker);
+    }
+  }, [idLevelUser]);
   return (
     <>
       <div className="max-w-[250px]">
-        <InputImage form={form} name="logo" label="Logo" />
+        <InputImage form={form} name="gambar" label="Logo" />
       </div>
       <CardInput title="Informasi User">
         <div className="flex flex-col gap-4">
@@ -42,17 +58,17 @@ const UsersForm = ({ form }: Props) => {
             data={[
               {
                 label: "Laki-Laki",
-                value: "Laki-Laki",
+                value: "L",
               },
               {
                 label: "Perempuan",
-                value: "Perempuan",
+                value: "P",
               },
             ]}
           />
           <InputText
             form={form}
-            name="nomor_telepon"
+            name="telepon"
             isRow
             label="Telepon"
             placeholder="Telepon"
@@ -71,22 +87,27 @@ const UsersForm = ({ form }: Props) => {
           <InputRadio
             isRow
             form={form}
-            name="status_akun"
+            name="status"
             label="Status Akun"
             data={[
               {
                 label: "Aktif",
-                value: "Aktif",
+                value: "Y",
               },
               {
                 label: "Tidak Aktif",
-                value: "Tidak Aktif",
+                value: "N",
               },
             ]}
           />
           <SelectCustom
-            data={[]}
-            name="level_user"
+            data={levelUser.map((item) => {
+              return {
+                value: item.id_level,
+                label: item.nama,
+              };
+            })}
+            name="level_user.id_level_user"
             label="Level User"
             placeholder="Masukkan Level User"
             form={form}
@@ -94,7 +115,7 @@ const UsersForm = ({ form }: Props) => {
             level5
             inputClassName="lg:max-w-[300px]"
           />
-          <InputRadio
+          {/* <InputRadio
             isRow
             form={form}
             name="ada_satuan_kerja"
@@ -109,14 +130,19 @@ const UsersForm = ({ form }: Props) => {
                 value: "Tidak",
               },
             ]}
-          />
-          {form.watch("ada_satuan_kerja") == "Ya" ? (
+          /> */}
+          {isSatuanKerja ? (
             <InputCheckbox
               isRow
               form={form}
               name="satuan_kerja"
               label="Pilih Satuan Kerja"
-              data={optionSatuan}
+              data={satuanOrganisasi.map((item) => {
+                return {
+                  label: item.nama,
+                  value: item.id_satuan_organisasi,
+                };
+              })}
               isSingle
               isGrid
             />
@@ -128,7 +154,6 @@ const UsersForm = ({ form }: Props) => {
               defaultValue="Tidak Ada Satker"
               placeholder="Tidak Ada Satker"
               isRow
-              
               isDisabled
               inputClassName="lg:max-w-[300px]"
             />

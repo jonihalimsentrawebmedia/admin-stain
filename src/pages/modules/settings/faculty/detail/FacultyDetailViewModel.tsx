@@ -1,9 +1,12 @@
 import { useForm } from "react-hook-form";
 
-import LOGO from "@/assets/img/logo.png";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import useGetSatuanOrganisasiDetail from "../../controller/useGetSatuanOrganisasiDetail";
 const FacultyDetailViewModel = () => {
+  const { satuanOrganisasi } = useGetSatuanOrganisasiDetail({
+    kelompok: "FAKULTAS",
+  });
   const form = useForm();
   const navigate = useNavigate();
   const { id } = useParams();
@@ -34,7 +37,7 @@ const FacultyDetailViewModel = () => {
     },
     {
       label: "Nama Universitas / Perguruan Tinggi",
-      name: "nama_universitas_perguruan_tinggi",
+      name: "nama",
     },
     {
       label: "Singkatan",
@@ -64,7 +67,7 @@ const FacultyDetailViewModel = () => {
     },
     {
       label: "Kelurahan / Desa",
-      name: "kelurahan_desa",
+      name: "kelurahan",
     },
     {
       label: "Kode Pos",
@@ -109,24 +112,11 @@ const FacultyDetailViewModel = () => {
   }
   useEffect(() => {
     form.reset({
-      kelompok: "Universitas",
-      nama_universitas_perguruan_tinggi:
-        "Sekolah Tinggi Agama Islam Negeri Mandailing Natal",
-      singkatan: "STAIN MADINA",
-      keyword: "STAIN MADINA, Sumatera Utara, Perguruan Tinggi",
-      telepon: "081234657890",
-      fax: "0123456789",
-      email: "stainmadina@email.ac.id",
-      alamat: "Jl. Prof. Dr. Andi Hakim, No. 9.",
-      provinsi: "Sumatera Utara",
-      kabupaten_kota: "Kabupaten Mandailing Natal",
-      kecamatan: "Panjabungan",
-      kelurahan_desa: "Desa Janji",
-      kode_pos: "12345",
-      logo: LOGO,
-      favicon: LOGO,
+      ...satuanOrganisasi,
+      kelompok: "Fakultas",
     });
-  }, []);
+  }, [satuanOrganisasi]);
+
   return {
     fieldAddress,
     fieldContact,

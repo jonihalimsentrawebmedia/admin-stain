@@ -1,11 +1,13 @@
 import { Form } from "@/components/ui/form";
-import UnitEditViewModel from "./UnitEditViewModel";
 import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup";
-import UnitForm from "../components/UnitForm";
 import ButtonForm from "@/components/common/button/ButtonForm";
+import useUpdateSatuanOrganisasi from "../../controller/useUpdateSatuanOrganisasi";
+import SatuanOrganisasiForm from "../../components/form/SatuanOrganisasiForm";
 
 const UnitEditView = () => {
-  const { form, handleSave, loading, goToBack } = UnitEditViewModel();
+  const { form, handleSave, loading, goToBack } = useUpdateSatuanOrganisasi({
+    kelompok: "UNIT",
+  });
   return (
     <div className="flex flex-col gap-4 ">
       <Form {...form}>
@@ -30,12 +32,12 @@ const UnitEditView = () => {
             ]}
             label="Edit Data Unit"
           />
-          <UnitForm form={form} />
+          <SatuanOrganisasiForm kelompok="UNIT" form={form} />
           <ButtonForm loading={loading} />
         </form>
       </Form>
     </div>
   );
-}
+};
 
-export default UnitEditView
+export default UnitEditView;

@@ -1,11 +1,17 @@
 import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup";
 import TableCustom from "@/components/common/table/TableCustom";
-import { data } from "./data";
 import ProdiViewModel from "./ProdiViewModel";
 import SelectFilter from "@/components/common/filter/SelectFilter";
+import useGetSatuanOrganisasi from "../controller/useGetSatuanOrganisasi";
 
 const ProdiView = () => {
   const { columns, goToAdd } = ProdiViewModel();
+  const { loading, satuanOrganisasi } = useGetSatuanOrganisasi({
+    kelompok: "PRODI",
+  });
+  const { satuanOrganisasi: fakultas } = useGetSatuanOrganisasi({
+    kelompok: "FAKULTAS",
+  });
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
@@ -20,9 +26,20 @@ const ProdiView = () => {
       />
 
       <TableCustom
-        addFilter={<SelectFilter label="Fakultas Asal" options={[]} />}
+        addFilter={
+          <SelectFilter
+            label="Fakultas Asal"
+            options={fakultas.map((item) => {
+              return {
+                label: item.nama,
+                value: item.id_satuan_organisasi,
+              };
+            })}
+          />
+        }
         columns={columns}
-        data={data}
+        data={satuanOrganisasi}
+        loading={loading}
       />
     </div>
   );

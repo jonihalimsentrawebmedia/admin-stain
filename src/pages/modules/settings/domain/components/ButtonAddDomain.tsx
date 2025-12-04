@@ -6,14 +6,43 @@ import { useForm } from "react-hook-form";
 import { HiPlus } from "react-icons/hi";
 import ButtonForm from "@/components/common/button/ButtonForm";
 import DomainForm from "./DomainForm";
+import { DomainResolver, type DomainType } from "../model";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
+import AxiosClient from "@/provider/axios";
+import { toast } from "react-toastify";
 
 const ButtonAddDomain = () => {
   const [open, setOpen] = useState(false);
-  const form = useForm();
+  const form = useForm<DomainType>({
+    resolver: zodResolver(DomainResolver),
+  });
+
   const [loading, setLoading] = useState(false);
-  async function handleSave() {
+
+  const queryClient = useQueryClient();
+  async function handleSave(data: DomainType) {
     setLoading(true);
-    setLoading(false);
+    try {
+      const res = await AxiosClient.post(`/pengaturan/domains`, data);
+
+      if (res.data.status) {
+        toast.success(res.data.message);
+
+        await queryClient.invalidateQueries({
+          queryKey: ["settings-domain"],
+        });
+        setOpen(false);
+      }
+    } catch (err: any) {
+      toast.error(
+        err?.response?.data?.error || "Terjadi kesalahan, silakan coba lagi."
+      );
+    } finally {
+      setLoading(false);
+      setOpen(false);
+      form.reset();
+    }
   }
   return (
     <>
@@ -25,7 +54,7 @@ const ButtonAddDomain = () => {
         className={"bg-white text-primary border-primary hover:text-primary"}
       >
         <HiPlus />
-       Tambah 
+        Tambah
       </Button>
 
       <DialogCustom

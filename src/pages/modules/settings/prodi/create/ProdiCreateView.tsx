@@ -1,12 +1,16 @@
 import { Form } from "@/components/ui/form";
-import ProdiCreateViewModel from "./ProdiCreateViewModel";
-import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup";
-import ProdiForm from "../components/ProdiForm";
-import ButtonForm from "@/components/common/button/ButtonForm";
 
+import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup";
+import ButtonForm from "@/components/common/button/ButtonForm";
+import usePostSatuanOrganisasi from "../../controller/usePostSatuanOrganisasi";
+import SatuanOrganisasiForm from "../../components/form/SatuanOrganisasiForm";
 
 const ProdiCreateView = () => {
-   const { form, handleSave, loading, goToBack } = ProdiCreateViewModel();
+  //  const { form, handleSave, loading, goToBack } = ProdiCreateViewModel();
+  const { form, handleSave, loading, goToBack } = usePostSatuanOrganisasi({
+    kelompok: "PRODI",
+  });
+
   return (
     <div className="flex flex-col gap-4 ">
       <Form {...form}>
@@ -31,12 +35,12 @@ const ProdiCreateView = () => {
             ]}
             label="Tambah Data Fakultas"
           />
-          <ProdiForm form={form} />
+          <SatuanOrganisasiForm form={form} kelompok="PRODI" />
           <ButtonForm loading={loading} />
         </form>
       </Form>
     </div>
   );
-}
+};
 
-export default ProdiCreateView
+export default ProdiCreateView;

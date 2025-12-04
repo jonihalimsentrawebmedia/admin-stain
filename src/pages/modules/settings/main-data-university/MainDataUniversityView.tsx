@@ -1,48 +1,33 @@
-import { Button } from "@/components/ui/button";
-import MainDataUniversityDetail from "./components/MainDataUniversityDetail";
-import MainDataUniversityForm from "./components/MainDataUniversityForm";
+import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup";
+import useGetSatuanOrganisasi from "../controller/useGetSatuanOrganisasi";
+import TableCustom from "@/components/common/table/TableCustom";
 import MainDataUniversityViewModel from "./MainDataUniversityViewModel";
-import { Pencil } from "lucide-react";
 
 const MainDataUniversityView = () => {
-  const { form, handleSave, loadingSubmit, isDetail, setIsDetail } =
-    MainDataUniversityViewModel();
+  const { columns, goToAdd } = MainDataUniversityViewModel();
+  const { loading, satuanOrganisasi } = useGetSatuanOrganisasi({
+    kelompok: "UNIVERSITAS",
+  });
   return (
-    <>
-      <div
-        className="flex gap-4 items-center justify-between
-        "
-      >
-        <div
-          className="text-2xl text-[#464646]! font-medium
-            "
-        >
-          Data Utama Universitas
-        </div>
+    <div className="flex flex-col gap-4">
+      <ButtonTitleGroup
+        label="Data Universitas"
+        buttonGroup={[
+          {
+            label: "Tambah Data",
+            onClick: () => goToAdd(),
+            type: "add",
+          },
+        ]}
+      />
 
-        {isDetail && (
-          <Button
-            onClick={() => {
-              setIsDetail(false);
-            }}
-            variant={"outline"}
-            className="border border-primary bg-white text-primary hover:text-primary"
-          >
-            <Pencil />
-            Edit Data
-          </Button>
-        )}
-      </div>
-      {isDetail ? (
-        <MainDataUniversityDetail form={form} />
-      ) : (
-        <MainDataUniversityForm
-          form={form}
-          handleSave={handleSave}
-          loading={loadingSubmit}
-        />
-      )}
-    </>
+      <TableCustom
+        columns={columns}
+        data={satuanOrganisasi}
+        loading={loading}
+        placeHolderSearch="Cari Universitas"
+      />
+    </div>
   );
 };
 

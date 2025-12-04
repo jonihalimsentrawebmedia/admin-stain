@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useState, type ChangeEvent } from "react";
-import {  ImagePlus, Pencil, Trash2 } from "lucide-react";
+import { useEffect, useRef, useState, type ChangeEvent } from "react";
+import { ImagePlus, Pencil, Trash2 } from "lucide-react";
 import {
   FormField,
   FormItem,
@@ -11,6 +11,8 @@ import {
 } from "@/components/ui/form";
 import type { FieldValues, Path, UseFormReturn } from "react-hook-form";
 import { Button } from "@/components/ui/button";
+import AxiosClient from "@/provider/axios";
+import { toast } from "react-toastify";
 
 interface FileUploadFieldProps<T extends FieldValues> {
   form: UseFormReturn<T>;
@@ -33,10 +35,17 @@ export default function InputImage<T extends FieldValues>({
 }: FileUploadFieldProps<T>) {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
+  const [, setLoading] = useState(false);
+  const handleClick = (e: any) => {
+    e.preventDefault();
+    fileInputRef.current?.click();
+  };
 
-  const handleClick = () => fileInputRef.current?.click();
-
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>, field: any) => {
+  const handleFileChange = async (
+    e: ChangeEvent<HTMLInputElement>,
+    field: any
+  ) => {
+    e.preventDefault();
     const file = e.target.files?.[0];
     if (!file) return;
 
@@ -55,11 +64,27 @@ export default function InputImage<T extends FieldValues>({
 
     // Bersihkan error dan set value ke form
     form.clearErrors(name);
-    field.onChange(e.target.files);
 
     // Set preview jika aktif
     if (previewEnabled) {
-      setPreview(URL.createObjectURL(file));
+      const formData = new FormData();
+      formData.append("berkas", file);
+      setLoading(true);
+      try {
+        const res = await AxiosClient.post(`/upload`, formData);
+
+        if (res.data.status) {
+          toast.success(res.data.message);
+          field.onChange(res.data.url);
+          setPreview(res.data.url);
+        }
+      } catch (err: any) {
+        toast.error(
+          err?.response?.data?.error || "Terjadi kesalahan, silakan coba lagi."
+        );
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -68,6 +93,12 @@ export default function InputImage<T extends FieldValues>({
     field.onChange(null);
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
+
+  useEffect(() => {
+    if (form.watch(name)) {
+      setPreview(form.watch(name));
+    }
+  }, [form.watch(name)]);
 
   return (
     <FormField
@@ -105,7 +136,7 @@ export default function InputImage<T extends FieldValues>({
 
               {preview ? (
                 <Button
-                onClick={handleClick}
+                  onClick={handleClick}
                   variant={"outline"}
                   className="bg-white text-primary hover:text-primary border-primary"
                 >

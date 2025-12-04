@@ -1,11 +1,13 @@
 import { Form } from "@/components/ui/form";
-import UnitCreateViewModel from "./UnitCreateViewModel";
 import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup";
 import ButtonForm from "@/components/common/button/ButtonForm";
-import UnitForm from "../components/UnitForm";
+import SatuanOrganisasiForm from "../../components/form/SatuanOrganisasiForm";
+import usePostSatuanOrganisasi from "../../controller/usePostSatuanOrganisasi";
 
 const UnitCreateView = () => {
-   const { form, handleSave, loading, goToBack } = UnitCreateViewModel();
+    const { form, handleSave, loading, goToBack } = usePostSatuanOrganisasi({
+    kelompok: "UNIT",
+  });
   return (
     <div className="flex flex-col gap-4 ">
       <Form {...form}>
@@ -30,7 +32,7 @@ const UnitCreateView = () => {
             ]}
             label="Tambah Data Unit"
           />
-          <UnitForm form={form} />
+          <SatuanOrganisasiForm kelompok="UNIT" form={form} />
           <ButtonForm loading={loading} />
         </form>
       </Form>

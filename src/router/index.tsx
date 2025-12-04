@@ -15,6 +15,9 @@ import InstitutionCreateView from "@/pages/modules/settings/institution/create/I
 import InstitutionDetailView from "@/pages/modules/settings/institution/detail/InstitutionDetailView";
 import InstitutionEditView from "@/pages/modules/settings/institution/edit/InstitutionEditView";
 import InstitutionView from "@/pages/modules/settings/institution/InstitutionView";
+import UniversityCreateView from "@/pages/modules/settings/main-data-university/create/UniversityCreateView";
+import UniversityDetailView from "@/pages/modules/settings/main-data-university/detail/UniversityDetailView";
+import UniversityEditView from "@/pages/modules/settings/main-data-university/edit/UniversityEditView";
 import MainDataUniversityView from "@/pages/modules/settings/main-data-university/MainDataUniversityView";
 import HistoryLoginDetailView from "@/pages/modules/settings/management-users/history-login/detail/HistoryLoginDetailView";
 import HistoryLoginView from "@/pages/modules/settings/management-users/history-login/HistoryLoginView";
@@ -87,7 +90,24 @@ export const Router = createBrowserRouter([
           },
           {
             path: "main-data-university",
-            element: <MainDataUniversityView />,
+            children: [
+              {
+                index: true,
+                element: <MainDataUniversityView />,
+              },
+              {
+                path: "add",
+                element: <UniversityCreateView />,
+              },
+              {
+                path: "edit/:id",
+                element: <UniversityEditView />,
+              },
+              {
+                path: "detail/:id",
+                element: <UniversityDetailView />,
+              },
+            ],
           },
           {
             path: "faculty",

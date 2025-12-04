@@ -5,20 +5,55 @@ import { useForm } from "react-hook-form";
 import ButtonForm from "@/components/common/button/ButtonForm";
 import { IconEdit } from "@/components/common/table/icon";
 import DomainForm from "./DomainForm";
-
-const ButtonEditDomain = () => {
+import { DomainResolver, type DomainList, type DomainType } from "../model";
+import { useQueryClient } from "@tanstack/react-query";
+import { zodResolver } from "@hookform/resolvers/zod";
+import AxiosClient from "@/provider/axios";
+import { toast } from "react-toastify";
+interface Props{
+  data:DomainList
+}
+const ButtonEditDomain = ({data}:Props) => {
   const [open, setOpen] = useState(false);
-  const form = useForm();
+ const form = useForm<DomainType>({
+    resolver: zodResolver(DomainResolver),
+  });
+
   const [loading, setLoading] = useState(false);
-  async function handleSave() {
+
+  const queryClient = useQueryClient();
+  async function handleSave(values: DomainType) {
     setLoading(true);
-    setLoading(false);
+    try {
+      const res = await AxiosClient.put(`/pengaturan/domains/${data.id_domain}`, values);
+
+      if (res.data.status) {
+        toast.success(res.data.message);
+
+        await queryClient.invalidateQueries({
+          queryKey: ["settings-domain"],
+        });
+        setOpen(false);
+      }
+    } catch (err: any) {
+      toast.error(
+        err?.response?.data?.error || "Terjadi kesalahan, silakan coba lagi."
+      );
+    } finally {
+      setLoading(false);
+      setOpen(false);
+      form.reset();
+    }
   }
+  
   return (
     <>
       <button
         onClick={() => {
           setOpen(true);
+          form.reset({
+            ...data
+          })
         }}
       >
         <IconEdit />

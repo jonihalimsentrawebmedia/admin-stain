@@ -1,11 +1,13 @@
 import { Form } from "@/components/ui/form";
-import InstitutionEditViewModel from "./InstitutionEditViewModel";
 import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup";
-import InstitutionForm from "../components/InstitutionForm";
 import ButtonForm from "@/components/common/button/ButtonForm";
+import SatuanOrganisasiForm from "../../components/form/SatuanOrganisasiForm";
+import useUpdateSatuanOrganisasi from "../../controller/useUpdateSatuanOrganisasi";
 
 const InstitutionEditView = () => {
-  const { form, handleSave, loading, goToBack } = InstitutionEditViewModel();
+  const { form, handleSave, loading, goToBack } = useUpdateSatuanOrganisasi({
+    kelompok: "LEMBAGA",
+  });
   return (
     <div className="flex flex-col gap-4 ">
       <Form {...form}>
@@ -30,7 +32,7 @@ const InstitutionEditView = () => {
             ]}
             label="Edit Lembaga"
           />
-          <InstitutionForm form={form} />
+          <SatuanOrganisasiForm kelompok="LEMBAGA" form={form} />
           <ButtonForm loading={loading} />
         </form>
       </Form>

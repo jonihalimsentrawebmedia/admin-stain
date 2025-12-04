@@ -5,20 +5,63 @@ import { useForm } from "react-hook-form";
 import ModuleForm from "./ModuleForm";
 import ButtonForm from "@/components/common/button/ButtonForm";
 import { IconEdit } from "@/components/common/table/icon";
-
-const ButtonEditModule = () => {
+import { ModuleResolver, type ModuleList, type ModuleType } from "../model";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useQueryClient } from "@tanstack/react-query";
+import AxiosClient from "@/provider/axios";
+import { toast } from "react-toastify";
+interface Props {
+  data: ModuleList;
+}
+const ButtonEditModule = ({ data }: Props) => {
   const [open, setOpen] = useState(false);
-  const form = useForm();
+  const form = useForm<ModuleType>({
+    resolver: zodResolver(ModuleResolver),
+  });
+
   const [loading, setLoading] = useState(false);
-  async function handleSave() {
+
+  const queryClient = useQueryClient();
+  async function handleSave(values: ModuleType) {
     setLoading(true);
-    setLoading(false);
+    try {
+      const res = await AxiosClient.put(
+        `/pengaturan/modules/${data.id_module}`,
+        {
+          ...values,
+          urutan: Number(values.urutan),
+        }
+      );
+
+      if (res.data.status) {
+        toast.success(res.data.message);
+
+        await queryClient.invalidateQueries({
+          queryKey: ["modules-list"],
+        });
+        setOpen(false);
+      }
+    } catch (err: any) {
+      toast.error(
+        err?.response?.data?.error || "Terjadi kesalahan, silakan coba lagi."
+      );
+    } finally {
+      setLoading(false);
+      setOpen(false);
+      form.reset();
+    }
   }
   return (
     <>
       <button
         onClick={() => {
           setOpen(true);
+          form.reset({
+            controller: data.controller,
+            kategori: data.kategori,
+            nama_module: data.nama_module,
+            urutan: data.urutan.toString(),
+          });
         }}
       >
         <IconEdit />

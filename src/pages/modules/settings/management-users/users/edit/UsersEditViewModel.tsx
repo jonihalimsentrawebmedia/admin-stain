@@ -1,27 +1,72 @@
-import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { UsersResolver, type UsersType } from "../model";
+import AxiosClient from "@/provider/axios";
+import { zodResolver } from "@hookform/resolvers/zod";
+import useGetUsersDetail from "../controller/useGetUsersDetail";
 
 const UsersEditViewModel = () => {
- const navigate = useNavigate();
-  const form = useForm();
+  const { user } = useGetUsersDetail();
+  const navigate = useNavigate();
+  const params = useParams();
+  const { id } = params;
+  const form = useForm<UsersType>({
+    resolver: zodResolver(UsersResolver),
+  });
+
   const [loading, setLoading] = useState(false);
-  async function handleSave(values: any) {
-    console.log(values);
-    setLoading(false);
+
+  const queryClient = useQueryClient();
+  async function handleSave(data: UsersType) {
     setLoading(true);
+    try {
+      const res = await AxiosClient.put(
+        `/pengaturan/manajemen-user/users/${id}`,
+        {
+          ...data,
+        }
+      );
+
+      if (res.data.status) {
+        toast.success(res.data.message);
+        goToBack();
+        await queryClient.invalidateQueries({
+          queryKey: ["users-list", "users-detail"],
+        });
+      }
+    } catch (err: any) {
+      toast.error(
+        err?.response?.data?.error || "Terjadi kesalahan, silakan coba lagi."
+      );
+    } finally {
+      setLoading(false);
+    }
   }
 
-  function goToBack(){
-    navigate(-1)
+  function goToBack() {
+    navigate(-1);
   }
+
+  useEffect(() => {
+    if (user) {
+      form.reset({
+        ...user,
+        level_user: {
+          id_level_user: user.level_users_multi[0].id_level_user,
+        },
+      });
+    }
+  }, [user]);
   return {
     form,
     loading,
     handleSave,
-    navigate,goToBack
+    navigate,
+    goToBack,
   };
-}
+};
 
-export default UsersEditViewModel
+export default UsersEditViewModel;

@@ -1,6 +1,6 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import { IoIosInformationCircle } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { FaGear } from "react-icons/fa6";
 import { Switch } from "@/components/ui/switch";
 import {
@@ -8,36 +8,46 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Pencil,  Trash } from "lucide-react";
+import { Pencil,  } from "lucide-react";
 import ButtonAddLevelUser from "./components/ButtonAddLevelUser";
 import ButtonSettingLevelUser from "./components/ButtonSettingLevelUser";
+import type { UserList } from "./model";
+import ButtonDeleteUser from "./components/ButtonDeleteUsers";
 const UsersViewModel = () => {
   const navigate = useNavigate();
-  const columns: ColumnDef<any>[] = [
+  const [searchParams] = useSearchParams();
+  const page = Number(searchParams.get("page") || 1);
+  const limit = Number(searchParams.get("limit") || 10);
+  const columns: ColumnDef<UserList>[] = [
     // Kolom # (Nomor Urut)
     {
       accessorKey: "no",
       header: "#",
-      cell: (row) => <span>{row.row.index + 1}</span>, // Menggunakan index baris + 1
+      cell: (row) => {
+        const idx = row.row.index;
+        return <div className="">{(page - 1) * limit + idx + 1}</div>;
+      },
     },
 
     // Kolom Nama User
-    { accessorKey: "nama_user", header: "Nama User" },
+    { accessorKey: "nama_lengkap", header: "Nama User" },
 
     // Kolom Level (Memiliki penanda bullet/dot untuk level kedua)
     {
-      accessorKey: "level",
+      accessorKey: "level_users",
       header: "Level",
       cell: (row) => {
-        const { level, secondary_level } = row.row.original;
+        const { level_users } = row.row.original;
         return (
           <div className="flex flex-col">
-            <span>{level}</span>
-            {secondary_level && (
-              <div className="flex items-center text-sm text-gray-500">
-                <span className="mr-1">•</span>
-                <span>{secondary_level}</span>
-              </div>
+            {level_users.length == 1 ? (
+              <div>{level_users[0]}</div>
+            ) : (
+              <ul className="pl-4 list-outside list-disc">
+                {level_users.map((item, index) => (
+                  <li key={item + index}>{item}</li>
+                ))}
+              </ul>
             )}
           </div>
         );
@@ -54,7 +64,7 @@ const UsersViewModel = () => {
           <div className="flex items-center gap-2">
             <FaGear className="text-green-600" />
             {/* <IconGear className="text-green-600" /> */}
-            <span>{values.no_handphone}</span>
+            <span>{values.telepon}</span>
           </div>
         );
       },
@@ -69,7 +79,7 @@ const UsersViewModel = () => {
       header: "Status",
       cell: (row) => {
         const { status } = row.row.original;
-        const isAktif = status === "Aktif";
+        const isAktif = status === "Y";
         return (
           <div className="flex justify-center flex-col items-center">
             <Switch checked={isAktif} />
@@ -82,7 +92,21 @@ const UsersViewModel = () => {
     },
 
     // Kolom Aktif Sejak (Tanggal dan Waktu)
-    { accessorKey: "aktif_sejak", header: "Aktif Sejak" },
+    {
+      accessorKey: "aktif_sejak",
+      header: "Aktif Sejak",
+      cell: (row) => {
+        const values = row.row.original;
+        return (
+          <div className="flex flex-col items-center gap-2">
+            <div>
+              {values.aktif_sejak.split(" ")[0].split("-").reverse().join("-")}
+            </div>
+            <div>{values.aktif_sejak.split(" ")[1]}</div>
+          </div>
+        );
+      },
+    },
 
     // Kolom Aksi (Menu Ellipsis)
     {
@@ -100,7 +124,7 @@ const UsersViewModel = () => {
                 <button
                   onClick={() => {
                     navigate(
-                      `/modules/settings/management-users/users/detail/1`
+                      `/modules/settings/management-users/users/detail/${values.id_user}`
                     );
                   }}
                   className="flex gap-4 items-center cursor-pointer text-[#464646]"
@@ -116,17 +140,16 @@ const UsersViewModel = () => {
                 </div> */}
                 <button
                   onClick={() => {
-                    navigate(`/modules/settings/management-users/users/edit/1`);
+                    navigate(
+                      `/modules/settings/management-users/users/edit/${values.id_user}`
+                    );
                   }}
                   className="flex gap-4 items-center text-[#464646] cursor-pointer"
                 >
                   <Pencil className="text-orange-500 size-4" />
                   Edit
                 </button>
-                <div className="flex gap-4 items-center text-[#464646] cursor-pointer">
-                  <Trash className="text-red-500 size-4" />
-                  Hapus
-                </div>
+                <ButtonDeleteUser data={values} />
               </div>
             </PopoverContent>
           </Popover>

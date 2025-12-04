@@ -7,27 +7,64 @@ interface Props {
   form: UseFormReturn<any>;
 }
 const ModuleForm = ({ form }: Props) => {
+  const optionsCategory = [
+    {
+      label: "PENGATURAN",
+      value: "PENGATURAN",
+    },
+    {
+      label: "WEBSITE UTAMA",
+      value: "WEBSITE_UTAMA",
+    },
+    {
+      label: "WEBSITE PRODI",
+      value: "WEBSITE_PRODI",
+    },
+    {
+      label: "WEBSITE UNIT",
+      value: "WEBSITE_UNIT",
+    },
+    {
+      label: "WEBSITE LEMBAGA",
+      value: "WEBSITE_LEMBAGA",
+    },
+    {
+      label: "MANAJEMEN EDITOR",
+      value: "MANAJEMEN_EDITOR",
+    },
+    {
+      label: "LAPORAN STATISTIK",
+      value: "LAPORAN_STATISTIK",
+    },
+  ];
+ 
   return (
     <>
       <div className="max-w-[300px]">
-        <InputImage2 label="" description="icon" form={form} name="logo" maxSizeMB={2} />
+        <InputImage2
+          label=""
+          description="icon"
+          form={form}
+          name="gambar"
+          maxSizeMB={2}
+        />
       </div>
       <InputText
         form={form}
-        name=""
+        name="nama_module"
         isRow
         label="Nama Modul"
         placeholder="Nama Modul"
       />
       <InputText
         form={form}
-        name=""
+        name="controller"
         isRow
         label="Controller "
         placeholder="Controller "
       />
       <SelectCustom
-        data={[]}
+        data={optionsCategory}
         name="kategori"
         label="Kategori"
         placeholder="Pilih"
@@ -36,6 +73,7 @@ const ModuleForm = ({ form }: Props) => {
         level1
       />
       <InputText
+        type="number"
         form={form}
         name="urutan"
         isRow

@@ -5,30 +5,55 @@ import { SelectCustom } from "@/components/common/form/SelectCustom";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import type { UseFormReturn } from "react-hook-form";
+import useGetSatuanOrganisasi from "../../controller/useGetSatuanOrganisasi";
+import { useEffect } from "react";
 
 interface Props {
   form: UseFormReturn<any>;
+  kelompok: string;
 }
-const FacultyForm = ({ form }: Props) => {
+const FacultyForm = ({ form, kelompok }: Props) => {
+  const { satuanOrganisasi } = useGetSatuanOrganisasi({
+    kelompok: kelompok == "FAKULTAS" ? "UNIVERSITAS" : "",
+  });
+
+  useEffect(() => {
+    if (kelompok) {
+      form.setValue("kelompok", kelompok);
+    }
+  }, [kelompok]);
   return (
     <>
-      <div className="flex gap-4">
+      <div className="flex flex-col md:flex-row gap-4">
         <InputImage form={form} name="logo" label="Logo" />
         <InputImage form={form} name="favicon" label="Favicon" />
       </div>
       <CardInput title="Identitas Institusi">
         <SelectCustom
-          data={[]}
-          name="kelompok"
-          label="Kelompok"
-          placeholder="Pilih Kelompok"
+          data={satuanOrganisasi.map((item) => {
+            return {
+              label: item.nama,
+              value: item.id_satuan_organisasi,
+            };
+          })}
+          name="parent_id"
+          label="Universitas/PT Asal"
+          placeholder="Pilih Universitas/PT Asal"
           form={form}
           isRow
           level1
         />
         <InputText
+          name="kelompok"
+          label="Kelompok"
+          placeholder="Pilih Kelompok"
           form={form}
-          name=""
+          isRow
+          isDisabled
+        />
+        <InputText
+          form={form}
+          name="nama"
           isRow
           label="Nama Universitas / Perguruan Tinggi"
           placeholder="Nama Universitas / Perguruan Tinggi"
@@ -57,64 +82,47 @@ const FacultyForm = ({ form }: Props) => {
         </div>
         <InputText
           form={form}
-          name=""
+          name="alamat"
           isRow
           label="Alamat"
           placeholder="Alamat lengkap Nama Universitas / Perguruan Tinggi"
         />
-        <SelectCustom
-          data={[]}
+        <InputText
           name="provinsi"
           label="Provinsi"
           placeholder="Masukkan Provinsi"
           form={form}
           isRow
-          level1
           inputClassName="lg:max-w-[300px]"
         />
-        <SelectCustom
-          data={[]}
-          name="kabupaten"
+        <InputText
+          name="kabupaten_kota"
           label="Kabupaten/Kota"
           placeholder="Masukkan Kabupaten/Kota"
           form={form}
           isRow
-          level2
           inputClassName="lg:max-w-[300px]"
         />
-        <SelectCustom
-          data={[]}
-          name="provinsi"
-          label="Provinsi"
-          placeholder="Masukkan Provinsi"
-          form={form}
-          isRow
-          level3
-          inputClassName="lg:max-w-[300px]"
-        />
-        <SelectCustom
-          data={[]}
+        <InputText
           name="kecamatan"
           label="Kecamatan"
           placeholder="Masukkan Kecamatan"
           form={form}
           isRow
-          level4
           inputClassName="lg:max-w-[300px]"
         />
-        <SelectCustom
-          data={[]}
+
+        <InputText
           name="kelurahan"
           label="Kelurahan / Desa"
           placeholder="Masukkan Kelurahan / Desa"
           form={form}
           isRow
-          level5
           inputClassName="lg:max-w-[300px]"
         />
         <InputText
           form={form}
-          name=""
+          name="kode_pos"
           isRow
           label="Kode Pos"
           placeholder="Kode Pos"
@@ -174,7 +182,7 @@ const FacultyForm = ({ form }: Props) => {
         />
         <InputText
           form={form}
-          name="Youtube"
+          name="youtube"
           isRow
           label="Youtube"
           placeholder="Masukkan link disini"

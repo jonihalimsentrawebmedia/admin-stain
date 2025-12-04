@@ -10,7 +10,7 @@ interface Props {
   isRow?: boolean;
   isRowParent?: boolean;
 }
-const DetailField = ({ data, form, isRow=true,isRowParent }: Props) => {
+const DetailField = ({ data, form, isRow = true, isRowParent }: Props) => {
   return (
     <div
       className={`flex ${isRowParent ? "flex-row" : "flex-col"} gap-4
@@ -18,6 +18,7 @@ const DetailField = ({ data, form, isRow=true,isRowParent }: Props) => {
     >
       {data.map((item) => (
         <div
+          key={item.name + item.label}
           className={`flex ${isRow ? "flex-row" : "flex-col"} gap-2
     `}
         >

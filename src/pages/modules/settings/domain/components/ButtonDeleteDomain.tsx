@@ -2,17 +2,21 @@ import { DialogCustom } from "@/components/common/dialog/DialogCustom";
 import { IconDelete } from "@/components/common/table/icon";
 import { Button } from "@/components/ui/button";
 import { Trash2, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import DetailField from "@/components/common/field/DetailField";
-const ButtonDeleteDomain = () => {
+import type { DomainList } from "../model";
+import { useQueryClient } from "@tanstack/react-query";
+import AxiosClient from "@/provider/axios";
+import { toast } from "react-toastify";
+
+interface Props {
+  data: DomainList;
+}
+const ButtonDeleteDomain = ({ data }: Props) => {
   const [open, setOpen] = useState(false);
   const form = useForm();
   const fieldsConfig = [
-    {
-      name: "jenis_modul",
-      label: "Jenis Modul",
-    },
     {
       name: "kelompok",
       label: "Kelompok",
@@ -26,7 +30,7 @@ const ButtonDeleteDomain = () => {
       label: "Domain",
     },
     {
-      name: "ip_server",
+      name: "ip",
       label: "IP Server",
     },
     {
@@ -34,21 +38,41 @@ const ButtonDeleteDomain = () => {
       label: "Endpoint BE",
     },
   ];
-  useEffect(() => {
-    form.reset({
-      jenis_modul: "Website Utama",
-      kelompok: "Universitas",
-      nama: "Sekolah Tinggi Agama Islam Negeri Mandailing Natal",
-      domain: "https://stain-madina.ac.id",
-      ip_server: "115.103.5.55.2",
-      endpoint_be: "https://be.stain-madina.ac.id",
-    });
-  }, []);
+
+  const [loading, setLoading] = useState(false);
+
+  const queryClient = useQueryClient();
+  async function handleDelete() {
+    setLoading(true);
+    try {
+      const res = await AxiosClient.delete(
+        `/pengaturan/domains/${data.id_domain}`
+      );
+
+      if (res.data.status) {
+        toast.success(res.data.message);
+
+        await queryClient.invalidateQueries({
+          queryKey: ["settings-domain"],
+        });
+      }
+    } catch (err: any) {
+      toast.error(
+        err?.response?.data?.error || "Terjadi kesalahan, silakan coba lagi."
+      );
+    } finally {
+      setLoading(false);
+      setOpen(false);
+    }
+  }
   return (
     <>
       <button
         onClick={() => {
           setOpen(true);
+          form.reset({
+            ...data,
+          });
         }}
       >
         {" "}
@@ -66,7 +90,7 @@ const ButtonDeleteDomain = () => {
       >
         <p>Apakah anda yakin untuk menghapus domain yang dipilih?</p>
         <div className="my-4 ">
-          <DetailField data={fieldsConfig} form={form}  />
+          <DetailField data={fieldsConfig} form={form} />
         </div>
 
         <div className="flex gap-4 items-center justify-end">
@@ -77,7 +101,11 @@ const ButtonDeleteDomain = () => {
             <X />
             Batal
           </Button>
-          <Button className="bg-red-500 hover:bg-red-500/90 text-white">
+          <Button
+            onClick={handleDelete}
+            disabled={loading}
+            className="bg-red-500 hover:bg-red-500/90 text-white"
+          >
             <Trash2 />
             Hapus
           </Button>

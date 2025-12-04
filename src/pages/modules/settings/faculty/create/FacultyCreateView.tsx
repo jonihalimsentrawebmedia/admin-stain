@@ -1,11 +1,15 @@
 import FacultyCreateViewModel from "./FacultyCreateViewModel";
 import { Form } from "@/components/ui/form";
 import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup";
-import FacultyForm from "../components/FacultyForm";
 import ButtonForm from "@/components/common/button/ButtonForm";
+import usePostSatuanOrganisasi from "../../controller/usePostSatuanOrganisasi";
+import SatuanOrganisasiForm from "../../components/form/SatuanOrganisasiForm";
 
 const FacultyCreateView = () => {
-  const { form, handleSave, loading, goToBack } = FacultyCreateViewModel();
+  const { goToBack } = FacultyCreateViewModel();
+  const { form, handleSave, loading } = usePostSatuanOrganisasi({
+    kelompok: "FAKULTAS",
+  });
   return (
     <div className="flex flex-col gap-4 ">
       <Form {...form}>
@@ -30,7 +34,7 @@ const FacultyCreateView = () => {
             ]}
             label="Tambah Data Fakultas"
           />
-          <FacultyForm form={form} />
+          <SatuanOrganisasiForm form={form} kelompok="FAKULTAS" />
           <ButtonForm loading={loading} />
         </form>
       </Form>

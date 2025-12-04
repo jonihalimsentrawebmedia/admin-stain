@@ -1,33 +1,37 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import ButtonEditDomain from "./components/ButtonEditDomain";
 import ButtonDeleteDomain from "./components/ButtonDeleteDomain";
+import type { DomainList } from "./model";
+import { useSearchParams } from "react-router-dom";
 
 const DomainViewModel = () => {
-  const columns: ColumnDef<any>[] = [
+  const [searchParams] = useSearchParams();
+  const page = Number(searchParams.get("page") || 1);
+  const limit = Number(searchParams.get("limit") || 10);
+  const columns: ColumnDef<DomainList>[] = [
     // ✅ Nomor (#)
     {
       accessorKey: "no",
       header: "#",
       cell: (row) => {
-        // Menggunakan index + 1 untuk nomor urut
-        return <div>{row.row.index + 1}</div>;
+        const idx = row.row.index;
+        return <div className="">{(page - 1) * limit + idx + 1}</div>;
       },
     },
 
     // ✅ Jenis Modul
-    { accessorKey: "jenis_modul", header: "Jenis Modul" },
 
     // ✅ Kelompok
     { accessorKey: "kelompok", header: "Kelompok" },
 
     // ✅ Nama
-    { accessorKey: "nama", header: "Nama" },
+    // { accessorKey: "nama", header: "Nama" },
 
     // ✅ Domain
     { accessorKey: "domain", header: "Domain" },
 
     // ✅ IP Server
-    { accessorKey: "ip_server", header: "IP Server" },
+    { accessorKey: "ip", header: "IP Server" },
 
     // ✅ Endpoint BE
     { accessorKey: "endpoint_be", header: "Endpoint BE" },
@@ -36,11 +40,12 @@ const DomainViewModel = () => {
     {
       accessorKey: "aksi",
       header: "Aksi",
-      cell: () => {
+      cell: (row) => {
+        const values = row.row.original;
         return (
           <div className="flex gap-2 items-center">
-            <ButtonEditDomain />
-            <ButtonDeleteDomain />
+            <ButtonEditDomain data={values} />
+            <ButtonDeleteDomain data={values}/>
           </div>
         );
       },

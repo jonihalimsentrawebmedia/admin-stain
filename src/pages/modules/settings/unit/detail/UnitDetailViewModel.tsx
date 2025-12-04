@@ -1,9 +1,12 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
-import LOGO from "@/assets/img/logo.png";
+import useGetSatuanOrganisasiDetail from "../../controller/useGetSatuanOrganisasiDetail";
 
 const UnitDetailViewModel = () => {
+  const { satuanOrganisasi } = useGetSatuanOrganisasiDetail({
+    kelompok: "UNIT",
+  });
   const form = useForm();
   const navigate = useNavigate();
   const { id } = useParams();
@@ -12,8 +15,12 @@ const UnitDetailViewModel = () => {
       label: "Logo",
       name: "logo",
       component: (
-        <div className="bg-[#F5FFFA] border border-[#70F2B1] p-4">
-          <img src={form.watch("logo")} alt="logo" />
+        <div className="bg-[#F5FFFA] border  border-[#70F2B1] p-4">
+          <img
+            className="max-w-[200px] max-h-[200px]"
+            src={form.watch("logo")}
+            alt="logo"
+          />
         </div>
       ),
     },
@@ -21,8 +28,12 @@ const UnitDetailViewModel = () => {
       label: "Favicon",
       name: "favicon",
       component: (
-        <div className="bg-[#F5FFFA] border border-[#70F2B1] p-4">
-          <img src={form.watch("favicon")} alt="logo" />
+        <div className="bg-[#F5FFFA] border  border-[#70F2B1] p-4">
+          <img
+            src={form.watch("favicon")}
+            className="max-w-[200px] max-h-[200px]"
+            alt="logo"
+          />
         </div>
       ),
     },
@@ -35,7 +46,7 @@ const UnitDetailViewModel = () => {
 
     {
       label: "Nama Program Studi",
-      name: "nama_program",
+      name: "nama",
     },
     {
       label: "Keyword",
@@ -102,27 +113,15 @@ const UnitDetailViewModel = () => {
   ];
 
   function goToEdit() {
-    navigate(`/modules/settings/faculty/edit/${id}`);
+    navigate(`/modules/settings/unit/edit/${id}`);
   }
   useEffect(() => {
-    form.reset({
-      kelompok: "Universitas",
-      fakultas_asal: "Fakultas Ilmu Bahasa",
-      nama_program: "Sastra Inggris",
-      keyword: "STAIN MADINA, Sumatera Utara, Perguruan Tinggi",
-      telepon: "081234657890",
-      fax: "0123456789",
-      email: "stainmadina@email.ac.id",
-      alamat: "Jl. Prof. Dr. Andi Hakim, No. 9.",
-      provinsi: "Sumatera Utara",
-      kabupaten_kota: "Kabupaten Mandailing Natal",
-      kecamatan: "Panjabungan",
-      kelurahan_desa: "Desa Janji",
-      kode_pos: "12345",
-      logo: LOGO,
-      favicon: LOGO,
-    });
-  }, []);
+    if (satuanOrganisasi) {
+      form.reset({
+        ...satuanOrganisasi,
+      });
+    }
+  }, [satuanOrganisasi]);
   return {
     fieldAddress,
     fieldContact,

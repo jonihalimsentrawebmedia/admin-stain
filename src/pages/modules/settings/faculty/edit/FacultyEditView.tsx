@@ -1,14 +1,20 @@
-import FacultyEditViewModel from "./FacultyEditViewModel";
+
 import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup";
-import FacultyForm from "../components/FacultyForm";
+
 import ButtonForm from "@/components/common/button/ButtonForm";
 import { Form } from "@/components/ui/form";
+import useUpdateSatuanOrganisasi from "../../controller/useUpdateSatuanOrganisasi";
+import SatuanOrganisasiForm from "../../components/form/SatuanOrganisasiForm";
 
 const FacultyEditView = () => {
-  const { form, handleSave, loading, goToBack } = FacultyEditViewModel();
+  // const { form, handleSave, loading, goToBack } = FacultyEditViewModel();
+
+  const { form, handleSave, loading, goToBack } = useUpdateSatuanOrganisasi({
+    kelompok: "FAKULTAS",
+  });
   return (
     <div className="flex flex-col">
-      <Form {...form} >
+      <Form {...form}>
         <form
           onSubmit={form.handleSubmit(handleSave)}
           className="flex flex-col gap-4"
@@ -30,7 +36,7 @@ const FacultyEditView = () => {
             ]}
             label="Edit Data Fakultas"
           />
-          <FacultyForm form={form} />
+          <SatuanOrganisasiForm form={form} kelompok="FAKULTAS" />
           <ButtonForm loading={loading} />
         </form>
       </Form>

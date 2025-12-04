@@ -1,11 +1,14 @@
 import { Form } from "@/components/ui/form";
-import InstitutionCreateViewModel from "./InstitutionCreateViewModel";
 import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup";
-import InstitutionForm from "../components/InstitutionForm";
+
 import ButtonForm from "@/components/common/button/ButtonForm";
+import usePostSatuanOrganisasi from "../../controller/usePostSatuanOrganisasi";
+import SatuanOrganisasiForm from "../../components/form/SatuanOrganisasiForm";
 
 const InstitutionCreateView = () => {
-    const { form, handleSave, loading, goToBack } = InstitutionCreateViewModel();
+  const { form, handleSave, loading, goToBack } = usePostSatuanOrganisasi({
+    kelompok: "LEMBAGA",
+  });
   return (
     <div className="flex flex-col gap-4 ">
       <Form {...form}>
@@ -30,12 +33,12 @@ const InstitutionCreateView = () => {
             ]}
             label="Tambah Lembaga"
           />
-          <InstitutionForm form={form} />
+          <SatuanOrganisasiForm kelompok="LEMBAGA" form={form} />
           <ButtonForm loading={loading} />
         </form>
       </Form>
     </div>
   );
-}
+};
 
-export default InstitutionCreateView
+export default InstitutionCreateView;
