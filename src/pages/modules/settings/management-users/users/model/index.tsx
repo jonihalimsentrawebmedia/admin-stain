@@ -17,7 +17,7 @@ export const UsersResolver = z.object({
   // Tipe: string (Nomor telepon), bisa ditambahkan validasi format regex lebih lanjut
   telepon: z
     .string({ error: "Nomor Telepon Wajib Diisi" })
-    .min(11, { error: "Nomor Telepon Minila 11 Digit" }),
+    .min(11, { error: "Nomor Telepon Minimal 11 Digit" }),
 
   // Tipe: string (Email), menggunakan validasi format bawaan Zod
   email: z.string().email({ message: "Format email tidak valid." }),

@@ -28,7 +28,7 @@ export const SelectUniversity = () => {
         }
       })
       .catch((err) => {
-        toast.error(err?.response?.data?.error || 'Terjadi kesalahan, silakan coba lagi.')
+        toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
       })
   }
 

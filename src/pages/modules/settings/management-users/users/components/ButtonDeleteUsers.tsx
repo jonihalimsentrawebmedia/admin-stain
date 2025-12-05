@@ -35,7 +35,7 @@ const ButtonDeleteUser = ({ data }: Props) => {
       }
     } catch (err: any) {
       toast.error(
-        err?.response?.data?.error || "Terjadi kesalahan, silakan coba lagi."
+        err?.response?.data?.message || "Terjadi kesalahan, silakan coba lagi."
       );
     } finally {
       setLoading(false);

@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const GroupRankResolver = z.object({
-  nama_golongan: z.string({ error: "Nama Golongan Wajib Diisi" }),
+  nama_golongan: z.string({ error: "Nama Golongan Wajib Diisi" }).min(1,{ error: "Nama Golongan Wajib Diisi" }),
 });
 
 export type GroupRankType = z.infer<typeof GroupRankResolver>;

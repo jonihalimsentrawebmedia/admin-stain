@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const NewsCategoryResolver = z.object({
-  nama_kategori: z.string({ error: "Nama Kategori Wajib Diisi" }),
+  nama_kategori: z.string({ error: "Nama Kategori Wajib Diisi" }).min(1,{ error: "Nama Kategori Wajib Diisi" }),
 });
 
 export type NewsCategoryType = z.infer<typeof NewsCategoryResolver>;

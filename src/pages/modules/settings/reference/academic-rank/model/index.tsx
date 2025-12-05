@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const AcademicRankResolver = z.object({
-  nama_akademik: z.string({ error: "Nama Akademik Wajib Diisi" }),
+  nama_akademik: z.string({ error: "Nama Akademik Wajib Diisi" }).min(1,{ error: "Nama Akademik Wajib Diisi" }),
 });
 export type AcademicRankType = z.infer<typeof AcademicRankResolver>;
 export interface AcademicRankList {

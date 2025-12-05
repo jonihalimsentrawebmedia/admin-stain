@@ -43,15 +43,16 @@ const ButtonEditAcademicRank = ({ data }: Props) => {
           queryKey: ["settings-academic-rank"],
         });
         setOpen(false);
+       
+      form.reset();
       }
     } catch (err: any) {
       toast.error(
-        err?.response?.data?.error || "Terjadi kesalahan, silakan coba lagi."
+        err?.response?.data?.message || "Terjadi kesalahan, silakan coba lagi."
       );
     } finally {
       setLoading(false);
-      setOpen(false);
-      form.reset();
+ 
     }
   }
   return (

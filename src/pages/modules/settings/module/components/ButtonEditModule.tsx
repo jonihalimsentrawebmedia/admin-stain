@@ -40,15 +40,16 @@ const ButtonEditModule = ({ data }: Props) => {
           queryKey: ["modules-list"],
         });
         setOpen(false);
+             form.reset();
       }
     } catch (err: any) {
       toast.error(
-        err?.response?.data?.error || "Terjadi kesalahan, silakan coba lagi."
+        err?.response?.data?.message || "Terjadi kesalahan, silakan coba lagi."
       );
     } finally {
       setLoading(false);
-      setOpen(false);
-      form.reset();
+   
+ 
     }
   }
   return (
@@ -61,6 +62,7 @@ const ButtonEditModule = ({ data }: Props) => {
             kategori: data.kategori,
             nama_module: data.nama_module,
             urutan: data.urutan.toString(),
+            gambar:data.gambar
           });
         }}
       >
