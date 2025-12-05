@@ -2,8 +2,10 @@ import {useState, useEffect} from "react";
 import {useQuery} from "@tanstack/react-query";
 import AxiosClient from "@/provider/axios.tsx";
 import type {IModulesList} from "@/pages/modules/interface";
+import { useNavigate } from "react-router-dom";
 
 export const ModulesViewModel = () => {
+  const navigate=useNavigate()
   const [modules, setModules] = useState<IModulesList[]>([]);
 
   const [moduleSelect, setModuleSelect] = useState<IModulesList>()
@@ -22,11 +24,16 @@ export const ModulesViewModel = () => {
     }
   }, [data]);
 
+  function goToProfile(){
+
+    navigate('/modules/profile')
+  }
+
   return {
     modules,
     loading,
     moduleSelect,
-    setModuleSelect
+    setModuleSelect,goToProfile
   };
 };
 

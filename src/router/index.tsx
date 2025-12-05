@@ -48,6 +48,7 @@ import ChangePasswordProfileView from '@/pages/modules/settings/dashboard/change
 import MainLayout from '@/pages/modules/website-utama/component/layout'
 import { ProfilePageMainWebsite } from '@/pages/modules/website-utama/profile'
 import { EditPageUniversity } from '@/pages/modules/website-utama/profile/editPage'
+import ModuleProfileView from '@/pages/modules/profile/ModuleProfileView'
 
 export const Router = createBrowserRouter([
   {
@@ -79,12 +80,17 @@ export const Router = createBrowserRouter([
       },
     ],
   },
+
   {
     path: 'modules',
     children: [
       {
         index: true,
         element: <ModulesView />,
+      },
+      {
+        path: 'profile',
+        element: <ModuleProfileView />,
       },
       {
         path: 'select-university',

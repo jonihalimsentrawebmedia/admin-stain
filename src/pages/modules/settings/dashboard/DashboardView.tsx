@@ -1,11 +1,12 @@
-import DashboardViewModel from "./DashboardViewModel";
+import Cookies from 'js-cookie'
+import DashboardViewModel from './DashboardViewModel'
 
 const DashboardView = () => {
-  const { data } = DashboardViewModel();
+  const { data, form } = DashboardViewModel()
   return (
     <div className="flex flex-col gap-4">
       <div className="text-2xl">
-        Selamat Datang, <span className="text-primary">John Doe</span>
+        Selamat Datang, <span className="text-primary">{Cookies.get('profile')}</span>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {data.map((item) => (
@@ -29,7 +30,7 @@ const DashboardView = () => {
                 }}
                 className="w-full text-center text-2xl font-bold"
               >
-                {item.count}
+                {form.watch(item.name)}
               </div>
             </div>
             <div
@@ -44,7 +45,7 @@ const DashboardView = () => {
         ))}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default DashboardView;
+export default DashboardView

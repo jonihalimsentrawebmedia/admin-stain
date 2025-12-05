@@ -13,7 +13,7 @@ const useGetDashboard = () => {
   }>({
     refetchOnWindowFocus: false,
     queryKey: ["dashboard"],
-    queryFn: () => AxiosClient.get("/dashboard").then((res) => res.data),
+    queryFn: () => AxiosClient.get("/pengaturan/dashboard").then((res) => res.data),
   });
 
   const loading = isLoading || isFetching;

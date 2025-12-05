@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom'
 import { urlStringEncode } from '@/utils/helper.tsx'
 
 const ModulesView = () => {
-  const { modules, moduleSelect, setModuleSelect } = ModulesViewModel()
+  const { modules, moduleSelect, setModuleSelect, goToProfile } = ModulesViewModel()
 
   return (
     <div
@@ -19,7 +19,7 @@ const ModulesView = () => {
       }}
       className={`w-screen h-screen object-cover bg-cover bg-fixed relative  flex justify-center items-center `}
     >
-      <Card className="max-w-7xl w-full backdrop-blur-md bg-white/40 ">
+      <Card className="max-w-7xl w-full h-[80dvh] overflow-y-auto backdrop-blur-md bg-white/40 ">
         <CardContent className="flex flex-col gap-4">
           <div className="bg-green-800 rounded-lg">
             <div
@@ -40,7 +40,12 @@ const ModulesView = () => {
                 </div>
               </div>
               <div className="flex flex-col gap-4">
-                <Button className="text-neutral bg-white hover:bg-white/90 text-start justify-start">
+                <Button
+                  onClick={() => {
+                    goToProfile()
+                  }}
+                  className="text-neutral bg-white hover:bg-white/90 text-start justify-start"
+                >
                   <FaUser className="text-blue-600" />
                   Halaman Profile
                 </Button>
@@ -48,7 +53,7 @@ const ModulesView = () => {
               </div>
             </div>
           </div>
-          <div className="rounded-lg grid grid-cols-12">
+          <div className="rounded-lg gap-4 md:gap-0 grid grid-cols-12">
             <div className="col-span-12 lg:col-span-8 flex flex-col gap-4 p-4 rounded-l-lg bg-white">
               <div className="font-bold text-neutral text-xl">Daftar Modul</div>
               <div className="grid w-full text-center grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">

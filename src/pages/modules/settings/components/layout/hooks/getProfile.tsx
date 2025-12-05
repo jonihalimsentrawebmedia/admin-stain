@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
+import Cookies from 'js-cookie'
 
 export interface User {
   id_user: string
@@ -32,6 +33,7 @@ export const UseGetUserProfile = () => {
   useEffect(() => {
     if (data) {
       setProfileUser(data)
+      Cookies.set('profile',data.nama_lengkap)
     }
   }, [data])
 

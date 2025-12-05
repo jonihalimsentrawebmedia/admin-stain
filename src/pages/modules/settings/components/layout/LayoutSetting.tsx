@@ -7,7 +7,7 @@ import { MdBusiness, MdBusinessCenter, MdPeople, MdRoomPreferences } from 'react
 import { IconSettings } from '../icon'
 import { FaGear } from 'react-icons/fa6'
 import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/hooks/getProfile.tsx'
-import { FaUserCircle } from 'react-icons/fa'
+import ButtonProfile from '../button/ButtonProfile'
 
 export default function DashboardLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -123,10 +123,7 @@ export default function DashboardLayout() {
           <button className="text-green-700 sm:hidden" onClick={() => setSidebarOpen(!sidebarOpen)}>
             <Menu className="w-6 h-6" />
           </button>
-          <div className="hidden sm:flex items-center gap-2">
-            <FaUserCircle className={'size-7 text-primary'} />
-            <span className="text-sm font-medium text-gray-700">{profileUser?.nama_lengkap}</span>
-          </div>
+      <ButtonProfile profileUser={profileUser}/>
           <button
             className="text-green-700 hidden sm:block"
             onClick={() => setSideBarSmall(!sidebarSmall)}
