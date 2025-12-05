@@ -49,6 +49,7 @@ import MainLayout from '@/pages/modules/website-utama/component/layout'
 import { ProfilePageMainWebsite } from '@/pages/modules/website-utama/profile'
 import { EditPageUniversity } from '@/pages/modules/website-utama/profile/editPage'
 import ModuleProfileView from '@/pages/modules/profile/ModuleProfileView'
+import ImpactInnovationView from '@/pages/modules/settings/reference/impact-innovation/ImpactInnovationView'
 
 export const Router = createBrowserRouter([
   {
@@ -298,6 +299,10 @@ export const Router = createBrowserRouter([
               {
                 path: 'academic-rank',
                 element: <AcademicRankView />,
+              },
+              {
+                path: 'impact-innovation',
+                element: <ImpactInnovationView />,
               },
             ],
           },

@@ -1,5 +1,4 @@
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { FaUserCircle } from 'react-icons/fa'
 import type { User } from '../layout/hooks/getProfile'
 import { Link, useNavigate } from 'react-router-dom'
 import { Lock, LogOut, User2 } from 'lucide-react'

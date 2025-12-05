@@ -92,6 +92,10 @@ export default function DashboardLayout() {
           label: 'Kategori Berita',
         },
         {
+          link: '/modules/settings/reference/impact-innovation',
+          label: 'Kategori Inovasi Berdampak',
+        },
+        {
           link: '/modules/settings/reference/group-rank',
           label: 'Pangkat Golongan',
         },
@@ -123,7 +127,7 @@ export default function DashboardLayout() {
           <button className="text-green-700 sm:hidden" onClick={() => setSidebarOpen(!sidebarOpen)}>
             <Menu className="w-6 h-6" />
           </button>
-      <ButtonProfile profileUser={profileUser}/>
+          <ButtonProfile profileUser={profileUser} />
           <button
             className="text-green-700 hidden sm:block"
             onClick={() => setSideBarSmall(!sidebarSmall)}
