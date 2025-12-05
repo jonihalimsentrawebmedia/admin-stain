@@ -1,10 +1,15 @@
 import { DialogCustom } from "@/components/common/dialog/DialogCustom";
 import { Button } from "@/components/ui/button";
-import { Check, X,  } from "lucide-react";
+import { Check, X, } from "lucide-react";
 import { useState } from "react";
+import useEditStatusUser from "../controller/useEditStatusUser";
+
 
 const ButtonActive = () => {
   const [open, setOpen] = useState(false);
+  const { handleUpdate, loading } = useEditStatusUser({
+    status: "Y"
+  })
   return (
     <>
       <Button
@@ -27,13 +32,14 @@ const ButtonActive = () => {
 
         <div className="flex gap-4 items-center justify-end">
           <Button
+            disabled={loading}
             onClick={() => setOpen(false)}
             className="bg-white border border-primary hover:bg-white/90 text-primary"
           >
             <X />
             Batal
           </Button>
-          <Button className="bg-[#27CD7F] hover:bg-[#27CD7F]/90 text-white">
+          <Button onClick={handleUpdate} disabled={loading} className="bg-[#27CD7F] hover:bg-[#27CD7F]/90 text-white">
             <Check />
             Nonaktifkan
           </Button>

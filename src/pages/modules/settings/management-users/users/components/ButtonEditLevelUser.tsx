@@ -5,15 +5,27 @@ import { InputText } from "@/components/common/form/InputText";
 import { SelectCustom } from "@/components/common/form/SelectCustom";
 import { Form } from "@/components/ui/form";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { optionSatuan } from "../data";
-import { InputRadio } from "@/components/common/form/InputRadio";
 import { IconEdit } from "@/components/common/table/icon";
+import type { LevelUserList } from "../../level/model";
+import type { SatuanOrganisasiList } from "../../../model";
+import ButtonForm from "@/components/common/button/ButtonForm";
+import type { UserList } from "../model";
+import type { UserMultiLevelList } from "../model/leveluser";
+import useEditLevelUser from "../controller/useEditLevelUser";
+interface Props {
+  levelUser: LevelUserList[]
+  satuanOrganisasi: SatuanOrganisasiList[]
+  formDetail: any
+  data: UserList
+  values: UserMultiLevelList
+}
+const ButtonEditLevelUser = ({ levelUser, satuanOrganisasi, formDetail, data, values }: Props) => {
+  const { form, handleSave, loading, open, setOpen } = useEditLevelUser({
+    id_level_user: values.id_level_user,
+    id_multi_level: values.id_users_multi_level
+  })
 
-const ButtonEditLevelUser = () => {
-  const form = useForm();
-  const [open, setOpen] = useState(false);
-  async function handleSave() {}
+
   const field = [
     {
       label: "Nama Lengkap",
@@ -25,17 +37,40 @@ const ButtonEditLevelUser = () => {
     },
     {
       label: "Level User 1",
-      name: "level_user",
+      name: "level_users_multi",
+      component: (
+        <div>
+          {data.level_users.length == 1 ? data.level_users[0] : <ul className="ml-2 pl-2 list-outside list-disc">
+            {data.level_users.map((item) => (
+              <li key={data.id_user + item}>{item}</li>
+            ))}
+
+          </ul>}
+        </div>
+      )
     },
   ];
 
+  const idLevelUser = form.watch("id_level_user");
+  const [isSatuanKerja, setIsSatuanKerja] = useState(false);
+
+
   useEffect(() => {
-    form.reset({
-      nama_lengkap: "Rudi Tabuti",
-      level_user: "Kaprodi",
-      jabatan: "Admin Fakultas",
-    });
-  }, []);
+    if (idLevelUser) {
+      const temp = levelUser.filter((item) => item.id_level == idLevelUser)[0];
+
+      setIsSatuanKerja(temp.is_satker);
+    }
+  }, [idLevelUser]);
+
+  useEffect(() => {
+    if (values) {
+      form.reset({
+        id_level_user: values.id_level_user,
+        list_unit: values.list_unit_nama ? values.list_unit_nama[0].id_satuan_organisasi : undefined
+      })
+    }
+  }, [values])
   return (
     <>
       <div
@@ -50,52 +85,43 @@ const ButtonEditLevelUser = () => {
         className="max-w-2xl! w-full!"
         open={open}
         setOpen={setOpen}
-        title={<p className="text-2xl ">Tambah Level User</p>}
+        title={<p className="text-2xl ">Ubah Level User</p>}
       >
         <div className="flex flex-col gap-4">
           <div className="p-4 border-primary border rounded-xl bg-[#F5FFFA]">
-            <DetailField data={field} form={form} isRow />
+            <DetailField data={field} form={formDetail} isRow />
           </div>
 
           <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(handleSave)}
-              className="flex flex-col gap-4"
-            >
+            <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
               <SelectCustom
-                data={[]}
-                name="level_user"
-                placeholder="Pilih"
+                data={levelUser.map((item) => {
+                  return {
+                    value: item.id_level,
+                    label: item.nama,
+                  };
+                })}
+                name="id_level_user"
                 label="Level User"
-                isFilter
-                isRow
-                level1
+                placeholder="Masukkan Level User"
                 form={form}
+                isRow
+                level5
                 inputClassName="lg:max-w-[300px]"
               />
-              <InputRadio
-                isRow
-                form={form}
-                name="ada_satuan_kerja"
-                label="Ada Satuan Kerja?"
-                data={[
-                  {
-                    label: "Ya",
-                    value: "Ya",
-                  },
-                  {
-                    label: "Tidak",
-                    value: "Tidak",
-                  },
-                ]}
-              />
-              {form.watch("ada_satuan_kerja") == "Ya" ? (
+
+              {isSatuanKerja ? (
                 <InputCheckbox
                   isRow
                   form={form}
-                  name="satuan_kerja"
+                  name="list_unit"
                   label="Pilih Satuan Kerja"
-                  data={optionSatuan}
+                  data={satuanOrganisasi.map((item) => {
+                    return {
+                      label: item.nama,
+                      value: item.id_satuan_organisasi,
+                    };
+                  })}
                   isSingle
                   isGrid
                 />
@@ -111,6 +137,9 @@ const ButtonEditLevelUser = () => {
                   inputClassName="lg:max-w-[300px]"
                 />
               )}
+              <ButtonForm loading={loading} onCancel={() => {
+                setOpen(false)
+              }} />
             </form>
           </Form>
         </div>

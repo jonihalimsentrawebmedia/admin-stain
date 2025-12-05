@@ -5,6 +5,7 @@ import DetailField from "@/components/common/field/DetailField";
 import CardInput from "@/components/common/card/CardInput";
 import ButtonNonActive from "../components/ButtonNonActive";
 import ButtonActive from "../components/ButtonActive";
+import { returnStatus } from "../utils";
 
 const UsersDetailView = () => {
   const { fieldImage, fieldConfiguration, form, goToEdit } =
@@ -16,17 +17,18 @@ const UsersDetailView = () => {
         buttonGroup={[
           {
             label: "",
-            onClick: () => {},
+            onClick: () => { },
             type: "add",
             element: (
-              <div className="flex gap-4">
-                <div className="flex gap-2 items-center">
-                  <div>Status</div>
-                  <div className="size-4 rounded-full bg-green-400"></div>
-                  <div>Aktif</div>
-                </div>
-                <ButtonNonActive />
-                <ButtonActive />
+              <div className="flex flex-wrap gap-4">
+                {returnStatus(form.watch('status'))}
+                {form.watch('status') == "Y" ? (
+                  <ButtonNonActive />
+                ) : (
+                  <ButtonActive />
+                )}
+
+
               </div>
             ),
           },

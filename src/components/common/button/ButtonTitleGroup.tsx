@@ -21,7 +21,7 @@ const ButtonTitleGroup = (props: Props) => {
   const {buttonGroup, label, isBack} = props;
   const navigate = useNavigate();
   return (
-    <div className="flex gap-4 items-center justify-between">
+    <div className="flex gap-4 flex-wrap items-center justify-between">
       <div className="flex gap-4 items-center">
         {isBack && (
           <button

@@ -2,15 +2,30 @@ import { DialogCustom } from "@/components/common/dialog/DialogCustom";
 import DetailField from "@/components/common/field/DetailField";
 import { Switch } from "@/components/ui/switch";
 import type { ColumnDef } from "@tanstack/react-table";
-import { Pencil } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import ButtonEditLevelUser from "./ButtonEditLevelUser";
 import TableCustom from "@/components/common/table/TableCustom";
-import { dummyDataLevelUser } from "../data";
 
-const ButtonSettingLevelUser = () => {
-  const form = useForm();
+import type { UserList } from "../model";
+import useGetUsersLevel from "../controller/useGetUsersLevel";
+import { FaGear } from "react-icons/fa6";
+import useGetUsersDetail from "../controller/useGetUsersDetail";
+import type { UserMultiLevelList } from "../model/leveluser";
+import { formatDateTime } from "@/utils/date";
+import type { LevelUserList } from "../../level/model";
+import type { SatuanOrganisasiList } from "../../../model";
+import { Skeleton } from "@/components/ui/skeleton";
+interface Props {
+  data: UserList
+  levelUser: LevelUserList[]
+  satuanOrganisasi: SatuanOrganisasiList[]
+
+}
+const ButtonSettingLevelUser = ({ data, levelUser, satuanOrganisasi }: Props) => {
+  const { loading, userMulti } = useGetUsersLevel({ id: data.id_user })
+  const { loading: loadingUser, user } = useGetUsersDetail({ idUser: data.id_user })
+  const formDetail = useForm();
   const [open, setOpen] = useState(false);
 
   const field = [
@@ -20,10 +35,20 @@ const ButtonSettingLevelUser = () => {
     },
     {
       label: "Level User 1",
-      name: "level_user",
+      name: "level_users_multi",
+      component: (
+        <div>
+          {data.level_users.length == 1 ? data.level_users[0] : <ul className="ml-2 pl-2 list-outside list-disc">
+            {data.level_users.map((item) => (
+              <li key={data.id_user + item}>{item}</li>
+            ))}
+
+          </ul>}
+        </div>
+      )
     },
   ];
-  const columns: ColumnDef<any>[] = [
+  const columns: ColumnDef<UserMultiLevelList>[] = [
     // ✅ Nomor (Menggunakan index dari row)
     {
       accessorKey: "no",
@@ -35,22 +60,22 @@ const ButtonSettingLevelUser = () => {
     },
 
     // ✅ Level
-    { accessorKey: "level", header: "Level" },
+    { accessorKey: "nama_level_user", header: "Level" },
 
     // ✅ Satuan Kerja
     {
-      accessorKey: "satuan_kerja",
+      accessorKey: "list_unit_nama",
       header: "Satuan Kerja",
       cell: (row) => {
-        const satuanKerjaList: string[] = row.row.original.satuan_kerja;
+        const satuanKerjaList = row.row.original.list_unit_nama;
 
         if (Array.isArray(satuanKerjaList)) {
           // Menampilkan daftar satuan kerja dalam bentuk list
           return (
             <ul className="list-disc list-inside ml-2">
-              {satuanKerjaList.map((item, index) => (
-                <li key={index} className="text-sm">
-                  {item}
+              {satuanKerjaList?.map((item, index) => (
+                <li key={index + item.nama_satuan_organisasi + data.id_user} className="text-sm">
+                  {item.nama_satuan_organisasi}
                 </li>
               ))}
             </ul>
@@ -67,7 +92,7 @@ const ButtonSettingLevelUser = () => {
       header: "Status",
       cell: (row) => {
         const values = row.row.original;
-        const isActive = values.status === "Aktif";
+        const isActive = values.status === "Y";
 
         // Menggunakan Switch/Toggle dan teks Status
         return (
@@ -77,15 +102,12 @@ const ButtonSettingLevelUser = () => {
             <Switch
               checked={isActive}
               // Contoh penanganan perubahan status
-              onCheckedChange={() =>
-                console.log("Status changed for ID:", values.id)
-              }
+
               className="data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-gray-200"
             />
             <div
-              className={`text-sm ${
-                isActive ? "text-green-600" : "text-gray-600"
-              }`}
+              className={`text-sm ${isActive ? "text-green-600" : "text-gray-600"
+                }`}
             >
               {values.status}
             </div>
@@ -98,34 +120,44 @@ const ButtonSettingLevelUser = () => {
     { accessorKey: "aktif_sejak", header: "Aktif Sejak" },
 
     // ✅ Diubah
-    { accessorKey: "diubah", header: "Diubah" },
+    {
+      accessorKey: "diubah", header: "Diubah", cell: (row) => {
+        const values = row.row.original
+        const updateAt = formatDateTime(values.updated_at)
+        return <div className="text-center">{updateAt.date}
+          <br />
+          {updateAt.time}
+        </div>
+      },
+    },
 
     // ✅ Aksi (Ikon Edit)
     {
       accessorKey: "action",
       header: "Aksi",
-      cell: () => {
-        return <ButtonEditLevelUser />;
+      cell: (row) => {
+        const values = row.row.original
+        return <ButtonEditLevelUser values={values} data={data} formDetail={formDetail} levelUser={levelUser} satuanOrganisasi={satuanOrganisasi} />;
       },
     },
   ];
 
   useEffect(() => {
-    form.reset({
-      level_user: "Kaprodi",
-      jabatan: "Admin Fakultas",
-    });
-  }, []);
+    if (user) {
+      formDetail.reset({
+        ...user
+      });
+    }
+  }, [user]);
   return (
     <>
       <div
         onClick={() => {
           setOpen(true);
         }}
-        className="flex items-center space-x-4 cursor-pointer "
+
       >
-        <Pencil className="text-orange-400 size-4" />
-        <div className="text-[#464646]">Atur Level User</div>
+        <FaGear className="text-green-600" />
       </div>
       <DialogCustom
         className="max-w-2xl! w-full!"
@@ -135,13 +167,14 @@ const ButtonSettingLevelUser = () => {
       >
         <div className="flex flex-col gap-4">
           <div className="p-4 border-primary border rounded-xl bg-[#F5FFFA]">
-            <DetailField data={field} form={form} isRow />
+            {loadingUser ? <Skeleton /> : <DetailField data={field} form={formDetail} isRow />}
           </div>
           <TableCustom
             isShowPagination={false}
             isShowFilter={false}
             columns={columns}
-            data={dummyDataLevelUser}
+            loading={loading}
+            data={userMulti}
             placeHolderSearch="Cari  User"
           />
         </div>

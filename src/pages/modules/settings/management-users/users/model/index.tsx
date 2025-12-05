@@ -52,6 +52,11 @@ interface UserLevelMulti {
   updated_at: string; // ISO 8601 string (Date/Time with timezone)
   updated_user: string; // ID user yang terakhir memperbarui data
   nama_level_user: string;
+  list_unit_nama?: {
+    id_satuan_organisasi: string
+    nama_satuan_organisasi: string
+  }[]
+
 }
 
 export interface UserDetail {
@@ -69,5 +74,5 @@ export interface UserDetail {
   updated_user: string;
 
   // Properti Array Nested
-  level_users_multi: UserLevelMulti[]; 
+  level_users_multi: UserLevelMulti[];
 }

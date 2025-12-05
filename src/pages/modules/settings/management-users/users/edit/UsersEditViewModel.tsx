@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import useGetUsersDetail from "../controller/useGetUsersDetail";
 
 const UsersEditViewModel = () => {
-  const { user } = useGetUsersDetail();
+  const { user } = useGetUsersDetail({});
   const navigate = useNavigate();
   const params = useParams();
   const { id } = params;

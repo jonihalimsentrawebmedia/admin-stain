@@ -27,7 +27,10 @@ const DetailField = ({ data, form, isRow = true, isRowParent }: Props) => {
           </div>
           {item.component ? (
             form.watch(item.name) ? (
-              item.component
+              <div className="text-[#464646]">
+                {item.component}
+              </div>
+
             ) : (
               "-"
             )

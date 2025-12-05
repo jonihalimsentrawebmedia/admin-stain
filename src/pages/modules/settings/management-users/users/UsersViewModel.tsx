@@ -1,19 +1,23 @@
 import type { ColumnDef } from "@tanstack/react-table";
 import { IoIosInformationCircle } from "react-icons/io";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { FaGear } from "react-icons/fa6";
+
 import { Switch } from "@/components/ui/switch";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Pencil,  } from "lucide-react";
+import { Pencil, } from "lucide-react";
 import ButtonAddLevelUser from "./components/ButtonAddLevelUser";
 import ButtonSettingLevelUser from "./components/ButtonSettingLevelUser";
 import type { UserList } from "./model";
 import ButtonDeleteUser from "./components/ButtonDeleteUsers";
+import useGetSatuanOrganisasiAll from "../../controller/useGetSatuanOrganisasiAll";
+import useGetLevelUser from "../level/controller/useGetLevelUser";
 const UsersViewModel = () => {
+  const { satuanOrganisasi } = useGetSatuanOrganisasiAll();
+  const { levelUser } = useGetLevelUser();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const page = Number(searchParams.get("page") || 1);
@@ -62,7 +66,7 @@ const UsersViewModel = () => {
         const values = row.row.original;
         return (
           <div className="flex items-center gap-2">
-            <FaGear className="text-green-600" />
+            <ButtonSettingLevelUser data={values} levelUser={levelUser} satuanOrganisasi={satuanOrganisasi} />
             {/* <IconGear className="text-green-600" /> */}
             <span>{values.telepon}</span>
           </div>
@@ -132,8 +136,8 @@ const UsersViewModel = () => {
                   <IoIosInformationCircle className="text-blue-500 size-4" />
                   Detail User
                 </button>
-                <ButtonAddLevelUser />
-                <ButtonSettingLevelUser />
+                <ButtonAddLevelUser data={values} levelUser={levelUser} satuanOrganisasi={satuanOrganisasi} />
+
                 {/* <div className="flex gap-4 items-center">
                   <Plus className="text-green-500 size-4" />
                   Tambah Level

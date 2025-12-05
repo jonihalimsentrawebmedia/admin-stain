@@ -58,7 +58,7 @@ export function InputCheckbox({
         >
           {label && (
             <FormLabel
-              className={clsx("text-md", {
+              className={clsx("text-md whitespace-pre-line", {
                 "w-full max-w-[200px]": isRow && label && !isMobile,
                 hidden: isRow && !label,
                 "w-full": isMobile,
@@ -109,7 +109,7 @@ export function InputCheckbox({
                         className="h-5 w-5"
                       />
                     </FormControl>
-                    <p className="text-nowrap">{item.label}</p>
+                    <p className="text-nowrap whitespace-pre-line">{item.label}</p>
                   </label>
                 </Fragment>
               ))}

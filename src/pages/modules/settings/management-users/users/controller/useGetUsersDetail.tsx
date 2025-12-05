@@ -3,8 +3,11 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import type { UserDetail,  } from "../model";
-
-const useGetUsersDetail = () => {
+interface Props{
+  idUser?:string
+}
+const useGetUsersDetail = ({idUser}:Props) => {
+  
   const params = useParams();
   const { id } = params;
   const [user, setUser] = useState<UserDetail>();
@@ -13,7 +16,7 @@ const useGetUsersDetail = () => {
     refetchOnWindowFocus: false,
     queryKey: ["users-detail"],
     queryFn: () =>
-      AxiosClient.get(`/pengaturan/manajemen-user/users/${id}`).then(
+      AxiosClient.get(`/pengaturan/manajemen-user/users/${idUser??id}`).then(
         (res) => res.data.data
       ),
   });
