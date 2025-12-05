@@ -1,15 +1,16 @@
-import BG from "@/assets/img/bg-modules.png";
-import PATERN from "@/assets/img/patern.png";
-import LOGO from "@/assets/img/logo.png";
-import {Card, CardContent} from "@/components/ui/card";
-import {Button} from "@/components/ui/button";
-import {FaUser} from "react-icons/fa";
-import ButtonLogOut from "@/pages/modules/components/buttonLogOut.tsx";
-import {ModulesViewModel} from "@/pages/modules/ModulesViewModel.tsx";
+import BG from '@/assets/img/bg-modules.png'
+import PATERN from '@/assets/img/patern.png'
+import LOGO from '@/assets/img/logo.png'
+import { Card, CardContent } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { FaUser } from 'react-icons/fa'
+import ButtonLogOut from '@/pages/modules/components/buttonLogOut.tsx'
+import { ModulesViewModel } from '@/pages/modules/ModulesViewModel.tsx'
+import { Link } from 'react-router-dom'
+import { urlStringEncode } from '@/utils/helper.tsx'
 
 const ModulesView = () => {
-
-  const {modules, moduleSelect, setModuleSelect} = ModulesViewModel();
+  const { modules, moduleSelect, setModuleSelect } = ModulesViewModel()
 
   return (
     <div
@@ -29,12 +30,10 @@ const ModulesView = () => {
             >
               <div className="flex gap-2 items-center">
                 <div className="w-[100px] bg-white h-[100px] rounded-xl flex justify-center items-center">
-                  <img src={LOGO} alt="logo" width={52} height={52}/>
+                  <img src={LOGO} alt="logo" width={52} height={52} />
                 </div>
                 <div>
-                  <div className="text-white">
-                    Manajemen Pengelolaan Website
-                  </div>
+                  <div className="text-white">Manajemen Pengelolaan Website</div>
                   <div className="text-2xl font-bold text-white">
                     Sekolah Tinggi Agama Islam Negeri MADINA
                   </div>
@@ -42,10 +41,10 @@ const ModulesView = () => {
               </div>
               <div className="flex flex-col gap-4">
                 <Button className="text-neutral bg-white hover:bg-white/90 text-start justify-start">
-                  <FaUser className="text-blue-600"/>
+                  <FaUser className="text-blue-600" />
                   Halaman Profile
                 </Button>
-                <ButtonLogOut/>
+                <ButtonLogOut />
               </div>
             </div>
           </div>
@@ -54,15 +53,20 @@ const ModulesView = () => {
               <div className="font-bold text-neutral text-xl">Daftar Modul</div>
               <div className="grid w-full text-center grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
                 {modules.map((item, k) => (
-                  <div key={k} onClick={() => {
-                    setModuleSelect(item)
-                  }}
-                       className={`shadow ${moduleSelect?.id_module === item.id_module ? "bg-[#CCE6D9]" : "bg-[#E9E9E9]"} border-[#E9E9E9] text-center border rounded-lg p-4 flex flex-col items-center justify-center`}>
-                    {/*<div className="mx-auto"> {item.icon}</div>*/}
-                    <div className="text-[14px]">{item.nama_module}</div>
-                    <div className="text-blue-400 text-[10px]">
-                      {}
+                  <div
+                    key={k}
+                    onClick={() => {
+                      setModuleSelect(item)
+                    }}
+                    className={`shadow ${moduleSelect?.id_module === item.id_module ? 'bg-[#CCE6D9]' : 'bg-[#E9E9E9]'} border-[#E9E9E9] text-center border rounded-lg p-4 flex flex-col items-center justify-center`}
+                  >
+                    <div className="mx-auto mb-2">
+                      <img src={item?.gambar} className={'size-10 object-contain'} />
                     </div>
+                    <div className="text-[14px]">{item.nama_module}</div>
+                    {item?.nama_module.toLowerCase() === 'website utama' && (
+                      <p className="text-xs text-primary">https://stain-madina.ac.id</p>
+                    )}
                   </div>
                 ))}
               </div>
@@ -70,20 +74,24 @@ const ModulesView = () => {
             <div className="bg-[#E9E9E9] p-4 col-span-12 rounded-r-lg lg:col-span-4 ">
               {moduleSelect && (
                 <div className="flex flex-col gap-4">
-                  <div className="font-bold text-black text-xl">
-                    Daftar Role
-                  </div>
-                  <div
-                    className="font-medium
-                        "
+                  <div className="font-bold text-black text-xl">Daftar Role</div>
+                  <div className="font-medium">{moduleSelect.nama_module}</div>
+                  <Link
+                    onClick={() => {
+                      window.localStorage.setItem('module', JSON.stringify(moduleSelect))
+                    }}
+                    to={
+                      moduleSelect.nama_module.toLowerCase() === 'website utama'
+                        ? '/modules/select-university?url=website-utama'
+                        : `/modules/${urlStringEncode(moduleSelect?.controller)}/dashboard`
+                    }
                   >
-                    {moduleSelect.nama_module}
-                  </div>
-                  <Card>
-                    <CardContent>
-                      <div className="text-[#295AA3]">Admin Website</div>
-                    </CardContent>
-                  </Card>
+                    <Card>
+                      <CardContent>
+                        <div className="text-[#295AA3]">Admin {moduleSelect.nama_module}</div>
+                      </CardContent>
+                    </Card>
+                  </Link>
                 </div>
               )}
             </div>
@@ -91,7 +99,7 @@ const ModulesView = () => {
         </CardContent>
       </Card>
     </div>
-  );
-};
+  )
+}
 
-export default ModulesView;
+export default ModulesView
