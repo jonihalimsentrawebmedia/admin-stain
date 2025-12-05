@@ -10,7 +10,7 @@ interface Props {
   buttonGroup: {
     type: "add" | "edit" | "save" | "cancel";
     label: string;
-    onClick: () => void;
+    onClick: (e?:any) => void;
     element?: ReactNode;
     isDisabled?: boolean;
   }[];
@@ -26,7 +26,8 @@ const ButtonTitleGroup = (props: Props) => {
         {isBack && (
           <button
             className="cursor-pointer"
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault()
               navigate(-1);
             }}
           >

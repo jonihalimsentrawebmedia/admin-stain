@@ -42,6 +42,8 @@ import UnitEditView from '@/pages/modules/settings/unit/edit/UnitEditView'
 import UnitView from '@/pages/modules/settings/unit/UnitView'
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { SelectUniversity } from '@/pages/modules/website-utama/select-university'
+import ProfileView from '@/pages/modules/settings/dashboard/profile/ProfileView'
+import EditProfileView from '@/pages/modules/settings/dashboard/profile/edit/EditProfileView'
 
 export const Router = createBrowserRouter([
   {
@@ -90,8 +92,23 @@ export const Router = createBrowserRouter([
         children: [
           {
             path: 'dashboard',
-            element: <DashboardView />,
+
+            children: [
+              {
+                index: true,
+                element: <DashboardView />,
+              },
+              {
+                path: 'profile',
+                element: <ProfileView />,
+              },
+              {
+                path: 'profile/edit',
+                element: <EditProfileView />,
+              },
+            ],
           },
+
           {
             path: 'main-data-university',
             children: [

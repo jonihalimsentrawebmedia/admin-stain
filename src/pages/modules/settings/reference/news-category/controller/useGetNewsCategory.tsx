@@ -7,10 +7,11 @@ import type { Meta } from "@/components/common/table/TablePagination";
 
 const useGetNewsCategory = () => {
   const [searchParams, ] = useSearchParams();
-  const [newsCategory, setNewsCategory] = useState<NewsCategoryList[]>([]);
-  const page = searchParams.get("page") || "1";
+    const page = searchParams.get("page") || "1";
   const limit = searchParams.get("limit") || "10";
   const search = searchParams.get("search") || "";
+  const [newsCategory, setNewsCategory] = useState<NewsCategoryList[]>([]);
+
   const { data, isLoading, isFetching } = useQuery<{
     data: NewsCategoryList[];
     meta: Meta;
