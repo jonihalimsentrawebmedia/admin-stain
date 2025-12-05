@@ -44,6 +44,7 @@ import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { SelectUniversity } from '@/pages/modules/website-utama/select-university'
 import ProfileView from '@/pages/modules/settings/dashboard/profile/ProfileView'
 import EditProfileView from '@/pages/modules/settings/dashboard/profile/edit/EditProfileView'
+import ChangePasswordProfileView from '@/pages/modules/settings/dashboard/change-password/ChangePasswordView'
 
 export const Router = createBrowserRouter([
   {
@@ -105,6 +106,10 @@ export const Router = createBrowserRouter([
               {
                 path: 'profile/edit',
                 element: <EditProfileView />,
+              },
+              {
+                path: 'change-password',
+                element: <ChangePasswordProfileView />,
               },
             ],
           },
