@@ -212,9 +212,9 @@ function SidebarItemTree(props: SidebarItemTreeProps) {
             {item.child!.map((child, l) => (
               <div className={'relative pl-2 py-1 w-full'} key={l}>
                 <div
-                  className={`absolute w-px bg-white left-0 top-0 ${l === (item.child?.length ?? 0) - 1 ? 'h-1/2' : 'h-full'}`}
+                  className={`absolute w-px bg-primary left-0 top-0 ${l === (item.child?.length ?? 0) - 1 ? 'h-1/2' : 'h-full'}`}
                 />
-                <div className={'absolute w-2 h-px bg-white left-0 top-5'} />
+                <div className={'absolute w-2 h-px bg-primary left-0 top-5'} />
                 <SidebarItemTree
                   key={makeGroupId(groupId, l, child.name)}
                   item={child}
