@@ -28,7 +28,7 @@ export const EditPageUniversity = () => {
   }, [detailUniversity])
 
   const handleSave = async (e: SatuanOrganisasiType) => {
-    await AxiosClient.put('/website-utama/profil', {
+    await AxiosClient.post('/website-utama/profil', {
       ...e,
     }).then((res) => {
       if (res.data.status) {
