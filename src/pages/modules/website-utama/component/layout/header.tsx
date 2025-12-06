@@ -1,10 +1,10 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { IoMdNotificationsOutline } from 'react-icons/io'
 import type { IModulesList } from '@/pages/modules/interface'
 import { RiMenuLine } from 'react-icons/ri'
 import React from 'react'
 import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/hooks/getProfile.tsx'
 import { ButtonSession } from '@/pages/modules/website-utama/component/buttonSession'
+import ButtonProfile from '@/pages/modules/settings/components/button/ButtonProfile.tsx'
 
 interface Props {
   collapsed: boolean
@@ -35,15 +35,7 @@ export function Header(props: Props) {
         </div>
         <div className="flex items-center gap-4">
           <IoMdNotificationsOutline className="text-xl text-green-700 cursor-pointer" />
-          <div className="flex items-center gap-2">
-            <Avatar className="h-8 w-8">
-              <AvatarImage src={profileUser?.gambar} />
-              <AvatarFallback>AW</AvatarFallback>
-            </Avatar>
-
-            <span className="text-sm">{profileUser?.nama_lengkap}</span>
-          </div>
-
+          <ButtonProfile profileUser={profileUser} />
           <button onClick={() => setCollapsed(!collapsed)}>
             <RiMenuLine />
           </button>

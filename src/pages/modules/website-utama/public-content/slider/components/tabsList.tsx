@@ -15,12 +15,13 @@ export const TabsListCustom = (props: Props) => {
 
   return (
     <>
-      <Tabs>
+      <Tabs defaultValue={data[0].value}>
         <TabsList className={'bg-transparent shadow-none rounded-none w-full'}>
-          {data?.map((item) => (
+          {data?.map((item, k) => (
             <TabsTrigger
+              key={k}
               className={
-                'border border-primary rounded-none data-[state=active]:bg-primary data-[state=active]:text-white text-primary'
+                'border border-primary rounded-none data-[state=active]:bg-primary data-[state=active]:text-white text-primary p-2.5'
               }
               value={item?.value}
             >
@@ -28,8 +29,10 @@ export const TabsListCustom = (props: Props) => {
             </TabsTrigger>
           ))}
         </TabsList>
-        {data?.map((row) => (
-          <TabsContent value={row?.value}>{row?.element}</TabsContent>
+        {data?.map((row, k) => (
+          <TabsContent key={k} value={row?.value}>
+            {row?.element}
+          </TabsContent>
         ))}
       </Tabs>
     </>

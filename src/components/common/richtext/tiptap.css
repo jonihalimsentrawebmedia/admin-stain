@@ -1,0 +1,42 @@
+/* Wrapper */
+.tiptap-wrapper {
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: white;
+}
+
+/* Toolbar */
+.tiptap-toolbar {
+    display: flex;
+    gap: 6px;
+    border-bottom: 1px solid #e5e7eb;
+    background: #f8f9fa;
+}
+
+.tiptap-toolbar button {
+    padding: 4px 8px;
+    font-size: 14px;
+    border-radius: 6px;
+    background: white;
+    border: 1px solid #d1d5db;
+    cursor: pointer;
+}
+
+.tiptap-toolbar button:hover {
+    background: #e5e7eb;
+}
+
+/* === The real editor === */
+.tiptap {
+    min-height: 200px;
+    padding: 5px;
+    outline: none !important;
+}
+
+.tiptap p.is-editor-empty:first-child::before {
+    color: #9ca3af;
+    content: attr(data-placeholder);
+    float: left;
+    pointer-events: none;
+    height: 0;
+}
