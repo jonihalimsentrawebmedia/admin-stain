@@ -46,10 +46,9 @@ import ProfileView from '@/pages/modules/settings/dashboard/profile/ProfileView'
 import EditProfileView from '@/pages/modules/settings/dashboard/profile/edit/EditProfileView'
 import ChangePasswordProfileView from '@/pages/modules/settings/dashboard/change-password/ChangePasswordView'
 import MainLayout from '@/pages/modules/website-utama/component/layout'
-import { ProfilePageMainWebsite } from '@/pages/modules/website-utama/profile'
-import { EditPageUniversity } from '@/pages/modules/website-utama/profile/editPage'
 import ModuleProfileView from '@/pages/modules/profile/ModuleProfileView'
 import ImpactInnovationView from '@/pages/modules/settings/reference/impact-innovation/ImpactInnovationView'
+import { MainWebsiteRouter } from '@/router/main-website/router.tsx'
 
 export const Router = createBrowserRouter([
   {
@@ -329,34 +328,7 @@ export const Router = createBrowserRouter([
       {
         path: 'website-utama',
         element: <MainLayout />,
-        children: [
-          {
-            path: 'dashboard',
-            element: <></>,
-          },
-          {
-            path: 'profile',
-            children: [
-              {
-                index: true,
-                element: <ProfilePageMainWebsite />,
-              },
-              {
-                path: 'edit',
-                element: <EditPageUniversity />,
-              },
-            ],
-          },
-          {
-            path: 'public-content',
-            children: [
-              {
-                path: '*',
-                element: <></>,
-              },
-            ],
-          },
-        ],
+        children: [...MainWebsiteRouter],
       },
     ],
   },
