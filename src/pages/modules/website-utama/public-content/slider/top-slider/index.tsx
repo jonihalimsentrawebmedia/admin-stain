@@ -1,18 +1,128 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { TabsListCustom } from '@/pages/modules/website-utama/public-content/slider/components/tabsList.tsx'
-import { DraftSection } from '@/pages/modules/website-utama/public-content/slider/top-slider/create/component/draftSection.tsx'
+import { UseGetStatusSlider } from '@/pages/modules/website-utama/public-content/slider/top-slider/hooks'
+import { useEffect } from 'react'
+import { DraftSection } from '@/pages/modules/website-utama/public-content/slider/top-slider/components/table/draftSection.tsx'
+import { SubmitSection } from '@/pages/modules/website-utama/public-content/slider/top-slider/components/table/submitSection.tsx'
+import { PublishSection } from '@/pages/modules/website-utama/public-content/slider/top-slider/components/table/publishSection.tsx'
+import { UnPublishSection } from '@/pages/modules/website-utama/public-content/slider/top-slider/components/table/unpublishSection.tsx'
+import { EditorProcessSection } from '@/pages/modules/website-utama/public-content/slider/top-slider/components/table/editorProcesSection.tsx'
+import { RejectSection } from '@/pages/modules/website-utama/public-content/slider/top-slider/components/table/RejectSection.tsx'
+import {
+  EditorApproveSection
+} from '@/pages/modules/website-utama/public-content/slider/top-slider/components/table/EditorApproveSection.tsx'
 
 export const TopSliderPublicContent = () => {
   const navigate = useNavigate()
+  const { status } = UseGetStatusSlider()
+
+  const [searchParams, setSearchParams] = useSearchParams()
+
+  const statusParams = searchParams.get('status')
+
+  useEffect(() => {
+    if (!statusParams) {
+      setSearchParams({ status: 'DRAFT' })
+    }
+  }, [statusParams])
 
   const DataTabs = [
-    { id: 1, name: 'Draft', value: 'draft', element: <DraftSection /> },
-    { id: 2, name: 'Diajukan Ke Editor', value: 'pengajuan', element: <></> },
-    { id: 3, name: 'Ditolak Ke Editor', value: 'tolak', element: <></> },
-    { id: 4, name: 'Disetujui Ke Editor', value: 'setujui', element: <></> },
-    { id: 5, name: 'Publish', value: 'publish', element: <></> },
-    { id: 6, name: 'Unpublish', value: 'unpublish', element: <></> },
+    {
+      id: 1,
+      name: (
+        <div className="p-2 flex items-center gap-1.5">
+          <p>Draft</p>
+          <div className="bg-red-500 size-4 text-white rounded-full text-xs">{status?.DRAFT}</div>
+        </div>
+      ),
+      value: 'DRAFT',
+      element: <DraftSection />,
+    },
+
+    {
+      id: 2,
+      name: (
+        <div className="p-2 flex items-center gap-1.5">
+          <p>Diajukan Ke Editor</p>
+          <div className="bg-red-500 size-4 text-white rounded-full text-xs">
+            {status?.DIAJUKAN_EDITOR}
+          </div>
+        </div>
+      ),
+      value: 'DIAJUKAN_EDITOR',
+      element: <SubmitSection />,
+    },
+
+    {
+      id: 3,
+      name: (
+        <div className="p-2 flex items-center gap-1.5">
+          <p>Proses Editor</p>
+          <div className="bg-red-500 size-4 text-white rounded-full text-xs">
+            {status?.PROSES_EDITOR}
+          </div>
+        </div>
+      ),
+      value: 'PROSES_EDITOR',
+      element: <EditorProcessSection />,
+    },
+
+    {
+      id: 4,
+      name: (
+        <div className="p-2 flex items-center gap-1.5">
+          <p>Ditolak Ke Editor</p>
+          <div className="bg-red-500 size-4 text-white rounded-full text-xs">
+            {status?.TOLAK_EDITOR}
+          </div>
+        </div>
+      ),
+      value: 'TOLAK_EDITOR',
+      element: <RejectSection />,
+    },
+
+    {
+      id: 5,
+      name: (
+        <div className="p-2 flex items-center gap-1.5">
+          <p>Disetujui Ke Editor</p>
+          <div className="bg-red-500 size-4 text-white rounded-full text-xs">
+            {status?.DISETUJUI_EDITOR}
+          </div>
+        </div>
+      ),
+      value: 'DISETUJUI_EDITOR',
+      element: <EditorApproveSection />,
+    },
+
+    {
+      id: 6,
+      name: (
+        <div className="p-2 flex items-center gap-1.5">
+          <p>Publish</p>
+          <div className="bg-red-500 size-4 text-white rounded-full text-xs">
+            {status?.PUBLISHED}
+          </div>
+        </div>
+      ),
+      value: 'PUBLISHED',
+      element: <PublishSection />,
+    },
+
+    {
+      id: 7,
+      name: (
+        <div className="p-2 flex items-center gap-1.5">
+          <p>Unpublish</p>
+          <div className="bg-red-500 size-4 text-white rounded-full text-xs">
+            {status?.UNPUBLISH}
+          </div>
+        </div>
+      ),
+      value: 'UNPUBLISH',
+      element: <UnPublishSection />,
+    },
   ]
 
   return (
@@ -29,7 +139,13 @@ export const TopSliderPublicContent = () => {
           ]}
         />
 
-        <TabsListCustom data={DataTabs} />
+        <TabsListCustom
+          value={statusParams ?? 'DRAFT'}
+          onChange={(e) => {
+            setSearchParams({ status: e })
+          }}
+          data={DataTabs}
+        />
       </div>
     </>
   )

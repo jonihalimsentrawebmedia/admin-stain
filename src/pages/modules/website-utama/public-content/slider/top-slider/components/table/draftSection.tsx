@@ -1,10 +1,10 @@
 import TableCustom from '@/components/common/table/TableCustom.tsx'
-import TOpSliderColumns from '@/pages/modules/website-utama/public-content/slider/top-slider/create/component/topSliderColumns.tsx'
 import { UseGetListTopSliderDraft } from '@/pages/modules/website-utama/public-content/slider/top-slider/hooks'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
+import TopSliderColumns from '@/pages/modules/website-utama/public-content/slider/top-slider/components/table/topSliderColumns.tsx'
 
 export const DraftSection = () => {
-  const columns = TOpSliderColumns()
+  const columns = TopSliderColumns()
   const { listDraftSlider, loading } = UseGetListTopSliderDraft()
   return (
     <>

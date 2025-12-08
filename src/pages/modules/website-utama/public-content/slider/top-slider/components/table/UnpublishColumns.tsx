@@ -2,10 +2,13 @@ import { Link, useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
 import type { IListSlider } from '@/pages/modules/website-utama/public-content/slider/top-slider/create/data'
 import { Button } from '@/components/ui/button.tsx'
-import { HiPencil } from 'react-icons/hi'
 import { RxExternalLink } from 'react-icons/rx'
+import { format } from 'date-fns'
+import { TimeAgo } from '@/utils/helper.tsx'
+import { ButtonPublished } from '@/pages/modules/website-utama/public-content/slider/top-slider/components/buttonPublish.tsx'
+import { HiPencil } from 'react-icons/hi'
 
-const TOpSliderColumns = () => {
+const UnpublishedColumns = () => {
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') ?? 1)
   const limit = Number(searchParams.get('limit') ?? 10)
@@ -54,18 +57,40 @@ const TOpSliderColumns = () => {
       },
     },
     {
-      accessorKey: 'action',
-      header: '',
+      accessorKey: 'date',
+      header: 'Tgl Unpublish',
       cell: ({ row }) => {
-        const id = row?.original?.id_slider_atas
         return (
-          <>
-            <Link to={`edit/${id}`}>
-              <button className={'bg-yellow-500 p-1.5 rounded text-white hover:bg-yellow-600'}>
+          <div className={'flex flex-col gap-1.5 items-center'}>
+            <p className={'text-xs'}>
+              {format(row?.original?.diajukan_at as string, 'dd MMMM yyyy')}
+            </p>
+            <p className={'text-xs'}>{format(row?.original?.diajukan_at as string, 'HH:mm:ss')}</p>
+            <p className={'text-xs text-primary'}>
+              {TimeAgo(row?.original?.diajukan_at as string)}
+            </p>
+          </div>
+        )
+      },
+    },
+    {
+      accessorKey: 'action',
+      header: 'Aksi',
+      cell: ({ row }) => {
+        return (
+          <div className={'flex flex-col gap-1.5 items-center w-full'}>
+            <Link to={`edit/${row?.original?.id_slider_atas}`}>
+              <button
+                className={
+                  ' border border-yellow-500 p-1.5 rounded text-yellow-500 hover:text-yellow-600 flex gap-1.5 items-center'
+                }
+              >
                 <HiPencil />
+                Edit Slider
               </button>
             </Link>
-          </>
+            <ButtonPublished data={row?.original} />
+          </div>
         )
       },
     },
@@ -74,4 +99,4 @@ const TOpSliderColumns = () => {
   return columns
 }
 
-export default TOpSliderColumns
+export default UnpublishedColumns

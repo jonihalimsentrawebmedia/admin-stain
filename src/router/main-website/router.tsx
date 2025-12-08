@@ -2,6 +2,7 @@ import { ProfilePageMainWebsite } from '@/pages/modules/website-utama/profile'
 import { EditPageUniversity } from '@/pages/modules/website-utama/profile/editPage'
 import { TopSliderPublicContent } from '@/pages/modules/website-utama/public-content/slider/top-slider'
 import { CreateTopSlider } from '@/pages/modules/website-utama/public-content/slider/top-slider/create'
+import { UpdatedTopSliderPage } from '@/pages/modules/website-utama/public-content/slider/top-slider/updated'
 
 export const MainWebsiteRouter = [
   {
@@ -37,6 +38,10 @@ export const MainWebsiteRouter = [
               {
                 path: 'add',
                 element: <CreateTopSlider />,
+              },
+              {
+                path: 'edit/:id',
+                element: <UpdatedTopSliderPage />,
               },
             ],
           },

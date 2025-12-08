@@ -5,12 +5,22 @@ import AxiosClient from '@/provider/axios.tsx'
 import { useSearchParams } from 'react-router-dom'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 
+export interface ISatusSlider {
+  DIAJUKAN_EDITOR: number
+  DISETUJUI_EDITOR: number
+  DRAFT: number
+  PROSES_EDITOR: number
+  PUBLISHED: number
+  TOLAK_EDITOR: number
+  UNPUBLISH: number
+}
+
 export const UseGetListTopSliderDraft = () => {
   const [listDraftSlider, setListDraftSlider] = useState<IListSlider[]>([])
   const [meta, setMeta] = useState<Meta>()
 
   const [searchParams] = useSearchParams()
-  const statusPublish = searchParams.get('status-publish')
+  const statusPublish = searchParams.get('status')
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
 
@@ -20,7 +30,8 @@ export const UseGetListTopSliderDraft = () => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['list-slider-draft', ParamSearch.toString()],
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get('/website-utama/slider-atas').then((res) => res.data),
+    queryFn: () =>
+      AxiosClient.get(`/website-utama/slider-atas?${ParamSearch}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching
@@ -53,4 +64,25 @@ export const UseGetSliderDetail = (id: string) => {
   }, [data])
 
   return { detailSlider, loading }
+}
+
+export const UseGetStatusSlider = () => {
+  const [status, setStatus] = useState<ISatusSlider>()
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['status-slider'],
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get('/website-utama/slider-atas/status').then((res) => res.data.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setStatus(data)
+    }
+  }, [data])
+
+  return { status, loading }
 }

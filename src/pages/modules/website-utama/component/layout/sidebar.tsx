@@ -8,10 +8,6 @@ interface Props {
   collapsed: boolean
 }
 
-interface Props {
-  collapsed: boolean
-}
-
 type MenuItem = {
   name: string
   icon?: React.ReactNode
@@ -19,44 +15,54 @@ type MenuItem = {
   child?: MenuItem[]
 }
 
-export function Sidebar(props: Props) {
-  const { collapsed } = props
-  const location = useLocation()
+/**
+ * IMPORTANT
+ * - makeGroupId harus dipakai SAMA saat membuat defaultOpenGroups dan saat render.
+ * - collectOpenGroups akan menandai semua parent groupId yang punya child aktif.
+ */
 
-  // state untuk simpan group yang sedang open (berdasarkan "id" unik)
+export function Sidebar({ collapsed }: Props) {
+  const location = useLocation()
+  const pathname = location.pathname
+
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({})
 
-  // buat id unik untuk setiap row berdasarkan index + nama
-  const makeGroupId = (prefix: string, index: number, name: string) => `${prefix}-${index}-${name}`
+  const makeGroupId = (parentId: string, index: number, name: string) =>
+    `${parentId}-${index}-${name}`
 
   const isActivePath = (path?: string) => {
     if (!path) return false
-    // sesuaikan jika pattern URL berbeda
-    return location.pathname === path || location.pathname.startsWith(path + '/')
+    return pathname === path || pathname.startsWith(path + '/')
+  }
+
+  // recursive helper: collect groupIds yang harus di-open karena ada active descendant
+  const collectOpenGroups = (
+    item: MenuItem,
+    parentGroupId: string,
+    index: number,
+    map: Record<string, boolean>
+  ) => {
+    const id = makeGroupId(parentGroupId, index, item.name)
+    if (isActiveTree(item, pathname)) {
+      map[id] = true
+    }
+    if (item.child) {
+      item.child.forEach((child, idx) => collectOpenGroups(child, id, idx, map))
+    }
   }
 
   const defaultOpenGroups = useMemo(() => {
     const map: Record<string, boolean> = {}
-
-    MENULIST.forEach((row: MenuItem, i: number) => {
-      const groupId = makeGroupId('root', i, row.name)
-      // auto-open kalau ada anak yang aktif
-      if (row.child && hasActiveInTree(row, location.pathname)) {
-        map[groupId] = true
-      }
+    MENULIST.forEach((row, i) => {
+      collectOpenGroups(row, 'root', i, map)
     })
-
     return map
-  }, [location.pathname])
+  }, [pathname])
 
-  // merge default + user toggle
   const groups = { ...defaultOpenGroups, ...openGroups }
 
   const toggleGroup = (groupId: string) => {
-    setOpenGroups((prev) => ({
-      ...prev,
-      [groupId]: !prev[groupId],
-    }))
+    setOpenGroups((prev) => ({ ...prev, [groupId]: !prev[groupId] }))
   }
 
   return (
@@ -67,12 +73,10 @@ export function Sidebar(props: Props) {
       )}
     >
       <div className="space-y-2 overflow-y-auto py-4">
-        {MENULIST.map((row: MenuItem, k: number) => {
-          const groupId = makeGroupId('root', k, row.name)
+        {MENULIST.map((row, idx) => {
+          const groupId = makeGroupId('root', idx, row.name)
           const isGroupOpen = groups[groupId] ?? false
-          const isRowActive = isActiveTree(row, location.pathname)
-
-          // hanya icon saat collapsed
+          const isRowActive = isActiveTree(row, pathname)
           const labelVisible = !collapsed
 
           if (row.child && row.child.length > 0) {
@@ -85,7 +89,9 @@ export function Sidebar(props: Props) {
                   onClick={() => !collapsed && toggleGroup(groupId)}
                   className={cn(
                     'flex w-full items-center gap-1.5 px-2 py-2 transition-colors',
-                    ` focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${!isGroupOpen ? 'text-white' : 'text-primary'}`,
+                    `focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${
+                      !isGroupOpen ? 'text-white' : 'text-primary'
+                    }`,
                     isRowActive ? 'text-primary font-semibold' : '',
                     collapsed ? 'justify-center' : 'justify-between'
                   )}
@@ -109,24 +115,20 @@ export function Sidebar(props: Props) {
 
                 {!collapsed && isGroupOpen && (
                   <ul className="border-white/30 pl-4 w-full">
-                    {row.child.map((child, l) => (
-                      <div className={'relative pl-2 py-1 w-full'} key={l}>
-                        <div
-                          className={`absolute w-px bg-primary left-0 top-0 ${l === (row.child?.length ?? 0) - 1 ? 'h-1/2' : 'h-full'}`}
-                        />
-                        <div className={'absolute w-2 h-px bg-primary left-0 top-5'} />
-                        <SidebarItemTree
-                          key={makeGroupId(groupId, l, child.name)}
-                          item={child}
-                          depth={1}
-                          parentId={groupId}
-                          makeGroupId={makeGroupId}
-                          groups={groups}
-                          toggleGroup={toggleGroup}
-                          isActivePath={isActivePath}
-                          collapsed={collapsed}
-                        />
-                      </div>
+                    {row.child.map((child, childIdx) => (
+                      <TreeNodeWrapper
+                        length={row?.child.length}
+                        key={makeGroupId(groupId, childIdx, child.name)}
+                        item={child}
+                        parentGroupId={groupId}
+                        index={childIdx}
+                        depth={1}
+                        makeGroupId={makeGroupId}
+                        groups={groups}
+                        toggleGroup={toggleGroup}
+                        isActivePath={isActivePath}
+                        collapsed={collapsed}
+                      />
                     ))}
                   </ul>
                 )}
@@ -149,11 +151,11 @@ export function Sidebar(props: Props) {
           )
 
           return row.path ? (
-            <Link key={k} to={row.path}>
+            <Link key={groupId} to={row.path}>
               {content}
             </Link>
           ) : (
-            <div key={k}>{content}</div>
+            <div key={groupId}>{content}</div>
           )
         })}
       </div>
@@ -161,28 +163,65 @@ export function Sidebar(props: Props) {
   )
 }
 
-interface SidebarItemTreeProps {
-  item: MenuItem
-  depth: number
-  parentId: string
-  makeGroupId: (prefix: string, index: number, name: string) => string
-  groups: Record<string, boolean>
-  toggleGroup: (id: string) => void
-  isActivePath: (path?: string) => boolean
-  collapsed: boolean
+/**
+ * TreeNodeWrapper:
+ * - buat container garis + hitung groupId
+ * - panggil recursive TreeNode
+ */
+function TreeNodeWrapper({
+  item,
+  parentGroupId,
+  index,
+  depth,
+  makeGroupId,
+  groups,
+  toggleGroup,
+  isActivePath,
+  collapsed,
+  length,
+}: any) {
+  const groupId = makeGroupId(parentGroupId, index, item.name)
+  return (
+    <div className="relative pl-2 py-1 w-full" key={groupId}>
+      <div
+        className={`absolute w-px bg-primary left-0 top-0 ${index === length - 1 ? 'h-1/2' : 'h-full'}`}
+      />
+      <div className="absolute w-2 h-px bg-primary left-0 top-5" />
+      <TreeNode
+        item={item}
+        depth={depth}
+        parentGroupId={parentGroupId}
+        index={index}
+        groupId={groupId}
+        makeGroupId={makeGroupId}
+        groups={groups}
+        toggleGroup={toggleGroup}
+        isActivePath={isActivePath}
+        collapsed={collapsed}
+      />
+    </div>
+  )
 }
 
-function SidebarItemTree(props: SidebarItemTreeProps) {
-  const { item, depth, parentId, makeGroupId, groups, toggleGroup, isActivePath, collapsed } = props
-
+/**
+ * TreeNode: recursive renderer for an item (could be leaf or parent)
+ * - groupId prop is passed from wrapper to ensure IDs match the collector
+ */
+function TreeNode({
+  item,
+  depth,
+  groupId,
+  makeGroupId,
+  groups,
+  toggleGroup,
+  isActivePath,
+  collapsed,
+}: any) {
   const hasChildren = !!item.child && item.child.length > 0
-  const groupId = makeGroupId(parentId, depth, item.name)
   const isOpen = groups[groupId] ?? false
-  const isActive = isActiveTree(item, window.location.pathname)
-
+  const pathname = useLocation().pathname
+  const isActive = isActiveTree(item, pathname)
   const labelVisible = !collapsed
-
-  const baseIndent = depth
 
   if (hasChildren) {
     return (
@@ -209,24 +248,20 @@ function SidebarItemTree(props: SidebarItemTreeProps) {
 
         {labelVisible && isOpen && (
           <ul className="border-white/30 pl-3 w-full">
-            {item.child!.map((child, l) => (
-              <div className={'relative pl-2 py-1 w-full'} key={l}>
-                <div
-                  className={`absolute w-px bg-primary left-0 top-0 ${l === (item.child?.length ?? 0) - 1 ? 'h-1/2' : 'h-full'}`}
-                />
-                <div className={'absolute w-2 h-px bg-primary left-0 top-5'} />
-                <SidebarItemTree
-                  key={makeGroupId(groupId, l, child.name)}
-                  item={child}
-                  depth={1}
-                  parentId={groupId}
-                  makeGroupId={makeGroupId}
-                  groups={groups}
-                  toggleGroup={toggleGroup}
-                  isActivePath={isActivePath}
-                  collapsed={collapsed}
-                />
-              </div>
+            {item.child!.map((child: MenuItem, childIdx: number) => (
+              <TreeNodeWrapper
+                key={makeGroupId(groupId, childIdx, child.name)}
+                item={child}
+                parentGroupId={groupId}
+                index={childIdx}
+                depth={depth + 1}
+                makeGroupId={makeGroupId}
+                groups={groups}
+                toggleGroup={toggleGroup}
+                isActivePath={isActivePath}
+                collapsed={collapsed}
+                length={item.child!.length}
+              />
             ))}
           </ul>
         )}
@@ -241,7 +276,7 @@ function SidebarItemTree(props: SidebarItemTreeProps) {
         'hover:bg-white hover:text-primary',
         isActive || isActivePath(item.path) ? 'text-primary font-semibold' : 'text-primary'
       )}
-      style={{ marginLeft: baseIndent }}
+      style={{ marginLeft: depth }}
     >
       {item.icon && <span className="text-xs">{item.icon}</span>}
       {labelVisible && <span>{item.name}</span>}
@@ -251,8 +286,11 @@ function SidebarItemTree(props: SidebarItemTreeProps) {
   return <li>{item.path ? <Link to={item.path}>{itemContent}</Link> : itemContent}</li>
 }
 
-// helper: cek apakah di tree ada path yang aktif
-function isActiveTree(item: MenuItem, pathname: string): boolean {
+/* ---------------------------
+   Active helpers (unchanged)
+   - isActiveTree: returns true if item or any descendant matches pathname
+----------------------------*/
+export function isActiveTree(item: MenuItem, pathname: string): boolean {
   if (item.path && (pathname === item.path || pathname.startsWith(item.path + '/'))) {
     return true
   }
@@ -262,7 +300,6 @@ function isActiveTree(item: MenuItem, pathname: string): boolean {
   return false
 }
 
-// helper: cek apakah ada anak yang aktif
-function hasActiveInTree(item: MenuItem, pathname: string): boolean {
+export function hasActiveInTree(item: MenuItem, pathname: string): boolean {
   return isActiveTree(item, pathname)
 }
