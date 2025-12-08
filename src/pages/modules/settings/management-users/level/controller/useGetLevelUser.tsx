@@ -12,7 +12,7 @@ const useGetLevelUser = (isParam=false) => {
   const page = searchParams.get('page') || '1'
   const limit = searchParams.get('limit') || '10'
   const search = searchParams.get('search') || ''
-  console.log(isParam,'is')
+  
   const { data, isLoading, isFetching } = useQuery<{
     data: LevelUserList[]
     meta: Meta

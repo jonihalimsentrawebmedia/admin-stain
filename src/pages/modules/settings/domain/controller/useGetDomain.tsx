@@ -26,7 +26,7 @@ const useGetDomain = () => {
 
   useEffect(() => {
     if (data) {
-      setDomains(data.data)
+      setDomains(data.data??[])
       setMeta(data.meta)
     }
   }, [data])

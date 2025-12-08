@@ -28,7 +28,7 @@ const useGetAcademicRank = () => {
 
   useEffect(() => {
     if (data) {
-      setAcademicRank(data.data)
+      setAcademicRank(data.data??[])
       setMeta(data.meta)
     }
   }, [data])

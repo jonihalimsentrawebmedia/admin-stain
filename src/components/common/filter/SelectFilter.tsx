@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import Select, { type StylesConfig } from 'react-select'
 
@@ -44,12 +45,23 @@ interface Props {
 }
 const SelectFilter = ({ label, options, name }: Props) => {
   const [searchParams, setSearchParams] = useSearchParams()
+  const [value, setValue] = useState()
+
+  useEffect(() => {
+    console.log(searchParams.get(name ?? ''),'test')
+    if (searchParams.get(name ?? '') || options.length!==0) {
+      const temp:any = options.filter((row) => row.value == searchParams.get(name ?? ''))
+      console.log(temp,'test123',options)
+      setValue(temp)
+    }
+  }, [options])
   return (
     <div className="flex flex-col gap-1 relative">
       <label className="text-green-600 z-10 text-sm font-medium absolute ml-3 bg-white px-1 w-fit  -top-2.5">
         {label}
       </label>
       <Select
+        value={value}
         defaultValue={options[0]}
         options={[
           {
@@ -66,6 +78,7 @@ const SelectFilter = ({ label, options, name }: Props) => {
             const newParams = new URLSearchParams(searchParams.toString())
             newParams.set(name, e.value)
             setSearchParams(newParams)
+            setValue(e)
           }
         }}
       />

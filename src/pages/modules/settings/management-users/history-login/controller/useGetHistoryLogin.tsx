@@ -28,7 +28,7 @@ const useGetHistoryLogin = () => {
 
   useEffect(() => {
     if (data) {
-      setHistories(data.data)
+      setHistories(data.data??[])
       setMeta(data.meta)
     }
   }, [data])

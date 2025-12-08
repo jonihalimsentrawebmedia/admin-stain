@@ -12,7 +12,6 @@ interface Props {
 }
 
 const TablePaginate = ({ meta }: Props) => {
-  console.log(meta, 'meta')
   const [searchParams, setSearchParams] = useSearchParams()
   const currentPage = parseInt(searchParams.get('page') ?? '1')
   // const limit = Number(searchParams.get("limit") ?? "10");

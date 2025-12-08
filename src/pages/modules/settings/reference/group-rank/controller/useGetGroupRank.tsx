@@ -28,7 +28,7 @@ const useGetGroupRank = () => {
 
   useEffect(() => {
     if (data) {
-      setGroupRank(data.data)
+      setGroupRank(data.data??[])
       setMeta(data.meta)
     }
   }, [data])

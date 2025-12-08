@@ -29,7 +29,7 @@ const useGetImpactInnovation = () => {
 
   useEffect(() => {
     if (data) {
-      setImpactInnovation(data.data)
+      setImpactInnovation(data.data??[])
       setMeta(data.meta)
     }
   }, [data])

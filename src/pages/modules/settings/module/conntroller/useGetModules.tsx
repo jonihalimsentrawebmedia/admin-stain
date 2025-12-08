@@ -26,7 +26,7 @@ const useGetModules = () => {
 
   useEffect(() => {
     if (data) {
-      setModules(data.data)
+      setModules(data.data??[])
       setMeta(data.meta)
     }
   }, [data])

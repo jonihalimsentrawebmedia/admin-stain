@@ -42,7 +42,7 @@ const [meta,setMeta]=useState<Meta>()
 
   useEffect(() => {
     if (data) {
-      setNewsCategory(data.data)
+      setNewsCategory(data.data??[])
       setMeta(data.meta)
     }
   }, [data])

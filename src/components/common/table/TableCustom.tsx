@@ -103,6 +103,13 @@ const TableCustom = (props: Props) => {
           ))}
         </TableHeader>
         <TableBody>
+          {data.length == 0 && (
+            <TableRow>
+              <TableCell  colSpan={columnCount} className="text-center border">
+                Data Tidak Ada
+              </TableCell>
+            </TableRow>
+          )}
           {loading
             ? Array.from({ length: 5 }).map((_, rowIndex) => (
                 <TableRow key={`skeleton-${rowIndex}`}>

@@ -30,7 +30,7 @@ const useGetUsers = () => {
 
   useEffect(() => {
     if (data) {
-      setUsers(data.data)
+      setUsers(data.data??[])
       setMeta(data.meta)
     }
   }, [data])
