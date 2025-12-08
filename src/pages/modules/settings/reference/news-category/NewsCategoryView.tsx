@@ -6,7 +6,7 @@ import useGetNewsCategory from "./controller/useGetNewsCategory";
 
 const NewsCategoryView = () => {
   const { columns } = NewsCategoryViewModel();
-  const { loading, newsCategory } = useGetNewsCategory();
+  const { loading, newsCategory,meta } = useGetNewsCategory();
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
@@ -28,6 +28,7 @@ const NewsCategoryView = () => {
         tdClassName="text-start"
         loading={loading}
         placeHolderSearch="Cari Kategori Berita"
+        meta={meta}
       />
     </div>
   );

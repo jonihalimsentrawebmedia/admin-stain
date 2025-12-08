@@ -1,8 +1,4 @@
-import {
-  flexRender,
-  getCoreRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
+import { flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import {
   Table,
   TableBody,
@@ -11,38 +7,39 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from '@/components/ui/table'
 
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from 'react-router-dom'
 
-import type { ReactNode } from "react";
-import SetLimitList from "./SetLimitList";
-import Search from "./Search";
-import TablePaginate from "./TablePagination";
-import { Skeleton } from "@/components/ui/skeleton";
+import type { ReactNode } from 'react'
+import SetLimitList from './SetLimitList'
+import Search from './Search'
+import TablePaginate, { type Meta } from './TablePagination'
+import { Skeleton } from '@/components/ui/skeleton'
 interface Props {
-  data: any;
-  columns: any;
-  className?: string;
-  thClassName?: string;
-  tdClassName?: string;
-  isShowFilter?: boolean;
-  isShowPagination?: boolean;
-  tdFooterClassName?: string;
-  isShowFooterTable?: boolean;
-  addFilter?: ReactNode;
-  addRowColumn?: ReactNode;
-  classNameSearch?: string;
-  placeHolderSearch?: string;
-  loading?: boolean;
+  data: any
+  columns: any
+  className?: string
+  thClassName?: string
+  tdClassName?: string
+  isShowFilter?: boolean
+  isShowPagination?: boolean
+  tdFooterClassName?: string
+  isShowFooterTable?: boolean
+  addFilter?: ReactNode
+  addRowColumn?: ReactNode
+  classNameSearch?: string
+  placeHolderSearch?: string
+  loading?: boolean
+  meta?: Meta
 }
 const TableCustom = (props: Props) => {
   const {
     className,
     columns,
     data,
-    tdClassName = "border",
-    thClassName = "",
+    tdClassName = 'border',
+    thClassName = '',
     isShowFilter = true,
     isShowPagination = true,
     tdFooterClassName,
@@ -50,34 +47,31 @@ const TableCustom = (props: Props) => {
     addFilter,
     addRowColumn,
     loading,
-    classNameSearch = "rounded-lg",
-    placeHolderSearch = "Cari...",
-  } = props;
+    classNameSearch = 'rounded-lg',
+    placeHolderSearch = 'Cari...',
+    meta,
+  } = props
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-  });
-  const [, setSearchParams] = useSearchParams();
+  })
+  const [, setSearchParams] = useSearchParams()
   const handleSearch = (query: string) => {
     setSearchParams((prev) => {
-      const newParams = new URLSearchParams(prev);
-      newParams.set("search", query);
-      newParams.set("page", "1"); // Reset ke halaman 1 saat search
-      return newParams;
-    });
-  };
-  const columnCount = columns?.length || 5;
+      const newParams = new URLSearchParams(prev)
+      newParams.set('search', query)
+      newParams.set('page', '1') // Reset ke halaman 1 saat search
+      return newParams
+    })
+  }
+  const columnCount = columns?.length || 5
 
   return (
     <div className="flex flex-col w-full gap-4 ">
       {isShowFilter && (
         <div className="flex flex-col gap-4 md:flex-row md:items-center  justify-between">
-          <div
-            className={`flex w-full items-center gap-4 ${
-              addFilter ? "" : "justify-between"
-            }`}
-          >
+          <div className={`flex w-full items-center gap-4 ${addFilter ? '' : 'justify-between'}`}>
             {addFilter}
             <Search
               onSearch={handleSearch}
@@ -102,38 +96,33 @@ const TableCustom = (props: Props) => {
                 >
                   {header.isPlaceholder
                     ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
+                    : flexRender(header.column.columnDef.header, header.getContext())}
                 </TableHead>
               ))}
             </TableRow>
           ))}
         </TableHeader>
         <TableBody>
-          {loading &&
-            Array.from({ length: 5 }).map((_, rowIndex) => (
-              <TableRow key={`skeleton-${rowIndex}`}>
-                {Array.from({ length: columnCount }).map((_, colIndex) => (
-                  <TableCell key={colIndex} className={`${tdClassName}`}>
-                    <Skeleton className="h-4 w-full" />
-                  </TableCell>
-                ))}
-              </TableRow>
-            ))}
-          {table.getRowModel().rows.map((row) => (
-            <TableRow key={row.id}>
-              {row.getVisibleCells().map((cell) => (
-                <TableCell
-                  className={tdClassName + " text-[#3E3E3E]"}
-                  key={cell.id}
-                >
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </TableCell>
+          {loading
+            ? Array.from({ length: 5 }).map((_, rowIndex) => (
+                <TableRow key={`skeleton-${rowIndex}`}>
+                  {Array.from({ length: columnCount }).map((_, colIndex) => (
+                    <TableCell key={colIndex} className={`${tdClassName}`}>
+                      <Skeleton className="h-4 w-full" />
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            : table.getRowModel().rows.map((row) => (
+                <TableRow key={row.id}>
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell className={tdClassName + ' text-[#3E3E3E]'} key={cell.id}>
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </TableCell>
+                  ))}
+                </TableRow>
               ))}
-            </TableRow>
-          ))}
+
           {addRowColumn && addRowColumn}
         </TableBody>
         {isShowFooterTable && (
@@ -148,10 +137,7 @@ const TableCustom = (props: Props) => {
                   >
                     {header.isPlaceholder
                       ? null
-                      : flexRender(
-                          header.column.columnDef.footer,
-                          header.getContext()
-                        )}
+                      : flexRender(header.column.columnDef.footer, header.getContext())}
                   </TableCell>
                 ))}
               </TableRow>
@@ -164,11 +150,11 @@ const TableCustom = (props: Props) => {
           <div>
             <SetLimitList />
           </div>
-          <TablePaginate length={10} />
+          <TablePaginate length={10} meta={meta} />
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default TableCustom;
+export default TableCustom

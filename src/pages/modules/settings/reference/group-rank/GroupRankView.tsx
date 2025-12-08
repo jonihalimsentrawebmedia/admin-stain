@@ -7,7 +7,7 @@ import useGetGroupRank from "./controller/useGetGroupRank";
 const GroupRankView = () => {
   const { columns } = GroupRankViewModel();
 
-  const { groupRank, loading } = useGetGroupRank();
+  const { groupRank, loading ,meta} = useGetGroupRank();
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
@@ -27,6 +27,7 @@ const GroupRankView = () => {
         columns={columns}
         data={groupRank}
         placeHolderSearch="Cari Pangkat Golongan"
+        meta={meta}
       />
     </div>
   );

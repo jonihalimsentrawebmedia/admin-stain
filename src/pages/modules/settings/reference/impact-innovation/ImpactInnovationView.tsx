@@ -6,7 +6,7 @@ import TableCustom from '@/components/common/table/TableCustom'
 
 const ImpactInnovationView = () => {
   const { columns } = ImpactInnovationViewModel()
-  const { loading, impactInnovation } = useGetImpactInnovation()
+  const { loading, impactInnovation ,meta} = useGetImpactInnovation()
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
@@ -27,6 +27,7 @@ const ImpactInnovationView = () => {
         thClassName="text-start"
         tdClassName="text-start"
         loading={loading}
+        meta={meta}
         placeHolderSearch="Cari Kategori Inovasi Berdampak"
       />
     </div>

@@ -1,10 +1,11 @@
 import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup";
 import HistoryLoginDetailViewModel from "./HistoryLoginDetailViewModel";
 import TableCustom from "@/components/common/table/TableCustom";
-import { dummyDataDetail } from "../data";
 import DetailField from "@/components/common/field/DetailField";
+import useGetLogHistory from "../controller/useGetLogHistory";
 
 const HistoryLoginDetailView = () => {
+  const {histories}=useGetLogHistory()
   const { columns, fieldsConfig, form } = HistoryLoginDetailViewModel();
   return (
     <div className="flex flex-col gap-4">
@@ -15,7 +16,7 @@ const HistoryLoginDetailView = () => {
 
       <TableCustom
         columns={columns}
-        data={dummyDataDetail}
+        data={histories??[]}
         isShowPagination={false}
         isShowFilter={false}
       />
