@@ -1,20 +1,18 @@
-import { Send } from 'lucide-react'
-import { Button } from '@/components/ui/button.tsx'
+import { FaTrash } from 'react-icons/fa'
 import { useState } from 'react'
-import { useQueryClient } from '@tanstack/react-query'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
-import type { IListSlider } from '@/pages/modules/website-utama/public-content/slider/top-slider/create/data'
+import type { IListBottomSlider } from '@/pages/modules/website-utama/public-content/slider/top-slider/create/data'
+import { Button } from '@/components/ui/button.tsx'
 import AxiosClient from '@/provider/axios.tsx'
+import { useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
-import { MdSend } from 'react-icons/md'
 
 interface Props {
-  data: IListSlider
+  data: IListBottomSlider
 }
 
-export const ButtonApproved = (props: Props) => {
+export const ButonDeleteBottomSlider = (props: Props) => {
   const { data } = props
-
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -22,17 +20,15 @@ export const ButtonApproved = (props: Props) => {
 
   const HandlerDelete = async () => {
     setLoading(true)
-    await AxiosClient.patch(`website-utama/slider-atas/${data?.id_slider_atas}/status-publish`, {
-      status_publish: 'DIAJUKAN_EDITOR',
-    })
+    await AxiosClient.delete(`/website-utama/slider-bawah/${data?.id_slider_bawah}`)
       .then((res) => {
         if (res?.data?.status) {
-          toast.success(res.data.message || 'Success Mengajukan data slider atas')
+          toast.success(res.data.message || 'Success menghapus data slider Bawah')
           queryClient.invalidateQueries({
-            queryKey: ['list-slider-draft'],
+            queryKey: ['list-slider-bottom'],
           })
           queryClient.invalidateQueries({
-            queryKey: ['status-slider'],
+            queryKey: ['status-slider-bottom'],
           })
           setOpen(false)
           setLoading(false)
@@ -46,22 +42,18 @@ export const ButtonApproved = (props: Props) => {
 
   return (
     <>
-      <Button
+      <button
         onClick={() => setOpen(!open)}
-        size={'sm'}
-        variant={'outline'}
-        className={'border-blue-500 text-blue-500 hover:text-blue-600'}
+        className={'bg-red-500 p-1.5 rounded text-white hover:bg-red-600'}
       >
-        <Send />
-        Ajukan Ke Editor
-      </Button>
-
+        <FaTrash />
+      </button>
       <DialogCustom
+        className={'rounded'}
         open={open}
         setOpen={setOpen}
-        className={'rounded'}
-        title={'Ajukan Ke Editor?'}
-        description={'Apakah anda yakin untuk mengajukan slider ini ke editor?'}
+        title={'Hapus Data Slider Bawah?'}
+        description={'Apakah anda yakin untuk menghapus sldier yang dipilih?'}
       >
         <div>
           <img
@@ -81,12 +73,8 @@ export const ButtonApproved = (props: Props) => {
           >
             Batal
           </Button>
-          <Button
-            disabled={loading}
-            onClick={HandlerDelete}
-            className={'bg-blue-500 hover:bg-blue-600 text-white'}
-          >
-            <MdSend /> Ajukan
+          <Button disabled={loading} onClick={HandlerDelete} variant={'destructive'}>
+            Hapus
           </Button>
         </div>
       </DialogCustom>
