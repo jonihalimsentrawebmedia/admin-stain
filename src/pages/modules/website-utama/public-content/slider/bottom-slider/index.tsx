@@ -1,19 +1,19 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { TabsListCustom } from '@/pages/modules/website-utama/public-content/slider/components/tabsList.tsx'
-import { UseGetStatusSlider } from '@/pages/modules/website-utama/public-content/slider/top-slider/hooks'
 import { useEffect } from 'react'
-import { DraftSection } from './components/table/draftSection.tsx'
-import { SubmitSection } from './components/table/submitSection.tsx'
-import { PublishSection } from './components/table/publishSection.tsx'
-import { UnPublishSection } from './components/table/unpublishSection.tsx'
-import { EditorProcessSection } from './components/table/editorProcesSection.tsx'
-import { RejectSection } from './components/table/RejectSection.tsx'
-import { EditorApproveSection } from './components/table/EditorApproveSection'
+import { UseGetStatusBottomSlider } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/hooks'
+import { ButtomSubmitSection } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/components/table/submitSection.tsx'
+import { EditorProcessSection } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/components/table/editorProcesSection.tsx'
+import { BottomDraftSection } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/components/table/draftSection.tsx'
+import { BottomRejectSection } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/components/table/RejectSection.tsx'
+import { BottomEditorApproveSection } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/components/table/EditorApproveSection.tsx'
+import { BottomPublishSection } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/components/table/publishSection.tsx'
+import { UnPublishSectionBottom } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/components/table/unpublishSection.tsx'
 
-export const TopSliderPublicContent = () => {
+export const BottomSliderPublicContent = () => {
   const navigate = useNavigate()
-  const { status } = UseGetStatusSlider()
+  const { status } = UseGetStatusBottomSlider()
 
   const [searchParams, setSearchParams] = useSearchParams()
 
@@ -35,7 +35,7 @@ export const TopSliderPublicContent = () => {
         </div>
       ),
       value: 'DRAFT',
-      element: <DraftSection />,
+      element: <BottomDraftSection />,
     },
 
     {
@@ -49,7 +49,7 @@ export const TopSliderPublicContent = () => {
         </div>
       ),
       value: 'DIAJUKAN_EDITOR',
-      element: <SubmitSection />,
+      element: <ButtomSubmitSection />,
     },
 
     {
@@ -77,7 +77,7 @@ export const TopSliderPublicContent = () => {
         </div>
       ),
       value: 'TOLAK_EDITOR',
-      element: <RejectSection />,
+      element: <BottomRejectSection />,
     },
 
     {
@@ -91,7 +91,7 @@ export const TopSliderPublicContent = () => {
         </div>
       ),
       value: 'DISETUJUI_EDITOR',
-      element: <EditorApproveSection />,
+      element: <BottomEditorApproveSection />,
     },
 
     {
@@ -105,7 +105,7 @@ export const TopSliderPublicContent = () => {
         </div>
       ),
       value: 'PUBLISHED',
-      element: <PublishSection />,
+      element: <BottomPublishSection />,
     },
 
     {
@@ -119,7 +119,7 @@ export const TopSliderPublicContent = () => {
         </div>
       ),
       value: 'UNPUBLISH',
-      element: <UnPublishSection />,
+      element: <UnPublishSectionBottom />,
     },
   ]
 
@@ -127,7 +127,7 @@ export const TopSliderPublicContent = () => {
     <>
       <div className={'flex flex-col gap-5'}>
         <ButtonTitleGroup
-          label={'Slider Atas'}
+          label={'Slider Bawah'}
           buttonGroup={[
             {
               label: 'Tambah Data',

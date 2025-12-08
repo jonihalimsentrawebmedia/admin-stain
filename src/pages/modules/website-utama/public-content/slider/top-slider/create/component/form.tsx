@@ -10,10 +10,11 @@ import { type TopSliderType } from '@/pages/modules/website-utama/public-content
 interface Props {
   form: UseFormReturn<TopSliderType>
   HandleSave: (e: TopSliderType) => void
+  position?: string
 }
 
 export const FormCreateSliderOnTop = (props: Props) => {
-  const { form, HandleSave } = props
+  const { form, HandleSave, position = 'Atas' } = props
   const navigate = useNavigate()
 
   return (
@@ -22,7 +23,7 @@ export const FormCreateSliderOnTop = (props: Props) => {
         <Form {...form}>
           <form className="flex flex-col gap-5" onSubmit={form.handleSubmit(HandleSave)}>
             <ButtonTitleGroup
-              label={'Tambah Slider Atas'}
+              label={`Tambah Slider ${position}`}
               buttonGroup={[
                 {
                   label: 'Batal',

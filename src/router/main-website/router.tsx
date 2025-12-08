@@ -3,6 +3,11 @@ import { EditPageUniversity } from '@/pages/modules/website-utama/profile/editPa
 import { TopSliderPublicContent } from '@/pages/modules/website-utama/public-content/slider/top-slider'
 import { CreateTopSlider } from '@/pages/modules/website-utama/public-content/slider/top-slider/create'
 import { UpdatedTopSliderPage } from '@/pages/modules/website-utama/public-content/slider/top-slider/updated'
+import { BottomSliderPublicContent } from '@/pages/modules/website-utama/public-content/slider/bottom-slider'
+import { CreateBottomSlider } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/create'
+import { UpdatedBottomSlider } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/updated'
+import NewsPublicContentPage from '@/pages/modules/website-utama/public-content/news'
+import { CreatedNewsPage } from '@/pages/modules/website-utama/public-content/news/created'
 
 export const MainWebsiteRouter = [
   {
@@ -44,6 +49,36 @@ export const MainWebsiteRouter = [
                 element: <UpdatedTopSliderPage />,
               },
             ],
+          },
+          {
+            path: 'bottom-slider',
+            children: [
+              {
+                index: true,
+                element: <BottomSliderPublicContent />,
+              },
+              {
+                path: 'add',
+                element: <CreateBottomSlider />,
+              },
+              {
+                path: 'edit/:id',
+                element: <UpdatedBottomSlider />,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: 'news',
+        children: [
+          {
+            index: true,
+            element: <NewsPublicContentPage />,
+          },
+          {
+            path: 'add',
+            element: <CreatedNewsPage />,
           },
         ],
       },

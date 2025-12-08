@@ -1,13 +1,12 @@
-export interface IListSlider {
+export type IListSlider = {
   id_slider_atas: string
   id_satuan_organisasi: string
-
   gambar: string
-  keterangan: string   // HTML content
+  keterangan: string // HTML content
   url: string | null
 
-  status: "Y" | "N"
-  status_publish: "DRAFT" | "PUBLISHED" | string
+  status: 'Y' | 'N'
+  status_publish: 'DRAFT' | 'PUBLISHED' | string
 
   diajukan_at: string | null
   ditolak_at: string | null
@@ -29,4 +28,8 @@ export interface IListSlider {
   created_user: string
   updated_at: string
   updated_user: string
+}
+
+export type IListBottomSlider = Omit<IListSlider, 'id_slider_atas'> & {
+  id_slider_bawah: string
 }

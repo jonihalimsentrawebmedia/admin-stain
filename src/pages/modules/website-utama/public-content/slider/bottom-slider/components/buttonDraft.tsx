@@ -1,18 +1,17 @@
-import { Send } from 'lucide-react'
+import { IconCancel } from '@/components/common/icon'
 import { Button } from '@/components/ui/button.tsx'
 import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
-import type { IListSlider } from '@/pages/modules/website-utama/public-content/slider/top-slider/create/data'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import { MdSend } from 'react-icons/md'
+import type { IListBottomSlider } from '@/pages/modules/website-utama/public-content/slider/top-slider/create/data'
+import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 
 interface Props {
-  data: IListSlider
+  data: IListBottomSlider
 }
 
-export const ButtonApproved = (props: Props) => {
+export const ButtonDraftBottom = (props: Props) => {
   const { data } = props
 
   const [open, setOpen] = useState(false)
@@ -20,19 +19,19 @@ export const ButtonApproved = (props: Props) => {
 
   const queryClient = useQueryClient()
 
-  const HandlerDelete = async () => {
+  const HandlerDraft = async () => {
     setLoading(true)
-    await AxiosClient.patch(`website-utama/slider-atas/${data?.id_slider_atas}/status-publish`, {
-      status_publish: 'DIAJUKAN_EDITOR',
+    await AxiosClient.patch(`website-utama/slider-bawah/${data?.id_slider_bawah}/status-publish`, {
+      status_publish: 'DRAFT',
     })
       .then((res) => {
         if (res?.data?.status) {
-          toast.success(res.data.message || 'Success Mengajukan data slider atas')
+          toast.success(res.data.message || 'Success Mengajukan data slider bawah')
           queryClient.invalidateQueries({
-            queryKey: ['list-slider-draft'],
+            queryKey: ['list-slider-bottom'],
           })
           queryClient.invalidateQueries({
-            queryKey: ['status-slider'],
+            queryKey: ['status-slider-bottom'],
           })
           setOpen(false)
           setLoading(false)
@@ -48,12 +47,11 @@ export const ButtonApproved = (props: Props) => {
     <>
       <Button
         onClick={() => setOpen(!open)}
-        size={'sm'}
         variant={'outline'}
-        className={'border-blue-500 text-blue-500 hover:text-blue-600'}
+        className={'border border-yellow-500 hover:text-yellow-500 text-yellow-500'}
       >
-        <Send />
-        Ajukan Ke Editor
+        <IconCancel />
+        Kembali Ke Draft
       </Button>
 
       <DialogCustom
@@ -83,10 +81,11 @@ export const ButtonApproved = (props: Props) => {
           </Button>
           <Button
             disabled={loading}
-            onClick={HandlerDelete}
-            className={'bg-blue-500 hover:bg-blue-600 text-white'}
+            onClick={HandlerDraft}
+            className={'border bg-yellow-500 hover:bg-yellow-600'}
           >
-            <MdSend /> Ajukan
+            <IconCancel color={'fill-white'} />
+            Kembalikan Ke Draft
           </Button>
         </div>
       </DialogCustom>

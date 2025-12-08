@@ -3,16 +3,16 @@ import { Button } from '@/components/ui/button.tsx'
 import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
-import type { IListSlider } from '@/pages/modules/website-utama/public-content/slider/top-slider/create/data'
+import type { IListBottomSlider } from '@/pages/modules/website-utama/public-content/slider/top-slider/create/data'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { MdSend } from 'react-icons/md'
 
 interface Props {
-  data: IListSlider
+  data: IListBottomSlider
 }
 
-export const ButtonApproved = (props: Props) => {
+export const ButtonApprovedBottom = (props: Props) => {
   const { data } = props
 
   const [open, setOpen] = useState(false)
@@ -22,17 +22,17 @@ export const ButtonApproved = (props: Props) => {
 
   const HandlerDelete = async () => {
     setLoading(true)
-    await AxiosClient.patch(`website-utama/slider-atas/${data?.id_slider_atas}/status-publish`, {
+    await AxiosClient.patch(`website-utama/slider-bawah/${data?.id_slider_bawah}/status-publish`, {
       status_publish: 'DIAJUKAN_EDITOR',
     })
       .then((res) => {
         if (res?.data?.status) {
-          toast.success(res.data.message || 'Success Mengajukan data slider atas')
+          toast.success(res.data.message || 'Success Mengajukan data slider bawah')
           queryClient.invalidateQueries({
-            queryKey: ['list-slider-draft'],
+            queryKey: ['list-slider-bottom'],
           })
           queryClient.invalidateQueries({
-            queryKey: ['status-slider'],
+            queryKey: ['status-slider-bottom'],
           })
           setOpen(false)
           setLoading(false)

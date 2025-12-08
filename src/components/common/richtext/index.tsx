@@ -4,12 +4,18 @@ import type { FieldValues, UseFormReturn, Path, PathValue } from 'react-hook-for
 interface Props<T extends FieldValues> {
   form: UseFormReturn<T>
   name: Path<T>
+  label?: string
+  required?: boolean
 }
 
-export const RichText = <T extends FieldValues>({ form, name }: Props<T>) => {
+export const RichText = <T extends FieldValues>(props: Props<T>) => {
+  const { form, name, label, required } = props
   return (
     <div className="grid grid-cols-[12rem_1fr] gap-5 items-start">
-      <label>Keterangan (Optional)</label>
+      <label>
+        {label ?? 'Keterangan (Optional)'}
+        {required && <span className="text-red-500">*</span>}
+      </label>
 
       <SimpleEditor
         value={form.watch(name) ?? ''}
