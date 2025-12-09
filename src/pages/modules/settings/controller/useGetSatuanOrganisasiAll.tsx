@@ -17,14 +17,14 @@ const useGetSatuanOrganisasiAll = () => {
     queryFn: () =>
       AxiosClient.get(
         `/pengaturan/satuan-organisasi`
-      ).then((res) => res.data.data),
+      ).then((res) => res.data),
   });
 
   const loading = isLoading || isFetching;
 
   useEffect(() => {
     if (data) {
-      setSatuanOrganisasi(data);
+      setSatuanOrganisasi(data.data??[]);
     }
   }, [data]);
 

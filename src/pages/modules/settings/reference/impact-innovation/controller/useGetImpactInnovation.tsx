@@ -1,4 +1,4 @@
-import  { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import type { InovationList } from '../model'
 import { useQuery } from '@tanstack/react-query'
@@ -10,6 +10,7 @@ const useGetImpactInnovation = () => {
   const page = searchParams.get('page') || '1'
   const limit = searchParams.get('limit') || '10'
   const search = searchParams.get('search') || ''
+  const [meta,setMeta]=useState<Meta>()
   const [impactInnovation, setImpactInnovation] = useState<InovationList[]>([])
 
   const { data, isLoading, isFetching } = useQuery<{
@@ -19,20 +20,23 @@ const useGetImpactInnovation = () => {
     refetchOnWindowFocus: false,
     queryKey: ['settings-impact-innovation', { page, limit, search }],
     queryFn: () =>
-      AxiosClient.get('/pengaturan/referensi/inovasi-berdampak').then((res) => res.data),
+      AxiosClient.get(`/pengaturan/referensi/inovasi-berdampak?${searchParams.toString()}`).then(
+        (res) => res.data
+      ),
   })
 
   const loading = isLoading || isFetching
 
   useEffect(() => {
     if (data) {
-      setImpactInnovation(data.data)
+      setImpactInnovation(data.data??[])
+      setMeta(data.meta)
     }
   }, [data])
 
   return {
     impactInnovation,
-    loading,
+    loading,meta
   }
 }
 

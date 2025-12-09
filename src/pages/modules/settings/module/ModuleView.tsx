@@ -6,7 +6,7 @@ import useGetModules from "./conntroller/useGetModules";
 
 const ModuleView = () => {
   const { columns } = ModuleViewModel();
-  const { loading, modules } = useGetModules();
+  const { loading, modules ,meta} = useGetModules();
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
@@ -25,6 +25,7 @@ const ModuleView = () => {
         columns={columns}
         data={modules}
         loading={loading}
+        meta={meta}
         placeHolderSearch="Cari Modul"
       />
     </div>

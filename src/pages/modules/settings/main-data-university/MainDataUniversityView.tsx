@@ -5,7 +5,7 @@ import MainDataUniversityViewModel from "./MainDataUniversityViewModel";
 
 const MainDataUniversityView = () => {
   const { columns, goToAdd } = MainDataUniversityViewModel();
-  const { loading, satuanOrganisasi } = useGetSatuanOrganisasi({
+  const { loading, satuanOrganisasi ,meta} = useGetSatuanOrganisasi({
     kelompok: "UNIVERSITAS",
   });
   return (
@@ -26,6 +26,7 @@ const MainDataUniversityView = () => {
         data={satuanOrganisasi}
         loading={loading}
         placeHolderSearch="Cari Universitas"
+        meta={meta}
       />
     </div>
   );

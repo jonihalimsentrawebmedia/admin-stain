@@ -6,7 +6,7 @@ import useGetAcademicRank from "./controller/useGetAcademicRank";
 
 const AcademicRankView = () => {
   const { columns } = AcademicRankViewModel();
-  const { academicRank, loading } = useGetAcademicRank();
+  const { academicRank, loading ,meta} = useGetAcademicRank();
 
   return (
     <div className="flex flex-col gap-4">
@@ -26,6 +26,7 @@ const AcademicRankView = () => {
         columns={columns}
         data={academicRank}
         loading={loading}
+        meta={meta}
         placeHolderSearch="Cari Pangkat Akademik"
       />
     </div>

@@ -6,7 +6,7 @@ import useGetSatuanOrganisasi from "../controller/useGetSatuanOrganisasi";
 
 const ProdiView = () => {
   const { columns, goToAdd } = ProdiViewModel();
-  const { loading, satuanOrganisasi } = useGetSatuanOrganisasi({
+  const { loading, satuanOrganisasi,meta } = useGetSatuanOrganisasi({
     kelompok: "PRODI",
   });
   const { satuanOrganisasi: fakultas } = useGetSatuanOrganisasi({
@@ -40,6 +40,7 @@ const ProdiView = () => {
         columns={columns}
         data={satuanOrganisasi}
         loading={loading}
+        meta={meta}
       />
     </div>
   );

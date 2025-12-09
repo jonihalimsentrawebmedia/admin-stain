@@ -15,7 +15,7 @@ const useGetNewsCategory = (props?: Props) => {
   const page = searchParams.get('page') || '1'
   const limit = searchParams.get('limit') || '10'
   const search = searchParams.get('search') || ''
-
+const [meta,setMeta]=useState<Meta>()
   let ParamsSearch: URLSearchParams
   if (isGetAll) {
     ParamsSearch = new URLSearchParams({ page: '1', limit: '10000' })
@@ -42,13 +42,14 @@ const useGetNewsCategory = (props?: Props) => {
 
   useEffect(() => {
     if (data) {
-      setNewsCategory(data.data)
+      setNewsCategory(data.data??[])
+      setMeta(data.meta)
     }
   }, [data])
 
   return {
     newsCategory,
-    loading,
+    loading,meta
   }
 }
 

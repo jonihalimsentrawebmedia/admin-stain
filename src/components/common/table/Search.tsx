@@ -1,6 +1,7 @@
-import {cn} from '@/lib/utils'
-import {SearchIcon, XIcon} from 'lucide-react'
-import React, {useEffect, useState} from 'react'
+import { cn } from '@/lib/utils'
+import { SearchIcon, XIcon } from 'lucide-react'
+import React, { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 
 interface SearchProps {
   onSearch?: (query: string) => void
@@ -17,6 +18,7 @@ const Search: React.FC<SearchProps> = ({
   className,
   innerClassName,
 }) => {
+  const [searchParam] = useSearchParams()
   const [query, setQuery] = useState('')
   const [hasSearched, setHasSearched] = useState(false)
 
@@ -31,8 +33,7 @@ const Search: React.FC<SearchProps> = ({
       clearTimeout(handler)
     }
   }, [query])
-  
-  
+
   useEffect(() => {
     if (hasSearched && onSearch) {
       onSearch(debouncedQuery)
@@ -50,6 +51,12 @@ const Search: React.FC<SearchProps> = ({
     setQuery('')
     if (onSearch) onSearch('')
   }
+
+  useEffect(() => {
+    if (searchParam.get('search')) {
+      setQuery(searchParam.get('search') ?? '')
+    }
+  }, [])
 
   return (
     <div className={cn('relative', className)}>

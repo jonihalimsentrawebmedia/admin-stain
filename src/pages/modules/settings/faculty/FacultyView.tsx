@@ -6,7 +6,7 @@ import useGetSatuanOrganisasi from "../controller/useGetSatuanOrganisasi";
 
 const FacultyView = () => {
   const { columns, goToAdd } = FacultyViewModel();
-  const { satuanOrganisasi, loading } = useGetSatuanOrganisasi({
+  const { satuanOrganisasi, loading ,meta} = useGetSatuanOrganisasi({
     kelompok: "FAKULTAS",
   });
   return (
@@ -25,6 +25,7 @@ const FacultyView = () => {
         loading={loading}
         columns={columns}
         data={satuanOrganisasi}
+        meta={meta}
       />
     </div>
   );

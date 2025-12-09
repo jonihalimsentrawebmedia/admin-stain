@@ -43,7 +43,6 @@ const ButtonDelete = ({ description, title, urlDelete, queryKey }: Props) => {
     <>
       <button
         onClick={() => {
-          console.log(urlDelete);
           setOpen(true);
         }}
       >
