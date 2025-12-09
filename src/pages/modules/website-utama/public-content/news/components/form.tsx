@@ -8,22 +8,43 @@ import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import { RichText } from '@/components/common/richtext'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import { UploadMultipleImages } from '@/pages/modules/website-utama/public-content/news/components/multipleUploadImg.tsx'
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import { useNavigate } from 'react-router-dom'
 
 interface Props {
   form: UseFormReturn<INewsTypeForm>
   HandleSave: (e: any) => void
+  loading: boolean
 }
 
 export const FormNewsContent = (props: Props) => {
-  const { form, HandleSave } = props
+  const { form, HandleSave, loading } = props
   const { newsCategory, loading: laod1 } = useGetNewsCategory({ isGetAll: true })
-  
-  console.log(form.watch('berita_gambar_tambahan'))
+
+  const navigate = useNavigate()
 
   return (
     <>
       <Form {...form}>
         <form className={'flex flex-col gap-5 p-5'} onSubmit={form.handleSubmit(HandleSave)}>
+          <ButtonTitleGroup
+            label={'Tulis Berita'}
+            buttonGroup={[
+              {
+                type: 'cancel',
+                label: 'Batal',
+                onClick: () => {
+                  navigate(-1)
+                },
+              },
+              {
+                isDisabled: loading,
+                type: 'save',
+                label: 'Simpan',
+                onClick: () => {},
+              },
+            ]}
+          />
           <UploadImageWitAlt
             form={form}
             alt={'keterangan_gambar'}
@@ -76,11 +97,28 @@ export const FormNewsContent = (props: Props) => {
           <UploadMultipleImages
             form={form}
             name={'berita_gambar_tambahan'}
-            label={'Gambar Tambahan'}
+            label={'Gambar Tambahan (Ukuran 1280 x 478)'}
             uploadUrl={'/upload'}
             placeholder={'Gambar Tambahan'}
             maxFiles={10}
-            required
+          />
+          <ButtonTitleGroup
+            label={''}
+            buttonGroup={[
+              {
+                type: 'cancel',
+                label: 'Batal',
+                onClick: () => {
+                  navigate(-1)
+                },
+              },
+              {
+                isDisabled: loading,
+                type: 'save',
+                label: 'Simpan',
+                onClick: () => {},
+              },
+            ]}
           />
         </form>
       </Form>

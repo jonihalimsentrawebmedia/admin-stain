@@ -111,7 +111,7 @@ export const UploadMultipleImages = <T extends FieldValues>(props: Props<T>) => 
   return (
     <div className="grid gap-5 grid-cols-[12rem_1fr] items-start">
       <div className="flex items-center justify-between">
-        <label className="font-medium">
+        <label className="text-sm">
           {label}
           {required && <span className="text-red-500">*</span>}
         </label>
