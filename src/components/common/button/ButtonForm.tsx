@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 interface Props {
   loading: boolean;
   onCancel?: () => void;
+  
 }
 const ButtonForm = ({ loading, onCancel }: Props) => {
   const navigate = useNavigate();

@@ -13,6 +13,10 @@ import { DetailNewsPage } from '@/pages/modules/website-utama/public-content/new
 import { AnnouncementPage } from '@/pages/modules/website-utama/public-content/announcement'
 import { CreateAnnouncementPage } from '@/pages/modules/website-utama/public-content/announcement/created'
 import { UpdatedAnnouncementPage } from '@/pages/modules/website-utama/public-content/announcement/updated'
+import SettingMenuHeaderView from '@/pages/modules/website-utama/settings-menu/header/SettingMenuHeaderView'
+import ContentView from '@/pages/modules/website-utama/settings-menu/header/content/ContentView'
+import ContentCreateView from '@/pages/modules/website-utama/settings-menu/header/content/create/ContentCreateView'
+import ContentEditView from '@/pages/modules/website-utama/settings-menu/header/content/edit/ContentEditView'
 
 export const MainWebsiteRouter = [
   {
@@ -115,6 +119,43 @@ export const MainWebsiteRouter = [
       {
         path: '*',
         element: <></>,
+      },
+    ],
+  },
+  {
+    path: 'pengaturan-menu',
+    children: [
+      {
+        path: 'header',
+        children: [
+          {
+            index: true,
+            element: <SettingMenuHeaderView />,
+          },
+          {
+            path: ':id',
+            children: [
+              {
+                path: 'content',
+
+                children: [
+                  {
+                    index: true,
+                    element: <ContentView />,
+                  },
+                  {
+                    path: 'add',
+                    element: <ContentCreateView />,
+                  },
+                  {
+                    path:":idContent/edit",
+                    element: <ContentEditView />,
+                  }
+                ],
+              },
+            ],
+          },
+        ],
       },
     ],
   },
