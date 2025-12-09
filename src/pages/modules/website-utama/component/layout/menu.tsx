@@ -1,6 +1,7 @@
 import { MdDashboard } from 'react-icons/md'
 import { IoSchool } from 'react-icons/io5'
 import { TbWorld } from 'react-icons/tb'
+import { FaGear } from 'react-icons/fa6'
 
 const baseDomain = '/modules/website-utama'
 
@@ -52,6 +53,23 @@ export const MENULIST = [
         id: 4,
         name: 'Agenda',
         path: `${baseDomain}/public-content/agenda`,
+      },
+    ],
+  },
+  {
+    id: 4,
+    name: 'Pengaturan Menu',
+    icon: <FaGear className={'size-5'} />,
+    child: [
+      {
+        id: 1,
+        name: 'Header',
+        path: `${baseDomain}/pengaturan-menu/header`,
+      },
+      {
+        id: 2,
+        name: 'Footer',
+        path: `${baseDomain}/pengaturan-menu/footer`,
       },
     ],
   },
