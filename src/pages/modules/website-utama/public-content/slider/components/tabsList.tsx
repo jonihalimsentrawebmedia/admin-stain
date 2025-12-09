@@ -16,7 +16,7 @@ interface Props {
 
 export const TabsListCustom = ({ data, value, onChange }: Props) => {
   return (
-    <Tabs value={value} onValueChange={(val) => onChange?.(val)} className="w-full">
+    <Tabs value={value} onValueChange={(val) => onChange?.(val)} className="w-full flex flex-col gap-5">
       <TabsList className="bg-transparent shadow-none rounded-none w-full">
         {data.map((item) => (
           <TabsTrigger

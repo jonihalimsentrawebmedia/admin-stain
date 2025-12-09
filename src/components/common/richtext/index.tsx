@@ -14,7 +14,7 @@ export const RichText = <T extends FieldValues>(props: Props<T>) => {
     <div className="grid grid-cols-[12rem_1fr] gap-5 items-start">
       <label>
         {label ?? 'Keterangan (Optional)'}
-        {required && <span className="text-red-500">*</span>}
+        {required && <span className="text-red-500"> *</span>}
       </label>
 
       <SimpleEditor

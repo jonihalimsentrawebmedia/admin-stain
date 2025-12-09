@@ -62,6 +62,7 @@ const TableCustom = (props: Props) => {
       const newParams = new URLSearchParams(prev)
       newParams.set('search', query)
       newParams.set('page', '1') // Reset ke halaman 1 saat search
+      if (query === '') newParams.delete('search')
       return newParams
     })
   }
@@ -88,10 +89,10 @@ const TableCustom = (props: Props) => {
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
+              {headerGroup.headers.map((header, l) => (
                 <TableHead
                   colSpan={header.colSpan}
-                  key={header.id}
+                  key={l}
                   className={` border bg-[#F5FFFA] text-primary ${thClassName}`}
                 >
                   {header.isPlaceholder
@@ -105,7 +106,7 @@ const TableCustom = (props: Props) => {
         <TableBody>
           {data.length == 0 && (
             <TableRow>
-              <TableCell  colSpan={columnCount} className="text-center border">
+              <TableCell colSpan={columnCount} className="text-center border">
                 Data Tidak Ada
               </TableCell>
             </TableRow>
@@ -122,8 +123,8 @@ const TableCustom = (props: Props) => {
               ))
             : table.getRowModel().rows.map((row) => (
                 <TableRow key={row.id}>
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell className={tdClassName + ' text-[#3E3E3E]'} key={cell.id}>
+                  {row.getVisibleCells().map((cell, k) => (
+                    <TableCell className={tdClassName + ' text-[#3E3E3E]'} key={k}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}

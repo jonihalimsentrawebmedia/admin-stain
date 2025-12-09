@@ -3,6 +3,7 @@ import type { INewsDetail } from '@/pages/modules/website-utama/public-content/n
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
+import { useSearchParams } from 'react-router-dom'
 
 export interface INewsStatus {
   DIAJUKAN_EDITOR: number
@@ -18,10 +19,18 @@ export const UseGetNews = () => {
   const [newsList, setNewsList] = useState<INewsDetail[]>([])
   const [meta, setMeta] = useState<Meta>()
 
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const status = searchParams.get('status')
+
+  const ParamsSearch = new URLSearchParams({ page, limit })
+  if (status) ParamsSearch.append('status-publish', status)
+
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['nes'],
+    queryKey: ['list-news', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get('/website-utama/berita').then((res) => res.data),
+    queryFn: () => AxiosClient.get(`/website-utama/berita?${ParamsSearch}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching
@@ -34,6 +43,26 @@ export const UseGetNews = () => {
   }, [data])
 
   return { newsList, loading, meta }
+}
+
+export const UseGetNewsDetail = (id: string) => {
+  const [detailNews, setDetailNews] = useState<INewsDetail>()
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['detail-news', id],
+    refetchOnWindowFocus: false,
+    queryFn: () => AxiosClient.get(`/website-utama/berita/${id}`).then((res) => res.data.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setDetailNews(data)
+    }
+  }, [data])
+
+  return { detailNews, loading }
 }
 
 export const UseGetNewsStatus = () => {

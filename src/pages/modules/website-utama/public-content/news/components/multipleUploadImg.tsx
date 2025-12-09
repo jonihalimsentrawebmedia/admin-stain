@@ -8,8 +8,8 @@ import { FaTrash } from 'react-icons/fa'
 import { FiPlus } from 'react-icons/fi'
 
 interface ImageItem {
-  url: string
-  alt: string
+  gambar: string
+  keterangan: string
 }
 
 interface Props<T extends FieldValues> {
@@ -51,7 +51,7 @@ export const UploadMultipleImages = <T extends FieldValues>(props: Props<T>) => 
         toast.success(res.data.message)
 
         const currentImages = [...(form.getValues(name) || [])] as ImageItem[]
-        const newImage: ImageItem = { url: res.data.url, alt: '' }
+        const newImage: ImageItem = { gambar: res.data.url, keterangan: '' }
 
         if (index !== undefined && index >= 0) {
           // Edit existing image
@@ -103,7 +103,7 @@ export const UploadMultipleImages = <T extends FieldValues>(props: Props<T>) => 
   const updateAlt = (index: number, value: string) => {
     const currentImages = [...(form.getValues(name) || [])] as ImageItem[]
     if (currentImages[index]) {
-      currentImages[index].alt = value
+      currentImages[index].keterangan = value
       form.setValue(name, currentImages as PathValue<T, Path<T>>)
     }
   }
@@ -143,8 +143,8 @@ export const UploadMultipleImages = <T extends FieldValues>(props: Props<T>) => 
                 >
                   <div className="aspect-video relative">
                     <img
-                      src={image.url}
-                      alt={image.alt || `Gambar ${index + 1}`}
+                      src={image.gambar}
+                      alt={image.keterangan || `Gambar ${index + 1}`}
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-200" />
@@ -172,7 +172,7 @@ export const UploadMultipleImages = <T extends FieldValues>(props: Props<T>) => 
                   <div className="p-3">
                     <input
                       type="text"
-                      value={image.alt}
+                      value={image.keterangan}
                       onChange={(e) => updateAlt(index, e.target.value)}
                       placeholder="Keterangan gambar"
                       className="w-full p-2 border rounded text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"

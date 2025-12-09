@@ -8,6 +8,11 @@ import { CreateBottomSlider } from '@/pages/modules/website-utama/public-content
 import { UpdatedBottomSlider } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/updated'
 import NewsPublicContentPage from '@/pages/modules/website-utama/public-content/news'
 import { CreatedNewsPage } from '@/pages/modules/website-utama/public-content/news/created'
+import { UpdatedNewsPage } from '@/pages/modules/website-utama/public-content/news/updated'
+import { DetailNewsPage } from '@/pages/modules/website-utama/public-content/news/detail/page.tsx'
+import { AnnouncementPage } from '@/pages/modules/website-utama/public-content/announcement'
+import { CreateAnnouncementPage } from '@/pages/modules/website-utama/public-content/announcement/created'
+import { UpdatedAnnouncementPage } from '@/pages/modules/website-utama/public-content/announcement/updated'
 
 export const MainWebsiteRouter = [
   {
@@ -79,6 +84,31 @@ export const MainWebsiteRouter = [
           {
             path: 'add',
             element: <CreatedNewsPage />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedNewsPage />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailNewsPage />,
+          },
+        ],
+      },
+      {
+        path: 'announcement',
+        children: [
+          {
+            index: true,
+            element: <AnnouncementPage />,
+          },
+          {
+            path: 'add',
+            element: <CreateAnnouncementPage />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedAnnouncementPage />,
           },
         ],
       },

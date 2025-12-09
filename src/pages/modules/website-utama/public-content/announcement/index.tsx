@@ -1,23 +1,23 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { HiPencil } from 'react-icons/hi'
 import { Button } from '@/components/ui/button.tsx'
+import { HiPencil } from 'react-icons/hi'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { UseGetNewsStatus } from '@/pages/modules/website-utama/public-content/news/hooks'
 import { TabsListCustom } from '@/pages/modules/website-utama/public-content/slider/components/tabsList.tsx'
 import { useEffect } from 'react'
-import { DraftSectionTabs } from '@/pages/modules/website-utama/public-content/news/components/table/draftSection.tsx'
-import { SubmissionSection } from '@/pages/modules/website-utama/public-content/news/components/table/SubmissionSection.tsx'
-import { ProcessSection } from '@/pages/modules/website-utama/public-content/news/components/table/processSection.tsx'
-import { RejectionSection } from '@/pages/modules/website-utama/public-content/news/components/table/rejectionSection.tsx'
-import { ApproveSection } from '@/pages/modules/website-utama/public-content/news/components/table/ApproveSection.tsx'
-import { PublishSection } from '@/pages/modules/website-utama/public-content/news/components/table/publishSection.tsx'
-import { UpPublishSection } from '@/pages/modules/website-utama/public-content/news/components/table/upPublishSection.tsx'
+import { UseGetAnnouncementStatus } from '@/pages/modules/website-utama/public-content/announcement/hooks'
+import { DraftAnnouncementSection } from '@/pages/modules/website-utama/public-content/announcement/components/table/draftSection.tsx'
+import { SubmissionAnnouncementSection } from '@/pages/modules/website-utama/public-content/announcement/components/table/submissionSection.tsx'
+import { ProcessAnnouncementSection } from '@/pages/modules/website-utama/public-content/announcement/components/table/ProcessSection.tsx'
+import { RejectAnnouncementSection } from '@/pages/modules/website-utama/public-content/announcement/components/table/rejectSection.tsx'
+import { ApproveAnnouncementSection } from '@/pages/modules/website-utama/public-content/announcement/components/table/approveSection.tsx'
+import { PublishAnnouncementSection } from '@/pages/modules/website-utama/public-content/announcement/components/table/publishSection.tsx'
+import { UnpublishAnnouncementSection } from '@/pages/modules/website-utama/public-content/announcement/components/table/unpublishSection.tsx'
 
-const NewsPublicContentPage = () => {
+export const AnnouncementPage = () => {
   const navigate = useNavigate()
-  const { status } = UseGetNewsStatus()
 
   const [searchParams, setSearchParams] = useSearchParams()
+  const { status } = UseGetAnnouncementStatus()
 
   const statusParams = searchParams.get('status')
 
@@ -37,7 +37,7 @@ const NewsPublicContentPage = () => {
         </div>
       ),
       value: 'DRAFT',
-      element: <DraftSectionTabs />,
+      element: <DraftAnnouncementSection />,
     },
     {
       id: 2,
@@ -50,7 +50,7 @@ const NewsPublicContentPage = () => {
         </div>
       ),
       value: 'DIAJUKAN_EDITOR',
-      element: <SubmissionSection />,
+      element: <SubmissionAnnouncementSection />,
     },
     {
       id: 3,
@@ -63,7 +63,7 @@ const NewsPublicContentPage = () => {
         </div>
       ),
       value: 'PROSES_EDITOR',
-      element: <ProcessSection />,
+      element: <ProcessAnnouncementSection />,
     },
     {
       id: 4,
@@ -76,7 +76,7 @@ const NewsPublicContentPage = () => {
         </div>
       ),
       value: 'TOLAK_EDITOR',
-      element: <RejectionSection />,
+      element: <RejectAnnouncementSection />,
     },
     {
       id: 5,
@@ -89,7 +89,7 @@ const NewsPublicContentPage = () => {
         </div>
       ),
       value: 'DISETUJUI_EDITOR',
-      element: <ApproveSection />,
+      element: <ApproveAnnouncementSection />,
     },
     {
       id: 6,
@@ -102,7 +102,7 @@ const NewsPublicContentPage = () => {
         </div>
       ),
       value: 'PUBLISHED',
-      element: <PublishSection />,
+      element: <PublishAnnouncementSection />,
     },
     {
       id: 7,
@@ -115,7 +115,7 @@ const NewsPublicContentPage = () => {
         </div>
       ),
       value: 'UNPUBLISH',
-      element: <UpPublishSection />,
+      element: <UnpublishAnnouncementSection />,
     },
   ]
 
@@ -123,20 +123,20 @@ const NewsPublicContentPage = () => {
     <>
       <div className="flex flex-col gap-5">
         <ButtonTitleGroup
-          label={'Berita'}
+          label={'Pengumuman'}
           buttonGroup={[
             {
-              label: 'Tulis Berita',
               type: 'add',
+              label: '',
               onClick: () => {},
               element: (
                 <Button
-                  onClick={() => navigate('add')}
                   variant={'outline'}
+                  onClick={() => navigate('add')}
                   className={'border-primary text-primary hover:text-primary'}
                 >
                   <HiPencil />
-                  Tulis Berita
+                  Tulis Pengumuman
                 </Button>
               ),
             },
@@ -154,5 +154,3 @@ const NewsPublicContentPage = () => {
     </>
   )
 }
-
-export default NewsPublicContentPage

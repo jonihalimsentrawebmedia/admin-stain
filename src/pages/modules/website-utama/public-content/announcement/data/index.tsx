@@ -1,12 +1,15 @@
-export interface INewsDetail {
-  id_berita: string
+export interface IDocumentAnnouncement {
+  id_pengumuman_dokumen: number
+  url_dokumen: string
+  dokumen_key: string
+  id_pengumuman: string
+}
+
+export interface IAnnouncement {
+  id_pengumuman: string
   id_satuan_organisasi: string
-  gambar: string
-  gambar_key: string
-  keterangan_gambar: string
-  judul: string
-  id_kategori_berita: string
-  isi_berita: string
+  judul_pengumuman: string
+  isi_pengumuman: string
   penulis: string
   status: string
   status_publish: string
@@ -28,14 +31,17 @@ export interface INewsDetail {
   created_user: string
   updated_at: string
   updated_user: string
-  berita_gambar_tambahan: IImageNewsMore[] // kalau ada struktur, kasihkan, nanti kubuatin
-  nama_kategori_berita: string
+
+  dokumens: IDocumentAnnouncement[]
 }
 
-export interface IImageNewsMore {
-  id_berita_gambar_tambahan: number
-  id_berita: string
-  gambar: string
-  gambar_key: string
-  keterangan: string
+
+export interface IstatusAnnouncement {
+  DIAJUKAN_EDITOR: number
+  DISETUJUI_EDITOR: number
+  DRAFT: number
+  PROSES_EDITOR: number
+  PUBLISHED: number
+  TOLAK_EDITOR: number
+  UNPUBLISH: number
 }

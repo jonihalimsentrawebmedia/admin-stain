@@ -35,6 +35,7 @@ const customStyles: StylesConfig = {
     // zIndex: 99,
   }),
 }
+
 interface Props {
   label: string
   options: {
@@ -42,19 +43,19 @@ interface Props {
     label: string
   }[]
   name?: string
+  selectClassName?: string
 }
-const SelectFilter = ({ label, options, name }: Props) => {
+const SelectFilter = ({ label, options, name, selectClassName = 'min-w-xs' }: Props) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const [value, setValue] = useState()
 
   useEffect(() => {
-    console.log(searchParams.get(name ?? ''),'test')
-    if (searchParams.get(name ?? '') || options.length!==0) {
-      const temp:any = options.filter((row) => row.value == searchParams.get(name ?? ''))
-      console.log(temp,'test123',options)
+    if (searchParams.get(name ?? '') || options.length !== 0) {
+      const temp: any = options.filter((row) => row.value == searchParams.get(name ?? ''))
       setValue(temp)
     }
   }, [options])
+
   return (
     <div className="flex flex-col gap-1 relative">
       <label className="text-green-600 z-10 text-sm font-medium absolute ml-3 bg-white px-1 w-fit  -top-2.5">
@@ -71,12 +72,13 @@ const SelectFilter = ({ label, options, name }: Props) => {
           ...options,
         ]}
         styles={customStyles}
-        className="min-w-xs"
+        className={`${selectClassName}`}
         placeholder="Pilih"
         onChange={(e: any) => {
           if (name) {
             const newParams = new URLSearchParams(searchParams.toString())
             newParams.set(name, e.value)
+            if (e.value === '') newParams.delete(name)
             setSearchParams(newParams)
             setValue(e)
           }

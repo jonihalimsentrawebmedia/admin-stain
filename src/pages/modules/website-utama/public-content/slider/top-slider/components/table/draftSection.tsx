@@ -5,13 +5,15 @@ import TopSliderColumns from '@/pages/modules/website-utama/public-content/slide
 
 export const DraftSection = () => {
   const columns = TopSliderColumns()
-  const { listDraftSlider, loading } = UseGetListTopSliderDraft()
+  const { listDraftSlider, loading, meta } = UseGetListTopSliderDraft()
   return (
     <>
       <TableCustom
         addFilter={
           <SelectFilter
+            selectClassName={'min-w-[8rem]'}
             label="Tampilkan"
+            name={'limit'}
             options={[
               { label: '10 Data', value: '10' },
               { label: '25 Data', value: '25' },
@@ -24,6 +26,7 @@ export const DraftSection = () => {
         data={listDraftSlider}
         loading={loading}
         placeHolderSearch="Cari Gambar"
+        meta={meta}
       />
     </>
   )

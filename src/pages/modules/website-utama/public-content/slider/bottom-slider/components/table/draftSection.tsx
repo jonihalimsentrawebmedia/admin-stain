@@ -5,7 +5,7 @@ import BottomSliderColumns from '@/pages/modules/website-utama/public-content/sl
 
 export const BottomDraftSection = () => {
   const columns = BottomSliderColumns()
-  const { listBottomSlider, loading } = UseGetListBottomSlider()
+  const { listBottomSlider, loading,meta } = UseGetListBottomSlider()
   return (
     <>
       <TableCustom
@@ -24,6 +24,7 @@ export const BottomDraftSection = () => {
         data={listBottomSlider}
         loading={loading}
         placeHolderSearch="Cari Gambar"
+        meta={meta}
       />
     </>
   )

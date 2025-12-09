@@ -11,6 +11,7 @@ export const NewsResolver = z.object({
     .array(
       z.object({
         gambar: z.string().min(1),
+        keterangan: z.string().optional().nullable(),
       })
     )
     .optional()
