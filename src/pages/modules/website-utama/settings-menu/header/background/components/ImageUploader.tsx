@@ -26,7 +26,7 @@ export default function ImageUploader({ data, handleSave, index, handleChecked }
 
   const handleFile = async (file: File | undefined) => {
     if (!file) return
-    const url = URL.createObjectURL(file)
+  
 
     const formData = new FormData()
     formData.append('berkas', file)

@@ -67,12 +67,8 @@ const TableSettingMenuHeader = () => {
           : menuList.map((item, index) => (
               <>
                 <TableRow className="py-0!">
-                  <TableCell className="border-b h-[60px] left-0 relative">
-                    <div className='pl-2'>
-                      {index + 1}
-                    </div>
-
-              
+                  <TableCell className="border-b  left-0 relative">
+                    <div className="pl-4">{index + 1}</div>
                   </TableCell>
                   <TableCell className="border-b">{item.nama_menu}</TableCell>
                   <TableCell className="border-b">
@@ -81,9 +77,7 @@ const TableSettingMenuHeader = () => {
                   <TableCell className="border-b">
                     <ButtonAddSubMenu data={item} menu_parent_name={item.nama_menu} />
                   </TableCell>
-                  <TableCell className="border-b">
-                    {item.status == 'Y' ? 'Ya' : 'Tidak'}
-                  </TableCell>
+                  <TableCell className="border-b">{item.status == 'Y' ? 'Ya' : 'Tidak'}</TableCell>
                   <TableCell className="border-b">{item.urutan}</TableCell>
                   <TableCell className="border-b">
                     <Link
@@ -108,10 +102,19 @@ const TableSettingMenuHeader = () => {
                 {item.children.map((subItem, indexSub) => (
                   <>
                     <TableRow className="py-0!">
-                      <TableCell className="border-b ">
+                      <TableCell className="border-b relative">
                         <div className="pl-4  ">
                           {index + 1}.{indexSub + 1}
                         </div>
+                        {item.children.length == 1 || indexSub == item.children.length - 1 ? (
+                          <div className="h-1/2 top-0  bg-primary w-px absolute"></div>
+                        ) : (
+                          <div className="h-full top-0  bg-primary w-px absolute"></div>
+                        )}
+
+                        {item.children.length > 0 && (
+                          <div className="h-px top-1/2  bg-primary w-2.5 absolute"></div>
+                        )}
                       </TableCell>
                       <TableCell className="border-b ">{subItem.nama_menu}</TableCell>
                       <TableCell className="border-b">
@@ -153,9 +156,20 @@ const TableSettingMenuHeader = () => {
                     {subItem.children.map((subSubItem, indexSubSub) => (
                       <TableRow className="py-0!">
                         <TableCell className="border-b relative ">
-                          <div className="pl-8  ">
+                          <div className="pl-12  ">
                             {index + 1}.{indexSub + 1}.{indexSubSub + 1}
                           </div>
+
+                          {subItem.children.length == 1 ||
+                          indexSubSub == subItem.children.length - 1 ? (
+                            <div className="h-1/2 top-0 left-8  bg-primary w-px absolute"></div>
+                          ) : (
+                            <div className="h-full top-0 left-8   bg-primary w-px absolute"></div>
+                          )}
+
+                          {subItem.children.length > 0 && (
+                            <div className="h-px top-1/2 left-8  bg-primary w-2.5 absolute"></div>
+                          )}
                         </TableCell>
                         <TableCell className="border-b ">{subSubItem.nama_menu}</TableCell>
                         <TableCell className="border-b">

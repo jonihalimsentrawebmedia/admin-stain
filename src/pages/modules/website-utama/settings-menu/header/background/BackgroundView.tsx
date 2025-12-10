@@ -1,5 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
-import ImageUploader, { type ImageDataUploader } from './components/ImageUploader'
+import ImageUploader from './components/ImageUploader'
 import { useEffect, useState } from 'react'
 import useGetBackground from '../content/controller/useGetBackground'
 import type { MenuBackgroundItem } from '../content/model/menu-background'

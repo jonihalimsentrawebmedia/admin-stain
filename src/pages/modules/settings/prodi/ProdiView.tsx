@@ -1,26 +1,27 @@
-import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup";
-import TableCustom from "@/components/common/table/TableCustom";
-import ProdiViewModel from "./ProdiViewModel";
-import SelectFilter from "@/components/common/filter/SelectFilter";
-import useGetSatuanOrganisasi from "../controller/useGetSatuanOrganisasi";
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
+import TableCustom from '@/components/common/table/TableCustom'
+import ProdiViewModel from './ProdiViewModel'
+import SelectFilter from '@/components/common/filter/SelectFilter'
+import useGetSatuanOrganisasi from '../controller/useGetSatuanOrganisasi'
 
 const ProdiView = () => {
-  const { columns, goToAdd } = ProdiViewModel();
-  const { loading, satuanOrganisasi,meta } = useGetSatuanOrganisasi({
-    kelompok: "PRODI",
-  });
+  const { columns, goToAdd } = ProdiViewModel()
+  const { loading, satuanOrganisasi, meta } = useGetSatuanOrganisasi({
+    kelompok: 'PRODI',
+  })
   const { satuanOrganisasi: fakultas } = useGetSatuanOrganisasi({
-    kelompok: "FAKULTAS",
-  });
+    kelompok: 'FAKULTAS',
+    isFilter:true
+  })
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
         label="Data Prodi"
         buttonGroup={[
           {
-            label: "Tambah Data",
+            label: 'Tambah Data',
             onClick: () => goToAdd(),
-            type: "add",
+            type: 'add',
           },
         ]}
       />
@@ -28,12 +29,13 @@ const ProdiView = () => {
       <TableCustom
         addFilter={
           <SelectFilter
+            name="id_parent"
             label="Fakultas Asal"
             options={fakultas.map((item) => {
               return {
                 label: item.nama,
                 value: item.id_satuan_organisasi,
-              };
+              }
             })}
           />
         }
@@ -43,7 +45,7 @@ const ProdiView = () => {
         meta={meta}
       />
     </div>
-  );
-};
+  )
+}
 
-export default ProdiView;
+export default ProdiView
