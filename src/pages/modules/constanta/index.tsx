@@ -1,4 +1,4 @@
-export const OptionsKelompok = [
+export const OptionGrouping = [
   {
     label: "Universitas",
     value: "UNIVERSITAS",

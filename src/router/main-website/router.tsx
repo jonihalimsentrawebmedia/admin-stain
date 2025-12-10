@@ -27,6 +27,9 @@ import { CreateImpactInnovationPage } from '@/pages/modules/website-utama/public
 import BackgroundView from '@/pages/modules/website-utama/settings-menu/header/background/BackgroundView'
 import ServicesView from '@/pages/modules/website-utama/services/ServicesView'
 import LogView from '@/pages/modules/website-utama/services/log/LogView'
+import { UpdatedImpactInnovationPage } from '@/pages/modules/website-utama/public-content/impact-innovation/updated'
+import { DetailImpactInnovationPage } from '@/pages/modules/website-utama/public-content/impact-innovation/detail'
+import { StructureOrganizationPage } from '@/pages/modules/website-utama/public-content/structure-organization'
 
 export const MainWebsiteRouter = [
   {
@@ -161,6 +164,23 @@ export const MainWebsiteRouter = [
           {
             path: 'add',
             element: <CreateImpactInnovationPage />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedImpactInnovationPage />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailImpactInnovationPage />,
+          },
+        ],
+      },
+      {
+        path: 'structure-organization',
+        children: [
+          {
+            index: true,
+            element: <StructureOrganizationPage />,
           },
         ],
       },

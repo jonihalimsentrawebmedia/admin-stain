@@ -4,14 +4,20 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { HiPencil } from 'react-icons/hi'
 import { TabsListCustom } from '@/pages/modules/website-utama/public-content/slider/components/tabsList.tsx'
-import { UseGetImpactInnovationStatus } from '@/pages/modules/website-utama/public-content/impact-innovation/hooks'
+import { UseGetImpactInnovationStatus } from './hooks/index'
+import { DraftSectionImpactInnovation } from './components/table/draftSection.tsx'
+import { SubmissionSectionImpactInnovation } from '@/pages/modules/website-utama/public-content/impact-innovation/components/table/submissionSection.tsx'
+import { ProcessSectionImpactInnovation } from '@/pages/modules/website-utama/public-content/impact-innovation/components/table/processSection.tsx'
+import { RejectSectionImpactInnovation } from '@/pages/modules/website-utama/public-content/impact-innovation/components/table/rejectSection.tsx'
+import { ApprovedSectionImpactInnovation } from '@/pages/modules/website-utama/public-content/impact-innovation/components/table/approvedSection.tsx'
+import { PublishSectionImpactInnovation } from '@/pages/modules/website-utama/public-content/impact-innovation/components/table/publishSection.tsx'
+import { UnpublishSectionImpactInnovation } from '@/pages/modules/website-utama/public-content/impact-innovation/components/table/unpublishSection.tsx'
 
 export const ImpactInnovationPage = () => {
   const navigate = useNavigate()
   const { status } = UseGetImpactInnovationStatus()
-  
+
   const [searchParams, setSearchParams] = useSearchParams()
-  
   const statusParams = searchParams.get('status')
 
   useEffect(() => {
@@ -30,7 +36,7 @@ export const ImpactInnovationPage = () => {
         </div>
       ),
       value: 'DRAFT',
-      element: <></>,
+      element: <DraftSectionImpactInnovation />,
     },
     {
       id: 2,
@@ -43,7 +49,7 @@ export const ImpactInnovationPage = () => {
         </div>
       ),
       value: 'DIAJUKAN_EDITOR',
-      element: <></>,
+      element: <SubmissionSectionImpactInnovation />,
     },
     {
       id: 3,
@@ -56,7 +62,7 @@ export const ImpactInnovationPage = () => {
         </div>
       ),
       value: 'PROSES_EDITOR',
-      element: <></>,
+      element: <ProcessSectionImpactInnovation />,
     },
     {
       id: 4,
@@ -69,7 +75,7 @@ export const ImpactInnovationPage = () => {
         </div>
       ),
       value: 'TOLAK_EDITOR',
-      element: <></>,
+      element: <RejectSectionImpactInnovation />,
     },
     {
       id: 5,
@@ -82,7 +88,7 @@ export const ImpactInnovationPage = () => {
         </div>
       ),
       value: 'DISETUJUI_EDITOR',
-      element: <></>,
+      element: <ApprovedSectionImpactInnovation />,
     },
     {
       id: 6,
@@ -95,7 +101,7 @@ export const ImpactInnovationPage = () => {
         </div>
       ),
       value: 'PUBLISHED',
-      element: <></>,
+      element: <PublishSectionImpactInnovation />,
     },
     {
       id: 7,
@@ -108,7 +114,7 @@ export const ImpactInnovationPage = () => {
         </div>
       ),
       value: 'UNPUBLISH',
-      element: <></>,
+      element: <UnpublishSectionImpactInnovation />,
     },
   ]
 

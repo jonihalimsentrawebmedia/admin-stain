@@ -3,15 +3,27 @@ import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { IImpactInnovationList, IStatusImpactInnovation } from '../data/index'
+import { useSearchParams } from 'react-router-dom'
 
 export const UseGetImpactInnovation = () => {
   const [impactInnovation, setImpactInnovation] = useState<IImpactInnovationList[]>([])
   const [meta, setMeta] = useState<Meta>()
 
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search')
+  const status = searchParams.get('status')
+
+  const ParamsSearch = new URLSearchParams({ page, limit })
+  if (search) ParamsSearch.append('search', search)
+  if (status) ParamsSearch.append('status-publish', status)
+
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['impact-innovation'],
+    queryKey: ['list-impact-innovation', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get('/website-utama/inovasi-berdampak').then((res) => res.data),
+    queryFn: () =>
+      AxiosClient.get(`/website-utama/inovasi-berdampak?${ParamsSearch}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching

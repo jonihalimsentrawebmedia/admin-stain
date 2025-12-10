@@ -54,8 +54,8 @@ export const ImpactInnovationForm = (props: Props) => {
             className={'lg:grid-cols-[15rem_1fr]'}
             name={'judul'}
             form={form}
-            label={'Label'}
-            placeholder={'Label'}
+            label={'Judul Inovasi Berdampak*'}
+            placeholder={'Judul Inovasi Berdampak*'}
             inputClassName={'bg-white'}
             isRequired
             isRow
