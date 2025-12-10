@@ -30,6 +30,7 @@ import LogView from '@/pages/modules/website-utama/services/log/LogView'
 import { UpdatedImpactInnovationPage } from '@/pages/modules/website-utama/public-content/impact-innovation/updated'
 import { DetailImpactInnovationPage } from '@/pages/modules/website-utama/public-content/impact-innovation/detail'
 import { StructureOrganizationPage } from '@/pages/modules/website-utama/public-content/structure-organization'
+import CalendarAcademicView from '@/pages/modules/website-utama/calendar-academic/CalendarAcademicView'
 
 export const MainWebsiteRouter = [
   {
@@ -241,6 +242,15 @@ export const MainWebsiteRouter = [
       {
         path: ':id/log',
         element: <LogView />,
+      },
+    ],
+  },
+  {
+    path: 'calendar-academic',
+    children: [
+      {
+        index: true,
+        element: <CalendarAcademicView />,
       },
     ],
   },
