@@ -24,6 +24,7 @@ import { UpdatedAgendaPage } from '@/pages/modules/website-utama/public-content/
 import { DetailAgendaPage } from '@/pages/modules/website-utama/public-content/agenda/detail'
 import { ImpactInnovationPage } from '@/pages/modules/website-utama/public-content/impact-innovation'
 import { CreateImpactInnovationPage } from '@/pages/modules/website-utama/public-content/impact-innovation/created'
+import BackgroundView from '@/pages/modules/website-utama/settings-menu/header/background/BackgroundView'
 
 export const MainWebsiteRouter = [
   {
@@ -191,6 +192,10 @@ export const MainWebsiteRouter = [
                   {
                     path: 'add',
                     element: <ContentCreateView />,
+                  },
+                  {
+                    path: 'background',
+                    element: <BackgroundView />,
                   },
                   {
                     path: ':idContent/edit',

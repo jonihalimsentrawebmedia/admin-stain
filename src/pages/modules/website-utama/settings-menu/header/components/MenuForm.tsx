@@ -10,12 +10,31 @@ interface Props {
   handleSave: (e: ISettingMenuTypeForm) => void
   loading: boolean
   onCancel: () => void
+  isSubMenu?: boolean
 }
-const MenuForm = ({ handleSave, form, loading, onCancel }: Props) => {
+const MenuForm = ({ handleSave, form, loading, onCancel, isSubMenu }: Props) => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
-        <TextInput form={form} name="nama_menu" placeholder="Nama Menu" label="Nama Menu*" isRow />
+        {isSubMenu && (
+          <TextInput
+            form={form}
+            name="sub_menu_parent"
+            placeholder={'Nama Menu*'}
+            label={'Nama Menu*'}
+            isRow
+            isDisabled
+            className='disabled:bg-gray-300'
+            inputClassName='disabled:bg-gray-300'
+          />
+        )}
+        <TextInput
+          form={form}
+          name="nama_menu"
+          placeholder={isSubMenu ? 'Nama SubMenu*' : 'Nama Menu*'}
+          label={isSubMenu ? 'Nama SubMenu*' : 'Nama Menu*'}
+          isRow
+        />
         <TextInput
           form={form}
           name="controller"
@@ -25,6 +44,22 @@ const MenuForm = ({ handleSave, form, loading, onCancel }: Props) => {
         />
         <InputRadio
           label="Halaman?"
+          data={[
+            {
+              label: 'Ya',
+              value: true,
+            },
+            {
+              label: 'Tidak',
+              value: false,
+            },
+          ]}
+          form={form}
+          name="halaman"
+          isRow
+        />
+        <InputRadio
+          label="Status"
           data={[
             {
               label: 'Ya',
@@ -41,7 +76,7 @@ const MenuForm = ({ handleSave, form, loading, onCancel }: Props) => {
         />
         <TextInput
           form={form}
-          name="sumber_data"
+          name="url"
           placeholder="Sumber Data (url)*"
           label="Sumber Data (url)**"
           isRow

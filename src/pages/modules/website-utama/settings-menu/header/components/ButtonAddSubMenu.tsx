@@ -12,8 +12,9 @@ import { toast } from 'react-toastify'
 import type { Menu } from '../model'
 interface Props {
   data: Menu
+  menu_parent_name: string
 }
-const ButtonAddSubMenu = ({ data }: Props) => {
+const ButtonAddSubMenu = ({ data, menu_parent_name }: Props) => {
   const form = useForm<ISettingMenuTypeForm>({
     resolver: zodResolver(SettingMenuResolver),
   })
@@ -51,6 +52,7 @@ const ButtonAddSubMenu = ({ data }: Props) => {
           setOpen(true)
           form.reset({
             id_parent_menu: data.id_menu,
+            sub_menu_parent: menu_parent_name,
           })
         }}
         className="border border-primary hover:text-primay text-primary"
@@ -59,8 +61,9 @@ const ButtonAddSubMenu = ({ data }: Props) => {
         Tambah SubMenu
       </Button>
 
-      <DialogCustom open={open} className={'rounded'} setOpen={setOpen} title={'Tambah Menu'}>
+      <DialogCustom  open={open} className={'rounded w-full lg:min-w-2xl '} setOpen={setOpen} title={'Tambah Menu'}>
         <MenuForm
+        isSubMenu
           form={form}
           loading={loading}
           handleSave={handleSave}

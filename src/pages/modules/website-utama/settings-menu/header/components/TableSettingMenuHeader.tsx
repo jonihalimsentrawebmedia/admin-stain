@@ -66,16 +66,24 @@ const TableSettingMenuHeader = () => {
               ))
           : menuList.map((item, index) => (
               <>
-                <TableRow>
-                  <TableCell className="border-b">{index + 1}</TableCell>
+                <TableRow className="py-0!">
+                  <TableCell className="border-b h-[60px] left-0 relative">
+                    <div className='pl-2'>
+                      {index + 1}
+                    </div>
+
+              
+                  </TableCell>
                   <TableCell className="border-b">{item.nama_menu}</TableCell>
                   <TableCell className="border-b">
                     <Switch checked={item.status == 'Y'} />
                   </TableCell>
                   <TableCell className="border-b">
-                    <ButtonAddSubMenu data={item} />
+                    <ButtonAddSubMenu data={item} menu_parent_name={item.nama_menu} />
                   </TableCell>
-                  <TableCell className="border-b">{item.status == 'Y' ? 'Ya' : 'Tidak'}</TableCell>
+                  <TableCell className="border-b">
+                    {item.status == 'Y' ? 'Ya' : 'Tidak'}
+                  </TableCell>
                   <TableCell className="border-b">{item.urutan}</TableCell>
                   <TableCell className="border-b">
                     <Link
@@ -99,7 +107,7 @@ const TableSettingMenuHeader = () => {
                 </TableRow>
                 {item.children.map((subItem, indexSub) => (
                   <>
-                    <TableRow>
+                    <TableRow className="py-0!">
                       <TableCell className="border-b ">
                         <div className="pl-4  ">
                           {index + 1}.{indexSub + 1}
@@ -110,7 +118,7 @@ const TableSettingMenuHeader = () => {
                         <Switch checked={subItem.status == 'Y'} />
                       </TableCell>
                       <TableCell className="border-b">
-                        <ButtonAddSubMenu data={subItem} />
+                        <ButtonAddSubMenu data={subItem} menu_parent_name={subItem.nama_menu} />
                       </TableCell>
                       <TableCell className="border-b">
                         {item.status == 'Y' ? 'Ya' : 'Tidak'}
@@ -133,15 +141,19 @@ const TableSettingMenuHeader = () => {
                         <div className="flex gap-2 items-center">
                           <ButtonEdit data={subItem} />
 
-                          <ButtonDelete data={subItem} isSubMenu />
+                          <ButtonDelete
+                            data={subItem}
+                            isSubMenu
+                            menu_parent_name={item.nama_menu}
+                          />
                         </div>
                       </TableCell>
                     </TableRow>
 
                     {subItem.children.map((subSubItem, indexSubSub) => (
-                      <TableRow>
-                        <TableCell className="border-b ">
-                          <div className="pl-8 border-l ">
+                      <TableRow className="py-0!">
+                        <TableCell className="border-b relative ">
+                          <div className="pl-8  ">
                             {index + 1}.{indexSub + 1}.{indexSubSub + 1}
                           </div>
                         </TableCell>
@@ -150,7 +162,10 @@ const TableSettingMenuHeader = () => {
                           <Switch checked={subSubItem.status == 'Y'} />
                         </TableCell>
                         <TableCell className="border-b">
-                          <ButtonAddSubMenu data={subSubItem} />
+                          <ButtonAddSubMenu
+                            data={subSubItem}
+                            menu_parent_name={subSubItem.nama_menu}
+                          />
                         </TableCell>
                         <TableCell className="border-b">
                           {item.status == 'Y' ? 'Ya' : 'Tidak'}
@@ -172,7 +187,11 @@ const TableSettingMenuHeader = () => {
                         <TableCell className="border-b">
                           <div className="flex gap-2 items-center">
                             <ButtonEdit data={subSubItem} />
-                            <ButtonDelete data={subSubItem} isSubMenu />
+                            <ButtonDelete
+                              data={subSubItem}
+                              isSubMenu
+                              menu_parent_name={subItem.nama_menu}
+                            />
                           </div>
                         </TableCell>
                       </TableRow>

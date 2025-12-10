@@ -56,7 +56,11 @@ const ContentViewModel = () => {
   function goToAdd() {
     navigate(`/modules/website-utama/pengaturan-menu/header/${id}/content/add`)
   }
-  return { columns, goToAdd }
+  function goToBackground(){
+    navigate(`/modules/website-utama/pengaturan-menu/header/${id}/content/background`)
+
+  }
+  return { columns, goToAdd ,goToBackground}
 }
 
 export default ContentViewModel

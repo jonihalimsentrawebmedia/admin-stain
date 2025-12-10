@@ -10,6 +10,7 @@ export interface MenuBase {
   created_user: string
   updated_at: string // ISO 8601 timestamp string
   updated_user: string
+  url:string
 }
 
 export interface Menu extends MenuBase {

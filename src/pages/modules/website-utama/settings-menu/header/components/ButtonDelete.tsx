@@ -12,8 +12,9 @@ import { Trash2, X } from 'lucide-react'
 interface Props {
   isSubMenu?: boolean
   data: Menu
+  menu_parent_name?:string
 }
-const ButtonDelete = ({ data, isSubMenu }: Props) => {
+const ButtonDelete = ({ data, isSubMenu,menu_parent_name }: Props) => {
   const form = useForm()
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -43,11 +44,11 @@ const ButtonDelete = ({ data, isSubMenu }: Props) => {
   ]
   const fieldSubMenu: any = [
     {
-      name: 'nama_menu',
+      name: 'menu_parent_name',
       label: 'Nama Menu*',
     },
     {
-      name: 'sub_nama_menu',
+      name: 'nama_menu',
       label: 'Nama Submenu*',
     },
 
@@ -97,6 +98,7 @@ const ButtonDelete = ({ data, isSubMenu }: Props) => {
           setOpen(!open)
           form.reset({
             ...data,
+            menu_parent_name:menu_parent_name
           })
         }}
       >
