@@ -59,6 +59,11 @@ export const MENULIST = [
         name: 'Agenda',
         path: `${baseDomain}/public-content/agenda`,
       },
+      {
+        id: 6,
+        name: 'Struktur Organisasi',
+        path: `${baseDomain}/public-content/structure-organization`,
+      },
     ],
   },
   {

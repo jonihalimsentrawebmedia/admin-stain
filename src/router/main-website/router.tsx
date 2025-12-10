@@ -24,6 +24,9 @@ import { UpdatedAgendaPage } from '@/pages/modules/website-utama/public-content/
 import { DetailAgendaPage } from '@/pages/modules/website-utama/public-content/agenda/detail'
 import { ImpactInnovationPage } from '@/pages/modules/website-utama/public-content/impact-innovation'
 import { CreateImpactInnovationPage } from '@/pages/modules/website-utama/public-content/impact-innovation/created'
+import { UpdatedImpactInnovationPage } from '@/pages/modules/website-utama/public-content/impact-innovation/updated'
+import { DetailImpactInnovationPage } from '@/pages/modules/website-utama/public-content/impact-innovation/detail'
+import { StructureOrganizationPage } from '@/pages/modules/website-utama/public-content/structure-organization'
 
 export const MainWebsiteRouter = [
   {
@@ -158,6 +161,23 @@ export const MainWebsiteRouter = [
           {
             path: 'add',
             element: <CreateImpactInnovationPage />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedImpactInnovationPage />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailImpactInnovationPage />,
+          },
+        ],
+      },
+      {
+        path: 'structure-organization',
+        children: [
+          {
+            index: true,
+            element: <StructureOrganizationPage />,
           },
         ],
       },

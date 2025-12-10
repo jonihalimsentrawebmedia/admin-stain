@@ -22,6 +22,7 @@ interface Props<T extends FieldValues> {
   isLoading?: boolean
   isRequired?: boolean
   fx?: (e: any) => void
+  usePortal?: boolean
 }
 
 export const SelectBasicInput = <T extends FieldValues>({
@@ -34,6 +35,7 @@ export const SelectBasicInput = <T extends FieldValues>({
   isDisabled = false,
   isRow = false,
   apiValue,
+  usePortal = false,
   isRequired,
   label,
   isLoading,
@@ -70,6 +72,10 @@ export const SelectBasicInput = <T extends FieldValues>({
               <Skeleton className="h-[40px] bg-gray-300" />
             ) : (
               <Select
+                styles={{
+                  menuPortal: (base) => (usePortal ? { ...base, zIndex: 9999 } : base),
+                }}
+                menuPortalTarget={usePortal ? document.body : undefined}
                 isDisabled={isDisabled}
                 options={data}
                 value={selectedOption}
