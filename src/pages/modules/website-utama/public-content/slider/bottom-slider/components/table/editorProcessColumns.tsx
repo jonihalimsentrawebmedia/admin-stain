@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button.tsx'
 import { RxExternalLink } from 'react-icons/rx'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
+import { MdOutlineHistory } from 'react-icons/md'
 
 const EditorProcessColumns = () => {
   const [searchParams] = useSearchParams()
@@ -49,6 +50,24 @@ const EditorProcessColumns = () => {
             >
               <RxExternalLink />
               Buka URL
+            </Button>
+          </Link>
+        )
+      },
+    },
+    {
+      accessorKey: 'log',
+      header: 'Log',
+      cell: ({ row }) => {
+        return (
+          <Link to={`log/${row?.original?.id_slider_bawah}`}>
+            <Button
+              size={'sm'}
+              variant={'outline'}
+              className={'text-blue-500 border-blue-500 hover:text-blue-500'}
+            >
+              <MdOutlineHistory />
+              Lihat Log
             </Button>
           </Link>
         )

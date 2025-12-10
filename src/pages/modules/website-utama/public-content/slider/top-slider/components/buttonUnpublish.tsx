@@ -59,8 +59,8 @@ export const ButtonUnPublished = (props: Props) => {
         open={open}
         setOpen={setOpen}
         className={'rounded'}
-        title={'Ajukan Ke Editor?'}
-        description={'Apakah anda yakin untuk mengajukan slider ini ke editor?'}
+        title={'Unpublish Slider'}
+        description={'Apakah anda yakin untuk Unpublish slider yang dipilih?'}
       >
         <div>
           <img

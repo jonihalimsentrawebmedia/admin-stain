@@ -59,8 +59,8 @@ export const ButtonPublishedBottom = (props: Props) => {
         open={open}
         setOpen={setOpen}
         className={'rounded'}
-        title={'Ajukan Ke Editor?'}
-        description={'Apakah anda yakin untuk mengajukan slider ini ke editor?'}
+        title={'Publish Slider'}
+        description={'Apakah anda yakin untuk mempublish slider yang dipilih?'}
       >
         <div>
           <img

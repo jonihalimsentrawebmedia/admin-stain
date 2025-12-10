@@ -7,6 +7,7 @@ import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { ButtonPublished } from '@/pages/modules/website-utama/public-content/slider/top-slider/components/buttonPublish.tsx'
 import { HiPencil } from 'react-icons/hi'
+import { MdOutlineHistory } from 'react-icons/md'
 
 const UnpublishedColumns = () => {
   const [searchParams] = useSearchParams()
@@ -70,6 +71,24 @@ const UnpublishedColumns = () => {
               {TimeAgo(row?.original?.diajukan_at as string)}
             </p>
           </div>
+        )
+      },
+    },
+    {
+      accessorKey: 'log',
+      header: 'Log',
+      cell: ({ row }) => {
+        return (
+          <Link to={`log/${row?.original?.id_slider_atas}`}>
+            <Button
+              size={'sm'}
+              variant={'outline'}
+              className={'text-blue-500 border-blue-500 hover:text-blue-500'}
+            >
+              <MdOutlineHistory />
+              Lihat Log
+            </Button>
+          </Link>
         )
       },
     },

@@ -6,6 +6,7 @@ import { HiPencil } from 'react-icons/hi'
 import { RxExternalLink } from 'react-icons/rx'
 import { ButonDeleteBottomSlider } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/components/butonDelete.tsx'
 import { ButtonApprovedBottom } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/components/buttonApproved.tsx'
+import { MdOutlineHistory } from 'react-icons/md'
 
 const BottomSliderColumns = () => {
   const [searchParams] = useSearchParams()
@@ -50,6 +51,24 @@ const BottomSliderColumns = () => {
             >
               <RxExternalLink />
               Buka URL
+            </Button>
+          </Link>
+        )
+      },
+    },
+    {
+      accessorKey: 'log',
+      header: 'Log',
+      cell: ({ row }) => {
+        return (
+          <Link to={`log/${row?.original?.id_slider_bawah}`}>
+            <Button
+              size={'sm'}
+              variant={'outline'}
+              className={'text-blue-500 border-blue-500 hover:text-blue-500'}
+            >
+              <MdOutlineHistory />
+              Lihat Log
             </Button>
           </Link>
         )

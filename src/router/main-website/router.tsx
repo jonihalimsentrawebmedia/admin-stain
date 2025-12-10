@@ -17,6 +17,13 @@ import SettingMenuHeaderView from '@/pages/modules/website-utama/settings-menu/h
 import ContentView from '@/pages/modules/website-utama/settings-menu/header/content/ContentView'
 import ContentCreateView from '@/pages/modules/website-utama/settings-menu/header/content/create/ContentCreateView'
 import ContentEditView from '@/pages/modules/website-utama/settings-menu/header/content/edit/ContentEditView'
+import { AnnouncementDetailPage } from '@/pages/modules/website-utama/public-content/announcement/detail'
+import { AgendaPage } from '@/pages/modules/website-utama/public-content/agenda'
+import { CreateAgendaPage } from '@/pages/modules/website-utama/public-content/agenda/created'
+import { UpdatedAgendaPage } from '@/pages/modules/website-utama/public-content/agenda/updated'
+import { DetailAgendaPage } from '@/pages/modules/website-utama/public-content/agenda/detail'
+import { ImpactInnovationPage } from '@/pages/modules/website-utama/public-content/impact-innovation'
+import { CreateImpactInnovationPage } from '@/pages/modules/website-utama/public-content/impact-innovation/created'
 
 export const MainWebsiteRouter = [
   {
@@ -114,6 +121,44 @@ export const MainWebsiteRouter = [
             path: 'edit/:id',
             element: <UpdatedAnnouncementPage />,
           },
+          {
+            path: 'detail/:id',
+            element: <AnnouncementDetailPage />,
+          },
+        ],
+      },
+      {
+        path: 'agenda',
+        children: [
+          {
+            index: true,
+            element: <AgendaPage />,
+          },
+          {
+            path: 'add',
+            element: <CreateAgendaPage />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedAgendaPage />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailAgendaPage />,
+          },
+        ],
+      },
+      {
+        path: 'impact-innovation',
+        children: [
+          {
+            index: true,
+            element: <ImpactInnovationPage />,
+          },
+          {
+            path: 'add',
+            element: <CreateImpactInnovationPage />,
+          },
         ],
       },
       {
@@ -148,9 +193,9 @@ export const MainWebsiteRouter = [
                     element: <ContentCreateView />,
                   },
                   {
-                    path:":idContent/edit",
+                    path: ':idContent/edit',
                     element: <ContentEditView />,
-                  }
+                  },
                 ],
               },
             ],

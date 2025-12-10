@@ -6,6 +6,7 @@ import { RxExternalLink } from 'react-icons/rx'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { ButtonDraftBottom } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/components/buttonDraft.tsx'
+import { MdOutlineHistory } from 'react-icons/md'
 
 const BottomSubmissionColumns = () => {
   const [searchParams] = useSearchParams()
@@ -50,6 +51,24 @@ const BottomSubmissionColumns = () => {
             >
               <RxExternalLink />
               Buka URL
+            </Button>
+          </Link>
+        )
+      },
+    },
+    {
+      accessorKey: 'log',
+      header: 'Log',
+      cell: ({ row }) => {
+        return (
+          <Link to={`log/${row?.original?.id_slider_bawah}`}>
+            <Button
+              size={'sm'}
+              variant={'outline'}
+              className={'text-blue-500 border-blue-500 hover:text-blue-500'}
+            >
+              <MdOutlineHistory />
+              Lihat Log
             </Button>
           </Link>
         )

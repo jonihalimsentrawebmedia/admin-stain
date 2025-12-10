@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button.tsx'
 import { RxExternalLink } from 'react-icons/rx'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
+import { MdOutlineHistory } from 'react-icons/md'
 
 const EditorProcessColumns = () => {
   const [searchParams] = useSearchParams()
@@ -55,6 +56,24 @@ const EditorProcessColumns = () => {
       },
     },
     {
+      accessorKey: 'log',
+      header: 'Log',
+      cell: ({ row }) => {
+        return (
+          <Link to={`log/${row?.original?.id_slider_atas}`}>
+            <Button
+              size={'sm'}
+              variant={'outline'}
+              className={'text-blue-500 border-blue-500 hover:text-blue-500'}
+            >
+              <MdOutlineHistory />
+              Lihat Log
+            </Button>
+          </Link>
+        )
+      },
+    },
+    {
       accessorKey: 'action',
       header: 'Tgl Diproses',
       cell: ({ row }) => {
@@ -64,9 +83,7 @@ const EditorProcessColumns = () => {
               {format(row?.original?.proses_at as string, 'dd MMMM yyyy')}
             </p>
             <p className={'text-xs'}>{format(row?.original?.proses_at as string, 'HH:mm:ss')}</p>
-            <p className={'text-xs text-primary'}>
-              {TimeAgo(row?.original?.proses_at as string)}
-            </p>
+            <p className={'text-xs text-primary'}>{TimeAgo(row?.original?.proses_at as string)}</p>
           </div>
         )
       },

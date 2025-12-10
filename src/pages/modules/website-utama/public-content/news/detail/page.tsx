@@ -39,8 +39,11 @@ export const DetailNewsPage = () => {
             label: 'Edit Data',
             onClick: () => {},
             element: (
-              <div className={'flex items-center gap-1.5'}>
-                Status : <p className="text-blue-600 font-semibold">{detailNews?.status_publish}</p>
+              <div className={'flex items-center gap-2'}>
+                Status :{' '}
+                <p className="text-blue-600 font-semibold">
+                  {detailNews?.status_publish?.split('_').join(' ')}
+                </p>
                 <Button
                   onClick={() =>
                     navigate(
@@ -59,13 +62,16 @@ export const DetailNewsPage = () => {
             type: 'save',
             label: 'Edit Data',
             onClick: () => {},
-            element: (
-              <div className={'flex items-center gap-1.5 border-l border-gray-500 pl-2'}>
-                <Button>
-                  <MdSend /> Ajukan Ke Editor
-                </Button>
-              </div>
-            ),
+            element:
+              detailNews?.status_publish !== 'DIAJUKAN_EDITOR' ? (
+                <div className={'flex items-center gap-1.5 border-l border-gray-500 pl-2'}>
+                  <Button>
+                    <MdSend /> Ajukan Ke Editor
+                  </Button>
+                </div>
+              ) : (
+                <></>
+              ),
           },
         ]}
         isBack={true}

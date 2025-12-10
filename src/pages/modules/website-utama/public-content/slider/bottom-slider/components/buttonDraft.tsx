@@ -58,8 +58,8 @@ export const ButtonDraftBottom = (props: Props) => {
         open={open}
         setOpen={setOpen}
         className={'rounded'}
-        title={'Ajukan Ke Editor?'}
-        description={'Apakah anda yakin untuk mengajukan slider ini ke editor?'}
+        title={'Kembali Ke Draft'}
+        description={'Apakah anda yakin untuk mengembalikan draft yang diajukan ke draft?'}
       >
         <div>
           <img

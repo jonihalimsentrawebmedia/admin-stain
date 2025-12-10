@@ -6,6 +6,7 @@ import { RxExternalLink } from 'react-icons/rx'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { HiPencil } from 'react-icons/hi'
+import { MdOutlineHistory } from 'react-icons/md'
 
 const RejectEditorColumns = () => {
   const [searchParams] = useSearchParams()
@@ -73,6 +74,24 @@ const RejectEditorColumns = () => {
     {
       accessorKey: 'alasan_ditolak',
       header: 'Alasan',
+    },
+    {
+      accessorKey: 'log',
+      header: 'Log',
+      cell: ({ row }) => {
+        return (
+          <Link to={`log/${row?.original?.id_slider_atas}`}>
+            <Button
+              size={'sm'}
+              variant={'outline'}
+              className={'text-blue-500 border-blue-500 hover:text-blue-500'}
+            >
+              <MdOutlineHistory />
+              Lihat Log
+            </Button>
+          </Link>
+        )
+      },
     },
     {
       accessorKey: 'action',

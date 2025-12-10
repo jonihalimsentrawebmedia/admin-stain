@@ -2,10 +2,11 @@ import { Link, useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
 import type { IAnnouncement } from '@/pages/modules/website-utama/public-content/announcement/data'
 import { BiLinkExternal } from 'react-icons/bi'
-import { MdInfo } from 'react-icons/md'
+import { MdInfo, MdOutlineHistory } from 'react-icons/md'
 import { HiPencil } from 'react-icons/hi'
 import { ButtonDeleteAnnouncement } from '@/pages/modules/website-utama/public-content/announcement/components/buttonDelete.tsx'
 import { ButtonSubmissionAnnouncement } from '@/pages/modules/website-utama/public-content/announcement/components/buttonSubmission.tsx'
+import { Button } from '@/components/ui/button.tsx'
 
 export const DraftAnnouncementColumns = () => {
   const [searchParams] = useSearchParams()
@@ -62,6 +63,24 @@ export const DraftAnnouncementColumns = () => {
           ))}
         </ul>
       ),
+    },
+    {
+      accessorKey: 'log',
+      header: 'Log',
+      cell: ({ row }) => {
+        return (
+          <Link to={`log/${row?.original?.id_pengumuman}`}>
+            <Button
+              size={'sm'}
+              variant={'outline'}
+              className={'text-blue-500 border-blue-500 hover:text-blue-500'}
+            >
+              <MdOutlineHistory />
+              Lihat Log
+            </Button>
+          </Link>
+        )
+      },
     },
     {
       accessorKey: 'action',

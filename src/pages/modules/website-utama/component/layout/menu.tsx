@@ -46,11 +46,16 @@ export const MENULIST = [
       },
       {
         id: 3,
+        name: 'Inovasi Berdampak',
+        path: `${baseDomain}/public-content/impact-innovation`,
+      },
+      {
+        id: 4,
         name: 'Pengumuman',
         path: `${baseDomain}/public-content/announcement`,
       },
       {
-        id: 4,
+        id: 5,
         name: 'Agenda',
         path: `${baseDomain}/public-content/agenda`,
       },

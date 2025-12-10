@@ -6,6 +6,7 @@ import { RxExternalLink } from 'react-icons/rx'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { ButtonPublishedBottom } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/components/buttonPublish.tsx'
+import { MdOutlineHistory } from 'react-icons/md'
 
 const EditorApprovedColumnsBottom = () => {
   const [searchParams] = useSearchParams()
@@ -67,6 +68,24 @@ const EditorApprovedColumnsBottom = () => {
             <p className={'text-xs'}>{format(row?.original?.proses_at as string, 'HH:mm:ss')}</p>
             <p className={'text-xs text-primary'}>{TimeAgo(row?.original?.proses_at as string)}</p>
           </div>
+        )
+      },
+    },
+    {
+      accessorKey: 'log',
+      header: 'Log',
+      cell: ({ row }) => {
+        return (
+          <Link to={`log/${row?.original?.id_slider_bawah}`}>
+            <Button
+              size={'sm'}
+              variant={'outline'}
+              className={'text-blue-500 border-blue-500 hover:text-blue-500'}
+            >
+              <MdOutlineHistory />
+              Lihat Log
+            </Button>
+          </Link>
         )
       },
     },

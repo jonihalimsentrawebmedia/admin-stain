@@ -6,12 +6,13 @@ interface Props<T extends FieldValues> {
   name: Path<T>
   label?: string
   required?: boolean
+  className?: string
 }
 
 export const RichText = <T extends FieldValues>(props: Props<T>) => {
-  const { form, name, label, required } = props
+  const { form, name, label, required, className } = props
   return (
-    <div className="grid grid-cols-[12rem_1fr] gap-5 items-start">
+    <div className={`grid grid-cols-[12rem_1fr] gap-5 items-start ${className}`}>
       <label>
         {label ?? 'Keterangan (Optional)'}
         {required && <span className="text-red-500"> *</span>}

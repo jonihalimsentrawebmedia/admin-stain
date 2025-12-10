@@ -20,6 +20,7 @@ interface Props<T extends FieldValues> {
   form: UseFormReturn<T>
   uploadUrl: string
   maxFiles?: number
+  className?: string
 }
 
 export const UploadMultipleImages = <T extends FieldValues>(props: Props<T>) => {
@@ -30,6 +31,7 @@ export const UploadMultipleImages = <T extends FieldValues>(props: Props<T>) => 
     required,
     form,
     uploadUrl,
+    className,
     maxFiles = 10,
   } = props
 
@@ -109,7 +111,7 @@ export const UploadMultipleImages = <T extends FieldValues>(props: Props<T>) => 
   }
 
   return (
-    <div className="grid gap-5 grid-cols-[12rem_1fr] items-start">
+    <div className={`grid gap-5 grid-cols-[12rem_1fr] items-start ${className}`}>
       <div className="flex items-center justify-between">
         <label className="text-sm">
           {label}

@@ -14,11 +14,23 @@ interface Props<T extends FieldValues> {
   required?: boolean
   form: UseFormReturn<T>
   uploadUrl: string
+  width?: string
+  height?: string
   alt: string
 }
 
 export const UploadImageWitAlt = <T extends FieldValues>(props: Props<T>) => {
-  const { name, label, placeholder = 'Upload gambar', required, form, uploadUrl, alt } = props
+  const {
+    name,
+    label,
+    placeholder = 'Upload gambar',
+    required,
+    form,
+    uploadUrl,
+    alt,
+    width = 'w-[512px]',
+    height = 'h-[191.2px]',
+  } = props
 
   const uploadRef = useRef<HTMLInputElement | null>(null)
 
@@ -56,59 +68,60 @@ export const UploadImageWitAlt = <T extends FieldValues>(props: Props<T>) => {
 
   return (
     <>
-      <div className="flex items-start gap-5">
-        <div className="space-y-2">
-          <label className="font-medium">
-            {label}
-            {required && <span className="text-red-500">*</span>}
-          </label>
+      <div>
+        <label className="font-medium">
+          {label}
+          {required && <span className="text-red-500">*</span>}
+        </label>
+        <div className="flex items-start gap-5 mt-2">
+          <div>
+            <input
+              type="file"
+              hidden
+              accept="image/png, image/jpeg, image/jpg"
+              ref={uploadRef}
+              onChange={(e) => handleFileChange(e.target.files)}
+            />
 
-          <input
-            type="file"
-            hidden
-            accept="image/png, image/jpeg, image/jpg"
-            ref={uploadRef}
-            onChange={(e) => handleFileChange(e.target.files)}
-          />
-
-          {imageUrl ? (
-            <div className="relative">
-              <div className="w-[512px] h-[191.2px] rounded overflow-hidden border">
-                <img src={imageUrl} alt="Uploaded image" className="w-full h-full object-cover" />
-                <div className="absolute flex items-center gap-1 top-2 right-2">
-                  <button
-                    className="bg-yellow-500 p-1.5 text-white rounded"
-                    onClick={(e) => {
-                      e.preventDefault()
-                      pickImage()
-                    }}
-                  >
-                    <HiPencil className={'size-3'} />
-                  </button>
-                  <button onClick={RemoveImage} className="bg-red-500 p-1.5 text-white rounded">
-                    <FaTrash className={'size-3'} />
-                  </button>
+            {imageUrl ? (
+              <div className="relative">
+                <div className={`${width} ${height} rounded overflow-hidden border`}>
+                  <img src={imageUrl} alt="Uploaded image" className="w-full h-full object-cover" />
+                  <div className="absolute flex items-center gap-1 top-2 right-2">
+                    <button
+                      className="bg-yellow-500 p-1.5 text-white rounded"
+                      onClick={(e) => {
+                        e.preventDefault()
+                        pickImage()
+                      }}
+                    >
+                      <HiPencil className={'size-3'} />
+                    </button>
+                    <button onClick={RemoveImage} className="bg-red-500 p-1.5 text-white rounded">
+                      <FaTrash className={'size-3'} />
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ) : (
-            <div
-              className="bg-primary/5 mt-2 border border-dashed border-primary w-[512px] h-[191.2px] rounded flex flex-col items-center justify-center cursor-pointer hover:bg-primary/10 transition"
-              onClick={pickImage}
-            >
-              <BiSolidImageAdd className="text-primary size-8" />
-              <p className="text-xs text-primary font-semibold">{placeholder}</p>
-              <p className="text-gray-500 text-sm">Max 5 MB</p>
-              <p className="text-gray-500 text-sm">PNG, JPG, JPEG</p>
-            </div>
-          )}
+            ) : (
+              <div
+                className={`bg-primary/5 border border-dashed border-primary ${width} ${height} rounded flex flex-col items-center justify-center cursor-pointer hover:bg-primary/10 transition`}
+                onClick={pickImage}
+              >
+                <BiSolidImageAdd className="text-primary size-8" />
+                <p className="text-xs text-primary font-semibold">{placeholder}</p>
+                <p className="text-gray-500 text-sm">Max 5 MB</p>
+                <p className="text-gray-500 text-sm">PNG, JPG, JPEG</p>
+              </div>
+            )}
+          </div>
+          <InputText
+            inputClassName={''}
+            form={form}
+            name={alt}
+            placeholder={'Keterangan gambar'}
+          />
         </div>
-        <InputText
-          inputClassName={'mt-8'}
-          form={form}
-          name={alt}
-          placeholder={'Keterangan gambar'}
-        />
       </div>
     </>
   )
