@@ -31,6 +31,11 @@ import { UpdatedImpactInnovationPage } from '@/pages/modules/website-utama/publi
 import { DetailImpactInnovationPage } from '@/pages/modules/website-utama/public-content/impact-innovation/detail'
 import { StructureOrganizationPage } from '@/pages/modules/website-utama/public-content/structure-organization'
 import CalendarAcademicView from '@/pages/modules/website-utama/calendar-academic/CalendarAcademicView'
+import { PlacemenUser } from '@/pages/modules/website-utama/public-content/structure-organization/Placeman-user'
+import { FacilitiesPage } from '@/pages/modules/website-utama/public-content/facilities'
+import { CreatedFacilitiesPage } from '@/pages/modules/website-utama/public-content/facilities/created'
+import { UpdatedFacilitiesPage } from '@/pages/modules/website-utama/public-content/facilities/updated'
+import { DetailFacilitiesPage } from '@/pages/modules/website-utama/public-content/facilities/detail'
 
 export const MainWebsiteRouter = [
   {
@@ -182,6 +187,31 @@ export const MainWebsiteRouter = [
           {
             index: true,
             element: <StructureOrganizationPage />,
+          },
+          {
+            path: 'team/:id',
+            element: <PlacemenUser />,
+          },
+        ],
+      },
+      {
+        path: 'facilities',
+        children: [
+          {
+            index: true,
+            element: <FacilitiesPage />,
+          },
+          {
+            path: 'add',
+            element: <CreatedFacilitiesPage />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedFacilitiesPage />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailFacilitiesPage />,
           },
         ],
       },
