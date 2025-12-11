@@ -37,6 +37,11 @@ import LogAcademicYear from '@/pages/modules/website-utama/calendar-academic/log
 import LogActivityView from '@/pages/modules/website-utama/calendar-academic/log/LogActivityView'
 import LogActivityDetailView from '@/pages/modules/website-utama/calendar-academic/log/LogActivityDetailView'
 import CalendarAcademicBackgroundView from '@/pages/modules/website-utama/calendar-academic/background/CalendarAcademicBackgroundView'
+import { PlacemenUser } from '@/pages/modules/website-utama/public-content/structure-organization/Placeman-user'
+import { FacilitiesPage } from '@/pages/modules/website-utama/public-content/facilities'
+import { CreatedFacilitiesPage } from '@/pages/modules/website-utama/public-content/facilities/created'
+import { UpdatedFacilitiesPage } from '@/pages/modules/website-utama/public-content/facilities/updated'
+import { DetailFacilitiesPage } from '@/pages/modules/website-utama/public-content/facilities/detail'
 
 export const MainWebsiteRouter = [
   {
@@ -188,6 +193,31 @@ export const MainWebsiteRouter = [
           {
             index: true,
             element: <StructureOrganizationPage />,
+          },
+          {
+            path: 'team/:id',
+            element: <PlacemenUser />,
+          },
+        ],
+      },
+      {
+        path: 'facilities',
+        children: [
+          {
+            index: true,
+            element: <FacilitiesPage />,
+          },
+          {
+            path: 'add',
+            element: <CreatedFacilitiesPage />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedFacilitiesPage />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailFacilitiesPage />,
           },
         ],
       },

@@ -2,21 +2,22 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { HiPencil } from 'react-icons/hi'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { TabsListCustom } from '@/pages/modules/website-utama/public-content/slider/components/tabsList.tsx'
+import { UseGetFacilitiesStatus } from '@/pages/modules/website-utama/public-content/facilities/hooks'
 import { useEffect } from 'react'
-import { UseGetAgendaStatus } from './hooks/index'
-import { DraftSectionAgenda } from './components/table/draftSection'
-import { SubmissionSectionAgenda } from './components/table/submissionSection.tsx'
-import { ProcessSectionAgenda } from './components/table/processSection.tsx'
-import { RejectSectionAgenda } from '@/pages/modules/website-utama/public-content/agenda/components/table/rejectSection.tsx'
-import { ApprovedSectionAgenda } from '@/pages/modules/website-utama/public-content/agenda/components/table/approvedSection.tsx'
-import { PublishSectionAgenda } from '@/pages/modules/website-utama/public-content/agenda/components/table/publishSection.tsx'
-import { UnpublishSectionAgenda } from '@/pages/modules/website-utama/public-content/agenda/components/table/unpublishSection.tsx'
+import { TabsListCustom } from '@/pages/modules/website-utama/public-content/slider/components/tabsList.tsx'
+import { DraftSectionFacilities } from './components/table/draftSection.tsx'
+import { SubmissionSectionFacilities } from './components/table/submissionSection.tsx'
+import { ProcessSectionSection } from './components/table/processSection.tsx'
+import { RejectSectionSection } from './components/table/rejectSection.tsx'
+import { ApprovedSectionFacilities } from '@/pages/modules/website-utama/public-content/facilities/components/table/approvedSection.tsx'
+import { PublishSectionFacilities } from '@/pages/modules/website-utama/public-content/facilities/components/table/publishSection.tsx'
+import { UnpublishSectionFacilities } from '@/pages/modules/website-utama/public-content/facilities/components/table/unpublishSection.tsx'
 
-export const AgendaPage = () => {
+export const FacilitiesPage = () => {
   const navigate = useNavigate()
-  
-  const { status } = UseGetAgendaStatus()
+
+  const { status } = UseGetFacilitiesStatus()
+
   const [searchParams, setSearchParams] = useSearchParams()
   const statusParams = searchParams.get('status')
 
@@ -36,7 +37,7 @@ export const AgendaPage = () => {
         </div>
       ),
       value: 'DRAFT',
-      element: <DraftSectionAgenda />,
+      element: <DraftSectionFacilities />,
     },
     {
       id: 2,
@@ -49,7 +50,7 @@ export const AgendaPage = () => {
         </div>
       ),
       value: 'DIAJUKAN_EDITOR',
-      element: <SubmissionSectionAgenda />,
+      element: <SubmissionSectionFacilities />,
     },
     {
       id: 3,
@@ -62,7 +63,7 @@ export const AgendaPage = () => {
         </div>
       ),
       value: 'PROSES_EDITOR',
-      element: <ProcessSectionAgenda />,
+      element: <ProcessSectionSection />,
     },
     {
       id: 4,
@@ -75,7 +76,7 @@ export const AgendaPage = () => {
         </div>
       ),
       value: 'TOLAK_EDITOR',
-      element: <RejectSectionAgenda />,
+      element: <RejectSectionSection />,
     },
     {
       id: 5,
@@ -88,7 +89,7 @@ export const AgendaPage = () => {
         </div>
       ),
       value: 'DISETUJUI_EDITOR',
-      element: <ApprovedSectionAgenda />,
+      element: <ApprovedSectionFacilities />,
     },
     {
       id: 6,
@@ -101,7 +102,7 @@ export const AgendaPage = () => {
         </div>
       ),
       value: 'PUBLISHED',
-      element: <PublishSectionAgenda />,
+      element: <PublishSectionFacilities />,
     },
     {
       id: 7,
@@ -114,7 +115,7 @@ export const AgendaPage = () => {
         </div>
       ),
       value: 'UNPUBLISH',
-      element: <UnpublishSectionAgenda />,
+      element: <UnpublishSectionFacilities />,
     },
   ]
 
@@ -122,7 +123,7 @@ export const AgendaPage = () => {
     <>
       <div className="flex flex-col gap-5">
         <ButtonTitleGroup
-          label={'Agenda'}
+          label={'Fasilitas'}
           buttonGroup={[
             {
               type: 'add',
@@ -135,7 +136,7 @@ export const AgendaPage = () => {
                   className={'border-primary text-primary hover:text-primary'}
                 >
                   <HiPencil />
-                  Tulis Agenda
+                  Tulis Fasilitas
                 </Button>
               ),
             },

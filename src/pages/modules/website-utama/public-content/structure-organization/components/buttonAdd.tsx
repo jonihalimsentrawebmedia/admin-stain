@@ -8,6 +8,7 @@ import { StructureOrganization, type StructureOrganizationType } from '../data/r
 import { zodResolver } from '@hookform/resolvers/zod'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
+import { useQueryClient } from '@tanstack/react-query'
 
 export const ButtonAddStructureOrganization = () => {
   const [open, setOpen] = useState(false)
@@ -17,6 +18,8 @@ export const ButtonAddStructureOrganization = () => {
     resolver: zodResolver(StructureOrganization),
   })
 
+  const queryClient = useQueryClient()
+
   const HandleSave = async (e: StructureOrganizationType) => {
     setLoading(true)
     await AxiosClient.post('/website-utama/kelompok-organisasi', e)
@@ -24,6 +27,9 @@ export const ButtonAddStructureOrganization = () => {
         if (res.data.status) {
           setLoading(false)
           setOpen(false)
+          queryClient.invalidateQueries({
+            queryKey: ['list-group-organization'],
+          })
           toast.success(res.data.message || 'Success tambah data kelompok')
           form.reset()
         }
