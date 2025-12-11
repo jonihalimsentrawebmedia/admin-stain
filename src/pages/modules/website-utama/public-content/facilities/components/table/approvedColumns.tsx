@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button.tsx'
 import { MdInfo, MdOutlineHistory } from 'react-icons/md'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
-import { ButtonDraftFacilities } from '../buttonDraft'
 import { ButtonPublishFacilities } from '@/pages/modules/website-utama/public-content/facilities/components/buttonPublish.tsx'
 
 export const ApprovedColumnsFacilities = () => {
@@ -80,7 +79,6 @@ export const ApprovedColumnsFacilities = () => {
               <p className={'text-primary text-sm'}>
                 {TimeAgo(row?.original?.disetujui_at as string)}
               </p>
-              <ButtonDraftFacilities {...row?.original} />
             </div>
           </>
         )

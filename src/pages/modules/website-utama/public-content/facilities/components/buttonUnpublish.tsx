@@ -17,7 +17,7 @@ export const ButtonUnpublishFacilities = (data: IFacilitiesDetail) => {
   const HandlerDelete = async () => {
     setLoading(true)
     await AxiosClient.patch(`/website-utama/fasilitas/${data?.id_fasilitas}/status-publish`, {
-      status_publish: 'PUBLISHED',
+      status_publish: 'UNPUBLISH',
     })
       .then((res) => {
         if (res?.data?.status) {

@@ -79,7 +79,6 @@ export const PublishColumnsFacilities = () => {
               <p className={'text-primary text-sm'}>
                 {TimeAgo(row?.original?.published_at as string)}
               </p>
-              <ButtonUnpublishFacilities {...row?.original} />
             </div>
           </>
         )

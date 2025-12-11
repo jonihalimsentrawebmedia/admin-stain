@@ -65,7 +65,7 @@ export const DetailFacilitiesPage = () => {
         <Separator className={'my-5'} />
 
         <div className={'flex items-start gap-x-8 px-5'}>
-          <div className="w-6/12">
+          <div className="w-7/12">
             <p className="text-2xl font-semibold">{detail?.nama_fasilitas}</p>
 
             <div>
@@ -77,8 +77,8 @@ export const DetailFacilitiesPage = () => {
             </div>
           </div>
 
-          <div className="w-6/12">
-            <img src={detail?.gambar} alt="image" className="w-full h-[456px] object-contain" />
+          <div className="w-5/12">
+            <img src={detail?.gambar} alt="image" className="w-full h-[456px] object-cover rounded-md" />
           </div>
         </div>
 

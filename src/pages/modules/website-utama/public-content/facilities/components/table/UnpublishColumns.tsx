@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button.tsx'
 import { MdInfo, MdOutlineHistory } from 'react-icons/md'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
-import { ButtonUnpublishFacilities } from '../../components/buttonUnpublish.tsx'
 import { HiPencil } from 'react-icons/hi'
 import { ButtonPublishFacilities } from '@/pages/modules/website-utama/public-content/facilities/components/buttonPublish.tsx'
 
@@ -81,7 +80,6 @@ export const UnpublishColumnsFacilities = () => {
               <p className={'text-primary text-sm'}>
                 {TimeAgo(row?.original?.unpublished_at as string)}
               </p>
-              <ButtonUnpublishFacilities {...row?.original} />
             </div>
           </>
         )
