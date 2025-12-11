@@ -3,6 +3,8 @@ import type { ColumnDef } from '@tanstack/react-table'
 import type { IGroupOrganization } from '@/pages/modules/website-utama/public-content/structure-organization/data/index.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { FaForward } from 'react-icons/fa'
+import { ButtonEditStructureOrganization } from '../components/buttonEdit'
+import { ButtonDeleteStructureOrganization } from '@/pages/modules/website-utama/public-content/structure-organization/components/buttonDelete.tsx'
 
 export const GroupOrganizationColumns = () => {
   const [searchParams] = useSearchParams()
@@ -41,6 +43,16 @@ export const GroupOrganizationColumns = () => {
     {
       accessorKey: 'urutan',
       header: 'Urutan',
+    },
+    {
+      accessorKey: 'action',
+      header: '',
+      cell: ({ row }) => (
+        <div className={'flex items-center justify-end gap-2'}>
+          <ButtonEditStructureOrganization {...row?.original} />
+          <ButtonDeleteStructureOrganization {...row?.original} />
+        </div>
+      ),
     },
   ]
 
