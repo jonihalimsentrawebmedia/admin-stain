@@ -1,7 +1,8 @@
 import { MdDashboard } from 'react-icons/md'
 import { IoSchool } from 'react-icons/io5'
 import { TbWorld } from 'react-icons/tb'
-import { FaGear } from 'react-icons/fa6'
+import { FaGear, FaGears } from 'react-icons/fa6'
+import { Calendar } from 'lucide-react'
 
 const baseDomain = '/modules/website-utama'
 
@@ -82,5 +83,17 @@ export const MENULIST = [
         path: `${baseDomain}/pengaturan-menu/footer`,
       },
     ],
+  },
+  {
+    id: 4,
+    name: 'Layanan',
+    path: `${baseDomain}/services`,
+    icon: <FaGears className={'size-5'} />,
+  },
+  {
+    id: 5,
+    name: 'Kalender Akademik',
+    path: `${baseDomain}/calendar-academic`,
+    icon: <Calendar className={'size-5'} />,
   },
 ]

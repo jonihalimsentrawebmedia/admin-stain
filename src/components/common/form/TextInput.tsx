@@ -29,8 +29,8 @@ interface Props<T extends FieldValues> {
   isDisabled?: boolean
   isRequired?: boolean
   isNumber?: boolean
-  min?: number
-  max?: number
+  min?: number|string
+  max?: number|string
 }
 
 function TextInput<T extends FieldValues>({

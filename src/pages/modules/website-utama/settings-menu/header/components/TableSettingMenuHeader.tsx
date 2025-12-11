@@ -8,13 +8,13 @@ import {
 } from '@/components/ui/table'
 import useGetSettingsMenu from '../controller/useGetSettingsMenu'
 import { Skeleton } from '@/components/ui/skeleton'
-import { Switch } from '@/components/ui/switch'
 import { Button } from '@/components/ui/button'
 import { FastForward } from 'lucide-react'
 import ButtonAddSubMenu from './ButtonAddSubMenu'
 import ButtonDelete from './ButtonDelete'
 import ButtonEdit from './ButtonEdit'
 import { Link } from 'react-router-dom'
+import ButtonActiveMenu from './ButtonActiveMenu'
 
 const TableSettingMenuHeader = () => {
   const { loading, menuList } = useGetSettingsMenu()
@@ -72,7 +72,8 @@ const TableSettingMenuHeader = () => {
                   </TableCell>
                   <TableCell className="border-b">{item.nama_menu}</TableCell>
                   <TableCell className="border-b">
-                    <Switch checked={item.status == 'Y'} />
+                    {/* <Switch checked={item.status == 'Y'} /> */}
+                    <ButtonActiveMenu data={item} />
                   </TableCell>
                   <TableCell className="border-b">
                     <ButtonAddSubMenu data={item} menu_parent_name={item.nama_menu} />
@@ -118,7 +119,7 @@ const TableSettingMenuHeader = () => {
                       </TableCell>
                       <TableCell className="border-b ">{subItem.nama_menu}</TableCell>
                       <TableCell className="border-b">
-                        <Switch checked={subItem.status == 'Y'} />
+                        <ButtonActiveMenu data={subItem} />
                       </TableCell>
                       <TableCell className="border-b">
                         <ButtonAddSubMenu data={subItem} menu_parent_name={subItem.nama_menu} />
@@ -173,7 +174,7 @@ const TableSettingMenuHeader = () => {
                         </TableCell>
                         <TableCell className="border-b ">{subSubItem.nama_menu}</TableCell>
                         <TableCell className="border-b">
-                          <Switch checked={subSubItem.status == 'Y'} />
+                          <ButtonActiveMenu data={subSubItem} />
                         </TableCell>
                         <TableCell className="border-b">
                           <ButtonAddSubMenu

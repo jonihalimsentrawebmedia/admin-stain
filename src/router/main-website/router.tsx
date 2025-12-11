@@ -31,6 +31,12 @@ import { UpdatedImpactInnovationPage } from '@/pages/modules/website-utama/publi
 import { DetailImpactInnovationPage } from '@/pages/modules/website-utama/public-content/impact-innovation/detail'
 import { StructureOrganizationPage } from '@/pages/modules/website-utama/public-content/structure-organization'
 import CalendarAcademicView from '@/pages/modules/website-utama/calendar-academic/CalendarAcademicView'
+import CalendarAcademicDetailView from '@/pages/modules/website-utama/calendar-academic/detail/CalendarAcademicDetailView'
+import DetailActivityView from '@/pages/modules/website-utama/calendar-academic/detail-activity/DetailActivityView'
+import LogAcademicYear from '@/pages/modules/website-utama/calendar-academic/log/LogAcademicYear'
+import LogActivityView from '@/pages/modules/website-utama/calendar-academic/log/LogActivityView'
+import LogActivityDetailView from '@/pages/modules/website-utama/calendar-academic/log/LogActivityDetailView'
+import CalendarAcademicBackgroundView from '@/pages/modules/website-utama/calendar-academic/background/CalendarAcademicBackgroundView'
 
 export const MainWebsiteRouter = [
   {
@@ -251,6 +257,50 @@ export const MainWebsiteRouter = [
       {
         index: true,
         element: <CalendarAcademicView />,
+      },
+      {
+        path: 'background',
+        element: <CalendarAcademicBackgroundView />,
+      },
+      {
+        path: ':idAcademicYear',
+        children: [
+          {
+            index: true,
+            element: <CalendarAcademicDetailView />,
+          },
+          {
+            path: 'log',
+            element: <LogAcademicYear />,
+          },
+
+          {
+            path: 'detail-activity',
+            children: [
+              {
+                index: true,
+                element: <DetailActivityView />,
+              },
+              {
+                path: ':idActivity',
+                children: [
+                  {
+                    index: true,
+                    element: <DetailActivityView />,
+                  },
+                  {
+                    path: 'log',
+                    element: <LogActivityView />,
+                  },
+                  {
+                    path: 'log-detail/:idActivityDetail',
+                    element: <LogActivityDetailView />,
+                  },
+                ],
+              },
+            ],
+          },
+        ],
       },
     ],
   },

@@ -1,12 +1,12 @@
 import type { ColumnDef } from '@tanstack/react-table'
-import { Link,  useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import type { ServicesList } from './model'
 import { MdOpenInNew } from 'react-icons/md'
-import { Switch } from '@/components/ui/switch'
-import { Label } from '@/components/ui/label'
+
 import { History } from 'lucide-react'
 import ButtonEditServices from './components/ButtonEditServices'
 import ButtonDeleteServices from './components/ButtonDeleteServices'
+import ButtonActiveServices from './components/ButtonActiveServices'
 
 const ServicesViewModel = () => {
   const [searchParams] = useSearchParams()
@@ -46,14 +46,7 @@ const ServicesViewModel = () => {
       accessorKey: 'header',
       header: 'Posisi Header',
       cell: ({ row }) => {
-        return (
-          <div className="flex items-center flex-col space-x-2">
-            <Switch checked={row.original.header == 'Y'} id="airplane-mode" />
-            <Label htmlFor="airplane-mode">
-              {row.original.header == 'Y' ? 'Aktif' : 'Tidak Aktif'}
-            </Label>
-          </div>
-        )
+        return <ButtonActiveServices data={row.original} name="header" />
       },
     },
 
@@ -61,28 +54,14 @@ const ServicesViewModel = () => {
       accessorKey: 'slider',
       header: 'Posisi Bawah Slider',
       cell: ({ row }) => {
-        return (
-          <div className="flex items-center flex-col space-x-2">
-            <Switch checked={row.original.slider == 'Y'} id="airplane-mode" />
-            <Label htmlFor="airplane-mode">
-              {row.original.slider == 'Y' ? 'Aktif' : 'Tidak Aktif'}
-            </Label>
-          </div>
-        )
+        return <ButtonActiveServices data={row.original} name="slider" />
       },
     },
     {
       accessorKey: 'footer',
       header: 'Posisi Footer',
       cell: ({ row }) => {
-        return (
-          <div className="flex items-center flex-col space-x-2">
-            <Switch checked={row.original.footer == 'Y'} id="airplane-mode" />
-            <Label htmlFor="airplane-mode">
-              {row.original.footer == 'Y' ? 'Aktif' : 'Tidak Aktif'}
-            </Label>
-          </div>
-        )
+        return <ButtonActiveServices data={row.original} name="footer" />
       },
     },
     {
@@ -92,7 +71,6 @@ const ServicesViewModel = () => {
         return (
           <Link
             to={`/modules/website-utama/services/${row.original.id_layanan}/log`}
-       
             className="border border-[#2769CD] px-4 py-2 text-[#2769CD] rounded-lg flex gap-2 items-center"
           >
             <History className="text-[#2769CD] size-6" />
