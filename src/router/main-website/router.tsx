@@ -47,6 +47,14 @@ import StatisticView from '@/pages/modules/website-utama/statistic/StatisticView
 import AcreditationView from '@/pages/modules/website-utama/acreditation/AcreditationView'
 import LogStatisticView from '@/pages/modules/website-utama/statistic/log/LogStatisticView'
 import AcreditationBackgroundView from '@/pages/modules/website-utama/acreditation/background/AcreditationBackgroundView'
+import { GalleryVideoPage } from '@/pages/modules/website-utama/public-content/gallery/video'
+import { GalleryPhotoPage } from '@/pages/modules/website-utama/public-content/gallery/Foto'
+import { DataAlbumListPage } from '@/pages/modules/website-utama/public-content/gallery/Foto/data-album'
+import { AchievementPage } from '@/pages/modules/website-utama/public-content/achievement'
+import { CreatedAchievementPage } from '@/pages/modules/website-utama/public-content/achievement/created'
+import { UpdatedAchievementPage } from '@/pages/modules/website-utama/public-content/achievement/updated'
+import { DetailAchievementPage } from '@/pages/modules/website-utama/public-content/achievement/detail'
+import { LogActivityPage } from '@/pages/modules/website-utama/public-content/slider/top-slider/log'
 
 export const MainWebsiteRouter = [
   {
@@ -86,6 +94,10 @@ export const MainWebsiteRouter = [
               {
                 path: 'edit/:id',
                 element: <UpdatedTopSliderPage />,
+              },
+              {
+                path: 'log/:id',
+                element: <LogActivityPage />,
               },
             ],
           },
@@ -223,6 +235,54 @@ export const MainWebsiteRouter = [
           {
             path: 'detail/:id',
             element: <DetailFacilitiesPage />,
+          },
+        ],
+      },
+      {
+        path: 'gallery',
+        children: [
+          {
+            path: 'photo',
+            children: [
+              {
+                index: true,
+                element: <GalleryPhotoPage />,
+              },
+              {
+                path: 'album/:id',
+                element: <DataAlbumListPage />,
+              },
+            ],
+          },
+          {
+            path: 'video',
+            children: [
+              {
+                index: true,
+                element: <GalleryVideoPage />,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: 'achievement',
+        children: [
+          {
+            index: true,
+            element: <AchievementPage />,
+          },
+          {
+            path: 'add',
+            element: <CreatedAchievementPage />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedAchievementPage />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailAchievementPage />,
           },
         ],
       },

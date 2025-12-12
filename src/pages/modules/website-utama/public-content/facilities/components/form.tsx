@@ -35,7 +35,12 @@ export const FormFacilities = (props: props) => {
             ]}
           />
 
-          <UploadImageRatio form={form} name={'gambar'} />
+          <UploadImageRatio
+            required
+            label={'Gambar Utama (Ukuran 4:3)'}
+            form={form}
+            name={'gambar'}
+          />
 
           <TextInput
             form={form}

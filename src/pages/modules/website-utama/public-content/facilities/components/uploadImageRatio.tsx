@@ -10,10 +10,11 @@ interface props {
   name: string
   form: any
   label?: string
+  required?: boolean
 }
 
 export const UploadImageRatio = (props: props) => {
-  const { placeholder, name, form } = props
+  const { placeholder, name, form, label, required } = props
 
   const refButton = useRef<any | null>(null)
 
@@ -45,7 +46,7 @@ export const UploadImageRatio = (props: props) => {
     <>
       <div>
         <label>
-          Gambar Utama (Ukuran 4:3) <span className={'text-red-500'}>*</span>
+          {label} {required && <span className={'text-red-500'}>*</span>}
         </label>
         <input type="file" hidden ref={refButton} onChange={(e) => HandleUpload(e.target.files)} />
 
@@ -54,7 +55,10 @@ export const UploadImageRatio = (props: props) => {
             <div className={'flex absolute top-1 right-1 gap-1.5'}>
               <button
                 className={'bg-yellow-500 text-white hover:bg-yellow-600 rounded p-1.5'}
-                onClick={() => refButton.current.click()}
+                onClick={(e) => {
+                  e.preventDefault()
+                  refButton.current.click()
+                }}
               >
                 <HiPencil />
               </button>
@@ -74,15 +78,26 @@ export const UploadImageRatio = (props: props) => {
             />
           </div>
         ) : (
-          <div
-            onClick={() => refButton.current.click()}
-            className={`flex flex-col gap-1.5 text-center hover:cursor-pointer border border-primary text-primary rounded w-[300px] h-[225px] justify-center items-center`}
-          >
-            <BiSolidImageAdd className="text-primary size-8" />
-            <p className="text-sm">{placeholder ?? 'Upload Pas Foto'}</p>
-            <p className={'text-sm text-gray-500'}>Max 2MB</p>
-            <p className={'text-sm text-gray-500'}>PNG, JPG, JPEG</p>
-          </div>
+          <>
+            <div
+              onClick={() => refButton.current.click()}
+              className={`
+            ${form.formState.errors[name] ? 'border-red-500' : ''}
+            flex flex-col gap-1.5 text-center hover:cursor-pointer border
+             border-primary text-primary rounded w-[300px] h-[225px] justify-center items-center
+            `}
+            >
+              <BiSolidImageAdd className="text-primary size-8" />
+              <p className={`text-sm ${form.formState.errors[name] ? 'text-red-500' : ''}`}>
+                {placeholder ?? 'Upload Pas Foto'}
+              </p>
+              <p className={'text-sm text-gray-500'}>Max 2MB</p>
+              <p className={'text-sm text-gray-500'}>PNG, JPG, JPEG</p>
+            </div>
+            {form.formState.errors[name] && (
+              <p className={'text-red-500 text-sm'}>{form.formState.errors[name].message}</p>
+            )}
+          </>
         )}
       </div>
     </>
