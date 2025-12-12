@@ -1,0 +1,79 @@
+import { useEffect, useState } from 'react'
+import type { Meta } from '@/components/common/table/TablePagination.tsx'
+import { useSearchParams } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
+import AxiosClient from '@/provider/axios.tsx'
+import type { IAchievementDetail } from '../data/index.tsx'
+
+export const UseGetAchievement = () => {
+  const [listAchievement, setListAchievement] = useState<IAchievementDetail[]>([])
+  const [meta, setMeta] = useState<Meta>()
+
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search')
+  const status = searchParams.get('status')
+
+  const ParamsSearch = new URLSearchParams({ page, limit })
+  if (search) ParamsSearch.append('search', search)
+  if (status) ParamsSearch.append('status-publish', status)
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['list-achievement', ParamsSearch.toString()],
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get(`/website-utama/prestasi?${ParamsSearch}`).then((res) => res.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setListAchievement(data?.data ?? [])
+      setMeta(data?.meta)
+    }
+  }, [data])
+
+  return { listAchievement, loading, meta }
+}
+
+export const UseGetAchievementDetail = (id: string) => {
+  const [detailAchievement, setDetailAchievement] = useState<IAchievementDetail>()
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['detail-achievement', id],
+    refetchOnWindowFocus: false,
+    queryFn: () => AxiosClient.get(`/website-utama/prestasi/${id}`).then((res) => res.data.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setDetailAchievement(data)
+    }
+  }, [data])
+
+  return { detailAchievement, loading }
+}
+
+export const UseGetAchievementStatus = () => {
+  const [status, setStatus] = useState<any>()
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['status-achievement'],
+    refetchOnWindowFocus: false,
+    queryFn: () => AxiosClient.get('/website-utama/prestasi/status').then((res) => res.data.data),
+  })
+
+  useEffect(() => {
+    if (data) {
+      setStatus(data)
+    }
+  }, [data])
+
+  const loading = isLoading || isFetching
+
+  return { status, loading }
+}

@@ -3,14 +3,15 @@ import { ButtonAddPlaceman } from '@/pages/modules/website-utama/public-content/
 import { UseGetPlacemanUser } from '@/pages/modules/website-utama/public-content/structure-organization/Placeman-user/hooks'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsUserPlaceman } from './data/columns'
+import { useParams } from 'react-router-dom'
 
 export const PlacemenUser = () => {
-  const { meta, loading, listUserPlaceman } = UseGetPlacemanUser()
+  const { id } = useParams()
+  const { meta, loading, listUserPlaceman } = UseGetPlacemanUser(id ?? '')
   const columns = ColumnsUserPlaceman()
 
   return (
-    <div
-     className={'flex flex-col gap-y-8'}>
+    <div className={'flex flex-col gap-y-8'}>
       <ButtonTitleGroup
         isBack
         label={'Daftar Pejabat - Rektorat'}

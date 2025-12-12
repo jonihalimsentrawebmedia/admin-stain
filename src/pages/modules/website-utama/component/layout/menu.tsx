@@ -70,6 +70,27 @@ export const MENULIST = [
         name: 'Fasilitas',
         path: `${baseDomain}/public-content/facilities`,
       },
+      {
+        id: 8,
+        name: 'Galeri',
+        child: [
+          {
+            id: 1,
+            name: 'Galeri Video',
+            path: `${baseDomain}/public-content/gallery/video`,
+          },
+          {
+            id: 2,
+            name: 'Galeri Foto',
+            path: `${baseDomain}/public-content/gallery/photo`,
+          },
+        ],
+      },
+      {
+        id: 9,
+        name: 'Prestasi',
+        path: `${baseDomain}/public-content/achievement`,
+      },
     ],
   },
   {

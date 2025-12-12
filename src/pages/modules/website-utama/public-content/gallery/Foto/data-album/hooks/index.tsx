@@ -3,10 +3,10 @@ import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useSearchParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
-import type { IPlacemanUser } from '../data/index'
+import type { IGalleryPhoto } from '../data/index'
 
-export const UseGetPlacemanUser = (id: string) => {
-  const [listUserPlaceman, setListUserPlaceman] = useState<IPlacemanUser[]>([])
+export const UseGetGalleryAlbum = (id: string) => {
+  const [galleryAlbum, setGalleryAlbum] = useState<IGalleryPhoto[]>([])
   const [meta, setMeta] = useState<Meta>()
 
   const [searchParams] = useSearchParams()
@@ -16,23 +16,23 @@ export const UseGetPlacemanUser = (id: string) => {
 
   const ParamsSearch = new URLSearchParams({ page, limit })
   if (search) ParamsSearch.append('search', search)
-  if (id) ParamsSearch.append('id_kelompok_organisasi', id ?? '')
+  if (id) ParamsSearch.append('id_album', id)
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['list-placeman', ParamsSearch.toString()],
+    queryKey: ['list-photo', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get(`/website-utama/pejabat?${ParamsSearch}`).then((res) => res.data),
+      AxiosClient.get(`/website-utama/galeri-foto?${ParamsSearch}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching
 
   useEffect(() => {
     if (data) {
-      setListUserPlaceman(data?.data ?? [])
+      setGalleryAlbum(data?.data ?? [])
       setMeta(data?.meta)
     }
   }, [data])
 
-  return { listUserPlaceman, loading, meta }
+  return { galleryAlbum, loading, meta }
 }
