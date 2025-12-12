@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form'
-import { AcademicYearResolver, type IAcademicYearTypeForm } from '../model/resolver'
+import { AcreditationResolver, type IAcreditationTypeForm } from '../model/resolver'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
@@ -8,26 +8,28 @@ import { toast } from 'react-toastify'
 import { Button } from '@/components/ui/button'
 import { Plus } from 'lucide-react'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom'
-import AcademicYearForm from './AcademicYearForm'
+import AcreditationForm from './AcreditationForm'
 
-const ButtonAddAcademicYear = () => {
-  const form = useForm<IAcademicYearTypeForm>({
-    resolver: zodResolver(AcademicYearResolver),
+const ButtonAddAcreditation = () => {
+  const form = useForm<IAcreditationTypeForm>({
+    resolver: zodResolver(AcreditationResolver),
   })
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
   const queryClient = useQueryClient()
 
-  const handleSave = async (e: IAcademicYearTypeForm) => {
+  const handleSave = async (e: IAcreditationTypeForm) => {
     setLoading(true)
-    await AxiosClient.post('/website-utama/tahun-akademik', {
+    await AxiosClient.post('/website-utama/akreditas', {
       ...e,
+      akhir_berlaku: new Date(e.akhir_berlaku).toISOString(),
+      mulai_berlaku: new Date(e.mulai_berlaku).toISOString(),
     })
       .then((res) => {
         if (res.data.status) {
           queryClient.invalidateQueries({
-            queryKey: ['list-acedemic-year'],
+            queryKey: ['list-acreditation'],
           })
           setOpen(false)
           setLoading(false)
@@ -57,9 +59,9 @@ const ButtonAddAcademicYear = () => {
         open={open}
         className={'rounded min-w-xs lg:min-w-2xl'}
         setOpen={setOpen}
-        title={'Tambah Tahun Akademik'}
+        title={'Tambah Akreditasi'}
       >
-        <AcademicYearForm
+        <AcreditationForm
           form={form}
           loading={loading}
           handleSave={handleSave}
@@ -72,4 +74,4 @@ const ButtonAddAcademicYear = () => {
   )
 }
 
-export default ButtonAddAcademicYear
+export default ButtonAddAcreditation

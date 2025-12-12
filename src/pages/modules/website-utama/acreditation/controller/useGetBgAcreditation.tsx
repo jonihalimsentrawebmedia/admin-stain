@@ -1,20 +1,19 @@
-import { useQuery } from "@tanstack/react-query"
-import type { ImageCalendarAcademic } from "../background/CalendarAcademicBackgroundView"
-import AxiosClient from "@/provider/axios"
 import { useEffect, useState } from "react"
+import type { ImageCalendarAcademic } from "../../calendar-academic/background/CalendarAcademicBackgroundView"
+import { useQuery } from "@tanstack/react-query"
+import AxiosClient from "@/provider/axios"
 
-
-const useGetBgCalendarAcademic = () => {
-const [background, setBackground] = useState<ImageCalendarAcademic[]>([])
+const useGetBgAcreditation = () => {
+ const [background, setBackground] = useState<ImageCalendarAcademic[]>([])
 
 
 
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['bg-calendar-academic'],
+    queryKey: ['bg-acreditation'],
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get(`/website-utama/tahun-akademik-background`).then(
+      AxiosClient.get(`/website-utama/akreditas-background`).then(
         (res) => res.data
       ),
   })
@@ -31,4 +30,4 @@ const [background, setBackground] = useState<ImageCalendarAcademic[]>([])
   return {  loading, background }
 }
 
-export default useGetBgCalendarAcademic
+export default useGetBgAcreditation

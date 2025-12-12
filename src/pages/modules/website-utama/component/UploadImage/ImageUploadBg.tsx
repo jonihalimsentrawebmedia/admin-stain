@@ -6,12 +6,12 @@ import { toast } from 'react-toastify'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Skeleton } from '@/components/ui/skeleton'
 import ButtonDelete from '@/components/common/button/ButtonDelete'
+import { useQueryClient } from '@tanstack/react-query'
 
 export interface ImageDataUploader {
   gambar: string
   urutan: number
   status: 'Y' | 'N'
- 
 }
 interface Props {
   data: ImageDataUploader
@@ -19,14 +19,22 @@ interface Props {
   handleSave: (value: ImageDataUploader) => void
   handleChecked: (value: boolean) => void
   urlBg: string
-  urlBgDelete:string
-  keyUrl:string
+  urlBgDelete: string
+  keyUrl: string
 }
-export default function ImageUploader({ data, handleSave, index, handleChecked, urlBg,keyUrl,urlBgDelete }: Props) {
+export default function ImageUploader({
+  data,
+
+  index,
+  handleChecked,
+  urlBg,
+  keyUrl,
+  urlBgDelete,
+}: Props) {
   const [preview, setPreview] = useState<string | null>()
   const [loading, setLoading] = useState(false)
   const fileRef = useRef<HTMLInputElement | null>(null)
-
+  const queryClient = useQueryClient()
   const handleFile = async (file: File | undefined) => {
     if (!file) return
 
@@ -46,9 +54,10 @@ export default function ImageUploader({ data, handleSave, index, handleChecked, 
         ])
         if (resBg.data.status) {
           toast.success(resBg.data.message)
-          handleSave({
-            ...data,
+          await queryClient.invalidateQueries({
+            queryKey: [keyUrl],
           })
+
           setPreview(res.data.url)
         }
       }

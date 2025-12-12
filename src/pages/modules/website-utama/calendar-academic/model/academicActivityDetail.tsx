@@ -13,4 +13,6 @@ export interface ActivityDetail {
     tahun_akademik: number;
     semester: 'GANJIL' | 'GENAP' | string;
     nama_tahun_akademik_kegiatan: string;
+    nama_user_created:string,
+    nama_user_updated:string
 }

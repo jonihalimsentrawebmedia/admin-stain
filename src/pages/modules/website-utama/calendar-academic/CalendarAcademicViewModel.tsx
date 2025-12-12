@@ -1,11 +1,12 @@
 import type { ColumnDef } from '@tanstack/react-table'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import type { AcademicYearList } from './model'
 import { FastForward, History } from 'lucide-react'
 import ButtonEditAcademicYear from './components/ButtonEditAcademicYear'
 import ButtonDeleteAcademicYear from './components/ButtonDeleteAcademicYear'
 
 const CalendarAcademicViewModel = () => {
+  const navigate=useNavigate()
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') ?? 1)
   const limit = Number(searchParams.get('limit') ?? 10)
@@ -76,7 +77,10 @@ const CalendarAcademicViewModel = () => {
     },
   ]
 
-  return { columns }
+  function goToBackground(){
+    navigate('background')
+  }
+  return { columns,goToBackground }
 }
 
 export default CalendarAcademicViewModel

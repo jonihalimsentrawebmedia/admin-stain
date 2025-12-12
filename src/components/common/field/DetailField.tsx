@@ -9,11 +9,12 @@ interface Props {
   form: UseFormReturn<any>;
   isRow?: boolean;
   isRowParent?: boolean;
+  classNameParent?:string
 }
-const DetailField = ({ data, form, isRow = true, isRowParent }: Props) => {
+const DetailField = ({ data, form, isRow = true, isRowParent ,classNameParent}: Props) => {
   return (
     <div
-      className={`flex ${isRowParent ? "flex-row" : "flex-col"} gap-4
+      className={`flex ${isRowParent ? "flex-row" : "flex-col"} gap-4 ${classNameParent}
     `}
     >
       {data.map((item) => (

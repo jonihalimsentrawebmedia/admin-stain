@@ -24,7 +24,7 @@ const useGetLogAcademicActivity = () => {
 
   useEffect(() => {
     if (data) {
-      setLog(data?.data)
+      setLog(data?.data??[])
       setMeta(data?.meta)
     }
   }, [data])

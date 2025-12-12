@@ -42,6 +42,11 @@ import { FacilitiesPage } from '@/pages/modules/website-utama/public-content/fac
 import { CreatedFacilitiesPage } from '@/pages/modules/website-utama/public-content/facilities/created'
 import { UpdatedFacilitiesPage } from '@/pages/modules/website-utama/public-content/facilities/updated'
 import { DetailFacilitiesPage } from '@/pages/modules/website-utama/public-content/facilities/detail'
+import StatisticView from '@/pages/modules/website-utama/statistic/StatisticView'
+
+import AcreditationView from '@/pages/modules/website-utama/acreditation/AcreditationView'
+import LogStatisticView from '@/pages/modules/website-utama/statistic/log/LogStatisticView'
+import AcreditationBackgroundView from '@/pages/modules/website-utama/acreditation/background/AcreditationBackgroundView'
 
 export const MainWebsiteRouter = [
   {
@@ -332,6 +337,33 @@ export const MainWebsiteRouter = [
           },
         ],
       },
+    ],
+  },
+  {
+    path: 'statistic',
+
+    children: [
+      {
+        index: true,
+        element: <StatisticView />,
+      },
+      {
+        path: 'log',
+        element: <LogStatisticView />,
+      },
+    ],
+  },
+  {
+    path: 'acreditation',
+    children: [
+      {
+        index: true,
+        element: <AcreditationView />,
+      },
+      {
+        path:"background",
+        element:<AcreditationBackgroundView/>
+      }
     ],
   },
 ]

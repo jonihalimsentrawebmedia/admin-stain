@@ -4,14 +4,14 @@ import useGetLogAcademicActivity from '../controller/useGetLogAcademicActivity'
 import TableCustom from '@/components/common/table/TableCustom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
 import type { ColumnDef } from '@tanstack/react-table'
-import type { LogActivity } from '../model'
+import type { LogStatistic } from '../../statistic/model'
 
 const LogActivityView = () => {
   const { activity } = useGetAcademicYearActivityDetail()
   const { log } = useGetLogAcademicActivity()
   const createdAt = formatDateTime(activity?.created_at ?? null)
   const updatedAt = formatDateTime(activity?.updated_at ?? null)
-  const columns: ColumnDef<LogActivity>[] = [
+  const columns: ColumnDef<LogStatistic>[] = [
     {
       accessorKey: 'No',
       header: '#',
@@ -21,14 +21,14 @@ const LogActivityView = () => {
       },
     },
     {
-      accessorKey: 'fieldname',
+      accessorKey: 'jenis_data',
       header: 'Jenis Data',
     },
     {
-      accessorKey: 'created_at',
+      accessorKey: 'diubah_pada',
       header: 'Diperbaharui Oleh',
       cell: ({ row }) => {
-        const createdAt = formatDateTime(row.original.created_at)
+        const createdAt = formatDateTime(row.original.diubah_pada)
         return (
           <div>
             {row.original.nama_user},
@@ -41,17 +41,12 @@ const LogActivityView = () => {
       },
     },
     {
-      accessorKey: 'old_data',
+      accessorKey: 'data_lama',
       header: 'Data Sebelumnya',
     },
     {
-      accessorKey: 'new_data',
+      accessorKey: 'data_baru',
       header: 'Data Hasil Perubahan',
-      cell: (row) => {
-        return (
-          <div className="whitespace-pre-line">{JSON.stringify(row.row.original.new_data)}</div>
-        )
-      },
     },
   ]
   return (
@@ -78,13 +73,13 @@ const LogActivityView = () => {
         <div>
           <div className="text-[#999999] text-sm">Diposting Oleh</div>
           <div className=" ">
-            {activity?.updated_user} {createdAt.date} , {createdAt.time}
+            {activity?.nama_user_created} {createdAt.date} , {createdAt.time}
           </div>
         </div>
         <div>
           <div className="text-[#999999] text-sm">Diperbaharui Oleh</div>
           <div className=" ">
-            {activity?.updated_user} {updatedAt.date} , {updatedAt.time}
+            {activity?.nama_user_updated} {updatedAt.date} , {updatedAt.time}
           </div>
         </div>
       </div>

@@ -2,58 +2,53 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
 import useGetCalendarAcademicDetail from '../controller/useGetCalendarAcademicDetail'
 import { formatDateTime } from '@/utils/date'
 import type { ColumnDef } from '@tanstack/react-table'
-import type { LogActivity } from '../model'
 import TableCustom from '@/components/common/table/TableCustom'
 import useGetLogAcademicYear from '../controller/useGetLogAcademicYear'
+import type { LogStatistic } from '../../statistic/model'
 
 const LogAcademicYear = () => {
   const { academicYear } = useGetCalendarAcademicDetail()
   const { log } = useGetLogAcademicYear()
   const createdAt = formatDateTime(academicYear?.created_at ?? null)
   const updatedAt = formatDateTime(academicYear?.updated_at ?? null)
-  const columns: ColumnDef<LogActivity>[] = [
-    {
-      accessorKey: 'No',
-      header: '#',
-      cell: ({ row }) => {
-        const i = row?.index
-        return <>{i + 1}</>
-      },
-    },
-    {
-      accessorKey: 'fieldname',
-      header: 'Jenis Data',
-    },
-    {
-      accessorKey: 'created_at',
-      header: 'Diperbaharui Oleh',
-      cell: ({ row }) => {
-        const createdAt = formatDateTime(row.original.created_at)
-        return (
-          <div>
-            {row.original.nama_user},
-            <br />
-            <span className="text-primary">
-              {createdAt.date}, {createdAt.time}
-            </span>
-          </div>
-        )
-      },
-    },
-    {
-      accessorKey: 'old_data',
-      header: 'Data Sebelumnya',
-    },
-    {
-      accessorKey: 'new_data',
-      header: 'Data Hasil Perubahan',
-      cell: (row) => {
-        return (
-          <div className="whitespace-pre-line">{JSON.stringify(row.row.original.new_data)}</div>
-        )
-      },
-    },
-  ]
+   const columns: ColumnDef<LogStatistic>[] = [
+     {
+       accessorKey: 'No',
+       header: '#',
+       cell: ({ row }) => {
+         const i = row?.index
+         return <>{i + 1}</>
+       },
+     },
+     {
+       accessorKey: 'jenis_data',
+       header: 'Jenis Data',
+     },
+     {
+       accessorKey: 'diubah_pada',
+       header: 'Diperbaharui Oleh',
+       cell: ({ row }) => {
+         const createdAt = formatDateTime(row.original.diubah_pada)
+         return (
+           <div>
+             {row.original.nama_user},
+             <br />
+             <span className="text-primary">
+               {createdAt.date}, {createdAt.time}
+             </span>
+           </div>
+         )
+       },
+     },
+     {
+       accessorKey: 'data_lama',
+       header: 'Data Sebelumnya',
+     },
+     {
+       accessorKey: 'data_baru',
+       header: 'Data Hasil Perubahan',
+     },
+   ]
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup buttonGroup={[]} label="Log Data - Statistik" isBack />
@@ -76,13 +71,13 @@ const LogAcademicYear = () => {
         <div>
           <div className="text-[#999999] text-sm">Diposting Oleh</div>
           <div className=" ">
-            {academicYear?.updated_user} {createdAt.date} , {createdAt.time}
+            {academicYear?.nama_user_created} {createdAt.date} , {createdAt.time}
           </div>
         </div>
         <div>
           <div className="text-[#999999] text-sm">Diperbaharui Oleh</div>
           <div className=" ">
-            {academicYear?.updated_user} {updatedAt.date} , {updatedAt.time}
+            {academicYear?.nama_user_updated} {updatedAt.date} , {updatedAt.time}
           </div>
         </div>
       </div>

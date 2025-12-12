@@ -1,18 +1,17 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
-import CalendarAcademicViewModel from './CalendarAcademicViewModel'
-import useGetCalendarAcademic from './controller/useGetCalendarAcademic'
+import useGetAcreditation from './controller/useGetAcreditation'
+import AcreditationViewModel from './AcreditationViewModel'
 import TableCustom from '@/components/common/table/TableCustom'
-import SelectFilter from '@/components/common/filter/SelectFilter'
-import ButtonAddAcademicYear from './components/ButtonAddAcademicYear'
-import useGetBgCalendarAcademic from './controller/useGetBgCalendarAcademic'
+import ButtonAddAcreditation from './components/ButtonAddAcreditation'
+import useGetBgAcreditation from './controller/useGetBgAcreditation'
 import { Button } from '@/components/ui/button'
 import { IoWarning } from 'react-icons/io5'
 import { Image } from 'lucide-react'
 
-const CalendarAcademicView = () => {
-  const { columns, goToBackground } = CalendarAcademicViewModel()
-  const { academicYearList, loading, meta } = useGetCalendarAcademic()
-  const { background } = useGetBgCalendarAcademic()
+const AcreditationView = () => {
+  const { loading, meta, acreditationList } = useGetAcreditation()
+  const { columns, goToBackground } = AcreditationViewModel()
+  const { background } = useGetBgAcreditation()
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
@@ -46,27 +45,15 @@ const CalendarAcademicView = () => {
             label: '',
             onClick: () => {},
             type: 'add',
-            element: <ButtonAddAcademicYear />,
+            element: <ButtonAddAcreditation />,
           },
         ]}
-        label="Kalender Akademik"
+        label="Akreditasi"
       />
       <TableCustom
-        addFilter={
-          <SelectFilter
-            selectClassName={'min-w-[8rem]'}
-            label="Tampilkan"
-            name={'limit'}
-            options={[
-              { label: '10 Data', value: '10' },
-              { label: '25 Data', value: '25' },
-              { label: '50 Data', value: '50' },
-              { label: '100 Data', value: '100' },
-            ]}
-          />
-        }
+        tdClassName="whitespace-pre-line"
         columns={columns}
-        data={academicYearList}
+        data={acreditationList}
         loading={loading}
         meta={meta}
       />
@@ -74,4 +61,4 @@ const CalendarAcademicView = () => {
   )
 }
 
-export default CalendarAcademicView
+export default AcreditationView

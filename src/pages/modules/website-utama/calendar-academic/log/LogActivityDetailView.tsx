@@ -2,9 +2,9 @@ import { formatDateTime } from '@/utils/date'
 import useGetActivityDetail from '../controller/useGetActivityDetail'
 import useGetLogAcademicActivityDetail from '../controller/useGetLogAcademicActivityDetail'
 import type { ColumnDef } from '@tanstack/react-table'
-import type { LogActivity } from '../model'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
 import TableCustom from '@/components/common/table/TableCustom'
+import type { LogStatistic } from '../../statistic/model'
 
 const LogActivityDetailView = () => {
   const { activityDetail } = useGetActivityDetail()
@@ -13,7 +13,7 @@ const LogActivityDetailView = () => {
   const updatedAt = formatDateTime(activityDetail?.updated_at ?? null)
   const startAt = formatDateTime(activityDetail?.tanggal_mulai ?? null)
   const endAt = formatDateTime(activityDetail?.tanggal_selesai ?? null)
-  const columns: ColumnDef<LogActivity>[] = [
+  const columns: ColumnDef<LogStatistic>[] = [
     {
       accessorKey: 'No',
       header: '#',
@@ -23,14 +23,14 @@ const LogActivityDetailView = () => {
       },
     },
     {
-      accessorKey: 'fieldname',
+      accessorKey: 'jenis_data',
       header: 'Jenis Data',
     },
     {
-      accessorKey: 'created_at',
+      accessorKey: 'diubah_pada',
       header: 'Diperbaharui Oleh',
       cell: ({ row }) => {
-        const createdAt = formatDateTime(row.original.created_at)
+        const createdAt = formatDateTime(row.original.diubah_pada)
         return (
           <div>
             {row.original.nama_user},
@@ -43,17 +43,12 @@ const LogActivityDetailView = () => {
       },
     },
     {
-      accessorKey: 'old_data',
+      accessorKey: 'data_lama',
       header: 'Data Sebelumnya',
     },
     {
-      accessorKey: 'new_data',
+      accessorKey: 'data_baru',
       header: 'Data Hasil Perubahan',
-      cell: (row) => {
-        return (
-          <div className="whitespace-pre-line">{JSON.stringify(row.row.original.new_data)}</div>
-        )
-      },
     },
   ]
   return (
@@ -80,13 +75,13 @@ const LogActivityDetailView = () => {
         <div>
           <div className="text-[#999999] text-sm">Diposting Oleh</div>
           <div className=" ">
-            {activityDetail?.updated_user} {createdAt.date} , {createdAt.time}
+            {activityDetail?.nama_user_created} {createdAt.date} , {createdAt.time}
           </div>
         </div>
         <div>
           <div className="text-[#999999] text-sm">Diperbaharui Oleh</div>
           <div className=" ">
-            {activityDetail?.updated_user} {updatedAt.date} , {updatedAt.time}
+            {activityDetail?.nama_user_updated} {updatedAt.date} , {updatedAt.time}
           </div>
         </div>
       </div>

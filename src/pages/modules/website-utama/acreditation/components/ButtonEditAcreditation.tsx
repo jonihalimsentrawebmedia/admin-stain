@@ -1,33 +1,40 @@
 import { useForm } from 'react-hook-form'
-import { AcademicYearResolver, type IAcademicYearTypeForm } from '../model/resolver'
+import type { AcreditationList } from '../model'
+import { AcreditationResolver, type IAcreditationTypeForm } from '../model/resolver'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
-import { Button } from '@/components/ui/button'
-import { Plus } from 'lucide-react'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom'
-import AcademicYearForm from './AcademicYearForm'
+import AcreditationForm from './AcreditationForm'
+import { IconEdit } from '@/components/common/table/icon'
+import { formatDateTime } from '@/utils/date'
 
-const ButtonAddAcademicYear = () => {
-  const form = useForm<IAcademicYearTypeForm>({
-    resolver: zodResolver(AcademicYearResolver),
+interface Props {
+  data: AcreditationList
+}
+
+const ButtonEditAcreditation = ({ data }: Props) => {
+  const form = useForm<IAcreditationTypeForm>({
+    resolver: zodResolver(AcreditationResolver),
   })
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
   const queryClient = useQueryClient()
 
-  const handleSave = async (e: IAcademicYearTypeForm) => {
+  const handleSave = async (e: IAcreditationTypeForm) => {
     setLoading(true)
-    await AxiosClient.post('/website-utama/tahun-akademik', {
+    await AxiosClient.put(`/website-utama/akreditas/${data.id_akreditas}`, {
       ...e,
+      akhir_berlaku: new Date(e.akhir_berlaku).toISOString(),
+      mulai_berlaku: new Date(e.mulai_berlaku).toISOString(),
     })
       .then((res) => {
         if (res.data.status) {
           queryClient.invalidateQueries({
-            queryKey: ['list-acedemic-year'],
+            queryKey: ['list-acreditation'],
           })
           setOpen(false)
           setLoading(false)
@@ -39,27 +46,31 @@ const ButtonAddAcademicYear = () => {
         setLoading(false)
       })
   }
-
+  const startAt = formatDateTime(data.mulai_berlaku)
+  const endAt = formatDateTime(data.akhir_berlaku)
+  console.log(startAt)
   return (
     <>
-      <Button
-        variant={'outline'}
+      <button
         onClick={() => {
           setOpen(true)
+          form.reset({
+            ...data,
+            akhir_berlaku: endAt.date.split('-').reverse().join('-'),
+            mulai_berlaku: startAt.date.split('-').reverse().join('-'),
+          })
         }}
-        className="border border-primary hover:text-primay text-primary"
       >
-        <Plus />
-        Tambah
-      </Button>
+        <IconEdit />
+      </button>
 
       <DialogCustom
         open={open}
         className={'rounded min-w-xs lg:min-w-2xl'}
         setOpen={setOpen}
-        title={'Tambah Tahun Akademik'}
+        title={'Edit Akreditasi'}
       >
-        <AcademicYearForm
+        <AcreditationForm
           form={form}
           loading={loading}
           handleSave={handleSave}
@@ -72,4 +83,4 @@ const ButtonAddAcademicYear = () => {
   )
 }
 
-export default ButtonAddAcademicYear
+export default ButtonEditAcreditation

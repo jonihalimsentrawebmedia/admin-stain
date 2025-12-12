@@ -90,10 +90,10 @@ export function DialogCustom({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent
-        className={cn('bg-white p-6 flex flex-col gap-4', className, backgroundColor)}
+        className={cn('bg-white p-6 flex flex-col gap-4 min-w-xs!', className, backgroundColor)}
         position={position}
         style={{
-          width: isAuto ? 'auto' : isMobile ? '90%' : width ? width : '30%',
+          width: isAuto ? 'auto' : isMobile ? '90%' : width ? width : '70%',
           height: height || 'auto',
           maxHeight: '90vh',
           overflowY: 'auto',

@@ -1,8 +1,11 @@
-import { MdDashboard } from 'react-icons/md'
+import { MdAddChart, MdDashboard } from 'react-icons/md'
 import { IoSchool } from 'react-icons/io5'
 import { TbWorld } from 'react-icons/tb'
 import { FaGear, FaGears } from 'react-icons/fa6'
 import { Calendar } from 'lucide-react'
+import { BiCertification, BiSolidCertification } from 'react-icons/bi'
+import { FaCertificate } from 'react-icons/fa'
+import { IconCertificate } from '@/components/common/icon'
 
 const baseDomain = '/modules/website-utama'
 
@@ -97,8 +100,20 @@ export const MENULIST = [
   },
   {
     id: 5,
+    name: 'Statistik',
+    path: `${baseDomain}/statistic`,
+    icon: <MdAddChart className={'size-5'} />,
+  },
+  {
+    id: 5,
     name: 'Kalender Akademik',
     path: `${baseDomain}/calendar-academic`,
     icon: <Calendar className={'size-5'} />,
+  },
+  {
+    id: 6,
+    name: 'Akreditasi',
+    path: `${baseDomain}/acreditation`,
+    icon: <IconCertificate  />,
   },
 ]
