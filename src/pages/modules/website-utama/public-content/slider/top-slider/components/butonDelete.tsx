@@ -49,7 +49,8 @@ export const ButonDeleteTopSlider = (props: Props) => {
         <FaTrash />
       </button>
       <DialogCustom
-        className={'rounded'}
+        isAuto
+        className={'rounded lg:max-w-2xl'}
         open={open}
         setOpen={setOpen}
         title={'Hapus Data Slider Atas?'}

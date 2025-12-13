@@ -1,14 +1,23 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { UseGetSliderDetail } from '@/pages/modules/website-utama/public-content/slider/top-slider/hooks'
+import {
+  UseGetLogData,
+  UseGetSliderDetail,
+} from '@/pages/modules/website-utama/public-content/slider/top-slider/hooks'
 import { Link, useParams } from 'react-router-dom'
 import { format } from 'date-fns'
+import TableCustom from '@/components/common/table/TableCustom.tsx'
+import { ColumnsLog } from '@/pages/modules/website-utama/public-content/slider/top-slider/create/data/columns.tsx'
 
 export const LogActivityPage = () => {
   const { id } = useParams()
   const { detailSlider } = UseGetSliderDetail(id ?? '')
+  const { logData } = UseGetLogData(id ?? '')
+  const columns = ColumnsLog()
+  
   return (
     <>
       <ButtonTitleGroup label={'Log Data'} buttonGroup={[]} isBack />
+      
       <div className={'flex items-start gap-x-8'}>
         <img
           src={detailSlider?.gambar}
@@ -49,6 +58,10 @@ export const LogActivityPage = () => {
           </p>
         </div>
       </div>
+
+      <p className="text-primary">History Perubahan Data</p>
+
+      <TableCustom data={logData} columns={columns} />
     </>
   )
 }

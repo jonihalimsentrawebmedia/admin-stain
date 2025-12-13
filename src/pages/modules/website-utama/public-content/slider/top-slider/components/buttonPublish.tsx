@@ -58,7 +58,8 @@ export const ButtonPublished = (props: Props) => {
       <DialogCustom
         open={open}
         setOpen={setOpen}
-        className={'rounded'}
+        isAuto
+        className={'rounded lg:max-w-2xl'}
         title={'Publish Slider'}
         description={'Apakah anda yakin untuk mempublish slider yang dipilih?'}
       >

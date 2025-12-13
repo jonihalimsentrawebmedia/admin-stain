@@ -59,7 +59,8 @@ export const ButtonApproved = (props: Props) => {
       <DialogCustom
         open={open}
         setOpen={setOpen}
-        className={'rounded'}
+        isAuto
+        className={'rounded lg:max-w-2xl'}
         title={'Ajukan Ke Editor?'}
         description={'Apakah anda yakin untuk mengajukan slider ini ke editor?'}
       >

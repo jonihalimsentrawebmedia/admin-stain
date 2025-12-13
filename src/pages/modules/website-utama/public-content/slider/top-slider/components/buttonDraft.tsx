@@ -56,8 +56,9 @@ export const ButtonDraft = (props: Props) => {
 
       <DialogCustom
         open={open}
+        isAuto
         setOpen={setOpen}
-        className={'rounded'}
+        className={'rounded lg:min-w-2xl'}
         title={'Kembali Ke Draft'}
         description={'Apakah anda yakin untuk mengembalikan berita yang diajukan ke draft?'}
       >

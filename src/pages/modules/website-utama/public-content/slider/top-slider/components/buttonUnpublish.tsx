@@ -58,7 +58,8 @@ export const ButtonUnPublished = (props: Props) => {
       <DialogCustom
         open={open}
         setOpen={setOpen}
-        className={'rounded'}
+        isAuto
+        className={'rounded lg:max-w-2xl'}
         title={'Unpublish Slider'}
         description={'Apakah anda yakin untuk Unpublish slider yang dipilih?'}
       >
