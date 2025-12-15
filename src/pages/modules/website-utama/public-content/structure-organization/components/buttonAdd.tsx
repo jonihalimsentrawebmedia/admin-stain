@@ -51,8 +51,19 @@ export const ButtonAddStructureOrganization = () => {
         Tambah Kelompok
       </Button>
 
-      <DialogCustom className={'rounded'} open={open} setOpen={setOpen} title={'Tambah Kelompok'}>
-        <FormStructureOrganization form={form} HandleSave={HandleSave} loading={loading} />
+      <DialogCustom
+        className={'rounded lg:max-w-lg'}
+        open={open}
+        setOpen={setOpen}
+        title={'Tambah Kelompok'}
+      >
+        <FormStructureOrganization
+          open={open}
+          setOpen={setOpen}
+          form={form}
+          HandleSave={HandleSave}
+          loading={loading}
+        />
       </DialogCustom>
     </>
   )

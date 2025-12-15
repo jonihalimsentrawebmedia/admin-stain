@@ -80,3 +80,24 @@ export const UseGetAnnouncementStatus = () => {
 
   return { status, loading }
 }
+
+export const UseGetLogAnnouncement = (id: string) => {
+  const [logData, setLogData] = useState<any[]>([])
+  
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['log-inovasi-berdampak', id],
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get(`/website-utama/pengumuman-log/${id}`).then((res) => res.data.data),
+  })
+  
+  const loading = isLoading || isFetching
+  
+  useEffect(() => {
+    if (data) {
+      setLogData(data)
+    }
+  }, [data])
+  
+  return { logData, loading }
+}

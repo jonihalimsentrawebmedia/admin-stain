@@ -53,8 +53,9 @@ export const ButtonSubmissionAgenda = (data: IAgendaDetail) => {
 
       <DialogCustom
         open={open}
-        className={'rounded'}
         setOpen={setOpen}
+        isAuto
+        className={'rounded lg:max-w-xl'}
         title={'Ajukan Ke Editor'}
         description={'Apakah anda yakin untuk mengajukan Agenda yang dipilih ke editor?'}
       >

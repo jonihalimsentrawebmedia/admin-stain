@@ -56,4 +56,8 @@ export interface IImpactInnovationList {
   gambar_tambahan: IMoreImage[]
 
   nama_kategori: string
+
+  nama_user_created: string
+  nama_user_updated: string
+  nama_disetujui: string
 }

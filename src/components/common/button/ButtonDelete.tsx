@@ -50,7 +50,7 @@ const ButtonDelete = ({ description, title, urlDelete, queryKey }: Props) => {
         <IconDelete />
       </button>
       <DialogCustom
-        className="max-w-2xl! w-full!"
+        className="max-w-2xl! w-full! rounded-md"
         open={open}
         setOpen={setOpen}
         title={<p className="text-2xl text-red-500">{title}</p>}

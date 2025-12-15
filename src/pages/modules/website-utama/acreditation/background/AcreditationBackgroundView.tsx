@@ -71,8 +71,8 @@ const AcreditationBackgroundView = () => {
             keyUrl="bg-acreditation"
             urlBg="/website-utama/akreditas-background"
             urlBgDelete={`/website-utama/akreditas-background/${item.id_background}`}
-            handleChecked={() => {
-              handleUpdateStatus(item, index)
+            handleChecked={async () => {
+              await handleUpdateStatus(item, index)
             }}
             index={index + 1}
             key={'upload' + index}

@@ -52,7 +52,8 @@ export const ButtonDraftAnnouncement = (data: IAnnouncement) => {
 
       <DialogCustom
         open={open}
-        className={'rounded'}
+        isAuto
+        className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
         title={'Kembali Ke Draft'}
         description={'Apakah anda yakin untuk mengembalikan Pengumuman yang diajukan ke draft?'}

@@ -84,3 +84,24 @@ export const UseGetNewsStatus = () => {
 
   return { status, loading }
 }
+
+export const UseGetLogNews = (id: string) => {
+  const [logData, setLogData] = useState<any[]>([])
+  
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['log-berita', id],
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get(`/website-utama/berita-log/${id}`).then((res) => res.data.data),
+  })
+  
+  const loading = isLoading || isFetching
+  
+  useEffect(() => {
+    if (data) {
+      setLogData(data)
+    }
+  }, [data])
+  
+  return { logData, loading }
+}

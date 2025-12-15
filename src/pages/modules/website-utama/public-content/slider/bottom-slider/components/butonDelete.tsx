@@ -51,6 +51,7 @@ export const ButonDeleteBottomSlider = (props: Props) => {
       <DialogCustom
         className={'rounded'}
         open={open}
+        isAuto
         setOpen={setOpen}
         title={'Hapus Data Slider Bawah?'}
         description={'Apakah anda yakin untuk menghapus sldier yang dipilih?'}

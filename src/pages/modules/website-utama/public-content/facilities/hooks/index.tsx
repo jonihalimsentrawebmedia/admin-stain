@@ -76,3 +76,23 @@ export const UseGetFacilitiesStatus = () => {
 
   return { status, loading }
 }
+
+export const UseGetLogFacilities = (id: string) => {
+  const [logData, setLogData] = useState<any[]>([])
+  
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['log-inovasi-berdampak', id],
+    refetchOnWindowFocus: false,
+    queryFn: () => AxiosClient.get(`/website-utama/fasilitas-log/${id}`).then((res) => res.data.data),
+  })
+  
+  const loading = isLoading || isFetching
+  
+  useEffect(() => {
+    if (data) {
+      setLogData(data)
+    }
+  }, [data])
+  
+  return { logData, loading }
+}

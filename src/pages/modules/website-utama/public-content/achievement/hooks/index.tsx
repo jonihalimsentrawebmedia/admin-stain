@@ -77,3 +77,23 @@ export const UseGetAchievementStatus = () => {
 
   return { status, loading }
 }
+
+export const UseGetLogAchievement = (id: string) => {
+  const [logData, setLogData] = useState<any[]>([])
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['log-achievement', id],
+    refetchOnWindowFocus: false,
+    queryFn: () => AxiosClient.get(`/website-utama/prestasi-log/${id}`).then((res) => res.data.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setLogData(data)
+    }
+  }, [data])
+
+  return { logData, loading }
+}

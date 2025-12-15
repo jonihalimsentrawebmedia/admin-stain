@@ -42,7 +42,12 @@ export const ButtonDeleteStructureOrganization = (data: IGroupOrganization) => {
         <FaTrash />
       </button>
 
-      <DialogCustom className={'rounded'} open={open} setOpen={setOpen} title={'Hapus Kelompok'}>
+      <DialogCustom
+        className={'rounded lg:max-w-2xl'}
+        open={open}
+        setOpen={setOpen}
+        title={'Hapus Kelompok'}
+      >
         <div className={'grid grid-cols-[15rem_1fr] gap-5'}>
           <p className="text-gray-500">Kelompok</p>
           <p>{data?.kelompok}</p>

@@ -38,14 +38,18 @@ export interface IFacilitiesDetail {
   created_user: string
   updated_at: string
   updated_user: string
+
+  nama_user_created: string
+  nama_disetujui: string
+  nama_user_updated: string
 }
 
 export interface IStatusFacilities {
-  DIAJUKAN_EDITOR: number;
-  DISETUJUI_EDITOR: number;
-  DRAFT: number;
-  PROSES_EDITOR: number;
-  PUBLISHED: number;
-  TOLAK_EDITOR: number;
-  UNPUBLISH: number;
+  DIAJUKAN_EDITOR: number
+  DISETUJUI_EDITOR: number
+  DRAFT: number
+  PROSES_EDITOR: number
+  PUBLISHED: number
+  TOLAK_EDITOR: number
+  UNPUBLISH: number
 }

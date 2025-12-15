@@ -1,27 +1,30 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { UseGetLogTopSlider, UseGetSliderDetail } from '../hooks'
 import { Link, useParams } from 'react-router-dom'
 import { format } from 'date-fns'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsLog } from '@/pages/modules/website-utama/public-content/slider/top-slider/create/data/columns.tsx'
+import {
+  UseGetBottomSlider,
+  UseGetBottomSliderDetail,
+} from '@/pages/modules/website-utama/public-content/slider/bottom-slider/hooks'
 
-export const LogActivityPage = () => {
+export const LogBottomActivityPage = () => {
   const { id } = useParams()
-  const { detailSlider } = UseGetSliderDetail(id ?? '')
-  const { logData } = UseGetLogTopSlider(id ?? '')
+  const { logData } = UseGetBottomSlider(id ?? '')
+  const { detailSlider } = UseGetBottomSliderDetail(id ?? '')
   const columns = ColumnsLog()
 
   return (
     <>
       <ButtonTitleGroup label={'Log Data'} buttonGroup={[]} isBack />
-
+      
       <div className={'flex items-start gap-x-8'}>
         <img
           src={detailSlider?.gambar}
           className={'w-[320px] h-[240px] object-cover'}
           alt="imgae"
         />
- 
+        
         <div className={'flex flex-col gap-y-2 text-sm'}>
           <p className="text-gray-500">Keterangan</p>
           <p dangerouslySetInnerHTML={{ __html: detailSlider?.keterangan ?? '-' }} />

@@ -54,7 +54,8 @@ export const ButtonDeleteImpactInnovation = (data: IImpactInnovationList) => {
 
       <DialogCustom
         open={open}
-        className={'rounded'}
+        isAuto
+        className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
         title={'Hapus Inovasi Berdampak?'}
         description={'Apakah anda yakin untuk menghapus Inovasi Berdampak yang ditulis?'}

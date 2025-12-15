@@ -87,3 +87,24 @@ export const UseGetStatusBottomSlider = () => {
 
   return { status, loading }
 }
+
+export const UseGetBottomSlider = (id: string) => {
+  const [logData, setLogData] = useState<any[]>([])
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['log-slider', id],
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get(`/website-utama/slider-bawah-log/${id}`).then((res) => res.data.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setLogData(data)
+    }
+  }, [data])
+
+  return { logData, loading }
+}

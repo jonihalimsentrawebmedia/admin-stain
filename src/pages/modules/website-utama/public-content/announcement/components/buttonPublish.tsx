@@ -52,7 +52,8 @@ export const ButtonAnnouncementPublish = (data: IAnnouncement) => {
 
       <DialogCustom
         open={open}
-        className={'rounded'}
+        isAuto
+        className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
         title={'Publish Pengumuman'}
         description={'Apakah anda yakin untuk mempublish Pengumuman yang dipilih?'}

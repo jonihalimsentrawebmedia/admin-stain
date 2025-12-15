@@ -59,7 +59,8 @@ export const ButtonPublishImpactInnovation = (data: IImpactInnovationList) => {
 
       <DialogCustom
         open={open}
-        className={'rounded'}
+        isAuto
+        className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
         title={'Ajukan Ke Editor'}
         description={'Apakah anda yakin untuk mengajukan berita yang dipilih ke editor?'}
