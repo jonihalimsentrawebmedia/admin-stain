@@ -7,11 +7,12 @@ import useGetBackground from './controller/useGetBackground'
 import { Button } from '@/components/ui/button'
 import { IoWarning } from 'react-icons/io5'
 import { Image } from 'lucide-react'
+import { Skeleton } from '@/components/ui/skeleton'
 
 const ContentView = () => {
   const { columns, goToAdd, goToBackground } = ContentViewModel()
   const { contentList, loading, meta } = useGetContent()
-  const { backgroundList,loading:loadingBg } = useGetBackground()
+  const { backgroundList, loading: loadingBg } = useGetBackground()
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
@@ -20,26 +21,27 @@ const ContentView = () => {
             label: '',
             onClick: () => {},
             type: 'add',
-            element:
-              backgroundList.length == 0 ? (
-                <Button
-                  onClick={goToBackground}
-                  variant={'outline'}
-                  className="border border-red-500 text-red-500"
-                >
-                  <IoWarning className="text-red- hover:text-red-500 size-6" />
-                  Gambar Background Belum Ada
-                </Button>
-              ) : (
-                <Button
-                  onClick={goToBackground}
-                  variant={'outline'}
-                  className="border border-primary text-primary hover:text-primary"
-                >
-                  <Image className="text-primary" />
-                  Gambar Background
-                </Button>
-              ),
+            element: loadingBg ? (
+              <Skeleton className="h-[30px]" />
+            ) : backgroundList.length == 0 ? (
+              <Button
+                onClick={goToBackground}
+                variant={'outline'}
+                className="border border-red-500 text-red-500"
+              >
+                <IoWarning className="text-red- hover:text-red-500 size-6" />
+                Gambar Background Belum Ada
+              </Button>
+            ) : (
+              <Button
+                onClick={goToBackground}
+                variant={'outline'}
+                className="border border-primary text-primary hover:text-primary"
+              >
+                <Image className="text-primary" />
+                Gambar Background
+              </Button>
+            ),
           },
           {
             label: 'Tambah',
