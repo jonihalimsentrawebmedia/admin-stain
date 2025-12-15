@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import type {
   IAnnouncement,
+  IBGThumbnail,
   IstatusAnnouncement,
 } from '@/pages/modules/website-utama/public-content/announcement/data'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
@@ -83,21 +84,42 @@ export const UseGetAnnouncementStatus = () => {
 
 export const UseGetLogAnnouncement = (id: string) => {
   const [logData, setLogData] = useState<any[]>([])
-  
+
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['log-inovasi-berdampak', id],
     refetchOnWindowFocus: false,
     queryFn: () =>
       AxiosClient.get(`/website-utama/pengumuman-log/${id}`).then((res) => res.data.data),
   })
-  
+
   const loading = isLoading || isFetching
-  
+
   useEffect(() => {
     if (data) {
       setLogData(data)
     }
   }, [data])
-  
+
   return { logData, loading }
+}
+
+export const UseGetAnnouncementBackground = () => {
+  const [background, setBackground] = useState<IBGThumbnail[]>([])
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['background-announcement'],
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get(`/website-utama/pengumuman-background`).then((res) => res.data.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setBackground(data)
+    }
+  }, [data])
+
+  return { background, loading }
 }

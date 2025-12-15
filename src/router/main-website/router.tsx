@@ -62,6 +62,8 @@ import { LogActivityAnnouncementPage } from '@/pages/modules/website-utama/publi
 import { LogActivityAgendaPage } from '@/pages/modules/website-utama/public-content/agenda/log'
 import { LogActivityFacilitiesPage } from '@/pages/modules/website-utama/public-content/facilities/log'
 import { LogActivityAchievement } from '@/pages/modules/website-utama/public-content/achievement/log'
+import { AnnouncementBackground } from '@/pages/modules/website-utama/public-content/announcement/background'
+import { AgendaBackgroundPage } from '@/pages/modules/website-utama/public-content/agenda/background'
 
 export const MainWebsiteRouter = [
   {
@@ -179,6 +181,10 @@ export const MainWebsiteRouter = [
             path: 'log/:id',
             element: <LogActivityAnnouncementPage />,
           },
+          {
+            path: 'background',
+            element: <AnnouncementBackground />,
+          },
         ],
       },
       {
@@ -203,6 +209,10 @@ export const MainWebsiteRouter = [
           {
             path: 'log/:id',
             element: <LogActivityAgendaPage />,
+          },
+          {
+            path: 'background',
+            element: <AgendaBackgroundPage />,
           },
         ],
       },

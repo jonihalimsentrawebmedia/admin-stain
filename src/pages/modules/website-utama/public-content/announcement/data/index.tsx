@@ -48,3 +48,12 @@ export interface IstatusAnnouncement {
   TOLAK_EDITOR: number
   UNPUBLISH: number
 }
+
+export interface IBGThumbnail {
+  id_background: number
+  id_satuan_organisasi: string
+  context: 'PENGUMUMAN' | string
+  gambar: string
+  urutan: number
+  status: 'Y' | 'N'
+}
