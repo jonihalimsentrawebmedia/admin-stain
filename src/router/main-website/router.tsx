@@ -462,7 +462,8 @@ export const MainWebsiteRouter = [
       {
         path:":idAcreditation/log",
         element:<AcreditationLogDetail/>
-      }
+      },
+      {
         path: 'background',
         element: <AcreditationBackgroundView />,
       },
