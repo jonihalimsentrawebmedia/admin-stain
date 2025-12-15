@@ -31,7 +31,7 @@ export const DetailAgendaPage = () => {
                   <Button
                     onClick={() =>
                       navigate(
-                        `/modules/website-utama/public-content/announcement/edit/${detail?.id_pengumuman}`
+                        `/modules/website-utama/public-content/announcement/edit/${detail?.id_agenda}`
                       )
                     }
                     className={'border-primary text-primary hover:text-primary'}
@@ -64,7 +64,7 @@ export const DetailAgendaPage = () => {
 
         <div className={'flex items-start gap-x-8 px-5'}>
           <div className="w-7/12">
-            <p className="text-2xl font-semibold">{detail?.judul_pengumuman}</p>
+            <p className="text-2xl font-semibold">{detail?.judul}</p>
             <div className="my-5 grid grid-cols-2 gap-5">
               <div>
                 <p className="text-gray-500">Waktu</p>

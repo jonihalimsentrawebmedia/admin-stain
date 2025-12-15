@@ -72,7 +72,7 @@ export function Sidebar({ collapsed }: Props) {
         collapsed ? 'w-14' : 'w-60'
       )}
     >
-      <div className="space-y-2 overflow-y-auto py-4">
+      <div className="space-y-2 overflow-y-auto py-4 overflow-auto h-[calc(100vh-110px)]">
         {MENULIST.map((row, idx) => {
           const groupId = makeGroupId('root', idx, row.name)
           const isGroupOpen = groups[groupId] ?? false

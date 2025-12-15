@@ -4,6 +4,7 @@ import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useSearchParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
+import type { IBGThumbnail } from '@/pages/modules/website-utama/public-content/announcement/data'
 
 export const UseStructureOrganization = () => {
   const [listGroupOrganization, setListGroupOrganization] = useState<IGroupOrganization[]>([])
@@ -55,4 +56,25 @@ export const UseGetGroupOrganizationDetail = (id: string) => {
   }, [data])
 
   return { detailGroupOrganization, loading }
+}
+
+export const UseGetStructureBackground = () => {
+  const [background, setBackground] = useState<IBGThumbnail[]>([])
+  
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['background-innovation'],
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get(`/website-utama/kelompok-organisasi-background`).then((res) => res.data.data),
+  })
+  
+  const loading = isLoading || isFetching
+  
+  useEffect(() => {
+    if (data) {
+      setBackground(data)
+    }
+  }, [data])
+  
+  return { background, loading }
 }

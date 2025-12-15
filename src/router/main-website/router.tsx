@@ -63,6 +63,17 @@ import { LogActivityAnnouncementPage } from '@/pages/modules/website-utama/publi
 import { LogActivityAgendaPage } from '@/pages/modules/website-utama/public-content/agenda/log'
 import { LogActivityFacilitiesPage } from '@/pages/modules/website-utama/public-content/facilities/log'
 import { LogActivityAchievement } from '@/pages/modules/website-utama/public-content/achievement/log'
+import { AnnouncementBackground } from '@/pages/modules/website-utama/public-content/announcement/background'
+import { AgendaBackgroundPage } from '@/pages/modules/website-utama/public-content/agenda/background'
+import { InnovationBackgroundPage } from '@/pages/modules/website-utama/public-content/impact-innovation/background'
+import { GroupOrganizationBackgroundPage } from '@/pages/modules/website-utama/public-content/structure-organization/background'
+import { FacilitiesBackgroundPage } from '@/pages/modules/website-utama/public-content/facilities/background'
+import { AchievementBackgroundPage } from '@/pages/modules/website-utama/public-content/achievement/background'
+import { GalleryPhotoBackgroundPage } from '@/pages/modules/website-utama/public-content/gallery/Foto/background'
+import { GalleryVideoBackgroundPage } from '@/pages/modules/website-utama/public-content/gallery/video/background'
+import { LogActivityVideoPage } from '@/pages/modules/website-utama/public-content/gallery/video/log'
+import { LogActivityGalleryAlbum } from '@/pages/modules/website-utama/public-content/gallery/Foto/log'
+import { LogActivityGalleryAlbumPhoto } from '@/pages/modules/website-utama/public-content/gallery/Foto/data-album/log'
 
 export const MainWebsiteRouter = [
   {
@@ -180,6 +191,10 @@ export const MainWebsiteRouter = [
             path: 'log/:id',
             element: <LogActivityAnnouncementPage />,
           },
+          {
+            path: 'background',
+            element: <AnnouncementBackground />,
+          },
         ],
       },
       {
@@ -204,6 +219,10 @@ export const MainWebsiteRouter = [
           {
             path: 'log/:id',
             element: <LogActivityAgendaPage />,
+          },
+          {
+            path: 'background',
+            element: <AgendaBackgroundPage />,
           },
         ],
       },
@@ -230,6 +249,10 @@ export const MainWebsiteRouter = [
             path: 'log/:id',
             element: <LogActivityImpactInnovationPage />,
           },
+          {
+            path: 'background',
+            element: <InnovationBackgroundPage />,
+          },
         ],
       },
       {
@@ -242,6 +265,10 @@ export const MainWebsiteRouter = [
           {
             path: 'team/:id',
             element: <PlacemenUser />,
+          },
+          {
+            path: 'background',
+            element: <GroupOrganizationBackgroundPage />,
           },
         ],
       },
@@ -268,6 +295,10 @@ export const MainWebsiteRouter = [
             path: 'log/:id',
             element: <LogActivityFacilitiesPage />,
           },
+          {
+            path: 'background',
+            element: <FacilitiesBackgroundPage />,
+          },
         ],
       },
       {
@@ -281,8 +312,20 @@ export const MainWebsiteRouter = [
                 element: <GalleryPhotoPage />,
               },
               {
+                path: 'log/:id',
+                element: <LogActivityGalleryAlbum />,
+              },
+              {
+                path: 'background',
+                element: <GalleryPhotoBackgroundPage />,
+              },
+              {
                 path: 'album/:id',
                 element: <DataAlbumListPage />,
+              },
+              {
+                path: 'album/:id/log',
+                element: <LogActivityGalleryAlbumPhoto />,
               },
             ],
           },
@@ -292,6 +335,14 @@ export const MainWebsiteRouter = [
               {
                 index: true,
                 element: <GalleryVideoPage />,
+              },
+              {
+                path: 'log/:id',
+                element: <LogActivityVideoPage />,
+              },
+              {
+                path: 'background',
+                element: <GalleryVideoBackgroundPage />,
               },
             ],
           },
@@ -319,6 +370,10 @@ export const MainWebsiteRouter = [
           {
             path: 'log/:id',
             element: <LogActivityAchievement />,
+          },
+          {
+            path: 'background',
+            element: <AchievementBackgroundPage />,
           },
         ],
       },
@@ -456,16 +511,12 @@ export const MainWebsiteRouter = [
         element: <AcreditationView />,
       },
       {
-        path:"background",
-        element:<AcreditationBackgroundView/>
-      },
-      {
-        path:":idAcreditation/log",
-        element:<AcreditationLogDetail/>
-      },
-      {
         path: 'background',
         element: <AcreditationBackgroundView />,
+      },
+      {
+        path: ':idAcreditation/log',
+        element: <AcreditationLogDetail />,
       },
     ],
   },

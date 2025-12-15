@@ -4,7 +4,7 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { HiPencil } from 'react-icons/hi'
 import { TabsListCustom } from '@/pages/modules/website-utama/public-content/slider/components/tabsList.tsx'
-import { UseGetImpactInnovationStatus } from './hooks/index'
+import { UseGetImpactInnovationStatus, UseGetInnovationBackground } from './hooks/index'
 import { DraftSectionImpactInnovation } from './components/table/draftSection.tsx'
 import { SubmissionSectionImpactInnovation } from '@/pages/modules/website-utama/public-content/impact-innovation/components/table/submissionSection.tsx'
 import { ProcessSectionImpactInnovation } from '@/pages/modules/website-utama/public-content/impact-innovation/components/table/processSection.tsx'
@@ -12,10 +12,13 @@ import { RejectSectionImpactInnovation } from '@/pages/modules/website-utama/pub
 import { ApprovedSectionImpactInnovation } from '@/pages/modules/website-utama/public-content/impact-innovation/components/table/approvedSection.tsx'
 import { PublishSectionImpactInnovation } from '@/pages/modules/website-utama/public-content/impact-innovation/components/table/publishSection.tsx'
 import { UnpublishSectionImpactInnovation } from '@/pages/modules/website-utama/public-content/impact-innovation/components/table/unpublishSection.tsx'
+import { IoWarning } from 'react-icons/io5'
+import { Image } from 'lucide-react'
 
 export const ImpactInnovationPage = () => {
   const navigate = useNavigate()
   const { status } = UseGetImpactInnovationStatus()
+  const { background } = UseGetInnovationBackground()
 
   const [searchParams, setSearchParams] = useSearchParams()
   const statusParams = searchParams.get('status')
@@ -124,6 +127,29 @@ export const ImpactInnovationPage = () => {
         <ButtonTitleGroup
           label={'Inovasi Berdampak'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element:
+                background?.length === 0 ? (
+                  <Button
+                    onClick={() => navigate('background')}
+                    variant={'outline'}
+                    className="border border-red-500 hover:text-red-500 text-red-500"
+                  >
+                    <IoWarning className="text-red- hover:text-red-500 size-6" />
+                    Gambar Background Belum Ada
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => navigate('background')}
+                    variant={'outline'}
+                    className="border border-primary text-primary hover:text-primary"
+                  >
+                    <Image className="text-primary" />
+                    Gambar Background
+                  </Button>
+                ),
+            },
             {
               type: 'add',
               label: '',

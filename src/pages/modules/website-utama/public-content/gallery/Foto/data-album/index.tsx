@@ -2,7 +2,7 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { MdOutlineHistory } from 'react-icons/md'
 import { Button } from '@/components/ui/button.tsx'
 import { UseGetGalleryPhotoDetail } from '../hooks'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import Search from '@/components/common/table/Search.tsx'
 import { ButtonAddImage } from '@/pages/modules/website-utama/public-content/gallery/Foto/data-album/components/buttonAdd.tsx'
 import { UseGetGalleryAlbum } from '@/pages/modules/website-utama/public-content/gallery/Foto/data-album/hooks'
@@ -15,6 +15,7 @@ export const DataAlbumListPage = () => {
   const { galleryAlbum } = UseGetGalleryAlbum(id ?? '')
 
   const [_, setSearchParams] = useSearchParams()
+  const navigate = useNavigate()
 
   return (
     <>
@@ -25,7 +26,11 @@ export const DataAlbumListPage = () => {
           {
             type: 'custom',
             element: (
-              <Button variant={'outline'} className={'border-blue-600 text-blue-600'}>
+              <Button
+                onClick={() => navigate('log')}
+                variant={'outline'}
+                className={'border-blue-600 hover:text-blue-600 text-blue-600'}
+              >
                 <MdOutlineHistory /> Log Data
               </Button>
             ),

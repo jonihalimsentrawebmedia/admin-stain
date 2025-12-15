@@ -4,7 +4,7 @@ import { HiPencil } from 'react-icons/hi'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { TabsListCustom } from '@/pages/modules/website-utama/public-content/slider/components/tabsList.tsx'
 import { useEffect } from 'react'
-import { UseGetAgendaStatus } from './hooks/index'
+import { UseGetAgendaBackground, UseGetAgendaStatus } from './hooks/index'
 import { DraftSectionAgenda } from './components/table/draftSection'
 import { SubmissionSectionAgenda } from './components/table/submissionSection.tsx'
 import { ProcessSectionAgenda } from './components/table/processSection.tsx'
@@ -12,11 +12,15 @@ import { RejectSectionAgenda } from '@/pages/modules/website-utama/public-conten
 import { ApprovedSectionAgenda } from '@/pages/modules/website-utama/public-content/agenda/components/table/approvedSection.tsx'
 import { PublishSectionAgenda } from '@/pages/modules/website-utama/public-content/agenda/components/table/publishSection.tsx'
 import { UnpublishSectionAgenda } from '@/pages/modules/website-utama/public-content/agenda/components/table/unpublishSection.tsx'
+import { IoWarning } from 'react-icons/io5'
+import { Image } from 'lucide-react'
 
 export const AgendaPage = () => {
   const navigate = useNavigate()
-  
+
   const { status } = UseGetAgendaStatus()
+  const { background } = UseGetAgendaBackground()
+
   const [searchParams, setSearchParams] = useSearchParams()
   const statusParams = searchParams.get('status')
 
@@ -124,6 +128,29 @@ export const AgendaPage = () => {
         <ButtonTitleGroup
           label={'Agenda'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element:
+                background?.length === 0 ? (
+                  <Button
+                    onClick={() => navigate('background')}
+                    variant={'outline'}
+                    className="border border-red-500 hover:text-red-500 text-red-500"
+                  >
+                    <IoWarning className="text-red- hover:text-red-500 size-6" />
+                    Gambar Background Belum Ada
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => navigate('background')}
+                    variant={'outline'}
+                    className="border border-primary text-primary hover:text-primary"
+                  >
+                    <Image className="text-primary" />
+                    Gambar Background
+                  </Button>
+                ),
+            },
             {
               type: 'add',
               label: '',

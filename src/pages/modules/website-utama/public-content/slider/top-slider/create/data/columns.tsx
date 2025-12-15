@@ -41,7 +41,7 @@ export const ColumnsLog = () => {
         const data = row?.original
         return (
           <div>
-            {data?.jenis_data === 'Gambar' ? (
+            {data?.jenis_data === 'Gambar' || data?.jenis_data === 'LinkFoto' ? (
               <img
                 src={data?.data_lama as any}
                 alt="img"
@@ -63,7 +63,7 @@ export const ColumnsLog = () => {
         const data = row?.original
         return (
           <div>
-            {data?.jenis_data === 'Gambar' ? (
+            {data?.jenis_data === 'Gambar' || data?.jenis_data === 'LinkFoto' ? (
               <img
                 src={data?.data_baru as any}
                 alt="img"

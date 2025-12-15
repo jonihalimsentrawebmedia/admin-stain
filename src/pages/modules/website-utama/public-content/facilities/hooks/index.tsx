@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
+import type { IBGThumbnail } from '@/pages/modules/website-utama/public-content/announcement/data'
 
 export const UseGetFacilities = () => {
   const [listFacilities, setListFacilities] = useState<IFacilitiesDetail[]>([])
@@ -79,20 +80,42 @@ export const UseGetFacilitiesStatus = () => {
 
 export const UseGetLogFacilities = (id: string) => {
   const [logData, setLogData] = useState<any[]>([])
-  
+
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['log-inovasi-berdampak', id],
+    queryKey: ['log-facilities', id],
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get(`/website-utama/fasilitas-log/${id}`).then((res) => res.data.data),
+    queryFn: () =>
+      AxiosClient.get(`/website-utama/fasilitas-log/${id}`).then((res) => res.data.data),
   })
-  
+
   const loading = isLoading || isFetching
-  
+
   useEffect(() => {
     if (data) {
       setLogData(data)
     }
   }, [data])
-  
+
   return { logData, loading }
+}
+
+export const UseGetFacilitiesBackground = () => {
+  const [background, setBackground] = useState<IBGThumbnail[]>([])
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['background-facilities'],
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get(`/website-utama/fasilitas-background`).then((res) => res.data.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setBackground(data)
+    }
+  }, [data])
+
+  return { background, loading }
 }

@@ -7,4 +7,9 @@ export interface IGaleriAlbum {
   updated_at: string // ISO datetime string
   updated_user: string
   jumlah_foto: number
+
+  nama_user_created: string
+  nama_disetujui: string
+  disetujui_at: string
+  nama_user_updated: string
 }

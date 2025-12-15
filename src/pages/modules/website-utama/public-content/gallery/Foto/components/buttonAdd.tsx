@@ -53,7 +53,7 @@ export const ButtonAddAlbumPhoto = () => {
       </Button>
 
       <DialogCustom
-        className={'rounded'}
+        className={'rounded lg:max-w-xl'}
         open={open}
         setOpen={setOpen}
         title={'Tambah Galeri Foto'}

@@ -57,7 +57,7 @@ export const ButtonEditAlbumPhoto = (data: IGaleriAlbum) => {
       </button>
 
       <DialogCustom
-        className={'rounded'}
+        className={'rounded lg:max-w-xl'}
         open={open}
         setOpen={setOpen}
         title={'Tambah Galeri Foto'}

@@ -4,9 +4,11 @@ import { UseGetPlacemanUser } from '@/pages/modules/website-utama/public-content
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsUserPlaceman } from './data/columns'
 import { useParams } from 'react-router-dom'
+import { UseGetGroupOrganizationDetail } from '../hooks/index'
 
 export const PlacemenUser = () => {
   const { id } = useParams()
+  const { detailGroupOrganization: detail } = UseGetGroupOrganizationDetail(id ?? '')
   const { meta, loading, listUserPlaceman } = UseGetPlacemanUser(id ?? '')
   const columns = ColumnsUserPlaceman()
 
@@ -14,7 +16,7 @@ export const PlacemenUser = () => {
     <div className={'flex flex-col gap-y-8'}>
       <ButtonTitleGroup
         isBack
-        label={'Daftar Pejabat - Rektorat'}
+        label={`Daftar Pejabat - ${detail?.nama_kelompok}`}
         buttonGroup={[
           {
             type: 'add',

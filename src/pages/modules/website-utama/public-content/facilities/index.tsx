@@ -2,7 +2,10 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { HiPencil } from 'react-icons/hi'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { UseGetFacilitiesStatus } from '@/pages/modules/website-utama/public-content/facilities/hooks'
+import {
+  UseGetFacilitiesBackground,
+  UseGetFacilitiesStatus,
+} from '@/pages/modules/website-utama/public-content/facilities/hooks'
 import { useEffect } from 'react'
 import { TabsListCustom } from '@/pages/modules/website-utama/public-content/slider/components/tabsList.tsx'
 import { DraftSectionFacilities } from './components/table/draftSection.tsx'
@@ -12,11 +15,14 @@ import { RejectSectionSection } from './components/table/rejectSection.tsx'
 import { ApprovedSectionFacilities } from '@/pages/modules/website-utama/public-content/facilities/components/table/approvedSection.tsx'
 import { PublishSectionFacilities } from '@/pages/modules/website-utama/public-content/facilities/components/table/publishSection.tsx'
 import { UnpublishSectionFacilities } from '@/pages/modules/website-utama/public-content/facilities/components/table/unpublishSection.tsx'
+import { IoWarning } from 'react-icons/io5'
+import { Image } from 'lucide-react'
 
 export const FacilitiesPage = () => {
   const navigate = useNavigate()
 
   const { status } = UseGetFacilitiesStatus()
+  const { background } = UseGetFacilitiesBackground()
 
   const [searchParams, setSearchParams] = useSearchParams()
   const statusParams = searchParams.get('status')
@@ -125,6 +131,29 @@ export const FacilitiesPage = () => {
         <ButtonTitleGroup
           label={'Fasilitas'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element:
+                background?.length === 0 ? (
+                  <Button
+                    onClick={() => navigate('background')}
+                    variant={'outline'}
+                    className="border border-red-500 hover:text-red-500 text-red-500"
+                  >
+                    <IoWarning className="text-red- hover:text-red-500 size-6" />
+                    Gambar Background Belum Ada
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => navigate('background')}
+                    variant={'outline'}
+                    className="border border-primary text-primary hover:text-primary"
+                  >
+                    <Image className="text-primary" />
+                    Gambar Background
+                  </Button>
+                ),
+            },
             {
               type: 'add',
               label: '',
