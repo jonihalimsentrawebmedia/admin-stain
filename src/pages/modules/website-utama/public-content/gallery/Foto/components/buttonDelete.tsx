@@ -39,7 +39,12 @@ export const ButtonDeleteAlbumPhoto = (data: IGaleriAlbum) => {
         <FaTrash />
       </button>
 
-      <DialogCustom className={'rounded'} open={open} setOpen={setOpen} title={'Hapus Galeri Foto'}>
+      <DialogCustom
+        className={'rounded lg:max-w-xl'}
+        open={open}
+        setOpen={setOpen}
+        title={'Hapus Galeri Foto'}
+      >
         <div className={'flex flex-col gap-4'}>
           <div className="grid grid-cols-[15rem_1fr]">
             <p className="text-gray-500">Judul</p>

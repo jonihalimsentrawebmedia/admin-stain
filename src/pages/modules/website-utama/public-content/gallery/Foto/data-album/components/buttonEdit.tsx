@@ -65,7 +65,7 @@ export const ButtonEditImage = (data: IGalleryPhoto) => {
         <HiPencil />
       </button>
 
-      <DialogCustom open={open} setOpen={setOpen} title={'Tambah Foto'}>
+      <DialogCustom open={open} setOpen={setOpen} title={'Tambah Foto'} className={'rounded lg:max-w-xl'}>
         <div>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(HandlerSave)} className={'flex flex-col gap-5'}>

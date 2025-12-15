@@ -17,7 +17,7 @@ export const ButtonDeletePhotoAlbum = (props: IProps) => {
   const { data, title } = props
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
-  
+
   const queryClient = useQueryClient()
 
   const HandlerDelete = async () => {
@@ -29,7 +29,7 @@ export const ButtonDeletePhotoAlbum = (props: IProps) => {
           setLoading(false)
           toast.success(res.data.message || 'Success Pengajuan tambah data foto')
           queryClient.invalidateQueries({
-            queryKey:['list-photo']
+            queryKey: ['list-photo'],
           })
         }
       })
@@ -50,7 +50,7 @@ export const ButtonDeletePhotoAlbum = (props: IProps) => {
         setOpen={setOpen}
         title={'Hapus Foto'}
         description={'Apakah anda yakin untuk menghapus foto yang dipilih?'}
-        className={'rounded'}
+        className={'rounded lg:max-w-xl'}
       >
         <div className={'flex flex-col gap-5'}>
           <img

@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { IImpactInnovationList, IStatusImpactInnovation } from '../data/index'
 import { useSearchParams } from 'react-router-dom'
+import type { IBGThumbnail } from '@/pages/modules/website-utama/public-content/announcement/data'
 
 export const UseGetImpactInnovation = () => {
   const [impactInnovation, setImpactInnovation] = useState<IImpactInnovationList[]>([])
@@ -99,4 +100,25 @@ export const UseGetLogImpactInnovation = (id: string) => {
   }, [data])
 
   return { logData, loading }
+}
+
+export const UseGetInnovationBackground = () => {
+  const [background, setBackground] = useState<IBGThumbnail[]>([])
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['background-innovation'],
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get(`/website-utama/inovasi-berdampak-background`).then((res) => res.data.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setBackground(data)
+    }
+  }, [data])
+
+  return { background, loading }
 }
