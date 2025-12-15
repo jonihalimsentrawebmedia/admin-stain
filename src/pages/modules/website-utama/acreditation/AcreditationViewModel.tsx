@@ -4,12 +4,20 @@ import type { AcreditationList } from './model'
 import { History } from 'lucide-react'
 import ButtonEditAcreditation from './components/ButtonEditAcreditation'
 import ButtonDeleteAcreditation from './components/ButtonDeleteAcreditation'
+function capitalizeTextSimple(text: string): string {
+  if (!text) return ''
 
+  return text
+    .toLowerCase()
+    .split('_')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')
+}
 const AcreditationViewModel = () => {
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') ?? 1)
   const limit = Number(searchParams.get('limit') ?? 10)
-const navigate=useNavigate()
+  const navigate = useNavigate()
   const columns: ColumnDef<AcreditationList>[] = [
     {
       accessorKey: 'No',
@@ -39,8 +47,13 @@ const navigate=useNavigate()
       header: 'Uraian',
     },
     {
-      accessorKey: 'nilai_akreditasi',
+      accessorKey: 'nilai_akreditas',
       header: 'Nilai Akreditasi',
+      cell: ({ row }) => {
+        return (
+          <div className="capitalize">{capitalizeTextSimple(row.original.nilai_akreditas)}</div>
+        )
+      },
     },
     {
       accessorKey: 'lembaga_penilaian',
@@ -95,10 +108,10 @@ const navigate=useNavigate()
       },
     },
   ]
-function goToBackground(){
+  function goToBackground() {
     navigate('background')
-}
-  return { columns,goToBackground }
+  }
+  return { columns, goToBackground }
 }
 
 export default AcreditationViewModel

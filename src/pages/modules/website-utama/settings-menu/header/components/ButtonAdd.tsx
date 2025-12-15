@@ -53,7 +53,7 @@ const ButtonAdd = () => {
         Tambah Menu
       </Button>
 
-      <DialogCustom open={open} className={'rounded'} setOpen={setOpen} title={'Tambah Menu'}>
+      <DialogCustom width='50%' open={open} className={'rounded'} setOpen={setOpen} title={'Tambah Menu'}>
         <MenuForm
           form={form}
           loading={loading}

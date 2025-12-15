@@ -9,7 +9,7 @@ import ButtonAddActivity from './components/ButtonAddActivity'
 const CalendarAcademicDetailView = () => {
   const { field, form, columns } = CalendarAcademicDetailViewModel()
   const { academicActivityList, loading } = useGetAcademicYearActivity()
-  console.log(form.watch())
+ 
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup

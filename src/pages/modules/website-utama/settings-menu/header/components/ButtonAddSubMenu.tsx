@@ -61,7 +61,7 @@ const ButtonAddSubMenu = ({ data, menu_parent_name }: Props) => {
         Tambah SubMenu
       </Button>
 
-      <DialogCustom  open={open} className={'rounded w-full lg:min-w-2xl '} setOpen={setOpen} title={'Tambah Menu'}>
+      <DialogCustom width='50%'  open={open} className={'rounded w-full lg:min-w-2xl '} setOpen={setOpen} title={'Tambah Menu'}>
         <MenuForm
         isSubMenu
           form={form}

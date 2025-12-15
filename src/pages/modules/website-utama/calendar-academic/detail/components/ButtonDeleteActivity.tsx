@@ -42,7 +42,7 @@ const ButtonDeleteActivity = ({data}:Props) => {
           setLoading(false)
           toast.success(res.data.message || 'Success menghapus data Tahun Akademik')
           queryClient.invalidateQueries({
-            queryKey: ['list-academic-year-activity'],
+            queryKey: ['list-acedemic-year-activity'],
           })
         }
       })
@@ -69,6 +69,7 @@ const ButtonDeleteActivity = ({data}:Props) => {
         open={open}
         className={'rounded min-w-sm sm:min-w-2xl'}
         setOpen={setOpen}
+          width='50%'
         title={<p className="text-2xl text-red-500">Hapus Kegiatan Akademik</p>}
         description={'Anda yakin ingin menghapus kegiatan akademik ini?'}
       >

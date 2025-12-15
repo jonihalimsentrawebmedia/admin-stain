@@ -72,6 +72,7 @@ const ButtonDeleteServices = ({data}:Props) => {
 
       <DialogCustom
         open={open}
+        width='50%'
         className={'rounded lg:min-w-2xl'}
         setOpen={setOpen}
         title={<p className="text-2xl text-red-500">Hapus Layanan?</p>}

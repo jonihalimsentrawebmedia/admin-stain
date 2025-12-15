@@ -18,9 +18,10 @@ const ButtonActiveMenu = ({ data }: Props) => {
       nama_menu: data.nama_menu,
       controller: data.controller,
       halaman: data.halaman,
-      url:data.url,
-      id_parent_menu:data.id_parent_menu,
+      url: data.url,
+      id_parent_menu: data.id_parent_menu,
       status: data.status == 'Y' ? 'N' : 'Y',
+      urutan: data.urutan,
     })
       .then((res) => {
         if (res.data.status) {

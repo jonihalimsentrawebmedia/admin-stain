@@ -13,9 +13,10 @@ const useGetStatistic = () => {
 
  
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching ,refetch} = useQuery({
     queryKey: ['statistic',],
     refetchOnWindowFocus: false,
+    
     queryFn: () => AxiosClient.get(`/website-utama/statistik`).then((res) => res.data),
   })
 
@@ -28,7 +29,7 @@ const useGetStatistic = () => {
     }
   }, [data])
 
-  return { statistic, loading,  }
+  return { statistic, loading, refetch }
 }
 
 export default useGetStatistic

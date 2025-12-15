@@ -55,6 +55,7 @@ import { CreatedAchievementPage } from '@/pages/modules/website-utama/public-con
 import { UpdatedAchievementPage } from '@/pages/modules/website-utama/public-content/achievement/updated'
 import { DetailAchievementPage } from '@/pages/modules/website-utama/public-content/achievement/detail'
 import { LogActivityPage } from '@/pages/modules/website-utama/public-content/slider/top-slider/log'
+import AcreditationLogDetail from '@/pages/modules/website-utama/acreditation/log/AcreditationLogDetail'
 
 export const MainWebsiteRouter = [
   {
@@ -423,6 +424,10 @@ export const MainWebsiteRouter = [
       {
         path:"background",
         element:<AcreditationBackgroundView/>
+      },
+      {
+        path:":idAcreditation/log",
+        element:<AcreditationLogDetail/>
       }
     ],
   },

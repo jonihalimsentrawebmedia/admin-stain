@@ -31,6 +31,7 @@ const StatisticViewModel = () => {
           })
 
           setLoadingSave(false)
+          setImageStatisticTemp(imageStatisticTemp)
           toast.success(res.data.message || 'Success Pengajuan tambah data berita')
         }
       })
@@ -42,6 +43,8 @@ const StatisticViewModel = () => {
   const [isEdit, setIsEdit] = useState(false)
   const { loading, statistic } = useGetStatistic()
   const [imageStatistic, setImageStatistic] = useState<string[]>([])
+  const [imageStatisticTemp, setImageStatisticTemp] = useState<string[]>([])
+
   const field = [
     {
       name: 'mahasiswa',
@@ -73,6 +76,7 @@ const StatisticViewModel = () => {
     },
   ]
   function changeOnEdit() {
+    setImageStatistic(imageStatisticTemp)
     setIsEdit(!isEdit)
   }
 
@@ -88,11 +92,15 @@ const StatisticViewModel = () => {
         }
       }
       setImageStatistic(temp)
+      setImageStatisticTemp(temp)
+
       form.reset({
         ...statistic,
       })
     }
   }, [statistic])
+  console.log(imageStatisticTemp, 'tempI')
+  console.log(imageStatistic, 'tempII')
   return {
     form,
     statistic,
@@ -103,7 +111,8 @@ const StatisticViewModel = () => {
     imageStatistic,
     setImageStatistic,
     handleSave,
-    loadingSave,goToLog
+    loadingSave,
+    goToLog,
   }
 }
 

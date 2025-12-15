@@ -84,6 +84,7 @@ const ButtonDeleteDetailActivity = ({ data }: Props) => {
 
       <DialogCustom
         open={open}
+                width='50%'
         className={'rounded min-w-sm sm:min-w-2xl'}
         setOpen={setOpen}
         title={<p className="text-2xl text-red-500">Hapus Kegiatan Akademik</p>}

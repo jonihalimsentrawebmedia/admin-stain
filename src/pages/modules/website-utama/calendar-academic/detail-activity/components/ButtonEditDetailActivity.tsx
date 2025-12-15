@@ -73,6 +73,7 @@ const ButtonEditDetailActivity = ({ data }: Props) => {
         open={open}
         className={'rounded lg:min-w-2xl'}
         setOpen={setOpen}
+        width="50%"
         title={'Edit Kegiatan Akademik'}
       >
         <ActivityDetailForm

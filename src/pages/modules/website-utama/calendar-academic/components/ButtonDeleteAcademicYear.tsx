@@ -36,7 +36,7 @@ const ButtonDeleteAcademicYear = ({ data }: Props) => {
           setLoading(false)
           toast.success(res.data.message || 'Success menghapus data Tahun Akademik')
           queryClient.invalidateQueries({
-            queryKey: ['list-academic-year'],
+            queryKey: ['list-acedemic-year'],
           })
         }
       })
@@ -63,6 +63,7 @@ const ButtonDeleteAcademicYear = ({ data }: Props) => {
         open={open}
         className={'rounded lg:min-w-2xl'}
         setOpen={setOpen}
+          width='50%'
         title={<p className="text-2xl text-red-500">Hapus Kalender Akademik</p>}
         description={'Anda yakin ingin menghapus kalender akademik ini?'}
       >

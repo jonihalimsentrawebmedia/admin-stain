@@ -107,6 +107,7 @@ const ButtonDelete = ({ data, isSubMenu,menu_parent_name }: Props) => {
 
       <DialogCustom
         open={open}
+        width='50%'
         className={'rounded'}
         setOpen={setOpen}
         title={<p className="text-2xl text-red-500">Hapus Menu</p>}
