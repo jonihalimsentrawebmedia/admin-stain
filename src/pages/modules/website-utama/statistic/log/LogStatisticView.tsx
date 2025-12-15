@@ -49,7 +49,7 @@ const LogStatisticView = () => {
   ]
   return (
     <div className="flex flex-col gap-4">
-      <ButtonTitleGroup buttonGroup={[]} label="Log Data - Statistik" isBack />
+      <ButtonTitleGroup link='/modules/website-utama/statistic' buttonGroup={[]} label="Log Data - Statistik" isBack />
 
       <TableCustom
         addFilter={

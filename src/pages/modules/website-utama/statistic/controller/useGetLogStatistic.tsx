@@ -17,7 +17,7 @@ const useGetLogStatistic = () => {
   const ParamsSearch = new URLSearchParams({ page, limit, search })
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['log-statistic',ParamsSearch],
+    queryKey: ['log-statistic',ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
       AxiosClient.get(`/website-utama/statistik-log?${ParamsSearch}`).then(

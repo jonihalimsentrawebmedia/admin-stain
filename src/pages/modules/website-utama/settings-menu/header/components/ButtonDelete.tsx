@@ -12,9 +12,9 @@ import { Trash2, X } from 'lucide-react'
 interface Props {
   isSubMenu?: boolean
   data: Menu
-  menu_parent_name?:string
+  menu_parent_name?: string
 }
-const ButtonDelete = ({ data, isSubMenu,menu_parent_name }: Props) => {
+const ButtonDelete = ({ data, isSubMenu, menu_parent_name }: Props) => {
   const form = useForm()
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -59,6 +59,7 @@ const ButtonDelete = ({ data, isSubMenu,menu_parent_name }: Props) => {
     {
       name: 'halaman',
       label: 'Halaman?*',
+      component: <div>{data.halaman ? 'Ya' : 'Tidak'}</div>,
     },
     {
       name: 'status',
@@ -98,7 +99,7 @@ const ButtonDelete = ({ data, isSubMenu,menu_parent_name }: Props) => {
           setOpen(!open)
           form.reset({
             ...data,
-            menu_parent_name:menu_parent_name
+            menu_parent_name: menu_parent_name,
           })
         }}
       >
@@ -107,7 +108,7 @@ const ButtonDelete = ({ data, isSubMenu,menu_parent_name }: Props) => {
 
       <DialogCustom
         open={open}
-        width='50%'
+        width="50%"
         className={'rounded'}
         setOpen={setOpen}
         title={<p className="text-2xl text-red-500">Hapus Menu</p>}

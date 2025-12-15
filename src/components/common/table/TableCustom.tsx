@@ -107,7 +107,7 @@ const TableCustom = (props: Props) => {
           ))}
         </TableHeader>
         <TableBody>
-          {data.length == 0 && (
+          {data.length == 0 && loading == false && (
             <TableRow>
               <TableCell colSpan={columnCount} className="text-center border">
                 Data Tidak Ada
@@ -162,7 +162,10 @@ const TableCustom = (props: Props) => {
             {isShowLimit ? (
               <SetLimitList />
             ) : (
-              <div>Menampilkan 1 - {limitData > totalData ? totalData : limitData} Data dari {meta?.total} Data</div>
+              <div>
+                Menampilkan 1 - {limitData > totalData ? totalData : limitData} Data dari{' '}
+                {meta?.total} Data
+              </div>
             )}
           </div>
           <TablePaginate length={10} meta={meta} />

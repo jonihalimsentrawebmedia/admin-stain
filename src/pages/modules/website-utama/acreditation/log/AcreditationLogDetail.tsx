@@ -7,12 +7,15 @@ import type { LogStatistic } from '../../statistic/model'
 import { Skeleton } from '@/components/ui/skeleton'
 import TableCustom from '@/components/common/table/TableCustom'
 import SelectFilter from '@/components/common/filter/SelectFilter'
+import { capitalizeTextSimple } from '../AcreditationViewModel'
 
 const AcreditationLogDetail = () => {
   const { acreditationDetail, loading } = useGetAcreditationDetail()
   const { log, loading: loadingLog, meta } = useGetLogAcreditation()
   const createdAt = formatDateTime(acreditationDetail?.created_at ?? null)
   const updatedAt = formatDateTime(acreditationDetail?.updated_at ?? null)
+  const startAt=formatDateTime(acreditationDetail?.mulai_berlaku ?? null)
+  const endAt=formatDateTime(acreditationDetail?.akhir_berlaku ?? null)
   const columns: ColumnDef<LogStatistic>[] = [
     {
       accessorKey: 'No',
@@ -52,12 +55,13 @@ const AcreditationLogDetail = () => {
     },
   ]
 
+
   if (loading) {
     return <Skeleton className="height-[400px] w-full" />
   }
   return (
     <div className="flex  flex-col gap-4">
-      <ButtonTitleGroup buttonGroup={[]} label="Log Data " isBack />
+      <ButtonTitleGroup link='/modules/website-utama/acreditation' buttonGroup={[]} label="Log Data " isBack />
 
       <div className="flex gap-4 flex-col md:flex-row">
         <img
@@ -78,7 +82,7 @@ const AcreditationLogDetail = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <div className="text-[#999999] text-sm">Nilai Akreditasi*</div>
-                <div className="">{acreditationDetail?.nilai_akreditas}</div>
+                <div className="">{capitalizeTextSimple(acreditationDetail?.nilai_akreditas??"")}</div>
               </div>
               <div>
                 <div className="text-[#999999] text-sm">Lembaga Penilai*</div>
@@ -91,7 +95,7 @@ const AcreditationLogDetail = () => {
               <div>
                 <div className="text-[#999999] text-sm">Masa Berlaku*</div>
                 <div className="">
-                  {acreditationDetail?.mulai_berlaku} s.d {acreditationDetail?.akhir_berlaku}
+                  {startAt.date} s.d {endAt.date}
                 </div>
               </div>
               <div>

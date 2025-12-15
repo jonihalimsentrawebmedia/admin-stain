@@ -75,7 +75,7 @@ const LogView = () => {
   ]
   return (
     <div className="flex flex-col gap-4">
-      <ButtonTitleGroup buttonGroup={[]} isBack label="Log Data" />
+      <ButtonTitleGroup link='/modules/website-utama/services' buttonGroup={[]} isBack label="Log Data" />
       <div>
         <div className="text-[#999999] text-sm">Nama Layanan</div>
         <div className="text-green-600 font-medium text-3xl">{service?.nama_layanan}</div>

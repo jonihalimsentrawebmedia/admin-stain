@@ -5,7 +5,7 @@ import { History } from 'lucide-react'
 import ButtonEditAcreditation from './components/ButtonEditAcreditation'
 import ButtonDeleteAcreditation from './components/ButtonDeleteAcreditation'
 import { useState } from 'react'
-function capitalizeTextSimple(text: string): string {
+export function capitalizeTextSimple(text: string): string {
   if (!text) return ''
 
   return text
