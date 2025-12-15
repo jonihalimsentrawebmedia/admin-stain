@@ -48,4 +48,8 @@ export interface IAgendaDetail {
   created_user: string
   updated_at: string
   updated_user: string
+
+  nama_user_created: string
+  nama_disetujui: string
+  nama_user_updated: string
 }

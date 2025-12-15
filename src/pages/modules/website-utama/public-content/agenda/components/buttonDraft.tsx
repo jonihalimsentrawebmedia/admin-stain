@@ -53,8 +53,9 @@ export const ButtonDraftAgenda = (data: IAgendaDetail) => {
 
       <DialogCustom
         open={open}
-        className={'rounded'}
         setOpen={setOpen}
+        isAuto
+        className={'rounded lg:max-w-xl'}
         title={'Kembali Ke Draft'}
         description={'Apakah anda yakin untuk mengembalikan Agenda yang diajukan ke draft?'}
       >

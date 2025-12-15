@@ -52,7 +52,8 @@ export const ButtonSubmissionAnnouncement = (data: IAnnouncement) => {
 
       <DialogCustom
         open={open}
-        className={'rounded'}
+        isAuto
+        className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
         title={'Ajukan Ke Editor'}
         description={'Apakah anda yakin untuk mengajukan Pengumuman yang dipilih ke editor?'}

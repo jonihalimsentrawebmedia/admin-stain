@@ -48,7 +48,8 @@ export const ButtonDeleteAgenda = (data: IAgendaDetail) => {
 
       <DialogCustom
         open={open}
-        className={'rounded'}
+        isAuto
+        className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
         title={'Hapus Agenda?'}
         description={'Apakah anda yakin untuk menghapus Agenda yang ditulis?'}

@@ -42,4 +42,8 @@ export interface IAchievementDetail {
   gambar_tambahan: IMoreImage[]
 
   nama_kategori_berita: string
+
+  nama_user_created: string
+  nama_disetujui: string
+  nama_user_updated: string
 }

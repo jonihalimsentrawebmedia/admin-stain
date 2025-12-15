@@ -3,8 +3,6 @@ import { IoSchool } from 'react-icons/io5'
 import { TbWorld } from 'react-icons/tb'
 import { FaGear, FaGears } from 'react-icons/fa6'
 import { Calendar } from 'lucide-react'
-import { BiCertification, BiSolidCertification } from 'react-icons/bi'
-import { FaCertificate } from 'react-icons/fa'
 import { IconCertificate } from '@/components/common/icon'
 
 const baseDomain = '/modules/website-utama'

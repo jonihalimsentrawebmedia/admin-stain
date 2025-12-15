@@ -12,6 +12,7 @@ import { RejectAnnouncementSection } from '@/pages/modules/website-utama/public-
 import { ApproveAnnouncementSection } from '@/pages/modules/website-utama/public-content/announcement/components/table/approveSection.tsx'
 import { PublishAnnouncementSection } from '@/pages/modules/website-utama/public-content/announcement/components/table/publishSection.tsx'
 import { UnpublishAnnouncementSection } from '@/pages/modules/website-utama/public-content/announcement/components/table/unpublishSection.tsx'
+import { Image } from 'lucide-react'
 
 export const AnnouncementPage = () => {
   const navigate = useNavigate()
@@ -125,6 +126,28 @@ export const AnnouncementPage = () => {
         <ButtonTitleGroup
           label={'Pengumuman'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <Button
+                  onClick={() => navigate('background')}
+                  variant={'outline'}
+                  className="border border-primary text-primary hover:text-primary"
+                >
+                  <Image className="text-primary" />
+                  Gambar Background
+                </Button>
+
+                // <Button
+                //   onClick={() => navigate('background')}
+                //   variant={'outline'}
+                //   className="border border-red-500 text-red-500"
+                // >
+                //   <IoWarning className="text-red- hover:text-red-500 size-6" />
+                //   Gambar Background Belum Ada
+                // </Button>
+              ),
+            },
             {
               type: 'add',
               label: '',

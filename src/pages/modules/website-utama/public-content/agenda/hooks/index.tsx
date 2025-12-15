@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
-import type { IStatusAgenda } from '@/pages/modules/website-utama/public-content/agenda/data'
+import type { IAgendaDetail, IStatusAgenda } from '../data/index'
 import { useSearchParams } from 'react-router-dom'
 
 export const UseGetAgendaList = () => {
@@ -38,7 +38,7 @@ export const UseGetAgendaList = () => {
 }
 
 export const UseGetAgendaDetail = (id: string) => {
-  const [detailAgenda, setDetailAgenda] = useState<any>()
+  const [detailAgenda, setDetailAgenda] = useState<IAgendaDetail>()
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['detail-agenda', id],
@@ -75,4 +75,24 @@ export const UseGetAgendaStatus = () => {
   }, [data])
 
   return { status, loading }
+}
+
+export const UseGetLogAgenda = (id: string) => {
+  const [logData, setLogData] = useState<any[]>([])
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['log-inovasi-berdampak', id],
+    refetchOnWindowFocus: false,
+    queryFn: () => AxiosClient.get(`/website-utama/agenda-log/${id}`).then((res) => res.data.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setLogData(data)
+    }
+  }, [data])
+
+  return { logData, loading }
 }

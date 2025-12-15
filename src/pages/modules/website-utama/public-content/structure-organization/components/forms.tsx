@@ -5,15 +5,18 @@ import type { StructureOrganizationType } from '../data/resolver.tsx'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import { OptionGrouping } from '@/pages/modules/constanta'
 import TextInput from '@/components/common/form/TextInput.tsx'
+import type { Dispatch, SetStateAction } from 'react'
 
 interface props {
   loading: boolean
   form: UseFormReturn<StructureOrganizationType>
   HandleSave: (e: StructureOrganizationType) => void
+  open?: boolean
+  setOpen?: Dispatch<SetStateAction<boolean>>
 }
 
 export const FormStructureOrganization = (props: props) => {
-  const { form, loading, HandleSave } = props
+  const { form, loading, HandleSave, open, setOpen } = props
   return (
     <>
       <Form {...form}>
@@ -52,7 +55,11 @@ export const FormStructureOrganization = (props: props) => {
               {
                 label: 'Batal',
                 type: 'cancel',
-                onClick: () => {},
+                onClick: () => {
+                  if (setOpen) {
+                    setOpen(!open)
+                  }
+                },
               },
               { isDisabled: loading, label: 'Simpan', type: 'save', onClick: () => {} },
             ]}

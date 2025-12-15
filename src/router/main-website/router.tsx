@@ -56,6 +56,13 @@ import { UpdatedAchievementPage } from '@/pages/modules/website-utama/public-con
 import { DetailAchievementPage } from '@/pages/modules/website-utama/public-content/achievement/detail'
 import { LogActivityPage } from '@/pages/modules/website-utama/public-content/slider/top-slider/log'
 import AcreditationLogDetail from '@/pages/modules/website-utama/acreditation/log/AcreditationLogDetail'
+import { LogBottomActivityPage } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/log'
+import { LogActivityNewsPage } from '@/pages/modules/website-utama/public-content/news/log'
+import { LogActivityImpactInnovationPage } from '@/pages/modules/website-utama/public-content/impact-innovation/log'
+import { LogActivityAnnouncementPage } from '@/pages/modules/website-utama/public-content/announcement/log'
+import { LogActivityAgendaPage } from '@/pages/modules/website-utama/public-content/agenda/log'
+import { LogActivityFacilitiesPage } from '@/pages/modules/website-utama/public-content/facilities/log'
+import { LogActivityAchievement } from '@/pages/modules/website-utama/public-content/achievement/log'
 
 export const MainWebsiteRouter = [
   {
@@ -117,6 +124,10 @@ export const MainWebsiteRouter = [
                 path: 'edit/:id',
                 element: <UpdatedBottomSlider />,
               },
+              {
+                path: 'log/:id',
+                element: <LogBottomActivityPage />,
+              },
             ],
           },
         ],
@@ -140,6 +151,10 @@ export const MainWebsiteRouter = [
             path: 'detail/:id',
             element: <DetailNewsPage />,
           },
+          {
+            path: 'log/:id',
+            element: <LogActivityNewsPage />,
+          },
         ],
       },
       {
@@ -160,6 +175,10 @@ export const MainWebsiteRouter = [
           {
             path: 'detail/:id',
             element: <AnnouncementDetailPage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityAnnouncementPage />,
           },
         ],
       },
@@ -182,6 +201,10 @@ export const MainWebsiteRouter = [
             path: 'detail/:id',
             element: <DetailAgendaPage />,
           },
+          {
+            path: 'log/:id',
+            element: <LogActivityAgendaPage />,
+          },
         ],
       },
       {
@@ -202,6 +225,10 @@ export const MainWebsiteRouter = [
           {
             path: 'detail/:id',
             element: <DetailImpactInnovationPage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityImpactInnovationPage />,
           },
         ],
       },
@@ -236,6 +263,10 @@ export const MainWebsiteRouter = [
           {
             path: 'detail/:id',
             element: <DetailFacilitiesPage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityFacilitiesPage />,
           },
         ],
       },
@@ -284,6 +315,10 @@ export const MainWebsiteRouter = [
           {
             path: 'detail/:id',
             element: <DetailAchievementPage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityAchievement />,
           },
         ],
       },
@@ -402,7 +437,6 @@ export const MainWebsiteRouter = [
   },
   {
     path: 'statistic',
-
     children: [
       {
         index: true,
@@ -422,6 +456,7 @@ export const MainWebsiteRouter = [
         element: <AcreditationView />,
       },
       {
+<<<<<<< HEAD
         path:"background",
         element:<AcreditationBackgroundView/>
       },
@@ -429,6 +464,11 @@ export const MainWebsiteRouter = [
         path:":idAcreditation/log",
         element:<AcreditationLogDetail/>
       }
+=======
+        path: 'background',
+        element: <AcreditationBackgroundView />,
+      },
+>>>>>>> 4b7d37ea9e6178b970ee7e0ebb0bf317a5b3a703
     ],
   },
 ]

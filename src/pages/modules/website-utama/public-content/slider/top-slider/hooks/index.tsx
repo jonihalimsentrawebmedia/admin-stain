@@ -87,7 +87,7 @@ export const UseGetStatusSlider = () => {
   return { status, loading }
 }
 
-export const UseGetLogData = (id: string) => {
+export const UseGetLogTopSlider = (id: string) => {
   const [logData, setLogData] = useState<any[]>([])
 
   const { data, isLoading, isFetching } = useQuery({

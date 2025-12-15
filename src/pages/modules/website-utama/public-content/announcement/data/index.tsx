@@ -32,9 +32,12 @@ export interface IAnnouncement {
   updated_at: string
   updated_user: string
 
+  nama_user_created: string
+  nama_user_updated: string
+  nama_disetujui: string
+
   dokumens: IDocumentAnnouncement[]
 }
-
 
 export interface IstatusAnnouncement {
   DIAJUKAN_EDITOR: number

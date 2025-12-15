@@ -69,10 +69,6 @@ export const ColumnsLog = () => {
                 alt="img"
                 className="w-[400px] h-[240px] rounded object-cover"
               />
-            ) : data?.jenis_data === 'status' ? (
-              <>
-                <div></div>
-              </>
             ) : (
               <div>
                 <div

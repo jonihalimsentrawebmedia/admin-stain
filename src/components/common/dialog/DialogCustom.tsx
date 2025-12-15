@@ -90,7 +90,7 @@ export function DialogCustom({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent
-        className={cn('bg-white p-6 flex flex-col gap-4 min-w-xs!', className, backgroundColor)}
+        className={cn('bg-white p-6 flex flex-col gap-4', className, backgroundColor)}
         position={position}
         style={{
           width: isAuto ? 'auto' : isMobile ? '90%' : width ? width : '70%',

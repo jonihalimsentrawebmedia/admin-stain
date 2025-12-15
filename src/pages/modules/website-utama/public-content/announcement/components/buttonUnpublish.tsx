@@ -52,8 +52,9 @@ export const ButtonAnnouncementUnpublish = (data: IAnnouncement) => {
 
       <DialogCustom
         open={open}
-        className={'rounded'}
         setOpen={setOpen}
+        isAuto
+        className={'rounded lg:max-w-xl'}
         title={'Unpublish Pengumuman'}
         description={'Apakah anda yakin untuk mengUnpublish Pengumuman yang dipilih?'}
       >

@@ -53,8 +53,9 @@ export const ButtonPublishAgenda = (data: IAgendaDetail) => {
 
       <DialogCustom
         open={open}
-        className={'rounded'}
         setOpen={setOpen}
+        isAuto
+        className={'rounded lg:max-w-xl'}
         title={'Publish Agenda'}
         description={'Apakah anda yakin untuk mempublish Agenda yang dipilih?'}
       >

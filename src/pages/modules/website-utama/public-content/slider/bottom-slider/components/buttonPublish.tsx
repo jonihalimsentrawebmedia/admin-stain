@@ -57,6 +57,7 @@ export const ButtonPublishedBottom = (props: Props) => {
 
       <DialogCustom
         open={open}
+        isAuto
         setOpen={setOpen}
         className={'rounded'}
         title={'Publish Slider'}

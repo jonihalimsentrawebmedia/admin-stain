@@ -30,7 +30,6 @@ interface Props {
 }
 export default function ImageUploader({
   data,
-
   index,
   handleChecked,
   urlBg,
@@ -201,7 +200,7 @@ export default function ImageUploader({
               description={
                 <div>
                   <p>"Apakah anda yakin untuk menghapus gambar ini?"</p>
-                  <img className="w-full h-60" src={data.gambar} />
+                  <img className="w-full h-72 object-cover" src={data.gambar} />
                 </div>
               }
               title="Hapus Gambar Background"

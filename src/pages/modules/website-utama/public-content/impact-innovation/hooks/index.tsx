@@ -79,3 +79,24 @@ export const UseGetImpactInnovationStatus = () => {
 
   return { status, loading }
 }
+
+export const UseGetLogImpactInnovation = (id: string) => {
+  const [logData, setLogData] = useState<any[]>([])
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['log-inovasi-berdampak', id],
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get(`/website-utama/inovasi-berdampak-log/${id}`).then((res) => res.data.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setLogData(data)
+    }
+  }, [data])
+
+  return { logData, loading }
+}

@@ -47,7 +47,8 @@ export const ButtonDeleteAnnouncement = (data: IAnnouncement) => {
 
       <DialogCustom
         open={open}
-        className={'rounded'}
+        isAuto
+        className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
         title={'Hapus Pengumuman?'}
         description={'Apakah anda yakin untuk menghapus Pengumuman yang ditulis?'}

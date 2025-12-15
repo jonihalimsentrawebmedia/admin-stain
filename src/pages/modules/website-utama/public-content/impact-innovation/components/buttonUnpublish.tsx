@@ -62,7 +62,8 @@ export const ButtonUnpublishImpactInnovation = (data: IImpactInnovationList) => 
 
       <DialogCustom
         open={open}
-        className={'rounded'}
+        isAuto
+        className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
         title={'Unpublish Berita'}
         description={'Apakah anda yakin untuk mempublish berita yang dipilih?'}
