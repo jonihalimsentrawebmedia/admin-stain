@@ -20,7 +20,6 @@ const StatisticView = () => {
     setImageStatistic,
     goToLog,
   } = StatisticViewModel()
-  console.log(form.watch())
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
@@ -101,8 +100,8 @@ const StatisticView = () => {
                   temp[index] = image
                   setImageStatistic(temp)
                 }}
-                heightValidation={0}
-                widthValidation={0}
+                minWidth={280}
+                minheight={320}
                 image={item}
                 index={index}
                 isEdit={isEdit}

@@ -21,6 +21,12 @@ interface Props {
   urlBg: string
   urlBgDelete: string
   keyUrl: string
+  maxWidth?: number
+  maxHeight?: number
+  minWidth?: number
+  minheight?: number
+  maxSize?: number
+  allowedTypes?: string[]
 }
 export default function ImageUploader({
   data,
@@ -29,6 +35,12 @@ export default function ImageUploader({
   urlBg,
   keyUrl,
   urlBgDelete,
+  maxHeight = 10000,
+  maxSize = 2097152,
+  maxWidth = 10000,
+  minWidth = 200,
+  minheight = 200,
+  allowedTypes = ['image/png', 'image/jpg', 'image/jpeg'],
 }: Props) {
   const [preview, setPreview] = useState<string | null>()
   const [loading, setLoading] = useState(false)
@@ -69,11 +81,82 @@ export default function ImageUploader({
 
   const onDrop = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault()
+    const file = e.dataTransfer.files?.[0]
+    if (file) {
+      if (!allowedTypes?.includes(file.type)) {
+        toast.error(`Format file tidak didukung. ${allowedTypes?.join(',')}`)
+        return
+      }
+      if (file.size > maxSize) {
+        toast.error(`Ukuran file maksimal ${maxSize / 1024 / 1024}`)
+
+        return
+      }
+      const img = new Image()
+      const objectUrl = URL.createObjectURL(file)
+
+      img.src = objectUrl
+      img.onload = () => {
+        const { width, height } = img
+
+        URL.revokeObjectURL(objectUrl)
+
+        if (width < minWidth || height < minheight) {
+          toast.error(`Resolusi minimal ${minWidth}x${minheight}px`)
+          return
+        }
+
+        if (width > maxWidth || height > maxHeight) {
+          toast.error(`Resolusi maksimal ${maxWidth}x${maxHeight}px`)
+          return
+        }
+
+        // ✅ File lolos semua validasi
+        console.log('File valid:', file)
+
+        // handleFile(file)
+      }
+    }
     handleFile(e.dataTransfer.files?.[0])
   }
 
   const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
+    if (file) {
+      if (!allowedTypes?.includes(file.type)) {
+        toast.error(`Format file tidak didukung. ${allowedTypes?.join(',')}`)
+        return
+      }
+      if (file.size > maxSize) {
+        toast.error(`Ukuran file maksimal ${maxSize / 1024 / 1024}`)
+
+        return
+      }
+      const img = new Image()
+      const objectUrl = URL.createObjectURL(file)
+
+      img.src = objectUrl
+      img.onload = () => {
+        const { width, height } = img
+
+        URL.revokeObjectURL(objectUrl)
+
+        if (width < minWidth || height < minheight) {
+          toast.error(`Resolusi minimal ${minWidth}x${minheight}px`)
+          return
+        }
+
+        if (width > maxWidth || height > maxHeight) {
+          toast.error(`Resolusi maksimal ${maxWidth}x${maxHeight}px`)
+          return
+        }
+
+        // ✅ File lolos semua validasi
+        console.log('File valid:', file)
+
+        // handleFile(file)
+      }
+    }
     handleFile(file)
   }
 

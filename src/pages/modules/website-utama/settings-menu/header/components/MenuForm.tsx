@@ -78,8 +78,9 @@ const MenuForm = ({ handleSave, form, loading, onCancel, isSubMenu }: Props) => 
           form={form}
           name="url"
           placeholder="Sumber Data (url)*"
-          label="Sumber Data (url)**"
+          label="Sumber Data (url)*"
           isRow
+          type='url'
         />
         <TextInput
           form={form}

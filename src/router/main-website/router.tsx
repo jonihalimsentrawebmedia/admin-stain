@@ -55,6 +55,7 @@ import { CreatedAchievementPage } from '@/pages/modules/website-utama/public-con
 import { UpdatedAchievementPage } from '@/pages/modules/website-utama/public-content/achievement/updated'
 import { DetailAchievementPage } from '@/pages/modules/website-utama/public-content/achievement/detail'
 import { LogActivityPage } from '@/pages/modules/website-utama/public-content/slider/top-slider/log'
+import AcreditationLogDetail from '@/pages/modules/website-utama/acreditation/log/AcreditationLogDetail'
 import { LogBottomActivityPage } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/log'
 import { LogActivityNewsPage } from '@/pages/modules/website-utama/public-content/news/log'
 import { LogActivityImpactInnovationPage } from '@/pages/modules/website-utama/public-content/impact-innovation/log'
@@ -465,9 +466,19 @@ export const MainWebsiteRouter = [
         element: <AcreditationView />,
       },
       {
+<<<<<<< HEAD
+        path:"background",
+        element:<AcreditationBackgroundView/>
+      },
+      {
+        path:":idAcreditation/log",
+        element:<AcreditationLogDetail/>
+      }
+=======
         path: 'background',
         element: <AcreditationBackgroundView />,
       },
+>>>>>>> 4b7d37ea9e6178b970ee7e0ebb0bf317a5b3a703
     ],
   },
 ]

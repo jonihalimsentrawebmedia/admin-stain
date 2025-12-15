@@ -57,6 +57,7 @@ const ButtonAddAcademicYear = () => {
         open={open}
         className={'rounded min-w-xs lg:min-w-2xl'}
         setOpen={setOpen}
+        width='50%'
         title={'Tambah Tahun Akademik'}
       >
         <AcademicYearForm

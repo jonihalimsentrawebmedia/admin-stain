@@ -56,7 +56,7 @@ const ButtonEdit = ({ data }: Props) => {
         <IconEdit />
       </button>
 
-      <DialogCustom open={open} className={'rounded'} setOpen={setOpen} title={'Edit Menu'}>
+      <DialogCustom width='50%' open={open} className={'rounded'} setOpen={setOpen} title={'Edit Menu'}>
         <MenuForm
           form={form}
           loading={loading}

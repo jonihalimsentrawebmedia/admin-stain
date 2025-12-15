@@ -1,9 +1,4 @@
-import {
-
-  IconDeleteImage,
-
-  IconEditGreen,
-} from '@/components/common/table/icon'
+import { IconDeleteImage, IconEditGreen } from '@/components/common/table/icon'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import AxiosClient from '@/provider/axios'
@@ -14,21 +9,32 @@ import type { StatistikUniversitasType } from '../model'
 
 interface Props {
   image: string
-  widthValidation?: number
-  heightValidation?: number
+  maxWidth?: number
+  maxHeight?: number
+  minWidth?: number
+  minheight?: number
+  maxSize?: number
+  allowedTypes?: string[]
+
   isEdit: boolean
   index: number
   setImage: (image: string) => void
   handleSave: (value: StatistikUniversitasType) => void
   form: any
 }
-const ImageStatistic = ({ 
+const ImageStatistic = ({
   image,
-  isEdit, 
+  isEdit,
   index,
   handleSave,
   setImage,
   form,
+  allowedTypes = ['image/png', 'image/jpg', 'image/jpeg'],
+  maxHeight = 10000,
+  maxSize = 2097152,
+  maxWidth = 10000,
+  minWidth = 200,
+  minheight = 200,
 }: Props) => {
   const [preview, setPreview] = useState<string | null>('')
   const [loading, setLoading] = useState(false)
@@ -55,6 +61,42 @@ const ImageStatistic = ({
   }
   const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
+    console.log(file)
+    if (file) {
+      if (!allowedTypes?.includes(file.type)) {
+        toast.error(`Format file tidak didukung. ${allowedTypes?.join(',')}`)
+        return
+      }
+      if (file.size > maxSize) {
+        toast.error(`Ukuran file maksimal ${maxSize / 1024 / 1024}`)
+
+        return
+      }
+      const img = new Image()
+      const objectUrl = URL.createObjectURL(file)
+
+      img.src = objectUrl
+      img.onload = () => {
+        const { width, height } = img
+
+        URL.revokeObjectURL(objectUrl)
+
+        if (width < minWidth || height < minheight) {
+          toast.error(`Resolusi minimal ${minWidth}x${minheight}px`)
+          return
+        }
+
+        if (width > maxWidth || height > maxHeight) {
+          toast.error(`Resolusi maksimal ${maxWidth}x${maxHeight}px`)
+          return
+        }
+
+        // ✅ File lolos semua validasi
+        console.log('File valid:', file)
+
+        // handleFile(file)
+      }
+    }
     handleFile(file)
   }
   useEffect(() => {

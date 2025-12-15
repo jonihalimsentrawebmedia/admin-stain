@@ -57,7 +57,7 @@ const ButtonAddServices = () => {
         Tambah
       </Button>
 
-      <DialogCustom open={open} className={'rounded lg:min-w-2xl'} setOpen={setOpen} title={'Tambah Menu'}>
+      <DialogCustom width='50%' open={open} className={'rounded lg:min-w-2xl'} setOpen={setOpen} title={'Tambah Menu'}>
         <ServiceForm
           form={form}
           loading={loading}

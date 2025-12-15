@@ -29,6 +29,7 @@ const ServiceForm = ({ form, handleCancel, handleSave, loading }: Props) => {
             name="url_layanan"
             label="URL Layanan"
             placeholder="URL Layanan"
+            type='url'
           />
           <InputCheckbox
             form={form}

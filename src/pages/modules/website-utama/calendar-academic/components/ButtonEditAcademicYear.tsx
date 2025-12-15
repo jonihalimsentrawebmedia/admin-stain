@@ -30,7 +30,7 @@ const ButtonEditAcademicYear = ({ data }: Props) => {
       .then((res) => {
         if (res.data.status) {
           queryClient.invalidateQueries({
-            queryKey: ['list-academic-year'],
+            queryKey: ['list-acedemic-year'],
           })
           setOpen(false)
           setLoading(false)
@@ -59,6 +59,7 @@ const ButtonEditAcademicYear = ({ data }: Props) => {
 
       <DialogCustom
         open={open}
+        width="50%"
         className={'rounded lg:min-w-2xl'}
         setOpen={setOpen}
         title={'Edit Tahun Akademik'}

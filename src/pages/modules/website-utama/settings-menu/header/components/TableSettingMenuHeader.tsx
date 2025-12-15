@@ -68,7 +68,7 @@ const TableSettingMenuHeader = () => {
               <>
                 <TableRow className="py-0!">
                   <TableCell className="border-b  left-0 relative">
-                    <div className="pl-4">{index + 1}</div>
+                    <div className="">{index + 1}</div>
                   </TableCell>
                   <TableCell className="border-b">{item.nama_menu}</TableCell>
                   <TableCell className="border-b">
@@ -125,7 +125,7 @@ const TableSettingMenuHeader = () => {
                         <ButtonAddSubMenu data={subItem} menu_parent_name={subItem.nama_menu} />
                       </TableCell>
                       <TableCell className="border-b">
-                        {item.status == 'Y' ? 'Ya' : 'Tidak'}
+                        {item.halaman ? 'Ya' : 'Tidak'}
                       </TableCell>
                       <TableCell className="border-b">{subItem.urutan}</TableCell>
                       <TableCell className="border-b">
@@ -177,10 +177,7 @@ const TableSettingMenuHeader = () => {
                           <ButtonActiveMenu data={subSubItem} />
                         </TableCell>
                         <TableCell className="border-b">
-                          <ButtonAddSubMenu
-                            data={subSubItem}
-                            menu_parent_name={subSubItem.nama_menu}
-                          />
+                       
                         </TableCell>
                         <TableCell className="border-b">
                           {item.status == 'Y' ? 'Ya' : 'Tidak'}
