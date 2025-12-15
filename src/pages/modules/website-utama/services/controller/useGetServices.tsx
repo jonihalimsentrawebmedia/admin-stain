@@ -1,4 +1,4 @@
-import  { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { ServicesList } from '../model'
 import type { Meta } from '@/components/common/table/TablePagination'
 import { useSearchParams } from 'react-router-dom'

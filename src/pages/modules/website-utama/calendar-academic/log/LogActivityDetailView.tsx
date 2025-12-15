@@ -5,10 +5,13 @@ import type { ColumnDef } from '@tanstack/react-table'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
 import TableCustom from '@/components/common/table/TableCustom'
 import type { LogStatistic } from '../../statistic/model'
+import SelectFilter from '@/components/common/filter/SelectFilter'
+import { useParams } from 'react-router-dom'
 
 const LogActivityDetailView = () => {
   const { activityDetail } = useGetActivityDetail()
-  const { log } = useGetLogAcademicActivityDetail()
+  const { log, loading, meta } = useGetLogAcademicActivityDetail()
+  const { idAcademicYear, idActivity } = useParams()
   const createdAt = formatDateTime(activityDetail?.created_at ?? null)
   const updatedAt = formatDateTime(activityDetail?.updated_at ?? null)
   const startAt = formatDateTime(activityDetail?.tanggal_mulai ?? null)
@@ -53,7 +56,12 @@ const LogActivityDetailView = () => {
   ]
   return (
     <div className="flex flex-col gap-4">
-      <ButtonTitleGroup buttonGroup={[]} label="Log Data" isBack />
+      <ButtonTitleGroup
+        link={`/modules/website-utama/calendar-academic/${idAcademicYear}/detail-activity/${idActivity}`}
+        buttonGroup={[]}
+        label="Log Data"
+        isBack
+      />
       <div>
         <div className="text-[#999999] text-sm">Uraian Kegiatan</div>
         <div className="text-green-600 font-medium text-3xl">{activityDetail?.uraian_kegiatan}</div>
@@ -86,7 +94,26 @@ const LogActivityDetailView = () => {
         </div>
       </div>
 
-      <TableCustom data={log} isShowFilter={false} isShowPagination={false} columns={columns} />
+      <TableCustom
+        meta={meta}
+        addFilter={
+          <SelectFilter
+            selectClassName={'min-w-[8rem]'}
+            label="Tampilkan"
+            name={'limit'}
+            options={[
+              { label: '10 Data', value: '10' },
+              { label: '25 Data', value: '25' },
+              { label: '50 Data', value: '50' },
+              { label: '100 Data', value: '100' },
+            ]}
+          />
+        }
+        data={log}
+        isShowLimit={false}
+        columns={columns}
+        loading={loading}
+      />
     </div>
   )
 }

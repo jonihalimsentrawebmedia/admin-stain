@@ -39,6 +39,7 @@ const ServicesView = () => {
         data={serviceList}
         meta={meta}
         loading={loading}
+        isShowLimit={false}
       />
     </div>
   )

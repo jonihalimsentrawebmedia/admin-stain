@@ -15,10 +15,11 @@ interface Props {
     isDisabled?: boolean
   }[]
   isBack?: boolean
+  link?: string
 }
 
 const ButtonTitleGroup = (props: Props) => {
-  const { buttonGroup, label, isBack } = props
+  const { buttonGroup, label, isBack, link } = props
   const navigate = useNavigate()
   return (
     <div className="flex gap-4 flex-wrap items-center justify-between">
@@ -28,7 +29,11 @@ const ButtonTitleGroup = (props: Props) => {
             className="cursor-pointer"
             onClick={(e) => {
               e.preventDefault()
-              navigate(-1)
+              if (link) {
+                navigate(link)
+              } else {
+                navigate(-1)
+              }
             }}
           >
             <IconBackTitle />

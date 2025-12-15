@@ -9,7 +9,7 @@ import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import DetailField from '@/components/common/field/DetailField'
 import { Button } from '@/components/ui/button'
 import { Trash2, X } from 'lucide-react'
-import { formatDateTime } from '@/utils/date'
+
 
 interface Props {
   data: AcreditationList
@@ -40,11 +40,11 @@ const ButtonDeleteAcreditation = ({ data }: Props) => {
       label: 'No. Surat Keputusan*',
     },
     {
-      name: '',
+      name: 'mulai_berlaku',
       label: 'Mulai Berlaku*',
     },
     {
-      name: '',
+      name: 'akhir_berlaku',
       label: 'Akhir Berlaku*',
     },
   ]
@@ -71,8 +71,7 @@ const ButtonDeleteAcreditation = ({ data }: Props) => {
         setLoading(false)
       })
   }
-  const startAt = formatDateTime(data.mulai_berlaku)
-  const endAt = formatDateTime(data.akhir_berlaku)
+ 
   return (
     <>
       <button
@@ -80,8 +79,8 @@ const ButtonDeleteAcreditation = ({ data }: Props) => {
           setOpen(!open)
           form.reset({
             ...data,
-            akhir_berlaku: endAt.date,
-            mulai_berlaku: startAt.date,
+            akhir_berlaku: data.akhir_berlaku.split("-").reverse().join("-"),
+            mulai_berlaku: data.mulai_berlaku.split("-").reverse().join("-"),
           })
         }}
       >
@@ -92,6 +91,7 @@ const ButtonDeleteAcreditation = ({ data }: Props) => {
         open={open}
         className={'rounded min-w-xs lg:min-w-2xl'}
         setOpen={setOpen}
+           width='50%'
         title={<p className="text-2xl text-red-500">Hapus Akreditasi</p>}
         description={'Anda yakin ingin menghapus akreditasi ini?'}
       >

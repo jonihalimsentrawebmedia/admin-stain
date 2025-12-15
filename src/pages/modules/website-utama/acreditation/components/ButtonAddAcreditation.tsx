@@ -60,6 +60,7 @@ const ButtonAddAcreditation = () => {
         className={'rounded min-w-xs lg:min-w-2xl'}
         setOpen={setOpen}
         title={'Tambah Akreditasi'}
+        width='50%'
       >
         <AcreditationForm
           form={form}

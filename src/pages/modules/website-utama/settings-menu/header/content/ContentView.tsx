@@ -11,7 +11,7 @@ import { Image } from 'lucide-react'
 const ContentView = () => {
   const { columns, goToAdd, goToBackground } = ContentViewModel()
   const { contentList, loading, meta } = useGetContent()
-  const { backgroundList } = useGetBackground()
+  const { backgroundList,loading:loadingBg } = useGetBackground()
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
@@ -65,6 +65,7 @@ const ContentView = () => {
             ]}
           />
         }
+        isShowLimit={false}
         columns={columns}
         data={contentList}
         loading={loading}

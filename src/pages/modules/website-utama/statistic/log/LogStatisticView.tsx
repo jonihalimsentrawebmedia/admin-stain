@@ -4,9 +4,10 @@ import type { LogStatistic } from '../model'
 import type { ColumnDef } from '@tanstack/react-table'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
 import TableCustom from '@/components/common/table/TableCustom'
+import SelectFilter from '@/components/common/filter/SelectFilter'
 
 const LogStatisticView = () => {
-  const { log } = useGetLogStatistic()
+  const { log, loading, meta } = useGetLogStatistic()
 
   const columns: ColumnDef<LogStatistic>[] = [
     {
@@ -50,7 +51,26 @@ const LogStatisticView = () => {
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup buttonGroup={[]} label="Log Data - Statistik" isBack />
 
-      <TableCustom data={log} isShowFilter={false} isShowPagination={false} columns={columns} />
+      <TableCustom
+        addFilter={
+          <SelectFilter
+            selectClassName={'min-w-[8rem]'}
+            label="Tampilkan"
+            name={'limit'}
+            options={[
+              { label: '10 Data', value: '10' },
+              { label: '25 Data', value: '25' },
+              { label: '50 Data', value: '50' },
+              { label: '100 Data', value: '100' },
+            ]}
+          />
+        }
+        meta={meta}
+        loading={loading}
+        data={log}
+        isShowLimit={false}
+        columns={columns}
+      />
     </div>
   )
 }

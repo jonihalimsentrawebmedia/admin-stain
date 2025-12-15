@@ -8,11 +8,12 @@ import useGetBgCalendarAcademic from './controller/useGetBgCalendarAcademic'
 import { Button } from '@/components/ui/button'
 import { IoWarning } from 'react-icons/io5'
 import { Image } from 'lucide-react'
+import { Skeleton } from '@/components/ui/skeleton'
 
 const CalendarAcademicView = () => {
   const { columns, goToBackground } = CalendarAcademicViewModel()
   const { academicYearList, loading, meta } = useGetCalendarAcademic()
-  const { background } = useGetBgCalendarAcademic()
+  const { background, loading: loadingBg } = useGetBgCalendarAcademic()
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
@@ -21,26 +22,27 @@ const CalendarAcademicView = () => {
             label: '',
             onClick: () => {},
             type: 'add',
-            element:
-              background.length == 0 ? (
-                <Button
-                  onClick={goToBackground}
-                  variant={'outline'}
-                  className="border border-red-500 text-red-500"
-                >
-                  <IoWarning className="text-red- hover:text-red-500 size-6" />
-                  Gambar Background Belum Ada
-                </Button>
-              ) : (
-                <Button
-                  onClick={goToBackground}
-                  variant={'outline'}
-                  className="border border-primary text-primary hover:text-primary"
-                >
-                  <Image className="text-primary" />
-                  Gambar Background
-                </Button>
-              ),
+            element: loadingBg ? (
+              <Skeleton className="h-[30px] " />
+            ) : background.length == 0 ? (
+              <Button
+                onClick={goToBackground}
+                variant={'outline'}
+                className="border border-red-500 text-red-500"
+              >
+                <IoWarning className="text-red- hover:text-red-500 size-6" />
+                Gambar Background Belum Ada
+              </Button>
+            ) : (
+              <Button
+                onClick={goToBackground}
+                variant={'outline'}
+                className="border border-primary text-primary hover:text-primary"
+              >
+                <Image className="text-primary" />
+                Gambar Background
+              </Button>
+            ),
           },
           {
             label: '',
@@ -69,6 +71,7 @@ const CalendarAcademicView = () => {
         data={academicYearList}
         loading={loading}
         meta={meta}
+        isShowLimit={false}
       />
     </div>
   )

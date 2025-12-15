@@ -4,6 +4,7 @@ import type { AcreditationList } from './model'
 import { History } from 'lucide-react'
 import ButtonEditAcreditation from './components/ButtonEditAcreditation'
 import ButtonDeleteAcreditation from './components/ButtonDeleteAcreditation'
+import { useState } from 'react'
 function capitalizeTextSimple(text: string): string {
   if (!text) return ''
 
@@ -12,6 +13,30 @@ function capitalizeTextSimple(text: string): string {
     .split('_')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ')
+}
+type ExpandableTextProps = {
+  text: string
+}
+
+const ExpandableText = ({ text }: ExpandableTextProps) => {
+  const [expanded, setExpanded] = useState(false)
+
+  return (
+    <div className="min-w-[200px]">
+      <p className={`text-sm text-gray-800 leading-relaxed ${expanded ? '' : 'line-clamp-3'}`}>
+        {text}
+      </p>
+
+      {text.length > 100 && (
+        <button
+          onClick={() => setExpanded(!expanded)}
+          className="mt-1 text-xs font-medium text-green-600 hover:underline"
+        >
+          {expanded ? 'Lihat Lebih Sedikit' : 'Lihat Selengkapnya'}
+        </button>
+      )}
+    </div>
+  )
 }
 const AcreditationViewModel = () => {
   const [searchParams] = useSearchParams()
@@ -45,6 +70,9 @@ const AcreditationViewModel = () => {
     {
       accessorKey: 'uraian',
       header: 'Uraian',
+      cell: ({ row }) => {
+        return <ExpandableText text={row.original.uraian} />
+      },
     },
     {
       accessorKey: 'nilai_akreditas',

@@ -6,10 +6,11 @@ import type { ColumnDef } from '@tanstack/react-table'
 import type { LogStatistic } from '../../statistic/model'
 import { Skeleton } from '@/components/ui/skeleton'
 import TableCustom from '@/components/common/table/TableCustom'
+import SelectFilter from '@/components/common/filter/SelectFilter'
 
 const AcreditationLogDetail = () => {
   const { acreditationDetail, loading } = useGetAcreditationDetail()
-  const { log, loading: loadingLog } = useGetLogAcreditation()
+  const { log, loading: loadingLog, meta } = useGetLogAcreditation()
   const createdAt = formatDateTime(acreditationDetail?.created_at ?? null)
   const updatedAt = formatDateTime(acreditationDetail?.updated_at ?? null)
   const columns: ColumnDef<LogStatistic>[] = [
@@ -110,7 +111,28 @@ const AcreditationLogDetail = () => {
         </div>
       </div>
 
-      <TableCustom loading={loadingLog} columns={columns} data={log} isShowFilter={false} isShowPagination={false} />
+      <TableCustom
+      
+        meta={meta}
+        addFilter={
+          <SelectFilter
+            selectClassName={'min-w-[8rem]'}
+            label="Tampilkan"
+            name={'limit'}
+            options={[
+              { label: '10 Data', value: '10' },
+              { label: '25 Data', value: '25' },
+              { label: '50 Data', value: '50' },
+              { label: '100 Data', value: '100' },
+            ]}
+          />
+        }
+        data={log}
+        isShowLimit={false}
+        columns={columns}
+        loading={loadingLog}
+
+      />
     </div>
   )
 }

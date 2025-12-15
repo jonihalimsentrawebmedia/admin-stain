@@ -6,12 +6,13 @@ import useGetLogServices from '../controller/useGetLogServices'
 import type { ColumnDef } from '@tanstack/react-table'
 import type { LogStatistic } from '../../statistic/model'
 import TableCustom from '@/components/common/table/TableCustom'
+import SelectFilter from '@/components/common/filter/SelectFilter'
 
 const LogView = () => {
   const { service } = useGetServicesDetail()
   const createdAt = formatDateTime(service?.created_at ?? null)
   const updatedAt = formatDateTime(service?.updated_at ?? null)
-  const { log, loading } = useGetLogServices()
+  const { log, loading, meta } = useGetLogServices()
   const columns: ColumnDef<LogStatistic>[] = [
     {
       accessorKey: 'No',
@@ -44,10 +45,32 @@ const LogView = () => {
     {
       accessorKey: 'data_lama',
       header: 'Data Sebelumnya',
+      cell: ({ row }) => {
+        return (
+          <div>
+            {row.original.data_lama == 'Y'
+              ? 'Aktif'
+              : row.original.data_lama == 'N'
+                ? 'Tidak Aktif'
+                : row.original.data_lama}
+          </div>
+        )
+      },
     },
     {
       accessorKey: 'data_baru',
       header: 'Data Hasil Perubahan',
+      cell: ({ row }) => {
+        return (
+          <div>
+            {row.original.data_baru == 'Y'
+              ? 'Aktif'
+              : row.original.data_baru == 'N'
+                ? 'Tidak Aktif'
+                : row.original.data_baru}
+          </div>
+        )
+      },
     },
   ]
   return (
@@ -92,9 +115,22 @@ const LogView = () => {
         </div>
       </div>
       <TableCustom
+        meta={meta}
+        addFilter={
+          <SelectFilter
+            selectClassName={'min-w-[8rem]'}
+            label="Tampilkan"
+            name={'limit'}
+            options={[
+              { label: '10 Data', value: '10' },
+              { label: '25 Data', value: '25' },
+              { label: '50 Data', value: '50' },
+              { label: '100 Data', value: '100' },
+            ]}
+          />
+        }
         data={log}
-        isShowFilter={false}
-        isShowPagination={false}
+        isShowLimit={false}
         columns={columns}
         loading={loading}
       />

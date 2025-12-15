@@ -32,6 +32,7 @@ interface Props {
   placeHolderSearch?: string
   loading?: boolean
   meta?: Meta
+  isShowLimit?: boolean
 }
 const TableCustom = (props: Props) => {
   const {
@@ -50,13 +51,14 @@ const TableCustom = (props: Props) => {
     classNameSearch = 'rounded-lg',
     placeHolderSearch = 'Cari...',
     meta,
+    isShowLimit = true,
   } = props
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
   })
-  const [, setSearchParams] = useSearchParams()
+  const [searchparams, setSearchParams] = useSearchParams()
   const handleSearch = (query: string) => {
     setSearchParams((prev) => {
       const newParams = new URLSearchParams(prev)
@@ -67,7 +69,8 @@ const TableCustom = (props: Props) => {
     })
   }
   const columnCount = columns?.length || 5
-
+  const totalData = meta?.total ?? 0
+  const limitData = searchparams.get('limit') ? Number(searchparams.get('limit')) : 10
   return (
     <div className="flex flex-col w-full gap-4 ">
       {isShowFilter && (
@@ -156,7 +159,11 @@ const TableCustom = (props: Props) => {
       {isShowPagination && (
         <div className="flex gap-4 items-center justify-between">
           <div>
-            <SetLimitList />
+            {isShowLimit ? (
+              <SetLimitList />
+            ) : (
+              <div>Menampilkan 1 - {limitData > totalData ? totalData : limitData} Data dari {meta?.total} Data</div>
+            )}
           </div>
           <TablePaginate length={10} meta={meta} />
         </div>
