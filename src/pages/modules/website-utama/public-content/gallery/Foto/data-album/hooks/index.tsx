@@ -36,3 +36,46 @@ export const UseGetGalleryAlbum = (id: string) => {
 
   return { galleryAlbum, loading, meta }
 }
+
+export const UseGetGalleryPhotoDetail = (id: string) => {
+  const [detailGalleryPhoto, setDetailGalleryPhoto] = useState<IGalleryPhoto>()
+  
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['detail-photo', id],
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get(`/website-utama/galeri-foto/${id}`).then((res) => res.data.data),
+  })
+  
+  const loading = isLoading || isFetching
+  
+  useEffect(() => {
+    if (data) {
+      setDetailGalleryPhoto(data)
+    }
+  },[data])
+  
+  return { detailGalleryPhoto, loading }
+  
+}
+
+export const UseGetLogAlbumPhoto = (id: string) => {
+  const [logData, setLogData] = useState<any[]>([])
+  
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['log-photo-album', id],
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get(`/website-utama/galeri-foto-log/${id}`).then((res) => res.data.data),
+  })
+  
+  const loading = isLoading || isFetching
+  
+  useEffect(() => {
+    if (data) {
+      setLogData(data)
+    }
+  }, [data])
+  
+  return { logData, loading }
+}

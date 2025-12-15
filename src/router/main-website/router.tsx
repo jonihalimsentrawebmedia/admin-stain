@@ -73,6 +73,7 @@ import { GalleryPhotoBackgroundPage } from '@/pages/modules/website-utama/public
 import { GalleryVideoBackgroundPage } from '@/pages/modules/website-utama/public-content/gallery/video/background'
 import { LogActivityVideoPage } from '@/pages/modules/website-utama/public-content/gallery/video/log'
 import { LogActivityGalleryAlbum } from '@/pages/modules/website-utama/public-content/gallery/Foto/log'
+import { LogActivityGalleryAlbumPhoto } from '@/pages/modules/website-utama/public-content/gallery/Foto/data-album/log'
 
 export const MainWebsiteRouter = [
   {
@@ -321,6 +322,10 @@ export const MainWebsiteRouter = [
               {
                 path: 'album/:id',
                 element: <DataAlbumListPage />,
+              },
+              {
+                path: 'album/:id/log',
+                element: <LogActivityGalleryAlbumPhoto />,
               },
             ],
           },

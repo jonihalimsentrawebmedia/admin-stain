@@ -8,4 +8,9 @@ export interface IGalleryPhoto {
   created_user: string
   updated_at: string // ISO datetime
   updated_user: string
+
+  nama_user_created: string
+  nama_disetujui: string
+  disetujui_at: string
+  nama_user_updated: string
 }
