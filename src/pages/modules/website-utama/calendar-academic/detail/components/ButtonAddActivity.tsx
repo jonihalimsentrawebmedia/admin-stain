@@ -38,6 +38,7 @@ const ButtonAddActivity = ({ nama_tahun_akademik }: Props) => {
           setOpen(false)
           setLoading(false)
           toast.success(res.data.message || 'Success Pengajuan tambah data berita')
+          form.reset()
         }
       })
       .catch((err) => {
@@ -64,7 +65,7 @@ const ButtonAddActivity = ({ nama_tahun_akademik }: Props) => {
 
       <DialogCustom
         open={open}
-        width='50%'
+        width="50%"
         className={'rounded lg:min-w-2xl'}
         setOpen={setOpen}
         title={'Tambah Kegiatan Akademik'}

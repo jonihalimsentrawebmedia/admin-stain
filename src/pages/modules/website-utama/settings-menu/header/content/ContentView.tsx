@@ -16,6 +16,7 @@ const ContentView = () => {
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
+      link='/modules/website-utama/pengaturan-menu/header'
         buttonGroup={[
           {
             label: '',

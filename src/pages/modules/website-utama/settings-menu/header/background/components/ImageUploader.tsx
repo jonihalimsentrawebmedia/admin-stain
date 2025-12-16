@@ -6,6 +6,7 @@ import type { MenuBackgroundItem } from '../../content/model/menu-background'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Skeleton } from '@/components/ui/skeleton'
 import ButtonDelete from '@/components/common/button/ButtonDelete'
+import { useQueryClient } from '@tanstack/react-query'
 
 export interface ImageDataUploader {
   id_menu: string
@@ -23,10 +24,9 @@ export default function ImageUploader({ data, handleSave, index, handleChecked }
   const [preview, setPreview] = useState<string | null>()
   const [loading, setLoading] = useState(false)
   const fileRef = useRef<HTMLInputElement | null>(null)
-
+  const queryClient = useQueryClient()
   const handleFile = async (file: File | undefined) => {
     if (!file) return
-  
 
     const formData = new FormData()
     formData.append('berkas', file)
@@ -47,9 +47,12 @@ export default function ImageUploader({ data, handleSave, index, handleChecked }
           toast.success(resBg.data.message)
           handleSave({
             ...data,
-            id_menu_background:resBg.data.data[0].id_menu_background,
+            id_menu_background: resBg.data.data[0].id_menu_background,
           })
           setPreview(res.data.url)
+          queryClient.invalidateQueries({
+            queryKey: ['list-backgrounds'],
+          })
         }
       }
     } catch (err: any) {

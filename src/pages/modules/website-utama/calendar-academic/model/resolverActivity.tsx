@@ -8,7 +8,7 @@ export const ActivityResolver = z.object({
     .string({ error: 'Nama Kegiatan Wajib Diisi' })
     .min(1, { error: 'Nama Kegiatan Wajib Diisi' }),
 
-  urutan: z.number({ error: 'Ururtan Wajib Diisi' }).min(1, { error: 'Ururtan Wajib Diisi' }),
+  urutan: z.number({ error: 'Ururtan Wajib Diisi' }).min(0, { error: 'Ururtan Wajib Diisi' }),
 })
 
 export type IActivityTypeForm = z.infer<typeof ActivityResolver>

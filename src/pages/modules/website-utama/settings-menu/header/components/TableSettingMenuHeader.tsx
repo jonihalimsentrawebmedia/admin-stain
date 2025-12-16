@@ -66,7 +66,7 @@ const TableSettingMenuHeader = () => {
               ))
           : menuList.map((item, index) => (
               <>
-                <TableRow className="py-0!">
+                <TableRow key={'parent' + index} className="py-0!">
                   <TableCell className="border-b  left-0 relative">
                     <div className="">{index + 1}</div>
                   </TableCell>
@@ -78,20 +78,22 @@ const TableSettingMenuHeader = () => {
                   <TableCell className="border-b">
                     <ButtonAddSubMenu data={item} menu_parent_name={item.nama_menu} />
                   </TableCell>
-                  <TableCell className="border-b">{item.status == 'Y' ? 'Ya' : 'Tidak'}</TableCell>
+                  <TableCell className="border-b">{item.halaman ? 'Ya' : 'Tidak'}</TableCell>
                   <TableCell className="border-b">{item.urutan}</TableCell>
                   <TableCell className="border-b">
-                    <Link
-                      to={`/modules/website-utama/pengaturan-menu/header/${item.id_menu}/content`}
-                    >
-                      <Button
-                        variant={'outline'}
-                        className="border border-primary hover:text-primay text-primary"
+                    {item.halaman && (
+                      <Link
+                        to={`/modules/website-utama/pengaturan-menu/header/${item.id_menu}/content`}
                       >
-                        <FastForward />
-                        Konten
-                      </Button>
-                    </Link>
+                        <Button
+                          variant={'outline'}
+                          className="border border-primary hover:text-primay text-primary"
+                        >
+                          <FastForward />
+                          Konten
+                        </Button>
+                      </Link>
+                    )}
                   </TableCell>
                   <TableCell className="border-b">
                     <div className="flex gap-2 items-center">
@@ -102,7 +104,7 @@ const TableSettingMenuHeader = () => {
                 </TableRow>
                 {item.children.map((subItem, indexSub) => (
                   <>
-                    <TableRow className="py-0!">
+                    <TableRow key={'subParent' + index + indexSub} className="py-0!">
                       <TableCell className="border-b relative">
                         <div className="pl-4  ">
                           {index + 1}.{indexSub + 1}
@@ -124,22 +126,22 @@ const TableSettingMenuHeader = () => {
                       <TableCell className="border-b">
                         <ButtonAddSubMenu data={subItem} menu_parent_name={subItem.nama_menu} />
                       </TableCell>
-                      <TableCell className="border-b">
-                        {item.halaman ? 'Ya' : 'Tidak'}
-                      </TableCell>
+                      <TableCell className="border-b">{subItem.halaman ? 'Ya' : 'Tidak'}</TableCell>
                       <TableCell className="border-b">{subItem.urutan}</TableCell>
                       <TableCell className="border-b">
-                        <Link
-                          to={`/modules/website-utama/pengaturan-menu/header/${item.id_menu}/content`}
-                        >
-                          <Button
-                            variant={'outline'}
-                            className="border border-primary hover:text-primay text-primary"
+                        {subItem.halaman && (
+                          <Link
+                            to={`/modules/website-utama/pengaturan-menu/header/${item.id_menu}/content`}
                           >
-                            <FastForward />
-                            Konten
-                          </Button>
-                        </Link>
+                            <Button
+                              variant={'outline'}
+                              className="border border-primary hover:text-primay text-primary"
+                            >
+                              <FastForward />
+                              Konten
+                            </Button>
+                          </Link>
+                        )}
                       </TableCell>
                       <TableCell className="border-b">
                         <div className="flex gap-2 items-center">
@@ -155,7 +157,10 @@ const TableSettingMenuHeader = () => {
                     </TableRow>
 
                     {subItem.children.map((subSubItem, indexSubSub) => (
-                      <TableRow className="py-0!">
+                      <TableRow
+                        key={'subSubparent' + index + indexSub + indexSubSub}
+                        className="py-0!"
+                      >
                         <TableCell className="border-b relative ">
                           <div className="pl-12  ">
                             {index + 1}.{indexSub + 1}.{indexSubSub + 1}
@@ -176,25 +181,25 @@ const TableSettingMenuHeader = () => {
                         <TableCell className="border-b">
                           <ButtonActiveMenu data={subSubItem} />
                         </TableCell>
+                        <TableCell className="border-b"></TableCell>
                         <TableCell className="border-b">
-                       
-                        </TableCell>
-                        <TableCell className="border-b">
-                          {item.status == 'Y' ? 'Ya' : 'Tidak'}
+                          {subSubItem.halaman ? 'Ya' : 'Tidak'}
                         </TableCell>
                         <TableCell className="border-b">{subSubItem.urutan}</TableCell>
                         <TableCell className="border-b">
-                          <Link
-                            to={`/modules/website-utama/pengaturan-menu/header/${item.id_menu}/content`}
-                          >
-                            <Button
-                              variant={'outline'}
-                              className="border border-primary hover:text-primay text-primary"
+                          {subSubItem.halaman && (
+                            <Link
+                              to={`/modules/website-utama/pengaturan-menu/header/${item.id_menu}/content`}
                             >
-                              <FastForward />
-                              Konten
-                            </Button>
-                          </Link>
+                              <Button
+                                variant={'outline'}
+                                className="border border-primary hover:text-primay text-primary"
+                              >
+                                <FastForward />
+                                Konten
+                              </Button>
+                            </Link>
+                          )}
                         </TableCell>
                         <TableCell className="border-b">
                           <div className="flex gap-2 items-center">

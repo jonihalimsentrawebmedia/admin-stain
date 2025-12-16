@@ -32,6 +32,7 @@ const ButtonAddAcademicYear = () => {
           setOpen(false)
           setLoading(false)
           toast.success(res.data.message || 'Success Pengajuan tambah data berita')
+          form.reset()
         }
       })
       .catch((err) => {
@@ -57,7 +58,7 @@ const ButtonAddAcademicYear = () => {
         open={open}
         className={'rounded min-w-xs lg:min-w-2xl'}
         setOpen={setOpen}
-        width='50%'
+        width="50%"
         title={'Tambah Tahun Akademik'}
       >
         <AcademicYearForm
