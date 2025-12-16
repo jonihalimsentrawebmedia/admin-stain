@@ -9,10 +9,11 @@ import ButtonAddActivity from './components/ButtonAddActivity'
 const CalendarAcademicDetailView = () => {
   const { field, form, columns } = CalendarAcademicDetailViewModel()
   const { academicActivityList, loading } = useGetAcademicYearActivity()
- 
+
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
+        link="/modules/website-utama/calendar-academic"
         buttonGroup={[
           {
             label: '',

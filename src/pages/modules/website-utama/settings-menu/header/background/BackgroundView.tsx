@@ -11,6 +11,7 @@ const BackgroundView = () => {
   const [image, setImage] = useState<MenuBackgroundItem[]>([])
   const { backgroundList } = useGetBackground()
   const params = useParams()
+ 
   async function handleUpdateStatus(data: MenuBackgroundItem, index: number) {
     try {
       const res = await AxiosClient.patch(
@@ -24,6 +25,7 @@ const BackgroundView = () => {
         const temp = [...image]
         temp[index].status = data.status == 'Y' ? 'N' : 'Y'
         setImage(temp)
+      
       }
     } catch (err: any) {
       toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')

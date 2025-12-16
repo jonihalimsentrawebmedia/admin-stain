@@ -5,14 +5,17 @@ import DetailField from '@/components/common/field/DetailField'
 import useGetActivityDetailList from '../controller/useGetActivityDetailList'
 import TableCustom from '@/components/common/table/TableCustom'
 import ButtonAddDetailActivity from './components/ButtonAddDetailActivity'
+import { useParams } from 'react-router-dom'
 
 const DetailActivityView = () => {
   const { field, form, columns, activity } = DetailActivityViewModel()
   const { academicActivityDetailList, loading } = useGetActivityDetailList()
-
+  const { idAcademicYear } = useParams()
+  const link = `/modules/website-utama/calendar-academic/${idAcademicYear}`
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
+        link={link}
         buttonGroup={[
           {
             label: '',
@@ -28,7 +31,7 @@ const DetailActivityView = () => {
         <DetailField data={field} form={form} />
       </CardInput>
       {academicActivityDetailList.length == 0 ? (
-        <p className='text-red-500 italic'>Belum ada kegiatan</p>
+        <p className="text-red-500 italic">Belum ada kegiatan</p>
       ) : (
         <TableCustom
           columns={columns}

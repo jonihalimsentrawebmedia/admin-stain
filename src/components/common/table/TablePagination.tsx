@@ -17,7 +17,7 @@ const TablePaginate = ({ meta }: Props) => {
   // const limit = Number(searchParams.get("limit") ?? "10");
 
   // const total = meta?.total ?? 0;
-  const lastPage = meta?.last_page ?? 1
+  const lastPage = meta?.last_page == 0 ? 1 : (meta?.last_page ?? 1)
 
   // const start = limit * (currentPage - 1) + 1;
   // const end = Math.min(currentPage * limit, total);

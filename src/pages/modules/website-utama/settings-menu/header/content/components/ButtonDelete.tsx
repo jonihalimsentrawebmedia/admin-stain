@@ -68,6 +68,7 @@ const ButtonDeleteContent = ({ data }: Props) => {
       </button>
 
       <DialogCustom
+        width="50%"
         open={open}
         className={'rounded'}
         setOpen={setOpen}

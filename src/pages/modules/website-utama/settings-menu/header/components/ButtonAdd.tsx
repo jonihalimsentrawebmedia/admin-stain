@@ -26,12 +26,14 @@ const ButtonAdd = () => {
     })
       .then((res) => {
         if (res.data.status) {
-             queryClient.invalidateQueries({
+          queryClient.invalidateQueries({
             queryKey: ['list-menus'],
           })
+
           setOpen(false)
           setLoading(false)
           toast.success(res.data.message || 'Success Pengajuan tambah data berita')
+          form.reset()
         }
       })
       .catch((err) => {
@@ -53,7 +55,13 @@ const ButtonAdd = () => {
         Tambah Menu
       </Button>
 
-      <DialogCustom width='50%' open={open} className={'rounded'} setOpen={setOpen} title={'Tambah Menu'}>
+      <DialogCustom
+        width="50%"
+        open={open}
+        className={'rounded'}
+        setOpen={setOpen}
+        title={'Tambah Menu'}
+      >
         <MenuForm
           form={form}
           loading={loading}

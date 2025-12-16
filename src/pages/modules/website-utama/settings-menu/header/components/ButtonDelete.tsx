@@ -18,6 +18,7 @@ const ButtonDelete = ({ data, isSubMenu, menu_parent_name }: Props) => {
   const form = useForm()
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
+
   const field: any = [
     {
       name: 'nama_menu',
@@ -59,7 +60,6 @@ const ButtonDelete = ({ data, isSubMenu, menu_parent_name }: Props) => {
     {
       name: 'halaman',
       label: 'Halaman?*',
-      component: <div>{data.halaman ? 'Ya' : 'Tidak'}</div>,
     },
     {
       name: 'status',
@@ -97,9 +97,11 @@ const ButtonDelete = ({ data, isSubMenu, menu_parent_name }: Props) => {
       <button
         onClick={() => {
           setOpen(!open)
+          console.log(data, 'data')
           form.reset({
             ...data,
             menu_parent_name: menu_parent_name,
+            halaman: data.halaman ? 'Ya' : 'Tidak',
           })
         }}
       >

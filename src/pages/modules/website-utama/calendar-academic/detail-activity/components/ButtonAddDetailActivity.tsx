@@ -45,6 +45,7 @@ const ButtonAddDetailActivity = ({ data }: Props) => {
           setOpen(false)
           setLoading(false)
           toast.success(res.data.message || 'Success Pengajuan tambah data berita')
+          form.reset()
         }
       })
       .catch((err) => {
@@ -74,7 +75,7 @@ const ButtonAddDetailActivity = ({ data }: Props) => {
         open={open}
         className={'rounded lg:min-w-2xl'}
         setOpen={setOpen}
-        width='50%'
+        width="50%"
         title={'Tambah Kegiatan Akademik'}
       >
         <ActivityDetailForm

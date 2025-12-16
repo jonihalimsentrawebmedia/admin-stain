@@ -21,7 +21,7 @@ const ContentForm = ({ form }: Props) => {
         isNumber
       />
       <TextInput form={form} name="judul" placeholder="Judul" label="Judul*" isRow />
-      <RichText form={form} name="isi" label="Isi *" />
+      <RichText form={form} name="isi" label="Isi *"   />
     </div>
   )
 }
