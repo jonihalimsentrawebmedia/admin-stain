@@ -30,6 +30,8 @@ export const UploadImgBackground = ({ background, context, max = 4, queryName }:
       const upload = await AxiosClient.post('/upload', formData)
       if (!upload.data.status) return
 
+      const lastUrutan = background.length > 0 ? Math.max(...background.map((i) => i.urutan)) : 0
+
       const payload = [
         ...background.map((i) => ({
           gambar: i.gambar,
@@ -38,11 +40,10 @@ export const UploadImgBackground = ({ background, context, max = 4, queryName }:
         })),
         {
           gambar: upload.data.url,
-          urutan: background.length + 1,
+          urutan: lastUrutan + 1,
           status: background.length === 0 ? 'Y' : 'N',
         },
       ]
-
       await AxiosClient.post(`/website-utama/${context}`, payload)
 
       await queryClient.invalidateQueries({
@@ -61,17 +62,6 @@ export const UploadImgBackground = ({ background, context, max = 4, queryName }:
     setIsDragging(false)
     await handleUpload(e.dataTransfer.files)
   }
-
-  // const HandleDelete = async (id: number) => {
-  //   await AxiosClient.delete(`/website-utama/${context}/${id}`)
-  //     .then((res) => {
-  //       if (res.data.status) {
-  //         queryClient.invalidateQueries({ queryKey: [queryName] })
-  //         toast.success('Berhasil menghapus gambar')
-  //       }
-  //     })
-  //     .catch((err) => toast.error(err?.response?.data?.message || 'Terjadi kesalahan.'))
-  // }
 
   return (
     <>
