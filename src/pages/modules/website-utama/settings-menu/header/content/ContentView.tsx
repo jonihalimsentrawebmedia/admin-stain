@@ -8,15 +8,17 @@ import { Button } from '@/components/ui/button'
 import { IoWarning } from 'react-icons/io5'
 import { Image } from 'lucide-react'
 import { Skeleton } from '@/components/ui/skeleton'
+import Cookies from 'js-cookie'
 
 const ContentView = () => {
   const { columns, goToAdd, goToBackground } = ContentViewModel()
   const { contentList, loading, meta } = useGetContent()
   const { backgroundList, loading: loadingBg } = useGetBackground()
+  const nameMenu = Cookies.get('nama_menu')
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
-      link='/modules/website-utama/pengaturan-menu/header'
+        link="/modules/website-utama/pengaturan-menu/header"
         buttonGroup={[
           {
             label: '',
@@ -50,7 +52,7 @@ const ContentView = () => {
             type: 'add',
           },
         ]}
-        label="Konten - Sejarah"
+        label={`Konten - ${nameMenu??""}`}
         isBack
       />
 

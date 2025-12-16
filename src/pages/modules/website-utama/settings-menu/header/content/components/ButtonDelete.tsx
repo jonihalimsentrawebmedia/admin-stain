@@ -9,6 +9,7 @@ import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import DetailField from '@/components/common/field/DetailField'
 import { Button } from '@/components/ui/button'
 import { Trash2, X } from 'lucide-react'
+import Cookies from 'js-cookie'
 
 interface Props {
   data: ContentList
@@ -32,7 +33,7 @@ const ButtonDeleteContent = ({ data }: Props) => {
       label: 'Judul',
     },
   ]
-
+ const nameMenu = Cookies.get('nama_menu')
   const queryClient = useQueryClient()
 
   const handleDelete = async () => {
@@ -72,7 +73,7 @@ const ButtonDeleteContent = ({ data }: Props) => {
         open={open}
         className={'rounded'}
         setOpen={setOpen}
-        title={<p className="text-2xl text-red-500">Hapus Konten - Sejarah?</p>}
+        title={<p className="text-2xl text-red-500">Hapus Konten - {nameMenu??""}?</p>}
         description={'Apakah anda yakin untuk menghapus konten yang ditulis?'}
       >
         <DetailField data={field} form={form} />

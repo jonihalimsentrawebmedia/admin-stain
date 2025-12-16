@@ -1,60 +1,57 @@
-import { DialogCustom } from "@/components/common/dialog/DialogCustom";
-import { Button } from "@/components/ui/button";
-import { Form } from "@/components/ui/form";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { HiPlus } from "react-icons/hi";
-import ModuleForm from "./ModuleForm";
-import ButtonForm from "@/components/common/button/ButtonForm";
-import { ModuleResolver, type ModuleType } from "../model";
-import { useQueryClient } from "@tanstack/react-query";
-import AxiosClient from "@/provider/axios";
-import { toast } from "react-toastify";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { DialogCustom } from '@/components/common/dialog/DialogCustom'
+import { Button } from '@/components/ui/button'
+import { Form } from '@/components/ui/form'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { HiPlus } from 'react-icons/hi'
+import ModuleForm from './ModuleForm'
+import ButtonForm from '@/components/common/button/ButtonForm'
+import { ModuleResolver, type ModuleType } from '../model'
+import { useQueryClient } from '@tanstack/react-query'
+import AxiosClient from '@/provider/axios'
+import { toast } from 'react-toastify'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 const ButtonAddModule = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
   const form = useForm<ModuleType>({
     resolver: zodResolver(ModuleResolver),
-  });
+  })
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
   async function handleSave(data: ModuleType) {
-    setLoading(true);
+    setLoading(true)
     try {
       const res = await AxiosClient.post(`/pengaturan/modules`, {
         ...data,
         urutan: Number(data.urutan),
-      });
+      })
 
       if (res.data.status) {
-        toast.success(res.data.message);
+        toast.success(res.data.message)
 
         await queryClient.invalidateQueries({
-          queryKey: ["modules-list"],
-        });
-        setOpen(false);
+          queryKey: ['modules-list'],
+        })
+        setOpen(false)
+        form.reset()
       }
     } catch (err: any) {
-      toast.error(
-        err?.response?.data?.message || "Terjadi kesalahan, silakan coba lagi."
-      );
+      toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
     } finally {
-      setLoading(false);
-      setOpen(false);
-      form.reset();
+      setLoading(false)
     }
   }
   return (
     <>
       <Button
         onClick={() => {
-          setOpen(true);
+          setOpen(true)
         }}
-        variant={"outline"}
-        className={"bg-white text-primary border-primary hover:text-primary"}
+        variant={'outline'}
+        className={'bg-white text-primary border-primary hover:text-primary'}
       >
         <HiPlus />
         Tambah Modul
@@ -68,15 +65,12 @@ const ButtonAddModule = () => {
       >
         <div className="flex flex-col gap-4">
           <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(handleSave)}
-              className="flex flex-col gap-4"
-            >
+            <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
               <ModuleForm form={form} />
               <ButtonForm
                 loading={loading}
                 onCancel={() => {
-                  setOpen(false);
+                  setOpen(false)
                 }}
               />
             </form>
@@ -84,7 +78,7 @@ const ButtonAddModule = () => {
         </div>
       </DialogCustom>
     </>
-  );
-};
+  )
+}
 
-export default ButtonAddModule;
+export default ButtonAddModule

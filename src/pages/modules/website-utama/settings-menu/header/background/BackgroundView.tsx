@@ -6,12 +6,13 @@ import type { MenuBackgroundItem } from '../content/model/menu-background'
 import { useParams } from 'react-router-dom'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
+import Cookies from 'js-cookie'
 
 const BackgroundView = () => {
   const [image, setImage] = useState<MenuBackgroundItem[]>([])
   const { backgroundList } = useGetBackground()
   const params = useParams()
- 
+  const nameMenu = Cookies.get('nama_menu')
   async function handleUpdateStatus(data: MenuBackgroundItem, index: number) {
     try {
       const res = await AxiosClient.patch(
@@ -25,7 +26,6 @@ const BackgroundView = () => {
         const temp = [...image]
         temp[index].status = data.status == 'Y' ? 'N' : 'Y'
         setImage(temp)
-      
       }
     } catch (err: any) {
       toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
@@ -52,7 +52,7 @@ const BackgroundView = () => {
   }, [backgroundList])
   return (
     <div className="flex flex-col gap-4">
-      <ButtonTitleGroup buttonGroup={[]} label="Gambar Background - Sejarah" isBack />
+      <ButtonTitleGroup buttonGroup={[]} label={`Gambar Background - ${nameMenu}`} isBack />
       <div className="px-4 py 2 border border-[#2769CD] rounded-lg bg-[#F5F9FF]">
         <ul className="list-outside text-[#464646] list-disc pl-4 ml-4">
           <li>Minimal ada 1 gambar</li>

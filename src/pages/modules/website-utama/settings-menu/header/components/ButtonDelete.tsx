@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form'
 import DetailField from '@/components/common/field/DetailField'
 import { Button } from '@/components/ui/button'
 import { Trash2, X } from 'lucide-react'
+
 interface Props {
   isSubMenu?: boolean
   data: Menu
@@ -72,7 +73,7 @@ const ButtonDelete = ({ data, isSubMenu, menu_parent_name }: Props) => {
     },
   ]
   const queryClient = useQueryClient()
-
+ 
   const handleDelete = async () => {
     setLoading(true)
     await AxiosClient.delete(`/website-utama/menu/${data?.id_menu}`)

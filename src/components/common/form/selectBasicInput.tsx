@@ -69,7 +69,7 @@ export const SelectBasicInput = <T extends FieldValues>({
               </FormLabel>
             )}
             {isLoading ? (
-              <Skeleton className="h-[40px] bg-gray-300" />
+              <Skeleton className="h-10 bg-gray-300" />
             ) : (
               <Select
                 styles={{
@@ -87,7 +87,7 @@ export const SelectBasicInput = <T extends FieldValues>({
                   }
                 }}
                 classNamePrefix="react-select"
-                className={`min-h-[40px] z-20 ${selectClassName}`}
+                className={`min-h-10 z-20 ${selectClassName}`}
               />
             )}
             <FormMessage />

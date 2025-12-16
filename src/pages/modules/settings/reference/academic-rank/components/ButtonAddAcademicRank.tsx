@@ -1,62 +1,56 @@
-import { DialogCustom } from "@/components/common/dialog/DialogCustom";
-import { Button } from "@/components/ui/button";
-import { Form } from "@/components/ui/form";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { HiPlus } from "react-icons/hi";
+import { DialogCustom } from '@/components/common/dialog/DialogCustom'
+import { Button } from '@/components/ui/button'
+import { Form } from '@/components/ui/form'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { HiPlus } from 'react-icons/hi'
 
-import ButtonForm from "@/components/common/button/ButtonForm";
-import { InputText } from "@/components/common/form/InputText";
-import { AcademicRankResolver, type AcademicRankType } from "../model";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useQueryClient } from "@tanstack/react-query";
-import AxiosClient from "@/provider/axios";
-import { toast } from "react-toastify";
+import ButtonForm from '@/components/common/button/ButtonForm'
+import { InputText } from '@/components/common/form/InputText'
+import { AcademicRankResolver, type AcademicRankType } from '../model'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useQueryClient } from '@tanstack/react-query'
+import AxiosClient from '@/provider/axios'
+import { toast } from 'react-toastify'
 
 const ButtonAddAcademicRank = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
   const form = useForm<AcademicRankType>({
     resolver: zodResolver(AcademicRankResolver),
-  });
+  })
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
   async function handleSave(data: AcademicRankType) {
-    setLoading(true);
+    setLoading(true)
     try {
-      const res = await AxiosClient.post(
-        `/pengaturan/referensi/pangkat-akademik`,
-        data
-      );
+      const res = await AxiosClient.post(`/pengaturan/referensi/pangkat-akademik`, data)
 
       if (res.data.status) {
-        toast.success(res.data.message);
+        toast.success(res.data.message)
 
         await queryClient.invalidateQueries({
-          queryKey: ["settings-academic-rank"],
-        });
-    
-         setOpen(false);
-      form.reset();
+          queryKey: ['settings-academic-rank'],
+        })
+
+        setOpen(false)
+        form.reset()
       }
     } catch (err: any) {
-      toast.error(
-        err?.response?.data?.message || "Terjadi kesalahan, silakan coba lagi."
-      );
+      toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
     } finally {
-      setLoading(false);
-     
+      setLoading(false)
     }
   }
   return (
     <>
       <Button
         onClick={() => {
-          setOpen(true);
+          setOpen(true)
         }}
-        variant={"outline"}
-        className={"bg-white text-primary border-primary hover:text-primary"}
+        variant={'outline'}
+        className={'bg-white text-primary border-primary hover:text-primary'}
       >
         <HiPlus />
         Tambah Data
@@ -70,10 +64,7 @@ const ButtonAddAcademicRank = () => {
       >
         <div className="flex flex-col gap-4">
           <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(handleSave)}
-              className="flex flex-col gap-4"
-            >
+            <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
               <InputText
                 form={form}
                 name="nama_akademik"
@@ -84,7 +75,7 @@ const ButtonAddAcademicRank = () => {
               <ButtonForm
                 loading={loading}
                 onCancel={() => {
-                  setOpen(false);
+                  setOpen(false)
                 }}
               />
             </form>
@@ -92,7 +83,7 @@ const ButtonAddAcademicRank = () => {
         </div>
       </DialogCustom>
     </>
-  );
-};
+  )
+}
 
-export default ButtonAddAcademicRank;
+export default ButtonAddAcademicRank

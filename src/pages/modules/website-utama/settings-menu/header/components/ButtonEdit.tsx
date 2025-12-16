@@ -34,7 +34,7 @@ const ButtonEdit = ({ data }: Props) => {
           })
           setOpen(false)
           setLoading(false)
-          toast.success(res.data.message || 'Success Pengajuan tambah data berita')
+          toast.success(res.data.message || 'Success Pengajuan update data menu')
         }
       })
       .catch((err) => {

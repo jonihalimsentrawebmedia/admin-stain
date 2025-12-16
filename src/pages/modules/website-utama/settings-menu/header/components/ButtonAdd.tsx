@@ -32,7 +32,7 @@ const ButtonAdd = () => {
 
           setOpen(false)
           setLoading(false)
-          toast.success(res.data.message || 'Success Pengajuan tambah data berita')
+          toast.success(res.data.message || 'Success Pengajuan tambah data menu')
           form.reset()
         }
       })

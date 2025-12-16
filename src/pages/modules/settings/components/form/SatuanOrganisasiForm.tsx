@@ -1,62 +1,63 @@
-import CardInput from "@/components/common/card/CardInput";
-import InputImage from "@/components/common/form/InputImage";
-import { InputText } from "@/components/common/form/InputText";
-import { SelectCustom } from "@/components/common/form/SelectCustom";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Label } from "@/components/ui/label";
-import type { UseFormReturn } from "react-hook-form";
-import useGetSatuanOrganisasi from "../../controller/useGetSatuanOrganisasi";
-import { useEffect } from "react";
+import CardInput from '@/components/common/card/CardInput'
+import InputImage from '@/components/common/form/InputImage'
+import { InputText } from '@/components/common/form/InputText'
+import { SelectCustom } from '@/components/common/form/SelectCustom'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Label } from '@/components/ui/label'
+import type { UseFormReturn } from 'react-hook-form'
+import useGetSatuanOrganisasi from '../../controller/useGetSatuanOrganisasi'
+import { useEffect } from 'react'
 
 interface Props {
-  form: UseFormReturn<any>;
-  kelompok: string;
+  form: UseFormReturn<any>
+  kelompok: string
 }
 const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
   const { satuanOrganisasi } = useGetSatuanOrganisasi({
-    kelompok: kelompok == "PRODI" ? "FAKULTAS" : "UNIVERSITAS",
-  });
+    kelompok: kelompok == 'PRODI' ? 'FAKULTAS' : 'UNIVERSITAS',
+  })
 
   useEffect(() => {
     if (kelompok) {
-      form.setValue("kelompok", kelompok);
+      form.setValue('kelompok', kelompok)
     }
-  }, [kelompok]);
+  }, [kelompok])
 
   const labelName =
-    kelompok == "PRODI"
-      ? "Nama Program Studi"
-      : kelompok == "UNIT"
-      ? "Nama Unit"
-      : "Nama Universitas / Perguruan Tinggi";
+    kelompok == 'PRODI'
+      ? 'Nama Program Studi'
+      : kelompok == 'UNIT'
+        ? 'Nama Unit'
+        : 'Nama Universitas / Perguruan Tinggi'
   const placeHolderName =
-    kelompok == "PRODI"
-      ? "Nama Program Studi"
-      : kelompok == "UNIT"
-      ? "Nama Unit"
-      : "Nama Universitas / Perguruan Tinggi";
-  const placeHolderNameUniv =
-    kelompok == "PRODI" ? "Pilih" : "Pilih Universitas/PT Asal";
-  const labelNameUniv =
-    kelompok == "PRODI" ? "Fakultas Asal" : "Universitas/PT Asal";
+    kelompok == 'PRODI'
+      ? 'Nama Program Studi'
+      : kelompok == 'UNIT'
+        ? 'Nama Unit'
+        : 'Nama Universitas / Perguruan Tinggi'
+  const placeHolderNameUniv = kelompok == 'PRODI' ? 'Pilih' : 'Pilih Universitas/PT Asal'
+  const labelNameUniv = kelompok == 'PRODI' ? 'Fakultas Asal' : 'Universitas/PT Asal'
 
   function getTitle() {
     switch (kelompok) {
-      case "PRODI":
-        return "Identitas Program Studi";
-      case "UNIT":
-        return "Identitas Unit ";
-      case "FAKULTAS":
-        return "Identitas Fakultas";
-      case "UNIVERSITAS":
-        return "Identitas Institusi";
-      case "LEMBAGA":
-        return "Identitas Lembaga";
+      case 'PRODI':
+        return 'Identitas Program Studi'
+      case 'UNIT':
+        return 'Identitas Unit '
+      case 'FAKULTAS':
+        return 'Identitas Fakultas'
+      case 'UNIVERSITAS':
+        return 'Identitas Institusi'
+      case 'LEMBAGA':
+        return 'Identitas Lembaga'
       default:
-        return "";
+        return ''
     }
   }
-
+  const valuesFakultas = satuanOrganisasi.filter(
+    (item) => item.id_satuan_organisasi == form.watch('parent_id')
+  )[0]
+  console.log(form.watch('parent_id'))
   return (
     <>
       <div className="flex flex-col md:flex-row gap-4">
@@ -64,13 +65,13 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
         <InputImage form={form} name="favicon" label="Favicon" />
       </div>
       <CardInput title={getTitle()}>
-        {kelompok !== "UNIVERSITAS" && (
+        {kelompok !== 'UNIVERSITAS' && (
           <SelectCustom
             data={satuanOrganisasi.map((item) => {
               return {
                 label: item.nama,
                 value: item.id_satuan_organisasi,
-              };
+              }
             })}
             name="parent_id"
             label={labelNameUniv}
@@ -89,14 +90,8 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
           isRow
           isDisabled
         />
-        <InputText
-          form={form}
-          name="nama"
-          isRow
-          label={labelName}
-          placeholder={placeHolderName}
-        />
-        {kelompok !== "PRODI" && kelompok !== "UNIT" && (
+        <InputText form={form} name="nama" isRow label={labelName} placeholder={placeHolderName} />
+        {kelompok !== 'PRODI' && kelompok !== 'UNIT' && (
           <InputText
             form={form}
             name="singkatan"
@@ -114,12 +109,41 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
         />
       </CardInput>
       <CardInput title="Alamat Lengkap">
-        <div className="flex items-center gap-3">
-          <Checkbox id="isSome" />
-          <Label htmlFor="isSome" className="text-neutral font-normal">
-            Gunakan alamat universitas sebagai alamat fakultas
-          </Label>
-        </div>
+        {kelompok !== 'UNIVERSITAS' && (
+          <div className="flex items-center gap-3">
+            <Checkbox
+              disabled={!form.watch('parent_id')}
+              id="isSome"
+              onCheckedChange={(e) => {
+                const temp = form.watch()
+                if (e) {
+                  form.reset({
+                    ...temp,
+                    alamat: valuesFakultas.alamat,
+                    provinsi: valuesFakultas.provinsi,
+                    kabupaten_kota: valuesFakultas.kabupaten_kota,
+                    kecamatan: valuesFakultas.kecamatan,
+                    kelurahan: valuesFakultas.kelurahan,
+                    kode_pos: valuesFakultas.kode_pos,
+                  })
+                } else {
+                  form.reset({
+                    ...temp,
+                    alamat: '',
+                    provinsi: '',
+                    kabupaten_kota: '',
+                    kecamatan: '',
+                    kelurahan: '',
+                    kode_pos: '',
+                  })
+                }
+              }}
+            />
+            <Label htmlFor="isSome" className="text-neutral font-normal">
+              Gunakan alamat universitas sebagai alamat fakultas
+            </Label>
+          </div>
+        )}
         <InputText
           form={form}
           name="alamat"
@@ -229,7 +253,7 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
         />
       </CardInput>
     </>
-  );
-};
+  )
+}
 
-export default SatuanOrganisasiForm;
+export default SatuanOrganisasiForm

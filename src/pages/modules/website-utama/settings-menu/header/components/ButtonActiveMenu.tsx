@@ -30,7 +30,7 @@ const ButtonActiveMenu = ({ data }: Props) => {
           })
 
           setLoading(false)
-          toast.success(res.data.message || 'Success Pengajuan tambah data berita')
+          toast.success(res.data.message || 'Success Pengajuan update menu')
         }
       })
       .catch((err) => {

@@ -3,7 +3,6 @@ import { IconDelete } from "@/components/common/table/icon";
 import { Button } from "@/components/ui/button";
 import { Trash2, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import GEAR from "@/assets/img/gear.png";
 import { useForm } from "react-hook-form";
 import DetailField from "@/components/common/field/DetailField";
 import { useQueryClient } from "@tanstack/react-query";
@@ -89,7 +88,7 @@ const ButtonDeleteModule = ({ data }: Props) => {
         <p>Apakah anda yakin untuk menghapus modul yang dipilih?</p>
         <div className="my-4 ">
           <div className="mx-auto max-w-[200px] mb-4 bg-[#F5FFFA] border border-primary rounded-xl p-4 flex justify-center items-center">
-            <img src={GEAR} alt="" />
+            <img src={data.gambar} alt="" />
           </div>
           <DetailField data={fieldsConfig} form={form} isRow={false} />
         </div>

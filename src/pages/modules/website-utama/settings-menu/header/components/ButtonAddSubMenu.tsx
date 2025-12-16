@@ -35,7 +35,8 @@ const ButtonAddSubMenu = ({ data, menu_parent_name }: Props) => {
           })
           setOpen(false)
           setLoading(false)
-          toast.success(res.data.message || 'Success Pengajuan tambah data berita')
+          toast.success(res.data.message || 'Success Pengajuan tambah data sub menu')
+          form.reset()
         }
       })
       .catch((err) => {

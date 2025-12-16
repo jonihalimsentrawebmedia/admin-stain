@@ -22,7 +22,7 @@ const ButtonDeleteDomain = ({ data }: Props) => {
       label: "Kelompok",
     },
     {
-      name: "nama",
+      name: "nama_satuan_organisasi",
       label: "Nama",
     },
     {

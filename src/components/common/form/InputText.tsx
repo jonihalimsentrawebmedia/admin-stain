@@ -1,162 +1,149 @@
-import {
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 
-import {useEffect, useState, type JSX, type ReactNode} from "react";
-import clsx from "clsx";
-import type {UseFormReturn} from "react-hook-form";
-import {useMobile} from "@/utils/useMobile";
-import {Input} from "./Input";
-import {Eye, EyeOff} from "lucide-react";
+import { useEffect, useState, type JSX, type ReactNode } from 'react'
+import clsx from 'clsx'
+import type { UseFormReturn } from 'react-hook-form'
+import { useMobile } from '@/utils/useMobile'
+import { Input } from './Input'
+import { Eye, EyeOff } from 'lucide-react'
 
-export function InputText(
-  {
-    form,
-    label,
-    placeholder = "",
-    name,
-    prefix,
-    suffix,
-    type,
-    handlerClick,
-    className,
-    isDisabled,
-    isNumber,
-    isFloat,
-    isRow,
-    defaultValue,
-    inputClassName,
-    onChange,
-    isRupiah,
-    minDate,
-    onChangeFile,
-    classNameLabel,
-    isRequired,
-  }: {
-    form: UseFormReturn | undefined | any;
-    label?: string | ReactNode;
-    placeholder?: string;
-    name: string;
-    isRow?: boolean;
-    prefix?: JSX.Element;
-    suffix?: JSX.Element;
-    type?:
-      | "text"
-      | "number"
-      | "password"
-      | "date"
-      | "file"
-      | "time"
-      | "email"
-      | "url"
-      | "datetime-local"
-      | "color";
-    handlerClick?: () => void;
-    className?: string;
-    isDisabled?: boolean;
-    classNameLabel?: string;
-    isNumber?: boolean;
-    isFloat?: boolean;
-    defaultValue?: string;
-    inputClassName?: string;
-    onChange?: (value: string) => void;
-    onChangeFile?: (value: any) => void;
-    isRupiah?: boolean;
-    minDate?: string;
-    isRequired?: boolean;
-  }) {
-  const {isMobile} = useMobile();
-  const [displayValue, setDisplayValue] = useState("");
-  const [openEye, setOpenEye] = useState(false);
+export function InputText({
+  form,
+  label,
+  placeholder = '',
+  name,
+  prefix,
+  suffix,
+  type,
+  handlerClick,
+  className,
+  isDisabled,
+  isNumber,
+  isFloat,
+  isRow,
+  defaultValue,
+  inputClassName,
+  onChange,
+  isRupiah,
+  minDate,
+  onChangeFile,
+  classNameLabel,
+  isRequired,
+}: {
+  form: UseFormReturn | undefined | any
+  label?: string | ReactNode
+  placeholder?: string
+  name: string
+  isRow?: boolean
+  prefix?: JSX.Element
+  suffix?: JSX.Element
+  type?:
+    | 'text'
+    | 'number'
+    | 'password'
+    | 'date'
+    | 'file'
+    | 'time'
+    | 'email'
+    | 'url'
+    | 'datetime-local'
+    | 'color'
+  handlerClick?: () => void
+  className?: string
+  isDisabled?: boolean
+  classNameLabel?: string
+  isNumber?: boolean
+  isFloat?: boolean
+  defaultValue?: string
+  inputClassName?: string
+  onChange?: (value: string) => void
+  onChangeFile?: (value: any) => void
+  isRupiah?: boolean
+  minDate?: string
+  isRequired?: boolean
+}) {
+  const { isMobile } = useMobile()
+  const [displayValue, setDisplayValue] = useState('')
+  const [openEye, setOpenEye] = useState(false)
   // Format nilai saat pertama kali render atau ketika nilai berubah dari luar
   useEffect(() => {
     if (isRupiah && isNumber && form?.getValues(name) !== undefined) {
-      const value = form.getValues(name) || "0";
+      const value = form.getValues(name) || '0'
       const numValue =
-        typeof value === "string"
-          ? parseFloat(value.replace(/[^\d]/g, "")) || 0
-          : value;
-      setDisplayValue(formatRupiah(numValue.toString()));
+        typeof value === 'string' ? parseFloat(value.replace(/[^\d]/g, '')) || 0 : value
+      setDisplayValue(formatRupiah(numValue.toString()))
     }
-  }, [form?.getValues(name), isRupiah, isNumber, name]);
+  }, [form?.getValues(name), isRupiah, isNumber, name])
 
   const formatRupiah = (value: string) => {
-    const num = parseFloat(value.replace(/[^\d]/g, "")) || 0;
-    return new Intl.NumberFormat("id-ID").format(num);
-  };
+    const num = parseFloat(value.replace(/[^\d]/g, '')) || 0
+    return new Intl.NumberFormat('id-ID').format(num)
+  }
 
   const parseRupiah = (value: string) => {
-    return value.replace(/[^\d]/g, "");
-  };
+    return value.replace(/[^\d]/g, '')
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let value = e.target.value;
-    let rawValue = value;
+    let value = e.target.value
+    let rawValue = value
 
     if (isRupiah && isNumber) {
-      rawValue = parseRupiah(value);
-      value = formatRupiah(rawValue);
+      rawValue = parseRupiah(value)
+      value = formatRupiah(rawValue)
     } else if (isNumber) {
-      rawValue = value.replace(/[^\d]/g, "");
-      value = rawValue;
+      rawValue = value.replace(/[^\d]/g, '')
+      value = rawValue
     } else if (isFloat) {
       rawValue = value
-        .replace(/[^0-9.\-]/g, "") // Hanya angka, titik, minus
-        .replace(/(?!^)-/g, "") // Hapus semua minus kecuali di awal
-        .replace(/(\..*?)\..*/g, "$1"); // Satu titik desimal saja
-      value = rawValue;
+        .replace(/[^0-9.\-]/g, '') // Hanya angka, titik, minus
+        .replace(/(?!^)-/g, '') // Hapus semua minus kecuali di awal
+        .replace(/(\..*?)\..*/g, '$1') // Satu titik desimal saja
+      value = rawValue
     }
 
     // Update display value
-    setDisplayValue(value);
+    setDisplayValue(value)
 
     // Update form value (raw value tanpa format)
     if (form) {
-      if (type !== "file") {
-        form.setValue(name, rawValue, {shouldValidate: true});
+      if (type !== 'file') {
+        form.setValue(name, rawValue, { shouldValidate: true })
       }
     }
 
     if (onChange) {
-      onChange(rawValue);
+      onChange(rawValue)
     }
 
     if (onChangeFile) {
-      onChangeFile(e.target.files);
+      onChangeFile(e.target.files)
     }
-  };
+  }
 
   const handleBlur = () => {
     if (isRupiah && isNumber && displayValue) {
-      const numValue = parseFloat(parseRupiah(displayValue)) || 0;
-      setDisplayValue(formatRupiah(numValue.toString()));
+      const numValue = parseFloat(parseRupiah(displayValue)) || 0
+      setDisplayValue(formatRupiah(numValue.toString()))
     }
-  };
+  }
 
   return (
     <FormField
       control={form?.control}
       name={name}
-      render={({field}) => (
+      render={({ field }) => (
         <FormItem
-          className={clsx(
-            `flex w-full `,
-            {
-              "flex-row items-center gap-8 ": isRow && !isMobile,
-              "flex-col gap-2 ": !isRow || isMobile,
-            },
-            className
-          )}
+          className={`whitespace-nowrap 
+          ${isRow ? `${isMobile ? 'flex flex-col gap-4' : 'grid grid-cols-[12rem_1fr] flex-row items-center gap-5'} ` : 'flex flex-col gap-2'} 
+          ${className}`}
         >
           {label && (
             <FormLabel
               className={clsx(` text-wrap text-[#464646] font-normal`, {
-                "w-full max-w-[200px]": isRow && label && !isMobile,
+                'w-full max-w-[200px]': isRow && label && !isMobile,
                 hidden: isRow && !label,
-                "w-full": isMobile,
+                'w-full': isMobile,
                 classNameLabel,
               })}
             >
@@ -164,40 +151,32 @@ export function InputText(
             </FormLabel>
           )}
           <div
-            className={clsx("flex flex-col gap-3 bg-white rounded-lg", {
-              "w-full": isMobile,
-              "w-full phones:w-full": isRow && label && !isMobile,
+            className={clsx('flex flex-col gap-3 bg-white rounded-lg', {
+              'w-full': isMobile,
+              'w-full phones:w-full': isRow && label && !isMobile,
               //   'w-full phones:w-full': isRow && !label && !isMobile,
             })}
           >
             <Input
               {...field}
-              type={
-                type === "number" && (isRupiah || isNumber)
-                  ? "text"
-                  : openEye
-                    ? "text"
-                    : type
-              }
+              type={type === 'number' && (isRupiah || isNumber) ? 'text' : openEye ? 'text' : type}
               placeholder={placeholder}
-              value={displayValue || field.value || ""}
+              value={displayValue || field.value || ''}
               defaultValue={defaultValue}
               prefix={prefix}
-              className={clsx(
-                `text-[16px] disabled:bg-[#E9E9E9] h-12 ${inputClassName}`
-              )}
+              className={clsx(`text-[16px] disabled:bg-[#E9E9E9] h-12 ${inputClassName}`)}
               suffix={
-                type == "password" ? (
+                type == 'password' ? (
                   openEye == false ? (
                     <Eye
                       onClick={() => {
-                        setOpenEye(true);
+                        setOpenEye(true)
                       }}
                     />
                   ) : openEye ? (
                     <EyeOff
                       onClick={() => {
-                        setOpenEye(false);
+                        setOpenEye(false)
                       }}
                     />
                   ) : (
@@ -211,12 +190,12 @@ export function InputText(
               disabled={isDisabled}
               onChange={handleChange}
               onBlur={handleBlur}
-              min={type != "date" ? undefined : minDate ?? undefined}
+              min={type != 'date' ? undefined : (minDate ?? undefined)}
             />
-            <FormMessage/>
+            <FormMessage />
           </div>
         </FormItem>
       )}
     />
-  );
+  )
 }

@@ -32,9 +32,10 @@ const ContentCreateView = () => {
           queryClient.invalidateQueries({
             queryKey: ['list-contents'],
           })
-          navigate(-1)
+      
           setLoading(false)
-          toast.success(res.data.message || 'Success Pengajuan tambah data berita')
+          toast.success(res.data.message || 'Success Pengajuan tambah data konten')
+              navigate(-1)
         }
       })
       .catch((err) => {

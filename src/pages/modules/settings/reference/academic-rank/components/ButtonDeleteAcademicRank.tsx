@@ -1,42 +1,39 @@
-import { DialogCustom } from "@/components/common/dialog/DialogCustom";
-import { IconDelete } from "@/components/common/table/icon";
-import { Button } from "@/components/ui/button";
-import { useQueryClient } from "@tanstack/react-query";
-import { Trash2, X } from "lucide-react";
-import { useState } from "react";
-import type { AcademicRankList } from "../model";
-import AxiosClient from "@/provider/axios";
-import { toast } from "react-toastify";
+import { DialogCustom } from '@/components/common/dialog/DialogCustom'
+import { IconDelete } from '@/components/common/table/icon'
+import { Button } from '@/components/ui/button'
+import { useQueryClient } from '@tanstack/react-query'
+import { Trash2, X } from 'lucide-react'
+import { useState } from 'react'
+import type { AcademicRankList } from '../model'
+import AxiosClient from '@/provider/axios'
+import { toast } from 'react-toastify'
 interface Props {
-  data: AcademicRankList;
+  data: AcademicRankList
 }
 const ButtonDeleteAcademicRank = ({ data }: Props) => {
-  const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
   async function handleDelete() {
-    setLoading(true);
+    setLoading(true)
     try {
       const res = await AxiosClient.delete(
         `/pengaturan/referensi/pangkat-akademik/${data.id_akademik}`
-      );
+      )
 
       if (res.data.status) {
-        toast.success(res.data.message);
+        toast.success(res.data.message)
 
         await queryClient.invalidateQueries({
-          queryKey: ["settings-academic-rank"],
-        });
-          setOpen(false);
+          queryKey: ['settings-academic-rank'],
+        })
+        setOpen(false)
       }
     } catch (err: any) {
-      toast.error(
-        err?.response?.data?.message || "Terjadi kesalahan, silakan coba lagi."
-      );
+      toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
     } finally {
-      setLoading(false);
-    
+      setLoading(false)
     }
   }
   return (
@@ -44,7 +41,7 @@ const ButtonDeleteAcademicRank = ({ data }: Props) => {
       <button
         className="cursor-pointer"
         onClick={() => {
-          setOpen(true);
+          setOpen(true)
         }}
       >
         <IconDelete />
@@ -56,9 +53,9 @@ const ButtonDeleteAcademicRank = ({ data }: Props) => {
         title={<p className="text-2xl text-red-500">Hapus Pangkat Akademik</p>}
       >
         <p>
-          Anda akan menghapus Pangkat Akademik{" "}
-          <span className="font-bold">“${data.nama_akademik}”</span>. Apakah
-          Anda yakin untuk menghapus Pangkat Akademik yang dipilih?
+          Anda akan menghapus Pangkat Akademik{' '}
+          <span className="font-bold">“${data.nama_akademik}”</span>. Apakah Anda yakin untuk
+          menghapus Pangkat Akademik yang dipilih?
         </p>
 
         <div className="flex gap-4 items-center justify-end">
@@ -80,7 +77,7 @@ const ButtonDeleteAcademicRank = ({ data }: Props) => {
         </div>
       </DialogCustom>
     </>
-  );
-};
+  )
+}
 
-export default ButtonDeleteAcademicRank;
+export default ButtonDeleteAcademicRank

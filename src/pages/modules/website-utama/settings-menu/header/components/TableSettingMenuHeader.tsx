@@ -15,6 +15,7 @@ import ButtonDelete from './ButtonDelete'
 import ButtonEdit from './ButtonEdit'
 import { Link } from 'react-router-dom'
 import ButtonActiveMenu from './ButtonActiveMenu'
+import Cookies from 'js-cookie'
 
 const TableSettingMenuHeader = () => {
   const { loading, menuList } = useGetSettingsMenu()
@@ -84,6 +85,9 @@ const TableSettingMenuHeader = () => {
                     {item.halaman && (
                       <Link
                         to={`/modules/website-utama/pengaturan-menu/header/${item.id_menu}/content`}
+                        onClick={() => {
+                          Cookies.set('nama_menu', item.nama_menu)
+                        }}
                       >
                         <Button
                           variant={'outline'}
@@ -132,6 +136,9 @@ const TableSettingMenuHeader = () => {
                         {subItem.halaman && (
                           <Link
                             to={`/modules/website-utama/pengaturan-menu/header/${item.id_menu}/content`}
+                            onClick={() => {
+                              Cookies.set('nama_menu', subItem.nama_menu)
+                            }}
                           >
                             <Button
                               variant={'outline'}
@@ -189,6 +196,9 @@ const TableSettingMenuHeader = () => {
                         <TableCell className="border-b">
                           {subSubItem.halaman && (
                             <Link
+                              onClick={() => {
+                                Cookies.set('nama_menu', subSubItem.nama_menu)
+                              }}
                               to={`/modules/website-utama/pengaturan-menu/header/${item.id_menu}/content`}
                             >
                               <Button

@@ -28,7 +28,7 @@ const LevelForm = ({ form }: Props) => {
     }
   }, [isSuperAdmin]);
   useEffect(() => {
-    if (isSatker) {
+    if (!isSatker) {
       form.setValue("kelompok", undefined);
     }
   }, [isSatker]);

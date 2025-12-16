@@ -102,7 +102,7 @@ const LogView = () => {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div>
-          <div className="text-[#999999] text-sm">Diposting Oleh</div>
+          <div className="text-[#999999] text-sm ">Diposting Oleh</div>
           <div className=" ">
             {createdAt.date} , {createdAt.time}
           </div>
@@ -115,6 +115,7 @@ const LogView = () => {
         </div>
       </div>
       <TableCustom
+      tdClassName='whitespace-pre-line'
         meta={meta}
         addFilter={
           <SelectFilter

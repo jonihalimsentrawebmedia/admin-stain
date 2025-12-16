@@ -90,16 +90,9 @@ export function SelectCustom({
       control={form.control}
       render={({ field }) => (
         <FormItem
-          className={cn(
-            `flex w-full`,
-            {
-              "flex-row items-center gap-8": isRow && !isMobile,
-              "flex-col gap-0": !isRow || isMobile,
-              className,
-              zIndex,
-            },
-            className
-          )}
+           className={`whitespace-nowrap 
+          ${isRow ? `${isMobile ? 'flex flex-col gap-4' : 'grid grid-cols-[12rem_1fr] flex-row items-center gap-5'} ` : 'flex flex-col gap-2'} 
+          ${className}`}
         >
           {label && (
             <FormLabel
@@ -169,7 +162,7 @@ export function SelectCustom({
                   }),
                   singleValue: (provided) => ({
                     ...provided,
-                    color: "#0E874E",
+                    color: "#464646",
                   }),
                   input: (provided) => ({
                     ...provided,
@@ -191,7 +184,7 @@ export function SelectCustom({
                     backgroundColor: state.isFocused
                       ? "#f1f5f9"
                       : "transparent",
-                    color: "#0E874E",
+                    color: "#464646",
                     cursor: isDisabled ? "not-allowed" : "pointer",
                   
                   }),
