@@ -36,7 +36,6 @@ export const ButtonDelete = (props: props) => {
     <>
       <button
         onClick={() => setOpen(!open)}
-        // onClick={() => HandleDelete(item?.id_background)}
         className={'bg-red-500 p-1.5 rounded text-white'}
       >
         <FaTrash />
