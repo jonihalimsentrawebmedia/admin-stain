@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 import { Checkbox } from '@/components/ui/checkbox'
 import type { IBGThumbnail } from '@/pages/modules/website-utama/public-content/announcement/data'
 import { cn } from '@/lib/utils'
-import { FaTrash } from 'react-icons/fa'
+import { ButtonDelete } from '@/pages/modules/website-utama/public-content/achievement/background/buttonDelete.tsx'
 
 interface Props {
   background: IBGThumbnail[]
@@ -62,16 +62,16 @@ export const UploadImgBackground = ({ background, context, max = 4, queryName }:
     await handleUpload(e.dataTransfer.files)
   }
 
-  const HandleDelete = async (id: number) => {
-    await AxiosClient.delete(`/website-utama/${context}/${id}`)
-      .then((res) => {
-        if (res.data.status) {
-          queryClient.invalidateQueries({ queryKey: [queryName] })
-          toast.success('Berhasil menghapus gambar')
-        }
-      })
-      .catch((err) => toast.error(err?.response?.data?.message || 'Terjadi kesalahan.'))
-  }
+  // const HandleDelete = async (id: number) => {
+  //   await AxiosClient.delete(`/website-utama/${context}/${id}`)
+  //     .then((res) => {
+  //       if (res.data.status) {
+  //         queryClient.invalidateQueries({ queryKey: [queryName] })
+  //         toast.success('Berhasil menghapus gambar')
+  //       }
+  //     })
+  //     .catch((err) => toast.error(err?.response?.data?.message || 'Terjadi kesalahan.'))
+  // }
 
   return (
     <>
@@ -107,12 +107,13 @@ export const UploadImgBackground = ({ background, context, max = 4, queryName }:
                 />
                 Aktifkan Gambar Ini
               </label>
-              <button
-                onClick={() => HandleDelete(item?.id_background)}
-                className={'bg-red-500 p-1.5 rounded text-white'}
-              >
-                <FaTrash />
-              </button>
+              <ButtonDelete context={context} queryName={queryName} data={item} />
+              {/*<button*/}
+              {/*  onClick={() => HandleDelete(item?.id_background)}*/}
+              {/*  className={'bg-red-500 p-1.5 rounded text-white'}*/}
+              {/*>*/}
+              {/*  <FaTrash />*/}
+              {/*</button>*/}
             </div>
           </div>
         ))}
