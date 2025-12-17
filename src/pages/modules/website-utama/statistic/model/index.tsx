@@ -17,6 +17,8 @@ export interface StatisticUniversity {
   created_user: string
   updated_at: string
   updated_user: string
+  tanggal_berdiri: string
+  teks_pengantar: string
 }
 
 // 1. Skema untuk DataGambar
@@ -31,6 +33,12 @@ export const StatisticUniversitySchema = z.object({
   lektor_kepala: z.number().int().nonnegative(),
   asisten_ahli: z.number().int().nonnegative(),
   staf_pengajar: z.number().int().nonnegative(),
+  teks_pengantar: z
+    .string({ error: 'Teks Pengantar Wajib Diisi' })
+    .min(1, { error: 'Teks Pengantar Wajib Diisi' }),
+  tanggal: z.string({ error: 'Tanggal Wajib Diisi' }).min(1, { error: 'Tanggal Wajib Diisi' }),
+  bulan: z.string({ error: 'Bulan Wajib Diisi' }).min(1, { error: 'Bulan Wajib Diisi' }),
+  tahun: z.string({ error: 'Tahun Wajib Diisi' }).min(1, { error: 'Tahun Wajib Diisi' }),
 })
 
 // 3. Mendapatkan Tipe TypeScript (Interface) secara otomatis

@@ -7,6 +7,9 @@ import CardInput from '@/components/common/card/CardInput'
 import DetailField from '@/components/common/field/DetailField'
 import ImageStatistic from './components/ImageStatistic'
 import TextInput from '@/components/common/form/TextInput'
+import { SelectBasicInput } from '@/components/common/form/selectBasicInput'
+import { dateOptions, generateYearData, monthOptions } from './data'
+import { RichText } from '@/components/common/richtext'
 
 const StatisticView = () => {
   const {
@@ -109,6 +112,49 @@ const StatisticView = () => {
               />
             ))}
           </div>
+        </CardInput>
+        <CardInput title="Tanggal Berdiri">
+          {isEdit ? (
+            <div className="flex gap-4">
+              <SelectBasicInput
+                data={dateOptions}
+                form={form}
+                name="tanggal"
+                placeholder="Pilih"
+                label="Tanggal"
+                selectClassName="min-w-[150px]"
+              />
+              <SelectBasicInput
+                data={monthOptions}
+                form={form}
+                name="bulan"
+                placeholder="Pilih"
+                label="Bulan"
+                selectClassName="min-w-[150px]"
+              />
+              <SelectBasicInput
+                data={generateYearData(1940)}
+                form={form}
+                name="tahun"
+                placeholder="Pilih"
+                label="Tahun"
+                selectClassName="min-w-[150px]"
+              />
+            </div>
+          ) : (
+            <div>
+              {form.watch('tanggal')}-
+              {monthOptions.filter((item) => item.value == form.watch('bulan'))[0]?.label}-
+              {form.watch('tahun')}
+            </div>
+          )}
+        </CardInput>
+        <CardInput title="Teks Pengantar">
+          {isEdit ? (
+            <RichText isRow={false} className='gap-2!'  form={form} name="teks_pengantar" label="Isi Teks Pengantar" />
+          ) : (
+            <div dangerouslySetInnerHTML={{ __html: form.watch('teks_pengantar') }}></div>
+          )}
         </CardInput>
         <CardInput title="Angka">
           {isEdit ? (

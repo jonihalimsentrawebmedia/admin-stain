@@ -5,6 +5,7 @@ import type { ColumnDef } from '@tanstack/react-table'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
 import TableCustom from '@/components/common/table/TableCustom'
 import SelectFilter from '@/components/common/filter/SelectFilter'
+import { isImageUrl } from '../../acreditation/log/AcreditationLogDetail'
 
 const LogStatisticView = () => {
   const { log, loading, meta } = useGetLogStatistic()
@@ -41,15 +42,36 @@ const LogStatisticView = () => {
     {
       accessorKey: 'data_lama',
       header: 'Data Sebelumnya',
+      cell: ({ row }) => {
+        const isImage = isImageUrl(row.original.data_lama)
+        return isImage ? (
+          <img width={100} height={100} src={row.original.data_lama} />
+        ) : (
+          row.original.data_lama
+        )
+      },
     },
     {
       accessorKey: 'data_baru',
       header: 'Data Hasil Perubahan',
+      cell: ({ row }) => {
+        const isImage = isImageUrl(row.original.data_baru)
+        return isImage ? (
+          <img width={100} height={100} src={row.original.data_baru} />
+        ) : (
+          row.original.data_baru
+        )
+      },
     },
   ]
   return (
     <div className="flex flex-col gap-4">
-      <ButtonTitleGroup link='/modules/website-utama/statistic' buttonGroup={[]} label="Log Data - Statistik" isBack />
+      <ButtonTitleGroup
+        link="/modules/website-utama/statistic"
+        buttonGroup={[]}
+        label="Log Data - Statistik"
+        isBack
+      />
 
       <TableCustom
         addFilter={
@@ -70,6 +92,7 @@ const LogStatisticView = () => {
         data={log}
         isShowLimit={false}
         columns={columns}
+        tdClassName="whitespace-pre-line"
       />
     </div>
   )
