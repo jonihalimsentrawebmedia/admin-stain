@@ -18,11 +18,13 @@ const StatisticViewModel = () => {
 
   const handleSave = async (e: StatistikUniversitasType) => {
     setLoadingSave(true)
+    const tempDate = `${e.tanggal}-${e.bulan}-${e.tahun}`
     await AxiosClient.post('/website-utama/statistik', {
       ...e,
       data: {
         gambars: imageStatistic,
       },
+      tanggal_berdiri: tempDate,
     })
       .then((res) => {
         if (res.data.status) {
@@ -93,14 +95,16 @@ const StatisticViewModel = () => {
       }
       setImageStatistic(temp)
       setImageStatisticTemp(temp)
-
+      const dateStatistic = statistic.tanggal_berdiri.split('-')
       form.reset({
         ...statistic,
+        tanggal: dateStatistic[0],
+        bulan: dateStatistic[1],
+        tahun: dateStatistic[2],
       })
     }
   }, [statistic])
-  console.log(imageStatisticTemp, 'tempI')
-  console.log(imageStatistic, 'tempII')
+
   return {
     form,
     statistic,

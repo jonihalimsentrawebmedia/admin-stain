@@ -8,7 +8,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import TableCustom from '@/components/common/table/TableCustom'
 import SelectFilter from '@/components/common/filter/SelectFilter'
 import { capitalizeTextSimple } from '../AcreditationViewModel'
-function isImageUrl(url: string) {
+export function isImageUrl(url: string) {
   return /\.(jpg|jpeg|png|gif|webp|bmp|svg)$/i.test(url)
 }
 
