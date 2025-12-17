@@ -1,4 +1,4 @@
-import axios, {AxiosError, AxiosHeaders, type InternalAxiosRequestConfig} from 'axios'
+import axios, { AxiosError, AxiosHeaders, type InternalAxiosRequestConfig } from 'axios'
 import Cookies from 'js-cookie'
 
 const AxiosClient = axios.create({
@@ -45,13 +45,13 @@ AxiosClient.interceptors.response.use(
       })
     }
     if (error.status === 401) {
-      console.log(error.status)
       const token = Cookies.get('token')
       if (token) {
         Cookies.remove('token')
-        Cookies.remove('x-level-id')
-        Cookies.remove('levelID')
-        window.location.href = '/login'
+        window.location.href = '/'
+      } else {
+        Cookies.remove('token')
+        window.location.href = '/'
       }
     }
     return Promise.reject(error)

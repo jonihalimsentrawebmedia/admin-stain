@@ -64,20 +64,20 @@ export const PublishColumnsAgenda = () => {
       header: 'Penulis',
     },
     {
-      accessorKey: 'disetujui_at',
-      header: 'Tgl. Proses',
+      accessorKey: 'published_at',
+      header: 'Tgl. Publish',
       cell: ({ row }) => {
         return (
           <>
             <div className="flex flex-col gap-1.5 text-center">
               <p className={'text-sm'}>
-                {format(row?.original?.disetujui_at as string, 'dd MMMM yyyy')}
+                {format(row?.original?.published_at as string, 'dd MMMM yyyy')}
               </p>
               <p className={'text-sm'}>
-                {format(row?.original?.disetujui_at as string, 'HH:mm:ss')}
+                {format(row?.original?.published_at as string, 'HH:mm:ss')}
               </p>
               <p className={'text-primary text-sm'}>
-                {TimeAgo(row?.original?.disetujui_at as string)}
+                {TimeAgo(row?.original?.published_at as string)}
               </p>
             </div>
           </>

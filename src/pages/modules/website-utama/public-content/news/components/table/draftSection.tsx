@@ -12,7 +12,7 @@ export const DraftSectionTabs = () => {
   return (
     <>
       <TableCustom
-        tdClassName={'[&>td:nth-child(1)]:w-fit border'}
+        tdClassName={'whitespace-pre-line border'}
         addFilter={
           <div className={'flex items-center gap-1.5'}>
             <SelectFilter
