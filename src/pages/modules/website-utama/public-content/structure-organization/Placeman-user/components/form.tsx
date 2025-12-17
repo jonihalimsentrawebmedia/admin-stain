@@ -3,22 +3,23 @@ import type { UseFormReturn } from 'react-hook-form'
 import { Form } from '@/components/ui/form.tsx'
 import type { PlacemanType } from '../data/resolver'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { useNavigate } from 'react-router-dom'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import useGetGroupRank from '@/pages/modules/settings/reference/group-rank/controller/useGetGroupRank.tsx'
 import useGetAcademicRank from '@/pages/modules/settings/reference/academic-rank/controller/useGetAcademicRank.tsx'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import Checkbox from '@/components/common/form/checkbox.tsx'
+import type { Dispatch, SetStateAction } from 'react'
 
 interface Props {
   form: UseFormReturn<PlacemanType>
   loading: boolean
   HandleSave: (e: PlacemanType) => void
+  open: Boolean
+  setOpen: Dispatch<SetStateAction<boolean>>
 }
 
 export const FormPlacemanUser = (props: Props) => {
-  const { form, loading, HandleSave } = props
-  const navigate = useNavigate()
+  const { form, loading, HandleSave, open, setOpen } = props
 
   const { loading: load1, groupRank } = useGetGroupRank()
   const { loading: load2, academicRank } = useGetAcademicRank()
@@ -119,8 +120,9 @@ export const FormPlacemanUser = (props: Props) => {
               {
                 label: 'Batal',
                 type: 'cancel',
-                onClick: () => {
-                  navigate(-1)
+                onClick: (e) => {
+                  e.preventDefault()
+                  setOpen(!open)
                 },
               },
               { isDisabled: loading, label: 'Simpan', type: 'save', onClick: () => {} },

@@ -80,7 +80,13 @@ export const ButtonEditPlaceman = (data: IPlacemanUser) => {
         setOpen={setOpen}
         title={'Ubah Data Pejabat'}
       >
-        <FormPlacemanUser form={form} HandleSave={HandleSave} loading={loading} />
+        <FormPlacemanUser
+          setOpen={setOpen}
+          open={open}
+          form={form}
+          HandleSave={HandleSave}
+          loading={loading}
+        />
       </DialogCustom>
     </>
   )

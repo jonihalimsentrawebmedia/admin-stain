@@ -47,6 +47,7 @@ export const ButtonAddPlaceman = () => {
           form.reset({
             show_email_public: false,
             show_no_hp_public: false,
+            id_kelompok_organisasi: id,
           })
         }
       })
@@ -55,6 +56,8 @@ export const ButtonAddPlaceman = () => {
         setLoading(false)
       })
   }
+
+  console.log(form.formState.errors)
 
   return (
     <>
@@ -73,7 +76,13 @@ export const ButtonAddPlaceman = () => {
         setOpen={setOpen}
         title={'Tambah Pejabat'}
       >
-        <FormPlacemanUser form={form} HandleSave={HandleSave} loading={loading} />
+        <FormPlacemanUser
+          open={open}
+          setOpen={setOpen}
+          form={form}
+          HandleSave={HandleSave}
+          loading={loading}
+        />
       </DialogCustom>
     </>
   )
