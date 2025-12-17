@@ -35,7 +35,12 @@ const PublishedColumns = () => {
       header: 'Keterangan',
       cell: ({ row }) => {
         const desc = row?.original?.keterangan ?? '-'
-        return <div dangerouslySetInnerHTML={{ __html: desc }} className="whitespace-pre-line" />
+        return (
+          <div
+            dangerouslySetInnerHTML={{ __html: desc }}
+            className="whitespace-pre-line tiptap ProseMirror simple-editor"
+          />
+        )
       },
     },
     {

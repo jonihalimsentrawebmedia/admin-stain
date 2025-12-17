@@ -151,7 +151,7 @@ export const DetailImpactInnovationPage = () => {
 
         <div className="max-w-4xl mx-auto mt-5">
           <div
-            className={'space-y-5'}
+            className={'space-y-5 tiptap ProseMirror simple-editor'}
             dangerouslySetInnerHTML={{ __html: detail?.isi_inovasi_berdampak ?? '' }}
           />
         </div>

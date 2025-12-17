@@ -32,7 +32,12 @@ const ContentViewModel = () => {
       accessorKey: 'isi',
       header: 'Isi',
       cell: ({ row }) => {
-        return <div dangerouslySetInnerHTML={{ __html: row.original.isi }}></div>
+        return (
+          <div
+            className={'tiptap ProseMirror simple-editor'}
+            dangerouslySetInnerHTML={{ __html: row.original.isi }}
+          ></div>
+        )
       },
     },
 
@@ -56,11 +61,10 @@ const ContentViewModel = () => {
   function goToAdd() {
     navigate(`/modules/website-utama/pengaturan-menu/header/${id}/content/add`)
   }
-  function goToBackground(){
+  function goToBackground() {
     navigate(`/modules/website-utama/pengaturan-menu/header/${id}/content/background`)
-
   }
-  return { columns, goToAdd ,goToBackground}
+  return { columns, goToAdd, goToBackground }
 }
 
 export default ContentViewModel
