@@ -48,7 +48,6 @@ const ButtonEditAcreditation = ({ data }: Props) => {
   }
   const startAt = formatDateTime(data.mulai_berlaku)
   const endAt = formatDateTime(data.akhir_berlaku)
-  console.log(startAt)
   return (
     <>
       <button

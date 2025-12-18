@@ -16,6 +16,7 @@ import ButtonEdit from './ButtonEdit'
 import { Link } from 'react-router-dom'
 import ButtonActiveMenu from './ButtonActiveMenu'
 import Cookies from 'js-cookie'
+import React from 'react'
 
 const TableSettingMenuHeader = () => {
   const { loading, menuList } = useGetSettingsMenu()
@@ -66,8 +67,8 @@ const TableSettingMenuHeader = () => {
                 </TableRow>
               ))
           : menuList.map((item, index) => (
-              <>
-                <TableRow key={'parent' + index} className="py-0!">
+              <React.Fragment key={'parent' + index}>
+                <TableRow  className="py-0!">
                   <TableCell className="border-b  left-0 relative">
                     <div className="">{index + 1}</div>
                   </TableCell>
@@ -107,8 +108,8 @@ const TableSettingMenuHeader = () => {
                   </TableCell>
                 </TableRow>
                 {item.children.map((subItem, indexSub) => (
-                  <>
-                    <TableRow key={'subParent' + index + indexSub} className="py-0!">
+                  <React.Fragment key={'subParent' + index + indexSub} >
+                    <TableRow  className="py-0!">
                       <TableCell className="border-b relative">
                         <div className="pl-4  ">
                           {index + 1}.{indexSub + 1}
@@ -223,9 +224,9 @@ const TableSettingMenuHeader = () => {
                         </TableCell>
                       </TableRow>
                     ))}
-                  </>
+                  </React.Fragment>
                 ))}
-              </>
+              </React.Fragment>
             ))}
       </TableBody>
     </Table>
