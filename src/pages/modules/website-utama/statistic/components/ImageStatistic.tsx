@@ -61,7 +61,6 @@ const ImageStatistic = ({
   }
   const onFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
-    console.log(file)
     if (file) {
       if (!allowedTypes?.includes(file.type)) {
         toast.error(`Format file tidak didukung. ${allowedTypes?.join(',')}`)
