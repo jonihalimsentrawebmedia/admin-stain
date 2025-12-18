@@ -135,7 +135,7 @@ const TableSettingMenuHeader = () => {
                       <TableCell className="border-b">
                         {subItem.halaman && (
                           <Link
-                            to={`/modules/website-utama/pengaturan-menu/header/${item.id_menu}/content`}
+                            to={`/modules/website-utama/pengaturan-menu/header/${subItem.id_menu}/content`}
                             onClick={() => {
                               Cookies.set('nama_menu', subItem.nama_menu)
                             }}
@@ -199,7 +199,7 @@ const TableSettingMenuHeader = () => {
                               onClick={() => {
                                 Cookies.set('nama_menu', subSubItem.nama_menu)
                               }}
-                              to={`/modules/website-utama/pengaturan-menu/header/${item.id_menu}/content`}
+                              to={`/modules/website-utama/pengaturan-menu/header/${subSubItem.id_menu}/content`}
                             >
                               <Button
                                 variant={'outline'}
