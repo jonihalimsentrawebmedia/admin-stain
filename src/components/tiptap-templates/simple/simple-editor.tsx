@@ -11,6 +11,8 @@ import { Highlight } from '@tiptap/extension-highlight'
 import { Subscript } from '@tiptap/extension-subscript'
 import { Superscript } from '@tiptap/extension-superscript'
 import { Selection } from '@tiptap/extensions'
+import { TextStyle } from '@tiptap/extension-text-style'
+import Color from '@tiptap/extension-color'
 
 // --- UI Primitives ---
 import { Button } from '@/components/tiptap-ui-primitive/button'
@@ -58,6 +60,7 @@ import { handleImageUpload, MAX_FILE_SIZE } from '@/lib/tiptap-utils'
 
 // --- Styles ---
 import '@/components/tiptap-templates/simple/simple-editor.scss'
+import { TextColorButton } from '@/components/common/ColorButton'
 
 const MainToolbarContent = ({
   onHighlighterClick,
@@ -94,6 +97,9 @@ const MainToolbarContent = ({
         <MarkButton type="strike" />
         <MarkButton type="code" />
         <MarkButton type="underline" />
+        
+        <TextColorButton />
+        
         {!isMobile ? (
           <ColorHighlightPopover />
         ) : (
@@ -189,6 +195,8 @@ export function SimpleEditor(props: props) {
           enableClickSelection: true,
         },
       }),
+      TextStyle,
+      Color,
       HorizontalRule,
       TextAlign.configure({ types: ['heading', 'paragraph'] }),
       TaskList,

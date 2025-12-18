@@ -50,6 +50,7 @@ export const ButtonSubmissionFacilities = (data: IFacilitiesDetail) => {
 
       <DialogCustom
         open={open}
+        className={'rounded lg:max-w-2xl'}
         setOpen={setOpen}
         title={<p className={'text-2xl text-blue-600'}>Ajukan ke Editor</p>}
         description={'Apakah anda yakin untuk mengajukan Fasilitas yang ditulis ke editor?'}
