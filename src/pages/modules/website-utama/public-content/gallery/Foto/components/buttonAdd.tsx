@@ -11,6 +11,7 @@ import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { Form } from '@/components/ui/form.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import { UploadImageRatio } from '@/pages/modules/website-utama/public-content/facilities/components/uploadImageRatio.tsx'
 
 export const ButtonAddAlbumPhoto = () => {
   const [open, setOpen] = useState(false)
@@ -61,6 +62,7 @@ export const ButtonAddAlbumPhoto = () => {
         <div>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(HandleSave)} className={'flex flex-col gap-5'}>
+              <UploadImageRatio form={form} name={'thumbnail'} placeholder={'thumbnail'} />
               <TextInput
                 name={'judul'}
                 form={form}

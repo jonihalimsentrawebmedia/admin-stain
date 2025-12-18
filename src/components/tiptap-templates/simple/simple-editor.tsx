@@ -13,6 +13,10 @@ import { Superscript } from '@tiptap/extension-superscript'
 import { Selection } from '@tiptap/extensions'
 import { TextStyle } from '@tiptap/extension-text-style'
 import Color from '@tiptap/extension-color'
+import { Table } from '@tiptap/extension-table'
+import TableRow from '@tiptap/extension-table-row'
+import TableCell from '@tiptap/extension-table-cell'
+import TableHeader from '@tiptap/extension-table-header'
 
 // --- UI Primitives ---
 import { Button } from '@/components/tiptap-ui-primitive/button'
@@ -29,6 +33,7 @@ import '@/components/tiptap-node/list-node/list-node.scss'
 import '@/components/tiptap-node/image-node/image-node.scss'
 import '@/components/tiptap-node/heading-node/heading-node.scss'
 import '@/components/tiptap-node/paragraph-node/paragraph-node.scss'
+import { Dropcursor } from '@tiptap/extensions'
 
 // --- Tiptap UI ---
 import { HeadingDropdownMenu } from '@/components/tiptap-ui/heading-dropdown-menu'
@@ -61,6 +66,8 @@ import { handleImageUpload, MAX_FILE_SIZE } from '@/lib/tiptap-utils'
 // --- Styles ---
 import '@/components/tiptap-templates/simple/simple-editor.scss'
 import { TextColorButton } from '@/components/common/ColorButton'
+import { AddTableButton } from '@/components/common/createTable'
+import { TableFloatingToolbar } from '@/components/common/createTable/tableFlating.tsx'
 
 const MainToolbarContent = ({
   onHighlighterClick,
@@ -92,14 +99,18 @@ const MainToolbarContent = ({
       <ToolbarSeparator />
 
       <ToolbarGroup>
+        <AddTableButton />
+      </ToolbarGroup>
+
+      <ToolbarGroup>
         <MarkButton type="bold" />
         <MarkButton type="italic" />
         <MarkButton type="strike" />
         <MarkButton type="code" />
         <MarkButton type="underline" />
-        
+
         <TextColorButton />
-        
+
         {!isMobile ? (
           <ColorHighlightPopover />
         ) : (
@@ -197,12 +208,31 @@ export function SimpleEditor(props: props) {
       }),
       TextStyle,
       Color,
+      Table.configure({
+        resizable: true, // ⬅️ INI KUNCINYA
+        handleWidth: 5,
+        lastColumnResizable: true,
+        allowTableNodeSelection: true,
+      }),
+      TableRow,
+      TableHeader,
+      TableCell,
       HorizontalRule,
       TextAlign.configure({ types: ['heading', 'paragraph'] }),
       TaskList,
       TaskItem.configure({ nested: true }),
       Highlight.configure({ multicolor: true }),
-      Image,
+      Image.configure({
+        inline: true,
+        resize: {
+          enabled: true,
+          minHeight: 50,
+          minWidth: 50,
+          directions: ['top', 'bottom', 'left', 'right'],
+          alwaysPreserveAspectRatio: true,
+        },
+      }),
+      Dropcursor,
       Typography,
       Superscript,
       Subscript,
@@ -212,7 +242,7 @@ export function SimpleEditor(props: props) {
         maxSize: MAX_FILE_SIZE,
         limit: 3,
         upload: handleImageUpload,
-        onError: (error) => console.error('Upload failed:', error),
+        onError: (error: any) => console.error('Upload failed:', error),
       }),
     ],
 
@@ -263,7 +293,7 @@ export function SimpleEditor(props: props) {
             />
           )}
         </Toolbar>
-
+        <TableFloatingToolbar />
         <EditorContent editor={editor} role="presentation" className="simple-editor-content" />
       </EditorContext.Provider>
     </div>

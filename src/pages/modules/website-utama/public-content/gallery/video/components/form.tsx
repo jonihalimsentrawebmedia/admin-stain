@@ -3,6 +3,7 @@ import type { VideoType } from '../data/resolver'
 import { Form } from '@/components/ui/form.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
+import { UploadImageRatio } from '@/pages/modules/website-utama/public-content/facilities/components/uploadImageRatio.tsx'
 
 interface props {
   loading: boolean
@@ -18,11 +19,8 @@ export const FormGalleyVideo = (props: props) => {
   return (
     <>
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(HandleSave)}
-          className={'flex flex-col gap-5'}
-          hidden={!open}
-        >
+        <form onSubmit={form.handleSubmit(HandleSave)} className={'flex flex-col gap-5'}>
+          <UploadImageRatio form={form} name={'thumbnail'} placeholder={'thumbnail'} />
           <TextInput
             label={'Judul Galeri'}
             form={form}
@@ -46,7 +44,7 @@ export const FormGalleyVideo = (props: props) => {
                 label: 'Batal',
                 type: 'cancel',
                 onClick: () => {
-                  setOpen(false)
+                  setOpen(!open)
                 },
               },
               {

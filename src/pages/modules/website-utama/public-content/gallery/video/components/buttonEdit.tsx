@@ -23,6 +23,7 @@ export const ButtonEditVideo = (data: IGalleryVideo) => {
       form.reset({
         link_video: data.link_video,
         judul: data.judul,
+        thumbnail: data?.thumbnail,
       })
     }
   }, [data])
@@ -59,7 +60,7 @@ export const ButtonEditVideo = (data: IGalleryVideo) => {
         open={open}
         setOpen={setOpen}
         title={'Edit Galeri Video'}
-        className={'rounded lg:min-w-2xl'}
+        className={'rounded lg:max-w-2xl'}
       >
         <FormGalleyVideo
           form={form}

@@ -11,6 +11,7 @@ import TextInput from '@/components/common/form/TextInput.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import type { IGaleriAlbum } from '@/pages/modules/website-utama/public-content/gallery/Foto/data'
 import { HiPencil } from 'react-icons/hi'
+import { UploadImageRatio } from '@/pages/modules/website-utama/public-content/facilities/components/uploadImageRatio.tsx'
 
 export const ButtonEditAlbumPhoto = (data: IGaleriAlbum) => {
   const [open, setOpen] = useState(false)
@@ -24,6 +25,7 @@ export const ButtonEditAlbumPhoto = (data: IGaleriAlbum) => {
     if (data) {
       form.reset({
         judul: data.judul,
+        thumbnail: data?.thumbnail
       })
     }
   }, [data])
@@ -65,6 +67,7 @@ export const ButtonEditAlbumPhoto = (data: IGaleriAlbum) => {
         <div>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(HandleSave)} className={'flex flex-col gap-5'}>
+              <UploadImageRatio form={form} name={'thumbnail'} placeholder={'thumbnail'} />
               <TextInput
                 name={'judul'}
                 form={form}

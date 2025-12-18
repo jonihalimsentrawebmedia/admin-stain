@@ -7,6 +7,7 @@ export interface IGalleryVideo {
   created_user: string
   updated_at: string // ISO datetime string
   updated_user: string
+  thumbnail: string
 
   nama_user_created: string
   nama_disetujui: string

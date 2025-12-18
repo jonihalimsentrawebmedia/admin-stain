@@ -55,7 +55,7 @@ export const ButtonAddVideo = () => {
         open={open}
         setOpen={setOpen}
         title={'Tambah Galeri Video'}
-        className={'rounded'}
+        className={'rounded lg:max-w-3xl'}
       >
         <FormGalleyVideo
           form={form}
