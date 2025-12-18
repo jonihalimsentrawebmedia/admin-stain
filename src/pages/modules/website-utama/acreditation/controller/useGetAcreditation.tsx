@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react"
-import type { AcreditationList } from "../model"
-import type { Meta } from "@/components/common/table/TablePagination"
-import { useSearchParams } from "react-router-dom"
-import { useQuery } from "@tanstack/react-query"
-import AxiosClient from "@/provider/axios"
+import { useEffect, useState } from 'react'
+import type { AcreditationList } from '../model'
+import type { Meta } from '@/components/common/table/TablePagination'
+import { useSearchParams } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
+import AxiosClient from '@/provider/axios'
 
 const useGetAcreditation = () => {
   const [acreditationList, setAcreditationList] = useState<AcreditationList[]>([])
@@ -13,8 +13,9 @@ const useGetAcreditation = () => {
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
   const search = searchParams.get('search') ?? ''
+  const id_satuan_organisasi_akreditas = searchParams.get('id_satuan_organisasi_akreditas') ?? ''
 
-  const ParamsSearch = new URLSearchParams({ page, limit, search })
+  const ParamsSearch = new URLSearchParams({ page, limit, search, id_satuan_organisasi_akreditas })
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['list-acreditation', ParamsSearch.toString()],
