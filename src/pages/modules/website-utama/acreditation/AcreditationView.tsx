@@ -11,6 +11,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import useGetSatuanOrganisasi from '../../settings/controller/useGetSatuanOrganisasi'
 import { useSearchParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import SelectFilter from '@/components/common/filter/SelectFilter'
 
 const AcreditationView = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -116,8 +117,20 @@ const AcreditationView = () => {
         data={acreditationList}
         loading={loading}
         meta={meta}
-        isShowFilter={false}
-        isShowPagination={false}
+        isShowLimit={false}
+          addFilter={
+          <SelectFilter
+            selectClassName={'min-w-[8rem]'}
+            label="Tampilkan"
+            name={'limit'}
+            options={[
+              { label: '10 Data', value: '10' },
+              { label: '25 Data', value: '25' },
+              { label: '50 Data', value: '50' },
+              { label: '100 Data', value: '100' },
+            ]}
+          />
+        }
       />
     </div>
   )
