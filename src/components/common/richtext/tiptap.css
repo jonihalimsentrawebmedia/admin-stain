@@ -28,7 +28,7 @@
 
 /* === The real editor === */
 .tiptap {
-    min-height: 200px;
+    min-height: 400px;
     padding: 5px;
     outline: none !important;
 }
