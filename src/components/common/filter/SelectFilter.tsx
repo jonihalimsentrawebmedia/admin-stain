@@ -67,7 +67,7 @@ const SelectFilter = ({ label, options, name, selectClassName = 'min-w-xs' }: Pr
         options={[
           {
             value: '',
-            label: 'Keseluruhan',
+            label: 'Semua',
           },
           ...options,
         ]}
