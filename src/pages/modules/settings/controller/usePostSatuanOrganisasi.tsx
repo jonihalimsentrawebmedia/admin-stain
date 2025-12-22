@@ -14,7 +14,9 @@ const usePostSatuanOrganisasi = ({ kelompok }: Props) => {
   const navigate = useNavigate()
   const form = useForm<SatuanOrganisasiType>({
     resolver: zodResolver(SatuanOrganisasiResolver),
-    defaultValues: {},
+    defaultValues: {
+      is_alamat_sama_parent:false
+    },
   })
 
   const [loading, setLoading] = useState(false)

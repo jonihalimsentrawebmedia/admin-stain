@@ -9,17 +9,13 @@ const InstitutionDetailViewModel = () => {
   const form = useForm();
   const navigate = useNavigate();
   const { id } = useParams();
-  const fieldImage = [
+   const fieldImage = [
     {
       label: "Logo",
       name: "logo",
       component: (
         <div className="bg-[#F5FFFA] border border-[#70F2B1] p-4">
-          <img
-            className="max-w-[200px] max-h-[200px]"
-            src={form.watch("logo")}
-            alt="logo"
-          />
+          <img className="max-w-[200px] max-h-[200px]" src={form.watch("logo")} alt="logo" />
         </div>
       ),
     },
@@ -27,12 +23,8 @@ const InstitutionDetailViewModel = () => {
       label: "Favicon",
       name: "favicon",
       component: (
-        <div className="bg-[#F5FFFA] border border-[#70F2B1] p-4">
-          <img
-            className="max-w-[200px] max-h-[200px]"
-            src={form.watch("favicon")}
-            alt="logo"
-          />
+        <div className="bg-[#F5FFFA] w-fit border border-[#70F2B1] p-4">
+          <img className="max-w-[100px] max-h-[100px]" src={form.watch("favicon")} alt="logo" />
         </div>
       ),
     },
