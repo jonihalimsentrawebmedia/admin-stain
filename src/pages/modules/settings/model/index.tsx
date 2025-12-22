@@ -53,7 +53,8 @@ export interface SatuanOrganisasiList {
   nama: string // Nama lengkap organisasi
   singkatan: string // Singkatan atau akronim
   keyword: string // Kata kunci yang dipisahkan koma
-
+  kode_jenjang:string
+  nama_jenjang_pendidikan:string
   // Informasi Alamat
   alamat: string
   provinsi: string
