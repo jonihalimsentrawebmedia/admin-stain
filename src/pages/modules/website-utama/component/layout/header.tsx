@@ -5,6 +5,7 @@ import React from 'react'
 import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/hooks/getProfile.tsx'
 import { ButtonSession } from '@/pages/modules/website-utama/component/buttonSession'
 import ButtonProfile from '@/pages/modules/settings/components/button/ButtonProfile.tsx'
+import { Link } from 'react-router-dom'
 
 interface Props {
   collapsed: boolean
@@ -22,7 +23,9 @@ export function Header(props: Props) {
   return (
     <header className="py-4 px-5 bg-[#E9FFF1] border-b border-green-200 flex items-center justify-between w-full">
       <div className="flex items-center gap-4">
-        <img src={module?.gambar} alt="gambar" className="size-14" />
+        <Link to={'/modules'} className={'p-2'}>
+          <img src={module?.gambar} alt="gambar" className="size-10" />
+        </Link>
         <div className="flex flex-col">
           <p className="text-sm font-semibold text-primary">Manajemen Pengelolaan Website</p>
           <p className="text-2xl font-semibold">Website Utama</p>
