@@ -18,7 +18,6 @@ export default function MainLayout() {
         </main>
       </div>
 
-      {/* FOOTER */}
       <footer className="text-center py-2 text-xs text-gray-400 border-t">
         Admin Website © 2025
       </footer>
