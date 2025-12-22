@@ -32,7 +32,11 @@ const ProdiViewModel = () => {
 
     // Kolom Nama Prodi
     { accessorKey: "nama", header: "Nama Prodi" },
-    { accessorKey: "nama", header: "Jenjang Pendidikan" },
+    { accessorKey: "nama_jenjang_pendidikan", header: "Jenjang Pendidikan",cell:(row)=>{
+      const values=row.row.original
+      return <div>{values.kode_jenjang}-{values.nama_jenjang_pendidikan}</div>
+    } },
+    
 
     // Kolom Aksi (Icon Biru -> Detail/Lihat, Icon Kuning -> Edit, Icon Merah -> Delete)
     {
