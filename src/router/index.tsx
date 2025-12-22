@@ -49,6 +49,7 @@ import MainLayout from '@/pages/modules/website-utama/component/layout'
 import ModuleProfileView from '@/pages/modules/profile/ModuleProfileView'
 import ImpactInnovationView from '@/pages/modules/settings/reference/impact-innovation/ImpactInnovationView'
 import { MainWebsiteRouter } from '@/router/main-website/router.tsx'
+import EducationalLevelView from '@/pages/modules/settings/reference/educational-level/EducationalLevelView'
 
 export const Router = createBrowserRouter([
   {
@@ -302,6 +303,10 @@ export const Router = createBrowserRouter([
               {
                 path: 'impact-innovation',
                 element: <ImpactInnovationView />,
+              },
+              {
+                path: 'educational-level',
+                element: <EducationalLevelView />,
               },
             ],
           },

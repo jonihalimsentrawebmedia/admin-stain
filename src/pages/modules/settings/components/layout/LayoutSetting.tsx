@@ -103,6 +103,10 @@ export default function DashboardLayout() {
           link: '/modules/settings/reference/academic-rank',
           label: 'Pangkat Akademik',
         },
+        {
+          link: '/modules/settings/reference/educational-level',
+          label: 'Jenjang Pendidikan',
+        },
       ],
     },
   ]

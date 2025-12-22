@@ -7,6 +7,8 @@ import { Label } from '@/components/ui/label'
 import type { UseFormReturn } from 'react-hook-form'
 import useGetSatuanOrganisasi from '../../controller/useGetSatuanOrganisasi'
 import { useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import useGetEducationalLevel from '../../reference/educational-level/controller/useGetEducationalLevel'
 
 interface Props {
   form: UseFormReturn<any>
@@ -14,9 +16,27 @@ interface Props {
 }
 const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
   const { satuanOrganisasi } = useGetSatuanOrganisasi({
-    kelompok: kelompok == 'PRODI' ? 'FAKULTAS' : 'UNIVERSITAS',
+    kelompok: 'UNIVERSITAS',
+    isFilter: kelompok == 'PRODI' ? true : false,
+    isGetAll: true,
   })
-
+  const { satuanOrganisasi: fakultas } = useGetSatuanOrganisasi({
+    kelompok: 'FAKULTAS',
+    isGetAll: true,
+  })
+  const [searchParams, setSearchParams] = useSearchParams()
+  let educationalLevelOption: any = []
+  if (kelompok == 'PRODI') {
+    const { educationalLevel } = useGetEducationalLevel({
+      isGetAll: true,
+    })
+    educationalLevelOption = educationalLevel.map((item) => {
+      return {
+        value: item.id_jenjang,
+        label: `${item.kode_jenjang} - ${item.nama_jenjang}`,
+      }
+    })
+  }
   useEffect(() => {
     if (kelompok) {
       form.setValue('kelompok', kelompok)
@@ -28,15 +48,23 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
       ? 'Nama Program Studi'
       : kelompok == 'UNIT'
         ? 'Nama Unit'
-        : 'Nama Universitas / Perguruan Tinggi'
+        : kelompok == 'FAKULTAS'
+          ? 'Nama Fakultas'
+          : kelompok == 'LEMBAGA'
+            ? 'Nama Lembaga'
+            : 'Nama Universitas / Perguruan Tinggi'
   const placeHolderName =
     kelompok == 'PRODI'
       ? 'Nama Program Studi'
       : kelompok == 'UNIT'
         ? 'Nama Unit'
-        : 'Nama Universitas / Perguruan Tinggi'
+        : kelompok == 'FAKULTAS'
+          ? 'Nama Fakultas'
+          : kelompok == 'LEMBAGA'
+            ? 'Nama Lembaga'
+            : 'Nama Universitas / Perguruan Tinggi'
   const placeHolderNameUniv = kelompok == 'PRODI' ? 'Pilih' : 'Pilih Universitas/PT Asal'
-  const labelNameUniv = kelompok == 'PRODI' ? 'Fakultas Asal' : 'Universitas/PT Asal'
+  const labelNameUniv = kelompok == 'PRODI' ? 'Universitas Asal' : 'Universitas/PT Asal'
 
   function getTitle() {
     switch (kelompok) {
@@ -55,7 +83,8 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
     }
   }
   const valuesFakultas = satuanOrganisasi.filter(
-    (item) => item.id_satuan_organisasi == form.watch('parent_id')
+    (item) =>
+      item.id_satuan_organisasi == form.watch(kelompok == 'PRODI' ? 'parent_id_temp' : 'parent_id')
   )[0]
   console.log(form.watch('parent_id'))
   return (
@@ -65,6 +94,16 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
         <InputImage form={form} name="favicon" label="Favicon" />
       </div>
       <CardInput title={getTitle()}>
+        {kelompok === 'PRODI' && (
+          <InputText
+            name="kelompok"
+            label="Kelompok"
+            placeholder="Pilih Kelompok"
+            form={form}
+            isRow
+            isDisabled
+          />
+        )}
         {kelompok !== 'UNIVERSITAS' && (
           <SelectCustom
             data={satuanOrganisasi.map((item) => {
@@ -73,7 +112,15 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
                 value: item.id_satuan_organisasi,
               }
             })}
-            name="parent_id"
+            fx={(e) => {
+              if (kelompok == 'PRODI') {
+                const newParams = new URLSearchParams(searchParams.toString())
+                newParams.set('id_parent', e.value)
+                if (e.value === '') newParams.delete('id_parent')
+                setSearchParams(newParams)
+              }
+            }}
+            name={kelompok == 'PRODI' ? 'parent_id_temp' : 'parent_id'}
             label={labelNameUniv}
             placeholder={placeHolderNameUniv}
             form={form}
@@ -81,16 +128,46 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
             level1
           />
         )}
+        {kelompok == 'PRODI' && (
+          <SelectCustom
+            isDisabled={form.watch('parent_id_temp') == undefined}
+            data={fakultas.map((item) => {
+              return {
+                label: item.nama,
+                value: item.id_satuan_organisasi,
+              }
+            })}
+            name="parent_id"
+            label={'Fakultas Asal'}
+            placeholder={'Pilih Universitas terlebih dahulu'}
+            form={form}
+            isRow
+            level2
+          />
+        )}
+        {kelompok !== 'PRODI' && (
+          <InputText
+            name="kelompok"
+            label="Kelompok"
+            placeholder="Pilih Kelompok"
+            form={form}
+            isRow
+            isDisabled
+          />
+        )}
 
-        <InputText
-          name="kelompok"
-          label="Kelompok"
-          placeholder="Pilih Kelompok"
-          form={form}
-          isRow
-          isDisabled
-        />
         <InputText form={form} name="nama" isRow label={labelName} placeholder={placeHolderName} />
+        {kelompok == 'PRODI' && (
+          <SelectCustom
+            data={educationalLevelOption}
+            name="id_jenjang_pendidikan"
+            label={'Jenjang Pendidikan'}
+            placeholder={'Pilih '}
+            form={form}
+            isRow
+            level3
+          />
+        )}
         {kelompok !== 'PRODI' && kelompok !== 'UNIT' && (
           <InputText
             form={form}

@@ -8,6 +8,7 @@ import type { Meta } from '@/components/common/table/TablePagination'
 interface Props {
   kelompok?: string
   isFilter?: boolean
+  isGetAll?: boolean
 }
 
 const useGetSatuanOrganisasi = (props: Props) => {
@@ -15,8 +16,10 @@ const useGetSatuanOrganisasi = (props: Props) => {
   const page = searchParams.get('page') || '1'
   const limit = searchParams.get('limit') || '10'
   const search = searchParams.get('search') || ''
-  const { kelompok, isFilter } = props
-  const id_parent = isFilter ? '' : searchParams.get('id_parent')
+  const { kelompok, isFilter, isGetAll } = props
+  const id_parent = isFilter ? '' : (searchParams.get('id_parent') ?? '')
+  const ParamsSearch = new URLSearchParams({ page, limit, search, id_parent })
+  const ParamsSearchParent = new URLSearchParams({ id_parent })
 
   const [satuanOrganisasi, setSatuanOrganisasi] = useState<SatuanOrganisasiList[]>([])
   const [meta, setMeta] = useState<Meta>()
@@ -25,7 +28,7 @@ const useGetSatuanOrganisasi = (props: Props) => {
     queryKey: ['satuan-organisasi-list', kelompok, { search, page, limit, id_parent }],
     queryFn: () =>
       AxiosClient.get(
-        `/pengaturan/satuan-organisasi/${kelompok ?? ''}?${searchParams.toString()}`
+        `/pengaturan/satuan-organisasi/${kelompok ?? ''}?${isGetAll ? ParamsSearchParent : ParamsSearch}`
       ).then((res) => res.data),
   })
 
