@@ -20,7 +20,9 @@ const useUpdateSatuanOrganisasi = ({ kelompok }: Props) => {
   const navigate = useNavigate()
   const form = useForm<SatuanOrganisasiType>({
     resolver: zodResolver(SatuanOrganisasiResolver),
-    defaultValues: {},
+    defaultValues: {
+      
+    },
   })
 
   const [loading, setLoading] = useState(false)

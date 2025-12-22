@@ -35,6 +35,7 @@ export const SatuanOrganisasiResolver = z.object({
   twitter: z.string().url('URL Twitter tidak valid').optional(),
   instagram: z.string().url('URL Instagram tidak valid').optional(),
   youtube: z.string().url('URL YouTube tidak valid').optional(),
+  is_alamat_sama_parent: z.boolean()
 })
 
 /**

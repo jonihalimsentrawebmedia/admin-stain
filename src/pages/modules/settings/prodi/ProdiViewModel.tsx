@@ -28,10 +28,11 @@ const ProdiViewModel = () => {
     { accessorKey: "parent_id", header: "ID Parent" },
 
     // Kolom Fakultas Asal
-    { accessorKey: "nama", header: "Fakultas Asal" },
+    { accessorKey: "nama_parent", header: "Fakultas Asal" },
 
     // Kolom Nama Prodi
     { accessorKey: "nama", header: "Nama Prodi" },
+    { accessorKey: "nama", header: "Jenjang Pendidikan" },
 
     // Kolom Aksi (Icon Biru -> Detail/Lihat, Icon Kuning -> Edit, Icon Merah -> Delete)
     {

@@ -189,6 +189,7 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
         {kelompok !== 'UNIVERSITAS' && (
           <div className="flex items-center gap-3">
             <Checkbox
+              checked={form.watch('is_alamat_sama_parent')}
               disabled={!form.watch('parent_id')}
               id="isSome"
               onCheckedChange={(e) => {
@@ -202,6 +203,7 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
                     kecamatan: valuesFakultas.kecamatan,
                     kelurahan: valuesFakultas.kelurahan,
                     kode_pos: valuesFakultas.kode_pos,
+                    is_alamat_sama_parent: e,
                   })
                 } else {
                   form.reset({
@@ -212,6 +214,7 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
                     kecamatan: '',
                     kelurahan: '',
                     kode_pos: '',
+                    is_alamat_sama_parent: e,
                   })
                 }
               }}
