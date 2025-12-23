@@ -23,9 +23,11 @@ export const UseGetListBottomSlider = () => {
   const statusPublish = searchParams.get('status')
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search')
 
   const ParamSearch = new URLSearchParams({ page, limit })
   if (statusPublish) ParamSearch.append('status-publish', statusPublish)
+  if (search) ParamSearch.append('search', search)
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['list-slider-bottom', ParamSearch.toString()],

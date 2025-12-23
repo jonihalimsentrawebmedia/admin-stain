@@ -23,9 +23,13 @@ export const UseGetNews = () => {
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
   const status = searchParams.get('status')
+  const category = searchParams.get('id_category')
+  const search = searchParams.get('search')
 
   const ParamsSearch = new URLSearchParams({ page, limit })
   if (status) ParamsSearch.append('status-publish', status)
+  if (category) ParamsSearch.append('id-kategori-berita', category)
+  if (search) ParamsSearch.append('search', search)
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['list-news', ParamsSearch.toString()],
@@ -87,21 +91,20 @@ export const UseGetNewsStatus = () => {
 
 export const UseGetLogNews = (id: string) => {
   const [logData, setLogData] = useState<any[]>([])
-  
+
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['log-berita', id],
     refetchOnWindowFocus: false,
-    queryFn: () =>
-      AxiosClient.get(`/website-utama/berita-log/${id}`).then((res) => res.data.data),
+    queryFn: () => AxiosClient.get(`/website-utama/berita-log/${id}`).then((res) => res.data.data),
   })
-  
+
   const loading = isLoading || isFetching
-  
+
   useEffect(() => {
     if (data) {
       setLogData(data)
     }
   }, [data])
-  
+
   return { logData, loading }
 }

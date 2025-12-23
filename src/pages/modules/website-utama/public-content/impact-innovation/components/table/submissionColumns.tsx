@@ -66,7 +66,7 @@ export const SubmissionColumnsImpactInnovation = () => {
       header: 'Judul',
     },
     {
-      accessorKey: 'nama_kategori_berita',
+      accessorKey: 'nama_kategori',
       header: 'Kategori Berita',
     },
     {

@@ -15,10 +15,12 @@ export const UseGetImpactInnovation = () => {
   const limit = searchParams.get('limit') ?? '10'
   const search = searchParams.get('search')
   const status = searchParams.get('status')
+  const category = searchParams.get('id_category')
 
   const ParamsSearch = new URLSearchParams({ page, limit })
   if (search) ParamsSearch.append('search', search)
   if (status) ParamsSearch.append('status-publish', status)
+  if (category) ParamsSearch.append('id-kategori-inovasi-berdampak', category)
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['list-impact-innovation', ParamsSearch.toString()],
