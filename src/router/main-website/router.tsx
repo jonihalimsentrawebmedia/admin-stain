@@ -74,6 +74,9 @@ import { GalleryVideoBackgroundPage } from '@/pages/modules/website-utama/public
 import { LogActivityVideoPage } from '@/pages/modules/website-utama/public-content/gallery/video/log'
 import { LogActivityGalleryAlbum } from '@/pages/modules/website-utama/public-content/gallery/Foto/log'
 import { LogActivityGalleryAlbumPhoto } from '@/pages/modules/website-utama/public-content/gallery/Foto/data-album/log'
+import DownloadFilePage from '@/pages/modules/website-utama/public-content/download'
+import { AddDownloadPage } from '@/pages/modules/website-utama/public-content/download/components/addPage.tsx'
+import { EditDownloadPage } from '@/pages/modules/website-utama/public-content/download/components/editPage.tsx'
 
 export const MainWebsiteRouter = [
   {
@@ -374,6 +377,23 @@ export const MainWebsiteRouter = [
           {
             path: 'background',
             element: <AchievementBackgroundPage />,
+          },
+        ],
+      },
+      {
+        path: 'download',
+        children: [
+          {
+            index: true,
+            element: <DownloadFilePage />,
+          },
+          {
+            path: 'add',
+            element: <AddDownloadPage />,
+          },
+          {
+            path: 'edit/:id',
+            element: <EditDownloadPage />,
           },
         ],
       },

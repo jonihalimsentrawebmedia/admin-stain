@@ -38,14 +38,23 @@ const customStyles: StylesConfig = {
 
 interface Props {
   label: string
+  loading?: boolean
   options: {
     value: string
     label: string
   }[]
+  zIndex?: string
   name?: string
   selectClassName?: string
 }
-const SelectFilter = ({ label, options, name, selectClassName = 'min-w-xs' }: Props) => {
+const SelectFilter = ({
+  label,
+  zIndex,
+  loading,
+  options,
+  name,
+  selectClassName = 'min-w-xs',
+}: Props) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const [value, setValue] = useState()
 
@@ -57,11 +66,14 @@ const SelectFilter = ({ label, options, name, selectClassName = 'min-w-xs' }: Pr
   }, [options])
 
   return (
-    <div className="flex flex-col gap-1 relative">
-      <label className="text-green-600 z-10 text-sm font-medium absolute ml-3 bg-white px-1 w-fit  -top-2.5">
+    <div className={`flex flex-col gap-1 relative ${zIndex}`}>
+      <label
+        className={`text-green-600 z-10 text-sm font-medium absolute ml-3 bg-white px-1 w-fit  -top-2.5`}
+      >
         {label}
       </label>
       <Select
+        isDisabled={loading}
         value={value}
         defaultValue={options[0]}
         options={[

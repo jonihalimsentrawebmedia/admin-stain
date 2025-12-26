@@ -92,6 +92,16 @@ export const MENULIST = [
         name: 'Prestasi',
         path: `${baseDomain}/public-content/achievement`,
       },
+      {
+        id: 10,
+        name: 'Download',
+        path: `${baseDomain}/public-content/download`,
+      },
+      {
+        id: 11,
+        name: 'Musik Resmi',
+        path: `${baseDomain}/public-content/music`,
+      },
     ],
   },
   {
@@ -133,6 +143,6 @@ export const MENULIST = [
     id: 6,
     name: 'Akreditasi',
     path: `${baseDomain}/acreditation`,
-    icon: <IconCertificate  />,
+    icon: <IconCertificate />,
   },
 ]

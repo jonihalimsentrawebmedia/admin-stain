@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 
 import { Fragment, type ReactNode } from 'react'
@@ -21,11 +19,13 @@ export function InputRadio({
   defaultValue,
   heightInput,
   styleForm,
+  fx,
   isRequired,
 }: {
   form: UseFormReturn | undefined | any
   label?: string | ReactNode
   name: string
+  fx?: () => void
   className?: string
   isDisabled?: boolean
   isRow?: boolean
@@ -73,7 +73,12 @@ export function InputRadio({
                       type="radio"
                       value={item?.value}
                       checked={field.value === item?.value}
-                      onChange={() => field.onChange(item?.value)}
+                      onChange={() => {
+                        field.onChange(item?.value)
+                        if (fx) {
+                          fx()
+                        }
+                      }}
                       disabled={isDisabled}
                       defaultValue={defaultValue?.value}
                       className="h-5 w-5 accent-primary"
