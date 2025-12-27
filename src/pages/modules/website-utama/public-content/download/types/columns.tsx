@@ -3,6 +3,7 @@ import type { IDownload } from '@/pages/modules/website-utama/public-content/dow
 import { Link, useSearchParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button.tsx'
 import { HiPencil } from 'react-icons/hi'
+import { ButtonDeleteFileDownload } from '@/pages/modules/website-utama/public-content/download/components/buttonDelete.tsx'
 
 export const DownloadFileColumns = () => {
   const [searchParams] = useSearchParams()
@@ -57,11 +58,14 @@ export const DownloadFileColumns = () => {
       cell: ({ row }) => {
         const data = row?.original
         return (
-          <Link to={`edit/${data?.id_download}`} className="flex items-center gap-2">
-            <button className={'bg-yellow-500 p-1.5 rounded hover:bg-yellow-600 text-white'}>
-              <HiPencil />
-            </button>
-          </Link>
+          <div className={'flex items-center gap-1.5'}>
+            <Link to={`edit/${data?.id_download}`} className="flex items-center gap-2">
+              <button className={'bg-yellow-500 p-1.5 rounded hover:bg-yellow-600 text-white'}>
+                <HiPencil />
+              </button>
+            </Link>
+            <ButtonDeleteFileDownload data={data} />
+          </div>
         )
       },
     },

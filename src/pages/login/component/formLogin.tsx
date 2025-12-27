@@ -20,11 +20,13 @@ export const FormLogin = () => {
             className="flex flex-col gap-4"
           >
             <TextInput
+              placeholder={'Email'}
               form={form}
               name="email"
               label="Email"
             />
             <TextInput
+              placeholder={'Password'}
               form={form}
               name="password"
               label="Password"

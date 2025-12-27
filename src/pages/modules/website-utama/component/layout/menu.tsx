@@ -1,5 +1,5 @@
-import { MdAddChart, MdDashboard } from 'react-icons/md'
-import { IoSchool } from 'react-icons/io5'
+import { MdAddChart, MdChecklist, MdDashboard, MdEmail, MdOutlineRunCircle } from 'react-icons/md'
+import { IoSchool, IoStorefront } from 'react-icons/io5'
 import { TbWorld } from 'react-icons/tb'
 import { FaGear, FaGears } from 'react-icons/fa6'
 import { Calendar } from 'lucide-react'
@@ -122,27 +122,51 @@ export const MENULIST = [
     ],
   },
   {
-    id: 4,
+    id: 5,
     name: 'Layanan',
     path: `${baseDomain}/services`,
     icon: <FaGears className={'size-5'} />,
   },
   {
-    id: 5,
+    id: 6,
     name: 'Statistik',
     path: `${baseDomain}/statistic`,
     icon: <MdAddChart className={'size-5'} />,
   },
   {
-    id: 5,
+    id: 7,
     name: 'Kalender Akademik',
     path: `${baseDomain}/calendar-academic`,
     icon: <Calendar className={'size-5'} />,
   },
   {
-    id: 6,
+    id: 8,
     name: 'Akreditasi',
     path: `${baseDomain}/acreditation`,
     icon: <IconCertificate />,
+  },
+  {
+    id: 10,
+    name: 'Identitas',
+    path: `${baseDomain}/identity`,
+    icon: <IoStorefront className={'size-5'} />,
+  },
+  {
+    id: 11,
+    name: 'Peraturan Akademik',
+    path: `${baseDomain}/academic-rules`,
+    icon: <MdChecklist className={'size-5'} />,
+  },
+  {
+    id: 12,
+    name: 'Kehidupan Kampus',
+    path: `${baseDomain}/campus-life`,
+    icon: <MdOutlineRunCircle className={'size-5'} />,
+  },
+  {
+    id: 13,
+    name: 'Surat Keterangan Mahasiswa',
+    path: `${baseDomain}/surat-keterangan`,
+    icon: <MdEmail className={'size-5'} />,
   },
 ]

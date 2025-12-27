@@ -77,6 +77,12 @@ import { LogActivityGalleryAlbumPhoto } from '@/pages/modules/website-utama/publ
 import DownloadFilePage from '@/pages/modules/website-utama/public-content/download'
 import { AddDownloadPage } from '@/pages/modules/website-utama/public-content/download/components/addPage.tsx'
 import { EditDownloadPage } from '@/pages/modules/website-utama/public-content/download/components/editPage.tsx'
+import { OfficialMusicPage } from '@/pages/modules/website-utama/public-content/musik-resmi'
+import { AddOfficialMusicPage } from '@/pages/modules/website-utama/public-content/musik-resmi/components/addPage.tsx'
+import { EditOfficialMusicPage } from '@/pages/modules/website-utama/public-content/musik-resmi/components/editPage.tsx'
+import { CertificateStudent } from '@/pages/modules/website-utama/surat-keterangan-mahasiswa'
+import { AcademicRegulation } from '@/pages/modules/website-utama/peraturan-akademik'
+import { AddPageAcademicRule } from '@/pages/modules/website-utama/peraturan-akademik/components/addPage.tsx'
 
 export const MainWebsiteRouter = [
   {
@@ -398,6 +404,23 @@ export const MainWebsiteRouter = [
         ],
       },
       {
+        path: 'music',
+        children: [
+          {
+            index: true,
+            element: <OfficialMusicPage />,
+          },
+          {
+            path: 'add',
+            element: <AddOfficialMusicPage />,
+          },
+          {
+            path: 'edit/:id',
+            element: <EditOfficialMusicPage />,
+          },
+        ],
+      },
+      {
         path: '*',
         element: <></>,
       },
@@ -537,6 +560,36 @@ export const MainWebsiteRouter = [
       {
         path: ':idAcreditation/log',
         element: <AcreditationLogDetail />,
+      },
+    ],
+  },
+  {
+    path: 'surat-keterangan',
+    children: [
+      {
+        index: true,
+        element: <CertificateStudent />,
+      },
+    ],
+  },
+  {
+    path: 'identity',
+    element: <></>,
+  },
+  {
+    path: 'academic-rules',
+    children: [
+      {
+        index: true,
+        element: <AcademicRegulation />,
+      },
+      {
+        path: 'background',
+        element: <></>,
+      },
+      {
+        path: 'update',
+        element: <AddPageAcademicRule />,
       },
     ],
   },
