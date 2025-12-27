@@ -107,6 +107,18 @@ export default function DashboardLayout() {
           link: '/modules/settings/reference/educational-level',
           label: 'Jenjang Pendidikan',
         },
+        {
+          link: '/modules/settings/reference/countries',
+          label: 'Negara',
+        },
+        {
+          link: '/modules/settings/reference/province',
+          label: 'Provinsi',
+        },
+        {
+          link: '/modules/settings/reference/regency',
+          label: 'kabupaten',
+        },
       ],
     },
   ]
