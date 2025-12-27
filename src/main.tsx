@@ -3,11 +3,14 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import Providers from '@/provider'
+import { HelmetProvider } from 'react-helmet-async'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Providers>
-      <App />
+      <HelmetProvider>
+        <App />
+      </HelmetProvider>
     </Providers>
   </StrictMode>
 )
