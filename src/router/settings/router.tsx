@@ -38,6 +38,9 @@ import ImpactInnovationView from '@/pages/modules/settings/reference/impact-inno
 import ProfileView from '@/pages/modules/settings/dashboard/profile/ProfileView'
 import EditProfileView from '@/pages/modules/settings/dashboard/profile/edit/EditProfileView'
 import ChangePasswordProfileView from '@/pages/modules/settings/dashboard/change-password/ChangePasswordView'
+import CountryView from '@/pages/modules/settings/reference/country/CountryView'
+import ProvinceView from '@/pages/modules/settings/reference/province/ProvinceView'
+import RegencyView from '@/pages/modules/settings/reference/regency/RegencyView'
 export const SettingRouter = [
   {
     path: 'dashboard',
@@ -245,6 +248,18 @@ export const SettingRouter = [
       {
         path: 'educational-level',
         element: <EducationalLevelView />,
+      },
+      {
+        path: 'countries',
+        element: <CountryView />,
+      },
+      {
+        path: 'province',
+        element: <ProvinceView />,
+      },
+      {
+        path: 'regency',
+        element: <RegencyView />,
       },
     ],
   },
