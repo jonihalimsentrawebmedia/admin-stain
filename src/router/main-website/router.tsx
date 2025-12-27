@@ -83,11 +83,13 @@ import { EditOfficialMusicPage } from '@/pages/modules/website-utama/public-cont
 import { CertificateStudent } from '@/pages/modules/website-utama/surat-keterangan-mahasiswa'
 import { AcademicRegulation } from '@/pages/modules/website-utama/peraturan-akademik'
 import { AddPageAcademicRule } from '@/pages/modules/website-utama/peraturan-akademik/components/addPage.tsx'
+import { PageIdentity } from '@/pages/modules/website-utama/Identity/page.tsx'
+import DashboardAdmin from '@/pages/modules/website-utama/beranda'
 
 export const MainWebsiteRouter = [
   {
     path: 'dashboard',
-    element: <></>,
+    element: <DashboardAdmin />,
   },
   {
     path: 'profile',
@@ -574,7 +576,12 @@ export const MainWebsiteRouter = [
   },
   {
     path: 'identity',
-    element: <></>,
+    children: [
+      {
+        index: true,
+        element: <PageIdentity />,
+      },
+    ],
   },
   {
     path: 'academic-rules',
