@@ -13,10 +13,25 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { UploadFileInput } from '@/components/common/form/uploadFileInput.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { UseGetDetailAcademicRules } from '../hooks/index'
 
 export const AddPageAcademicRule = () => {
   const [loading, setLoading] = useState(false)
+  const { academicRules: data } = UseGetDetailAcademicRules()
+
+  useEffect(() => {
+    if (data) {
+      form.reset({
+        isi: data?.isi ?? '',
+        pengantar: data?.pengantar ?? '',
+        penutup: data?.penutup ?? '',
+        dokumen_teks_pengantar: data?.dokumen_teks_pengantar ?? '',
+        dokumen_status_url: data?.dokumen_status_url ?? '',
+        dokumen_status_key: data?.dokumen_status_key ?? '',
+      })
+    }
+  }, [data])
 
   const form = useForm<IAcademicRules>({
     resolver: zodResolver(AcademicRuleResolver),
@@ -92,7 +107,7 @@ export const AddPageAcademicRule = () => {
               <UploadFileInput
                 form={form}
                 name={'dokumen_status_url'}
-                keyname={'dokumen_status_url'}
+                keyname={'dokumen_status_key'}
                 label={'Dokumen Status'}
                 required
                 isRow

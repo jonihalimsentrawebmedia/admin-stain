@@ -6,6 +6,7 @@ export const AcademicRuleResolver = z.object({
   penutup: z.string(),
   dokumen_teks_pengantar: z.string(),
   dokumen_status_url: z.string(),
+  dokumen_status_key: z.string(),
 })
 
 export type IAcademicRules = z.infer<typeof AcademicRuleResolver>

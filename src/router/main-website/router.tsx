@@ -87,11 +87,13 @@ import CalloborationCategoryView from '@/pages/modules/website-utama/kerjasama/k
 import SubCalloborationCategoryView from '@/pages/modules/website-utama/kerjasama/sub-kategori-kerjasama/SubCalloborationCategoryView'
 import TypeOfCalloborationView from '@/pages/modules/website-utama/kerjasama/jenis-kerjasama/TypeOfCalloborationView'
 import FieldOfCooperationView from '@/pages/modules/website-utama/kerjasama/bidang-kerjasama/FieldOfCooperationView'
+import { PageIdentity } from '@/pages/modules/website-utama/Identity/page.tsx'
+import DashboardAdmin from '@/pages/modules/website-utama/beranda'
 
 export const MainWebsiteRouter = [
   {
     path: 'dashboard',
-    element: <></>,
+    element: <DashboardAdmin />,
   },
   {
     path: 'profile',
@@ -578,7 +580,12 @@ export const MainWebsiteRouter = [
   },
   {
     path: 'identity',
-    element: <></>,
+    children: [
+      {
+        index: true,
+        element: <PageIdentity />,
+      },
+    ],
   },
   {
     path: 'academic-rules',
