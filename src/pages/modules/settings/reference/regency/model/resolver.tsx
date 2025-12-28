@@ -4,6 +4,12 @@ export const RegencyResolver = z.object({
   nama_kabupaten: z
     .string({ error: 'Nama Kabupaten Wajib Diisi' })
     .min(1, { error: 'Nama Kabupaten Wajib Diisi' }),
+  kode: z
+    .string({ error: 'Kode Wajib Diisi' })
+    .min(1, { error: 'Kode Wajib Diisi' }),
+  status_administrasi: z
+    .string({ error: 'Status Administrasi Wajib Diisi' })
+    .min(1, { error: 'Status Administrasi Wajib Diisi' }),
   id_provinsi: z
     .string({ error: 'Nama Provinsi Wajib Diisi' })
     .min(1, { error: 'Nama Provinsi Wajib Diisi' }),

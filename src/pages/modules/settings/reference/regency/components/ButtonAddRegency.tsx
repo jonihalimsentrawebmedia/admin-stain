@@ -99,6 +99,25 @@ const ButtonAddRegency = () => {
                 level2
                 isDisabled={form.watch('id_negara') == undefined}
               />
+              <SelectCustom
+                isRow
+                data={[
+                  {
+                    label: 'Kabupaten',
+                    value: 'KABUPATEN',
+                  },
+                  {
+                    label: 'Kota',
+                    value: 'KOTA',
+                  },
+                ]}
+                form={form}
+                name="status_administrasi"
+                label="Status Administrasi"
+                placeholder="Pilih Status Administrasi"
+                level3
+              />
+              <InputText form={form} name="kode" isRow label="Kode" placeholder="Kode" />
               <InputText
                 form={form}
                 name="nama_kabupaten"

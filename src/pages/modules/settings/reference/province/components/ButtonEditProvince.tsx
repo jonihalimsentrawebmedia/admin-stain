@@ -83,6 +83,8 @@ const ButtonEditProvince = ({ data, optionCountry }: Props) => {
                 placeholder="Pilih Negara"
                 level1
               />
+              <InputText form={form} name="kode" isRow label="Kode" placeholder="Kode" />
+
               <InputText
                 form={form}
                 name="nama_provinsi"

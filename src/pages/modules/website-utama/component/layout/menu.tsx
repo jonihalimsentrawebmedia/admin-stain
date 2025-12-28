@@ -1,4 +1,11 @@
-import { MdAddChart, MdChecklist, MdDashboard, MdEmail, MdOutlineRunCircle } from 'react-icons/md'
+import {
+  MdAddChart,
+  MdChecklist,
+  MdDashboard,
+  MdEmail,
+  MdHandshake,
+  MdOutlineRunCircle,
+} from 'react-icons/md'
 import { IoSchool, IoStorefront } from 'react-icons/io5'
 import { TbWorld } from 'react-icons/tb'
 import { FaGear, FaGears } from 'react-icons/fa6'
@@ -168,5 +175,23 @@ export const MENULIST = [
     name: 'Surat Keterangan Mahasiswa',
     path: `${baseDomain}/surat-keterangan`,
     icon: <MdEmail className={'size-5'} />,
+  },
+  {
+    id: 14,
+    name: 'Kerjasama',
+    path: `${baseDomain}/kerjasama`,
+    icon: <MdHandshake className={'size-5'} />,
+    child: [
+      {
+        id: 1,
+        name: 'Kategori Kerjasama',
+        path: `${baseDomain}/kerjasama/kategori-kerjasama`,
+      },
+      {
+        id: 2,
+        name: 'Sub Kategori Kerjasama',
+        path: `${baseDomain}/kerjasama/sub-kategori-kerjasama`,
+      },
+    ],
   },
 ]

@@ -83,6 +83,8 @@ import { EditOfficialMusicPage } from '@/pages/modules/website-utama/public-cont
 import { CertificateStudent } from '@/pages/modules/website-utama/surat-keterangan-mahasiswa'
 import { AcademicRegulation } from '@/pages/modules/website-utama/peraturan-akademik'
 import { AddPageAcademicRule } from '@/pages/modules/website-utama/peraturan-akademik/components/addPage.tsx'
+import CalloborationCategoryView from '@/pages/modules/website-utama/kerjasama/kategori-kerjasama/CalloborationCategoryView'
+import SubCalloborationCategoryView from '@/pages/modules/website-utama/kerjasama/sub-kategori-kerjasama/SubCalloborationCategoryView'
 
 export const MainWebsiteRouter = [
   {
@@ -593,4 +595,17 @@ export const MainWebsiteRouter = [
       },
     ],
   },
+  {
+    path:"kerjasama",
+    children:[
+      {
+        path:"kategori-kerjasama",
+        element:<CalloborationCategoryView/>
+      },
+      {
+        path:"sub-kategori-kerjasama",
+        element:<SubCalloborationCategoryView/>
+      }
+    ]
+  }
 ]
