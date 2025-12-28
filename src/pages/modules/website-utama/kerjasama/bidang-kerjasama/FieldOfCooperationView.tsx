@@ -1,14 +1,14 @@
-import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
-import useGetTypeOfCalloboration from './controller/useGetTypeOfCalloboration'
-import TypeOfCalloborationViewModel from './TypeOfCalloborationViewModel'
-import ButtonAddTypeOfCalloboration from './components/ButtonAddTypeOfCalloboration'
-import TableCustom from '@/components/common/table/TableCustom'
-import SelectFilter from '@/components/common/filter/SelectFilter'
+import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup"
+import useGetFieldOfCooperation from "./controller/useGetFieldOfCooperation"
+import FieldOfCooperationViewModel from "./FieldOfCooperationViewModel"
+import ButtonAddFieldOfCooperation from "./components/ButtonAddFieldOfCooperation"
+import TableCustom from "@/components/common/table/TableCustom"
+import SelectFilter from "@/components/common/filter/SelectFilter"
 
-const TypeOfCalloborationView = () => {
-  const { columns } = TypeOfCalloborationViewModel()
+const FieldOfCooperationView = () => {
+ const { columns } = FieldOfCooperationViewModel()
 
-  const { typeOfCalloboration, loading, meta } = useGetTypeOfCalloboration()
+  const { fieldOfCooperation, loading, meta } = useGetFieldOfCooperation()
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
@@ -17,10 +17,10 @@ const TypeOfCalloborationView = () => {
             label: '',
             onClick: () => {},
             type: 'add',
-            element: <ButtonAddTypeOfCalloboration />,
+            element: <ButtonAddFieldOfCooperation />,
           },
         ]}
-        label="Jenis Kerjasama"
+        label="Bidang Kerjasama"
       />
       <TableCustom
         addFilter={
@@ -37,7 +37,7 @@ const TypeOfCalloborationView = () => {
           />
         }
         columns={columns}
-        data={typeOfCalloboration}
+        data={fieldOfCooperation}
         loading={loading}
         meta={meta}
         isShowLimit={false}
@@ -46,4 +46,4 @@ const TypeOfCalloborationView = () => {
   )
 }
 
-export default TypeOfCalloborationView
+export default FieldOfCooperationView

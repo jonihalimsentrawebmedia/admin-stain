@@ -86,6 +86,7 @@ import { AddPageAcademicRule } from '@/pages/modules/website-utama/peraturan-aka
 import CalloborationCategoryView from '@/pages/modules/website-utama/kerjasama/kategori-kerjasama/CalloborationCategoryView'
 import SubCalloborationCategoryView from '@/pages/modules/website-utama/kerjasama/sub-kategori-kerjasama/SubCalloborationCategoryView'
 import TypeOfCalloborationView from '@/pages/modules/website-utama/kerjasama/jenis-kerjasama/TypeOfCalloborationView'
+import FieldOfCooperationView from '@/pages/modules/website-utama/kerjasama/bidang-kerjasama/FieldOfCooperationView'
 
 export const MainWebsiteRouter = [
   {
@@ -610,7 +611,11 @@ export const MainWebsiteRouter = [
       {
         path:"jenis-kerjasama",
         element:<TypeOfCalloborationView/>
-      }
+      },
+      {
+        path:"bidang-kerjasama",
+        element:<FieldOfCooperationView/>
+      },
     ]
   }
 ]
