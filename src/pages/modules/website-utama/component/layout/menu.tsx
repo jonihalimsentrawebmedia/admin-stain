@@ -192,6 +192,11 @@ export const MENULIST = [
         name: 'Sub Kategori Kerjasama',
         path: `${baseDomain}/kerjasama/sub-kategori-kerjasama`,
       },
+      {
+        id: 3,
+        name: 'Jenis Kerjasama',
+        path: `${baseDomain}/kerjasama/jenis-kerjasama`,
+      },
     ],
   },
 ]

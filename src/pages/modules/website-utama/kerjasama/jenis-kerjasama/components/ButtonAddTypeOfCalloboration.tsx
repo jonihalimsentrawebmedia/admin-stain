@@ -1,45 +1,39 @@
-import { zodResolver } from '@hookform/resolvers/zod'
-import {
-  SubCalloborationCategoryResolver,
-  type ISubCalloborationCategoryTypeForm,
-} from '../model/resolver'
+import { useForm } from 'react-hook-form'
+import { TypeOfCalloborationResolver, type ITypeOfCalloborationTypeForm } from '../model/resolver'
 import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@/components/ui/button'
 import { Plus } from 'lucide-react'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom'
+import { Form } from '@/components/ui/form'
 import TextInput from '@/components/common/form/TextInput'
 import ButtonForm from '@/components/common/button/ButtonForm'
-import { useForm } from 'react-hook-form'
-import useGetCalloborationCategory from '../../kategori-kerjasama/controller/useGetCalloborationCategory'
-import { SelectBasicInput } from '@/components/common/form/selectBasicInput'
-import { Form } from '@/components/ui/form'
 
-const ButtonAddSubCalloborationCategory = () => {
-  const { calloborationCategory } = useGetCalloborationCategory()
-  const form = useForm<ISubCalloborationCategoryTypeForm>({
-    resolver: zodResolver(SubCalloborationCategoryResolver),
+const ButtonAddTypeOfCalloboration = () => {
+  const form = useForm<ITypeOfCalloborationTypeForm>({
+    resolver: zodResolver(TypeOfCalloborationResolver),
   })
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
   const queryClient = useQueryClient()
 
-  const handleSave = async (e: ISubCalloborationCategoryTypeForm) => {
+  const handleSave = async (e: ITypeOfCalloborationTypeForm) => {
     setLoading(true)
-    await AxiosClient.post('/website-utama/sub-kategori-kerjasama', {
+    await AxiosClient.post('/website-utama/jenis-kerjasama', {
       ...e,
     })
       .then((res) => {
         if (res.data.status) {
           queryClient.invalidateQueries({
-            queryKey: ['list-sub-calloboration-category'],
+            queryKey: ['list-type-of-calloboration'],
           })
           setOpen(false)
           setLoading(false)
-          toast.success(res.data.message || 'Success Pengajuan tambah sub kategori kerjasama')
+          toast.success(res.data.message || 'Success Pengajuan tambah data berita')
           form.reset()
         }
       })
@@ -66,35 +60,23 @@ const ButtonAddSubCalloborationCategory = () => {
         open={open}
         className={'rounded min-w-xs lg:min-w-2xl'}
         setOpen={setOpen}
-        title={'Tambah Sub Kategori Kerjasama'}
+        title={'Tambah Jenis Kerjasama'}
         width="50%"
       >
         <Form {...form}>
           <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
-            <SelectBasicInput
-              data={calloborationCategory.map((item) => {
-                return {
-                  label: item.nama_kategori_kerjasama,
-                  value: item.id_kategori_kerjasama,
-                }
-              })}
-              placeholder="Pilih Kategori Kerjasama"
-              form={form}
-              label="Kategori Kerjasama"
-              name="id_kategori_kerjasama"
-              isRow
-            />
             <TextInput
               form={form}
-              name="nama_sub_kategori"
+              name="nama_jenis_kerjasama"
               isRow
-              label="Nama Kategori Kerjasama*"
-              placeholder="Nama Kategori Kerjasama"
+              label="Nama Jenis Kerjasama*"
+              placeholder="Nama Jenis Kerjasama"
             />
             <ButtonForm
               loading={loading}
               onCancel={() => {
                 setOpen(false)
+               
               }}
             />
           </form>
@@ -104,4 +86,4 @@ const ButtonAddSubCalloborationCategory = () => {
   )
 }
 
-export default ButtonAddSubCalloborationCategory
+export default ButtonAddTypeOfCalloboration

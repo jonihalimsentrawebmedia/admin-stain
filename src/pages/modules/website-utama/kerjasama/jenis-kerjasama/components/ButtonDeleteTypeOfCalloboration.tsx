@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form'
-import type { SubCalloborationCategory } from '../model'
+import type { TypeOfCalloborationList } from '../model'
 import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
@@ -11,21 +11,16 @@ import { Button } from '@/components/ui/button'
 import { Trash2, X } from 'lucide-react'
 
 interface Props {
-  data: SubCalloborationCategory
+  data: TypeOfCalloborationList
 }
-
-const ButtonDeleteSubCalloborationCategory = ({ data }: Props) => {
+const ButtonDeleteTypeOfCalloboration = ({ data }: Props) => {
   const form = useForm()
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const field: any = [
     {
-      name: 'nama_kategori_kerjasama',
-      label: 'Nama Kategori Kerjasama*',
-    },
-    {
-      name: 'nama_kategori_kerjasama',
-      label: 'Nama Sub Kategori Kerjasama*',
+      name: 'nama_jenis_kerjasama',
+      label: 'Nama Jenis Kerjasama*',
     },
     {
       name: 'jumlah_kerjasama',
@@ -37,14 +32,14 @@ const ButtonDeleteSubCalloborationCategory = ({ data }: Props) => {
 
   const handleDelete = async () => {
     setLoading(true)
-    await AxiosClient.delete(`/website-utama/sub-kategori-kerjasama/${data?.id_sub_kategori_kerjasama}`)
+    await AxiosClient.delete(`/website-utama/jenis-kerjasama/${data?.id_jenis_kerjasama}`)
       .then((res) => {
         if (res?.data?.status) {
           setOpen(false)
           setLoading(false)
-          toast.success(res.data.message || 'Success menghapus data sub kategori kerjasama')
+          toast.success(res.data.message || 'Success menghapus data kategori kerjasama')
           queryClient.invalidateQueries({
-            queryKey: ['list-sub-calloboration-category'],
+            queryKey: ['list-type-of-calloboration'],
           })
         }
       })
@@ -72,9 +67,10 @@ const ButtonDeleteSubCalloborationCategory = ({ data }: Props) => {
         className={'rounded min-w-xs lg:min-w-2xl'}
         setOpen={setOpen}
         width="50%"
-        title={<p className="text-2xl text-red-500">Hapus Sub Kategori Kerjasama</p>}
-        description={'Apakah anda yakin untuk menghapus sub kategori kerjasama berikut?'}
+        title={<p className="text-2xl text-red-500">Hapus Jenis Kerjasama</p>}
+        description={'Apakah anda yakin untuk menghapus jenis kerjasama berikut?'}
       >
+      
         <DetailField data={field} form={form} />
         <div className="flex gap-4 items-center justify-end">
           <Button
@@ -98,4 +94,4 @@ const ButtonDeleteSubCalloborationCategory = ({ data }: Props) => {
   )
 }
 
-export default ButtonDeleteSubCalloborationCategory
+export default ButtonDeleteTypeOfCalloboration
