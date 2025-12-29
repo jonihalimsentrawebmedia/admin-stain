@@ -18,6 +18,7 @@ interface Props<T extends FieldValues> {
     | 'file'
     | 'time'
     | 'datetime-local'
+    | 'color'
   htmlFor?: string
   name: Path<T> // ✅ FIX DISINI, pakai Path<T> bukan string biasa
   placeholder?: string
@@ -29,8 +30,8 @@ interface Props<T extends FieldValues> {
   isDisabled?: boolean
   isRequired?: boolean
   isNumber?: boolean
-  min?: number|string
-  max?: number|string
+  min?: number | string
+  max?: number | string
 }
 
 function TextInput<T extends FieldValues>({
