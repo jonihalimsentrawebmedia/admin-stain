@@ -83,12 +83,17 @@ import { EditOfficialMusicPage } from '@/pages/modules/website-utama/public-cont
 import { CertificateStudent } from '@/pages/modules/website-utama/surat-keterangan-mahasiswa'
 import { AcademicRegulation } from '@/pages/modules/website-utama/peraturan-akademik'
 import { AddPageAcademicRule } from '@/pages/modules/website-utama/peraturan-akademik/components/addPage.tsx'
+import { PageIdentity } from '@/pages/modules/website-utama/Identity'
+import DashboardAdmin from '@/pages/modules/website-utama/beranda'
+import { UpdateIdentityPage } from '@/pages/modules/website-utama/Identity/components/update.tsx'
+import { IdentityBackground } from '@/pages/modules/website-utama/Identity/background'
+import { AcademicRulesBackground } from '@/pages/modules/website-utama/peraturan-akademik/background'
+import { StudentLetterBackground } from '@/pages/modules/website-utama/surat-keterangan-mahasiswa/background'
+import CampusLifePage from '@/pages/modules/website-utama/campus-life'
 import CalloborationCategoryView from '@/pages/modules/website-utama/kerjasama/kategori-kerjasama/CalloborationCategoryView'
 import SubCalloborationCategoryView from '@/pages/modules/website-utama/kerjasama/sub-kategori-kerjasama/SubCalloborationCategoryView'
 import TypeOfCalloborationView from '@/pages/modules/website-utama/kerjasama/jenis-kerjasama/TypeOfCalloborationView'
 import FieldOfCooperationView from '@/pages/modules/website-utama/kerjasama/bidang-kerjasama/FieldOfCooperationView'
-import { PageIdentity } from '@/pages/modules/website-utama/Identity/page.tsx'
-import DashboardAdmin from '@/pages/modules/website-utama/beranda'
 import CalloborationListView from '@/pages/modules/website-utama/kerjasama/daftar-kerjasama/CalloborationListView'
 import CalloborationCreateView from '@/pages/modules/website-utama/kerjasama/daftar-kerjasama/create/CalloborationCreateView'
 import CalloborationCategoryLogView from '@/pages/modules/website-utama/kerjasama/kategori-kerjasama/log/CalloborationCategoryLogView'
@@ -584,6 +589,10 @@ export const MainWebsiteRouter = [
         index: true,
         element: <CertificateStudent />,
       },
+      {
+        path: 'background',
+        element: <StudentLetterBackground />,
+      },
     ],
   },
   {
@@ -592,6 +601,14 @@ export const MainWebsiteRouter = [
       {
         index: true,
         element: <PageIdentity />,
+      },
+      {
+        path: 'update',
+        element: <UpdateIdentityPage />,
+      },
+      {
+        path: 'background',
+        element: <IdentityBackground />,
       },
     ],
   },
@@ -604,13 +621,17 @@ export const MainWebsiteRouter = [
       },
       {
         path: 'background',
-        element: <></>,
+        element: <AcademicRulesBackground />,
       },
       {
         path: 'update',
         element: <AddPageAcademicRule />,
       },
     ],
+  },
+  {
+    path: 'campus-life',
+    element: <CampusLifePage />,
   },
   {
     path: 'kerjasama',

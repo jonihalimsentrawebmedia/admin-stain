@@ -8,7 +8,7 @@ interface Props {
   isGetAll: boolean
   id_kategori_kerjasama: string
 }
-const useGetSubCalloborationCategory = (props: Props) => {
+const useGetSubCalloborationCategory = (props?: Props) => {
   const { isGetAll = false, id_kategori_kerjasama } = props ?? {}
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') || '1'

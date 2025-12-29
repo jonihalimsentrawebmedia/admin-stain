@@ -7,7 +7,7 @@ import AxiosClient from '@/provider/axios'
 interface Props {
   isGetAll: boolean
 }
-const useGetFieldOfCooperation = (props: Props) => {
+const useGetFieldOfCooperation = (props?: Props) => {
   const { isGetAll = false } = props ?? {}
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') || '1'
