@@ -89,6 +89,11 @@ import TypeOfCalloborationView from '@/pages/modules/website-utama/kerjasama/jen
 import FieldOfCooperationView from '@/pages/modules/website-utama/kerjasama/bidang-kerjasama/FieldOfCooperationView'
 import { PageIdentity } from '@/pages/modules/website-utama/Identity/page.tsx'
 import DashboardAdmin from '@/pages/modules/website-utama/beranda'
+import CalloborationListView from '@/pages/modules/website-utama/kerjasama/daftar-kerjasama/CalloborationListView'
+import CalloborationCreateView from '@/pages/modules/website-utama/kerjasama/daftar-kerjasama/create/CalloborationCreateView'
+import CalloborationCategoryLogView from '@/pages/modules/website-utama/kerjasama/kategori-kerjasama/log/CalloborationCategoryLogView'
+import SubCalloborationCategoryLogView from '@/pages/modules/website-utama/kerjasama/sub-kategori-kerjasama/log/SubCalloborationCategoryLogView'
+import TypeOfCalloborationLogView from '@/pages/modules/website-utama/kerjasama/jenis-kerjasama/log/TypeOfCalloborationLogView'
 
 export const MainWebsiteRouter = [
   {
@@ -605,24 +610,79 @@ export const MainWebsiteRouter = [
     ],
   },
   {
-    path:"kerjasama",
-    children:[
+    path: 'kerjasama',
+    children: [
       {
-        path:"kategori-kerjasama",
-        element:<CalloborationCategoryView/>
+        path: 'kategori-kerjasama',
+
+        children: [
+          {
+            index: true,
+            element: <CalloborationCategoryView />,
+          },
+          {
+            path: ':idCalloborationCategory',
+            children: [
+              {
+                path: 'log',
+                element: <CalloborationCategoryLogView />,
+              },
+            ],
+          },
+        ],
       },
       {
-        path:"sub-kategori-kerjasama",
-        element:<SubCalloborationCategoryView/>
+        path: 'sub-kategori-kerjasama',
+
+        children: [
+          {
+            index: true,
+            element: <SubCalloborationCategoryView />,
+          },
+          {
+            path: ':idSubCalloborationCategory',
+            children: [
+              {
+                path: 'log',
+                element: <SubCalloborationCategoryLogView />,
+              },
+            ],
+          },
+        ],
       },
       {
-        path:"jenis-kerjasama",
-        element:<TypeOfCalloborationView/>
+        path: 'jenis-kerjasama',
+
+        children: [
+          {
+            index: true,
+            element: <TypeOfCalloborationView />,
+          },
+          {
+            path: ':idTypeOfCalloboration',
+            children: [
+              {
+                path: 'log',
+                element: <TypeOfCalloborationLogView />,
+              },
+            ],
+          },
+        ],
       },
       {
-        path:"bidang-kerjasama",
-        element:<FieldOfCooperationView/>
+        path: 'bidang-kerjasama',
+        element: <FieldOfCooperationView />,
       },
-    ]
-  }
+      {
+        path: 'daftar-kerjasama',
+        children: [
+          { index: true, element: <CalloborationListView /> },
+          {
+            path: 'add',
+            element: <CalloborationCreateView />,
+          },
+        ],
+      },
+    ],
+  },
 ]

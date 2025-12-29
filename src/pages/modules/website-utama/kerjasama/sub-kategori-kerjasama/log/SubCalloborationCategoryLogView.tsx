@@ -1,18 +1,16 @@
-import { formatDateTime } from "@/utils/date"
-import useGetCalloborationCategoryDetail from "../controller/useGetCalloborationCategoryDetail"
-import useGetLogCalloborationCategory from "../controller/useGetLogCalloborationCategory"
-import type { ColumnDef } from "@tanstack/react-table"
-import type { LogStatistic } from "../../../statistic/model"
-import { Skeleton } from "@/components/ui/skeleton"
-import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup"
-import TableCustom from "@/components/common/table/TableCustom"
-import SelectFilter from "@/components/common/filter/SelectFilter"
+import type { ColumnDef } from '@tanstack/react-table'
+import useGetLogSubCalloboration from '../controller/useGetLogSubCalloboration'
+import useGetSubCalloborationCategoryDetail from '../controller/useGetSubCalloborationCategoryDetail'
+import type { LogStatistic } from '../../../statistic/model'
+import { formatDateTime } from '@/utils/date'
+import { Skeleton } from '@/components/ui/skeleton'
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
+import TableCustom from '@/components/common/table/TableCustom'
+import SelectFilter from '@/components/common/filter/SelectFilter'
 
-
-const CalloborationCategoryLogView = () => {
- const { calloborationCategoryDetail, loading } = useGetCalloborationCategoryDetail()
-  const { log, loading: loadingLog, meta } = useGetLogCalloborationCategory()
-
+const SubCalloborationCategoryLogView = () => {
+  const { subCalloborationCategoryDetail, loading } = useGetSubCalloborationCategoryDetail()
+  const { log, loading: loadingLog, meta } = useGetLogSubCalloboration()
 
   const columns: ColumnDef<LogStatistic>[] = [
     {
@@ -75,25 +73,27 @@ const CalloborationCategoryLogView = () => {
   return (
     <div className="flex  flex-col gap-4">
       <ButtonTitleGroup
-        link="/modules/website-utama/kerjasama/kategori-kerjasama"
+        link="/modules/website-utama/kerjasama/sub-kategori-kerjasama"
         buttonGroup={[]}
         label="Log Data "
         isBack
       />
 
       <div className="flex gap-4 flex-col md:flex-row">
-     
         <div>
           <div>
             <div className="text-[#999999] text-sm">Nama Kategori Kerjasama</div>
             <div className="text-green-600 font-medium text-3xl">
-              {calloborationCategoryDetail?.nama_kategori_kerjasama}
+              {subCalloborationCategoryDetail?.nama_sub_kategori}
+            </div>
+            <div>
+              <div className="text-[#999999] text-sm">Kategori Kerjasama</div>
+              <div className=""> {subCalloborationCategoryDetail?.nama_kategori_kerjasama}</div>
             </div>
             <div>
               <div className="text-[#999999] text-sm">Jumlah Kerjama</div>
-              <div className="">              {calloborationCategoryDetail?.jumlah_kerjasama}</div>
+              <div className=""> {subCalloborationCategoryDetail?.jumlah_kerjasama}</div>
             </div>
-           
           </div>
         </div>
       </div>
@@ -123,4 +123,4 @@ const CalloborationCategoryLogView = () => {
   )
 }
 
-export default CalloborationCategoryLogView
+export default SubCalloborationCategoryLogView

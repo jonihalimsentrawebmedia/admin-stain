@@ -7,11 +7,11 @@ import type { RegencyList } from '../model'
 
 interface Props {
   isGetAll: boolean
- 
+  id_provinsi?:string
 }
 
 const useGetRegency = (props?: Props) => {
-  const { isGetAll = false,  } = props ?? {}
+  const { isGetAll = false,id_provinsi  } = props ?? {}
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') || '1'
   const limit = searchParams.get('limit') || '10'
@@ -21,7 +21,7 @@ const useGetRegency = (props?: Props) => {
   if (isGetAll) {
     ParamsSearch = new URLSearchParams({ page: '1', limit: '10000' })
     ParamsSearch.append('search', search)
-   
+    ParamsSearch.append('id_provinsi', id_provinsi ?? '')
   } else {
     ParamsSearch = new URLSearchParams({ page, limit, search })
   }

@@ -5,12 +5,11 @@ import { useParams, useSearchParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
 import AxiosClient from "@/provider/axios"
 
-
-const useGetLogCalloborationCategory = () => {
+const useGetLogTypeOfCalloboration = () => {
   const [log, setLog] = useState<LogActivity[]>([])
   const [meta, setMeta] = useState<Meta>()
 
-  const { idCalloborationCategory } = useParams()
+  const { idTypeOfCalloboration } = useParams()
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
@@ -18,10 +17,10 @@ const useGetLogCalloborationCategory = () => {
 
   const ParamsSearch = new URLSearchParams({ page, limit, search })
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['log-list-calloboration-log',ParamsSearch.toString()],
+    queryKey: ['log-type-of-calloboration-log',ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get(`/website-utama/kategori-kerjasama-log/${idCalloborationCategory}?${ParamsSearch}`).then(
+      AxiosClient.get(`/website-utama/jenis-kerjasama-log/${idTypeOfCalloboration}?${ParamsSearch}`).then(
         (res) => res.data
       ),
   })
@@ -38,4 +37,4 @@ const useGetLogCalloborationCategory = () => {
   return { log, loading, meta }
 }
 
-export default useGetLogCalloborationCategory
+export default useGetLogTypeOfCalloboration

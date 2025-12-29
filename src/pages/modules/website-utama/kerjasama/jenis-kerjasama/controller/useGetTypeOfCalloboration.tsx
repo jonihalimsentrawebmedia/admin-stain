@@ -4,16 +4,24 @@ import type { TypeOfCalloborationList } from "../model"
 import type { Meta } from "@/components/common/table/TablePagination"
 import { useQuery } from "@tanstack/react-query"
 import AxiosClient from "@/provider/axios"
-
-const useGetTypeOfCalloboration = () => {
+interface Props{
+    isGetAll?:boolean
+}
+const useGetTypeOfCalloboration = (props?:Props) => {
   const [searchParams] = useSearchParams()
+ const { isGetAll = false } = props ?? {}
+
   const page = searchParams.get('page') || '1'
   const limit = searchParams.get('limit') || '10'
   const search = searchParams.get('search') || ''
 
-  let ParamsSearch: URLSearchParams
-
-  ParamsSearch = new URLSearchParams({ page, limit, search })
+ let ParamsSearch: URLSearchParams
+  if (isGetAll) {
+    ParamsSearch = new URLSearchParams({ page: '1', limit: '10000' })
+    ParamsSearch.append('search', search)
+  } else {
+    ParamsSearch = new URLSearchParams({ page, limit, search })
+  }
 
   const [typeOfCalloboration, setTypeOfCalloboration] = useState<TypeOfCalloborationList[]>([])
   const [meta, setMeta] = useState<Meta>()

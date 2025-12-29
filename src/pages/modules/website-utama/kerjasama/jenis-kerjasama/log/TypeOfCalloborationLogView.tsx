@@ -1,17 +1,17 @@
-import { formatDateTime } from "@/utils/date"
-import useGetCalloborationCategoryDetail from "../controller/useGetCalloborationCategoryDetail"
-import useGetLogCalloborationCategory from "../controller/useGetLogCalloborationCategory"
 import type { ColumnDef } from "@tanstack/react-table"
+import useGetLogTypeOfCalloboration from "../controller/useGetLogTypeOfCalloboration"
+import useGetTypeOfCalloborationDetail from "../controller/useGetTypeOfCalloborationDetail"
 import type { LogStatistic } from "../../../statistic/model"
+import { formatDateTime } from "@/utils/date"
 import { Skeleton } from "@/components/ui/skeleton"
 import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup"
 import TableCustom from "@/components/common/table/TableCustom"
 import SelectFilter from "@/components/common/filter/SelectFilter"
 
 
-const CalloborationCategoryLogView = () => {
- const { calloborationCategoryDetail, loading } = useGetCalloborationCategoryDetail()
-  const { log, loading: loadingLog, meta } = useGetLogCalloborationCategory()
+const TypeOfCalloborationLogView = () => {
+const { typeOfCalloborationDetail, loading } = useGetTypeOfCalloborationDetail()
+  const { log, loading: loadingLog, meta } = useGetLogTypeOfCalloboration()
 
 
   const columns: ColumnDef<LogStatistic>[] = [
@@ -87,11 +87,11 @@ const CalloborationCategoryLogView = () => {
           <div>
             <div className="text-[#999999] text-sm">Nama Kategori Kerjasama</div>
             <div className="text-green-600 font-medium text-3xl">
-              {calloborationCategoryDetail?.nama_kategori_kerjasama}
+              {typeOfCalloborationDetail?.nama_jenis_kerjasama}
             </div>
             <div>
               <div className="text-[#999999] text-sm">Jumlah Kerjama</div>
-              <div className="">              {calloborationCategoryDetail?.jumlah_kerjasama}</div>
+              <div className="">              {typeOfCalloborationDetail?.jumlah_kerjasama}</div>
             </div>
            
           </div>
@@ -123,4 +123,4 @@ const CalloborationCategoryLogView = () => {
   )
 }
 
-export default CalloborationCategoryLogView
+export default TypeOfCalloborationLogView

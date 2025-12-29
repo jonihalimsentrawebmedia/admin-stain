@@ -4,16 +4,25 @@ import type { SubCalloborationCategory } from '../model'
 import type { Meta } from '@/components/common/table/TablePagination'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
-
-const useGetSubCalloborationCategory = () => {
+interface Props {
+  isGetAll: boolean
+  id_kategori_kerjasama: string
+}
+const useGetSubCalloborationCategory = (props: Props) => {
+  const { isGetAll = false, id_kategori_kerjasama } = props ?? {}
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') || '1'
   const limit = searchParams.get('limit') || '10'
   const search = searchParams.get('search') || ''
 
   let ParamsSearch: URLSearchParams
-
-  ParamsSearch = new URLSearchParams({ page, limit, search })
+  if (isGetAll) {
+    ParamsSearch = new URLSearchParams({ page: '1', limit: '10000' })
+    ParamsSearch.append('search', search)
+    ParamsSearch.append('id_kategori_kerjasama', id_kategori_kerjasama ?? '')
+  } else {
+    ParamsSearch = new URLSearchParams({ page, limit, search })
+  }
 
   const [subCalloborationCategory, setSubCaloborationCategory] = useState<
     SubCalloborationCategory[]
