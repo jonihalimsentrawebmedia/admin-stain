@@ -1,15 +1,14 @@
 import type { ColumnDef } from '@tanstack/react-table'
-import useGetCalloborationDetail from '../controller/useGetCalloborationDetail'
+
 import useGetLogCalloboration from '../controller/useGetLogCalloboration'
 import type { LogStatistic } from '../../../statistic/model'
 import { formatDateTime } from '@/utils/date'
-import { Skeleton } from '@/components/ui/skeleton'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
 import TableCustom from '@/components/common/table/TableCustom'
 import SelectFilter from '@/components/common/filter/SelectFilter'
 
 const CalloborationLogView = () => {
-  const { calloborationDetail, loading } = useGetCalloborationDetail()
+ 
   const { log, loading: loadingLog, meta } = useGetLogCalloboration()
 
   const columns: ColumnDef<LogStatistic>[] = [
@@ -67,9 +66,7 @@ const CalloborationLogView = () => {
     },
   ]
 
-  if (loading) {
-    return <Skeleton className="height-[400px] w-full" />
-  }
+ 
   return (
     <div className="flex  flex-col gap-4">
       <ButtonTitleGroup
