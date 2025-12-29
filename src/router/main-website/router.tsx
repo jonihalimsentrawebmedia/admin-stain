@@ -102,6 +102,7 @@ import TypeOfCalloborationLogView from '@/pages/modules/website-utama/kerjasama/
 import FieldOfCooperationLogView from '@/pages/modules/website-utama/kerjasama/bidang-kerjasama/log/FieldOfCooperationLogView'
 import CalloborationEditView from '@/pages/modules/website-utama/kerjasama/daftar-kerjasama/edit/CalloborationEditView'
 import CalloborationDetailView from '@/pages/modules/website-utama/kerjasama/daftar-kerjasama/detail/CalloborationDetailView'
+import CalloborationLogView from '@/pages/modules/website-utama/kerjasama/daftar-kerjasama/log/CalloborationLogView'
 
 export const MainWebsiteRouter = [
   {
@@ -730,6 +731,10 @@ export const MainWebsiteRouter = [
               {
                 path: 'detail',
                 element: <CalloborationDetailView />,
+              },
+              {
+                path: 'log',
+                element: <CalloborationLogView />,
               },
             ],
           },

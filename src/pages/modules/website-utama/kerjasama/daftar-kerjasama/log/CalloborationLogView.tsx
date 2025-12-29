@@ -1,6 +1,6 @@
 import type { ColumnDef } from '@tanstack/react-table'
-import useGetLogTypeOfCalloboration from '../controller/useGetLogTypeOfCalloboration'
-import useGetTypeOfCalloborationDetail from '../controller/useGetTypeOfCalloborationDetail'
+import useGetCalloborationDetail from '../controller/useGetCalloborationDetail'
+import useGetLogCalloboration from '../controller/useGetLogCalloboration'
 import type { LogStatistic } from '../../../statistic/model'
 import { formatDateTime } from '@/utils/date'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -8,9 +8,9 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
 import TableCustom from '@/components/common/table/TableCustom'
 import SelectFilter from '@/components/common/filter/SelectFilter'
 
-const TypeOfCalloborationLogView = () => {
-  const { typeOfCalloborationDetail, loading } = useGetTypeOfCalloborationDetail()
-  const { log, loading: loadingLog, meta } = useGetLogTypeOfCalloboration()
+const CalloborationLogView = () => {
+  const { calloborationDetail, loading } = useGetCalloborationDetail()
+  const { log, loading: loadingLog, meta } = useGetLogCalloboration()
 
   const columns: ColumnDef<LogStatistic>[] = [
     {
@@ -73,27 +73,13 @@ const TypeOfCalloborationLogView = () => {
   return (
     <div className="flex  flex-col gap-4">
       <ButtonTitleGroup
-        link="/modules/website-utama/kerjasama/jenis-kerjasama"
+        link="/modules/website-utama/kerjasama/daftar-kerjasama"
         buttonGroup={[]}
         label="Log Data "
         isBack
       />
+      <div className="text-primary">Histori Perubahan Data</div>
 
-      <div className="flex gap-4 flex-col md:flex-row">
-        <div>
-          <div>
-            <div className="text-[#999999] text-sm">Nama Jenis Kerjasama</div>
-            <div className="text-green-600 font-medium text-3xl">
-              {typeOfCalloborationDetail?.nama_jenis_kerjasama}
-            </div>
-            <div>
-              <div className="text-[#999999] text-sm">Jumlah Kerjama</div>
-              <div className=""> {typeOfCalloborationDetail?.jumlah_kerjasama}</div>
-            </div>
-          </div>
-        </div>
-      </div>
- <div className="text-primary">Histori Perubahan Data</div>
       <TableCustom
         tdClassName="whitespace-pre-line"
         meta={meta}
@@ -119,4 +105,4 @@ const TypeOfCalloborationLogView = () => {
   )
 }
 
-export default TypeOfCalloborationLogView
+export default CalloborationLogView

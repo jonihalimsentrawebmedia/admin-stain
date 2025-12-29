@@ -97,6 +97,7 @@ const SubCalloborationCategoryLogView = () => {
           </div>
         </div>
       </div>
+      <div className="text-primary">Histori Perubahan Data</div>
 
       <TableCustom
         tdClassName="whitespace-pre-line"
