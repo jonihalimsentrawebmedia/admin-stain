@@ -1,17 +1,15 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import type { SubCalloborationCategory } from '../model'
 import type { Meta } from '@/components/common/table/TablePagination'
-import AxiosClient from '@/provider/axios'
 import { useQuery } from '@tanstack/react-query'
-import type { RegencyList } from '../model'
-
+import AxiosClient from '@/provider/axios'
 interface Props {
   isGetAll: boolean
-  id_provinsi?:string
+  id_kategori_kerjasama: string
 }
-
-const useGetRegency = (props?: Props) => {
-  const { isGetAll = false,id_provinsi  } = props ?? {}
+const useGetSubCalloborationCategory = (props?: Props) => {
+  const { isGetAll = false, id_kategori_kerjasama } = props ?? {}
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') || '1'
   const limit = searchParams.get('limit') || '10'
@@ -21,38 +19,42 @@ const useGetRegency = (props?: Props) => {
   if (isGetAll) {
     ParamsSearch = new URLSearchParams({ page: '1', limit: '10000' })
     ParamsSearch.append('search', search)
-    ParamsSearch.append('id_provinsi', id_provinsi ?? '')
+    ParamsSearch.append('id_kategori_kerjasama', id_kategori_kerjasama ?? '')
   } else {
     ParamsSearch = new URLSearchParams({ page, limit, search })
   }
 
-  const [regency, setRegency] = useState<RegencyList[]>([])
+  const [subCalloborationCategory, setSubCaloborationCategory] = useState<
+    SubCalloborationCategory[]
+  >([])
   const [meta, setMeta] = useState<Meta>()
 
   const { data, isLoading, isFetching } = useQuery<{
-    data: RegencyList[]
+    data: SubCalloborationCategory[]
     meta: Meta
   }>({
     refetchOnWindowFocus: false,
-    queryKey: ['settings-regency', ParamsSearch.toString()],
+    queryKey: ['list-sub-calloboration-category', ParamsSearch.toString()],
     queryFn: () =>
-      AxiosClient.get(`/pengaturan/referensi/kabupaten?${ParamsSearch}`).then((res) => res.data),
+      AxiosClient.get(`/website-utama/sub-kategori-kerjasama?${ParamsSearch}`).then(
+        (res) => res.data
+      ),
   })
 
   const loading = isLoading || isFetching
 
   useEffect(() => {
     if (data) {
-      setRegency(data.data ?? [])
+      setSubCaloborationCategory(data.data ?? [])
       setMeta(data.meta)
     }
   }, [data])
 
   return {
-   regency,
+    subCalloborationCategory,
     loading,
     meta,
   }
 }
 
-export default useGetRegency
+export default useGetSubCalloborationCategory

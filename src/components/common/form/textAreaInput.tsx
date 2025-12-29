@@ -1,6 +1,7 @@
 import type { FieldValues, Path, UseFormReturn } from 'react-hook-form'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form.tsx'
 import { Textarea } from '@/components/ui/textarea.tsx'
+import { useMobile } from '@/utils/useMobile'
 
 interface Props<T extends FieldValues> {
   label?: string
@@ -27,18 +28,16 @@ const TextAreaInput = <T extends FieldValues>({
   inputClassName,
   isRow = false,
 }: Props<T>) => {
+  const { isMobile } = useMobile()
   return (
     <FormField
       control={form.control}
       name={name}
       render={({ field }) => (
         <FormItem
-          className={`
-            ${isRow ? 'grid grid-cols-[12rem_1fr]' : 'flex'}
-            ${isRow ? 'flex-row items-center gap-5' : 'flex-col gap-2'}
-            whitespace-nowrap
-            ${className}
-          `}
+          className={`whitespace-nowrap 
+          ${isRow ? `${isMobile ? 'flex flex-col gap-4' : 'grid grid-cols-[12rem_1fr] flex-row items-center gap-5'} ` : 'flex flex-col gap-2'} 
+          ${className}`}
         >
           <FormLabel className="whitespace-pre-line text-gray-600" htmlFor={htmlFor}>
             {label} {isRequired && <span className="text-red-500">*</span>}
