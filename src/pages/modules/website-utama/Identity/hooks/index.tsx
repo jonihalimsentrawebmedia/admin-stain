@@ -1,38 +1,37 @@
 import { useEffect, useState } from 'react'
-import type { IAcademicRules } from '@/pages/modules/website-utama/peraturan-akademik/types'
+import type { IIdentityCampus } from '@/pages/modules/website-utama/Identity/types'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { IBGThumbnail } from '@/pages/modules/website-utama/public-content/announcement/data'
 
-export const UseGetDetailAcademicRules = () => {
-  const [academicRules, setAcademicRules] = useState<IAcademicRules>()
+export const UseGetIdentity = () => {
+  const [identityCampus, setIdentityCampus] = useState<IIdentityCampus>()
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['academic-rules'],
+    queryKey: ['identity-campus'],
     refetchOnWindowFocus: false,
-    queryFn: () =>
-      AxiosClient.get('/website-utama/pengaturan-akademik').then((res) => res.data.data),
+    queryFn: () => AxiosClient.get('/website-utama/identitas').then((res) => res.data.data),
   })
 
   const loading = isLoading || isFetching
 
   useEffect(() => {
     if (data) {
-      setAcademicRules(data)
+      setIdentityCampus(data)
     }
   }, [data])
 
-  return { academicRules, loading }
+  return { identityCampus, loading }
 }
 
-export const UseGetAcademicRulesBackground = () => {
+export const UseGetIdentityBackground = () => {
   const [background, setBackground] = useState<IBGThumbnail[]>([])
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['background-academic-rules'],
+    queryKey: ['background-identity'],
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get(`/website-utama/pengaturan-akademik-background`).then((res) => res.data.data),
+      AxiosClient.get(`/website-utama/identitas-background`).then((res) => res.data.data),
   })
 
   const loading = isLoading || isFetching

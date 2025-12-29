@@ -1,12 +1,15 @@
 import { Button } from '@/components/ui/button.tsx'
 import { IoMdImage } from 'react-icons/io'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Accordion } from '@/components/ui/accordion.tsx'
 import { AccordionCustom } from '@/components/common/accordion'
+import { UseGetIdentity } from '@/pages/modules/website-utama/Identity/hooks'
+import { TbExternalLink } from 'react-icons/tb'
 
 export const PageIdentity = () => {
   const navigate = useNavigate()
+  const { identityCampus: detail } = UseGetIdentity()
 
   return (
     <>
@@ -56,18 +59,18 @@ export const PageIdentity = () => {
               <p className="text-gray-500">Teks Pengantar</p>
               <div
                 className={'tiptap ProseMirror simple-editor'}
-                dangerouslySetInnerHTML={{ __html: '' }}
+                dangerouslySetInnerHTML={{ __html: detail?.teks_pengantar ?? '' }}
               />
               <p className="text-gray-500">Dokumen Status</p>
-              {/*<Link to={'#'} target={'_blank'}>*/}
-              {/*  <Button*/}
-              {/*    className={'border border-primary text-primary hover:text-primary'}*/}
-              {/*    variant={'outline'}*/}
-              {/*  >*/}
-              {/*    <TbExternalLink />*/}
-              {/*    Buka Dokumen*/}
-              {/*  </Button>*/}
-              {/*</Link>*/}
+              <Link to={detail?.dokumen_status_url ?? '#'} target={'_blank'}>
+                <Button
+                  className={'border border-primary text-primary hover:text-primary'}
+                  variant={'outline'}
+                >
+                  <TbExternalLink />
+                  Buka Dokumen
+                </Button>
+              </Link>
             </div>
           </AccordionCustom>
 
@@ -76,7 +79,7 @@ export const PageIdentity = () => {
               <p className="text-gray-500">Nama</p>
               <div
                 className={'tiptap ProseMirror simple-editor'}
-                dangerouslySetInnerHTML={{ __html: '' }}
+                dangerouslySetInnerHTML={{ __html: detail?.isi_nama ?? '' }}
               />
             </div>
           </AccordionCustom>
@@ -86,7 +89,7 @@ export const PageIdentity = () => {
               <p className="text-gray-500">Kedudukan</p>
               <div
                 className={'tiptap ProseMirror simple-editor'}
-                dangerouslySetInnerHTML={{ __html: '' }}
+                dangerouslySetInnerHTML={{ __html: detail?.isi_kedudukan ?? '' }}
               />
             </div>
           </AccordionCustom>
@@ -96,7 +99,7 @@ export const PageIdentity = () => {
               <p className="text-gray-500">Berdiri</p>
               <div
                 className={'tiptap ProseMirror simple-editor'}
-                dangerouslySetInnerHTML={{ __html: '' }}
+                dangerouslySetInnerHTML={{ __html: detail?.isi_berdiri ?? '' }}
               />
             </div>
           </AccordionCustom>
@@ -106,7 +109,7 @@ export const PageIdentity = () => {
               <p className="text-gray-500">Busana Akademik</p>
               <div
                 className={'tiptap ProseMirror simple-editor'}
-                dangerouslySetInnerHTML={{ __html: '' }}
+                dangerouslySetInnerHTML={{ __html: detail?.isi_busana_akademik ?? '' }}
               />
             </div>
           </AccordionCustom>
@@ -114,11 +117,17 @@ export const PageIdentity = () => {
           <AccordionCustom name={'lambang'} title={'Lambang'}>
             <div className="grid grid-cols-[12rem_1fr] gap-5">
               <p className="text-gray-500">Gambar</p>
-              <div></div>
+              <div>
+                <img
+                  src={detail?.lambang_url}
+                  alt="img"
+                  className={'w-[150px] object-contain h-auto'}
+                />
+              </div>
               <p className="text-gray-500">Isi Lambang</p>
               <div
                 className={'tiptap ProseMirror simple-editor'}
-                dangerouslySetInnerHTML={{ __html: '' }}
+                dangerouslySetInnerHTML={{ __html: detail?.isi_lambang ?? '' }}
               />
             </div>
           </AccordionCustom>
@@ -126,11 +135,17 @@ export const PageIdentity = () => {
           <AccordionCustom name={'bendera'} title={'Bendera'}>
             <div className="grid grid-cols-[12rem_1fr] gap-5">
               <p className="text-gray-500">Gambar</p>
-              <div></div>
+              <div>
+                <img
+                  src={detail?.bendera_url}
+                  alt="img"
+                  className={'w-[180px] object-contain h-auto'}
+                />
+              </div>
               <p className="text-gray-500">Isi Bendera</p>
               <div
                 className={'tiptap ProseMirror simple-editor'}
-                dangerouslySetInnerHTML={{ __html: '' }}
+                dangerouslySetInnerHTML={{ __html: detail?.isi_bendera ?? '' }}
               />
             </div>
           </AccordionCustom>
@@ -140,7 +155,7 @@ export const PageIdentity = () => {
               <p className="text-gray-500">Mars & Hymne</p>
               <div
                 className={'tiptap ProseMirror simple-editor'}
-                dangerouslySetInnerHTML={{ __html: '' }}
+                dangerouslySetInnerHTML={{ __html: detail?.isi_mars_hymne ?? '' }}
               />
             </div>
           </AccordionCustom>

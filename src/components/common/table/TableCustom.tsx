@@ -90,7 +90,7 @@ const TableCustom = (props: Props) => {
 
       <Table className={`${className}  `}>
         <TableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
+          {table?.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header, l) => (
                 <TableHead
@@ -107,7 +107,7 @@ const TableCustom = (props: Props) => {
           ))}
         </TableHeader>
         <TableBody>
-          {data.length == 0 && loading == false && (
+          {data?.length == 0 && loading == false && (
             <TableRow>
               <TableCell colSpan={columnCount} className="text-center border">
                 Data Tidak Ada
@@ -138,7 +138,7 @@ const TableCustom = (props: Props) => {
         </TableBody>
         {isShowFooterTable && (
           <TableFooter>
-            {table.getFooterGroups().map((footerGroup) => (
+            {table?.getFooterGroups()?.map((footerGroup) => (
               <TableRow key={footerGroup.id}>
                 {footerGroup.headers.map((header) => (
                   <TableCell

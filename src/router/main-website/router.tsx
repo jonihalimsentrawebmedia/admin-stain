@@ -83,8 +83,13 @@ import { EditOfficialMusicPage } from '@/pages/modules/website-utama/public-cont
 import { CertificateStudent } from '@/pages/modules/website-utama/surat-keterangan-mahasiswa'
 import { AcademicRegulation } from '@/pages/modules/website-utama/peraturan-akademik'
 import { AddPageAcademicRule } from '@/pages/modules/website-utama/peraturan-akademik/components/addPage.tsx'
-import { PageIdentity } from '@/pages/modules/website-utama/Identity/page.tsx'
+import { PageIdentity } from '@/pages/modules/website-utama/Identity'
 import DashboardAdmin from '@/pages/modules/website-utama/beranda'
+import { UpdateIdentityPage } from '@/pages/modules/website-utama/Identity/components/update.tsx'
+import { IdentityBackground } from '@/pages/modules/website-utama/Identity/background'
+import { AcademicRulesBackground } from '@/pages/modules/website-utama/peraturan-akademik/background'
+import { StudentLetterBackground } from '@/pages/modules/website-utama/surat-keterangan-mahasiswa/background'
+import CampusLifePage from '@/pages/modules/website-utama/campus-life'
 
 export const MainWebsiteRouter = [
   {
@@ -572,6 +577,10 @@ export const MainWebsiteRouter = [
         index: true,
         element: <CertificateStudent />,
       },
+      {
+        path: 'background',
+        element: <StudentLetterBackground />,
+      },
     ],
   },
   {
@@ -580,6 +589,14 @@ export const MainWebsiteRouter = [
       {
         index: true,
         element: <PageIdentity />,
+      },
+      {
+        path: 'update',
+        element: <UpdateIdentityPage />,
+      },
+      {
+        path: 'background',
+        element: <IdentityBackground />,
       },
     ],
   },
@@ -592,12 +609,16 @@ export const MainWebsiteRouter = [
       },
       {
         path: 'background',
-        element: <></>,
+        element: <AcademicRulesBackground />,
       },
       {
         path: 'update',
         element: <AddPageAcademicRule />,
       },
     ],
+  },
+  {
+    path: 'campus-life',
+    element: <CampusLifePage />,
   },
 ]
