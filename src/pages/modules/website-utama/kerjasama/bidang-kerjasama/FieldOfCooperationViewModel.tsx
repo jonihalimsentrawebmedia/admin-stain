@@ -24,7 +24,7 @@ const FieldOfCooperationViewModel = () => {
       header: 'Nama Bidang Kerjasama',
     },
     {
-      accessorKey: '',
+      accessorKey: 'jumlah_kerjasama',
       header: 'Jumlah Kerjasama',
     },
 

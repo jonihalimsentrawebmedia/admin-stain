@@ -1,16 +1,16 @@
 import type { ColumnDef } from '@tanstack/react-table'
-import useGetLogTypeOfCalloboration from '../controller/useGetLogTypeOfCalloboration'
-import useGetTypeOfCalloborationDetail from '../controller/useGetTypeOfCalloborationDetail'
 import type { LogStatistic } from '../../../statistic/model'
+import useGetFieldOfCooperationDetail from '../controller/useGetFieldOfCooperationDetail'
+import useGetLogFieldOfCooperation from '../controller/useGetLogFieldOfCooperation'
 import { formatDateTime } from '@/utils/date'
 import { Skeleton } from '@/components/ui/skeleton'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
 import TableCustom from '@/components/common/table/TableCustom'
 import SelectFilter from '@/components/common/filter/SelectFilter'
 
-const TypeOfCalloborationLogView = () => {
-  const { typeOfCalloborationDetail, loading } = useGetTypeOfCalloborationDetail()
-  const { log, loading: loadingLog, meta } = useGetLogTypeOfCalloboration()
+const FieldOfCooperationLogView = () => {
+  const { fieldOfCooperationDetail, loading } = useGetFieldOfCooperationDetail()
+  const { log, loading: loadingLog, meta } = useGetLogFieldOfCooperation()
 
   const columns: ColumnDef<LogStatistic>[] = [
     {
@@ -73,7 +73,7 @@ const TypeOfCalloborationLogView = () => {
   return (
     <div className="flex  flex-col gap-4">
       <ButtonTitleGroup
-        link="/modules/website-utama/kerjasama/jenis-kerjasama"
+        link="/modules/website-utama/kerjasama/kategori-kerjasama"
         buttonGroup={[]}
         label="Log Data "
         isBack
@@ -82,13 +82,13 @@ const TypeOfCalloborationLogView = () => {
       <div className="flex gap-4 flex-col md:flex-row">
         <div>
           <div>
-            <div className="text-[#999999] text-sm">Nama Jenis Kerjasama</div>
+            <div className="text-[#999999] text-sm">Nama Bidang Kerjasama</div>
             <div className="text-green-600 font-medium text-3xl">
-              {typeOfCalloborationDetail?.nama_jenis_kerjasama}
+              {fieldOfCooperationDetail?.nama_bidang_kerjasama}
             </div>
             <div>
               <div className="text-[#999999] text-sm">Jumlah Kerjama</div>
-              <div className=""> {typeOfCalloborationDetail?.jumlah_kerjasama}</div>
+              <div className=""> {fieldOfCooperationDetail?.jumlah_kerjasama}</div>
             </div>
           </div>
         </div>
@@ -119,4 +119,4 @@ const TypeOfCalloborationLogView = () => {
   )
 }
 
-export default TypeOfCalloborationLogView
+export default FieldOfCooperationLogView

@@ -24,7 +24,7 @@ const TypeOfCalloborationViewModel = () => {
       header: 'Nama Jenis Kerjasama',
     },
     {
-      accessorKey: '',
+      accessorKey: 'jumlah_kerjasama',
       header: 'Jumlah Kerjasama',
     },
   

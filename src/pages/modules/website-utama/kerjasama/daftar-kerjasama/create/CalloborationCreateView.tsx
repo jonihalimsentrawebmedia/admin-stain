@@ -26,7 +26,7 @@ const CalloborationCreateView = () => {
                 onClick: () => {},
               },
             ]}
-            label="Tambah Data Fakultas"
+            label="Tambah Daftar Kerjasama"
           />
           <CalloborationForm form={form} />
           <ButtonForm loading={loading} />

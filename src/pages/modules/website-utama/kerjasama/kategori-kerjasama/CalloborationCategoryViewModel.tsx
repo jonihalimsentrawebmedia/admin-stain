@@ -24,7 +24,7 @@ const CalloborationCategoryViewModel = () => {
       header: 'Nama Kategori Kerjasama',
     },
     {
-      accessorKey: '',
+      accessorKey: 'jumlah_kerjasama',
       header: 'Jumlah Kerjasama',
     },
   

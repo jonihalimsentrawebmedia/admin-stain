@@ -94,6 +94,9 @@ import CalloborationCreateView from '@/pages/modules/website-utama/kerjasama/daf
 import CalloborationCategoryLogView from '@/pages/modules/website-utama/kerjasama/kategori-kerjasama/log/CalloborationCategoryLogView'
 import SubCalloborationCategoryLogView from '@/pages/modules/website-utama/kerjasama/sub-kategori-kerjasama/log/SubCalloborationCategoryLogView'
 import TypeOfCalloborationLogView from '@/pages/modules/website-utama/kerjasama/jenis-kerjasama/log/TypeOfCalloborationLogView'
+import FieldOfCooperationLogView from '@/pages/modules/website-utama/kerjasama/bidang-kerjasama/log/FieldOfCooperationLogView'
+import CalloborationEditView from '@/pages/modules/website-utama/kerjasama/daftar-kerjasama/edit/CalloborationEditView'
+import CalloborationDetailView from '@/pages/modules/website-utama/kerjasama/daftar-kerjasama/detail/CalloborationDetailView'
 
 export const MainWebsiteRouter = [
   {
@@ -671,7 +674,22 @@ export const MainWebsiteRouter = [
       },
       {
         path: 'bidang-kerjasama',
-        element: <FieldOfCooperationView />,
+
+        children: [
+          {
+            index: true,
+            element: <FieldOfCooperationView />,
+          },
+          {
+            path: ':idFieldOfCooperation',
+            children: [
+              {
+                path: 'log',
+                element: <FieldOfCooperationLogView />,
+              },
+            ],
+          },
+        ],
       },
       {
         path: 'daftar-kerjasama',
@@ -680,6 +698,19 @@ export const MainWebsiteRouter = [
           {
             path: 'add',
             element: <CalloborationCreateView />,
+          },
+          {
+            path: ':idCalloboration',
+            children: [
+              {
+                path: 'edit',
+                element: <CalloborationEditView />,
+              },
+              {
+                path: 'detail',
+                element: <CalloborationDetailView />,
+              },
+            ],
           },
         ],
       },

@@ -1,26 +1,27 @@
-import type { ReactNode } from "react";
-import type { UseFormReturn } from "react-hook-form";
+import type { ReactNode } from 'react'
+import type { UseFormReturn } from 'react-hook-form'
 interface Props {
   data: {
-    name: string;
-    label: string;
-    component?: ReactNode;
-  }[];
-  form: UseFormReturn<any>;
-  isRow?: boolean;
-  isRowParent?: boolean;
-  classNameParent?:string
+    name: string
+    label: string
+    component?: ReactNode
+  }[]
+  form: UseFormReturn<any>
+  isRow?: boolean
+  isRowParent?: boolean
+  classNameParent?: string
+  isGrid?: boolean
 }
-const DetailField = ({ data, form, isRow = true, isRowParent ,classNameParent}: Props) => {
+const DetailField = ({ data, form, isRow = true, isRowParent, classNameParent, isGrid }: Props) => {
   return (
     <div
-      className={`flex ${isRowParent ? "flex-row" : "flex-col"} gap-4 ${classNameParent}
+      className={`${isGrid ? 'grid grid-cols-1 md:grid-cols-2' : 'flex'} ${isRowParent ? 'flex-row' : 'flex-col'} gap-4 ${classNameParent}
     `}
     >
       {data.map((item) => (
         <div
           key={item.name + item.label}
-          className={`flex ${isRow ? "flex-col lg:flex-row" : "flex-col"} gap-2
+          className={`flex ${isRow ? 'flex-col lg:flex-row' : 'flex-col'} gap-2
     `}
         >
           <div className="min-w-[200px] max-w-[200px] w-full text-wrap text-[#999999]">
@@ -28,20 +29,21 @@ const DetailField = ({ data, form, isRow = true, isRowParent ,classNameParent}: 
           </div>
           {item.component ? (
             form.watch(item.name) ? (
-              <div className="text-[#464646]">
-                {item.component}
-              </div>
-
+              <div className="text-[#464646]">{item.component}</div>
+            ) : item.label != '' ? (
+              '-'
             ) : (
-              "-"
+              ''
             )
           ) : (
-            <div className="text-[#464646]">{form.watch(item.name) ?? "-"}</div>
+            <div className="text-[#464646]">
+              {item.label == '' ? '' : (form.watch(item.name) ?? '-')}
+            </div>
           )}
         </div>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default DetailField;
+export default DetailField
