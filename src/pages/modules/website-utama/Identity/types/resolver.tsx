@@ -3,7 +3,7 @@ import { z } from 'zod'
 export const CampusIdentityResolver = z.object({
   teks_pengantar: z.string({ error: 'teks pengantar wajib diisi' }),
   dokumen_status_url: z.string({ error: 'dokumen status wajib diisi' }),
-  dokumen_status_key: z.string({ error: 'dokumen status key wajib diisi' }),
+  dokumen_status_key: z.string().optional().nullable(),
   isi_nama: z.string({ error: 'isi nama wajib diisi' }),
   isi_kedudukan: z.string({ error: 'isi kedudukan wajib diisi' }),
   isi_berdiri: z.string({ error: 'isi berdiri wajib diisi' }),

@@ -8,16 +8,16 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { AccordionCustom } from '@/components/common/accordion'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import type { ICampusLifeIntroduction } from '@/pages/modules/website-utama/campus-life/types'
+import type { IUrlDirectionCampusLife } from '../../types/index.ts'
 import { useQueryClient } from '@tanstack/react-query'
 
 interface props {
   isEdit: boolean
   setIsEdit: Dispatch<SetStateAction<boolean>>
-  data?: ICampusLifeIntroduction
+  data?: IUrlDirectionCampusLife
 }
 
-export const FormIntroduction = (props: props) => {
+export const FormUrlDirection = (props: props) => {
   const { isEdit, setIsEdit, data } = props
 
   const [loading, setLoading] = useState(false)
@@ -28,21 +28,23 @@ export const FormIntroduction = (props: props) => {
     if (data) {
       form.reset({
         is_warna_background: data?.is_warna_background,
-        warna_background: data?.is_warna_background ? data?.warna_background : '',
+        warna_background: data?.is_warna_background ? data?.warna_background :null,
         teks_pengantar: data?.teks_pengantar,
+        teks_tombol: data?.teks_tombol,
+        link_tombol: data?.link_tombol,
       })
     }
   }, [])
 
   const HandleSave = async (e: any) => {
     setLoading(true)
-    await AxiosClient.post('/website-utama/kehidupan-kampus-pengantar', e)
+    await AxiosClient.post('/website-utama/kehidupan-kampus-link-arahan', e)
       .then((res) => {
         if (res?.data?.status) {
           setLoading(false)
           setIsEdit(!isEdit)
           queryClient.invalidateQueries({
-            queryKey: ['campus-life-introduction'],
+            queryKey: ['url-direction-campus-life'],
           })
           toast.success(res?.data?.message || 'Data berhasil disimpan')
         }
@@ -58,7 +60,7 @@ export const FormIntroduction = (props: props) => {
       <Form {...form}>
         <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(HandleSave)}>
           <ButtonTitleGroup
-            label={'Pengantar'}
+            label={'Link Arahan'}
             buttonGroup={[
               {
                 type: 'cancel',
@@ -74,11 +76,7 @@ export const FormIntroduction = (props: props) => {
               },
             ]}
           />
-          <AccordionCustom
-            name={'pengantar'}
-            title={'Isi'}
-            contentClassName={'flex flex-col gap-5'}
-          >
+          <AccordionCustom name={'url'} title={'Isi'} contentClassName={'flex flex-col gap-5'}>
             <InputRadio
               form={form}
               isRow
@@ -107,6 +105,25 @@ export const FormIntroduction = (props: props) => {
               </div>
             )}
             <RichText form={form} name={'teks_pengantar'} label={'Text Pengantar'} isRow required />
+
+            <TextInput
+              name={'teks_tombol'}
+              form={form}
+              label={'Text Tombol'}
+              placeholder={'Text Tombol'}
+              isRow
+              isRequired
+            />
+
+            <TextInput
+              name={'link_tombol'}
+              form={form}
+              label={'Link Tombol'}
+              placeholder={'Link Url Tombol'}
+              type={'url'}
+              isRow
+              isRequired
+            />
           </AccordionCustom>
         </form>
       </Form>

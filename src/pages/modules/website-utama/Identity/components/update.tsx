@@ -23,6 +23,8 @@ export const UpdateIdentityPage = () => {
   const form = useForm<IIdentityCampus>({
     resolver: zodResolver(CampusIdentityResolver),
   })
+  
+  console.log(form.formState.errors)
 
   useEffect(() => {
     if (identityCampus) {

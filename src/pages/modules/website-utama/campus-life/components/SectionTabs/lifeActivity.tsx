@@ -1,20 +1,20 @@
-import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { useState } from 'react'
-import { Accordion } from '@/components/ui/accordion.tsx'
+import { UseGetCampusActivityUnit } from '@/pages/modules/website-utama/campus-life/hooks'
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { AccordionCustom } from '@/components/common/accordion'
-import { FormIntroduction } from '@/pages/modules/website-utama/campus-life/components/SectionTabs/forms.tsx'
-import { UseGetCampusLifeIntroduction } from '@/pages/modules/website-utama/campus-life/hooks'
+import { Accordion } from '@/components/ui/accordion.tsx'
+import { LifeActivityForm } from '@/pages/modules/website-utama/campus-life/components/SectionTabs/lifeActivityForm.tsx'
 
-export const SectionIntroduction = () => {
+export const LifeActivitySection = () => {
   const [isEdit, setIsEdit] = useState(false)
-  const { introduction } = UseGetCampusLifeIntroduction()
+  const { campusActivity } = UseGetCampusActivityUnit()
 
   return (
     <>
       <div className={'flex flex-col gap-5'}>
         {!isEdit && (
           <ButtonTitleGroup
-            label={'Pengantar'}
+            label={'Unit Kegiatan Mahasiswa'}
             buttonGroup={[
               {
                 type: 'edit',
@@ -27,18 +27,18 @@ export const SectionIntroduction = () => {
           />
         )}
 
-        <Accordion type={'single'} defaultValue={'pengantar'} collapsible>
+        <Accordion type={'single'} defaultValue={'activity'} collapsible>
           {isEdit ? (
-            <FormIntroduction data={introduction} isEdit={isEdit} setIsEdit={setIsEdit} />
+            <LifeActivityForm setIsEdit={setIsEdit} isEdit={isEdit} data={campusActivity} />
           ) : (
-            <AccordionCustom name={'pengantar'} title={'Isi'}>
+            <AccordionCustom name={'activity'} title={'Isi'}>
               <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
                 <p className="text-gray-500">Warna Background</p>
                 <div>
-                  {introduction?.is_warna_background ? (
+                  {campusActivity?.is_warna_background ? (
                     <div
                       className={'size-5'}
-                      style={{ background: `${introduction?.warna_background}` }}
+                      style={{ background: `${campusActivity?.warna_background}` }}
                     />
                   ) : (
                     'Tidak Ada'
@@ -47,7 +47,7 @@ export const SectionIntroduction = () => {
                 <p className="text-gray-500">Text Pengantar</p>
                 <div
                   className={'tiptap ProseMirror simple-editor'}
-                  dangerouslySetInnerHTML={{ __html: introduction?.teks_pengantar ?? '' }}
+                  dangerouslySetInnerHTML={{ __html: campusActivity?.teks_pengantar ?? '' }}
                 />
               </div>
             </AccordionCustom>

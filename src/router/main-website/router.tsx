@@ -103,6 +103,7 @@ import FieldOfCooperationLogView from '@/pages/modules/website-utama/kerjasama/b
 import CalloborationEditView from '@/pages/modules/website-utama/kerjasama/daftar-kerjasama/edit/CalloborationEditView'
 import CalloborationDetailView from '@/pages/modules/website-utama/kerjasama/daftar-kerjasama/detail/CalloborationDetailView'
 import CalloborationLogView from '@/pages/modules/website-utama/kerjasama/daftar-kerjasama/log/CalloborationLogView'
+import { CampusLifeBackground } from '@/pages/modules/website-utama/campus-life/background'
 
 export const MainWebsiteRouter = [
   {
@@ -632,7 +633,16 @@ export const MainWebsiteRouter = [
   },
   {
     path: 'campus-life',
-    element: <CampusLifePage />,
+    children: [
+      {
+        index: true,
+        element: <CampusLifePage />,
+      },
+      {
+        path: 'background',
+        element: <CampusLifeBackground />,
+      },
+    ],
   },
   {
     path: 'kerjasama',

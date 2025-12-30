@@ -8,16 +8,16 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { AccordionCustom } from '@/components/common/accordion'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import type { ICampusLifeIntroduction } from '@/pages/modules/website-utama/campus-life/types'
+import type { ICampusLifeFacilities } from '../../types/index.ts'
 import { useQueryClient } from '@tanstack/react-query'
 
 interface props {
   isEdit: boolean
   setIsEdit: Dispatch<SetStateAction<boolean>>
-  data?: ICampusLifeIntroduction
+  data?: ICampusLifeFacilities
 }
 
-export const FormIntroduction = (props: props) => {
+export const FormFacilities = (props: props) => {
   const { isEdit, setIsEdit, data } = props
 
   const [loading, setLoading] = useState(false)
@@ -36,13 +36,13 @@ export const FormIntroduction = (props: props) => {
 
   const HandleSave = async (e: any) => {
     setLoading(true)
-    await AxiosClient.post('/website-utama/kehidupan-kampus-pengantar', e)
+    await AxiosClient.post('/website-utama/kehidupan-kampus-fasilitas', e)
       .then((res) => {
         if (res?.data?.status) {
           setLoading(false)
           setIsEdit(!isEdit)
           queryClient.invalidateQueries({
-            queryKey: ['campus-life-introduction'],
+            queryKey: ['campus-life-facilities'],
           })
           toast.success(res?.data?.message || 'Data berhasil disimpan')
         }
@@ -58,7 +58,7 @@ export const FormIntroduction = (props: props) => {
       <Form {...form}>
         <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(HandleSave)}>
           <ButtonTitleGroup
-            label={'Pengantar'}
+            label={'Fasilitas'}
             buttonGroup={[
               {
                 type: 'cancel',
@@ -75,7 +75,7 @@ export const FormIntroduction = (props: props) => {
             ]}
           />
           <AccordionCustom
-            name={'pengantar'}
+            name={'fasilitas'}
             title={'Isi'}
             contentClassName={'flex flex-col gap-5'}
           >
