@@ -133,6 +133,8 @@ export const UseGetApprovedList = (status: string) => {
 
 export const UseGetTrentVisitor = (mode: Mode) => {
   const [trentVisitor, setTrentVisitor] = useState<any>()
+  const [visitor, setVisitor] = useState<{ baru: number; kembali: number }>()
+  const [device, setDevice] = useState<{ desktop: number; mobile: number }>()
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['tren-visitor', mode],
@@ -147,10 +149,11 @@ export const UseGetTrentVisitor = (mode: Mode) => {
 
   useEffect(() => {
     if (data) {
-      console.log(data)
       setTrentVisitor(data?.tren_kunjungan)
+      setVisitor(data?.jenis_pengunjung)
+      setDevice(data?.perangkat)
     }
   }, [data])
 
-  return { trentVisitor, loading }
+  return { trentVisitor, loading, visitor, device }
 }

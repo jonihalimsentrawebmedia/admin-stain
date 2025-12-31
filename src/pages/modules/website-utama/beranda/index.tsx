@@ -19,7 +19,7 @@ export default function DashboardAdmin() {
   const [tabsName, setTabsName] = useState('DIAJUKAN_EDITOR')
   const [mode, setMode] = useState<Mode>('harian')
 
-  const { trentVisitor } = UseGetTrentVisitor(mode)
+  const { trentVisitor, visitor, device } = UseGetTrentVisitor(mode)
 
   const chartData =
     (trentVisitor &&
@@ -167,11 +167,26 @@ export default function DashboardAdmin() {
             <CardContent className="space-y-2">
               <div className="flex justify-between">
                 <span>Pengunjung Baru</span>
-                <span>50%</span>
+                <span>
+                  {visitor?.baru} (
+                  {(
+                    ((visitor?.baru ?? 0) / ((visitor?.baru ?? 0) + (visitor?.kembali ?? 0) || 1)) *
+                    100
+                  ).toFixed(2)}
+                  %)
+                </span>
               </div>
               <div className="flex justify-between">
                 <span>Pengunjung Kembali</span>
-                <span>50%</span>
+                <span>
+                  {visitor?.kembali} (
+                  {(
+                    ((visitor?.kembali ?? 0) /
+                      ((visitor?.baru ?? 0) + (visitor?.kembali ?? 0) || 1)) *
+                    100
+                  ).toFixed(2)}
+                  %)
+                </span>
               </div>
             </CardContent>
           </Card>
@@ -183,11 +198,27 @@ export default function DashboardAdmin() {
             <CardContent className="space-y-2">
               <div className="flex justify-between">
                 <span>Desktop</span>
-                <span>40%</span>
+                <span>
+                  {device?.desktop} (
+                  {(
+                    ((device?.desktop ?? 0) /
+                      ((device?.mobile ?? 0) + (device?.desktop ?? 0) || 1)) *
+                    100
+                  ).toFixed(2)}
+                  %)
+                </span>
               </div>
               <div className="flex justify-between">
                 <span>Mobile</span>
-                <span>60%</span>
+                <span>
+                  {device?.mobile} (
+                  {(
+                    ((device?.mobile ?? 0) /
+                      ((device?.mobile ?? 0) + (device?.desktop ?? 0) || 1)) *
+                    100
+                  ).toFixed(2)}
+                  %)
+                </span>
               </div>
             </CardContent>
           </Card>
