@@ -1,27 +1,83 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
+
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
 import { Plus } from 'lucide-react'
-
-const stats = [
-  { label: 'Total Pengunjung', value: '10,000' },
-  { label: 'Hari Ini', value: '1,000' },
-  { label: 'Kemarin', value: '950' },
-  { label: 'Minggu Ini', value: '7,000' },
-  { label: 'Bulan Ini', value: '8,000' },
-  { label: 'Tahun Ini', value: '10,000' },
-]
-
-const chartData = [
-  { name: 'Minggu 1', value: 150, color: '#007bff' },
-  { name: 'Minggu 2', value: 220, color: '#dc3545' },
-  { name: 'Minggu 3', value: 300, color: '#ffc107' },
-  { name: 'Minggu 4', value: 400, color: '#28a745' },
-  { name: 'Minggu 5', value: 500, color: '#17a2b8' },
-]
+import {
+  UseGetApprovedList,
+  UseGetTotalVisitor,
+  UseGetTrentVisitor,
+} from '@/pages/modules/website-utama/beranda/hooks'
+import { TabsListCustom } from '@/pages/modules/website-utama/public-content/slider/components/tabsList.tsx'
+import { useState } from 'react'
+import { ApprovedSection } from '@/pages/modules/website-utama/beranda/components/Approved/section.tsx'
+import { Link } from 'react-router-dom'
+import { SelectBasic } from '@/components/common/select/basic.tsx'
+import type { Mode } from '@/pages/modules/website-utama/beranda/types'
 
 export default function DashboardAdmin() {
+  const [tabsName, setTabsName] = useState('DIAJUKAN_EDITOR')
+  const [mode, setMode] = useState<Mode>('harian')
+
+  const { trentVisitor } = UseGetTrentVisitor(mode)
+
+  const chartData =
+    (trentVisitor &&
+      Object?.entries(trentVisitor).map(([key, value]) => ({
+        name: key,
+        value: value,
+      }))) ??
+    []
+
+  const { status } = UseGetTotalVisitor()
+  const { approvedList } = UseGetApprovedList(tabsName ?? '')
+
+  const TabsList = [
+    {
+      id: 1,
+      name: 'Diajukan Ke Editor',
+      value: 'DIAJUKAN_EDITOR',
+      element: <ApprovedSection data={approvedList} />,
+    },
+    {
+      id: 2,
+      name: 'Disetujui Editor',
+      value: 'DISETUJUI_EDITOR',
+      element: <ApprovedSection data={approvedList} />,
+    },
+    {
+      id: 3,
+      name: 'Proses Editor',
+      value: 'PROSES_EDITOR',
+      element: <ApprovedSection data={approvedList} />,
+    },
+    {
+      id: 4,
+      name: 'Tolak Editor',
+      value: 'TOLAK_EDITOR',
+      element: <ApprovedSection data={approvedList} />,
+    },
+  ]
+
+  const actions = [
+    { label: 'Tulis Berita', url: '/modules/website-utama/public-content/news/add' },
+    { label: 'Tulis Pengumuman', url: '/modules/website-utama/public-content/announcement/add' },
+    { label: 'Tulis Agenda', url: '/modules/website-utama/public-content/agenda/add' },
+    {
+      label: 'Tulis Inovasi Berdampak',
+      url: '/modules/website-utama/public-content/achievement/add',
+    },
+    { label: 'Tulis Prestasi', url: '/modules/website-utama/public-content/achievement/add' },
+    { label: 'Tambah Berkas Download', url: '/modules/website-utama/public-content/download/add' },
+  ]
+
+  const listMode = [
+    { label: 'Harian', value: 'harian' },
+    { label: 'Mingguan', value: 'mingguan' },
+    { label: 'Bulanan', value: 'bulanan' },
+    { label: 'Tahunan', value: 'tahunan' },
+  ]
+
   return (
     <div className="min-h-screen space-y-6">
       <h1 className="text-2xl font-semibold">
@@ -30,11 +86,17 @@ export default function DashboardAdmin() {
 
       {/* Statistik */}
       <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-6 gap-4">
-        {stats.map((item, i) => (
-          <Card key={i} className="bg-green-600/90 text-white">
-            <CardContent className="p-4">
+        {status?.map((item, i) => (
+          <Card
+            key={i}
+            className="bg-primary-foreground hover:bg-primary hover:text-white text-primary border-primary"
+          >
+            <CardContent className="p-4 relative">
               <p className="text-sm">{item.label}</p>
-              <p className="text-xl font-bold">{item.value}</p>
+              <p className="text-xl font-bold">
+                {new Intl.NumberFormat('id-ID').format(item.value)}
+              </p>
+              {item?.icon}
             </CardContent>
           </Card>
         ))}
@@ -42,86 +104,53 @@ export default function DashboardAdmin() {
 
       {/* Konten & Akses */}
       <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
-        <Card className="xl:col-span-3">
-          <CardHeader>
-            <CardTitle>Konten Yang Diajukan</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <Tabs defaultValue="diajukan">
-              <TabsList className="mb-4">
-                <TabsTrigger value="diajukan">Diajukan</TabsTrigger>
-                <TabsTrigger value="proses">Proses</TabsTrigger>
-                <TabsTrigger value="ditolak">Ditolak</TabsTrigger>
-                <TabsTrigger value="disetujui">Disetujui</TabsTrigger>
-              </TabsList>
-            </Tabs>
-
-            <div className="overflow-auto rounded-lg border">
-              <table className="w-full text-sm">
-                <thead className="bg-green-50 text-green-700">
-                  <tr>
-                    <th className="p-2">Tanggal</th>
-                    <th>Jenis</th>
-                    <th>Judul</th>
-                    <th>Penulis</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {[1, 2, 3, 4, 5].map((i) => (
-                    <tr key={i} className="border-t">
-                      <td className="p-2">26-12-2025</td>
-                      <td>Berita</td>
-                      <td>STAIN MADINA Menggelar Kegiatan</td>
-                      <td>John Doe</td>
-                      <td>
-                        <Button size="sm" variant="outline">
-                          Detail
-                        </Button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </CardContent>
-        </Card>
+        <div className="xl:col-span-3">
+          <p className="text-primary font-semibold text-2xl">Konten Yang Diajukan</p>
+          <TabsListCustom data={TabsList} value={tabsName} onChange={setTabsName} />
+        </div>
 
         <Card className={'bg-primary-foreground'}>
           <CardHeader>
             <CardTitle>Akses Cepat</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-2">
-            {[
-              'Tulis Berita',
-              'Tulis Pengumuman',
-              'Tulis Agenda',
-              'Tulis Inovasi Berdampak',
-              'Tulis Prestasi',
-              'Tambah Berkas Download',
-            ].map((item, i) => (
-              <Button
-                key={i}
-                variant="outline"
-                className="w-full justify-start border border-primary text-primary hover:text-primary"
-              >
-                <Plus className="mr-2 h-4 w-4" /> {item}
-              </Button>
+          <CardContent className="space-y-2 flex flex-col">
+            {actions?.map((item, i) => (
+              <Link to={item?.url} key={i}>
+                <Button
+                  variant="outline"
+                  className="w-full justify-start border border-primary text-primary hover:text-primary"
+                >
+                  <Plus className="mr-2 h-4 w-4" /> {item?.label}
+                </Button>
+              </Link>
             ))}
           </CardContent>
         </Card>
       </div>
 
-      {/* Chart */}
       <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
         <Card className="xl:col-span-3">
           <CardHeader>
-            <CardTitle>Tren Kunjungan Website</CardTitle>
+            <CardTitle className={'text-primary'}>Tren Kunjungan Website</CardTitle>
           </CardHeader>
-          <CardContent className="h-72">
+          <CardContent className="h-80">
+            <SelectBasic
+              className={'mb-2'}
+              label={'Data Bersadarkan'}
+              data={listMode}
+              value={mode}
+              onChange={setMode}
+              isRow
+            />
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={chartData}>
-                <XAxis dataKey="name" />
+              <BarChart data={chartData ?? []} margin={{ bottom: 60 }}>
+                <XAxis
+                  dataKey="name"
+                  angle={mode === 'harian' ? -75 : mode == 'bulanan' ? -45 : 0}
+                  textAnchor="end"
+                  interval={0}
+                  height={60}
+                />
                 <YAxis />
                 <Tooltip />
                 <Bar dataKey="value" fill="#8884d8" />

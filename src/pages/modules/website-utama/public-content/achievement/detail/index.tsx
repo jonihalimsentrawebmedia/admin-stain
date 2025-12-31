@@ -88,16 +88,14 @@ export const DetailAchievementPage = () => {
           >
             <div className="flex items-start gap-2 w-1/2 h-full">
               <div className="flex gap-5 flex-col justify-between items-start h-full">
-                <p className={'text-3xl font-semibold text-white'}>
-                  STAIN MADINA Menggelar Kegiatan Microteaching di SMP Negeri 9 Medan
-                </p>
+                <p className={'text-3xl font-semibold text-white'}>{detail?.judul ?? ''}</p>
                 <div className="flex items-center justify-between gap-5 w-full">
                   <div>
                     <p className="text-white">Tanggal Terbit</p>
                     <p className={'text-white'}>
                       {detail?.diterbitkan_at
                         ? format(detail?.diterbitkan_at, 'dd MMMM yyyy')
-                        : '--:--:--'}
+                        : '-:-:-'}
                     </p>
                   </div>
                   <div>

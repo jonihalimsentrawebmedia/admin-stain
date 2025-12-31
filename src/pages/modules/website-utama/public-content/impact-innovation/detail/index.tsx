@@ -48,7 +48,7 @@ export const DetailImpactInnovationPage = () => {
                 <Button
                   onClick={() =>
                     navigate(
-                      `/modules/website-utama/public-content/news/edit/${detail?.id_inovasi_berdampak}`
+                      `/modules/website-utama/public-content/impact-innovation/edit/${detail?.id_inovasi_berdampak}`
                     )
                   }
                   className={'border-primary text-primary hover:text-primary'}

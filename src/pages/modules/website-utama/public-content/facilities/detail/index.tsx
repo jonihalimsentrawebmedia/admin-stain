@@ -33,7 +33,7 @@ export const DetailFacilitiesPage = () => {
                   <Button
                     onClick={() =>
                       navigate(
-                        `/modules/website-utama/public-content/announcement/edit/${detail?.id_fasilitas}`
+                        `/modules/website-utama/public-content/facilities/edit/${detail?.id_fasilitas}`
                       )
                     }
                     className={'border-primary text-primary hover:text-primary'}

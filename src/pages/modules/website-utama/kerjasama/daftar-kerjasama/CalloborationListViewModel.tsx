@@ -36,7 +36,7 @@ const CalloborationListViewModel = () => {
       },
     },
     {
-      accessorKey: 'alamat_mitra',
+      accessorKey: 'nama_mitra',
       header: 'Mitra',
     },
     {
