@@ -26,6 +26,7 @@ const FacultyView = () => {
         columns={columns}
         data={satuanOrganisasi}
         meta={meta}
+        isShowChoiceColumn
       />
     </div>
   );

@@ -11,11 +11,15 @@ import {
 
 import { useSearchParams } from 'react-router-dom'
 
-import type { ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import SetLimitList from './SetLimitList'
 import Search from './Search'
 import TablePaginate, { type Meta } from './TablePagination'
 import { Skeleton } from '@/components/ui/skeleton'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { IconListTable } from './icon'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Label } from '@/components/ui/label'
 interface Props {
   data: any
   columns: any
@@ -33,6 +37,7 @@ interface Props {
   loading?: boolean
   meta?: Meta
   isShowLimit?: boolean
+  isShowChoiceColumn?: boolean
 }
 const TableCustom = (props: Props) => {
   const {
@@ -52,6 +57,7 @@ const TableCustom = (props: Props) => {
     placeHolderSearch = 'Cari...',
     meta,
     isShowLimit = true,
+    isShowChoiceColumn,
   } = props
   const table = useReactTable({
     data,
@@ -59,6 +65,7 @@ const TableCustom = (props: Props) => {
     getCoreRowModel: getCoreRowModel(),
   })
   const [searchparams, setSearchParams] = useSearchParams()
+  const [columnChecked, setColumnChecked] = useState<any>([])
   const handleSearch = (query: string) => {
     setSearchParams((prev) => {
       const newParams = new URLSearchParams(prev)
@@ -71,6 +78,10 @@ const TableCustom = (props: Props) => {
   const columnCount = columns?.length || 5
   const totalData = meta?.total ?? 0
   const limitData = searchparams.get('limit') ? Number(searchparams.get('limit')) : 10
+  useEffect(() => {
+    const temp = columns.map((item: any) => item.accessorKey)
+    setColumnChecked(temp)
+  }, [])
   return (
     <div className="flex flex-col w-full gap-4 ">
       {isShowFilter && (
@@ -85,6 +96,41 @@ const TableCustom = (props: Props) => {
               placeholder={placeHolderSearch}
             />
           </div>
+          {isShowChoiceColumn && (
+            <Popover>
+              <PopoverTrigger>
+                <IconListTable />
+              </PopoverTrigger>
+              <PopoverContent  className="w-fit flex flex-col gap-2">
+                {columns.map((item: any) => (
+                  <div
+                    className={`flex gap-2 items-center ${item.header == '' || item.header == '#' || item.accessorKey == 'aksi' || item.accessorKey == 'action' || item.accessorKey == 'no' ? 'hidden' : ''}`}
+                  >
+                    <Checkbox
+                      onCheckedChange={() => {
+                        const temp = [...columnChecked]
+
+                        if (!columnChecked.includes(item.accessorKey)) {
+                          temp.push(item.accessorKey)
+                          setColumnChecked(temp)
+                        } else {
+                          console.log(temp, item.accessorKey)
+                          const temp2 = temp.filter((sub) => {
+                            return sub != item.accessorKey
+                          })
+                          console.log(temp)
+                          setColumnChecked(temp2)
+                        }
+                      }}
+                      checked={columnChecked.includes(item.accessorKey)}
+                      id={item.accessorKey}
+                    />
+                    <Label htmlFor={item.accessorKey}>{item.header}</Label>
+                  </div>
+                ))}
+              </PopoverContent>
+            </Popover>
+          )}
         </div>
       )}
 
@@ -96,7 +142,7 @@ const TableCustom = (props: Props) => {
                 <TableHead
                   colSpan={header.colSpan}
                   key={l}
-                  className={` border bg-[#F5FFFA] text-primary ${thClassName}`}
+                  className={` border bg-[#F5FFFA] text-primary ${thClassName} ${columnChecked.includes(header.id) ? '' : 'hidden'}`}
                 >
                   {header.isPlaceholder
                     ? null
@@ -126,8 +172,11 @@ const TableCustom = (props: Props) => {
               ))
             : table.getRowModel().rows.map((row) => (
                 <TableRow key={row.id}>
-                  {row.getVisibleCells().map((cell, k) => (
-                    <TableCell className={tdClassName + ' text-[#3E3E3E]'} key={k}>
+                  {row.getVisibleCells().map((cell: any, k) => (
+                    <TableCell
+                      className={`${tdClassName + ' text-[#3E3E3E]'} ${columnChecked.includes(cell.column.columnDef.accessorKey) ? '' : 'hidden'}`}
+                      key={k}
+                    >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}

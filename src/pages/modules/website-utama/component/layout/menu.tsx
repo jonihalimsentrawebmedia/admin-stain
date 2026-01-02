@@ -177,6 +177,12 @@ export const MENULIST = [
     icon: <MdEmail className={'size-5'} />,
   },
   {
+    id: 13.1,
+    name: 'Program Studi',
+    path: `${baseDomain}/program-studi`,
+    icon: <IoSchool className={'size-5'} />,
+  },
+  {
     id: 14,
     name: 'Kerjasama',
     path: `${baseDomain}/kerjasama`,

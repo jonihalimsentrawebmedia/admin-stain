@@ -26,6 +26,7 @@ const UnitView = () => {
         data={satuanOrganisasi}
         loading={loading}
         placeHolderSearch="Cari Unit"
+        isShowChoiceColumn
       />
     </div>
   );

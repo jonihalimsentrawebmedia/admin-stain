@@ -1,18 +1,16 @@
-import { formatDateTime } from "@/utils/date"
-import useGetCalloborationCategoryDetail from "../controller/useGetCalloborationCategoryDetail"
-import useGetLogCalloborationCategory from "../controller/useGetLogCalloborationCategory"
-import type { ColumnDef } from "@tanstack/react-table"
-import type { LogStatistic } from "../../../statistic/model"
-import { Skeleton } from "@/components/ui/skeleton"
-import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup"
-import TableCustom from "@/components/common/table/TableCustom"
-import SelectFilter from "@/components/common/filter/SelectFilter"
-
+import { formatDateTime } from '@/utils/date'
+import useGetCalloborationCategoryDetail from '../controller/useGetCalloborationCategoryDetail'
+import useGetLogCalloborationCategory from '../controller/useGetLogCalloborationCategory'
+import type { ColumnDef } from '@tanstack/react-table'
+import type { LogStatistic } from '../../../statistic/model'
+import { Skeleton } from '@/components/ui/skeleton'
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
+import TableCustom from '@/components/common/table/TableCustom'
+import SelectFilter from '@/components/common/filter/SelectFilter'
 
 const CalloborationCategoryLogView = () => {
- const { calloborationCategoryDetail, loading } = useGetCalloborationCategoryDetail()
+  const { calloborationCategoryDetail, loading } = useGetCalloborationCategoryDetail()
   const { log, loading: loadingLog, meta } = useGetLogCalloborationCategory()
-
 
   const columns: ColumnDef<LogStatistic>[] = [
     {
@@ -82,7 +80,6 @@ const CalloborationCategoryLogView = () => {
       />
 
       <div className="flex gap-4 flex-col md:flex-row">
-     
         <div>
           <div>
             <div className="text-[#999999] text-sm">Nama Kategori Kerjasama</div>
@@ -91,13 +88,12 @@ const CalloborationCategoryLogView = () => {
             </div>
             <div>
               <div className="text-[#999999] text-sm">Jumlah Kerjama</div>
-              <div className="">              {calloborationCategoryDetail?.jumlah_kerjasama}</div>
+              <div className=""> {calloborationCategoryDetail?.jumlah_kerjasama}</div>
             </div>
-           
           </div>
         </div>
       </div>
- <div className="text-primary">Histori Perubahan Data</div>
+      <div className="text-primary">Histori Perubahan Data</div>
       <TableCustom
         tdClassName="whitespace-pre-line"
         meta={meta}

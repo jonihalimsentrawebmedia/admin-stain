@@ -8,6 +8,7 @@ import { IconSettings } from '../icon'
 import { FaGear } from 'react-icons/fa6'
 import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/hooks/getProfile.tsx'
 import ButtonProfile from '../button/ButtonProfile'
+import { IconModules } from '@/pages/modules/website-utama/component/layout/header'
 
 export default function DashboardLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -140,6 +141,9 @@ export default function DashboardLayout() {
         </div>
 
         <div className="flex items-center gap-3">
+          <Link to={'/modules'}>
+            <IconModules />
+          </Link>
           <button className="text-green-700 sm:hidden" onClick={() => setSidebarOpen(!sidebarOpen)}>
             <Menu className="w-6 h-6" />
           </button>

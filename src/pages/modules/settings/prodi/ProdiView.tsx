@@ -43,6 +43,7 @@ const ProdiView = () => {
         data={satuanOrganisasi}
         loading={loading}
         meta={meta}
+        isShowChoiceColumn
       />
     </div>
   )

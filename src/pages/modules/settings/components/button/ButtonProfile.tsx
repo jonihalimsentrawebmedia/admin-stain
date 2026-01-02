@@ -1,9 +1,10 @@
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import type { User } from '../layout/hooks/getProfile'
 import { Link, useNavigate } from 'react-router-dom'
-import { Lock, LogOut, User2 } from 'lucide-react'
+import { Lock, LogOut,  User2 } from 'lucide-react'
 import { toast } from 'react-toastify'
 import Cookies from 'js-cookie'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 interface Props {
   profileUser?: User
 }
@@ -18,7 +19,13 @@ const ButtonProfile = ({ profileUser }: Props) => {
     <Popover>
       <PopoverTrigger asChild>
         <div className="hidden sm:flex items-center gap-2">
-          <img src={profileUser?.gambar} className='size-8 rounded-full' alt="" />
+          <Avatar>
+            <AvatarImage src={profileUser?.gambar} alt="@shadcn" />
+            <AvatarFallback>
+              <User2 className="text-gray-300" />
+            </AvatarFallback>
+          </Avatar>
+
           <span className="text-sm font-medium text-gray-700">{profileUser?.nama_lengkap}</span>
         </div>
       </PopoverTrigger>

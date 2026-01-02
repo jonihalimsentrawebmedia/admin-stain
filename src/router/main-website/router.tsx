@@ -104,6 +104,16 @@ import CalloborationEditView from '@/pages/modules/website-utama/kerjasama/dafta
 import CalloborationDetailView from '@/pages/modules/website-utama/kerjasama/daftar-kerjasama/detail/CalloborationDetailView'
 import CalloborationLogView from '@/pages/modules/website-utama/kerjasama/daftar-kerjasama/log/CalloborationLogView'
 import { CampusLifeBackground } from '@/pages/modules/website-utama/campus-life/background'
+import ProgramStudyView from '@/pages/modules/website-utama/program-studi/ProgramStudyView'
+import AboutProgramStudiView from '@/pages/modules/website-utama/program-studi/detail/tentang/AboutProgramStudiView'
+import LayoutProgramStudy from '@/pages/modules/website-utama/program-studi/detail/components/LayoutProgramStudy'
+import ManagementUnitProgramStudyView from '@/pages/modules/website-utama/program-studi/detail/unit-pengelola/ManagementUnitProgramStudyView'
+import VisiMisiProgramStudyView from '@/pages/modules/website-utama/program-studi/detail/visi-misi/VisiMisiProgramStudyView'
+import OrganizationalStructureView from '@/pages/modules/website-utama/program-studi/detail/struktur-organisasi/OrganizationalStructureView'
+import ContactUsProgramStudyView from '@/pages/modules/website-utama/program-studi/detail/hubungi-kami/ContactUsProgramStudyView'
+import StaffProgramStudyView from '@/pages/modules/website-utama/program-studi/detail/staff/StaffProgramStudyView'
+import DosenProgramStudyView from '@/pages/modules/website-utama/program-studi/detail/dosen/DosenProgramStudyView'
+import GalleryProgramStudyView from '@/pages/modules/website-utama/program-studi/detail/gallery/GalleryProgramStudyView'
 
 export const MainWebsiteRouter = [
   {
@@ -747,6 +757,53 @@ export const MainWebsiteRouter = [
                 element: <CalloborationLogView />,
               },
             ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: 'program-studi',
+    children: [
+      {
+        index: true,
+        element: <ProgramStudyView />,
+      },
+      {
+        path: ':id',
+        element: <LayoutProgramStudy />,
+        children: [
+          {
+            path: 'tentang',
+            element: <AboutProgramStudiView />,
+          },
+          {
+            path: 'unit-pengelola',
+            element: <ManagementUnitProgramStudyView />,
+          },
+          {
+            path: 'visi-misi',
+            element: <VisiMisiProgramStudyView />,
+          },
+          {
+            path: 'struktur-organisasi',
+            element: <OrganizationalStructureView />,
+          },
+          {
+            path: 'hubungi-kami',
+            element: <ContactUsProgramStudyView />,
+          },
+          {
+            path: 'staff',
+            element: <StaffProgramStudyView />,
+          },
+          {
+            path: 'dosen',
+            element: <DosenProgramStudyView />,
+          },
+          {
+            path: 'galeri',
+            element: <GalleryProgramStudyView />,
           },
         ],
       },

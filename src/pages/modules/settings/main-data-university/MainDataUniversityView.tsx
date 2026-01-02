@@ -27,6 +27,7 @@ const MainDataUniversityView = () => {
         loading={loading}
         placeHolderSearch="Cari Universitas"
         meta={meta}
+        isShowChoiceColumn
       />
     </div>
   );

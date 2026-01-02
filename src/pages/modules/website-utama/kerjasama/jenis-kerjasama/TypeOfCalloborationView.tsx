@@ -22,6 +22,7 @@ const TypeOfCalloborationView = () => {
         ]}
         label="Jenis Kerjasama"
       />
+      
       <TableCustom
         addFilter={
           <SelectFilter
