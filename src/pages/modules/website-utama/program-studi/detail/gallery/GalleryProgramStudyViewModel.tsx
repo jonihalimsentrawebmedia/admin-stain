@@ -2,14 +2,14 @@ import type { ColumnDef } from '@tanstack/react-table'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import type { GaleriAlbum } from '../model/gallery'
 import { Button } from '@/components/ui/button'
-import { FastForward } from 'lucide-react'
+import { FaForward } from 'react-icons/fa'
 
 const GalleryProgramStudyViewModel = () => {
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') ?? 1)
   const limit = Number(searchParams.get('limit') ?? 10)
-const navigate=useNavigate()
-const {id}=useParams()
+  const navigate = useNavigate()
+  const { id } = useParams()
   const columns: ColumnDef<GaleriAlbum>[] = [
     {
       accessorKey: 'No',
@@ -35,10 +35,14 @@ const {id}=useParams()
       header: 'Isi Galeri',
       cell: ({ row }) => {
         return (
-          <Button onClick={()=>{
-            navigate(`/modules/website-utama/program-studi/${id}/galeri`)
-          }} variant={'outline'} className="border-primary text-primary border">
-            <FastForward />
+          <Button
+            onClick={() => {
+              navigate(`/modules/website-utama/program-studi/${id}/galeri`)
+            }}
+            variant={'outline'}
+            className="border-primary text-primary hover:text-primary border"
+          >
+            <FaForward />
             Isi Galeri ({row.original.jumlah_foto})
           </Button>
         )

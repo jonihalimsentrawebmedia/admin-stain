@@ -46,7 +46,7 @@ export const ButtonSession = () => {
         <FaGear />
       </Button>
 
-      <DialogCustom open={open} setOpen={setOpen} title={'Ganti Data: Universitas'}>
+      <DialogCustom className={'lg:max-w-2xl rounded'} open={open} setOpen={setOpen} title={'Ganti Data: Universitas'}>
         <div>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(HandlerSubmit)}>

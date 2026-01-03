@@ -21,5 +21,8 @@ export const RenderUrl = (url: string, id: string) => {
     case 'slider_atas': {
       return `slider/top-slider`
     }
+    case 'fasilitas': {
+      return `facilities/detail/${id}`
+    }
   }
 }

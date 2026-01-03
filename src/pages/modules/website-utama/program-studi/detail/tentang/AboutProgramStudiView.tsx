@@ -74,7 +74,10 @@ const AboutProgramStudiView = () => {
             {isEditContent ? (
               <RichText form={form} name="isi_konten" label="" isRow={false} />
             ) : (
-              <div dangerouslySetInnerHTML={{ __html: aboutDetail?.isi_konten ?? '' }} />
+              <div
+                className={'tiptap ProseMirror simple-editor'}
+                dangerouslySetInnerHTML={{ __html: aboutDetail?.isi_konten ?? '' }}
+              />
             )}
           </CardInput>
           <CardInput title="Gambar (Minimal 1 gambar)">
@@ -86,6 +89,7 @@ const AboutProgramStudiView = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 mt-4 gap-4">
               {image.map((item, index) => (
                 <ImageAbout
+                  key={index}
                   img={item}
                   isEdit={isEditContent}
                   setImage={(value) => {

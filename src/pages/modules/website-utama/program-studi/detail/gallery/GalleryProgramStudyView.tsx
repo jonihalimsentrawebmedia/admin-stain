@@ -6,6 +6,7 @@ import SelectFilter from '@/components/common/filter/SelectFilter'
 const GalleryProgramStudyView = () => {
   const { loading, gallery, meta } = useGetGallery()
   const { columns } = GalleryProgramStudyViewModel()
+  
   return (
     <div className="flex flex-col gap-4">
       <div className="flex justify-between items-center">

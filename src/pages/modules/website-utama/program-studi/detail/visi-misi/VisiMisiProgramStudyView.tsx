@@ -78,21 +78,30 @@ const VisiMisiProgramStudyView = () => {
           {isEdit ? (
             <RichText form={form} name="visi" />
           ) : (
-            <div dangerouslySetInnerHTML={{ __html: visiMisiDetail?.visi ?? '' }} />
+            <div
+              className={'tiptap ProseMirror simple-editor'}
+              dangerouslySetInnerHTML={{ __html: visiMisiDetail?.visi ?? '' }}
+            />
           )}
         </CardInput>
         <CardInput title="Misi">
           {isEdit ? (
             <RichText form={form} name="misi" />
           ) : (
-            <div dangerouslySetInnerHTML={{ __html: visiMisiDetail?.misi ?? '' }} />
+            <div
+              className={'tiptap ProseMirror simple-editor'}
+              dangerouslySetInnerHTML={{ __html: visiMisiDetail?.misi ?? '' }}
+            />
           )}
         </CardInput>
         <CardInput title="Tujuan">
           {isEdit ? (
             <RichText form={form} name="tujuan" />
           ) : (
-            <div dangerouslySetInnerHTML={{ __html: visiMisiDetail?.tujuan ?? '' }} />
+            <div
+              className={'tiptap ProseMirror simple-editor'}
+              dangerouslySetInnerHTML={{ __html: visiMisiDetail?.tujuan ?? '' }}
+            />
           )}
         </CardInput>
       </form>

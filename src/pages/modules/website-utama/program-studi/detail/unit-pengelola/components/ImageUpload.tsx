@@ -1,14 +1,15 @@
 'use client'
 
-import { useRef, useState, type ChangeEvent,  } from 'react'
+import { useRef, useState, type ChangeEvent } from 'react'
 import { FormField, FormItem, FormMessage, FormControl } from '@/components/ui/form'
 import type { FieldValues, Path, UseFormReturn } from 'react-hook-form'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
 import { useMobile } from '@/utils/useMobile'
-import { Trash2, Upload } from 'lucide-react'
+import { Upload } from 'lucide-react'
 import { BiPhotoAlbum } from 'react-icons/bi'
 import { Button } from '@/components/ui/button'
+import { FaTrash } from 'react-icons/fa'
 
 interface FileUploadFieldProps<T extends FieldValues> {
   form: UseFormReturn<T>
@@ -120,7 +121,7 @@ export default function ImageUplaod<T extends FieldValues>({
                   )}
                 </div>
 
-                <div className="space-y-2">
+                <div className="space-y-2 space-x-2">
                   <ul className="list-disc ml-4 pl-4 list-outside text-[#2769CD]">
                     <li>Ukuran 4x3</li>
                     <li>Jenis .jpg/.jpeg/.png</li>
@@ -143,7 +144,7 @@ export default function ImageUplaod<T extends FieldValues>({
                       }}
                       variant={'destructive'}
                     >
-                      <Trash2 />
+                      <FaTrash />
                     </Button>
                   )}
                 </div>

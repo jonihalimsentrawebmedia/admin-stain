@@ -114,6 +114,8 @@ import ContactUsProgramStudyView from '@/pages/modules/website-utama/program-stu
 import StaffProgramStudyView from '@/pages/modules/website-utama/program-studi/detail/staff/StaffProgramStudyView'
 import DosenProgramStudyView from '@/pages/modules/website-utama/program-studi/detail/dosen/DosenProgramStudyView'
 import GalleryProgramStudyView from '@/pages/modules/website-utama/program-studi/detail/gallery/GalleryProgramStudyView'
+import NewsProgramStudyView from '@/pages/modules/website-utama/program-studi/detail/berita/NewsProgramStudyView.tsx'
+import { DetailNewsProdiPage } from '@/pages/modules/website-utama/program-studi/detail/berita/detail'
 
 export const MainWebsiteRouter = [
   {
@@ -805,8 +807,20 @@ export const MainWebsiteRouter = [
             path: 'galeri',
             element: <GalleryProgramStudyView />,
           },
+          {
+            path: 'berita',
+            element: <NewsProgramStudyView />,
+          },
+          {
+            path: '*',
+            element: <></>,
+          },
         ],
       },
     ],
+  },
+  {
+    path: 'program-studi/:id/berita/detail/:detail_id',
+    element: <DetailNewsProdiPage />,
   },
 ]
