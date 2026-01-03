@@ -5,8 +5,9 @@ import {
   MdEmail,
   MdHandshake,
   MdOutlineRunCircle,
+  MdQuestionAnswer,
 } from 'react-icons/md'
-import { IoSchool, IoStorefront } from 'react-icons/io5'
+import { IoBusinessSharp, IoSchool, IoStorefront } from 'react-icons/io5'
 import { TbWorld } from 'react-icons/tb'
 import { FaGear, FaGears } from 'react-icons/fa6'
 import { Calendar } from 'lucide-react'
@@ -153,37 +154,7 @@ export const MENULIST = [
     icon: <IconCertificate />,
   },
   {
-    id: 10,
-    name: 'Identitas',
-    path: `${baseDomain}/identity`,
-    icon: <IoStorefront className={'size-5'} />,
-  },
-  {
-    id: 11,
-    name: 'Peraturan Akademik',
-    path: `${baseDomain}/academic-rules`,
-    icon: <MdChecklist className={'size-5'} />,
-  },
-  {
-    id: 12,
-    name: 'Kehidupan Kampus',
-    path: `${baseDomain}/campus-life`,
-    icon: <MdOutlineRunCircle className={'size-5'} />,
-  },
-  {
-    id: 13,
-    name: 'Surat Keterangan Mahasiswa',
-    path: `${baseDomain}/surat-keterangan`,
-    icon: <MdEmail className={'size-5'} />,
-  },
-  {
-    id: 13.1,
-    name: 'Program Studi',
-    path: `${baseDomain}/program-studi`,
-    icon: <IoSchool className={'size-5'} />,
-  },
-  {
-    id: 14,
+    id: 9,
     name: 'Kerjasama',
     path: `${baseDomain}/kerjasama`,
     icon: <MdHandshake className={'size-5'} />,
@@ -212,6 +183,60 @@ export const MENULIST = [
         id: 5,
         name: 'Daftar Kerjasama',
         path: `${baseDomain}/kerjasama/daftar-kerjasama`,
+      },
+    ],
+  },
+  {
+    id: 10,
+    name: 'Identitas',
+    path: `${baseDomain}/identity`,
+    icon: <IoStorefront className={'size-5'} />,
+  },
+  {
+    id: 11,
+    name: 'Peraturan Akademik',
+    path: `${baseDomain}/academic-rules`,
+    icon: <MdChecklist className={'size-5'} />,
+  },
+  {
+    id: 12,
+    name: 'Kehidupan Kampus',
+    path: `${baseDomain}/campus-life`,
+    icon: <MdOutlineRunCircle className={'size-5'} />,
+  },
+  {
+    id: 13,
+    name: 'Surat Keterangan Mahasiswa',
+    path: `${baseDomain}/surat-keterangan`,
+    icon: <MdEmail className={'size-5'} />,
+  },
+  {
+    id: 14,
+    name: 'Program Studi',
+    path: `${baseDomain}/program-studi`,
+    icon: <IoSchool className={'size-5'} />,
+  },
+  {
+    id: 15,
+    name: 'Fakultas',
+    icon: <IoBusinessSharp className={'size-5'} />,
+    path: `${baseDomain}/Fakultas`,
+  },
+  {
+    id: 17,
+    name: 'Petayaan',
+    planet: `${baseDomain}/petayaan`,
+    icon: <MdQuestionAnswer className={'size-5'} />,
+    child: [
+      {
+        id: 1,
+        name: 'Kontak Masuk',
+        path: `${baseDomain}/petayaan/kontak-masuk`,
+      },
+      {
+        id: 1,
+        name: 'F.A.Q',
+        path: `${baseDomain}/petayaan/faq`,
       },
     ],
   },
