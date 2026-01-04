@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import useGetOrganizationalStructure from '../controller/useGetOrganizationalStructure'
 import {
   OrganizationalStructureResolver,
@@ -48,6 +48,11 @@ const OrganizationalStructureView = () => {
         setLoading(false)
       })
   }
+  useEffect(() => {
+    if (organizationalStructureDetail) {
+      form.setValue('url_gambar', organizationalStructureDetail.url_gambar)
+    }
+  }, [organizationalStructureDetail])
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">

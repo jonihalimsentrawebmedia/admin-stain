@@ -57,7 +57,6 @@ export const ButtonAddPlaceman = () => {
       })
   }
 
-  console.log(form.formState.errors)
 
   return (
     <>

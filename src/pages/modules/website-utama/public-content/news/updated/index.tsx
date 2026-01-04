@@ -40,7 +40,6 @@ export const UpdatedNewsPage = () => {
     }
   }, [detailNews])
 
-  console.log(form.formState.errors)
 
   const HandleSubmit = async (e: INewsTypeForm) => {
     setLoading(true)

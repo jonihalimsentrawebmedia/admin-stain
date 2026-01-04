@@ -116,6 +116,9 @@ import DosenProgramStudyView from '@/pages/modules/website-utama/program-studi/d
 import GalleryProgramStudyView from '@/pages/modules/website-utama/program-studi/detail/gallery/GalleryProgramStudyView'
 import NewsProgramStudyView from '@/pages/modules/website-utama/program-studi/detail/berita/NewsProgramStudyView.tsx'
 import { DetailNewsProdiPage } from '@/pages/modules/website-utama/program-studi/detail/berita/detail'
+import FacultyView from '@/pages/modules/website-utama/fakultas/FacultyView'
+import LayoutFaculty from '@/pages/modules/website-utama/fakultas/detail/components/LayoutFaculty'
+import GalleryDetailPhotoView from '@/pages/modules/website-utama/program-studi/detail/gallery/detail/GalleryDetailPhotoView'
 
 export const MainWebsiteRouter = [
   {
@@ -820,7 +823,74 @@ export const MainWebsiteRouter = [
     ],
   },
   {
+    path: 'fakultas',
+    children: [
+      {
+        index: true,
+        element: <FacultyView />,
+      },
+      {
+        path: ':id',
+        element: <LayoutFaculty />,
+        children: [
+          {
+            path: 'tentang',
+            element: <AboutProgramStudiView />,
+          },
+          {
+            path: 'unit-pengelola',
+            element: <ManagementUnitProgramStudyView />,
+          },
+          {
+            path: 'visi-misi',
+            element: <VisiMisiProgramStudyView />,
+          },
+          {
+            path: 'struktur-organisasi',
+            element: <OrganizationalStructureView />,
+          },
+          {
+            path: 'hubungi-kami',
+            element: <ContactUsProgramStudyView />,
+          },
+          {
+            path: 'staff',
+            element: <StaffProgramStudyView />,
+          },
+          {
+            path: 'dosen',
+            element: <DosenProgramStudyView />,
+          },
+          {
+            path: 'galeri',
+            element: <GalleryProgramStudyView />,
+          },
+          {
+            path: 'berita',
+            element: <NewsProgramStudyView />,
+          },
+          {
+            path: '*',
+            element: <></>,
+          },
+        ],
+      },
+    ],
+  },
+  {
     path: 'program-studi/:id/berita/detail/:detail_id',
     element: <DetailNewsProdiPage />,
+  },
+  {
+    path: 'fakultas/:id/berita/detail/:detail_id',
+    element: <DetailNewsProdiPage />,
+  },
+  {
+    path: 'fakultas/:id/galeri/:idGallery/detail',
+    element: <GalleryDetailPhotoView />,
+  },
+  {
+    path: 'program-studi/:id/galeri/:idGallery/detail',
+    element: <GalleryDetailPhotoView />,
   },
 ]

@@ -27,7 +27,6 @@ export const UploadDocument = <T extends FieldValues>(props: Props<T>) => {
   const dataDocuments = form.watch(name)
 
   useEffect(() => {
-    console.log(dataDocuments)
     if (dataDocuments) setDocuments(dataDocuments)
   }, [dataDocuments])
 
@@ -47,7 +46,6 @@ export const UploadDocument = <T extends FieldValues>(props: Props<T>) => {
     })
   }
 
-  console.log(form.watch(name))
 
   return (
     <>

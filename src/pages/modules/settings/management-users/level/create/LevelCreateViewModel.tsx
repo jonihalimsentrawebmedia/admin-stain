@@ -44,7 +44,6 @@ const LevelCreateViewModel = () => {
   function goToBack() {
     navigate(-1);
   }
-  console.log(form.watch());
   return {
     form,
     loading,

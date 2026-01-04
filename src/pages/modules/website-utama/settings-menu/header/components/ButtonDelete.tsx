@@ -98,7 +98,6 @@ const ButtonDelete = ({ data, isSubMenu, menu_parent_name }: Props) => {
       <button
         onClick={() => {
           setOpen(!open)
-          console.log(data, 'data')
           form.reset({
             ...data,
             menu_parent_name: menu_parent_name,

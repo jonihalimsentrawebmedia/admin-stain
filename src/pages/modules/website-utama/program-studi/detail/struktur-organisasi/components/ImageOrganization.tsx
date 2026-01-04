@@ -172,7 +172,7 @@ const ImageOrganization = (props: Props) => {
           </ul>
         </div>
       ) : (
-        <img src={image} className="w-full h-[600px] object-cover object-center" alt="" />
+        <img src={image} className="w-full  object-cover object-center" alt="" />
       )}
 
       <input

@@ -17,7 +17,6 @@ const OtpViewModel = () => {
         email: Cookies.get("email"),
       })
       .then((res) => {
-        console.log(res)
         if (res?.data?.status) {
           toast.success(res.data.message);
           navigate(`/forget-password/change-password`);

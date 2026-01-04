@@ -86,7 +86,6 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
     (item) =>
       item.id_satuan_organisasi == form.watch(kelompok == 'PRODI' ? 'parent_id_temp' : 'parent_id')
   )[0]
-  console.log(form.watch('parent_id'))
   return (
     <>
       <div className="flex flex-col md:flex-row gap-4">

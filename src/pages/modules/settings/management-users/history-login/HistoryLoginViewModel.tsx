@@ -77,7 +77,6 @@ const HistoryLoginViewModel = () => {
         return (
           <Link
             to={`/modules/settings/management-users/history/detail/${values.id_user}`}
-            onClick={() => console.log('Lihat Aktivitas', values.id_user)}
           >
             {/* Asumsi IconArrowRight adalah komponen yang merepresentasikan ikon panah ke kanan */}
             <IconDetail />

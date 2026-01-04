@@ -1,25 +1,25 @@
 import { useEffect, useState } from 'react'
-import type { GaleriAlbum } from '../model/gallery'
+import type { GaleriVideo } from '../model/video'
 import type { Meta } from '@/components/common/table/TablePagination'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 
-const useGetGallery = () => {
-  const [gallery, setGallery] = useState<GaleriAlbum[]>([])
+const useGetVideo = () => {
+  const [galleryVideo, setGalleryVideo] = useState<GaleriVideo[]>([])
   const [meta, setMeta] = useState<Meta>()
   const { id } = useParams()
-   const [searchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
   const search = searchParams.get('search') ?? ''
   const type = searchParams.get('type') ?? ''
-const ParamsSearch = new URLSearchParams({ page, limit, search,type })
+  const ParamsSearch = new URLSearchParams({ page, limit, search, type })
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['program-studi-gallery',ParamsSearch.toString()],
+    queryKey: ['program-studi-gallery-video', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get(`/website-utama/satuan-organisasi/${id}/galeri-album?${ParamsSearch}`).then(
+      AxiosClient.get(`/website-utama/satuan-organisasi/${id}/galeri-video?${ParamsSearch}`).then(
         (res) => res.data
       ),
   })
@@ -28,12 +28,12 @@ const ParamsSearch = new URLSearchParams({ page, limit, search,type })
 
   useEffect(() => {
     if (data) {
-      setGallery(data?.data ?? [])
+      setGalleryVideo(data?.data ?? [])
       setMeta(data.meta)
     }
   }, [data])
 
-  return { gallery, loading, meta }
+  return { galleryVideo, loading, meta }
 }
 
-export default useGetGallery
+export default useGetVideo

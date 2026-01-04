@@ -30,7 +30,6 @@ const useUpdateSatuanOrganisasi = ({ kelompok }: Props) => {
   const queryClient = useQueryClient()
   async function handleSave(data: SatuanOrganisasiType) {
     setLoading(true)
-    console.log(data.logo)
     try {
       const res = await AxiosClient.put(`/pengaturan/satuan-organisasi/${kelompok ?? ''}/${id}`, {
         ...data,

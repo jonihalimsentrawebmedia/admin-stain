@@ -28,7 +28,6 @@ const useGetStaff = () => {
 
   useEffect(() => {
     if (data) {
-        console.log(data)
       setStaff(data?.data ?? [])
       setMeta(data.meta)
     }

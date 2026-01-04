@@ -118,7 +118,6 @@ const UsersViewModel = () => {
       header: "", // Header kosong
       cell: (row) => {
         const values = row.row.original;
-        console.log(values);
         // Diwakili oleh menu dropdown/ellipsis
         return (
           <Popover>

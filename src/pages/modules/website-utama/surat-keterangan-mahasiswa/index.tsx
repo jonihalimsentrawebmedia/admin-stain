@@ -20,7 +20,6 @@ export const CertificateStudent = () => {
   const { studentLetter, meta, loading } = UseGetStudentLetter()
   const columns = ColumnsStudentLetter()
 
-  console.log(studentLetter)
 
   return (
     <>

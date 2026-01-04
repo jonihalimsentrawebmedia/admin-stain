@@ -23,7 +23,6 @@ const useGetManagementUnit = () => {
 
   useEffect(() => {
     if (data) {
-        console.log(data)
       setManagementUnit(data?.data ?? [])
       setMeta(data.meta)
     }

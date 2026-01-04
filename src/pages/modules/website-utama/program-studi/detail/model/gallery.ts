@@ -12,4 +12,5 @@ export interface GaleriAlbum {
   jumlah_foto: number;
   nama_user_created: string;
   nama_user_updated: string;
+  link_video:string
 }

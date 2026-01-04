@@ -29,7 +29,6 @@ export const UploadFileInput = <T extends FieldValues>(props: Props<T>) => {
         .then((res) => {
           if (res?.data?.status) {
             toast.success('Success Upload Berkas')
-            console.log(e)
             form.setValue(name, res?.data?.url)
             form.setValue(keyname, e[0]?.name as PathValue<T, Path<T>>)
           }

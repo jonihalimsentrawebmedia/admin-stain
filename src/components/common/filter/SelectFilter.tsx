@@ -46,6 +46,7 @@ interface Props {
   zIndex?: string
   name?: string
   selectClassName?: string
+  fx?: (value: any) => void
 }
 const SelectFilter = ({
   label,
@@ -54,6 +55,7 @@ const SelectFilter = ({
   options,
   name,
   selectClassName = 'min-w-xs',
+  fx,
 }: Props) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const [value, setValue] = useState()
@@ -61,7 +63,11 @@ const SelectFilter = ({
   useEffect(() => {
     if (searchParams.get(name ?? '') || options.length !== 0) {
       const temp: any = options.filter((row) => row.value == searchParams.get(name ?? ''))
-      setValue(temp)
+      setValue(temp)  
+      if(fx){
+      
+        fx(temp.value)
+      }
     }
   }, [options])
 
@@ -87,6 +93,10 @@ const SelectFilter = ({
         className={`${selectClassName}`}
         placeholder="Pilih"
         onChange={(e: any) => {
+          if (fx) {
+            fx(e.value)
+            return
+          }
           if (name) {
             const newParams = new URLSearchParams(searchParams.toString())
             newParams.set(name, e.value)

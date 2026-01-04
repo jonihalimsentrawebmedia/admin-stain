@@ -42,7 +42,6 @@ export const EditDownloadPage = () => {
     resolver: zodResolver(DownloadResolver),
   })
 
-  console.log(form.formState.errors)
 
   const HandleSubmit = async (e: DownloadType) => {
     setLoading(true)

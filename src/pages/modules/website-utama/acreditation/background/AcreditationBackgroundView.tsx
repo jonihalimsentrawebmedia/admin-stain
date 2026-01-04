@@ -79,7 +79,6 @@ const AcreditationBackgroundView = () => {
             data={item}
             handleSave={(value: any) => {
               const temp = [...image]
-              console.log(value)
               temp[index].id_background = value.id_background
               setImage(temp)
             }}

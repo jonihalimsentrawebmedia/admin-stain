@@ -114,11 +114,9 @@ const TableCustom = (props: Props) => {
                           temp.push(item.accessorKey)
                           setColumnChecked(temp)
                         } else {
-                          console.log(temp, item.accessorKey)
                           const temp2 = temp.filter((sub) => {
                             return sub != item.accessorKey
                           })
-                          console.log(temp)
                           setColumnChecked(temp2)
                         }
                       }}
