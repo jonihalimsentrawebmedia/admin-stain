@@ -7,16 +7,17 @@ interface Props<T extends FieldValues> {
   label?: string
   required?: boolean
   className?: string
+  labelClassName?: string
   isRow?: boolean
 }
 
 export const RichText = <T extends FieldValues>(props: Props<T>) => {
-  const { form, name, label, required, className, isRow = true } = props
+  const { form, name, label, required, className, isRow = true, labelClassName } = props
   return (
     <div
       className={`${isRow ? 'grid grid-cols-[12rem_1fr]' : 'flex flex-col'} gap-5 items-start ${className}`}
     >
-      <label className={`${form.formState.errors[name] ? 'text-red-500' : ''}`}>
+      <label className={`${form.formState.errors[name] ? 'text-red-500' : ''} ${labelClassName}`}>
         {label ?? 'Keterangan (Optional)'}
         {required && <span className="text-red-500"> *</span>}
       </label>

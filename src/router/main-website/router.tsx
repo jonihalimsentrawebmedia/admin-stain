@@ -119,6 +119,13 @@ import { DetailNewsProdiPage } from '@/pages/modules/website-utama/program-studi
 import FacultyView from '@/pages/modules/website-utama/fakultas/FacultyView'
 import LayoutFaculty from '@/pages/modules/website-utama/fakultas/detail/components/LayoutFaculty'
 import GalleryDetailPhotoView from '@/pages/modules/website-utama/program-studi/detail/gallery/detail/GalleryDetailPhotoView'
+import { InboxMessagePage } from '@/pages/modules/website-utama/pertayaan/kotak-masuk'
+import { InboxMessageBackground } from '@/pages/modules/website-utama/pertayaan/kotak-masuk/background'
+import { FaqListData } from '@/pages/modules/website-utama/pertayaan/Faq'
+import { CategoryFAQList } from '@/pages/modules/website-utama/pertayaan/Faq/Category'
+import { RegistrationPathPage } from '@/pages/modules/website-utama/jalur-pendaftaran'
+import { AddPageRegisterPath } from '@/pages/modules/website-utama/jalur-pendaftaran/components/addPage.tsx'
+import { EditPageRegisterPath } from '@/pages/modules/website-utama/jalur-pendaftaran/components/editPage.tsx'
 
 export const MainWebsiteRouter = [
   {
@@ -892,5 +899,57 @@ export const MainWebsiteRouter = [
   {
     path: 'program-studi/:id/galeri/:idGallery/detail',
     element: <GalleryDetailPhotoView />,
+  },
+  {
+    path: 'pertanyaan',
+    children: [
+      {
+        path: 'kotak-masuk',
+        children: [
+          {
+            index: true,
+            element: <InboxMessagePage />,
+          },
+          {
+            path: 'background',
+            element: <InboxMessageBackground />,
+          },
+        ],
+      },
+      {
+        path: 'faq',
+        children: [
+          {
+            index: true,
+            element: <FaqListData />,
+          },
+          {
+            path: 'kategori',
+            element: <CategoryFAQList />,
+          },
+          {
+            path: 'background',
+            element: <InboxMessageBackground />,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: 'jalur-pendaftaran',
+    children: [
+      {
+        index: true,
+        element: <RegistrationPathPage />,
+      },
+      {
+        path: 'add',
+        element: <AddPageRegisterPath />,
+      },
+      {
+        path: 'edit/:id',
+        element: <EditPageRegisterPath />,
+      },
+    ],
   },
 ]

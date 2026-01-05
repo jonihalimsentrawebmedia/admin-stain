@@ -4,6 +4,7 @@ import {
   MdDashboard,
   MdEmail,
   MdHandshake,
+  MdHowToReg,
   MdOutlineRunCircle,
   MdQuestionAnswer,
 } from 'react-icons/md'
@@ -224,20 +225,26 @@ export const MENULIST = [
   },
   {
     id: 17,
-    name: 'Petayaan',
-    planet: `${baseDomain}/petayaan`,
+    name: 'pertanyaan',
+    path: `${baseDomain}/pertanyaan`,
     icon: <MdQuestionAnswer className={'size-5'} />,
     child: [
       {
         id: 1,
-        name: 'Kontak Masuk',
-        path: `${baseDomain}/petayaan/kontak-masuk`,
+        name: 'Kotak Masuk',
+        path: `${baseDomain}/pertanyaan/kotak-masuk`,
       },
       {
         id: 1,
         name: 'F.A.Q',
-        path: `${baseDomain}/petayaan/faq`,
+        path: `${baseDomain}/pertanyaan/faq`,
       },
     ],
+  },
+  {
+    id: 18,
+    name: 'Jalur Pendaftaran',
+    path: `${baseDomain}/jalur-pendaftaran`,
+    icon: <MdHowToReg className={'size-5'} />,
   },
 ]
