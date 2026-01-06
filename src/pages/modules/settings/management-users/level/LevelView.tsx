@@ -24,6 +24,8 @@ const LevelView = () => {
         data={levelUser}
         loading={loading}
         meta={meta}
+        tdClassName='whitespace-pre-line'
+        thClassName='whitespace-pre-line'
         placeHolderSearch="Cari Level User"
       />
     </div>

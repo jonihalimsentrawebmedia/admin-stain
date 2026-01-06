@@ -28,6 +28,8 @@ const EducationalLevelView = () => {
         loading={loading}
         meta={meta}
         placeHolderSearch="Cari Jenjang Pendidikan"
+        tdClassName='whitespace-pre-line'
+        thClassName='whitespace-pre-line'
       />
     </div>
   );

@@ -28,6 +28,8 @@ const MainDataUniversityView = () => {
         placeHolderSearch="Cari Universitas"
         meta={meta}
         isShowChoiceColumn
+        tdClassName='whitespace-pre-line'
+        thClassName='whitespace-pre-line'
       />
     </div>
   );

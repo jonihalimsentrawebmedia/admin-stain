@@ -13,7 +13,7 @@ export const ModulesViewModel = () => {
   const {data, isLoading, isFetching} = useQuery({
     refetchOnWindowFocus: false,
     queryKey: ['modules-list'],
-    queryFn: () => AxiosClient.get('/pengaturan/modules').then(res => res.data.data)
+    queryFn: () => AxiosClient.get('/dashboard').then(res => res.data.data)
   })
 
   const loading = isLoading || isFetching;

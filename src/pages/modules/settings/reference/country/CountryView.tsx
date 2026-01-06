@@ -24,11 +24,12 @@ const CountryView = () => {
       <TableCustom
         columns={columns}
         data={country}
-        thClassName="text-start"
-        tdClassName="text-start"
+      
         loading={loading}
         meta={meta}
         placeHolderSearch="Cari Negara"
+        tdClassName='whitespace-pre-line text-start'
+        thClassName='whitespace-pre-line text-start'
       />
     </div>
   )

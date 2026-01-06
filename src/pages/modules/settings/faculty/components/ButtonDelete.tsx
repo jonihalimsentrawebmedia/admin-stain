@@ -1,27 +1,26 @@
-import { DialogCustom } from "@/components/common/dialog/DialogCustom";
-import { IconDelete } from "@/components/common/table/icon";
-import { Button } from "@/components/ui/button";
-import { Trash2Icon, X } from "lucide-react";
-import { useState } from "react";
-import type { SatuanOrganisasiList } from "../../model";
-import useDeleteSatuanOrganisasi from "../../controller/useDeleteSatuanOrganisasi";
+import { DialogCustom } from '@/components/common/dialog/DialogCustom'
+import { IconDelete } from '@/components/common/table/icon'
+import { Button } from '@/components/ui/button'
+import { Trash2Icon, X } from 'lucide-react'
+import { useState } from 'react'
+import type { SatuanOrganisasiList } from '../../model'
+import useDeleteSatuanOrganisasi from '../../controller/useDeleteSatuanOrganisasi'
 interface Props {
-  data: SatuanOrganisasiList;
+  data: SatuanOrganisasiList
 }
 const ButtonDelete = ({ data }: Props) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
   const { handleDelete, loading } = useDeleteSatuanOrganisasi({
     id: data.id_satuan_organisasi,
-    kelompok: "FAKULTAS",
-  });
+    kelompok: 'FAKULTAS',
+  })
   return (
     <>
       <button
         onClick={() => {
-          setOpen(true);
+          setOpen(true)
         }}
       >
-        {" "}
         <IconDelete />
       </button>
       <DialogCustom
@@ -31,8 +30,8 @@ const ButtonDelete = ({ data }: Props) => {
         title={<p className="text-2xl text-red-500">Hapus Data Prodi?</p>}
       >
         <p>
-          Anda akan menghapus fakultas “{data.nama}”. Apakah Anda yakin untuk
-          menghapus fakultas yang dipilih?
+          Anda akan menghapus fakultas “{data.nama}”. Apakah Anda yakin untuk menghapus fakultas
+          yang dipilih?
         </p>
 
         <div className="flex gap-4 items-center justify-end">
@@ -54,7 +53,7 @@ const ButtonDelete = ({ data }: Props) => {
         </div>
       </DialogCustom>
     </>
-  );
-};
+  )
+}
 
-export default ButtonDelete;
+export default ButtonDelete

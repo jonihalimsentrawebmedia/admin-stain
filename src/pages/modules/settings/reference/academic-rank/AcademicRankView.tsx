@@ -28,6 +28,8 @@ const AcademicRankView = () => {
         loading={loading}
         meta={meta}
         placeHolderSearch="Cari Pangkat Akademik"
+        tdClassName='whitespace-pre-line'
+        thClassName='whitespace-pre-line'
       />
     </div>
   );

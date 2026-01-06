@@ -24,8 +24,8 @@ const RegencyView = () => {
       <TableCustom
         columns={columns}
         data={regency}
-        thClassName="text-start"
-        tdClassName="text-start"
+        tdClassName="whitespace-pre-line text-start"
+        thClassName="whitespace-pre-line text-start"
         loading={loading}
         meta={meta}
         placeHolderSearch="Cari Provinsi"

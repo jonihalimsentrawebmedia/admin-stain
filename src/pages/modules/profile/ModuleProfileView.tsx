@@ -43,7 +43,7 @@ const ModuleProfileView = () => {
             >
               <div className="flex gap-2 items-center">
                 <div className="w-[100px] bg-white h-[100px] rounded-xl flex justify-center items-center">
-                  <img src={LOGO} alt="logo" width={52} height={52} />
+                  <img src={LOGO} alt="logo" width={52} height={52} className='rounded-full'/>
                 </div>
                 <div>
                   <div className="text-white">Manajemen Pengelolaan Website</div>

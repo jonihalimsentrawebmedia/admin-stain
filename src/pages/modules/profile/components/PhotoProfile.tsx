@@ -57,7 +57,7 @@ const PhotoProfile = ({ img, }: Props) => {
         {loading ? (
           <Skeleton className="h-40 w-40 rounded-full" />
         ) : (
-          <img className="rounded-full" src={image} alt="" />
+          <img className="rounded-full object-cover w-40 h-40" src={image} alt="" />
         )}
 
         <input

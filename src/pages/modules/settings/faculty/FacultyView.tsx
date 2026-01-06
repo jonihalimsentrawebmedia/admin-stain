@@ -27,6 +27,8 @@ const FacultyView = () => {
         data={satuanOrganisasi}
         meta={meta}
         isShowChoiceColumn
+        tdClassName='whitespace-pre-line'
+        thClassName='whitespace-pre-line'
       />
     </div>
   );

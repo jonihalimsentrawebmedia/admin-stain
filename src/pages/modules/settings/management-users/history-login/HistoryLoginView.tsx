@@ -31,6 +31,8 @@ const HistoryLoginView = () => {
         data={histories}
         loading={loading}
         meta={meta}
+        tdClassName='whitespace-pre-line'
+        thClassName='whitespace-pre-line'
         placeHolderSearch="Cari  User"
       />
     </div>

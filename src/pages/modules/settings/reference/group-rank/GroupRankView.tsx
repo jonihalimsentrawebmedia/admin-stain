@@ -28,6 +28,8 @@ const GroupRankView = () => {
         data={groupRank}
         placeHolderSearch="Cari Pangkat Golongan"
         meta={meta}
+        tdClassName='whitespace-pre-line'
+        thClassName='whitespace-pre-line'
       />
     </div>
   );

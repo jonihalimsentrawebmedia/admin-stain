@@ -16,7 +16,7 @@ const useGetSatuanOrganisasiAll = () => {
     queryKey: ["satuan-organisasi-list",],
     queryFn: () =>
       AxiosClient.get(
-        `/pengaturan/satuan-organisasi`
+        `/pengaturan/satuan-organisasi?limit=10000`
       ).then((res) => res.data),
   });
 

@@ -24,8 +24,8 @@ const ImpactInnovationView = () => {
       <TableCustom
         columns={columns}
         data={impactInnovation}
-        thClassName="text-start"
-        tdClassName="text-start"
+      tdClassName='whitespace-pre-line text-start'
+        thClassName='whitespace-pre-line text-start'
         loading={loading}
         meta={meta}
         placeHolderSearch="Cari Kategori Inovasi Berdampak"

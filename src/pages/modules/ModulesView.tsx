@@ -69,7 +69,7 @@ const ModulesView = () => {
                       <img src={item?.gambar} className={'size-10 object-contain'} />
                     </div>
                     <div className="text-[14px]">{item.nama_module}</div>
-                    {item?.nama_module.toLowerCase() === 'website utama' && (
+                    {item?.nama_module?.toLowerCase() === 'website utama' && (
                       <p className="text-xs text-primary">https://stain-madina.ac.id</p>
                     )}
                   </div>

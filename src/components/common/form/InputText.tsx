@@ -164,7 +164,7 @@ export function InputText({
               value={displayValue || field.value || ''}
               defaultValue={defaultValue}
               prefix={prefix}
-              className={clsx(`text-[16px] disabled:bg-[#E9E9E9] h-12 ${inputClassName}`)}
+              className={clsx(`text-[16px] text-black disabled:text-[#444] disabled:bg-[#E9E9E9] h-12 ${inputClassName}`)}
               suffix={
                 type == 'password' ? (
                   openEye == false ? (

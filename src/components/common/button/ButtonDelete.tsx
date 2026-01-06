@@ -1,54 +1,52 @@
-import { DialogCustom } from "@/components/common/dialog/DialogCustom";
-import { IconDelete } from "@/components/common/table/icon";
-import { Button } from "@/components/ui/button";
-import AxiosClient from "@/provider/axios";
-import { useQueryClient } from "@tanstack/react-query";
-import {  Trash2Icon, X } from "lucide-react";
-import { useState, type ReactNode } from "react";
-import { toast } from "react-toastify";
+import { DialogCustom } from '@/components/common/dialog/DialogCustom'
+import { IconDelete } from '@/components/common/table/icon'
+import { Button } from '@/components/ui/button'
+import AxiosClient from '@/provider/axios'
+import { useQueryClient } from '@tanstack/react-query'
+import { Trash2Icon, X } from 'lucide-react'
+import { useState, type ReactNode } from 'react'
+import { toast } from 'react-toastify'
 
 interface Props {
-  title: string;
-  description: ReactNode;
-  urlDelete?: string;
-  queryKey?: string;
+  title: string
+  description: ReactNode
+  urlDelete?: string
+  queryKey?: string
 }
 const ButtonDelete = ({ description, title, urlDelete, queryKey }: Props) => {
-  const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
   async function handleDelete() {
-    setLoading(true);
+    setLoading(true)
     try {
-      const res = await AxiosClient.delete(urlDelete ?? "");
+      const res = await AxiosClient.delete(urlDelete ?? '')
 
       if (res.data.status) {
-        toast.success(res.data.message);
+        toast.success(res.data.message)
 
         await queryClient.invalidateQueries({
           queryKey: [queryKey],
-        });
+        })
       }
     } catch (err: any) {
-      toast.error(
-        err?.response?.data?.message || "Terjadi kesalahan, silakan coba lagi."
-      );
+      toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
     } finally {
-      setLoading(false);
-      setOpen(false);
+      setLoading(false)
+      setOpen(false)
     }
   }
   return (
     <>
-      <button
+      <div
+        className="cusrsor-pointer h-fit"
         onClick={() => {
-          setOpen(true);
+          setOpen(true)
         }}
       >
-        {" "}
         <IconDelete />
-      </button>
+      </div>
       <DialogCustom
         className="max-w-2xl! w-full! rounded-md"
         open={open}
@@ -76,7 +74,7 @@ const ButtonDelete = ({ description, title, urlDelete, queryKey }: Props) => {
         </div>
       </DialogCustom>
     </>
-  );
-};
+  )
+}
 
-export default ButtonDelete;
+export default ButtonDelete

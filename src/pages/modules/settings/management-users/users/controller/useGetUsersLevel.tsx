@@ -12,7 +12,7 @@ const [userMulti, setUserMulti] = useState<UserMultiLevelList[]>([]);
 
   const {data, isLoading, isFetching} = useQuery({
     refetchOnWindowFocus: false,
-    queryKey: ['users-list-multi'],
+    queryKey: ['users-list-multi'+id],
     queryFn: () => AxiosClient.get(`/pengaturan/manajemen-user/users/multi-level/by-user/${id}`).then(res => res.data.data)
   })
 

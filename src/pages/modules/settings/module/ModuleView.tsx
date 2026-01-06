@@ -27,6 +27,8 @@ const ModuleView = () => {
         loading={loading}
         meta={meta}
         placeHolderSearch="Cari Modul"
+        tdClassName='whitespace-pre-line'
+        thClassName='whitespace-pre-line'
       />
     </div>
   );

@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie'
 import DashboardViewModel from './DashboardViewModel'
+import { Link } from 'react-router-dom'
 
 const DashboardView = () => {
   const { data, form } = DashboardViewModel()
@@ -10,7 +11,8 @@ const DashboardView = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {data.map((item) => (
-          <div
+          <Link
+            to={item.link}
             style={{
               color: item.bgLabel,
               borderColor: item.bgLabel,
@@ -41,7 +43,7 @@ const DashboardView = () => {
             >
               {item.label}
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

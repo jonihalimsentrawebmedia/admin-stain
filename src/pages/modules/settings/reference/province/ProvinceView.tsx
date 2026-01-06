@@ -24,10 +24,11 @@ const ProvinceView = () => {
       <TableCustom
         columns={columns}
         data={province}
-        thClassName="text-start"
-        tdClassName="text-start"
+      
         loading={loading}
         meta={meta}
+        tdClassName='whitespace-pre-line text-start'
+        thClassName='whitespace-pre-line text-start'
         placeHolderSearch="Cari Provinsi"
       />
     </div>

@@ -40,6 +40,8 @@ const UsersView = () => {
         loading={loading}
         meta={meta}
         placeHolderSearch="Cari  User"
+        tdClassName='whitespace-pre-line'
+        thClassName='whitespace-pre-line'
       />
     </div>
   )

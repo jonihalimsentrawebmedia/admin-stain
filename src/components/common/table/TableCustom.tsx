@@ -79,7 +79,10 @@ const TableCustom = (props: Props) => {
   const totalData = meta?.total ?? 0
   const limitData = searchparams.get('limit') ? Number(searchparams.get('limit')) : 10
   useEffect(() => {
-    const temp = columns.map((item: any) => item.accessorKey)
+    const temp = columns
+      .map((item: any) => item.accessorKey)
+      .filter((item: any) => item !== 'id_satuan_organisasi' && item != 'parent_id')
+    console.log(temp)
     setColumnChecked(temp)
   }, [])
   return (

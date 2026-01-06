@@ -24,8 +24,8 @@ const NewsCategoryView = () => {
       <TableCustom
         columns={columns}
         data={newsCategory}
-        thClassName="text-start"
-        tdClassName="text-start"
+tdClassName='whitespace-pre-line text-start'
+        thClassName='whitespace-pre-line text-start'
         loading={loading}
         placeHolderSearch="Cari Kategori Berita"
         meta={meta}

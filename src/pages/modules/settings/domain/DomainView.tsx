@@ -28,6 +28,8 @@ const DomainView = () => {
         loading={loading}
         meta={meta}
         placeHolderSearch="Cari Domain"
+        tdClassName='whitespace-pre-line'
+        thClassName='whitespace-pre-line'
       />
     </div>
   )

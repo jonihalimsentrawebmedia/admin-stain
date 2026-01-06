@@ -1,92 +1,83 @@
-import { DialogCustom } from "@/components/common/dialog/DialogCustom";
-import { IconDelete } from "@/components/common/table/icon";
-import { Button } from "@/components/ui/button";
-import { Trash2, X } from "lucide-react";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import DetailField from "@/components/common/field/DetailField";
-import type { DomainList } from "../model";
-import { useQueryClient } from "@tanstack/react-query";
-import AxiosClient from "@/provider/axios";
-import { toast } from "react-toastify";
+import { DialogCustom } from '@/components/common/dialog/DialogCustom'
+import { IconDelete } from '@/components/common/table/icon'
+import { Button } from '@/components/ui/button'
+import { Trash2, X } from 'lucide-react'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import DetailField from '@/components/common/field/DetailField'
+import type { DomainList } from '../model'
+import { useQueryClient } from '@tanstack/react-query'
+import AxiosClient from '@/provider/axios'
+import { toast } from 'react-toastify'
 
 interface Props {
-  data: DomainList;
+  data: DomainList
 }
 const ButtonDeleteDomain = ({ data }: Props) => {
-  const [open, setOpen] = useState(false);
-  const form = useForm();
+  const [open, setOpen] = useState(false)
+  const form = useForm()
   const fieldsConfig = [
     {
-      name: "kelompok",
-      label: "Kelompok",
+      name: 'kelompok',
+      label: 'Kelompok',
     },
     {
-      name: "nama_satuan_organisasi",
-      label: "Nama",
+      name: 'nama_satuan_organisasi',
+      label: 'Nama',
     },
     {
-      name: "domain",
-      label: "Domain",
+      name: 'domain',
+      label: 'Domain',
     },
     {
-      name: "ip",
-      label: "IP Server",
+      name: 'ip',
+      label: 'IP Server',
     },
     {
-      name: "endpoint_be",
-      label: "Endpoint BE",
+      name: 'endpoint_be',
+      label: 'Endpoint BE',
     },
-  ];
+  ]
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
   async function handleDelete() {
-    setLoading(true);
+    setLoading(true)
     try {
-      const res = await AxiosClient.delete(
-        `/pengaturan/domains/${data.id_domain}`
-      );
+      const res = await AxiosClient.delete(`/pengaturan/domains/${data.id_domain}`)
 
       if (res.data.status) {
-        toast.success(res.data.message);
+        toast.success(res.data.message)
 
         await queryClient.invalidateQueries({
-          queryKey: ["settings-domain"],
-        });
+          queryKey: ['settings-domain'],
+        })
       }
     } catch (err: any) {
-      toast.error(
-        err?.response?.data?.message || "Terjadi kesalahan, silakan coba lagi."
-      );
+      toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
     } finally {
-      setLoading(false);
-      setOpen(false);
+      setLoading(false)
+      setOpen(false)
     }
   }
   return (
     <>
       <button
         onClick={() => {
-          setOpen(true);
+          setOpen(true)
           form.reset({
             ...data,
-          });
+          })
         }}
       >
-        {" "}
         <IconDelete />
       </button>
       <DialogCustom
         className="max-w-2xl! w-full!"
         open={open}
         setOpen={setOpen}
-        title={
-          <p className="text-2xl text-red-500">
-            Hapus Pengaturan Domain Public
-          </p>
-        }
+        title={<p className="text-2xl text-red-500">Hapus Pengaturan Domain Public</p>}
       >
         <p>Apakah anda yakin untuk menghapus domain yang dipilih?</p>
         <div className="my-4 ">
@@ -112,7 +103,7 @@ const ButtonDeleteDomain = ({ data }: Props) => {
         </div>
       </DialogCustom>
     </>
-  );
-};
+  )
+}
 
-export default ButtonDeleteDomain;
+export default ButtonDeleteDomain

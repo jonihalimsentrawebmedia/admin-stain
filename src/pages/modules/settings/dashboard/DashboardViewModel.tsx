@@ -21,6 +21,7 @@ const DashboardViewModel = () => {
       icon: <IconDomain />,
       count: '1000',
       name: 'domain',
+      link: '/modules/settings/domain',
     },
     {
       label: 'Universitas ',
@@ -29,6 +30,7 @@ const DashboardViewModel = () => {
       icon: <IconUniversity />,
       count: '1',
       name: 'universitas',
+      link: '/modules/settings/main-data-university',
     },
     {
       label: 'Fakultas',
@@ -37,6 +39,7 @@ const DashboardViewModel = () => {
       icon: <IconFaculty />,
       count: '6',
       name: 'fakultas',
+      link: '/modules/settings/faculty',
     },
     {
       label: 'Program Studi',
@@ -45,6 +48,7 @@ const DashboardViewModel = () => {
       icon: <IconProgram />,
       count: '12',
       name: 'program_studi',
+      link: '/modules/settings/prodi',
     },
     {
       label: 'Unit',
@@ -53,6 +57,7 @@ const DashboardViewModel = () => {
       icon: <IconUnit />,
       count: '5',
       name: 'unit',
+      link: '/modules/settings/unit',
     },
     {
       label: 'Lembaga',
@@ -61,6 +66,7 @@ const DashboardViewModel = () => {
       icon: <IconInstitution />,
       count: '5',
       name: 'lembaga',
+      link: '/modules/settings/institution',
     },
   ]
 

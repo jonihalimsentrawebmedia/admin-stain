@@ -118,7 +118,7 @@ export default function DashboardLayout() {
         },
         {
           link: '/modules/settings/reference/regency',
-          label: 'kabupaten',
+          label: 'Kabupaten',
         },
       ],
     },
@@ -168,12 +168,13 @@ export default function DashboardLayout() {
   `}
         >
           <div className=" space-y-1 overflow-y-auto pb-8 pt-8 sm:mt-0">
-            {menu.map((item) => (
+            {menu.map((item,index) => (
               <SidebarItem
+              
                 icon={item.icon}
                 label={item.label}
                 link={item.link}
-                key={item.link}
+                key={item.link+index}
                 active={pathname.includes(item.link)}
                 hiddenLabel={sidebarSmall}
                 path={pathname}

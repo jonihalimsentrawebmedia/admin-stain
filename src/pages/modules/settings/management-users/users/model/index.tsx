@@ -24,7 +24,7 @@ export const UsersResolver = z.object({
 
   // Tipe: Literal Union ('Y' | 'N'), wajib diisi
   status: z.string({ error: "Status Wajib Diisi" }),
-  satuan_kerja: z.string().optional().nullable(),
+  satuan_kerja: z.union([z.string(), z.array(z.string())]).optional().nullable(),
   level_user: levelUserSchema,
 });
 
@@ -52,10 +52,9 @@ interface UserLevelMulti {
   updated_at: string; // ISO 8601 string (Date/Time with timezone)
   updated_user: string; // ID user yang terakhir memperbarui data
   nama_level_user: string;
-  list_unit_nama?: {
-    id_satuan_organisasi: string
-    nama_satuan_organisasi: string
-  }[]
+  list_unit:string[]
+  list_unit_nama:string[],
+
 
 }
 
