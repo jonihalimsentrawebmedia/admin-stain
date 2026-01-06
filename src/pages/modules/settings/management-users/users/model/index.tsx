@@ -71,6 +71,7 @@ export interface UserDetail {
   created_user: string;
   updated_at: string; // ISO 8601 string (Date/Time with timezone)
   updated_user: string;
+  satuan_kerja:string[]
 
   // Properti Array Nested
   level_users_multi: UserLevelMulti[];

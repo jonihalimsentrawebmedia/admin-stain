@@ -84,7 +84,7 @@ const ButtonSettingLevelUser = ({ data, levelUser, satuanOrganisasi }: Props) =>
           )
         }
         // Jika bukan array, tampilkan langsung nilainya (seperti di baris 1)
-        return <div>{satuanKerjaList==""?"Tidak ada":satuanKerjaList}</div>
+        return <div>{satuanKerjaList == undefined ? 'Tidak ada' : satuanKerjaList}</div>
       },
     },
 
@@ -97,7 +97,7 @@ const ButtonSettingLevelUser = ({ data, levelUser, satuanOrganisasi }: Props) =>
 
         return (
           <ButtonSwitch
-            keyList={"users-list-multi"+data.id_user}
+            keyList={'users-list-multi' + data.id_user}
             data={values}
             link={`/pengaturan/manajemen-user/users/multi-level/${values.id_users_multi_level}/status`}
           />
@@ -106,7 +106,21 @@ const ButtonSettingLevelUser = ({ data, levelUser, satuanOrganisasi }: Props) =>
     },
 
     // ✅ Aktif Sejak
-    { accessorKey: 'aktif_sejak', header: 'Aktif Sejak' },
+    {
+      accessorKey: 'aktif_sejak',
+      header: 'Aktif Sejak',
+      cell: (row) => {
+        const values = row.row.original
+        const updateAt = formatDateTime(values.aktif_sejak)
+        return (
+          <div className="text-center">
+            {updateAt.date}
+            <br />
+           
+          </div>
+        )
+      },
+    },
 
     // ✅ Diubah
     {
