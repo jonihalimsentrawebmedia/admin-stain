@@ -13,6 +13,9 @@ import MainLayout from '@/pages/modules/website-utama/component/layout'
 import ModuleProfileView from '@/pages/modules/profile/ModuleProfileView'
 import { MainWebsiteRouter } from '@/router/main-website/router.tsx'
 import { SettingRouter } from './settings/router'
+import MainLayoutProdi from '@/pages/modules/website-prodi/components/layout'
+import { WebsiteProdiRouter } from '@/router/website-prodi/router.tsx'
+import { SelectProdi } from '@/pages/modules/website-prodi/select-prodi'
 
 export const Router = createBrowserRouter([
   {
@@ -61,6 +64,10 @@ export const Router = createBrowserRouter([
         element: <SelectUniversity />,
       },
       {
+        path: 'select-Prodi',
+        element: <SelectProdi />,
+      },
+      {
         path: 'settings',
         element: <LayoutSetting />,
         children: [...SettingRouter],
@@ -69,6 +76,11 @@ export const Router = createBrowserRouter([
         path: 'website-utama',
         element: <MainLayout />,
         children: [...MainWebsiteRouter],
+      },
+      {
+        path: 'website-prodi',
+        element: <MainLayoutProdi />,
+        children: [...WebsiteProdiRouter],
       },
     ],
   },

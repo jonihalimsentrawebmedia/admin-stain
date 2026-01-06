@@ -7,10 +7,12 @@ import { FaUser } from 'react-icons/fa'
 import ButtonLogOut from '@/pages/modules/components/buttonLogOut.tsx'
 import { ModulesViewModel } from '@/pages/modules/ModulesViewModel.tsx'
 import { Link } from 'react-router-dom'
-import { urlStringEncode } from '@/utils/helper.tsx'
+import { GetModuleUrl } from '@/utils/helper.tsx'
 
 const ModulesView = () => {
   const { modules, moduleSelect, setModuleSelect, goToProfile } = ModulesViewModel()
+
+  console.log(moduleSelect?.nama_module)
 
   return (
     <div
@@ -85,11 +87,7 @@ const ModulesView = () => {
                     onClick={() => {
                       window.localStorage.setItem('module', JSON.stringify(moduleSelect))
                     }}
-                    to={
-                      moduleSelect.nama_module.toLowerCase() === 'website utama'
-                        ? '/modules/select-university?url=website-utama'
-                        : `/modules/${urlStringEncode(moduleSelect?.controller)}/dashboard`
-                    }
+                    to={GetModuleUrl(moduleSelect)}
                   >
                     <Card>
                       <CardContent>
