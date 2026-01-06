@@ -25,3 +25,18 @@ export const TimeStampLocal = (date: any) => {
     locale: id,
   })
 }
+
+export const GetModuleUrl = (moduleSelect: { nama_module: string; controller?: string }) => {
+  const moduleName = moduleSelect.nama_module.toLowerCase()
+
+  switch (moduleName) {
+    case 'website utama':
+      return '/modules/select-university?url=website-utama'
+
+    case 'website prodi':
+      return '/modules/select-prodi?url=website-prodi'
+
+    default:
+      return `/modules/${urlStringEncode(moduleSelect?.controller ?? '')}/dashboard`
+  }
+}

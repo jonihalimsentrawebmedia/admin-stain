@@ -3,16 +3,16 @@ import type { IModulesList } from '@/pages/modules/interface'
 import { RiMenuLine } from 'react-icons/ri'
 import React from 'react'
 import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/hooks/getProfile.tsx'
-import { ButtonSession } from '@/pages/modules/website-utama/component/buttonSession'
 import ButtonProfile from '@/pages/modules/settings/components/button/ButtonProfile.tsx'
 import { Link } from 'react-router-dom'
+import { ButtonSessionProdi } from '@/pages/modules/website-prodi/components/buttonSession'
 
 interface Props {
   collapsed: boolean
   setCollapsed: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export function Header(props: Props) {
+export function HeaderProdi(props: Props) {
   const { collapsed, setCollapsed } = props
 
   const localStorage = window.localStorage.getItem('module')
@@ -34,7 +34,7 @@ export function Header(props: Props) {
       <div className="flex items-center gap-5">
         <div className="flex items-center gap-4">
           <div className="text-sm text-gray-600">Ganti Data:</div>
-          <ButtonSession />
+          <ButtonSessionProdi />
         </div>
         <Link to={'/modules'}>
           <IconModules />

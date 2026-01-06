@@ -2,30 +2,15 @@ import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import Cookies from 'js-cookie'
-
-export interface User {
-  id_user: string
-  email: string
-  nama_lengkap: string
-  telepon: string
-  status: 'Y' | 'N' // diasumsikan status hanya Y/N
-  pin_token: string
-  expired_token: number // UNIX timestamp
-  interaksi_terakhir: string // ISO datetime
-  created_at: string // ISO datetime
-  created_user: string
-  updated_at: string // ISO datetime
-  updated_user: string
-  gambar: string
-}
+import type { IUserProfile } from '@/pages/modules/website-utama/user-profile/data/types.ts'
 
 export const UseGetUserProfile = () => {
-  const [profileUser, setProfileUser] = useState<User>()
+  const [profileUser, setProfileUser] = useState<IUserProfile>()
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['profile-user'],
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get('/auth/profile').then((res) => res.data.data?.user),
+    queryFn: () => AxiosClient.get('/auth/profile').then((res) => res.data.data),
   })
 
   const loading = isLoading || isFetching
@@ -33,7 +18,7 @@ export const UseGetUserProfile = () => {
   useEffect(() => {
     if (data) {
       setProfileUser(data)
-      Cookies.set('profile',data.nama_lengkap)
+      Cookies.set('profile', data.nama_lengkap)
     }
   }, [data])
 

@@ -44,7 +44,6 @@ import RegencyView from '@/pages/modules/settings/reference/regency/RegencyView'
 export const SettingRouter = [
   {
     path: 'dashboard',
-
     children: [
       {
         index: true,
@@ -55,7 +54,7 @@ export const SettingRouter = [
         element: <ProfileView />,
       },
       {
-        path: 'profile/edit',
+        path: 'user-profile',
         element: <EditProfileView />,
       },
       {
