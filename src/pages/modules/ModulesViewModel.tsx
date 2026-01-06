@@ -1,31 +1,30 @@
-import {useState, useEffect} from "react";
-import {useQuery} from "@tanstack/react-query";
-import AxiosClient from "@/provider/axios.tsx";
-import type {IModulesList} from "@/pages/modules/interface";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import AxiosClient from '@/provider/axios.tsx'
+import type { IModules } from '@/pages/modules/interface'
+import { useNavigate } from 'react-router-dom'
 
 export const ModulesViewModel = () => {
-  const navigate=useNavigate()
-  const [modules, setModules] = useState<IModulesList[]>([]);
+  const navigate = useNavigate()
+  const [modules, setModules] = useState<IModules[]>([])
 
-  const [moduleSelect, setModuleSelect] = useState<IModulesList>()
+  const [moduleSelect, setModuleSelect] = useState<IModules>()
 
-  const {data, isLoading, isFetching} = useQuery({
+  const { data, isLoading, isFetching } = useQuery({
     refetchOnWindowFocus: false,
     queryKey: ['modules-list'],
-    queryFn: () => AxiosClient.get('/pengaturan/modules').then(res => res.data.data)
+    queryFn: () => AxiosClient.get('/dashboard').then((res) => res.data.data),
   })
 
-  const loading = isLoading || isFetching;
+  const loading = isLoading || isFetching
 
   useEffect(() => {
     if (data) {
       setModules(data)
     }
-  }, [data]);
+  }, [data])
 
-  function goToProfile(){
-
+  function goToProfile() {
     navigate('/modules/profile')
   }
 
@@ -33,7 +32,7 @@ export const ModulesViewModel = () => {
     modules,
     loading,
     moduleSelect,
-    setModuleSelect,goToProfile
-  };
-};
-
+    setModuleSelect,
+    goToProfile,
+  }
+}

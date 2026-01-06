@@ -221,7 +221,7 @@ export const MENULIST = [
     id: 15,
     name: 'Fakultas',
     icon: <IoBusinessSharp className={'size-5'} />,
-    path: `${baseDomain}/Fakultas`,
+    path: `${baseDomain}/fakultas`,
   },
   {
     id: 17,
