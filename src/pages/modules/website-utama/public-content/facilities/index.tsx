@@ -17,6 +17,7 @@ import { PublishSectionFacilities } from '@/pages/modules/website-utama/public-c
 import { UnpublishSectionFacilities } from '@/pages/modules/website-utama/public-content/facilities/components/table/unpublishSection.tsx'
 import { IoWarning } from 'react-icons/io5'
 import { Image } from 'lucide-react'
+import { toast } from 'react-toastify'
 
 export const FacilitiesPage = () => {
   const navigate = useNavigate()
@@ -161,7 +162,13 @@ export const FacilitiesPage = () => {
               element: (
                 <Button
                   variant={'outline'}
-                  onClick={() => navigate('add')}
+                  onClick={() => {
+                    if (status && status?.DRAFT > 0) {
+                      toast.info('Silahkan Ajukan Data Terlebih Dahulu')
+                    } else {
+                      navigate('add')
+                    }
+                  }}
                   className={'border-primary text-primary hover:text-primary'}
                 >
                   <HiPencil />

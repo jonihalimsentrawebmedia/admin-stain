@@ -10,6 +10,7 @@ import { UnPublishSection } from './components/table/unpublishSection.tsx'
 import { EditorProcessSection } from './components/table/editorProcesSection.tsx'
 import { RejectSection } from './components/table/RejectSection.tsx'
 import { EditorApproveSection } from './components/table/EditorApproveSection'
+import { toast } from 'react-toastify'
 
 export const TopSliderPublicContent = () => {
   const navigate = useNavigate()
@@ -37,7 +38,6 @@ export const TopSliderPublicContent = () => {
       value: 'DRAFT',
       element: <DraftSection />,
     },
-
     {
       id: 2,
       name: (
@@ -51,7 +51,6 @@ export const TopSliderPublicContent = () => {
       value: 'DIAJUKAN_EDITOR',
       element: <SubmitSection />,
     },
-
     {
       id: 3,
       name: (
@@ -65,7 +64,6 @@ export const TopSliderPublicContent = () => {
       value: 'PROSES_EDITOR',
       element: <EditorProcessSection />,
     },
-
     {
       id: 4,
       name: (
@@ -79,7 +77,6 @@ export const TopSliderPublicContent = () => {
       value: 'TOLAK_EDITOR',
       element: <RejectSection />,
     },
-
     {
       id: 5,
       name: (
@@ -93,7 +90,6 @@ export const TopSliderPublicContent = () => {
       value: 'DISETUJUI_EDITOR',
       element: <EditorApproveSection />,
     },
-
     {
       id: 6,
       name: (
@@ -107,7 +103,6 @@ export const TopSliderPublicContent = () => {
       value: 'PUBLISHED',
       element: <PublishSection />,
     },
-
     {
       id: 7,
       name: (
@@ -132,7 +127,13 @@ export const TopSliderPublicContent = () => {
             {
               label: 'Tambah Data',
               type: 'add',
-              onClick: () => navigate('add'),
+              onClick: () => {
+                if (status && status?.DRAFT > 0) {
+                  toast.info('Silahkan Ajukan Data Terlebih Dahulu')
+                } else {
+                  navigate('add')
+                }
+              },
             },
           ]}
         />

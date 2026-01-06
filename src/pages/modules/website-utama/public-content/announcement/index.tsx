@@ -17,6 +17,7 @@ import { PublishAnnouncementSection } from '@/pages/modules/website-utama/public
 import { UnpublishAnnouncementSection } from '@/pages/modules/website-utama/public-content/announcement/components/table/unpublishSection.tsx'
 import { Image } from 'lucide-react'
 import { IoWarning } from 'react-icons/io5'
+import { toast } from 'react-toastify'
 
 export const AnnouncementPage = () => {
   const navigate = useNavigate()
@@ -161,7 +162,13 @@ export const AnnouncementPage = () => {
               element: (
                 <Button
                   variant={'outline'}
-                  onClick={() => navigate('add')}
+                  onClick={() => {
+                    if (status && status?.DRAFT > 0) {
+                      toast.info('Silahkan Ajukan Data Terlebih Dahulu')
+                    } else {
+                      navigate('add')
+                    }
+                  }}
                   className={'border-primary text-primary hover:text-primary'}
                 >
                   <HiPencil />

@@ -19,7 +19,7 @@ export const ColumnsApproval = () => {
       accessorKey: 'tanggal',
       header: 'Tanggal Diajukan',
       cell: ({ row }) => {
-        return <>{format(row?.original?.tanggal, 'dd/MM/yyyy')}</>
+        return <>{format(row?.original?.tanggal, 'dd/MM/yyyy HH:mm:ss')}</>
       },
     },
     {

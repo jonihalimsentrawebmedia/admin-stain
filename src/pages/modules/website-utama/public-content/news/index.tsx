@@ -12,6 +12,7 @@ import { RejectionSection } from '@/pages/modules/website-utama/public-content/n
 import { ApproveSection } from '@/pages/modules/website-utama/public-content/news/components/table/ApproveSection.tsx'
 import { PublishSection } from '@/pages/modules/website-utama/public-content/news/components/table/publishSection.tsx'
 import { UpPublishSection } from '@/pages/modules/website-utama/public-content/news/components/table/upPublishSection.tsx'
+import { toast } from 'react-toastify'
 
 const NewsPublicContentPage = () => {
   const navigate = useNavigate()
@@ -131,7 +132,13 @@ const NewsPublicContentPage = () => {
               onClick: () => {},
               element: (
                 <Button
-                  onClick={() => navigate('add')}
+                  onClick={() => {
+                    if (status && status?.DRAFT > 0) {
+                      toast.info('Silahkan Ajukan Data Terlebih Dahulu')
+                    } else {
+                      navigate('add')
+                    }
+                  }}
                   variant={'outline'}
                   className={'border-primary text-primary hover:text-primary'}
                 >

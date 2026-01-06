@@ -294,7 +294,7 @@ export function SimpleEditor(props: props) {
           )}
         </Toolbar>
         <TableFloatingToolbar />
-        <EditorContent editor={editor} role="presentation" className="simple-editor-content" />
+        <EditorContent editor={editor} role="presentation" className="simple-editor-content min-h-[120px] bg-white" />
       </EditorContext.Provider>
     </div>
   )

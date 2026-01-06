@@ -101,7 +101,7 @@ const TableCustom = (props: Props) => {
               <PopoverTrigger>
                 <IconListTable />
               </PopoverTrigger>
-              <PopoverContent  className="w-fit flex flex-col gap-2">
+              <PopoverContent className="w-fit flex flex-col gap-2">
                 {columns.map((item: any) => (
                   <div
                     className={`flex gap-2 items-center ${item.header == '' || item.header == '#' || item.accessorKey == 'aksi' || item.accessorKey == 'action' || item.accessorKey == 'no' ? 'hidden' : ''}`}
@@ -132,7 +132,7 @@ const TableCustom = (props: Props) => {
         </div>
       )}
 
-      <Table className={`${className}  `}>
+      <Table className={`${className}`}>
         <TableHeader>
           {table?.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
@@ -172,7 +172,7 @@ const TableCustom = (props: Props) => {
                 <TableRow key={row.id}>
                   {row.getVisibleCells().map((cell: any, k) => (
                     <TableCell
-                      className={`${tdClassName + ' text-[#3E3E3E]'} ${columnChecked.includes(cell.column.columnDef.accessorKey) ? '' : 'hidden'}`}
+                      className={`whitespace-pre-wrap ${tdClassName + ' text-[#3E3E3E]'} ${columnChecked.includes(cell.column.columnDef.accessorKey) ? '' : 'hidden'}`}
                       key={k}
                     >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}

@@ -126,6 +126,7 @@ import { CategoryFAQList } from '@/pages/modules/website-utama/pertayaan/Faq/Cat
 import { RegistrationPathPage } from '@/pages/modules/website-utama/jalur-pendaftaran'
 import { AddPageRegisterPath } from '@/pages/modules/website-utama/jalur-pendaftaran/components/addPage.tsx'
 import { EditPageRegisterPath } from '@/pages/modules/website-utama/jalur-pendaftaran/components/editPage.tsx'
+import { FooterContent } from '@/pages/modules/website-utama/settings-menu/Footer'
 
 export const MainWebsiteRouter = [
   {
@@ -507,6 +508,10 @@ export const MainWebsiteRouter = [
             ],
           },
         ],
+      },
+      {
+        path: 'footer',
+        element: <FooterContent />,
       },
     ],
   },

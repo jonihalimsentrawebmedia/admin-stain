@@ -10,6 +10,7 @@ import { BottomRejectSection } from '@/pages/modules/website-utama/public-conten
 import { BottomEditorApproveSection } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/components/table/EditorApproveSection.tsx'
 import { BottomPublishSection } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/components/table/publishSection.tsx'
 import { UnPublishSectionBottom } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/components/table/unpublishSection.tsx'
+import { toast } from 'react-toastify'
 
 export const BottomSliderPublicContent = () => {
   const navigate = useNavigate()
@@ -132,7 +133,13 @@ export const BottomSliderPublicContent = () => {
             {
               label: 'Tambah Data',
               type: 'add',
-              onClick: () => navigate('add'),
+              onClick: () => {
+                if (status && status?.DRAFT > 0) {
+                  toast.info('Silahkan Ajukan Data Terlebih Dahulu')
+                } else {
+                  navigate('add')
+                }
+              },
             },
           ]}
         />
