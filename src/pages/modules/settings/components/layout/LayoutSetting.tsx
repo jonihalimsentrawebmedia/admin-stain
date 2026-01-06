@@ -9,6 +9,7 @@ import { FaGear } from 'react-icons/fa6'
 import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/hooks/getProfile.tsx'
 import ButtonProfile from '../button/ButtonProfile'
 import { IconModules } from '@/pages/modules/website-utama/component/layout/header'
+import type { IModulesList } from '@/pages/modules/interface'
 
 export default function DashboardLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -125,6 +126,8 @@ export default function DashboardLayout() {
   ]
 
   const { profileUser } = UseGetUserProfile()
+  const localStorage = window.localStorage.getItem('module')
+  const module: IModulesList = JSON.parse(localStorage || '{}')
 
   return (
     <div className="flex flex-col h-screen overflow-hidden! bg-gray-100">
@@ -147,7 +150,7 @@ export default function DashboardLayout() {
           <button className="text-green-700 sm:hidden" onClick={() => setSidebarOpen(!sidebarOpen)}>
             <Menu className="w-6 h-6" />
           </button>
-          <ButtonProfile profileUser={profileUser} />
+          <ButtonProfile profileUser={profileUser} module={module} />
           <button
             className="text-green-700 hidden sm:block"
             onClick={() => setSideBarSmall(!sidebarSmall)}

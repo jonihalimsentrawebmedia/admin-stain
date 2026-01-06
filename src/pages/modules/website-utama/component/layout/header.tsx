@@ -37,11 +37,11 @@ export function Header(props: Props) {
           <ButtonSession />
         </div>
         <Link to={'/modules'}>
-          <IconModules/>
+          <IconModules />
         </Link>
         <div className="flex items-center gap-4">
           <IoMdNotificationsOutline className="text-xl text-green-700 cursor-pointer" />
-          <ButtonProfile profileUser={profileUser} />
+          <ButtonProfile module={module} profileUser={profileUser} />
           <button onClick={() => setCollapsed(!collapsed)}>
             <RiMenuLine />
           </button>
