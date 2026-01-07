@@ -22,7 +22,9 @@ const ManagementUnitProgramStudyViewModel = () => {
       accessorKey: 'gambar_url',
       header: 'Foto',
       cell: ({ row }) => {
-        return <img src={row.original.gambar_url} className="w-[45px] h-[60px] rounded" />
+        return (
+          <img src={row.original.gambar_url} className="w-[45px] h-[60px] rounded object-cover" />
+        )
       },
     },
     {

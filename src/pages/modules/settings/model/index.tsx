@@ -35,7 +35,7 @@ export const SatuanOrganisasiResolver = z.object({
   twitter: z.string().url('URL Twitter tidak valid').optional(),
   instagram: z.string().url('URL Instagram tidak valid').optional(),
   youtube: z.string().url('URL YouTube tidak valid').optional(),
-  is_alamat_sama_parent: z.boolean()
+  is_alamat_sama_parent: z.boolean(),
 })
 
 /**
@@ -51,10 +51,11 @@ export interface SatuanOrganisasiList {
   logo: string // Nama file atau URL logo
   favicon: string // Nama file atau URL favicon
   nama: string // Nama lengkap organisasi
+  nama_parent: string
   singkatan: string // Singkatan atau akronim
   keyword: string // Kata kunci yang dipisahkan koma
-  kode_jenjang:string
-  nama_jenjang_pendidikan:string
+  kode_jenjang: string
+  nama_jenjang_pendidikan: string
   // Informasi Alamat
   alamat: string
   provinsi: string

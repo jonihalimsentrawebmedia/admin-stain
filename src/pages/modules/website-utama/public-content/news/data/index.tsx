@@ -1,3 +1,5 @@
+import type { StatusPublish } from '@/pages/modules/website-prodi/public-content/news/data/types.ts'
+
 export interface INewsDetail {
   id_berita: string
   id_satuan_organisasi: string
@@ -9,7 +11,7 @@ export interface INewsDetail {
   isi_berita: string
   penulis: string
   status: string
-  status_publish: string
+  status_publish: StatusPublish
   diajukan_at: string | null
   ditolak_at: string | null
   alasan_ditolak: string | null

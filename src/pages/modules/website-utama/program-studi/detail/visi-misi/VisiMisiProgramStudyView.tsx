@@ -38,6 +38,7 @@ const VisiMisiProgramStudyView = () => {
           })
 
           setLoading(false)
+          setIsEdit(!isEdit)
           toast.success(res.data.message || 'Success Pengajuan tambah bidang kerjasama')
         }
       })

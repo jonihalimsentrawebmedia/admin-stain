@@ -92,7 +92,7 @@ export function SidebarProdi({ collapsed }: Props) {
                     `focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${
                       !isGroupOpen ? 'text-white' : 'text-black'
                     }`,
-                    isRowActive ? 'text-primary font-semibold' : '',
+                    isRowActive ? 'text-black font-semibold' : '',
                     collapsed ? 'justify-center' : 'justify-between'
                   )}
                 >
@@ -232,7 +232,7 @@ function TreeNode({
           className={cn(
             `flex w-full items-center gap-1.5 px-1.5 py-1.5 text-sm transition-colors text-white`,
             'hover:bg-white/10',
-            isActive ? 'font-semibold text-primary' : 'text-primary'
+            isActive ? 'font-semibold text-black' : 'text-black'
           )}
         >
           {item.icon && <span className="text-xs">{item.icon}</span>}
@@ -273,8 +273,8 @@ function TreeNode({
     <div
       className={cn(
         'flex items-center gap-1.5 rounded px-1.5 py-1.5 text-sm transition-colors text-white',
-        'hover:bg-white hover:text-primary',
-        isActive || isActivePath(item.path) ? 'text-primary font-semibold' : 'text-primary'
+        'hover:bg-white hover:text-black',
+        isActive || isActivePath(item.path) ? 'text-black font-semibold' : 'text-black'
       )}
       style={{ marginLeft: depth }}
     >

@@ -5,7 +5,7 @@ import TableCustom from '@/components/common/table/TableCustom.tsx'
 
 const NewsProgramStudyView = () => {
   const { id } = useParams()
-  const { prodiNews, loading } = UseGetNewsProdi(id ?? '')
+  const { prodiNews, loading, meta } = UseGetNewsProdi(id ?? '')
   const columns = ProdiNewsColumns()
 
   return (
@@ -16,6 +16,7 @@ const NewsProgramStudyView = () => {
           className={'border'}
           tdClassName={'whitespace-pre-line border'}
           columns={columns}
+          meta={meta}
           data={prodiNews}
           loading={loading}
         />

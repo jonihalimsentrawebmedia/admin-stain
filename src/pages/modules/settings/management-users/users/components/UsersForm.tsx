@@ -28,9 +28,11 @@ const UsersForm = ({ form ,isEdit}: Props) => {
       setIsSatuanKerja(temp.is_satker)
     }
   }, [idLevelUser])
-  const leverUserFil = levelUser.filter(
-    (item) => item.id_level == form.watch('level_user.id_level_user')
-  )[0]
+  
+  // const leverUserFil = levelUser.filter(
+  //   (item) => item.id_level == form.watch('level_user.id_level_user')
+  // )[0]
+  
   return (
     <>
       <div className="max-w-[250px]">

@@ -12,9 +12,16 @@ interface Props {
   data: TabItem[]
   value?: string
   onChange?: (value: string) => void
+  triggerClassName?: string
 }
 
-export const TabsListCustom = ({ data, value, onChange }: Props) => {
+export const TabsListCustom = (props: Props) => {
+  const {
+    data,
+    value,
+    onChange,
+    triggerClassName = 'border-primary rounded-none data-[state=active]:bg-primary data-[state=active]:text-white text-primary',
+  } = props
   return (
     <Tabs
       value={value}
@@ -26,10 +33,7 @@ export const TabsListCustom = ({ data, value, onChange }: Props) => {
           <TabsTrigger
             key={item.id}
             value={item.value}
-            className="border border-primary rounded-none
-                       data-[state=active]:bg-primary
-                       data-[state=active]:text-white
-                       text-primary p-2.5"
+            className={`border p-2.5 ${triggerClassName}`}
           >
             {item.name}
           </TabsTrigger>
