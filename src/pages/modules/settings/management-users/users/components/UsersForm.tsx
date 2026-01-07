@@ -134,7 +134,7 @@ const UsersForm = ({ form ,isEdit}: Props) => {
                       value: item.id_satuan_organisasi,
                     }
                   })}
-                  isSingle={leverUserFil?.kelompok == 'EDITOR' ? false : true}
+                 
                   isGrid
                 />
               ) : (

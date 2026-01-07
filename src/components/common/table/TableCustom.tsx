@@ -174,7 +174,7 @@ const TableCustom = (props: Props) => {
                 <TableRow key={row.id}>
                   {row.getVisibleCells().map((cell: any, k) => (
                     <TableCell
-                      className={`whitespace-pre-wrap ${tdClassName + ' text-[#3E3E3E]'} ${columnChecked.includes(cell.column.columnDef.accessorKey) ? '' : 'hidden'}`}
+                      className={`whitespace-pre-wrap border ${tdClassName + ' text-[#3E3E3E]'} ${columnChecked.includes(cell.column.columnDef.accessorKey) ? '' : 'hidden'}`}
                       key={k}
                     >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
