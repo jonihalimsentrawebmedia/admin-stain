@@ -35,6 +35,8 @@ export const SelectProdi = () => {
 
   const HandlerSubmit = async (e: any) => {
     await AxiosClient.post('/prodi/user-session', {
+      id_universitas: e?.id_university,
+      id_fakultas: e?.id_faculty,
       id_prodi: e?.id_prodi,
     })
       .then((res) => {

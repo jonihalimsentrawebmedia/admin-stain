@@ -6,6 +6,7 @@ import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/ho
 import ButtonProfile from '@/pages/modules/settings/components/button/ButtonProfile.tsx'
 import { Link } from 'react-router-dom'
 import { ButtonSessionProdi } from '@/pages/modules/website-prodi/components/buttonSession'
+import { UseGetProdiSession } from '@/pages/modules/website-prodi/hooks'
 
 interface Props {
   collapsed: boolean
@@ -19,6 +20,7 @@ export function HeaderProdi(props: Props) {
   const module: IModulesList = JSON.parse(localStorage || '{}')
 
   const { profileUser } = UseGetUserProfile()
+  const { session } = UseGetProdiSession()
 
   return (
     <header className="py-4 px-5 bg-[#E9FFF1] border-b border-green-200 flex items-center justify-between w-full">
@@ -28,13 +30,13 @@ export function HeaderProdi(props: Props) {
         </Link>
         <div className="flex flex-col">
           <p className="text-sm font-semibold text-primary">Manajemen Pengelolaan Website</p>
-          <p className="text-2xl font-semibold">Website Utama</p>
+          <p className="text-2xl font-semibold">Prodi - {session?.nama_prodi}</p>
         </div>
       </div>
       <div className="flex items-center gap-5">
         <div className="flex items-center gap-4">
           <div className="text-sm text-gray-600">Ganti Data:</div>
-          <ButtonSessionProdi />
+          <ButtonSessionProdi session={session} />
         </div>
         <Link to={'/modules'}>
           <IconModules />

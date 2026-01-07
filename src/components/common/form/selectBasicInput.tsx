@@ -75,6 +75,7 @@ export const SelectBasicInput = <T extends FieldValues>({
                 styles={{
                   menuPortal: (base) => (usePortal ? { ...base, zIndex: 9999 } : base),
                 }}
+                menuPosition={usePortal ? 'fixed' : 'absolute'}
                 menuPortalTarget={usePortal ? document.body : undefined}
                 isDisabled={isDisabled}
                 options={data}

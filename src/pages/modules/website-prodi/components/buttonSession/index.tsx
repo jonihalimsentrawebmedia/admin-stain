@@ -1,15 +1,16 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FaGear } from 'react-icons/fa6'
 import { Button } from '@/components/ui/button.tsx'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { Form } from '@/components/ui/form.tsx'
 import { useForm } from 'react-hook-form'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { UseGetGroupOrganizationFlexible } from '@/pages/modules/website-prodi/select-prodi/hooks'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
+import type { ISessionProdi } from '@/pages/modules/website-prodi/hooks'
 
-export const ButtonSessionProdi = () => {
+export const ButtonSessionProdi = ({ session }: { session?: ISessionProdi }) => {
   const [open, setOpen] = useState(false)
   const [parentId, setParentId] = useState({
     id_university: '',
@@ -28,9 +29,23 @@ export const ButtonSessionProdi = () => {
 
   const form = useForm()
 
+  useEffect(() => {
+    if (session) {
+      form.setValue('id_university', session?.id_universitas)
+      form.setValue('id_faculty', session?.id_fakultas)
+      form.setValue('id_prodi', session?.id_prodi)
+      setParentId({
+        id_university: session?.id_universitas,
+        id_faculty: session?.id_fakultas,
+      })
+    }
+  }, [session])
+
   const HandlerSubmit = async (e: any) => {
-    await AxiosClient.post('/website-utama/user-session', {
-      id_satuan_organisasi: e?.id_university,
+    await AxiosClient.post('/prodi/user-session', {
+      id_universitas: e?.id_university,
+      id_fakultas: e?.id_faculty,
+      id_prodi: e?.id_prodi,
     })
       .then((res) => {
         toast.success(res.data.message)
@@ -52,9 +67,10 @@ export const ButtonSessionProdi = () => {
         <FaGear />
       </Button>
 
-      <DialogCustom
+      <DialogBasic
         className={'lg:max-w-2xl rounded'}
         open={open}
+        disableOutsideDialog
         setOpen={setOpen}
         title={'Ganti Data: Universitas'}
       >
@@ -65,7 +81,7 @@ export const ButtonSessionProdi = () => {
                 form={form}
                 name={'id_university'}
                 placeholder={'Pilih Universitas digunakan'}
-                selectClassName={'z-50'}
+                selectClassName={'z-40'}
                 data={
                   university?.map((row) => ({
                     label: row?.nama,
@@ -73,12 +89,11 @@ export const ButtonSessionProdi = () => {
                   })) ?? []
                 }
                 fx={() => {
-                  if (form.watch('id_university')) {
-                    setParentId({
-                      ...parentId,
-                      id_university: form.watch('id_university'),
-                    })
-                  }
+                  setParentId({
+                    id_university: form.watch('id_university'),
+                    id_faculty: '',
+                  })
+
                   form.setValue('id_faculty', '')
                   form.setValue('id_prodi', '')
                 }}
@@ -88,7 +103,7 @@ export const ButtonSessionProdi = () => {
                 form={form}
                 name={'id_faculty'}
                 placeholder={'Pilih Fakultas'}
-                selectClassName={'z-40'}
+                selectClassName={'z-30'}
                 data={
                   faculty?.map((row) => ({
                     label: row?.nama,
@@ -109,8 +124,8 @@ export const ButtonSessionProdi = () => {
               <SelectBasicInput
                 form={form}
                 name={'id_prodi'}
-                selectClassName={'z-30'}
                 placeholder={'Pilih Program Studi'}
+                selectClassName={'z-20'}
                 data={
                   prodi?.map((row) => ({
                     label: row?.nama,
@@ -125,7 +140,7 @@ export const ButtonSessionProdi = () => {
             </form>
           </Form>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

@@ -1,10 +1,14 @@
 import { cn } from '@/lib/utils'
 
-
 import { X } from 'lucide-react'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { useEffect, type Dispatch, type ReactNode, type SetStateAction } from 'react'
-import { Dialog, DialogContent, DialogDescription, DialogHeader } from '@/components/ui/dialogCommon'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+} from '@/components/ui/dialogCommon'
 import { DialogTitle } from '@/components/ui/dialog'
 
 interface DialogCustomProps {
@@ -39,6 +43,7 @@ export function DialogCustom({
   position,
 }: DialogCustomProps) {
   // Fix untuk bug pointer-events di Radix UI
+
   useEffect(() => {
     if (!open) {
       // Cleanup pointer-events setelah dialog ditutup
@@ -90,7 +95,11 @@ export function DialogCustom({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogContent
-        className={cn('bg-white p-6 flex flex-col gap-4', className, backgroundColor)}
+        className={cn(
+          'bg-white p-6 flex flex-col gap-4 pointer-events-auto',
+          className,
+          backgroundColor
+        )}
         position={position}
         style={{
           width: isAuto ? 'auto' : isMobile ? '90%' : width ? width : '70%',
