@@ -1,17 +1,17 @@
-import { DialogCustom } from "@/components/common/dialog/DialogCustom";
-import DetailField from "@/components/common/field/DetailField";
-import { InputCheckbox } from "@/components/common/form/InputCheckbox";
-import { InputText } from "@/components/common/form/InputText";
-import { SelectCustom } from "@/components/common/form/SelectCustom";
-import { Form } from "@/components/ui/form";
-import { useEffect, useState } from "react";
-import { IconEdit } from "@/components/common/table/icon";
-import type { LevelUserList } from "../../level/model";
-import type { SatuanOrganisasiList } from "../../../model";
-import ButtonForm from "@/components/common/button/ButtonForm";
-import type { UserList } from "../model";
-import type { UserMultiLevelList } from "../model/leveluser";
-import useEditLevelUser from "../controller/useEditLevelUser";
+import { DialogCustom } from '@/components/common/dialog/DialogCustom'
+import DetailField from '@/components/common/field/DetailField'
+import { InputCheckbox } from '@/components/common/form/InputCheckbox'
+import { InputText } from '@/components/common/form/InputText'
+import { SelectCustom } from '@/components/common/form/SelectCustom'
+import { Form } from '@/components/ui/form'
+import { useEffect, useState } from 'react'
+import { IconEdit } from '@/components/common/table/icon'
+import type { LevelUserList } from '../../level/model'
+import type { SatuanOrganisasiList } from '../../../model'
+import ButtonForm from '@/components/common/button/ButtonForm'
+import type { UserList } from '../model'
+import type { UserMultiLevelList } from '../model/leveluser'
+import useEditLevelUser from '../controller/useEditLevelUser'
 interface Props {
   levelUser: LevelUserList[]
   satuanOrganisasi: SatuanOrganisasiList[]
@@ -22,60 +22,59 @@ interface Props {
 const ButtonEditLevelUser = ({ levelUser, satuanOrganisasi, formDetail, data, values }: Props) => {
   const { form, handleSave, loading, open, setOpen } = useEditLevelUser({
     id_level_user: values.id_level_user,
-    id_multi_level: values.id_users_multi_level
+    id_multi_level: values.id_users_multi_level,
   })
-
 
   const field = [
     {
-      label: "Nama Lengkap",
-      name: "nama_lengkap",
+      label: 'Nama Lengkap',
+      name: 'nama_lengkap',
     },
     {
-      label: "Jabatan",
-      name: "jabatan",
+      label: 'Jabatan',
+      name: 'jabatan',
     },
     {
-      label: "Level User 1",
-      name: "level_users_multi",
+      label: 'Level User 1',
+      name: 'level_users_multi',
       component: (
         <div>
-          {data.level_users.length == 1 ? data.level_users[0] : <ul className="ml-2 pl-2 list-outside list-disc">
-            {data.level_users.map((item) => (
-              <li key={data.id_user + item}>{item}</li>
-            ))}
-
-          </ul>}
+          {data.level_users.length == 1 ? (
+            data.level_users[0]
+          ) : (
+            <ul className="ml-2 pl-2 list-outside list-disc">
+              {data.level_users.map((item) => (
+                <li key={data.id_user + item}>{item}</li>
+              ))}
+            </ul>
+          )}
         </div>
-      )
+      ),
     },
-  ];
+  ]
 
-  const idLevelUser = form.watch("id_level_user");
-  const [isSatuanKerja, setIsSatuanKerja] = useState(false);
-
+  const idLevelUser = form.watch('id_level_user')
+  const [isSatuanKerja, setIsSatuanKerja] = useState(false)
 
   useEffect(() => {
     if (idLevelUser) {
-      const temp = levelUser.filter((item) => item.id_level == idLevelUser)[0];
+      const temp = levelUser.filter((item) => item.id_level == idLevelUser)[0]
 
-      setIsSatuanKerja(temp.is_satker);
+      setIsSatuanKerja(temp.is_satker)
     }
-  }, [idLevelUser]);
+  }, [idLevelUser])
 
-  useEffect(() => {
-    if (values) {
-      form.reset({
-        id_level_user: values.id_level_user,
-        list_unit: values.list_unit_nama ? values.list_unit_nama[0].id_satuan_organisasi : undefined
-      })
-    }
-  }, [values])
   return (
     <>
       <div
         onClick={() => {
-          setOpen(true);
+          setOpen(true)
+          form.reset({
+            id_level_user: values.id_level_user,
+            list_unit: values.list_unit_nama
+              ? values.list_unit_nama.map((item) => item.id_satuan_organisasi)
+              : undefined,
+          })
         }}
         className="flex items-center cursor-pointer gap-4"
       >
@@ -99,7 +98,7 @@ const ButtonEditLevelUser = ({ levelUser, satuanOrganisasi, formDetail, data, va
                   return {
                     value: item.id_level,
                     label: item.nama,
-                  };
+                  }
                 })}
                 name="id_level_user"
                 label="Level User"
@@ -120,9 +119,8 @@ const ButtonEditLevelUser = ({ levelUser, satuanOrganisasi, formDetail, data, va
                     return {
                       label: item.nama,
                       value: item.id_satuan_organisasi,
-                    };
+                    }
                   })}
-                  isSingle
                   isGrid
                 />
               ) : (
@@ -137,15 +135,18 @@ const ButtonEditLevelUser = ({ levelUser, satuanOrganisasi, formDetail, data, va
                   inputClassName="lg:max-w-[300px]"
                 />
               )}
-              <ButtonForm loading={loading} onCancel={() => {
-                setOpen(false)
-              }} />
+              <ButtonForm
+                loading={loading}
+                onCancel={() => {
+                  setOpen(false)
+                }}
+              />
             </form>
           </Form>
         </div>
       </DialogCustom>
     </>
-  );
-};
+  )
+}
 
-export default ButtonEditLevelUser;
+export default ButtonEditLevelUser

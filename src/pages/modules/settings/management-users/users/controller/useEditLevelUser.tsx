@@ -24,7 +24,7 @@ const useEditLevelUser = ({ id_level_user, id_multi_level }: Props) => {
             const res = await AxiosClient.put(`/pengaturan/manajemen-user/users/multi-level/${id_multi_level}`, {
                 ...data,
                 id_level_user,
-                list_unit: [data.list_unit]
+                list_unit: data.list_unit
             });
 
             if (res.data.status) {

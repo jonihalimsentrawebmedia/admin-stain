@@ -82,7 +82,6 @@ const TableCustom = (props: Props) => {
     const temp = columns
       .map((item: any) => item.accessorKey)
       .filter((item: any) => item !== 'id_satuan_organisasi' && item != 'parent_id')
-    console.log(temp)
     setColumnChecked(temp)
   }, [])
   return (

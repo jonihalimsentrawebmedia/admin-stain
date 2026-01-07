@@ -34,7 +34,6 @@ export const SelectProdi = () => {
   const navigate = useNavigate()
 
   const HandlerSubmit = async (e: any) => {
-    console.log(e)
     await AxiosClient.post('/prodi/user-session', {
       id_prodi: e?.id_prodi,
     })

@@ -11,7 +11,6 @@ export const ChangeStatus = (data: IRegistrationPath) => {
   const queryClient = useQueryClient()
 
   const HandlerChange = async (e: any) => {
-    console.log(e)
     setLoading(true)
     await AxiosClient.patch(
       `/website-utama/jalur-pendaftaran/${data?.id_jalur_pendaftaran}/status`,

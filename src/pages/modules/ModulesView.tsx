@@ -12,7 +12,6 @@ import { GetModuleUrl } from '@/utils/helper.tsx'
 const ModulesView = () => {
   const { modules, moduleSelect, setModuleSelect, goToProfile } = ModulesViewModel()
 
-  console.log(moduleSelect?.nama_module)
 
   return (
     <div

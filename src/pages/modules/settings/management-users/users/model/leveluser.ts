@@ -4,15 +4,11 @@ export const LevelUserResolver = z.object({
   id_level_user: z
     .string({ error: 'Level User Wajib Diisi' })
     .min(1, { error: 'Level User Wajib Diisi' }),
-  list_unit:
-    // 1. Menggunakan z.array() untuk menandakan ini adalah array
 
-    // 2. Di dalamnya, kita definisikan tipe elemen array-nya, yaitu string
-    z
-      .string({ error: 'Unit dalam List Wajib Diisi' })
-
-      // 3. Menambahkan .min(1) pada array untuk memastikan array tidak kosong
-      .min(1, { message: 'List Unit Wajib Diisi ' }),
+  list_unit: z
+    .union([z.string(), z.array(z.string())])
+    .optional()
+    .nullable(),
 })
 export type LeveluserType = z.infer<typeof LevelUserResolver>
 
