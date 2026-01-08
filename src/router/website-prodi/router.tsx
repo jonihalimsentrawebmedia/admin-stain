@@ -15,6 +15,28 @@ import { NewsProdiCreated } from '@/pages/modules/website-prodi/public-content/n
 import { NewsProdiUpdated } from '@/pages/modules/website-prodi/public-content/news/updated'
 import { DetailNewsProdiPage } from '@/pages/modules/website-prodi/public-content/news/detail'
 import { LogActivityNewsProdiPage } from '@/pages/modules/website-prodi/public-content/news/log-data'
+import { AnnouncementProdiPublicContent } from '@/pages/modules/website-prodi/public-content/announcement'
+import { CreatedAnnouncementProdi } from '@/pages/modules/website-prodi/public-content/announcement/created'
+import { UpdatedAnnouncementProdi } from '@/pages/modules/website-prodi/public-content/announcement/updated'
+import { AnnouncementProdiDetailPage } from '@/pages/modules/website-prodi/public-content/announcement/detail'
+import { LogActivityAnnouncementProdiPage } from '@/pages/modules/website-prodi/public-content/announcement/log'
+import { AgendaProdiPublicContent } from '@/pages/modules/website-prodi/public-content/agenda'
+import { CreateAgendaProdiPage } from '@/pages/modules/website-prodi/public-content/agenda/created'
+import { UpdatedAgendaProdiPage } from '@/pages/modules/website-prodi/public-content/agenda/updated'
+import { AgendaProdiDetailPage } from '@/pages/modules/website-prodi/public-content/agenda/detail'
+import { LogActivityAgendaProdiPage } from '@/pages/modules/website-prodi/public-content/agenda/log'
+import DownloadFileProdiPage from '@/pages/modules/website-prodi/public-content/Download'
+import { CategoryDownloadProdiPage } from '@/pages/modules/website-prodi/public-content/Download/category'
+import { AddDownloadProdiPage } from '@/pages/modules/website-prodi/public-content/Download/created'
+import { UpdatedDownloadProdiPage } from '@/pages/modules/website-prodi/public-content/Download/updated'
+import { PromotionProdiPage } from '@/pages/modules/website-prodi/public-content/promotion'
+import { CreatedPromotionProdi } from '@/pages/modules/website-prodi/public-content/promotion/created'
+import { UpdatedPromotionProdi } from '@/pages/modules/website-prodi/public-content/promotion/updated'
+import { LogActivityPromotionProdiPage } from '@/pages/modules/website-prodi/public-content/promotion/log'
+import { DetailPromotionPage } from '@/pages/modules/website-prodi/public-content/promotion/detail'
+import { QuestionFAQProdiPage } from '@/pages/modules/website-prodi/question/FAQ'
+import { CategoryFAQProdiPage } from '@/pages/modules/website-prodi/question/FAQ/category'
+import { InboxMessage } from '@/pages/modules/website-prodi/question/inbox-message'
 
 export const WebsiteProdiRouter = [
   {
@@ -113,9 +135,118 @@ export const WebsiteProdiRouter = [
         children: [
           {
             index: true,
-            element: <></>,
+            element: <AnnouncementProdiPublicContent />,
+          },
+          {
+            path: 'add',
+            element: <CreatedAnnouncementProdi />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedAnnouncementProdi />,
+          },
+          {
+            path: 'detail/:id',
+            element: <AnnouncementProdiDetailPage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityAnnouncementProdiPage />,
           },
         ],
+      },
+      {
+        path: 'agenda',
+        children: [
+          {
+            index: true,
+            element: <AgendaProdiPublicContent />,
+          },
+          {
+            path: 'add',
+            element: <CreateAgendaProdiPage />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedAgendaProdiPage />,
+          },
+          {
+            path: 'detail/:id',
+            element: <AgendaProdiDetailPage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityAgendaProdiPage />,
+          },
+        ],
+      },
+      {
+        path: 'promotion',
+        children: [
+          {
+            index: true,
+            element: <PromotionProdiPage />,
+          },
+          {
+            path: 'add',
+            element: <CreatedPromotionProdi />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedPromotionProdi />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailPromotionPage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityPromotionProdiPage />,
+          },
+        ],
+      },
+      {
+        path: 'download',
+        children: [
+          {
+            index: true,
+            element: <DownloadFileProdiPage />,
+          },
+          {
+            path: 'category',
+            element: <CategoryDownloadProdiPage />,
+          },
+          {
+            path: 'add',
+            element: <AddDownloadProdiPage />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedDownloadProdiPage />,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: 'question',
+    children: [
+      {
+        path: 'faq',
+        children: [
+          {
+            index: true,
+            element: <QuestionFAQProdiPage />,
+          },
+          {
+            path: 'category',
+            element: <CategoryFAQProdiPage />,
+          },
+        ],
+      },
+      {
+        path: 'inbox',
+        element: <InboxMessage />,
       },
     ],
   },

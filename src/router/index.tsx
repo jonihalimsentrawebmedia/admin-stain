@@ -16,6 +16,8 @@ import { SettingRouter } from './settings/router'
 import MainLayoutProdi from '@/pages/modules/website-prodi/components/layout'
 import { WebsiteProdiRouter } from '@/router/website-prodi/router.tsx'
 import { SelectProdi } from '@/pages/modules/website-prodi/select-prodi'
+import ProdiWebTheme from '@/pages/modules/website-prodi/components/layout/theme.tsx'
+import DefaultTheme from '@/components/common/theme/default.tsx'
 
 export const Router = createBrowserRouter([
   {
@@ -53,7 +55,11 @@ export const Router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <ModulesView />,
+        element: (
+          <DefaultTheme>
+            <ModulesView />
+          </DefaultTheme>
+        ),
       },
       {
         path: 'profile',
@@ -74,12 +80,20 @@ export const Router = createBrowserRouter([
       },
       {
         path: 'website-utama',
-        element: <MainLayout />,
+        element: (
+          <DefaultTheme>
+            <MainLayout />
+          </DefaultTheme>
+        ),
         children: [...MainWebsiteRouter],
       },
       {
         path: 'website-prodi',
-        element: <MainLayoutProdi />,
+        element: (
+          <ProdiWebTheme>
+            <MainLayoutProdi />
+          </ProdiWebTheme>
+        ),
         children: [...WebsiteProdiRouter],
       },
     ],

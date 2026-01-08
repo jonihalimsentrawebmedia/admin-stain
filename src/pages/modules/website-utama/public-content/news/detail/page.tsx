@@ -3,11 +3,11 @@ import { UseGetNewsDetail } from '@/pages/modules/website-utama/public-content/n
 import { useNavigate, useParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button.tsx'
 import { HiPencil } from 'react-icons/hi'
-import { MdSend } from 'react-icons/md'
 import { Separator } from '@/components/ui/separator.tsx'
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel'
 import { useEffect, useState } from 'react'
 import { format } from 'date-fns'
+import { ButtonSubmissionNews } from '@/pages/modules/website-utama/public-content/news/components/buttonSubmission.tsx'
 
 export const DetailNewsPage = () => {
   const { id } = useParams()
@@ -63,12 +63,8 @@ export const DetailNewsPage = () => {
             label: 'Edit Data',
             onClick: () => {},
             element:
-              detailNews?.status_publish !== 'DIAJUKAN_EDITOR' ? (
-                <div className={'flex items-center gap-1.5 border-l border-gray-500 pl-2'}>
-                  <Button>
-                    <MdSend /> Ajukan Ke Editor
-                  </Button>
-                </div>
+              detailNews?.status_publish === 'DRAFT' ? (
+                <ButtonSubmissionNews {...detailNews} />
               ) : (
                 <></>
               ),

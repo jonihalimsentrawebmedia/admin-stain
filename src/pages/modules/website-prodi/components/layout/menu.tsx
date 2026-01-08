@@ -1,4 +1,4 @@
-import { MdDashboard, MdInfo } from 'react-icons/md'
+import { MdDashboard, MdInfo, MdQuestionAnswer } from 'react-icons/md'
 import { FaGraduationCap } from 'react-icons/fa'
 
 const baseDomain = '/modules/website-prodi'
@@ -46,6 +46,29 @@ export const MENULISTPRODI = [
         id: 25,
         name: 'Download',
         path: `${baseDomain}/public-content/download`,
+      },
+    ],
+  },
+  {
+    id: 7,
+    name: 'Pertayaan',
+    icon: <MdQuestionAnswer className={'size-5'} />,
+    path: `${baseDomain}/question`,
+    child: [
+      {
+        id: 71,
+        name: 'Kontak Masuk',
+        path: `${baseDomain}/question/inbox`,
+      },
+      {
+        id: 72,
+        name: 'F.A.Q',
+        path: `${baseDomain}/question/faq`,
+      },
+      {
+        id: 73,
+        name: 'Pendaftaran',
+        path: `${baseDomain}/question/registration`,
       },
     ],
   },

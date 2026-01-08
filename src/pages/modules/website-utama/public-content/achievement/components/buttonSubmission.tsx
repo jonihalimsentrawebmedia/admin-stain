@@ -59,7 +59,7 @@ export const ButtonSubmissionAchievement = (data: IAchievementDetail) => {
 
       <DialogCustom
         open={open}
-        className={'rounded'}
+        className={'rounded lg:max-w-2xl'}
         setOpen={setOpen}
         title={'Ajukan Ke Editor'}
         description={'Apakah anda yakin untuk mengajukan prestasi yang dipilih ke editor?'}

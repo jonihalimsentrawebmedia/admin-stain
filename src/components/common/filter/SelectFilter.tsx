@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import Select, { type StylesConfig } from 'react-select'
 
+const primaryColor = 'hsl(var(--primary))'
+
 const customStyles: StylesConfig = {
   control: (provided, state) => ({
     ...provided,
-    borderColor: '#22c55e', // hijau
+    borderColor: primaryColor, // hijau
     boxShadow: state.isFocused ? '0 0 0 1px #22c55e' : 'none',
-    '&:hover': { borderColor: '#22c55e' },
+    '&:hover': { borderColor: primaryColor },
     borderRadius: '8px',
     minHeight: '48px',
     paddingLeft: '4px',
@@ -25,7 +27,7 @@ const customStyles: StylesConfig = {
   indicatorSeparator: () => ({ display: 'none' }),
   dropdownIndicator: (provided, state) => ({
     ...provided,
-    color: '#16a34a', // hijau
+    color: primaryColor, // hijau
     transform: state.selectProps.menuIsOpen ? 'rotate(180deg)' : 'rotate(0deg)',
     transition: 'transform 0.2s ease',
   }),
@@ -63,9 +65,8 @@ const SelectFilter = ({
   useEffect(() => {
     if (searchParams.get(name ?? '') || options.length !== 0) {
       const temp: any = options.filter((row) => row.value == searchParams.get(name ?? ''))
-      setValue(temp)  
-      if(fx){
-      
+      setValue(temp)
+      if (fx) {
         fx(temp.value)
       }
     }
@@ -74,7 +75,7 @@ const SelectFilter = ({
   return (
     <div className={`flex flex-col gap-1 relative ${zIndex}`}>
       <label
-        className={`text-green-600 z-10 text-sm font-medium absolute ml-3 bg-white px-1 w-fit  -top-2.5`}
+        className={`text-primary z-10 text-sm font-medium absolute ml-3 bg-white px-1 w-fit  -top-2.5`}
       >
         {label}
       </label>

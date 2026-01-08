@@ -2,12 +2,13 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button.tsx'
 import { HiPencil } from 'react-icons/hi'
-import { MdSend } from 'react-icons/md'
 import { Separator } from '@/components/ui/separator.tsx'
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel'
 import { useEffect, useState } from 'react'
 import { format } from 'date-fns'
 import { UseGetImpactInnovationDetail } from '@/pages/modules/website-utama/public-content/impact-innovation/hooks'
+import { ButtonSubmissionImpactInnovation } from '@/pages/modules/website-utama/public-content/impact-innovation/components/buttonSubmission.tsx'
+import type { IImpactInnovationList } from '@/pages/modules/website-utama/public-content/impact-innovation/data'
 
 export const DetailImpactInnovationPage = () => {
   const { id } = useParams()
@@ -36,9 +37,7 @@ export const DetailImpactInnovationPage = () => {
         label={'Detail Berita'}
         buttonGroup={[
           {
-            type: 'edit',
-            label: 'Edit Data',
-            onClick: () => {},
+            type: 'custom',
             element: (
               <div className={'flex items-center gap-2'}>
                 Status :{' '}
@@ -60,15 +59,11 @@ export const DetailImpactInnovationPage = () => {
             ),
           },
           {
-            type: 'save',
-            label: 'Edit Data',
-            onClick: () => {},
+            type: 'custom',
             element:
-              detail?.status_publish !== 'DIAJUKAN_EDITOR' ? (
+              detail?.status_publish === 'DRAFT' ? (
                 <div className={'flex items-center gap-1.5 border-l border-gray-500 pl-2'}>
-                  <Button>
-                    <MdSend /> Ajukan Ke Editor
-                  </Button>
+                  <ButtonSubmissionImpactInnovation {...(detail as IImpactInnovationList)} />
                 </div>
               ) : (
                 <></>

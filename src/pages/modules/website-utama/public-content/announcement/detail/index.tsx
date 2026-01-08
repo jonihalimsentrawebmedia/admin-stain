@@ -1,13 +1,14 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { HiPencil } from 'react-icons/hi'
-import { MdDownload, MdSend } from 'react-icons/md'
+import { MdDownload } from 'react-icons/md'
 import { Separator } from '@/components/ui/separator.tsx'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { UseGetAnnouncementDetail } from '@/pages/modules/website-utama/public-content/announcement/hooks'
 import { format } from 'date-fns'
 import Select from 'react-select'
 import { useEffect, useState } from 'react'
+import { ButtonSubmissionAnnouncement } from '@/pages/modules/website-utama/public-content/announcement/components/buttonSubmission.tsx'
 
 export const AnnouncementDetailPage = () => {
   const { id } = useParams()
@@ -21,12 +22,12 @@ export const AnnouncementDetailPage = () => {
     })) ?? []
 
   const [document, setDocument] = useState<any>(options[0] ?? null)
-  
+
   useEffect(() => {
     if (options.length > 0 && !document) {
-      setDocument(options[0]);
+      setDocument(options[0])
     }
-  }, [options]);
+  }, [options])
 
   return (
     <>
@@ -35,9 +36,7 @@ export const AnnouncementDetailPage = () => {
           label={'Detail Pengumuman'}
           buttonGroup={[
             {
-              type: 'edit',
-              label: 'Edit Data',
-              onClick: () => {},
+              type: 'custom',
               element: (
                 <div className={'flex items-center gap-2'}>
                   Status :{' '}
@@ -59,15 +58,11 @@ export const AnnouncementDetailPage = () => {
               ),
             },
             {
-              type: 'save',
-              label: 'Edit Data',
-              onClick: () => {},
+              type: 'custom',
               element:
-                detail?.status_publish !== 'DIAJUKAN_EDITOR' ? (
+                detail?.status_publish === 'DRAFT' ? (
                   <div className={'flex items-center gap-1.5 border-l border-gray-500 pl-2'}>
-                    <Button>
-                      <MdSend /> Ajukan Ke Editor
-                    </Button>
+                    <ButtonSubmissionAnnouncement {...detail} />
                   </div>
                 ) : (
                   <></>

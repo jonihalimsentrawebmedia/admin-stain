@@ -1,7 +1,7 @@
 import { UseGetProdiNews } from '@/pages/modules/website-prodi/public-content/news/hooks'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import type { StatusPublish } from '@/pages/modules/website-prodi/public-content/news/data/types.ts'
-import { ColumnsReturnByStatus } from '@/pages/modules/website-prodi/public-content/news/components/columns'
+import { ColumnsReturnByStatus } from './columns/index'
 import { useSearchParams } from 'react-router-dom'
 
 interface props {

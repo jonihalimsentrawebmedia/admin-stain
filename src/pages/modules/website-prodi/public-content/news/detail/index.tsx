@@ -35,9 +35,7 @@ export const DetailNewsProdiPage = () => {
         label={'Detail Berita'}
         buttonGroup={[
           {
-            type: 'edit',
-            label: 'Edit Data',
-            onClick: () => {},
+            type: 'custom',
             element: (
               <div className={'flex items-center gap-2'}>
                 Status :{' '}
@@ -46,7 +44,7 @@ export const DetailNewsProdiPage = () => {
                 </p>
                 <Button
                   onClick={() =>
-                    navigate(`/modules/website-utama/public-content/news/edit/${detail?.id_berita}`)
+                    navigate(`/modules/website-prodi/public-content/news/edit/${detail?.id_berita}`)
                   }
                   className={'border-primary text-primary hover:text-primary'}
                   variant={'outline'}
@@ -63,8 +61,7 @@ export const DetailNewsProdiPage = () => {
               navigate(`/modules/website-utama/public-content/news/edit/${detail?.id_berita}`)
             },
             element:
-              detail?.status_publish !== 'DIAJUKAN_EDITOR' &&
-              detail?.status_publish !== 'PUBLISHED' ? (
+              detail?.status_publish === 'DRAFT' ? (
                 <ButtonSubmissionNewsProdi {...(detail as any)} />
               ) : (
                 <></>
@@ -82,7 +79,7 @@ export const DetailNewsProdiPage = () => {
               'bg-white/12 rounded-lg shadow p-10 flex items- h-full gap-x-12 justify-between'
             }
           >
-            <div className="flex items-start gap-2 w-1/2 h-full">
+            <div className="flex items-start gap-2 w-8/12 h-full">
               <div className="flex gap-5 flex-col justify-between items-start h-full">
                 <div
                   className={
@@ -112,9 +109,9 @@ export const DetailNewsProdiPage = () => {
               </div>
             </div>
 
-            <div className="w-[484px] mx-auto">
+            <div className="w-4/12 mx-auto">
               {/* CAROUSEL */}
-              <Carousel setApi={setApi} className="w-[484px]">
+              <Carousel setApi={setApi} className="w-full">
                 <CarouselContent className="pr-0">
                   {images.map((item, index) => (
                     <CarouselItem key={index} className="pr-0">

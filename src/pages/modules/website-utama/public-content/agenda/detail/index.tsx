@@ -3,9 +3,10 @@ import { UseGetAgendaDetail } from '@/pages/modules/website-utama/public-content
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { HiPencil } from 'react-icons/hi'
-import { MdSend } from 'react-icons/md'
 import { Separator } from '@/components/ui/separator.tsx'
 import { format } from 'date-fns'
+import { ButtonSubmissionAgenda } from '@/pages/modules/website-utama/public-content/agenda/components/buttonSubmission.tsx'
+import type { IAgendaDetail } from '@/pages/modules/website-utama/public-content/agenda/data'
 
 export const DetailAgendaPage = () => {
   const { id } = useParams()
@@ -19,9 +20,7 @@ export const DetailAgendaPage = () => {
           label={'Detail Agenda'}
           buttonGroup={[
             {
-              type: 'edit',
-              label: 'Edit Data',
-              onClick: () => {},
+              type: 'custom',
               element: (
                 <div className={'flex items-center gap-2'}>
                   Status :{' '}
@@ -43,15 +42,11 @@ export const DetailAgendaPage = () => {
               ),
             },
             {
-              type: 'save',
-              label: 'Edit Data',
-              onClick: () => {},
+              type: 'custom',
               element:
-                detail?.status_publish !== 'DIAJUKAN_EDITOR' ? (
+                detail?.status_publish === 'DRAFT' ? (
                   <div className={'flex items-center gap-1.5 border-l border-gray-500 pl-2'}>
-                    <Button>
-                      <MdSend /> Ajukan Ke Editor
-                    </Button>
+                    <ButtonSubmissionAgenda {...(detail as IAgendaDetail)} />
                   </div>
                 ) : (
                   <></>

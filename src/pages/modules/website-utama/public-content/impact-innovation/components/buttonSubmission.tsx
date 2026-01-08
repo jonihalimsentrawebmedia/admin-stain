@@ -69,10 +69,10 @@ export const ButtonSubmissionImpactInnovation = (data: IImpactInnovationList) =>
         description={'Apakah anda yakin untuk mengajukan berita yang dipilih ke editor?'}
       >
         <div className={'flex flex-col gap-2.5'}>
-          {data?.gambar_tambahan.length > 0 ? (
+          {data?.gambar_tambahan && data?.gambar_tambahan.length > 0 ? (
             <Carousel>
               <CarouselContent>
-                {data?.gambar_tambahan.map((item, index) => (
+                {data?.gambar_tambahan?.map((item, index) => (
                   <CarouselItem key={index}>
                     <img
                       src={item?.gambar}

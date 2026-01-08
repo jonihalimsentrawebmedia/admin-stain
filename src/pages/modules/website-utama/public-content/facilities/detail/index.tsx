@@ -1,13 +1,14 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { HiPencil } from 'react-icons/hi'
-import { MdSend } from 'react-icons/md'
 import { Separator } from '@/components/ui/separator.tsx'
 import { useNavigate, useParams } from 'react-router-dom'
 import { UseGetFacilitiesDetail } from '@/pages/modules/website-utama/public-content/facilities/hooks'
 import { IconTitle } from '@/components/common/icon'
 import { FaPhone } from 'react-icons/fa6'
 import { IoMailSharp } from 'react-icons/io5'
+import { ButtonSubmissionFacilities } from '@/pages/modules/website-utama/public-content/facilities/components/buttonSubmission.tsx'
+import type { IFacilitiesDetail } from '@/pages/modules/website-utama/public-content/facilities/data'
 
 export const DetailFacilitiesPage = () => {
   const { id } = useParams()
@@ -21,9 +22,7 @@ export const DetailFacilitiesPage = () => {
           label={'Detail Agenda'}
           buttonGroup={[
             {
-              type: 'edit',
-              label: 'Edit Data',
-              onClick: () => {},
+              type: 'custom',
               element: (
                 <div className={'flex items-center gap-2'}>
                   Status :{' '}
@@ -45,15 +44,11 @@ export const DetailFacilitiesPage = () => {
               ),
             },
             {
-              type: 'save',
-              label: 'Edit Data',
-              onClick: () => {},
+              type: 'custom',
               element:
-                detail?.status_publish !== 'DIAJUKAN_EDITOR' ? (
+                detail?.status_publish === 'DRAFT' ? (
                   <div className={'flex items-center gap-1.5 border-l border-gray-500 pl-2'}>
-                    <Button>
-                      <MdSend /> Ajukan Ke Editor
-                    </Button>
+                    <ButtonSubmissionFacilities {...(detail as IFacilitiesDetail)} />
                   </div>
                 ) : (
                   <></>
@@ -78,7 +73,11 @@ export const DetailFacilitiesPage = () => {
           </div>
 
           <div className="w-5/12">
-            <img src={detail?.gambar} alt="image" className="w-full h-[456px] object-cover rounded-md" />
+            <img
+              src={detail?.gambar}
+              alt="image"
+              className="w-full h-[456px] object-cover rounded-md"
+            />
           </div>
         </div>
 
