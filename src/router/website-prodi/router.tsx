@@ -108,6 +108,15 @@ export const WebsiteProdiRouter = [
           },
         ],
       },
+      {
+        path: 'announcement',
+        children: [
+          {
+            index: true,
+            element: <></>,
+          },
+        ],
+      },
     ],
   },
   {
