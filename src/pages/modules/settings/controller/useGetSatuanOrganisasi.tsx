@@ -9,15 +9,18 @@ interface Props {
   kelompok?: string
   isFilter?: boolean
   isGetAll?: boolean
+  idParent?: string
+  searchFilter?:string
 }
 
 const useGetSatuanOrganisasi = (props: Props) => {
   const [searchParams] = useSearchParams()
+  const { kelompok, isFilter, isGetAll, idParent,searchFilter } = props
   const page = searchParams.get('page') || '1'
   const limit = searchParams.get('limit') || '10'
-  const search = searchParams.get('search') || ''
-  const { kelompok, isFilter, isGetAll } = props
-  const id_parent = isFilter ? '' : (searchParams.get('id_parent') ?? '')
+  const search = searchFilter?searchFilter:searchParams.get('search') || ''
+  
+  const id_parent = isFilter ? '' : idParent ? idParent : (searchParams.get('id_parent') ?? '')
   const ParamsSearch = new URLSearchParams({ page, limit, search, id_parent })
   const ParamsSearchParent = new URLSearchParams({ id_parent })
 

@@ -9,6 +9,7 @@ interface SearchProps {
   position?: 'start' | 'end'
   className?: string
   innerClassName?: string
+  disabled?:boolean
 }
 
 const Search: React.FC<SearchProps> = ({
@@ -16,7 +17,7 @@ const Search: React.FC<SearchProps> = ({
   placeholder = 'Cari...',
   position = 'start',
   className,
-  innerClassName,
+  innerClassName,disabled
 }) => {
   const [searchParam] = useSearchParams()
   const [query, setQuery] = useState('')
@@ -68,6 +69,7 @@ const Search: React.FC<SearchProps> = ({
       )}
 
       <input
+      disabled={disabled}
         type="text"
         className={cn(
           `w-full border bg-white border-[#CDCDCD] rounded py-3 focus:outline-none focus:ring-2 focus:ring-primary`,
@@ -81,7 +83,7 @@ const Search: React.FC<SearchProps> = ({
 
       {/* Suffix <search di kanan jika posisi end */}
       {position === 'end' && (
-        <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[#295AA3] text-sm select-none">
+        <span className="absolute right-4 top-1/2 -translate-y-1/2  text-sm select-none">
           <SearchIcon size={16} />
         </span>
       )}

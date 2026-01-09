@@ -63,6 +63,8 @@ export interface SatuanOrganisasiList {
   kecamatan: string
   kelurahan: string
   kode_pos: string
+  singkatan_fakultas: string
+  singkatan_universitas: string
 
   // Informasi Kontak & Sosial Media
   telepon: string

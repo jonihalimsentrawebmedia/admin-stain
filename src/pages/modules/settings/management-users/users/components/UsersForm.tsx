@@ -9,18 +9,18 @@ import type { UseFormReturn } from 'react-hook-form'
 import type { UsersType } from '../model'
 import useGetLevelUser from '../../level/controller/useGetLevelUser'
 import { useEffect, useState } from 'react'
-import { InputCheckbox } from '@/components/common/form/InputCheckbox'
-import useGetSatuanOrganisasiAll from '../../../controller/useGetSatuanOrganisasiAll'
+
+import InputSatuanKerja from './InputSatuanKerja'
 
 interface Props {
   form: UseFormReturn<UsersType>
   isEdit?: boolean
 }
-const UsersForm = ({ form ,isEdit}: Props) => {
+const UsersForm = ({ form, isEdit }: Props) => {
   const { levelUser } = useGetLevelUser()
   const idLevelUser = form.watch('level_user.id_level_user')
   const [isSatuanKerja, setIsSatuanKerja] = useState(false)
-  const { satuanOrganisasi } = useGetSatuanOrganisasiAll()
+
   useEffect(() => {
     if (idLevelUser) {
       const temp = levelUser.filter((item) => item.id_level == idLevelUser)[0]
@@ -28,11 +28,9 @@ const UsersForm = ({ form ,isEdit}: Props) => {
       setIsSatuanKerja(temp.is_satker)
     }
   }, [idLevelUser])
+
   
-  // const leverUserFil = levelUser.filter(
-  //   (item) => item.id_level == form.watch('level_user.id_level_user')
-  // )[0]
-  
+
   return (
     <>
       <div className="max-w-[250px]">
@@ -125,20 +123,21 @@ const UsersForm = ({ form ,isEdit}: Props) => {
               />
 
               {isSatuanKerja ? (
-                <InputCheckbox
-                  isRow
-                  form={form}
-                  name="satuan_kerja"
-                  label="Pilih Satuan Kerja"
-                  data={satuanOrganisasi.map((item) => {
-                    return {
-                      label: item.nama,
-                      value: item.id_satuan_organisasi,
-                    }
-                  })}
-                 
-                  isGrid
-                />
+                // <InputCheckbox
+                //   isRow
+                //   form={form}
+                //   name="satuan_kerja"
+                //   label="Pilih Satuan Kerja"
+                //   data={satuanOrganisasi.map((item) => {
+                //     return {
+                //       label: item.nama,
+                //       value: item.id_satuan_organisasi,
+                //     }
+                //   })}
+
+                //   isGrid
+                // />
+                <InputSatuanKerja form={form} />
               ) : (
                 <InputText
                   form={form}
