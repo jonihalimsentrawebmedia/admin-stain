@@ -3,7 +3,7 @@ export const levelUserSchema = z.object({
   id_level_user: z.string().min(1, { message: "ID level user harus diisi." }),
 });
 export const UsersResolver = z.object({
-  gambar: z.string(),
+  gambar: z.string().min(1, { message: "Gambar harus diupload." }),
 
   // Tipe: string (Nama lengkap)
   nama_lengkap: z.string().min(1, { message: "Nama lengkap harus diisi." }),
