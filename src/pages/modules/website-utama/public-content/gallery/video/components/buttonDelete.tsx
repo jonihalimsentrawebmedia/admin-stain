@@ -1,8 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
-import { useForm } from 'react-hook-form'
-import { VideoResolver, type VideoType } from '../data/resolver'
-import { zodResolver } from '@hookform/resolvers/zod'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
@@ -15,19 +12,6 @@ import { Button } from '@/components/ui/button.tsx'
 export const ButtonDeleteVideo = (data: IGalleryVideo) => {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
-
-  const form = useForm<VideoType>({
-    resolver: zodResolver(VideoResolver),
-  })
-
-  useEffect(() => {
-    if (data) {
-      form.reset({
-        link_video: data.link_video,
-        judul: data.judul,
-      })
-    }
-  }, [data])
 
   const queryClient = useQueryClient()
 
@@ -42,7 +26,6 @@ export const ButtonDeleteVideo = (data: IGalleryVideo) => {
             queryKey: ['list-video'],
           })
           toast.success(res.data.message || 'Success Pengajuan tambah data video')
-          form.reset()
         }
       })
       .catch((err) => {
@@ -62,7 +45,7 @@ export const ButtonDeleteVideo = (data: IGalleryVideo) => {
         setOpen={setOpen}
         title={'Hapus Galeri Video'}
         description={'Apakah anda yakin untuk menghapus galeri video yang dipilih?'}
-        className={'rounded lg:min-w-2xl'}
+        className={'rounded lg:max-w-2xl'}
       >
         <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
           <p className="text-gray-500">Judul Gallery</p>
@@ -83,9 +66,7 @@ export const ButtonDeleteVideo = (data: IGalleryVideo) => {
               },
             },
             {
-              isDisabled: loading,
-              label: 'Hapus',
-              type: 'save',
+              type: 'custom',
               element: (
                 <>
                   <Button variant={'destructive'} onClick={HandlerDelete} disabled={loading}>
@@ -93,7 +74,6 @@ export const ButtonDeleteVideo = (data: IGalleryVideo) => {
                   </Button>
                 </>
               ),
-              onClick: () => {},
             },
           ]}
         />

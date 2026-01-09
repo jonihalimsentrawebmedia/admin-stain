@@ -45,7 +45,11 @@ export const ProfileNewsColumns = () => {
       header: '',
       cell: ({ row }) => {
         return (
-          <Link to={'#'} key={row.original.id_berita} className="text-primary">
+          <Link
+            to={`/modules/website-prodi/public-content/news/detail/${row?.original?.id_berita}`}
+            key={row.original.id_berita}
+            className="text-primary"
+          >
             <button className={'bg-blue-500 text-white p-1.5 rounded'}>
               <MdInfo />
             </button>

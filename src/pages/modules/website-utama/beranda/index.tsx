@@ -1,6 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
 import { Plus } from 'lucide-react'
 import {
@@ -14,6 +13,7 @@ import { ApprovedSection } from '@/pages/modules/website-utama/beranda/component
 import { Link } from 'react-router-dom'
 import { SelectBasic } from '@/components/common/select/basic.tsx'
 import type { Mode } from '@/pages/modules/website-utama/beranda/types'
+import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/hooks/getProfile.tsx'
 
 export default function DashboardAdmin() {
   const [tabsName, setTabsName] = useState('DIAJUKAN_EDITOR')
@@ -30,6 +30,7 @@ export default function DashboardAdmin() {
     []
 
   const { status } = UseGetTotalVisitor()
+  const { profileUser } = UseGetUserProfile()
   const { approvedList } = UseGetApprovedList(tabsName ?? '')
 
   const TabsList = [
@@ -81,7 +82,7 @@ export default function DashboardAdmin() {
   return (
     <div className="min-h-screen space-y-6">
       <h1 className="text-2xl font-semibold">
-        Selamat Datang <span className="text-green-500">Admin Website</span>
+        Selamat Datang <span className="text-green-500">{profileUser?.nama_lengkap}</span>
       </h1>
 
       {/* Statistik */}

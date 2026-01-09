@@ -4,7 +4,7 @@ import Select, { type StylesConfig } from 'react-select'
 
 const primaryColor = 'hsl(var(--primary))'
 
-const customStyles: StylesConfig = {
+ const customStylesSelect: StylesConfig = {
   control: (provided, state) => ({
     ...provided,
     borderColor: primaryColor, // hijau
@@ -90,7 +90,7 @@ const SelectFilter = ({
           },
           ...options,
         ]}
-        styles={customStyles}
+        styles={customStylesSelect}
         className={`${selectClassName}`}
         placeholder="Pilih"
         onChange={(e: any) => {

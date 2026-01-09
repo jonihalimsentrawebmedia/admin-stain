@@ -1,7 +1,6 @@
 import { useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
 import type { IMessage } from '@/pages/modules/website-utama/pertayaan/kotak-masuk/data/types.tsx'
-import { MdOutlineHistory } from 'react-icons/md'
 import { ButtonReply } from '@/pages/modules/website-utama/pertayaan/kotak-masuk/components/buttonReply.tsx'
 
 export const ColumnsMessage = () => {
@@ -58,15 +57,7 @@ export const ColumnsMessage = () => {
       accessorKey: 'status',
       header: 'Balas',
       cell: ({ row }) => {
-        if (row?.original?.status === 'BELUM_TERJAWAB') {
-          return <ButtonReply data={row.original} />
-        } else {
-          return (
-            <button className="text-blue-500 p-2 rounded border border-blue-500">
-              <MdOutlineHistory className={'size-4'} />
-            </button>
-          )
-        }
+        return <ButtonReply data={row.original} />
       },
     },
   ]

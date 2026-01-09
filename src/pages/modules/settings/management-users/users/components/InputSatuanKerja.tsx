@@ -4,7 +4,7 @@ import { useMobile } from '@/utils/useMobile'
 import { useState } from 'react'
 import Select from 'react-select'
 
-import InputModalSatuanKerja from './InputModalSatuanKerja'
+import InputModalSatuanKerja, { customStylesSelect } from './InputModalSatuanKerja'
 import useGetSatuanOrganisasi from '../../../controller/useGetSatuanOrganisasi'
 import { Checkbox } from '@/components/ui/checkbox'
 
@@ -182,6 +182,7 @@ const InputSatuanKerja = ({ form }: Props) => {
               Kelompok
             </div>
             <Select
+            styles={customStylesSelect}
               onChange={(e: any) => {
                 setValueKelompok(e)
               }}

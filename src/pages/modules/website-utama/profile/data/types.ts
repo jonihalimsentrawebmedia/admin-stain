@@ -24,4 +24,5 @@ export interface IDetailUniversity {
   updated_at: string // ISO date string
   updated_user: string
   nama_parent: string
+  id_parent_satuan_organisasi: string
 }

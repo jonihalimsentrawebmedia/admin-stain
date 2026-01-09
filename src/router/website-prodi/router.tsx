@@ -37,6 +37,17 @@ import { DetailPromotionPage } from '@/pages/modules/website-prodi/public-conten
 import { QuestionFAQProdiPage } from '@/pages/modules/website-prodi/question/FAQ'
 import { CategoryFAQProdiPage } from '@/pages/modules/website-prodi/question/FAQ/category'
 import { InboxMessage } from '@/pages/modules/website-prodi/question/inbox-message'
+import { CurriculumProdiPage } from '@/pages/modules/website-prodi/curriculum'
+import { DataProdiProfile } from '@/pages/modules/website-prodi/data-prodi'
+import { UpdatedDataProdi } from '@/pages/modules/website-prodi/data-prodi/updated'
+import { AccreditationProdiPage } from '@/pages/modules/website-prodi/accreditation'
+import { GalleryVideoProdiPage } from '@/pages/modules/website-prodi/gallery/video'
+import AccreditationProdiLog from '@/pages/modules/website-prodi/accreditation/log'
+import { GalleryAlbumProdiPage } from '@/pages/modules/website-prodi/gallery/album'
+import { GalleryPhotoProdiPage } from '@/pages/modules/website-prodi/gallery/photo'
+import { LogActivityGalleryAlbum } from '@/pages/modules/website-prodi/gallery/album/log'
+import { GalleryProfileDetail } from '@/pages/modules/website-prodi/profile/gallery'
+import DashboardAdminProdi from '@/pages/modules/website-prodi/dashboard'
 
 export const WebsiteProdiRouter = [
   {
@@ -44,7 +55,7 @@ export const WebsiteProdiRouter = [
     children: [
       {
         index: true,
-        element: <></>,
+        element: <DashboardAdminProdi />,
       },
       {
         path: 'user-profile',
@@ -53,6 +64,19 @@ export const WebsiteProdiRouter = [
       {
         path: 'change-password',
         element: <ChangePassword />,
+      },
+    ],
+  },
+  {
+    path: 'data-prodi',
+    children: [
+      {
+        index: true,
+        element: <DataProdiProfile />,
+      },
+      {
+        path: 'edit',
+        element: <UpdatedDataProdi />,
       },
     ],
   },
@@ -91,6 +115,10 @@ export const WebsiteProdiRouter = [
       {
         path: 'news',
         element: <NewsPublishedProfile />,
+      },
+      {
+        path: 'gallery',
+        element: <GalleryProfileDetail />,
       },
       {
         path: 'contact-us',
@@ -223,6 +251,54 @@ export const WebsiteProdiRouter = [
           {
             path: 'edit/:id',
             element: <UpdatedDownloadProdiPage />,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: 'accreditation',
+    children: [
+      {
+        index: true,
+        element: <AccreditationProdiPage />,
+      },
+      {
+        path: 'log/:id',
+        element: <AccreditationProdiLog />,
+      },
+    ],
+  },
+  {
+    path: 'curriculum',
+    children: [
+      {
+        index: true,
+        element: <CurriculumProdiPage />,
+      },
+    ],
+  },
+  {
+    path: 'Gallery',
+    children: [
+      {
+        path: 'video',
+        element: <GalleryVideoProdiPage />,
+      },
+      {
+        path: 'photo',
+        children: [
+          {
+            index: true,
+            element: <GalleryAlbumProdiPage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityGalleryAlbum />,
+          },
+          {
+            path: 'album/:id',
+            element: <GalleryPhotoProdiPage />,
           },
         ],
       },
