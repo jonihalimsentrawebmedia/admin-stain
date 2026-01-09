@@ -42,7 +42,7 @@ export const UserProfilePage = () => {
                   <p>{profileUser?.level_user}</p>
                   <p className="text-gray-500">Satuan Kerja</p>
                   <ul className={'list-decimal flex flex-col gap-1.5 pl-4'}>
-                    {profileUser?.satuan_kerja.map((item, k) => (
+                    {profileUser?.satuan_kerja?.map((item, k) => (
                       <li key={k}>{item}</li>
                     ))}
                   </ul>
