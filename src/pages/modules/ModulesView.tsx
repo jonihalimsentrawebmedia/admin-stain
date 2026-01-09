@@ -12,7 +12,6 @@ import { GetModuleUrl } from '@/utils/helper.tsx'
 const ModulesView = () => {
   const { modules, moduleSelect, setModuleSelect, goToProfile } = ModulesViewModel()
 
-
   return (
     <div
       style={{
@@ -20,7 +19,7 @@ const ModulesView = () => {
       }}
       className={`w-screen h-screen object-cover bg-cover bg-fixed relative  flex justify-center items-center `}
     >
-      <Card className="max-w-7xl w-full h-[80dvh] overflow-y-auto backdrop-blur-md bg-white/40 ">
+      <Card className="max-w-7xl w-full overflow-y-auto backdrop-blur-md bg-white/40 ">
         <CardContent className="flex flex-col gap-4">
           <div className="bg-green-800 rounded-lg">
             <div

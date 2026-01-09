@@ -121,7 +121,7 @@ export const UseGetApprovedList = (status: string) => {
   const loading = isLoading || isFetching
 
   useEffect(() => {
-    if (data && data !== null) {
+    if (data) {
       setApprovedList(data)
     } else {
       setApprovedList([])
@@ -137,10 +137,10 @@ export const UseGetTrentVisitor = (mode: Mode) => {
   const [device, setDevice] = useState<{ desktop: number; mobile: number }>()
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['tren-visitor', mode],
+    queryKey: ['trent-visitor', mode],
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get(`website-utama/dashboard/statistik-pengunjung/${mode ?? 'harian'}`).then(
+      AxiosClient.get(`/website-utama/dashboard/statistik-pengunjung/${mode ?? 'harian'}`).then(
         (res) => res.data?.data
       ),
   })

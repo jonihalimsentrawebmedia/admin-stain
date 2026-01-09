@@ -60,7 +60,7 @@ const TableCustom = (props: Props) => {
     isShowChoiceColumn,
   } = props
   const table = useReactTable({
-    data,
+    data: data ?? [],
     columns,
     getCoreRowModel: getCoreRowModel(),
   })

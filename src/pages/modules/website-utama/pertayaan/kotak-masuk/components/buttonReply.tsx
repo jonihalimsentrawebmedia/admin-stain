@@ -9,6 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import type { IMessage } from '@/pages/modules/website-utama/pertayaan/kotak-masuk/data/types.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
+import { RiHistoryFill } from 'react-icons/ri'
 
 interface Props {
   data: IMessage
@@ -26,9 +27,11 @@ export const ButtonReply = (props: Props) => {
 
   const queryClient = useQueryClient()
 
+  const status = data?.status === 'BELUM_TERJAWAB' ? 'kirim-jawaban' : 'kirim-ulang'
+
   const HandleReply = async (value: IMessageResolver) => {
     setLoading(!loading)
-    await AxiosClient.post(`/website-utama/pertanyaan/${data?.id_pertanyaan}/kirim-jawaban`, value)
+    await AxiosClient.post(`/website-utama/pertanyaan/${data?.id_pertanyaan}/${status}`, value)
       .then((res) => {
         if (res.data.status) {
           setOpen(false)
@@ -48,13 +51,25 @@ export const ButtonReply = (props: Props) => {
 
   return (
     <>
-      <button
-        className="bg-blue-500 text-white p-2 rounded"
-        onClick={() => setOpen(!open)}
-        disabled={loading}
-      >
-        <IoMdMail className={'size-4'} />
-      </button>
+      {data?.status === 'BELUM_TERJAWAB' ? (
+        <button
+          className="bg-blue-500 text-white p-2 rounded"
+          onClick={() => setOpen(!open)}
+          disabled={loading}
+        >
+          <IoMdMail className={'size-4'} />
+        </button>
+      ) : (
+        <>
+          <button
+            className="text-blue-500 p-2 hover:text-blue-600 rounded border border-blue-500"
+            onClick={() => setOpen(!open)}
+            disabled={loading}
+          >
+            <RiHistoryFill className={'size-4'} />
+          </button>
+        </>
+      )}
 
       <DialogCustom
         disableOutsideDialog={true}

@@ -9,7 +9,10 @@ export interface AcreditationList {
   akhir_berlaku: string
   nilai_akreditas: string
   created_at: string
+  updated_at: string
   gambar: string
+  nama_user_created: string
+  nama_user_updated: string
   nama_satuan_organisasi_akreditas: string
   nama_satuan_organisasi: string
 }
