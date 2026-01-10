@@ -1,6 +1,7 @@
 import { MdBook, MdBusiness, MdDashboard, MdInfo, MdQuestionAnswer } from 'react-icons/md'
 import { FaGraduationCap, FaImage } from 'react-icons/fa'
 import { PiCertificateFill } from 'react-icons/pi'
+import { FaGear } from 'react-icons/fa6'
 
 const baseDomain = '/modules/website-prodi'
 
@@ -106,6 +107,29 @@ export const MENULISTPRODI = [
         id: 83,
         name: 'Pendaftaran',
         path: `${baseDomain}/question/registration`,
+      },
+    ],
+  },
+  {
+    id: 9,
+    name: 'Pengaturan Website',
+    path: `${baseDomain}/settings`,
+    icon: <FaGear className={'size-5'} />,
+    child: [
+      {
+        id: 91,
+        name: 'Landing Page',
+        path: `${baseDomain}/settings/landing-page`,
+      },
+      {
+        id: 92,
+        name: 'Landing Page Promosi',
+        path: `${baseDomain}/settings/landing-promosi`,
+      },
+      {
+        id: 93,
+        name: 'Gambar Background',
+        path: `${baseDomain}/settings/background`,
       },
     ],
   },

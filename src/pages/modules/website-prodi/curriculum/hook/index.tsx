@@ -38,3 +38,23 @@ export const UseGetCurriculum = (props?: DataProps) => {
 
   return { curriculum, loading, meta }
 }
+
+export const UseGetCurriculumDetail = (id: string) => {
+  const [detailCurriculum, setDetailCurriculum] = useState<ICurriculum>()
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['detail-curriculum', id],
+    refetchOnWindowFocus: false,
+    queryFn: () => AxiosClient.get(`/prodi/kurikulum/${id}`).then((res) => res.data?.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setDetailCurriculum(data)
+    }
+  }, [data])
+
+  return { detailCurriculum, loading }
+}

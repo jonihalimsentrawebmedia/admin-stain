@@ -48,6 +48,11 @@ import { GalleryPhotoProdiPage } from '@/pages/modules/website-prodi/gallery/pho
 import { LogActivityGalleryAlbum } from '@/pages/modules/website-prodi/gallery/album/log'
 import { GalleryProfileDetail } from '@/pages/modules/website-prodi/profile/gallery'
 import DashboardAdminProdi from '@/pages/modules/website-prodi/dashboard'
+import { CurriculumSubjectDetail } from '@/pages/modules/website-prodi/curriculum/suject-detail'
+import { RegistrationQuestionPage } from '@/pages/modules/website-prodi/question/registration'
+import { LandingPageProdi } from '@/pages/modules/website-prodi/settings/landing-page'
+import { LandingPromotion } from '@/pages/modules/website-prodi/settings/landing-promotion'
+import { BackgroundWebsiteSettings } from '@/pages/modules/website-prodi/settings/background'
 
 export const WebsiteProdiRouter = [
   {
@@ -276,6 +281,10 @@ export const WebsiteProdiRouter = [
         index: true,
         element: <CurriculumProdiPage />,
       },
+      {
+        path: 'subject/:id',
+        element: <CurriculumSubjectDetail />,
+      },
     ],
   },
   {
@@ -323,6 +332,27 @@ export const WebsiteProdiRouter = [
       {
         path: 'inbox',
         element: <InboxMessage />,
+      },
+      {
+        path: 'registration',
+        element: <RegistrationQuestionPage />,
+      },
+    ],
+  },
+  {
+    path: 'settings',
+    children: [
+      {
+        path: 'landing-page',
+        element: <LandingPageProdi />,
+      },
+      {
+        path: 'landing-promosi',
+        element: <LandingPromotion />,
+      },
+      {
+        path: 'background',
+        element: <BackgroundWebsiteSettings />,
       },
     ],
   },

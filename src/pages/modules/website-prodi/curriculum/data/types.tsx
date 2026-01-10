@@ -5,6 +5,8 @@ export interface ICurriculum {
   nama_kurikulum: string
   slug: string
   lama_kuliah: number
+  nama_jenjang_pendidikan: string
+  kode_jenjang_pendidikan: string
   created_at: string
   created_user: string
   updated_at: string
