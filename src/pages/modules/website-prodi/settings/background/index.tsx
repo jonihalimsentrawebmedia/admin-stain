@@ -11,7 +11,14 @@ export const BackgroundWebsiteSettings = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const context = searchParams.get('context') ?? TAB_LIST[0].value
 
-  const { meta, prodiBackground, loading } = UseGetProdiBackground()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+
+  const { meta, prodiBackground, loading } = UseGetProdiBackground({
+    page: page,
+    limit: limit,
+    context: context,
+  })
   const columns = ProdiLandingPageColumns()
 
   return (
