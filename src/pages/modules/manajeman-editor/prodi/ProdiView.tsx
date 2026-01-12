@@ -1,0 +1,54 @@
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
+import TableCustom from '@/components/common/table/TableCustom'
+import ProdiViewModel from './ProdiViewModel'
+import SelectFilter from '@/components/common/filter/SelectFilter'
+import SubmissionButton from '../components/buttonSumission/SubmissionButton'
+import useGetSatuanOrganisasi from '../controller/useGetSatuanOrganisasi'
+
+const ProdiView = () => {
+  const { columns } = ProdiViewModel()
+  const { loading, satuanOrganisasi, meta } = useGetSatuanOrganisasi({
+    kelompok: 'PRODI',
+  })
+  const { satuanOrganisasi: fakultas } = useGetSatuanOrganisasi({
+    kelompok: 'FAKULTAS',
+    isFilter: true,
+  })
+  return (
+    <div className="flex flex-col gap-4">
+      <ButtonTitleGroup
+        label="Data Prodi"
+        buttonGroup={[
+          {
+            type: 'custom',
+            element: <SubmissionButton kelompok="PRODI" />,
+          },
+        ]}
+      />
+
+      <TableCustom
+        addFilter={
+          <SelectFilter
+            name="id_parent"
+            label="Fakultas Asal"
+            options={fakultas.map((item) => {
+              return {
+                label: item.nama,
+                value: item.id_satuan_organisasi,
+              }
+            })}
+          />
+        }
+        columns={columns}
+        data={satuanOrganisasi}
+        loading={loading}
+        meta={meta}
+        isShowChoiceColumn
+        tdClassName="whitespace-pre-line"
+        thClassName="whitespace-pre-line"
+      />
+    </div>
+  )
+}
+
+export default ProdiView

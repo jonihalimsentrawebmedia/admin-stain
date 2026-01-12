@@ -1,0 +1,82 @@
+import { IoSchool } from 'react-icons/io5'
+import { MdBusiness, MdBusinessCenter, MdDashboard, MdInfo } from 'react-icons/md'
+
+const baseDomain = '/modules/editor'
+
+export const MENULIST = [
+  {
+    id: 1,
+    name: 'Dashboard',
+    path: `${baseDomain}/dashboard`,
+    icon: <MdDashboard className={'size-5'} />,
+    child: [],
+  },
+  {
+    id: 2,
+    name: 'Data Utama Universitas',
+    path: `${baseDomain}/main-data-university`,
+    icon: <IoSchool className="size-5" />,
+    child: [],
+  },
+  {
+    id: 3,
+    path: `${baseDomain}/faculty`,
+    name: 'Data Fakultas',
+    icon: <MdBusiness className="size-5" />,
+    child: [],
+  },
+  {
+    id: 4,
+    path: `${baseDomain}/prodi`,
+    name: 'Data Prodi',
+    icon: <MdBusiness className="size-5" />,
+    child: [],
+  },
+  {
+    id: 5,
+    path: `${baseDomain}/unit`,
+    name: 'Data Unit',
+    icon: <MdBusinessCenter className="size-5" />,
+    child: [],
+  },
+  {
+    id: 6,
+    path: `${baseDomain}/institution`,
+    name: 'Data Lembaga',
+    icon: <MdBusinessCenter className="size-5" />,
+    child: [],
+  },
+  {
+    id: 4,
+    name: 'Konten Publik',
+    path: `${baseDomain}/public-content`,
+    icon: <MdInfo className={'size-5'} />,
+    child: [
+      {
+        id: 41,
+        name: 'Berita',
+        path: `${baseDomain}/public-content/news`,
+      },
+      // {
+      //   id: 42,
+      //   name: 'Pengumuman',
+      //   path: `${baseDomain}/public-content/announcement`,
+      // },
+      // {
+      //   id: 43,
+      //   name: 'Agenda',
+      //   path: `${baseDomain}/public-content/agenda`,
+      // },
+      // {
+      //   id: 44,
+      //   name: 'Promosi',
+      //   path: `${baseDomain}/public-content/promotion`,
+      // },
+      // {
+      //   id: 45,
+      //   name: 'Download',
+      //   path: `${baseDomain}/public-content/download`,
+      // },
+    ],
+  },
+]

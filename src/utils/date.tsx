@@ -38,3 +38,29 @@ export function formatDateTimeCustom(value?: string | null) {
     date: '',
   }
 }
+
+export function cekSelisihHari(a:string) {
+  // 1. Ubah input dan hari ini ke objek Date
+  const tanggalInput = new Date(a);
+  const hariIni = new Date();
+
+  // 2. Reset waktu ke jam 00:00:00 agar perbandingan hanya pada tanggal
+  tanggalInput.setHours(0, 0, 0, 0);
+  hariIni.setHours(0, 0, 0, 0);
+
+  // 3. Hitung selisih dalam milidetik, lalu ubah ke satuan hari
+  const selisihMilidetik = hariIni.getTime() - tanggalInput.getTime();
+  const selisihHari = Math.floor(selisihMilidetik / (1000 * 60 * 60 * 24));
+
+  // 4. Logika Return
+  if (selisihHari === 0) {
+    return "hari ini";
+  } else if (selisihHari === 1) {
+    return "1 hari sebelumnya";
+  } else if (selisihHari > 1) {
+    return `${selisihHari} hari sebelumnya`;
+  } else {
+    // Jika selisih negatif, berarti tanggal input ada di masa depan
+    return `${Math.abs(selisihHari)} hari mendatang`;
+  }
+}

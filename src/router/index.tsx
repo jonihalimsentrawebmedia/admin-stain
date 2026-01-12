@@ -18,6 +18,8 @@ import { WebsiteProdiRouter } from '@/router/website-prodi/router.tsx'
 import { SelectProdi } from '@/pages/modules/website-prodi/select-prodi'
 import ProdiWebTheme from '@/pages/modules/website-prodi/components/layout/theme.tsx'
 import DefaultTheme from '@/components/common/theme/default.tsx'
+import MainLayoutEditor from '@/pages/modules/manajeman-editor/components/layout'
+import { EditorRouter } from './editor/router'
 
 export const Router = createBrowserRouter([
   {
@@ -95,6 +97,15 @@ export const Router = createBrowserRouter([
           </ProdiWebTheme>
         ),
         children: [...WebsiteProdiRouter],
+      },
+      {
+        path: 'editor',
+        element: (
+          <DefaultTheme>
+            <MainLayoutEditor />
+          </DefaultTheme>
+        ),
+        children: [...EditorRouter],
       },
     ],
   },

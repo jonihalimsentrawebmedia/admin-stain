@@ -9,9 +9,10 @@ export interface Meta {
 interface Props {
   meta?: Meta
   length: number
+  setPage?: (value: string) => void
 }
 
-const TablePaginate = ({ meta }: Props) => {
+const TablePaginate = ({ meta, setPage }: Props) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const currentPage = parseInt(searchParams.get('page') ?? '1')
   // const limit = Number(searchParams.get("limit") ?? "10");
@@ -23,9 +24,13 @@ const TablePaginate = ({ meta }: Props) => {
   // const end = Math.min(currentPage * limit, total);
 
   const updatePage = (page: number) => {
-    const newParams = new URLSearchParams(searchParams)
-    newParams.set('page', page.toString())
-    setSearchParams(newParams)
+    if (setPage) {
+      setPage(page.toString())
+    } else {
+      const newParams = new URLSearchParams(searchParams)
+      newParams.set('page', page.toString())
+      setSearchParams(newParams)
+    }
   }
 
   const handleNextPrev = (direction: 'next' | 'prev') => {

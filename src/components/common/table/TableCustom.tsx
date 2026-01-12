@@ -38,6 +38,9 @@ interface Props {
   meta?: Meta
   isShowLimit?: boolean
   isShowChoiceColumn?: boolean
+  setPage?: (value: any) => void
+  setLimit?: (value: any) => void
+  setSearch?: (value: any) => void
 }
 const TableCustom = (props: Props) => {
   const {
@@ -58,6 +61,9 @@ const TableCustom = (props: Props) => {
     meta,
     isShowLimit = true,
     isShowChoiceColumn,
+    setLimit,
+    setPage,
+    setSearch,
   } = props
   const table = useReactTable({
     data: data ?? [],
@@ -67,13 +73,17 @@ const TableCustom = (props: Props) => {
   const [searchparams, setSearchParams] = useSearchParams()
   const [columnChecked, setColumnChecked] = useState<any>([])
   const handleSearch = (query: string) => {
-    setSearchParams((prev) => {
-      const newParams = new URLSearchParams(prev)
-      newParams.set('search', query)
-      newParams.set('page', '1') // Reset ke halaman 1 saat search
-      if (query === '') newParams.delete('search')
-      return newParams
-    })
+    if (setSearch) {
+      setSearch(query)
+    } else {
+      setSearchParams((prev) => {
+        const newParams = new URLSearchParams(prev)
+        newParams.set('search', query)
+        newParams.set('page', '1') // Reset ke halaman 1 saat search
+        if (query === '') newParams.delete('search')
+        return newParams
+      })
+    }
   }
   const columnCount = columns?.length || 5
   const totalData = meta?.total ?? 0
@@ -209,7 +219,7 @@ const TableCustom = (props: Props) => {
         <div className="flex gap-4 items-center justify-between">
           <div>
             {isShowLimit ? (
-              <SetLimitList />
+              <SetLimitList setLimit={setLimit} />
             ) : (
               <div>
                 Menampilkan 1 - {limitData > totalData ? totalData : limitData} Data dari{' '}
@@ -217,7 +227,7 @@ const TableCustom = (props: Props) => {
               </div>
             )}
           </div>
-          <TablePaginate length={10} meta={meta} />
+          <TablePaginate length={10} meta={meta} setPage={setPage} />
         </div>
       )}
     </div>

@@ -1,0 +1,37 @@
+import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import AxiosClient from "@/provider/axios";
+import type { SatuanOrganisasiList } from "../../settings/model";
+
+
+
+const useGetSatuanOrganisasiAll = () => {
+ 
+  const [satuanOrganisasi, setSatuanOrganisasi] = useState<
+    SatuanOrganisasiList[]
+  >([]);
+
+  const { data, isLoading, isFetching } = useQuery({
+    refetchOnWindowFocus: false,
+    queryKey: ["satuan-organisasi-list",],
+    queryFn: () =>
+      AxiosClient.get(
+        `/pengaturan/satuan-organisasi?limit=10000`
+      ).then((res) => res.data),
+  });
+
+  const loading = isLoading || isFetching;
+
+  useEffect(() => {
+    if (data) {
+      setSatuanOrganisasi(data.data??[]);
+    }
+  }, [data]);
+
+  return {
+    satuanOrganisasi,
+    loading,
+  };
+};
+
+export default useGetSatuanOrganisasiAll;
