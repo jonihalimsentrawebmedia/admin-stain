@@ -14,6 +14,11 @@ import ProdiDetailHistoryView from '@/pages/modules/manajeman-editor/prodi/detai
 import ProdiDetailView from '@/pages/modules/manajeman-editor/prodi/detail/ProdiDetailView'
 import ProdiEditView from '@/pages/modules/manajeman-editor/prodi/edit/ProdiEditView'
 import ProdiView from '@/pages/modules/manajeman-editor/prodi/ProdiView'
+import { NewsManagementEditorPublicContentPage } from '@/pages/modules/manajeman-editor/public-content/news'
+import { NewsMangagementEditorCreated } from '@/pages/modules/manajeman-editor/public-content/news/created'
+import { DetailNewsManagementEditorPage } from '@/pages/modules/manajeman-editor/public-content/news/detail'
+import { LogActivityNewsManagementEditorPage } from '@/pages/modules/manajeman-editor/public-content/news/log-data'
+import { NewsManagementEditorUpdated } from '@/pages/modules/manajeman-editor/public-content/news/updated'
 import UnitDetailHistoryView from '@/pages/modules/manajeman-editor/unit/detail-history/UnitDetailHistoryView'
 import UnitDetailView from '@/pages/modules/manajeman-editor/unit/detail/UnitDetailView'
 import UnitEditView from '@/pages/modules/manajeman-editor/unit/edit/UnitEditView'
@@ -148,6 +153,36 @@ export const EditorRouter = [
       {
         path: ':id/detail/:idHistory',
         element: <InstitutionDetailHistoryView />,
+      },
+    ],
+  },
+  {
+    path: 'public-content',
+    children: [
+      {
+        path: 'news',
+        children: [
+          {
+            index: true,
+            element: <NewsManagementEditorPublicContentPage />,
+          },
+          {
+            path: 'add',
+            element: <NewsMangagementEditorCreated />,
+          },
+          {
+            path: 'edit/:id',
+            element: <NewsManagementEditorUpdated />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailNewsManagementEditorPage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityNewsManagementEditorPage />,
+          },
+        ],
       },
     ],
   },

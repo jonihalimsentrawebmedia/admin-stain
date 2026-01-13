@@ -34,7 +34,7 @@ const primaryColor = 'hsl(var(--primary))'
   menu: (provided) => ({
     ...provided,
     borderRadius: '8px',
-    // zIndex: 99,
+    zIndex: 99,
   }),
 }
 
@@ -75,7 +75,7 @@ const SelectFilter = ({
   return (
     <div className={`flex flex-col gap-1 relative ${zIndex}`}>
       <label
-        className={`text-primary z-10 text-sm font-medium absolute ml-3 bg-white px-1 w-fit  -top-2.5`}
+        className={`text-primary z-5 text-sm font-medium absolute ml-3 bg-white px-1 w-fit  -top-2.5`}
       >
         {label}
       </label>
