@@ -28,6 +28,22 @@ export const PublishedColumnsManagementEditor = () => {
         return <>{(page - 1) * limit + i + 1}</>
       },
     },
+     {
+      accessorKey: 'diajukan_user',
+      header: 'Diajukan Oleh',
+      cell: ({ row }) => {
+        const values = row.original
+        return <>{values.diajukan_user}</>
+      },
+    },
+    {
+      accessorKey: 'id_satuan_organisasi',
+      header: 'Unit/Satuan Kerja',
+      cell: ({}) => {
+        // const values = row.original
+        return <>-</>
+      },
+    },
     {
       accessorKey: 'gambar',
       header: 'Gambar',

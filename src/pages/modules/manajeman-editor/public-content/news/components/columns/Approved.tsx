@@ -12,7 +12,8 @@ import {
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { ButtonPublishNewsProdi } from '@/pages/modules/website-prodi/public-content/news/components/buttonPublish.tsx'
-import type { INewsDetail } from '../../../model'
+import type { INewsDetail } from '@/pages/modules/website-utama/public-content/news/data'
+
 
 export const ApprovedColumnsManagementEditor = () => {
   const [searchParams] = useSearchParams()
@@ -59,6 +60,22 @@ export const ApprovedColumnsManagementEditor = () => {
             )}
           </div>
         )
+      },
+    },
+     {
+      accessorKey: 'diajukan_user',
+      header: 'Diajukan Oleh',
+      cell: ({ row }) => {
+        const values = row.original
+        return <>{values.diajukan_user}</>
+      },
+    },
+    {
+      accessorKey: 'id_satuan_organisasi',
+      header: 'Unit/Satuan Kerja',
+      cell: ({}) => {
+        // const values = row.original
+        return <>-</>
       },
     },
     {
