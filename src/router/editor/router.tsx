@@ -14,8 +14,11 @@ import ProdiDetailHistoryView from '@/pages/modules/manajeman-editor/prodi/detai
 import ProdiDetailView from '@/pages/modules/manajeman-editor/prodi/detail/ProdiDetailView'
 import ProdiEditView from '@/pages/modules/manajeman-editor/prodi/edit/ProdiEditView'
 import ProdiView from '@/pages/modules/manajeman-editor/prodi/ProdiView'
+import { AnnouncementManagementEditorPublicContent } from '@/pages/modules/manajeman-editor/public-content/announcement'
+import { AnnouncementManagementEditorDetailPage } from '@/pages/modules/manajeman-editor/public-content/announcement/detail'
+import { LogActivityAnnouncementManagementEditorPage } from '@/pages/modules/manajeman-editor/public-content/announcement/log'
+import { UpdatedAnnouncementManagementEditor } from '@/pages/modules/manajeman-editor/public-content/announcement/updated'
 import { NewsManagementEditorPublicContentPage } from '@/pages/modules/manajeman-editor/public-content/news'
-import { NewsMangagementEditorCreated } from '@/pages/modules/manajeman-editor/public-content/news/created'
 import { DetailNewsManagementEditorPage } from '@/pages/modules/manajeman-editor/public-content/news/detail'
 import { LogActivityNewsManagementEditorPage } from '@/pages/modules/manajeman-editor/public-content/news/log-data'
 import { NewsManagementEditorUpdated } from '@/pages/modules/manajeman-editor/public-content/news/updated'
@@ -166,10 +169,7 @@ export const EditorRouter = [
             index: true,
             element: <NewsManagementEditorPublicContentPage />,
           },
-          {
-            path: 'add',
-            element: <NewsMangagementEditorCreated />,
-          },
+        
           {
             path: 'edit/:id',
             element: <NewsManagementEditorUpdated />,
@@ -184,6 +184,28 @@ export const EditorRouter = [
           },
         ],
       },
+       {
+              path: 'announcement',
+              children: [
+                {
+                  index: true,
+                  element: <AnnouncementManagementEditorPublicContent />,
+                },
+               
+                {
+                  path: 'edit/:id',
+                  element: <UpdatedAnnouncementManagementEditor  />,
+                },
+                {
+                  path: 'detail/:id',
+                  element: <AnnouncementManagementEditorDetailPage />,
+                },
+                {
+                  path: 'log/:id',
+                  element: <LogActivityAnnouncementManagementEditorPage />,
+                },
+              ],
+            },
     ],
   },
 ]
