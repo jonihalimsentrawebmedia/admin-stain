@@ -8,11 +8,12 @@ import { useQueryClient } from '@tanstack/react-query'
 import type { IAgendaDetail } from '@/pages/modules/website-utama/public-content/agenda/data'
 import { format } from 'date-fns'
 import { MdCancel } from 'react-icons/md'
+import { Textarea } from '@/components/ui/textarea'
 
 export const ButtonUnpublishAgendaManagementEditor = (data: IAgendaDetail) => {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
-
+  const [reason, setReason] = useState('')
   const queryClient = useQueryClient()
 
   const HandleSubmission = async () => {
@@ -87,6 +88,16 @@ export const ButtonUnpublishAgendaManagementEditor = (data: IAgendaDetail) => {
           </div>
           <p className="text-gray-500">Penulis</p>
           <p>{data?.penulis}</p>
+          <div>
+            <p>Alasan Unpublish</p>
+            <Textarea
+              placeholder="Alasan Unpublish"
+              value={reason}
+              onChange={(e) => {
+                setReason(e.target.value)
+              }}
+            />
+          </div>
 
           <div className="flex items-center justify-end">
             <ButtonTitleGroup

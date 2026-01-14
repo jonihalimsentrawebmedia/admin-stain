@@ -62,23 +62,26 @@ export const ButtonRejectManagementEditor = (data: IListSlider) => {
         description={'Apakah anda yakin untuk menolak penguguman yang dipilih?'}
       >
         <div className={'flex flex-col gap-2.5'}>
-        <div>
-          <img
-            src={data?.gambar}
-            alt="image"
-            className="w-[290px] h-[174px] rounded object-cover"
-          />
-          <p className={'text-gray-500'}>Keterangan</p>
-          <p dangerouslySetInnerHTML={{ __html: data?.keterangan ?? '' }} />
-        </div>
+          <div>
+            <img
+              src={data?.gambar}
+              alt="image"
+              className="w-[290px] h-[174px] rounded object-cover"
+            />
+            <p className={'text-gray-500'}>Keterangan</p>
+            <p dangerouslySetInnerHTML={{ __html: data?.keterangan ?? '' }} />
+          </div>
 
-          <Textarea
-            placeholder="Alasan "
-            value={reason}
-            onChange={(e) => {
-              setReason(e.target.value)
-            }}
-          />
+          <div>
+            <p>Alasan Ditolak</p>
+            <Textarea
+              placeholder="Alasan Ditolak"
+              value={reason}
+              onChange={(e) => {
+                setReason(e.target.value)
+              }}
+            />
+          </div>
 
           <div className="flex items-center justify-end">
             <ButtonTitleGroup

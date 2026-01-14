@@ -7,11 +7,12 @@ import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { useQueryClient } from '@tanstack/react-query'
 import type { IAnnouncement } from '@/pages/modules/website-utama/public-content/announcement/data'
 import { MdCancel } from 'react-icons/md'
+import { Textarea } from '@/components/ui/textarea'
 
 export const ButtonAnnouncementUnpublishManagementEditor = (data: IAnnouncement) => {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
-
+  const [reason, setReason] = useState('')
   const queryClient = useQueryClient()
 
   const HandleSubmission = async () => {
@@ -63,6 +64,16 @@ export const ButtonAnnouncementUnpublishManagementEditor = (data: IAnnouncement)
           <p>{data?.judul_pengumuman}</p>
           <p className="text-gray-500">Penulis</p>
           <p>{data?.penulis}</p>
+          <div>
+            <p>Alasan Unpublish</p>
+            <Textarea
+              placeholder="Alasan Unpublish"
+              value={reason}
+              onChange={(e) => {
+                setReason(e.target.value)
+              }}
+            />
+          </div>
 
           <div className="flex items-center justify-end">
             <ButtonTitleGroup

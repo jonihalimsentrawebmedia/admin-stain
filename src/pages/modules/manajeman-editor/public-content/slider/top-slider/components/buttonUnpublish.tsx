@@ -6,6 +6,7 @@ import type { IListSlider } from '@/pages/modules/website-utama/public-content/s
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { MdCancel } from 'react-icons/md'
+import { Textarea } from '@/components/ui/textarea'
 
 interface Props {
   data: IListSlider
@@ -16,7 +17,7 @@ export const ButtonUnPublished = (props: Props) => {
 
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
-
+  const [reason, setReason] = useState('')
   const queryClient = useQueryClient()
 
   const HandlerDelete = async () => {
@@ -71,6 +72,16 @@ export const ButtonUnPublished = (props: Props) => {
           />
           <p className={'text-gray-500'}>Keterangan</p>
           <p dangerouslySetInnerHTML={{ __html: data?.keterangan ?? '' }} />
+        </div>
+        <div>
+          <p>Alasan Unpublish</p>
+          <Textarea
+            placeholder="Alasan Unpublish"
+            value={reason}
+            onChange={(e) => {
+              setReason(e.target.value)
+            }}
+          />
         </div>
 
         <div className={'flex justify-end gap-1.5'}>

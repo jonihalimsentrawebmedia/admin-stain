@@ -72,13 +72,16 @@ export const ButtonRejectManagementEditor = (data: IListBottomSlider) => {
             <p dangerouslySetInnerHTML={{ __html: data?.keterangan ?? '' }} />
           </div>
 
-          <Textarea
-            placeholder="Alasan "
-            value={reason}
-            onChange={(e) => {
-              setReason(e.target.value)
-            }}
-          />
+        <div>
+            <p>Alasan Ditolak</p>
+            <Textarea
+              placeholder="Alasan Ditolak"
+              value={reason}
+              onChange={(e) => {
+                setReason(e.target.value)
+              }}
+            />
+          </div>
 
           <div className="flex items-center justify-end">
             <ButtonTitleGroup

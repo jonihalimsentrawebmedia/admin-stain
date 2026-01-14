@@ -22,6 +22,10 @@ import { AnnouncementManagementEditorPublicContent } from '@/pages/modules/manaj
 import { AnnouncementManagementEditorDetailPage } from '@/pages/modules/manajeman-editor/public-content/announcement/detail'
 import { LogActivityAnnouncementManagementEditorPage } from '@/pages/modules/manajeman-editor/public-content/announcement/log'
 import { UpdatedAnnouncementManagementEditor } from '@/pages/modules/manajeman-editor/public-content/announcement/updated'
+import { ImpactInnovationPage } from '@/pages/modules/manajeman-editor/public-content/impact-innovation'
+import { DetailImpactInnovationPage } from '@/pages/modules/manajeman-editor/public-content/impact-innovation/detail'
+import { LogActivityImpactInnovationPage } from '@/pages/modules/manajeman-editor/public-content/impact-innovation/log'
+import { UpdatedImpactInnovationPage } from '@/pages/modules/manajeman-editor/public-content/impact-innovation/updated'
 import { NewsManagementEditorPublicContentPage } from '@/pages/modules/manajeman-editor/public-content/news'
 import { DetailNewsManagementEditorPage } from '@/pages/modules/manajeman-editor/public-content/news/detail'
 import { LogActivityNewsManagementEditorPage } from '@/pages/modules/manajeman-editor/public-content/news/log-data'
@@ -182,7 +186,7 @@ export const EditorRouter = [
                 index: true,
                 element: <TopSliderPublicContent />,
               },
-             
+
               {
                 path: 'edit/:id',
                 element: <UpdatedTopSliderPage />,
@@ -200,7 +204,7 @@ export const EditorRouter = [
                 index: true,
                 element: <BottomSliderPublicContent />,
               },
-              
+
               {
                 path: 'edit/:id',
                 element: <UpdatedBottomSlider />,
@@ -276,6 +280,29 @@ export const EditorRouter = [
           {
             path: 'log/:id',
             element: <LogActivityAgendaManagementEditorPage />,
+          },
+        ],
+      },
+
+      {
+        path: 'impact-innovation',
+        children: [
+          {
+            index: true,
+            element: <ImpactInnovationPage />,
+          },
+
+          {
+            path: 'edit/:id',
+            element: <UpdatedImpactInnovationPage />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailImpactInnovationPage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityImpactInnovationPage />,
           },
         ],
       },

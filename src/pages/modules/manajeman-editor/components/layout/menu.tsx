@@ -52,7 +52,7 @@ export const MENULIST = [
     path: `${baseDomain}/public-content`,
     icon: <MdInfo className={'size-5'} />,
     child: [
-       {
+      {
         id: 1,
         name: 'Slider',
         child: [
@@ -72,6 +72,11 @@ export const MENULIST = [
         id: 41,
         name: 'Berita',
         path: `${baseDomain}/public-content/news`,
+      },
+      {
+        id: 3,
+        name: 'Inovasi Berdampak',
+        path: `${baseDomain}/public-content/impact-innovation`,
       },
       {
         id: 42,

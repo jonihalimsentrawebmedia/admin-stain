@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button.tsx'
 import { useState } from 'react'
 import AxiosClient from '@/provider/axios.tsx'
-import type { INewsDetail } from '@/pages/modules/website-utama/public-content/news/data'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import {
@@ -14,9 +13,10 @@ import {
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { MdCancel } from 'react-icons/md'
+import type { IImpactInnovationList } from '../data/index'
 import { Textarea } from '@/components/ui/textarea'
 
-export const ButtonUnpublishNewsManagementEditor = (data: INewsDetail) => {
+export const ButtonUnpublishImpactInnovation = (data: IImpactInnovationList) => {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const [reason, setReason] = useState('')
@@ -24,16 +24,19 @@ export const ButtonUnpublishNewsManagementEditor = (data: INewsDetail) => {
 
   const HandleApprove = async () => {
     setLoading(true)
-    await AxiosClient.patch(`/editor/berita/${data?.id_berita}/status-publish`, {
-      status_publish: 'UNPUBLISH',
-    })
+    await AxiosClient.patch(
+      `/editor/inovasi-berdampak/${data?.id_inovasi_berdampak}/status-publish`,
+      {
+        status_publish: 'UNPUBLISH',
+      }
+    )
       .then((res) => {
         if (res?.data?.status) {
           queryClient.invalidateQueries({
-            queryKey: ['management-editor-news'],
+            queryKey: ['list-impact-innovation-editor'],
           })
           queryClient.invalidateQueries({
-            queryKey: ['management-editor-news-status'],
+            queryKey: ['status-impact-innovation-editor'],
           })
           toast.success(res.data.message || 'Success Mengajukan data berita')
           setOpen(false)
@@ -55,7 +58,7 @@ export const ButtonUnpublishNewsManagementEditor = (data: INewsDetail) => {
         className={'border-red-500 text-red-500 hover:text-red-600'}
       >
         <MdCancel />
-        Unpublish Berita
+        Unpublish
       </Button>
 
       <DialogCustom
@@ -63,14 +66,14 @@ export const ButtonUnpublishNewsManagementEditor = (data: INewsDetail) => {
         isAuto
         className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
-        title={'Unpublish Berita'}
-        description={'Apakah anda yakin untuk mempublish berita yang dipilih?'}
+        title={'Unpublish Inovasi Berdampak'}
+        description={'Apakah anda yakin untuk mempublish inovasi berdampak yang dipilih?'}
       >
         <div className={'flex flex-col gap-2.5'}>
-          {data?.berita_gambar_tambahan.length > 0 ? (
+          {data?.gambar_tambahan.length > 0 ? (
             <Carousel>
               <CarouselContent>
-                {data?.berita_gambar_tambahan.map((item, index) => (
+                {data?.gambar_tambahan.map((item, index) => (
                   <CarouselItem key={index}>
                     <img
                       src={item?.gambar}
@@ -90,10 +93,9 @@ export const ButtonUnpublishNewsManagementEditor = (data: INewsDetail) => {
           <p className="text-gray-500">Judul</p>
           <p>{data?.judul}</p>
           <p className="text-gray-500">Kategori</p>
-          <p>{data?.nama_kategori_berita}</p>
+          <p>{data?.nama_kategori}</p>
           <p className="text-gray-500">Penulis</p>
           <p>{data?.penulis}</p>
-
           <div>
             <p>Alasan Unpublish</p>
             <Textarea
@@ -120,7 +122,7 @@ export const ButtonUnpublishNewsManagementEditor = (data: INewsDetail) => {
                       onClick={HandleApprove}
                     >
                       <MdCancel />
-                      Unpublish Berita
+                      Unpublish
                     </Button>
                   ),
                   onClick: () => {},

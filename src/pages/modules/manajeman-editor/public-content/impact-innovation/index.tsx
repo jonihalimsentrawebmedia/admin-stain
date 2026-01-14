@@ -1,14 +1,16 @@
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+
 import { TabsListCustom } from '@/pages/modules/website-utama/public-content/slider/components/tabsList.tsx'
-import { UseGetManagementEditorNewsStatus } from './hooks'
-import type { StatusPublish } from './data/types'
-import { TableDataListNews } from './components/listNews'
+import { UseGetImpactInnovationStatus } from './hooks/index'
 
-export const NewsManagementEditorPublicContentPage = () => {
 
-  const { status } = UseGetManagementEditorNewsStatus()
+import ImpactInnovationList from './components/ImpactInnovationList.tsx'
+import type { StatusPublish } from '@/pages/modules/website-prodi/public-content/news/data/types.ts'
+
+export const ImpactInnovationPage = () => {
+  const { status } = UseGetImpactInnovationStatus()
 
   const [searchParams, setSearchParams] = useSearchParams()
   const statusParams = searchParams.get('status') as StatusPublish
@@ -29,7 +31,7 @@ export const NewsManagementEditorPublicContentPage = () => {
         </div>
       ),
       value: 'DRAFT',
-      element: <TableDataListNews status={statusParams ?? 'DRAFT'} />,
+      element: <ImpactInnovationList status={statusParams ?? 'DRAFT'} />,
     },
     {
       id: 2,
@@ -42,7 +44,7 @@ export const NewsManagementEditorPublicContentPage = () => {
         </div>
       ),
       value: 'DIAJUKAN_EDITOR',
-      element: <TableDataListNews status={statusParams ?? 'DRAFT'} />,
+      element: <ImpactInnovationList status={statusParams ?? 'DRAFT'} />,
     },
     {
       id: 3,
@@ -55,7 +57,7 @@ export const NewsManagementEditorPublicContentPage = () => {
         </div>
       ),
       value: 'PROSES_EDITOR',
-      element: <TableDataListNews status={statusParams ?? 'DRAFT'} />,
+      element: <ImpactInnovationList status={statusParams ?? 'DRAFT'} />,
     },
     {
       id: 4,
@@ -68,7 +70,7 @@ export const NewsManagementEditorPublicContentPage = () => {
         </div>
       ),
       value: 'TOLAK_EDITOR',
-      element: <TableDataListNews status={statusParams ?? 'DRAFT'} />,
+      element: <ImpactInnovationList status={statusParams ?? 'DRAFT'} />,
     },
     {
       id: 5,
@@ -81,7 +83,7 @@ export const NewsManagementEditorPublicContentPage = () => {
         </div>
       ),
       value: 'DISETUJUI_EDITOR',
-      element: <TableDataListNews status={statusParams ?? 'DRAFT'} />,
+      element: <ImpactInnovationList status={statusParams ?? 'DRAFT'} />,
     },
     {
       id: 6,
@@ -94,7 +96,7 @@ export const NewsManagementEditorPublicContentPage = () => {
         </div>
       ),
       value: 'PUBLISHED',
-      element: <TableDataListNews status={statusParams ?? 'DRAFT'} />,
+      element: <ImpactInnovationList status={statusParams ?? 'DRAFT'} />,
     },
     {
       id: 7,
@@ -107,22 +109,16 @@ export const NewsManagementEditorPublicContentPage = () => {
         </div>
       ),
       value: 'UNPUBLISH',
-      element: <TableDataListNews status={statusParams ?? 'DRAFT'} />,
+      element: <ImpactInnovationList status={statusParams ?? 'DRAFT'} />,
     },
   ]
 
   return (
     <>
       <div className="flex flex-col gap-5">
-        <ButtonTitleGroup
-          label={'Berita'}
-          buttonGroup={[]}
-        />
+        <ButtonTitleGroup label={'Inovasi Berdampak'} buttonGroup={[]} />
 
         <TabsListCustom
-          triggerClassName={
-            'border-[#0E874A] rounded-none data-[state=active]:bg-[#0E874A] data-[state=active]:text-white text-black'
-          }
           value={statusParams ?? 'DRAFT'}
           onChange={(e) => {
             setSearchParams({ status: e })

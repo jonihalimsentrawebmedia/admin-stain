@@ -6,6 +6,7 @@ import type { IListBottomSlider } from '@/pages/modules/website-utama/public-con
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { MdCancel } from 'react-icons/md'
+import { Textarea } from '@/components/ui/textarea'
 
 interface Props {
   data: IListBottomSlider
@@ -13,7 +14,7 @@ interface Props {
 
 export const ButtonUnPublishedBottom = (props: Props) => {
   const { data } = props
-
+  const [reason, setReason] = useState('')
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -27,7 +28,7 @@ export const ButtonUnPublishedBottom = (props: Props) => {
       .then((res) => {
         if (res?.data?.status) {
           toast.success(res.data.message || 'Success Mengajukan data slider bawah')
-            queryClient.invalidateQueries({
+          queryClient.invalidateQueries({
             queryKey: ['list-slider-bottom-editor'],
           })
           queryClient.invalidateQueries({
@@ -71,6 +72,16 @@ export const ButtonUnPublishedBottom = (props: Props) => {
           />
           <p className={'text-gray-500'}>Keterangan</p>
           <p dangerouslySetInnerHTML={{ __html: data?.keterangan ?? '' }} />
+        </div>
+        <div>
+          <p>Alasan Unpublish</p>
+          <Textarea
+            placeholder="Alasan Unpublish"
+            value={reason}
+            onChange={(e) => {
+              setReason(e.target.value)
+            }}
+          />
         </div>
 
         <div className={'flex justify-end gap-1.5'}>
