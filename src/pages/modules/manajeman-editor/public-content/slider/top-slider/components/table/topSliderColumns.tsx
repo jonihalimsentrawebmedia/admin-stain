@@ -31,7 +31,7 @@ const TOpSliderColumns = () => {
           <>
             {values.nama_user}
             <br />
-            {values.nama_level}
+           <span className='text-primary'> {values.nama_level}</span>
           </>
         )
       },

@@ -32,7 +32,7 @@ const SubmissionColumns = () => {
           <>
             {values.nama_diajukan}
             <br />
-            {values.level_diajukan}
+            <span className='text-primary'>{values.level_diajukan}</span>
           </>
         )
       },

@@ -32,7 +32,7 @@ const UnpublishedColumns = () => {
           <>
             {values.nama_unpublished}
             <br />
-            {values.level_unpublished}
+            <span className='text-primary'>{values.level_unpublished}</span>
           </>
         )
       },

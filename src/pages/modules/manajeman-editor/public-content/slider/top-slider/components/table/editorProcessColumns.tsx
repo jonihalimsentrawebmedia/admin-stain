@@ -23,7 +23,7 @@ const EditorProcessColumns = () => {
         return <>{(page - 1) * limit + i + 1}</>
       },
     },
-     {
+    {
       accessorKey: 'diajukan_user',
       header: 'Diajukan Oleh',
       cell: ({ row }) => {
@@ -32,7 +32,7 @@ const EditorProcessColumns = () => {
           <>
             {values.nama_proses}
             <br />
-            {values.level_proses}
+            <span className="text-primary"> {values.level_proses}</span>
           </>
         )
       },
@@ -112,7 +112,7 @@ const EditorProcessColumns = () => {
         )
       },
     },
-      {
+    {
       accessorKey: 'action1',
       header: '',
       cell: ({ row }) => {

@@ -22,7 +22,7 @@ const PublishedColumns = () => {
         return <>{(page - 1) * limit + i + 1}</>
       },
     },
-     {
+    {
       accessorKey: 'diajukan_user',
       header: 'Diajukan Oleh',
       cell: ({ row }) => {
@@ -31,7 +31,7 @@ const PublishedColumns = () => {
           <>
             {values.nama_published}
             <br />
-            {values.level_published}
+            <span className="text-primary">{values.level_published}</span>
           </>
         )
       },

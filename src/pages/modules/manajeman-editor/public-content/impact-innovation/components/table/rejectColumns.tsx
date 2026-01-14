@@ -28,6 +28,28 @@ export const RejectColumnsImpactInnovation = () => {
         return <>{(page - 1) * limit + i + 1}</>
       },
     },
+     {
+      accessorKey: 'diajukan_user',
+      header: 'Diajukan Oleh',
+      cell: ({ row }) => {
+        const values = row.original
+        return (
+          <>
+            {values.nama_ditolak}
+            <br />
+            <span className="text-primary"> {values.level_ditolak}</span>
+          </>
+        )
+      },
+    },
+    {
+      accessorKey: 'nama_satuan_organisasi',
+      header: 'Unit/Satuan Kerja',
+      cell: ({ row }) => {
+        const values = row.original
+        return <>{values.nama_satuan_organisasi}</>
+      },
+    },
     {
       accessorKey: 'gambar',
       header: 'Gambar',

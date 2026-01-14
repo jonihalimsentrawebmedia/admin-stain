@@ -12,8 +12,8 @@ import {
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { HiPencil } from 'react-icons/hi'
-import type { IImpactInnovationList } from '@/pages/modules/website-utama/public-content/impact-innovation/data'
 import { ButtonPublishImpactInnovation } from '../buttonPublish'
+import type { IImpactInnovationList } from '../../data'
 
 export const UnpublishColumnsImpactInnovation = () => {
   const [searchParams] = useSearchParams()
@@ -27,6 +27,28 @@ export const UnpublishColumnsImpactInnovation = () => {
       cell: ({ row }) => {
         const i = row?.index
         return <>{(page - 1) * limit + i + 1}</>
+      },
+    },
+    {
+      accessorKey: 'diajukan_user',
+      header: 'Diajukan Oleh',
+      cell: ({ row }) => {
+        const values = row.original
+        return (
+          <>
+            {values.nama_unpublished}
+            <br />
+            <span className="text-primary">{values.level_unpublished}</span>
+          </>
+        )
+      },
+    },
+    {
+      accessorKey: 'nama_satuan_organisasi',
+      header: 'Unit/Satuan Kerja',
+      cell: ({ row }) => {
+        const values = row.original
+        return <>{values.nama_satuan_organisasi}</>
       },
     },
     {

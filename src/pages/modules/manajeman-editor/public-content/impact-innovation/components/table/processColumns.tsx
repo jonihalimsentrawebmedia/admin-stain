@@ -30,6 +30,28 @@ export const ProcessColumnsImpactInnovation = () => {
       },
     },
     {
+      accessorKey: 'diajukan_user',
+      header: 'Diajukan Oleh',
+      cell: ({ row }) => {
+        const values = row.original
+        return (
+          <>
+            {values.nama_proses}
+            <br />
+            <span className="text-primary"> {values.level_proses}</span>
+          </>
+        )
+      },
+    },
+    {
+      accessorKey: 'nama_satuan_organisasi',
+      header: 'Unit/Satuan Kerja',
+      cell: ({ row }) => {
+        const values = row.original
+        return <>{values.nama_satuan_organisasi}</>
+      },
+    },
+    {
       accessorKey: 'gambar',
       header: 'Gambar',
       cell: ({ row }) => {

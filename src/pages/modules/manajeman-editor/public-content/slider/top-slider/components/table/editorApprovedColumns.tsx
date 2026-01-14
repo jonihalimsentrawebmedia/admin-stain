@@ -31,7 +31,7 @@ const EditorApprovedColumns = () => {
           <>
             {values.nama_disetujui}
             <br />
-            {values.level_disetujui}
+            <span className="text-primary"> {values.level_disetujui}</span>
           </>
         )
       },

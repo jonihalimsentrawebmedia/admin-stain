@@ -11,9 +11,9 @@ import {
 } from '@/components/ui/carousel.tsx'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
-import type { IImpactInnovationList } from '@/pages/modules/website-utama/public-content/impact-innovation/data'
 import { ButtonDraftImpactInnovation } from '../buttonDraft'
 import ButtonProcessManagementEditor from '../buttonProcess'
+import type { IImpactInnovationList } from '../../data'
 
 export const SubmissionColumnsImpactInnovation = () => {
   const [searchParams] = useSearchParams()
@@ -27,6 +27,28 @@ export const SubmissionColumnsImpactInnovation = () => {
       cell: ({ row }) => {
         const i = row?.index
         return <>{(page - 1) * limit + i + 1}</>
+      },
+    },
+    {
+      accessorKey: 'diajukan_user',
+      header: 'Diajukan Oleh',
+      cell: ({ row }) => {
+        const values = row.original
+        return (
+          <>
+            {values.nama_diajukan}
+            <br />
+            <span className="text-primary">{values.level_diajukan}</span>
+          </>
+        )
+      },
+    },
+    {
+      accessorKey: 'nama_satuan_organisasi',
+      header: 'Unit/Satuan Kerja',
+      cell: ({ row }) => {
+        const values = row.original
+        return <>{values.nama_satuan_organisasi}</>
       },
     },
     {

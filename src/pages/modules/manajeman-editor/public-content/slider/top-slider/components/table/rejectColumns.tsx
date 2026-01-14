@@ -31,7 +31,7 @@ const RejectEditorColumns = () => {
           <>
             {values.nama_ditolak}
             <br />
-            {values.level_ditolak}
+            <span className="text-primary"> {values.level_ditolak}</span>
           </>
         )
       },
