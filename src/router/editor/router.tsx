@@ -26,6 +26,12 @@ import { NewsManagementEditorPublicContentPage } from '@/pages/modules/manajeman
 import { DetailNewsManagementEditorPage } from '@/pages/modules/manajeman-editor/public-content/news/detail'
 import { LogActivityNewsManagementEditorPage } from '@/pages/modules/manajeman-editor/public-content/news/log-data'
 import { NewsManagementEditorUpdated } from '@/pages/modules/manajeman-editor/public-content/news/updated'
+import { BottomSliderPublicContent } from '@/pages/modules/manajeman-editor/public-content/slider/bottom-slider'
+import { LogBottomActivityPage } from '@/pages/modules/manajeman-editor/public-content/slider/bottom-slider/log'
+import { UpdatedBottomSlider } from '@/pages/modules/manajeman-editor/public-content/slider/bottom-slider/updated'
+import { TopSliderPublicContent } from '@/pages/modules/manajeman-editor/public-content/slider/top-slider'
+import { LogActivityPage } from '@/pages/modules/manajeman-editor/public-content/slider/top-slider/log'
+import { UpdatedTopSliderPage } from '@/pages/modules/manajeman-editor/public-content/slider/top-slider/updated'
 import UnitDetailHistoryView from '@/pages/modules/manajeman-editor/unit/detail-history/UnitDetailHistoryView'
 import UnitDetailView from '@/pages/modules/manajeman-editor/unit/detail/UnitDetailView'
 import UnitEditView from '@/pages/modules/manajeman-editor/unit/edit/UnitEditView'
@@ -166,6 +172,47 @@ export const EditorRouter = [
   {
     path: 'public-content',
     children: [
+      {
+        path: 'slider',
+        children: [
+          {
+            path: 'top-slider',
+            children: [
+              {
+                index: true,
+                element: <TopSliderPublicContent />,
+              },
+             
+              {
+                path: 'edit/:id',
+                element: <UpdatedTopSliderPage />,
+              },
+              {
+                path: 'log/:id',
+                element: <LogActivityPage />,
+              },
+            ],
+          },
+          {
+            path: 'bottom-slider',
+            children: [
+              {
+                index: true,
+                element: <BottomSliderPublicContent />,
+              },
+              
+              {
+                path: 'edit/:id',
+                element: <UpdatedBottomSlider />,
+              },
+              {
+                path: 'log/:id',
+                element: <LogBottomActivityPage />,
+              },
+            ],
+          },
+        ],
+      },
       {
         path: 'news',
         children: [

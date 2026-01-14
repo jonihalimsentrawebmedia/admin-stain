@@ -29,28 +29,14 @@ export type IListSlider = {
   updated_at: string
   updated_user: string
 
-  nama_disetujui: string
-  nama_published: string
-  nama_diajukan: string
-  nama_ditolak: string
-  nama_proses: string
-  nama_unpublished: string
-  level_disetujui: string
-  level_published: string
-  level_diajukan: string
-  level_ditolak: string
-  level_proses: string
-  level_unpublished: string
-  nama_satuan_organisasi: string
-  nama_user: string
-  nama_level: string
-  nama_user_created :string
-  nama_user_updated:string
+  nama_user_created: string
+  nama_user_updated: string
 }
 
 export type IListBottomSlider = Omit<IListSlider, 'id_slider_atas'> & {
   id_slider_bawah: string
 }
+
 
 export interface IlogData {
   jenis_data: string

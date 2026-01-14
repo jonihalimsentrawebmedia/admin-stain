@@ -36,9 +36,9 @@ export const DraftStatusColumns = () => {
         const values = row.original
         return (
           <>
-            {values.nama_user_updated}
+            {values.nama_user}
             <br />
-            {/* {values.level_disetujui} */}
+            {values.nama_level}
           </>
         )
       },

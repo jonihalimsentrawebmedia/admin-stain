@@ -48,6 +48,8 @@ export interface INewsDetail {
   level_proses: string
   level_unpublished: string
   nama_satuan_organisasi:string
+  nama_user:string
+  nama_level:string
 }
 
 export interface IImageNewsMore {
