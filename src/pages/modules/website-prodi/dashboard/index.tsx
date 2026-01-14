@@ -61,15 +61,14 @@ export default function DashboardAdminProdi() {
   ]
 
   const actions = [
-    { label: 'Tulis Berita', url: '/modules/website-utama/public-content/news/add' },
-    { label: 'Tulis Pengumuman', url: '/modules/website-utama/public-content/announcement/add' },
-    { label: 'Tulis Agenda', url: '/modules/website-utama/public-content/agenda/add' },
+    { label: 'Tulis Berita', url: '/modules/website-prodi/public-content/news/add' },
+    { label: 'Tulis Pengumuman', url: '/modules/website-prodi/public-content/announcement/add' },
+    { label: 'Tulis Agenda', url: '/modules/website-prodi/public-content/agenda/add' },
     {
-      label: 'Tulis Inovasi Berdampak',
-      url: '/modules/website-utama/public-content/achievement/add',
+      label: 'Tulis Promosi',
+      url: '/modules/website-prodi/public-content/promotion/add',
     },
-    { label: 'Tulis Prestasi', url: '/modules/website-utama/public-content/achievement/add' },
-    { label: 'Tambah Berkas Download', url: '/modules/website-utama/public-content/download/add' },
+    { label: 'Tambah Berkas Download', url: '/modules/website-prodi/public-content/download/add' },
   ]
 
   const listMode = [
