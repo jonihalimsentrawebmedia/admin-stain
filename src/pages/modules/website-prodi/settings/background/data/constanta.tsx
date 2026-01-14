@@ -47,4 +47,9 @@ export const TAB_LIST = [
     name: 'Kontak & Pendaftaran',
     element: <></>,
   },
+  {
+    id: 9,
+    value: 'GALERI',
+    name: 'Galeri',
+  }
 ]
