@@ -30,7 +30,7 @@ export const TableDataListAnnouncement = (props: props) => {
   return (
     <div className="space-y-8">
       <SelectFilter
-        selectClassName={'min-w-[8rem]'}
+        selectClassName={'w-full lg:min-w-[10rem] lg:max-w-[20rem]'}
         label="Unit/Satuan Kerja"
         name={'id_satuan_organisasi'}
         options={

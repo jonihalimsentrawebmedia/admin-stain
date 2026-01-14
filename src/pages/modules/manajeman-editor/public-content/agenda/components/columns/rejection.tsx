@@ -1,27 +1,20 @@
-import { Link, useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
+import type { IAgendaDetail } from '@/pages/modules/website-utama/public-content/agenda/data'
+import { Link, useSearchParams } from 'react-router-dom'
+import { format } from 'date-fns'
 import { Button } from '@/components/ui/button.tsx'
 import { MdInfo, MdOutlineHistory } from 'react-icons/md'
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel.tsx'
-import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { HiPencil } from 'react-icons/hi'
-import type { INewsDetail } from '@/pages/modules/website-utama/public-content/news/data'
 
-export const RejectionColumnsManagementEditor = () => {
+export const RejectionStatusColumns = () => {
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') ?? 1)
   const limit = Number(searchParams.get('limit') ?? 10)
 
-  const columns: ColumnDef<INewsDetail>[] = [
+  const columns: ColumnDef<IAgendaDetail>[] = [
     {
-      accessorKey: 'No',
+      accessorKey: 'no',
       header: '#',
       cell: ({ row }) => {
         const i = row?.index
@@ -53,46 +46,40 @@ export const RejectionColumnsManagementEditor = () => {
     {
       accessorKey: 'gambar',
       header: 'Gambar',
+      cell: ({ row }) => (
+        <img
+          src={row?.original?.gambar}
+          alt="gambar"
+          className={'w-[150px] object-cover h-[200px] rounded'}
+        />
+      ),
+    },
+    {
+      accessorKey: 'judul',
+      header: 'Nama Kegiatan',
+    },
+    {
+      accessorKey: 'lokasi_kegiatan',
+      header: 'Lokasi',
+    },
+    {
+      accessorKey: 'waktu_mulai',
+      header: 'Waktu',
       cell: ({ row }) => {
+        const start_time = row?.original?.waktu_mulai
+        const end_time = row?.original?.waktu_selesai
         return (
-          <div>
-            {row?.original?.berita_gambar_tambahan.length > 0 ? (
-              <Carousel className={'w-[300px]'}>
-                <CarouselContent className={'w-fit'}>
-                  {row?.original?.berita_gambar_tambahan.map((item, index) => (
-                    <CarouselItem key={index}>
-                      <img
-                        src={item?.gambar}
-                        className={'w-[300px] h-[225px] object-cover'}
-                        alt={item?.keterangan}
-                      />
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                <CarouselNext className={'absolute right-0 bottom-0'} />
-                <CarouselPrevious className={'absolute left-0 bottom-0'} />
-              </Carousel>
-            ) : (
-              <img
-                src={row.original?.gambar}
-                alt={row.original?.judul}
-                className={'w-[300px] h-[225px] object-cover'}
-              />
+          <div className="flex flex-col gap-1.5 text-center">
+            <p>{start_time ? format(new Date(start_time), 'dd-MM-yyyy, HH:mm:ss') : '-'}</p>
+            {end_time && (
+              <>
+                <p className="text-gray-500">s/d</p>
+                <p>{end_time ? format(new Date(end_time), 'dd-MM-yyyy, HH:mm:ss') : '-'}</p>
+              </>
             )}
           </div>
         )
       },
-    },
-    {
-      accessorKey: 'judul',
-      header: 'Judul',
-      cell: ({ row }) => {
-        return <p className={'text-sm whitespace-pre-line'}>{row?.original?.judul}</p>
-      },
-    },
-    {
-      accessorKey: 'nama_kategori_berita',
-      header: 'Kategori Berita',
     },
     {
       accessorKey: 'penulis',
@@ -126,38 +113,34 @@ export const RejectionColumnsManagementEditor = () => {
       header: 'Log',
       cell: ({ row }) => {
         return (
-          <>
-            <Link to={`log/${row?.original?.id_berita}`}>
-              <Button
-                size={'sm'}
-                variant={'outline'}
-                className={'text-blue-500 border-blue-500 hover:text-blue-500'}
-              >
-                <MdOutlineHistory />
-                Lihat Log
-              </Button>
-            </Link>
-          </>
+          <Link to={`log/${row?.original?.id_agenda}`}>
+            <Button
+              size={'sm'}
+              variant={'outline'}
+              className={'text-blue-500 border-blue-500 hover:text-blue-500'}
+            >
+              <MdOutlineHistory />
+              Lihat Log
+            </Button>
+          </Link>
         )
       },
     },
     {
-      accessorKey: 'log',
+      accessorKey: 'action',
       header: 'Aksi',
       cell: ({ row }) => {
         return (
-          <>
-            <Link to={`edit/${row?.original?.id_berita}`}>
-              <Button
-                size={'sm'}
-                variant={'outline'}
-                className={'text-yellow-500 border-yellow-500 hover:text-yellow-500'}
-              >
-                <HiPencil />
-                Perbaiki
-              </Button>
-            </Link>
-          </>
+          <Link to={`edit/${row?.original?.id_agenda}`}>
+            <Button
+              size={'sm'}
+              variant={'outline'}
+              className={'text-yellow-500 border-yellow-500 hover:text-yellow-500'}
+            >
+              <HiPencil />
+              Perbaiki
+            </Button>
+          </Link>
         )
       },
     },
@@ -167,7 +150,7 @@ export const RejectionColumnsManagementEditor = () => {
       cell: ({ row }) => {
         return (
           <>
-            <Link to={`detail/${row?.original?.id_berita}`}>
+            <Link to={`detail/${row?.original?.id_agenda}`}>
               <button className={'bg-blue-500 p-1.5 rounded text-white hover:bg-blue-600'}>
                 <MdInfo />
               </button>

@@ -50,6 +50,20 @@ export interface IAgendaDetail {
   updated_user: string
 
   nama_user_created: string
-  nama_disetujui: string
+ 
   nama_user_updated: string
+
+  nama_disetujui: string
+  nama_published: string
+  nama_diajukan: string
+  nama_ditolak: string
+  nama_proses: string
+  nama_unpublished: string
+  level_disetujui: string
+  level_published: string
+  level_diajukan: string
+  level_ditolak: string
+  level_proses: string
+  level_unpublished: string
+  nama_satuan_organisasi:string
 }

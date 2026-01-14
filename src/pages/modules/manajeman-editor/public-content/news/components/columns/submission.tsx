@@ -28,20 +28,26 @@ export const SubmissionStatusColumns = () => {
         return <>{(page - 1) * limit + i + 1}</>
       },
     },
-     {
+    {
       accessorKey: 'diajukan_user',
       header: 'Diajukan Oleh',
       cell: ({ row }) => {
         const values = row.original
-        return <>{values.diajukan_user}</>
+        return (
+          <>
+            {values.nama_diajukan}
+            <br />
+            {values.level_diajukan}
+          </>
+        )
       },
     },
     {
-      accessorKey: 'id_satuan_organisasi',
+      accessorKey: 'nama_satuan_organisasi',
       header: 'Unit/Satuan Kerja',
-      cell: ({}) => {
-        // const values = row.original
-        return <>-</>
+      cell: ({ row }) => {
+        const values = row.original
+        return <>{values.nama_satuan_organisasi}</>
       },
     },
     {
@@ -117,9 +123,11 @@ export const SubmissionStatusColumns = () => {
         return (
           <>
             <div className="flex flex-col space-y-2 items-center">
-              <p className={'whitespace-pre-line'}>{data?.diajukan_at ? format(data?.diajukan_at, 'dd-MM-yyyy , HH:mm:ss') : '-'}</p>
+              <p className={'whitespace-pre-line'}>
+                {data?.diajukan_at ? format(data?.diajukan_at, 'dd-MM-yyyy , HH:mm:ss') : '-'}
+              </p>
               <ButtonDraftProdi {...data} />
-              <ButtonProcessManagementEditor {...data}/>
+              <ButtonProcessManagementEditor {...data} />
             </div>
           </>
         )

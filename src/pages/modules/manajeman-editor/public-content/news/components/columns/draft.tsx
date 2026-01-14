@@ -34,15 +34,21 @@ export const DraftStatusColumns = () => {
       header: 'Diajukan Oleh',
       cell: ({ row }) => {
         const values = row.original
-        return <>{values.diajukan_user}</>
+        return (
+          <>
+            {values.nama_user_updated}
+            <br />
+            {/* {values.level_disetujui} */}
+          </>
+        )
       },
     },
     {
-      accessorKey: 'id_satuan_organisasi',
+      accessorKey: 'nama_satuan_organisasi',
       header: 'Unit/Satuan Kerja',
-      cell: ({}) => {
-        // const values = row.original
-        return <>-</>
+      cell: ({ row }) => {
+        const values = row.original
+        return <>{values.nama_satuan_organisasi}</>
       },
     },
     {

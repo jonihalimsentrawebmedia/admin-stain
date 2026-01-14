@@ -14,6 +14,10 @@ import ProdiDetailHistoryView from '@/pages/modules/manajeman-editor/prodi/detai
 import ProdiDetailView from '@/pages/modules/manajeman-editor/prodi/detail/ProdiDetailView'
 import ProdiEditView from '@/pages/modules/manajeman-editor/prodi/edit/ProdiEditView'
 import ProdiView from '@/pages/modules/manajeman-editor/prodi/ProdiView'
+import { AgendaManagementEditorPublicContent } from '@/pages/modules/manajeman-editor/public-content/agenda'
+import { AgendaManagementEditorDetailPage } from '@/pages/modules/manajeman-editor/public-content/agenda/detail'
+import { LogActivityAgendaManagementEditorPage } from '@/pages/modules/manajeman-editor/public-content/agenda/log'
+import { UpdatedAgendaManagementEditorPage } from '@/pages/modules/manajeman-editor/public-content/agenda/updated'
 import { AnnouncementManagementEditorPublicContent } from '@/pages/modules/manajeman-editor/public-content/announcement'
 import { AnnouncementManagementEditorDetailPage } from '@/pages/modules/manajeman-editor/public-content/announcement/detail'
 import { LogActivityAnnouncementManagementEditorPage } from '@/pages/modules/manajeman-editor/public-content/announcement/log'
@@ -169,7 +173,7 @@ export const EditorRouter = [
             index: true,
             element: <NewsManagementEditorPublicContentPage />,
           },
-        
+
           {
             path: 'edit/:id',
             element: <NewsManagementEditorUpdated />,
@@ -184,28 +188,50 @@ export const EditorRouter = [
           },
         ],
       },
-       {
-              path: 'announcement',
-              children: [
-                {
-                  index: true,
-                  element: <AnnouncementManagementEditorPublicContent />,
-                },
-               
-                {
-                  path: 'edit/:id',
-                  element: <UpdatedAnnouncementManagementEditor  />,
-                },
-                {
-                  path: 'detail/:id',
-                  element: <AnnouncementManagementEditorDetailPage />,
-                },
-                {
-                  path: 'log/:id',
-                  element: <LogActivityAnnouncementManagementEditorPage />,
-                },
-              ],
-            },
+      {
+        path: 'announcement',
+        children: [
+          {
+            index: true,
+            element: <AnnouncementManagementEditorPublicContent />,
+          },
+
+          {
+            path: 'edit/:id',
+            element: <UpdatedAnnouncementManagementEditor />,
+          },
+          {
+            path: 'detail/:id',
+            element: <AnnouncementManagementEditorDetailPage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityAnnouncementManagementEditorPage />,
+          },
+        ],
+      },
+      {
+        path: 'agenda',
+        children: [
+          {
+            index: true,
+            element: <AgendaManagementEditorPublicContent />,
+          },
+
+          {
+            path: 'edit/:id',
+            element: <UpdatedAgendaManagementEditorPage />,
+          },
+          {
+            path: 'detail/:id',
+            element: <AgendaManagementEditorDetailPage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityAgendaManagementEditorPage />,
+          },
+        ],
+      },
     ],
   },
 ]

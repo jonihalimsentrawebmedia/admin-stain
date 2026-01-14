@@ -62,11 +62,11 @@ export const MENULIST = [
         name: 'Pengumuman',
         path: `${baseDomain}/public-content/announcement`,
       },
-      // {
-      //   id: 43,
-      //   name: 'Agenda',
-      //   path: `${baseDomain}/public-content/agenda`,
-      // },
+      {
+        id: 43,
+        name: 'Agenda',
+        path: `${baseDomain}/public-content/agenda`,
+      },
       // {
       //   id: 44,
       //   name: 'Promosi',

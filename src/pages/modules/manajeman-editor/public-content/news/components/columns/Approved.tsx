@@ -14,7 +14,6 @@ import { TimeAgo } from '@/utils/helper.tsx'
 import { ButtonPublishNewsProdi } from '@/pages/modules/website-prodi/public-content/news/components/buttonPublish.tsx'
 import type { INewsDetail } from '@/pages/modules/website-utama/public-content/news/data'
 
-
 export const ApprovedColumnsManagementEditor = () => {
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') ?? 1)
@@ -27,6 +26,28 @@ export const ApprovedColumnsManagementEditor = () => {
       cell: ({ row }) => {
         const i = row?.index
         return <>{(page - 1) * limit + i + 1}</>
+      },
+    },
+    {
+      accessorKey: 'diajukan_user',
+      header: 'Diajukan Oleh',
+      cell: ({ row }) => {
+        const values = row.original
+        return (
+          <>
+            {values.nama_disetujui}
+            <br />
+            {values.level_disetujui}
+          </>
+        )
+      },
+    },
+    {
+      accessorKey: 'nama_satuan_organisasi',
+      header: 'Unit/Satuan Kerja',
+      cell: ({ row }) => {
+        const values = row.original
+        return <>{values.nama_satuan_organisasi}</>
       },
     },
     {
@@ -62,7 +83,7 @@ export const ApprovedColumnsManagementEditor = () => {
         )
       },
     },
-     {
+    {
       accessorKey: 'diajukan_user',
       header: 'Diajukan Oleh',
       cell: ({ row }) => {
