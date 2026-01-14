@@ -93,6 +93,11 @@ export const MENULIST = [
         name: 'Fasilitas',
         path: `${baseDomain}/public-content/facilities`,
       },
+       {
+        id: 7,
+        name: 'Prestasi',
+        path: `${baseDomain}/public-content/achievement`,
+      },
       // {
       //   id: 44,
       //   name: 'Promosi',

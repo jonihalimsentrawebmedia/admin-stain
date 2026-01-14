@@ -14,6 +14,10 @@ import ProdiDetailHistoryView from '@/pages/modules/manajeman-editor/prodi/detai
 import ProdiDetailView from '@/pages/modules/manajeman-editor/prodi/detail/ProdiDetailView'
 import ProdiEditView from '@/pages/modules/manajeman-editor/prodi/edit/ProdiEditView'
 import ProdiView from '@/pages/modules/manajeman-editor/prodi/ProdiView'
+import { AchievementPage } from '@/pages/modules/manajeman-editor/public-content/achievement'
+import { DetailAchievementPage } from '@/pages/modules/manajeman-editor/public-content/achievement/detail'
+import { LogActivityAchievement } from '@/pages/modules/manajeman-editor/public-content/achievement/log'
+import { UpdatedAchievementPage } from '@/pages/modules/manajeman-editor/public-content/achievement/updated'
 import { AgendaManagementEditorPublicContent } from '@/pages/modules/manajeman-editor/public-content/agenda'
 import { AgendaManagementEditorDetailPage } from '@/pages/modules/manajeman-editor/public-content/agenda/detail'
 import { LogActivityAgendaManagementEditorPage } from '@/pages/modules/manajeman-editor/public-content/agenda/log'
@@ -330,6 +334,28 @@ export const EditorRouter = [
           {
             path: 'log/:id',
             element: <LogActivityFacilitiesPage />,
+          },
+        ],
+      },
+
+      {
+        path: 'achievement',
+        children: [
+          {
+            index: true,
+            element: <AchievementPage />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedAchievementPage />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailAchievementPage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityAchievement />,
           },
         ],
       },
