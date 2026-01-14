@@ -88,6 +88,11 @@ export const MENULIST = [
         name: 'Agenda',
         path: `${baseDomain}/public-content/agenda`,
       },
+       {
+        id: 7,
+        name: 'Fasilitas',
+        path: `${baseDomain}/public-content/facilities`,
+      },
       // {
       //   id: 44,
       //   name: 'Promosi',

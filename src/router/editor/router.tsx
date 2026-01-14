@@ -22,6 +22,10 @@ import { AnnouncementManagementEditorPublicContent } from '@/pages/modules/manaj
 import { AnnouncementManagementEditorDetailPage } from '@/pages/modules/manajeman-editor/public-content/announcement/detail'
 import { LogActivityAnnouncementManagementEditorPage } from '@/pages/modules/manajeman-editor/public-content/announcement/log'
 import { UpdatedAnnouncementManagementEditor } from '@/pages/modules/manajeman-editor/public-content/announcement/updated'
+import { FacilitiesPage } from '@/pages/modules/manajeman-editor/public-content/facilities'
+import { DetailFacilitiesPage } from '@/pages/modules/manajeman-editor/public-content/facilities/detail'
+import { LogActivityFacilitiesPage } from '@/pages/modules/manajeman-editor/public-content/facilities/log'
+import { UpdatedFacilitiesPage } from '@/pages/modules/manajeman-editor/public-content/facilities/updated'
 import { ImpactInnovationPage } from '@/pages/modules/manajeman-editor/public-content/impact-innovation'
 import { DetailImpactInnovationPage } from '@/pages/modules/manajeman-editor/public-content/impact-innovation/detail'
 import { LogActivityImpactInnovationPage } from '@/pages/modules/manajeman-editor/public-content/impact-innovation/log'
@@ -303,6 +307,29 @@ export const EditorRouter = [
           {
             path: 'log/:id',
             element: <LogActivityImpactInnovationPage />,
+          },
+        ],
+      },
+
+      {
+        path: 'facilities',
+        children: [
+          {
+            index: true,
+            element: <FacilitiesPage />,
+          },
+
+          {
+            path: 'edit/:id',
+            element: <UpdatedFacilitiesPage />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailFacilitiesPage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityFacilitiesPage />,
           },
         ],
       },
