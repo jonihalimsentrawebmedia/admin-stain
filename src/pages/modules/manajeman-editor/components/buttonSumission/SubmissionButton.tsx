@@ -40,7 +40,6 @@ const SubmissionButton = ({ kelompok }: Props) => {
       header: '#',
       cell: (row) => {
         const idx = row.row.index
-        console.log(page, Number(page) - 1, limit, Number(limit))
         return <div className="">{(Number(page) - 1) * Number(limit) + idx + 1}</div>
       }, // Menggunakan index baris + 1
     },

@@ -5,7 +5,6 @@ import { IconTitleText } from '@/components/common/icon'
 
 export const SideMenuProfile = () => {
   const pathname = useLocation().pathname
-  console.log(pathname)
   return (
     <>
       <Card className={'rounded py-5 h-fit'}>

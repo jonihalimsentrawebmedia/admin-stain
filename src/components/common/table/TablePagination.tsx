@@ -1,5 +1,6 @@
 import { useSearchParams } from 'react-router-dom'
 import { IoChevronBack, IoChevronForwardOutline } from 'react-icons/io5'
+import { useState } from 'react'
 
 export interface Meta {
   last_page: number
@@ -14,7 +15,8 @@ interface Props {
 
 const TablePaginate = ({ meta, setPage }: Props) => {
   const [searchParams, setSearchParams] = useSearchParams()
-  const currentPage = parseInt(searchParams.get('page') ?? '1')
+  const [currentPage, setCurrentPage] = useState(parseInt(searchParams.get('page') ?? '1'))
+
   // const limit = Number(searchParams.get("limit") ?? "10");
 
   // const total = meta?.total ?? 0;
@@ -26,6 +28,7 @@ const TablePaginate = ({ meta, setPage }: Props) => {
   const updatePage = (page: number) => {
     if (setPage) {
       setPage(page.toString())
+      setCurrentPage(page)
     } else {
       const newParams = new URLSearchParams(searchParams)
       newParams.set('page', page.toString())
@@ -54,7 +57,7 @@ const TablePaginate = ({ meta, setPage }: Props) => {
   }
 
   const pages = generatePageNumbers()
-
+ 
   return (
     <div className="mt-5 flex flex-col gap-2 items-start lg:flex-row lg:items-center justify-between">
       <div className="flex items-center text-xs lg:text-base gap-2">

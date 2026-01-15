@@ -83,7 +83,6 @@ const AccreditationProdiLog = () => {
     },
   ]
 
-  console.log(accreditation?.gambar)
 
   if (loading) {
     return <Skeleton className="height-[400px] w-full" />
