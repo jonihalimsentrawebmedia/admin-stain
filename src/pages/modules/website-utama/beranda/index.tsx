@@ -10,7 +10,7 @@ import {
 import { TabsListCustom } from '@/pages/modules/website-utama/public-content/slider/components/tabsList.tsx'
 import { useState } from 'react'
 import { ApprovedSection } from '@/pages/modules/website-utama/beranda/components/Approved/section.tsx'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { SelectBasic } from '@/components/common/select/basic.tsx'
 import type { Mode } from '@/pages/modules/website-utama/beranda/types'
 import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/hooks/getProfile.tsx'
@@ -18,7 +18,9 @@ import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/ho
 export default function DashboardAdmin() {
   const [tabsName, setTabsName] = useState('DIAJUKAN_EDITOR')
   const [mode, setMode] = useState<Mode>('harian')
-
+  const location = useLocation()
+  const path = location.pathname
+  const isEditor = path.includes('editor')
   const { trentVisitor, visitor, device } = UseGetTrentVisitor(mode)
 
   const chartData =
@@ -105,32 +107,34 @@ export default function DashboardAdmin() {
 
       {/* Konten & Akses */}
       <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
-        <div className="xl:col-span-3">
+        <div className={isEditor ? 'xl:col-span-4' : 'xl:col-span-3'}>
           <p className="text-primary font-semibold text-2xl">Konten Yang Diajukan</p>
           <TabsListCustom data={TabsList} value={tabsName} onChange={setTabsName} />
         </div>
 
-        <Card className={'bg-primary-foreground'}>
-          <CardHeader>
-            <CardTitle>Akses Cepat</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2 flex flex-col">
-            {actions?.map((item, i) => (
-              <Link to={item?.url} key={i}>
-                <Button
-                  variant="outline"
-                  className="w-full justify-start border border-primary text-primary hover:text-primary"
-                >
-                  <Plus className="mr-2 h-4 w-4" /> {item?.label}
-                </Button>
-              </Link>
-            ))}
-          </CardContent>
-        </Card>
+        {!isEditor && (
+          <Card className={'bg-primary-foreground'}>
+            <CardHeader>
+              <CardTitle>Akses Cepat</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-2 flex flex-col">
+              {actions?.map((item, i) => (
+                <Link to={item?.url} key={i}>
+                  <Button
+                    variant="outline"
+                    className="w-full justify-start border border-primary text-primary hover:text-primary"
+                  >
+                    <Plus className="mr-2 h-4 w-4" /> {item?.label}
+                  </Button>
+                </Link>
+              ))}
+            </CardContent>
+          </Card>
+        )}
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
-        <Card className="xl:col-span-3">
+        <Card className={isEditor ? 'xl:col-span-4' : 'xl:col-span-3'}>
           <CardHeader>
             <CardTitle className={'text-primary'}>Tren Kunjungan Website</CardTitle>
           </CardHeader>
@@ -160,70 +164,73 @@ export default function DashboardAdmin() {
           </CardContent>
         </Card>
 
-        <div className="space-y-4">
-          <Card>
-            <CardHeader>
-              <CardTitle>Jenis Pengunjung</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="flex justify-between">
-                <span>Pengunjung Baru</span>
-                <span>
-                  {visitor?.baru} (
-                  {(
-                    ((visitor?.baru ?? 0) / ((visitor?.baru ?? 0) + (visitor?.kembali ?? 0) || 1)) *
-                    100
-                  ).toFixed(2)}
-                  %)
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span>Pengunjung Kembali</span>
-                <span>
-                  {visitor?.kembali} (
-                  {(
-                    ((visitor?.kembali ?? 0) /
-                      ((visitor?.baru ?? 0) + (visitor?.kembali ?? 0) || 1)) *
-                    100
-                  ).toFixed(2)}
-                  %)
-                </span>
-              </div>
-            </CardContent>
-          </Card>
+        {!isEditor && (
+          <div className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle>Jenis Pengunjung</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <div className="flex justify-between">
+                  <span>Pengunjung Baru</span>
+                  <span>
+                    {visitor?.baru} (
+                    {(
+                      ((visitor?.baru ?? 0) /
+                        ((visitor?.baru ?? 0) + (visitor?.kembali ?? 0) || 1)) *
+                      100
+                    ).toFixed(2)}
+                    %)
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Pengunjung Kembali</span>
+                  <span>
+                    {visitor?.kembali} (
+                    {(
+                      ((visitor?.kembali ?? 0) /
+                        ((visitor?.baru ?? 0) + (visitor?.kembali ?? 0) || 1)) *
+                      100
+                    ).toFixed(2)}
+                    %)
+                  </span>
+                </div>
+              </CardContent>
+            </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Perangkat</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="flex justify-between">
-                <span>Desktop</span>
-                <span>
-                  {device?.desktop} (
-                  {(
-                    ((device?.desktop ?? 0) /
-                      ((device?.mobile ?? 0) + (device?.desktop ?? 0) || 1)) *
-                    100
-                  ).toFixed(2)}
-                  %)
-                </span>
-              </div>
-              <div className="flex justify-between">
-                <span>Mobile</span>
-                <span>
-                  {device?.mobile} (
-                  {(
-                    ((device?.mobile ?? 0) /
-                      ((device?.mobile ?? 0) + (device?.desktop ?? 0) || 1)) *
-                    100
-                  ).toFixed(2)}
-                  %)
-                </span>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+            <Card>
+              <CardHeader>
+                <CardTitle>Perangkat</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                <div className="flex justify-between">
+                  <span>Desktop</span>
+                  <span>
+                    {device?.desktop} (
+                    {(
+                      ((device?.desktop ?? 0) /
+                        ((device?.mobile ?? 0) + (device?.desktop ?? 0) || 1)) *
+                      100
+                    ).toFixed(2)}
+                    %)
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Mobile</span>
+                  <span>
+                    {device?.mobile} (
+                    {(
+                      ((device?.mobile ?? 0) /
+                        ((device?.mobile ?? 0) + (device?.desktop ?? 0) || 1)) *
+                      100
+                    ).toFixed(2)}
+                    %)
+                  </span>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
       </div>
     </div>
   )

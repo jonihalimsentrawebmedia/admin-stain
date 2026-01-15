@@ -58,7 +58,7 @@ const ButtonCancelDraft = ({ isIcon, url, queryKey }: Props) => {
           className="text-red-500 border border-red-500 hover:text-red-500"
         >
           <XCircle />
-          Setujui
+          Tolak
         </Button>
       )}
       <DialogCustom
