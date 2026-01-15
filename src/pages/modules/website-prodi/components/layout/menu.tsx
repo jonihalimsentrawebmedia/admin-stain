@@ -1,4 +1,11 @@
-import { MdBook, MdBusiness, MdDashboard, MdInfo, MdQuestionAnswer } from 'react-icons/md'
+import {
+  MdBook,
+  MdBusiness,
+  MdDashboard,
+  MdInfo,
+  MdMiscellaneousServices,
+  MdQuestionAnswer,
+} from 'react-icons/md'
 import { FaGraduationCap, FaImage } from 'react-icons/fa'
 import { PiCertificateFill } from 'react-icons/pi'
 import { FaGear } from 'react-icons/fa6'
@@ -26,108 +33,114 @@ export const MENULISTPRODI = [
   },
   {
     id: 4,
+    name: 'Layanan',
+    path: `${baseDomain}/service`,
+    icon: <MdMiscellaneousServices className={'size-5'} />,
+  },
+  {
+    id: 5,
     name: 'Konten Publik',
     path: `${baseDomain}/public-content`,
     icon: <MdInfo className={'size-5'} />,
     child: [
       {
-        id: 41,
+        id: 51,
         name: 'Berita',
         path: `${baseDomain}/public-content/news`,
       },
       {
-        id: 42,
+        id: 52,
         name: 'Pengumuman',
         path: `${baseDomain}/public-content/announcement`,
       },
       {
-        id: 43,
+        id: 53,
         name: 'Agenda',
         path: `${baseDomain}/public-content/agenda`,
       },
       {
-        id: 44,
+        id: 54,
         name: 'Promosi',
         path: `${baseDomain}/public-content/promotion`,
       },
       {
-        id: 45,
+        id: 55,
         name: 'Download',
         path: `${baseDomain}/public-content/download`,
       },
     ],
   },
   {
-    id: 5,
+    id: 6,
     name: 'Akreditasi',
     path: `${baseDomain}/accreditation`,
     icon: <PiCertificateFill className={'size-5'} />,
   },
   {
-    id: 6,
+    id: 7,
     name: 'Kurikulum',
     path: `${baseDomain}/curriculum`,
     icon: <MdBook className={'size-5'} />,
   },
   {
-    id: 7,
+    id: 8,
     name: 'Galeri',
     path: `${baseDomain}/gallery`,
     icon: <FaImage className={'size-5'} />,
     child: [
       {
-        id: 71,
+        id: 81,
         name: 'Foto',
         path: `${baseDomain}/gallery/photo`,
       },
       {
-        id: 72,
+        id: 82,
         name: 'Video',
         path: `${baseDomain}/gallery/video`,
       },
     ],
   },
   {
-    id: 8,
+    id: 9,
     name: 'Pertayaan',
     icon: <MdQuestionAnswer className={'size-5'} />,
     path: `${baseDomain}/question`,
     child: [
       {
-        id: 81,
+        id: 91,
         name: 'Kontak Masuk',
         path: `${baseDomain}/question/inbox`,
       },
       {
-        id: 82,
+        id: 92,
         name: 'F.A.Q',
         path: `${baseDomain}/question/faq`,
       },
       {
-        id: 83,
+        id: 93,
         name: 'Pendaftaran',
         path: `${baseDomain}/question/registration`,
       },
     ],
   },
   {
-    id: 9,
+    id: 10,
     name: 'Pengaturan Website',
     path: `${baseDomain}/settings`,
     icon: <FaGear className={'size-5'} />,
     child: [
       {
-        id: 91,
+        id: 101,
         name: 'Landing Page',
         path: `${baseDomain}/settings/landing-page`,
       },
       {
-        id: 92,
+        id: 102,
         name: 'Landing Page Promosi',
         path: `${baseDomain}/settings/landing-promosi`,
       },
       {
-        id: 93,
+        id: 103,
         name: 'Gambar Background',
         path: `${baseDomain}/settings/background`,
       },
