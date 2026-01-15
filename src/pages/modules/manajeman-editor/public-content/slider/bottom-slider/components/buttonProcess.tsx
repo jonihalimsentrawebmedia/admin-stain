@@ -55,8 +55,8 @@ const ButtonProcessManagementEditor = (data: IListBottomSlider) => {
         isAuto
         className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
-        title={'Proses Pengumuman'}
-        description={'Apakah anda yakin untuk memproses Pengumuman yang dipilih?'}
+        title={'Proses Slider Bawah'}
+        description={'Apakah anda yakin untuk memproses slider bawah yang dipilih?'}
       >
         <div className={'flex flex-col gap-2.5'}>
           <div>

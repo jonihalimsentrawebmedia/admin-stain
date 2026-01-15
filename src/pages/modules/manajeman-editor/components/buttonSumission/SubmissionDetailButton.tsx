@@ -13,8 +13,11 @@ import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import TableCustom from '@/components/common/table/TableCustom'
 import SelectFilter from '@/components/common/filter/SelectFilter'
 export function colostStatusPublish(color: string) {
-  return color == 'DIPROSES' ? 'text-[#2769CD]' : color == 'DITOLAK' ? 'text-red-500' : 'text-primary'
-  
+  return color == 'DIPROSES'
+    ? 'text-[#2769CD]'
+    : color == 'DITOLAK'
+      ? 'text-red-500'
+      : 'text-primary'
 }
 const SubmissionDetailButton = () => {
   const [open, setOpen] = useState(false)
@@ -136,16 +139,21 @@ const SubmissionDetailButton = () => {
         const values = row.row.original
         return (
           <div className="flex gap-2 items-center">
-            <ButtonAccept
-              isIcon
-              queryKey="editor-profile-satuan-organisasi-list"
-              url={`/editor/profil/${values.id_satuan_organisasi}/publish`}
-            />
-            <ButtonCancelDraft
-              isIcon
-              queryKey="editor-profile-satuan-organisasi-list"
-              url={`/editor/profil/${values.id_satuan_organisasi}/tolak`}
-            />
+            {(values.status_publish == 'DIPROSES' || values.status_publish == 'DRAFT') && (
+              <>
+                <ButtonAccept
+                  isIcon
+                  queryKey="editor-profile-satuan-organisasi-list"
+                  url={`/editor/profil/${values.id_satuan_organisasi}/publish`}
+                />
+                <ButtonCancelDraft
+                  isIcon
+                  queryKey="editor-profile-satuan-organisasi-list"
+                  url={`/editor/profil/${values.id_satuan_organisasi}/tolak`}
+                />
+              </>
+            )}
+
             {/* Tombol Kuning (Asumsi: Edit) */}
             {/* <Link to={`/modules/editor/main-data-university/edit/${values.id_satuan_organisasi}`}>
               <IconEdit />

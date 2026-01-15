@@ -1,7 +1,8 @@
-import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup";
-import DetailField from "@/components/common/field/DetailField";
-import CardInput from "@/components/common/card/CardInput";
-import UniversityDetailViewModel from "./UniversityDetailViewModel";
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
+import DetailField from '@/components/common/field/DetailField'
+import CardInput from '@/components/common/card/CardInput'
+import UniversityDetailViewModel from './UniversityDetailViewModel'
+import SubmissionButton from '../../components/buttonSumission/SubmissionButton'
 
 const UniversityDetailView = () => {
   const {
@@ -12,30 +13,29 @@ const UniversityDetailView = () => {
     fieldUniversity,
     form,
     goToEdit,
-  } = UniversityDetailViewModel();
+  } = UniversityDetailViewModel()
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
-        isBack
+        // isBack
         buttonGroup={[
           {
-            label: "Edit Data",
+            type: 'custom',
+            element: <SubmissionButton kelompok="UNIVERSITAS" />,
+          },
+          {
+            label: 'Edit Data',
             onClick: () => {
-              goToEdit();
+              goToEdit()
             },
-            type: "edit",
+            type: 'edit',
           },
         ]}
-        label="Detail Data Universitas"
+        label=" Data Utama Universitas"
       />
       <div className="flex flex-col gap-4">
         <div>
-          <DetailField
-            data={fieldImage}
-            form={form}
-            isRowParent
-            isRow={false}
-          />
+          <DetailField data={fieldImage} form={form} isRowParent isRow={false} />
         </div>
         <CardInput title="Identitas Unit">
           <DetailField data={fieldUniversity} form={form} />
@@ -51,7 +51,7 @@ const UniversityDetailView = () => {
         </CardInput>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default UniversityDetailView;
+export default UniversityDetailView

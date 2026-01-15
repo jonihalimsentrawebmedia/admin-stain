@@ -61,8 +61,8 @@ export const ButtonPublishAchievement = (data: IAchievementDetail) => {
         open={open}
         className={'rounded'}
         setOpen={setOpen}
-        title={'Ajukan Ke Editor'}
-        description={'Apakah anda yakin untuk mengajukan prestasi yang dipilih ke editor?'}
+        title={'Publish Konten'}
+        description={'Apakah anda yakin untuk mempublish konten yang dipilih?'}
       >
         <div className={'flex flex-col gap-2.5'}>
           {data?.gambar_tambahan.length > 0 ? (

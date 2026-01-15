@@ -26,6 +26,7 @@ export const ButtonUnpublishNewsManagementEditor = (data: INewsDetail) => {
     setLoading(true)
     await AxiosClient.patch(`/editor/berita/${data?.id_berita}/status-publish`, {
       status_publish: 'UNPUBLISH',
+        alasan_ditolak: reason == '' ? undefined : reason,
     })
       .then((res) => {
         if (res?.data?.status) {

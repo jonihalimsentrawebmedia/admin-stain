@@ -38,6 +38,10 @@ import { NewsManagementEditorPublicContentPage } from '@/pages/modules/manajeman
 import { DetailNewsManagementEditorPage } from '@/pages/modules/manajeman-editor/public-content/news/detail'
 import { LogActivityNewsManagementEditorPage } from '@/pages/modules/manajeman-editor/public-content/news/log-data'
 import { NewsManagementEditorUpdated } from '@/pages/modules/manajeman-editor/public-content/news/updated'
+import { PromotionManagementEditorPage } from '@/pages/modules/manajeman-editor/public-content/promotion'
+import { DetailPromotionPage } from '@/pages/modules/manajeman-editor/public-content/promotion/detail'
+import { LogActivityPromotionManagementEditorPage } from '@/pages/modules/manajeman-editor/public-content/promotion/log'
+import { UpdatedPromotionMangementEditor } from '@/pages/modules/manajeman-editor/public-content/promotion/updated'
 import { BottomSliderPublicContent } from '@/pages/modules/manajeman-editor/public-content/slider/bottom-slider'
 import { LogBottomActivityPage } from '@/pages/modules/manajeman-editor/public-content/slider/bottom-slider/log'
 import { UpdatedBottomSlider } from '@/pages/modules/manajeman-editor/public-content/slider/bottom-slider/updated'
@@ -356,6 +360,28 @@ export const EditorRouter = [
           {
             path: 'log/:id',
             element: <LogActivityAchievement />,
+          },
+        ],
+      },
+      {
+        path: 'promotion',
+        children: [
+          {
+            index: true,
+            element: <PromotionManagementEditorPage />,
+          },
+        
+          {
+            path: 'edit/:id',
+            element: <UpdatedPromotionMangementEditor />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailPromotionPage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityPromotionManagementEditorPage />,
           },
         ],
       },

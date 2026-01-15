@@ -59,8 +59,8 @@ export const ButtonRejectAgendaManagementEditor = (data: IAgendaDetail) => {
         isAuto
         className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
-        title={'Tolak Penguguman'}
-        description={'Apakah anda yakin untuk menolak penguguman yang dipilih?'}
+        title={'Tolak Agenda'}
+        description={'Apakah anda yakin untuk menolak agenda?'}
       >
         <div className={'flex flex-col gap-2.5'}>
           <div className={'text-center flex justify-center'}>

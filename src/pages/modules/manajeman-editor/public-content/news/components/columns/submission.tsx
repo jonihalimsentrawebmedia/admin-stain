@@ -11,8 +11,8 @@ import {
 import { Button } from '@/components/ui/button.tsx'
 import { MdInfo, MdOutlineHistory } from 'react-icons/md'
 import { format } from 'date-fns'
-import { ButtonDraftProdi } from '@/pages/modules/website-prodi/public-content/news/components/buttonDraft.tsx'
 import ButtonProcessManagementEditor from '../buttonProcess'
+import { ButtonDraftManagementEditor } from '../buttonDraft'
 
 export const SubmissionStatusColumns = () => {
   const [searchParams] = useSearchParams()
@@ -126,7 +126,7 @@ export const SubmissionStatusColumns = () => {
               <p className={'whitespace-pre-line'}>
                 {data?.diajukan_at ? format(data?.diajukan_at, 'dd-MM-yyyy , HH:mm:ss') : '-'}
               </p>
-              <ButtonDraftProdi {...data} />
+              <ButtonDraftManagementEditor {...data} />
               <ButtonProcessManagementEditor {...data} />
             </div>
           </>

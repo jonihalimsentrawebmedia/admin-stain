@@ -11,9 +11,9 @@ interface Props {
   isIcon: boolean
   url: string
   queryKey: string
- 
+  setOpenParent?: (value: boolean) => void
 }
-const ButtonAccept = ({ isIcon, url, queryKey}: Props) => {
+const ButtonAccept = ({ isIcon, url, queryKey, setOpenParent }: Props) => {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -38,13 +38,14 @@ const ButtonAccept = ({ isIcon, url, queryKey}: Props) => {
     }
   }
 
-
   return (
     <>
       {isIcon ? (
         <button
           onClick={() => {
-          
+            if (setOpenParent) {
+              setOpenParent(false)
+            }
             setOpen(true)
           }}
         >
@@ -53,7 +54,6 @@ const ButtonAccept = ({ isIcon, url, queryKey}: Props) => {
       ) : (
         <Button
           onClick={() => {
-         
             setOpen(true)
           }}
           variant={'outline'}
@@ -75,7 +75,6 @@ const ButtonAccept = ({ isIcon, url, queryKey}: Props) => {
           <Button
             onClick={() => {
               setOpen(false)
-            
             }}
             className="bg-white border border-primary hover:bg-white/90 text-primary"
           >

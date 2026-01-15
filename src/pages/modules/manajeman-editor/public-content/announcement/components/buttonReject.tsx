@@ -58,7 +58,7 @@ export const ButtonRejectAnnouncmentManagementEditor = (data: IAnnouncement) => 
         isAuto
         className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
-        title={'Tolak Penguguman'}
+        title={'Tolak Pengumuman'}
         description={'Apakah anda yakin untuk menolak penguguman yang dipilih?'}
       >
         <div className={'flex flex-col gap-2.5'}>

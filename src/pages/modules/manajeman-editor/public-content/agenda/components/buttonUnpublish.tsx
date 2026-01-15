@@ -20,6 +20,7 @@ export const ButtonUnpublishAgendaManagementEditor = (data: IAgendaDetail) => {
     setLoading(true)
     await AxiosClient.patch(`/editor/agenda/${data?.id_agenda}/status-publish`, {
       status_publish: 'UNPUBLISH',
+      alasan_ditolak: reason == '' ? undefined : reason,
     })
       .then((res) => {
         if (res?.data?.status) {
@@ -57,8 +58,8 @@ export const ButtonUnpublishAgendaManagementEditor = (data: IAgendaDetail) => {
         setOpen={setOpen}
         isAuto
         className={'rounded lg:max-w-xl'}
-        title={'Publish Agenda'}
-        description={'Apakah anda yakin untuk mempublish Agenda yang dipilih?'}
+        title={'Unpublish Agenda'}
+        description={'Apakah anda yakin untuk memUnpublish Agenda yang dipilih?'}
       >
         <div className={'flex flex-col gap-2.5'}>
           <div className={'text-center flex justify-center'}>

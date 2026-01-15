@@ -57,8 +57,8 @@ export const ButtonPublish2ManagementEditor = (data: IAgendaDetail) => {
         isAuto
         className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
-        title={'Publish Pengumuman'}
-        description={'Apakah anda yakin untuk mempublish Pengumuman yang dipilih?'}
+        title={'Publish Agenda'}
+        description={'Apakah anda yakin untuk mempublish Agenda yang dipilih?'}
       >
         <div className={'flex flex-col gap-2.5'}>
           <div className={'text-center flex justify-center'}>

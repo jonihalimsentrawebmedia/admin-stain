@@ -4,7 +4,7 @@ import Select, { type StylesConfig } from 'react-select'
 
 const primaryColor = 'hsl(var(--primary))'
 
- const customStylesSelect: StylesConfig = {
+const customStylesSelect: StylesConfig = {
   control: (provided, state) => ({
     ...provided,
     borderColor: primaryColor, // hijau
@@ -49,6 +49,7 @@ interface Props {
   name?: string
   selectClassName?: string
   fx?: (value: any) => void
+  valueParam?: string
 }
 const SelectFilter = ({
   label,
@@ -58,6 +59,7 @@ const SelectFilter = ({
   name,
   selectClassName = 'min-w-xs',
   fx,
+  valueParam,
 }: Props) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const [value, setValue] = useState()
@@ -66,9 +68,6 @@ const SelectFilter = ({
     if (searchParams.get(name ?? '') || options.length !== 0) {
       const temp: any = options.filter((row) => row.value == searchParams.get(name ?? ''))
       setValue(temp)
-      if (fx) {
-        fx(temp.value)
-      }
     }
   }, [options])
 
@@ -81,7 +80,7 @@ const SelectFilter = ({
       </label>
       <Select
         isDisabled={loading}
-        value={value}
+        value={valueParam ? options.filter((item) => item.value == valueParam)[0] : value}
         defaultValue={options[0]}
         options={[
           {

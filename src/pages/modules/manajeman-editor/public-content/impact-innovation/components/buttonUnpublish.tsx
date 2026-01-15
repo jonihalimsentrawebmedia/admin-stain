@@ -28,6 +28,7 @@ export const ButtonUnpublishImpactInnovation = (data: IImpactInnovationList) => 
       `/editor/inovasi-berdampak/${data?.id_inovasi_berdampak}/status-publish`,
       {
         status_publish: 'UNPUBLISH',
+         alasan_ditolak: reason == '' ? undefined : reason,
       }
     )
       .then((res) => {

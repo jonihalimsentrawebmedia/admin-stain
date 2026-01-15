@@ -52,7 +52,7 @@ export const ButtonUnpublishFacilities = (data: IFacilitiesDetail) => {
         open={open}
         setOpen={setOpen}
         title={'Unpublish Fasilitas'}
-        description={'Apakah anda yakin untuk Unpublish Inovasi Berdampak yang dipilih?'}
+        description={'Apakah anda yakin untuk Unpublish Fasilitas yang dipilih?'}
       >
         <div className="flex items-center justify-center">
           <img src={data?.gambar} alt="image" className={'w-[320px] h-60 object-cover'} />

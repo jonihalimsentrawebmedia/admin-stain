@@ -82,10 +82,10 @@ export const ButtonPublishedBottom = (props: Props) => {
             Batal
           </Button>
           <Button
-            variant={'outline'}
+            // variant={'outline'}
             disabled={loading}
             onClick={HandlerDelete}
-            className={'border-green-500 text-green-500 hover:text-green-600'}
+            className={'border-green-500  bg-green-500'}
           >
             <Check />
             Publish Sekarang

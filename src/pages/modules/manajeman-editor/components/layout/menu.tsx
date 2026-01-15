@@ -1,5 +1,7 @@
+import Cookies from 'js-cookie'
 import { IoSchool } from 'react-icons/io5'
-import { MdBusiness, MdBusinessCenter, MdDashboard, MdInfo } from 'react-icons/md'
+import { MdBusiness, MdBusinessCenter, MdDashboard } from 'react-icons/md'
+import { TbWorld } from 'react-icons/tb'
 
 const baseDomain = '/modules/editor'
 
@@ -14,7 +16,7 @@ export const MENULIST = [
   {
     id: 2,
     name: 'Data Utama Universitas',
-    path: `${baseDomain}/main-data-university`,
+    path: `${baseDomain}/main-data-university/detail/${Cookies.get('id_satuan_organisasi')}`,
     icon: <IoSchool className="size-5" />,
     child: [],
   },
@@ -50,7 +52,7 @@ export const MENULIST = [
     id: 4,
     name: 'Konten Publik',
     path: `${baseDomain}/public-content`,
-    icon: <MdInfo className={'size-5'} />,
+    icon: <TbWorld className={'size-5'} />,
     child: [
       {
         id: 1,
@@ -88,15 +90,20 @@ export const MENULIST = [
         name: 'Agenda',
         path: `${baseDomain}/public-content/agenda`,
       },
-       {
+      {
         id: 7,
         name: 'Fasilitas',
         path: `${baseDomain}/public-content/facilities`,
       },
-       {
-        id: 7,
+      {
+        id: 8,
         name: 'Prestasi',
         path: `${baseDomain}/public-content/achievement`,
+      },
+      {
+        id: 9,
+        name: 'Promosi',
+        path: `${baseDomain}/public-content/promotion`,
       },
       // {
       //   id: 44,

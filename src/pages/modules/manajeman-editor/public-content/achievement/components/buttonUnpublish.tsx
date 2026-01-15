@@ -14,17 +14,19 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { MdCancel } from 'react-icons/md'
 import type { IAchievementDetail } from '@/pages/modules/website-utama/public-content/achievement/data'
+import { Textarea } from '@/components/ui/textarea'
 
 export const ButtonUnpublishAchievement = (data: IAchievementDetail) => {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
-
+const [reason,setReason]=useState('')
   const queryClient = useQueryClient()
 
   const HandleApprove = async () => {
     setLoading(true)
     await AxiosClient.patch(`/editor/prestasi/${data?.id_prestasi}/status-publish`, {
       status_publish: 'UNPUBLISH',
+      alasan_ditolak: reason == '' ? undefined : reason,
     })
       .then((res) => {
         if (res?.data?.status) {
@@ -54,15 +56,15 @@ export const ButtonUnpublishAchievement = (data: IAchievementDetail) => {
         className={'border-red-500 text-red-500 hover:text-red-600'}
       >
         <MdCancel />
-        Unpublish Berita
+        Unpublish Konten
       </Button>
 
       <DialogCustom
         open={open}
         className={'rounded'}
         setOpen={setOpen}
-        title={'Unpublish prestasi'}
-        description={'Apakah anda yakin untuk mempublish prestasi yang dipilih?'}
+        title={'Unpublish Prestasi'}
+        description={'Apakah anda yakin untuk unpublish konten prestasi yang dipilih?'}
       >
         <div className={'flex flex-col gap-2.5'}>
           {data?.gambar_tambahan.length > 0 ? (
@@ -89,6 +91,16 @@ export const ButtonUnpublishAchievement = (data: IAchievementDetail) => {
           <p>{data?.judul}</p>
           <p className="text-gray-500">Penulis</p>
           <p>{data?.penulis}</p>
+              <div>
+            <p>Alasan Unpublish</p>
+            <Textarea
+              placeholder="Alasan Unpublish"
+              value={reason}
+              onChange={(e) => {
+                setReason(e.target.value)
+              }}
+            />
+          </div>
 
           <div className="flex items-center justify-end">
             <ButtonTitleGroup
