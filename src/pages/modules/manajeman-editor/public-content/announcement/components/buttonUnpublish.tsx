@@ -19,6 +19,7 @@ export const ButtonAnnouncementUnpublishManagementEditor = (data: IAnnouncement)
     setLoading(true)
     await AxiosClient.patch(`/editor/pengumuman/${data?.id_pengumuman}/status-publish`, {
       status_publish: 'UNPUBLISH',
+       alasan_ditolak: reason == '' ? undefined : reason,
     })
       .then((res) => {
         if (res?.data?.status) {

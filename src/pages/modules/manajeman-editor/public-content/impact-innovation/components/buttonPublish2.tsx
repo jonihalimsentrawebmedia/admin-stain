@@ -62,8 +62,8 @@ export const ButtonPublish2ManagementEditor = (data: IImpactInnovationList) => {
         isAuto
         className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
-        title={'Ajukan Ke Editor'}
-        description={'Apakah anda yakin untuk mengajukan berita yang dipilih ke editor?'}
+        title={'Publish Inovasi Berdampak'}
+        description={'Apakah anda yakin untuk mempublish inovasi berdampak yang dipilih?'}
       >
         <div className={'flex flex-col gap-2.5'}>
            {data?.gambar_tambahan.length > 0 ? (

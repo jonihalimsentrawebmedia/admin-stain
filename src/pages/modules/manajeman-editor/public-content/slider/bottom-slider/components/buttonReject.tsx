@@ -58,8 +58,8 @@ export const ButtonRejectManagementEditor = (data: IListBottomSlider) => {
         isAuto
         className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
-        title={'Tolak Penguguman'}
-        description={'Apakah anda yakin untuk menolak penguguman yang dipilih?'}
+        title={'Tolak Slider Bawah'}
+        description={'Apakah anda yakin untuk menyetujui slider bawah?'}
       >
         <div className={'flex flex-col gap-2.5'}>
           <div>

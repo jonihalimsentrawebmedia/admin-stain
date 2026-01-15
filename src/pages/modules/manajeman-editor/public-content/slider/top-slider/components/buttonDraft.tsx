@@ -60,7 +60,7 @@ export const ButtonDraft = (props: Props) => {
         setOpen={setOpen}
         className={'rounded lg:min-w-2xl'}
         title={'Kembali Ke Draft'}
-        description={'Apakah anda yakin untuk mengembalikan berita yang diajukan ke draft?'}
+        description={'Apakah anda yakin untuk mengembalikan draft yang diajukan ke draft?'}
       >
         <div>
           <img

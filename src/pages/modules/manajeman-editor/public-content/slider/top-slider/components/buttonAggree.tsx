@@ -56,8 +56,8 @@ const ButtonAggreManagementEditor = (data: IListSlider) => {
         isAuto
         className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
-        title={'Kembali Ke Draft'}
-        description={'Apakah anda yakin untuk mengembalikan Pengumuman yang diajukan ke draft?'}
+        title={'Setujui Slider Atas'}
+        description={'Apakah anda yakin untuk menyetujui slider atas?'}
       >
         <div className={'flex flex-col gap-2.5'}>
         <div>

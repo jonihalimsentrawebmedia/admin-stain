@@ -31,7 +31,7 @@ export const ButtonDraftManagementEditor = (data: INewsDetail) => {
           setOpen(false)
           setLoading(false)
           toast.success(res.data.message || 'Success Mengajukan data berita')
-          queryClient.invalidateQueries({
+        queryClient.invalidateQueries({
             queryKey: ['management-editor-news'],
           })
           queryClient.invalidateQueries({

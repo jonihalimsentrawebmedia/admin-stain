@@ -24,6 +24,7 @@ export const ButtonUnPublishedBottom = (props: Props) => {
     setLoading(true)
     await AxiosClient.patch(`editor/slider-bawah/${data?.id_slider_bawah}/status-publish`, {
       status_publish: 'UNPUBLISH',
+      alasan_ditolak: reason == '' ? undefined : reason,
     })
       .then((res) => {
         if (res?.data?.status) {

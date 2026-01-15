@@ -56,8 +56,8 @@ const ButtonAggreManagementEditor = (data: IAnnouncement) => {
         isAuto
         className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
-        title={'Kembali Ke Draft'}
-        description={'Apakah anda yakin untuk mengembalikan Pengumuman yang diajukan ke draft?'}
+        title={'Setujui Pengumuman'}
+        description={'Apakah anda yakin untuk menyetujui pengumuman?'}
       >
         <div className={'flex flex-col gap-2.5'}>
           <p className="text-gray-500">Judul</p>

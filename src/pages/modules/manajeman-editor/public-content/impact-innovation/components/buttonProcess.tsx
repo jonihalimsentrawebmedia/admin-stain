@@ -57,7 +57,7 @@ const ButtonProcessManagementEditor = (data: IImpactInnovationList) => {
         className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
         title={'Proses Konten'}
-        description={'Apakah anda yakin untuk mengembalikan berita yang diajukan ke draft?'}
+        description={'Apakah anda yakin untuk memproses Konten yang diajukan ?'}
       >
         <div className={'flex flex-col gap-2.5'}>
          {data?.gambar_tambahan.length > 0 ? (

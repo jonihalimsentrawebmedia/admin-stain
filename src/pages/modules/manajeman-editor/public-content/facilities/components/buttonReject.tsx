@@ -58,8 +58,8 @@ export const ButtonRejectManagementEditor = (data: IFacilitiesDetail) => {
         isAuto
         className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
-        title={'Tolak Berita'}
-        description={'Apakah anda yakin untuk menolak berita yang dipilih?'}
+        title={'Tolak Fasilitas'}
+        description={'Apakah anda yakin untuk menyetujui fasilitas?'}
       >
         <div className={'flex flex-col gap-2.5'}>
           <div className="flex items-center justify-center">

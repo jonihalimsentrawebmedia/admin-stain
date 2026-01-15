@@ -56,7 +56,7 @@ export const ButtonDeleteAchievement = (data: IAchievementDetail) => {
         open={open}
         className={'rounded'}
         setOpen={setOpen}
-        title={'Hapus Prestasi?'}
+        title={'Hapus Konten Prestasi?'}
         description={'Apakah anda yakin untuk menghapus Prestasi yang ditulis?'}
       >
         <div className={'flex flex-col gap-2.5'}>

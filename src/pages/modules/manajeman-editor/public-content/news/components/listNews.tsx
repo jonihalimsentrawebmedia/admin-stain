@@ -5,6 +5,7 @@ import { useSearchParams } from 'react-router-dom'
 import useGetSatuanOrganisasi from '../../../controller/useGetSatuanOrganisasi'
 import SelectFilter from '@/components/common/filter/SelectFilter'
 import { UseGetManagementEditorNews } from '../hooks'
+import useGetNewsCategory from '@/pages/modules/settings/reference/news-category/controller/useGetNewsCategory'
 
 interface props {
   status: StatusPublish
@@ -14,15 +15,17 @@ export const TableDataListNews = (props: props) => {
   const { status } = props
   const { satuanOrganisasi } = useGetSatuanOrganisasi({})
   const [searchParams] = useSearchParams()
+  const { newsCategory } = useGetNewsCategory({ isGetAll: true })
   const page = searchParams.get('page') || '1'
   const limit = searchParams.get('limit') || '10'
   const id_satuan_organisasi = searchParams.get('id_satuan_organisasi') || ''
+  const id_kategori_berita = searchParams.get('id-kategori-berita') || ''
 
   const { loading, meta, managementEditorNews } = UseGetManagementEditorNews({
     status_publish: status,
     page: page,
     limit: limit,
-    id_kategori_berita: '',
+    id_kategori_berita: id_kategori_berita,
     id_satuan_organisasi: id_satuan_organisasi,
   })
   const columns = ColumnsReturnByStatus(status)
@@ -30,7 +33,7 @@ export const TableDataListNews = (props: props) => {
   return (
     <div className="space-y-8">
       <SelectFilter
-    selectClassName={'w-full lg:min-w-[10rem] lg:max-w-[20rem]'}
+        selectClassName={'w-full lg:min-w-[10rem] lg:max-w-[20rem]'}
         label="Unit/Satuan Kerja"
         name={'id_satuan_organisasi'}
         options={
@@ -57,10 +60,15 @@ export const TableDataListNews = (props: props) => {
               ]}
             />
             <SelectFilter
-              selectClassName={'min-w-[8rem]'}
+              selectClassName={'min-w-[15rem]'}
               label="Kategori"
-              name={'id_kategori_berita'}
-              options={[]}
+              name={'id-kategori-berita'}
+              options={newsCategory.map((item) => {
+                return {
+                  label: item.nama_kategori,
+                  value: item.id_kategori,
+                }
+              })}
             />
           </div>
         }

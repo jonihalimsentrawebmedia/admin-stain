@@ -56,8 +56,8 @@ const ButtonProcessManagementEditor = (data: IAgendaDetail) => {
         isAuto
         className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
-        title={'Proses Pengumuman'}
-        description={'Apakah anda yakin untuk memproses Pengumuman yang dipilih?'}
+        title={'Proses Konten'}
+        description={'Apakah anda yakin untuk memproses Agenda yang diajukan ?'}
       >
         <div className={'flex flex-col gap-2.5'}>
           <div className={'text-center flex justify-center'}>

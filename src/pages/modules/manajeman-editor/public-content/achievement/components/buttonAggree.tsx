@@ -57,8 +57,8 @@ const ButtonAggreManagementEditor = (data: IAchievementDetail) => {
         isAuto
         className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
-        title={'Setujui '}
-        description={'Apakah anda yakin untuk mengajukan berita yang dipilih ke editor?'}
+        title={'Setujui Prestasi'}
+        description={'Apakah anda yakin untuk menyetujui prestasi?'}
       >
         <div className={'flex flex-col gap-2.5'}>
          {data?.gambar_tambahan.length > 0 ? (

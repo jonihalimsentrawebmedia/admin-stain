@@ -62,8 +62,8 @@ const ButtonAggreManagementEditor = (data: INewsDetail) => {
         isAuto
         className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
-        title={'Ajukan Ke Editor'}
-        description={'Apakah anda yakin untuk mengajukan berita yang dipilih ke editor?'}
+        title={'Setujui Berita'}
+        description={'Apakah anda yakin untuk menyetujui berita?'}
       >
         <div className={'flex flex-col gap-2.5'}>
           {data?.berita_gambar_tambahan.length > 0 ? (

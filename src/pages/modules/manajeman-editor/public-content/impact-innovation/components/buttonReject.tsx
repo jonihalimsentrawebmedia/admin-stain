@@ -67,8 +67,8 @@ export const ButtonRejectManagementEditor = (data: IImpactInnovationList) => {
         isAuto
         className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
-        title={'Tolak Berita'}
-        description={'Apakah anda yakin untuk menolak berita yang dipilih?'}
+        title={'Tolak Inovasi Berdampak'}
+        description={'Apakah anda yakin untuk menolak inovasi berdampak yang dipilih?'}
       >
         <div className={'flex flex-col gap-2.5'}>
           {data?.gambar_tambahan.length > 0 ? (
