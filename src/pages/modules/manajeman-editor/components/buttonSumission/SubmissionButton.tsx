@@ -20,9 +20,9 @@ interface Props {
 const SubmissionButton = ({ kelompok }: Props) => {
   const [open, setOpen] = useState(false)
   const [page, setPage] = useState('1')
-  const [limit, setLimit] = useState('10')
+  const [limit, setLimit] = useState('')
   const [search, setSearch] = useState('')
- 
+
   const { loading, meta, satuanOrganisasi } = useGetSatuanOrganisasiPengajuan({
     kelompok: kelompok,
     limitFilter: limit,
@@ -102,11 +102,13 @@ const SubmissionButton = ({ kelompok }: Props) => {
     {
       accessorKey: 'lihat-data',
       header: 'Lihat Data',
-      cell: ({row}) => {
+      cell: ({ row }) => {
         const values = row.original
 
         return (
-          <Link to={`/modules/editor/faculty/${values.id_satuan_organisasi}/detail/${values.id_draft}`}>
+          <Link
+            to={`/modules/editor/faculty/${values.id_satuan_organisasi}/detail/${values.id_draft}`}
+          >
             <Button
               variant={'outline'}
               className="border border-primary text-primary hover:text-primary"
@@ -127,18 +129,22 @@ const SubmissionButton = ({ kelompok }: Props) => {
         const values = row.row.original
         return (
           <div className="flex gap-2 items-center">
-            <ButtonAccept
-              isIcon
-              queryKey="editor-profile-satuan-organisasi-list"
-              url={`/editor/profil/${values.id_satuan_organisasi}/publish`}
-             
-            />
-            <ButtonCancelDraft
-              isIcon
-              queryKey="editor-profile-satuan-organisasi-list"
-              url={`/editor/profil/${values.id_satuan_organisasi}/tolak`}
-           
-            />
+            {(values.status_publish == 'DIPROSES' || values.status_publish == 'DRAFT') && (
+              <>
+                <ButtonAccept
+                  setOpenParent={setOpen}
+                  isIcon
+                  queryKey="editor-profile-satuan-organisasi-list"
+                  url={`/editor/profil/${values.id_satuan_organisasi}/publish`}
+                />
+                <ButtonCancelDraft
+                  isIcon
+                  queryKey="editor-profile-satuan-organisasi-list"
+                  url={`/editor/profil/${values.id_satuan_organisasi}/tolak`}
+                />
+              </>
+            )}
+
             {/* Tombol Kuning (Asumsi: Edit) */}
             {/* <Link to={`/modules/editor/main-data-university/edit/${values.id_satuan_organisasi}`}>
               <IconEdit />
@@ -149,6 +155,12 @@ const SubmissionButton = ({ kelompok }: Props) => {
       },
     },
   ]
+
+  //   useEffect(()=>{
+  // setPage('1')
+  // setLimit('10')
+  // setSearch('')
+  //   },[])
 
   return (
     <>
@@ -172,6 +184,7 @@ const SubmissionButton = ({ kelompok }: Props) => {
           <TableCustom
             addFilter={
               <SelectFilter
+                valueParam={limit}
                 selectClassName={'min-w-[8rem]'}
                 label="Tampilkan"
                 name={'limit'}

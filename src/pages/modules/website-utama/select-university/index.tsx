@@ -9,6 +9,7 @@ import useGetSatuanOrganisasi from '@/pages/modules/settings/controller/useGetSa
 import { Button } from '@/components/ui/button.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
+import Cookies from 'js-cookie'
 
 export const SelectUniversity = () => {
   const form = useForm()
@@ -25,6 +26,7 @@ export const SelectUniversity = () => {
         const url = searchParams.get('url')
         if (res.data.status) {
           navigate(`/modules/${url}/dashboard`)
+          Cookies.set('id_satuan_organisasi',e?.id_university)
         }
       })
       .catch((err) => {
