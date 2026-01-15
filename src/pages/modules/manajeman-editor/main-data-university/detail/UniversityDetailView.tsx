@@ -2,7 +2,7 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
 import DetailField from '@/components/common/field/DetailField'
 import CardInput from '@/components/common/card/CardInput'
 import UniversityDetailViewModel from './UniversityDetailViewModel'
-import SubmissionButton from '../../components/buttonSumission/SubmissionButton'
+import SubmissionDetailButton from '../../components/buttonSumission/SubmissionDetailButton'
 
 const UniversityDetailView = () => {
   const {
@@ -21,7 +21,7 @@ const UniversityDetailView = () => {
         buttonGroup={[
           {
             type: 'custom',
-            element: <SubmissionButton kelompok="UNIVERSITAS" />,
+            element: <SubmissionDetailButton />,
           },
           {
             label: 'Edit Data',

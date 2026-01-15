@@ -10,8 +10,9 @@ import SelectFilter from '@/components/common/filter/SelectFilter'
 import { Link } from 'react-router-dom'
 import { FastForward } from 'lucide-react'
 import useGetSatuanOrganisasiPengajuan from '../../controller/useGetSatuanOrganisasiPengajuan'
-import ButtonAccept from './ButtonAccept'
-import ButtonCancelDraft from './ButtonCancelDraft'
+import ModalAccept from './ModalAccept'
+import { IconCancel, IconChecklist } from '@/components/common/table/icon'
+import ModalCancel from './ModalCancel'
 
 interface Props {
   kelompok: string
@@ -19,6 +20,9 @@ interface Props {
 
 const SubmissionButton = ({ kelompok }: Props) => {
   const [open, setOpen] = useState(false)
+  const [openAccept, setOpenAccept] = useState(false)
+  const [openReject, setOpenReject] = useState(false)
+  const [idSatuanOrganisasi, setIdSatuanOrganisasi] = useState('')
   const [page, setPage] = useState('1')
   const [limit, setLimit] = useState('')
   const [search, setSearch] = useState('')
@@ -131,17 +135,30 @@ const SubmissionButton = ({ kelompok }: Props) => {
           <div className="flex gap-2 items-center">
             {(values.status_publish == 'DIPROSES' || values.status_publish == 'DRAFT') && (
               <>
-                <ButtonAccept
-                  setOpenParent={setOpen}
-                  isIcon
-                  queryKey="editor-profile-satuan-organisasi-list"
-                  url={`/editor/profil/${values.id_satuan_organisasi}/publish`}
-                />
-                <ButtonCancelDraft
+                <button
+                  onClick={() => {
+                    setOpen(false)
+                    setOpenAccept(true)
+                    setIdSatuanOrganisasi(values.id_satuan_organisasi)
+                  }}
+                >
+                  <IconChecklist />
+                </button>
+
+                <button
+                  onClick={() => {
+                    setOpen(false)
+                    setOpenReject(true)
+                    setIdSatuanOrganisasi(values.id_satuan_organisasi)
+                  }}
+                >
+                  <IconCancel />
+                </button>
+                {/* <ButtonCancelDraft
                   isIcon
                   queryKey="editor-profile-satuan-organisasi-list"
                   url={`/editor/profil/${values.id_satuan_organisasi}/tolak`}
-                />
+                /> */}
               </>
             )}
 
@@ -209,6 +226,25 @@ const SubmissionButton = ({ kelompok }: Props) => {
           />
         </div>
       </DialogCustom>
+
+      <ModalAccept
+        open={openAccept}
+        queryKey="editor-profile-satuan-organisasi-list"
+        url={`/editor/profil/${idSatuanOrganisasi}/publish`}
+        setOpen={(e) => {
+          setOpenAccept(e)
+          setOpen(true)
+        }}
+      />
+      <ModalCancel
+        open={openReject}
+        queryKey="editor-profile-satuan-organisasi-list"
+        url={`/editor/profil/${idSatuanOrganisasi}/tolak`}
+        setOpen={(e) => {
+          setOpenReject(e)
+          setOpen(true)
+        }}
+      />
     </>
   )
 }

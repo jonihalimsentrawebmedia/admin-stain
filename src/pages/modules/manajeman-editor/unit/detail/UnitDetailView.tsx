@@ -1,7 +1,8 @@
-import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup";
-import UnitDetailViewModel from "./UnitDetailViewModel";
-import DetailField from "@/components/common/field/DetailField";
-import CardInput from "@/components/common/card/CardInput";
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
+import UnitDetailViewModel from './UnitDetailViewModel'
+import DetailField from '@/components/common/field/DetailField'
+import CardInput from '@/components/common/card/CardInput'
+import SubmissionDetailButton from '../../components/buttonSumission/SubmissionDetailButton'
 
 const UnitDetailView = () => {
   const {
@@ -12,31 +13,29 @@ const UnitDetailView = () => {
     fieldUniversity,
     form,
     goToEdit,
-  } = UnitDetailViewModel();
+  } = UnitDetailViewModel()
   return (
     <div className="flex flex-col gap-4">
-        
       <ButtonTitleGroup
-      isBack
+        isBack
         buttonGroup={[
           {
-            label: "Edit Data",
+            type: 'custom',
+            element: <SubmissionDetailButton />,
+          },
+          {
+            label: 'Edit Data',
             onClick: () => {
-              goToEdit();
+              goToEdit()
             },
-            type: "edit",
+            type: 'edit',
           },
         ]}
         label="Detail Data Prodi"
       />
       <div className="flex flex-col gap-4">
         <div>
-          <DetailField
-            data={fieldImage}
-            form={form}
-            isRowParent
-            isRow={false}
-          />
+          <DetailField data={fieldImage} form={form} isRowParent isRow={false} />
         </div>
         <CardInput title="Identitas Unit">
           <DetailField data={fieldUniversity} form={form} />
@@ -52,7 +51,7 @@ const UnitDetailView = () => {
         </CardInput>
       </div>
     </div>
-  );
+  )
 }
 
 export default UnitDetailView
