@@ -18,6 +18,9 @@ export const RenderUrl = (url: string, id: string) => {
     case 'slider_bawah': {
       return `slider/bottom-slider`
     }
+    case 'promosi':{
+      return `promotion/detail/${id}`
+    }
     case 'slider_atas': {
       return `slider/top-slider`
     }

@@ -53,6 +53,7 @@ import { RegistrationQuestionPage } from '@/pages/modules/website-prodi/question
 import { LandingPageProdi } from '@/pages/modules/website-prodi/settings/landing-page'
 import { LandingPromotion } from '@/pages/modules/website-prodi/settings/landing-promotion'
 import { BackgroundWebsiteSettings } from '@/pages/modules/website-prodi/settings/background'
+import { ServiceProdiPage } from '@/pages/modules/website-prodi/service'
 
 export const WebsiteProdiRouter = [
   {
@@ -132,6 +133,15 @@ export const WebsiteProdiRouter = [
       {
         path: '*',
         element: <></>,
+      },
+    ],
+  },
+  {
+    path: 'service',
+    children: [
+      {
+        index: true,
+        element: <ServiceProdiPage />,
       },
     ],
   },

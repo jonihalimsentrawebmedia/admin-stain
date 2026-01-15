@@ -87,7 +87,7 @@ export const SubmissionStatusColumns = () => {
       header: 'Tgl.Diajukan',
       cell: ({ row }) => {
         return (
-          <>
+          <div className={'flex flex-col gap-1.5 justify-center'}>
             <div className="flex flex-col gap-1.5 text-center">
               <p className={'text-sm'}>
                 {format(row?.original?.diajukan_at as string, 'dd MMMM yyyy')}
@@ -100,7 +100,7 @@ export const SubmissionStatusColumns = () => {
               </p>
             </div>
             <ButtonDraftAnnouncementProdi {...row?.original} />
-          </>
+          </div>
         )
       },
     },
