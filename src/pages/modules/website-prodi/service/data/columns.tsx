@@ -53,7 +53,7 @@ export const ColumnsServiceProdi = () => {
       cell: ({ row }) => {
         return (
           <Link
-            to={`/modules/website-utama/services/${row.original.id_prodi_layanan}/log`}
+            to={`/modules/website-prodi/service/log/${row.original.id_prodi_layanan}`}
             className="border border-[#2769CD] px-4 py-2 text-[#2769CD] rounded-lg flex gap-2 items-center"
           >
             <History className="text-[#2769CD] size-6" />

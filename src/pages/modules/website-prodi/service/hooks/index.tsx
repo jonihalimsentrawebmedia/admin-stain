@@ -32,3 +32,25 @@ export const UseGetServiceProdi = () => {
 
   return { serviceProdi, loading, meta }
 }
+
+export const UseGetLogServiceProdi = (id: string) => {
+  const [serviceProdiLog, setServiceProdiLog] = useState<any>()
+  const [meta, setMeta] = useState<Meta>()
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['service-prodi-log', id],
+    refetchOnWindowFocus: false,
+    queryFn: () => AxiosClient.get(`/prodi/layanan-log/${id}`).then((res) => res.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setServiceProdiLog(data?.data ?? [])
+      setMeta(data?.meta)
+    }
+  }, [data])
+
+  return { serviceProdiLog, loading, meta }
+}

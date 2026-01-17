@@ -54,6 +54,7 @@ import { LandingPageProdi } from '@/pages/modules/website-prodi/settings/landing
 import { LandingPromotion } from '@/pages/modules/website-prodi/settings/landing-promotion'
 import { BackgroundWebsiteSettings } from '@/pages/modules/website-prodi/settings/background'
 import { ServiceProdiPage } from '@/pages/modules/website-prodi/service'
+import { LogDataServicePage } from '@/pages/modules/website-prodi/service/log'
 
 export const WebsiteProdiRouter = [
   {
@@ -142,6 +143,10 @@ export const WebsiteProdiRouter = [
       {
         index: true,
         element: <ServiceProdiPage />,
+      },
+      {
+        path: 'log/:id',
+        element: <LogDataServicePage />,
       },
     ],
   },
