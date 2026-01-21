@@ -55,7 +55,7 @@ export const ButtonSessionUnit = ({ session }: { session?: ISessionUnit }) => {
         variant={'outline'}
         className={'text-primary border-primary hover:text-primary'}
       >
-        Session Prodi
+        {session?.singkatan_universitas}/ {session?.nama_unit}
         <FaGear />
       </Button>
 

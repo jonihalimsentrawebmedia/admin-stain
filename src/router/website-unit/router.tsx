@@ -79,7 +79,16 @@ export const WebsiteUnitRouter = [
       },
       {
         path: 'achievement',
-        element: <AchievementUnitPage />,
+        children: [
+          {
+            index: true,
+            element: <AchievementUnitPage />,
+          },
+          {
+            path: ':id/reward',
+            element: <></>,
+          },
+        ],
       },
       {
         path: 'collaboration',
