@@ -33,6 +33,7 @@ const TablePaginate = ({ meta, setPage }: Props) => {
       const newParams = new URLSearchParams(searchParams)
       newParams.set('page', page.toString())
       setSearchParams(newParams)
+      setCurrentPage(page)
     }
   }
 
@@ -57,7 +58,7 @@ const TablePaginate = ({ meta, setPage }: Props) => {
   }
 
   const pages = generatePageNumbers()
- 
+
   return (
     <div className="mt-5 flex flex-col gap-2 items-start lg:flex-row lg:items-center justify-between">
       <div className="flex items-center text-xs lg:text-base gap-2">
