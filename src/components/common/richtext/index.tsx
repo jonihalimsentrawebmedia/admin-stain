@@ -15,14 +15,14 @@ export const RichText = <T extends FieldValues>(props: Props<T>) => {
   const { form, name, label, required, className, isRow = true, labelClassName } = props
   return (
     <div
-      className={`${isRow ? 'grid grid-cols-[12rem_1fr]' : 'flex flex-col'} gap-5 items-start ${className}`}
+      className={`${isRow ? 'grid grid-cols-[12rem_1fr]' : 'flex flex-col w-full'} w-full gap-5 items-start ${className}`}
     >
       <label className={`${form.formState.errors[name] ? 'text-red-500' : ''} ${labelClassName}`}>
         {label ?? 'Keterangan (Optional)'}
         {required && <span className="text-red-500"> *</span>}
       </label>
 
-      <div>
+      <div className={'w-full'}>
         <SimpleEditor
           value={form.watch(name) ?? ''}
           onchange={(e) => {

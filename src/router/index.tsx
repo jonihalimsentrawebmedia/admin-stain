@@ -20,6 +20,9 @@ import ProdiWebTheme from '@/pages/modules/website-prodi/components/layout/theme
 import DefaultTheme from '@/components/common/theme/default.tsx'
 import MainLayoutEditor from '@/pages/modules/manajeman-editor/components/layout'
 import { EditorRouter } from './editor/router'
+import { SelectUnitUniversity } from '@/pages/modules/website-unit/select-unit'
+import { WebsiteUnitRouter } from '@/router/website-unit/router.tsx'
+import MainLayoutUnit from '@/pages/modules/website-unit/components/layout'
 
 export const Router = createBrowserRouter([
   {
@@ -76,6 +79,10 @@ export const Router = createBrowserRouter([
         element: <SelectProdi />,
       },
       {
+        path: 'select-unit',
+        element: <SelectUnitUniversity />,
+      },
+      {
         path: 'settings',
         element: <LayoutSetting />,
         children: [...SettingRouter],
@@ -97,6 +104,17 @@ export const Router = createBrowserRouter([
           </ProdiWebTheme>
         ),
         children: [...WebsiteProdiRouter],
+      },
+      {
+        path: 'website-unit',
+        element: (
+          <>
+            <ProdiWebTheme>
+              <MainLayoutUnit />
+            </ProdiWebTheme>
+          </>
+        ),
+        children: [...WebsiteUnitRouter],
       },
       {
         path: 'editor',

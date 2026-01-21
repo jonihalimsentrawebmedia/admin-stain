@@ -61,9 +61,9 @@ export const SelectProdi = () => {
                 <ArrowLeft className={'text-primary'} />
                 Kembali
               </Link>
-              <p className="text-xl mt-5 font-semibold"></p>
+              <p className="text-xl mt-5 font-semibold">Pilih Data Prodi yang akan digunakan</p>
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(HandlerSubmit)} className={'flex flex-col gap-4'}>
+                <form onSubmit={form.handleSubmit(HandlerSubmit)} className={'flex flex-col gap-4 mt-5'}>
                   <SelectBasicInput
                     form={form}
                     name={'id_university'}

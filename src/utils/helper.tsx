@@ -32,6 +32,11 @@ export const GetModuleUrl = (moduleSelect: { nama_module: string; controller?: s
   switch (moduleName) {
     case 'website utama':
       return '/modules/select-university?url=website-utama'
+
+    case 'website unit': {
+      return '/modules/select-unit?url=website-unit'
+    }
+
     case 'manajemen editor':
       return '/modules/select-university?url=editor'
 
