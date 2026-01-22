@@ -25,3 +25,24 @@ export const UseGetCategoryAchievement = () => {
 
   return { categoryAchievement, loading, meta }
 }
+
+export const UseGetAchievementDetail = (id: string) => {
+  const [achievement, setAchievement] = useState<IAchievementCategory>()
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['achievement-detail', id],
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get(`/unit/profil/kategori-penghargaan/${id}`).then((res) => res.data?.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setAchievement(data)
+    }
+  }, [data])
+
+  return { achievement, loading }
+}

@@ -12,6 +12,19 @@ import { TaskPurposeUnit } from '@/pages/modules/website-unit/profile/task-purpo
 import { OrganizationStructure } from '@/pages/modules/website-unit/profile/organization-structure'
 import { Collaboration } from '@/pages/modules/website-unit/profile/collaboration'
 import { AchievementUnitPage } from '@/pages/modules/website-unit/profile/achievement'
+import { RewardAchievement } from '@/pages/modules/website-unit/profile/achievement/reward'
+import { CreatedCollaborationUnit } from '@/pages/modules/website-unit/profile/collaboration/created'
+import { UpdatedCollaborationUnit } from '@/pages/modules/website-unit/profile/collaboration/updated'
+import CalloborationDetailView from '@/pages/modules/website-utama/kerjasama/daftar-kerjasama/detail/CalloborationDetailView.tsx'
+import CalloborationLogView from '@/pages/modules/website-utama/kerjasama/daftar-kerjasama/log/CalloborationLogView.tsx'
+import { ServicesList } from '@/pages/modules/website-unit/services/category'
+import { ListServiceCategory } from '@/pages/modules/website-unit/services/list'
+import { MainServiceList } from '@/pages/modules/website-unit/services/main'
+import { HeaderFooterServices } from '@/pages/modules/website-unit/services/header-footer'
+import { OperationalHourPage } from '@/pages/modules/website-unit/services/operational-hour'
+import { CategoryCollection } from '@/pages/modules/website-unit/collection'
+import { ListCollectionCategory } from '@/pages/modules/website-unit/collection/listCollection'
+import { FloorPlanUnitPage } from '@/pages/modules/website-unit/floor-plan'
 
 export const WebsiteUnitRouter = [
   {
@@ -86,19 +99,87 @@ export const WebsiteUnitRouter = [
           },
           {
             path: ':id/reward',
-            element: <></>,
+            element: <RewardAchievement />,
           },
         ],
       },
       {
         path: 'collaboration',
-        element: <Collaboration />,
+        children: [
+          {
+            index: true,
+            element: <Collaboration />,
+          },
+          {
+            path: 'add',
+            element: <CreatedCollaborationUnit />,
+          },
+          {
+            path: 'edit/:idCalloboration',
+            element: <UpdatedCollaborationUnit />,
+          },
+          {
+            path: 'detail/:idCalloboration',
+            element: <CalloborationDetailView />,
+          },
+          {
+            path: 'log/:idCalloboration',
+            element: <CalloborationLogView />,
+          },
+        ],
       },
       {
         path: 'organization-structure',
         element: <OrganizationStructure />,
       },
     ],
+  },
+  {
+    path: 'services',
+    children: [
+      {
+        path: 'list',
+        children: [
+          {
+            index: true,
+            element: <ServicesList />,
+          },
+          {
+            path: ':id',
+            element: <ListServiceCategory />,
+          },
+        ],
+      },
+      {
+        path: 'main',
+        element: <MainServiceList />,
+      },
+      {
+        path: 'header-footer',
+        element: <HeaderFooterServices />,
+      },
+      {
+        path: 'operational-hours',
+        element: <OperationalHourPage />,
+      },
+    ],
+  },
+  {
+    path: 'collection',
+    children: [
+      {
+        index: true,
+        element: <CategoryCollection />,
+      },
+      {
+        path: ':id/list',
+        element: <ListCollectionCategory />,
+      },
+    ],
+  },
+  {
+    path: 'floor-plan',
+    element: <FloorPlanUnitPage />,
   },
   {
     path: '*',
