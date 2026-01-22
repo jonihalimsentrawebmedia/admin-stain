@@ -25,6 +25,7 @@ import { OperationalHourPage } from '@/pages/modules/website-unit/services/opera
 import { CategoryCollection } from '@/pages/modules/website-unit/collection'
 import { ListCollectionCategory } from '@/pages/modules/website-unit/collection/listCollection'
 import { FloorPlanUnitPage } from '@/pages/modules/website-unit/floor-plan'
+import { InboxMessageUnit } from '@/pages/modules/website-unit/question/inbox'
 
 export const WebsiteUnitRouter = [
   {
@@ -180,6 +181,15 @@ export const WebsiteUnitRouter = [
   {
     path: 'floor-plan',
     element: <FloorPlanUnitPage />,
+  },
+  {
+    path: 'question',
+    children: [
+      {
+        path: 'inbox',
+        element: <InboxMessageUnit />,
+      },
+    ],
   },
   {
     path: '*',
