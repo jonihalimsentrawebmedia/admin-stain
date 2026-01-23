@@ -34,7 +34,7 @@ export const UpdatedFacilitiesUnit = () => {
 
   const HandleSave = async (e: FacilitiesUnitResolverType) => {
     setLoading(true)
-    await AxiosClient.put(`/unit/unit-fasilitas/${id}`, e)
+    await AxiosClient.put(`/editor/unit-fasilitas/${id}`, e)
       .then((res) => {
         if (res.data.status) {
           setLoading(false)
