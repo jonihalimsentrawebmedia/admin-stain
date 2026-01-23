@@ -25,7 +25,7 @@ export const UseGetProdiBackground = (props?: Props) => {
     queryKey: ['prodi-background', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get(`prodi/prodi-background?${ParamsSearch}`).then((res) => res.data),
+      AxiosClient.get(`/prodi/prodi-background?${ParamsSearch}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching

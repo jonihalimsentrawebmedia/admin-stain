@@ -26,6 +26,38 @@ import { CategoryCollection } from '@/pages/modules/website-unit/collection'
 import { ListCollectionCategory } from '@/pages/modules/website-unit/collection/listCollection'
 import { FloorPlanUnitPage } from '@/pages/modules/website-unit/floor-plan'
 import { InboxMessageUnit } from '@/pages/modules/website-unit/question/inbox'
+import { QuestionFAQUnitPage } from '@/pages/modules/website-unit/question/FAQ'
+import { CategoryFAQUnitPage } from '@/pages/modules/website-unit/question/FAQ/category'
+import { GalleryVideoUnitPage } from '@/pages/modules/website-unit/gallery/video'
+import { GalleryAlbumUnitPage } from '@/pages/modules/website-unit/gallery/album'
+import { LogActivityGalleryAlbum } from '@/pages/modules/website-unit/gallery/album/log'
+import { GalleryPhotoUnitPage } from '@/pages/modules/website-unit/gallery/photo'
+import { LandingPageUnit } from '@/pages/modules/website-unit/settings/landing-page'
+import { BackgroundWebsiteUnitSettings } from '@/pages/modules/website-unit/settings/background'
+import { NewsUnitPublicContentPage } from '@/pages/modules/website-unit/public-content/news'
+import { NewsUnitCreated } from '@/pages/modules/website-unit/public-content/news/created'
+import { NewsUnitUpdated } from '@/pages/modules/website-unit/public-content/news/updated'
+import { DetailNewsUnitPage } from '@/pages/modules/website-unit/public-content/news/detail'
+import { LogActivityNewsUnitPage } from '@/pages/modules/website-unit/public-content/news/log-data'
+import { AnnouncementUnitPublicContent } from '@/pages/modules/website-unit/public-content/announcement'
+import { CreatedAnnouncementUnit } from '@/pages/modules/website-unit/public-content/announcement/created'
+import { UpdatedAnnouncementUnit } from '@/pages/modules/website-unit/public-content/announcement/updated'
+import { AnnouncementProdiDetailUnit } from '@/pages/modules/website-unit/public-content/announcement/detail'
+import { LogActivityAnnouncementUnitPage } from '@/pages/modules/website-unit/public-content/announcement/log'
+import { AgendaUnitPublicContent } from '@/pages/modules/website-unit/public-content/agenda'
+import { CreateAgendaUnitPage } from '@/pages/modules/website-unit/public-content/agenda/created'
+import { UpdatedAgendaUnitPage } from '@/pages/modules/website-unit/public-content/agenda/updated'
+import { LogActivityAgendaUnitPage } from '@/pages/modules/website-unit/public-content/agenda/log'
+import { AgendaUnitDetailPage } from '@/pages/modules/website-unit/public-content/agenda/detail'
+import DownloadFileUNitPage from '@/pages/modules/website-unit/public-content/Download'
+import { AddDownloadUnitPage } from '@/pages/modules/website-unit/public-content/Download/created'
+import { CategoryDownloadProdiPage } from '@/pages/modules/website-unit/public-content/Download/category'
+import { UpdatedDownloadUnitPage } from '@/pages/modules/website-unit/public-content/Download/updated'
+import { FacilitiesUnitPublicContent } from '@/pages/modules/website-unit/public-content/Facilities'
+import { CreatedFacilitiesUnit } from '@/pages/modules/website-unit/public-content/Facilities/created'
+import { UpdatedFacilitiesUnit } from '@/pages/modules/website-unit/public-content/Facilities/updated'
+import { DetailFacilitiesUnitPage } from '@/pages/modules/website-unit/public-content/Facilities/detail'
+import DashboardAdminUnit from '@/pages/modules/website-unit/dashboard'
 
 export const WebsiteUnitRouter = [
   {
@@ -33,7 +65,7 @@ export const WebsiteUnitRouter = [
     children: [
       {
         index: true,
-        element: <></>,
+        element: <DashboardAdminUnit />,
       },
       {
         path: 'user-profile',
@@ -183,11 +215,185 @@ export const WebsiteUnitRouter = [
     element: <FloorPlanUnitPage />,
   },
   {
+    path: 'public-content',
+    children: [
+      {
+        path: 'news',
+        children: [
+          {
+            index: true,
+            element: <NewsUnitPublicContentPage />,
+          },
+          {
+            path: 'add',
+            element: <NewsUnitCreated />,
+          },
+          {
+            path: 'edit/:id',
+            element: <NewsUnitUpdated />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailNewsUnitPage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityNewsUnitPage />,
+          },
+        ],
+      },
+      {
+        path: 'announcement',
+        children: [
+          {
+            index: true,
+            element: <AnnouncementUnitPublicContent />,
+          },
+          {
+            path: 'add',
+            element: <CreatedAnnouncementUnit />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedAnnouncementUnit />,
+          },
+          {
+            path: 'detail/:id',
+            element: <AnnouncementProdiDetailUnit />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityAnnouncementUnitPage />,
+          },
+        ],
+      },
+      {
+        path: 'agenda',
+        children: [
+          {
+            index: true,
+            element: <AgendaUnitPublicContent />,
+          },
+          {
+            path: 'add',
+            element: <CreateAgendaUnitPage />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedAgendaUnitPage />,
+          },
+          {
+            path: 'detail/:id',
+            element: <AgendaUnitDetailPage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityAgendaUnitPage />,
+          },
+        ],
+      },
+      {
+        path: 'download',
+        children: [
+          {
+            index: true,
+            element: <DownloadFileUNitPage />,
+          },
+          {
+            path: 'category',
+            element: <CategoryDownloadProdiPage />,
+          },
+          {
+            path: 'add',
+            element: <AddDownloadUnitPage />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedDownloadUnitPage />,
+          },
+        ],
+      },
+      {
+        path: 'facilities',
+        children: [
+          {
+            index: true,
+            element: <FacilitiesUnitPublicContent />,
+          },
+          {
+            path: 'add',
+            element: <CreatedFacilitiesUnit />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedFacilitiesUnit />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailFacilitiesUnitPage />,
+          },
+        ],
+      },
+    ],
+  },
+  {
     path: 'question',
     children: [
       {
         path: 'inbox',
         element: <InboxMessageUnit />,
+      },
+      {
+        path: 'faq',
+        children: [
+          {
+            index: true,
+            element: <QuestionFAQUnitPage />,
+          },
+          {
+            path: 'category',
+            element: <CategoryFAQUnitPage />,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: 'gallery',
+    children: [
+      {
+        path: 'video',
+        element: <GalleryVideoUnitPage />,
+      },
+      {
+        path: 'photo',
+        children: [
+          {
+            index: true,
+            element: <GalleryAlbumUnitPage />,
+          },
+          {
+            path: 'album/:id',
+            element: <GalleryPhotoUnitPage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityGalleryAlbum />,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: 'settings',
+    children: [
+      {
+        path: 'landing-page',
+        element: <LandingPageUnit />,
+      },
+      {
+        path: 'background',
+        element: <BackgroundWebsiteUnitSettings />,
       },
     ],
   },

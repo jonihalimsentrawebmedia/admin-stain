@@ -25,13 +25,13 @@ export const ButtonAddVideoProdi = () => {
 
   const HandlerDelete = async (e: VideoType) => {
     setLoading(true)
-    await AxiosClient.post('/prodi/galeri-video', e)
+    await AxiosClient.post('/unit/galeri-video', e)
       .then((res) => {
         if (res.data.status) {
           setOpen(false)
           setLoading(false)
           queryClient.invalidateQueries({
-            queryKey: ['video-prodi'],
+            queryKey: ['video-unit'],
           })
           toast.success(res.data.message || 'Success Pengajuan tambah data video')
           form.reset()

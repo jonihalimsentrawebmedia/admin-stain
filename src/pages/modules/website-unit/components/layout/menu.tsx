@@ -117,32 +117,32 @@ export const MenuListUnit = [
     id: 7,
     name: 'Konten Publik',
     icon: <MdInfo className={'size-5'} />,
-    path: `${baseDomain}/content-public`,
+    path: `${baseDomain}/public-content`,
     child: [
       {
         id: 71,
         name: 'Berita',
-        path: `${baseDomain}/content-public/news`,
+        path: `${baseDomain}/public-content/news`,
       },
       {
         id: 72,
         name: 'Pengumuman',
-        path: `${baseDomain}/content-public/announcement`,
+        path: `${baseDomain}/public-content/announcement`,
       },
       {
         id: 73,
         name: 'Agenda',
-        path: `${baseDomain}/content-public/agenda`,
+        path: `${baseDomain}/public-content/agenda`,
       },
       {
         id: 74,
         name: 'Download',
-        path: `${baseDomain}/content-public/download`,
+        path: `${baseDomain}/public-content/download`,
       },
       {
         id: 75,
         name: 'Fasilitas Unit',
-        path: `${baseDomain}/content-public/facilities`,
+        path: `${baseDomain}/public-content/facilities`,
       },
     ],
   },
