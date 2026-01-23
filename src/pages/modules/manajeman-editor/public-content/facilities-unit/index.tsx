@@ -1,4 +1,4 @@
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import {  useSearchParams } from 'react-router-dom'
 import type { StatusPublish } from '@/pages/modules/website-unit/public-content/news/data/types.ts'
 import { useEffect } from 'react'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
@@ -7,7 +7,7 @@ import { TableDataListFacilities } from './components/facilitiesList'
 import { UseGetFacilitiesUnitStatus } from './hooks'
 
 export const FacilitiesUnitEditor = () => {
-  const navigate = useNavigate()
+
   const { status } = UseGetFacilitiesUnitStatus()
 
   const [searchParams, setSearchParams] = useSearchParams()
@@ -115,7 +115,7 @@ export const FacilitiesUnitEditor = () => {
       <div className="flex flex-col gap-5">
         <ButtonTitleGroup
           label={'Fasilitas Unit'}
-          buttonGroup={[{ type: 'add', label: 'Tambah Fasilitas', onClick: () => navigate('add') }]}
+          buttonGroup={[]}
         />
 
         <TabsListCustom
