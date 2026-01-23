@@ -27,6 +27,10 @@ import { AnnouncementManagementEditorDetailPage } from '@/pages/modules/manajema
 import { LogActivityAnnouncementManagementEditorPage } from '@/pages/modules/manajeman-editor/public-content/announcement/log'
 import { UpdatedAnnouncementManagementEditor } from '@/pages/modules/manajeman-editor/public-content/announcement/updated'
 import { FacilitiesPage } from '@/pages/modules/manajeman-editor/public-content/facilities'
+import { FacilitiesUnitEditor } from '@/pages/modules/manajeman-editor/public-content/facilities-unit'
+import { DetailFacilitiesUnitPage } from '@/pages/modules/manajeman-editor/public-content/facilities-unit/detail'
+import { LogActivityFacilitiesUnitPage } from '@/pages/modules/manajeman-editor/public-content/facilities-unit/log'
+import { UpdatedFacilitiesUnit } from '@/pages/modules/manajeman-editor/public-content/facilities-unit/updated'
 import { DetailFacilitiesPage } from '@/pages/modules/manajeman-editor/public-content/facilities/detail'
 import { LogActivityFacilitiesPage } from '@/pages/modules/manajeman-editor/public-content/facilities/log'
 import { UpdatedFacilitiesPage } from '@/pages/modules/manajeman-editor/public-content/facilities/updated'
@@ -370,7 +374,7 @@ export const EditorRouter = [
             index: true,
             element: <PromotionManagementEditorPage />,
           },
-        
+
           {
             path: 'edit/:id',
             element: <UpdatedPromotionMangementEditor />,
@@ -382,6 +386,28 @@ export const EditorRouter = [
           {
             path: 'log/:id',
             element: <LogActivityPromotionManagementEditorPage />,
+          },
+        ],
+      },
+      {
+        path: 'facilities-unit',
+        children: [
+          {
+            index: true,
+            element: <FacilitiesUnitEditor />,
+          },
+         
+          {
+            path: 'edit/:id',
+            element: <UpdatedFacilitiesUnit />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailFacilitiesUnitPage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityFacilitiesUnitPage />,
           },
         ],
       },

@@ -105,6 +105,11 @@ export const MENULIST = [
         name: 'Promosi',
         path: `${baseDomain}/public-content/promotion`,
       },
+      {
+        id: 10,
+        name: 'Fasilitas Unit',
+        path: `${baseDomain}/public-content/facilities-unit`,
+      },
       // {
       //   id: 44,
       //   name: 'Promosi',

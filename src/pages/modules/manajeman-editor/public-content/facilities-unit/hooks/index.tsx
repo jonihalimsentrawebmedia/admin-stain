@@ -59,10 +59,10 @@ export const UseGetFacilitiesUnitDetail = (id: string) => {
   return { detailFacilities, loading }
 }
 
-export const UseGetFacilitiesStatus = () => {
+export const UseGetFacilitiesUnitStatus = () => {
   const [status, setStatus] = useState<IStatusFacilitiesUnit>()
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['status-facilities-unit-editor'],
+    queryKey: ['status-unit-facilities-editor'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/editor/unit-fasilitas/status').then((res) => res.data.data),
   })

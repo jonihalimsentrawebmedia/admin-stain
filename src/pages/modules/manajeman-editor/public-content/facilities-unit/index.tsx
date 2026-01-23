@@ -1,110 +1,134 @@
-import { Link, useSearchParams } from 'react-router-dom'
-import type { ColumnDef } from '@tanstack/react-table'
-import type { IFacilitiesDetail } from '@/pages/modules/website-utama/public-content/facilities/data'
-import { Button } from '@/components/ui/button.tsx'
-import { MdInfo, MdOutlineHistory } from 'react-icons/md'
-import { format } from 'date-fns'
-import { TimeAgo } from '@/utils/helper.tsx'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import type { StatusPublish } from '@/pages/modules/website-unit/public-content/news/data/types.ts'
+import { useEffect } from 'react'
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import { TabsListCustom } from '@/pages/modules/website-utama/public-content/slider/components/tabsList.tsx'
+import { TableDataListFacilities } from './components/facilitiesList'
+import { UseGetFacilitiesUnitStatus } from './hooks'
 
+export const FacilitiesUnitEditor = () => {
+  const navigate = useNavigate()
+  const { status } = UseGetFacilitiesUnitStatus()
 
-export const ApprovedColumnsFacilities = () => {
-  const [searchParams] = useSearchParams()
-  const page = Number(searchParams.get('page') ?? '1')
-  const limit = Number(searchParams.get('limit') ?? '10')
+  const [searchParams, setSearchParams] = useSearchParams()
+  const statusParams = searchParams.get('status') as StatusPublish
 
-  const columns: ColumnDef<IFacilitiesDetail>[] = [
+  useEffect(() => {
+    if (!statusParams) {
+      setSearchParams({ status: 'DRAFT' })
+    }
+  }, [statusParams])
+
+  const DataTabs = [
     {
-      accessorKey: 'order',
-      header: '#',
-      cell: ({ row }) => `${page * limit - limit + row.index + 1}`,
-    },
-    {
-      accessorKey: 'gambar',
-      header: 'Gambar',
-      cell: ({ row }) => (
-        <img
-          src={row.original.gambar}
-          alt="gambar"
-          className={'w-[180px] h-[135px] object-cover'}
-        />
+      id: 1,
+      name: (
+        <div className="p-2 flex items-center gap-1.5">
+          <p>Draft</p>
+          <div className="bg-red-500 size-4 text-white rounded-full text-xs">{status?.DRAFT}</div>
+        </div>
       ),
+      value: 'DRAFT',
+      element: <TableDataListFacilities status={statusParams ?? 'DRAFT'} />,
     },
     {
-      accessorKey: 'nama_fasilitas',
-      header: 'Nama Fasilitas',
+      id: 2,
+      name: (
+        <div className="p-2 flex items-center gap-1.5">
+          <p>Diajukan Ke Editor</p>
+          <div className="bg-red-500 size-4 text-white rounded-full text-xs">
+            {status?.DIAJUKAN_EDITOR}
+          </div>
+        </div>
+      ),
+      value: 'DIAJUKAN_EDITOR',
+      element: <TableDataListFacilities status={statusParams ?? 'DRAFT'} />,
     },
     {
-      accessorKey: 'alamat',
-      header: 'Alamat',
+      id: 3,
+      name: (
+        <div className="p-2 flex items-center gap-1.5">
+          <p>Proses Editor</p>
+          <div className="bg-red-500 size-4 text-white rounded-full text-xs">
+            {status?.PROSES_EDITOR}
+          </div>
+        </div>
+      ),
+      value: 'PROSES_EDITOR',
+      element: <TableDataListFacilities status={statusParams ?? 'DRAFT'} />,
     },
     {
-      accessorKey: 'no_hp_pembantu',
-      header: 'No. HP',
+      id: 4,
+      name: (
+        <div className="p-2 flex items-center gap-1.5">
+          <p>Ditolak Editor</p>
+          <div className="bg-red-500 size-4 text-white rounded-full text-xs">
+            {status?.TOLAK_EDITOR}
+          </div>
+        </div>
+      ),
+      value: 'TOLAK_EDITOR',
+      element: <TableDataListFacilities status={statusParams ?? 'DRAFT'} />,
     },
     {
-      accessorKey: 'email_pembantu',
-      header: 'Email',
+      id: 5,
+      name: (
+        <div className="p-2 flex items-center gap-1.5">
+          <p>Disetujui Editor</p>
+          <div className="bg-red-500 size-4 text-white rounded-full text-xs">
+            {status?.DISETUJUI_EDITOR}
+          </div>
+        </div>
+      ),
+      value: 'DISETUJUI_EDITOR',
+      element: <TableDataListFacilities status={statusParams ?? 'DRAFT'} />,
     },
     {
-      accessorKey: 'log',
-      header: 'Log',
-      cell: ({ row }) => {
-        return (
-          <Link to={`log/${row?.original?.id_fasilitas}`}>
-            <Button
-              size={'sm'}
-              variant={'outline'}
-              className={'text-blue-500 border-blue-500 hover:text-blue-500'}
-            >
-              <MdOutlineHistory />
-              Lihat Log
-            </Button>
-          </Link>
-        )
-      },
+      id: 6,
+      name: (
+        <div className="p-2 flex items-center gap-1.5">
+          <p>Publish</p>
+          <div className="bg-red-500 size-4 text-white rounded-full text-xs">
+            {status?.PUBLISHED}
+          </div>
+        </div>
+      ),
+      value: 'PUBLISHED',
+      element: <TableDataListFacilities status={statusParams ?? 'DRAFT'} />,
     },
     {
-      accessorKey: 'disetujui_at',
-      header: 'Tgl. Disetujui',
-      cell: ({ row }) => {
-        return (
-          <>
-            <div className="flex flex-col gap-1.5 text-center">
-              <p className={'text-sm'}>
-                {format(row?.original?.disetujui_at as string, 'dd MMMM yyyy')}
-              </p>
-              <p className={'text-sm'}>
-                {format(row?.original?.disetujui_at as string, 'HH:mm:ss')}
-              </p>
-              <p className={'text-primary text-sm'}>
-                {TimeAgo(row?.original?.disetujui_at as string)}
-              </p>
-            </div>
-          </>
-        )
-      },
-    },
-    {
-      accessorKey: 'action',
-      header: 'Aksi',
-    //   cell: ({ row }) => <ButtonPublishFacilities {...row?.original} />,
-    },
-    {
-      accessorKey: 'action',
-      header: '',
-      cell: ({ row }) => {
-        return (
-          <>
-            <Link to={`detail/${row?.original?.id_fasilitas}`}>
-              <button className={'bg-blue-500 p-1.5 rounded text-white hover:bg-blue-600'}>
-                <MdInfo />
-              </button>
-            </Link>
-          </>
-        )
-      },
+      id: 7,
+      name: (
+        <div className="p-2 flex items-center gap-1.5">
+          <p>Unpublish</p>
+          <div className="bg-red-500 size-4 text-white rounded-full text-xs">
+            {status?.UNPUBLISH}
+          </div>
+        </div>
+      ),
+      value: 'UNPUBLISH',
+      element: <TableDataListFacilities status={statusParams ?? 'DRAFT'} />,
     },
   ]
+  return (
+    <>
+      <div className="flex flex-col gap-5">
+        <ButtonTitleGroup
+          label={'Fasilitas Unit'}
+          buttonGroup={[{ type: 'add', label: 'Tambah Fasilitas', onClick: () => navigate('add') }]}
+        />
 
-  return columns
+        <TabsListCustom
+          triggerClassName={
+            'border-black rounded-none data-[state=active]:bg-black data-[state=active]:text-white text-black'
+          }
+          value={statusParams ?? 'DRAFT'}
+          onChange={(e) => {
+            setSearchParams({ status: e })
+          }}
+          data={DataTabs}
+        />
+      </div>
+    </>
+  )
 }
