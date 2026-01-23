@@ -120,7 +120,7 @@ export const FacilitiesUnitEditor = () => {
 
         <TabsListCustom
           triggerClassName={
-            'border-black rounded-none data-[state=active]:bg-black data-[state=active]:text-white text-black'
+            'border-primary rounded-none data-[state=active]:bg-primary data-[state=active]:text-white text-black'
           }
           value={statusParams ?? 'DRAFT'}
           onChange={(e) => {
