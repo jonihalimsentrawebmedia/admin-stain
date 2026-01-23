@@ -36,6 +36,7 @@ export const ButtonAddReward = (props: Props) => {
           queryClient.invalidateQueries({
             queryKey: ['reward'],
           })
+          form.reset()
           toast.success(res.data.message || 'Success Menambahkan Data Penghargaan')
         }
       })

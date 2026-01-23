@@ -30,6 +30,7 @@ export const AddMainService = () => {
           queryClient.invalidateQueries({
             queryKey: ['main-service'],
           })
+          form.reset()
         }
       })
       .catch((err) => {

@@ -31,7 +31,7 @@ export const ButtonAddHistory = () => {
   const form = useForm<HistoryResolverType>({
     resolver: zodResolver(HistoryResolver),
   })
-  
+
   const queryClient = useQueryClient()
 
   const HandleSave = async (value: HistoryResolverType) => {
@@ -45,11 +45,12 @@ export const ButtonAddHistory = () => {
       .then((res) => {
         if (res.data.status) {
           setOpen(false)
-          setOpen(false)
+          setLoading(false)
           toast.success(res.data.message || 'Success Menambahkan Data Sejarah')
           queryClient.invalidateQueries({
             queryKey: ['history-unit'],
           })
+          form.reset()
         }
       })
       .catch((err) => {
@@ -69,7 +70,12 @@ export const ButtonAddHistory = () => {
         Tambah Sejarah
       </Button>
 
-      <DialogCustom className={'rounded lg:max-w-2xl'} open={open} setOpen={setOpen} title={'Tambah Sejarah'}>
+      <DialogCustom
+        className={'rounded lg:max-w-2xl'}
+        open={open}
+        setOpen={setOpen}
+        title={'Tambah Sejarah'}
+      >
         <FormHistoryUnit
           form={form}
           handleSave={HandleSave}

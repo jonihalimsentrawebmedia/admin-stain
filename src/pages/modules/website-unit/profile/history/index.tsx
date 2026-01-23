@@ -3,9 +3,20 @@ import { ButtonAddHistory } from '@/pages/modules/website-unit/profile/history/c
 import { UseGetHistoryUnit } from '@/pages/modules/website-unit/profile/history/hooks'
 import { ColumnsHistory } from '@/pages/modules/website-unit/profile/history/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import { useSearchParams } from 'react-router-dom'
 
 export const HistoryUnit = () => {
-  const { historyUnit, meta, loading } = UseGetHistoryUnit()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { historyUnit, meta, loading } = UseGetHistoryUnit({
+    page: page,
+    limit: limit,
+    search: search,
+  })
+
   const columns = ColumnsHistory()
   return (
     <>
@@ -15,7 +26,7 @@ export const HistoryUnit = () => {
           buttonGroup={[{ type: 'custom', element: <ButtonAddHistory />, onClick: () => {} }]}
         />
 
-        <TableCustom columns={columns} data={historyUnit} loading={loading} meta={meta} />
+        <TableCustom isShowFilter={false} columns={columns} data={historyUnit} loading={loading} meta={meta} />
       </div>
     </>
   )
