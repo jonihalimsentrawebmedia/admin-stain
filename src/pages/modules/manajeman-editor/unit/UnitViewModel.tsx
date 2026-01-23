@@ -37,11 +37,11 @@ const UnitViewModel = () => {
         return (
           <div className="flex gap-2 items-center">
             {/* Tombol Biru (Asumsi: Detail/Lihat) */}
-            <Link to={`/modules/edit/unit/detail/${values.id_satuan_organisasi}`}>
+            <Link to={`/modules/editor/unit/detail/${values.id_satuan_organisasi}`}>
               <IconDetail />
             </Link>
             {/* Tombol Kuning (Asumsi: Edit) */}
-            <Link to={`/modules/edit/unit/edit/${values.id_satuan_organisasi}`}>
+            <Link to={`/modules/editor/unit/edit/${values.id_satuan_organisasi}`}>
               <IconEdit />
             </Link>
             {/* Tombol Merah (Asumsi: Delete) */}
