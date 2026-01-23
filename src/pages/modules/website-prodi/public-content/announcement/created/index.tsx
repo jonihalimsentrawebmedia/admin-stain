@@ -21,7 +21,7 @@ export const CreatedAnnouncementProdi = () => {
 
   const HandleSave = async (e: AnnouncementType) => {
     setLoading(true)
-    await AxiosClient.post('prodi/pengumuman', e).then((res) => {
+    await AxiosClient.post('/prodi/pengumuman', e).then((res) => {
       if (res.data.status) {
         setLoading(false)
         navigate('/modules/website-prodi/public-content/announcement')
