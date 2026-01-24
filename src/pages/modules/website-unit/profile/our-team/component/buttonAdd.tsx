@@ -45,6 +45,7 @@ export const ButtonAddOurTeam = () => {
           queryClient.invalidateQueries({
             queryKey: ['division-unit'],
           })
+          form.reset()
         }
       })
       .catch((err) => {

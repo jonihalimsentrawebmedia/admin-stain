@@ -46,6 +46,7 @@ export const ButtonAddFloorPlan = (props: Props) => {
           queryClient.invalidateQueries({
             queryKey: ['floor-plan'],
           })
+          form.reset()
           toast.success(res.data.message || 'Success Menambahkan Data Denah Lantai')
         }
       })

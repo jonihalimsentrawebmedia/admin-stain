@@ -46,9 +46,7 @@ export const ButtonAddPhotoUnit = () => {
           queryClient.invalidateQueries({
             queryKey: ['album-unit-detail'],
           })
-
           toast.success(res.data.message || 'Success Pengajuan tambah data foto')
-
           form.reset()
         }
       })

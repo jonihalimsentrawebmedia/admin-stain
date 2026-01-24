@@ -33,6 +33,7 @@ export const ButtonAddOperationalHour = () => {
           queryClient.invalidateQueries({
             queryKey: ['operational-hour'],
           })
+          form.reset()
           toast.success(res.data.message || 'Success Menambahkan Data Jadwal Operasional')
         }
       })

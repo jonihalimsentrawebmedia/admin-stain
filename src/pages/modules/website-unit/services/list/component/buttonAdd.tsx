@@ -42,6 +42,7 @@ export const ButtonAddListCategory = (rootData?: ICategoryServices) => {
           queryClient.invalidateQueries({
             queryKey: ['list-service'],
           })
+          form.reset()
           toast.success(res.data.message || 'Success Menambahkan Data Layanan')
         }
       })

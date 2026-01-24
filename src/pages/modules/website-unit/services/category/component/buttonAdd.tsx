@@ -4,7 +4,10 @@ import { Button } from '@/components/ui/button.tsx'
 import { BiPlus } from 'react-icons/bi'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { FormCategoryService } from '@/pages/modules/website-unit/services/category/component/form.tsx'
-import { CategoryServiceResolver, type CategoryServiceResolverType } from '@/pages/modules/website-unit/services/category/data/resolver.tsx'
+import {
+  CategoryServiceResolver,
+  type CategoryServiceResolverType,
+} from '@/pages/modules/website-unit/services/category/data/resolver.tsx'
 import { zodResolver } from '@hookform/resolvers/zod'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
@@ -45,6 +48,7 @@ export const ButtonAddCategoryService = (props: Props) => {
           queryClient.invalidateQueries({
             queryKey: ['category-services'],
           })
+          form.reset()
         }
       })
       .catch((err) => {
