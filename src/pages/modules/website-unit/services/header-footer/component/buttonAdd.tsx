@@ -30,6 +30,7 @@ export const ButtonAddServiceHeaderFooter = () => {
           queryClient.invalidateQueries({
             queryKey: ['header-footer'],
           })
+          form.reset()
           toast.success(res.data.message || 'Success Menambahkan Data Layanan Header Footer')
         }
       })
@@ -51,7 +52,12 @@ export const ButtonAddServiceHeaderFooter = () => {
         Tambah
       </Button>
 
-      <DialogCustom className={'lg:max-w-3xl rounded'} open={open} setOpen={setOpen} title={'Tambah Layanan Header Footer'}>
+      <DialogCustom
+        className={'lg:max-w-3xl rounded'}
+        open={open}
+        setOpen={setOpen}
+        title={'Tambah Layanan Header Footer'}
+      >
         <FormHeaderFooter
           form={form}
           open={open}

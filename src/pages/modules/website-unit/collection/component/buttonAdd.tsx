@@ -44,11 +44,12 @@ export const ButtonAddCollection = (props: Props) => {
     await AxiosClient.post('/unit/kategori-koleksi', value)
       .then((res) => {
         if (res.data.status) {
-          setOpen(false)
+          setLoading(false)
           setOpen(false)
           queryClient.invalidateQueries({
             queryKey: ['unit-collection'],
           })
+          form.reset()
           toast.success(res.data.message || 'Success Menambahkan Data Kategori Koleksi')
         }
       })

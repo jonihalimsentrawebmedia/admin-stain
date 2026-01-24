@@ -46,10 +46,11 @@ export const ButtonAddCollectionCategory = (props: Props) => {
       .then((res) => {
         if (res.data.status) {
           setOpen(false)
-          setOpen(false)
+          setLoading(false)
           queryClient.invalidateQueries({
             queryKey: ['collection-category'],
           })
+          form.reset()
           toast.success(res.data.message || 'Success Menambahkan Data Koleksi')
         }
       })
