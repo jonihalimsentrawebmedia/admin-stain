@@ -8,7 +8,6 @@ import { Button } from '@/components/ui/button'
 import { IoWarning } from 'react-icons/io5'
 import { Image } from 'lucide-react'
 import { Skeleton } from '@/components/ui/skeleton'
-import useGetSatuanOrganisasi from '../../settings/controller/useGetSatuanOrganisasi'
 import { useSearchParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import SelectFilter from '@/components/common/filter/SelectFilter'
@@ -16,37 +15,9 @@ import SelectFilter from '@/components/common/filter/SelectFilter'
 const AcreditationView = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const { loading, meta, acreditationList } = useGetAcreditation()
-  const { columns, goToBackground } = AcreditationViewModel()
+  const { columns, goToBackground, optionsJoin, optionsOrganisasiJoin } = AcreditationViewModel()
   const { background, loading: loadingBg } = useGetBgAcreditation()
   const [idOrganisasi, setIdOrganisasi] = useState('')
-  const { satuanOrganisasi: univ } = useGetSatuanOrganisasi({
-    isFilter: true,
-    kelompok: 'UNIVERSITAS',
-  })
-  const { satuanOrganisasi: prodi } = useGetSatuanOrganisasi({
-    isFilter: true,
-    kelompok: 'PRODI',
-  })
-  const optionsUniv = univ.map((item) => {
-    return {
-      value: item.id_satuan_organisasi,
-      label: item.nama,
-    }
-  })
-  const optionsProd = prodi.map((item) => {
-    return {
-      value: item.id_satuan_organisasi,
-      label: item.nama,
-    }
-  })
-  const optionsJoin = [
-    {
-      value: '',
-      label: 'Semua',
-    },
-    ...optionsProd,
-    ...optionsUniv,
-  ]
 
   useEffect(() => {
     if (searchParams.get('id_satuan_organisasi_akreditas')) {
@@ -88,7 +59,7 @@ const AcreditationView = () => {
             label: '',
             onClick: () => {},
             type: 'add',
-            element: <ButtonAddAcreditation />,
+            element: <ButtonAddAcreditation optionsSatuanOrganisasi={optionsOrganisasiJoin} />,
           },
         ]}
         label="Akreditasi"
@@ -107,7 +78,9 @@ const AcreditationView = () => {
           className="border px-4 py-2 "
         >
           {optionsJoin.map((item) => (
-            <option value={item.value}>{item.label}</option>
+            <option value={item.value} key={item.value}>
+              {item.label}
+            </option>
           ))}
         </select>
       </div>
@@ -118,7 +91,7 @@ const AcreditationView = () => {
         loading={loading}
         meta={meta}
         isShowLimit={false}
-          addFilter={
+        addFilter={
           <SelectFilter
             selectClassName={'min-w-[8rem]'}
             label="Tampilkan"

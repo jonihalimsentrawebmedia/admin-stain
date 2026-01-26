@@ -5,6 +5,7 @@ import { History } from 'lucide-react'
 import ButtonEditAcreditation from './components/ButtonEditAcreditation'
 import ButtonDeleteAcreditation from './components/ButtonDeleteAcreditation'
 import { useState } from 'react'
+import useGetSatuanOrganisasi from '../../settings/controller/useGetSatuanOrganisasi'
 export function capitalizeTextSimple(text: string): string {
   if (!text) return ''
 
@@ -43,6 +44,35 @@ const AcreditationViewModel = () => {
   const page = Number(searchParams.get('page') ?? 1)
   const limit = Number(searchParams.get('limit') ?? 10)
   const navigate = useNavigate()
+  const { satuanOrganisasi: univ } = useGetSatuanOrganisasi({
+    isFilter: true,
+    kelompok: 'UNIVERSITAS',
+  })
+  const { satuanOrganisasi: prodi } = useGetSatuanOrganisasi({
+    isFilter: true,
+    kelompok: 'PRODI',
+  })
+  const optionsUniv = univ.map((item) => {
+    return {
+      value: item.id_satuan_organisasi,
+      label: item.nama,
+    }
+  })
+  const optionsProd = prodi.map((item) => {
+    return {
+      value: item.id_satuan_organisasi,
+      label: item.nama,
+    }
+  })
+  const optionsJoin = [
+    {
+      value: '',
+      label: 'Semua',
+    },
+    ...optionsProd,
+    ...optionsUniv,
+  ]
+  const optionsOrganisasiJoin = [...optionsProd, ...optionsUniv]
   const columns: ColumnDef<AcreditationList>[] = [
     {
       accessorKey: 'No',
@@ -127,10 +157,8 @@ const AcreditationViewModel = () => {
       cell: ({ row }) => {
         return (
           <div className="flex gap-2 items-center">
-            <ButtonEditAcreditation data={row.original} />
+            <ButtonEditAcreditation data={row.original} optionsSatuanOrganisasi={optionsOrganisasiJoin} />
             <ButtonDeleteAcreditation data={row.original} />
-            {/* <ButtonEditServices data={row.original} />
-            <ButtonDeleteServices data={row.original} /> */}
           </div>
         )
       },
@@ -139,7 +167,7 @@ const AcreditationViewModel = () => {
   function goToBackground() {
     navigate('background')
   }
-  return { columns, goToBackground }
+  return { columns, goToBackground, optionsJoin ,optionsOrganisasiJoin}
 }
 
 export default AcreditationViewModel

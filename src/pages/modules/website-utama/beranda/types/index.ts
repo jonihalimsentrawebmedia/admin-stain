@@ -13,6 +13,8 @@ export interface IContent {
   jenis_konten: 'prestasi' | string
   judul: string
   penulis: string
+  nama_user: string
+  nama_level: string
 }
 
 export type Mode = 'harian' | 'mingguan' | 'bulanan' | 'tahunan'

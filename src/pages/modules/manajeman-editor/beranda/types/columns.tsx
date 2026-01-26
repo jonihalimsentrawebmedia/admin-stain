@@ -5,6 +5,7 @@ import { format } from 'date-fns'
 import { Button } from '@/components/ui/button.tsx'
 import { FaForward } from 'react-icons/fa'
 import { RenderUrl } from '@/pages/modules/website-utama/beranda/hooks/renderUrl.tsx'
+import { isEmpetyReturn } from '@/utils/helper'
 
 export const ColumnsApprovalEditor = () => {
   const culumns: ColumnDef<IContent>[] = [
@@ -23,6 +24,22 @@ export const ColumnsApprovalEditor = () => {
       },
     },
     {
+      accessorKey: 'nama_user',
+      header: 'Diajukan Oleh',
+      cell: ({ row }) => {
+        return (
+          <div>
+            <div>{row.original.nama_user}</div>
+            <div className="text-primary">{row.original.nama_level}</div>
+          </div>
+        )
+      },
+    },
+    {
+      accessorKey: 'nama_unit',
+      header: 'Unit/Satuan Kerja',
+    },
+    {
       accessorKey: 'jenis_konten',
       header: 'Jenis Konten',
     },
@@ -30,16 +47,16 @@ export const ColumnsApprovalEditor = () => {
       accessorKey: 'judul',
       header: 'Judul',
       cell: ({ row }) => {
-        return <p className={'whitespace-pre-line'}>{row?.original?.judul}</p>
+        return <p className={'whitespace-pre-line max-w-[200px]'}>{row?.original?.judul}</p>
       },
     },
-    {
-      accessorKey: 'nama_unit',
-      header: 'Satuan Organisasi',
-    },
+
     {
       accessorKey: 'penulis',
       header: 'Penulis',
+      cell: ({ row }) => {
+        return <p className={''}>{isEmpetyReturn(row.original.penulis)}</p>
+      },
     },
     {
       accessorKey: 'detail',
@@ -48,7 +65,7 @@ export const ColumnsApprovalEditor = () => {
         return (
           <>
             <Link
-              to={`/modules/website-utama/public-content/${RenderUrl(row?.original?.jenis_konten, row?.original?.id)}`}
+              to={`/modules/editor/public-content/${RenderUrl(row?.original?.jenis_konten, row?.original?.id)}`}
             >
               <Button
                 variant={'outline'}

@@ -9,8 +9,13 @@ import { Button } from '@/components/ui/button'
 import { Plus } from 'lucide-react'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import AcreditationForm from './AcreditationForm'
-
-const ButtonAddAcreditation = () => {
+interface Props {
+  optionsSatuanOrganisasi: {
+    value: string
+    label: string
+  }[]
+}
+const ButtonAddAcreditation = ({ optionsSatuanOrganisasi }: Props) => {
   const form = useForm<IAcreditationTypeForm>({
     resolver: zodResolver(AcreditationResolver),
   })
@@ -61,10 +66,11 @@ const ButtonAddAcreditation = () => {
         className={'rounded min-w-xs lg:min-w-2xl'}
         setOpen={setOpen}
         title={'Tambah Akreditasi'}
-        width='50%'
+        width="50%"
       >
         <AcreditationForm
           form={form}
+          optionsSatuanOrganisasi={optionsSatuanOrganisasi}
           loading={loading}
           handleSave={handleSave}
           handleCancel={() => {

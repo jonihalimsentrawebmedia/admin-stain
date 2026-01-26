@@ -6,16 +6,20 @@ import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom'
-import AcreditationForm from './AcreditationForm'
 import { IconEdit } from '@/components/common/table/icon'
 import { formatDateTime } from '@/utils/date'
+import { DialogCustom } from '@/components/common/dialog/DialogCustom'
+import AcreditationForm from './AcreditationForm'
 
 interface Props {
   data: AcreditationList
+  optionsSatuanOrganisasi: {
+    value: string
+    label: string
+  }[]
 }
 
-const ButtonEditAcreditation = ({ data }: Props) => {
+const ButtonEditAcreditation = ({ data, optionsSatuanOrganisasi }: Props) => {
   const form = useForm<IAcreditationTypeForm>({
     resolver: zodResolver(AcreditationResolver),
   })
@@ -67,10 +71,12 @@ const ButtonEditAcreditation = ({ data }: Props) => {
         open={open}
         className={'rounded min-w-xs lg:min-w-2xl'}
         setOpen={setOpen}
-        title={'Edit Akreditasi'}
+        title={'Tambah Akreditasi'}
         width="50%"
+        description=""
       >
         <AcreditationForm
+          optionsSatuanOrganisasi={optionsSatuanOrganisasi}
           form={form}
           loading={loading}
           handleSave={handleSave}

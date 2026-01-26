@@ -6,35 +6,41 @@ import { SelectBasicInput } from '@/components/common/form/selectBasicInput'
 import TextAreaInput from '@/components/common/form/textAreaInput'
 import ButtonForm from '@/components/common/button/ButtonForm'
 import InputImage3 from '@/components/common/form/InputImage3'
-import useGetSatuanOrganisasi from '@/pages/modules/settings/controller/useGetSatuanOrganisasi'
 
 interface Props {
   form: UseFormReturn<IAcreditationTypeForm>
   handleSave: (value: IAcreditationTypeForm) => void
   handleCancel: () => void
-  loading: boolean
+  loading: boolean,
+  optionsSatuanOrganisasi: {
+    value: string
+    label: string
+  }[]
 }
-const AcreditationForm = ({ form, handleCancel, handleSave, loading }: Props) => {
-  const { satuanOrganisasi } = useGetSatuanOrganisasi({
-    kelompok: 'UNIVERSITAS',
-  })
-  const { satuanOrganisasi: satuanOrganisasiProdi } = useGetSatuanOrganisasi({
-    kelompok: 'PRODI',
-  })
-  const optionsSatuanOrganisasi = [
-    ...satuanOrganisasi.map((item) => {
-      return {
-        value: item.id_satuan_organisasi,
-        label: item.nama,
-      }
-    }),
-    ...satuanOrganisasiProdi.map((item) => {
-      return {
-        value: item.id_satuan_organisasi,
-        label: item.nama,
-      }
-    }),
-  ]
+const AcreditationForm = ({ form, handleCancel, handleSave, loading ,optionsSatuanOrganisasi}: Props) => {
+  // const { satuanOrganisasi, loading: loadingUniv } = useGetSatuanOrganisasi({
+  //   kelompok: 'UNIVERSITAS',
+  // })
+  // const { satuanOrganisasi: satuanOrganisasiProdi, loading: loadingProd } = useGetSatuanOrganisasi({
+  //   kelompok: 'PRODI',
+  // })
+  // const optionsSatuanOrganisasi = [
+  //   ...satuanOrganisasi.map((item) => {
+  //     return {
+  //       value: item.id_satuan_organisasi,
+  //       label: item.nama,
+  //       key: item.id_satuan_organisasi,
+  //     }
+  //   }),
+  //   ...satuanOrganisasiProdi.map((item) => {
+  //     return {
+  //       value: item.id_satuan_organisasi,
+  //       label: item.nama,
+  //       key: item.id_satuan_organisasi,
+  //     }
+  //   }),
+  // ]
+  // console.log(optionsSatuanOrganisasi)
 
   const optionsAcreditationValue = [
     {
@@ -59,13 +65,14 @@ const AcreditationForm = ({ form, handleCancel, handleSave, loading }: Props) =>
       <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
         <InputImage3 form={form} name="gambar" isRow label="Gambar*" />
         <SelectBasicInput
-          data={optionsSatuanOrganisasi}
+          data={optionsSatuanOrganisasi ?? []}
           form={form}
           name="id_satuan_organisasi_akreditas"
           placeholder="Pilih"
           label="Pilih Universitas / Prodi*"
           isRow
-          selectClassName='z-50'
+          selectClassName="z-50"
+       
         />
         <TextAreaInput isRow form={form} name="uraian" label="Uraian" placeholder="Uraian" />
         <SelectBasicInput
@@ -109,7 +116,12 @@ const AcreditationForm = ({ form, handleCancel, handleSave, loading }: Props) =>
           isRow
           label="Akhir Berlaku*"
         />
-        <ButtonForm loading={loading} onCancel={handleCancel} />
+        <ButtonForm
+          loading={loading}
+          onCancel={() => {
+            handleCancel()
+          }}
+        />
       </form>
     </Form>
   )

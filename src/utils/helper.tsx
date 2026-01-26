@@ -47,3 +47,10 @@ export const GetModuleUrl = (moduleSelect: { nama_module: string; controller?: s
       return `/modules/${urlStringEncode(moduleSelect?.controller ?? '')}/dashboard`
   }
 }
+
+export function isEmpetyReturn(value: any) {
+  if (value == '' || value == undefined || value == null) {
+    return '-'
+  }
+  return value
+}

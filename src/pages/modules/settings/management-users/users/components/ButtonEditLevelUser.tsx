@@ -66,7 +66,7 @@ const ButtonEditLevelUser = ({ levelUser, satuanOrganisasi, formDetail, data, va
       setIsSatuanKerja(temp.is_satker)
     }
   }, [idLevelUser])
-console.log(form.watch('list_unit'))
+
   return (
     <>
       <div
