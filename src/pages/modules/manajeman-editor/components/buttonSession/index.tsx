@@ -8,23 +8,23 @@ import { useForm } from 'react-hook-form'
 import useGetSatuanOrganisasi from '@/pages/modules/settings/controller/useGetSatuanOrganisasi.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import { UseGetSession } from '@/pages/modules/website-utama/session'
+import { UseGetSessionEditor } from '../../session/index'
 
-export const ButtonSession = () => {
+export const ButtonSessionEditor = () => {
   const [open, setOpen] = useState(false)
 
   const form = useForm()
 
   const { satuanOrganisasi } = useGetSatuanOrganisasi({ kelompok: 'UNIVERSITAS' })
-  const { session } = UseGetSession()
+  const { session } = UseGetSessionEditor()
 
   useEffect(() => {
     if (session) form.setValue('id_university', session?.id_satuan_organisasi)
   }, [session])
 
   const HandlerSubmit = async (e: any) => {
-    await AxiosClient.post('/website-utama/user-session', {
-      id_satuan_organisasi: e?.id_university,
+    await AxiosClient.post('/editor/user-session', {
+      id_universitas: e?.id_university,
     })
       .then((res) => {
         toast.success(res.data.message)
@@ -46,7 +46,12 @@ export const ButtonSession = () => {
         <FaGear />
       </Button>
 
-      <DialogCustom className={'lg:max-w-2xl rounded'} open={open} setOpen={setOpen} title={'Ganti Data: Universitas'}>
+      <DialogCustom
+        className={'lg:max-w-2xl rounded'}
+        open={open}
+        setOpen={setOpen}
+        title={'Ganti Data: Universitas'}
+      >
         <div>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(HandlerSubmit)}>

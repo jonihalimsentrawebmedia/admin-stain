@@ -23,6 +23,7 @@ import { EditorRouter } from './editor/router'
 import { SelectUnitUniversity } from '@/pages/modules/website-unit/select-unit'
 import { WebsiteUnitRouter } from '@/router/website-unit/router.tsx'
 import MainLayoutUnit from '@/pages/modules/website-unit/components/layout'
+import { SelectUniversityEditor } from '@/pages/modules/manajeman-editor/select-university'
 
 export const Router = createBrowserRouter([
   {
@@ -77,6 +78,10 @@ export const Router = createBrowserRouter([
       {
         path: 'select-Prodi',
         element: <SelectProdi />,
+      },
+      {
+        path: 'editor-university',
+        element: <SelectUniversityEditor />,
       },
       {
         path: 'select-unit',

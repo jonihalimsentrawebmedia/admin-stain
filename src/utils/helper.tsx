@@ -38,7 +38,7 @@ export const GetModuleUrl = (moduleSelect: { nama_module: string; controller?: s
     }
 
     case 'manajemen editor':
-      return '/modules/select-university?url=editor'
+      return '/modules/editor-university?url=editor'
 
     case 'website prodi':
       return '/modules/select-prodi?url=website-prodi'
