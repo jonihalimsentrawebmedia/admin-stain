@@ -175,7 +175,7 @@ const ButtonSettingLevelUser = ({ data, levelUser, satuanOrganisasi }: Props) =>
         <FaGear className="text-green-600" />
       </div>
       <DialogCustom
-        className="max-w-2xl! w-full!"
+        className="max-w-2xl! w-full! rounded"
         open={open}
         setOpen={setOpen}
         title={<p className="text-2xl ">Atur Level User</p>}

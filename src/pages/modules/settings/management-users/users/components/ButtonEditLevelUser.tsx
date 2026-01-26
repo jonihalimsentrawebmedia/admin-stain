@@ -89,7 +89,7 @@ console.log(form.watch('list_unit'))
         <IconEdit />
       </div>
       <DialogCustom
-        className="max-w-2xl! w-full!"
+        className="max-w-2xl! w-full! rounded"
         open={open}
         setOpen={setOpen}
         title={<p className="text-2xl ">Ubah Level User</p>}
