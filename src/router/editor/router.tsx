@@ -57,9 +57,9 @@ import UnitDetailView from '@/pages/modules/manajeman-editor/unit/detail/UnitDet
 import UnitEditView from '@/pages/modules/manajeman-editor/unit/edit/UnitEditView'
 import UnitView from '@/pages/modules/manajeman-editor/unit/UnitView'
 
-import DashboardAdmin from '@/pages/modules/website-utama/beranda'
 import { ChangePassword } from '@/pages/modules/website-utama/change-password'
 import { UserProfilePage } from '@/pages/modules/website-utama/user-profile'
+import DashboardAdminEditor from '@/pages/modules/manajeman-editor/beranda'
 
 export const EditorRouter = [
   {
@@ -67,7 +67,7 @@ export const EditorRouter = [
     children: [
       {
         index: true,
-        element: <DashboardAdmin />,
+        element: <DashboardAdminEditor />,
       },
       {
         path: 'user-profile',
