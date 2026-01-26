@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
 import type { IContent } from '@/pages/modules/website-utama/beranda/types/index.ts'
 import { format } from 'date-fns'
@@ -7,6 +7,8 @@ import { FaForward } from 'react-icons/fa'
 import { RenderUrl } from '@/pages/modules/website-utama/beranda/hooks/renderUrl.tsx'
 
 export const ColumnsApprovalUnit = () => {
+  const { pathname } = useLocation()
+  const name = pathname.split('/')[2]
   const culumns: ColumnDef<IContent>[] = [
     {
       accessorKey: 'no',
@@ -44,7 +46,7 @@ export const ColumnsApprovalUnit = () => {
         return (
           <>
             <Link
-              to={`/modules/website-unit/public-content/${RenderUrl(row?.original?.jenis_konten, row?.original?.id)}`}
+              to={`/modules/${name}/public-content/${RenderUrl(row?.original?.jenis_konten, row?.original?.id)}`}
             >
               <Button
                 variant={'outline'}
