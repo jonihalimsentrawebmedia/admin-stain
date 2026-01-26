@@ -59,7 +59,7 @@ export const ButtonEditCategoryFaqProdi = (data: ICategoryFAQ) => {
       <DialogCustom
         open={open}
         setOpen={setOpen}
-        title={'Tambah Kategori'}
+        title={'Ubah Data Kategori F.A.Q'}
         className={'max-w-2xl rounded'}
       >
         <Form {...form}>

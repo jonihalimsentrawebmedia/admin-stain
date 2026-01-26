@@ -81,7 +81,7 @@ export const ButtonEditCurriculum = (props: Props) => {
       <DialogCustom
         open={open}
         setOpen={setOpen}
-        title={'Tambah Kurikulum'}
+        title={'Ubah Data Kurikulum'}
         className={'rounded lg:max-w-2xl'}
       >
         <FormCurriculumProdi

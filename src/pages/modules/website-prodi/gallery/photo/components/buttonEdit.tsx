@@ -71,7 +71,7 @@ export const ButtonEditPhotoProdi = (data: IGalleryPhoto) => {
       <DialogCustom
         open={open}
         setOpen={setOpen}
-        title={'Tambah Foto'}
+        title={'Ubah Data Foto'}
         className={'rounded lg:max-w-xl'}
       >
         <div>
