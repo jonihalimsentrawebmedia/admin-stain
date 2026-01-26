@@ -222,9 +222,9 @@ const InputSatuanKerja = ({ form }: Props) => {
                 setSearch(e)
               }}
             />
-            <div className="grid grid-cols-1 mt-4 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1   gap-2 mt-4 ">
               {satuanOrganisasi.map((item, index) => (
-                <div key={'list-satuan-kerja' + index} className="flex gap-2 items-center">
+                <div key={'list-satuan-kerja' + index} className="flex h-fit gap-2 items-center">
                   <Checkbox
                     id={item.id_satuan_organisasi}
                     onCheckedChange={(e) => {
@@ -266,10 +266,10 @@ const InputSatuanKerja = ({ form }: Props) => {
                       <>
                         <span className="text-primary">{item.singkatan_universitas}</span>{' '}
                         <span className="text-[#444]">{'>'}</span>{' '}
-                        <span className="text-primary">{item.singkatan_fakultas}</span>{' '}
+                        <span className="text-primary">{item.singkatan_fakultas??"-"}</span>{' '}
                         <span className="text-[#444]">
                           {'>'}
-                          {item.nama}
+                          {item.nama??"-"}
                         </span>
                       </>
                     ) : (

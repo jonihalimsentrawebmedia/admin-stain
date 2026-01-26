@@ -40,7 +40,7 @@ const UsersDetailView = () => {
             type: "edit",
           },
         ]}
-        label="Detail Data Prodi"
+        label="Detail User"
       />
       <div className="flex flex-col gap-4">
         <div>

@@ -24,7 +24,7 @@ const SetLimitList = ({ text, className, setLimit }: Props) => {
 
   return (
     <div className="flex items-center gap-2">
-      {text ?? 'Tampilkan'}
+      { 'Tampilkan'}
       <select
         value={currentValue}
         onChange={setLimit ?? handleChange}
@@ -35,7 +35,7 @@ const SetLimitList = ({ text, className, setLimit }: Props) => {
         <option value="50">50</option>
         <option value="100">100</option>
       </select>
-      data
+      {text}
     </div>
   )
 }

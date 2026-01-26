@@ -25,7 +25,7 @@ const UsersForm = ({ form, isEdit }: Props) => {
     if (idLevelUser) {
       const temp = levelUser.filter((item) => item.id_level == idLevelUser)[0]
 
-      setIsSatuanKerja(temp.is_satker)
+      setIsSatuanKerja(temp?.is_satker)
     }
   }, [idLevelUser])
 

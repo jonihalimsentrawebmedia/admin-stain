@@ -219,7 +219,11 @@ const TableCustom = (props: Props) => {
         <div className="flex gap-4 items-center justify-between">
           <div>
             {isShowLimit ? (
-              <SetLimitList setLimit={setLimit} />
+              <SetLimitList
+                setLimit={setLimit}
+                text={`${limitData > totalData ? totalData : limitData} Data dari
+                ${meta?.total} `}
+              />
             ) : (
               <div>
                 Menampilkan 1 - {limitData > totalData ? totalData : limitData} Data dari{' '}

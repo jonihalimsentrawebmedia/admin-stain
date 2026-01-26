@@ -1,6 +1,5 @@
 import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import DetailField from '@/components/common/field/DetailField'
-import { InputCheckbox } from '@/components/common/form/InputCheckbox'
 import { InputText } from '@/components/common/form/InputText'
 import { SelectCustom } from '@/components/common/form/SelectCustom'
 import { Form } from '@/components/ui/form'
@@ -12,6 +11,8 @@ import ButtonForm from '@/components/common/button/ButtonForm'
 import type { UserList } from '../model'
 import type { UserMultiLevelList } from '../model/leveluser'
 import useEditLevelUser from '../controller/useEditLevelUser'
+import TableCustom from '@/components/common/table/TableCustom'
+
 interface Props {
   levelUser: LevelUserList[]
   satuanOrganisasi: SatuanOrganisasiList[]
@@ -20,10 +21,12 @@ interface Props {
   values: UserMultiLevelList
 }
 const ButtonEditLevelUser = ({ levelUser, satuanOrganisasi, formDetail, data, values }: Props) => {
-  const { form, handleSave, loading, open, setOpen } = useEditLevelUser({
-    id_level_user: values.id_level_user,
-    id_multi_level: values.id_users_multi_level,
-  })
+  const { form, handleSave, loading, open, setOpen, columns, setValuesListUnit } = useEditLevelUser(
+    {
+      id_level_user: values.id_level_user,
+      id_multi_level: values.id_users_multi_level,
+    }
+  )
 
   const field = [
     {
@@ -63,7 +66,7 @@ const ButtonEditLevelUser = ({ levelUser, satuanOrganisasi, formDetail, data, va
       setIsSatuanKerja(temp.is_satker)
     }
   }, [idLevelUser])
-
+console.log(form.watch('list_unit'))
   return (
     <>
       <div
@@ -75,6 +78,11 @@ const ButtonEditLevelUser = ({ levelUser, satuanOrganisasi, formDetail, data, va
               ? values.list_unit_nama.map((item) => item.id_satuan_organisasi)
               : undefined,
           })
+          setValuesListUnit(
+            values.list_unit_nama
+              ? values.list_unit_nama.map((item) => item.id_satuan_organisasi)
+              : []
+          )
         }}
         className="flex items-center cursor-pointer gap-4"
       >
@@ -110,18 +118,25 @@ const ButtonEditLevelUser = ({ levelUser, satuanOrganisasi, formDetail, data, va
               />
 
               {isSatuanKerja ? (
-                <InputCheckbox
-                  isRow
-                  form={form}
-                  name="list_unit"
-                  label="Pilih Satuan Kerja"
-                  data={satuanOrganisasi.map((item) => {
-                    return {
-                      label: item.nama,
-                      value: item.id_satuan_organisasi,
-                    }
-                  })}
-                  isGrid
+                // <InputCheckbox
+                //   isRow
+                //   form={form}
+                //   name="list_unit"
+                //   label="Pilih Satuan Kerja"
+                //   data={satuanOrganisasi.map((item) => {
+                //     return {
+                //       label: item.nama,
+                //       value: item.id_satuan_organisasi,
+                //     }
+                //   })}
+                //   isGrid
+                // />
+
+                <TableCustom
+                  columns={columns}
+                  data={satuanOrganisasi}
+                  isShowPagination={false}
+                  isShowFilter={false}
                 />
               ) : (
                 <InputText

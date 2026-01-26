@@ -57,7 +57,7 @@ const UsersDetailViewModel = () => {
     },
   ]
   function goToEdit() {
-    navigate(`/modules/settings/users/edit/${id}`)
+    navigate(`/modules/settings/management-users/users/edit/${id}`)
   }
   useEffect(() => {
     if (user) {
