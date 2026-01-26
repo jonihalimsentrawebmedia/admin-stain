@@ -22,7 +22,7 @@ export const MenuListUnit = [
   {
     id: 2,
     name: 'Data Unit',
-    path: `${baseDomain}/data-Unit`,
+    path: `${baseDomain}/data-unit`,
     icon: <MdBusiness className={'size-5'} />,
   },
   {
