@@ -48,7 +48,9 @@ export const ButtonDeletePhotoAlbum = (props: IProps) => {
       <DialogCustom
         open={open}
         setOpen={setOpen}
-        title={'Hapus Foto'}
+        title={
+        <p className={'text-red-500'}>Hapus Foto</p>
+        }
         description={'Apakah anda yakin untuk menghapus foto yang dipilih?'}
         className={'rounded lg:max-w-xl'}
       >

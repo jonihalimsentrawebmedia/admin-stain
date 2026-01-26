@@ -43,7 +43,8 @@ export const ButtonDeleteAlbumPhotoUnit = (data: IGaleriAlbum) => {
         className={'rounded lg:max-w-xl'}
         open={open}
         setOpen={setOpen}
-        title={'Hapus Galeri Foto'}
+        title={<p className={'text-red-500 text-2xl'}>Hapus Galeri Foto</p>}
+        description={'Apakah anda yakin untuk menghapus foto yang dipilih?'}
       >
         <div className={'flex flex-col gap-4'}>
           <div className="grid grid-cols-[15rem_1fr]">

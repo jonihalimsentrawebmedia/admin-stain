@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button.tsx'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 
 import { BiX } from 'react-icons/bi'
-import { FaSave, FaTrash } from 'react-icons/fa'
+import { FaTrash } from 'react-icons/fa'
 import type { IStudentLetter } from '../types/index'
 import { Link } from 'react-router-dom'
 
@@ -50,7 +50,8 @@ export const ButtonDeleteLetter = (props: props) => {
       <DialogCustom
         open={open}
         setOpen={setOpen}
-        title={'Tambah Surat'}
+        title={<p className={'text-red-500'}>Hapus Surat Ketrarangan Mahasiswa ?</p>}
+        description={'Apakah anda yakin ingin menghapus surat ketrarangan mahasiswa ini?'}
         className={'lg:max-w-2xl rounded'}
       >
         <div className="grid grid-cols-[12rem_1fr] gap-5">
@@ -80,8 +81,8 @@ export const ButtonDeleteLetter = (props: props) => {
             <BiX />
             Batal
           </Button>
-          <Button disabled={loading} onClick={HandleDelete}>
-            <FaSave />
+          <Button variant={'destructive'} disabled={loading} onClick={HandleDelete}>
+            <FaTrash />
             Simpan
           </Button>
         </div>

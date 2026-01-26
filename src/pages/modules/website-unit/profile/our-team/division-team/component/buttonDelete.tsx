@@ -57,7 +57,7 @@ export const ButtonDeleteDivisionTeam = (props: Props) => {
         className={'rounded lg:max-w-2xl'}
         open={open}
         setOpen={setOpen}
-        title={'Tambah Divisi'}
+        title={<p className={'text-2xl text-red-500'}>Hapus Divisi</p>}
       >
         <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
           <p className="text-gray-500">Unit</p>

@@ -58,6 +58,7 @@ import { CreatedFacilitiesUnit } from '@/pages/modules/website-unit/public-conte
 import { UpdatedFacilitiesUnit } from '@/pages/modules/website-unit/public-content/Facilities/updated'
 import { DetailFacilitiesUnitPage } from '@/pages/modules/website-unit/public-content/Facilities/detail'
 import DashboardAdminUnit from '@/pages/modules/website-unit/dashboard'
+import { LogActivityFacilitiesUnitPage } from '@/pages/modules/website-unit/public-content/Facilities/log'
 
 export const WebsiteUnitRouter = [
   {
@@ -331,6 +332,10 @@ export const WebsiteUnitRouter = [
           {
             path: 'detail/:id',
             element: <DetailFacilitiesUnitPage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityFacilitiesUnitPage />,
           },
         ],
       },

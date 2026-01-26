@@ -54,7 +54,7 @@ export const ButtonDeleteHistory = (props: Props) => {
         className={'rounded lg:max-w-2xl'}
         open={open}
         setOpen={setOpen}
-        title={'Hapus Sejarah'}
+        title={<p className={'text-red-500 text-2xl'}>Hapus Sejarah</p>}
         description={'Apakah anda yakin ingin menghapus data ini?'}
       >
         <div className={'grid grid-cols-[12rem_1fr] gap-4'}>

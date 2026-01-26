@@ -54,7 +54,7 @@ export const ButtonDeleteDivision = (props: Props) => {
         className={'rounded lg:max-w-2xl'}
         open={open}
         setOpen={setOpen}
-        title={'Hapus Sejarah'}
+        title={<p className={'text-2xl text-red-500'}>Hapus Sejarah</p>}
         description={'Apakah anda yakin ingin menghapus data ini?'}
       >
         <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
@@ -64,7 +64,6 @@ export const ButtonDeleteDivision = (props: Props) => {
           <p>{data?.nama_divisi}</p>
           <p className="text-gray-500">Urutan</p>
           <p>{data?.urutan}</p>
-          
 
           <div className="col-span-2 flex items-center justify-end gap-2">
             <Button variant={'outline'} className={'border-primary'} onClick={() => setOpen(false)}>

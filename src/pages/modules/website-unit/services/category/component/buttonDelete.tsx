@@ -54,7 +54,8 @@ export const ButtonDeleteCategoryService = (props: Props) => {
         className={'lg:max-w-2xl rounded'}
         open={open}
         setOpen={setOpen}
-        title={'Tambah Kategori Laynaan'}
+        title={<p className={'text-2xl text-red-500'}>Hapus Kategori Laynaan</p>}
+        description={'Apakah anda yakin untuk menghapus kategori layanan berikut ?'}
       >
         <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
           <p className="text-gray-500">Nama Unit</p>

@@ -71,7 +71,7 @@ export const ButtonEditCollection = (props: Props) => {
         className={'rounded lg:max-w-2xl'}
         open={open}
         setOpen={setOpen}
-        title={'Tambah Kategori'}
+        title={'Ubah Data Kategori'}
       >
         <Form {...form}>
           <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(HandleSave)}>

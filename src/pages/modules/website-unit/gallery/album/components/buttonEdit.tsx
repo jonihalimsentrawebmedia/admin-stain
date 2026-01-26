@@ -73,7 +73,7 @@ export const ButtonEditAlbumUnit = (props: Props) => {
         className={'rounded lg:max-w-xl'}
         open={open}
         setOpen={setOpen}
-        title={'Edit Galeri Album Photo'}
+        title={'Ubah Galeri Album Photo'}
       >
         <div>
           <Form {...form}>

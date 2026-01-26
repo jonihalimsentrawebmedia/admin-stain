@@ -67,7 +67,7 @@ export const ButtonEditReward = (props: Props) => {
         className={'rounded lg:max-w-2xl'}
         open={open}
         setOpen={setOpen}
-        title={'Tambah Penghargaan'}
+        title={'Ubah Data Penghargaan'}
       >
         <Form {...form}>
           <form onSubmit={form.handleSubmit(HandleSave)} className={'space-y-4'}>

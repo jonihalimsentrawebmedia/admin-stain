@@ -54,7 +54,8 @@ export const ButtonDeleteFloorPlan = (props: Props) => {
         className={'rounded lg:max-w-4xl'}
         open={open}
         setOpen={setOpen}
-        title={'Tambah Denah'}
+        title={<p className={'text-red-500 text-2xl'}>Hapus Denah</p>}
+        description={'Apakah anda yakin ingin menghapus denah ini?'}
       >
         <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
           <p className="text-gray-500">Pilih Unit</p>

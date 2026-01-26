@@ -70,7 +70,7 @@ export const ButtonEditBackgroundUnit = (props: props) => {
       <DialogCustom
         open={open}
         setOpen={setOpen}
-        title={'Tambah Gambar'}
+        title={'Ubah Data Gambar'}
         className={'rounded lg:max-w-2xl'}
       >
         <div>

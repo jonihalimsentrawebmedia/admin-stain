@@ -91,7 +91,7 @@ const ButtonAddLevelUser = ({ data, levelUser, satuanOrganisasi }: Props) => {
         <div className="text-[#464646]">Tambah Level</div>
       </div>
       <DialogCustom
-        className="max-w-2xl! w-full!"
+        className="max-w-2xl! w-full! rounded"
         open={open}
         setOpen={setOpen}
         title={<p className="text-2xl ">Tambah Level User</p>}

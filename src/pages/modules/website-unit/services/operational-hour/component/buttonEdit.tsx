@@ -70,7 +70,7 @@ export const ButtonEditOperationalHour = (props: Props) => {
         className={'lg:max-w-3xl rounded'}
         open={open}
         setOpen={setOpen}
-        title={'Tambah Jadwal Operasional'}
+        title={'Ubah Data Jadwal Operasional'}
       >
         <FormOperationalHour
           form={form}

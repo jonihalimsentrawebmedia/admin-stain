@@ -56,7 +56,8 @@ export const ButtonDeleteListCategory = (props: Props) => {
         className={'rounded lg:max-w-3xl'}
         open={open}
         setOpen={setOpen}
-        title={'Tambah Layanan'}
+        title={<p className={'text-2xl text-red-500'}>Hapus Layanan</p>}
+        description={'Apakah anda yakin untuk menghapus layanan berikut ?'}
       >
         <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
           <p className="text-gray-500">Kategori Layanan</p>
@@ -73,7 +74,7 @@ export const ButtonDeleteListCategory = (props: Props) => {
           <p>{data?.uraian}</p>
           <p className="text-gray-500">Urutan</p>
           <p>{data?.urutan}</p>
-          
+
           <div className="col-span-2 flex items-center justify-end gap-2">
             <Button variant={'outline'} className={'border-primary'} onClick={() => setOpen(false)}>
               <BiX />

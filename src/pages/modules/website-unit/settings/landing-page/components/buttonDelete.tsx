@@ -51,7 +51,8 @@ export const ButtonDeleteLandingUnit = (props: props) => {
       <DialogCustom
         open={open}
         setOpen={setOpen}
-        title={'Edit Gambar'}
+        title={<p className={'text-red-500 text-2xl'}>Hapus Gambar</p>}
+        description={'Apakah anda yakin ingin menghapus gambar ini?'}
         className={'rounded lg:max-w-2xl'}
       >
         <div className={'flex-col flex gap-5'}>

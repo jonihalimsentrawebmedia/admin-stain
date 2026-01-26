@@ -67,7 +67,7 @@ export const ButtonEditServiceHeaderFooter = (data?: IUnitHeaderFooterServices) 
         className={'lg:max-w-3xl rounded'}
         open={open}
         setOpen={setOpen}
-        title={'Tambah Layanan Header Footer'}
+        title={'Ubah Data Layanan Header Footer'}
       >
         <FormHeaderFooter
           form={form}

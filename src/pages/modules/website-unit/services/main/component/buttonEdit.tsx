@@ -63,7 +63,7 @@ export const ButtonEditMainService = (props: Props) => {
         className={'lg:max-w-2xl rounded'}
         open={open}
         setOpen={setOpen}
-        title={'Tambah Layanan Utama'}
+        title={'Ganti Data Layanan Utama'}
       >
         <FormMainService
           form={form}

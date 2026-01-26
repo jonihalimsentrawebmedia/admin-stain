@@ -50,7 +50,7 @@ export const ButtonDeleteAnnouncement = (data: IAnnouncement) => {
         isAuto
         className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
-        title={'Hapus Pengumuman?'}
+        title={<p className={'text-red-500'}>Hapus Pengumuman?</p>}
         description={'Apakah anda yakin untuk menghapus Pengumuman yang ditulis?'}
       >
         <div className={'flex flex-col gap-2.5'}>
