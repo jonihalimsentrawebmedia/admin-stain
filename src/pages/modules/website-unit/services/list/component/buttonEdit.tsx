@@ -80,7 +80,7 @@ export const ButtonEditListCategory = (props: Props) => {
         className={'rounded lg:max-w-3xl'}
         open={open}
         setOpen={setOpen}
-        title={'Tambah Layanan'}
+        title={'Ubah Data Layanan'}
       >
         <FormListService
           form={form}

@@ -52,14 +52,15 @@ export const ButtonDeleteOperationalHour = (props: Props) => {
         className={'lg:max-w-3xl rounded'}
         open={open}
         setOpen={setOpen}
-        title={'Tambah Jadwal Operasional'}
+        title={<p className={'text-2xl text-red-500'}>Hapus Jadwal Operasional</p>}
+        description={'Apakah anda yakin untuk menghapus jadwal operasional berikut ?'}
       >
         <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
           <p className="text-gray-500">Hari</p>
           <p>{data?.hari}</p>
           <p className="text-gray-500">Jam Operasional</p>
           <p>{data?.jam_operasional}</p>
-          
+
           <div className="col-span-2 flex items-center justify-end gap-2">
             <Button variant={'outline'} className={'border-primary'} onClick={() => setOpen(false)}>
               <BiX />

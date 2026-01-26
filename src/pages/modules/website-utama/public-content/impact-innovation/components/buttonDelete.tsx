@@ -57,7 +57,7 @@ export const ButtonDeleteImpactInnovation = (data: IImpactInnovationList) => {
         isAuto
         className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
-        title={'Hapus Inovasi Berdampak?'}
+        title={<p className={'text-red-500'}>Hapus Inovasi Berdampak?</p>}
         description={'Apakah anda yakin untuk menghapus Inovasi Berdampak yang ditulis?'}
       >
         <div className={'flex flex-col gap-2.5'}>

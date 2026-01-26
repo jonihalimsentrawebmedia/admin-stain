@@ -74,7 +74,7 @@ export const ButtonEditFloorPlan = (props: Props) => {
         className={'rounded lg:max-w-4xl'}
         open={open}
         setOpen={setOpen}
-        title={'Tambah Denah'}
+        title={'Ubah Data Denah'}
       >
         <FormFloorPlan
           form={form}

@@ -80,7 +80,7 @@ export const ButtonEditHistory = (props: Props) => {
         className={'rounded lg:max-w-2xl'}
         open={open}
         setOpen={setOpen}
-        title={'Tambah Sejarah'}
+        title={'Ubah Data Sejarah'}
       >
         <FormHistoryUnit
           form={form}

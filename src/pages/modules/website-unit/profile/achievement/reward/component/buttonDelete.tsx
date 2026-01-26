@@ -58,7 +58,8 @@ export const ButtonDeleteReward = (props: Props) => {
         className={'rounded lg:max-w-2xl'}
         open={open}
         setOpen={setOpen}
-        title={'Tambah Penghargaan'}
+        title={<p className={'text-red-500 text-2xl'}>Hapus Penghargaan</p>}
+        description={'Apakah anda yakin ingin menghapus data ini?'}
       >
         <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
           <p className="text-gray-500">Pilih Unit</p>

@@ -54,9 +54,9 @@ export const ButtonDeleteAchievement = (data: IAchievementDetail) => {
 
       <DialogCustom
         open={open}
-        className={'rounded'}
+        className={'rounded lg:max-w-2xl'}
         setOpen={setOpen}
-        title={'Hapus Prestasi?'}
+        title={<p className={'text-red-500'}>Hapus Prestasi?</p>}
         description={'Apakah anda yakin untuk menghapus Prestasi yang ditulis?'}
       >
         <div className={'flex flex-col gap-2.5'}>

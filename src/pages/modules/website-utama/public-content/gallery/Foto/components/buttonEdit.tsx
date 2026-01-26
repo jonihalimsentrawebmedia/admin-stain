@@ -62,7 +62,7 @@ export const ButtonEditAlbumPhoto = (data: IGaleriAlbum) => {
         className={'rounded lg:max-w-xl'}
         open={open}
         setOpen={setOpen}
-        title={'Tambah Galeri Foto'}
+        title={'Ubah Data Galeri Foto'}
       >
         <div>
           <Form {...form}>

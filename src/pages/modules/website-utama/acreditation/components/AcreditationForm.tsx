@@ -65,7 +65,7 @@ const AcreditationForm = ({ form, handleCancel, handleSave, loading }: Props) =>
           placeholder="Pilih"
           label="Pilih Universitas / Prodi*"
           isRow
-          selectClassName='z-50'
+          selectClassName="z-50"
         />
         <TextAreaInput isRow form={form} name="uraian" label="Uraian" placeholder="Uraian" />
         <SelectBasicInput
@@ -109,7 +109,7 @@ const AcreditationForm = ({ form, handleCancel, handleSave, loading }: Props) =>
           isRow
           label="Akhir Berlaku*"
         />
-        <ButtonForm loading={loading} onCancel={handleCancel} />
+        <ButtonForm loading={loading} onCancel={() => handleCancel()} />
       </form>
     </Form>
   )

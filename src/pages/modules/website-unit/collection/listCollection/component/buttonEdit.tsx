@@ -79,7 +79,7 @@ export const ButtonEditCollectionCategory = (props: Props) => {
         className={'rounded lg:max-w-7xl'}
         open={open}
         setOpen={setOpen}
-        title={'Edit Koleksi'}
+        title={'Ubah Data Koleksi'}
       >
         <FormListCollection
           form={form}

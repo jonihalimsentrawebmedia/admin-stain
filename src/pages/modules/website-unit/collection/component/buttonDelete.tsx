@@ -53,7 +53,8 @@ export const ButtonDeleteCollection = (props: Props) => {
         className={'rounded lg:max-w-2xl'}
         open={open}
         setOpen={setOpen}
-        title={'Hapus Kategori'}
+        title={<p className={'text-red-500 text-2xl'}>Hapus Kategori</p>}
+        description={'Apakah anda yakin ingin menghapus kategori ini?'}
       >
         <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
           <p className="text-gray-500">Pilih Unit</p>

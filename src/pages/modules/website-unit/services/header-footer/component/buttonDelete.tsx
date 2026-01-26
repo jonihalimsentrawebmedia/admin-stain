@@ -48,7 +48,7 @@ export const ButtonDeleteServiceHeaderFooter = (data?: IUnitHeaderFooterServices
         className={'lg:max-w-3xl rounded'}
         open={open}
         setOpen={setOpen}
-        title={'Tambah Layanan Header Footer'}
+        title={<p className={'text-red-500 text-2xl'}>Hapus Layanan Header Footer</p>}
         description={'Apakah anda yakin untuk menghapus layanan berikut'}
       >
         <div className={'grid grid-cols-[12rem_1fr] gap-4'}>

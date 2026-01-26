@@ -51,7 +51,8 @@ export const ButtonDeleteMainService = (props: Props) => {
         className={'lg:max-w-2xl rounded'}
         open={open}
         setOpen={setOpen}
-        title={'Tambah Layanan Utama'}
+        title={<p className={'text-red-500 text-2xl'}>Hapus Layanan Utama</p>}
+        description={'Apakah anda yakin untuk menghapus layanan utama berikut ?'}
       >
         <div className="grid grid-cols-[12rem_1fr] gap-5">
           <p className="text-gray-500">Nama Kategori Layanan</p>

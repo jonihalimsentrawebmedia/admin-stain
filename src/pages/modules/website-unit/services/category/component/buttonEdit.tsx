@@ -70,7 +70,7 @@ export const ButtonEditCategoryService = (props: Props) => {
         className={'lg:max-w-2xl rounded'}
         open={open}
         setOpen={setOpen}
-        title={'Tambah Kategori Laynaan'}
+        title={'Ubah Data Kategori Laynaan'}
       >
         <FormCategoryService
           form={form}

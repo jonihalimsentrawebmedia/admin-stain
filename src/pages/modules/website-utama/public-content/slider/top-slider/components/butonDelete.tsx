@@ -53,7 +53,7 @@ export const ButonDeleteTopSlider = (props: Props) => {
         className={'rounded lg:max-w-2xl'}
         open={open}
         setOpen={setOpen}
-        title={'Hapus Data Slider Atas?'}
+        title={<p className={'text-red-500'}>Hapus Data Slider Atas?</p>}
         description={'Apakah anda yakin untuk menghapus sldier yang dipilih?'}
       >
         <div>

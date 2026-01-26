@@ -46,7 +46,8 @@ export const ButtonDeleteStructureOrganization = (data: IGroupOrganization) => {
         className={'rounded lg:max-w-2xl'}
         open={open}
         setOpen={setOpen}
-        title={'Hapus Kelompok'}
+        title={<p className={'text-red-500'}>Hapus Kelompok</p>}
+        description={'Apakah anda yakin untuk menghapus kelompok ini?'}
       >
         <div className={'grid grid-cols-[15rem_1fr] gap-5'}>
           <p className="text-gray-500">Kelompok</p>

@@ -53,7 +53,7 @@ export const ButonDeleteBottomSlider = (props: Props) => {
         open={open}
         isAuto
         setOpen={setOpen}
-        title={'Hapus Data Slider Bawah?'}
+        title={<p className={'text-red-500'}>Hapus Data Slider Bawah?</p>}
         description={'Apakah anda yakin untuk menghapus sldier yang dipilih?'}
       >
         <div>

@@ -84,7 +84,7 @@ export const ButtonEditDivisionTeam = (props: Props) => {
         className={'rounded lg:max-w-2xl'}
         open={open}
         setOpen={setOpen}
-        title={'Tambah Divisi'}
+        title={'Ubah Data Divisi'}
       >
         <FormDivisionTeam
           form={form}

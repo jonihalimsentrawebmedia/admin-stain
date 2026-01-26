@@ -56,7 +56,7 @@ export const ButtonDeleteCollectionCategory = (props: Props) => {
         className={'rounded lg:max-w-7xl'}
         open={open}
         setOpen={setOpen}
-        title={'Edit Koleksi'}
+        title={<p className={'text-2xl text-red-500'}>Hapus Koleksi</p>}
       >
         <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
           <p className="text-gray-500">Kategori Koleksi</p>
