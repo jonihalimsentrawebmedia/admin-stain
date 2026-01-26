@@ -70,7 +70,7 @@ export const ButtonEditLetter = (props: props) => {
       <DialogCustom
         open={open}
         setOpen={setOpen}
-        title={'Tambah Surat'}
+        title={'Ubah Data Surat Keterangan Mahasiswa'}
         className={'lg:max-w-2xl rounded'}
       >
         <Form {...form}>
