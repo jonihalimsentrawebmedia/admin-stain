@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Book, ChevronDown, Menu } from 'lucide-react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import { CiGrid42 } from 'react-icons/ci'
@@ -171,13 +171,12 @@ export default function DashboardLayout() {
   `}
         >
           <div className=" space-y-1 overflow-y-auto pb-8 pt-8 sm:mt-0">
-            {menu.map((item,index) => (
+            {menu.map((item, index) => (
               <SidebarItem
-              
                 icon={item.icon}
                 label={item.label}
                 link={item.link}
-                key={item.link+index}
+                key={item.link + index}
                 active={pathname.includes(item.link)}
                 hiddenLabel={sidebarSmall}
                 path={pathname}
@@ -224,7 +223,7 @@ function SidebarItem({ icon, label, active, dropdown, link, hiddenLabel, childre
     }
   }, [path])
   return (
-    <>
+    <React.Fragment key={link + label}>
       {children.length == 0 ? (
         <Link
           to={link}
@@ -260,8 +259,8 @@ function SidebarItem({ icon, label, active, dropdown, link, hiddenLabel, childre
                 isActive ? 'border-l-primary' : 'border-l-white '
               }`}
             >
-              {children.map((row: any) => (
-                <div className="flex  items-end gap-1">
+              {children.map((row: any,index:number) => (
+                <div key={row.link+index} className="flex  items-end gap-1">
                   <div className={`w-2 h-px  ${isActive ? 'bg-primary' : 'bg-white'}`}></div>
                   <Link
                     to={row.link}
@@ -282,6 +281,6 @@ function SidebarItem({ icon, label, active, dropdown, link, hiddenLabel, childre
           )}
         </div>
       )}
-    </>
+    </React.Fragment>
   )
 }
