@@ -42,7 +42,8 @@ export const ButtonDeleteServiceProdi = (data: IServiceProdi) => {
         className={'lg:max-w-2xl rounded'}
         open={open}
         setOpen={setOpen}
-        title={'Tambah Layanan'}
+        title={<p className={'text-red-500'}>Hapus Layanan</p>}
+        description={'Apakah anda yakin ingin menghapus layanan ini?'}
       >
         <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
           <p>Nama Layanan</p>

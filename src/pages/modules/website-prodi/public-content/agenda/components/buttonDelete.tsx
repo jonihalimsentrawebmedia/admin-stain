@@ -51,7 +51,9 @@ export const ButtonDeleteAgendaProdi = (data: IAgendaDetail) => {
         isAuto
         className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
-        title={'Hapus Agenda?'}
+        title={
+        <p className={'text-red-500'}>Hapus Agenda?</p>
+        }
         description={'Apakah anda yakin untuk menghapus Agenda yang ditulis?'}
       >
         <div className={'flex flex-col gap-2.5'}>

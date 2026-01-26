@@ -57,8 +57,8 @@ export const ButtonDeletePromotionProdi = (data: IPromotion) => {
         isAuto
         className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
-        title={'Hapus Data?'}
-        description={'Apakah anda yakin untuk menghapus data ini?'}
+        title={<p className={'text-red-500'}>Hapus Data Promosi?</p>}
+        description={'Apakah anda yakin untuk menghapus data Promosi ini?'}
       >
         <div className={'flex flex-col gap-2.5'}>
           {data?.promosi_gambar_tambahan.length > 0 ? (

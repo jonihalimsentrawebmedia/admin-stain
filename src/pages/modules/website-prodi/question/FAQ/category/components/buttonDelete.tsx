@@ -50,7 +50,8 @@ export const ButtonDeleteCategoryFaqProdi = (props: Props) => {
       <DialogCustom
         open={open}
         setOpen={setOpen}
-        title={'Edit Kategori'}
+        title={<p className={'text-red-500'}>Hapus Data Kategori F.A.Q</p>}
+        description={'Apakah anda yakin untuk menghapus data kategori ini?'}
         className={'max-w-2xl rounded'}
       >
         <div className={'grid grid-cols-[12rem_1fr]'}>
