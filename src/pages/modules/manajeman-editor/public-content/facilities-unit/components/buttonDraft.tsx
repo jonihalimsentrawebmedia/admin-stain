@@ -6,7 +6,7 @@ import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { BiX } from 'react-icons/bi'
 import { IconCancel } from '@/components/common/icon'
-import type { IUnitFacilities } from '../data'
+import type { IUnitFacilities } from '../../../../new_editor/publict-content/facilities-unit/data'
 
 export const ButtonDraftFacilities = (data: IUnitFacilities) => {
   const [open, setOpen] = useState(false)

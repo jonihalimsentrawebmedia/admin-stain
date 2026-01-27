@@ -29,7 +29,7 @@ const useUpdateSatuanOrganisasi = ({ kelompok }: Props) => {
   async function handleSave(data: SatuanOrganisasiType) {
     setLoading(true)
     try {
-      const res = await AxiosClient.put(`/editor/profil/${id}`, {
+      const res = await AxiosClient.post(`/editor/profil/${id}`, {
         ...data,
       })
 
@@ -52,7 +52,7 @@ const useUpdateSatuanOrganisasi = ({ kelompok }: Props) => {
   }
   function goToBack() {
     if (kelompok == 'PRODI') {
-      navigate('/modules/editor/prodi')
+      navigate('/modules/editor/dashboard')
     } else {
       navigate(-1)
     }

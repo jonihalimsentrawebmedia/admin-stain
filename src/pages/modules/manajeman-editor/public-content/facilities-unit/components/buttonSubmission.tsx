@@ -6,7 +6,7 @@ import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { BiX } from 'react-icons/bi'
 import { MdSend } from 'react-icons/md'
-import type { IUnitFacilities } from '../data'
+import type { IUnitFacilities } from '../../../../new_editor/publict-content/facilities-unit/data'
 
 export const ButtonSubmissionFacilities = (data: IUnitFacilities) => {
   const [open, setOpen] = useState(false)

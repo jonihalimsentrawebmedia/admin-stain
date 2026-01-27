@@ -12,8 +12,8 @@ import {
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import type { INewsDetail } from '@/pages/modules/website-utama/public-content/news/data'
-import ButtonAggreManagementEditor from '../buttonAggree'
-import { ButtonRejectNewsManagementEditor } from '../buttonReject'
+import ButtonAggreManagementEditor from '../../../../../new_editor/publict-content/news/component/buttonAggree.tsx'
+import { ButtonRejectNewsManagementEditor } from '../../../../../new_editor/publict-content/news/component/buttonReject.tsx'
 
 export const ProcessEditorManagementEditor = () => {
   const [searchParams] = useSearchParams()

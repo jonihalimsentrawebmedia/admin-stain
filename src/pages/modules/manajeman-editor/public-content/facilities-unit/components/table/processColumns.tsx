@@ -4,9 +4,9 @@ import { Button } from '@/components/ui/button.tsx'
 import { MdInfo, MdOutlineHistory } from 'react-icons/md'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
-import ButtonAggreManagementEditor from '../buttonAggree'
-import { ButtonRejectManagementEditor } from '../buttonReject'
-import type { IUnitFacilities } from '../../data'
+import ButtonAggreManagementEditor from '../../../../../new_editor/publict-content/facilities-unit/component/buttonAggree.tsx'
+import { ButtonRejectManagementEditor } from '../../../../../new_editor/publict-content/facilities-unit/component/buttonReject.tsx'
+import type { IUnitFacilities } from '../../../../../new_editor/publict-content/facilities-unit/data'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 
 export const ProcessColumnsFacilities = () => {

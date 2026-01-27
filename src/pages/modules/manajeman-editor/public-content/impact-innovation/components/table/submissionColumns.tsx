@@ -12,8 +12,8 @@ import {
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { ButtonDraftImpactInnovation } from '../buttonDraft'
-import ButtonProcessManagementEditor from '../buttonProcess'
-import type { IImpactInnovationList } from '../../data'
+import ButtonProcessManagementEditor from '../../../../../new_editor/publict-content/impact-innovation/component/buttonProcess.tsx'
+import type { IImpactInnovationList } from '../../../../../new_editor/publict-content/impact-innovation/data'
 
 export const SubmissionColumnsImpactInnovation = () => {
   const [searchParams] = useSearchParams()

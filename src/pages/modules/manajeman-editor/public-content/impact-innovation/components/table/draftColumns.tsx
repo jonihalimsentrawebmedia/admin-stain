@@ -10,7 +10,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel.tsx'
-import type { IImpactInnovationList } from '../../data/index'
+import type { IImpactInnovationList } from '@/pages/modules/new_editor/publict-content/impact-innovation/data/index'
 import { ButtonDeleteImpactInnovation } from '../buttonDelete'
 import { ButtonPublish2ManagementEditor } from '../buttonPublish2'
 

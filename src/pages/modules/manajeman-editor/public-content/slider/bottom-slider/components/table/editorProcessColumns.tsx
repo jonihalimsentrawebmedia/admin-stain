@@ -6,8 +6,6 @@ import { RxExternalLink } from 'react-icons/rx'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { MdOutlineHistory } from 'react-icons/md'
-import ButtonAggreManagementEditor from '../buttonAggree'
-import { ButtonRejectManagementEditor } from '../buttonReject'
 
 const EditorProcessColumns = () => {
   const [searchParams] = useSearchParams()
@@ -23,7 +21,7 @@ const EditorProcessColumns = () => {
         return <>{(page - 1) * limit + i + 1}</>
       },
     },
-     {
+    {
       accessorKey: 'diajukan_user',
       header: 'Diajukan Oleh',
       cell: ({ row }) => {
@@ -108,18 +106,6 @@ const EditorProcessColumns = () => {
             </p>
             <p className={'text-xs'}>{format(row?.original?.proses_at as string, 'HH:mm:ss')}</p>
             <p className={'text-xs text-primary'}>{TimeAgo(row?.original?.proses_at as string)}</p>
-          </div>
-        )
-      },
-    },
-     {
-      accessorKey: 'action1',
-      header: 'Aksi',
-      cell: ({ row }) => {
-        return (
-          <div className="space-y-2">
-            <ButtonAggreManagementEditor {...row.original} />
-            <ButtonRejectManagementEditor {...row.original} />
           </div>
         )
       },

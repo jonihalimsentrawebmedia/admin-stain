@@ -5,8 +5,8 @@ import { Button } from '@/components/ui/button.tsx'
 import { MdInfo, MdOutlineHistory } from 'react-icons/md'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
-import ButtonAggreManagementEditor from '../buttonAggree'
-import { ButtonRejectManagementEditor } from '../buttonReject'
+import ButtonAggreManagementEditor from '../../../../../new_editor/publict-content/facilities/component/buttonAggree.tsx'
+import { ButtonRejectManagementEditor } from '../../../../../new_editor/publict-content/facilities/component/buttonReject.tsx'
 
 export const ProcessColumnsFacilities = () => {
   const [searchParams] = useSearchParams()

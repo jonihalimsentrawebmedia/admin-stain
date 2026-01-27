@@ -19,7 +19,7 @@ export const ButtonSessionEditor = () => {
   const { session } = UseGetSessionEditor()
 
   useEffect(() => {
-    if (session) form.setValue('id_university', session?.id_satuan_organisasi)
+    if (session) form.setValue('id_university', session?.id_universitas)
   }, [session])
 
   const HandlerSubmit = async (e: any) => {
@@ -42,7 +42,7 @@ export const ButtonSessionEditor = () => {
         variant={'outline'}
         className={'text-primary border-primary hover:text-primary'}
       >
-        {session?.singkatan}
+        {session?.singkatan_universitas}
         <FaGear />
       </Button>
 

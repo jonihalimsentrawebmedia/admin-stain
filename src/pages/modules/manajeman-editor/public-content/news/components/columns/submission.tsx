@@ -11,7 +11,7 @@ import {
 import { Button } from '@/components/ui/button.tsx'
 import { MdInfo, MdOutlineHistory } from 'react-icons/md'
 import { format } from 'date-fns'
-import ButtonProcessManagementEditor from '../buttonProcess'
+import ButtonProcessManagementEditor from '../../../../../new_editor/publict-content/news/component/buttonProcess.tsx'
 import { ButtonDraftManagementEditor } from '../buttonDraft'
 
 export const SubmissionStatusColumns = () => {

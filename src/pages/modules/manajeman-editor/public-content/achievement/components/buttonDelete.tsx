@@ -13,7 +13,7 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
-import type { IAchievementDetail } from '../data/index'
+import type { IAchievementDetail } from '@/pages/modules/new_editor/publict-content/achievement/data/index'
 
 export const ButtonDeleteAchievement = (data: IAchievementDetail) => {
   const [open, setOpen] = useState(false)

@@ -12,7 +12,7 @@ import {
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { HiPencil } from 'react-icons/hi'
-import type { IAchievementDetail } from '../../data/index'
+import type { IAchievementDetail } from '@/pages/modules/new_editor/publict-content/achievement/data/index'
 
 export const RejectColumnsAchievement = () => {
   const [searchParams] = useSearchParams()

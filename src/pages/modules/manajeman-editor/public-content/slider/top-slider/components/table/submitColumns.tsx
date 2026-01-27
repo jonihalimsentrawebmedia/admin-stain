@@ -7,7 +7,7 @@ import { format } from 'date-fns'
 import { ButtonDraft } from '@/pages/modules/website-utama/public-content/slider/top-slider/components/buttonDraft.tsx'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { MdOutlineHistory } from 'react-icons/md'
-import ButtonProcessManagementEditor from '../buttonProcess'
+import ButtonProcessManagementEditor from '../../../../../../new_editor/publict-content/top-slider/component/buttonProcess.tsx'
 
 const SubmissionColumns = () => {
   const [searchParams] = useSearchParams()

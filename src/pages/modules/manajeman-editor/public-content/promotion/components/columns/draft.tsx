@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button.tsx'
 import { MdInfo, MdOutlineHistory } from 'react-icons/md'
 import { HiPencil } from 'react-icons/hi'
 
-import type { IPromotion } from '../../data/types'
+import type { IPromotion } from '@/pages/modules/new_editor/publict-content/promotion/data/types'
 import { ButtonDeletePromotionManagementEditor } from '../buttonDelete'
 import { ButtonSubmissionPromotionManagementEditor } from '../buttonSubmission'
 

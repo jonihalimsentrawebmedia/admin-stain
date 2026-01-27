@@ -10,13 +10,15 @@ import type { Mode } from '@/pages/modules/website-utama/beranda/types'
 import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/hooks/getProfile.tsx'
 import {
   UseGetApprovedListEditor,
+  UseGetApprovedListEditorStatus,
   UseGetTotalVisitorEditor,
   UseGetTrentVisitorEditor,
 } from '@/pages/modules/manajeman-editor/beranda/hooks'
 import { ApprovedSectionEditor } from '@/pages/modules/manajeman-editor/beranda/components/Approved/section.tsx'
+import type { status } from '@/pages/modules/new_editor/data/types/data.tsx'
 
 export default function DashboardAdminEditor() {
-  const [tabsName, setTabsName] = useState('DIAJUKAN_EDITOR')
+  const [tabsName, setTabsName] = useState<status>('DIAJUKAN_EDITOR')
   const [mode, setMode] = useState<Mode>('harian')
   const location = useLocation()
   const path = location.pathname
@@ -34,31 +36,60 @@ export default function DashboardAdminEditor() {
   const { status } = UseGetTotalVisitorEditor()
   const { profileUser } = UseGetUserProfile()
   const { approvedList } = UseGetApprovedListEditor(tabsName ?? '')
+  const { status: total } = UseGetApprovedListEditorStatus()
 
   const TabsList = [
     {
       id: 1,
-      name: 'Diajukan Ke Editor',
+      name: (
+        <div className="p-2 flex items-center gap-1.5">
+          <p>Diajukan Ke Editor</p>
+          <div className="bg-red-500 size-4 text-white rounded-full text-xs">
+            {total?.DIAJUKAN_EDITOR}
+          </div>
+        </div>
+      ),
       value: 'DIAJUKAN_EDITOR',
-      element: <ApprovedSectionEditor data={approvedList} />,
+      element: <ApprovedSectionEditor data={approvedList} status={tabsName} />,
     },
     {
       id: 2,
-      name: 'Disetujui Editor',
-      value: 'DISETUJUI_EDITOR',
-      element: <ApprovedSectionEditor data={approvedList} />,
+      name: (
+        <div className="p-2 flex items-center gap-1.5">
+          <p>Proses Editor</p>
+          <div className="bg-red-500 size-4 text-white rounded-full text-xs">
+            {total?.PROSES_EDITOR}
+          </div>
+        </div>
+      ),
+      value: 'PROSES_EDITOR',
+      element: <ApprovedSectionEditor data={approvedList} status={tabsName} />,
     },
     {
       id: 3,
-      name: 'Proses Editor',
-      value: 'PROSES_EDITOR',
-      element: <ApprovedSectionEditor data={approvedList} />,
+      name: (
+        <div className="p-2 flex items-center gap-1.5">
+          <p>Disetujui Editor</p>
+          <div className="bg-red-500 size-4 text-white rounded-full text-xs">
+            {total?.DISETUJUI_EDITOR}
+          </div>
+        </div>
+      ),
+      value: 'DISETUJUI_EDITOR',
+      element: <ApprovedSectionEditor data={approvedList} status={tabsName} />,
     },
     {
       id: 4,
-      name: 'Tolak Editor',
+      name: (
+        <div className="p-2 flex items-center gap-1.5">
+          <p>Ditolak Editor</p>
+          <div className="bg-red-500 size-4 text-white rounded-full text-xs">
+            {total?.TOLAK_EDITOR}
+          </div>
+        </div>
+      ),
       value: 'TOLAK_EDITOR',
-      element: <ApprovedSectionEditor data={approvedList} />,
+      element: <ApprovedSectionEditor data={approvedList} status={tabsName} />,
     },
   ]
 
@@ -105,11 +136,14 @@ export default function DashboardAdminEditor() {
         ))}
       </div>
 
-      {/* Konten & Akses */}
       <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
         <div className={isEditor ? 'xl:col-span-4' : 'xl:col-span-3'}>
           <p className="text-primary font-semibold text-2xl">Konten Yang Diajukan</p>
-          <TabsListCustom data={TabsList} value={tabsName} onChange={setTabsName} />
+          <TabsListCustom
+            data={TabsList}
+            value={tabsName}
+            onChange={(e) => setTabsName(e as status)}
+          />
         </div>
 
         {!isEditor && (

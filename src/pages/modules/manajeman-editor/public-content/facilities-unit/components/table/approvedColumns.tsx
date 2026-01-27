@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button.tsx'
 import { MdInfo, MdOutlineHistory } from 'react-icons/md'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
-import type { IUnitFacilities } from '../../data'
+import type { IUnitFacilities } from '../../../../../new_editor/publict-content/facilities-unit/data'
 import { ButtonPublishFacilitiesUnit } from '../buttonPublish'
 import {
   Carousel,

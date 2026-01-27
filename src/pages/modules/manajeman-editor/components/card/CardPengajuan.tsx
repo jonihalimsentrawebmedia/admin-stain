@@ -8,19 +8,19 @@ const CardPengajuan = ({ form }: Props) => {
   const fieldIdentitas = [
     {
       label: 'Tanggal Diajukan',
-      name: 'tanggal',
+      name: 'tanggal_diajukan',
     },
     {
       label: 'Nama',
-      name: 'nama',
+      name: 'nama_pengaju',
     },
     {
       label: 'Jabatan',
-      name: 'jabatan',
+      name: 'level_pengaju',
     },
     {
       label: 'Unit/Satuan Kerja',
-      name: 'unit',
+      name: 'satuan_kerja',
     },
   ]
   return (

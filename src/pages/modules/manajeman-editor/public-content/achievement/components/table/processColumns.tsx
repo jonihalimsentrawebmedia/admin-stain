@@ -11,9 +11,9 @@ import {
 } from '@/components/ui/carousel.tsx'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
-import type { IAchievementDetail } from '../../data/index'
-import ButtonAggreManagementEditor from '../buttonAggree'
-import { ButtonRejectManagementEditor } from '../buttonReject'
+import type { IAchievementDetail } from '@/pages/modules/new_editor/publict-content/achievement/data/index'
+import ButtonAggreManagementEditor from '../../../../../new_editor/publict-content/achievement/component/buttonAggree.tsx'
+import { ButtonRejectManagementEditor } from '../../../../../new_editor/publict-content/achievement/component/buttonReject.tsx'
 
 export const ProcessColumnsAchievement = () => {
   const [searchParams] = useSearchParams()

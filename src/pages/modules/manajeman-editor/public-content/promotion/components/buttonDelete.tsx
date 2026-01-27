@@ -13,7 +13,7 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
-import type { IPromotion } from '../data/types'
+import type { IPromotion } from '@/pages/modules/new_editor/publict-content/promotion/data/types'
 
 export const ButtonDeletePromotionManagementEditor = (data: IPromotion) => {
   const [open, setOpen] = useState(false)

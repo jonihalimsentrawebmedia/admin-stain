@@ -5,7 +5,7 @@ import { MdInfo, MdOutlineHistory } from 'react-icons/md'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { ButtonUnpublishFacilities } from '../../components/buttonUnpublish.tsx'
-import type { IUnitFacilities } from '../../data/index.tsx'
+import type { IUnitFacilities } from '@/pages/modules/new_editor/publict-content/facilities-unit/data/index.tsx'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel.tsx'
 
 export const PublishColumnsFacilities = () => {

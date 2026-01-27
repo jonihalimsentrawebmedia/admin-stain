@@ -39,7 +39,7 @@ export const UpdatedFacilitiesUnit = () => {
         if (res.data.status) {
           setLoading(false)
           toast.success(res.data.message || 'Success tambah data fasilitas')
-          navigate('/modules/website-unit/public-content/facilities')
+          navigate('/modules/website-unit/public-content/facilities-unit')
         }
       })
       .catch((err) => {

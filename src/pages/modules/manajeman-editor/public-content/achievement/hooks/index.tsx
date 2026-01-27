@@ -3,7 +3,7 @@ import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useSearchParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
-import type { IAchievementDetail } from '../data/index.tsx'
+import type { IAchievementDetail } from '@/pages/modules/new_editor/publict-content/achievement/data/index.tsx'
 import type { IBGThumbnail } from '@/pages/modules/website-utama/public-content/announcement/data'
 
 export const UseGetAchievement = () => {

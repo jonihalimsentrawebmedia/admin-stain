@@ -142,7 +142,7 @@ export const MenuListUnit = [
       {
         id: 75,
         name: 'Fasilitas Unit',
-        path: `${baseDomain}/public-content/facilities`,
+        path: `${baseDomain}/public-content/facilities-unit`,
       },
     ],
   },

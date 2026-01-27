@@ -10,9 +10,9 @@ import {
 import { Button } from '@/components/ui/button.tsx'
 import { MdInfo, MdOutlineHistory } from 'react-icons/md'
 import { format } from 'date-fns'
-import type { IPromotion } from '../../data/types'
+import type { IPromotion } from '@/pages/modules/new_editor/publict-content/promotion/data/types'
 import { ButtonDraftPromotionEditor } from '../buttonDraft'
-import ButtonProcessManagementEditor from '../buttonProcess'
+import ButtonProcessManagementEditor from '../../../../../new_editor/publict-content/promotion/component/buttonProcess.tsx'
 
 export const SubmissionStatusColumns = () => {
   const [searchParams] = useSearchParams()

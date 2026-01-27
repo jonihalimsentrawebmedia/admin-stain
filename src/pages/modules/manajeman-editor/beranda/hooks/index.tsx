@@ -11,6 +11,13 @@ import {
 } from 'react-icons/md'
 import { RiBarChart2Fill } from 'react-icons/ri'
 
+export interface statusTotal {
+  DIAJUKAN_EDITOR: number
+  DISETUJUI_EDITOR: number
+  PROSES_EDITOR: number
+  TOLAK_EDITOR: number
+}
+
 export const UseGetTotalVisitorEditor = () => {
   const [totalVisitor, setTotalVisitor] = useState<ITotalVisitor>()
   const [status, setStatus] = useState<{ label: string; value: number; icon: any }[]>([])
@@ -129,6 +136,27 @@ export const UseGetApprovedListEditor = (status: string) => {
   }, [data])
 
   return { approvedList, loading }
+}
+
+export const UseGetApprovedListEditorStatus = () => {
+  const [status, setStatus] = useState<statusTotal>()
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['list-approved-status'],
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get('/editor/dashboard/konten-yang-diajukan').then((res) => res.data.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setStatus(data)
+    }
+  }, [data])
+
+  return { status, loading }
 }
 
 export const UseGetTrentVisitorEditor = (mode: Mode) => {

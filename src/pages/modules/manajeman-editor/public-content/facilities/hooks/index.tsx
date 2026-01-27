@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import type { IFacilitiesDetail, IStatusFacilities } from '../data/index'
+import type { IFacilitiesDetail, IStatusFacilities } from '@/pages/modules/new_editor/publict-content/facilities/data/index'
 import { useSearchParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
