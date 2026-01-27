@@ -11,9 +11,9 @@ import {
 } from '@/components/ui/carousel.tsx'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
-import type { IPromotion } from '../../data/types'
-import ButtonAggreManagementEditor from '../buttonAggree'
-import { ButtonRejectAgendaManagementEditor } from '../buttonReject'
+import type { IPromotion } from '@/pages/modules/new_editor/publict-content/promotion/data/types'
+import ButtonAggreManagementEditor from '../../../../../new_editor/publict-content/promotion/component/buttonAggree.tsx'
+import { ButtonRejectAgendaManagementEditor } from '../../../../../new_editor/publict-content/promotion/component/buttonReject.tsx'
 
 export const EditorProcessStatusColumns = () => {
   const [searchParams] = useSearchParams()

@@ -13,7 +13,7 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { useQueryClient } from '@tanstack/react-query'
 import { IconCancel } from '@/components/common/icon'
-import type { IPromotion } from '../data/types'
+import type { IPromotion } from '@/pages/modules/new_editor/publict-content/promotion/data/types'
 
 export const ButtonDraftPromotionEditor = (data: IPromotion) => {
   const [open, setOpen] = useState(false)

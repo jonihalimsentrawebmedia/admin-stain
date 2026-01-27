@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/carousel.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
-import type { IImpactInnovationList } from '../data'
+import type { IImpactInnovationList } from '../../../../new_editor/publict-content/impact-innovation/data'
 
 export const ButtonPublish2ManagementEditor = (data: IImpactInnovationList) => {
   const [open, setOpen] = useState(false)

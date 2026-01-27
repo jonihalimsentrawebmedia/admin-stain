@@ -13,7 +13,7 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { useQueryClient } from '@tanstack/react-query'
 import { IconCancel } from '@/components/common/icon'
-import type { IAchievementDetail } from '../data/index'
+import type { IAchievementDetail } from '@/pages/modules/new_editor/publict-content/achievement/data/index'
 
 export const ButtonDraftAchievement = (data: IAchievementDetail) => {
   const [open, setOpen] = useState(false)

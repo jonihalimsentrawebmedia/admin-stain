@@ -13,7 +13,7 @@ import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { HiPencil } from 'react-icons/hi'
 import { ButtonPublishImpactInnovation } from '../buttonPublish'
-import type { IImpactInnovationList } from '../../data'
+import type { IImpactInnovationList } from '../../../../../new_editor/publict-content/impact-innovation/data'
 
 export const UnpublishColumnsImpactInnovation = () => {
   const [searchParams] = useSearchParams()

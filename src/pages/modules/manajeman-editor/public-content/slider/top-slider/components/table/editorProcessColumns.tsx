@@ -6,8 +6,8 @@ import { RxExternalLink } from 'react-icons/rx'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { MdOutlineHistory } from 'react-icons/md'
-import ButtonAggreManagementEditor from '../buttonAggree'
-import { ButtonRejectManagementEditor } from '../buttonReject'
+import ButtonAggreManagementEditor from '../../../../../../new_editor/publict-content/top-slider/component/buttonAggree.tsx'
+import { ButtonRejectManagementEditor } from '../../../../../../new_editor/publict-content/top-slider/component/buttonReject.tsx'
 
 const EditorProcessColumns = () => {
   const [searchParams] = useSearchParams()

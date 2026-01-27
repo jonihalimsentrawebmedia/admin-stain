@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
-import type { IStatusFacilitiesUnit, IUnitFacilities } from '../data'
+import type { IStatusFacilitiesUnit, IUnitFacilities } from '../../../../new_editor/publict-content/facilities-unit/data'
 
 export const UseGetFacilitiesUnit = () => {
   const [listFacilities, setListFacilities] = useState<IUnitFacilities[]>([])

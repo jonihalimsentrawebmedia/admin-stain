@@ -5,7 +5,7 @@ import { MdInfo, MdOutlineHistory } from 'react-icons/md'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { HiPencil } from 'react-icons/hi'
-import type { IUnitFacilities } from '../../data'
+import type { IUnitFacilities } from '../../../../../new_editor/publict-content/facilities-unit/data'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 
 export const RejectColumnsFacilities = () => {

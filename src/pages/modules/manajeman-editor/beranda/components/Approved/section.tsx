@@ -1,18 +1,20 @@
 import type { IContent } from '@/pages/modules/website-utama/beranda/types'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
-import { ColumnsApprovalEditor } from '@/pages/modules/manajeman-editor/beranda/types/columns.tsx'
+import type { status } from '@/pages/modules/new_editor/data/types/data.tsx'
+import { RendersColumnsData } from '@/pages/modules/new_editor/data/columns'
 
 interface Props {
   data: IContent[]
+  status: status
 }
 
 export const ApprovedSectionEditor = (props: Props) => {
-  const { data } = props
-  const columns = ColumnsApprovalEditor()
+  const { data, status } = props
+  const columns = RendersColumnsData(status)
 
   return (
     <>
-      <div className={'lg:max-h-[280px] overflow-y-auto border'}>
+      <div className={'overflow-y-auto border'}>
         <TableCustom
           isShowFilter={false}
           className={'text-start whitespace-pre-line'}

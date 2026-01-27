@@ -6,7 +6,7 @@ import { RxExternalLink } from 'react-icons/rx'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { MdOutlineHistory } from 'react-icons/md'
-import ButtonProcessManagementEditor from '../buttonProcess'
+import ButtonProcessManagementEditor from '../../../../../../new_editor/publict-content/bottom-slider/component/buttonProcess.tsx'
 import { ButtonDraftBottom } from '../buttonDraft'
 
 const BottomSubmissionColumns = () => {

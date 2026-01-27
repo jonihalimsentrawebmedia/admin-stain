@@ -5,7 +5,7 @@ import { MdInfo, MdOutlineHistory } from 'react-icons/md'
 import { HiPencil } from 'react-icons/hi'
 
 import { ButtonSubmissionFacilities } from '../../components/buttonSubmission.tsx'
-import type { IUnitFacilities } from '../../data/index.tsx'
+import type { IUnitFacilities } from '@/pages/modules/new_editor/publict-content/facilities-unit/data/index.tsx'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel.tsx'
 import { ButtonDeleteFacilitiesUnit } from '../buttonDelete.tsx'
 

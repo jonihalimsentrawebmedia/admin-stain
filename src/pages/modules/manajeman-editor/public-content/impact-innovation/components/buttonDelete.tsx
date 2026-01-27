@@ -13,7 +13,7 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
-import type { IImpactInnovationList } from '../data/index'
+import type { IImpactInnovationList } from '@/pages/modules/new_editor/publict-content/impact-innovation/data/index'
 
 export const ButtonDeleteImpactInnovation = (data: IImpactInnovationList) => {
   const [open, setOpen] = useState(false)

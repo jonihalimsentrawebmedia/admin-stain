@@ -27,8 +27,8 @@ export function Header(props: Props) {
           <img src={module?.gambar} alt="gambar" className="size-10" />
         </Link>
         <div className="flex flex-col">
-          <p className="text-sm font-semibold text-primary">Manajemen Pengelolaan Website</p>
-          <p className="text-2xl font-semibold">Website Utama</p>
+          <p className="text-sm font-semibold text-primary">Manajemen Editor</p>
+          <p className="text-2xl font-semibold">STAIN MADINA</p>
         </div>
       </div>
       <div className="flex items-center gap-5">

@@ -13,7 +13,7 @@ import {
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { MdCancel } from 'react-icons/md'
-import type { IImpactInnovationList } from '../data/index'
+import type { IImpactInnovationList } from '@/pages/modules/new_editor/publict-content/impact-innovation/data/index'
 import { Textarea } from '@/components/ui/textarea'
 
 export const ButtonUnpublishImpactInnovation = (data: IImpactInnovationList) => {

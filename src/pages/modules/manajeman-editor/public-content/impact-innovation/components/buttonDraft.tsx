@@ -13,7 +13,7 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { useQueryClient } from '@tanstack/react-query'
 import { IconCancel } from '@/components/common/icon'
-import type { IImpactInnovationList } from '../data/index'
+import type { IImpactInnovationList } from '@/pages/modules/new_editor/publict-content/impact-innovation/data/index'
 
 export const ButtonDraftImpactInnovation = (data: IImpactInnovationList) => {
   const [open, setOpen] = useState(false)

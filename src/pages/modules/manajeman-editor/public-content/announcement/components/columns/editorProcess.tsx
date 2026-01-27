@@ -6,8 +6,7 @@ import { Button } from '@/components/ui/button.tsx'
 import { MdInfo, MdOutlineHistory } from 'react-icons/md'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
-import ButtonAggreManagementEditor from '../buttonAggree'
-import { ButtonRejectAnnouncmentManagementEditor } from '../buttonReject'
+import ButtonAggreManagementEditor from '@/pages/modules/new_editor/publict-content/announcement/component/buttonAggree.tsx'
 
 export const EditorProcessStatusColumns = () => {
   const [searchParams] = useSearchParams()
@@ -144,10 +143,8 @@ export const EditorProcessStatusColumns = () => {
       header: '',
       cell: ({ row }) => {
         return (
-          <div className='space-y-2'>
-            <ButtonAggreManagementEditor {...row.original}/>
-            <ButtonRejectAnnouncmentManagementEditor {...row.original}/>
-           
+          <div className="space-y-2">
+            <ButtonAggreManagementEditor {...row.original} />
           </div>
         )
       },

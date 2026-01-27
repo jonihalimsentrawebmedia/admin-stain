@@ -10,7 +10,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel.tsx'
-import type { IAchievementDetail } from '../../data/index'
+import type { IAchievementDetail } from '@/pages/modules/new_editor/publict-content/achievement/data/index'
 import { ButtonDeleteAchievement } from '../buttonDelete'
 import { ButtonSubmissionAchievement } from '../buttonSubmission'
 

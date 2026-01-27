@@ -6,7 +6,7 @@ import { MdInfo, MdOutlineHistory } from 'react-icons/md'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { ButtonDraftFacilities } from '../buttonDraft'
-import ButtonProcessManagementEditor from '../buttonProcess'
+import ButtonProcessManagementEditor from '../../../../../new_editor/publict-content/facilities/component/buttonProcess.tsx'
 
 export const SubmissionColumnsFacilities = () => {
   const [searchParams] = useSearchParams()

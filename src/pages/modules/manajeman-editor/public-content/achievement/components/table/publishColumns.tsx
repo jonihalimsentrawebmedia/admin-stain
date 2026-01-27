@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/carousel.tsx'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
-import type { IAchievementDetail } from '../../data/index'
+import type { IAchievementDetail } from '@/pages/modules/new_editor/publict-content/achievement/data/index'
 import { ButtonUnpublishAchievement } from '../buttonUnpublish'
 
 export const PublishColumnsAchievement = () => {

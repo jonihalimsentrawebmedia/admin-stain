@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/carousel.tsx'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
-import type { IImpactInnovationList } from '../../data/index'
+import type { IImpactInnovationList } from '@/pages/modules/new_editor/publict-content/impact-innovation/data/index'
 import { ButtonUnpublishImpactInnovation } from '../buttonUnpublish'
 
 export const PublishColumnsImpactInnovation = () => {

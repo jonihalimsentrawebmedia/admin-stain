@@ -12,7 +12,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel'
-import type { IUnitFacilities } from '../../data'
+import type { IUnitFacilities } from '../../../../../new_editor/publict-content/facilities-unit/data'
 import { ButtonPublishFacilitiesUnit } from '../buttonPublish'
 
 export const UnpublishColumnsFacilities = () => {

@@ -7,7 +7,7 @@ import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { ButtonDraftAnnouncementManagementEditor } from '../buttonDraft'
-import ButtonProcessManagementEditor from '../buttonProcess'
+import ButtonProcessManagementEditor from '@/pages/modules/new_editor/publict-content/announcement/component/buttonProcess.tsx'
 
 export const SubmissionStatusColumns = () => {
   const [searchParams] = useSearchParams()

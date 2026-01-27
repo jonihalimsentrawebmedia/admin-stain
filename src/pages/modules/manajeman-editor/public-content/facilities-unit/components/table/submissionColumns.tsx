@@ -5,8 +5,8 @@ import { MdInfo, MdOutlineHistory } from 'react-icons/md'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { ButtonDraftFacilities } from '../buttonDraft'
-import ButtonProcessManagementEditor from '../buttonProcess'
-import type { IUnitFacilities } from '../../data'
+import ButtonProcessManagementEditor from '../../../../../new_editor/publict-content/facilities-unit/component/buttonProcess.tsx'
+import type { IUnitFacilities } from '../../../../../new_editor/publict-content/facilities-unit/data'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel'
 
 export const SubmissionColumnsFacilities = () => {

@@ -12,7 +12,7 @@ import {
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { HiPencil } from 'react-icons/hi'
-import type { IPromotion } from '../../data/types'
+import type { IPromotion } from '@/pages/modules/new_editor/publict-content/promotion/data/types'
 
 export const RejectionStatusColumns = () => {
   const [searchParams] = useSearchParams()

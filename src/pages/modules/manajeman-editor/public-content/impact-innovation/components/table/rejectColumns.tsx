@@ -12,7 +12,7 @@ import {
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { HiPencil } from 'react-icons/hi'
-import type { IImpactInnovationList } from '../../data/index'
+import type { IImpactInnovationList } from '@/pages/modules/new_editor/publict-content/impact-innovation/data/index'
 
 export const RejectColumnsImpactInnovation = () => {
   const [searchParams] = useSearchParams()

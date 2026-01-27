@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
-import type { IImpactInnovationList, IStatusImpactInnovation } from '../data/index'
+import type { IImpactInnovationList, IStatusImpactInnovation } from '@/pages/modules/new_editor/publict-content/impact-innovation/data/index'
 import { useSearchParams } from 'react-router-dom'
 import type { IBGThumbnail } from '@/pages/modules/website-utama/public-content/announcement/data'
 

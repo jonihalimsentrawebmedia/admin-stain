@@ -4,7 +4,7 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { useNavigate } from 'react-router-dom'
 import { UploadImageRatio } from './uploadImageRatio.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
-import type { FacilitiesType } from '../data/resolver'
+import type { FacilitiesType } from '@/pages/modules/new_editor/publict-content/facilities/data/resolver'
 import { RichText } from '@/components/common/richtext'
 
 interface props {
