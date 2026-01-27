@@ -315,7 +315,7 @@ export const WebsiteUnitRouter = [
         ],
       },
       {
-        path: 'facilities',
+        path: 'facilities-unit',
         children: [
           {
             index: true,

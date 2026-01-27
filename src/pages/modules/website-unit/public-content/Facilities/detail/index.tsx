@@ -28,7 +28,7 @@ export const DetailFacilitiesUnitPage = () => {
                   <Button
                     onClick={() =>
                       navigate(
-                        `/modules/website-unit/public-content/facilities/edit/${detail?.id_unit_fasilitas}`
+                        `/modules/website-unit/public-content/facilities-unit/edit/${detail?.id_unit_fasilitas}`
                       )
                     }
                     className={'border-primary text-primary hover:text-primary'}

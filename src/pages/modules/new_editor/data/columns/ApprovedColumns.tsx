@@ -2,9 +2,10 @@ import { Link, useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
 import type { IContentSubmission } from '@/pages/modules/new_editor/data/types/data.tsx'
 import { format } from 'date-fns'
-import { RenderUrl } from '@/pages/modules/website-utama/beranda/hooks/renderUrl.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { FaForward } from 'react-icons/fa'
+import { FormatTimeAgo } from '@/utils/helper.tsx'
+import { RenderUrlEditor } from '@/pages/modules/new_editor/hooks/editorUrl.tsx'
 
 export const ApprovedColumns = () => {
   const [searchParams] = useSearchParams()
@@ -65,6 +66,7 @@ export const ApprovedColumns = () => {
         return (
           <div>
             <p>{value?.tanggal_disetujui ? format(value?.tanggal_disetujui, 'dd-MM-yyyy') : ''}</p>
+            <p>{FormatTimeAgo(value?.tanggal_disetujui ?? '')}</p>
           </div>
         )
       },
@@ -80,7 +82,7 @@ export const ApprovedColumns = () => {
         return (
           <>
             <Link
-              to={`/modules/editor/public-content/${RenderUrl(row?.original?.jenis_konten, row?.original?.id)}`}
+              to={`/modules/editor/public-content/${RenderUrlEditor(row?.original?.jenis_konten, row?.original?.id)}`}
             >
               <Button
                 size={'sm'}

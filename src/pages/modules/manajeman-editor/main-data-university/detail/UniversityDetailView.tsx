@@ -8,18 +8,23 @@ import ButtonNewEditor from '../../components/buttonSumission/ButtonNewEditor'
 
 const UniversityDetailView = () => {
   const {
-    fieldAddress,
-    fieldContact,
-    fieldImage,
-    fieldMediaSocial,
-    fieldUniversity,
+    fieldAddress1,
+    fieldAddress2,
+    fieldContact1,
+    fieldContact2,
+    fieldImage1,
+    fieldImage2,
+    fieldMediaSocial1,
+    fieldMediaSocial2,
+    fieldUniversity1,
+    fieldUniversity2,
     form,
     goToEdit,
   } = UniversityDetailViewModel()
+
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
-        // isBack
         buttonGroup={[
           {
             type: 'custom',
@@ -33,7 +38,7 @@ const UniversityDetailView = () => {
                 linkAccept=""
                 linkCancel=""
                 linkSend=""
-                status=""
+                status={form.watch('status')}
               />
             ),
           },
@@ -44,32 +49,32 @@ const UniversityDetailView = () => {
         <CardPengajuan form={form} />
         <CardInput title="Logo & Favicon" classNameChildren="p-0">
           <CardLog
-            children={<DetailField data={fieldImage} form={form} isRowParent isRow={false} />}
-            children2={<DetailField data={fieldImage} form={form} isRowParent isRow={false} />}
+            children={<DetailField data={fieldImage1} form={form} isRowParent isRow={false} />}
+            children2={<DetailField data={fieldImage2} form={form} isRowParent isRow={false} />}
           />
         </CardInput>
         <CardInput title="Identitas Institusi" classNameChildren="p-0">
           <CardLog
-            children={<DetailField data={fieldUniversity} form={form} />}
-            children2={<DetailField data={fieldUniversity} form={form} />}
+            children={<DetailField data={fieldUniversity1} form={form} />}
+            children2={<DetailField data={fieldUniversity2} form={form} />}
           />
         </CardInput>
         <CardInput title="Alamat Lengkap" classNameChildren="p-0">
           <CardLog
-            children={<DetailField data={fieldAddress} form={form} />}
-            children2={<DetailField data={fieldAddress} form={form} />}
+            children={<DetailField data={fieldAddress1} form={form} />}
+            children2={<DetailField data={fieldAddress2} form={form} />}
           />
         </CardInput>
         <CardInput title="Kontak Resmi" classNameChildren="p-0">
           <CardLog
-            children={<DetailField data={fieldContact} form={form} />}
-            children2={<DetailField data={fieldContact} form={form} />}
+            children={<DetailField data={fieldContact1} form={form} />}
+            children2={<DetailField data={fieldContact2} form={form} />}
           />
         </CardInput>
         <CardInput title="Media Sosial" classNameChildren="p-0">
           <CardLog
-            children={<DetailField data={fieldMediaSocial} form={form} />}
-            children2={<DetailField data={fieldMediaSocial} form={form} />}
+            children={<DetailField data={fieldMediaSocial1} form={form} />}
+            children2={<DetailField data={fieldMediaSocial2} form={form} />}
           />
         </CardInput>
       </div>

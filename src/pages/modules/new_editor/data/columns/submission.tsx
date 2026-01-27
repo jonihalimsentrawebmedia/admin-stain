@@ -2,9 +2,9 @@ import { Link, useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
 import type { IContentSubmission } from '@/pages/modules/new_editor/data/types/data.tsx'
 import { format } from 'date-fns'
-import { RenderUrl } from '@/pages/modules/website-utama/beranda/hooks/renderUrl.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { FaForward } from 'react-icons/fa'
+import { RenderUrlEditor } from '../../hooks/editorUrl'
 
 export const SubmissionColumns = () => {
   const [searchParams] = useSearchParams()
@@ -69,10 +69,15 @@ export const SubmissionColumns = () => {
       accessorKey: 'Detail',
       header: 'Detail',
       cell: ({ row }) => {
+        const value = row?.original
         return (
           <>
             <Link
-              to={`/modules/editor/public-content/${RenderUrl(row?.original?.jenis_konten, row?.original?.id)}`}
+              to={
+                value?.jenis_konten === 'profil_universitas'
+                  ? `/modules/editor/${RenderUrlEditor(value?.jenis_konten, value?.id)}`
+                  : `/modules/editor/public-content/${RenderUrlEditor(value?.jenis_konten, value?.id)}`
+              }
             >
               <Button
                 size={'sm'}

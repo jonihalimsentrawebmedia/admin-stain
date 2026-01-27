@@ -32,7 +32,7 @@ const ButtonNewEditor = ({
     <div className="flex gap-2 items-center">
       <div className="flex items-center gap-2">
         <div className="text-[#999]">Status</div>
-        <div className="text-blue-500">Diajukan Ke Editor</div>
+        <div className="text-blue-500">{status}</div>
         <Button
           onClick={goToEdit}
           variant={'outline'}

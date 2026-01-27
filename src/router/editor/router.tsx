@@ -90,6 +90,9 @@ import { UpdatedPromotionManagementEditor } from '@/pages/modules/new_editor/pub
 import { UpdatedFacilitiesUnit } from '@/pages/modules/new_editor/publict-content/facilities-unit/updated'
 import { DetailFacilitiesUnitPage } from '@/pages/modules/new_editor/publict-content/facilities-unit/detail'
 import { LogActivityFacilitiesUnitPage } from '@/pages/modules/new_editor/publict-content/facilities-unit/log'
+import UniversityEditView from '@/pages/modules/manajeman-editor/main-data-university/edit/UniversityEditView.tsx'
+import UniversityDetailView from '@/pages/modules/manajeman-editor/main-data-university/detail/UniversityDetailView.tsx'
+import MainDataUniversityDetailHistoryView from '@/pages/modules/manajeman-editor/main-data-university/detail-history/MainDataUniversityDetailHistoryView.tsx'
 
 export const EditorRouter = [
   {
@@ -289,28 +292,23 @@ export const EditorRouter = [
       },
     ],
   },
-  // {
-  //   path: 'main-data-university',
-  //   children: [
-  //     {
-  //       index: true,
-  //       element: <MainDataUniversityView />,
-  //     },
-  //
-  //     {
-  //       path: 'edit/:id',
-  //       element: <UniversityEditView />,
-  //     },
-  //     {
-  //       path: 'detail/:id',
-  //       element: <UniversityDetailView />,
-  //     },
-  //     {
-  //       path: ':id/detail/:idHistory',
-  //       element: <MainDataUniversityDetailHistoryView />,
-  //     },
-  //   ],
-  // },
+  {
+    path: 'data-university',
+    children: [
+      {
+        path: 'edit/:id',
+        element: <UniversityEditView />,
+      },
+      {
+        path: 'detail/:id',
+        element: <UniversityDetailView />,
+      },
+      {
+        path: ':id/detail/:idHistory',
+        element: <MainDataUniversityDetailHistoryView />,
+      },
+    ],
+  },
   // {
   //   path: 'faculty',
   //   children: [

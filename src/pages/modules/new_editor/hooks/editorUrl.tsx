@@ -1,4 +1,6 @@
-export const RenderUrl = (url: string, id: string) => {
+// data-university
+
+export const RenderUrlEditor = (url: string, id: string) => {
   switch (url) {
     case 'prestasi': {
       return `achievement/detail/${id}`
@@ -29,6 +31,9 @@ export const RenderUrl = (url: string, id: string) => {
     }
     case 'unit_fasilitas': {
       return `facilities-unit/detail/${id}`
+    }
+    case 'profil_universitas': {
+      return `/data-university/detail/${id}`
     }
   }
 }

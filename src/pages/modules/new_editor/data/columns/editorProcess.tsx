@@ -2,9 +2,10 @@ import { Link, useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
 import type { IContentSubmission } from '@/pages/modules/new_editor/data/types/data.tsx'
 import { format } from 'date-fns'
-import { RenderUrl } from '@/pages/modules/website-utama/beranda/hooks/renderUrl.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { FaForward } from 'react-icons/fa'
+import { FormatTimeAgo } from '@/utils/helper.tsx'
+import { RenderUrlEditor } from '@/pages/modules/new_editor/hooks/editorUrl.tsx'
 
 export const ProcessEditorColumns = () => {
   const [searchParams] = useSearchParams()
@@ -67,11 +68,14 @@ export const ProcessEditorColumns = () => {
     },
     {
       accessorKey: 'tanggal_diproses',
-      header: 'Tanggal Diproces',
+      header: 'Tanggal Diproses',
       cell: (row) => {
         const values = row.row.original
         return (
-          <p>{values?.tanggal_diproses ? format(values?.tanggal_diproses, 'dd-MM-yyyy') : '-'}</p>
+          <div className={'flex flex-col gap-1'}>
+            <p>{values?.tanggal_diproses ? format(values?.tanggal_diproses, 'dd-MM-yyyy') : '-'}</p>
+            <p>{FormatTimeAgo(values?.tanggal_diproses ?? '')}</p>
+          </div>
         )
       },
     },
@@ -86,7 +90,7 @@ export const ProcessEditorColumns = () => {
         return (
           <>
             <Link
-              to={`/modules/editor/public-content/${RenderUrl(row?.original?.jenis_konten, row?.original?.id)}`}
+              to={`/modules/editor/public-content/${RenderUrlEditor(row?.original?.jenis_konten, row?.original?.id)}`}
             >
               <Button
                 size={'sm'}
