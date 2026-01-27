@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { MENULIST } from './menu'
 import { cn } from '@/lib/utils'
@@ -61,8 +61,46 @@ export function Sidebar({ collapsed }: Props) {
 
   const groups = { ...defaultOpenGroups, ...openGroups }
 
+  // const toggleGroup = (groupId: string) => {
+  //   setOpenGroups((prev) => ({ ...prev, [groupId]: !prev[groupId] }))
+  // }
+
+  useEffect(() => {
+    if (collapsed) setOpenGroups({})
+  }, [collapsed])
+  
+  useEffect(() => {
+    // cek apakah path sekarang ada di menu yang punya parent children
+    const activeHasParentGroup = MENULIST.some(item => {
+      if (!item.child) return false
+      return isActiveTree(item, pathname)
+    })
+    
+    // kalau yang aktif bukan dari group tree → tutup semua
+    if (!activeHasParentGroup) {
+      setOpenGroups({})
+    }
+  }, [pathname])
+
   const toggleGroup = (groupId: string) => {
-    setOpenGroups((prev) => ({ ...prev, [groupId]: !prev[groupId] }))
+    setOpenGroups((prev) => {
+      const next = { ...prev }
+
+      // ambil parentId (semua sebelum "-index-name")
+      const parentId = groupId.split('-').slice(0, -2).join('-')
+
+      // tutup semua group yang parent-nya sama
+      Object.keys(next).forEach((key) => {
+        if (key.startsWith(parentId + '-') && key !== groupId) {
+          next[key] = false
+        }
+      })
+
+      // toggle group yg diklik
+      next[groupId] = !prev[groupId]
+
+      return next
+    })
   }
 
   return (
