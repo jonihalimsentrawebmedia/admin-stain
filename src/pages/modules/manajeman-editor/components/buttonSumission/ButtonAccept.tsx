@@ -6,6 +6,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 interface Props {
   isIcon: boolean
@@ -16,16 +17,20 @@ interface Props {
 const ButtonAccept = ({ isIcon, url, queryKey, setOpenParent }: Props) => {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
-
+  const [searchParams] = useSearchParams()
   const queryClient = useQueryClient()
+  const navigate = useNavigate()
   async function handleAccept() {
     setLoading(true)
     try {
-      const res = await AxiosClient.post(url ?? '')
+      const res = await AxiosClient.patch(url ?? '', {
+        status_publish: 'DISETUJUI_EDITOR',
+        type_pengajuan: searchParams.get('jenis_konten'),
+      })
 
       if (res.data.status) {
         toast.success(res.data.message)
-
+        navigate(-1)
         await queryClient.invalidateQueries({
           queryKey: [queryKey],
         })

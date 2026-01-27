@@ -96,3 +96,16 @@ export function FormatTimeAgo(dateInput: string | Date): string {
   const years = differenceInYears(now, date)
   return `${years} tahun yang lalu`
 }
+
+export function StatusPublish(value:string){
+    switch(value){
+      case "DIAJUKAN_EDITOR":
+        return <div className='text-blue-500'>Diajukan Ke Editor</div>
+      case "PROSES_EDITOR":
+        return <div className='text-blue-500'>Proses Editor</div>
+      case "TOLAK_EDITOR":
+        return <div className='text-red-500'>Ditolak</div>
+      case "DISETUJUI_EDITOR":
+        return <div className='text-green-500'>Disetujui</div>
+    }
+}

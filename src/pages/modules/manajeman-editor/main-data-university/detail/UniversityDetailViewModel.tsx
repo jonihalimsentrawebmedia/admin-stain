@@ -10,7 +10,7 @@ const UniversityDetailViewModel = () => {
   const form = useForm()
   const navigate = useNavigate()
 
-  console.log(profileChangeData)
+ 
 
   const fieldImage1 = [
     {
@@ -241,7 +241,7 @@ const UniversityDetailViewModel = () => {
     fieldUniversity1,
     fieldUniversity2,
     form,
-    goToEdit,
+    goToEdit,id
   }
 }
 

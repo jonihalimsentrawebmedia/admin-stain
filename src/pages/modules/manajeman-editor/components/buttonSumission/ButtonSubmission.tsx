@@ -6,32 +6,36 @@ import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { BiX } from 'react-icons/bi'
 import { MdFastForward, MdSend } from 'react-icons/md'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 interface Props {
   link: string
   queryKey: string
   queryKeyStatus: string
 }
-export const ButtonSubmission= ({ link, queryKey, queryKeyStatus }: Props) => {
+export const ButtonSubmission = ({ link, queryKey, queryKeyStatus }: Props) => {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
-
+  const [searchParams] = useSearchParams()
   const queryClient = useQueryClient()
-
+  const navigate = useNavigate()
   const HandlerDelete = async () => {
     setLoading(true)
     await AxiosClient.patch(link, {
-      status_publish: 'DIAJUKAN_EDITOR',
+      status_publish: 'PROSES_EDITOR',
+      type_pengajuan: searchParams.get('jenis_konten'),
     })
       .then((res) => {
         if (res?.data?.status) {
           setOpen(false)
           setLoading(false)
+          toast.success(res.data.message)
           queryClient.invalidateQueries({
             queryKey: [queryKey],
           })
           queryClient.invalidateQueries({
             queryKey: [queryKeyStatus],
           })
+          navigate(-1)
         }
       })
       .catch((err) => {
@@ -52,7 +56,7 @@ export const ButtonSubmission= ({ link, queryKey, queryKeyStatus }: Props) => {
         className={'rounded lg:max-w-2xl'}
         setOpen={setOpen}
         title={<p className={'text-2xl text-primary'}>Ajukan ke Editor</p>}
-        description={'Apakah anda yakin untuk memproses konten profil universitas yang diajukan?'}
+        description={'Apakah anda yakin untuk memproses konten profil  yang diajukan?'}
       >
         <div className="flex items-center justify-end gap-2">
           <Button
@@ -63,11 +67,7 @@ export const ButtonSubmission= ({ link, queryKey, queryKeyStatus }: Props) => {
             <BiX />
             Batal
           </Button>
-          <Button
-            disabled={loading}
-            onClick={HandlerDelete}
-            className={'bg-primary text-white'}
-          >
+          <Button disabled={loading} onClick={HandlerDelete} className={'bg-primary text-white'}>
             <MdFastForward />
             Proses Konten
           </Button>

@@ -74,8 +74,8 @@ export const SubmissionColumns = () => {
           <>
             <Link
               to={
-                value?.jenis_konten === 'profil_universitas'
-                  ? `/modules/editor/${RenderUrlEditor(value?.jenis_konten, value?.id)}`
+                value?.jenis_konten.includes('profil')
+                  ? `/modules/editor/${RenderUrlEditor(value?.jenis_konten, value?.id)}?jenis_konten=${value?.jenis_konten}`
                   : `/modules/editor/public-content/${RenderUrlEditor(value?.jenis_konten, value?.id)}`
               }
             >

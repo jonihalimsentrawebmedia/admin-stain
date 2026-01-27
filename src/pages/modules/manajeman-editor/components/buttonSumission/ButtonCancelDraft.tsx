@@ -7,6 +7,7 @@ import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import { Textarea } from '@/components/ui/textarea'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 
 interface Props {
   isIcon: boolean
@@ -17,17 +18,21 @@ const ButtonCancelDraft = ({ isIcon, url, queryKey }: Props) => {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const [reason, setReason] = useState('')
+  const [searchParams] = useSearchParams()
   const queryClient = useQueryClient()
+  const navigate = useNavigate()
   async function handleCancel() {
     setLoading(true)
     try {
-      const res = await AxiosClient.post(url ?? '', {
+      const res = await AxiosClient.patch(url ?? '', {
         alasan_tolak: reason,
+        status_publish: 'TOLAK_EDITOR',
+        type_pengajuan: searchParams.get('jenis_konten'),
       })
 
       if (res.data.status) {
         toast.success(res.data.message)
-
+        navigate(-1)
         await queryClient.invalidateQueries({
           queryKey: [queryKey],
         })

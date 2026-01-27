@@ -3,6 +3,7 @@ import ButtonAccept from './ButtonAccept'
 import ButtonCancelDraft from './ButtonCancelDraft'
 import { ButtonSubmission } from './ButtonSubmission'
 import { HiPencil } from 'react-icons/hi'
+import { StatusPublish } from '@/utils/helper'
 
 interface Props {
   status: string
@@ -32,18 +33,28 @@ const ButtonNewEditor = ({
     <div className="flex gap-2 items-center">
       <div className="flex items-center gap-2">
         <div className="text-[#999]">Status</div>
-        <div className="text-blue-500">{status}</div>
-        <Button
-          onClick={goToEdit}
-          variant={'outline'}
-          className={'bg-white text-primary border-primary hover:text-primary'}
-        >
-          <HiPencil />
-          Edit Data
-        </Button>
-        <ButtonSubmission link={linkSend} queryKey={keySend} queryKeyStatus={keyStatus} />
-        <ButtonCancelDraft queryKey={keyCancel} url={linkCancel} isIcon={false} />
-        <ButtonAccept isIcon={false} queryKey={keyAccept} url={linkAccept} />
+        {StatusPublish(status)}
+        {status !== 'TOLAK_EDITOR' && status !== 'DISETUJUI_EDITOR' && (
+          <Button
+            onClick={goToEdit}
+            variant={'outline'}
+            className={'bg-white text-primary border-primary hover:text-primary'}
+          >
+            <HiPencil />
+            Edit Data
+          </Button>
+        )}
+
+        {status == 'DIAJUKAN_EDITOR' && (
+          <ButtonSubmission link={linkSend} queryKey={keySend} queryKeyStatus={keyStatus} />
+        )}
+
+        {status == 'PROSES_EDITOR' && (
+          <>
+            <ButtonCancelDraft queryKey={keyCancel} url={linkCancel} isIcon={false} />
+            <ButtonAccept isIcon={false} queryKey={keyAccept} url={linkAccept} />
+          </>
+        )}
       </div>
     </div>
   )

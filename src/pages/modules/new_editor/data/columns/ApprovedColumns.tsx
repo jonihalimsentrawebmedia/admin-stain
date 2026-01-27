@@ -79,10 +79,15 @@ export const ApprovedColumns = () => {
       accessorKey: 'Detail',
       header: 'Detail',
       cell: ({ row }) => {
+        const value = row.original
         return (
           <>
             <Link
-              to={`/modules/editor/public-content/${RenderUrlEditor(row?.original?.jenis_konten, row?.original?.id)}`}
+              to={
+                value?.jenis_konten.includes('profil')
+                  ? `/modules/editor/${RenderUrlEditor(value?.jenis_konten, value?.id)}?jenis_konten=${value?.jenis_konten}`
+                  : `/modules/editor/public-content/${RenderUrlEditor(value?.jenis_konten, value?.id)}`
+              }
             >
               <Button
                 size={'sm'}

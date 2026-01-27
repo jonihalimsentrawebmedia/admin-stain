@@ -35,5 +35,11 @@ export const RenderUrlEditor = (url: string, id: string) => {
     case 'profil_universitas': {
       return `/data-university/detail/${id}`
     }
+    case 'profil_prodi': {
+      return `/prodi/detail/${id}`
+    }
+    case 'profil_unit': {
+      return `/unit/detail/${id}`
+    }
   }
 }

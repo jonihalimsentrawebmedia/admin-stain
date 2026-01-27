@@ -52,7 +52,7 @@ const ImageProfile = ({ img, isEdit }: Props) => {
   }, [img])
 
   return (
-    <div className="max-w-[250px] flex justify-center items-center border relative max-h-[250px]">
+    <div className="max-w-[250px] min-w-[250px] min-h-[250px] flex justify-center items-center border relative max-h-[250px]">
       {loading ? <Skeleton className="h-[250px] w-[250px]" /> : <img src={image} alt="" />}
 
       {isEdit && (

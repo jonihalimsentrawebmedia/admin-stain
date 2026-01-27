@@ -5,6 +5,7 @@ import UniversityDetailViewModel from './UniversityDetailViewModel'
 import CardPengajuan from '../../components/card/CardPengajuan'
 import CardLog from '../../components/card/CardLog'
 import ButtonNewEditor from '../../components/buttonSumission/ButtonNewEditor'
+import CardReject from '../../components/card/CardReject'
 
 const UniversityDetailView = () => {
   const {
@@ -20,6 +21,7 @@ const UniversityDetailView = () => {
     fieldUniversity2,
     form,
     goToEdit,
+    id,
   } = UniversityDetailViewModel()
 
   return (
@@ -31,14 +33,14 @@ const UniversityDetailView = () => {
             element: (
               <ButtonNewEditor
                 goToEdit={goToEdit}
-                keyAccept=""
-                keyCancel=""
-                keySend=""
-                keyStatus=""
-                linkAccept=""
-                linkCancel=""
-                linkSend=""
-                status={form.watch('status')}
+                keyAccept="editor-change-data-profile"
+                keyCancel="editor-change-data-profile"
+                keySend={`editor-change-data-profile`}
+                keyStatus="list-approved-status"
+                linkAccept={`/editor/dashboard/update-status-publish/${id}`}
+                linkCancel={`/editor/dashboard/update-status-publish/${id}`}
+                linkSend={`/editor/dashboard/update-status-publish/${id}`}
+                status={form.watch('status_publish')}
               />
             ),
           },
@@ -47,6 +49,7 @@ const UniversityDetailView = () => {
       />
       <div className="flex flex-col gap-4">
         <CardPengajuan form={form} />
+        {form.watch('status_publish') == 'TOLAK_EDITOR' && <CardReject form={form} />}
         <CardInput title="Logo & Favicon" classNameChildren="p-0">
           <CardLog
             children={<DetailField data={fieldImage1} form={form} isRowParent isRow={false} />}

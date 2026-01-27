@@ -148,7 +148,7 @@ export const FormUserProfile = (props: Props) => {
                 <p>{data?.level_user}</p>
                 <p className="text-gray-500">Satuan Kerja</p>
                 <ul className={'list-decimal flex flex-col gap-1.5 pl-4'}>
-                  {data?.satuan_kerja.map((item, k) => (
+                  {data?.satuan_kerja?.map((item, k) => (
                     <li key={k}>{item}</li>
                   ))}
                 </ul>

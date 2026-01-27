@@ -35,7 +35,7 @@ export const UpdatedDataUnit = () => {
     }).then((res) => {
       if (res.data.status) {
         toast.success(res.data.message || 'Success Pengajuan update data universitas')
-        navigate('/modules/website-unit/data-unit')
+        navigate('/modules/website-unit/data-unit/draft')
       }
     })
   }

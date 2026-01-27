@@ -30,7 +30,7 @@ export const UpdatedDataProdi = () => {
   }, [dataProdi])
 
   const handleSave = async (e: SatuanOrganisasiType) => {
-    await AxiosClient.post('/prodi/profil', {
+    await AxiosClient.post('/prodi/profil/draft', {
       ...e,
     }).then((res) => {
       if (res.data.status) {
