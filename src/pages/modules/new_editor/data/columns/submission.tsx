@@ -25,7 +25,7 @@ export const SubmissionColumns = () => {
       header: 'Tanggal Diajukan',
       cell: (row) => {
         const values = row.row.original
-        return <p>{format(values?.tanggal, 'dd-MM-yyyy')}</p>
+        return <p>{values?.tanggal ? format(values?.tanggal, 'dd-MM-yyyy') : '-'}</p>
       },
     },
     {
