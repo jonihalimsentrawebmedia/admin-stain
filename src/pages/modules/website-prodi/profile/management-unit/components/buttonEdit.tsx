@@ -69,7 +69,7 @@ const ButtonEditManagementUnit = (props: Props) => {
         open={open}
         className={'rounded min-w-xs lg:min-w-2xl'}
         setOpen={setOpen}
-        title={'Tambah Unit Pengelola'}
+        title={'Ubah Data Unit Pengelola'}
         width="50%"
       >
         <Form {...form}>

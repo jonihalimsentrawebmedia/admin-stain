@@ -12,7 +12,7 @@ interface Props {
   handleSave: (value: IAcreditationTypeForm) => void
   handleCancel: () => void
   loading: boolean,
-  optionsSatuanOrganisasi: {
+  optionsSatuanOrganisasi?: {
     value: string
     label: string
   }[]

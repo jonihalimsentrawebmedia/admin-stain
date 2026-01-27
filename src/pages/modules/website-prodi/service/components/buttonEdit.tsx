@@ -66,7 +66,7 @@ export const ButtonEditServiceProdi = (data: IServiceProdi) => {
         className={'lg:max-w-2xl rounded'}
         open={open}
         setOpen={setOpen}
-        title={'Tambah Layanan'}
+        title={'Ubah Data Layanan'}
       >
         <FormServiceProdi
           form={form}

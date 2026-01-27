@@ -43,7 +43,7 @@ export const ButtonDeleteVideoProdi = (data: IGalleryVideo) => {
       <DialogCustom
         open={open}
         setOpen={setOpen}
-        title={'Hapus Galeri Video'}
+        title={<p className={'text-red-500'}>Hapus Galeri Video</p>}
         description={'Apakah anda yakin untuk menghapus galeri video yang dipilih?'}
         className={'rounded lg:max-w-2xl'}
       >

@@ -71,7 +71,7 @@ export const ButtonEditFAQProdi = (props: Props) => {
       <DialogCustom
         open={open}
         setOpen={setOpen}
-        title={'Tambah F.A.Q'}
+        title={'Ubah Data F.A.Q'}
         className={'rounded lg:max-w-7xl'}
         disableOutsideDialog
       >

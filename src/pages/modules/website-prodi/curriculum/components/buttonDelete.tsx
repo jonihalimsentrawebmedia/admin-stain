@@ -52,7 +52,8 @@ export const ButtonDeleteCurriculum = (props: Props) => {
       <DialogCustom
         open={open}
         setOpen={setOpen}
-        title={'Tambah Kurikulum'}
+        title={<p className={'text-red-500'}>Hapus Kurikulum</p>}
+        description={'Apakah anda yakin untuk menghapus data kurikulum ini?'}
         className={'rounded lg:max-w-2xl'}
       >
         <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
