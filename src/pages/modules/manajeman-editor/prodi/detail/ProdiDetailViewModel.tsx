@@ -16,7 +16,7 @@ const ProdiDetailViewModel = () => {
       name: "logo",
       component: (
         <div className="bg-[#F5FFFA] border border-[#70F2B1] p-4">
-          <img className="max-w-[200px] max-h-[200px]" src={form.watch("logo")} alt="logo" />
+          <img className="max-w-40 max-h-40" src={form.watch("logo")} alt="logo" />
         </div>
       ),
     },
@@ -25,7 +25,7 @@ const ProdiDetailViewModel = () => {
       name: "favicon",
       component: (
         <div className="bg-[#F5FFFA] w-fit border border-[#70F2B1] p-4">
-          <img className="max-w-[100px] max-h-[100px]" src={form.watch("favicon")} alt="logo" />
+          <img className="max-w-[60px] max-h-[60px]" src={form.watch("favicon")} alt="logo" />
         </div>
       ),
     },
@@ -36,12 +36,20 @@ const ProdiDetailViewModel = () => {
       name: "kelompok",
     },
     {
-      label: "Fakultas Asal",
+      label: "Universitas Asal",
       name: "nama_parent",
+    },
+    {
+      label: "Fakultas Asal",
+      name: "nama_fakultas",
     },
     {
       label: "Nama Program Studi",
       name: "nama",
+    },
+    {
+      label: "Jenjang Pendidikan",
+      name: "jenjang_pendidikan",
     },
     {
       label: "Keyword",

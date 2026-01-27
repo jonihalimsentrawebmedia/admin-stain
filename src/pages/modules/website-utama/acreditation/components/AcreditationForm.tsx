@@ -18,29 +18,7 @@ interface Props {
   }[]
 }
 const AcreditationForm = ({ form, handleCancel, handleSave, loading ,optionsSatuanOrganisasi}: Props) => {
-  // const { satuanOrganisasi, loading: loadingUniv } = useGetSatuanOrganisasi({
-  //   kelompok: 'UNIVERSITAS',
-  // })
-  // const { satuanOrganisasi: satuanOrganisasiProdi, loading: loadingProd } = useGetSatuanOrganisasi({
-  //   kelompok: 'PRODI',
-  // })
-  // const optionsSatuanOrganisasi = [
-  //   ...satuanOrganisasi.map((item) => {
-  //     return {
-  //       value: item.id_satuan_organisasi,
-  //       label: item.nama,
-  //       key: item.id_satuan_organisasi,
-  //     }
-  //   }),
-  //   ...satuanOrganisasiProdi.map((item) => {
-  //     return {
-  //       value: item.id_satuan_organisasi,
-  //       label: item.nama,
-  //       key: item.id_satuan_organisasi,
-  //     }
-  //   }),
-  // ]
-  // console.log(optionsSatuanOrganisasi)
+  
 
   const optionsAcreditationValue = [
     {
