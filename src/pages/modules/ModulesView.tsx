@@ -17,30 +17,33 @@ const ModulesView = () => {
       style={{
         backgroundImage: `url(${BG})`,
       }}
-      className={`w-screen h-screen object-cover bg-cover bg-fixed relative  flex justify-center items-center `}
+      className={`w-screen min-h-full bg-cover lg:bg-fixed relative flex justify-center lg:items-center items-start lg:py-6 overflow-y-auto`}
     >
-      <Card className="max-w-7xl w-full overflow-y-auto backdrop-blur-md bg-white/40 ">
+      <Card className="max-w-7xl w-full backdrop-blur-md bg-white/40">
         <CardContent className="flex flex-col gap-4">
-          <div className="bg-green-800 rounded-lg">
+          <div className="bg-green-800 rounded-lg overflow-hidden">
             <div
               style={{
                 backgroundImage: `url(${PATERN})`,
               }}
-              className=" p-4 rounded-lg bg-cover object-cover flex w-full justify-between items-center"
+              className=" p-4 rounded-lg bg-cover object-cover flex flex-col lg:flex-row w-full justify-between items-center"
             >
-              <div className="flex gap-2 items-center">
+              <div className="flex gap-2 items-center overflow-auto h-full">
                 <div className="w-[100px] bg-white h-[100px] rounded-xl flex justify-center items-center">
                   <img src={LOGO} alt="logo" width={52} height={52} />
                 </div>
                 <div>
-                  <div className="text-white">Manajemen Pengelolaan Website</div>
-                  <div className="text-2xl font-bold text-white">
+                  <div className="text-white text-sm lg:text-base">
+                    Manajemen Pengelolaan Website
+                  </div>
+                  <div className="text-base lg:text-2xl font-bold text-white">
                     Sekolah Tinggi Agama Islam Negeri MADINA
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col gap-4">
+              <div className="flex lg:flex-col gap-4 mt-4">
                 <Button
+                  size={'sm'}
                   onClick={() => {
                     goToProfile()
                   }}
@@ -53,10 +56,11 @@ const ModulesView = () => {
               </div>
             </div>
           </div>
+
           <div className="rounded-lg gap-4 md:gap-0 grid grid-cols-12">
-            <div className="col-span-12 lg:col-span-8 flex flex-col gap-4 p-4 rounded-l-lg bg-white">
+            <div className="col-span-12 lg:col-span-8 flex flex-col gap-4 p-4 rounded-lg lg:rounded-l-lg bg-white">
               <div className="font-bold text-neutral text-xl">Daftar Modul</div>
-              <div className="grid w-full text-center grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+              <div className="grid w-full text-center grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 lg:h-full max-h-[300px] overflow-auto">
                 {modules.map((item, k) => (
                   <div
                     key={k}
@@ -76,7 +80,7 @@ const ModulesView = () => {
                 ))}
               </div>
             </div>
-            <div className="bg-[#E9E9E9] p-4 col-span-12 rounded-r-lg lg:col-span-4 ">
+            <div className="bg-[#E9E9E9] p-4 col-span-12 rounded-lg lg:rounded-r-lg lg:col-span-4 ">
               {moduleSelect && (
                 <div className="flex flex-col gap-4">
                   <div className="font-bold text-black text-xl">Daftar Role</div>

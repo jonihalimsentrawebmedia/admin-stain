@@ -26,7 +26,7 @@ const LoginView = () => {
       }}
       className={`w-screen h-screen object-cover bg-cover bg-fixed relative  flex justify-center items-center `}
     >
-      <Card className="max-w-2xl w-full backdrop-blur-md bg-white/40 ">
+      <Card className="max-w-2xl w-full h-full lg:h-fit backdrop-blur-md bg-white/40 flex flex-col items-center justify-center">
         <CardContent className="flex flex-col gap-4">
           <div className="bg-green-800 rounded-lg">
             <div
@@ -36,14 +36,14 @@ const LoginView = () => {
               className=" p-4 rounded-lg bg-cover object-cover flex w-full justify-between items-center"
             >
               <div className="flex gap-2 items-center">
-                <div className="w-[100px] bg-white h-[100px] rounded-xl flex justify-center items-center">
-                  <img src={LOGO} alt="logo" width={52} height={52}/>
+                <div className="w-[100px] bg-white h-[75px] lg:h-[100px] rounded-xl flex justify-center items-center">
+                  <img src={LOGO} alt="logo" width={52} height={52} className={'object-contain'}/>
                 </div>
                 <div>
-                  <div className="text-white">
+                  <div className="text-white text-sm lg:text-base">
                     Manajemen Pengelolaan Website
                   </div>
-                  <div className="text-2xl font-bold text-white">
+                  <div className="text-base lg:text-2xl font-bold text-white">
                     Sekolah Tinggi Agama Islam Negeri MADINA
                   </div>
                 </div>

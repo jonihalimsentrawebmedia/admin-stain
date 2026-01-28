@@ -14,7 +14,7 @@ const ButtonLogOut = () => {
   }
   return (
     <>
-      <Button className="text-neutral bg-white hover:bg-white/90 text-start justify-start" onClick={handleLogOut}>
+      <Button size={'sm'} className="text-neutral bg-white hover:bg-white/90 text-start justify-start" onClick={handleLogOut}>
         <IoLogOutOutline className="text-red-500"/>
         Keluar Akun
       </Button>

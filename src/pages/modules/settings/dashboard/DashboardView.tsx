@@ -10,8 +10,9 @@ const DashboardView = () => {
         Selamat Datang, <span className="text-primary">{Cookies.get('profile')}</span>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {data.map((item) => (
+        {data.map((item,k) => (
           <Link
+            key={k}
             to={item.link}
             style={{
               color: item.bgLabel,
@@ -25,7 +26,7 @@ const DashboardView = () => {
               }}
               className={` p-4 h-[120px] rounded-t-lg flex gap-4 items-center `}
             >
-              <div className="absolute">{item.icon}</div>
+              <div className="lg:absolute">{item.icon}</div>
               <div
                 style={{
                   color: item.bgLabel,
