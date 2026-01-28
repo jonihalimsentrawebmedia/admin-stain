@@ -238,12 +238,12 @@ const ProdiDetailViewModel = () => {
     },
     {
       label: 'Kelurahan / Desa',
-      name: 'pengajuan_profil.kelurahan_desa',
+      name: 'pengajuan_profil.kelurahan',
       component: (
         <div
-          className={`${form.watch('current_profil.kelurahan_desa') !== form.watch('pengajuan_profil.kelurahan_desa') ? 'border border-primary p-1.5' : ''}`}
+          className={`${form.watch('current_profil.kelurahan') !== form.watch('pengajuan_profil.kelurahan') ? 'border border-primary p-1.5' : ''}`}
         >
-          {form.watch('pengajuan_profil.kelurahan_desa')}
+          {form.watch('pengajuan_profil.kelurahan')}
         </div>
       ),
     },
