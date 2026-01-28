@@ -48,14 +48,14 @@ export const ButtonSubmission = ({ link, queryKey, queryKeyStatus }: Props) => {
     <>
       <Button className={'text-white bg-primary! hover:text-white'} onClick={() => setOpen(!open)}>
         <MdSend />
-        Ajukan ke Editor
+        Proses Editor
       </Button>
 
       <DialogCustom
         open={open}
         className={'rounded lg:max-w-2xl'}
         setOpen={setOpen}
-        title={<p className={'text-2xl text-primary'}>Ajukan ke Editor</p>}
+        title={<p className={'text-2xl text-primary'}>Proses Editor</p>}
         description={'Apakah anda yakin untuk memproses konten profil  yang diajukan?'}
       >
         <div className="flex items-center justify-end gap-2">
