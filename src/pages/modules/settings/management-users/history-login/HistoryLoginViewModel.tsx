@@ -2,7 +2,8 @@ import { IconDetail } from '@/components/common/table/icon'
 import type { ColumnDef } from '@tanstack/react-table'
 import { Link, useSearchParams } from 'react-router-dom'
 import type { UserHistories } from './model'
-import { formatDateTime, formatDateTimeCustom } from '@/utils/date'
+import { formatDateTime } from '@/utils/date'
+import { format } from 'date-fns'
 
 const HistoryLoginViewModel = () => {
   const [searchParams] = useSearchParams()
@@ -41,14 +42,13 @@ const HistoryLoginViewModel = () => {
       header: 'Aktif Sejak',
       cell: (row) => {
         const value = row.row.original.aktif_sejak
-        const temp = formatDateTimeCustom(value)
-        // Memastikan tampilan tanggal dan waktu dalam dua baris
         return (
           <div className="whitespace-pre-line text-center">
-            {temp.date} <br /> {temp.time??"-"}{' '}
+            <p>{format(value, 'dd-MM-yyyy')}</p>
+            <p>{format(value, 'HH:mm:ss')}</p>
           </div>
         )
-      }
+      },
     },
 
     // ✅ Login Terakhir
@@ -61,7 +61,7 @@ const HistoryLoginViewModel = () => {
         // Memastikan tampilan tanggal dan waktu dalam dua baris
         return (
           <div className="whitespace-pre-line text-center">
-            {temp.date} <br /> {temp.time==""?"-":temp.time}{' '}
+            {temp.date} <br /> {temp.time == '' ? '-' : temp.time}{' '}
           </div>
         )
       },
@@ -75,9 +75,7 @@ const HistoryLoginViewModel = () => {
         const values = row.row.original
         // Ikon panah ke kanan, biasanya untuk melihat detail
         return (
-          <Link
-            to={`/modules/settings/management-users/history/detail/${values.id_user}`}
-          >
+          <Link to={`/modules/settings/management-users/history/detail/${values.id_user}`}>
             {/* Asumsi IconArrowRight adalah komponen yang merepresentasikan ikon panah ke kanan */}
             <IconDetail />
           </Link>

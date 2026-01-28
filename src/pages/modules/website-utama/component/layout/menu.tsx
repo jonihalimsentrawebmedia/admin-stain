@@ -225,7 +225,7 @@ export const MENULIST = [
   },
   {
     id: 17,
-    name: 'pertanyaan',
+    name: 'Pertanyaan',
     path: `${baseDomain}/pertanyaan`,
     icon: <MdQuestionAnswer className={'size-5'} />,
     child: [
