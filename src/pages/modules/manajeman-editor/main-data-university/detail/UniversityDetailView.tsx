@@ -27,6 +27,7 @@ const UniversityDetailView = () => {
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
+        isBack
         buttonGroup={[
           {
             type: 'custom',

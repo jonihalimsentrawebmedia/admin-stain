@@ -9,7 +9,7 @@ import CardReject from '../../components/card/CardReject'
 
 const FacultyDetailView = () => {
   const {
-     fieldAddress1,
+    fieldAddress1,
     fieldAddress2,
     fieldContact1,
     fieldContact2,
@@ -31,7 +31,7 @@ const FacultyDetailView = () => {
           {
             type: 'custom',
             element: (
-               <ButtonNewEditor
+              <ButtonNewEditor
                 goToEdit={goToEdit}
                 keyAccept="editor-change-data-profile"
                 keyCancel="editor-change-data-profile"
@@ -44,7 +44,6 @@ const FacultyDetailView = () => {
               />
             ),
           },
-       
         ]}
         label="Pengajuan Data - Profil Fakultas"
       />

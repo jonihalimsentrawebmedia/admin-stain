@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import { Trash2Icon, X, XCircle } from 'lucide-react'
+import { X, XCircle } from 'lucide-react'
 import { IconCancel } from '@/components/common/table/icon'
 import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import { Textarea } from '@/components/ui/textarea'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import { MdOutlineCancel } from 'react-icons/md'
 
 interface Props {
   isIcon: boolean
@@ -25,7 +26,7 @@ const ButtonCancelDraft = ({ isIcon, url, queryKey }: Props) => {
     setLoading(true)
     try {
       const res = await AxiosClient.patch(url ?? '', {
-        alasan_tolak: reason,
+        alasan_ditolak: reason,
         status_publish: 'TOLAK_EDITOR',
         type_pengajuan: searchParams.get('jenis_konten'),
       })
@@ -95,7 +96,7 @@ const ButtonCancelDraft = ({ isIcon, url, queryKey }: Props) => {
             disabled={loading}
             className="bg-red-500 hover:bg-red-500/90 text-white"
           >
-            <Trash2Icon />
+            <MdOutlineCancel />
             Hapus
           </Button>
         </div>

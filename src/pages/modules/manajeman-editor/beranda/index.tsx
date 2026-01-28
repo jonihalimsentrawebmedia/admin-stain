@@ -4,7 +4,7 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recha
 import { Plus } from 'lucide-react'
 import { TabsListCustom } from '@/pages/modules/website-utama/public-content/slider/components/tabsList.tsx'
 import { useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useSearchParams } from 'react-router-dom'
 import { SelectBasic } from '@/components/common/select/basic.tsx'
 import type { Mode } from '@/pages/modules/website-utama/beranda/types'
 import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/hooks/getProfile.tsx'
@@ -25,6 +25,10 @@ export default function DashboardAdminEditor() {
   const isEditor = path.includes('editor')
   const { trentVisitor, visitor, device } = UseGetTrentVisitorEditor(mode)
 
+  const [searchParams, setSearchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+
   const chartData =
     (trentVisitor &&
       Object?.entries(trentVisitor).map(([key, value]) => ({
@@ -35,7 +39,11 @@ export default function DashboardAdminEditor() {
 
   const { status } = UseGetTotalVisitorEditor()
   const { profileUser } = UseGetUserProfile()
-  const { approvedList } = UseGetApprovedListEditor(tabsName ?? '')
+  const { approvedList, loading, meta } = UseGetApprovedListEditor({
+    status: tabsName ?? '',
+    page: page,
+    limit: limit,
+  })
   const { status: total } = UseGetApprovedListEditorStatus()
 
   const TabsList = [
@@ -50,7 +58,14 @@ export default function DashboardAdminEditor() {
         </div>
       ),
       value: 'DIAJUKAN_EDITOR',
-      element: <ApprovedSectionEditor data={approvedList} status={tabsName} />,
+      element: (
+        <ApprovedSectionEditor
+          loading={loading}
+          meta={meta}
+          data={approvedList}
+          status={tabsName}
+        />
+      ),
     },
     {
       id: 2,
@@ -63,7 +78,14 @@ export default function DashboardAdminEditor() {
         </div>
       ),
       value: 'PROSES_EDITOR',
-      element: <ApprovedSectionEditor data={approvedList} status={tabsName} />,
+      element: (
+        <ApprovedSectionEditor
+          loading={loading}
+          meta={meta}
+          data={approvedList}
+          status={tabsName}
+        />
+      ),
     },
     {
       id: 3,
@@ -76,7 +98,14 @@ export default function DashboardAdminEditor() {
         </div>
       ),
       value: 'DISETUJUI_EDITOR',
-      element: <ApprovedSectionEditor data={approvedList} status={tabsName} />,
+      element: (
+        <ApprovedSectionEditor
+          loading={loading}
+          meta={meta}
+          data={approvedList}
+          status={tabsName}
+        />
+      ),
     },
     {
       id: 4,
@@ -89,7 +118,14 @@ export default function DashboardAdminEditor() {
         </div>
       ),
       value: 'TOLAK_EDITOR',
-      element: <ApprovedSectionEditor data={approvedList} status={tabsName} />,
+      element: (
+        <ApprovedSectionEditor
+          loading={loading}
+          meta={meta}
+          data={approvedList}
+          status={tabsName}
+        />
+      ),
     },
   ]
 
@@ -142,7 +178,12 @@ export default function DashboardAdminEditor() {
           <TabsListCustom
             data={TabsList}
             value={tabsName}
-            onChange={(e) => setTabsName(e as status)}
+            onChange={(e) => {
+              setTabsName(e as status)
+              const ParamsSearch = new URLSearchParams()
+              ParamsSearch.set('page', '1')
+              setSearchParams(ParamsSearch)
+            }}
           />
         </div>
 

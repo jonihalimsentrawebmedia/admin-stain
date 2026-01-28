@@ -10,12 +10,20 @@ import {
   MdSettingsBackupRestore,
 } from 'react-icons/md'
 import { RiBarChart2Fill } from 'react-icons/ri'
+import type { Meta } from '@/components/common/table/TablePagination.tsx'
 
 export interface statusTotal {
   DIAJUKAN_EDITOR: number
   DISETUJUI_EDITOR: number
   PROSES_EDITOR: number
   TOLAK_EDITOR: number
+}
+
+interface PropsMeta {
+  status: string
+  page?: string
+  limit?: string
+  search?: string
 }
 
 export const UseGetTotalVisitorEditor = () => {
@@ -110,18 +118,22 @@ export const UseGetTotalVisitorEditor = () => {
   return { totalVisitor, loading, status }
 }
 
-export const UseGetApprovedListEditor = (status: string) => {
+export const UseGetApprovedListEditor = (props?: PropsMeta) => {
+  const { status, page, limit } = props ?? {}
   const [approvedList, setApprovedList] = useState<IContent[]>([])
+  const [meta, setMeta] = useState<Meta>()
 
   const ParamsSearch = new URLSearchParams()
   if (status) ParamsSearch.set('status-publish', status)
+  if (page) ParamsSearch.set('page', page ?? '1')
+  if (limit) ParamsSearch.set('limit', limit ?? '10')
 
-  const { data, isLoading, isFetching } = useQuery<null | IContent[]>({
+  const { data, isLoading, isFetching } = useQuery<null | { data: IContent[]; meta: Meta }>({
     queryKey: ['list-approved', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
       AxiosClient.get(`/editor/dashboard/list-konten-pengajuan?${ParamsSearch}`).then(
-        (res) => res.data.data
+        (res) => res.data
       ),
   })
 
@@ -129,13 +141,14 @@ export const UseGetApprovedListEditor = (status: string) => {
 
   useEffect(() => {
     if (data) {
-      setApprovedList(data)
+      setApprovedList(data?.data)
+      setMeta(data?.meta)
     } else {
       setApprovedList([])
     }
   }, [data])
 
-  return { approvedList, loading }
+  return { approvedList, loading, meta }
 }
 
 export const UseGetApprovedListEditorStatus = () => {
