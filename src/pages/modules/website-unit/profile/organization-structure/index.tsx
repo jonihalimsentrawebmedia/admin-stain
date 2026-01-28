@@ -72,7 +72,7 @@ export const OrganizationStructure = () => {
             />
 
             <img
-              src={organization?.gambar_struktur_url ?? '/img/no-image.png'}
+              src={organization?.gambar_struktur_url || '/noimg.png'}
               alt="asd"
               className={'w-full h-auto object-cover'}
             />
