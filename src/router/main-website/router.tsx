@@ -127,9 +127,9 @@ import { RegistrationPathPage } from '@/pages/modules/website-utama/jalur-pendaf
 import { AddPageRegisterPath } from '@/pages/modules/website-utama/jalur-pendaftaran/components/addPage.tsx'
 import { EditPageRegisterPath } from '@/pages/modules/website-utama/jalur-pendaftaran/components/editPage.tsx'
 import { FooterContent } from '@/pages/modules/website-utama/settings-menu/Footer'
-import { LogFooterContent } from '@/pages/modules/website-utama/settings-menu/Footer/log'
 import { UserProfilePage } from '@/pages/modules/website-utama/user-profile'
 import { ChangePassword } from '@/pages/modules/website-utama/change-password'
+import { LogFooterContent } from '@/pages/modules/website-utama/settings-menu/Footer/log'
 
 export const MainWebsiteRouter = [
   {
