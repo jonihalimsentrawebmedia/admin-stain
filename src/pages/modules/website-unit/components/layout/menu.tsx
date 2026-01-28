@@ -33,7 +33,7 @@ export const MenuListUnit = [
     child: [
       {
         id: 31,
-        name: 'tentang Unit',
+        name: 'Tentang Unit',
         path: `${baseDomain}/profile/about`,
       },
       {
