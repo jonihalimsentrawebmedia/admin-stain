@@ -1,4 +1,6 @@
 import DetailField from '@/components/common/field/DetailField'
+import { format } from 'date-fns'
+import { FormatTimeAgo } from '@/utils/helper.tsx'
 
 interface Props {
   form: any
@@ -9,6 +11,9 @@ const CardPengajuan = ({ form }: Props) => {
     {
       label: 'Tanggal Diajukan',
       name: 'tanggal_diajukan',
+      component: form.watch('tanggal_diajukan')
+        ? `${format(form.watch('tanggal_diajukan'), 'dd-MM-yyyy HH:mm:ss')} ${FormatTimeAgo(form.watch('tanggal_diajukan'))}`
+        : '-',
     },
     {
       label: 'Nama',
