@@ -5,17 +5,18 @@ import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { SelectCustom } from '@/components/common/form/SelectCustom.tsx'
 import { Form } from '@/components/ui/form.tsx'
 import { useForm } from 'react-hook-form'
-import useGetSatuanOrganisasi from '@/pages/modules/settings/controller/useGetSatuanOrganisasi.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { UseGetSession } from '@/pages/modules/website-utama/session'
+import { UseGetUniversityDomainExist } from '@/pages/modules/website-utama/select-university/hooks'
 
 export const ButtonSession = () => {
   const [open, setOpen] = useState(false)
 
   const form = useForm()
 
-  const { satuanOrganisasi } = useGetSatuanOrganisasi({ kelompok: 'UNIVERSITAS' })
+  const { satuanOrganisasi } = UseGetUniversityDomainExist({ kelompok: 'UNIVERSITAS' })
+
   const { session } = UseGetSession()
 
   useEffect(() => {
@@ -46,7 +47,12 @@ export const ButtonSession = () => {
         <FaGear />
       </Button>
 
-      <DialogCustom className={'lg:max-w-2xl rounded'} open={open} setOpen={setOpen} title={'Ganti Data: Universitas'}>
+      <DialogCustom
+        className={'lg:max-w-2xl rounded'}
+        open={open}
+        setOpen={setOpen}
+        title={'Ganti Data: Universitas'}
+      >
         <div>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(HandlerSubmit)}>

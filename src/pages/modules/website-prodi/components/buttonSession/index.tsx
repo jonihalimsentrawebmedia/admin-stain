@@ -5,10 +5,10 @@ import { Form } from '@/components/ui/form.tsx'
 import { useForm } from 'react-hook-form'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import { UseGetGroupOrganizationFlexible } from '@/pages/modules/website-prodi/select-prodi/hooks'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import type { ISessionProdi } from '@/pages/modules/website-prodi/hooks'
+import { UseGetUniversityDomainExist } from '@/pages/modules/website-utama/select-university/hooks'
 
 export const ButtonSessionProdi = ({ session }: { session?: ISessionProdi }) => {
   const [open, setOpen] = useState(false)
@@ -17,15 +17,19 @@ export const ButtonSessionProdi = ({ session }: { session?: ISessionProdi }) => 
     id_faculty: '',
   })
 
-  const { dataSatuan: university } = UseGetGroupOrganizationFlexible({ kelompok: 'UNIVERSITAS' })
-  const { dataSatuan: faculty } = UseGetGroupOrganizationFlexible({
+  const { satuanOrganisasi: university, loading: load1 } = UseGetUniversityDomainExist({
+    kelompok: 'UNIVERSITAS',
+  })
+  const { satuanOrganisasi: faculty, loading: load2 } = UseGetUniversityDomainExist({
     kelompok: 'FAKULTAS',
     id_parent: parentId?.id_university,
   })
-  const { dataSatuan: prodi } = UseGetGroupOrganizationFlexible({
+  const { satuanOrganisasi: prodi, loading: load3 } = UseGetUniversityDomainExist({
     kelompok: 'PRODI',
     id_parent: parentId?.id_faculty,
   })
+
+  const loading = load1 || load2 || load3
 
   const form = useForm()
 
@@ -80,6 +84,7 @@ export const ButtonSessionProdi = ({ session }: { session?: ISessionProdi }) => 
               <SelectBasicInput
                 form={form}
                 name={'id_university'}
+                isDisabled={loading}
                 placeholder={'Pilih Universitas digunakan'}
                 selectClassName={'z-40'}
                 data={
@@ -102,6 +107,7 @@ export const ButtonSessionProdi = ({ session }: { session?: ISessionProdi }) => 
               <SelectBasicInput
                 form={form}
                 name={'id_faculty'}
+                isDisabled={loading}
                 placeholder={'Pilih Fakultas'}
                 selectClassName={'z-30'}
                 data={
@@ -124,6 +130,7 @@ export const ButtonSessionProdi = ({ session }: { session?: ISessionProdi }) => 
               <SelectBasicInput
                 form={form}
                 name={'id_prodi'}
+                isDisabled={loading}
                 placeholder={'Pilih Program Studi'}
                 selectClassName={'z-20'}
                 data={

@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import type { ISessionUnit } from '@/pages/modules/website-unit/hooks'
-import { UseGetGroupOrganizationFlexible } from '@/pages/modules/website-prodi/select-prodi/hooks'
+import { UseGetUniversityDomainExist } from '@/pages/modules/website-utama/select-university/hooks'
 
 export const ButtonSessionUnit = ({ session }: { session?: ISessionUnit }) => {
   const [open, setOpen] = useState(false)
@@ -16,11 +16,15 @@ export const ButtonSessionUnit = ({ session }: { session?: ISessionUnit }) => {
     id_university: '',
   })
 
-  const { dataSatuan: university } = UseGetGroupOrganizationFlexible({ kelompok: 'UNIVERSITAS' })
-  const { dataSatuan: unit } = UseGetGroupOrganizationFlexible({
+  const { satuanOrganisasi: university, loading: load1 } = UseGetUniversityDomainExist({
+    kelompok: 'UNIVERSITAS',
+  })
+  const { satuanOrganisasi: unit, loading: load2 } = UseGetUniversityDomainExist({
     kelompok: 'UNIT',
     id_parent: parentId?.id_university,
   })
+
+  const loading = load1 || load2
 
   const form = useForm()
 
@@ -75,6 +79,7 @@ export const ButtonSessionUnit = ({ session }: { session?: ISessionUnit }) => {
               <SelectBasicInput
                 form={form}
                 name={'id_university'}
+                isDisabled={loading}
                 placeholder={'Pilih Universitas digunakan'}
                 selectClassName={'z-50'}
                 data={
@@ -97,6 +102,7 @@ export const ButtonSessionUnit = ({ session }: { session?: ISessionUnit }) => {
                 form={form}
                 name={'id_unit'}
                 placeholder={'Pilih Unit'}
+                isDisabled={loading}
                 selectClassName={'z-40'}
                 data={
                   unit?.map((row) => ({

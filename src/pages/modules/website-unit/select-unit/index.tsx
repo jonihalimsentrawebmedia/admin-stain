@@ -2,7 +2,6 @@ import BG from '@/assets/img/bg-modules.png'
 import { Card, CardContent } from '@/components/ui/card.tsx'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
-import { UseGetGroupOrganizationFlexible } from '@/pages/modules/website-prodi/select-prodi/hooks'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import { useForm } from 'react-hook-form'
 import { Form } from '@/components/ui/form.tsx'
@@ -10,6 +9,7 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
+import { UseGetUniversityDomainExist } from '@/pages/modules/website-utama/select-university/hooks'
 
 export const SelectUnitUniversity = () => {
   const [parentId, setParentId] = useState({
@@ -19,11 +19,16 @@ export const SelectUnitUniversity = () => {
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
 
-  const { dataSatuan: university } = UseGetGroupOrganizationFlexible({ kelompok: 'UNIVERSITAS' })
-  const { dataSatuan: unit } = UseGetGroupOrganizationFlexible({
+  const { satuanOrganisasi: university, loading: load1 } = UseGetUniversityDomainExist({
+    kelompok: 'UNIVERSITAS',
+  })
+  const { satuanOrganisasi: unit, loading: load2 } = UseGetUniversityDomainExist({
     kelompok: 'UNIT',
     id_parent: parentId?.id_university,
   })
+
+  const loading = load1 || load2
+
   const form = useForm()
 
   const HandleSaveSession = async (value: any) => {
@@ -65,6 +70,7 @@ export const SelectUnitUniversity = () => {
                     <SelectBasicInput
                       form={form}
                       name={'id_university'}
+                      isDisabled={loading}
                       placeholder={'Pilih Universitas digunakan'}
                       selectClassName={'z-50'}
                       data={
@@ -88,6 +94,7 @@ export const SelectUnitUniversity = () => {
                       name={'id_unit'}
                       placeholder={'Pilih Unit'}
                       selectClassName={'z-40'}
+                      isDisabled={loading}
                       data={
                         unit?.map((row) => ({
                           label: row?.nama,

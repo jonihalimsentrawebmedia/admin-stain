@@ -5,15 +5,15 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { SelectCustom } from '@/components/common/form/SelectCustom.tsx'
 import { Form } from '@/components/ui/form.tsx'
 import { useForm } from 'react-hook-form'
-import useGetSatuanOrganisasi from '@/pages/modules/settings/controller/useGetSatuanOrganisasi.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import Cookies from 'js-cookie'
+import { UseGetUniversityDomainExist } from '@/pages/modules/website-utama/select-university/hooks'
 
 export const SelectUniversity = () => {
   const form = useForm()
-  const { satuanOrganisasi } = useGetSatuanOrganisasi({ kelompok: 'UNIVERSITAS' })
+  const { satuanOrganisasi } = UseGetUniversityDomainExist({ kelompok: 'UNIVERSITAS' })
 
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
@@ -26,7 +26,7 @@ export const SelectUniversity = () => {
         const url = searchParams.get('url')
         if (res.data.status) {
           navigate(`/modules/${url}/dashboard`)
-          Cookies.set('id_satuan_organisasi',e?.id_university)
+          Cookies.set('id_satuan_organisasi', e?.id_university)
         }
       })
       .catch((err) => {
