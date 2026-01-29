@@ -1,4 +1,3 @@
-import { IoMdNotificationsOutline } from 'react-icons/io'
 import type { IModulesList } from '@/pages/modules/interface'
 import { RiMenuLine } from 'react-icons/ri'
 import React from 'react'
@@ -7,6 +6,7 @@ import ButtonProfile from '@/pages/modules/settings/components/button/ButtonProf
 import { Link } from 'react-router-dom'
 import { UseGetSessionUnit } from '@/pages/modules/website-unit/hooks'
 import { ButtonSessionUnit } from '@/pages/modules/website-unit/components/buttonSession'
+import { NotificationListUnit } from '@/pages/modules/website-unit/components/layout/notification'
 
 interface Props {
   collapsed: boolean
@@ -42,7 +42,7 @@ export function HeaderUnit(props: Props) {
           <IconModules />
         </Link>
         <div className="flex items-center gap-4">
-          <IoMdNotificationsOutline className="text-xl text-green-700 cursor-pointer" />
+          <NotificationListUnit />
           <ButtonProfile module={module} profileUser={profileUser} />
           <button onClick={() => setCollapsed(!collapsed)}>
             <RiMenuLine />

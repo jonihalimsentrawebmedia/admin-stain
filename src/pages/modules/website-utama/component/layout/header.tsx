@@ -1,4 +1,3 @@
-import { IoMdNotificationsOutline } from 'react-icons/io'
 import type { IModulesList } from '@/pages/modules/interface'
 import { RiMenuLine } from 'react-icons/ri'
 import React from 'react'
@@ -6,6 +5,7 @@ import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/ho
 import { ButtonSession } from '@/pages/modules/website-utama/component/buttonSession'
 import ButtonProfile from '@/pages/modules/settings/components/button/ButtonProfile.tsx'
 import { Link } from 'react-router-dom'
+import { NotificationList } from '@/pages/modules/website-utama/component/layout/notification'
 
 interface Props {
   collapsed: boolean
@@ -54,7 +54,7 @@ export function Header(props: Props) {
           <IconModules />
         </Link>
         <div className="flex items-center gap-4 justify-end w-full">
-          <IoMdNotificationsOutline className="text-xl text-green-700 cursor-pointer" />
+          <NotificationList />
           <ButtonProfile module={module} profileUser={profileUser} />
           <button onClick={() => setCollapsed(!collapsed)}>
             <RiMenuLine />
