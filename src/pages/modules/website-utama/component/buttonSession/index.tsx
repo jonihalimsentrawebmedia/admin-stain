@@ -9,6 +9,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { UseGetSession } from '@/pages/modules/website-utama/session'
 import { UseGetUniversityDomainExist } from '@/pages/modules/website-utama/select-university/hooks'
+import { useMobile } from '@/utils/useMobile.tsx'
 
 export const ButtonSession = () => {
   const [open, setOpen] = useState(false)
@@ -18,6 +19,7 @@ export const ButtonSession = () => {
   const { satuanOrganisasi } = UseGetUniversityDomainExist({ kelompok: 'UNIVERSITAS' })
 
   const { session } = UseGetSession()
+  const { isMobile } = useMobile()
 
   useEffect(() => {
     if (session) form.setValue('id_university', session?.id_satuan_organisasi)
@@ -39,11 +41,12 @@ export const ButtonSession = () => {
   return (
     <>
       <Button
+        size={'sm'}
         onClick={() => setOpen(!open)}
         variant={'outline'}
         className={'text-primary border-primary hover:text-primary'}
       >
-        {session?.singkatan}
+        {!isMobile && session?.singkatan}
         <FaGear />
       </Button>
 

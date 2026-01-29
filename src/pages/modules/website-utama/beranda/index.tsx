@@ -84,7 +84,7 @@ export default function DashboardAdmin() {
   return (
     <div className="min-h-screen space-y-6">
       <h1 className="text-2xl font-semibold">
-        Selamat Datang <span className="text-green-500">{profileUser?.nama_lengkap}</span>
+        Selamat Datang <span className="text-primary">{profileUser?.nama_lengkap}</span>
       </h1>
 
       {/* Statistik */}

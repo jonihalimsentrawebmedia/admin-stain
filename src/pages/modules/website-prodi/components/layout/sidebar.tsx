@@ -107,7 +107,7 @@ export function SidebarProdi({ collapsed }: Props) {
   return (
     <div
       className={cn(
-        'bg-black text-white h-full transition-all duration-300 px-0.5',
+        'bg-primary text-white h-full transition-all duration-300 px-0.5',
         collapsed ? 'w-14' : 'w-60'
       )}
     >

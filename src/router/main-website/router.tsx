@@ -130,6 +130,7 @@ import { FooterContent } from '@/pages/modules/website-utama/settings-menu/Foote
 import { UserProfilePage } from '@/pages/modules/website-utama/user-profile'
 import { ChangePassword } from '@/pages/modules/website-utama/change-password'
 import { LogFooterContent } from '@/pages/modules/website-utama/settings-menu/Footer/log'
+import { ChangePrimaryAndFooterColor } from '@/pages/modules/website-utama/settings-menu/color'
 
 export const MainWebsiteRouter = [
   {
@@ -535,6 +536,15 @@ export const MainWebsiteRouter = [
           {
             path: 'log',
             element: <LogFooterContent />,
+          },
+        ],
+      },
+      {
+        path: 'primary-color',
+        children: [
+          {
+            index: true,
+            element: <ChangePrimaryAndFooterColor />,
           },
         ],
       },

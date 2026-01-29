@@ -34,13 +34,13 @@ export const ProcessColumns = () => {
         return (
           <div>
             {row?.original?.berita_gambar_tambahan.length > 0 ? (
-              <Carousel className={'w-[300px]'}>
+              <Carousel className={'w-[150px]'}>
                 <CarouselContent className={'w-fit'}>
                   {row?.original?.berita_gambar_tambahan.map((item, index) => (
                     <CarouselItem key={index}>
                       <img
                         src={item?.gambar}
-                        className={'w-[300px] h-[225px] object-cover'}
+                        className={'w-[100px] h-[75px] object-cover'}
                         alt={item?.keterangan}
                       />
                     </CarouselItem>
@@ -53,7 +53,7 @@ export const ProcessColumns = () => {
               <img
                 src={row.original?.gambar}
                 alt={row.original?.judul}
-                className={'w-[300px] h-[225px] object-cover'}
+                className={'w-[100px] h-[75px] object-cover'}
               />
             )}
           </div>

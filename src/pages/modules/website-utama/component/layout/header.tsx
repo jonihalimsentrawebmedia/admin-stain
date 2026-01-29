@@ -21,25 +21,39 @@ export function Header(props: Props) {
   const { profileUser } = UseGetUserProfile()
 
   return (
-    <header className="py-4 px-5 bg-[#E9FFF1] border-b border-green-200 flex items-center justify-between w-full">
-      <div className="flex items-center gap-4">
-        <Link to={'/modules'} className={'p-2'}>
-          <img src={module?.gambar} alt="gambar" className="size-10" />
-        </Link>
-        <div className="flex flex-col">
-          <p className="text-sm font-semibold text-primary">Manajemen Pengelolaan Website</p>
-          <p className="text-2xl font-semibold">Website Utama</p>
+    <header className="p-2 lg:py-4 lg:px-5 bg-[#E9FFF1] border-b border-green-200 flex flex-col lg:flex-row lg:items-center lg:justify-between w-full">
+      <div className="flex items-center justify-between gap-4">
+        <div className="flex items-center gap-4">
+          <Link to={'/modules'} className={'lg:p-2'}>
+            <img src={module?.gambar} alt="gambar" className="size-10" />
+          </Link>
+          <div className="flex flex-col">
+            <p className="text-xs lg:text-sm font-semibold text-primary">
+              Manajemen Pengelolaan Website
+            </p>
+            <p className="text-sm lg:text-2xl font-semibold">{module?.nama_module}</p>
+          </div>
+        </div>
+
+        <div className={'flex items-center gap-2.5 lg:hidden'}>
+          <Link to={'/modules'}>
+            <IconModules />
+          </Link>
+          <button onClick={() => setCollapsed(!collapsed)}>
+            <RiMenuLine className={'size-5'} />
+          </button>
         </div>
       </div>
-      <div className="flex items-center gap-5">
+
+      <div className="lg:flex items-center gap-5 hidden">
         <div className="flex items-center gap-4">
-          <div className="text-sm text-gray-600">Ganti Data:</div>
+          <div className="text-sm whitespace-nowrap text-gray-600">Ganti Data:</div>
           <ButtonSession />
         </div>
         <Link to={'/modules'}>
           <IconModules />
         </Link>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 justify-end w-full">
           <IoMdNotificationsOutline className="text-xl text-green-700 cursor-pointer" />
           <ButtonProfile module={module} profileUser={profileUser} />
           <button onClick={() => setCollapsed(!collapsed)}>
@@ -53,7 +67,12 @@ export function Header(props: Props) {
 
 export function IconModules() {
   return (
-    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      className={'lg:size-10 size-8'}
+      viewBox="0 0 40 40"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <rect x="0.5" y="0.5" width="39" height="39" rx="7.5" fill="white" />
       <rect x="0.5" y="0.5" width="39" height="39" rx="7.5" stroke="#1BB869" />
       <path

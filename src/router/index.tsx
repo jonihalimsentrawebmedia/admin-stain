@@ -24,6 +24,7 @@ import { SelectUnitUniversity } from '@/pages/modules/website-unit/select-unit'
 import { WebsiteUnitRouter } from '@/router/website-unit/router.tsx'
 import MainLayoutUnit from '@/pages/modules/website-unit/components/layout'
 import { SelectUniversityEditor } from '@/pages/modules/manajeman-editor/select-university'
+import UnitWebTheme from '@/pages/modules/website-unit/components/layout/theme.tsx'
 
 export const Router = createBrowserRouter([
   {
@@ -114,9 +115,9 @@ export const Router = createBrowserRouter([
         path: 'website-unit',
         element: (
           <>
-            <ProdiWebTheme>
+            <UnitWebTheme>
               <MainLayoutUnit />
-            </ProdiWebTheme>
+            </UnitWebTheme>
           </>
         ),
         children: [...WebsiteUnitRouter],

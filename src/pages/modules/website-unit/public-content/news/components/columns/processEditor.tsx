@@ -2,19 +2,13 @@ import { Link, useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
 import { Button } from '@/components/ui/button.tsx'
 import { MdInfo, MdOutlineHistory } from 'react-icons/md'
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel.tsx'
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel.tsx'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import type { INewsDetail } from '@/pages/modules/website-utama/public-content/news/data'
+import Autoplay from 'embla-carousel-autoplay'
 
 export const ProcessEditorUnit = () => {
-  
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') ?? 1)
   const limit = Number(searchParams.get('limit') ?? 10)
@@ -35,26 +29,31 @@ export const ProcessEditorUnit = () => {
         return (
           <div>
             {row?.original?.berita_gambar_tambahan.length > 0 ? (
-              <Carousel className={'w-[300px]'}>
+              <Carousel
+                className={'w-[100px]'}
+                plugins={[
+                  Autoplay({
+                    delay: 2000,
+                  }),
+                ]}
+              >
                 <CarouselContent className={'w-fit'}>
                   {row?.original?.berita_gambar_tambahan.map((item, index) => (
                     <CarouselItem key={index}>
                       <img
                         src={item?.gambar}
-                        className={'w-[300px] h-[225px] object-cover'}
+                        className={'w-[100px] h-[75px] object-cover'}
                         alt={item?.keterangan}
                       />
                     </CarouselItem>
                   ))}
                 </CarouselContent>
-                <CarouselNext className={'absolute right-0 bottom-0'} />
-                <CarouselPrevious className={'absolute left-0 bottom-0'} />
               </Carousel>
             ) : (
               <img
                 src={row.original?.gambar}
                 alt={row.original?.judul}
-                className={'w-[300px] h-[225px] object-cover'}
+                className={'w-[100px] h-[75px] object-cover'}
               />
             )}
           </div>

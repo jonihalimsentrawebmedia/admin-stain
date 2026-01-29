@@ -1,10 +1,17 @@
 import { Outlet } from 'react-router-dom'
 import { Header } from './header'
 import { Sidebar } from './sidebar.tsx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useMobile } from '@/utils/useMobile.tsx'
 
 export default function MainLayout() {
+  const { isMobile } = useMobile()
   const [collapsed, setCollapsed] = useState(false)
+
+  useEffect(() => {
+    if (isMobile) setCollapsed(true)
+    else setCollapsed(false)
+  }, [isMobile])
 
   return (
     <>

@@ -144,6 +144,11 @@ export const MENULISTPRODI = [
         name: 'Gambar Background',
         path: `${baseDomain}/settings/background`,
       },
+      {
+        id: 104,
+        name: 'Pengaturan Warna Prodi',
+        path: `${baseDomain}/settings/primary-color`,
+      },
     ],
   },
 ]

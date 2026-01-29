@@ -55,6 +55,7 @@ import { LandingPromotion } from '@/pages/modules/website-prodi/settings/landing
 import { BackgroundWebsiteSettings } from '@/pages/modules/website-prodi/settings/background'
 import { ServiceProdiPage } from '@/pages/modules/website-prodi/service'
 import { LogDataServicePage } from '@/pages/modules/website-prodi/service/log'
+import { PrimaryAndFooterColorProdi } from '@/pages/modules/website-prodi/settings/color'
 
 export const WebsiteProdiRouter = [
   {
@@ -368,6 +369,10 @@ export const WebsiteProdiRouter = [
       {
         path: 'background',
         element: <BackgroundWebsiteSettings />,
+      },
+      {
+        path: 'primary-color',
+        element: <PrimaryAndFooterColorProdi />,
       },
     ],
   },

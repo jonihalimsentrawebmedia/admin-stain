@@ -47,7 +47,7 @@ export const ProfilePageMainWebsite = () => {
             className={'mt-5 flex flex-col gap-5'}
           >
             <AccordionCustom name={'identity'} title={'Identitas Institusi'}>
-              <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
+              <div className={'flex flex-col gap-2.5 lg:grid grid-cols-[12rem_1fr] lg:gap-5'}>
                 <p className="text-gray-500">Kelompok</p>
                 <p>{detailUniversity?.kelompok ?? '-'}</p>
                 <p className="text-gray-500">Nama Universitas / Perguruan Tinggi</p>
@@ -60,7 +60,7 @@ export const ProfilePageMainWebsite = () => {
             </AccordionCustom>
 
             <AccordionCustom name={'address'} title={'Alamat Lengkap'}>
-              <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
+              <div className={'flex flex-col gap-2.5 lg:grid grid-cols-[12rem_1fr] lg:gap-5'}>
                 <p className="text-gray-500">Alamat</p>
                 <p>{detailUniversity?.alamat ?? '-'}</p>
                 <p className="text-gray-500">Provinsi</p>
@@ -77,7 +77,7 @@ export const ProfilePageMainWebsite = () => {
             </AccordionCustom>
 
             <AccordionCustom name={'contact'} title={'Kontak Resmi'}>
-              <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
+              <div className={'flex flex-col gap-2.5 lg:grid grid-cols-[12rem_1fr] lg:gap-5'}>
                 <p className="text-gray-500">Telepon</p>
                 <p>{detailUniversity?.telepon ?? '-'}</p>
                 <p className="text-gray-500">Fax</p>
@@ -88,7 +88,7 @@ export const ProfilePageMainWebsite = () => {
             </AccordionCustom>
 
             <AccordionCustom name={'media'} title={'Media Sosial'}>
-              <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
+              <div className={'flex flex-col gap-2.5 lg:grid grid-cols-[12rem_1fr] lg:gap-5'}>
                 <p className="text-gray-500">Facebook</p>
                 <p>{detailUniversity?.facebook ?? '-'}</p>
                 <p className="text-gray-500">Twitter</p>

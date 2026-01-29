@@ -59,6 +59,7 @@ import { UpdatedFacilitiesUnit } from '@/pages/modules/website-unit/public-conte
 import { DetailFacilitiesUnitPage } from '@/pages/modules/website-unit/public-content/Facilities/detail'
 import DashboardAdminUnit from '@/pages/modules/website-unit/dashboard'
 import { LogActivityFacilitiesUnitPage } from '@/pages/modules/website-unit/public-content/Facilities/log'
+import { PrimaryAndFooterColorUnit } from '@/pages/modules/website-unit/settings/color'
 
 export const WebsiteUnitRouter = [
   {
@@ -399,6 +400,10 @@ export const WebsiteUnitRouter = [
       {
         path: 'background',
         element: <BackgroundWebsiteUnitSettings />,
+      },
+      {
+        path: 'primary-color',
+        element: <PrimaryAndFooterColorUnit />,
       },
     ],
   },

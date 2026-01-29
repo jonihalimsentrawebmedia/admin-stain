@@ -198,6 +198,11 @@ export const MenuListUnit = [
         name: 'Gambar Background',
         path: `${baseDomain}/settings/background`,
       },
+      {
+        id: 103,
+        name: 'Pengaturan Warna Unit',
+        path: `${baseDomain}/settings/primary-color`,
+      },
     ],
   },
 ]

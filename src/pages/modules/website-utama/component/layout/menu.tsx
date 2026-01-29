@@ -128,6 +128,11 @@ export const MENULIST = [
         name: 'Footer',
         path: `${baseDomain}/pengaturan-menu/footer`,
       },
+      {
+        id: 3,
+        name: 'Pengaturan Warna Halaman',
+        path: `${baseDomain}/pengaturan-menu/primary-color`,
+      },
     ],
   },
   {
