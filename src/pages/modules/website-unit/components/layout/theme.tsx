@@ -5,6 +5,7 @@ import { UseGetUnitPrimary } from '@/pages/modules/website-unit/settings/color/h
 const UnitWebTheme = ({ children }: { children: ReactNode }) => {
   const { setTheme } = useThemeColor()
   const { colorPrimary } = UseGetUnitPrimary()
+  
   useEffect(() => {
     setTheme({
       primary: colorPrimary?.warna_admin as string??'#000',
