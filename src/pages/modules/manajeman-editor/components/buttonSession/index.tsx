@@ -5,17 +5,18 @@ import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { SelectCustom } from '@/components/common/form/SelectCustom.tsx'
 import { Form } from '@/components/ui/form.tsx'
 import { useForm } from 'react-hook-form'
-import useGetSatuanOrganisasi from '@/pages/modules/settings/controller/useGetSatuanOrganisasi.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { UseGetSessionEditor } from '../../session/index'
+import { UseGetUniversityDomainExist } from '@/pages/modules/website-utama/select-university/hooks'
 
 export const ButtonSessionEditor = () => {
   const [open, setOpen] = useState(false)
 
   const form = useForm()
 
-  const { satuanOrganisasi } = useGetSatuanOrganisasi({ kelompok: 'UNIVERSITAS' })
+  const { satuanOrganisasi } = UseGetUniversityDomainExist({ kelompok: 'UNIVERSITAS' })
+
   const { session } = UseGetSessionEditor()
 
   useEffect(() => {
