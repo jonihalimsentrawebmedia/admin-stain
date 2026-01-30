@@ -3,7 +3,7 @@ name: Deploy Vite to VPS
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy:
