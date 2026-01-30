@@ -66,7 +66,7 @@ export default function DashboardAdminUnit() {
     { label: 'Tulis Agenda', url: '/modules/website-unit/public-content/agenda/add' },
     {
       label: 'Tambah Fasilitas',
-      url: '/modules/website-unit/public-content/facilities/add',
+      url: '/modules/website-unit/public-content/facilities-unit/add',
     },
     { label: 'Tambah Berkas Download', url: '/modules/website-unit/public-content/download/add' },
   ]

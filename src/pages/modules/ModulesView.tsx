@@ -58,7 +58,7 @@ const ModulesView = () => {
           </div>
 
           <div className="rounded-lg gap-4 md:gap-0 grid grid-cols-12">
-            <div className="col-span-12 lg:col-span-8 flex flex-col gap-4 p-4 rounded-lg lg:rounded-l-lg bg-white">
+            <div className="col-span-12 lg:col-span-8 flex flex-col gap-4 p-4 rounded-lg lg:rounded-none lg:rounded-l-lg bg-white">
               <div className="font-bold text-neutral text-xl">Daftar Modul</div>
               <div className="grid w-full text-center grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 lg:h-full max-h-[300px] overflow-auto">
                 {modules.map((item, k) => (
@@ -80,7 +80,7 @@ const ModulesView = () => {
                 ))}
               </div>
             </div>
-            <div className="bg-[#E9E9E9] p-4 col-span-12 rounded-lg lg:rounded-r-lg lg:col-span-4 ">
+            <div className="bg-[#E9E9E9] p-4 col-span-12 rounded-lg lg:rounded-none lg:rounded-r-lg lg:col-span-4 ">
               {moduleSelect && (
                 <div className="flex flex-col gap-4">
                   <div className="font-bold text-black text-xl">Daftar Role</div>
