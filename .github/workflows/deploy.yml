@@ -3,7 +3,7 @@ name: Deploy Vite to VPS
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
@@ -11,40 +11,35 @@ jobs:
 
     steps:
       # =====================
-      # CHECKOUT SOURCE
+      # CHECKOUT
       # =====================
       - name: 📥 Checkout repository
         uses: actions/checkout@v4
 
       # =====================
-      # SETUP NODE & PNPM
+      # NODE
       # =====================
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: pnpm
-
-      - name: 📦 Setup pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 10
+          cache: npm
 
       # =====================
       # INSTALL & BUILD
       # =====================
       - name: 📦 Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: npm ci
 
       - name: 🏗 Build Vite
-        run: pnpm build
+        run: npm run build
         env:
           VITE_API_URL: ${{ secrets.VITE_API_URL }}
 
       # =====================
       # SSH & DEPLOY
       # =====================
-      - name: 🔐 Setup SSH agent
+      - name: 🔐 Setup SSH
         uses: webfactory/ssh-agent@v0.9.0
         with:
           ssh-private-key: ${{ secrets.VPS_SSH_KEY }}
@@ -56,7 +51,7 @@ jobs:
             ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }}:/var/www/${{ secrets.DEPLOY_DOMAIN }}/
 
       # =====================
-      # RELOAD NGINX
+      # NGINX
       # =====================
       - name: 🔄 Reload Nginx
         run: |
