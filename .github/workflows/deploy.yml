@@ -1,4 +1,4 @@
-name: Deploy Vite to VPS (pnpm)
+name: Deploy Vite to VPS (yarn)
 
 on:
   push:
@@ -17,28 +17,22 @@ jobs:
         uses: actions/checkout@v4
 
       # =====================
-      # NODE + PNPM
+      # NODE + YARN
       # =====================
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: pnpm
-
-      - name: 📦 Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 9
-          run_install: false
+          cache: yarn
 
       # =====================
       # INSTALL & BUILD
       # =====================
       - name: 📦 Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: yarn install --frozen-lockfile
 
       - name: 🏗 Build Vite
-        run: pnpm build
+        run: yarn build
         env:
           VITE_API_URL: ${{ secrets.VITE_API_URL }}
 
