@@ -62,7 +62,7 @@ export const ButtonEditFAQ = (props: Props) => {
   return (
     <>
       <button
-        className={'p-2 text-white bg-yellow-500 hover:bg-yellow-600 rounded'}
+        className={'p-1.5 text-white bg-yellow-500 hover:bg-yellow-600 rounded'}
         onClick={() => setOpen(!open)}
       >
         <HiPencil />

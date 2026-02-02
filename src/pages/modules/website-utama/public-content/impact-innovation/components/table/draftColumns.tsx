@@ -13,6 +13,7 @@ import {
 import type { IImpactInnovationList } from '../../data/index'
 import { ButtonDeleteImpactInnovation } from '@/pages/modules/website-utama/public-content/impact-innovation/components/buttonDelete.tsx'
 import { ButtonSubmissionImpactInnovation } from '@/pages/modules/website-utama/public-content/impact-innovation/components/buttonSubmission.tsx'
+import { IoLanguage } from 'react-icons/io5'
 
 export const DraftColumnsImpactInnovation = () => {
   const [searchParams] = useSearchParams()
@@ -101,6 +102,11 @@ export const DraftColumnsImpactInnovation = () => {
           <>
             <div className={'flex flex-col gap-2 items-center'}>
               <div className="flex items-center gap-1">
+                <Link to={`language/${row?.original?.id_inovasi_berdampak}`}>
+                  <button className={'bg-primary p-1.5 rounded text-white'}>
+                    <IoLanguage />
+                  </button>
+                </Link>
                 <Link to={`detail/${row?.original?.id_inovasi_berdampak}`}>
                   <button className={'bg-blue-500 p-1.5 rounded text-white hover:bg-blue-600'}>
                     <MdInfo />

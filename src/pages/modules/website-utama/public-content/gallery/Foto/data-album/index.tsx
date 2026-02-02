@@ -2,12 +2,13 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { MdOutlineHistory } from 'react-icons/md'
 import { Button } from '@/components/ui/button.tsx'
 import { UseGetGalleryPhotoDetail } from '../hooks'
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import Search from '@/components/common/table/Search.tsx'
 import { ButtonAddImage } from '@/pages/modules/website-utama/public-content/gallery/Foto/data-album/components/buttonAdd.tsx'
 import { UseGetGalleryAlbum } from '@/pages/modules/website-utama/public-content/gallery/Foto/data-album/hooks'
 import { ButtonEditImage } from '@/pages/modules/website-utama/public-content/gallery/Foto/data-album/components/buttonEdit.tsx'
 import { ButtonDeletePhotoAlbum } from '@/pages/modules/website-utama/public-content/gallery/Foto/data-album/components/buttonDelete.tsx'
+import { IoLanguage } from 'react-icons/io5'
 
 export const DataAlbumListPage = () => {
   const { id } = useParams()
@@ -59,6 +60,11 @@ export const DataAlbumListPage = () => {
               <div key={index}>
                 <div className="relative w-full">
                   <div className="absolute gap-1.5 flex items-center justify-end w-full p-1.5">
+                    <Link to={`${item?.id_galeri_foto}`}>
+                      <button className={'bg-primary p-1.5 rounded text-white'}>
+                        <IoLanguage />
+                      </button>
+                    </Link>
                     <ButtonEditImage {...item} />
                     <ButtonDeletePhotoAlbum title={detail?.judul ?? ''} data={item} />
                   </div>

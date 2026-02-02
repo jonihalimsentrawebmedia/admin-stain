@@ -13,6 +13,7 @@ import {
 import type { IAchievementDetail } from '../../data/index'
 import { ButtonDeleteAchievement } from '@/pages/modules/website-utama/public-content/achievement/components/buttonDelete.tsx'
 import { ButtonSubmissionAchievement } from '@/pages/modules/website-utama/public-content/achievement/components/buttonSubmission.tsx'
+import { IoLanguage } from 'react-icons/io5'
 
 export const DraftColumnsAchievement = () => {
   const [searchParams] = useSearchParams()
@@ -97,6 +98,11 @@ export const DraftColumnsAchievement = () => {
           <>
             <div className={'flex flex-col gap-2 items-center'}>
               <div className="flex items-center gap-1">
+                <Link to={`language/${row?.original?.id_prestasi}`}>
+                  <button className={'bg-primary p-1.5 rounded text-white'}>
+                    <IoLanguage />
+                  </button>
+                </Link>
                 <Link to={`detail/${row?.original?.id_prestasi}`}>
                   <button className={'bg-blue-500 p-1.5 rounded text-white hover:bg-blue-600'}>
                     <MdInfo />

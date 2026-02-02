@@ -4,6 +4,7 @@ import type { IStudentLetter } from '@/pages/modules/website-utama/surat-keteran
 import { Button } from '@/components/ui/button.tsx'
 import { ButtonEditLetter } from '@/pages/modules/website-utama/surat-keterangan-mahasiswa/components/buttonEditLetter.tsx'
 import { ButtonDeleteLetter } from '@/pages/modules/website-utama/surat-keterangan-mahasiswa/components/buttonDelete.tsx'
+import { IoLanguage } from 'react-icons/io5'
 
 export const ColumnsStudentLetter = () => {
   const [searchParams] = useSearchParams()
@@ -69,6 +70,12 @@ export const ColumnsStudentLetter = () => {
         return (
           <>
             <div className="flex items-center gap-2">
+              <Link
+                className={'bg-primary p-1.5 rounded text-white'}
+                to={`language/${row?.original?.id_surat_mahasiswa_surat_keterangan_mahasiswa}`}
+              >
+                <IoLanguage />
+              </Link>
               <ButtonEditLetter data={row.original} />
               <ButtonDeleteLetter data={row.original} />
             </div>

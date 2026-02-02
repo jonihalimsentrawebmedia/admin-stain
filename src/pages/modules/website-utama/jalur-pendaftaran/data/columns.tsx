@@ -4,6 +4,7 @@ import type { IRegistrationPath } from '@/pages/modules/website-utama/jalur-pend
 import { HiPencil } from 'react-icons/hi'
 import { ChangeStatus } from '@/pages/modules/website-utama/jalur-pendaftaran/components/changeStatus.tsx'
 import { ButtonDeleteRegistrationPath } from '@/pages/modules/website-utama/jalur-pendaftaran/components/buttonDelete.tsx'
+import { IoLanguage } from 'react-icons/io5'
 
 export const ColumnsRegistrationPath = () => {
   const [searchParams] = useSearchParams()
@@ -50,8 +51,14 @@ export const ColumnsRegistrationPath = () => {
       cell: ({ row }) => {
         return (
           <div className={'flex gap-2 items-center justify-end'}>
+            <Link
+              to={`language/${row?.original?.id_jalur_pendaftaran}`}
+              className={'bg-primary text-white p-1.5 rounded'}
+            >
+              <IoLanguage />
+            </Link>
             <Link to={`edit/${row?.original?.id_jalur_pendaftaran ?? ''}`}>
-              <button className={'p-2 rounded bg-yellow-500 text-white hover:bg-yellow-600'}>
+              <button className={'p-1.5 rounded bg-yellow-500 text-white hover:bg-yellow-600'}>
                 <HiPencil />
               </button>
             </Link>

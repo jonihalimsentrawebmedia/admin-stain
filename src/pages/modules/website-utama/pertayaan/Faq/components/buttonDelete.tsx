@@ -43,7 +43,7 @@ export const ButtonDeleteFAQ = (props: Props) => {
   return (
     <>
       <button
-        className={'p-2 text-white bg-red-500 hover:bg-red-600 rounded'}
+        className={'p-1.5 text-white bg-red-500 hover:bg-red-600 rounded'}
         onClick={() => setOpen(!open)}
       >
         <FaTrash />

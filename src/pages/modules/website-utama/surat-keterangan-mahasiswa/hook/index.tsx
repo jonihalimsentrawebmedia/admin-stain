@@ -52,25 +52,71 @@ export const UseGetStudentLetter = () => {
   return { studentLetter, loading, meta }
 }
 
+export const UseGetStudentLetterById = (id: string) => {
+  const [studentLetter, setStudentLetter] = useState<IStudentLetter>()
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['surat-keterangan-mahasiswa-by-id', id],
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get(`/website-utama/surat-keterangan-mahasiswa/${id}`).then(
+        (res) => res.data.data
+      ),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setStudentLetter(data)
+    }
+  }, [data])
+
+  return { studentLetter, loading }
+}
+
 export const UseGetLetterStudentBackground = () => {
   const [background, setBackground] = useState<IBGThumbnail[]>([])
-  
+
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['background-student-letter'],
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get(`/website-utama/surat-keterangan-mahasiswa-background`).then((res) => res.data.data),
+      AxiosClient.get(`/website-utama/surat-keterangan-mahasiswa-background`).then(
+        (res) => res.data.data
+      ),
   })
-  
+
   const loading = isLoading || isFetching
-  
+
   useEffect(() => {
     if (data) {
       setBackground(data)
     }
   }, [data])
-  
+
   return { background, loading }
 }
 
+export const UseGetLogLetterStudent = (id: string) => {
+  const [logData, setLogData] = useState<any[]>([])
 
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['log-letter', id],
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get(`/website-utama/surat-keterangan-mahasiswa-log/${id}`).then(
+        (res) => res.data.data
+      ),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setLogData(data)
+    }
+  }, [data])
+
+  return { logData, loading }
+}

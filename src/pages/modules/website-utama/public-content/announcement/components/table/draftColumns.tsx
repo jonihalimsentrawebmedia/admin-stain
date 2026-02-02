@@ -7,6 +7,7 @@ import { HiPencil } from 'react-icons/hi'
 import { ButtonDeleteAnnouncement } from '@/pages/modules/website-utama/public-content/announcement/components/buttonDelete.tsx'
 import { ButtonSubmissionAnnouncement } from '@/pages/modules/website-utama/public-content/announcement/components/buttonSubmission.tsx'
 import { Button } from '@/components/ui/button.tsx'
+import { IoLanguage } from 'react-icons/io5'
 
 export const DraftAnnouncementColumns = () => {
   const [searchParams] = useSearchParams()
@@ -90,6 +91,11 @@ export const DraftAnnouncementColumns = () => {
           <>
             <div className={'flex flex-col gap-2 items-center'}>
               <div className="flex items-center gap-1">
+                <Link to={`language/${row?.original?.id_pengumuman}`}>
+                  <button className={'bg-primary p-1.5 rounded text-white'}>
+                    <IoLanguage />
+                  </button>
+                </Link>
                 <Link to={`detail/${row?.original?.id_pengumuman}`}>
                   <button className={'bg-blue-500 p-1.5 rounded text-white hover:bg-blue-600'}>
                     <MdInfo />

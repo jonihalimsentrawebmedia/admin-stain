@@ -1,11 +1,10 @@
-import { useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
 import type { IPlacemanUser } from '../data/index'
 import { Checkbox } from '@/components/ui/checkbox.tsx'
 import { ButtonEditPlaceman } from '@/pages/modules/website-utama/public-content/structure-organization/Placeman-user/components/buttonEdit.tsx'
-import {
-  ButtonDeletePlaceman
-} from '@/pages/modules/website-utama/public-content/structure-organization/Placeman-user/components/buttonDelete.tsx'
+import { ButtonDeletePlaceman } from '@/pages/modules/website-utama/public-content/structure-organization/Placeman-user/components/buttonDelete.tsx'
+import { IoLanguage } from 'react-icons/io5'
 
 export const ColumnsUserPlaceman = () => {
   const [searchParams] = useSearchParams()
@@ -87,6 +86,11 @@ export const ColumnsUserPlaceman = () => {
       header: '',
       cell: ({ row }) => (
         <div className={'flex flex-col gap-2 w-fit'}>
+          <Link to={`${row?.original?.id_pejabat}`}>
+            <button className={'bg-primary p-1.5 rounded text-white'}>
+              <IoLanguage />
+            </button>
+          </Link>
           <ButtonEditPlaceman {...row?.original} />
           <ButtonDeletePlaceman {...row?.original} />
         </div>

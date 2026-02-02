@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button.tsx'
 import { FaPlay } from 'react-icons/fa'
 import { HiPencil } from 'react-icons/hi'
 import { ButtonDeleteOfficialMusic } from '@/pages/modules/website-utama/public-content/musik-resmi/components/buttonDelete.tsx'
+import { IoLanguage } from 'react-icons/io5'
 
 export const ColumnsOfficialMusic = () => {
   const [searchParams] = useSearchParams()
@@ -64,6 +65,11 @@ export const ColumnsOfficialMusic = () => {
         return (
           <>
             <div className="flex items-center justify-center gap-2">
+              <Link to={`language/${data?.id_mars_musik}`} className="flex items-center gap-2">
+                <button className={'bg-primary p-1.5 rounded hover:bg-primary text-white'}>
+                  <IoLanguage />
+                </button>
+              </Link>
               <Link to={`edit/${data?.id_mars_musik}`} className="flex items-center gap-2">
                 <button className={'bg-yellow-500 p-1.5 rounded hover:bg-yellow-600 text-white'}>
                   <HiPencil />

@@ -7,6 +7,7 @@ import { History } from 'lucide-react'
 import ButtonEditServices from './components/ButtonEditServices'
 import ButtonDeleteServices from './components/ButtonDeleteServices'
 import ButtonActiveServices from './components/ButtonActiveServices'
+import { IoLanguage } from 'react-icons/io5'
 
 const ServicesViewModel = () => {
   const [searchParams] = useSearchParams()
@@ -85,6 +86,12 @@ const ServicesViewModel = () => {
       cell: ({ row }) => {
         return (
           <div className="flex gap-2 items-center">
+            <Link
+              to={`language/${row?.original?.id_layanan}`}
+              className={'bg-primary text-white p-1.5 rounded'}
+            >
+              <IoLanguage />
+            </Link>
             <ButtonEditServices data={row.original} />
             <ButtonDeleteServices data={row.original} />
           </div>

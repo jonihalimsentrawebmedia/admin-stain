@@ -6,6 +6,7 @@ import { MdInfo, MdOutlineHistory } from 'react-icons/md'
 import { HiPencil } from 'react-icons/hi'
 import { ButtonDeleteFacilities } from '../../components/buttonDelete.tsx'
 import { ButtonSubmissionFacilities } from '../../components/buttonSubmission.tsx'
+import { IoLanguage } from 'react-icons/io5'
 
 export const DraftColumnsFacilities = () => {
   const [searchParams] = useSearchParams()
@@ -71,6 +72,11 @@ export const DraftColumnsFacilities = () => {
           <>
             <div className={'flex flex-col gap-2 items-center'}>
               <div className="flex items-center gap-1">
+                <Link to={`language/${row?.original?.id_fasilitas}`}>
+                  <button className={'bg-primary p-1.5 rounded text-white'}>
+                    <IoLanguage />
+                  </button>
+                </Link>
                 <Link to={`detail/${row?.original?.id_fasilitas}`}>
                   <button className={'bg-blue-500 p-1.5 rounded text-white hover:bg-blue-600'}>
                     <MdInfo />

@@ -1,7 +1,7 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { IoMdImage } from 'react-icons/io'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Accordion } from '@/components/ui/accordion.tsx'
 import { AccordionCustom } from '@/components/common/accordion'
 import {
@@ -13,13 +13,13 @@ import { ButtonAddLetter } from '@/pages/modules/website-utama/surat-keterangan-
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsStudentLetter } from '@/pages/modules/website-utama/surat-keterangan-mahasiswa/types/columns.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
+import { IoLanguage } from 'react-icons/io5'
 
 export const CertificateStudent = () => {
   const navigate = useNavigate()
   const { stepApproval } = UseGetStepApproved()
   const { studentLetter, meta, loading } = UseGetStudentLetter()
   const columns = ColumnsStudentLetter()
-
 
   return (
     <>
@@ -53,7 +53,12 @@ export const CertificateStudent = () => {
               className={'tiptap ProseMirror simple-editor'}
               dangerouslySetInnerHTML={{ __html: stepApproval?.alur_pengajuan ?? '' }}
             />
-            <ButtonUpdateStepApproval data={stepApproval} />
+            <div className={'flex gap-1.5 items-center'}>
+              <ButtonUpdateStepApproval data={stepApproval} />
+              <Link className={'bg-primary p-1.5 rounded text-white'} to={`pengajuan/language`}>
+                <IoLanguage />
+              </Link>
+            </div>
           </AccordionCustom>
         </Accordion>
 

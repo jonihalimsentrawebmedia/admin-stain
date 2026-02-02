@@ -6,6 +6,7 @@ import { Accordion } from '@/components/ui/accordion.tsx'
 import { AccordionCustom } from '@/components/common/accordion'
 import { UseGetDetailAcademicRules } from '@/pages/modules/website-utama/peraturan-akademik/hooks'
 import { TbExternalLink } from 'react-icons/tb'
+import { IoLanguage } from 'react-icons/io5'
 
 export const AcademicRegulation = () => {
   const navigate = useNavigate()
@@ -18,6 +19,14 @@ export const AcademicRegulation = () => {
         <ButtonTitleGroup
           label={'Peraturan Akademik'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <Link to={'language'} className={'bg-primary p-1.5 rounded text-white'}>
+                  <IoLanguage />
+                </Link>
+              ),
+            },
             {
               type: 'custom',
               element: (

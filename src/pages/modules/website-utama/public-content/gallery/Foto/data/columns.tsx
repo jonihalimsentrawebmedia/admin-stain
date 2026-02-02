@@ -6,6 +6,7 @@ import { FaForward } from 'react-icons/fa'
 import { MdOutlineHistory } from 'react-icons/md'
 import { ButtonEditAlbumPhoto } from '@/pages/modules/website-utama/public-content/gallery/Foto/components/buttonEdit.tsx'
 import { ButtonDeleteAlbumPhoto } from '@/pages/modules/website-utama/public-content/gallery/Foto/components/buttonDelete.tsx'
+import { IoLanguage } from 'react-icons/io5'
 
 export const ColumnsGalleryPhoto = () => {
   const [searchParams] = useSearchParams()
@@ -60,6 +61,11 @@ export const ColumnsGalleryPhoto = () => {
       cell: ({ row }) => {
         return (
           <div className={'flex justify-end gap-2 items-center'}>
+            <Link to={`language/${row?.original?.id_galeri_album}`}>
+              <button className={'bg-primary p-1.5 rounded text-white'}>
+                <IoLanguage />
+              </button>
+            </Link>
             <ButtonEditAlbumPhoto {...row.original} />
             <ButtonDeleteAlbumPhoto {...row?.original} />
           </div>

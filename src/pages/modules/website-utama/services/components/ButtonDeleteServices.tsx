@@ -1,21 +1,21 @@
-import { useQueryClient } from "@tanstack/react-query"
-import type { ServicesList } from "../model"
-import { useForm } from "react-hook-form"
-import { useState } from "react"
-import { Link } from "react-router-dom"
-import AxiosClient from "@/provider/axios"
-import { toast } from "react-toastify"
-import { IconDelete } from "@/components/common/table/icon"
-import { DialogCustom } from "@/components/common/dialog/DialogCustom"
-import DetailField from "@/components/common/field/DetailField"
-import { Button } from "@/components/ui/button"
-import { Trash2, X } from "lucide-react"
+import { useQueryClient } from '@tanstack/react-query'
+import type { ServicesList } from '../model'
+import { useForm } from 'react-hook-form'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import AxiosClient from '@/provider/axios'
+import { toast } from 'react-toastify'
+import { DialogCustom } from '@/components/common/dialog/DialogCustom'
+import DetailField from '@/components/common/field/DetailField'
+import { Button } from '@/components/ui/button'
+import { Trash2, X } from 'lucide-react'
+import { FaTrash } from 'react-icons/fa'
 
-interface Props{
-    data:ServicesList
+interface Props {
+  data: ServicesList
 }
 
-const ButtonDeleteServices = ({data}:Props) => {
+const ButtonDeleteServices = ({ data }: Props) => {
   const form = useForm()
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -28,11 +28,12 @@ const ButtonDeleteServices = ({data}:Props) => {
     {
       name: 'url_layanan',
       label: 'URL',
-      component:(
-        <Link to={data.url_layanan} target="_blank" className="underline text-blue-500">Buka Url</Link>
-      )
+      component: (
+        <Link to={data.url_layanan} target="_blank" className="underline text-blue-500">
+          Buka Url
+        </Link>
+      ),
     },
-    
   ]
 
   const queryClient = useQueryClient()
@@ -59,26 +60,26 @@ const ButtonDeleteServices = ({data}:Props) => {
   return (
     <>
       <button
+        className={'p-1.5 bg-red-500 text-white hover:bg-red-600 rounded'}
         onClick={() => {
           setOpen(!open)
           form.reset({
             ...data,
-      
           })
         }}
       >
-        <IconDelete />
+        <FaTrash />
       </button>
 
       <DialogCustom
         open={open}
-        width='50%'
+        width="50%"
         className={'rounded lg:min-w-2xl'}
         setOpen={setOpen}
         title={<p className="text-2xl text-red-500">Hapus Layanan?</p>}
         description={'Apakah anda yakin untuk menghapus data ini?'}
       >
-        <DetailField data={ field} form={form} />
+        <DetailField data={field} form={form} />
         <div className="flex gap-4 items-center justify-end">
           <Button
             onClick={() => setOpen(false)}

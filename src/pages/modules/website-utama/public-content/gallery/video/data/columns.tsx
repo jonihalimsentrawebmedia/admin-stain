@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button.tsx'
 import { MdOutlineHistory } from 'react-icons/md'
 import { ButtonEditVideo } from '@/pages/modules/website-utama/public-content/gallery/video/components/buttonEdit.tsx'
 import { ButtonDeleteVideo } from '@/pages/modules/website-utama/public-content/gallery/video/components/buttonDelete.tsx'
+import { IoLanguage } from 'react-icons/io5'
 
 export const ColumnsVideo = () => {
   const [searchParams] = useSearchParams()
@@ -66,6 +67,11 @@ export const ColumnsVideo = () => {
       cell: ({ row }) => {
         return (
           <div className={'flex justify-end gap-2 items-center'}>
+            <Link to={`language/${row?.original?.id_galeri_video}`}>
+              <button className={'bg-primary p-1.5 rounded text-white'}>
+                <IoLanguage />
+              </button>
+            </Link>
             <ButtonEditVideo {...row.original} />
             <ButtonDeleteVideo {...row.original} />
           </div>

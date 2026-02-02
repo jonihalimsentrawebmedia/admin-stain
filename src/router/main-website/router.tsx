@@ -131,6 +131,28 @@ import { UserProfilePage } from '@/pages/modules/website-utama/user-profile'
 import { ChangePassword } from '@/pages/modules/website-utama/change-password'
 import { LogFooterContent } from '@/pages/modules/website-utama/settings-menu/Footer/log'
 import { ChangePrimaryAndFooterColor } from '@/pages/modules/website-utama/settings-menu/color'
+import { NewsWithLanguage } from '@/pages/modules/website-utama/public-content/news/language'
+import { ImpactInnovationLanguage } from '@/pages/modules/website-utama/public-content/impact-innovation/language'
+import { AnnouncementLanguage } from '@/pages/modules/website-utama/public-content/announcement/language'
+import { AgendaLanguagePage } from '@/pages/modules/website-utama/public-content/agenda/language'
+import { StructureOrganizationLanguagePage } from '@/pages/modules/website-utama/public-content/structure-organization/language'
+import { PlacemanUserLanguagePage } from '@/pages/modules/website-utama/public-content/structure-organization/Placeman-user/language'
+import { FacilitiesLanguage } from '@/pages/modules/website-utama/public-content/facilities/language'
+import { GalleryVideoLanguage } from '@/pages/modules/website-utama/public-content/gallery/video/language'
+import { GalleryAlbumLanguage } from '@/pages/modules/website-utama/public-content/gallery/Foto/language'
+import { GalleryPhotoLanguage } from '@/pages/modules/website-utama/public-content/gallery/Foto/data-album/language'
+import { AchievementLanguagePage } from '@/pages/modules/website-utama/public-content/achievement/language'
+import { DownloadCategoryLanguage } from '@/pages/modules/website-utama/public-content/download/category-language'
+import { DownloadFileLanguage } from '@/pages/modules/website-utama/public-content/download/language'
+import { AnthemMusicLanguage } from '@/pages/modules/website-utama/public-content/musik-resmi/language'
+import { ServiceLanguagePage } from '@/pages/modules/website-utama/services/language'
+import { CategoryFAQLanguagePage } from '@/pages/modules/website-utama/pertayaan/Faq/Category/language'
+import { FAQLanguagePage } from '@/pages/modules/website-utama/pertayaan/Faq/language'
+import { SubmissionSKMLanguagePage } from '@/pages/modules/website-utama/surat-keterangan-mahasiswa/pengajuan-language'
+import { SKMLanguagePage } from '@/pages/modules/website-utama/surat-keterangan-mahasiswa/language'
+import { LogActivitySKM } from '@/pages/modules/website-utama/surat-keterangan-mahasiswa/log'
+import { RegisteredPathLanguagePage } from '@/pages/modules/website-utama/jalur-pendaftaran/language'
+import { AcademicRulesLanguagePage } from '@/pages/modules/website-utama/peraturan-akademik/language'
 
 export const MainWebsiteRouter = [
   {
@@ -236,6 +258,10 @@ export const MainWebsiteRouter = [
             path: 'log/:id',
             element: <LogActivityNewsPage />,
           },
+          {
+            path: 'language/:id',
+            element: <NewsWithLanguage />,
+          },
         ],
       },
       {
@@ -264,6 +290,10 @@ export const MainWebsiteRouter = [
           {
             path: 'background',
             element: <AnnouncementBackground />,
+          },
+          {
+            path: 'language/:id',
+            element: <AnnouncementLanguage />,
           },
         ],
       },
@@ -294,6 +324,10 @@ export const MainWebsiteRouter = [
             path: 'background',
             element: <AgendaBackgroundPage />,
           },
+          {
+            path: 'language/:id',
+            element: <AgendaLanguagePage />,
+          },
         ],
       },
       {
@@ -323,6 +357,10 @@ export const MainWebsiteRouter = [
             path: 'background',
             element: <InnovationBackgroundPage />,
           },
+          {
+            path: 'language/:id',
+            element: <ImpactInnovationLanguage />,
+          },
         ],
       },
       {
@@ -333,8 +371,16 @@ export const MainWebsiteRouter = [
             element: <StructureOrganizationPage />,
           },
           {
+            path: 'language/:id',
+            element: <StructureOrganizationLanguagePage />,
+          },
+          {
             path: 'team/:id',
             element: <PlacemenUser />,
+          },
+          {
+            path: 'team/:id/:userId',
+            element: <PlacemanUserLanguagePage />,
           },
           {
             path: 'background',
@@ -369,6 +415,10 @@ export const MainWebsiteRouter = [
             path: 'background',
             element: <FacilitiesBackgroundPage />,
           },
+          {
+            path: 'language/:id',
+            element: <FacilitiesLanguage />,
+          },
         ],
       },
       {
@@ -394,8 +444,16 @@ export const MainWebsiteRouter = [
                 element: <DataAlbumListPage />,
               },
               {
+                path: 'album/:id/:photoId',
+                element: <GalleryPhotoLanguage />,
+              },
+              {
                 path: 'album/:id/log',
                 element: <LogActivityGalleryAlbumPhoto />,
+              },
+              {
+                path: 'language/:id',
+                element: <GalleryAlbumLanguage />,
               },
             ],
           },
@@ -413,6 +471,10 @@ export const MainWebsiteRouter = [
               {
                 path: 'background',
                 element: <GalleryVideoBackgroundPage />,
+              },
+              {
+                path: 'language/:id',
+                element: <GalleryVideoLanguage />,
               },
             ],
           },
@@ -442,6 +504,10 @@ export const MainWebsiteRouter = [
             element: <LogActivityAchievement />,
           },
           {
+            path: 'language/:id',
+            element: <AchievementLanguagePage />,
+          },
+          {
             path: 'background',
             element: <AchievementBackgroundPage />,
           },
@@ -453,6 +519,14 @@ export const MainWebsiteRouter = [
           {
             index: true,
             element: <DownloadFilePage />,
+          },
+          {
+            path: 'category-language/:id',
+            element: <DownloadCategoryLanguage />,
+          },
+          {
+            path: 'language/:id',
+            element: <DownloadFileLanguage />,
           },
           {
             path: 'add',
@@ -478,6 +552,10 @@ export const MainWebsiteRouter = [
           {
             path: 'edit/:id',
             element: <EditOfficialMusicPage />,
+          },
+          {
+            path: 'language/:id',
+            element: <AnthemMusicLanguage />,
           },
         ],
       },
@@ -560,6 +638,10 @@ export const MainWebsiteRouter = [
       {
         path: ':id/log',
         element: <LogView />,
+      },
+      {
+        path: 'language/:id',
+        element: <ServiceLanguagePage />,
       },
     ],
   },
@@ -654,6 +736,18 @@ export const MainWebsiteRouter = [
         element: <CertificateStudent />,
       },
       {
+        path: 'pengajuan/language',
+        element: <SubmissionSKMLanguagePage />,
+      },
+      {
+        path: 'language/:id',
+        element: <SKMLanguagePage />,
+      },
+      {
+        path: 'log/:id',
+        element: <LogActivitySKM />,
+      },
+      {
         path: 'background',
         element: <StudentLetterBackground />,
       },
@@ -686,6 +780,10 @@ export const MainWebsiteRouter = [
       {
         path: 'background',
         element: <AcademicRulesBackground />,
+      },
+      {
+        path: 'language',
+        element: <AcademicRulesLanguagePage />,
       },
       {
         path: 'update',
@@ -964,8 +1062,16 @@ export const MainWebsiteRouter = [
             element: <FaqListData />,
           },
           {
+            path: 'language/:id',
+            element: <FAQLanguagePage />,
+          },
+          {
             path: 'kategori',
             element: <CategoryFAQList />,
+          },
+          {
+            path: 'kategori/language/:id',
+            element: <CategoryFAQLanguagePage />,
           },
           {
             path: 'background',
@@ -989,6 +1095,10 @@ export const MainWebsiteRouter = [
       {
         path: 'edit/:id',
         element: <EditPageRegisterPath />,
+      },
+      {
+        path: 'language/:id',
+        element: <RegisteredPathLanguagePage />,
       },
     ],
   },

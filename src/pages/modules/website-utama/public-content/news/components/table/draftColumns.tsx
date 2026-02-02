@@ -13,6 +13,7 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel.tsx'
 import { ButtonSubmissionNews } from '@/pages/modules/website-utama/public-content/news/components/buttonSubmission.tsx'
+import { IoLanguage } from 'react-icons/io5'
 
 export const DraftNewsColumns = () => {
   const [searchParams] = useSearchParams()
@@ -101,6 +102,11 @@ export const DraftNewsColumns = () => {
           <>
             <div className={'flex flex-col gap-2 items-center'}>
               <div className="flex items-center gap-1">
+                <Link to={`language/${row?.original?.id_berita}`}>
+                  <button className={'bg-primary p-1.5 rounded text-white'}>
+                    <IoLanguage />
+                  </button>
+                </Link>
                 <Link to={`detail/${row?.original?.id_berita}`}>
                   <button className={'bg-blue-500 p-1.5 rounded text-white hover:bg-blue-600'}>
                     <MdInfo />

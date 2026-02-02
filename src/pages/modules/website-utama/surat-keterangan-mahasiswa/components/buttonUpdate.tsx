@@ -53,8 +53,9 @@ export const ButtonUpdateStepApproval = (props: props) => {
   return (
     <>
       <Button
+        size={'sm'}
         variant={'outline'}
-        className={'border-primary text-primary hover:text-primary w-fit'}
+        className={'border-primary text-primary hover:text-primary w-fit rounded'}
         onClick={() => setOpen(!open)}
       >
         <HiPencil />

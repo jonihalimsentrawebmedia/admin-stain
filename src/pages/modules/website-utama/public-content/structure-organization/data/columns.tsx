@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button.tsx'
 import { FaForward } from 'react-icons/fa'
 import { ButtonEditStructureOrganization } from '../components/buttonEdit'
 import { ButtonDeleteStructureOrganization } from '@/pages/modules/website-utama/public-content/structure-organization/components/buttonDelete.tsx'
+import { IoLanguage } from 'react-icons/io5'
 
 export const GroupOrganizationColumns = () => {
   const [searchParams] = useSearchParams()
@@ -49,6 +50,11 @@ export const GroupOrganizationColumns = () => {
       header: '',
       cell: ({ row }) => (
         <div className={'flex items-center justify-end gap-2'}>
+          <Link to={`language/${row?.original?.id_kelompok_organisasi}`}>
+            <button className={'bg-primary p-1.5 rounded text-white'}>
+              <IoLanguage />
+            </button>
+          </Link>
           <ButtonEditStructureOrganization {...row?.original} />
           <ButtonDeleteStructureOrganization {...row?.original} />
         </div>

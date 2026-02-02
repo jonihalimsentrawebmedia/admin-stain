@@ -6,9 +6,9 @@ import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
-import { IconEdit } from '@/components/common/table/icon'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import ServiceForm from './ServiceForm'
+import { HiPencil } from 'react-icons/hi'
 
 interface Props {
   data: ServicesList
@@ -49,6 +49,7 @@ const ButtonEditServices = ({ data }: Props) => {
   return (
     <>
       <button
+        className={'p-1.5 bg-yellow-500 text-white hover:bg-yellow-600 rounded'}
         onClick={() => {
           setOpen(true)
           const temp = []
@@ -68,12 +69,12 @@ const ButtonEditServices = ({ data }: Props) => {
           })
         }}
       >
-        <IconEdit />
+        <HiPencil />
       </button>
 
       <DialogCustom
         open={open}
-        width='50%'
+        width="50%"
         className={'rounded lg:min-w-2xl'}
         setOpen={setOpen}
         title={'Edit Menu'}
