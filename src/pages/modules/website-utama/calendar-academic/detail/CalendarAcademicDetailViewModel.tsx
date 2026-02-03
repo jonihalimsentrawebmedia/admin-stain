@@ -4,9 +4,11 @@ import useGetCalendarAcademicDetail from '../controller/useGetCalendarAcademicDe
 import type { AcademicActivity } from '../model/academicActivity'
 import type { ColumnDef } from '@tanstack/react-table'
 import { Link } from 'react-router-dom'
-import { FastForward, History } from 'lucide-react'
+import { History } from 'lucide-react'
 import ButtonDeleteActivity from './components/ButtonDeleteActivity'
 import ButtonEditActivity from './components/ButtonEditActivity'
+import { FaForward } from 'react-icons/fa'
+import { IoLanguage } from 'react-icons/io5'
 
 const CalendarAcademicDetailViewModel = () => {
   const { academicYear } = useGetCalendarAcademicDetail()
@@ -41,9 +43,9 @@ const CalendarAcademicDetailViewModel = () => {
         return (
           <Link
             to={`/modules/website-utama/calendar-academic/${row.original.id_tahun_akademik}/detail-activity/${row.original.id_tahun_akademik_kegiatan}`}
-            className="border border-primary px-4 py-2 text-primary rounded-lg flex gap-2 items-center"
+            className="border border-primary px-3 py-1.5 w-fit text-primary rounded flex gap-2 items-center"
           >
-            <FastForward className="text-primary size-6" />
+            <FaForward className={'size-4'} />
             Rincian Kegiatan
           </Link>
         )
@@ -57,9 +59,9 @@ const CalendarAcademicDetailViewModel = () => {
         return (
           <Link
             to={`/modules/website-utama/calendar-academic/${row.original.id_tahun_akademik}/detail-activity/${row.original.id_tahun_akademik_kegiatan}/log`}
-            className="border border-[#2769CD] px-4 py-2 text-[#2769CD] rounded-lg flex gap-2 items-center"
+            className="border border-[#2769CD] px-3 py-1.5 w-fit text-[#2769CD] rounded flex gap-2 items-center"
           >
-            <History className="text-[#2769CD] size-6" />
+            <History className="size-4" />
             Log
           </Link>
         )
@@ -71,6 +73,12 @@ const CalendarAcademicDetailViewModel = () => {
       cell: ({ row }) => {
         return (
           <div className="flex gap-2 items-center">
+            <Link
+              to={`language/${row?.original?.id_tahun_akademik_kegiatan}`}
+              className={'bg-primary p-1.5 text-white rounded'}
+            >
+              <IoLanguage />
+            </Link>
             <ButtonEditActivity data={row.original} />
             <ButtonDeleteActivity data={row.original} />
           </div>

@@ -6,10 +6,10 @@ import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
-import { IconEdit } from '@/components/common/table/icon'
 import { formatDateTime } from '@/utils/date'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import AcreditationForm from './AcreditationForm'
+import { HiPencil } from 'react-icons/hi'
 
 interface Props {
   data: AcreditationList
@@ -63,8 +63,9 @@ const ButtonEditAcreditation = ({ data, optionsSatuanOrganisasi }: Props) => {
             mulai_berlaku: startAt.date.split('-').reverse().join('-'),
           })
         }}
+        className={'bg-yellow-500 text-white hover:bg-yellow-600 rounded p-1.5'}
       >
-        <IconEdit />
+        <HiPencil />
       </button>
 
       <DialogCustom

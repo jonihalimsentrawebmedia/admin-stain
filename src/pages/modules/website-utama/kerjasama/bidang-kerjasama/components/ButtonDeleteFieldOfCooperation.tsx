@@ -4,11 +4,11 @@ import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
-import { IconDelete } from '@/components/common/table/icon'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import DetailField from '@/components/common/field/DetailField'
 import { Button } from '@/components/ui/button'
 import { Trash2, X } from 'lucide-react'
+import { FaTrash } from 'react-icons/fa'
 
 interface Props {
   data: FieldOfCooperationList
@@ -58,8 +58,9 @@ const ButtonDeleteFieldOfCooperation = ({ data }: Props) => {
             ...data,
           })
         }}
+        className={'p-1.5 text-white bg-red-500 rounded hover:bg-red-600'}
       >
-        <IconDelete />
+        <FaTrash />
       </button>
 
       <DialogCustom

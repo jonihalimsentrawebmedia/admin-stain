@@ -10,12 +10,12 @@ import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
-import { IconEdit } from '@/components/common/table/icon'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import { Form } from '@/components/ui/form'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput'
 import TextInput from '@/components/common/form/TextInput'
 import ButtonForm from '@/components/common/button/ButtonForm'
+import { HiPencil } from 'react-icons/hi'
 
 interface Props {
   data: SubCalloborationCategory
@@ -58,6 +58,7 @@ const ButtonEditSubCalloborationCategory = ({ data }: Props) => {
   return (
     <>
       <button
+        className={'bg-yellow-500 text-white p-1.5 hover:bg-yellow-600 rounded'}
         onClick={() => {
           setOpen(true)
           form.reset({
@@ -65,7 +66,7 @@ const ButtonEditSubCalloborationCategory = ({ data }: Props) => {
           })
         }}
       >
-        <IconEdit />
+        <HiPencil />
       </button>
 
       <DialogCustom

@@ -6,8 +6,8 @@ import SelectFilter from '@/components/common/filter/SelectFilter'
 
 const CalloborationListView = () => {
   const { columns, goToAdd } = CalloborationListViewModel()
-
   const { calloborationList, loading, meta } = useGetCalloborationList()
+  
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup

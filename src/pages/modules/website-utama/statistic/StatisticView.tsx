@@ -10,6 +10,8 @@ import TextInput from '@/components/common/form/TextInput'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput'
 import { dateOptions, generateYearData, monthOptions } from './data'
 import { RichText } from '@/components/common/richtext'
+import { Link } from 'react-router-dom'
+import { IoLanguage } from 'react-icons/io5'
 
 const StatisticView = () => {
   const {
@@ -47,9 +49,16 @@ const StatisticView = () => {
                 ]
               : [
                   {
-                    label: '',
+                    type: 'custom',
+                    element: (
+                      <Link to={'language'} className={'bg-primary p-2 rounded text-white'}>
+                        <IoLanguage />
+                      </Link>
+                    ),
+                  },
+                  {
                     onClick: () => {},
-                    type: 'add',
+                    type: 'custom',
                     element: (
                       <Button
                         onClick={(e) => {
@@ -151,7 +160,13 @@ const StatisticView = () => {
         </CardInput>
         <CardInput title="Teks Pengantar">
           {isEdit ? (
-            <RichText isRow={false} className='gap-2!'  form={form} name="teks_pengantar" label="Isi Teks Pengantar" />
+            <RichText
+              isRow={false}
+              className="gap-2!"
+              form={form}
+              name="teks_pengantar"
+              label="Isi Teks Pengantar"
+            />
           ) : (
             <div dangerouslySetInnerHTML={{ __html: form.watch('teks_pengantar') }}></div>
           )}

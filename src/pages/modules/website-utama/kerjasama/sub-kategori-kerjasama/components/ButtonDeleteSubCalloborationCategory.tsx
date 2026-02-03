@@ -4,11 +4,11 @@ import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
-import { IconDelete } from '@/components/common/table/icon'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import DetailField from '@/components/common/field/DetailField'
 import { Button } from '@/components/ui/button'
 import { Trash2, X } from 'lucide-react'
+import { FaTrash } from 'react-icons/fa'
 
 interface Props {
   data: SubCalloborationCategory
@@ -37,7 +37,9 @@ const ButtonDeleteSubCalloborationCategory = ({ data }: Props) => {
 
   const handleDelete = async () => {
     setLoading(true)
-    await AxiosClient.delete(`/website-utama/sub-kategori-kerjasama/${data?.id_sub_kategori_kerjasama}`)
+    await AxiosClient.delete(
+      `/website-utama/sub-kategori-kerjasama/${data?.id_sub_kategori_kerjasama}`
+    )
       .then((res) => {
         if (res?.data?.status) {
           setOpen(false)
@@ -57,6 +59,7 @@ const ButtonDeleteSubCalloborationCategory = ({ data }: Props) => {
   return (
     <>
       <button
+        className={'text-white bg-red-500 p-1.5 rounded hover:bg-red-600'}
         onClick={() => {
           setOpen(!open)
           form.reset({
@@ -64,7 +67,7 @@ const ButtonDeleteSubCalloborationCategory = ({ data }: Props) => {
           })
         }}
       >
-        <IconDelete />
+        <FaTrash />
       </button>
 
       <DialogCustom

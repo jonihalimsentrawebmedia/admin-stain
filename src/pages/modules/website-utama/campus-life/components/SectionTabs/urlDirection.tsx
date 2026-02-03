@@ -6,6 +6,7 @@ import { Accordion } from '@/components/ui/accordion.tsx'
 import { FormUrlDirection } from '@/pages/modules/website-utama/campus-life/components/SectionTabs/urlDirectionform.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { Link } from 'react-router-dom'
+import { IoLanguage } from 'react-icons/io5'
 
 export const UrlDirectionSection = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -18,6 +19,14 @@ export const UrlDirectionSection = () => {
           <ButtonTitleGroup
             label={'Link Arahan'}
             buttonGroup={[
+              {
+                type: 'custom',
+                element: (
+                  <Link to={'link/language'} className={'bg-primary p-1.5 rounded text-white'}>
+                    <IoLanguage />
+                  </Link>
+                ),
+              },
               {
                 type: 'edit',
                 label: 'Edit Data',

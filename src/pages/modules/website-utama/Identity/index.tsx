@@ -6,6 +6,7 @@ import { Accordion } from '@/components/ui/accordion.tsx'
 import { AccordionCustom } from '@/components/common/accordion'
 import { UseGetIdentity } from '@/pages/modules/website-utama/Identity/hooks'
 import { TbExternalLink } from 'react-icons/tb'
+import { IoLanguage } from 'react-icons/io5'
 
 export const PageIdentity = () => {
   const navigate = useNavigate()
@@ -17,6 +18,14 @@ export const PageIdentity = () => {
         <ButtonTitleGroup
           label={'Identitas'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <Link to={'language'} className={'bg-primary p-1.5 rounded text-white'}>
+                  <IoLanguage />
+                </Link>
+              ),
+            },
             {
               type: 'custom',
               element: (

@@ -1,12 +1,13 @@
-import { Link, useSearchParams } from "react-router-dom"
-import type { TypeOfCalloborationList } from "./model"
-import type { ColumnDef } from "@tanstack/react-table"
-import { History } from "lucide-react"
-import ButtonEditTypeOfCalloboration from "./components/ButtonEditTypeOfCalloboration"
-import ButtonDeleteTypeOfCalloboration from "./components/ButtonDeleteTypeOfCalloboration"
+import { Link, useSearchParams } from 'react-router-dom'
+import type { TypeOfCalloborationList } from './model'
+import type { ColumnDef } from '@tanstack/react-table'
+import { History } from 'lucide-react'
+import ButtonEditTypeOfCalloboration from './components/ButtonEditTypeOfCalloboration'
+import ButtonDeleteTypeOfCalloboration from './components/ButtonDeleteTypeOfCalloboration'
+import { IoLanguage } from 'react-icons/io5'
 
 const TypeOfCalloborationViewModel = () => {
- const [searchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') ?? 1)
   const limit = Number(searchParams.get('limit') ?? 10)
 
@@ -27,7 +28,6 @@ const TypeOfCalloborationViewModel = () => {
       accessorKey: 'jumlah_kerjasama',
       header: 'Jumlah Kerjasama',
     },
-  
 
     {
       accessorKey: 'log',
@@ -50,6 +50,12 @@ const TypeOfCalloborationViewModel = () => {
       cell: ({ row }) => {
         return (
           <div className="flex gap-2 items-center">
+            <Link
+              to={`language/${row?.original?.id_jenis_kerjasama}`}
+              className={'bg-primary p-1.5 text-white rounded'}
+            >
+              <IoLanguage />
+            </Link>
             <ButtonEditTypeOfCalloboration data={row.original} />
             <ButtonDeleteTypeOfCalloboration data={row.original} />
           </div>
@@ -57,7 +63,6 @@ const TypeOfCalloborationViewModel = () => {
       },
     },
   ]
-
 
   return { columns }
 }

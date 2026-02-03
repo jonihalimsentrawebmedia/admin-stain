@@ -6,9 +6,9 @@ import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
-import { IconEdit } from '@/components/common/table/icon'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import AcademicYearForm from './AcademicYearForm'
+import { HiPencil } from 'react-icons/hi'
 
 interface Props {
   data: AcademicYearList
@@ -53,8 +53,9 @@ const ButtonEditAcademicYear = ({ data }: Props) => {
             ...data,
           })
         }}
+        className={'bg-yellow-500 hover:bg-yellow-600 p-1.5 text-white rounded'}
       >
-        <IconEdit />
+        <HiPencil />
       </button>
 
       <DialogCustom

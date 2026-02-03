@@ -14,6 +14,7 @@ const CalendarAcademicView = () => {
   const { columns, goToBackground } = CalendarAcademicViewModel()
   const { academicYearList, loading, meta } = useGetCalendarAcademic()
   const { background, loading: loadingBg } = useGetBgCalendarAcademic()
+  
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup

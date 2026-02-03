@@ -6,9 +6,9 @@ import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
-import { IconEdit } from '@/components/common/table/icon'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import MenuForm from './MenuForm'
+import { HiPencil } from 'react-icons/hi'
 
 interface Props {
   data: Menu
@@ -46,6 +46,7 @@ const ButtonEdit = ({ data }: Props) => {
   return (
     <>
       <button
+        className={'bg-yellow-500 text-white rounded p-1.5'}
         onClick={() => {
           setOpen(true)
           form.reset({
@@ -53,10 +54,16 @@ const ButtonEdit = ({ data }: Props) => {
           })
         }}
       >
-        <IconEdit />
+        <HiPencil />
       </button>
 
-      <DialogCustom width='50%' open={open} className={'rounded'} setOpen={setOpen} title={'Edit Menu'}>
+      <DialogCustom
+        width="50%"
+        open={open}
+        className={'rounded'}
+        setOpen={setOpen}
+        title={'Edit Menu'}
+      >
         <MenuForm
           form={form}
           loading={loading}

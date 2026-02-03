@@ -8,6 +8,7 @@ import { format } from 'date-fns'
 import { FastForward } from 'lucide-react'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
+import { FaForward } from 'react-icons/fa'
 
 const ButtonProcessManagementEditor = (data: IAgendaDetail) => {
   const [open, setOpen] = useState(false)
@@ -102,7 +103,7 @@ const ButtonProcessManagementEditor = (data: IAgendaDetail) => {
                       className={'bg-primary hover:bg-green-600'}
                       onClick={HandleApprove}
                     >
-                      <FastForward />
+                      <FaForward />
                       Proses Konten
                     </Button>
                   ),

@@ -7,8 +7,8 @@ import SelectFilter from "@/components/common/filter/SelectFilter"
 
 const FieldOfCooperationView = () => {
  const { columns } = FieldOfCooperationViewModel()
-
   const { fieldOfCooperation, loading, meta } = useGetFieldOfCooperation()
+  
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup

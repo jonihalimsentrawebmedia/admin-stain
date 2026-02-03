@@ -1,19 +1,20 @@
-import AxiosClient from "@/provider/axios"
-import { useQueryClient } from "@tanstack/react-query"
-import { useState } from "react"
-import { useForm } from "react-hook-form"
-import { toast } from "react-toastify"
-import type { AcademicActivity } from "../../model/academicActivity"
-import { IconDelete } from "@/components/common/table/icon"
-import { DialogCustom } from "@/components/common/dialog/DialogCustom"
-import DetailField from "@/components/common/field/DetailField"
-import { Button } from "@/components/ui/button"
-import { Trash2, X } from "lucide-react"
-interface Props{
-    data:AcademicActivity
+import AxiosClient from '@/provider/axios'
+import { useQueryClient } from '@tanstack/react-query'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
+import type { AcademicActivity } from '../../model/academicActivity'
+import { DialogCustom } from '@/components/common/dialog/DialogCustom'
+import DetailField from '@/components/common/field/DetailField'
+import { Button } from '@/components/ui/button'
+import { Trash2, X } from 'lucide-react'
+import { FaTrash } from 'react-icons/fa'
+
+interface Props {
+  data: AcademicActivity
 }
-const ButtonDeleteActivity = ({data}:Props) => {
- const form = useForm()
+const ButtonDeleteActivity = ({ data }: Props) => {
+  const form = useForm()
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const field: any = [
@@ -35,7 +36,9 @@ const ButtonDeleteActivity = ({data}:Props) => {
 
   const handleDelete = async () => {
     setLoading(true)
-    await AxiosClient.delete(`/website-utama/tahun-akademik-kegiatan/${data?.id_tahun_akademik_kegiatan}`)
+    await AxiosClient.delete(
+      `/website-utama/tahun-akademik-kegiatan/${data?.id_tahun_akademik_kegiatan}`
+    )
       .then((res) => {
         if (res?.data?.status) {
           setOpen(false)
@@ -61,15 +64,16 @@ const ButtonDeleteActivity = ({data}:Props) => {
             ...data,
           })
         }}
+        className={'bg-red-500 hover:bg-red-600 p-1.5 text-white rounded'}
       >
-        <IconDelete />
+        <FaTrash />
       </button>
 
       <DialogCustom
         open={open}
         className={'rounded min-w-sm sm:min-w-2xl'}
         setOpen={setOpen}
-          width='50%'
+        width="50%"
         title={<p className="text-2xl text-red-500">Hapus Kegiatan Akademik</p>}
         description={'Anda yakin ingin menghapus kegiatan akademik ini?'}
       >

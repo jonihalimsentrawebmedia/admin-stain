@@ -4,6 +4,7 @@ import type { ITestimonialCampusLife } from '@/pages/modules/website-utama/campu
 import { Button } from '@/components/ui/button.tsx'
 import { ButtonEditTestimonial } from '@/pages/modules/website-utama/campus-life/components/SectionTabs/Testimoni/buttonEdit.tsx'
 import { ButtonDeleteTestimonial } from '@/pages/modules/website-utama/campus-life/components/SectionTabs/Testimoni/buttonDelete.tsx'
+import { IoLanguage } from 'react-icons/io5'
 
 export const TestimonialColumns = () => {
   const [searchParams] = useSearchParams()
@@ -63,6 +64,12 @@ export const TestimonialColumns = () => {
       cell: ({ row }) => {
         return (
           <div className={'flex gap-2 items-center'}>
+            <Link
+              to={`testimoni/language/${row?.original?.id_kehidupan_kampus_testimoni}`}
+              className={'bg-primary text-white p-1.5 rounded'}
+            >
+              <IoLanguage />
+            </Link>
             <ButtonEditTestimonial data={row.original} />
             <ButtonDeleteTestimonial data={row?.original} />
           </div>

@@ -8,11 +8,11 @@ import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import TableCustom from '@/components/common/table/TableCustom'
 import SelectFilter from '@/components/common/filter/SelectFilter'
 import { Link } from 'react-router-dom'
-import { FastForward } from 'lucide-react'
 import useGetSatuanOrganisasiPengajuan from '../../controller/useGetSatuanOrganisasiPengajuan'
 import ModalAccept from './ModalAccept'
 import { IconCancel, IconChecklist } from '@/components/common/table/icon'
 import ModalCancel from './ModalCancel'
+import { FaForward } from 'react-icons/fa'
 
 interface Props {
   kelompok: string
@@ -116,7 +116,7 @@ const SubmissionButton = ({ kelompok }: Props) => {
               variant={'outline'}
               className="border border-primary text-primary hover:text-primary"
             >
-              <FastForward className="size-4" />
+              <FaForward className="size-4" />
               Lihat Data
             </Button>
           </Link>

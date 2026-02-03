@@ -4,9 +4,10 @@ import type { AcademicYearList } from './model'
 import { FastForward, History } from 'lucide-react'
 import ButtonEditAcademicYear from './components/ButtonEditAcademicYear'
 import ButtonDeleteAcademicYear from './components/ButtonDeleteAcademicYear'
+import { IoLanguage } from 'react-icons/io5'
 
 const CalendarAcademicViewModel = () => {
-  const navigate=useNavigate()
+  const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') ?? 1)
   const limit = Number(searchParams.get('limit') ?? 10)
@@ -39,9 +40,9 @@ const CalendarAcademicViewModel = () => {
         return (
           <Link
             to={`/modules/website-utama/calendar-academic/${row.original.id_tahun_akademik}`}
-            className="border border-primary px-4 py-2 text-primary rounded-lg flex gap-2 items-center"
+            className="border border-primary px-3 py-1.5 w-fit text-primary rounded-lg flex gap-2 items-center"
           >
-            <FastForward className="text-primary size-6" />
+            <FastForward className=" size-4" />
             Rincian Kegiatan
           </Link>
         )
@@ -55,9 +56,9 @@ const CalendarAcademicViewModel = () => {
         return (
           <Link
             to={`/modules/website-utama/calendar-academic/${row.original.id_tahun_akademik}/log`}
-            className="border border-[#2769CD] px-4 py-2 text-[#2769CD] rounded-lg flex gap-2 items-center"
+            className="border border-[#2769CD] px-3 py-1.5 w-fit text-[#2769CD] rounded-lg flex gap-2 items-center"
           >
-            <History className="text-[#2769CD] size-6" />
+            <History className="size-4" />
             Log
           </Link>
         )
@@ -69,6 +70,12 @@ const CalendarAcademicViewModel = () => {
       cell: ({ row }) => {
         return (
           <div className="flex gap-2 items-center">
+            <Link
+              to={`language/${row?.original?.id_tahun_akademik}`}
+              className={'bg-primary p-1.5 text-white rounded'}
+            >
+              <IoLanguage />
+            </Link>
             <ButtonEditAcademicYear data={row.original} />
             <ButtonDeleteAcademicYear data={row.original} />
           </div>
@@ -77,10 +84,10 @@ const CalendarAcademicViewModel = () => {
     },
   ]
 
-  function goToBackground(){
+  function goToBackground() {
     navigate('background')
   }
-  return { columns,goToBackground }
+  return { columns, goToBackground }
 }
 
 export default CalendarAcademicViewModel

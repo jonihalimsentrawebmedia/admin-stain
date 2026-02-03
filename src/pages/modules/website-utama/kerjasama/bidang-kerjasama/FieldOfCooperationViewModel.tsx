@@ -4,6 +4,7 @@ import type { ColumnDef } from '@tanstack/react-table'
 import { History } from 'lucide-react'
 import ButtonEditFieldOfCooperation from './components/ButtonEditFieldOfCooperation'
 import ButtonDeleteFieldOfCooperation from './components/ButtonDeleteFieldOfCooperation'
+import { IoLanguage } from 'react-icons/io5'
 
 const FieldOfCooperationViewModel = () => {
   const [searchParams] = useSearchParams()
@@ -35,9 +36,9 @@ const FieldOfCooperationViewModel = () => {
         return (
           <Link
             to={`/modules/website-utama/kerjasama/bidang-kerjasama/${row.original.id_bidang_kerjasama}/log`}
-            className="border border-[#2769CD] px-4 py-2 text-[#2769CD] rounded-lg flex gap-2 items-center"
+            className="border border-[#2769CD] px-3 py-1.5 w-fit text-[#2769CD] rounded-lg flex gap-2 items-center"
           >
-            <History className="text-[#2769CD] size-6" />
+            <History className="size-4" />
             Log
           </Link>
         )
@@ -49,6 +50,12 @@ const FieldOfCooperationViewModel = () => {
       cell: ({ row }) => {
         return (
           <div className="flex gap-2 items-center">
+            <Link
+              to={`language/${row?.original?.id_bidang_kerjasama}`}
+              className={'bg-primary p-1.5 text-white rounded'}
+            >
+              <IoLanguage />
+            </Link>
             <ButtonEditFieldOfCooperation data={row.original} />
             <ButtonDeleteFieldOfCooperation data={row.original} />
           </div>

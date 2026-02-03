@@ -4,11 +4,11 @@ import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
-import { IconEdit } from '@/components/common/table/icon'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import type { AcademicActivity } from '../../model/academicActivity'
 import { ActivityResolver, type IActivityTypeForm } from '../../model/resolverActivity'
 import ActivityForm from './ActivityForm'
+import { HiPencil } from 'react-icons/hi'
 
 interface Props {
   data: AcademicActivity
@@ -24,10 +24,13 @@ const ButtonEditActivity = ({ data }: Props) => {
 
   const handleSave = async (e: IActivityTypeForm) => {
     setLoading(true)
-    await AxiosClient.put(`/website-utama/tahun-akademik-kegiatan/${data.id_tahun_akademik_kegiatan}`, {
-      ...e,
-      id_tahun_akademik:data.id_tahun_akademik
-    })
+    await AxiosClient.put(
+      `/website-utama/tahun-akademik-kegiatan/${data.id_tahun_akademik_kegiatan}`,
+      {
+        ...e,
+        id_tahun_akademik: data.id_tahun_akademik,
+      }
+    )
       .then((res) => {
         if (res.data.status) {
           queryClient.invalidateQueries({
@@ -54,15 +57,16 @@ const ButtonEditActivity = ({ data }: Props) => {
             ...data,
           })
         }}
+        className={'bg-yellow-500 hover:bg-yellow-600 p-1.5 text-white rounded'}
       >
-        <IconEdit />
+        <HiPencil />
       </button>
 
       <DialogCustom
         open={open}
         className={'rounded lg:min-w-2xl'}
         setOpen={setOpen}
-          width='50%'
+        width="50%"
         title={'Edit Tahun Akademik'}
       >
         <ActivityForm

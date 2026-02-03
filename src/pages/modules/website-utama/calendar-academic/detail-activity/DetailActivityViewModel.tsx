@@ -7,6 +7,7 @@ import { Link, useParams } from 'react-router-dom'
 import { History } from 'lucide-react'
 import ButtonEditDetailActivity from './components/ButtonEditDetailActivity'
 import ButtonDeleteDetailActivity from './components/ButtonDeleteDetailActivity'
+import { IoLanguage } from 'react-icons/io5'
 
 const DetailActivityViewModel = () => {
   const form = useForm()
@@ -68,9 +69,9 @@ const DetailActivityViewModel = () => {
         return (
           <Link
             to={`/modules/website-utama/calendar-academic/${idAcademicYear}/detail-activity/${idActivity}/log-detail/${row.original.id_tahun_akademik_uraian_kegiatan}`}
-            className="border border-[#2769CD] px-4 py-2 text-[#2769CD] rounded-lg flex gap-2 items-center"
+            className="border border-[#2769CD] px-3 py-1.5 w-fit text-[#2769CD] rounded-lg flex gap-2 items-center"
           >
-            <History className="text-[#2769CD] size-6" />
+            <History className="size-4" />
             Log
           </Link>
         )
@@ -82,10 +83,14 @@ const DetailActivityViewModel = () => {
       cell: ({ row }) => {
         return (
           <div className="flex gap-2 items-center">
+            <Link
+              to={`language/${row?.original?.id_tahun_akademik_uraian_kegiatan}`}
+              className={'bg-primary p-1.5 text-white rounded'}
+            >
+              <IoLanguage />
+            </Link>
             <ButtonEditDetailActivity data={row.original} />
             <ButtonDeleteDetailActivity data={row.original} />
-            {/* <ButtonEditActivity data={row.original} />
-            <ButtonDeleteActivity data={row.original} /> */}
           </div>
         )
       },

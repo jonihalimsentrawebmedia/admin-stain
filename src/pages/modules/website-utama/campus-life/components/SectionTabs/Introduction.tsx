@@ -4,6 +4,8 @@ import { Accordion } from '@/components/ui/accordion.tsx'
 import { AccordionCustom } from '@/components/common/accordion'
 import { FormIntroduction } from '@/pages/modules/website-utama/campus-life/components/SectionTabs/forms.tsx'
 import { UseGetCampusLifeIntroduction } from '@/pages/modules/website-utama/campus-life/hooks'
+import { Link } from 'react-router-dom'
+import { IoLanguage } from 'react-icons/io5'
 
 export const SectionIntroduction = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -16,6 +18,14 @@ export const SectionIntroduction = () => {
           <ButtonTitleGroup
             label={'Pengantar'}
             buttonGroup={[
+              {
+                type: 'custom',
+                element: (
+                  <Link to={'pengantar/language'} className={'bg-primary p-1.5 rounded text-white'}>
+                    <IoLanguage />
+                  </Link>
+                ),
+              },
               {
                 type: 'edit',
                 label: 'Edit Data',

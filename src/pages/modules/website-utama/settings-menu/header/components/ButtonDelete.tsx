@@ -1,5 +1,4 @@
 import { DialogCustom } from '@/components/common/dialog/DialogCustom'
-import { IconDelete } from '@/components/common/table/icon'
 import AxiosClient from '@/provider/axios'
 import { useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
@@ -9,6 +8,7 @@ import { useForm } from 'react-hook-form'
 import DetailField from '@/components/common/field/DetailField'
 import { Button } from '@/components/ui/button'
 import { Trash2, X } from 'lucide-react'
+import { FaTrash } from 'react-icons/fa'
 
 interface Props {
   isSubMenu?: boolean
@@ -73,7 +73,7 @@ const ButtonDelete = ({ data, isSubMenu, menu_parent_name }: Props) => {
     },
   ]
   const queryClient = useQueryClient()
- 
+
   const handleDelete = async () => {
     setLoading(true)
     await AxiosClient.delete(`/website-utama/menu/${data?.id_menu}`)
@@ -96,6 +96,7 @@ const ButtonDelete = ({ data, isSubMenu, menu_parent_name }: Props) => {
   return (
     <>
       <button
+        className={'bg-red-500 text-white rounded p-1.5'}
         onClick={() => {
           setOpen(!open)
           form.reset({
@@ -105,7 +106,7 @@ const ButtonDelete = ({ data, isSubMenu, menu_parent_name }: Props) => {
           })
         }}
       >
-        <IconDelete />
+        <FaTrash />
       </button>
 
       <DialogCustom

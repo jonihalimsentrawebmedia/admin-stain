@@ -4,11 +4,11 @@ import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
-import { IconDelete } from '@/components/common/table/icon'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import DetailField from '@/components/common/field/DetailField'
 import { Button } from '@/components/ui/button'
 import { Trash2, X } from 'lucide-react'
+import { FaTrash } from 'react-icons/fa'
 
 interface Props {
   data: ActivityDetail
@@ -78,13 +78,14 @@ const ButtonDeleteDetailActivity = ({ data }: Props) => {
             ...data,
           })
         }}
+        className={'bg-red-500 hover:bg-red-600 p-1.5 text-white rounded'}
       >
-        <IconDelete />
+        <FaTrash />
       </button>
 
       <DialogCustom
         open={open}
-                width='50%'
+        width="50%"
         className={'rounded min-w-sm sm:min-w-2xl'}
         setOpen={setOpen}
         title={<p className="text-2xl text-red-500">Hapus Kegiatan Akademik</p>}

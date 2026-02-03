@@ -2,9 +2,11 @@ import type { ColumnDef } from '@tanstack/react-table'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import type { CalloborationList } from './model'
 import { History } from 'lucide-react'
-import { IconDetail2, IconEdit } from '@/components/common/table/icon'
 import ButtonDeleteCalloborationList from './components/ButtonDeleteCalloborationList'
 import { formatDateTime } from '@/utils/date'
+import { IoLanguage } from 'react-icons/io5'
+import { MdInfo } from 'react-icons/md'
+import { HiPencil } from 'react-icons/hi'
 
 const CalloborationListViewModel = () => {
   const navigate = useNavigate()
@@ -86,9 +88,9 @@ const CalloborationListViewModel = () => {
         return (
           <Link
             to={`/modules/website-utama/kerjasama/daftar-kerjasama/${row.original.id_kerjasama}/log`}
-            className="border border-[#2769CD] px-4 py-2 text-[#2769CD] rounded-lg flex gap-2 items-center"
+            className="border border-[#2769CD] px-3 py-1.5 w-fit text-[#2769CD] rounded-lg flex gap-2 items-center"
           >
-            <History className="text-[#2769CD] size-6" />
+            <History className="size-4" />
             Log
           </Link>
         )
@@ -100,13 +102,23 @@ const CalloborationListViewModel = () => {
       cell: ({ row }) => {
         return (
           <div className="flex gap-2 items-center">
-            <Link to={`/modules/website-utama/kerjasama/daftar-kerjasama/${row.original.id_kerjasama}/detail`}>
-              <IconDetail2 />
+            <Link
+              to={`language/${row?.original?.id_kerjasama}`}
+              className={'bg-primary text-white rounded p-1.5'}
+            >
+              <IoLanguage />
             </Link>
             <Link
+              className={'bg-blue-500 p-1.5 text-white hover:bg-blue-600 rounded'}
+              to={`/modules/website-utama/kerjasama/daftar-kerjasama/${row.original.id_kerjasama}/detail`}
+            >
+              <MdInfo />
+            </Link>
+            <Link
+              className={'p-1.5 bg-yellow-500 text-white hover:bg-yellow-600 rounded'}
               to={`/modules/website-utama/kerjasama/daftar-kerjasama/${row.original.id_kerjasama}/edit`}
             >
-              <IconEdit />
+              <HiPencil />
             </Link>
             <ButtonDeleteCalloborationList data={row.original} />
           </div>

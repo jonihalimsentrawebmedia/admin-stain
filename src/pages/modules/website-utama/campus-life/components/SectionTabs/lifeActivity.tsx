@@ -4,6 +4,8 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { AccordionCustom } from '@/components/common/accordion'
 import { Accordion } from '@/components/ui/accordion.tsx'
 import { LifeActivityForm } from '@/pages/modules/website-utama/campus-life/components/SectionTabs/lifeActivityForm.tsx'
+import { Link } from 'react-router-dom'
+import { IoLanguage } from 'react-icons/io5'
 
 export const LifeActivitySection = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -16,6 +18,14 @@ export const LifeActivitySection = () => {
           <ButtonTitleGroup
             label={'Unit Kegiatan Mahasiswa'}
             buttonGroup={[
+              {
+                type: 'custom',
+                element: (
+                  <Link to={'ukm/language'} className={'bg-primary p-1.5 rounded text-white'}>
+                    <IoLanguage />
+                  </Link>
+                ),
+              },
               {
                 type: 'edit',
                 label: 'Edit Data',

@@ -153,6 +153,25 @@ import { SKMLanguagePage } from '@/pages/modules/website-utama/surat-keterangan-
 import { LogActivitySKM } from '@/pages/modules/website-utama/surat-keterangan-mahasiswa/log'
 import { RegisteredPathLanguagePage } from '@/pages/modules/website-utama/jalur-pendaftaran/language'
 import { AcademicRulesLanguagePage } from '@/pages/modules/website-utama/peraturan-akademik/language'
+import { HeaderMenuLanguagePage } from '@/pages/modules/website-utama/settings-menu/header/language'
+import { FooterLanguagePage } from '@/pages/modules/website-utama/settings-menu/Footer/language'
+import { CorporationCategoryLanguagePage } from '@/pages/modules/website-utama/kerjasama/kategori-kerjasama/language'
+import { CorporationSubCategoryLanguagePage } from '@/pages/modules/website-utama/kerjasama/sub-kategori-kerjasama/language'
+import { TypeCollaborationLanguagePage } from '@/pages/modules/website-utama/kerjasama/jenis-kerjasama/language'
+import { FieldCollaborationLanguagePage } from '@/pages/modules/website-utama/kerjasama/bidang-kerjasama/language'
+import { CollaborationLanguagePage } from '@/pages/modules/website-utama/kerjasama/daftar-kerjasama/language'
+import { StatisticLanguagePage } from '@/pages/modules/website-utama/statistic/language'
+import { YearAcademicLanguagePage } from '@/pages/modules/website-utama/calendar-academic/language'
+import { YearAcademicActivityLanguagePage } from '@/pages/modules/website-utama/calendar-academic/detail/language'
+import { YearActivityDetailLanguagePage } from '@/pages/modules/website-utama/calendar-academic/detail-activity/language'
+import { AccreditationLanguagePage } from '@/pages/modules/website-utama/acreditation/language'
+import { IdentityLanguagePage } from '@/pages/modules/website-utama/Identity/language'
+import { TextIntroduceLanguagePage } from '@/pages/modules/website-utama/campus-life/language/pengantar'
+import { TextFacilitiesLanguagePage } from '@/pages/modules/website-utama/campus-life/language/fasilitas'
+import { TextUnitActivityLanguagePage } from '@/pages/modules/website-utama/campus-life/language/ukm'
+import { TextPerformanceLanguagePage } from '@/pages/modules/website-utama/campus-life/language/prestasi'
+import { TextTestimonyLanguagePage } from '@/pages/modules/website-utama/campus-life/language/testimoni'
+import { TextDirectUrlLanguagePage } from '@/pages/modules/website-utama/campus-life/language/directLink'
 
 export const MainWebsiteRouter = [
   {
@@ -576,6 +595,10 @@ export const MainWebsiteRouter = [
             element: <SettingMenuHeaderView />,
           },
           {
+            path: 'language/:id',
+            element: <HeaderMenuLanguagePage />,
+          },
+          {
             path: ':id',
             children: [
               {
@@ -610,6 +633,10 @@ export const MainWebsiteRouter = [
           {
             index: true,
             element: <FooterContent />,
+          },
+          {
+            path: 'language',
+            element: <FooterLanguagePage />,
           },
           {
             path: 'log',
@@ -653,6 +680,10 @@ export const MainWebsiteRouter = [
         element: <CalendarAcademicView />,
       },
       {
+        path: 'language/:id',
+        element: <YearAcademicLanguagePage />,
+      },
+      {
         path: 'background',
         element: <CalendarAcademicBackgroundView />,
       },
@@ -664,10 +695,13 @@ export const MainWebsiteRouter = [
             element: <CalendarAcademicDetailView />,
           },
           {
+            path: 'language/:id',
+            element: <YearAcademicActivityLanguagePage />,
+          },
+          {
             path: 'log',
             element: <LogAcademicYear />,
           },
-
           {
             path: 'detail-activity',
             children: [
@@ -681,6 +715,10 @@ export const MainWebsiteRouter = [
                   {
                     index: true,
                     element: <DetailActivityView />,
+                  },
+                  {
+                    path: 'language/:id',
+                    element: <YearActivityDetailLanguagePage />,
                   },
                   {
                     path: 'log',
@@ -706,6 +744,10 @@ export const MainWebsiteRouter = [
         element: <StatisticView />,
       },
       {
+        path: 'language',
+        element: <StatisticLanguagePage />,
+      },
+      {
         path: 'log',
         element: <LogStatisticView />,
       },
@@ -717,6 +759,10 @@ export const MainWebsiteRouter = [
       {
         index: true,
         element: <AcreditationView />,
+      },
+      {
+        path: 'language/:id',
+        element: <AccreditationLanguagePage />,
       },
       {
         path: 'background',
@@ -761,6 +807,10 @@ export const MainWebsiteRouter = [
         element: <PageIdentity />,
       },
       {
+        path: 'language',
+        element: <IdentityLanguagePage />,
+      },
+      {
         path: 'update',
         element: <UpdateIdentityPage />,
       },
@@ -799,6 +849,30 @@ export const MainWebsiteRouter = [
         element: <CampusLifePage />,
       },
       {
+        path: 'pengantar/language',
+        element: <TextIntroduceLanguagePage />,
+      },
+      {
+        path: 'fasilitas/language',
+        element: <TextFacilitiesLanguagePage />,
+      },
+      {
+        path: 'ukm/language',
+        element: <TextUnitActivityLanguagePage />,
+      },
+      {
+        path: 'prestasi/language',
+        element: <TextPerformanceLanguagePage />,
+      },
+      {
+        path: 'testimoni/language/:id',
+        element: <TextTestimonyLanguagePage />,
+      },
+      {
+        path: 'link/language',
+        element: <TextDirectUrlLanguagePage />,
+      },
+      {
         path: 'background',
         element: <CampusLifeBackground />,
       },
@@ -809,11 +883,14 @@ export const MainWebsiteRouter = [
     children: [
       {
         path: 'kategori-kerjasama',
-
         children: [
           {
             index: true,
             element: <CalloborationCategoryView />,
+          },
+          {
+            path: 'language/:id',
+            element: <CorporationCategoryLanguagePage />,
           },
           {
             path: ':idCalloborationCategory',
@@ -828,11 +905,14 @@ export const MainWebsiteRouter = [
       },
       {
         path: 'sub-kategori-kerjasama',
-
         children: [
           {
             index: true,
             element: <SubCalloborationCategoryView />,
+          },
+          {
+            path: 'language/:id',
+            element: <CorporationSubCategoryLanguagePage />,
           },
           {
             path: ':idSubCalloborationCategory',
@@ -847,11 +927,14 @@ export const MainWebsiteRouter = [
       },
       {
         path: 'jenis-kerjasama',
-
         children: [
           {
             index: true,
             element: <TypeOfCalloborationView />,
+          },
+          {
+            path: 'language/:id',
+            element: <TypeCollaborationLanguagePage />,
           },
           {
             path: ':idTypeOfCalloboration',
@@ -866,11 +949,14 @@ export const MainWebsiteRouter = [
       },
       {
         path: 'bidang-kerjasama',
-
         children: [
           {
             index: true,
             element: <FieldOfCooperationView />,
+          },
+          {
+            path: 'language/:id',
+            element: <FieldCollaborationLanguagePage />,
           },
           {
             path: ':idFieldOfCooperation',
@@ -890,6 +976,10 @@ export const MainWebsiteRouter = [
           {
             path: 'add',
             element: <CalloborationCreateView />,
+          },
+          {
+            path: 'language/:id',
+            element: <CollaborationLanguagePage />,
           },
           {
             path: ':idCalloboration',

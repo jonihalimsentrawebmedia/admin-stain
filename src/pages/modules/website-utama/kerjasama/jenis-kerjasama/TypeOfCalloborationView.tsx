@@ -7,8 +7,8 @@ import SelectFilter from '@/components/common/filter/SelectFilter'
 
 const TypeOfCalloborationView = () => {
   const { columns } = TypeOfCalloborationViewModel()
-
   const { typeOfCalloboration, loading, meta } = useGetTypeOfCalloboration()
+  
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup

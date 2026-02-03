@@ -1,12 +1,13 @@
-import type { ColumnDef } from "@tanstack/react-table"
-import { Link, useSearchParams } from "react-router-dom"
-import type { SubCalloborationCategory } from "./model"
-import { History } from "lucide-react"
-import ButtonEditSubCalloborationCategory from "./components/ButtonEditSubCalloborationCategory"
-import ButtonDeleteSubCalloborationCategory from "./components/ButtonDeleteSubCalloborationCategory"
+import type { ColumnDef } from '@tanstack/react-table'
+import { Link, useSearchParams } from 'react-router-dom'
+import type { SubCalloborationCategory } from './model'
+import { History } from 'lucide-react'
+import ButtonEditSubCalloborationCategory from './components/ButtonEditSubCalloborationCategory'
+import ButtonDeleteSubCalloborationCategory from './components/ButtonDeleteSubCalloborationCategory'
+import { IoLanguage } from 'react-icons/io5'
 
 const SubCalloborationCategoryViewModel = () => {
-   const [searchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') ?? 1)
   const limit = Number(searchParams.get('limit') ?? 10)
 
@@ -31,7 +32,6 @@ const SubCalloborationCategoryViewModel = () => {
       accessorKey: 'jumlah_kerjasama',
       header: 'Jumlah Kerjasama',
     },
-  
 
     {
       accessorKey: 'log',
@@ -54,6 +54,12 @@ const SubCalloborationCategoryViewModel = () => {
       cell: ({ row }) => {
         return (
           <div className="flex gap-2 items-center">
+            <Link
+              to={`language/${row?.original?.id_sub_kategori_kerjasama}`}
+              className={'bg-primary p-1.5 text-white rounded'}
+            >
+              <IoLanguage />
+            </Link>
             <ButtonEditSubCalloborationCategory data={row.original} />
             <ButtonDeleteSubCalloborationCategory data={row.original} />
           </div>
@@ -61,7 +67,6 @@ const SubCalloborationCategoryViewModel = () => {
       },
     },
   ]
-
 
   return { columns }
 }

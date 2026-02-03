@@ -5,7 +5,6 @@ import type { ISatuanOrganisasi } from '../../controller/useGetSatuanOrganisasiP
 import { cekSelisihHari, formatDateTime } from '@/utils/date'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
-import { FastForward } from 'lucide-react'
 
 import { IoInformationCircle } from 'react-icons/io5'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom'
@@ -14,6 +13,7 @@ import SelectFilter from '@/components/common/filter/SelectFilter'
 import ModalAccept from './ModalAccept'
 import ModalCancel from './ModalCancel'
 import { IconCancel, IconChecklist } from '@/components/common/table/icon'
+import { FaForward } from 'react-icons/fa'
 export function colostStatusPublish(color: string) {
   return color == 'DIPROSES'
     ? 'text-[#2769CD]'
@@ -126,7 +126,7 @@ const SubmissionDetailButton = () => {
               variant={'outline'}
               className="border border-primary text-primary hover:text-primary"
             >
-              <FastForward className="size-4" />
+              <FaForward className="size-4" />
               Lihat Data
             </Button>
           </Link>

@@ -1,4 +1,4 @@
-import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
+  import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
 import TableSettingMenuHeader from './components/TableSettingMenuHeader'
 import ButtonAdd from './components/ButtonAdd'
 

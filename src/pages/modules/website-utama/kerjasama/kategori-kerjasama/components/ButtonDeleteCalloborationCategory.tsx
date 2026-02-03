@@ -4,11 +4,11 @@ import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
-import { IconDelete } from '@/components/common/table/icon'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import DetailField from '@/components/common/field/DetailField'
 import { Button } from '@/components/ui/button'
 import { Trash2, X } from 'lucide-react'
+import { FaTrash } from 'react-icons/fa'
 
 interface Props {
   data: CalloborationCategoryList
@@ -52,6 +52,7 @@ const ButtonDeleteCalloborationCategory = ({ data }: Props) => {
   return (
     <>
       <button
+        className={'p-1.5 text-white bg-red-500 rounded hover:bg-red-600'}
         onClick={() => {
           setOpen(!open)
           form.reset({
@@ -59,7 +60,7 @@ const ButtonDeleteCalloborationCategory = ({ data }: Props) => {
           })
         }}
       >
-        <IconDelete />
+        <FaTrash />
       </button>
 
       <DialogCustom
@@ -70,7 +71,6 @@ const ButtonDeleteCalloborationCategory = ({ data }: Props) => {
         title={<p className="text-2xl text-red-500">Hapus Kategori Bersama</p>}
         description={'Anda yakin ingin menghapus kategori bersama ini?'}
       >
-      
         <DetailField data={field} form={form} />
         <div className="flex gap-4 items-center justify-end">
           <Button

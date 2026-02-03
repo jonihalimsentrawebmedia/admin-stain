@@ -4,12 +4,11 @@ import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
-import { IconDelete } from '@/components/common/table/icon'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import DetailField from '@/components/common/field/DetailField'
 import { Button } from '@/components/ui/button'
 import { Trash2, X } from 'lucide-react'
-
+import { FaTrash } from 'react-icons/fa'
 
 interface Props {
   data: AcreditationList
@@ -53,9 +52,7 @@ const ButtonDeleteAcreditation = ({ data }: Props) => {
 
   const handleDelete = async () => {
     setLoading(true)
-    await AxiosClient.delete(
-      `/website-utama/akreditas/${data?.id_akreditas}`
-    )
+    await AxiosClient.delete(`/website-utama/akreditas/${data?.id_akreditas}`)
       .then((res) => {
         if (res?.data?.status) {
           setOpen(false)
@@ -71,7 +68,7 @@ const ButtonDeleteAcreditation = ({ data }: Props) => {
         setLoading(false)
       })
   }
- 
+
   return (
     <>
       <button
@@ -79,19 +76,20 @@ const ButtonDeleteAcreditation = ({ data }: Props) => {
           setOpen(!open)
           form.reset({
             ...data,
-            akhir_berlaku: data.akhir_berlaku.split("-").reverse().join("-"),
-            mulai_berlaku: data.mulai_berlaku.split("-").reverse().join("-"),
+            akhir_berlaku: data.akhir_berlaku.split('-').reverse().join('-'),
+            mulai_berlaku: data.mulai_berlaku.split('-').reverse().join('-'),
           })
         }}
+        className={'bg-red-500 text-white hover:bg-red-600 rounded p-1.5'}
       >
-        <IconDelete />
+        <FaTrash />
       </button>
 
       <DialogCustom
         open={open}
         className={'rounded min-w-xs lg:min-w-2xl'}
         setOpen={setOpen}
-           width='50%'
+        width="50%"
         title={<p className="text-2xl text-red-500">Hapus Akreditasi</p>}
         description={'Anda yakin ingin menghapus akreditasi ini?'}
       >

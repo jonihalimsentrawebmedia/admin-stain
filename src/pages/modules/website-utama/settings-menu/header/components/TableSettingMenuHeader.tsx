@@ -17,6 +17,7 @@ import { Link } from 'react-router-dom'
 import ButtonActiveMenu from './ButtonActiveMenu'
 import Cookies from 'js-cookie'
 import React from 'react'
+import { IoLanguage } from 'react-icons/io5'
 
 const TableSettingMenuHeader = () => {
   const { loading, menuList } = useGetSettingsMenu()
@@ -68,7 +69,7 @@ const TableSettingMenuHeader = () => {
               ))
           : menuList.map((item, index) => (
               <React.Fragment key={'parent' + index}>
-                <TableRow  className="py-0!">
+                <TableRow className="py-0!">
                   <TableCell className="border-b  left-0 relative">
                     <div className="">{index + 1}</div>
                   </TableCell>
@@ -102,14 +103,20 @@ const TableSettingMenuHeader = () => {
                   </TableCell>
                   <TableCell className="border-b">
                     <div className="flex gap-2 items-center">
+                      <Link
+                        to={`language/${item?.id_menu}?${item?.id_parent_menu ? `parent=${item?.id_parent_menu}` : ''}`}
+                        className={'p-1.5 bg-primary text-white rounded'}
+                      >
+                        <IoLanguage />
+                      </Link>
                       <ButtonEdit data={item} />
                       <ButtonDelete data={item} />
                     </div>
                   </TableCell>
                 </TableRow>
                 {item.children.map((subItem, indexSub) => (
-                  <React.Fragment key={'subParent' + index + indexSub} >
-                    <TableRow  className="py-0!">
+                  <React.Fragment key={'subParent' + index + indexSub}>
+                    <TableRow className="py-0!">
                       <TableCell className="border-b relative">
                         <div className="pl-4  ">
                           {index + 1}.{indexSub + 1}
@@ -153,8 +160,13 @@ const TableSettingMenuHeader = () => {
                       </TableCell>
                       <TableCell className="border-b">
                         <div className="flex gap-2 items-center">
+                          <Link
+                            to={`language/${subItem?.id_menu}?${subItem?.id_parent_menu ? `parent=${subItem?.id_parent_menu}` : ''}`}
+                            className={'p-1.5 bg-primary text-white rounded'}
+                          >
+                            <IoLanguage />
+                          </Link>
                           <ButtonEdit data={subItem} />
-
                           <ButtonDelete
                             data={subItem}
                             isSubMenu
@@ -214,6 +226,12 @@ const TableSettingMenuHeader = () => {
                         </TableCell>
                         <TableCell className="border-b">
                           <div className="flex gap-2 items-center">
+                            <Link
+                              to={`language/${subSubItem?.id_menu}?${subSubItem?.id_parent_menu ? `parent=${subSubItem?.id_parent_menu}` : ''}`}
+                              className={'p-1.5 bg-primary text-white rounded'}
+                            >
+                              <IoLanguage />
+                            </Link>
                             <ButtonEdit data={subSubItem} />
                             <ButtonDelete
                               data={subSubItem}

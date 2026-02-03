@@ -1,21 +1,21 @@
-import { useForm } from "react-hook-form"
-import { TypeOfCalloborationResolver, type ITypeOfCalloborationTypeForm } from "../model/resolver"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useState } from "react"
-import { useQueryClient } from "@tanstack/react-query"
-import AxiosClient from "@/provider/axios"
-import type { TypeOfCalloborationList } from "../model"
-import { toast } from "react-toastify"
-import { IconEdit } from "@/components/common/table/icon"
-import { DialogCustom } from "@/components/common/dialog/DialogCustom"
-import { Form } from "@/components/ui/form"
-import TextInput from "@/components/common/form/TextInput"
-import ButtonForm from "@/components/common/button/ButtonForm"
-interface Props{
-  data:TypeOfCalloborationList
+import { useForm } from 'react-hook-form'
+import { TypeOfCalloborationResolver, type ITypeOfCalloborationTypeForm } from '../model/resolver'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useState } from 'react'
+import { useQueryClient } from '@tanstack/react-query'
+import AxiosClient from '@/provider/axios'
+import type { TypeOfCalloborationList } from '../model'
+import { toast } from 'react-toastify'
+import { DialogCustom } from '@/components/common/dialog/DialogCustom'
+import { Form } from '@/components/ui/form'
+import TextInput from '@/components/common/form/TextInput'
+import ButtonForm from '@/components/common/button/ButtonForm'
+import { HiPencil } from 'react-icons/hi'
+interface Props {
+  data: TypeOfCalloborationList
 }
-const ButtonEditTypeOfCalloboration = ({data}:Props) => {
- const form = useForm<ITypeOfCalloborationTypeForm>({
+const ButtonEditTypeOfCalloboration = ({ data }: Props) => {
+  const form = useForm<ITypeOfCalloborationTypeForm>({
     resolver: zodResolver(TypeOfCalloborationResolver),
   })
   const [open, setOpen] = useState(false)
@@ -47,17 +47,17 @@ const ButtonEditTypeOfCalloboration = ({data}:Props) => {
 
   return (
     <>
-     <button
-           onClick={() => {
-             setOpen(true)
-             form.reset({
-               ...data,
-             
-             })
-           }}
-         >
-           <IconEdit />
-         </button>
+      <button
+        className={'p-1.5 text-white bg-yellow-500 rounded hover:bg-yellow-600'}
+        onClick={() => {
+          setOpen(true)
+          form.reset({
+            ...data,
+          })
+        }}
+      >
+        <HiPencil />
+      </button>
 
       <DialogCustom
         open={open}

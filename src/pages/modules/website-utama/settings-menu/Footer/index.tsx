@@ -9,7 +9,8 @@ import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { Button } from '@/components/ui/button.tsx'
 import { MdOutlineHistory } from 'react-icons/md'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { IoLanguage } from 'react-icons/io5'
 
 export const FooterContent = () => {
   const form = useForm()
@@ -50,6 +51,14 @@ export const FooterContent = () => {
           <ButtonTitleGroup
             label={'Footer'}
             buttonGroup={[
+              {
+                type: 'custom',
+                element: (
+                  <Link to={'language'} className={'bg-primary p-2 rounded text-white'}>
+                    <IoLanguage />
+                  </Link>
+                ),
+              },
               { type: 'edit', label: 'Edit', onClick: () => setIsEdit(!isEdit) },
               {
                 type: 'custom',
