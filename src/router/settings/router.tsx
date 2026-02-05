@@ -41,6 +41,7 @@ import ChangePasswordProfileView from '@/pages/modules/settings/dashboard/change
 import CountryView from '@/pages/modules/settings/reference/country/CountryView'
 import ProvinceView from '@/pages/modules/settings/reference/province/ProvinceView'
 import RegencyView from '@/pages/modules/settings/reference/regency/RegencyView'
+import { NewsCategoryLanguagePage } from '@/pages/modules/settings/reference/news-category/language'
 export const SettingRouter = [
   {
     path: 'dashboard',
@@ -231,6 +232,10 @@ export const SettingRouter = [
       {
         path: 'news-category',
         element: <NewsCategoryView />,
+      },
+      {
+        path: 'news-category/language/:id',
+        element: <NewsCategoryLanguagePage />,
       },
       {
         path: 'group-rank',

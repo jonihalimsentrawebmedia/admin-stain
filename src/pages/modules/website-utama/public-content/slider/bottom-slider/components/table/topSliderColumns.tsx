@@ -7,6 +7,7 @@ import { RxExternalLink } from 'react-icons/rx'
 import { ButonDeleteBottomSlider } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/components/butonDelete.tsx'
 import { ButtonApprovedBottom } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/components/buttonApproved.tsx'
 import { MdOutlineHistory } from 'react-icons/md'
+import { IoLanguage } from 'react-icons/io5'
 
 const BottomSliderColumns = () => {
   const [searchParams] = useSearchParams()
@@ -82,6 +83,9 @@ const BottomSliderColumns = () => {
         return (
           <div className={'w-fit flex flex-col gap-1.5 items-center'}>
             <div className={'flex justify-center items-center gap-1.5 w-fit'}>
+              <Link to={`language/${id}`} className={'bg-primary text-white p-1.5 rounded'}>
+                <IoLanguage />
+              </Link>
               <Link to={`edit/${id}`}>
                 <button className={'bg-yellow-500 p-1.5 rounded text-white hover:bg-yellow-600'}>
                   <HiPencil />

@@ -1,74 +1,67 @@
-import { DialogCustom } from "@/components/common/dialog/DialogCustom";
+import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 
-import { Form } from "@/components/ui/form";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Form } from '@/components/ui/form'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 
-import ButtonForm from "@/components/common/button/ButtonForm";
-import { InputText } from "@/components/common/form/InputText";
-import { IconEdit } from "@/components/common/table/icon";
-import {
-  NewsCategoryResolver,
-  type NewsCategoryList,
-  type NewsCategoryType,
-} from "../model";
-import AxiosClient from "@/provider/axios";
-import { toast } from "react-toastify";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useQueryClient } from "@tanstack/react-query";
+import ButtonForm from '@/components/common/button/ButtonForm'
+import { InputText } from '@/components/common/form/InputText'
+import { NewsCategoryResolver, type NewsCategoryList, type NewsCategoryType } from '../model'
+import AxiosClient from '@/provider/axios'
+import { toast } from 'react-toastify'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useQueryClient } from '@tanstack/react-query'
+import { HiPencil } from 'react-icons/hi'
+
 interface Props {
-  data: NewsCategoryList;
+  data: NewsCategoryList
 }
 const ButtonEditNewsCategory = ({ data }: Props) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
   const form = useForm<NewsCategoryType>({
     resolver: zodResolver(NewsCategoryResolver),
-  });
+  })
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
   async function handleSave(values: NewsCategoryType) {
-    setLoading(true);
+    setLoading(true)
     try {
       const res = await AxiosClient.put(
         `/pengaturan/referensi/kategori-berita/${data.id_kategori}`,
         values
-      );
+      )
 
       if (res.data.status) {
-        toast.success(res.data.message);
+        toast.success(res.data.message)
 
         await queryClient.invalidateQueries({
-          queryKey: ["settings-news-category"],
-        });
-        setOpen(false);
-             form.reset();
+          queryKey: ['settings-news-category'],
+        })
+        setOpen(false)
+        form.reset()
       }
     } catch (err: any) {
-      toast.error(
-        err?.response?.data?.message || "Terjadi kesalahan, silakan coba lagi."
-      );
+      toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
     } finally {
-      setLoading(false);
-    
- 
+      setLoading(false)
     }
-    setLoading(false);
+    setLoading(false)
   }
   return (
     <>
       <button
-        className="cursor-pointer"
+        className="cursor-pointer p-1.5 bg-yellow-500 hover:bg-yellow-600 text-white rounded"
         onClick={() => {
-          setOpen(true);
+          setOpen(true)
 
           form.reset({
             nama_kategori: data.nama_kategori,
-          });
+          })
         }}
       >
-        <IconEdit />
+        <HiPencil />
       </button>
 
       <DialogCustom
@@ -79,10 +72,7 @@ const ButtonEditNewsCategory = ({ data }: Props) => {
       >
         <div className="flex flex-col gap-4">
           <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(handleSave)}
-              className="flex flex-col gap-4"
-            >
+            <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
               <InputText
                 form={form}
                 name="nama_kategori"
@@ -93,7 +83,7 @@ const ButtonEditNewsCategory = ({ data }: Props) => {
               <ButtonForm
                 loading={loading}
                 onCancel={() => {
-                  setOpen(false);
+                  setOpen(false)
                 }}
               />
             </form>
@@ -101,7 +91,7 @@ const ButtonEditNewsCategory = ({ data }: Props) => {
         </div>
       </DialogCustom>
     </>
-  );
-};
+  )
+}
 
-export default ButtonEditNewsCategory;
+export default ButtonEditNewsCategory

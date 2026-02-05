@@ -1,55 +1,52 @@
-import { DialogCustom } from "@/components/common/dialog/DialogCustom";
-import { IconDelete } from "@/components/common/table/icon";
-import { Button } from "@/components/ui/button";
-import { Trash2, X } from "lucide-react";
-import { useState } from "react";
-import type { NewsCategoryList } from "../model";
-import { useQueryClient } from "@tanstack/react-query";
-import AxiosClient from "@/provider/axios";
-import { toast } from "react-toastify";
+import { DialogCustom } from '@/components/common/dialog/DialogCustom'
+import { Button } from '@/components/ui/button'
+import { Trash2, X } from 'lucide-react'
+import { useState } from 'react'
+import type { NewsCategoryList } from '../model'
+import { useQueryClient } from '@tanstack/react-query'
+import AxiosClient from '@/provider/axios'
+import { toast } from 'react-toastify'
+import { FaTrash } from 'react-icons/fa'
+
 interface Props {
-  data: NewsCategoryList;
+  data: NewsCategoryList
 }
 const ButtonDeleteNewsCategory = ({ data }: Props) => {
-  const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false)
+  const [loading, setLoading] = useState(false)
 
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
   async function handleDelete() {
-    setLoading(true);
+    setLoading(true)
     try {
       const res = await AxiosClient.delete(
         `/pengaturan/referensi/kategori-berita/${data.id_kategori}`
-      );
+      )
 
       if (res.data.status) {
-        toast.success(res.data.message);
+        toast.success(res.data.message)
 
         await queryClient.invalidateQueries({
-          queryKey: ["settings-news-category"],
-        });
-        setOpen(false);
+          queryKey: ['settings-news-category'],
+        })
+        setOpen(false)
       }
     } catch (err: any) {
-      toast.error(
-        err?.response?.data?.message || "Terjadi kesalahan, silakan coba lagi."
-      );
+      toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
     } finally {
-      setLoading(false);
-   
+      setLoading(false)
     }
-    setLoading(false);
+    setLoading(false)
   }
   return (
     <>
       <button
-        className="cursor-pointer"
+        className="cursor-pointer bg-red-500 p-1.5 text-white rounded hover:bg-red-600"
         onClick={() => {
-          setOpen(true);
+          setOpen(true)
         }}
       >
-        {" "}
-        <IconDelete />
+        <FaTrash />
       </button>
       <DialogCustom
         className="max-w-2xl! w-full!"
@@ -58,9 +55,9 @@ const ButtonDeleteNewsCategory = ({ data }: Props) => {
         title={<p className="text-2xl text-red-500">Hapus Kategori Berita</p>}
       >
         <p>
-          Anda akan menghapus kategori berita{" "}
-          <span className="font-bold">“{data.nama_kategori}”</span>. Apakah Anda
-          yakin untuk menghapus kategori berita yang dipilih?
+          Anda akan menghapus kategori berita{' '}
+          <span className="font-bold">“{data.nama_kategori}”</span>. Apakah Anda yakin untuk
+          menghapus kategori berita yang dipilih?
         </p>
 
         <div className="flex gap-4 items-center justify-end">
@@ -82,7 +79,7 @@ const ButtonDeleteNewsCategory = ({ data }: Props) => {
         </div>
       </DialogCustom>
     </>
-  );
-};
+  )
+}
 
-export default ButtonDeleteNewsCategory;
+export default ButtonDeleteNewsCategory

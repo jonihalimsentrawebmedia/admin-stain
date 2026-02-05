@@ -172,6 +172,8 @@ import { TextUnitActivityLanguagePage } from '@/pages/modules/website-utama/camp
 import { TextPerformanceLanguagePage } from '@/pages/modules/website-utama/campus-life/language/prestasi'
 import { TextTestimonyLanguagePage } from '@/pages/modules/website-utama/campus-life/language/testimoni'
 import { TextDirectUrlLanguagePage } from '@/pages/modules/website-utama/campus-life/language/directLink'
+import { TopSliderLanguagePage } from '@/pages/modules/website-utama/public-content/slider/top-slider/language'
+import { BottomSliderLanguagePage } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/language'
 
 export const MainWebsiteRouter = [
   {
@@ -218,6 +220,10 @@ export const MainWebsiteRouter = [
                 element: <TopSliderPublicContent />,
               },
               {
+                path: 'language/:id',
+                element: <TopSliderLanguagePage />,
+              },
+              {
                 path: 'add',
                 element: <CreateTopSlider />,
               },
@@ -237,6 +243,10 @@ export const MainWebsiteRouter = [
               {
                 index: true,
                 element: <BottomSliderPublicContent />,
+              },
+              {
+                path: 'language/:id',
+                element: <BottomSliderLanguagePage />,
               },
               {
                 path: 'add',
