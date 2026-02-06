@@ -56,6 +56,7 @@ import { BackgroundWebsiteSettings } from '@/pages/modules/website-prodi/setting
 import { ServiceProdiPage } from '@/pages/modules/website-prodi/service'
 import { LogDataServicePage } from '@/pages/modules/website-prodi/service/log'
 import { PrimaryAndFooterColorProdi } from '@/pages/modules/website-prodi/settings/color'
+import { TemplateWebsite } from '@/pages/modules/website-prodi/settings/template-website'
 
 export const WebsiteProdiRouter = [
   {
@@ -373,6 +374,10 @@ export const WebsiteProdiRouter = [
       {
         path: 'primary-color',
         element: <PrimaryAndFooterColorProdi />,
+      },
+      {
+        path: 'template',
+        element: <TemplateWebsite />,
       },
     ],
   },

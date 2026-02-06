@@ -149,6 +149,11 @@ export const MENULISTPRODI = [
         name: 'Pengaturan Warna Prodi',
         path: `${baseDomain}/settings/primary-color`,
       },
+      {
+        id: 105,
+        name: 'Template Website',
+        path: `${baseDomain}/settings/template`,
+      },
     ],
   },
 ]
