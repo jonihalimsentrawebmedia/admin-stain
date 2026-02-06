@@ -10,7 +10,7 @@ interface Props {
   loading: boolean
 }
 
-export const FormLanguageNewsCategory = (props: Props) => {
+export const FormLanguageRankedAcademic = (props: Props) => {
   const { form, HandleSave, loading } = props
   const navigate = useNavigate()
   return (
@@ -37,12 +37,12 @@ export const FormLanguageNewsCategory = (props: Props) => {
           />
 
           <TextInput
-            name={'nama_kategori'}
-            placeholder={'Nama Kategori'}
+            name={'nama_akademik'}
+            placeholder={'Nama Kategori Akademik'}
             form={form}
             isRequired
             isRow
-            label={'Nama Kategori'}
+            label={'Nama Kategori Akademik'}
             inputClassName={'bg-white text-black'}
           />
           <ButtonTitleGroup

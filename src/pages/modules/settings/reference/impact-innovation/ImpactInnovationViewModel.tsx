@@ -1,13 +1,15 @@
 import type { ColumnDef } from '@tanstack/react-table'
-import { useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import ButtonEditImpactInnovation from './components/ButtonEditImpactInnovation'
 import ButtonDeleteImpactInnovation from './components/ButtonDeleteImpactInnovation'
+import type { InovationList } from '@/pages/modules/settings/reference/impact-innovation/model'
+import { IoLanguage } from 'react-icons/io5'
 
 const ImpactInnovationViewModel = () => {
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') || 1)
   const limit = Number(searchParams.get('limit') || 10)
-  const columns: ColumnDef<any>[] = [
+  const columns: ColumnDef<InovationList>[] = [
     // ✅ Nomor (#)
     {
       accessorKey: 'no',
@@ -28,7 +30,13 @@ const ImpactInnovationViewModel = () => {
       cell: (row) => {
         const values = row.row.original
         return (
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 items-center justify-end">
+            <Link
+              to={`language/${values?.id_inovasi}`}
+              className={'bg-primary text-white p-1.5 rounded'}
+            >
+              <IoLanguage />
+            </Link>
             <ButtonEditImpactInnovation data={values} />
             <ButtonDeleteImpactInnovation data={values} />
           </div>

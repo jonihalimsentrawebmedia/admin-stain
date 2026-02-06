@@ -1,5 +1,4 @@
 import { DialogCustom } from '@/components/common/dialog/DialogCustom'
-import { IconDelete } from '@/components/common/table/icon'
 import { Button } from '@/components/ui/button'
 import { useQueryClient } from '@tanstack/react-query'
 import { Trash2, X } from 'lucide-react'
@@ -7,6 +6,8 @@ import { useState } from 'react'
 import type { InovationList } from '../model'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
+import { FaTrash } from 'react-icons/fa'
+
 interface Props {
   data: InovationList
 }
@@ -39,12 +40,12 @@ const ButtonDeleteImpactInnovation = ({ data }: Props) => {
   return (
     <>
       <button
-        className="cursor-pointer"
+        className="cursor-pointer bg-red-500 p-1.5 text-white rounded hover:bg-red-600"
         onClick={() => {
           setOpen(true)
         }}
       >
-        <IconDelete />
+        <FaTrash />
       </button>
       <DialogCustom
         className="max-w-2xl! w-full!"
@@ -53,8 +54,9 @@ const ButtonDeleteImpactInnovation = ({ data }: Props) => {
         title={<p className="text-2xl text-red-500">Hapus Pangkat Akademik</p>}
       >
         <p>
-          Anda akan menghapus kategori Inovasi Berdampak <span className='font-bold'>“{data.nama_inovasi}”</span>. Apakah Anda
-          yakin untuk menghapus kategori berita yang dipilih?
+          Anda akan menghapus kategori Inovasi Berdampak{' '}
+          <span className="font-bold">“{data.nama_inovasi}”</span>. Apakah Anda yakin untuk
+          menghapus kategori berita yang dipilih?
         </p>
 
         <div className="flex gap-4 items-center justify-end">

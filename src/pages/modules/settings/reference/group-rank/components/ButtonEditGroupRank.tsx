@@ -1,72 +1,63 @@
-import { DialogCustom } from "@/components/common/dialog/DialogCustom";
+import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 
-import { Form } from "@/components/ui/form";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-
-import ButtonForm from "@/components/common/button/ButtonForm";
-import { InputText } from "@/components/common/form/InputText";
-import { IconEdit } from "@/components/common/table/icon";
-import {
-  GroupRankResolver,
-  type GroupRankList,
-  type GroupRankType,
-} from "../model";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useQueryClient } from "@tanstack/react-query";
-import AxiosClient from "@/provider/axios";
-import { toast } from "react-toastify";
+import { Form } from '@/components/ui/form'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import ButtonForm from '@/components/common/button/ButtonForm'
+import { InputText } from '@/components/common/form/InputText'
+import { GroupRankResolver, type GroupRankList, type GroupRankType } from '../model'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useQueryClient } from '@tanstack/react-query'
+import AxiosClient from '@/provider/axios'
+import { toast } from 'react-toastify'
+import { HiPencil } from 'react-icons/hi'
 interface Props {
-  data: GroupRankList;
+  data: GroupRankList
 }
 const ButtonEditGroupRank = ({ data }: Props) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
   const form = useForm<GroupRankType>({
     resolver: zodResolver(GroupRankResolver),
-  });
+  })
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
   async function handleSave(values: GroupRankType) {
-    setLoading(true);
+    setLoading(true)
     try {
       const res = await AxiosClient.post(
         `/pengaturan/referensi/pangkat-golongan/${data.id_golongan}`,
         values
-      );
+      )
 
       if (res.data.status) {
-        toast.success(res.data.message);
+        toast.success(res.data.message)
 
         await queryClient.invalidateQueries({
-          queryKey: ["settings-group-rank"],
-        });
-        setOpen(false);
-          form.reset();
+          queryKey: ['settings-group-rank'],
+        })
+        setOpen(false)
+        form.reset()
       }
     } catch (err: any) {
-      toast.error(
-        err?.response?.data?.message || "Terjadi kesalahan, silakan coba lagi."
-      );
+      toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
     } finally {
-      setLoading(false);
-   
-    
+      setLoading(false)
     }
   }
   return (
     <>
       <button
-        className="cursor-pointer"
+        className="cursor-pointer bg-yellow-500 p-1.5 hover:bg-yellow-600 text-white rounded"
         onClick={() => {
-          setOpen(true);
+          setOpen(true)
           form.reset({
             ...data,
-          });
+          })
         }}
       >
-        <IconEdit />
+        <HiPencil />
       </button>
 
       <DialogCustom
@@ -77,10 +68,7 @@ const ButtonEditGroupRank = ({ data }: Props) => {
       >
         <div className="flex flex-col gap-4">
           <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(handleSave)}
-              className="flex flex-col gap-4"
-            >
+            <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
               <InputText
                 form={form}
                 name="nama_golongan"
@@ -91,7 +79,7 @@ const ButtonEditGroupRank = ({ data }: Props) => {
               <ButtonForm
                 loading={loading}
                 onCancel={() => {
-                  setOpen(false);
+                  setOpen(false)
                 }}
               />
             </form>
@@ -99,7 +87,7 @@ const ButtonEditGroupRank = ({ data }: Props) => {
         </div>
       </DialogCustom>
     </>
-  );
-};
+  )
+}
 
-export default ButtonEditGroupRank;
+export default ButtonEditGroupRank

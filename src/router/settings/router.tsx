@@ -42,6 +42,9 @@ import CountryView from '@/pages/modules/settings/reference/country/CountryView'
 import ProvinceView from '@/pages/modules/settings/reference/province/ProvinceView'
 import RegencyView from '@/pages/modules/settings/reference/regency/RegencyView'
 import { NewsCategoryLanguagePage } from '@/pages/modules/settings/reference/news-category/language'
+import { CategoryImpactInnovationLanguagePage } from '@/pages/modules/settings/reference/impact-innovation/language'
+import { RankedGroupCategoryLanguagePage } from '@/pages/modules/settings/reference/group-rank/language'
+import { RankedAcademicLanguagePage } from '@/pages/modules/settings/reference/academic-rank/language'
 export const SettingRouter = [
   {
     path: 'dashboard',
@@ -242,12 +245,24 @@ export const SettingRouter = [
         element: <GroupRankView />,
       },
       {
+        path: 'group-rank/language/:id',
+        element: <RankedGroupCategoryLanguagePage />,
+      },
+      {
         path: 'academic-rank',
         element: <AcademicRankView />,
       },
       {
+        path: 'academic-rank/language/:id',
+        element: <RankedAcademicLanguagePage />,
+      },
+      {
         path: 'impact-innovation',
         element: <ImpactInnovationView />,
+      },
+      {
+        path: 'impact-innovation/language/:id',
+        element: <CategoryImpactInnovationLanguagePage />,
       },
       {
         path: 'educational-level',

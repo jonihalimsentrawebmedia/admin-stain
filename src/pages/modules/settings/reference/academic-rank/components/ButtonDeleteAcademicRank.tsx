@@ -1,5 +1,4 @@
 import { DialogCustom } from '@/components/common/dialog/DialogCustom'
-import { IconDelete } from '@/components/common/table/icon'
 import { Button } from '@/components/ui/button'
 import { useQueryClient } from '@tanstack/react-query'
 import { Trash2, X } from 'lucide-react'
@@ -7,6 +6,8 @@ import { useState } from 'react'
 import type { AcademicRankList } from '../model'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
+import { FaTrash } from 'react-icons/fa'
+
 interface Props {
   data: AcademicRankList
 }
@@ -39,12 +40,12 @@ const ButtonDeleteAcademicRank = ({ data }: Props) => {
   return (
     <>
       <button
-        className="cursor-pointer"
+        className="cursor-pointer bg-red-500 p-1.5 text-white rounded hover:bg-red-600"
         onClick={() => {
           setOpen(true)
         }}
       >
-        <IconDelete />
+        <FaTrash />
       </button>
       <DialogCustom
         className="max-w-2xl! w-full!"
