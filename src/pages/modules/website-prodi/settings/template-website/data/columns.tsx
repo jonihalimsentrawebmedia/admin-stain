@@ -14,6 +14,14 @@ export const ColumnsTemplateWebsite = () => {
       },
     },
     {
+      accessorKey: 'image',
+      header: 'Template',
+      cell: ({ row }) => {
+        const image = row?.original?.image
+        return <img src={image} alt="gambar" className={'w-[250px] h-[100px] object-contain'} />
+      },
+    },
+    {
       accessorKey: 'thema',
       header: 'Nama Template',
     },
