@@ -60,6 +60,7 @@ import { DetailFacilitiesUnitPage } from '@/pages/modules/website-unit/public-co
 import DashboardAdminUnit from '@/pages/modules/website-unit/dashboard'
 import { LogActivityFacilitiesUnitPage } from '@/pages/modules/website-unit/public-content/Facilities/log'
 import { PrimaryAndFooterColorUnit } from '@/pages/modules/website-unit/settings/color'
+import { TemplateWebSettings } from '@/pages/modules/website-unit/settings/template-web'
 
 export const WebsiteUnitRouter = [
   {
@@ -404,6 +405,10 @@ export const WebsiteUnitRouter = [
       {
         path: 'primary-color',
         element: <PrimaryAndFooterColorUnit />,
+      },
+      {
+        path: 'template',
+        element: <TemplateWebSettings />,
       },
     ],
   },

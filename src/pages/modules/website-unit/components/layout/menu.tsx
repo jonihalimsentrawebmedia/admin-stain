@@ -203,6 +203,11 @@ export const MenuListUnit = [
         name: 'Pengaturan Warna Unit',
         path: `${baseDomain}/settings/primary-color`,
       },
+      {
+        id: 104,
+        name: 'Template Website',
+        path: `${baseDomain}/settings/template`,
+      },
     ],
   },
 ]
