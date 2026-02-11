@@ -7,6 +7,7 @@ import { MdInfo, MdOutlineHistory } from 'react-icons/md'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { ButtonPublishAgendaProdi } from '../buttonPublish.tsx'
 import { HiPencil } from 'react-icons/hi'
+import { ButtonDeleteAgendaProdi } from '@/pages/modules/website-prodi/public-content/agenda/components/buttonDelete.tsx'
 
 export const UnPublishedStatusColumns = () => {
   const [searchParams] = useSearchParams()
@@ -129,13 +130,14 @@ export const UnPublishedStatusColumns = () => {
       header: '',
       cell: ({ row }) => {
         return (
-          <>
+          <div className={'flex flex-col gap-1.5 items-center'}>
+            <ButtonDeleteAgendaProdi {...row?.original} />
             <Link to={`detail/${row?.original?.id_agenda}`}>
               <button className={'bg-blue-500 p-1.5 rounded text-white hover:bg-blue-600'}>
                 <MdInfo />
               </button>
             </Link>
-          </>
+          </div>
         )
       },
     },

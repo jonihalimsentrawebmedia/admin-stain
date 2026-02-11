@@ -8,6 +8,7 @@ import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { HiPencil } from 'react-icons/hi'
 import { ButtonAnnouncementPublishUnit } from '../buttonPublish'
+import { ButtonDeleteAnnouncementUnit } from '@/pages/modules/website-unit/public-content/announcement/components/buttonDelete.tsx'
 
 export const UnPublishStatusColumns = () => {
   const [searchParams] = useSearchParams()
@@ -130,13 +131,14 @@ export const UnPublishStatusColumns = () => {
       header: '',
       cell: ({ row }) => {
         return (
-          <>
+          <div className={'flex flex-col gap-1.5 items-center'}>
+            <ButtonDeleteAnnouncementUnit {...row?.original} />
             <Link to={`detail/${row?.original?.id_pengumuman}`}>
               <button className={'bg-blue-500 p-1.5 rounded text-white hover:bg-blue-600'}>
                 <MdInfo />
               </button>
             </Link>
-          </>
+          </div>
         )
       },
     },

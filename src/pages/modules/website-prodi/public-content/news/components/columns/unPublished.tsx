@@ -9,6 +9,7 @@ import { HiPencil } from 'react-icons/hi'
 import type { INewsDetail } from '@/pages/modules/website-utama/public-content/news/data'
 import { ButtonPublishNewsProdi } from '@/pages/modules/website-prodi/public-content/news/components/buttonPublish.tsx'
 import Autoplay from 'embla-carousel-autoplay'
+import { ButtonDeleteNewsProdi } from '@/pages/modules/website-prodi/public-content/news/components/buttonDelete.tsx'
 
 export const UnPublishColumnsProdi = () => {
   const [searchParams] = useSearchParams()
@@ -144,13 +145,14 @@ export const UnPublishColumnsProdi = () => {
       header: 'Aksi',
       cell: ({ row }) => {
         return (
-          <>
+          <div className={'flex flex-col gap-1.5 items-center'}>
+            <ButtonDeleteNewsProdi {...row?.original} />
             <Link to={`detail/${row?.original?.id_berita}`}>
               <button className={'bg-blue-500 p-1.5 rounded text-white hover:bg-blue-600'}>
                 <MdInfo />
               </button>
             </Link>
-          </>
+          </div>
         )
       },
     },
