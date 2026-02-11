@@ -1,28 +1,31 @@
 import BG from '@/assets/img/bg-modules.png'
-import { Card, CardContent } from '@/components/ui/card.tsx'
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
-import { ArrowLeft } from 'lucide-react'
-import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
-import { useForm } from 'react-hook-form'
-import { Form } from '@/components/ui/form.tsx'
-import { useState } from 'react'
-import { Button } from '@/components/ui/button.tsx'
+import {Card, CardContent} from '@/components/ui/card.tsx'
+import {Link, useNavigate, useSearchParams} from 'react-router-dom'
+import {ArrowLeft} from 'lucide-react'
+import {SelectBasicInput} from '@/components/common/form/selectBasicInput.tsx'
+import {useForm} from 'react-hook-form'
+import {Form} from '@/components/ui/form.tsx'
+import {useState} from 'react'
+import {Button} from '@/components/ui/button.tsx'
 import AxiosClient from '@/provider/axios.tsx'
-import { toast } from 'react-toastify'
-import { UseGetUniversityDomainExist } from '@/pages/modules/website-utama/select-university/hooks'
+import {toast} from 'react-toastify'
+import {UseGetUniversityDomainExist} from '@/pages/modules/website-utama/select-university/hooks'
+import {UseGetIdentityPublic} from "@/pages/login/hooks";
 
 export const SelectUnitUniversity = () => {
   const [parentId, setParentId] = useState({
     id_university: '',
   })
 
+  const {publicIdentity} = UseGetIdentityPublic()
+
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
 
-  const { satuanOrganisasi: university, loading: load1 } = UseGetUniversityDomainExist({
+  const {satuanOrganisasi: university, loading: load1} = UseGetUniversityDomainExist({
     kelompok: 'UNIVERSITAS',
   })
-  const { satuanOrganisasi: unit, loading: load2 } = UseGetUniversityDomainExist({
+  const {satuanOrganisasi: unit, loading: load2} = UseGetUniversityDomainExist({
     kelompok: 'UNIT',
     id_parent: parentId?.id_university,
   })
@@ -51,13 +54,13 @@ export const SelectUnitUniversity = () => {
   return (
     <>
       <div className={'w-screen h-screen relative flex items-center justify-center'}>
-        <img src={BG} className={'w-screen h-screen absolute object-cover z-10'} />
+        <img src={publicIdentity?.background ?? BG} className={'w-screen h-screen absolute object-cover z-10'}/>
         <div className="flex items-center justify-between relative z-20">
           <Card className={'bg-white/30'}>
             <CardContent>
               <div className="w-xl bg-white p-5 rounded">
                 <Link to={'/modules'} className={'flex items-center gap-2 text-primary text-sm'}>
-                  <ArrowLeft className={'text-primary'} />
+                  <ArrowLeft className={'text-primary'}/>
                   Kembali
                 </Link>
                 <p className="text-xl mt-5 font-semibold">Pilih Data Unit yang akan digunakan</p>

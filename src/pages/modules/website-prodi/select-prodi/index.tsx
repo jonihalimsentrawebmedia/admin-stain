@@ -1,18 +1,21 @@
 import BG from '@/assets/img/bg-modules.png'
-import { Card, CardContent } from '@/components/ui/card.tsx'
-import { ArrowLeft } from 'lucide-react'
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
-import { Form } from '@/components/ui/form.tsx'
-import { useForm } from 'react-hook-form'
-import { Button } from '@/components/ui/button.tsx'
+import {Card, CardContent} from '@/components/ui/card.tsx'
+import {ArrowLeft} from 'lucide-react'
+import {Link, useNavigate, useSearchParams} from 'react-router-dom'
+import {Form} from '@/components/ui/form.tsx'
+import {useForm} from 'react-hook-form'
+import {Button} from '@/components/ui/button.tsx'
 import AxiosClient from '@/provider/axios.tsx'
-import { toast } from 'react-toastify'
-import { useState } from 'react'
-import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
-import { UseGetUniversityDomainExist } from '@/pages/modules/website-utama/select-university/hooks'
+import {toast} from 'react-toastify'
+import {useState} from 'react'
+import {SelectBasicInput} from '@/components/common/form/selectBasicInput.tsx'
+import {UseGetUniversityDomainExist} from '@/pages/modules/website-utama/select-university/hooks'
+import {UseGetIdentityPublic} from "@/pages/login/hooks";
 
 export const SelectProdi = () => {
   const [searchParams] = useSearchParams()
+  const {publicIdentity} = UseGetIdentityPublic()
+
 
   const form = useForm()
 
@@ -20,14 +23,14 @@ export const SelectProdi = () => {
     id_university: '',
     id_faculty: '',
   })
-  const { satuanOrganisasi: university, loading: load1 } = UseGetUniversityDomainExist({
+  const {satuanOrganisasi: university, loading: load1} = UseGetUniversityDomainExist({
     kelompok: 'UNIVERSITAS',
   })
-  const { satuanOrganisasi: faculty, loading: load2 } = UseGetUniversityDomainExist({
+  const {satuanOrganisasi: faculty, loading: load2} = UseGetUniversityDomainExist({
     kelompok: 'FAKULTAS',
     id_parent: parentId?.id_university,
   })
-  const { satuanOrganisasi: prodi, loading: load3 } = UseGetUniversityDomainExist({
+  const {satuanOrganisasi: prodi, loading: load3} = UseGetUniversityDomainExist({
     kelompok: 'PRODI',
     id_parent: parentId?.id_faculty,
   })
@@ -55,13 +58,13 @@ export const SelectProdi = () => {
 
   return (
     <div className={'w-screen h-screen relative flex items-center justify-center'}>
-      <img src={BG} className={'w-screen h-screen absolute object-cover z-10'} />
+      <img src={publicIdentity?.background ?? BG} className={'w-screen h-screen absolute object-cover z-10'}/>
       <div className="flex items-center justify-between relative z-20">
         <Card className={'bg-white/30'}>
           <CardContent>
             <div className="w-xl bg-white p-5 rounded">
               <Link to={'/modules'} className={'flex items-center gap-2 text-primary text-sm'}>
-                <ArrowLeft className={'text-primary'} />
+                <ArrowLeft className={'text-primary'}/>
                 Kembali
               </Link>
               <p className="text-xl mt-5 font-semibold">Pilih Data Prodi yang akan digunakan</p>
