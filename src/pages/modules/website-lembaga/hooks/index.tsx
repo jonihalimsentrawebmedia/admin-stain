@@ -30,3 +30,40 @@ export const UseGetInstitutionSession = () => {
 
   return { session, loading }
 }
+export interface ISatuanOrganisasiProfil {
+  id_satuan_organisasi: string; // UUID
+  id_lembaga: string;           // UUID
+  /** * Field 'isi' menampung konten dalam format HTML string 
+   */
+  isi: string;                  
+  created_at: string;           // ISO Date String
+  created_user: string;
+  updated_at: string;           // ISO Date String
+  updated_user: string;
+  nama_user_created: string;
+  nama_user_updated: string;
+}
+
+interface Props{
+  link:string,
+  queryKey:string
+}
+export const UseGetWebsiteLembagaGlobal = ({link,queryKey}:Props) => {
+  const [dataGlobal, setDataGlobal] = useState<ISatuanOrganisasiProfil>()
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: [queryKey],
+    refetchOnWindowFocus: false,
+    queryFn: () => AxiosClient.get(link).then((res) => res.data?.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setDataGlobal(data)
+    }
+  }, [data])
+
+  return { dataGlobal, loading }
+}
