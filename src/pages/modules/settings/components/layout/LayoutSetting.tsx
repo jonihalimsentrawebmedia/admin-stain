@@ -123,6 +123,12 @@ export default function DashboardLayout() {
         },
       ],
     },
+    {
+      link: '/modules/settings/identity-menu',
+      label: 'Menu Identitas',
+      icon: <MdBusinessCenter size={24} />,
+      children: [],
+    },
   ]
 
   const { profileUser } = UseGetUserProfile()
@@ -259,8 +265,8 @@ function SidebarItem({ icon, label, active, dropdown, link, hiddenLabel, childre
                 isActive ? 'border-l-primary' : 'border-l-white '
               }`}
             >
-              {children.map((row: any,index:number) => (
-                <div key={row.link+index} className="flex  items-end gap-1">
+              {children.map((row: any, index: number) => (
+                <div key={row.link + index} className="flex  items-end gap-1">
                   <div className={`w-2 h-px  ${isActive ? 'bg-primary' : 'bg-white'}`}></div>
                   <Link
                     to={row.link}

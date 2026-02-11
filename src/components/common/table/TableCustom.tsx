@@ -91,7 +91,13 @@ const TableCustom = (props: Props) => {
   useEffect(() => {
     const temp = columns
       .map((item: any) => item.accessorKey)
-      .filter((item: any) => item !== 'id_satuan_organisasi' && item != 'parent_id')
+      .filter(
+        (item: any) =>
+          item !== 'id_satuan_organisasi' &&
+          item != 'parent_id' &&
+          item != 'ip' &&
+          item !== 'endpoint_be'
+      )
     setColumnChecked(temp)
   }, [])
   return (

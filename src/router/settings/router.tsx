@@ -45,6 +45,7 @@ import { NewsCategoryLanguagePage } from '@/pages/modules/settings/reference/new
 import { CategoryImpactInnovationLanguagePage } from '@/pages/modules/settings/reference/impact-innovation/language'
 import { RankedGroupCategoryLanguagePage } from '@/pages/modules/settings/reference/group-rank/language'
 import { RankedAcademicLanguagePage } from '@/pages/modules/settings/reference/academic-rank/language'
+import IdentityView from '@/pages/modules/settings/identity/IdentityView'
 export const SettingRouter = [
   {
     path: 'dashboard',
@@ -297,6 +298,15 @@ export const SettingRouter = [
       {
         index: true,
         element: <DomainView />,
+      },
+    ],
+  },
+  {
+    path: 'identity-menu',
+    children: [
+      {
+        index: true,
+        element: <IdentityView />,
       },
     ],
   },
