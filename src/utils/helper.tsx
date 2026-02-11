@@ -37,6 +37,10 @@ export const GetModuleUrl = (moduleSelect: { nama_module: string; controller?: s
       return '/modules/select-unit?url=website-unit'
     }
 
+    case 'website lembaga': {
+      return '/modules/select-lembaga?url=website-lembaga'
+    }
+
     case 'manajemen editor':
       return '/modules/editor-university?url=editor'
 
@@ -55,7 +59,6 @@ export function isEmpetyReturn(value: any) {
   return value
 }
 
-
 import {
   differenceInSeconds,
   differenceInMinutes,
@@ -70,42 +73,42 @@ import {
 
 export function FormatTimeAgo(dateInput: string | Date): string {
   const date = typeof dateInput === 'string' ? parseISO(dateInput) : dateInput
-  
+
   if (!isValid(date)) return '-'
-  
+
   const now = new Date()
-  
+
   const seconds = differenceInSeconds(now, date)
   if (seconds < 60) return `${seconds} detik yang lalu`
-  
+
   const minutes = differenceInMinutes(now, date)
   if (minutes < 60) return `${minutes} menit yang lalu`
-  
+
   const hours = differenceInHours(now, date)
   if (hours < 24) return `${hours} jam yang lalu`
-  
+
   const days = differenceInDays(now, date)
   if (days < 7) return `${days} hari yang lalu`
-  
+
   const weeks = differenceInWeeks(now, date)
   if (weeks < 4) return `${weeks} minggu yang lalu`
-  
+
   const months = differenceInMonths(now, date)
   if (months < 12) return `${months} bulan yang lalu`
-  
+
   const years = differenceInYears(now, date)
   return `${years} tahun yang lalu`
 }
 
-export function StatusPublish(value:string){
-    switch(value){
-      case "DIAJUKAN_EDITOR":
-        return <div className='text-blue-500'>Diajukan Ke Editor</div>
-      case "PROSES_EDITOR":
-        return <div className='text-blue-500'>Proses Editor</div>
-      case "TOLAK_EDITOR":
-        return <div className='text-red-500'>Ditolak</div>
-      case "DISETUJUI_EDITOR":
-        return <div className='text-green-500'>Disetujui</div>
-    }
+export function StatusPublish(value: string) {
+  switch (value) {
+    case 'DIAJUKAN_EDITOR':
+      return <div className="text-blue-500">Diajukan Ke Editor</div>
+    case 'PROSES_EDITOR':
+      return <div className="text-blue-500">Proses Editor</div>
+    case 'TOLAK_EDITOR':
+      return <div className="text-red-500">Ditolak</div>
+    case 'DISETUJUI_EDITOR':
+      return <div className="text-green-500">Disetujui</div>
+  }
 }

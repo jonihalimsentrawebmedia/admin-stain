@@ -4,7 +4,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import type { SatuanOrganisasiDetail } from '@/pages/modules/settings/model'
 
 interface props {
-  kelompok: 'UNIVERSITAS' | 'FAKULTAS' | 'PRODI' | 'UNIT'
+  kelompok: 'UNIVERSITAS' | 'FAKULTAS' | 'PRODI' | 'UNIT' | 'LEMBAGA'
   id_parent?: string
 }
 

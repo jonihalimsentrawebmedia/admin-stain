@@ -26,7 +26,7 @@ const ButtonEditGroupRank = ({ data }: Props) => {
   async function handleSave(values: GroupRankType) {
     setLoading(true)
     try {
-      const res = await AxiosClient.post(
+      const res = await AxiosClient.put(
         `/pengaturan/referensi/pangkat-golongan/${data.id_golongan}`,
         values
       )
