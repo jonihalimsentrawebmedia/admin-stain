@@ -1,21 +1,21 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
-import { Plus } from 'lucide-react'
-import { TabsListCustom } from '@/pages/modules/website-utama/public-content/slider/components/tabsList.tsx'
-import { useState } from 'react'
-import { Link, useLocation, useSearchParams } from 'react-router-dom'
-import { SelectBasic } from '@/components/common/select/basic.tsx'
-import type { Mode } from '@/pages/modules/website-utama/beranda/types'
-import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/hooks/getProfile.tsx'
+import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card'
+import {Button} from '@/components/ui/button'
+import {BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer} from 'recharts'
+import {Plus} from 'lucide-react'
+import {TabsListCustom} from '@/pages/modules/website-utama/public-content/slider/components/tabsList.tsx'
+import {useState} from 'react'
+import {Link, useLocation, useSearchParams} from 'react-router-dom'
+import {SelectBasic} from '@/components/common/select/basic.tsx'
+import type {Mode} from '@/pages/modules/website-utama/beranda/types'
+import {UseGetUserProfile} from '@/pages/modules/settings/components/layout/hooks/getProfile.tsx'
 import {
   UseGetApprovedListEditor,
   UseGetApprovedListEditorStatus,
   UseGetTotalVisitorEditor,
   UseGetTrentVisitorEditor,
 } from '@/pages/modules/manajeman-editor/beranda/hooks'
-import { ApprovedSectionEditor } from '@/pages/modules/manajeman-editor/beranda/components/Approved/section.tsx'
-import type { status } from '@/pages/modules/new_editor/data/types/data.tsx'
+import {ApprovedSectionEditor} from '@/pages/modules/manajeman-editor/beranda/components/Approved/section.tsx'
+import type {status} from '@/pages/modules/new_editor/data/types/data.tsx'
 
 export default function DashboardAdminEditor() {
   const [tabsName, setTabsName] = useState<status>('DIAJUKAN_EDITOR')
@@ -23,7 +23,7 @@ export default function DashboardAdminEditor() {
   const location = useLocation()
   const path = location.pathname
   const isEditor = path.includes('editor')
-  const { trentVisitor, visitor, device } = UseGetTrentVisitorEditor(mode)
+  const {trentVisitor, visitor, device} = UseGetTrentVisitorEditor(mode)
 
   const [searchParams, setSearchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
@@ -37,14 +37,14 @@ export default function DashboardAdminEditor() {
       }))) ??
     []
 
-  const { status } = UseGetTotalVisitorEditor()
-  const { profileUser } = UseGetUserProfile()
-  const { approvedList, loading, meta } = UseGetApprovedListEditor({
+  const {status} = UseGetTotalVisitorEditor()
+  const {profileUser} = UseGetUserProfile()
+  const {approvedList, loading, meta} = UseGetApprovedListEditor({
     status: tabsName ?? '',
     page: page,
     limit: limit,
   })
-  const { status: total } = UseGetApprovedListEditorStatus()
+  const {status: total} = UseGetApprovedListEditorStatus()
 
   const TabsList = [
     {
@@ -130,22 +130,22 @@ export default function DashboardAdminEditor() {
   ]
 
   const actions = [
-    { label: 'Tulis Berita', url: '/modules/website-utama/public-content/news/add' },
-    { label: 'Tulis Pengumuman', url: '/modules/website-utama/public-content/announcement/add' },
-    { label: 'Tulis Agenda', url: '/modules/website-utama/public-content/agenda/add' },
+    {label: 'Tulis Berita', url: '/modules/website-utama/public-content/news/add'},
+    {label: 'Tulis Pengumuman', url: '/modules/website-utama/public-content/announcement/add'},
+    {label: 'Tulis Agenda', url: '/modules/website-utama/public-content/agenda/add'},
     {
       label: 'Tulis Inovasi Berdampak',
       url: '/modules/website-utama/public-content/achievement/add',
     },
-    { label: 'Tulis Prestasi', url: '/modules/website-utama/public-content/achievement/add' },
-    { label: 'Tambah Berkas Download', url: '/modules/website-utama/public-content/download/add' },
+    {label: 'Tulis Prestasi', url: '/modules/website-utama/public-content/achievement/add'},
+    {label: 'Tambah Berkas Download', url: '/modules/website-utama/public-content/download/add'},
   ]
 
   const listMode = [
-    { label: 'Harian', value: 'harian' },
-    { label: 'Mingguan', value: 'mingguan' },
-    { label: 'Bulanan', value: 'bulanan' },
-    { label: 'Tahunan', value: 'tahunan' },
+    {label: 'Harian', value: 'harian'},
+    {label: 'Mingguan', value: 'mingguan'},
+    {label: 'Bulanan', value: 'bulanan'},
+    {label: 'Tahunan', value: 'tahunan'},
   ]
 
   return (
@@ -199,7 +199,7 @@ export default function DashboardAdminEditor() {
                     variant="outline"
                     className="w-full justify-start border border-primary text-primary hover:text-primary"
                   >
-                    <Plus className="mr-2 h-4 w-4" /> {item?.label}
+                    <Plus className="mr-2 h-4 w-4"/> {item?.label}
                   </Button>
                 </Link>
               ))}
@@ -222,20 +222,22 @@ export default function DashboardAdminEditor() {
               onChange={setMode}
               isRow
             />
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={chartData ?? []} margin={{ bottom: 60 }}>
-                <XAxis
-                  dataKey="name"
-                  angle={mode === 'harian' ? -75 : mode == 'bulanan' ? -45 : 0}
-                  textAnchor="end"
-                  interval={0}
-                  height={60}
-                />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="value" fill="#8884d8" />
-              </BarChart>
-            </ResponsiveContainer>
+            <div className="w-full h-80">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={chartData ?? []} margin={{bottom: 60}}>
+                  <XAxis
+                    dataKey="name"
+                    angle={mode === 'harian' ? -75 : mode == 'bulanan' ? -45 : 0}
+                    textAnchor="end"
+                    interval={0}
+                    height={60}
+                  />
+                  <YAxis/>
+                  <Tooltip/>
+                  <Bar dataKey="value" fill="#8884d8"/>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
           </CardContent>
         </Card>
 
