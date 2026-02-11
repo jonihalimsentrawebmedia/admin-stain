@@ -1,14 +1,13 @@
-import type { ReactNode } from 'react'
+import { HeaderLayoutInstitution } from '@/pages/modules/website-lembaga/component/Layout/header'
+import { Outlet } from 'react-router-dom'
 
-interface Props {
-  children: ReactNode
-}
-
-export const LayoutWebsiteInstitution = (props: Props) => {
-  const { children } = props
+export const LayoutWebsiteInstitution = () => {
   return (
     <>
-      <div className={'w-7xl mx-auto'}>{children}</div>
+      <HeaderLayoutInstitution />
+      <div className={'w-7xl mx-auto'}>
+        <Outlet />
+      </div>
     </>
   )
 }

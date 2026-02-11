@@ -26,6 +26,8 @@ import MainLayoutUnit from '@/pages/modules/website-unit/components/layout'
 import { SelectUniversityEditor } from '@/pages/modules/manajeman-editor/select-university'
 import UnitWebTheme from '@/pages/modules/website-unit/components/layout/theme.tsx'
 import { SelectInstitutionUniversity } from '@/pages/modules/website-lembaga/select-institution'
+import { LayoutWebsiteInstitution } from '@/pages/modules/website-lembaga/component/Layout'
+import { WebsiteInstitutionRouter } from '@/router/website-lembaga'
 
 export const Router = createBrowserRouter([
   {
@@ -132,9 +134,10 @@ export const Router = createBrowserRouter([
         path: 'website-lembaga',
         element: (
           <>
-            <div></div>
+            <LayoutWebsiteInstitution />
           </>
         ),
+        children: [...WebsiteInstitutionRouter],
       },
 
       {
