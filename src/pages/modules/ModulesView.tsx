@@ -8,7 +8,6 @@ import ButtonLogOut from '@/pages/modules/components/buttonLogOut.tsx'
 import { ModulesViewModel } from '@/pages/modules/ModulesViewModel.tsx'
 import { Link } from 'react-router-dom'
 import { GetModuleUrl } from '@/utils/helper.tsx'
-import UseGetProfile from '@/pages/modules/settings/dashboard/profile/controller/useGetProfile.tsx'
 
 const ModulesView = () => {
   const { modules, moduleSelect, setModuleSelect, goToProfile } = ModulesViewModel()
