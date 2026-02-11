@@ -7,6 +7,7 @@ import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { ButtonUnPublishedBottom } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/components/buttonUnpublish.tsx'
 import { MdOutlineHistory } from 'react-icons/md'
+import { IoLanguage } from 'react-icons/io5'
 
 const PublishedColumnsBottom = () => {
   const [searchParams] = useSearchParams()
@@ -97,6 +98,12 @@ const PublishedColumnsBottom = () => {
       cell: ({ row }) => {
         return (
           <div className={'flex flex-col gap-1.5 items-center'}>
+            <Link
+              to={`language/${row?.original?.id_slider_bawah}`}
+              className={'bg-primary p-1.5 rounded text-white'}
+            >
+              <IoLanguage />
+            </Link>
             <ButtonUnPublishedBottom data={row?.original} />
           </div>
         )

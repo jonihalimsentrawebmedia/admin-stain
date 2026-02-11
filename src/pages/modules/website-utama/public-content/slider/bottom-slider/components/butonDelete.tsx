@@ -6,6 +6,9 @@ import { Button } from '@/components/ui/button.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
+import { useForm } from 'react-hook-form'
+import { Form } from '@/components/ui/form.tsx'
+import TextInput from '@/components/common/form/TextInput.tsx'
 
 interface Props {
   data: IListBottomSlider
@@ -15,6 +18,8 @@ export const ButonDeleteBottomSlider = (props: Props) => {
   const { data } = props
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
+
+  const form = useForm()
 
   const queryClient = useQueryClient()
 
@@ -66,6 +71,20 @@ export const ButonDeleteBottomSlider = (props: Props) => {
           <p dangerouslySetInnerHTML={{ __html: data?.keterangan ?? '' }} />
         </div>
 
+        <Form {...form}>
+          <form>
+            <TextInput
+              form={form}
+              name={'validator'}
+              label={
+                <p className={'text-red-500'}>
+                  To confirm, type <b>“DELETE”</b>
+                </p>
+              }
+            />
+          </form>
+        </Form>
+
         <div className={'flex justify-end gap-1.5'}>
           <Button
             onClick={() => setOpen(!open)}
@@ -74,7 +93,11 @@ export const ButonDeleteBottomSlider = (props: Props) => {
           >
             Batal
           </Button>
-          <Button disabled={loading} onClick={HandlerDelete} variant={'destructive'}>
+          <Button
+            disabled={form.watch('validator') !== 'DELETE' || loading}
+            onClick={HandlerDelete}
+            variant={'destructive'}
+          >
             Hapus
           </Button>
         </div>

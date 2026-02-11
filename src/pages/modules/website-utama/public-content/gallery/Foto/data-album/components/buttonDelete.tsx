@@ -7,6 +7,9 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { Button } from '@/components/ui/button.tsx'
 import { useQueryClient } from '@tanstack/react-query'
+import { useForm } from 'react-hook-form'
+import { Form } from '@/components/ui/form.tsx'
+import TextInput from '@/components/common/form/TextInput.tsx'
 
 interface IProps {
   data: IGalleryPhoto
@@ -18,6 +21,7 @@ export const ButtonDeletePhotoAlbum = (props: IProps) => {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
+  const form = useForm()
   const queryClient = useQueryClient()
 
   const HandlerDelete = async () => {
@@ -48,9 +52,7 @@ export const ButtonDeletePhotoAlbum = (props: IProps) => {
       <DialogCustom
         open={open}
         setOpen={setOpen}
-        title={
-        <p className={'text-red-500'}>Hapus Foto</p>
-        }
+        title={<p className={'text-red-500'}>Hapus Foto</p>}
         description={'Apakah anda yakin untuk menghapus foto yang dipilih?'}
         className={'rounded lg:max-w-xl'}
       >
@@ -67,6 +69,21 @@ export const ButtonDeletePhotoAlbum = (props: IProps) => {
             <p className="text-gray-500">Keterangan</p>
             <p>{data?.judul}</p>
           </div>
+
+          <Form {...form}>
+            <form className="my-2">
+              <TextInput
+                form={form}
+                name={'validator'}
+                label={
+                  <p className={'text-red-500'}>
+                    To confirm, type <b>“DELETE”</b>
+                  </p>
+                }
+              />
+            </form>
+          </Form>
+
           <ButtonTitleGroup
             label={''}
             buttonGroup={[
@@ -82,7 +99,11 @@ export const ButtonDeletePhotoAlbum = (props: IProps) => {
                 type: 'custom',
                 onClick: () => {},
                 element: (
-                  <Button onClick={HandlerDelete} variant={'destructive'}>
+                  <Button
+                    onClick={HandlerDelete}
+                    variant={'destructive'}
+                    disabled={form.watch('validator') !== 'DELETE' || loading}
+                  >
                     <FaTrash /> Hapus
                   </Button>
                 ),

@@ -7,6 +7,7 @@ import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { HiPencil } from 'react-icons/hi'
 import { ButtonPublishFacilities } from '@/pages/modules/website-utama/public-content/facilities/components/buttonPublish.tsx'
+import { ButtonDeleteFacilities } from '@/pages/modules/website-utama/public-content/facilities/components/buttonDelete.tsx'
 
 export const UnpublishColumnsFacilities = () => {
   const [searchParams] = useSearchParams()
@@ -109,13 +110,14 @@ export const UnpublishColumnsFacilities = () => {
       header: '',
       cell: ({ row }) => {
         return (
-          <>
+          <div className={'flex flex-col gap-1.5 items-center'}>
+            <ButtonDeleteFacilities {...row?.original} />
             <Link to={`detail/${row?.original?.id_fasilitas}`}>
               <button className={'bg-blue-500 p-1.5 rounded text-white hover:bg-blue-600'}>
                 <MdInfo />
               </button>
             </Link>
-          </>
+          </div>
         )
       },
     },

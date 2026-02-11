@@ -59,7 +59,7 @@ export const ButtonUnpublishAchievement = (data: IAchievementDetail) => {
 
       <DialogCustom
         open={open}
-        className={'rounded'}
+        className={'rounded lg:max-w-2xl'}
         setOpen={setOpen}
         title={'Unpublish prestasi'}
         description={'Apakah anda yakin untuk mempublish prestasi yang dipilih?'}

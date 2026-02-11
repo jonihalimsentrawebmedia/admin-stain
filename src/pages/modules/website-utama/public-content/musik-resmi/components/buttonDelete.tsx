@@ -8,6 +8,9 @@ import { BiX } from 'react-icons/bi'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
+import { useForm } from 'react-hook-form'
+import { Form } from '@/components/ui/form.tsx'
+import TextInput from '@/components/common/form/TextInput.tsx'
 
 interface props {
   data: IMarsMusic
@@ -18,6 +21,7 @@ export const ButtonDeleteOfficialMusic = (props: props) => {
   const [loading, setLoading] = useState(false)
   const [open, setOpen] = useState(false)
 
+  const form = useForm()
   const queryClient = useQueryClient()
 
   const HandlerDelete = async () => {
@@ -58,6 +62,20 @@ export const ButtonDeleteOfficialMusic = (props: props) => {
             <p>{data?.judul}</p>
           </div>
 
+          <Form {...form}>
+            <form className="my-2">
+              <TextInput
+                form={form}
+                name={'validator'}
+                label={
+                  <p className={'text-red-500'}>
+                    To confirm, type <b>“DELETE”</b>
+                  </p>
+                }
+              />
+            </form>
+          </Form>
+
           <div className="flex items-center justify-end col-span-2 gap-2">
             <Button
               className={'text-primary border border-primary hover:text-primary'}
@@ -68,7 +86,7 @@ export const ButtonDeleteOfficialMusic = (props: props) => {
               Batal
             </Button>
             <Button
-              disabled={loading}
+              disabled={form.watch('validator') !== 'DELETE' || loading}
               className={'bg-red-500 hover:bg-red-600 text-white'}
               onClick={HandlerDelete}
             >

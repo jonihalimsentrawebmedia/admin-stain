@@ -14,11 +14,15 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import type { IAchievementDetail } from '../data/index'
+import { useForm } from 'react-hook-form'
+import { Form } from '@/components/ui/form.tsx'
+import TextInput from '@/components/common/form/TextInput.tsx'
 
 export const ButtonDeleteAchievement = (data: IAchievementDetail) => {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
+  const form = useForm()
   const queryClient = useQueryClient()
 
   const HandlerDelete = async () => {
@@ -85,6 +89,20 @@ export const ButtonDeleteAchievement = (data: IAchievementDetail) => {
           <p className="text-gray-500">Penulis</p>
           <p>{data?.penulis}</p>
 
+          <Form {...form}>
+            <form className="my-2">
+              <TextInput
+                form={form}
+                name={'validator'}
+                label={
+                  <p className={'text-red-500'}>
+                    To confirm, type <b>“DELETE”</b>
+                  </p>
+                }
+              />
+            </form>
+          </Form>
+
           <div className="flex items-center justify-end">
             <ButtonTitleGroup
               label={''}
@@ -94,7 +112,11 @@ export const ButtonDeleteAchievement = (data: IAchievementDetail) => {
                   type: 'add',
                   label: '',
                   element: (
-                    <Button disabled={loading} variant={'destructive'} onClick={HandlerDelete}>
+                    <Button
+                      disabled={form.watch('validator') !== 'DELETE' || loading}
+                      variant={'destructive'}
+                      onClick={HandlerDelete}
+                    >
                       <FaTrash />
                       Hapus
                     </Button>

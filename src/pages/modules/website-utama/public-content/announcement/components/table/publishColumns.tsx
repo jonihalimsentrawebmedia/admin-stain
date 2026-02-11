@@ -7,6 +7,7 @@ import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { ButtonAnnouncementUnpublish } from '@/pages/modules/website-utama/public-content/announcement/components/buttonUnpublish.tsx'
 import { Button } from '@/components/ui/button.tsx'
+import { IoLanguage } from 'react-icons/io5'
 
 export const PublishAnnouncementColumns = () => {
   const [searchParams] = useSearchParams()
@@ -119,13 +120,19 @@ export const PublishAnnouncementColumns = () => {
       header: 'Aksi',
       cell: ({ row }) => {
         return (
-          <>
+          <div className={'flex flex-col gap-1.5 items-center'}>
+            <Link
+              to={`language/${row?.original?.id_pengumuman}`}
+              className={'bg-primary p-1.5 rounded text-white'}
+            >
+              <IoLanguage />
+            </Link>
             <Link to={`detail/${row?.original?.id_pengumuman}`}>
               <button className={'bg-blue-500 p-1.5 rounded text-white hover:bg-blue-600'}>
                 <MdInfo />
               </button>
             </Link>
-          </>
+          </div>
         )
       },
     },

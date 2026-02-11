@@ -8,11 +8,15 @@ import { Link } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { FaTrash } from 'react-icons/fa'
 import { Button } from '@/components/ui/button.tsx'
+import { useForm } from 'react-hook-form'
+import { Form } from '@/components/ui/form.tsx'
+import TextInput from '@/components/common/form/TextInput.tsx'
 
 export const ButtonDeleteVideo = (data: IGalleryVideo) => {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
+  const form = useForm()
   const queryClient = useQueryClient()
 
   const HandlerDelete = async () => {
@@ -55,6 +59,21 @@ export const ButtonDeleteVideo = (data: IGalleryVideo) => {
             Buka Link
           </Link>
         </div>
+
+        <Form {...form}>
+          <form className="my-2">
+            <TextInput
+              form={form}
+              name={'validator'}
+              label={
+                <p className={'text-red-500'}>
+                  To confirm, type <b>“DELETE”</b>
+                </p>
+              }
+            />
+          </form>
+        </Form>
+
         <ButtonTitleGroup
           label={''}
           buttonGroup={[
@@ -69,7 +88,11 @@ export const ButtonDeleteVideo = (data: IGalleryVideo) => {
               type: 'custom',
               element: (
                 <>
-                  <Button variant={'destructive'} onClick={HandlerDelete} disabled={loading}>
+                  <Button
+                    variant={'destructive'}
+                    onClick={HandlerDelete}
+                    disabled={form.watch('validator') !== 'DELETE' || loading}
+                  >
                     <FaTrash /> Hapus
                   </Button>
                 </>

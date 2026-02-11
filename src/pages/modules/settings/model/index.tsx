@@ -76,6 +76,7 @@ export interface SatuanOrganisasiList {
   youtube: string
 
   // Metadata Audit
+  tampil: boolean
   created_at: string // ISO 8601 string (Date/Time with timezone)
   created_user: string
   updated_at: string // ISO 8601 string (Date/Time with timezone)

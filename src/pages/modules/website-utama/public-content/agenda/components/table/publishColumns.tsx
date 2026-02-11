@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button.tsx'
 import { MdInfo, MdOutlineHistory } from 'react-icons/md'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { ButtonUnpublishAgenda } from '../buttonUnpublish.tsx'
+import { IoLanguage } from 'react-icons/io5'
 
 export const PublishColumnsAgenda = () => {
   const [searchParams] = useSearchParams()
@@ -114,13 +115,19 @@ export const PublishColumnsAgenda = () => {
       header: '',
       cell: ({ row }) => {
         return (
-          <>
+          <div className={'flex flex-col gap-1.5 items-center'}>
+            <Link
+              to={`language/${row?.original?.id_agenda}`}
+              className={'bg-primary p-1.5 rounded text-white'}
+            >
+              <IoLanguage />
+            </Link>
             <Link to={`detail/${row?.original?.id_agenda}`}>
               <button className={'bg-blue-500 p-1.5 rounded text-white hover:bg-blue-600'}>
                 <MdInfo />
               </button>
             </Link>
-          </>
+          </div>
         )
       },
     },

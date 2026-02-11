@@ -14,6 +14,7 @@ import { TimeAgo } from '@/utils/helper.tsx'
 import { HiPencil } from 'react-icons/hi'
 import { ButtonPublishAchievement } from '../buttonPublish'
 import type { IAchievementDetail } from '../../data/index'
+import { ButtonDeleteAchievement } from '@/pages/modules/website-utama/public-content/achievement/components/buttonDelete.tsx'
 
 export const UnpublishColumnsAchievement = () => {
   const [searchParams] = useSearchParams()
@@ -140,13 +141,14 @@ export const UnpublishColumnsAchievement = () => {
       header: 'Aksi',
       cell: ({ row }) => {
         return (
-          <>
+          <div className={'flex flex-col gap-1.5 items-center'}>
+            <ButtonDeleteAchievement {...row?.original} />
             <Link to={`detail/${row?.original?.id_prestasi}`}>
               <button className={'bg-blue-500 p-1.5 rounded text-white hover:bg-blue-600'}>
                 <MdInfo />
               </button>
             </Link>
-          </>
+          </div>
         )
       },
     },

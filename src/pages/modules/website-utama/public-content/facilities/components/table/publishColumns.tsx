@@ -6,6 +6,7 @@ import { MdInfo, MdOutlineHistory } from 'react-icons/md'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { ButtonUnpublishFacilities } from '../../components/buttonUnpublish.tsx'
+import { IoLanguage } from 'react-icons/io5'
 
 export const PublishColumnsFacilities = () => {
   const [searchParams] = useSearchParams()
@@ -94,13 +95,19 @@ export const PublishColumnsFacilities = () => {
       header: '',
       cell: ({ row }) => {
         return (
-          <>
+          <div className={'flex flex-col gap-1.5 items-center'}>
+            <Link
+              to={`language/${row?.original?.id_fasilitas}`}
+              className={'bg-primary p-1.5 rounded text-white'}
+            >
+              <IoLanguage />
+            </Link>
             <Link to={`detail/${row?.original?.id_fasilitas}`}>
               <button className={'bg-blue-500 p-1.5 rounded text-white hover:bg-blue-600'}>
                 <MdInfo />
               </button>
             </Link>
-          </>
+          </div>
         )
       },
     },

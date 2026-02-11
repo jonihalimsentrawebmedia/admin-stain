@@ -7,11 +7,15 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import type { IGaleriAlbum } from '@/pages/modules/website-utama/public-content/gallery/Foto/data'
 import { FaTrash } from 'react-icons/fa'
 import { Button } from '@/components/ui/button.tsx'
+import { useForm } from 'react-hook-form'
+import { Form } from '@/components/ui/form.tsx'
+import TextInput from '@/components/common/form/TextInput.tsx'
 
 export const ButtonDeleteAlbumPhoto = (data: IGaleriAlbum) => {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
+  const form = useForm()
   const queryClient = useQueryClient()
 
   const HandleSave = async () => {
@@ -51,6 +55,21 @@ export const ButtonDeleteAlbumPhoto = (data: IGaleriAlbum) => {
             <p className="text-gray-500">Judul</p>
             <p>{data?.judul}</p>
           </div>
+
+          <Form {...form}>
+            <form className="my-2">
+              <TextInput
+                form={form}
+                name={'validator'}
+                label={
+                  <p className={'text-red-500'}>
+                    To confirm, type <b>“DELETE”</b>
+                  </p>
+                }
+              />
+            </form>
+          </Form>
+
           <ButtonTitleGroup
             label={''}
             buttonGroup={[
@@ -68,7 +87,11 @@ export const ButtonDeleteAlbumPhoto = (data: IGaleriAlbum) => {
                 onClick: () => {},
                 element: (
                   <>
-                    <Button variant={'destructive'} onClick={HandleSave} disabled={loading}>
+                    <Button
+                      variant={'destructive'}
+                      onClick={HandleSave}
+                      disabled={form.watch('validator') !== 'DELETE' || loading}
+                    >
                       <FaTrash /> Hapus
                     </Button>
                   </>

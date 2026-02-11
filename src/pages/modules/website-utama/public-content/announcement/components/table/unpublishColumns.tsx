@@ -8,6 +8,7 @@ import { TimeAgo } from '@/utils/helper.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { HiPencil } from 'react-icons/hi'
 import { ButtonAnnouncementPublish } from '../../components/buttonPublish'
+import { ButtonDeleteAnnouncement } from '@/pages/modules/website-utama/public-content/announcement/components/buttonDelete.tsx'
 
 export const UnpublishAnnouncementColumns = () => {
   const [searchParams] = useSearchParams()
@@ -130,13 +131,14 @@ export const UnpublishAnnouncementColumns = () => {
       header: '',
       cell: ({ row }) => {
         return (
-          <>
+          <div className={'flex flex-col gap-1.5 items-center'}>
+            <ButtonDeleteAnnouncement {...row?.original} />
             <Link to={`detail/${row?.original?.id_pengumuman}`}>
               <button className={'bg-blue-500 p-1.5 rounded text-white hover:bg-blue-600'}>
                 <MdInfo />
               </button>
             </Link>
-          </>
+          </div>
         )
       },
     },

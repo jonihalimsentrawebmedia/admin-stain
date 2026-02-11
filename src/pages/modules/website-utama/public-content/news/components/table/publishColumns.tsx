@@ -13,6 +13,7 @@ import {
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { ButtonUnpublishNews } from '../buttonUnpublish.tsx'
+import { IoLanguage } from 'react-icons/io5'
 
 export const PublishColumns = () => {
   const [searchParams] = useSearchParams()
@@ -129,13 +130,19 @@ export const PublishColumns = () => {
       header: 'Aksi',
       cell: ({ row }) => {
         return (
-          <>
+          <div className={'flex gap-1.5 flex-col items-center'}>
+            <Link
+              to={`language/${row?.original?.id_berita}`}
+              className={'bg-primary p-1.5 rounded text-white'}
+            >
+              <IoLanguage/>
+            </Link>
             <Link to={`detail/${row?.original?.id_berita}`}>
               <button className={'bg-blue-500 p-1.5 rounded text-white hover:bg-blue-600'}>
                 <MdInfo />
               </button>
             </Link>
-          </>
+          </div>
         )
       },
     },

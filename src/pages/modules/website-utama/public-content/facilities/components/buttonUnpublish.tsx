@@ -51,6 +51,7 @@ export const ButtonUnpublishFacilities = (data: IFacilitiesDetail) => {
       <DialogCustom
         open={open}
         setOpen={setOpen}
+        className={'rounded lg:max-w-2xl'}
         title={'Unpublish Fasilitas'}
         description={'Apakah anda yakin untuk Unpublish Inovasi Berdampak yang dipilih?'}
       >

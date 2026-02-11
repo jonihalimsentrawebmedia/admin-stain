@@ -7,6 +7,7 @@ import { MdInfo, MdOutlineHistory } from 'react-icons/md'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { ButtonPublishAgenda } from '@/pages/modules/website-utama/public-content/agenda/components/buttonPublish.tsx'
 import { HiPencil } from 'react-icons/hi'
+import { ButtonDeleteAgenda } from '@/pages/modules/website-utama/public-content/agenda/components/buttonDelete.tsx'
 
 export const UnpublishColumnsAgenda = () => {
   const [searchParams] = useSearchParams()
@@ -129,13 +130,14 @@ export const UnpublishColumnsAgenda = () => {
       header: '',
       cell: ({ row }) => {
         return (
-          <>
+          <div className={'flex flex-col gap-1.5 items-center'}>
+            <ButtonDeleteAgenda {...row?.original} />
             <Link to={`detail/${row?.original?.id_agenda}`}>
               <button className={'bg-blue-500 p-1.5 rounded text-white hover:bg-blue-600'}>
                 <MdInfo />
               </button>
             </Link>
-          </>
+          </div>
         )
       },
     },

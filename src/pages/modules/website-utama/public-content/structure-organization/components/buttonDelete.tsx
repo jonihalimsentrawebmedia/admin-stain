@@ -7,11 +7,15 @@ import { Button } from '@/components/ui/button.tsx'
 import { BiX } from 'react-icons/bi'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
+import { useForm } from 'react-hook-form'
+import { Form } from '@/components/ui/form.tsx'
+import TextInput from '@/components/common/form/TextInput.tsx'
 
 export const ButtonDeleteStructureOrganization = (data: IGroupOrganization) => {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
+  const form = useForm()
   const queryClient = useQueryClient()
 
   const HandlerDelete = async () => {
@@ -57,6 +61,20 @@ export const ButtonDeleteStructureOrganization = (data: IGroupOrganization) => {
           <p className="text-gray-500">Urutan</p>
           <p>{data?.urutan}</p>
 
+          <Form {...form}>
+            <form className={'col-span-2 my-2'}>
+              <TextInput
+                form={form}
+                name={'validator'}
+                label={
+                  <p className={'text-red-500'}>
+                    To confirm, type <b>“DELETE”</b>
+                  </p>
+                }
+              />
+            </form>
+          </Form>
+
           <div className="col-span-2 flex items-center justify-end w-full gap-2">
             <Button
               variant={'outline'}
@@ -66,7 +84,11 @@ export const ButtonDeleteStructureOrganization = (data: IGroupOrganization) => {
               <BiX />
               Batal
             </Button>
-            <Button variant={'destructive'} onClick={HandlerDelete} disabled={loading}>
+            <Button
+              variant={'destructive'}
+              onClick={HandlerDelete}
+              disabled={form.watch('validator') !== 'DELETE' || loading}
+            >
               <FaTrash /> Hapus
             </Button>
           </div>

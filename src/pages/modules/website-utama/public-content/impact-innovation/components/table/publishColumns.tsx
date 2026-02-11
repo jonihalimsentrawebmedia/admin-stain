@@ -13,6 +13,7 @@ import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import type { IImpactInnovationList } from '../../data/index'
 import { ButtonUnpublishImpactInnovation } from '../buttonUnpublish'
+import { IoLanguage } from 'react-icons/io5'
 
 export const PublishColumnsImpactInnovation = () => {
   const [searchParams] = useSearchParams()
@@ -129,13 +130,19 @@ export const PublishColumnsImpactInnovation = () => {
       header: 'Aksi',
       cell: ({ row }) => {
         return (
-          <>
+          <div className={'flex-col flex items-center gap-2'}>
+            <Link
+              to={`language/${row?.original.id_inovasi_berdampak}`}
+              className={'bg-primary p-1.5 rounded text-white'}
+            >
+              <IoLanguage />
+            </Link>
             <Link to={`detail/${row?.original?.id_inovasi_berdampak}`}>
               <button className={'bg-blue-500 p-1.5 rounded text-white hover:bg-blue-600'}>
                 <MdInfo />
               </button>
             </Link>
-          </>
+          </div>
         )
       },
     },

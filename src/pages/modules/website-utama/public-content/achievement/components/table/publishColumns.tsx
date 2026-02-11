@@ -13,6 +13,7 @@ import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import type { IAchievementDetail } from '../../data/index'
 import { ButtonUnpublishAchievement } from '../buttonUnpublish'
+import { IoLanguage } from 'react-icons/io5'
 
 export const PublishColumnsAchievement = () => {
   const [searchParams] = useSearchParams()
@@ -125,13 +126,19 @@ export const PublishColumnsAchievement = () => {
       header: 'Aksi',
       cell: ({ row }) => {
         return (
-          <>
+          <div className={'flex flex-col gap-1.5 items-center'}>
+            <Link
+              to={`language/${row?.original?.id_prestasi}`}
+              className={'bg-primary p-1.5 rounded text-white'}
+            >
+              <IoLanguage />
+            </Link>
             <Link to={`detail/${row?.original?.id_prestasi}`}>
               <button className={'bg-blue-500 p-1.5 rounded text-white hover:bg-blue-600'}>
                 <MdInfo />
               </button>
             </Link>
-          </>
+          </div>
         )
       },
     },

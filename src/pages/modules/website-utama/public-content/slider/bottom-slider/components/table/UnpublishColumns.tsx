@@ -8,6 +8,7 @@ import { TimeAgo } from '@/utils/helper.tsx'
 import { HiPencil } from 'react-icons/hi'
 import { ButtonPublishedBottom } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/components/buttonPublish.tsx'
 import { MdOutlineHistory } from 'react-icons/md'
+import { ButonDeleteBottomSlider } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/components/butonDelete.tsx'
 
 const UnpublishedColumnsBottom = () => {
   const [searchParams] = useSearchParams()
@@ -98,6 +99,7 @@ const UnpublishedColumnsBottom = () => {
       cell: ({ row }) => {
         return (
           <div className={'flex flex-col gap-1.5 items-center w-full'}>
+            <ButonDeleteBottomSlider data={row?.original} />
             <Link to={`edit/${row?.original?.id_slider_bawah}`}>
               <button
                 className={

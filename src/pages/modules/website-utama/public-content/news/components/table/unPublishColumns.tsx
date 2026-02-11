@@ -14,6 +14,7 @@ import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { ButtonPublishNews } from '@/pages/modules/website-utama/public-content/news/components/buttonPublish.tsx'
 import { HiPencil } from 'react-icons/hi'
+import { ButtonDeleteNews } from '@/pages/modules/website-utama/public-content/news/components/buttonDelete.tsx'
 
 export const UnPublishColumns = () => {
   const [searchParams] = useSearchParams()
@@ -144,13 +145,14 @@ export const UnPublishColumns = () => {
       header: 'Aksi',
       cell: ({ row }) => {
         return (
-          <>
+          <div className={'flex flex-col gap-1.5 items-center'}>
+            <ButtonDeleteNews {...row?.original} />
             <Link to={`detail/${row?.original?.id_berita}`}>
               <button className={'bg-blue-500 p-1.5 rounded text-white hover:bg-blue-600'}>
                 <MdInfo />
               </button>
             </Link>
-          </>
+          </div>
         )
       },
     },

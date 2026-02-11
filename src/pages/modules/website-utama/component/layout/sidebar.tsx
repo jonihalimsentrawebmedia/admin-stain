@@ -106,8 +106,8 @@ export function Sidebar({ collapsed }: Props) {
   return (
     <div
       className={cn(
-        'bg-primary text-white h-full transition-all duration-300 px-0.5 absolute z-50 lg:relative',
-        collapsed ? 'w-0 hidden lg:block lg:w-14' : 'w-60'
+        'bg-primary text-white h-full transition-all duration-300 absolute z-50 lg:relative px-2',
+        collapsed ? 'w-0 hidden lg:block lg:w-14' : 'w-64'
       )}
     >
       <div className="space-y-2 overflow-y-auto py-4 overflow-auto h-dvh lg:h-[calc(100vh-100px)]">

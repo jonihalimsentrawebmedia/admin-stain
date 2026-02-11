@@ -7,11 +7,15 @@ import { toast } from 'react-toastify'
 import { Button } from '@/components/ui/button.tsx'
 import { BiX } from 'react-icons/bi'
 import { FaTrash } from 'react-icons/fa'
+import { useForm } from 'react-hook-form'
+import { Form } from '@/components/ui/form.tsx'
+import TextInput from '@/components/common/form/TextInput.tsx'
 
 export const ButtonDeletePlaceman = (data: IPlacemanUser) => {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
+  const form = useForm()
   const queryClient = useQueryClient()
 
   const HandleSave = async () => {
@@ -72,8 +76,23 @@ export const ButtonDeletePlaceman = (data: IPlacemanUser) => {
             <p>{data?.email}</p>
             <p className={'text-gray-500'}>Urutan</p>
             <p>{data?.urutan}</p>
+
+            <Form {...form}>
+              <form className="my-2 col-span-2">
+                <TextInput
+                  form={form}
+                  name={'validator'}
+                  label={
+                    <p className={'text-red-500'}>
+                      To confirm, type <b>“DELETE”</b>
+                    </p>
+                  }
+                />
+              </form>
+            </Form>
           </div>
         </div>
+
         <div className="flex items-center justify-end gap-2">
           <Button
             variant={'outline'}
@@ -83,7 +102,11 @@ export const ButtonDeletePlaceman = (data: IPlacemanUser) => {
             <BiX />
             Batal
           </Button>
-          <Button variant={'destructive'} disabled={loading} onClick={HandleSave}>
+          <Button
+            variant={'destructive'}
+            disabled={form.watch('validator') !== 'DELETE' || loading}
+            onClick={HandleSave}
+          >
             <FaTrash />
             Hapus
           </Button>
