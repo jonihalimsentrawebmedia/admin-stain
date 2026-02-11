@@ -1,53 +1,55 @@
-import { InputText } from "@/components/common/form/InputText";
-import { SelectCustom } from "@/components/common/form/SelectCustom";
-import type { UseFormReturn } from "react-hook-form";
-import useGetSatuanOrganisasi from "../../controller/useGetSatuanOrganisasi";
+import { InputText } from '@/components/common/form/InputText'
+import { SelectCustom } from '@/components/common/form/SelectCustom'
+import type { UseFormReturn } from 'react-hook-form'
+import useGetSatuanOrganisasi from '../../controller/useGetSatuanOrganisasi'
 
 interface Props {
-  form: UseFormReturn<any>;
+  form: UseFormReturn<any>
 }
 const DomainForm = ({ form }: Props) => {
   const optionsGroup = [
     {
-      label: "Universitas",
-      value: "UNIVERSITAS",
+      label: 'Universitas',
+      value: 'UNIVERSITAS',
     },
     {
-      label: "Fakultas",
-      value: "FAKULTAS",
+      label: 'Fakultas',
+      value: 'FAKULTAS',
     },
     {
-      label: "Program Studi",
-      value: "PRODI",
+      label: 'Program Studi',
+      value: 'PRODI',
     },
     {
-      label: "Unit",
-      value: "UNIT",
+      label: 'Unit',
+      value: 'UNIT',
     },
     {
-      label: "Lembaga",
-      value: "LEMBAGA",
+      label: 'Lembaga',
+      value: 'LEMBAGA',
     },
     {
-      label: "Unit Kegiatan Khusus / Unit Kegiatan Mahasiswa",
-      value: "UKK_UKM",
+      label: 'Unit Kegiatan Khusus / Unit Kegiatan Mahasiswa',
+      value: 'UKK_UKM',
     },
     {
-      label: "Rektorat",
-      value: "REKTORAT",
+      label: 'Rektorat',
+      value: 'REKTORAT',
     },
     {
-      label: "Biro",
-      value: "BIRO",
+      label: 'Biro',
+      value: 'BIRO',
     },
     {
-      label: "Unit Pelaksana Teknis",
-      value: "UPT",
+      label: 'Unit Pelaksana Teknis',
+      value: 'UPT',
     },
-  ];
+  ]
   const { satuanOrganisasi } = useGetSatuanOrganisasi({
-    kelompok: form.watch("kelompok"),
-  });
+    kelompok: form.watch('kelompok'),
+    isGetAll: true,
+  })
+
   return (
     <>
       <SelectCustom
@@ -60,12 +62,12 @@ const DomainForm = ({ form }: Props) => {
         level1
       />
       <SelectCustom
-        isDisabled={!form.watch("kelompok")}
+        isDisabled={!form.watch('kelompok')}
         data={satuanOrganisasi.map((item) => {
           return {
             label: item.nama,
             value: item.id_satuan_organisasi,
-          };
+          }
         })}
         name="id_satuan_organisasi"
         label="Nama"
@@ -75,20 +77,8 @@ const DomainForm = ({ form }: Props) => {
         level2
       />
 
-      <InputText
-        form={form}
-        name="domain"
-        isRow
-        label="Domain   "
-        placeholder="Domain "
-      />
-      <InputText
-        form={form}
-        name="ip"
-        isRow
-        label="IP Server"
-        placeholder="IP Server"
-      />
+      <InputText form={form} name="domain" isRow label="Domain   " placeholder="Domain " />
+      <InputText form={form} name="ip" isRow label="IP Server" placeholder="IP Server" />
       <InputText
         form={form}
         name="endpoint_be"
@@ -97,7 +87,7 @@ const DomainForm = ({ form }: Props) => {
         placeholder="Endpoint BE"
       />
     </>
-  );
-};
+  )
+}
 
-export default DomainForm;
+export default DomainForm

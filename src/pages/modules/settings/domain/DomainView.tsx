@@ -26,10 +26,11 @@ const DomainView = () => {
         columns={columns}
         data={domains}
         loading={loading}
+        isShowChoiceColumn={true}
         meta={meta}
         placeHolderSearch="Cari Domain"
-        tdClassName='whitespace-pre-line'
-        thClassName='whitespace-pre-line'
+        tdClassName="whitespace-pre-line"
+        thClassName="whitespace-pre-line"
       />
     </div>
   )
