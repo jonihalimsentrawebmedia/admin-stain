@@ -11,11 +11,11 @@ export const HeaderLayoutInstitution = () => {
 
   return (
     <>
-      <div className={'bg-primary'}>
+      <div className={'bg-[#0F4D30]'}>
         <div
           className={`w-full mx-auto max-w-[1920px] py-2 bg-[url(/Background.png)] bg-cover bg-center`}
         >
-          <div className="w-full max-w-7xl mx-auto">
+          <div className="w-full flex gap-4 items-center justify-between  max-w-7xl mx-auto">
             <div className="flex items-center gap-2">
               <img
                 src={module?.gambar}

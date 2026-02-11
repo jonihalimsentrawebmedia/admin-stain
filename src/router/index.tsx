@@ -28,6 +28,7 @@ import UnitWebTheme from '@/pages/modules/website-unit/components/layout/theme.t
 import { SelectInstitutionUniversity } from '@/pages/modules/website-lembaga/select-institution'
 import { LayoutWebsiteInstitution } from '@/pages/modules/website-lembaga/component/Layout'
 import { WebsiteInstitutionRouter } from '@/router/website-lembaga'
+import UnitWebLembagaTheme from '@/pages/modules/website-lembaga/component/Layout/theme'
 
 export const Router = createBrowserRouter([
   {
@@ -133,9 +134,11 @@ export const Router = createBrowserRouter([
       {
         path: 'website-lembaga',
         element: (
-          <>
-            <LayoutWebsiteInstitution />
-          </>
+    
+            <UnitWebLembagaTheme>
+              <LayoutWebsiteInstitution />
+            </UnitWebLembagaTheme>
+       
         ),
         children: [...WebsiteInstitutionRouter],
       },
