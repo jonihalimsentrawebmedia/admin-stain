@@ -21,7 +21,7 @@ export function Header(props: Props) {
   const { profileUser } = UseGetUserProfile()
 
   return (
-    <header className="p-2 lg:py-4 lg:px-5 bg-[#E9FFF1] border-b border-green-200 flex flex-col lg:flex-row lg:items-center lg:justify-between w-full">
+    <header className="p-2 lg:py-4 lg:px-5 bg-primary/50 border-b-primary flex flex-col lg:flex-row lg:items-center lg:justify-between w-full">
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           <Link to={'/modules'} className={'lg:p-2'}>

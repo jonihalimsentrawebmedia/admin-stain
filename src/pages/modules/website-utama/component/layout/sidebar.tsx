@@ -68,14 +68,14 @@ export function Sidebar({ collapsed }: Props) {
   useEffect(() => {
     if (collapsed) setOpenGroups({})
   }, [collapsed])
-  
+
   useEffect(() => {
     // cek apakah path sekarang ada di menu yang punya parent children
-    const activeHasParentGroup = MENULIST.some(item => {
+    const activeHasParentGroup = MENULIST.some((item) => {
       if (!item.child) return false
       return isActiveTree(item, pathname)
     })
-    
+
     // kalau yang aktif bukan dari group tree → tutup semua
     if (!activeHasParentGroup) {
       setOpenGroups({})
@@ -106,8 +106,8 @@ export function Sidebar({ collapsed }: Props) {
   return (
     <div
       className={cn(
-        'bg-primary text-white h-full transition-all duration-300 absolute z-50 lg:relative px-2',
-        collapsed ? 'w-0 hidden lg:block lg:w-14' : 'w-64'
+        `bg-primary text-white h-full transition-all duration-300 absolute z-50 lg:relative ${collapsed ? '' : 'pl-[20px] pr-2'}`,
+        collapsed ? 'w-0 hidden lg:block lg:w-14' : 'w-72'
       )}
     >
       <div className="space-y-2 overflow-y-auto py-4 overflow-auto h-dvh lg:h-[calc(100vh-100px)]">
@@ -134,7 +134,12 @@ export function Sidebar({ collapsed }: Props) {
                     collapsed ? 'justify-center' : 'justify-between'
                   )}
                 >
-                  <div className={cn('flex items-center gap-1.5 text-sm', collapsed && 'justify-center')}>
+                  <div
+                    className={cn(
+                      'flex items-center gap-1.5 text-sm',
+                      collapsed && 'justify-center'
+                    )}
+                  >
                     {row.icon}
                     {labelVisible && <span>{row.name}</span>}
                   </div>
