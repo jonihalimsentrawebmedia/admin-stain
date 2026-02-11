@@ -21,7 +21,7 @@ export function Header(props: Props) {
   const { profileUser } = UseGetUserProfile()
 
   return (
-    <header className="py-4 px-5 bg-[#E9FFF1] border-b border-green-200 flex items-center justify-between w-full">
+    <header className="py-4 px-28 bg-[#E9FFF1] border-b border-green-200 flex items-center justify-between w-full">
       <div className="flex items-center gap-4">
         <Link to={'/modules'} className={'p-2'}>
           <img src={module?.gambar} alt="gambar" className="size-10" />

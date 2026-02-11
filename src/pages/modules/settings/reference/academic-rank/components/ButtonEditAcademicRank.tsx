@@ -26,7 +26,7 @@ const ButtonEditAcademicRank = ({ data }: Props) => {
   async function handleSave(values: AcademicRankType) {
     setLoading(true)
     try {
-      const res = await AxiosClient.post(
+      const res = await AxiosClient.put(
         `/pengaturan/referensi/pangkat-akademik/${data.id_akademik}`,
         values
       )
