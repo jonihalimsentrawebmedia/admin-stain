@@ -23,7 +23,7 @@ const TemplateAimViewModel = () => {
     },
 
     // ✅ Nama Pangkat Golongan
-    { accessorKey: 'nama_dokumen', header: 'Judul Dokumen Pendukung Akreditasi' },
+    { accessorKey: 'judul', header: 'Judul Dokumen Pendukung Akreditasi' },
     {
       accessorKey: 'slug',
       header: 'Dokumen',
@@ -31,16 +31,16 @@ const TemplateAimViewModel = () => {
         return (
           <div className="flex gap-2 items-center">
             <Link
-              to={`/modules/website-lembaga/layanan/spmi/dokumen-pendukung/${row.original.id_lembaga_daftar_dokumen}`}
+              to={`/modules/website-lembaga/layanan/aim/template/${row.original.id_lembaga_template_aim}?title=${row.original.judul}`}
             >
               <Button
                 variant={'outline'}
                 className="border-[#2769CD] text-[#2769CD] hover:text-[#2769CD]"
               >
-                Lihat Daftar Dokumen ({row.original.jumlah_dokumen_pendukung_akreditasi})
+                Lihat Daftar Dokumen ({row.original.jumlah_aim})
               </Button>
             </Link>
-            <ButtonAddDocument />
+            <ButtonAddDocument dataProps={row.original} />
           </div>
         )
       },

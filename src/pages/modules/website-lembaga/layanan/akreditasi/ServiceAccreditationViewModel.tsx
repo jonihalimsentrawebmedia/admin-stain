@@ -1,11 +1,12 @@
 import type { ColumnDef } from '@tanstack/react-table'
 import { useSearchParams } from 'react-router-dom'
+import type { ServiceAccreditation } from './model'
 
 const ServiceAccreditationViewModel = () => {
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') || 1)
   const limit = Number(searchParams.get('limit') || 10)
-  const columns: ColumnDef<any>[] = [
+  const columns: ColumnDef<ServiceAccreditation>[] = [
     // ✅ Nomor (#)
     {
       accessorKey: 'no',
@@ -30,7 +31,7 @@ const ServiceAccreditationViewModel = () => {
       },
     },
     {
-      accessorKey: 'prodi',
+      accessorKey: 'nama_satuan_organisasi',
       header: 'Universitas / Prodi',
     },
     {
@@ -38,11 +39,11 @@ const ServiceAccreditationViewModel = () => {
       header: 'Uraian',
     },
     {
-      accessorKey: 'nilai_akreditasi',
+      accessorKey: 'nilai_akreditas',
       header: 'Nilai Akreditasi',
     },
     {
-      accessorKey: 'lembaga_penilai',
+      accessorKey: 'lembaga_penilaian',
       header: 'Lembaga Penilai',
     },
     {
@@ -50,8 +51,17 @@ const ServiceAccreditationViewModel = () => {
       header: 'No. Surat Keputusan',
     },
     {
-      accessorKey: 'masa_berlaku',
+      accessorKey: 'mulai_berlaku',
       header: 'Masa Berlaku',
+      cell: ({ row }) => {
+        const values = row.original
+        return (
+          <div>
+            {values.mulai_berlaku.split('-').reverse().join('-')} s.d{' '}
+            {values.akhir_berlaku.split('-').reverse().join('-')}
+          </div>
+        )
+      },
     },
   ]
   return {

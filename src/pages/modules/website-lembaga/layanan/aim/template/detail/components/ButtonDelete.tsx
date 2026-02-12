@@ -8,16 +8,16 @@ import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import DetailField from '@/components/common/field/DetailField'
 import { Button } from '@/components/ui/button'
 import { Trash2, X } from 'lucide-react'
-import type { DocumentSupportList } from '../../model'
+import type {  DokumenTemplateAim } from '../../model'
 interface Props {
-  data: DocumentSupportList
+  data: DokumenTemplateAim
 }
 const ButtonDelete = ({ data }: Props) => {
   const [open, setOpen] = useState(false)
   const form = useForm()
   const fieldsConfig = [
     {
-      name: 'nama_dokumen',
+      name: 'judul',
       label: 'Judul*',
     },
     {
@@ -31,6 +31,8 @@ const ButtonDelete = ({ data }: Props) => {
     {
       name: 'public',
       label: 'Public / Tidak*',
+      component: <div>{data.public ? 'Publik' : 'Tidak Publik'}</div>,
+
     },
     {
       name: 'urutan',
@@ -45,14 +47,14 @@ const ButtonDelete = ({ data }: Props) => {
     setLoading(true)
     try {
       const res = await AxiosClient.delete(
-        `/lembaga/daftar-dokumen/${data.id_lembaga_daftar_dokumen}`
+        `/lembaga/dokumen-template-aim/${data.id_lembaga_dokumen_template_aim}`
       )
 
       if (res.data.status) {
         toast.success(res.data.message)
 
         await queryClient.invalidateQueries({
-          queryKey: ['lembaga-daftar-dokumen'],
+          queryKey: ['template-aim-detail-lembaga'],
         })
       }
     } catch (err: any) {

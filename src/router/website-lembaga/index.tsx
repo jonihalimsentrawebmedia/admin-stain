@@ -37,6 +37,14 @@ import { UpdatedNewsPage } from '@/pages/modules/website-lembaga/public-content/
 import ComplaintService from '@/pages/modules/website-lembaga/keluhan/ComplaintService.tsx'
 import { UserProfilePage } from '@/pages/modules/website-utama/user-profile'
 import { ChangePassword } from '@/pages/modules/website-utama/change-password'
+import VisiMisiView from '@/pages/modules/website-lembaga/profile/visi-misi/VisiMisiView'
+import VisiMisiLembagaAdd from '@/pages/modules/website-lembaga/profile/visi-misi/add/VisiMisiLembagaAdd'
+import VisiMisiLembagaEdit from '@/pages/modules/website-lembaga/profile/visi-misi/edit/VisiMisiLembagaEdit'
+import PerformanceInstitutaionView from '@/pages/modules/website-lembaga/profile/prestasi/PerformanceInstitutaionView'
+import SelayangPandangView from '@/pages/modules/website-lembaga/profile/selayang-pandang/SelayangPandangView'
+import WorkProgramInstitutaionView from '@/pages/modules/website-lembaga/profile/program-kerja/WorkProgramInstitutaionView'
+import StructureOrganitationInstitutionView from '@/pages/modules/website-lembaga/profile/struktur-organisasi/StructureOrganitationInstitutionView'
+import HummanResourceInstitutaionView from '@/pages/modules/website-lembaga/profile/sumber-daya-manusia/HummanResourceInstitutaionView'
 
 export const WebsiteInstitutionRouter = [
   {
@@ -255,4 +263,47 @@ export const WebsiteInstitutionRouter = [
       },
     ],
   },
+
+  {
+    path:"profile",
+    children:[
+      {
+        path:"visi-misi",
+        children:[
+          {
+            index:true,
+            element:<VisiMisiView/>
+          },
+          {
+            path:"add",
+             element:<VisiMisiLembagaAdd/>
+          },
+          {
+            path:"edit/:id",
+             element:<VisiMisiLembagaEdit/>
+          },
+        ]
+      },
+      {
+        path:"prestasi",
+        element:<PerformanceInstitutaionView/>
+      },
+      {
+        path:"selayang-pandang",
+        element:<SelayangPandangView/>
+      },
+      {
+        path:"program-kerja",
+        element:<WorkProgramInstitutaionView/>
+      },
+      {
+        path:"struktur-organisasi",
+        element:<StructureOrganitationInstitutionView/>
+      },
+      {
+        path:"sumber-daya-manusia",
+        element:<HummanResourceInstitutaionView/>
+      },
+    ]
+  }
 ]

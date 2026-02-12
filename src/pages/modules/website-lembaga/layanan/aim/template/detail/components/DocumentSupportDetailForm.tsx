@@ -8,7 +8,7 @@ interface Props {
 const DocumentSupportDetailForm = ({ form }: Props) => {
   return (
     <div className="flex flex-col gap-4">
-      <InputText form={form} name="nama_dokumen" isRow label="Judul*" placeholder="Judul" />
+      <InputText form={form} name="judul" isDisabled isRow label="Judul*" placeholder="Judul" />
       <InputText
         form={form}
         name="nama_dokumen"
@@ -21,16 +21,16 @@ const DocumentSupportDetailForm = ({ form }: Props) => {
         data={[
           {
             label: 'Public',
-            value: 'Public',
+            value: true,
           },
           {
             label: 'Tidak Public',
-            value: 'Tidak Public',
+            value: false,
           },
         ]}
         label="Public / Tidak*"
         isRow
-        name='public'
+        name="public"
         form={form}
       />
       <InputText form={form} name="urutan" isRow label="Urutan*" placeholder="Urutan" />

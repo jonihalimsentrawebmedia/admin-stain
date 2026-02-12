@@ -8,16 +8,16 @@ import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import DetailField from '@/components/common/field/DetailField'
 import { Button } from '@/components/ui/button'
 import { Trash2, X } from 'lucide-react'
-import type { DocumentSupportList } from '../../model'
+import type { DocumentSupportAccreditationList,  } from '../../model'
 interface Props {
-  data: DocumentSupportList
+  data: DocumentSupportAccreditationList
 }
 const ButtonDelete = ({ data }: Props) => {
   const [open, setOpen] = useState(false)
   const form = useForm()
   const fieldsConfig = [
     {
-      name: 'nama_dokumen',
+      name: 'judul',
       label: 'Judul*',
     },
     {
@@ -31,6 +31,7 @@ const ButtonDelete = ({ data }: Props) => {
     {
       name: 'public',
       label: 'Public / Tidak*',
+      component: <div>{data.public ? 'Publik' : 'Tidak Publik'}</div>,
     },
     {
       name: 'urutan',
@@ -45,7 +46,7 @@ const ButtonDelete = ({ data }: Props) => {
     setLoading(true)
     try {
       const res = await AxiosClient.delete(
-        `/lembaga/daftar-dokumen/${data.id_lembaga_daftar_dokumen}`
+        `/lembaga/dokumen-pendukung-akreditasi/${data.id_lembaga_dokumen_pendukung_akreditasi}`
       )
 
       if (res.data.status) {

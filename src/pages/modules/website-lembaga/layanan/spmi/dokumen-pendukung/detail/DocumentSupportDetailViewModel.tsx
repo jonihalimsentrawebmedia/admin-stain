@@ -1,6 +1,6 @@
 import type { ColumnDef } from '@tanstack/react-table'
-import { useSearchParams } from 'react-router-dom'
-import type { DocumentSupportList } from '../model'
+import { Link, useSearchParams } from 'react-router-dom'
+import type { DocumentSupportAccreditationList } from '../model'
 import { Button } from '@/components/ui/button'
 import ButtonEdit from './components/ButtonEdit'
 import ButtonDelete from './components/ButtonDelete'
@@ -9,7 +9,7 @@ const DocumentSupportDetailViewModel = () => {
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') || 1)
   const limit = Number(searchParams.get('limit') || 10)
-  const columns: ColumnDef<DocumentSupportList>[] = [
+  const columns: ColumnDef<DocumentSupportAccreditationList>[] = [
     // ✅ Nomor (#)
     {
       accessorKey: 'no',
@@ -25,17 +25,27 @@ const DocumentSupportDetailViewModel = () => {
     {
       accessorKey: 'url',
       header: 'URL',
-      cell: () => {
+      cell: ({row}) => {
         return (
-          <div className="flex gap-2 items-center">
+          <Link to={row.original.url} target='_blank' className="flex gap-2 items-center">
             <Button variant={'outline'} className="border-primary text-primary hover:text-primary">
               URL
             </Button>
+          </Link>
+        )
+      },
+    },
+    {
+      accessorKey: 'public',
+      header: 'Public / Tidak',
+      cell: ({ row }) => {
+        return (
+          <div className="flex gap-2 items-center">
+            {row.original.public ? 'Public' : 'Tidak Public'}
           </div>
         )
       },
     },
-    { accessorKey: 'public', header: 'Public / Tidak' },
     { accessorKey: 'urutan', header: 'Urutan' },
 
     // ✅ Aksi (Ikon Edit dan Hapus)
@@ -46,7 +56,7 @@ const DocumentSupportDetailViewModel = () => {
         const values = row.row.original
         return (
           <div className="flex gap-2 items-center">
-            <ButtonEdit data={values} />
+            <ButtonEdit dataProps={values} />
             <ButtonDelete data={values} />
           </div>
         )

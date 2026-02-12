@@ -7,18 +7,40 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { HiPlus } from 'react-icons/hi'
 import DocumentSupportForm from './DocumentSupportForm'
+import { DocumentSupportInstutationResolver, type DocumentSupportInstutationType } from '../model/resolver'
+import { useQueryClient } from '@tanstack/react-query'
+import AxiosClient from '@/provider/axios'
+import { toast } from 'react-toastify'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 const ButtonAdd = () => {
   const [open, setOpen] = useState(false)
-  const form = useForm()
+ const form = useForm<DocumentSupportInstutationType>({
+    resolver: zodResolver(DocumentSupportInstutationResolver),
+  })
 
   const [loading, setLoading] = useState(false)
 
-  async function handleSave(data: any) {
+  const queryClient = useQueryClient()
+  async function handleSave(data: DocumentSupportInstutationType) {
     setLoading(true)
     try {
-        console.log(data)
+      const res = await AxiosClient.post(`/lembaga/daftar-dokumen`, {
+        ...data,
+        urutan: Number(data.urutan),
+      })
+
+      if (res.data.status) {
+        toast.success(res.data.message)
+       setOpen(false)
+        await queryClient.invalidateQueries({
+          queryKey: ['daftar-dokumen-lembaga'],
+        })
+
+        form.reset()
+      }
     } catch (err: any) {
+      toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
     } finally {
       setLoading(false)
     }

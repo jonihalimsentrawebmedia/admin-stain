@@ -1,6 +1,6 @@
 import type { ColumnDef } from '@tanstack/react-table'
 import { useSearchParams } from 'react-router-dom'
-import type { DocumentSupportList } from '../model'
+import type {  DokumenTemplateAim } from '../model'
 import { Button } from '@/components/ui/button'
 import ButtonEdit from './components/ButtonEdit'
 import ButtonDelete from './components/ButtonDelete'
@@ -9,7 +9,7 @@ const TemplateAimDetailViewModel = () => {
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') || 1)
   const limit = Number(searchParams.get('limit') || 10)
-  const columns: ColumnDef<DocumentSupportList>[] = [
+  const columns: ColumnDef<DokumenTemplateAim>[] = [
     // ✅ Nomor (#)
     {
       accessorKey: 'no',
@@ -35,7 +35,17 @@ const TemplateAimDetailViewModel = () => {
         )
       },
     },
-    { accessorKey: 'public', header: 'Public / Tidak' },
+{
+      accessorKey: 'public',
+      header: 'Public / Tidak',
+      cell: ({ row }) => {
+        return (
+          <div className="flex gap-2 items-center">
+            {row.original.public ? 'Public' : 'Tidak Public'}
+          </div>
+        )
+      },
+    },
     { accessorKey: 'urutan', header: 'Urutan' },
 
     // ✅ Aksi (Ikon Edit dan Hapus)

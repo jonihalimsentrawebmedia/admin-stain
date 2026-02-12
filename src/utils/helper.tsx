@@ -46,6 +46,8 @@ export const GetModuleUrl = (moduleSelect: { nama_module: string; controller?: s
 
     case 'website prodi':
       return '/modules/select-prodi?url=website-prodi'
+    case 'lpmi':
+      return '/modules/select-university?url=website-lembaga'
 
     default:
       return `/modules/${urlStringEncode(moduleSelect?.controller ?? '')}/dashboard`

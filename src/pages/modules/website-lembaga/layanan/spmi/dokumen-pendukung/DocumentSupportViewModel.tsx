@@ -23,7 +23,7 @@ const DocumentSupportViewModel = () => {
     },
 
     // ✅ Nama Pangkat Golongan
-    { accessorKey: 'nama_dokumen', header: 'Judul Dokumen Pendukung Akreditasi' },
+    { accessorKey: 'judul', header: 'Judul Dokumen Pendukung Akreditasi' },
     {
       accessorKey: 'slug',
       header: 'Dokumen',
@@ -31,7 +31,7 @@ const DocumentSupportViewModel = () => {
         return (
           <div className="flex gap-2 items-center">
             <Link
-              to={`/modules/website-lembaga/layanan/spmi/dokumen-pendukung/${row.original.id_lembaga_daftar_dokumen}`}
+              to={`/modules/website-lembaga/layanan/spmi/dokumen-pendukung/${row.original.id_lembaga_daftar_dokumen}?title=${row.original.judul}`}
             >
               <Button
                 variant={'outline'}
@@ -40,7 +40,7 @@ const DocumentSupportViewModel = () => {
                 Lihat Daftar Dokumen ({row.original.jumlah_dokumen_pendukung_akreditasi})
               </Button>
             </Link>
-            <ButtonAddDocument />
+            <ButtonAddDocument dataProps={row.original} />
           </div>
         )
       },

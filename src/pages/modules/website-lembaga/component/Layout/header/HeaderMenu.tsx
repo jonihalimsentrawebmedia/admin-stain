@@ -24,7 +24,27 @@ export const HeaderMenu = () => {
       children: [
         {
           label: 'Selayang Pandang ',
-          link: `${baseUrl}/profile/selayang`,
+          link: `${baseUrl}/profile/selayang-pandang`,
+        },
+        {
+          label: 'Visi Misi',
+          link: `${baseUrl}/profile/visi-misi`,
+        },
+        {
+          label: 'Stuktur Organisasi',
+          link: `${baseUrl}/profile/struktur-organisasi`,
+        },
+        {
+          label: 'Program Kerja',
+          link: `${baseUrl}/profile/program-kerja`,
+        },
+        {
+          label: 'Prestasi',
+          link: `${baseUrl}/profile/prestasi`,
+        },
+        {
+          label: 'Sumber Daya Manusia',
+          link: `${baseUrl}/profile/sumber-daya-manusia`,
         },
       ],
     },
@@ -141,11 +161,11 @@ export const HeaderMenu = () => {
       ],
     },
   ]
-  
+
   return (
     <>
       <div className="bg-white shadow drop-shadow py-2">
-        <div className={'max-w-7xl mx-auto'}>
+        <div className={'max-w-7xl px-4 mx-auto'}>
           <Menubar className={'border-none shadow-none p-0'}>
             {Menus.map((menu, i) => (
               <MenubarMenu key={i}>

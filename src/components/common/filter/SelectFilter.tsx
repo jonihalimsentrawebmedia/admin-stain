@@ -8,7 +8,7 @@ const customStylesSelect: StylesConfig = {
   control: (provided, state) => ({
     ...provided,
     borderColor: primaryColor, // hijau
-    boxShadow: state.isFocused ? '0 0 0 1px #22c55e' : 'none',
+    boxShadow: state.isFocused ? `0 0 0 1px ${primaryColor}` : 'none',
     '&:hover': { borderColor: primaryColor },
     borderRadius: '8px',
     minHeight: '48px',
@@ -50,6 +50,7 @@ interface Props {
   selectClassName?: string
   fx?: (value: any) => void
   valueParam?: string
+  isLabelTop?: boolean
 }
 const SelectFilter = ({
   label,
@@ -60,6 +61,7 @@ const SelectFilter = ({
   selectClassName = 'min-w-xs',
   fx,
   valueParam,
+  isLabelTop = false,
 }: Props) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const [value, setValue] = useState()
@@ -72,40 +74,42 @@ const SelectFilter = ({
   }, [options])
 
   return (
-    <div className={`flex flex-col gap-1 relative ${zIndex}`}>
-      <label
-        className={`text-primary z-5 text-sm font-medium absolute ml-3 bg-white px-1 w-fit  -top-2.5`}
-      >
-        {label}
-      </label>
-      <Select
-        isDisabled={loading}
-        value={valueParam ? options.filter((item) => item.value == valueParam)[0] : value}
-        defaultValue={options[0]}
-        options={[
-          {
-            value: '',
-            label: 'Semua',
-          },
-          ...options,
-        ]}
-        styles={customStylesSelect}
-        className={`${selectClassName}`}
-        placeholder="Pilih"
-        onChange={(e: any) => {
-          if (fx) {
-            fx(e.value)
-            return
-          }
-          if (name) {
-            const newParams = new URLSearchParams(searchParams.toString())
-            newParams.set(name, e.value)
-            if (e.value === '') newParams.delete(name)
-            setSearchParams(newParams)
-            setValue(e)
-          }
-        }}
-      />
+    <div className="pt-4 relative">
+      <div className={`flex  flex-col gap-1 ${isLabelTop ? '' : 'relative'} ${zIndex}`}>
+        <label
+          className={`text-primary z-5 text-sm font-medium absolute  bg-white px-1 w-fit  ${isLabelTop ? '-top-1' : '-top-2.5 ml-3'}`}
+        >
+          {label}
+        </label>
+        <Select
+          isDisabled={loading}
+          value={valueParam ? options.filter((item) => item.value == valueParam)[0] : value}
+          defaultValue={options[0]}
+          options={[
+            {
+              value: '',
+              label: 'Semua',
+            },
+            ...options,
+          ]}
+          styles={customStylesSelect}
+          className={`${selectClassName}`}
+          placeholder="Pilih"
+          onChange={(e: any) => {
+            if (fx) {
+              fx(e.value)
+              return
+            }
+            if (name) {
+              const newParams = new URLSearchParams(searchParams.toString())
+              newParams.set(name, e.value)
+              if (e.value === '') newParams.delete(name)
+              setSearchParams(newParams)
+              setValue(e)
+            }
+          }}
+        />
+      </div>
     </div>
   )
 }

@@ -17,7 +17,7 @@ const ButtonDelete = ({ data }: Props) => {
   const form = useForm()
   const fieldsConfig = [
     {
-      name: 'nama_dokumen',
+      name: 'judul',
       label: 'Judul*',
     },
     {
@@ -40,7 +40,7 @@ const ButtonDelete = ({ data }: Props) => {
         toast.success(res.data.message)
 
         await queryClient.invalidateQueries({
-          queryKey: ['lembaga-daftar-dokumen'],
+          queryKey: ['daftar-dokumen-lembaga'],
         })
       }
     } catch (err: any) {

@@ -6,21 +6,49 @@ import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import { Form } from '@/components/ui/form'
 import DocumentSupportForm from './DocumentSupportForm'
 import ButtonForm from '@/components/common/button/ButtonForm'
+import {
+  DocumentSupportInstutationResolver,
+  type DocumentSupportInstutationType,
+} from '../model/resolver'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useQueryClient } from '@tanstack/react-query'
+import AxiosClient from '@/provider/axios'
+import { toast } from 'react-toastify'
 
 interface Props {
   data: DocumentSupportList
 }
 const ButtonEdit = ({ data }: Props) => {
   const [open, setOpen] = useState(false)
-  const form = useForm()
+  const form = useForm<DocumentSupportInstutationType>({
+    resolver: zodResolver(DocumentSupportInstutationResolver),
+  })
 
   const [loading, setLoading] = useState(false)
 
-  async function handleSave(data: any) {
+  const queryClient = useQueryClient()
+  async function handleSave(values: DocumentSupportInstutationType) {
     setLoading(true)
     try {
-      console.log(data)
+      const res = await AxiosClient.put(
+        `/lembaga/daftar-dokumen/${data.id_lembaga_daftar_dokumen}`,
+        {
+          ...values,
+          urutan: Number(values.urutan),
+        }
+      )
+
+      if (res.data.status) {
+        toast.success(res.data.message)
+        setOpen(false)
+        await queryClient.invalidateQueries({
+          queryKey: ['daftar-dokumen-lembaga'],
+        })
+
+        form.reset()
+      }
     } catch (err: any) {
+      toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
     } finally {
       setLoading(false)
     }
@@ -31,7 +59,8 @@ const ButtonEdit = ({ data }: Props) => {
         onClick={() => {
           setOpen(true)
           form.reset({
-            ...data,
+            judul: data.judul,
+            urutan: data.urutan.toString(),
           })
         }}
       >

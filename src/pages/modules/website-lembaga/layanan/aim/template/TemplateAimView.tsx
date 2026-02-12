@@ -4,10 +4,11 @@ import ButtonAdd from './components/ButtonAdd'
 import TableCustom from '@/components/common/table/TableCustom'
 import SelectFilter from '@/components/common/filter/SelectFilter'
 import TemplateAimViewModel from './TemplateAimViewModel'
+import useGetTemplateAim from './comtroller/useGetTemplateAim'
 
 const TemplateAimView = () => {
   const { columns } = TemplateAimViewModel()
-
+  const { document, loading, meta } = useGetTemplateAim({})
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
@@ -19,11 +20,12 @@ const TemplateAimView = () => {
             element: <ButtonAdd />,
           },
         ]}
-        label="Dokumen Pendukung Akreditasi"
+        label="Template AIM"
       />
       <TableCustom
         addFilter={
           <SelectFilter
+            isLabelTop
             selectClassName={'min-w-[8rem]'}
             label="Tampilkan"
             name={'limit'}
@@ -36,25 +38,9 @@ const TemplateAimView = () => {
           />
         }
         columns={columns}
-        data={[
-          {
-            id_lembaga_daftar_dokumen: '767ecb77-6157-43e0-8a13-3781c97c64cd',
-            id_satuan_organisasi: 'b888ee51-4aea-4bea-9752-e486a79ce758',
-            nama_dokumen: 'Sertifikat Akreditasi A',
-            slug: 'sertifikat-akreditasi-a',
-            url: 'https://storage.link/dokumen/akreditasi-a.pdf',
-            public: true,
-            urutan: 1,
-            created_at: '2026-02-11T21:32:05.482723+07:00',
-            created_user: '1',
-            updated_at: '2026-02-11T21:32:05.482723+07:00',
-            updated_user: '1',
-            nama_user_created: 'Administrator',
-            nama_user_updated: 'Administrator',
-            jumlah_dokumen_pendukung_akreditasi: 5,
-          },
-        ]}
-        loading={false}
+        data={document}
+        loading={loading}
+        meta={meta}
         isShowLimit={false}
       />
     </div>

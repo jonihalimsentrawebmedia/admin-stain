@@ -6,23 +6,53 @@ import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import { Form } from '@/components/ui/form'
 
 import ButtonForm from '@/components/common/button/ButtonForm'
-import type { DocumentSupportList } from '../../model'
+import type { DokumenTemplateAim } from '../../model'
 import DocumentSupportDetailForm from './DocumentSupportDetailForm'
+import { useSearchParams } from 'react-router-dom'
+import {
+  TemplateAimAccreditationInstutationResolver,
+  type TemplateAimAccreditationtInstutationType,
+} from '../../model/resolver'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useQueryClient } from '@tanstack/react-query'
+import AxiosClient from '@/provider/axios'
+import { toast } from 'react-toastify'
 
 interface Props {
-  data: DocumentSupportList
+  data: DokumenTemplateAim
 }
-const ButtonEdit = ({ data }: Props) => {
+const ButtonEdit = ({ data: dataProps }: Props) => {
+  const [searchParams] = useSearchParams()
   const [open, setOpen] = useState(false)
-  const form = useForm()
-
+  const form = useForm<TemplateAimAccreditationtInstutationType>({
+    resolver: zodResolver(TemplateAimAccreditationInstutationResolver),
+  })
   const [loading, setLoading] = useState(false)
 
-  async function handleSave(data: any) {
+  const queryClient = useQueryClient()
+  async function handleSave(data: TemplateAimAccreditationtInstutationType) {
     setLoading(true)
     try {
-      console.log(data)
+      const res = await AxiosClient.put(
+        `/lembaga/dokumen-template-aim/${dataProps.id_lembaga_dokumen_template_aim}`,
+        {
+          ...data,
+          urutan: Number(data.urutan),
+          id_lembaga_template_aim: dataProps.id_lembaga_template_aim,
+        }
+      )
+
+      if (res.data.status) {
+        toast.success(res.data.message)
+        setOpen(false)
+        await queryClient.invalidateQueries({
+          queryKey: ['template-aim-detail-lembaga'],
+        })
+
+        form.reset()
+      }
     } catch (err: any) {
+      toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
     } finally {
       setLoading(false)
     }
@@ -33,7 +63,11 @@ const ButtonEdit = ({ data }: Props) => {
         onClick={() => {
           setOpen(true)
           form.reset({
-            ...data,
+            judul: searchParams.get('judul') ?? '',
+            nama_dokumen: dataProps.nama_dokumen,
+            public: dataProps.public,
+            url: dataProps.url,
+            urutan: dataProps.urutan.toString(),
           })
         }}
       >
