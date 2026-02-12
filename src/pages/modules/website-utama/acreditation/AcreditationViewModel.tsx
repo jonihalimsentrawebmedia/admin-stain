@@ -99,7 +99,7 @@ const AcreditationViewModel = () => {
       },
     },
     {
-      accessorKey: 'nama_satuan_organisasi',
+      accessorKey: 'nama_satuan_organisasi_akreditas',
       header: 'Universitas / Prodi',
     },
     {
