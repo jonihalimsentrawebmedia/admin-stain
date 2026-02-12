@@ -1,14 +1,15 @@
-import { Switch } from "@/components/ui/switch"
-import type { ColumnDef } from "@tanstack/react-table"
-import { useSearchParams } from "react-router-dom"
-import ButtonEdit from "./components/ButtonEdit"
-import ButtonDelete from "./components/ButtonDelete"
+import type { ColumnDef } from '@tanstack/react-table'
+import { useSearchParams } from 'react-router-dom'
+import ButtonEdit from './components/ButtonEdit'
+import ButtonDelete from './components/ButtonDelete'
+import type { LandingList } from './model'
+import ButtonSwitch from './components/ButtonSwitch'
 
 const LandingPageViewModel = () => {
-   const [searchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') || 1)
   const limit = Number(searchParams.get('limit') || 10)
-  const columns: ColumnDef<any>[] = [
+  const columns: ColumnDef<LandingList>[] = [
     // ✅ Nomor (#)
     {
       accessorKey: 'no',
@@ -20,19 +21,18 @@ const LandingPageViewModel = () => {
     },
 
     // ✅ Nama Pangkat Golongan
-    { accessorKey: 'thumbnail', header: 'Thumbnail',cell:({row})=>{
-        return <img className="w-[344px] h-[258px]" src={row.original.thumbnail}/>
-    } },
+    {
+      accessorKey: 'thumbnail',
+      header: 'Thumbnail',
+      cell: ({ row }) => {
+        return <img className="w-[344px] h-[258px]" src={row.original.gambar_url} />
+      },
+    },
     {
       accessorKey: 'slug',
       header: 'Status Aktif',
-      cell: ({  }) => {
-        return (
-          <div className="flex gap-2 items-center">
-            <Switch checked/>
-                Aktif
-          </div>
-        )
+      cell: ({ row }) => {
+        return <ButtonSwitch data={row.original} />
       },
     },
 

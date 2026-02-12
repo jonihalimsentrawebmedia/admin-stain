@@ -7,18 +7,39 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { HiPlus } from 'react-icons/hi'
 import ImageUpload from './ImageUpload'
+import { LandingPageInstutationResolver, type LandingPageInstutationType } from '../model/resolver'
+import { useQueryClient } from '@tanstack/react-query'
+import { zodResolver } from '@hookform/resolvers/zod'
+import AxiosClient from '@/provider/axios'
+import { toast } from 'react-toastify'
 
 const ButtonAdd = () => {
   const [open, setOpen] = useState(false)
-  const form = useForm()
+  const form = useForm<LandingPageInstutationType>({
+    resolver: zodResolver(LandingPageInstutationResolver),
+  })
 
   const [loading, setLoading] = useState(false)
 
-  async function handleSave(data: any) {
+  const queryClient = useQueryClient()
+  async function handleSave(data: LandingPageInstutationType) {
     setLoading(true)
     try {
-      console.log(data)
+      const res = await AxiosClient.post(`/lembaga/background`, {
+        ...data,
+      })
+
+      if (res.data.status) {
+        toast.success(res.data.message)
+        setOpen(false)
+        await queryClient.invalidateQueries({
+          queryKey: ['landing-page-pengaturan'],
+        })
+
+        form.reset()
+      }
     } catch (err: any) {
+      toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
     } finally {
       setLoading(false)
     }
@@ -45,7 +66,7 @@ const ButtonAdd = () => {
         <div className="flex flex-col gap-4">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
-              <ImageUpload maxSizeMB={2} form={form} name="thumbnail" label="Gambar(Ukuran 4:2)" />
+              <ImageUpload maxSizeMB={2} form={form} name="gambar_url" label="Gambar(Ukuran 4:2)" />
               <div className="text-center">
                 <ButtonForm
                   position="justify-center"

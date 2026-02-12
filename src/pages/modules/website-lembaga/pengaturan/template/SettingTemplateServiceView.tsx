@@ -2,9 +2,11 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
 import SettingTemplateServiceViewModel from './SettingTemplateServiceViewModel'
 import { IoInformationCircle } from 'react-icons/io5'
 import TableCustom from '@/components/common/table/TableCustom'
+import useGetTemplateInstitutation from './controller/useGetTemplateInstitutaion'
 
 const SettingTemplateServiceView = () => {
   const { columns } = SettingTemplateServiceViewModel()
+  const { loading, template } = useGetTemplateInstitutation({})
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup buttonGroup={[]} label="Template Website" />
@@ -14,7 +16,13 @@ const SettingTemplateServiceView = () => {
         <div>Pilih template yang ingin anda gunakan untuk website anda.</div>
       </div>
 
-      <TableCustom columns={columns} data={[]} isShowFilter={false} isShowPagination={false} />
+      <TableCustom
+        columns={columns}
+        data={template}
+        loading={loading}
+        isShowFilter={false}
+        isShowPagination={false}
+      />
     </div>
   )
 }

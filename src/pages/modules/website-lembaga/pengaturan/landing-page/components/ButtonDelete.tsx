@@ -7,8 +7,9 @@ import { IconDelete } from '@/components/common/table/icon'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import { Button } from '@/components/ui/button'
 import { Trash2, X } from 'lucide-react'
+import type { LandingList } from '../model'
 interface Props {
-  data: any
+  data: LandingList
 }
 const ButtonDelete = ({ data }: Props) => {
   const [open, setOpen] = useState(false)
@@ -20,15 +21,13 @@ const ButtonDelete = ({ data }: Props) => {
   async function handleDelete() {
     setLoading(true)
     try {
-      const res = await AxiosClient.delete(
-        `/lembaga/daftar-dokumen/${data.id_lembaga_daftar_dokumen}`
-      )
+      const res = await AxiosClient.delete(`/lembaga/background/${data.id_lembaga_background}`)
 
       if (res.data.status) {
         toast.success(res.data.message)
 
         await queryClient.invalidateQueries({
-          queryKey: ['lembaga-daftar-dokumen'],
+          queryKey: ['landing-page-pengaturan'],
         })
       }
     } catch (err: any) {
@@ -56,8 +55,8 @@ const ButtonDelete = ({ data }: Props) => {
         setOpen={setOpen}
         title={<p className="text-2xl text-red-500">Hapus Gambar Landing Page</p>}
       >
-        <div className="my-4 ">
-          <img src={data.thumbnail} className='h-[400px]' alt="" />
+        <div className="my-4 mx-auto text-center">
+          <img src={data.gambar_url} className="h-[400px] object-contain" alt="" />
         </div>
 
         <div className="flex gap-4 items-center justify-center">

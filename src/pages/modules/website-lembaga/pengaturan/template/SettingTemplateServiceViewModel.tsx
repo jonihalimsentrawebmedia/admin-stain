@@ -1,14 +1,16 @@
 import { Button } from '@/components/ui/button'
-import { Switch } from '@/components/ui/switch'
 import type { ColumnDef } from '@tanstack/react-table'
 import { MdOpenInNew } from 'react-icons/md'
 import { Link, useSearchParams } from 'react-router-dom'
+import type { ThemaLembaga } from './model'
+import ButtonSwitch from './components/ButtonSwitch'
+import { format } from 'date-fns'
 
 const SettingTemplateServiceViewModel = () => {
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') || 1)
   const limit = Number(searchParams.get('limit') || 10)
-  const columns: ColumnDef<any>[] = [
+  const columns: ColumnDef<ThemaLembaga>[] = [
     // ✅ Nomor (#)
     {
       accessorKey: 'no',
@@ -21,32 +23,27 @@ const SettingTemplateServiceViewModel = () => {
 
     // ✅ Nama Pangkat Golongan
     {
-      accessorKey: 'thumbnail',
+      accessorKey: 'image',
       header: 'Thumbnail',
       cell: ({ row }) => {
-        return <img className="w-[344px] h-[258px]" src={row.original.thumbnail} />
+        return <img className="w-[344px] h-[258px] object-cover" src={row.original.image} />
       },
     },
     {
       accessorKey: 'status',
-      header: 'Status ',
-      cell: ({}) => {
-        return (
-          <div className="flex gap-2 items-center">
-            <Switch checked />
-            Aktif
-          </div>
-        )
+      header: 'Status',
+      cell: ({ row }) => {
+        return <ButtonSwitch data={row.original} />
       },
     },
     {
       accessorKey: 'tanggal',
       header: 'Tanggal Aktif',
-      cell: ({}) => {
+      cell: ({ row }) => {
         return (
           <div>
-            <div>1-2-2026, 12:00</div>
-            <div>(Oleh: f)</div>
+            <div>{format(row.original.tanggal_aktif, 'd-M-yyyy, HH:mm')}</div>
+            <div>(Oleh: {row.original.nama_user_updated??"-"})</div>
           </div>
         )
       },
@@ -57,10 +54,9 @@ const SettingTemplateServiceViewModel = () => {
       accessorKey: 'aksi',
       header: 'Lihat Demo',
       cell: () => {
-    
         return (
           <Link to={'#'}>
-            <Button className="border-primary text-primary">
+            <Button variant={'outline'} className="border-primary text-primary">
               <MdOpenInNew />
               Demo Template Website
             </Button>
