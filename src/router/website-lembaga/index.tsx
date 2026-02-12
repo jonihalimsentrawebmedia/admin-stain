@@ -35,11 +35,26 @@ import { NewsWithLanguage } from '@/pages/modules/website-lembaga/public-content
 import { LogActivityNewsPage } from '@/pages/modules/website-lembaga/public-content/news/log'
 import { UpdatedNewsPage } from '@/pages/modules/website-lembaga/public-content/news/updated'
 import ComplaintService from '@/pages/modules/website-lembaga/keluhan/ComplaintService.tsx'
+import { UserProfilePage } from '@/pages/modules/website-utama/user-profile'
+import { ChangePassword } from '@/pages/modules/website-utama/change-password'
 
 export const WebsiteInstitutionRouter = [
   {
     path: 'dashboard',
-    element: <DashboardLPMI />,
+    children: [
+      {
+        index: true,
+        element: <DashboardLPMI />,
+      },
+      {
+        path: 'user-profile',
+        element: <UserProfilePage />,
+      },
+      {
+        path: 'change-password',
+        element: <ChangePassword />,
+      },
+    ],
   },
   {
     path: 'jaminan-mutu',
