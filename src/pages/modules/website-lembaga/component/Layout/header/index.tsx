@@ -11,6 +11,7 @@ import { urlStringEncode } from '@/utils/helper'
 import { toast } from 'react-toastify'
 import Cookies from 'js-cookie'
 import { Skeleton } from '@/components/ui/skeleton'
+import HeaderMenuMobile from './HeaderMenuMobile'
 
 export const HeaderLayoutInstitution = () => {
   const localStorage = window.localStorage.getItem('module')
@@ -31,7 +32,7 @@ export const HeaderLayoutInstitution = () => {
         <div
           className={`w-full mx-auto max-w-[1920px] px-4 py-2 bg-[url(/Background.png)] bg-cover bg-center`}
         >
-          <div className="w-full flex gap-4 items-center justify-between  max-w-7xl mx-auto">
+          <div className="w-full flex gap-4 items-center justify-between  max-w-[1920px] mx-auto">
             <div className="flex items-center gap-2">
               <img
                 src={module?.gambar}
@@ -45,6 +46,8 @@ export const HeaderLayoutInstitution = () => {
             </div>
 
             <div className="flex gap-4 items-center">
+              <HeaderMenuMobile />
+              <HeaderMenu />
               <Link to={'/modules'}>
                 <IconModules />
               </Link>
@@ -98,7 +101,6 @@ export const HeaderLayoutInstitution = () => {
           </div>
         </div>
       </div>
-      <HeaderMenu />
     </>
   )
 }
