@@ -2,18 +2,13 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
 import { Plus } from 'lucide-react'
-import {
-  UseGetApprovedList,
-  UseGetTotalVisitor,
-  UseGetTrentVisitor,
-} from '@/pages/modules/website-utama/beranda/hooks'
+import { UseGetApprovedList, UseGetTotalVisitor, UseGetTrentVisitor } from './hooks/index.tsx'
 import { TabsListCustom } from '@/pages/modules/website-utama/public-content/slider/components/tabsList.tsx'
 import { useState } from 'react'
-import { ApprovedSection } from '@/pages/modules/website-utama/beranda/components/Approved/section.tsx'
+import { ApprovedSection } from './components/Approved/section'
 import { Link, useLocation } from 'react-router-dom'
 import { SelectBasic } from '@/components/common/select/basic.tsx'
-import type { Mode } from '@/pages/modules/website-utama/beranda/types'
-// import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/hooks/getProfile.tsx'
+import type { Mode } from './types/index'
 
 export default function DashboardLPMI() {
   const [tabsName, setTabsName] = useState('DIAJUKAN_EDITOR')
@@ -21,7 +16,7 @@ export default function DashboardLPMI() {
   const location = useLocation()
   const path = location.pathname
   const isEditor = path.includes('editor')
-  const { trentVisitor, } = UseGetTrentVisitor(mode)
+  const { trentVisitor } = UseGetTrentVisitor(mode)
 
   const chartData =
     (trentVisitor &&
@@ -107,25 +102,23 @@ export default function DashboardLPMI() {
           <TabsListCustom data={TabsList} value={tabsName} onChange={setTabsName} />
         </div>
 
-     
-          <Card className={'bg-primary-foreground'}>
-            <CardHeader>
-              <CardTitle>Akses Cepat</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2 flex flex-col">
-              {actions?.map((item, i) => (
-                <Link to={item?.url} key={i}>
-                  <Button
-                    variant="outline"
-                    className="w-full justify-start border border-primary text-primary hover:text-primary"
-                  >
-                    <Plus className="mr-2 h-4 w-4" /> {item?.label}
-                  </Button>
-                </Link>
-              ))}
-            </CardContent>
-          </Card>
-      
+        <Card className={'bg-primary-foreground'}>
+          <CardHeader>
+            <CardTitle>Akses Cepat</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-2 flex flex-col">
+            {actions?.map((item, i) => (
+              <Link to={item?.url} key={i}>
+                <Button
+                  variant="outline"
+                  className="w-full justify-start border border-primary text-primary hover:text-primary"
+                >
+                  <Plus className="mr-2 h-4 w-4" /> {item?.label}
+                </Button>
+              </Link>
+            ))}
+          </CardContent>
+        </Card>
       </div>
 
       <div className="grid grid-cols-1  gap-6">
@@ -158,8 +151,6 @@ export default function DashboardLPMI() {
             </ResponsiveContainer>
           </CardContent>
         </Card>
-
-        
       </div>
     </div>
   )

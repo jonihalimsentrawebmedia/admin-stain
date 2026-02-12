@@ -29,6 +29,9 @@ export const ButtonSubmissionAgenda = (data: IAgendaDetail) => {
             queryKey: ['list-agenda-lembaga'],
           })
           queryClient.invalidateQueries({
+            queryKey: ['detail-agenda-lembaga'],
+          })
+          queryClient.invalidateQueries({
             queryKey: ['status-agenda-lembaga'],
           })
         }

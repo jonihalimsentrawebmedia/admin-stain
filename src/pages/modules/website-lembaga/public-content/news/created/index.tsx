@@ -1,4 +1,4 @@
-import { FormNewsContent } from '@/pages/modules/website-utama/public-content/news/components/form.tsx'
+import { FormNewsContent } from '../components/form'
 import { useForm } from 'react-hook-form'
 import { type INewsTypeForm, NewsResolver } from '../data/resolver'
 import { zodResolver } from '@hookform/resolvers/zod'

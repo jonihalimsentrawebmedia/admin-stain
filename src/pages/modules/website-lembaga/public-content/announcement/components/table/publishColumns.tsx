@@ -1,11 +1,11 @@
 import { Link, useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
-import type { IAnnouncement } from '@/pages/modules/website-utama/public-content/announcement/data'
+import type { IAnnouncement } from '../../data/index'
 import { BiLinkExternal } from 'react-icons/bi'
 import { MdInfo, MdOutlineHistory } from 'react-icons/md'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
-import { ButtonAnnouncementUnpublish } from '@/pages/modules/website-utama/public-content/announcement/components/buttonUnpublish.tsx'
+import { ButtonAnnouncementUnpublish } from '../buttonUnpublish.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { IoLanguage } from 'react-icons/io5'
 

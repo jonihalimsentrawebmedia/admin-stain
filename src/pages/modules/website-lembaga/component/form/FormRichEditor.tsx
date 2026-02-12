@@ -1,4 +1,4 @@
-import  { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { UseGetWebsiteLembagaGlobal } from '../../hooks'
 import { Form } from '@/components/ui/form'
@@ -13,13 +13,14 @@ interface Props {
   queryKeyGetData: string
   linkPostData: string
   queryKeyPostData: string
-  title:string
+  title: string
 }
 const FormRichEditor = ({
   linkGetData,
   linkPostData,
   queryKeyGetData,
-  queryKeyPostData,title
+  queryKeyPostData,
+  title,
 }: Props) => {
   const form = useForm()
   const [isEdit, setIsEdit] = useState(false)
@@ -89,7 +90,10 @@ const FormRichEditor = ({
           label={title}
         />
         {!isEdit ? (
-          <div dangerouslySetInnerHTML={{ __html: form.watch('isi') }} />
+          <div
+            className={'tiptap ProseMirror simple-editor'}
+            dangerouslySetInnerHTML={{ __html: form.watch('isi') }}
+          />
         ) : (
           <RichText form={form} label="" name="isi" isRow={false} />
         )}

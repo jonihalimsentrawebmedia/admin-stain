@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/carousel.tsx'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
-import { ButtonDraft } from '@/pages/modules/website-utama/public-content/news/components/buttonDraft.tsx'
+import { ButtonDraft } from '../buttonDraft.tsx'
 
 export const SubmissionColumns = () => {
   const [searchParams] = useSearchParams()
@@ -94,8 +94,8 @@ export const SubmissionColumns = () => {
       },
     },
     {
-      accessorKey: 'Tgl. Diajukan',
-      header: '',
+      accessorKey: 'published_at',
+      header: 'Tgl. Diajukan',
       cell: ({ row }) => {
         return (
           <>

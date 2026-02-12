@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import type {
   IAnnouncement,
-  IBGThumbnail,
   IstatusAnnouncement,
 } from '@/pages/modules/website-lembaga/public-content/announcement/data'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
@@ -26,8 +25,7 @@ export const UseGetAnnouncement = () => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['list-announcement-lembaga', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
-    queryFn: () =>
-      AxiosClient.get(`/lembaga/pengumuman?${ParamsSearch}`).then((res) => res.data),
+    queryFn: () => AxiosClient.get(`/lembaga/pengumuman?${ParamsSearch}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching
@@ -88,8 +86,7 @@ export const UseGetLogAnnouncement = (id: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['log-inovasi-berdampak-lembaga', id],
     refetchOnWindowFocus: false,
-    queryFn: () =>
-      AxiosClient.get(`/lembaga/pengumuman-log/${id}`).then((res) => res.data.data),
+    queryFn: () => AxiosClient.get(`/lembaga/pengumuman-log/${id}`).then((res) => res.data.data),
   })
 
   const loading = isLoading || isFetching
@@ -101,25 +98,4 @@ export const UseGetLogAnnouncement = (id: string) => {
   }, [data])
 
   return { logData, loading }
-}
-
-export const UseGetAnnouncementBackground = () => {
-  const [background, setBackground] = useState<IBGThumbnail[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['background-announcement-lembaga'],
-    refetchOnWindowFocus: false,
-    queryFn: () =>
-      AxiosClient.get(`/lembaga/pengumuman-background`).then((res) => res.data.data),
-  })
-
-  const loading = isLoading || isFetching
-
-  useEffect(() => {
-    if (data) {
-      setBackground(data)
-    }
-  }, [data])
-
-  return { background, loading }
 }

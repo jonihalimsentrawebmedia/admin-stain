@@ -35,6 +35,9 @@ export const ButtonSubmissionNews = (data: INewsDetail) => {
             queryKey: ['list-news-lembaga'],
           })
           queryClient.invalidateQueries({
+            queryKey: ['detail-news-lembaga'],
+          })
+          queryClient.invalidateQueries({
             queryKey: ['status-news-lembaga'],
           })
         }

@@ -5,8 +5,8 @@ import { Button } from '@/components/ui/button.tsx'
 import { HiPencil } from 'react-icons/hi'
 import { Separator } from '@/components/ui/separator.tsx'
 import { format } from 'date-fns'
-import { ButtonSubmissionAgenda } from '@/pages/modules/website-utama/public-content/agenda/components/buttonSubmission.tsx'
-import type { IAgendaDetail } from '@/pages/modules/website-utama/public-content/agenda/data'
+import { ButtonSubmissionAgenda } from '../components/buttonSubmission.tsx'
+import type { IAgendaDetail } from '../data/index'
 
 export const DetailAgendaPage = () => {
   const { id } = useParams()

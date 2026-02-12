@@ -17,14 +17,12 @@ import LandingPageView from '@/pages/modules/website-lembaga/pengaturan/landing-
 import SettingTemplateServiceView from '@/pages/modules/website-lembaga/pengaturan/template/SettingTemplateServiceView'
 import ColorSettingService from '@/pages/modules/website-lembaga/pengaturan/warna/ColorSettingService'
 import { AgendaPage } from '@/pages/modules/website-lembaga/public-content/agenda'
-import { AgendaBackgroundPage } from '@/pages/modules/website-lembaga/public-content/agenda/background'
 import { CreateAgendaPage } from '@/pages/modules/website-lembaga/public-content/agenda/created'
 import { DetailAgendaPage } from '@/pages/modules/website-lembaga/public-content/agenda/detail'
 import { AgendaLanguagePage } from '@/pages/modules/website-lembaga/public-content/agenda/language'
 import { LogActivityAgendaPage } from '@/pages/modules/website-lembaga/public-content/agenda/log'
 import { UpdatedAgendaPage } from '@/pages/modules/website-lembaga/public-content/agenda/updated'
 import { AnnouncementPage } from '@/pages/modules/website-lembaga/public-content/announcement'
-import { AnnouncementBackground } from '@/pages/modules/website-lembaga/public-content/announcement/background'
 import { CreateAnnouncementPage } from '@/pages/modules/website-lembaga/public-content/announcement/created'
 import { AnnouncementDetailPage } from '@/pages/modules/website-lembaga/public-content/announcement/detail'
 import { AnnouncementLanguage } from '@/pages/modules/website-lembaga/public-content/announcement/language'
@@ -36,6 +34,7 @@ import { DetailNewsPage } from '@/pages/modules/website-lembaga/public-content/n
 import { NewsWithLanguage } from '@/pages/modules/website-lembaga/public-content/news/language'
 import { LogActivityNewsPage } from '@/pages/modules/website-lembaga/public-content/news/log'
 import { UpdatedNewsPage } from '@/pages/modules/website-lembaga/public-content/news/updated'
+import ComplaintService from '@/pages/modules/website-lembaga/keluhan/ComplaintService.tsx'
 
 export const WebsiteInstitutionRouter = [
   {
@@ -129,6 +128,10 @@ export const WebsiteInstitutionRouter = [
     ],
   },
   {
+    path: 'keluhan',
+    element: <ComplaintService />,
+  },
+  {
     path: 'pengaturan',
     children: [
       {
@@ -201,10 +204,6 @@ export const WebsiteInstitutionRouter = [
             element: <LogActivityAnnouncementPage />,
           },
           {
-            path: 'background',
-            element: <AnnouncementBackground />,
-          },
-          {
             path: 'language/:id',
             element: <AnnouncementLanguage />,
           },
@@ -232,10 +231,6 @@ export const WebsiteInstitutionRouter = [
           {
             path: 'log/:id',
             element: <LogActivityAgendaPage />,
-          },
-          {
-            path: 'background',
-            element: <AgendaBackgroundPage />,
           },
           {
             path: 'language/:id',

@@ -1,4 +1,4 @@
-import { AgendaForm } from '@/pages/modules/website-utama/public-content/agenda/components/form.tsx'
+import { AgendaForm } from '../components/form'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'

@@ -4,11 +4,11 @@ import { HiPencil } from 'react-icons/hi'
 import { MdDownload } from 'react-icons/md'
 import { Separator } from '@/components/ui/separator.tsx'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { UseGetAnnouncementDetail } from '@/pages/modules/website-utama/public-content/announcement/hooks'
+import { UseGetAnnouncementDetail } from '../hooks/index'
 import { format } from 'date-fns'
 import Select from 'react-select'
 import { useEffect, useState } from 'react'
-import { ButtonSubmissionAnnouncement } from '@/pages/modules/website-utama/public-content/announcement/components/buttonSubmission.tsx'
+import { ButtonSubmissionAnnouncement } from '../components/buttonSubmission.tsx'
 
 export const AnnouncementDetailPage = () => {
   const { id } = useParams()

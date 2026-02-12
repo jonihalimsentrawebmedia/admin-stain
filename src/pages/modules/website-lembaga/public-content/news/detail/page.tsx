@@ -1,5 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { UseGetNewsDetail } from '@/pages/modules/website-utama/public-content/news/hooks'
+import { UseGetNewsDetail } from '../hooks/index.tsx'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button.tsx'
 import { HiPencil } from 'react-icons/hi'
@@ -7,7 +7,7 @@ import { Separator } from '@/components/ui/separator.tsx'
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel'
 import { useEffect, useState } from 'react'
 import { format } from 'date-fns'
-import { ButtonSubmissionNews } from '@/pages/modules/website-utama/public-content/news/components/buttonSubmission.tsx'
+import { ButtonSubmissionNews } from '../components/buttonSubmission.tsx'
 
 export const DetailNewsPage = () => {
   const { id } = useParams()

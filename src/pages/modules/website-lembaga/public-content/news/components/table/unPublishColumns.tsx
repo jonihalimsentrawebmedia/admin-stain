@@ -12,9 +12,9 @@ import {
 } from '@/components/ui/carousel.tsx'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
-import { ButtonPublishNews } from '@/pages/modules/website-utama/public-content/news/components/buttonPublish.tsx'
+import { ButtonPublishNews } from '../buttonPublish.tsx'
 import { HiPencil } from 'react-icons/hi'
-import { ButtonDeleteNews } from '@/pages/modules/website-utama/public-content/news/components/buttonDelete.tsx'
+import { ButtonDeleteNews } from '../buttonDelete.tsx'
 
 export const UnPublishColumns = () => {
   const [searchParams] = useSearchParams()

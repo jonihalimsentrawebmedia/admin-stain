@@ -1,5 +1,5 @@
 import type { ColumnDef } from '@tanstack/react-table'
-import type { IAgendaDetail } from '@/pages/modules/website-utama/public-content/agenda/data'
+import type { IAgendaDetail } from '../../data/index.tsx'
 import { Link, useSearchParams } from 'react-router-dom'
 import { format } from 'date-fns'
 import { Button } from '@/components/ui/button.tsx'

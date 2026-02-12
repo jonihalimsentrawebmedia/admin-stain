@@ -1,4 +1,4 @@
-import { AnnouncementForm } from '@/pages/modules/website-utama/public-content/announcement/components/form.tsx'
+import { AnnouncementForm } from '../components/form'
 import { useForm } from 'react-hook-form'
 import { AnnouncementResolver, type AnnouncementType } from '../data/resolver'
 import { zodResolver } from '@hookform/resolvers/zod'

@@ -4,7 +4,6 @@ import AxiosClient from '@/provider/axios.tsx'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import type { IAgendaDetail, IStatusAgenda } from '../data/index'
 import { useSearchParams } from 'react-router-dom'
-import type { IBGThumbnail } from '../../announcement/data'
 
 export const UseGetAgendaList = () => {
   const [listAgenda, setListAgenda] = useState<any>([])
@@ -96,24 +95,4 @@ export const UseGetLogAgenda = (id: string) => {
   }, [data])
 
   return { logData, loading }
-}
-
-export const UseGetAgendaBackground = () => {
-  const [background, setBackground] = useState<IBGThumbnail[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['background-agenda-lembaga'],
-    refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get(`/lembaga/agenda-background`).then((res) => res.data.data),
-  })
-
-  const loading = isLoading || isFetching
-
-  useEffect(() => {
-    if (data) {
-      setBackground(data)
-    }
-  }, [data])
-
-  return { background, loading }
 }

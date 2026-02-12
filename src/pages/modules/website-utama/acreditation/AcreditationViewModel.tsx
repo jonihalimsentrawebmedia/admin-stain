@@ -49,10 +49,12 @@ const AcreditationViewModel = () => {
   const navigate = useNavigate()
   const { satuanOrganisasi: univ } = useGetSatuanOrganisasi({
     isFilter: true,
+    isGetAll: true,
     kelompok: 'UNIVERSITAS',
   })
   const { satuanOrganisasi: prodi } = useGetSatuanOrganisasi({
     isFilter: true,
+    isGetAll: true,
     kelompok: 'PRODI',
   })
   const optionsUniv = univ.map((item) => {

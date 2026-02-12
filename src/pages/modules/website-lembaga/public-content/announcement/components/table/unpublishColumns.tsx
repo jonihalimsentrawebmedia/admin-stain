@@ -1,14 +1,14 @@
 import { Link, useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
-import type { IAnnouncement } from '@/pages/modules/website-utama/public-content/announcement/data'
+import type { IAnnouncement } from '../../data/index'
 import { BiLinkExternal } from 'react-icons/bi'
 import { MdInfo, MdOutlineHistory } from 'react-icons/md'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { HiPencil } from 'react-icons/hi'
-import { ButtonAnnouncementPublish } from '../../components/buttonPublish'
-import { ButtonDeleteAnnouncement } from '@/pages/modules/website-utama/public-content/announcement/components/buttonDelete.tsx'
+import { ButtonAnnouncementPublish } from '../buttonPublish.tsx'
+import { ButtonDeleteAnnouncement } from '../buttonDelete'
 
 export const UnpublishAnnouncementColumns = () => {
   const [searchParams] = useSearchParams()

@@ -1,4 +1,4 @@
-import { FormNewsContent } from '@/pages/modules/website-utama/public-content/news/components/form.tsx'
+import { FormNewsContent } from '../components/form'
 import { useForm } from 'react-hook-form'
 import { type INewsTypeForm, NewsResolver } from '../data/resolver'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useNavigate, useParams } from 'react-router-dom'
-import { UseGetNewsDetail } from '@/pages/modules/website-utama/public-content/news/hooks'
+import { UseGetNewsDetail } from '../hooks/index'
 
 export const UpdatedNewsPage = () => {
   const { id } = useParams()
@@ -39,7 +39,6 @@ export const UpdatedNewsPage = () => {
       })
     }
   }, [detailNews])
-
 
   const HandleSubmit = async (e: INewsTypeForm) => {
     setLoading(true)

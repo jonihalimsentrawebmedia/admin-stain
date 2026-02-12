@@ -3,10 +3,7 @@ import { useParams } from 'react-router-dom'
 import { format } from 'date-fns'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsLog } from '@/pages/modules/website-utama/public-content/slider/top-slider/create/data/columns.tsx'
-import {
-  UseGetLogNews,
-  UseGetNewsDetail,
-} from '@/pages/modules/website-utama/public-content/news/hooks'
+import { UseGetLogNews, UseGetNewsDetail } from '../hooks/index'
 
 export const LogActivityNewsPage = () => {
   const { id } = useParams()

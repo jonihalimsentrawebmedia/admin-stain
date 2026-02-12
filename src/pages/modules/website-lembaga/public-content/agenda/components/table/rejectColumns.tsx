@@ -1,5 +1,5 @@
 import type { ColumnDef } from '@tanstack/react-table'
-import type { IAgendaDetail } from '@/pages/modules/website-utama/public-content/agenda/data'
+import type { IAgendaDetail } from '../../data/index.tsx'
 import { Link, useSearchParams } from 'react-router-dom'
 import { format } from 'date-fns'
 import { Button } from '@/components/ui/button.tsx'
@@ -73,9 +73,7 @@ export const RejectColumnsAgenda = () => {
               <p className={'text-sm'}>
                 {format(row?.original?.ditolak_at as string, 'dd MMMM yyyy')}
               </p>
-              <p className={'text-sm'}>
-                {format(row?.original?.ditolak_at as string, 'HH:mm:ss')}
-              </p>
+              <p className={'text-sm'}>{format(row?.original?.ditolak_at as string, 'HH:mm:ss')}</p>
               <p className={'text-primary text-sm'}>
                 {TimeAgo(row?.original?.ditolak_at as string)}
               </p>

@@ -19,7 +19,7 @@ export const UseGetTotalVisitor = () => {
     queryKey: ['total-visitor'],
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get('/website-utama/dashboard/total-pengunjung').then((res) => res.data?.data),
+      AxiosClient.get('/lembaga/dashboard/total-pengunjung').then((res) => res.data?.data),
   })
 
   const loading = isLoading || isFetching
@@ -113,7 +113,7 @@ export const UseGetApprovedList = (status: string) => {
     queryKey: ['list-approved', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get(`/website-utama/dashboard/list-konten-pengajuan?${ParamsSearch}`).then(
+      AxiosClient.get(`/lembaga/dashboard/list-konten-pengajuan?${ParamsSearch}`).then(
         (res) => res.data.data
       ),
   })
@@ -140,7 +140,7 @@ export const UseGetTrentVisitor = (mode: Mode) => {
     queryKey: ['trent-visitor', mode],
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get(`/website-utama/dashboard/statistik-pengunjung/${mode ?? 'harian'}`).then(
+      AxiosClient.get(`/lembaga/dashboard/statistik-pengunjung/${mode ?? 'harian'}`).then(
         (res) => res.data?.data
       ),
   })

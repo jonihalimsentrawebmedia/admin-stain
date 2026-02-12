@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/carousel.tsx'
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
-import { ButtonPublishNews } from '@/pages/modules/website-utama/public-content/news/components/buttonPublish.tsx'
+import { ButtonPublishNews } from '../buttonPublish.tsx'
 
 export const ApprovedColumns = () => {
   const [searchParams] = useSearchParams()

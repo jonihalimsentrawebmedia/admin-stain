@@ -174,6 +174,7 @@ import { TextTestimonyLanguagePage } from '@/pages/modules/website-utama/campus-
 import { TextDirectUrlLanguagePage } from '@/pages/modules/website-utama/campus-life/language/directLink'
 import { TopSliderLanguagePage } from '@/pages/modules/website-utama/public-content/slider/top-slider/language'
 import { BottomSliderLanguagePage } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/language'
+import { HeaderMenuContentLanguagePage } from '@/pages/modules/website-utama/settings-menu/header/content/language'
 
 export const MainWebsiteRouter = [
   {
@@ -618,6 +619,10 @@ export const MainWebsiteRouter = [
                   {
                     index: true,
                     element: <ContentView />,
+                  },
+                  {
+                    path: 'language/:idContent',
+                    element: <HeaderMenuContentLanguagePage />,
                   },
                   {
                     path: 'add',

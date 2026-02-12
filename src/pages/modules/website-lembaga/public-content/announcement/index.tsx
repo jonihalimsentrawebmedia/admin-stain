@@ -4,26 +4,20 @@ import { HiPencil } from 'react-icons/hi'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { TabsListCustom } from '@/pages/modules/website-utama/public-content/slider/components/tabsList.tsx'
 import { useEffect } from 'react'
-import {
-  UseGetAnnouncementBackground,
-  UseGetAnnouncementStatus,
-} from '@/pages/modules/website-lembaga/public-content/announcement/hooks'
-import { DraftAnnouncementSection } from '@/pages/modules/website-lembaga/public-content/announcement/components/table/draftSection.tsx'
-import { SubmissionAnnouncementSection } from '@/pages/modules/website-lembaga/public-content/announcement/components/table/submissionSection.tsx'
-import { ProcessAnnouncementSection } from '@/pages/modules/website-lembaga/public-content/announcement/components/table/ProcessSection.tsx'
-import { RejectAnnouncementSection } from '@/pages/modules/website-lembaga/public-content/announcement/components/table/rejectSection.tsx'
-import { ApproveAnnouncementSection } from '@/pages/modules/website-lembaga/public-content/announcement/components/table/approveSection.tsx'
-import { PublishAnnouncementSection } from '@/pages/modules/website-lembaga/public-content/announcement/components/table/publishSection.tsx'
-import { UnpublishAnnouncementSection } from '@/pages/modules/website-lembaga/public-content/announcement/components/table/unpublishSection.tsx'
-import { Image } from 'lucide-react'
-import { IoWarning } from 'react-icons/io5'
+import { UseGetAnnouncementStatus } from './hooks/index'
+import { DraftAnnouncementSection } from './components/table/draftSection'
+import { SubmissionAnnouncementSection } from './components/table/submissionSection'
+import { ProcessAnnouncementSection } from './components/table/ProcessSection'
+import { RejectAnnouncementSection } from './components/table/rejectSection'
+import { ApproveAnnouncementSection } from './components/table/approveSection'
+import { PublishAnnouncementSection } from './components/table/publishSection.tsx'
+import { UnpublishAnnouncementSection } from './components/table/unpublishSection.tsx'
 import { toast } from 'react-toastify'
 
 export const AnnouncementPage = () => {
   const navigate = useNavigate()
 
   const [searchParams, setSearchParams] = useSearchParams()
-  const { background } = UseGetAnnouncementBackground()
   const { status } = UseGetAnnouncementStatus()
 
   const statusParams = searchParams.get('status')
@@ -132,29 +126,6 @@ export const AnnouncementPage = () => {
         <ButtonTitleGroup
           label={'Pengumuman'}
           buttonGroup={[
-            {
-              type: 'custom',
-              element:
-                background?.length === 0 ? (
-                  <Button
-                    onClick={() => navigate('background')}
-                    variant={'outline'}
-                    className="border border-red-500 hover:text-red-500 text-red-500"
-                  >
-                    <IoWarning className="text-red- hover:text-red-500 size-6" />
-                    Gambar Background Belum Ada
-                  </Button>
-                ) : (
-                  <Button
-                    onClick={() => navigate('background')}
-                    variant={'outline'}
-                    className="border border-primary text-primary hover:text-primary"
-                  >
-                    <Image className="text-primary" />
-                    Gambar Background
-                  </Button>
-                ),
-            },
             {
               type: 'add',
               label: '',

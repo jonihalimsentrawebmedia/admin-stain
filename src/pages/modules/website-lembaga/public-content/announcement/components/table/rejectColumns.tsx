@@ -1,6 +1,6 @@
 import { Link, useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
-import type { IAnnouncement } from '@/pages/modules/website-utama/public-content/announcement/data'
+import type { IAnnouncement } from '../../data/index'
 import { BiLinkExternal } from 'react-icons/bi'
 import { MdInfo, MdOutlineHistory } from 'react-icons/md'
 import { format } from 'date-fns'
@@ -92,9 +92,7 @@ export const RejectAnnouncementColumns = () => {
               <p className={'text-sm'}>
                 {format(row?.original?.ditolak_at as string, 'dd MMMM yyyy')}
               </p>
-              <p className={'text-sm'}>
-                {format(row?.original?.ditolak_at as string, 'HH:mm:ss')}
-              </p>
+              <p className={'text-sm'}>{format(row?.original?.ditolak_at as string, 'HH:mm:ss')}</p>
               <p className={'text-primary text-sm whitespace-nowrap'}>
                 {TimeAgo(row?.original?.ditolak_at as string)}
               </p>

@@ -1,11 +1,10 @@
 import type { ColumnDef } from '@tanstack/react-table'
-import type { IAgendaDetail } from '@/pages/modules/website-utama/public-content/agenda/data'
+import type { IAgendaDetail } from '../../data/index'
 import { Link, useSearchParams } from 'react-router-dom'
 import { format } from 'date-fns'
 import { Button } from '@/components/ui/button.tsx'
 import { MdInfo, MdOutlineHistory } from 'react-icons/md'
 import { TimeAgo } from '@/utils/helper.tsx'
-
 
 export const ProcessColumnsAgenda = () => {
   const [searchParams] = useSearchParams()
@@ -91,9 +90,7 @@ export const ProcessColumnsAgenda = () => {
               <p className={'text-sm'}>
                 {format(row?.original?.proses_at as string, 'dd MMMM yyyy')}
               </p>
-              <p className={'text-sm'}>
-                {format(row?.original?.proses_at as string, 'HH:mm:ss')}
-              </p>
+              <p className={'text-sm'}>{format(row?.original?.proses_at as string, 'HH:mm:ss')}</p>
               <p className={'text-primary text-sm'}>
                 {TimeAgo(row?.original?.proses_at as string)}
               </p>

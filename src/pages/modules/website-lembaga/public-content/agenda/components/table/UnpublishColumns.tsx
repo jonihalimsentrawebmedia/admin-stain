@@ -1,13 +1,13 @@
 import type { ColumnDef } from '@tanstack/react-table'
-import type { IAgendaDetail } from '@/pages/modules/website-utama/public-content/agenda/data'
+import type { IAgendaDetail } from '../../data/index'
 import { Link, useSearchParams } from 'react-router-dom'
 import { format } from 'date-fns'
 import { Button } from '@/components/ui/button.tsx'
 import { MdInfo, MdOutlineHistory } from 'react-icons/md'
 import { TimeAgo } from '@/utils/helper.tsx'
-import { ButtonPublishAgenda } from '@/pages/modules/website-utama/public-content/agenda/components/buttonPublish.tsx'
+import { ButtonPublishAgenda } from '../buttonPublish.tsx'
 import { HiPencil } from 'react-icons/hi'
-import { ButtonDeleteAgenda } from '@/pages/modules/website-utama/public-content/agenda/components/buttonDelete.tsx'
+import { ButtonDeleteAgenda } from '../buttonDelete.tsx'
 
 export const UnpublishColumnsAgenda = () => {
   const [searchParams] = useSearchParams()

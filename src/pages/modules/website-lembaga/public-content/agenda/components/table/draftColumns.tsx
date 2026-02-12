@@ -1,12 +1,12 @@
 import type { ColumnDef } from '@tanstack/react-table'
-import type { IAgendaDetail } from '@/pages/modules/website-utama/public-content/agenda/data'
+import type { IAgendaDetail } from '../../data/index'
 import { Link, useSearchParams } from 'react-router-dom'
 import { format } from 'date-fns'
 import { Button } from '@/components/ui/button.tsx'
 import { MdInfo, MdOutlineHistory } from 'react-icons/md'
 import { HiPencil } from 'react-icons/hi'
-import { ButtonDeleteAgenda } from '@/pages/modules/website-utama/public-content/agenda/components/buttonDelete.tsx'
-import { ButtonSubmissionAgenda } from '@/pages/modules/website-utama/public-content/agenda/components/buttonSubmission.tsx'
+import { ButtonDeleteAgenda } from '../buttonDelete.tsx'
+import { ButtonSubmissionAgenda } from '../buttonSubmission.tsx'
 
 export const DraftColumns = () => {
   const [searchParams] = useSearchParams()

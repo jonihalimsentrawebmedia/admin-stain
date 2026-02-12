@@ -1,4 +1,4 @@
-import { AnnouncementForm } from '@/pages/modules/website-utama/public-content/announcement/components/form.tsx'
+import { AnnouncementForm } from '../components/form'
 import { useForm } from 'react-hook-form'
 import { AnnouncementResolver, type AnnouncementType } from '../data/resolver'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useNavigate, useParams } from 'react-router-dom'
-import { UseGetAnnouncementDetail } from '@/pages/modules/website-utama/public-content/announcement/hooks'
+import { UseGetAnnouncementDetail } from '../hooks/index'
 
 export const UpdatedAnnouncementPage = () => {
   const [loading, setLoading] = useState(false)
