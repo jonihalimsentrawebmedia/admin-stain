@@ -175,6 +175,8 @@ import { TextDirectUrlLanguagePage } from '@/pages/modules/website-utama/campus-
 import { TopSliderLanguagePage } from '@/pages/modules/website-utama/public-content/slider/top-slider/language'
 import { BottomSliderLanguagePage } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/language'
 import { HeaderMenuContentLanguagePage } from '@/pages/modules/website-utama/settings-menu/header/content/language'
+import { CreateAccreditation } from '@/pages/modules/website-utama/acreditation/create'
+import { UpdateAccreditation } from '@/pages/modules/website-utama/acreditation/update'
 
 export const MainWebsiteRouter = [
   {
@@ -774,6 +776,14 @@ export const MainWebsiteRouter = [
       {
         index: true,
         element: <AcreditationView />,
+      },
+      {
+        path: 'add',
+        element: <CreateAccreditation />,
+      },
+      {
+        path: 'edit/:idAcreditation',
+        element: <UpdateAccreditation />,
       },
       {
         path: 'language/:id',
