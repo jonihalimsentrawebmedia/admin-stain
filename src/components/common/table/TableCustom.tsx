@@ -96,7 +96,10 @@ const TableCustom = (props: Props) => {
           item !== 'id_satuan_organisasi' &&
           item != 'parent_id' &&
           item != 'ip' &&
-          item !== 'endpoint_be'
+          item !== 'endpoint_be' &&
+          item !== 'gambar' &&
+          item !== 'uraian' &&
+          item !== 'lembaga_penilaian'
       )
     setColumnChecked(temp)
   }, [])

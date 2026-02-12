@@ -24,6 +24,8 @@ export const AcreditationResolver = z.object({
   akhir_berlaku: z
     .string({ message: 'Tanggal Akhir Berlaku wajib diisi.' })
     .min(1, { message: 'Tanggal Akhir Berlaku wajib diisi.' }),
+  dokumen_akreditas: z.string(),
+  key_dokumen_akreditas: z.string().optional().nullable(),
 })
 
 export type IAcreditationTypeForm = z.infer<typeof AcreditationResolver>

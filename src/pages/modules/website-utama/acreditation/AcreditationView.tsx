@@ -2,22 +2,23 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
 import useGetAcreditation from './controller/useGetAcreditation'
 import AcreditationViewModel from './AcreditationViewModel'
 import TableCustom from '@/components/common/table/TableCustom'
-import ButtonAddAcreditation from './components/ButtonAddAcreditation'
 import useGetBgAcreditation from './controller/useGetBgAcreditation'
 import { Button } from '@/components/ui/button'
 import { IoWarning } from 'react-icons/io5'
 import { Image } from 'lucide-react'
 import { Skeleton } from '@/components/ui/skeleton'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import SelectFilter from '@/components/common/filter/SelectFilter'
 
 const AcreditationView = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const { loading, meta, acreditationList } = useGetAcreditation()
-  const { columns, goToBackground, optionsJoin, optionsOrganisasiJoin } = AcreditationViewModel()
+  const { columns, goToBackground, optionsJoin } = AcreditationViewModel()
   const { background, loading: loadingBg } = useGetBgAcreditation()
   const [idOrganisasi, setIdOrganisasi] = useState('')
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (searchParams.get('id_satuan_organisasi_akreditas')) {
@@ -56,10 +57,11 @@ const AcreditationView = () => {
             ),
           },
           {
-            label: '',
-            onClick: () => {},
+            label: 'Tambah',
+            onClick: () => {
+              navigate('add')
+            },
             type: 'add',
-            element: <ButtonAddAcreditation optionsSatuanOrganisasi={optionsOrganisasiJoin} />,
           },
         ]}
         label="Akreditasi"
@@ -88,6 +90,7 @@ const AcreditationView = () => {
         tdClassName="whitespace-pre-line"
         columns={columns}
         data={acreditationList}
+        isShowChoiceColumn={true}
         loading={loading}
         meta={meta}
         isShowLimit={false}

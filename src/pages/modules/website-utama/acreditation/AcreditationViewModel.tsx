@@ -2,11 +2,11 @@ import type { ColumnDef } from '@tanstack/react-table'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import type { AcreditationList } from './model'
 import { History } from 'lucide-react'
-import ButtonEditAcreditation from './components/ButtonEditAcreditation'
 import ButtonDeleteAcreditation from './components/ButtonDeleteAcreditation'
 import { useState } from 'react'
 import useGetSatuanOrganisasi from '../../settings/controller/useGetSatuanOrganisasi'
 import { IoLanguage } from 'react-icons/io5'
+import { HiPencil } from 'react-icons/hi'
 
 export function capitalizeTextSimple(text: string): string {
   if (!text) return ''
@@ -99,7 +99,7 @@ const AcreditationViewModel = () => {
       },
     },
     {
-      accessorKey: 'nama_satuan_organisasi',
+      accessorKey: 'nama_satuan_organisasi_akreditas',
       header: 'Universitas / Prodi',
     },
     {
@@ -168,10 +168,12 @@ const AcreditationViewModel = () => {
             >
               <IoLanguage />
             </Link>
-            <ButtonEditAcreditation
-              data={row.original}
-              optionsSatuanOrganisasi={optionsOrganisasiJoin}
-            />
+            <Link
+              to={`edit/${row?.original?.id_akreditas}`}
+              className={'bg-yellow-500 p-1.5 text-white rounded hover:bg-yellow-600'}
+            >
+              <HiPencil />
+            </Link>
             <ButtonDeleteAcreditation data={row.original} />
           </div>
         )
