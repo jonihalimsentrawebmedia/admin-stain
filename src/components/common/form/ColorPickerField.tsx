@@ -35,7 +35,7 @@ export function ColorPickerField({ name, title, description, disabled }: ColorPi
   const [open, setOpen] = useState(false)
   const [tempColor, setTempColor] = useState(value)
 
-  const [data, ] = useState({
+  const [data] = useState({
     primary: '#297D56',
   })
 
@@ -54,7 +54,6 @@ export function ColorPickerField({ name, title, description, disabled }: ColorPi
       )}
 
       <div className="flex items-center gap-4">
-        {/* Color preview */}
         <div className="w-20 h-20 rounded-md border" style={{ backgroundColor: value }} />
 
         <div className="flex flex-col gap-2">
@@ -85,12 +84,15 @@ export function ColorPickerField({ name, title, description, disabled }: ColorPi
             style={{ backgroundColor: tempColor }}
           />
 
-          <input
-            type="color"
-            value={tempColor}
-            onChange={(e) => setTempColor(e.target.value)}
-            className="w-full h-8 cursor-pointer"
-          />
+          <div className={'flex flex-col gap-1'}>
+            <p className={'text-sm'}>{title}</p>
+            <input
+              type="color"
+              value={tempColor}
+              onChange={(e) => setTempColor(e.target.value)}
+              className="w-full h-8 cursor-pointer"
+            />
+          </div>
 
           <div className="flex items-center gap-2 mt-3">
             <Input

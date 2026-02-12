@@ -32,8 +32,8 @@ const LoginView = () => {
     >
       <Card
         className="max-w-2xl w-full h-full lg:h-fit backdrop-blur-md bg-white/40 flex flex-col items-center justify-center">
-        <CardContent className="flex flex-col gap-4">
-          <div className="bg-green-800 rounded-lg">
+        <CardContent className="flex flex-col gap-4 w-full">
+          <div className="bg-green-800 rounded-lg w-full">
             <div
               style={{
                 backgroundImage: `url(${PATERN})`,

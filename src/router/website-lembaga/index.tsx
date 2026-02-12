@@ -210,39 +210,39 @@ export const WebsiteInstitutionRouter = [
           },
         ],
       },
-       {
-              path: 'agenda',
-              children: [
-                {
-                  index: true,
-                  element: <AgendaPage />,
-                },
-                {
-                  path: 'add',
-                  element: <CreateAgendaPage />,
-                },
-                {
-                  path: 'edit/:id',
-                  element: <UpdatedAgendaPage />,
-                },
-                {
-                  path: 'detail/:id',
-                  element: <DetailAgendaPage />,
-                },
-                {
-                  path: 'log/:id',
-                  element: <LogActivityAgendaPage />,
-                },
-                {
-                  path: 'background',
-                  element: <AgendaBackgroundPage />,
-                },
-                {
-                  path: 'language/:id',
-                  element: <AgendaLanguagePage />,
-                },
-              ],
-            },
+      {
+        path: 'agenda',
+        children: [
+          {
+            index: true,
+            element: <AgendaPage />,
+          },
+          {
+            path: 'add',
+            element: <CreateAgendaPage />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedAgendaPage />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailAgendaPage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityAgendaPage />,
+          },
+          {
+            path: 'background',
+            element: <AgendaBackgroundPage />,
+          },
+          {
+            path: 'language/:id',
+            element: <AgendaLanguagePage />,
+          },
+        ],
+      },
     ],
   },
 ]

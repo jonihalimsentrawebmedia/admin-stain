@@ -1,4 +1,4 @@
-import { ColorPickerField, getContrastTextColor } from '@/components/common/form/ColorPickerField'
+import { ColorPickerField } from '@/components/common/form/ColorPickerField'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -10,31 +10,63 @@ import {
 } from '@/components/ui/dialog'
 import { Form } from '@/components/ui/form'
 import { Save } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { UseGetColorAdmin } from '@/pages/modules/website-lembaga/pengaturan/warna/hooks'
+import AxiosClient from '@/provider/axios.tsx'
+import { toast } from 'react-toastify'
+import { useQueryClient } from '@tanstack/react-query'
+
 const WebsiteTabs = () => {
   const form = useForm()
   const [isShow, setIsShow] = useState(false)
   const [reset, setReset] = useState(false)
-  const [data] = useState({
-    primary: '#297D56',
-  })
+  const [loading, setLoading] = useState(false)
+
+  const { color } = UseGetColorAdmin('public')
+
+  useEffect(() => {
+    if (color) {
+      form.reset({
+        primary: color?.warna_primer,
+        secondary: color?.warna_sekunder,
+      })
+    }
+  }, [color])
+
+  const queryClient = useQueryClient()
+
+  const HandleSave = async (e: any) => {
+    setLoading(true)
+    await AxiosClient.post('/lembaga/pengaturan-warna/public', {
+      warna_primary: e?.primary,
+      warna_secondary: e?.secondary,
+    })
+      .then((res) => {
+        if (res.data.status) {
+          toast.success(res.data.message || 'Berhasil mengubah warna admin')
+          setLoading(false)
+          queryClient.invalidateQueries({
+            queryKey: ['color-admin'],
+          })
+        }
+      })
+      .catch((err) => {
+        setLoading(false)
+        toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
+      })
+  }
+
   return (
     <>
       <Form {...form}>
-        <form className="flex flex-col gap-4 p-4" onSubmit={form.handleSubmit(() => {})}>
+        <form className="flex flex-col gap-4 p-4" onSubmit={form.handleSubmit(HandleSave)}>
           <div className="flex md:justify-between gap-4">
             <div className="flex items-center gap-2">
               <Button type="button" variant="outline" onClick={() => setReset(true)}>
                 Kembalikan ke Default
               </Button>
-              <Button
-                type="submit"
-                style={{
-                  backgroundColor: data?.primary,
-                  color: getContrastTextColor(data?.primary),
-                }}
-              >
+              <Button type="submit" disabled={loading}>
                 <Save />
                 Simpan
               </Button>
@@ -45,14 +77,12 @@ const WebsiteTabs = () => {
               name="primary"
               title="Warna Primer/Primary"
               description="*Warna utama yang digunakan sebagai warna utama website (bagian atas website (Header), latar belakang judul besar, atau menu utama.)"
-              disabled={false}
             />
 
             <ColorPickerField
               name="secondary"
               title="Warna Sekunder/Secondary"
               description="*Warna sekunder yang digunakan sebagai warna pembeda"
-              disabled={true}
             />
           </>
         </form>
@@ -72,15 +102,7 @@ const WebsiteTabs = () => {
               Batal
             </Button>
 
-            <Button
-              type="button"
-              onClick={() => {}}
-              style={{
-                backgroundColor: data?.primary,
-                color: getContrastTextColor(data?.primary),
-              }}
-              variant="default"
-            >
+            <Button type="button" onClick={() => {}} variant="default">
               Simpan
             </Button>
           </DialogFooter>
@@ -104,13 +126,12 @@ const WebsiteTabs = () => {
 
             <Button
               type="button"
-              style={{
-                backgroundColor: data?.primary,
-                color: getContrastTextColor(data?.primary),
-              }}
               onClick={() => {
-                // form.reset(DEFAULT_COLOR) // ✅ reset form
-                // setReset(false) // ✅ tutup dialog reset
+                form.reset({
+                  primary: color?.warna_primer,
+                  secondary: color?.warna_sekunder,
+                }) // ✅ reset form
+                setReset(false) // ✅ tutup dialog reset
                 // onSubmit() // ✅ simpan ke backend
               }}
             >

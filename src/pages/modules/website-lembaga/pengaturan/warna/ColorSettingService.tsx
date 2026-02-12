@@ -1,6 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { IoInformationCircle } from 'react-icons/io5'
-import Admintabs from './components/Admintabs'
+import AdminTabs from './components/Admintabs'
 import WebsiteTabs from './components/WebsiteTabs'
 
 const ColorSettingService = () => {
@@ -29,7 +29,7 @@ const ColorSettingService = () => {
         </TabsList>
 
         <TabsContent value="admin">
-          <Admintabs />
+          <AdminTabs />
         </TabsContent>
         <TabsContent value="landing">
           <WebsiteTabs />

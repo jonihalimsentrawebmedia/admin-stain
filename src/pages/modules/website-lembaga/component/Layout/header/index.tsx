@@ -2,6 +2,7 @@ import type { IModulesList } from '@/pages/modules/interface'
 import { UseGetInstitutionSession } from '@/pages/modules/website-lembaga/hooks'
 import { Link } from 'react-router-dom'
 import { IconModules } from '@/pages/modules/website-prodi/components/layout/header.tsx'
+import { HeaderMenu } from '@/pages/modules/website-lembaga/component/Layout/header/HeaderMenu.tsx'
 
 export const HeaderLayoutInstitution = () => {
   const localStorage = window.localStorage.getItem('module')
@@ -34,6 +35,7 @@ export const HeaderLayoutInstitution = () => {
           </div>
         </div>
       </div>
+      <HeaderMenu />
     </>
   )
 }
