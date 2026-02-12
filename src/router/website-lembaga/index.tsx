@@ -45,6 +45,8 @@ import SelayangPandangView from '@/pages/modules/website-lembaga/profile/selayan
 import WorkProgramInstitutaionView from '@/pages/modules/website-lembaga/profile/program-kerja/WorkProgramInstitutaionView'
 import StructureOrganitationInstitutionView from '@/pages/modules/website-lembaga/profile/struktur-organisasi/StructureOrganitationInstitutionView'
 import HummanResourceInstitutaionView from '@/pages/modules/website-lembaga/profile/sumber-daya-manusia/HummanResourceInstitutaionView'
+import LembagaView from '@/pages/modules/website-lembaga/lembaga/LembagaView'
+import LembagaEditView from '@/pages/modules/website-lembaga/lembaga/edit/LembagaEditView'
 
 export const WebsiteInstitutionRouter = [
   {
@@ -303,6 +305,19 @@ export const WebsiteInstitutionRouter = [
       {
         path:"sumber-daya-manusia",
         element:<HummanResourceInstitutaionView/>
+      },
+    ]
+  },
+  {
+    path:"lembaga",
+    children:[
+      {
+        index:true,
+        element:<LembagaView/>
+      },
+      {
+        path:"edit",
+        element:<LembagaEditView/>
       },
     ]
   }
