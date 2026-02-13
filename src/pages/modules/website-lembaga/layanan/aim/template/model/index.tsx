@@ -1,5 +1,4 @@
 export interface DocumentSupportList {
-  id_lembaga_daftar_dokumen: string
   id_lembaga_template_aim: string
   id_satuan_organisasi: string
   judul: string

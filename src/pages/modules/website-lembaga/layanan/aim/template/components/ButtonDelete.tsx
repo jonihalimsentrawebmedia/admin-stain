@@ -33,7 +33,7 @@ const ButtonDelete = ({ data }: Props) => {
     setLoading(true)
     try {
       const res = await AxiosClient.delete(
-        `/lembaga/daftar-dokumen/${data?.id_lembaga_daftar_dokumen}`
+        `/lembaga/daftar-dokumen/${data?.id_lembaga_template_aim}`
       )
 
       if (res.data.status) {
