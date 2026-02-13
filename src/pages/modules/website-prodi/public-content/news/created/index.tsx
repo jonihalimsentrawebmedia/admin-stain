@@ -19,7 +19,10 @@ export const NewsProdiCreated = () => {
 
   const HandleSubmit = async (e: INewsTypeForm) => {
     setLoading(true)
-    await AxiosClient.post(`/prodi/berita`, e)
+    await AxiosClient.post(`/prodi/berita`, {
+      ...e,
+      tanggal_berita: new Date(e?.tanggal_berita).toISOString(),
+    })
       .then((res) => {
         if (res.data.status) {
           toast.success(res.data.message || 'Berita berhasil dibuat')

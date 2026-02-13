@@ -12,6 +12,7 @@ export interface INewsDetail {
   penulis: string
   status: string
   status_publish: StatusPublish
+  tanggal_berita: string
   diajukan_at: string | null
   ditolak_at: string | null
   alasan_ditolak: string | null
@@ -35,7 +36,7 @@ export interface INewsDetail {
 
   nama_user_created: string
   nama_user_updated: string
-   nama_disetujui: string
+  nama_disetujui: string
   nama_published: string
   nama_diajukan: string
   nama_ditolak: string
@@ -47,9 +48,9 @@ export interface INewsDetail {
   level_ditolak: string
   level_proses: string
   level_unpublished: string
-  nama_satuan_organisasi:string
-  nama_user:string
-  nama_level:string
+  nama_satuan_organisasi: string
+  nama_user: string
+  nama_level: string
 }
 
 export interface IImageNewsMore {

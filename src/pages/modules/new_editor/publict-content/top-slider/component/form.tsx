@@ -5,7 +5,7 @@ import TextInput from '@/components/common/form/TextInput.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { useNavigate } from 'react-router-dom'
 import { RichText } from '@/components/common/richtext'
-import { type TopSliderType } from '@/pages/modules/website-utama/public-content/slider/top-slider/create/data/resolver.tsx'
+import { type TopSliderType } from '../data/resolver'
 
 interface Props {
   form: UseFormReturn<TopSliderType>

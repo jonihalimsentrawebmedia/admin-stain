@@ -8,6 +8,7 @@ import { ButonDeleteBottomSlider } from '@/pages/modules/website-utama/public-co
 import { ButtonApprovedBottom } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/components/buttonApproved.tsx'
 import { MdOutlineHistory } from 'react-icons/md'
 import { IoLanguage } from 'react-icons/io5'
+import { format } from 'date-fns'
 
 const BottomSliderColumns = () => {
   const [searchParams] = useSearchParams()
@@ -40,21 +41,44 @@ const BottomSliderColumns = () => {
       },
     },
     {
+      accessorKey: 'is_aktif_sampai_at',
+      header: 'Status Aktif',
+      cell: ({ row }) => {
+        const status = row?.original?.is_aktif_sampai_at
+        return (
+          <div>
+            <p className={status ? 'text-green-500 font-semibold' : 'text-red-500'}>
+              {status ? 'Aktif' : 'Tidak Aktif'}
+            </p>
+            <p>
+              {status
+                ? `Aktif Sampai : ${format(row?.original?.aktif_sampai_at, 'dd MM yyyy')}`
+                : ''}
+            </p>
+          </div>
+        )
+      },
+    },
+    {
       accessorKey: 'url',
       header: 'URL',
       cell: ({ row }) => {
         const url = row?.original?.url ?? '#'
-        return (
-          <Link to={url} target={'_blank'}>
-            <Button
-              variant={'outline'}
-              className={'w-fit border-primary text-primary hover:text-primary'}
-            >
-              <RxExternalLink />
-              Buka URL
-            </Button>
-          </Link>
-        )
+        if (url !== '') {
+          return (
+            <Link to={url} target={'_blank'}>
+              <Button
+                variant={'outline'}
+                className={'w-fit border-primary text-primary hover:text-primary'}
+              >
+                <RxExternalLink />
+                Buka URL
+              </Button>
+            </Link>
+          )
+        } else {
+          return <div>Tidak Ada URL</div>
+        }
       },
     },
     {

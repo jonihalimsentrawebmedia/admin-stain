@@ -1,10 +1,13 @@
 import { FormCreateSliderOnTop } from '@/pages/modules/website-utama/public-content/slider/top-slider/create/component/form.tsx'
 import { useForm } from 'react-hook-form'
-import { TopSliderResolver, type TopSliderType } from '../../../../../new_editor/publict-content/top-slider/data/resolver.tsx'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from 'react-router-dom'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
+import {
+  TopSliderResolver,
+  type TopSliderType,
+} from '@/pages/modules/new_editor/publict-content/top-slider/data/resolver.tsx'
 
 export const CreateTopSlider = () => {
   const form = useForm<TopSliderType>({

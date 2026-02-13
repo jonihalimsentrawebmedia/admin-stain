@@ -13,10 +13,11 @@ interface Props<T extends FieldValues> {
   htmlFor?: string
   inputClassName?: string
   disabled?: boolean
+  fx?: () => void
 }
 
 export const SwitchInput = <T extends FieldValues>(props: Props<T>) => {
-  const { label, isRow, className, form, name, isRequired, htmlFor, inputClassName, disabled } =
+  const { label, isRow, className, form, name, isRequired, htmlFor, inputClassName, disabled, fx } =
     props
   const { isMobile } = useMobile()
 
@@ -39,7 +40,14 @@ export const SwitchInput = <T extends FieldValues>(props: Props<T>) => {
               <Switch
                 {...field}
                 checked={field.value}
-                onCheckedChange={field.onChange}
+                onCheckedChange={(e)=>{
+                  field.onChange(e)
+                  if (!(fx) || fx()){
+                    if (fx) {
+                      fx()
+                    }
+                  }
+                }}
                 id={htmlFor}
                 disabled={disabled}
                 className={`focus-visible:ring-0 ${inputClassName}`}

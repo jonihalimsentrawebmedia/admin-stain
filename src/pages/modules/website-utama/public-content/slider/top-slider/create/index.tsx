@@ -9,6 +9,9 @@ import { toast } from 'react-toastify'
 export const CreateTopSlider = () => {
   const form = useForm<TopSliderType>({
     resolver: zodResolver(TopSliderResolver),
+    defaultValues: {
+      is_aktif_sampai_at: false,
+    },
   })
 
   const navigate = useNavigate()
@@ -16,6 +19,7 @@ export const CreateTopSlider = () => {
   const HandlerSubmit = async (e: TopSliderType) => {
     await AxiosClient.post('/website-utama/slider-atas', {
       ...e,
+      aktif_sampai_at: e?.aktif_sampai_at ? new Date(e.aktif_sampai_at).toISOString() : null,
     })
       .then((res) => {
         if (res.data.status) {

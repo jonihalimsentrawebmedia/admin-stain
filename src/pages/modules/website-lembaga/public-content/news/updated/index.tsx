@@ -7,6 +7,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useNavigate, useParams } from 'react-router-dom'
 import { UseGetNewsDetail } from '../hooks/index'
+import { format } from 'date-fns'
 
 export const UpdatedNewsPage = () => {
   const { id } = useParams()
@@ -35,6 +36,7 @@ export const UpdatedNewsPage = () => {
         isi_berita: detailNews?.isi_berita,
         keterangan_gambar: detailNews?.keterangan_gambar,
         penulis: detailNews?.penulis,
+        tanggal_berita: format(detailNews?.tanggal_berita, 'yyyy-MM-dd'),
         berita_gambar_tambahan: temp,
       })
     }
@@ -45,6 +47,7 @@ export const UpdatedNewsPage = () => {
 
     await AxiosClient.put(`/lembaga/berita/${detailNews?.id_berita}`, {
       ...e,
+      tanggal_berita: new Date(e?.tanggal_berita).toISOString(),
     })
       .then((res) => {
         if (res.data.status) {

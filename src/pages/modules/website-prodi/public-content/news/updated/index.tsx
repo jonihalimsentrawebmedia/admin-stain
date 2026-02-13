@@ -10,6 +10,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useNavigate, useParams } from 'react-router-dom'
 import { UseGetProdiNewsDetail } from '../hooks/index.tsx'
+import { formatDate } from 'date-fns'
 
 export const NewsProdiUpdated = () => {
   const { id } = useParams()
@@ -37,6 +38,7 @@ export const NewsProdiUpdated = () => {
         isi_berita: prodiNewsDetail?.isi_berita,
         keterangan_gambar: prodiNewsDetail?.keterangan_gambar,
         penulis: prodiNewsDetail?.penulis,
+        tanggal_berita: formatDate(prodiNewsDetail?.tanggal_berita, 'yyyy-MM-dd'),
         berita_gambar_tambahan: temp,
       })
     }
@@ -44,7 +46,10 @@ export const NewsProdiUpdated = () => {
 
   const HandleSubmit = async (e: INewsTypeForm) => {
     setLoading(true)
-    await AxiosClient.put(`/prodi/berita/${id}`, e)
+    await AxiosClient.put(`/prodi/berita/${id}`, {
+      ...e,
+      tanggal_berita: new Date(e?.tanggal_berita).toISOString(),
+    })
       .then((res) => {
         if (res.data.status) {
           toast.success(res.data.message || 'Berita berhasil dibuat')

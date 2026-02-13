@@ -3,6 +3,7 @@ import type { StatusPublish } from '@/pages/modules/website-prodi/public-content
 export interface INewsDetail {
   id_berita: string
   id_satuan_organisasi: string
+  tanggal_berita: string
   gambar: string
   gambar_key: string
   keterangan_gambar: string
@@ -35,7 +36,7 @@ export interface INewsDetail {
 
   nama_user_created: string
   nama_user_updated: string
-   nama_disetujui: string
+  nama_disetujui: string
   nama_published: string
   nama_diajukan: string
   nama_ditolak: string
@@ -47,9 +48,9 @@ export interface INewsDetail {
   level_ditolak: string
   level_proses: string
   level_unpublished: string
-  nama_satuan_organisasi:string
-  nama_user:string
-  nama_level:string
+  nama_satuan_organisasi: string
+  nama_user: string
+  nama_level: string
 }
 
 export interface IImageNewsMore {

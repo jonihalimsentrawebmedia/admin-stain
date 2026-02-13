@@ -7,6 +7,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useEffect } from 'react'
 import { UseGetBottomSliderDetail } from '../hooks/index.tsx'
+import { format } from 'date-fns'
 
 export const UpdatedBottomSlider = () => {
   const form = useForm<TopSliderType>({
@@ -24,6 +25,8 @@ export const UpdatedBottomSlider = () => {
         url: detailSlider.url,
         keterangan: detailSlider.keterangan,
         gambar: detailSlider.gambar,
+        is_aktif_sampai_at: detailSlider?.is_aktif_sampai_at,
+        aktif_sampai_at: format(detailSlider?.aktif_sampai_at, 'yyyy-MM-dd'),
       })
     }
   }, [detailSlider])
@@ -31,6 +34,7 @@ export const UpdatedBottomSlider = () => {
   const HandlerSubmit = async (e: TopSliderType) => {
     await AxiosClient.put(`/website-utama/slider-bawah/${detailSlider?.id_slider_bawah}`, {
       ...e,
+      aktif_sampai_at: e?.aktif_sampai_at ? new Date(e.aktif_sampai_at).toISOString() : null,
     })
       .then((res) => {
         if (res.data.status) {

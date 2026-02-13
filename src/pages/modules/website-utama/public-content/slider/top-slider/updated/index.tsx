@@ -7,6 +7,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { UseGetSliderDetail } from '@/pages/modules/website-utama/public-content/slider/top-slider/hooks'
 import { useEffect } from 'react'
+import { format } from 'date-fns'
 
 export const UpdatedTopSliderPage = () => {
   const form = useForm<TopSliderType>({
@@ -22,6 +23,8 @@ export const UpdatedTopSliderPage = () => {
         url: detailSlider.url,
         keterangan: detailSlider.keterangan,
         gambar: detailSlider.gambar,
+        is_aktif_sampai_at: detailSlider?.is_aktif_sampai_at,
+        aktif_sampai_at: format(detailSlider?.aktif_sampai_at, 'yyyy-MM-dd'),
       })
     }
   }, [detailSlider])
@@ -31,6 +34,7 @@ export const UpdatedTopSliderPage = () => {
   const HandlerSubmit = async (e: TopSliderType) => {
     await AxiosClient.put(`/website-utama/slider-atas/${id}`, {
       ...e,
+      aktif_sampai_at: e?.aktif_sampai_at ? new Date(e.aktif_sampai_at).toISOString() : null,
     })
       .then((res) => {
         if (res.data.status) {

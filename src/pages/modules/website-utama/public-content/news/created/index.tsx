@@ -20,6 +20,7 @@ export const CreatedNewsPage = () => {
 
     await AxiosClient.post('/website-utama/berita', {
       ...e,
+      tanggal_berita: new Date(e.tanggal_berita).toISOString(),
     })
       .then((res) => {
         if (res.data.status) {

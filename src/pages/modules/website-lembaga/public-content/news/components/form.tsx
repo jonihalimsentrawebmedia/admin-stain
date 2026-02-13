@@ -94,6 +94,16 @@ export const FormNewsContent = (props: Props) => {
             inputClassName={'bg-white'}
           />
 
+          <TextInput
+            form={form}
+            name={'tanggal_berita'}
+            label={'Tanggal Berita'}
+            isRequired
+            isRow
+            inputClassName={'bg-white w-1/2'}
+            type={'date'}
+          />
+
           <UploadMultipleImages
             form={form}
             name={'berita_gambar_tambahan'}

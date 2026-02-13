@@ -28,6 +28,8 @@ export type IListSlider = {
   created_user: string
   updated_at: string
   updated_user: string
+  is_aktif_sampai_at: boolean
+  aktif_sampai_at: string
 
   nama_disetujui: string
   nama_published: string
@@ -44,8 +46,8 @@ export type IListSlider = {
   nama_satuan_organisasi: string
   nama_user: string
   nama_level: string
-  nama_user_created :string
-  nama_user_updated:string
+  nama_user_created: string
+  nama_user_updated: string
 }
 
 export type IListBottomSlider = Omit<IListSlider, 'id_slider_atas'> & {

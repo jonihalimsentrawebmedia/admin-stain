@@ -4,6 +4,8 @@ export const TopSliderResolver = z.object({
   gambar: z.string().min(1),
   keterangan: z.string().optional().nullable(),
   url: z.string().optional().nullable(),
+  is_aktif_sampai_at: z.boolean(),
+  aktif_sampai_at: z.string().optional().nullable(),
 })
 
 export type TopSliderType = z.infer<typeof TopSliderResolver>

@@ -31,6 +31,7 @@ export const UpdatedTopSliderPage = () => {
   const HandlerSubmit = async (e: TopSliderType) => {
     await AxiosClient.put(`/editor/slider-atas/${id}`, {
       ...e,
+      aktif_sampai_at: e?.aktif_sampai_at ? new Date(e?.aktif_sampai_at).toISOString() : null,
     })
       .then((res) => {
         if (res.data.status) {

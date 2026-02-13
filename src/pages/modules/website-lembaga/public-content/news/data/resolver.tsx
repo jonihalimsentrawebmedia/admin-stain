@@ -7,6 +7,7 @@ export const NewsResolver = z.object({
   id_kategori_berita: z.string().min(1),
   isi_berita: z.string().min(1),
   penulis: z.string().min(1),
+  tanggal_berita: z.string().min(1),
   berita_gambar_tambahan: z
     .array(
       z.object({

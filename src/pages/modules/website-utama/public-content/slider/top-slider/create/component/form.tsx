@@ -5,7 +5,8 @@ import TextInput from '@/components/common/form/TextInput.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { useNavigate } from 'react-router-dom'
 import { RichText } from '@/components/common/richtext'
-import { type TopSliderType } from '@/pages/modules/website-utama/public-content/slider/top-slider/create/data/resolver.tsx'
+import { SwitchInput } from '@/components/common/form/switchInput.tsx'
+import type { TopSliderType } from '@/pages/modules/new_editor/publict-content/top-slider/data/resolver.tsx'
 
 interface Props {
   form: UseFormReturn<TopSliderType>
@@ -54,9 +55,32 @@ export const FormCreateSliderOnTop = (props: Props) => {
               form={form}
               name={'url'}
               label={'URL (Optional)'}
+              inputClassName={'bg-white'}
               placeholder={'Masukkan URL untuk link'}
               isRow
             />
+
+            <SwitchInput
+              form={form}
+              name={'is_aktif_sampai_at'}
+              label={'Ada Batas Waktu Aktif?'}
+              fx={() => {
+                form.setValue('aktif_sampai_at', '')
+              }}
+              isRow
+              isRequired
+            />
+
+            <TextInput
+              isDisabled={!form.watch('is_aktif_sampai_at')}
+              name={'aktif_sampai_at'}
+              form={form}
+              label={'Aktif Sampai Pada'}
+              type={'date'}
+              inputClassName={'w-1/2 bg-white'}
+              isRow
+            />
+
             <ButtonTitleGroup
               label={''}
               buttonGroup={[
