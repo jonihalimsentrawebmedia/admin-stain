@@ -14,9 +14,6 @@ const ModuleForm = ({ form }: Props) => {
   // WEBSITE_LEMBAGA
   // MANAJEMEN_EDITOR
   // LAPORAN_STATISTIK
-  // WEBSITE_LPPM
-  // WEBSITE_PPID
-  // WEBSITE_UNIT_TRACER
 
   const optionsCategory = [
     {
@@ -38,18 +35,6 @@ const ModuleForm = ({ form }: Props) => {
     {
       label: 'WEBSITE LEMBAGA',
       value: 'WEBSITE_LEMBAGA',
-    },
-    {
-      label: 'WEBSITE LPPM',
-      value: 'WEBSITE_LPPM',
-    },
-    {
-      label: 'WEBSITE PPID',
-      value: 'WEBSITE_PPID',
-    },
-    {
-      label: 'WEBSITE UNIT TRACER',
-      value: 'WEBSITE_UNIT_TRACER',
     },
     {
       label: 'MANAJEMEN EDITOR',
