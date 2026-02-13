@@ -33,7 +33,7 @@ export const GetModuleUrl = (moduleSelect: { nama_module: string; controller?: s
     case 'website utama':
       return '/modules/select-university?url=website-utama'
 
-    case 'website unit': {
+    case 'upt. perpustakaan': {
       return '/modules/select-unit?url=website-unit'
     }
 
