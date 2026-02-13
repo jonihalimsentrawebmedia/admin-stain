@@ -3,6 +3,7 @@ import LembagaViewModel from './LembagaViewModel'
 import DetailField from '@/components/common/field/DetailField'
 import CardInput from '@/components/common/card/CardInput'
 import ButtonCancelDraft from './components/ButtonCancelDraft'
+import { IoInformationCircle } from 'react-icons/io5'
 
 const LembagaView = () => {
   const {
@@ -23,7 +24,7 @@ const LembagaView = () => {
             ? [
                 {
                   type: 'custom',
-                  element: <ButtonCancelDraft />,
+                  element: <ButtonCancelDraft form={form} />,
                 },
               ]
             : [
@@ -38,6 +39,14 @@ const LembagaView = () => {
         }
         label="Data Lembaga"
       />
+      {form.watch('status_publish') == 'DRAFT' && (
+        <div className="flex gap-2 items-center w-fit px-2 py-1 text-[#2769CD] border border-[#2769CD] rounded">
+          <IoInformationCircle className="size-8" />
+          <div className='text-black'>
+            Data yang tampil adalah data yang asli. Untuk melihat data yang anda ajukan <span className='text-blue-500 underline'>KLIK DISINI</span>
+          </div>
+        </div>
+      )}
       <div className="flex flex-col gap-4">
         <div>
           <DetailField data={fieldImage} form={form} isRowParent isRow={false} />

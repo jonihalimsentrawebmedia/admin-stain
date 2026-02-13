@@ -22,9 +22,10 @@ const useDraftLembaga = () => {
   const queryClient = useQueryClient()
   async function handleSave(data: SatuanOrganisasiType) {
     setLoading(true)
+ 
     try {
-      const res = await AxiosClient.post(`/unit/lembaga/draft`, {
-        ...data,
+      const res = await AxiosClient.post(`/lembaga/profil/draft`, {
+        ...form.watch(),
       })
 
       if (res.data.status) {
