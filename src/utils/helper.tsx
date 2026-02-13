@@ -48,7 +48,7 @@ export const GetModuleUrl = (moduleSelect: { nama_module: string; controller?: s
       return '/modules/select-prodi?url=website-prodi'
 
     case 'lpmi':
-      return '/modules/select-university?url=website-lembaga'
+      return '/modules/select-lembaga?url=website-lembaga'
 
     default:
       return `/modules/${urlStringEncode(moduleSelect?.controller ?? '')}/dashboard`
@@ -56,7 +56,7 @@ export const GetModuleUrl = (moduleSelect: { nama_module: string; controller?: s
 }
 
 export function isEmpetyReturn(value: any) {
-  if (value == '' || value == undefined || value == null) {
+  if (value == '' || value == undefined) {
     return '-'
   }
   return value
