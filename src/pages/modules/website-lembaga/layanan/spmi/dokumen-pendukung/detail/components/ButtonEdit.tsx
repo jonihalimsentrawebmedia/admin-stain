@@ -64,7 +64,7 @@ const ButtonEdit = ({ dataProps }: Props) => {
         onClick={() => {
           setOpen(true)
           form.reset({
-            judul: searchParams.get('judul') ?? '',
+            judul: searchParams.get('title') ?? '',
             nama_dokumen: dataProps.nama_dokumen,
             public: dataProps.public,
             url: dataProps.url,

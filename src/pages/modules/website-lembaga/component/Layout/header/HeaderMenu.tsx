@@ -9,12 +9,17 @@ import {
   MenubarSubTrigger,
   MenubarTrigger,
 } from '@/components/ui/menubar.tsx'
+import { ChevronDown } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
 const baseUrl = '/modules/website-lembaga'
 export const Menus = [
   {
     label: 'Beranda',
     link: `${baseUrl}/dashboard`,
+  },
+  {
+    label: 'Lembaga',
+    link: `${baseUrl}/lembaga`,
   },
   {
     label: 'Profile',
@@ -164,18 +169,26 @@ export const HeaderMenu = () => {
   const pathname = location.pathname
   function isActive(link: string) {
     if (pathname.includes(link)) {
-      return 'border-b rounded-b-none border-white hover:rounded-lg'
+      return 'border-b rounded-b-none border-white data-[state=open]:rounded-b-sm!'
     }
   }
   return (
     <>
       {/* <div className="bg-white shadow drop-shadow py-2">
         <div className={'max-w-7xl px-4 mx-auto'}> */}
-      <Menubar className={'border-none text-white hidden lg:flex bg-transparent shadow-none p-0'}>
+      <Menubar
+        className={'border-none text-white group  hidden lg:flex bg-transparent shadow-none p-0'}
+      >
         {Menus.map((menu, i) => (
           <MenubarMenu key={i}>
             {menu?.children ? (
-              <MenubarTrigger className={isActive(menu.link)}>{menu.label}</MenubarTrigger>
+              <MenubarTrigger className={isActive(menu.link)}>
+                {menu.label}{' '}
+                <ChevronDown
+                  className="h-4 w-4 transition-transform duration-200 
+               data-[state=open]:rotate-180"
+                />
+              </MenubarTrigger>
             ) : (
               <Link to={menu.link}>
                 <MenubarTrigger className={isActive(menu.link)}>{menu.label}</MenubarTrigger>

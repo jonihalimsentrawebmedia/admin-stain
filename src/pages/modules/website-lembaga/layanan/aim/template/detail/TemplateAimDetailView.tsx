@@ -27,7 +27,7 @@ const TemplateAimDetailView = () => {
           <SelectFilter
             isLabelTop
             selectClassName={'min-w-[8rem]'}
-            label="Tampilkan"
+            label="Jumlah Data"
             name={'limit'}
             options={[
               { label: '10 Data', value: '10' },

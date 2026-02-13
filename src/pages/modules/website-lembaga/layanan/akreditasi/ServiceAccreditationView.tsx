@@ -4,6 +4,7 @@ import TableCustom from '@/components/common/table/TableCustom'
 import useGetServiceAccreditation from './controller/useGetServiceAccreditation'
 import SelectFilter from '@/components/common/filter/SelectFilter'
 import useGetSatuanOrganisasi from '@/pages/modules/settings/controller/useGetSatuanOrganisasi'
+import Cookies from 'js-cookie'
 
 const ServiceAccreditationView = () => {
   const { columns } = ServiceAccreditationViewModel()
@@ -18,8 +19,11 @@ const ServiceAccreditationView = () => {
     kelompok: 'UNIVERSITAS',
     isFilter: true,
   })
+  const idUniv = Cookies.get('id_satuan_organisasi') ?? ''
   const options = [
-    ...univ.map((item) => ({ label: item.nama, value: item.id_satuan_organisasi })),
+    ...univ
+      .map((item) => ({ label: item.nama, value: item.id_satuan_organisasi }))
+      .filter((item) => item.value == idUniv),
     ...prodi.map((item) => ({ label: item.nama, value: item.id_satuan_organisasi })),
   ]
   return (
@@ -29,14 +33,14 @@ const ServiceAccreditationView = () => {
         selectClassName={'min-w-[8rem] max-w-[12rem]'}
         label="Pilih Universitas / Prodi"
         name={'id_satuan_organisasi_akreditas'}
-        options={options??[]}
+        options={options ?? []}
       />
       <TableCustom
         addFilter={
           <SelectFilter
             isLabelTop
             selectClassName={'min-w-[8rem]'}
-            label="Tampilkan"
+            label="Jumlah Data"
             name={'limit'}
             options={[
               { label: '10 Data', value: '10' },
