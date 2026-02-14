@@ -105,6 +105,8 @@ import InstitutionDetailHistoryView from '@/pages/modules/manajeman-editor/insti
 import FacultyEditView from '@/pages/modules/manajeman-editor/faculty/edit/FacultyEditView'
 import FacultyDetailView from '@/pages/modules/manajeman-editor/faculty/detail/FacultyDetailView'
 import FaculityDetailHistoryView from '@/pages/modules/manajeman-editor/faculty/detail-history/FaculityDetailHistoryView'
+import LembagaDetailView from '@/pages/modules/manajeman-editor/lembaga/detail/LembagaDetailView.tsx'
+import LembagaEditView from '@/pages/modules/manajeman-editor/lembaga/edit/LembagaEditView.tsx'
 
 export const EditorRouter = [
   {
@@ -355,6 +357,21 @@ export const EditorRouter = [
       },
     ],
   },
+
+  {
+    path: 'lembaga',
+    children: [
+      {
+        path: 'detail/:id',
+        element: <LembagaDetailView />,
+      },
+      {
+        path: 'edit/:id',
+        element: <LembagaEditView />,
+      },
+    ],
+  },
+
   {
     path: 'unit',
     children: [

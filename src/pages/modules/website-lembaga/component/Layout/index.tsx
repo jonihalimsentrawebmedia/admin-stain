@@ -7,7 +7,7 @@ export const LayoutWebsiteInstitution = () => {
     <div className="w-full max-w-[1920px] mx-auto h-full overflow-y-auto ">
       <HeaderLayoutInstitution />
       <HeaderMenu />
-      <div className={'max-w-[1440px] w-full mx-auto  py-6 px-8 '}>
+      <div className={'max-w-[1280px] w-full mx-auto  py-6 px-8 '}>
         <Outlet />
       </div>
     </div>
