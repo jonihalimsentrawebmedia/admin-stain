@@ -12,8 +12,8 @@ import { useQueryClient } from '@tanstack/react-query'
 import { zodResolver } from '@hookform/resolvers/zod'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
-import { SwitchInput } from '@/components/common/form/switchInput.tsx'
-import TextInput from '@/components/common/form/TextInput.tsx'
+// import { SwitchInput } from '@/components/common/form/switchInput.tsx'
+// import TextInput from '@/components/common/form/TextInput.tsx'
 
 const ButtonAdd = () => {
   const [open, setOpen] = useState(false)
