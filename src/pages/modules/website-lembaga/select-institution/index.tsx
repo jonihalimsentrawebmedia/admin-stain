@@ -94,7 +94,7 @@ export const SelectInstitutionUniversity = () => {
                     <SelectBasicInput
                       form={form}
                       name={'id_lembaga'}
-                      placeholder={'Pilih Unit'}
+                      placeholder={'Pilih Lembaga'}
                       selectClassName={'z-40'}
                       isDisabled={loading}
                       data={
