@@ -26,29 +26,26 @@ export const TimeStampLocal = (date: any) => {
   })
 }
 
-export const GetModuleUrl = (moduleSelect: { nama_module: string; controller?: string }) => {
-  const moduleName = moduleSelect.nama_module.toLowerCase()
+export const GetModuleUrl = (moduleSelect: { nama_module: string; controller: string }) => {
+  const moduleName = moduleSelect.controller.toLowerCase()
 
   switch (moduleName) {
-    case 'website utama':
+    case 'website_utama':
       return '/modules/select-university?url=website-utama'
 
-    case 'upt. perpustakaan': {
+    case 'website_unit': {
       return '/modules/select-unit?url=website-unit'
     }
 
-    case 'website lembaga': {
+    case 'website_lembaga': {
       return '/modules/select-lembaga?url=website-lembaga'
     }
 
-    case 'manajemen editor':
+    case 'editor':
       return '/modules/editor-university?url=editor'
 
-    case 'website prodi':
+    case 'website_prodi':
       return '/modules/select-prodi?url=website-prodi'
-
-    case 'lpmi':
-      return '/modules/select-lembaga?url=website-lembaga'
 
     default:
       return `/modules/${urlStringEncode(moduleSelect?.controller ?? '')}/dashboard`

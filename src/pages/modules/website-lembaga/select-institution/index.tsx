@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { UseGetUniversityDomainExist } from '@/pages/modules/website-utama/select-university/hooks'
+import { UseGetUnitList } from '@/pages/modules/website-unit/select-unit/hook'
 
 export const SelectInstitutionUniversity = () => {
   const [parentId, setParentId] = useState({
@@ -22,9 +23,10 @@ export const SelectInstitutionUniversity = () => {
   const { satuanOrganisasi: university, loading: load1 } = UseGetUniversityDomainExist({
     kelompok: 'UNIVERSITAS',
   })
-  const { satuanOrganisasi: unit, loading: load2 } = UseGetUniversityDomainExist({
+  const { unitList: unit, loading: load2 } = UseGetUnitList({
     kelompok: 'LEMBAGA',
     id_parent: parentId?.id_university,
+    context:'lpmi'
   })
 
   const loading = load1 || load2

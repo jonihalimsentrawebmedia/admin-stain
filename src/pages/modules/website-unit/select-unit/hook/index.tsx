@@ -6,7 +6,7 @@ import type { SatuanOrganisasiDetail } from '@/pages/modules/settings/model'
 interface Props {
   kelompok: 'UNIVERSITAS' | 'FAKULTAS' | 'PRODI' | 'UNIT' | 'LEMBAGA'
   id_parent?: string
-  context?: 'ppid ' | 'lppm' | 'perpustakaan'
+  context?: 'ppid ' | 'lppm' | 'perpustakaan' | 'lpmi'
 }
 
 export const UseGetUnitList = (props: Props) => {
