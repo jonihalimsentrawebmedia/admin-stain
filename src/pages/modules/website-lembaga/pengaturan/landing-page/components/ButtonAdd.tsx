@@ -12,6 +12,8 @@ import { useQueryClient } from '@tanstack/react-query'
 import { zodResolver } from '@hookform/resolvers/zod'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
+import { SwitchInput } from '@/components/common/form/switchInput.tsx'
+import TextInput from '@/components/common/form/TextInput.tsx'
 
 const ButtonAdd = () => {
   const [open, setOpen] = useState(false)
@@ -67,6 +69,28 @@ const ButtonAdd = () => {
           <Form {...form}>
             <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
               <ImageUpload maxSizeMB={2} form={form} name="gambar_url" label="Gambar(Ukuran 4:2)" />
+
+              {/*<SwitchInput*/}
+              {/*  form={form}*/}
+              {/*  name={'is_aktif_sampai_at'}*/}
+              {/*  label={'Ada Batas Waktu Aktif?'}*/}
+              {/*  fx={() => {*/}
+              {/*    form.setValue('aktif_sampai_at', '')*/}
+              {/*  }}*/}
+              {/*  isRow*/}
+              {/*  isRequired*/}
+              {/*/>*/}
+              
+              {/*<TextInput*/}
+              {/*  isDisabled={!form.watch('is_aktif_sampai_at')}*/}
+              {/*  name={'aktif_sampai_at'}*/}
+              {/*  form={form}*/}
+              {/*  label={'Aktif Sampai Pada'}*/}
+              {/*  type={'date'}*/}
+              {/*  inputClassName={'bg-white'}*/}
+              {/*  isRow*/}
+              {/*/>*/}
+
               <div className="text-center">
                 <ButtonForm
                   position="justify-center"
