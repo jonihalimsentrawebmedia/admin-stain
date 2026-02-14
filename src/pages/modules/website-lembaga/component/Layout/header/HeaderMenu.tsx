@@ -175,7 +175,7 @@ export const HeaderMenu = () => {
   return (
     <>
       <div className="bg-white shadow drop-shadow py-1.5">
-        <div className={'max-w-[1440px] px-4 mx-auto'}>
+        <div className={'max-w-[1280px] px-4 mx-auto'}>
           <Menubar className={'border-none  group  hidden lg:flex bg-transparent shadow-none p-0'}>
             {Menus.map((menu, i) => (
               <MenubarMenu key={i}>
