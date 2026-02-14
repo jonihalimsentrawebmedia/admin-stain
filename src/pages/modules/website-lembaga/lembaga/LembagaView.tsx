@@ -20,7 +20,7 @@ const LembagaView = () => {
       <ButtonTitleGroup
         isBack
         buttonGroup={
-          form.watch('status_publish') == 'DRAFT'
+          form.watch('status_publish') == 'DIAJUKAN_EDITOR'
             ? [
                 {
                   type: 'custom',
@@ -39,7 +39,7 @@ const LembagaView = () => {
         }
         label="Data Lembaga"
       />
-      {form.watch('status_publish') == 'DRAFT' && (
+      {form.watch('status_publish') == 'DIAJUKAN_EDITOR' && (
         <div className="flex gap-2 items-center w-fit px-2 py-1 text-[#2769CD] border border-[#2769CD] rounded">
           <IoInformationCircle className="size-8" />
           <div className='text-black'>

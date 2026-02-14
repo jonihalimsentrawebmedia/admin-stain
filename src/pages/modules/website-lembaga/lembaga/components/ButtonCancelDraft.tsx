@@ -22,7 +22,7 @@ const ButtonCancelDraft = ({ form }: Props) => {
     const temp = form.watch()
     delete temp.status_publish
     try {
-      const res = await AxiosClient.post(`/lembaga/profil/draft`, {
+      const res = await AxiosClient.post(`/lembaga/profil/batalkan-draft`, {
         ...temp,
       })
 
