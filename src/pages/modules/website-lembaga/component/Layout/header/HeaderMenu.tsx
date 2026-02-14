@@ -18,11 +18,11 @@ export const Menus = [
     link: `${baseUrl}/dashboard`,
   },
   {
-    label: 'Lembaga',
+    label: 'Profile Lembaga',
     link: `${baseUrl}/lembaga`,
   },
   {
-    label: 'Profile',
+    label: 'Tentang Kami',
     link: `${baseUrl}/profile`,
     children: [
       {
@@ -174,58 +174,56 @@ export const HeaderMenu = () => {
   }
   return (
     <>
-      {/* <div className="bg-white shadow drop-shadow py-2">
-        <div className={'max-w-7xl px-4 mx-auto'}> */}
-      <Menubar
-        className={'border-none text-white group  hidden lg:flex bg-transparent shadow-none p-0'}
-      >
-        {Menus.map((menu, i) => (
-          <MenubarMenu key={i}>
-            {menu?.children ? (
-              <MenubarTrigger className={isActive(menu.link)}>
-                {menu.label}{' '}
-                <ChevronDown
-                  className="h-4 w-4 transition-transform duration-200 
+      <div className="bg-white shadow drop-shadow py-1.5">
+        <div className={'max-w-[1440px] px-4 mx-auto'}>
+          <Menubar className={'border-none  group  hidden lg:flex bg-transparent shadow-none p-0'}>
+            {Menus.map((menu, i) => (
+              <MenubarMenu key={i}>
+                {menu?.children ? (
+                  <MenubarTrigger className={isActive(menu.link)}>
+                    {menu.label}{' '}
+                    <ChevronDown
+                      className="h-4 w-4 transition-transform duration-200 
                data-[state=open]:rotate-180"
-                />
-              </MenubarTrigger>
-            ) : (
-              <Link to={menu.link}>
-                <MenubarTrigger className={isActive(menu.link)}>{menu.label}</MenubarTrigger>
-              </Link>
-            )}
+                    />
+                  </MenubarTrigger>
+                ) : (
+                  <Link to={menu.link}>
+                    <MenubarTrigger className={isActive(menu.link)}>{menu.label}</MenubarTrigger>
+                  </Link>
+                )}
 
-            {menu.children && (
-              <MenubarContent>
-                <MenubarGroup>
-                  {menu.children.map((child, j) =>
-                    child.children ? (
-                      // 🔽 LEVEL 3
-                      <MenubarSub key={j}>
-                        <MenubarSubTrigger>{child.label}</MenubarSubTrigger>
-                        <MenubarSubContent>
-                          {child.children.map((sub, k) => (
-                            <Link to={sub?.link} key={k}>
-                              <MenubarItem>{sub.label}</MenubarItem>
-                            </Link>
-                          ))}
-                        </MenubarSubContent>
-                      </MenubarSub>
-                    ) : (
-                      // 🔹 LEVEL 2 biasa
-                      <Link to={child?.link} key={j}>
-                        <MenubarItem>{child.label}</MenubarItem>
-                      </Link>
-                    )
-                  )}
-                </MenubarGroup>
-              </MenubarContent>
-            )}
-          </MenubarMenu>
-        ))}
-      </Menubar>
-      {/* </div>
-      </div> */}
+                {menu.children && (
+                  <MenubarContent>
+                    <MenubarGroup>
+                      {menu.children.map((child, j) =>
+                        child.children ? (
+                          // 🔽 LEVEL 3
+                          <MenubarSub key={j}>
+                            <MenubarSubTrigger>{child.label}</MenubarSubTrigger>
+                            <MenubarSubContent>
+                              {child.children.map((sub, k) => (
+                                <Link to={sub?.link} key={k}>
+                                  <MenubarItem>{sub.label}</MenubarItem>
+                                </Link>
+                              ))}
+                            </MenubarSubContent>
+                          </MenubarSub>
+                        ) : (
+                          // 🔹 LEVEL 2 biasa
+                          <Link to={child?.link} key={j}>
+                            <MenubarItem>{child.label}</MenubarItem>
+                          </Link>
+                        )
+                      )}
+                    </MenubarGroup>
+                  </MenubarContent>
+                )}
+              </MenubarMenu>
+            ))}
+          </Menubar>
+        </div>
+      </div>
     </>
   )
 }
