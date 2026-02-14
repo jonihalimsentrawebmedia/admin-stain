@@ -49,6 +49,7 @@ const InputSatuanKerja = ({ form }: Props) => {
     searchFilter: search,
     idParent: valueKelompok.value == 'PRODI' ? valueFakultas.value : valueUniv.value,
   })
+  
   const optionKelompok = [
     {
       value: 'UNIVERSITAS',
@@ -87,6 +88,7 @@ const InputSatuanKerja = ({ form }: Props) => {
       label: 'Upt',
     },
   ]
+  
   const showUniv =
     valueKelompok.value == 'FAKULTAS' ||
     valueKelompok.value == 'UNIT' ||
@@ -115,7 +117,7 @@ const InputSatuanKerja = ({ form }: Props) => {
           >
             <Search placeholder="Klik untuk mencari " position="end" className="lg:max-w-[300px]" />
           </div>
-          {open == false && (
+          {!open && (
             <div className="mt-4 space-y-2">
               {valueSatuanKerja.map((item, index) => (
                 <div className="border-r flex gap-1 items-center pr-2">

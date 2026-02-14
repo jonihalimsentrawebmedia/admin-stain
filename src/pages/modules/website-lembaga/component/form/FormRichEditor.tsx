@@ -91,7 +91,7 @@ const FormRichEditor = ({
         />
         {!isEdit ? (
           <div
-            className={'tiptap ProseMirror simple-editor'}
+            className={'tiptap ProseMirror simple-editor html-class'}
             dangerouslySetInnerHTML={{ __html: form.watch('isi') }}
           />
         ) : (

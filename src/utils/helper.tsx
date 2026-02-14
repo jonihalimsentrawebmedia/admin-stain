@@ -26,26 +26,30 @@ export const TimeStampLocal = (date: any) => {
   })
 }
 
-export const GetModuleUrl = (moduleSelect: { nama_module: string; controller: string }) => {
+export const GetModuleUrl = (moduleSelect: {
+  nama_module: string
+  controller: string
+  id_module: string
+}) => {
   const moduleName = moduleSelect.controller.toLowerCase()
 
   switch (moduleName) {
     case 'website_utama':
-      return '/modules/select-university?url=website-utama'
+      return `/modules/select-university?url=website-utama`
 
     case 'website_unit': {
-      return '/modules/select-unit?url=website-unit'
+      return `/modules/select-unit?url=website-unit&id=${moduleSelect?.id_module}`
     }
 
     case 'website_lembaga': {
-      return '/modules/select-lembaga?url=website-lembaga'
+      return `/modules/select-lembaga?url=website-lembaga&id=${moduleSelect?.id_module}`
     }
 
     case 'editor':
       return '/modules/editor-university?url=editor'
 
     case 'website_prodi':
-      return '/modules/select-prodi?url=website-prodi'
+      return `/modules/select-prodi?url=website-prodi&id=${moduleSelect?.id_module}`
 
     default:
       return `/modules/${urlStringEncode(moduleSelect?.controller ?? '')}/dashboard`

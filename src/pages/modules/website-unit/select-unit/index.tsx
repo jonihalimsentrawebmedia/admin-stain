@@ -21,6 +21,8 @@ export const SelectUnitUniversity = () => {
   const { publicIdentity } = UseGetIdentityPublic()
 
   const [searchParams] = useSearchParams()
+  const id_module = searchParams.get('id')
+
   const navigate = useNavigate()
 
   const { satuanOrganisasi: university, loading: load1 } = UseGetUniversityDomainExist({
@@ -29,7 +31,7 @@ export const SelectUnitUniversity = () => {
   const { unitList: unit, loading: load2 } = UseGetUnitList({
     kelompok: 'UNIT',
     id_parent: parentId?.id_university,
-    context: 'perpustakaan',
+    id_module: id_module ?? '',
   })
 
   const loading = load1 || load2

@@ -65,41 +65,41 @@ export function SideNavUnit({ collapsed }: Props) {
   // const toggleGroup = (groupId: string) => {
   //   setOpenGroups((prev) => ({ ...prev, [groupId]: !prev[groupId] }))
   // }
-  
+
   useEffect(() => {
     if (collapsed) setOpenGroups({})
   }, [collapsed])
-  
+
   useEffect(() => {
     // cek apakah path sekarang ada di menu yang punya parent children
-    const activeHasParentGroup = MENULIST.some(item => {
+    const activeHasParentGroup = MENULIST.some((item) => {
       if (!item.child) return false
       return isActiveTree(item, pathname)
     })
-    
+
     // kalau yang aktif bukan dari group tree → tutup semua
     if (!activeHasParentGroup) {
       setOpenGroups({})
     }
   }, [pathname])
-  
+
   const toggleGroup = (groupId: string) => {
     setOpenGroups((prev) => {
       const next = { ...prev }
-      
+
       // ambil parentId (semua sebelum "-index-name")
       const parentId = groupId.split('-').slice(0, -2).join('-')
-      
+
       // tutup semua group yang parent-nya sama
       Object.keys(next).forEach((key) => {
         if (key.startsWith(parentId + '-') && key !== groupId) {
           next[key] = false
         }
       })
-      
+
       // toggle group yg diklik
       next[groupId] = !prev[groupId]
-      
+
       return next
     })
   }
@@ -135,7 +135,12 @@ export function SideNavUnit({ collapsed }: Props) {
                     collapsed ? 'justify-center' : 'justify-between'
                   )}
                 >
-                  <div className={cn('flex items-center gap-1.5', collapsed && 'justify-center')}>
+                  <div
+                    className={cn(
+                      'flex items-center gap-1.5 text-sm',
+                      collapsed && 'justify-center'
+                    )}
+                  >
                     {row.icon}
                     {labelVisible && <span>{row.name}</span>}
                   </div>

@@ -6,17 +6,17 @@ import type { SatuanOrganisasiDetail } from '@/pages/modules/settings/model'
 interface Props {
   kelompok: 'UNIVERSITAS' | 'FAKULTAS' | 'PRODI' | 'UNIT' | 'LEMBAGA'
   id_parent?: string
-  context?: 'ppid ' | 'lppm' | 'perpustakaan' | 'lpmi'
+  id_module?: string
 }
 
 export const UseGetUnitList = (props: Props) => {
-  const { kelompok, id_parent, context } = props
+  const { kelompok, id_parent, id_module } = props
   const [unitList, setUnitList] = useState<SatuanOrganisasiDetail[]>([])
 
   const ParamsSearch = new URLSearchParams()
   if (kelompok) ParamsSearch.set('kelompok', kelompok)
   if (id_parent) ParamsSearch.set('id_parent', id_parent)
-  if (context) ParamsSearch.set('context', context)
+  if (id_module) ParamsSearch.set('id_module', id_module)
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['unit-list', ParamsSearch.toString()],

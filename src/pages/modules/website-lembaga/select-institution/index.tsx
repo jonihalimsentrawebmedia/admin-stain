@@ -18,6 +18,7 @@ export const SelectInstitutionUniversity = () => {
   })
 
   const [searchParams] = useSearchParams()
+  const id_module = searchParams.get('id')
   const navigate = useNavigate()
 
   const { satuanOrganisasi: university, loading: load1 } = UseGetUniversityDomainExist({
@@ -26,7 +27,7 @@ export const SelectInstitutionUniversity = () => {
   const { unitList: unit, loading: load2 } = UseGetUnitList({
     kelompok: 'LEMBAGA',
     id_parent: parentId?.id_university,
-    context:'lpmi'
+    id_module: id_module ?? '',
   })
 
   const loading = load1 || load2

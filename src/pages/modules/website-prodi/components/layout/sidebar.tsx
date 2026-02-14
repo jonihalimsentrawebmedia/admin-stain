@@ -135,7 +135,7 @@ export function SidebarProdi({ collapsed }: Props) {
                     collapsed ? 'justify-center' : 'justify-between'
                   )}
                 >
-                  <div className={cn('flex items-center gap-1.5', collapsed && 'justify-center')}>
+                  <div className={cn('flex items-center gap-1.5 text-sm', collapsed && 'justify-center')}>
                     {row.icon}
                     {labelVisible && <span>{row.name}</span>}
                   </div>
