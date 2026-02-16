@@ -9,19 +9,27 @@ import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import type { ISessionUnit } from '@/pages/modules/website-unit/hooks'
 import { UseGetUniversityDomainExist } from '@/pages/modules/website-utama/select-university/hooks'
+import { UseGetUnitList } from '../../select-unit/hook'
 
 export const ButtonSessionUnit = ({ session }: { session?: ISessionUnit }) => {
   const [open, setOpen] = useState(false)
   const [parentId, setParentId] = useState({
     id_university: '',
+    id_module: '',
   })
 
   const { satuanOrganisasi: university, loading: load1 } = UseGetUniversityDomainExist({
     kelompok: 'UNIVERSITAS',
   })
-  const { satuanOrganisasi: unit, loading: load2 } = UseGetUniversityDomainExist({
+  // const { satuanOrganisasi: unit, loading: load2 } = UseGetUniversityDomainExist({
+  //   kelompok: 'UNIT',
+  //   id_parent: parentId?.id_university,
+  //   id_modu
+  // })
+  const { unitList: unit, loading: load2 } = UseGetUnitList({
     kelompok: 'UNIT',
     id_parent: parentId?.id_university,
+    id_module: parentId.id_module,
   })
 
   const loading = load1 || load2
@@ -32,8 +40,11 @@ export const ButtonSessionUnit = ({ session }: { session?: ISessionUnit }) => {
     if (session) {
       form.setValue('id_university', session?.id_universitas)
       form.setValue('id_unit', session?.id_unit)
+      const module = JSON.parse(localStorage.getItem('module') ?? '')
+      console.log(module)
       setParentId({
         id_university: session?.id_universitas,
+        id_module: module.id_module,
       })
     }
   }, [session])
