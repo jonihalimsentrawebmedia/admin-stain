@@ -50,6 +50,8 @@ export const GetModuleUrl = (moduleSelect: {
 
     case 'website_prodi':
       return `/modules/select-prodi?url=website-prodi&id=${moduleSelect?.id_module}`
+    case 'ppid':
+      return `/modules/select-ppid?url=ppid&id=${moduleSelect?.id_module}`
 
     default:
       return `/modules/${urlStringEncode(moduleSelect?.controller ?? '')}/dashboard`

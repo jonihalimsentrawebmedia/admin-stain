@@ -1,5 +1,4 @@
 import type { IModulesList } from '@/pages/modules/interface'
-import { UseGetInstitutionSession } from '@/pages/modules/website-lembaga/hooks'
 import { Link, useNavigate } from 'react-router-dom'
 import { IconModules } from '@/pages/modules/website-prodi/components/layout/header.tsx'
 import useGetProfile from '@/pages/modules/settings/dashboard/profile/controller/useGetProfile'
@@ -11,12 +10,13 @@ import { toast } from 'react-toastify'
 import Cookies from 'js-cookie'
 import { Skeleton } from '@/components/ui/skeleton'
 import HeaderMenuMobile from './HeaderMenuMobile'
+import { UseGetPPIDSession } from '../../../hooks'
 
-export const HeaderLayoutInstitution = () => {
+export const HeaderLayoutPPID = () => {
   const localStorage = window.localStorage.getItem('module')
   const module: IModulesList = JSON.parse(localStorage || '{}')
 
-  const { session } = UseGetInstitutionSession()
+  const { session } = UseGetPPIDSession()
   const { loading, profile } = useGetProfile()
   const navigate = useNavigate()
 
@@ -31,7 +31,7 @@ export const HeaderLayoutInstitution = () => {
         <div
           className={`w-full mx-auto max-w-[1920px] px-4 py-2 bg-[url(/Background.png)] bg-cover bg-center`}
         >
-          <div className="w-full flex gap-4 items-center justify-between  max-w-7xl mx-auto">
+          <div className="w-full flex gap-4 items-center justify-between  max-w-[1440px] mx-auto">
             <div className="flex items-center gap-2">
               <img
                 src={module?.gambar}
@@ -39,7 +39,7 @@ export const HeaderLayoutInstitution = () => {
                 className={'size-20 w-20 object-cover rounded-full'}
               />
               <div className={'flex flex-col'}>
-                <p className="text-2xl font-semibold text-white">{session?.nama_lembaga}</p>
+                <p className="text-2xl font-semibold text-white">{session?.nama_unit}</p>
                 <p className="text-white text-xs">{session?.nama_universitas}</p>
               </div>
             </div>

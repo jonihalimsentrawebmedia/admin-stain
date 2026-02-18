@@ -29,6 +29,10 @@ import { SelectInstitutionUniversity } from '@/pages/modules/website-lembaga/sel
 import { LayoutWebsiteInstitution } from '@/pages/modules/website-lembaga/component/Layout'
 import { WebsiteInstitutionRouter } from '@/router/website-lembaga'
 import InstitutionWebTheme from '@/pages/modules/website-lembaga/component/Layout/theme'
+import PPIDWebTheme from '@/pages/modules/ppid/component/Layout/theme'
+import { LayoutWebsitePPID } from '@/pages/modules/ppid/component/Layout'
+import { routesPPID } from './ppid/router'
+import { SelectPPID } from '@/pages/modules/ppid/select-ppid'
 
 export const Router = createBrowserRouter([
   {
@@ -97,6 +101,10 @@ export const Router = createBrowserRouter([
         element: <SelectInstitutionUniversity />,
       },
       {
+        path: 'select-ppid',
+        element: <SelectPPID />,
+      },
+      {
         path: 'settings',
         element: <LayoutSetting />,
         children: [...SettingRouter],
@@ -139,6 +147,15 @@ export const Router = createBrowserRouter([
           </InstitutionWebTheme>
         ),
         children: [...WebsiteInstitutionRouter],
+      },
+      {
+        path: 'ppid',
+        element: (
+          <PPIDWebTheme>
+            <LayoutWebsitePPID />
+          </PPIDWebTheme>
+        ),
+        children: [...routesPPID],
       },
 
       {

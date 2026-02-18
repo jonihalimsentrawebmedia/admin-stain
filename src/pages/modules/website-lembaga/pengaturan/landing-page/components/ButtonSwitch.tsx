@@ -9,9 +9,10 @@ interface Props {
   data: any
   link?: string
   keyList?: string
+  isActive?: boolean
 }
 
-const ButtonSwitch = ({ data, link, keyList }: Props) => {
+const ButtonSwitch = ({ data, link, keyList, isActive }: Props) => {
   const isAktif = data.status
   const [loading, setLoading] = useState(false)
   const queryClient = useQueryClient()
@@ -43,10 +44,10 @@ const ButtonSwitch = ({ data, link, keyList }: Props) => {
         onCheckedChange={() => {
           updateStatus()
         }}
-        checked={isAktif}
+        checked={isActive?isActive:isAktif}
       />
       <span className="text-xs text-center text-gray-500 mt-1">
-        {isAktif ? 'Aktif' : 'Tidak Aktif'}
+        {isActive || isAktif ? 'Aktif' : 'Tidak Aktif'}
       </span>
     </div>
   )
