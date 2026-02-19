@@ -5,6 +5,7 @@ interface Props {
     name: string
     label: string
     component?: ReactNode
+    isHidden?: boolean
   }[]
   form: UseFormReturn<any>
   isRow?: boolean
@@ -21,7 +22,7 @@ const DetailField = ({ data, form, isRow = true, isRowParent, classNameParent, i
       {data.map((item) => (
         <div
           key={item.name + item.label}
-          className={`flex ${isRow ? 'flex-col lg:flex-row' : 'flex-col'} gap-2
+          className={`flex ${isRow ? 'flex-col lg:flex-row' : 'flex-col'} ${item.isHidden ? 'hidden' : ''} gap-2
     `}
         >
           <div className="min-w-[200px] max-w-[200px] w-full text-wrap text-[#999999]">

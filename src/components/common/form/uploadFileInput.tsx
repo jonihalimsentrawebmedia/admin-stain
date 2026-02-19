@@ -7,6 +7,7 @@ import { FormMessage } from '@/components/ui/form'
 import { toast } from 'react-toastify'
 import AxiosClient from '@/provider/axios.tsx'
 import type { FieldValues, Path, PathValue, UseFormReturn } from 'react-hook-form'
+import { useMobile } from '@/utils/useMobile'
 
 interface Props<T extends FieldValues & Record<string, string>> {
   label?: string
@@ -31,7 +32,7 @@ export const UploadFileInput = <T extends FieldValues>(props: Props<T>) => {
           if (res?.data?.status) {
             toast.success('Success Upload Berkas')
             form.setValue(name, res?.data?.url)
-            form.setValue(keyname, e[0]?.name as PathValue<T, Path<T>>)
+            // form.setValue(keyname, e[0]?.name as PathValue<T, Path<T>>)
           }
         })
         .catch((err) => {
@@ -56,10 +57,12 @@ export const UploadFileInput = <T extends FieldValues>(props: Props<T>) => {
     }
   }
 
-  console.log(form.watch(name))
+  const { isMobile } = useMobile()
 
   return (
-    <div className={`w-full ${isRow ? 'grid grid-cols-[12rem_1fr] gap-5' : 'flex flex-col gap-2'}`}>
+    <div
+      className={`w-full whitespace-pre-wrap ${isRow ? `${isMobile ? 'flex flex-col gap-4' : 'grid grid-cols-[12rem_1fr] flex-row items-center gap-5'} ` : 'flex flex-col gap-2'}`}
+    >
       {label && (
         <Label htmlFor={'file'} className={'text-gray-500'}>
           {label} {required && <span className="text-red-500">*</span>}
@@ -68,7 +71,7 @@ export const UploadFileInput = <T extends FieldValues>(props: Props<T>) => {
       {form.watch(name) ? (
         <>
           <div
-            className={`p-2 bg-white flex items-center justify-between border ${innerClassName}`}
+            className={`p-2 break-all whitespace-pre-wrap bg-white flex items-center justify-between border ${innerClassName}`}
           >
             <Link
               to={form.watch(name)}

@@ -65,7 +65,7 @@ function TextInput<T extends FieldValues>({
           ${isRow ? `${isMobile ? 'flex flex-col gap-4' : 'grid grid-cols-[12rem_1fr] flex-row items-center gap-5'} ` : 'flex flex-col gap-2'} 
           ${className}`}
         >
-          <FormLabel className={'text-gray-600'} htmlFor={htmlFor}>
+          <FormLabel className={'text-gray-600 whitespace-pre-line'} htmlFor={htmlFor}>
             {label} {isRequired && <span className={'text-red-500'}>*</span>}
           </FormLabel>
           <FormControl>

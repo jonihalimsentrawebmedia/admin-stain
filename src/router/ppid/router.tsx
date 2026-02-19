@@ -1,4 +1,16 @@
 import DashboardPPID from '@/pages/modules/ppid/dashboard'
+import InformationAvailableDetailView from '@/pages/modules/ppid/information-public/Information-available/detail/InformationAvailableDetailView'
+import InformationAvailableView from '@/pages/modules/ppid/information-public/Information-available/InformationAvailableView'
+import InformationImmediatelyAddView from '@/pages/modules/ppid/information-public/information-immediately/add/InformationImmediatelyAddView'
+import InformationImmediatelyEditView from '@/pages/modules/ppid/information-public/information-immediately/edit/InformationImmediatelyEditView'
+import InformationImmediatelyView from '@/pages/modules/ppid/information-public/information-immediately/InformationImmediatelyView'
+import InformationPublicRegisterAddView from '@/pages/modules/ppid/information-public/information-public-register/add/InformationPublicRegisterAddView'
+import InformationPublicRegisterEditView from '@/pages/modules/ppid/information-public/information-public-register/edit/InformationPublicRegisterEditView'
+import InformationPublicRegisterView from '@/pages/modules/ppid/information-public/information-public-register/InformationPublicRegisterView'
+import InformationRegularDetailView from '@/pages/modules/ppid/information-public/information-regular/detail/InformationRegularDetailView'
+import InformationRegularView from '@/pages/modules/ppid/information-public/information-regular/InformationRegularView'
+import StandartServiceView from '@/pages/modules/ppid/information-public/standart-service/StandartServiceView'
+
 import ServiceCommitmentAddView from '@/pages/modules/ppid/profile/service-commitment/add/ServiceCommitmentAddView'
 import ServiceCommitmentEditView from '@/pages/modules/ppid/profile/service-commitment/edit/ServiceCommitmentEditView'
 import ServiceCommitmentView from '@/pages/modules/ppid/profile/service-commitment/ServiceCommitmentView'
@@ -97,6 +109,76 @@ export const routesPPID = [
       {
         path: 'structure-organization',
         element: <StructureOrganitationPPIDView />,
+      },
+    ],
+  },
+  {
+    path: 'information-public',
+    children: [
+      {
+        path: 'information-regular',
+        children: [
+          {
+            index: true,
+            element: <InformationRegularView />,
+          },
+          {
+            path: ':id',
+            element: <InformationRegularDetailView />,
+          },
+        ],
+      },
+      {
+        path: 'information-available',
+        children: [
+          {
+            index: true,
+            element: <InformationAvailableView />,
+          },
+          {
+            path: ':id',
+            element: <InformationAvailableDetailView />,
+          },
+        ],
+      },
+      {
+        path: 'information-immediately',
+        children: [
+          {
+            index: true,
+            element: <InformationImmediatelyView />,
+          },
+          {
+            path: 'add',
+            element: <InformationImmediatelyAddView />,
+          },
+
+          {
+            path: 'edit/:id',
+            element: <InformationImmediatelyEditView />,
+          },
+        ],
+      },
+      {
+        path: 'standard-service',
+        element: <StandartServiceView />,
+      },
+      {
+        path: 'register',
+        children: [
+          {
+            index: true,
+            element: <InformationPublicRegisterView />,
+          },
+          {
+            path: 'add',
+            element: <InformationPublicRegisterAddView />,
+          },
+          {
+            path: 'edit/:id',
+            element: <InformationPublicRegisterEditView />,
+          },
+        ],
       },
     ],
   },

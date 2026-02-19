@@ -48,24 +48,28 @@ export const Menus = [
     ],
   },
   {
-    label: 'Jaminan Mutu',
-    link: `${baseUrl}/jaminan-mutu`,
+    label: 'Informasi Publik',
+    link: `${baseUrl}/information-public`,
     children: [
       {
-        label: 'Sistem Dokumentasi',
-        link: `${baseUrl}/jaminan-mutu/sistem-dokumentasi`,
+        label: 'Informasi Berkala',
+        link: `${baseUrl}/information-public/information-regular`,
       },
       {
-        label: 'Manajemen Resiko',
-        link: `${baseUrl}/jaminan-mutu/manajemen-resiko`,
+        label: 'Informasi Tersedia',
+        link: `${baseUrl}/information-public/information-available`,
       },
       {
-        label: 'Audit Internal Mutu',
-        link: `${baseUrl}/jaminan-mutu/audit-internal`,
+        label: 'Informasi Serta Merta',
+        link: `${baseUrl}/information-public/information-immediately`,
       },
       {
-        label: 'Tinjauan Manajemen Resiko',
-        link: `${baseUrl}/jaminan-mutu/tinjauan-manajemen`,
+        label: 'Standard Pelayanan Informasi Publik',
+        link: `${baseUrl}/information-public/standard-service`,
+      },
+      {
+        label: 'Daftar Informasi Publik',
+        link: `${baseUrl}/information-public/register`,
       },
     ],
   },
