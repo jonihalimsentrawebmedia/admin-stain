@@ -75,7 +75,7 @@ export const DetailNewsPage = () => {
       <Separator className={'my-5'} />
 
       <div className="p-5">
-        <div className="bg-gradient-to-r p-8 from-[#3FA936] to-[#0C6939] rounded-lg shadow">
+        <div className="bg-linear-to-r p-8 from-[#3FA936] to-[#0C6939] rounded-lg shadow">
           <div
             className={
               'bg-white/12 rounded-lg shadow p-10 flex items- h-full gap-x-12 justify-between'

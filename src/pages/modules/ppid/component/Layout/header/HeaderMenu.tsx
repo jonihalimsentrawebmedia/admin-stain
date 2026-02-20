@@ -113,6 +113,30 @@ export const Menus = [
     ],
   },
   {
+    label: 'Laporan',
+    link: `${baseUrl}/reports`,
+    children: [
+      {
+        label: 'Laporan Akses Informasi Publik',
+        link: `${baseUrl}/reports/access`,
+
+        children: [],
+      },
+      {
+        label: 'Laporan Layanan Informasi Publik',
+        link: `${baseUrl}/reports/services`,
+
+        children: [],
+      },
+      {
+        label: 'Laporan Survei Layanan Informasi Publik',
+        link: `${baseUrl}/reports/survey`,
+
+        children: [],
+      },
+    ],
+  },
+  {
     label: 'Pengaturan',
     link: `${baseUrl}/settings`,
     children: [

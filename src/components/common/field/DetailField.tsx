@@ -29,7 +29,7 @@ const DetailField = ({ data, form, isRow = true, isRowParent, classNameParent, i
             {item.label}
           </div>
           {item.component ? (
-            form.watch(item.name) ? (
+            form.watch(item.name)!==undefined ? (
               <div className="text-[#464646]">{item.component}</div>
             ) : item.label != '' ? (
               '-'

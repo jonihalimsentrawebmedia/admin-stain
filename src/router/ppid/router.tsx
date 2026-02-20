@@ -32,6 +32,9 @@ import { UpdatedNewsPage } from '@/pages/modules/ppid/public-content/news/update
 import ShortcutView from '@/pages/modules/ppid/public-content/shortcut/ShortcutView'
 import RegulationEnviromentView from '@/pages/modules/ppid/regulation/enviroment/RegulationEnviromentView'
 import RegulationPublicView from '@/pages/modules/ppid/regulation/public/RegulationPublicView'
+import ReportsAccessView from '@/pages/modules/ppid/reports/access/ReportsAccessView'
+import ReportsServiceView from '@/pages/modules/ppid/reports/services/ReportsServiceView'
+import ReportsSurveyView from '@/pages/modules/ppid/reports/survey/ReportsSurveyView'
 import PPIDLandingPageView from '@/pages/modules/ppid/settings/landing-page/LandingPageView'
 import SettingTemplateServiceView from '@/pages/modules/ppid/settings/template/SettingTemplateServiceView'
 import PPIDSettingsVideosView from '@/pages/modules/ppid/settings/videos/PPIDSettingsVideosView'
@@ -274,4 +277,23 @@ export const routesPPID = [
       },
     ],
   },
+  {
+    path: 'reports',
+    children: [
+      {
+        path:"services",
+        element:<ReportsServiceView />
+      },
+      {
+        path:"survey",
+        element:<ReportsSurveyView />
+      },
+      {
+        path:"access",
+        element:<ReportsAccessView />
+      }
+
+    ]
+      
+  }
 ]
