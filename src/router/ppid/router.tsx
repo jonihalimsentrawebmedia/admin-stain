@@ -22,6 +22,10 @@ import VisiMisiPPIDView from '@/pages/modules/ppid/profile/visi-misi/VisiMisiVie
 import WorkResponsibilitiesAddView from '@/pages/modules/ppid/profile/work-responsibilities/add/WorkResponsibilitiesAddView'
 import WorkResponsibilitiesEditView from '@/pages/modules/ppid/profile/work-responsibilities/edit/WorkResponsibilitiesEditView'
 import WorkResponsibilitiesView from '@/pages/modules/ppid/profile/work-responsibilities/WorkResponsibilitiesView'
+import PPIDLandingPageView from '@/pages/modules/ppid/settings/landing-page/LandingPageView'
+import SettingTemplateServiceView from '@/pages/modules/ppid/settings/template/SettingTemplateServiceView'
+import PPIDSettingsVideosView from '@/pages/modules/ppid/settings/videos/PPIDSettingsVideosView'
+import ColorSettingService from '@/pages/modules/ppid/settings/warna/ColorSettingService'
 import UnitView from '@/pages/modules/ppid/unit/UnitView'
 import { ChangePassword } from '@/pages/modules/website-utama/change-password'
 import { UserProfilePage } from '@/pages/modules/website-utama/user-profile'
@@ -179,6 +183,28 @@ export const routesPPID = [
             element: <InformationPublicRegisterEditView />,
           },
         ],
+      },
+    ],
+  },
+
+   {
+    path: 'settings',
+    children: [
+      {
+        path: 'landing-page',
+        element: <PPIDLandingPageView />,
+      },
+      {
+        path: 'warna',
+        element: <ColorSettingService />,
+      },
+      {
+        path: 'template',
+        element: <SettingTemplateServiceView />,
+      },
+      {
+        path: 'video',
+        element: <PPIDSettingsVideosView />,
       },
     ],
   },

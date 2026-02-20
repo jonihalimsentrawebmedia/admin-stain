@@ -4,9 +4,6 @@ import {
   MenubarGroup,
   MenubarItem,
   MenubarMenu,
-  MenubarSub,
-  MenubarSubContent,
-  MenubarSubTrigger,
   MenubarTrigger,
 } from '@/components/ui/menubar.tsx'
 import { ChevronDown } from 'lucide-react'
@@ -74,52 +71,18 @@ export const Menus = [
     ],
   },
   {
-    label: 'Layanan',
-    link: `${baseUrl}/layanan`,
+    label: 'Regulasi',
+    link: `${baseUrl}/regulation`,
     children: [
       {
-        label: 'Sistem Penjaminan Mutu Internal (SPMI)',
-        link: `${baseUrl}/layanan/spmi`,
-        children: [
-          {
-            label: 'Dokumen Pendukung Akreditasi',
-            link: `${baseUrl}/layanan/spmi/dokumen-pendukung`,
-          },
-          {
-            label: 'Auditor Internal',
-            link: `${baseUrl}/layanan/spmi/auditor-internal`,
-          },
-          {
-            label: 'Reviewer',
-            link: `${baseUrl}/layanan/spmi/reviewer`,
-          },
-          {
-            label: 'Asesor',
-            link: `${baseUrl}/layanan/spmi/asesor`,
-          },
-          {
-            label: 'Laporan Benchmarking',
-            link: `${baseUrl}/layanan/spmi/laporan-benchmarking`,
-          },
-        ],
+        label: 'Regulasi Terkait',
+        link: `${baseUrl}/regulation/regulation`,
+        children: [],
       },
       {
-        label: 'Audit Internal Mutu (AIM)',
-        link: `${baseUrl}/layanan/aim`,
-        children: [
-          {
-            label: 'Template AIM',
-            link: `${baseUrl}/layanan/aim/template`,
-          },
-        ],
-      },
-      {
-        label: 'Akreditasi',
-        link: `${baseUrl}/layanan/akreditasi`,
-      },
-      {
-        label: 'Layanan Publik',
-        link: `${baseUrl}/layanan/pelayanan-public`,
+        label: 'Regulasi Lingkungan',
+        link: `${baseUrl}/regulation/environmental-regulation`,
+        children: [],
       },
     ],
   },
@@ -147,19 +110,23 @@ export const Menus = [
   },
   {
     label: 'Pengaturan',
-    link: `${baseUrl}/pengaturan`,
+    link: `${baseUrl}/settings`,
     children: [
       {
         label: 'Landing Page',
-        link: `${baseUrl}/pengaturan/landing-page`,
+        link: `${baseUrl}/settings/landing-page`,
+      },
+      {
+        label: 'Video',
+        link: `${baseUrl}/settings/video`,
       },
       {
         label: 'Pengaturan Warna',
-        link: `${baseUrl}/pengaturan/warna`,
+        link: `${baseUrl}/settings/warna`,
       },
       {
         label: 'Pengaturan Template',
-        link: `${baseUrl}/pengaturan/template`,
+        link: `${baseUrl}/settings/template`,
       },
     ],
   },
@@ -196,26 +163,30 @@ export const HeaderMenu = () => {
                 {menu.children && (
                   <MenubarContent>
                     <MenubarGroup>
-                      {menu.children.map((child, j) =>
-                        child.children ? (
-                          // 🔽 LEVEL 3
-                          <MenubarSub key={j}>
-                            <MenubarSubTrigger>{child.label}</MenubarSubTrigger>
-                            <MenubarSubContent>
-                              {child.children.map((sub, k) => (
-                                <Link to={sub?.link} key={k}>
-                                  <MenubarItem>{sub.label}</MenubarItem>
-                                </Link>
-                              ))}
-                            </MenubarSubContent>
-                          </MenubarSub>
-                        ) : (
-                          // 🔹 LEVEL 2 biasa
-                          <Link to={child?.link} key={j}>
-                            <MenubarItem>{child.label}</MenubarItem>
-                          </Link>
-                        )
-                      )}
+                      {menu.children.map((child, j) => (
+                        // child.children ? (
+                        //   // 🔽 LEVEL 3
+                        //   // <MenubarSub key={j}>
+                        //   //   <MenubarSubTrigger>{child.label}</MenubarSubTrigger>
+                        //   //   <MenubarSubContent>
+                        //   //     {child.children.map((sub, k) => (
+                        //   //       <Link to={sub?.link} key={k}>
+                        //   //         <MenubarItem>{sub.label}</MenubarItem>
+                        //   //       </Link>
+                        //   //     ))}
+                        //   //   </MenubarSubContent>
+                        //   // </MenubarSub>
+                        //   <></>
+                        // ) : (
+                        //   // 🔹 LEVEL 2 biasa
+                        //   // <Link to={child?.link} key={j}>
+                        //   //   <MenubarItem>{child.label}</MenubarItem>
+                        //   // </Link>
+                        // )
+                        <Link to={child?.link} key={j}>
+                          <MenubarItem>{child.label}</MenubarItem>
+                        </Link>
+                      ))}
                     </MenubarGroup>
                   </MenubarContent>
                 )}
