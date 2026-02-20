@@ -22,6 +22,14 @@ import VisiMisiPPIDView from '@/pages/modules/ppid/profile/visi-misi/VisiMisiVie
 import WorkResponsibilitiesAddView from '@/pages/modules/ppid/profile/work-responsibilities/add/WorkResponsibilitiesAddView'
 import WorkResponsibilitiesEditView from '@/pages/modules/ppid/profile/work-responsibilities/edit/WorkResponsibilitiesEditView'
 import WorkResponsibilitiesView from '@/pages/modules/ppid/profile/work-responsibilities/WorkResponsibilitiesView'
+import ApplicationProceduresView from '@/pages/modules/ppid/public-content/application-procedures/ApplicationProceduresView'
+import InfographicsView from '@/pages/modules/ppid/public-content/Infographics/InfographicsView'
+import PPIDNewsPublicContentPage from '@/pages/modules/ppid/public-content/news'
+import { CreatedNewsPage } from '@/pages/modules/ppid/public-content/news/created'
+import { DetailNewsPage } from '@/pages/modules/ppid/public-content/news/detail/page'
+import { LogActivityNewsPage } from '@/pages/modules/ppid/public-content/news/log'
+import { UpdatedNewsPage } from '@/pages/modules/ppid/public-content/news/updated'
+import ShortcutView from '@/pages/modules/ppid/public-content/shortcut/ShortcutView'
 import RegulationEnviromentView from '@/pages/modules/ppid/regulation/enviroment/RegulationEnviromentView'
 import RegulationPublicView from '@/pages/modules/ppid/regulation/public/RegulationPublicView'
 import PPIDLandingPageView from '@/pages/modules/ppid/settings/landing-page/LandingPageView'
@@ -220,6 +228,49 @@ export const routesPPID = [
       {
         path: 'enviroment',
         element: <RegulationEnviromentView />,
+      },
+    ],
+  },
+
+  {
+    path: 'public-content',
+    children: [
+      {
+        path: 'news',
+        children: [
+          {
+            index: true,
+            element: <PPIDNewsPublicContentPage />,
+          },
+          {
+            path: 'add',
+            element: <CreatedNewsPage />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedNewsPage />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailNewsPage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityNewsPage />,
+          },
+        ],
+      },
+        {
+        path: 'infographics',
+        element: <InfographicsView />,
+      },
+        {
+        path: 'application-procedures',
+        element: <ApplicationProceduresView />,
+      },
+        {
+        path: 'shortcut',
+        element: <ShortcutView />,
       },
     ],
   },

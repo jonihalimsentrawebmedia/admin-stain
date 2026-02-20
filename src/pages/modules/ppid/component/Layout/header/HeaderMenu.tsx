@@ -99,12 +99,16 @@ export const Menus = [
         link: `${baseUrl}/public-content/news`,
       },
       {
-        label: 'Pengumuman',
-        link: `${baseUrl}/public-content/announcement`,
+        label: 'Infografis',
+        link: `${baseUrl}/public-content/infographics`,
       },
       {
-        label: 'Agenda',
-        link: `${baseUrl}/public-content/agenda`,
+        label: 'Pintasan',
+        link: `${baseUrl}/public-content/shortcut`,
+      },
+      {
+        label: 'Tata Cara Permohonan',
+        link: `${baseUrl}/public-content/application-procedures`,
       },
     ],
   },
