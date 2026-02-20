@@ -1,13 +1,14 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
-import useGetStandartService from './controller/useGetStandartService'
-import StandartServiceViewModel from './StandartServiceViewModel'
-import ButtonAddDocument from '../components/button/ButtonAddDocument'
+
 import TableCustom from '@/components/common/table/TableCustom'
 import SelectFilter from '@/components/common/filter/SelectFilter'
+import RegulationEnviromentViewModel from './RegulationEnviromentViewModel'
+import useGetRegulationEnviroment from './controller/useGetRegulationEnviroment'
+import ButtonAddDocument from '../../information-public/components/button/ButtonAddDocument'
 
-const StandartServiceView = () => {
-  const { columns } = StandartServiceViewModel()
-  const { document, loading, meta, title } = useGetStandartService({})
+const RegulationEnviromentView = () => {
+  const { columns } = RegulationEnviromentViewModel()
+  const { document, loading, meta, title } = useGetRegulationEnviroment({})
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
@@ -18,8 +19,8 @@ const StandartServiceView = () => {
             type: 'add',
             element: (
               <ButtonAddDocument
-                keyLinkPost="ppip-standart-service"
-                linkPost="/unit-ppid/standard-pelayanan-informasi-public"
+                keyLinkPost="ppip-regulation-enviroment"
+                linkPost="/unit-ppid/regulasi-lingkungan-dokumen"
                 title="Dokumen"
                 titleField={title}
                 idCategory={undefined}
@@ -28,8 +29,8 @@ const StandartServiceView = () => {
             ),
           },
         ]}
-        label={"Standar Pelayanan Informasi Publik"}
-  
+        label={"Regulasi Mengenai Keterbukaan Informasi di Lingkungan STAIN Madina"}
+    
       />
       <TableCustom
         addFilter={
@@ -56,4 +57,4 @@ const StandartServiceView = () => {
   )
 }
 
-export default StandartServiceView
+export default RegulationEnviromentView

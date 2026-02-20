@@ -1,12 +1,12 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
-import useGetStandartService from './controller/useGetStandartService'
-import StandartServiceViewModel from './StandartServiceViewModel'
-import ButtonAddDocument from '../components/button/ButtonAddDocument'
+import useGetStandartService from './controller/useGetRegulationPublic'
 import TableCustom from '@/components/common/table/TableCustom'
 import SelectFilter from '@/components/common/filter/SelectFilter'
+import RegulationPublicViewModel from './RegulationPublicViewModel'
+import ButtonAddDocument from '../../information-public/components/button/ButtonAddDocument'
 
-const StandartServiceView = () => {
-  const { columns } = StandartServiceViewModel()
+const RegulationPublicView = () => {
+  const { columns } = RegulationPublicViewModel()
   const { document, loading, meta, title } = useGetStandartService({})
   return (
     <div className="flex flex-col gap-4">
@@ -18,8 +18,8 @@ const StandartServiceView = () => {
             type: 'add',
             element: (
               <ButtonAddDocument
-                keyLinkPost="ppip-standart-service"
-                linkPost="/unit-ppid/standard-pelayanan-informasi-public"
+                keyLinkPost="ppip-regulasi-public"
+                linkPost="/unit-ppid/regulasi-public-dokumen"
                 title="Dokumen"
                 titleField={title}
                 idCategory={undefined}
@@ -28,8 +28,7 @@ const StandartServiceView = () => {
             ),
           },
         ]}
-        label={"Standar Pelayanan Informasi Publik"}
-  
+        label={'Regulasi Mengenai Keterbukaan Informasi Publik'}
       />
       <TableCustom
         addFilter={
@@ -56,4 +55,4 @@ const StandartServiceView = () => {
   )
 }
 
-export default StandartServiceView
+export default RegulationPublicView

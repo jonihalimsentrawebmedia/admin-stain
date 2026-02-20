@@ -76,12 +76,12 @@ export const Menus = [
     children: [
       {
         label: 'Regulasi Terkait',
-        link: `${baseUrl}/regulation/regulation`,
+        link: `${baseUrl}/regulation/public`,
         children: [],
       },
       {
         label: 'Regulasi Lingkungan',
-        link: `${baseUrl}/regulation/environmental-regulation`,
+        link: `${baseUrl}/regulation/enviroment`,
         children: [],
       },
     ],

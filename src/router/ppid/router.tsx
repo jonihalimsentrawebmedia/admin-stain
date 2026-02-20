@@ -22,6 +22,8 @@ import VisiMisiPPIDView from '@/pages/modules/ppid/profile/visi-misi/VisiMisiVie
 import WorkResponsibilitiesAddView from '@/pages/modules/ppid/profile/work-responsibilities/add/WorkResponsibilitiesAddView'
 import WorkResponsibilitiesEditView from '@/pages/modules/ppid/profile/work-responsibilities/edit/WorkResponsibilitiesEditView'
 import WorkResponsibilitiesView from '@/pages/modules/ppid/profile/work-responsibilities/WorkResponsibilitiesView'
+import RegulationEnviromentView from '@/pages/modules/ppid/regulation/enviroment/RegulationEnviromentView'
+import RegulationPublicView from '@/pages/modules/ppid/regulation/public/RegulationPublicView'
 import PPIDLandingPageView from '@/pages/modules/ppid/settings/landing-page/LandingPageView'
 import SettingTemplateServiceView from '@/pages/modules/ppid/settings/template/SettingTemplateServiceView'
 import PPIDSettingsVideosView from '@/pages/modules/ppid/settings/videos/PPIDSettingsVideosView'
@@ -187,7 +189,7 @@ export const routesPPID = [
     ],
   },
 
-   {
+  {
     path: 'settings',
     children: [
       {
@@ -205,6 +207,19 @@ export const routesPPID = [
       {
         path: 'video',
         element: <PPIDSettingsVideosView />,
+      },
+    ],
+  },
+  {
+    path: 'regulation',
+    children: [
+      {
+        path: 'public',
+        element: <RegulationPublicView />,
+      },
+      {
+        path: 'enviroment',
+        element: <RegulationEnviromentView />,
       },
     ],
   },

@@ -12,6 +12,7 @@ import InformationPublicFormDocument from '../form/InformationPublicFormDocument
 import type { DocumentItem } from '../../information-regular/model'
 import { IconEdit } from '@/components/common/table/icon'
 import type { PublicInformationServiceStandardList } from '../../standart-service/model'
+import type { PublicInformationRegulationList } from '../../../regulation/public/model'
 
 export const InformationPublicGlobalResolver = z
   .object({
@@ -55,7 +56,7 @@ interface Props {
   idName: string
   idCategory?: string
   titleField: string
-  data: DocumentItem | PublicInformationServiceStandardList
+  data: DocumentItem | PublicInformationServiceStandardList|PublicInformationRegulationList
 }
 const ButtonEditDocument = ({
   keyLinkPost,
