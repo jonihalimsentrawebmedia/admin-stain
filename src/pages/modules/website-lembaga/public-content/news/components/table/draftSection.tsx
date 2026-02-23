@@ -1,5 +1,5 @@
 import { DraftNewsColumns } from '@/pages/modules/website-lembaga/public-content/news/components/table/draftColumns.tsx'
-import { UseGetNews } from '@/pages/modules/website-lembaga/public-content/news/hooks'
+import { UseGetNews } from '../../hooks/index.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import useGetNewsCategory from '@/pages/modules/settings/reference/news-category/controller/useGetNewsCategory.tsx'

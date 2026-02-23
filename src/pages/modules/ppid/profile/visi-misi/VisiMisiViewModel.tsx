@@ -31,7 +31,7 @@ const VisiMisiViewModel = () => {
         const values = row.original
         return (
           <div
-            className="flex gap-2 items-center"
+            className="flex gap-2 tiptap ProseMirror simple-editor html-class items-center"
             dangerouslySetInnerHTML={{ __html: values.isi }}
           />
         )
