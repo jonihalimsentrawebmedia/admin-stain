@@ -1,3 +1,8 @@
+import AdmissionInformationPublicView from '@/pages/modules/ppid/admission-application/information-public/AdmissionInformationPublicView'
+import AdmissionInformationPublicDetailView from '@/pages/modules/ppid/admission-application/information-public/detail/AdmissionInformationPublicDetailView'
+import AdmissionInformationPublicLogView from '@/pages/modules/ppid/admission-application/information-public/log/AdmissionInformationPublicLogView'
+import ObjectionsPublicDetailView from '@/pages/modules/ppid/admission-application/objections-public/detail/ObjectionsPublicDetailView'
+import ObjectionInformationPublicView from '@/pages/modules/ppid/admission-application/objections-public/ObjectionInformationPublicView'
 import DashboardPPID from '@/pages/modules/ppid/dashboard'
 import InformationAvailableDetailView from '@/pages/modules/ppid/information-public/Information-available/detail/InformationAvailableDetailView'
 import InformationAvailableView from '@/pages/modules/ppid/information-public/Information-available/InformationAvailableView'
@@ -263,15 +268,15 @@ export const routesPPID = [
           },
         ],
       },
-        {
+      {
         path: 'infographics',
         element: <InfographicsView />,
       },
-        {
+      {
         path: 'application-procedures',
         element: <ApplicationProceduresView />,
       },
-        {
+      {
         path: 'shortcut',
         element: <ShortcutView />,
       },
@@ -281,19 +286,52 @@ export const routesPPID = [
     path: 'reports',
     children: [
       {
-        path:"services",
-        element:<ReportsServiceView />
+        path: 'services',
+        element: <ReportsServiceView />,
       },
       {
-        path:"survey",
-        element:<ReportsSurveyView />
+        path: 'survey',
+        element: <ReportsSurveyView />,
       },
       {
-        path:"access",
-        element:<ReportsAccessView />
-      }
-
-    ]
-      
-  }
+        path: 'access',
+        element: <ReportsAccessView />,
+      },
+    ],
+  },
+  {
+    path: 'admission-application',
+    children: [
+      {
+        path: 'information-public',
+        children: [
+          {
+            index: true,
+            element: <AdmissionInformationPublicView />,
+          },
+          {
+            path: 'detail/:id',
+            element: <AdmissionInformationPublicDetailView />,
+          },
+          {
+            path: 'log/:id',
+            element: <AdmissionInformationPublicLogView />,
+          },
+        ],
+      },
+      {
+        path: 'objections-public',
+        children: [
+          {
+            index: true,
+            element: <ObjectionInformationPublicView />,
+          },
+          {
+            path:"detail/:id",
+            element: <ObjectionsPublicDetailView />,
+          }
+        ],
+      },
+    ],
+  },
 ]

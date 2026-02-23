@@ -87,8 +87,20 @@ export const Menus = [
     ],
   },
   {
-    label: 'Keluhan',
-    link: `${baseUrl}/keluhan`,
+    label: 'Permohonan Masuk',
+    link: `${baseUrl}/admission-application`,
+    children: [
+      {
+        label: 'Permohonan Informasi Publik',
+        link: `${baseUrl}/admission-application/information-public`,
+        children: [],
+      },
+      {
+        label: 'Permohonan Objection Informasi Publik',
+        link: `${baseUrl}/admission-application/objections-public`,
+        children: [],
+      },
+    ],
   },
   {
     label: 'Konten Publik',

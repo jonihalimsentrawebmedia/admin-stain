@@ -27,9 +27,9 @@ export const HeaderLayoutPPID = () => {
   }
   return (
     <>
-      <div className={'bg-[#0F4D30] w-full'}>
+      <div className={'bg-[#0F4D30] max-w-[1920px] w-full'}>
         <div
-          className={`w-full mx-auto max-w-[1920px] px-4 py-2 bg-[url(/Background.png)] bg-cover bg-center`}
+          className={`w-full mx-auto max-w-[1440px] px-4 py-2 bg-[url(/Background.png)] bg-cover bg-center`}
         >
           <div className="w-full flex gap-4 items-center justify-between  max-w-[1440px] mx-auto">
             <div className="flex items-center gap-2">

@@ -65,7 +65,7 @@ export function InputRadio({
               'w-full phones:w-full': isRow && !label && !isMobile,
             })}
           >
-            <div className={`flex w-full items-center gap-6 `}>
+            <div className={`flex w-full flex-wrap items-center gap-6 `}>
               {data?.map((item, idx) => (
                 <Fragment key={idx}>
                   <label className={`flex items-center gap-3 ${heightInput ?? ''}`}>
