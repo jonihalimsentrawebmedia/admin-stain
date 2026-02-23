@@ -10,6 +10,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useNavigate, useParams } from 'react-router-dom'
 import { UseGetManagementEditorNewsDetail } from '../hooks/index'
+import { format } from 'date-fns'
 
 export const NewsManagementEditorUpdated = () => {
   const { id } = useParams()
@@ -37,6 +38,7 @@ export const NewsManagementEditorUpdated = () => {
         isi_berita: managementEditorNewsDetail?.isi_berita,
         keterangan_gambar: managementEditorNewsDetail?.keterangan_gambar,
         penulis: managementEditorNewsDetail?.penulis,
+        tanggal_berita: format(managementEditorNewsDetail?.tanggal_berita,'yyyy-MM-dd'),
         berita_gambar_tambahan: temp,
       })
     }
@@ -44,7 +46,10 @@ export const NewsManagementEditorUpdated = () => {
 
   const HandleSubmit = async (e: INewsTypeForm) => {
     setLoading(true)
-    await AxiosClient.put(`/editor/berita/${id}`, e)
+    await AxiosClient.put(`/editor/berita/${id}`, {
+      ...e,
+      tanggal_berita: new Date(e?.tanggal_berita).toISOString(),
+    })
       .then((res) => {
         if (res.data.status) {
           toast.success(res.data.message || 'Berita berhasil dibuat')
