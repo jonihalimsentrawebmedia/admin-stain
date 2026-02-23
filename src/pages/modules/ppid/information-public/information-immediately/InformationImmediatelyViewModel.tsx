@@ -59,9 +59,9 @@ const InformationImmediatelyViewModel = () => {
           <ButtonSwitch
             isActive={row.original.public}
             key={'information-immediately-ppid'}
-            keyList="information-immediately-ppid"
+            keyList="information-immediately-unit-ppid"
             data={row.original}
-            link={`/unit-ppid/informasi-serta-merta/${row.original.id_informasi_serta_merta}/toggle-status`}
+            link={`/unit-ppid/informasi-serta-merta-informasi/${row.original.id_informasi_serta_merta}/toggle-status`}
           />
         )
       },

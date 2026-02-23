@@ -76,7 +76,7 @@ export const ButtonSettings = (props: Props) => {
         <FaGear />
       </button>
 
-      <DialogCustom open={open} setOpen={setOpen} title={'Settings'} className={'rounded'}>
+      <DialogCustom open={open} setOpen={setOpen} title={'Settings'} className={'rounded max-w-5xl'}>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(HandleSave)} className="grid grid-cols-2 gap-5">
             {satuanOrganisasi.map((item, k) => (
@@ -89,7 +89,7 @@ export const ButtonSettings = (props: Props) => {
             ))}
 
             <div className="col-span-2 flex justify-end gap-2 mt-5">
-              <ButtonForm loading={loading} />
+              <ButtonForm loading={loading} onCancel={() => setOpen(false)} />
             </div>
           </form>
         </Form>
