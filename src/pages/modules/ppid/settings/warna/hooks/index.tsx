@@ -28,7 +28,7 @@ export const UseGetColorAdmin = (context: 'admin' | 'public') => {
   return { color, loading }
 }
 
-export const UseGetAdminTheme = () => {
+export const UseGetAdminThemeUUID = () => {
   const [color, setColor] = useState<IColor>()
 
   const { data, isLoading, isFetching } = useQuery({

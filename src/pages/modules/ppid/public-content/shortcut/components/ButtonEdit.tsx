@@ -70,9 +70,10 @@ const ButtonEdit = ({ data: dataProps }: Props) => {
         <div className="flex flex-col gap-4">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
-              <div className="flex gap-2">
+              <div className="flex items-start gap-2">
                 <ImageUpload maxSizeMB={2} form={form} name="url_gambar" label="" />
                 <TextInput
+                  className="h-fit"
                   form={form}
                   name="nama_pintasan"
                   label="Nama Pintasan"

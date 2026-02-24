@@ -126,7 +126,7 @@ const ButtonEditDocument = ({
       </button>
 
       <DialogCustom
-        className="max-w-2xl! w-[90wdv] md:w-full! "
+        className="max-w-4xl! w-[90wdv] md:w-full! "
         open={open}
         setOpen={setOpen}
         title={<p className="text-2xl ">Edit{title}</p>}

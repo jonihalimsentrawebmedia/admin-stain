@@ -2,6 +2,7 @@ import AdmissionInformationPublicView from '@/pages/modules/ppid/admission-appli
 import AdmissionInformationPublicDetailView from '@/pages/modules/ppid/admission-application/information-public/detail/AdmissionInformationPublicDetailView'
 import AdmissionInformationPublicLogView from '@/pages/modules/ppid/admission-application/information-public/log/AdmissionInformationPublicLogView'
 import ObjectionsPublicDetailView from '@/pages/modules/ppid/admission-application/objections-public/detail/ObjectionsPublicDetailView'
+import ObjectionInformationLogView from '@/pages/modules/ppid/admission-application/objections-public/log/ObjectionInformationLogView'
 import ObjectionInformationPublicView from '@/pages/modules/ppid/admission-application/objections-public/ObjectionInformationPublicView'
 import DashboardPPID from '@/pages/modules/ppid/dashboard'
 import InformationAvailableDetailView from '@/pages/modules/ppid/information-public/Information-available/detail/InformationAvailableDetailView'
@@ -329,6 +330,10 @@ export const routesPPID = [
           {
             path:"detail/:id",
             element: <ObjectionsPublicDetailView />,
+          },
+          {
+            path:"log/:id",
+            element: <ObjectionInformationLogView />,
           }
         ],
       },

@@ -49,6 +49,7 @@ const StandartServiceView = () => {
         columns={columns}
         data={document}
         loading={loading}
+            thClassName='whitespace-pre-line!'
         meta={meta}
         isShowLimit={false}
       />

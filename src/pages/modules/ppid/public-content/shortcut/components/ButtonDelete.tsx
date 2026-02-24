@@ -57,7 +57,9 @@ const ButtonDelete = ({ data }: Props) => {
         title={<p className="text-2xl text-red-500">Hapus Pintasan</p>}
       >
         <div className="flex gap-2 ">
-          <img src={data.url_gambar} className="h-[400px] object-contain" alt="" />
+         <div className='p-4 border bg-[#F9F9F9] border-[#999]'>
+           <img src={data.url_gambar} className="h-[184] object-cover" alt="" />
+         </div>
           <DetailField
             form={form}
             data={[

@@ -95,7 +95,7 @@ export const SelectPPID = () => {
                     <SelectBasicInput
                       form={form}
                       name={'id_unit'}
-                      placeholder={'Pilih Lembaga'}
+                      placeholder={'Pilih PPID'}
                       selectClassName={'z-40'}
                       isDisabled={loading}
                       data={

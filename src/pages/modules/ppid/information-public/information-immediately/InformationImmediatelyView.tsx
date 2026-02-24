@@ -47,6 +47,7 @@ const InformationImmediatelyView = () => {
         data={informationImmediately}
         loading={loading}
         meta={meta}
+            thClassName='whitespace-pre-line!'
       />
     </div>
   )

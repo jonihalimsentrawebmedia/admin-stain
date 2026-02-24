@@ -5,6 +5,7 @@ import { format } from 'date-fns'
 import { statusEmail } from '../information-public/utils'
 import { Button } from '@/components/ui/button'
 import { IconDetail2 } from '@/components/common/table/icon'
+import ButtonEmail from './components/ButtonEmail'
 
 const ObjectionInformationPublicViewModel = () => {
   const [searchParams] = useSearchParams()
@@ -61,7 +62,7 @@ const ObjectionInformationPublicViewModel = () => {
         return (
           <div className="space-y-1">
             <div> {statusEmail(values.status_terjawab)}</div>
-            {/* <ButtonEmail isForTable={true} data={values} id={values.id_permohonan} /> */}
+            <ButtonEmail isForTable={true} data={values} id={values.id_permohonan} />
             <Link to={`log/${values.id_permohonan}`}>
               <Button variant="outline" className="border-primary text-primary hover:text-primary">
                 Riwayat Email

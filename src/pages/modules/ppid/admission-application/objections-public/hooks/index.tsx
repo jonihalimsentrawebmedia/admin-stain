@@ -70,7 +70,7 @@ export const useGetObjectionsPublicLog = (id: string) => {
   }>({
     refetchOnWindowFocus: false,
     queryKey: ['objections-public-log', id],
-    queryFn: () => AxiosClient.get(`/unit-ppid/permohonan-keberatan/${id}`).then((res) => res.data),
+    queryFn: () => AxiosClient.get(`/unit-ppid/permohonan-keberatan-riwayat/${id}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching

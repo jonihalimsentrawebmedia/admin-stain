@@ -59,8 +59,8 @@ export default function DashboardPPID() {
 
   const actions = [
     { label: 'Tulis Berita', url: '/modules/ppid/public-content/news/add' },
-    { label: 'Tulis Pengumuman', url: '/modules/ppid/public-content/announcement/add' },
-    { label: 'Tulis Agenda', url: '/modules/ppid/public-content/agenda/add' },
+    // { label: 'Tulis Pengumuman', url: '/modules/ppid/public-content/announcement/add' },
+    // { label: 'Tulis Agenda', url: '/modules/ppid/public-content/agenda/add' },
   ]
 
   const listMode = [
@@ -146,7 +146,7 @@ export default function DashboardPPID() {
                 />
                 <YAxis />
                 <Tooltip />
-                <Bar dataKey="value" fill="#8884d8" />
+                <Bar dataKey="value" fill="#297D56" />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>

@@ -4,16 +4,44 @@ import DetailField from '@/components/common/field/DetailField'
 import { Input } from '@/components/ui/input'
 import { Skeleton } from '@/components/ui/skeleton'
 import { format } from 'date-fns'
+import { statusAdmission } from '../../information-public/utils'
+import ButtonEmail from '../components/ButtonEmail'
+import { Link } from 'react-router-dom'
+import { Button } from '@/components/ui/button'
+import { FaWhatsapp } from 'react-icons/fa'
 
 const ObjectionsPublicDetailView = () => {
-  const { fieldIdentity, fieldRegistrasi, fieldKasus, form, loading, objectionPublic } =
+  const { fieldIdentity, fieldRegistrasi, fieldKasus, form, loading, objectionPublic,id } =
     ObjectionsPublicDetailViewModel()
   if (loading) {
     return <Skeleton className="h-[300px]" />
   }
   return (
     <div className="flex flex-col gap-4">
-      <ButtonTitleGroup buttonGroup={[]} label="Detail Permohonan Informasi Publik" />
+      <ButtonTitleGroup
+        buttonGroup={[
+          {
+            type: 'custom',
+            element: (
+              <div className="flex gap-2 items-center">
+                {statusAdmission(form.watch('status_permohonan') as string)}
+                <ButtonEmail data={objectionPublic} id={id!} />
+                <Link target="_blank" to={`https://wa.me/${objectionPublic?.no_hp}`}>
+                  <Button
+                    variant={'outline'}
+                    className="border border-primary text-primary hover:text-primary"
+                  >
+                    <FaWhatsapp />
+                    Whatsapp
+                  </Button>
+                </Link>
+              </div>
+            ),
+          },
+        ]}
+        isBack
+        label="Detail Permohonan Informasi Publik"
+      />
       <p className="text-blue-500">
         *Data “No Registrasi” dan “Hari / Tanggal tanggapan atas keberatan akan diberikan” akan
         diisi ketika mengirim email

@@ -42,6 +42,7 @@ const InformationAvailableView = () => {
         data={document}
         loading={loading}
         meta={meta}
+            thClassName='whitespace-pre-line!'
       />
     </div>
   )

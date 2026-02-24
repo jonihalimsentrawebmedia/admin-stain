@@ -11,6 +11,7 @@ import { UseGetWebsiteLembagaGlobal } from '@/pages/modules/website-lembaga/hook
 import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import { Button } from '@/components/ui/button'
 import { Pencil } from 'lucide-react'
+import { Skeleton } from '@/components/ui/skeleton'
 interface Props {
   linkGetData: string
   queryKeyGetData: string
@@ -50,7 +51,7 @@ const FormRichEditor = ({
         setLoading(false)
       })
   }
-  const { dataGlobal } = UseGetWebsiteLembagaGlobal({
+  const { dataGlobal,loading:loadingGet } = UseGetWebsiteLembagaGlobal({
     link: linkGetData,
     queryKey: queryKeyGetData,
   })
@@ -60,6 +61,10 @@ const FormRichEditor = ({
       ...dataGlobal,
     })
   }, [dataGlobal])
+
+  if(loadingGet){
+    return <Skeleton className='h-[200px]'/>
+  }
   return (
     <>
       <ButtonTitleGroup buttonGroup={[]} label={title} />

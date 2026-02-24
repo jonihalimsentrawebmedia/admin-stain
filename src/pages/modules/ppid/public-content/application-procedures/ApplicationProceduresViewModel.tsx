@@ -24,7 +24,7 @@ const ApplicationProceduresViewModel = () => {
       accessorKey: 'thumbnail',
       header: 'Thumbnail',
       cell: ({ row }) => {
-        return <img className="w-[344px] h-[258px]" src={row.original.url_gambar} />
+        return <img className="w-[344px] object-cover h-[258px]" src={row.original.url_gambar} />
       },
     },
     {

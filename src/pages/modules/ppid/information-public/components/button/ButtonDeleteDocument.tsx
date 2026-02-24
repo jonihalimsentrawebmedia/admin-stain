@@ -119,7 +119,11 @@ const ButtonDeleteDocument = ({ data, keyLinkDelete, linkDelete, title, titleFie
         <p>Apakah anda yakin ingin menghapus judul ini?</p>
         <div className="my-4 ">
           <DetailField
-            data={form.watch('jenis') == 'dokumen' ? fieldsConfigDocument : fieldsConfigUrl}
+            data={
+              form.watch('jenis')?.toLocaleLowerCase() == 'dokumen'
+                ? fieldsConfigDocument
+                : fieldsConfigUrl
+            }
             form={form}
           />
         </div>

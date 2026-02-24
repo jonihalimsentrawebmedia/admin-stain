@@ -29,7 +29,7 @@ const InformationRegularDetailViewModel = () => {
         const values = row.original
         return (
           <div className="flex gap-2 items-center">
-            {values.jenis == 'dokumen' ? (
+            {values.jenis.toLocaleLowerCase() == 'dokumen' ? (
               <Button
                 variant={'outline'}
                 className="border-primary text-primary hover:text-primary"

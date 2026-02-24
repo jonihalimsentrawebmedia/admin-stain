@@ -20,7 +20,7 @@ const ServiceCommitmentView = () => {
             },
           },
         ]}
-        label="Visi Misi"
+        label="Maklumat Layanan"
       />
       <TableCustom
         columns={columns}

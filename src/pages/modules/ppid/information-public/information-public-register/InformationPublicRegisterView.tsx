@@ -41,6 +41,7 @@ const InformationPublicRegisterView = () => {
         loading={loading}
         meta={meta}
         isShowLimit={false}
+            thClassName='whitespace-pre-line!'
       />
     </div>
   )

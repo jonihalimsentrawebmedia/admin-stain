@@ -143,7 +143,7 @@ export default function ImageUpload<T extends FieldValues>({
                         <MdAddPhotoAlternate size={32} />
                         Icon
                         <br />
-                        <ul className=" list-disc space-y-2 text-[#2769CD]">
+                        <ul className=" list-disc ml-2 pl-2 list-outside whitespace-pre-line  text-[#2769CD]">
                           <li>Ukuran 1:1</li>
                           <li>Jenis File: .jpg/.png/.jpeg</li>
                           <li>Maks: {maxSizeMB}MB</li>

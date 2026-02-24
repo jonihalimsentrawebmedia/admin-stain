@@ -24,7 +24,7 @@ const ShortcutViewModel = () => {
       accessorKey: 'thumbnail',
       header: 'Thumbnail',
       cell: ({ row }) => {
-        return <img className="w-[344px] h-[258px]" src={row.original.url_gambar} />
+        return <img className="w-12 object-contain h-12" src={row.original.url_gambar} />
       },
     },
    

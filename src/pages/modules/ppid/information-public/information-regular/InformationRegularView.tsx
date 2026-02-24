@@ -10,7 +10,7 @@ const InformationRegularView = () => {
   const { columns } = InformationRegularViewModel()
   const { document, loading, meta } = useGetInformationRegular({})
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 ">
       <FormRichEditor
         linkGetData="/unit-ppid/informasi-berkala"
         linkPostData="/unit-ppid/informasi-berkala"
@@ -28,7 +28,7 @@ const InformationRegularView = () => {
         addFilter={
           <SelectFilter
             isLabelTop
-            selectClassName={'min-w-[8rem]'}
+            selectClassName={'min-w-[8rem] '}
             label="Jumlah Data"
             name={'limit'}
             options={[
@@ -42,7 +42,10 @@ const InformationRegularView = () => {
         columns={columns}
         data={document}
         loading={loading}
+        thClassName='whitespace-pre-line!'
+        
         meta={meta}
+     
       />
     </div>
   )

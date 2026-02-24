@@ -25,7 +25,7 @@ const InfographicsViewModel = () => {
       accessorKey: 'thumbnail',
       header: 'Thumbnail',
       cell: ({ row }) => {
-        return <img className="w-[344px] h-[258px]" src={row.original.url_gambar} />
+        return <img className="w-[344px] h-[258px] object-cover" src={row.original.url_gambar} />
       },
     },
     {

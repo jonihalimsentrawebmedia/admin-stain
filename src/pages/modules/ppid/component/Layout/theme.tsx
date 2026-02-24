@@ -1,10 +1,10 @@
 import { type ReactNode, useEffect } from 'react'
 import { useThemeColor } from '@/hooks/custom/themeColor.tsx'
-import { UseGetAdminTheme } from '@/pages/modules/website-lembaga/pengaturan/warna/hooks'
+import { UseGetAdminThemeUUID } from '../../settings/warna/hooks'
 
 const PPIDWebTheme = ({ children }: { children: ReactNode }) => {
   const { setTheme } = useThemeColor()
-  const { color } = UseGetAdminTheme()
+  const { color } =  UseGetAdminThemeUUID()
 
   useEffect(() => {
     setTheme({

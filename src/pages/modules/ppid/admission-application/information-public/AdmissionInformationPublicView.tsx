@@ -31,8 +31,9 @@ const AdmissionInformationPublicView = () => {
         meta={meta}
         loading={loading}
         isShowLimit={false}
+        thClassName="whitespace-pre-line"
+        tdClassName="whitespace-pre-line"
       />
-      
     </div>
   )
 }

@@ -14,8 +14,8 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import { UseGetColorAdmin } from '@/pages/modules/website-lembaga/pengaturan/warna/hooks'
 import { useQueryClient } from '@tanstack/react-query'
+import { UseGetColorAdmin } from '../hooks'
 
 const AdminTabs = () => {
   const form = useForm()

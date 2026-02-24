@@ -56,7 +56,7 @@ const ButtonDelete = ({ data }: Props) => {
         title={<p className="text-2xl text-red-500">Hapus Gambar Landing Page</p>}
       >
         <div className="my-4 mx-auto text-center">
-          <img src={data.url_gambar} className="h-[400px] object-contain" alt="" />
+          <img src={data.url_gambar} className="h-[400px] object-cover" alt="" />
         </div>
 
         <div className="flex gap-4 items-center justify-center">

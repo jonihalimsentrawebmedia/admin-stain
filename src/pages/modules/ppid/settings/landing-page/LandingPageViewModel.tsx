@@ -25,7 +25,7 @@ const LandingPageViewModel = () => {
       accessorKey: 'thumbnail',
       header: 'Thumbnail',
       cell: ({ row }) => {
-        return <img className="w-[344px] h-[258px]" src={row.original.gambar_url} />
+        return <img className="w-[344px] h-[258px] object-cover" src={row.original.gambar_url} />
       },
     },
     {
