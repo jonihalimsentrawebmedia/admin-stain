@@ -4,31 +4,30 @@ import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import type { SatuanOrganisasiList } from '@/pages/modules/settings/model'
 
-const useGetUnit = () => {
-  const [unit, setUnit] = useState<SatuanOrganisasiList>()
+const useGetLembagaCurrent = () => {
+  const [lembagaCurrent, setLembagaCurrent] = useState<SatuanOrganisasiList>()
 
   const { data, isLoading, isFetching } = useQuery<{
     data: SatuanOrganisasiList
     meta: Meta
   }>({
     refetchOnWindowFocus: false,
-    queryKey: ['unit-ppid'],
-    queryFn: () => AxiosClient.get(`/unit-ppid/profil`).then((res) => res.data),
+    queryKey: ['lembaga'],
+    queryFn: () => AxiosClient.get(`/lembaga/profil/current`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching
 
   useEffect(() => {
     if (data) {
-      setUnit(data.data)
+      setLembagaCurrent(data.data)
     }
   }, [data])
 
   return {
-    unit,
+    lembagaCurrent,
     loading,
   }
 }
 
-
-export default useGetUnit
+export default useGetLembagaCurrent

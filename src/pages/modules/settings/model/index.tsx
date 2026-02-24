@@ -10,7 +10,7 @@ export const SatuanOrganisasiResolver = z.object({
 
   // Informasi Dasar Institusi
   nama: z.string({ error: 'Nama wajib diisi' }).min(3, 'Nama minimal 3 karakter'),
-  singkatan: z.string().optional(),
+  singkatan: z.string().optional().nullable(),
   keyword: z.string().optional(), // Bisa berupa daftar kata kunci yang dipisahkan koma
   id_jenjang_pendidikan: z.string({ error: 'Jenjang Pendidikan wajib diisi' }).optional(),
   // Informasi Alamat

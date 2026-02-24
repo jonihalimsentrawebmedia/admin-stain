@@ -36,7 +36,7 @@ const ShortcutViewModel = () => {
       cell: (row) => {
         const values = row.row.original
         return (
-          <div className="flex gap-2 flex-col items-center">
+          <div className="flex gap-2  items-center">
             <ButtonEdit data={values} />
             <ButtonDelete data={values} />
           </div>

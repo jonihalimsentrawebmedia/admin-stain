@@ -41,7 +41,7 @@ const ServiceCommitmentViewModel = () => {
         const values = row.original
         return (
           <div
-            className="flex gap-2 items-center tiptap ProseMirror simple-editor html-class"
+            className=" tiptap ProseMirror simple-editor html-class"
             dangerouslySetInnerHTML={{ __html: values.deskripsi }}
           />
         )

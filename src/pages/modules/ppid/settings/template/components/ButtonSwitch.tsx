@@ -22,7 +22,7 @@ const ButtonSwitch = ({ data,  }: Props) => {
       .then((res) => {
         if (res.data.status) {
           queryClient.invalidateQueries({
-            queryKey: [ 'template-pengaturan'],
+            queryKey: [ 'template-pengaturan-unit-ppid'],
           })
 
           setLoading(false)

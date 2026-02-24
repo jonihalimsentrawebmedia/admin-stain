@@ -11,6 +11,7 @@ const InformationRegularDetailView = () => {
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
+        link="/modules/ppid/information-public/information-regular"
         buttonGroup={[
           {
             label: '',

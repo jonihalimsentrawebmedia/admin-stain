@@ -6,16 +6,22 @@ import { useState } from 'react'
 import ModalAjukanUnit from '../components/ModalAjukanUnit'
 import useDraftUnit from '../controller/useDraftUnit'
 
-const LembagaEditView = () => {
+const UnitEditPPIDView = () => {
   const [open, setOpen] = useState(false)
   const { form, handleSave, loading, goToBack } = useDraftUnit()
+  console.log(form.watch())
+  const onError = (errors: any) => {
+    console.log('VALIDATION ERROR', errors)
+  }
+
   return (
     <div className="flex flex-col gap-4 ">
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(() => {
+          onSubmit={form.handleSubmit((data) => {
+            console.log(data)
             setOpen(true)
-          })}
+          }, onError)}
           className="flex flex-col gap-4"
         >
           <ButtonTitleGroup
@@ -44,4 +50,4 @@ const LembagaEditView = () => {
   )
 }
 
-export default LembagaEditView
+export default UnitEditPPIDView

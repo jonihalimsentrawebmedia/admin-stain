@@ -45,6 +45,7 @@ import PPIDLandingPageView from '@/pages/modules/ppid/settings/landing-page/Land
 import SettingTemplateServiceView from '@/pages/modules/ppid/settings/template/SettingTemplateServiceView'
 import PPIDSettingsVideosView from '@/pages/modules/ppid/settings/videos/PPIDSettingsVideosView'
 import ColorSettingService from '@/pages/modules/ppid/settings/warna/ColorSettingService'
+import UnitEditPPIDView from '@/pages/modules/ppid/unit/edit/UnitEditPPIDView'
 import UnitView from '@/pages/modules/ppid/unit/UnitView'
 import { ChangePassword } from '@/pages/modules/website-utama/change-password'
 import { UserProfilePage } from '@/pages/modules/website-utama/user-profile'
@@ -69,7 +70,16 @@ export const routesPPID = [
   },
   {
     path: 'unit',
-    element: <UnitView />,
+    children: [
+      {
+        index: true,
+        element: <UnitView />,
+      },
+      {
+        path: 'edit',
+        element: <UnitEditPPIDView />,
+      },
+    ],
   },
   {
     path: 'profile',
@@ -328,13 +338,13 @@ export const routesPPID = [
             element: <ObjectionInformationPublicView />,
           },
           {
-            path:"detail/:id",
+            path: 'detail/:id',
             element: <ObjectionsPublicDetailView />,
           },
           {
-            path:"log/:id",
+            path: 'log/:id',
             element: <ObjectionInformationLogView />,
-          }
+          },
         ],
       },
     ],

@@ -1,10 +1,14 @@
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import useGetUnit from './controller/useGetLembaga'
+import useGetUnitCurrent from './controller/useGetUnitCurrent'
 
 const UnitViewModel = () => {
   const { unit, loading } = useGetUnit()
+  const [isCurrent, setIsCurrent] = useState(true)
+  const { unitCurrent } = useGetUnitCurrent()
+  const formCurrent = useForm()
   const navigate = useNavigate()
   const form = useForm()
   const fieldImage = [
@@ -101,7 +105,7 @@ const UnitViewModel = () => {
     },
   ]
   function goToEdit() {
-    navigate(`/modules/website-lembaga/lembaga/edit`)
+    navigate(`/modules/ppid/unit/edit`)
   }
   useEffect(() => {
     if (unit) {
@@ -110,6 +114,13 @@ const UnitViewModel = () => {
       })
     }
   }, [unit])
+  useEffect(() => {
+    if (unitCurrent) {
+      formCurrent.reset({
+        ...unitCurrent,
+      })
+    }
+  }, [unitCurrent])
   return {
     fieldAddress,
     fieldContact,
@@ -117,7 +128,11 @@ const UnitViewModel = () => {
     fieldMediaSocial,
     fieldUniversity,
     form,
-    goToEdit,loading
+    goToEdit,
+    loading,
+    formCurrent,
+    isCurrent,
+    setIsCurrent,
   }
 }
 

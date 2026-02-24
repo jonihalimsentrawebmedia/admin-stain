@@ -30,6 +30,7 @@ const InformationAvailableDetailView = () => {
         ]}
         label={title}
         isBack
+        link='/modules/ppid/information-public/information-available'
       />
       <TableCustom
         addFilter={

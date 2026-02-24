@@ -1,10 +1,15 @@
 import { useForm } from 'react-hook-form'
 import useGetLembaga from './controller/useGetLembaga'
 import { useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import useGetLembagaCurrent from './controller/useGetLembagaCurrent'
 
 const LembagaViewModel = () => {
   const { lembaga, loading } = useGetLembaga()
+  const { lembagaCurrent } = useGetLembagaCurrent()
+  const formCurrent = useForm()
+  const [isCurrent, setIsCurrent] = useState(true)
+
   const navigate = useNavigate()
   const form = useForm()
   const fieldImage = [
@@ -110,6 +115,13 @@ const LembagaViewModel = () => {
       })
     }
   }, [lembaga])
+  useEffect(() => {
+    if (lembagaCurrent) {
+      formCurrent.reset({
+        ...lembagaCurrent,
+      })
+    }
+  }, [lembagaCurrent])
   return {
     fieldAddress,
     fieldContact,
@@ -117,7 +129,11 @@ const LembagaViewModel = () => {
     fieldMediaSocial,
     fieldUniversity,
     form,
-    goToEdit,loading
+    goToEdit,
+    loading,
+    formCurrent,
+    isCurrent,
+    setIsCurrent,
   }
 }
 

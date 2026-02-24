@@ -14,6 +14,9 @@ const UnitView = () => {
     fieldUniversity,
     form,
     goToEdit,
+    formCurrent,
+    isCurrent,
+    setIsCurrent,
   } = UnitViewModel()
   return (
     <div className="flex flex-col gap-4">
@@ -36,32 +39,60 @@ const UnitView = () => {
                 },
               ]
         }
-        label="Data Lembaga"
+        label="Data Unit"
       />
-      {form.watch('status_publish') == 'DIAJUKAN_EDITOR' && (
-        <div className="flex gap-2 items-center w-fit px-2 py-1 text-[#2769CD] border border-[#2769CD] rounded">
-          <IoInformationCircle className="size-8" />
-          <div className="text-black">
-            Data yang tampil adalah data yang asli. Untuk melihat data yang anda ajukan{' '}
-            <span className="text-blue-500 underline">KLIK DISINI</span>
+      {form.watch('status_publish') == 'DIAJUKAN_EDITOR' &&
+        (isCurrent ? (
+          <div className="flex gap-2 items-center w-fit px-2 py-1 text-[#2769CD] border border-[#2769CD] rounded">
+            <IoInformationCircle className="size-8" />
+            <div className="text-black">
+              Data yang tampil adalah data yang asli. Untuk melihat data yang anda ajukan {' '}
+              <span
+                onClick={() => {
+                  setIsCurrent(false)
+                }}
+                className="text-blue-500 underline cursor-pointer"
+              >
+                KLIK DISINI
+              </span>
+            </div>
           </div>
-        </div>
-      )}
+        ) : (
+          <div className="flex gap-2 items-center w-fit px-2 py-1 text-[#2769CD] border border-[#2769CD] rounded">
+            <IoInformationCircle className="size-8" />
+            <div className="text-black">
+              Data yang tampil adalah data yang anda ajukan. Untuk melihat data asli {" "}
+              <span
+                onClick={() => {
+                  setIsCurrent(true)
+                }}
+                className="text-blue-500 underline cursor-pointer"
+              >
+                KLIK DISINI
+              </span>
+            </div>
+          </div>
+        ))}
       <div className="flex flex-col gap-4">
         <div>
-          <DetailField data={fieldImage} form={form} isRowParent isRow={false} />
+          <DetailField
+            data={fieldImage}
+            form={isCurrent ? formCurrent : form}
+            isRowParent
+            isRow={false}
+          />
         </div>
         <CardInput title="Identitas Lembaga">
-          <DetailField data={fieldUniversity} form={form} />
+          <DetailField data={fieldUniversity} form={isCurrent ? formCurrent : form} />
         </CardInput>
         <CardInput title="Alamat Lengkap">
-          <DetailField data={fieldAddress} form={form} />
+          <DetailField data={fieldAddress} form={isCurrent ? formCurrent : form} />
         </CardInput>
         <CardInput title="Kontak Resmi">
-          <DetailField data={fieldContact} form={form} />
+          <DetailField data={fieldContact} form={isCurrent ? formCurrent : form} />
         </CardInput>
         <CardInput title="Media Sosial">
-          <DetailField data={fieldMediaSocial} form={form} />
+          <DetailField data={fieldMediaSocial} form={isCurrent ? formCurrent : form} />
         </CardInput>
       </div>
     </div>

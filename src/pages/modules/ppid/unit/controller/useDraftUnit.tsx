@@ -8,8 +8,9 @@ import { useNavigate } from 'react-router-dom'
 import { SatuanOrganisasiResolver, type SatuanOrganisasiType } from '@/pages/modules/settings/model'
 import useGetUnit from './useGetLembaga'
 
+
 const useDraftUnit = () => {
-  const {unit } = useGetUnit()
+  const { unit } = useGetUnit()
 
   const navigate = useNavigate()
   const form = useForm<SatuanOrganisasiType>({
@@ -53,11 +54,12 @@ const useDraftUnit = () => {
       })
     }
   }, [unit])
+ 
   return {
     loading,
     handleSave,
     form,
-    goToBack,
+    goToBack
   }
 }
 
