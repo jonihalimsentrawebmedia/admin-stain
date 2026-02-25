@@ -46,6 +46,7 @@ import { CategoryImpactInnovationLanguagePage } from '@/pages/modules/settings/r
 import { RankedGroupCategoryLanguagePage } from '@/pages/modules/settings/reference/group-rank/language'
 import { RankedAcademicLanguagePage } from '@/pages/modules/settings/reference/academic-rank/language'
 import IdentityView from '@/pages/modules/settings/identity/IdentityView'
+import BackupDataView from '@/pages/modules/settings/backup-data/BackupDataView'
 export const SettingRouter = [
   {
     path: 'dashboard',
@@ -307,6 +308,15 @@ export const SettingRouter = [
       {
         index: true,
         element: <IdentityView />,
+      },
+    ],
+  },
+  {
+    path: 'backup-data',
+    children: [
+      {
+        index: true,
+        element: <BackupDataView />,
       },
     ],
   },
