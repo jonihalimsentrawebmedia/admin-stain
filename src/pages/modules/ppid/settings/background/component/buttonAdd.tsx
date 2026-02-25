@@ -1,0 +1,85 @@
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useSearchParams } from 'react-router-dom'
+import { useQueryClient } from '@tanstack/react-query'
+import AxiosClient from '@/provider/axios.tsx'
+import { toast } from 'react-toastify'
+import { Button } from '@/components/ui/button.tsx'
+import { BiPlus } from 'react-icons/bi'
+import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
+import { Form } from '@/components/ui/form.tsx'
+import { UploadImageRatio } from '@/pages/modules/website-utama/public-content/facilities/components/uploadImageRatio.tsx'
+import ButtonForm from '@/components/common/button/ButtonForm.tsx'
+import { PPID_MENU } from '@/pages/modules/ppid/settings/background/data/constanta.tsx'
+
+const ButtonAddBackgroundPPID = () => {
+  const [open, setOpen] = useState(false)
+  const [loading, setLoading] = useState(false)
+
+  const form = useForm()
+  const [searchParams] = useSearchParams()
+  const context = searchParams.get('context') ?? PPID_MENU?.[0]?.value
+
+  const queryClient = useQueryClient()
+
+  const HandleSave = async (value: any) => {
+    setLoading(true)
+    await AxiosClient.post(`/unit-ppid/background/${context}`, {
+      gambar_url: value.gambar_url,
+    })
+      .then((res) => {
+        if (res.data.status) {
+          setOpen(false)
+          setLoading(false)
+          queryClient.invalidateQueries({
+            queryKey: ['background-unit-ppid'],
+          })
+          toast.success(res.data.message || 'Success tambah gambar')
+          form.reset()
+        }
+      })
+      .catch((err) => {
+        toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
+        setLoading(false)
+      })
+  }
+
+  return (
+    <>
+      <Button
+        variant={'outline'}
+        className={'text-primary border-primary hover:text-primary'}
+        onClick={() => setOpen(!open)}
+        disabled={loading}
+      >
+        <BiPlus />
+        Tambah Gambar
+      </Button>
+
+      <DialogCustom
+        open={open}
+        disableOutsideDialog={true}
+        setOpen={setOpen}
+        title={'Tambah Gambar'}
+        className={'rounded lg:max-w-2xl'}
+      >
+        <div>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(HandleSave)} className="space-y-4">
+              <UploadImageRatio
+                name={'gambar_url'}
+                form={form}
+                label={'Gambar(Ukuran 4:2)'}
+                maxWidthClassName={'max-w-[400px] mx-auto'}
+                aspectRatioWidth={4}
+                aspectRatioHeight={2}
+              />
+              <ButtonForm loading={loading} onCancel={() => setOpen(!open)} />
+            </form>
+          </Form>
+        </div>
+      </DialogCustom>
+    </>
+  )
+}
+export default ButtonAddBackgroundPPID

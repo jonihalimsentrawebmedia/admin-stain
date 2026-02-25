@@ -49,6 +49,7 @@ import UnitEditPPIDView from '@/pages/modules/ppid/unit/edit/UnitEditPPIDView'
 import UnitView from '@/pages/modules/ppid/unit/UnitView'
 import { ChangePassword } from '@/pages/modules/website-utama/change-password'
 import { UserProfilePage } from '@/pages/modules/website-utama/user-profile'
+import { SettingsBackground } from '@/pages/modules/ppid/settings/background'
 
 export const routesPPID = [
   {
@@ -234,6 +235,10 @@ export const routesPPID = [
       {
         path: 'video',
         element: <PPIDSettingsVideosView />,
+      },
+      {
+        path: 'background',
+        element: <SettingsBackground />,
       },
     ],
   },

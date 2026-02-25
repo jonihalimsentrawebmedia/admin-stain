@@ -168,6 +168,10 @@ export const Menus = [
         label: 'Pengaturan Template',
         link: `${baseUrl}/settings/template`,
       },
+      {
+        label: 'Pengaturan Background',
+        link: `${baseUrl}/settings/background`,
+      },
     ],
   },
 ]
