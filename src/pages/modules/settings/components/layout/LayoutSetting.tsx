@@ -3,7 +3,7 @@ import { Book, ChevronDown, Menu } from 'lucide-react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import { CiGrid42 } from 'react-icons/ci'
 import { IoSchool } from 'react-icons/io5'
-import { MdBusiness, MdBusinessCenter, MdPeople, MdRoomPreferences } from 'react-icons/md'
+import { MdBackup, MdBusiness, MdBusinessCenter, MdPeople, MdRoomPreferences } from 'react-icons/md'
 import { IconSettings } from '../icon'
 import { FaGear } from 'react-icons/fa6'
 import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/hooks/getProfile.tsx'
@@ -127,6 +127,12 @@ export default function DashboardLayout() {
       link: '/modules/settings/identity-menu',
       label: 'Menu Identitas',
       icon: <MdBusinessCenter size={24} />,
+      children: [],
+    },
+    {
+      link: '/modules/settings/backup-data',
+      label: 'Backup Data',
+      icon: <MdBackup size={24} />,
       children: [],
     },
   ]
