@@ -24,7 +24,7 @@ const ButtonAddBackgroundPPID = () => {
 
   const HandleSave = async (value: any) => {
     setLoading(true)
-    await AxiosClient.post(`/unit-ppid/background/${context}`, {
+    await AxiosClient.post(`/unit-ppid/ppid-background/${context}`, {
       gambar_url: value.gambar_url,
     })
       .then((res) => {

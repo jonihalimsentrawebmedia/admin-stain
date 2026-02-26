@@ -28,7 +28,7 @@ export const ToggleStatus = (props: IProps) => {
 
   const handleCheckedChange = async () => {
     await AxiosClient.patch(
-      `/unit-ppid/background/${context}/${data.id_ppid_background}/toggle-status`
+      `/unit-ppid/ppid-background/${context}/${data.id_ppid_background}/toggle-status`
     )
       .then((res) => {
         if (res?.data?.status) {

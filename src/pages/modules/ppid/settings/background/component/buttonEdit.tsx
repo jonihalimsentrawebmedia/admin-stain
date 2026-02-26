@@ -37,7 +37,7 @@ export const ButtonEditBackgroundUnit = (props: props) => {
 
   const HandleSave = async (value: any) => {
     setLoading(true)
-    await AxiosClient.put(`/unit-ppid/background/${context}/${data?.id_ppid_background}`, {
+    await AxiosClient.put(`/unit-ppid/ppid-background/${context}/${data?.id_ppid_background}`, {
       gambar_url: value.gambar_url,
     })
       .then((res) => {

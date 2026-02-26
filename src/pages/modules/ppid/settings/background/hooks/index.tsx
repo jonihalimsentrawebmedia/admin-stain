@@ -21,7 +21,7 @@ export const UseGetListBackground = (context: Context) => {
   const { data, isLoading, isFetching } = useQuery({
     refetchOnWindowFocus: false,
     queryKey: ['background-unit-ppid', context],
-    queryFn: () => AxiosClient.get(`/unit-ppid/background/${context}`).then((res) => res.data),
+    queryFn: () => AxiosClient.get(`/unit-ppid/ppid-background/${context}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching

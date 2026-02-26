@@ -26,7 +26,7 @@ export const ButtonDeleteBackgroundUnit = (props: props) => {
 
   const HandleSave = async () => {
     setLoading(true)
-    await AxiosClient.delete(`/unit-ppid/background/${context}/${data?.id_ppid_background}`)
+    await AxiosClient.delete(`/unit-ppid/ppid-background/${context}/${data?.id_ppid_background}`)
       .then((res) => {
         if (res.data.status) {
           setOpen(false)
