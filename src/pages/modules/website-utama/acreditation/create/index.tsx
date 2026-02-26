@@ -92,8 +92,19 @@ export const CreateAccreditation = () => {
               form={form}
               innerClassName={'w-full bg-white'}
               name={'dokumen_akreditas'}
-              label={'Link Berkas'}
+              label={'Berkas Akreditas'}
               keyname={'key_dokumen_akreditas'}
+              accept={'application/pdf'}
+              isRow
+              required
+            />
+
+            <UploadFileInput
+              form={form}
+              innerClassName={'w-full bg-white'}
+              name={'dokumen_sk_akreditas'}
+              label={'SK Berkas Akreditas'}
+              keyname={'key_dokumen_sk_akreditas'}
               accept={'application/pdf'}
               isRow
               required
@@ -104,9 +115,10 @@ export const CreateAccreditation = () => {
               form={form}
               name="id_satuan_organisasi_akreditas"
               placeholder="Pilih"
-              label="Pilih Universitas / Prodi*"
+              label="Pilih Universitas / Prodi"
               isRow
               selectClassName="z-50"
+              isRequired
             />
 
             <TextAreaInput isRow form={form} name="uraian" label="Uraian" placeholder="Uraian" />
@@ -115,7 +127,8 @@ export const CreateAccreditation = () => {
               form={form}
               name="nilai_akreditas"
               placeholder="Pilih"
-              label="Nilai Akreditasi*"
+              label="Nilai Akreditasi"
+              isRequired
               isRow
             />
             <TextInput
@@ -123,14 +136,16 @@ export const CreateAccreditation = () => {
               name="lembaga_penilaian"
               placeholder="Nama Lembaga Penilai"
               isRow
-              label="Lembaga Penilai*"
+              label="Lembaga Penilai"
+              isRequired
             />
             <TextInput
               form={form}
               name="no_surat_keputusan"
               placeholder="No. Surat Keputusan"
               isRow
-              label="No. Surat Keputusan*"
+              label="No. Surat Keputusan"
+              isRequired
             />
             <TextInput
               form={form}
@@ -139,7 +154,8 @@ export const CreateAccreditation = () => {
               name="mulai_berlaku"
               placeholder="Mulai Berlaku*"
               isRow
-              label="Mulai Berlaku*"
+              isRequired
+              label="Mulai Berlaku"
             />
             <TextInput
               form={form}
@@ -149,7 +165,8 @@ export const CreateAccreditation = () => {
               name="akhir_berlaku"
               placeholder="Akhir Berlaku*"
               isRow
-              label="Akhir Berlaku*"
+              isRequired
+              label="Akhir Berlaku"
             />
 
             <ButtonForm loading={loading} />

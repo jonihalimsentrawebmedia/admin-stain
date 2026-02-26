@@ -111,13 +111,24 @@ export const UpdateAccreditation = () => {
               form={form}
               innerClassName={'w-full bg-white'}
               name={'dokumen_akreditas'}
-              label={'Link Berkas'}
+              label={'Berkas Akreditas'}
               keyname={'key_dokumen_akreditas'}
               accept={'application/pdf'}
               isRow
               required
             />
 
+            <UploadFileInput
+              form={form}
+              innerClassName={'w-full bg-white'}
+              name={'dokumen_sk_akreditas'}
+              label={'SK Berkas Akreditas'}
+              keyname={'key_dokumen_sk_akreditas'}
+              accept={'application/pdf'}
+              isRow
+              required
+            />
+            
             <SelectBasicInput
               data={optionsOrganisasiJoin ?? []}
               form={form}

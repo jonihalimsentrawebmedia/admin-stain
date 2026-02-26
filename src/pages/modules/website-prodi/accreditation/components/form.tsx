@@ -7,6 +7,7 @@ import ButtonForm from '@/components/common/button/ButtonForm'
 import InputImage3 from '@/components/common/form/InputImage3'
 import useGetSatuanOrganisasi from '@/pages/modules/settings/controller/useGetSatuanOrganisasi'
 import type { IAcreditationTypeForm } from '@/pages/modules/website-utama/acreditation/model/resolver.tsx'
+import { UploadFileInput } from '@/components/common/form/uploadFileInput.tsx'
 
 interface Props {
   form: UseFormReturn<IAcreditationTypeForm>
@@ -68,6 +69,29 @@ const AccreditationFormProdi = ({ form, handleCancel, handleSave, loading }: Pro
           isRow
           selectClassName="z-50"
         />
+
+        <UploadFileInput
+          form={form}
+          innerClassName={'w-full bg-white'}
+          name={'dokumen_akreditas'}
+          label={'Berkas Akreditas'}
+          keyname={'key_dokumen_akreditas'}
+          accept={'application/pdf'}
+          isRow
+          required
+        />
+
+        <UploadFileInput
+          form={form}
+          innerClassName={'w-full bg-white'}
+          name={'dokumen_sk_akreditas'}
+          label={'SK Berkas Akreditas'}
+          keyname={'key_dokumen_sk_akreditas'}
+          accept={'application/pdf'}
+          isRow
+          required
+        />
+
         <TextAreaInput isRow form={form} name="uraian" label="Uraian" placeholder="Uraian" />
         <SelectBasicInput
           data={optionsAcreditationValue}
