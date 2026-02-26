@@ -3,12 +3,12 @@ import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
-import { IconDelete } from '@/components/common/table/icon'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import DetailField from '@/components/common/field/DetailField'
 import { Button } from '@/components/ui/button'
 import { Trash2, X } from 'lucide-react'
 import type { AcreditationList } from '@/pages/modules/website-utama/acreditation/model'
+import { FaTrash } from 'react-icons/fa'
 
 interface Props {
   data: AcreditationList
@@ -72,6 +72,7 @@ const ButtonDeleteAccreditationProdi = ({ data }: Props) => {
   return (
     <>
       <button
+        className={'bg-red-500 hover:bg-red-600 text-white p-1.5 w-fit rounded'}
         onClick={() => {
           setOpen(!open)
           form.reset({
@@ -81,7 +82,7 @@ const ButtonDeleteAccreditationProdi = ({ data }: Props) => {
           })
         }}
       >
-        <IconDelete />
+        <FaTrash />
       </button>
 
       <DialogCustom

@@ -14,6 +14,7 @@ const ModuleForm = ({ form }: Props) => {
   // WEBSITE_LEMBAGA
   // MANAJEMEN_EDITOR
   // LAPORAN_STATISTIK
+  // WEBSITE_FAKULTAS
 
   const optionsCategory = [
     {
@@ -23,6 +24,10 @@ const ModuleForm = ({ form }: Props) => {
     {
       label: 'WEBSITE UTAMA',
       value: 'WEBSITE_UTAMA',
+    },
+    {
+      label: 'WEBSITE FAKULTAS',
+      value: 'WEBSITE_FAKULTAS',
     },
     {
       label: 'WEBSITE PRODI',

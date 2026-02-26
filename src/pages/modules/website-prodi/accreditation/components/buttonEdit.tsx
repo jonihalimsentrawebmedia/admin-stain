@@ -73,7 +73,7 @@ const ButtonEditAccreditationProdi = (props: Props) => {
   return (
     <>
       <button
-        className={'bg-yellow-500 hover:bg-yellow-500 text-white p-1.5'}
+        className={'bg-yellow-500 hover:bg-yellow-600 text-white p-1.5 w-fit rounded'}
         onClick={() => setOpen(!open)}
       >
         <HiPencil />
