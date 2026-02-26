@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { MenuListUnit } from './menu'
-import { cn } from '@/lib/utils'
+import { MenuListLPPM } from './menu.tsx'
+import { cn } from '@/lib/utils.ts'
 import { ChevronRight } from 'lucide-react'
 
 interface Props {
@@ -14,12 +14,6 @@ type MenuItem = {
   path?: string
   child?: MenuItem[]
 }
-
-/**
- * IMPORTANT
- * - makeGroupId harus dipakai SAMA saat membuat defaultOpenGroups dan saat render.
- * - collectOpenGroups akan menandai semua parent groupId yang punya child aktif.
- */
 
 export function SideNavUnit({ collapsed }: Props) {
   const location = useLocation()
@@ -53,7 +47,7 @@ export function SideNavUnit({ collapsed }: Props) {
 
   const defaultOpenGroups = useMemo(() => {
     const map: Record<string, boolean> = {}
-    MenuListUnit.forEach((row, i) => {
+    MenuListLPPM.forEach((row, i) => {
       collectOpenGroups(row, 'root', i, map)
     })
     return map
@@ -71,7 +65,7 @@ export function SideNavUnit({ collapsed }: Props) {
 
   useEffect(() => {
     // cek apakah path sekarang ada di menu yang punya parent children
-    const activeHasParentGroup = MenuListUnit.some((item) => {
+    const activeHasParentGroup = MenuListLPPM.some((item) => {
       if (!item.child) return false
       return isActiveTree(item, pathname)
     })
@@ -111,7 +105,7 @@ export function SideNavUnit({ collapsed }: Props) {
       )}
     >
       <div className="space-y-2 overflow-y-auto py-4 overflow-auto h-[calc(100vh-110px)]">
-        {MenuListUnit.map((row, idx) => {
+        {MenuListLPPM.map((row, idx) => {
           const groupId = makeGroupId('root', idx, row.name)
           const isGroupOpen = groups[groupId] ?? false
           const isRowActive = isActiveTree(row, pathname)

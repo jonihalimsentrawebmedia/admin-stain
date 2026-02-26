@@ -41,6 +41,10 @@ export const GetModuleUrl = (moduleSelect: {
       return `/modules/select-unit?url=website-unit&id=${moduleSelect?.id_module}`
     }
 
+    case 'lppm': {
+      return `/modules/select-lppm?url=lppm&id=${moduleSelect?.id_module}`
+    }
+    
     case 'website_lembaga': {
       return `/modules/select-lembaga?url=website-lembaga&id=${moduleSelect?.id_module}`
     }
@@ -50,6 +54,7 @@ export const GetModuleUrl = (moduleSelect: {
 
     case 'website_prodi':
       return `/modules/select-prodi?url=website-prodi&id=${moduleSelect?.id_module}`
+
     case 'ppid':
       return `/modules/select-ppid?url=ppid&id=${moduleSelect?.id_module}`
 

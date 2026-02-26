@@ -12,7 +12,7 @@ import { toast } from 'react-toastify'
 import { UseGetUniversityDomainExist } from '@/pages/modules/website-utama/select-university/hooks'
 import { UseGetUnitList } from '@/pages/modules/website-unit/select-unit/hook'
 
-export const SelectInstitutionUniversity = () => {
+export const SelectSessionLPPM = () => {
   const [parentId, setParentId] = useState({
     id_university: '',
   })
@@ -35,7 +35,7 @@ export const SelectInstitutionUniversity = () => {
   const form = useForm()
 
   const HandleSaveSession = async (value: any) => {
-    await AxiosClient.post('/lembaga/user-session', {
+    await AxiosClient.post('/lppm/user-session', {
       id_universitas: value?.id_university,
       id_lembaga: value?.id_lembaga,
     })

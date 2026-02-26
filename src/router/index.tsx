@@ -33,6 +33,10 @@ import PPIDWebTheme from '@/pages/modules/ppid/component/Layout/theme'
 import { LayoutWebsitePPID } from '@/pages/modules/ppid/component/Layout'
 import { routesPPID } from './ppid/router'
 import { SelectPPID } from '@/pages/modules/ppid/select-ppid'
+import { SelectSessionLPPM } from '@/pages/modules/LPPM/select-lppm'
+import LPPMWebTheme from '@/pages/modules/LPPM/components/layout/theme.tsx'
+import MainLayoutLPPM from '@/pages/modules/LPPM/components/layout'
+import { routesLPPM } from '@/router/lppm/router.tsx'
 
 export const Router = createBrowserRouter([
   {
@@ -105,6 +109,10 @@ export const Router = createBrowserRouter([
         element: <SelectPPID />,
       },
       {
+        path: 'select-lppm',
+        element: <SelectSessionLPPM />,
+      },
+      {
         path: 'settings',
         element: <LayoutSetting />,
         children: [...SettingRouter],
@@ -138,7 +146,6 @@ export const Router = createBrowserRouter([
         ),
         children: [...WebsiteUnitRouter],
       },
-
       {
         path: 'website-lembaga',
         element: (
@@ -157,7 +164,6 @@ export const Router = createBrowserRouter([
         ),
         children: [...routesPPID],
       },
-
       {
         path: 'editor',
         element: (
@@ -166,6 +172,15 @@ export const Router = createBrowserRouter([
           </DefaultTheme>
         ),
         children: [...EditorRouter],
+      },
+      {
+        path: 'lppm',
+        element: (
+          <LPPMWebTheme>
+            <MainLayoutLPPM />
+          </LPPMWebTheme>
+        ),
+        children: [...routesLPPM],
       },
     ],
   },

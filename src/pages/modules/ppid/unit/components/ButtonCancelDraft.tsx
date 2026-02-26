@@ -30,7 +30,10 @@ const ButtonCancelDraft = ({ form }: Props) => {
         toast.success(res.data.message)
         setOpen(false)
         await queryClient.invalidateQueries({
-          queryKey: ['data-unit'],
+          queryKey: ['unit-ppi'],
+        })
+        await queryClient.invalidateQueries({
+          queryKey: ['unit-ppid-current'],
         })
       }
     } catch (err: any) {
