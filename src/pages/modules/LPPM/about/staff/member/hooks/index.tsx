@@ -39,3 +39,23 @@ export const UseGetMemberStaff = (props?: Props) => {
 
   return { member, loading, meta }
 }
+
+export const UseGetMemberDetail = (id: string) => {
+  const [detail, setDetail] = useState<IMemberStaff>()
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['member-staff-detail', id],
+    refetchOnWindowFocus: false,
+    queryFn: () => AxiosClient(`/lppm/staff-anggota/${id}`).then((res) => res?.data?.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setDetail(data)
+    }
+  }, [data])
+
+  return { detail, loading }
+}

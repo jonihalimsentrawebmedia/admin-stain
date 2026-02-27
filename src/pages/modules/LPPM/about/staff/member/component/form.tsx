@@ -47,7 +47,7 @@ export const FormMemberStaff = (props: FormProps) => {
               },
             ]}
           />
-          v
+
           <SelectBasicInput
             label={'Kelompok Staff'}
             name={'id_staff'}
@@ -62,7 +62,7 @@ export const FormMemberStaff = (props: FormProps) => {
               })) ?? []
             }
           />
-          
+
           <div className="w-fit">
             <FormUploadPhotoImage form={form} name={'url_gambar'} />
           </div>

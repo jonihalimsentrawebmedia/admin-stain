@@ -10,6 +10,50 @@ import { ProfileSecretaryPage } from '@/pages/modules/LPPM/about/secretary'
 import { ProfileStaffLPPM } from '@/pages/modules/LPPM/about/staff'
 import { StaffMemberList } from '@/pages/modules/LPPM/about/staff/member'
 import { CreateStaffMember } from '@/pages/modules/LPPM/about/staff/member/component/create.tsx'
+import { UpdateStaffMember } from '@/pages/modules/LPPM/about/staff/member/component/update.tsx'
+import { MainResearch } from '@/pages/modules/LPPM/research/main'
+import { SchemaDoctoralResearch } from '@/pages/modules/LPPM/research/schema/doctoral'
+import { SchemaInternalResearch } from '@/pages/modules/LPPM/research/schema/internal'
+import { PlanMainResearch } from '@/pages/modules/LPPM/research/plan'
+import { DocumentPLanResearch } from '@/pages/modules/LPPM/research/plan/document'
+import { GuideCategoryResearch } from '@/pages/modules/LPPM/research/guide'
+import { DocumentGuideCategory } from '@/pages/modules/LPPM/research/guide/document'
+import { StudyCenterList } from '@/pages/modules/LPPM/research/study-center/study-list'
+import { CreatedStudyCenter } from '@/pages/modules/LPPM/research/study-center/study-list/component/created.tsx'
+import { UpdateStudyCenter } from '@/pages/modules/LPPM/research/study-center/study-list/component/updated.tsx'
+import { DetailStudyCenter } from '@/pages/modules/LPPM/research/study-center/study-list/component/detail.tsx'
+import { StandardOperationalStudy } from '@/pages/modules/LPPM/research/study-center/operational-standard'
+import { MainDevotion } from '@/pages/modules/LPPM/devotion/main'
+import { DevotionInternalSchema } from '@/pages/modules/LPPM/devotion/schema/internal'
+import { ActivityProgramSchema } from '@/pages/modules/LPPM/devotion/schema/internal/activity-program'
+import { CreatedActivityProgram } from '@/pages/modules/LPPM/devotion/schema/internal/activity-program/component/created.tsx'
+import { UpdatedActivityProgram } from '@/pages/modules/LPPM/devotion/schema/internal/activity-program/component/updated.tsx'
+import { DetailActivityProgram } from '@/pages/modules/LPPM/devotion/schema/internal/activity-program/component/detail.tsx'
+import { SchemaDataDRTPM } from '@/pages/modules/LPPM/devotion/schema/drtpm'
+import { CreatedDRTPM } from '@/pages/modules/LPPM/devotion/schema/drtpm/component/created.tsx'
+import { UpdatedDataDRTPM } from '@/pages/modules/LPPM/devotion/schema/drtpm/component/updated.tsx'
+import { DetailDataDRTPM } from '@/pages/modules/LPPM/devotion/schema/drtpm/component/detail.tsx'
+import { SchemaDataBRIN } from '@/pages/modules/LPPM/devotion/schema/brin'
+import { CreatedBRIN } from '@/pages/modules/LPPM/devotion/schema/brin/component/created.tsx'
+import { UpdatedDataBRIN } from '@/pages/modules/LPPM/devotion/schema/brin/component/updated.tsx'
+import { DetailDataBRIN } from '@/pages/modules/LPPM/devotion/schema/brin/component/detail.tsx'
+import { SchemaFundingOther } from '@/pages/modules/LPPM/devotion/schema/other'
+import { CreatedOtherFunding } from '@/pages/modules/LPPM/devotion/schema/other/component/created.tsx'
+import { UpdatedOtherFunding } from '@/pages/modules/LPPM/devotion/schema/other/component/updated.tsx'
+import { DetailOtherFunding } from '@/pages/modules/LPPM/devotion/schema/other/component/detail.tsx'
+import { MainDevotionHub } from '@/pages/modules/LPPM/devotion/stain-hub'
+import { BookPublisherPage } from '@/pages/modules/LPPM/publication-hki/book/publisher'
+import { BookMediaPage } from '@/pages/modules/LPPM/publication-hki/book/media'
+import { BookCenterPage } from '@/pages/modules/LPPM/publication-hki/book/book-center'
+import { UserManagementBook } from '@/pages/modules/LPPM/publication-hki/book/book-center/manangement'
+import { CreatedUserManagementContext } from '@/pages/modules/LPPM/publication-hki/book/book-center/manangement/component/created.tsx'
+import { UpdatedUserManagementContext } from '@/pages/modules/LPPM/publication-hki/book/book-center/manangement/component/Updated.tsx'
+import { HKICenterPage } from '@/pages/modules/LPPM/publication-hki/hki/hki-center'
+import { UserManagementHKI } from '@/pages/modules/LPPM/publication-hki/hki/hki-center/management'
+import { CreatedUserManagementHKI } from '@/pages/modules/LPPM/publication-hki/hki/hki-center/management/component/created.tsx'
+import { UpdatedUserManagementHKI } from '@/pages/modules/LPPM/publication-hki/hki/hki-center/management/component/Updated.tsx'
+import { HKIDescriptionPage } from '@/pages/modules/LPPM/publication-hki/hki/description'
+import { HKIRegistrationPage } from '@/pages/modules/LPPM/publication-hki/hki/registration'
 
 export const routesLPPM = [
   {
@@ -79,6 +123,287 @@ export const routesLPPM = [
           {
             path: 'member/:id/add',
             element: <CreateStaffMember />,
+          },
+          {
+            path: 'member/:id/edit/:memberId',
+            element: <UpdateStaffMember />,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: 'research',
+    children: [
+      {
+        path: 'main',
+        element: <MainResearch />,
+      },
+      {
+        path: 'schema',
+        children: [
+          {
+            path: 'doctoral',
+            element: <SchemaDoctoralResearch />,
+          },
+          {
+            path: 'internal',
+            element: <SchemaInternalResearch />,
+          },
+        ],
+      },
+      {
+        path: 'plan',
+        children: [
+          {
+            index: true,
+            element: <PlanMainResearch />,
+          },
+          {
+            path: 'document/:id',
+            element: <DocumentPLanResearch />,
+          },
+        ],
+      },
+      {
+        path: 'guide',
+        children: [
+          {
+            index: true,
+            element: <GuideCategoryResearch />,
+          },
+          {
+            path: 'document/:id',
+            element: <DocumentGuideCategory />,
+          },
+        ],
+      },
+      {
+        path: 'study-center',
+        children: [
+          {
+            path: 'study-list',
+            children: [
+              {
+                index: true,
+                element: <StudyCenterList />,
+              },
+              {
+                path: 'add',
+                element: <CreatedStudyCenter />,
+              },
+              {
+                path: 'edit/:id',
+                element: <UpdateStudyCenter />,
+              },
+              {
+                path: 'detail/:id',
+                element: <DetailStudyCenter />,
+              },
+            ],
+          },
+          {
+            path: 'operational-standard',
+            children: [
+              {
+                index: true,
+                element: <StandardOperationalStudy />,
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: 'devotion',
+    children: [
+      {
+        path: 'main',
+        element: <MainDevotion />,
+      },
+      {
+        path: 'schema',
+        children: [
+          {
+            path: 'internal',
+            children: [
+              {
+                index: true,
+                element: <DevotionInternalSchema />,
+              },
+              {
+                path: 'activity-program',
+                children: [
+                  {
+                    index: true,
+                    element: <ActivityProgramSchema />,
+                  },
+                  {
+                    path: 'add',
+                    element: <CreatedActivityProgram />,
+                  },
+                  {
+                    path: 'edit/:id',
+                    element: <UpdatedActivityProgram />,
+                  },
+                  {
+                    path: 'detail/:id',
+                    element: <DetailActivityProgram />,
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            path: 'drtpm',
+            children: [
+              {
+                index: true,
+                element: <SchemaDataDRTPM />,
+              },
+              {
+                path: 'add',
+                element: <CreatedDRTPM />,
+              },
+              {
+                path: 'edit/:id',
+                element: <UpdatedDataDRTPM />,
+              },
+              {
+                path: 'detail/:id',
+                element: <DetailDataDRTPM />,
+              },
+            ],
+          },
+          {
+            path: 'brin',
+            children: [
+              {
+                index: true,
+                element: <SchemaDataBRIN />,
+              },
+              {
+                path: 'add',
+                element: <CreatedBRIN />,
+              },
+              {
+                path: 'edit/:id',
+                element: <UpdatedDataBRIN />,
+              },
+              {
+                path: 'detail/:id',
+                element: <DetailDataBRIN />,
+              },
+            ],
+          },
+          {
+            path: 'other',
+            children: [
+              {
+                index: true,
+                element: <SchemaFundingOther />,
+              },
+              {
+                path: 'add',
+                element: <CreatedOtherFunding />,
+              },
+              {
+                path: 'edit/:id',
+                element: <UpdatedOtherFunding />,
+              },
+              {
+                path: 'detail/:id',
+                element: <DetailOtherFunding />,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: 'stain-hub',
+        element: <MainDevotionHub />,
+      },
+    ],
+  },
+  {
+    path: 'publication-hki',
+    children: [
+      {
+        path: 'book',
+        children: [
+          {
+            path: 'book-center',
+            children: [
+              {
+                index: true,
+                element: <BookCenterPage />,
+              },
+              {
+                path: 'management',
+                children: [
+                  {
+                    index: true,
+                    element: <UserManagementBook />,
+                  },
+                  {
+                    path: 'add',
+                    element: <CreatedUserManagementContext />,
+                  },
+                  {
+                    path: 'edit/:id',
+                    element: <UpdatedUserManagementContext />,
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            path: 'publisher',
+            element: <BookPublisherPage />,
+          },
+          {
+            path: 'media',
+            element: <BookMediaPage />,
+          },
+        ],
+      },
+      {
+        path: 'hki',
+        children: [
+          {
+            path: 'hki-center',
+            children: [
+              {
+                index: true,
+                element: <HKICenterPage />,
+              },
+              {
+                path: 'management',
+                children: [
+                  {
+                    index: true,
+                    element: <UserManagementHKI />,
+                  },
+                  {
+                    path: 'add',
+                    element: <CreatedUserManagementHKI />,
+                  },
+                  {
+                    path: 'edit/:id',
+                    element: <UpdatedUserManagementHKI />,
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            path: 'description',
+            element: <HKIDescriptionPage />,
+          },
+          {
+            path: 'registration',
+            element: <HKIRegistrationPage />,
           },
         ],
       },

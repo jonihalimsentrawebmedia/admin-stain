@@ -108,8 +108,13 @@ export const MenuListLPPM = [
         child: [
           {
             id: 451,
-            name: 'Daftar Studi',
+            name: 'Pusat Studi',
             path: `${baseDomain}/research/study-center/study-list`,
+          },
+          {
+            id: 452,
+            name: 'Standar Operasional Pusat Studi',
+            path: `${baseDomain}/research/study-center/operational-standard`,
           },
         ],
       },
@@ -120,12 +125,114 @@ export const MenuListLPPM = [
     name: 'Pengabdian',
     path: `${baseDomain}/devotion`,
     icon: <MdHomeRepairService className={'size-5'} />,
+    child: [
+      {
+        id: 51,
+        name: 'Pusat Pengabdian',
+        path: `${baseDomain}/devotion/main`,
+      },
+      {
+        id: 52,
+        name: 'Skema Pengabdian',
+        path: `${baseDomain}/devotion/schema`,
+        child: [
+          {
+            id: 521,
+            name: 'Pengabdian Pendanaan Internal',
+            path: `${baseDomain}/devotion/schema/internal`,
+          },
+          {
+            id: 522,
+            name: 'Pendanan DRTPM',
+            path: `${baseDomain}/devotion/schema/drtpm`,
+          },
+          {
+            id: 523,
+            name: 'Pendanaan BRIN',
+            path: `${baseDomain}/devotion/schema/brin`,
+          },
+          {
+            id: 524,
+            name: 'Pendanaan Lainnya',
+            path: `${baseDomain}/devotion/schema/other`,
+          },
+        ],
+      },
+      {
+        id: 53,
+        name: 'STAIN Hub',
+        path: `${baseDomain}/devotion/stain-hub`,
+      },
+    ],
   },
   {
     id: 6,
     name: 'Publikasi & HKI',
     icon: <GiWorld className={'size-5'} />,
     path: `${baseDomain}/publication-hki`,
+    child: [
+      {
+        id: 61,
+        name: 'Buku',
+        path: `${baseDomain}/publication-hki/book`,
+        child: [
+          {
+            id: 611,
+            name: 'Pusat Buku dan Media Massa',
+            path: `${baseDomain}/publication-hki/book/book-center`,
+          },
+          {
+            id: 622,
+            name: 'Penerbitan Buku',
+            path: `${baseDomain}/publication-hki/book/publisher`,
+          },
+          {
+            id: 633,
+            name: 'Penerbitan Media Massa',
+            path: `${baseDomain}/publication-hki/book/media`,
+          },
+        ],
+      },
+      {
+        id: 62,
+        name: 'HKI',
+        path: `${baseDomain}/publication-hki/hki`,
+        child: [
+          {
+            id: 621,
+            name: 'Pusat KI & Layanan Teknis',
+            path: `${baseDomain}/publication-hki/hki/hki-center`,
+          },
+          {
+            id: 622,
+            name: 'Deskripsi KI',
+            path: `${baseDomain}/publication-hki/hki/description`,
+          },
+          {
+            id: 623,
+            name: 'Pendaftaran KI',
+            path: `${baseDomain}/publication-hki/hki/registration`,
+          },
+        ],
+      },
+      {
+        id: 63,
+        name: 'Jurnal',
+        path: `${baseDomain}/publication-hki/journal`,
+        child: [
+          {
+            id: 631,
+            name: 'PLP',
+            path: `${baseDomain}/publication-hki/journal/plp`,
+          },
+          {
+            id: 632,
+            name: 'PPJS',
+            path: `${baseDomain}/publication-hki/journal/ppjs`,
+          },
+        ],
+      },
+    ],
   },
   {
     id: 7,
@@ -143,6 +250,26 @@ export const MenuListLPPM = [
         id: 81,
         name: 'Berita',
         path: `${baseDomain}/public-content/news`,
+      },
+      {
+        id: 82,
+        name: 'pengumuman',
+        path: `${baseDomain}/public-content/announcement`,
+      },
+      {
+        id: 83,
+        name: 'Agenda',
+        path: `${baseDomain}/public-content/agenda`,
+      },
+      {
+        id: 84,
+        name: 'Artikel',
+        path: `${baseDomain}/public-content/article`,
+      },
+      {
+        id: 85,
+        name: 'Download',
+        path: `${baseDomain}/public-content/download`,
       },
     ],
   },
