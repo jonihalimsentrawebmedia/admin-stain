@@ -44,5 +44,8 @@ export const RenderUrlEditor = (url: string, id: string) => {
 
     case 'profil_lembaga':
       return `/lembaga/detail/${id}`
+
+    case 'lppm_artikel':
+      return `/lppm/detail/${id}`
   }
 }
