@@ -7,7 +7,6 @@ import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { FormDocumentStandardOperational } from './form'
-import { useParams } from 'react-router-dom'
 import type { IStandardOperational } from '../data/types'
 import { HiPencil } from 'react-icons/hi'
 
@@ -15,13 +14,8 @@ export const ButtonEditStandardOperational = (data: IStandardOperational) => {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const { id } = useParams()
-
   const form = useForm<schemaStandardOperational>({
     resolver: zodResolver(ResolverStandardOperational),
-    defaultValues: {
-      id_kategori: id ?? '',
-    },
   })
 
   useEffect(() => {
