@@ -1,59 +1,91 @@
-import { UserProfilePage } from '@/pages/modules/website-utama/user-profile'
-import { ChangePassword } from '@/pages/modules/website-utama/change-password'
-import { DetailProfileLPPM } from '@/pages/modules/LPPM/data-lppm'
-import { UpdatedDataLPPM } from '@/pages/modules/LPPM/data-lppm/updated'
-import { AboutProfile } from '@/pages/modules/LPPM/about/profile'
-import { StructureOrganizationProfile } from '@/pages/modules/LPPM/about/structure'
-import { VisionMissionAbout } from '@/pages/modules/LPPM/about/vision-mission'
-import { ProfileLeaderPage } from '@/pages/modules/LPPM/about/leader'
-import { ProfileSecretaryPage } from '@/pages/modules/LPPM/about/secretary'
-import { ProfileStaffLPPM } from '@/pages/modules/LPPM/about/staff'
-import { StaffMemberList } from '@/pages/modules/LPPM/about/staff/member'
-import { CreateStaffMember } from '@/pages/modules/LPPM/about/staff/member/component/create.tsx'
-import { UpdateStaffMember } from '@/pages/modules/LPPM/about/staff/member/component/update.tsx'
-import { MainResearch } from '@/pages/modules/LPPM/research/main'
-import { SchemaDoctoralResearch } from '@/pages/modules/LPPM/research/schema/doctoral'
-import { SchemaInternalResearch } from '@/pages/modules/LPPM/research/schema/internal'
-import { PlanMainResearch } from '@/pages/modules/LPPM/research/plan'
-import { DocumentPLanResearch } from '@/pages/modules/LPPM/research/plan/document'
-import { GuideCategoryResearch } from '@/pages/modules/LPPM/research/guide'
-import { DocumentGuideCategory } from '@/pages/modules/LPPM/research/guide/document'
-import { StudyCenterList } from '@/pages/modules/LPPM/research/study-center/study-list'
-import { CreatedStudyCenter } from '@/pages/modules/LPPM/research/study-center/study-list/component/created.tsx'
-import { UpdateStudyCenter } from '@/pages/modules/LPPM/research/study-center/study-list/component/updated.tsx'
-import { DetailStudyCenter } from '@/pages/modules/LPPM/research/study-center/study-list/component/detail.tsx'
-import { StandardOperationalStudy } from '@/pages/modules/LPPM/research/study-center/operational-standard'
-import { MainDevotion } from '@/pages/modules/LPPM/devotion/main'
-import { DevotionInternalSchema } from '@/pages/modules/LPPM/devotion/schema/internal'
-import { ActivityProgramSchema } from '@/pages/modules/LPPM/devotion/schema/internal/activity-program'
-import { CreatedActivityProgram } from '@/pages/modules/LPPM/devotion/schema/internal/activity-program/component/created.tsx'
-import { UpdatedActivityProgram } from '@/pages/modules/LPPM/devotion/schema/internal/activity-program/component/updated.tsx'
-import { DetailActivityProgram } from '@/pages/modules/LPPM/devotion/schema/internal/activity-program/component/detail.tsx'
-import { SchemaDataDRTPM } from '@/pages/modules/LPPM/devotion/schema/drtpm'
-import { CreatedDRTPM } from '@/pages/modules/LPPM/devotion/schema/drtpm/component/created.tsx'
-import { UpdatedDataDRTPM } from '@/pages/modules/LPPM/devotion/schema/drtpm/component/updated.tsx'
-import { DetailDataDRTPM } from '@/pages/modules/LPPM/devotion/schema/drtpm/component/detail.tsx'
-import { SchemaDataBRIN } from '@/pages/modules/LPPM/devotion/schema/brin'
-import { CreatedBRIN } from '@/pages/modules/LPPM/devotion/schema/brin/component/created.tsx'
-import { UpdatedDataBRIN } from '@/pages/modules/LPPM/devotion/schema/brin/component/updated.tsx'
-import { DetailDataBRIN } from '@/pages/modules/LPPM/devotion/schema/brin/component/detail.tsx'
-import { SchemaFundingOther } from '@/pages/modules/LPPM/devotion/schema/other'
-import { CreatedOtherFunding } from '@/pages/modules/LPPM/devotion/schema/other/component/created.tsx'
-import { UpdatedOtherFunding } from '@/pages/modules/LPPM/devotion/schema/other/component/updated.tsx'
-import { DetailOtherFunding } from '@/pages/modules/LPPM/devotion/schema/other/component/detail.tsx'
-import { MainDevotionHub } from '@/pages/modules/LPPM/devotion/stain-hub'
-import { BookPublisherPage } from '@/pages/modules/LPPM/publication-hki/book/publisher'
-import { BookMediaPage } from '@/pages/modules/LPPM/publication-hki/book/media'
-import { BookCenterPage } from '@/pages/modules/LPPM/publication-hki/book/book-center'
-import { UserManagementBook } from '@/pages/modules/LPPM/publication-hki/book/book-center/manangement'
-import { CreatedUserManagementContext } from '@/pages/modules/LPPM/publication-hki/book/book-center/manangement/component/created.tsx'
-import { UpdatedUserManagementContext } from '@/pages/modules/LPPM/publication-hki/book/book-center/manangement/component/Updated.tsx'
-import { HKICenterPage } from '@/pages/modules/LPPM/publication-hki/hki/hki-center'
-import { UserManagementHKI } from '@/pages/modules/LPPM/publication-hki/hki/hki-center/management'
-import { CreatedUserManagementHKI } from '@/pages/modules/LPPM/publication-hki/hki/hki-center/management/component/created.tsx'
-import { UpdatedUserManagementHKI } from '@/pages/modules/LPPM/publication-hki/hki/hki-center/management/component/Updated.tsx'
-import { HKIDescriptionPage } from '@/pages/modules/LPPM/publication-hki/hki/description'
-import { HKIRegistrationPage } from '@/pages/modules/LPPM/publication-hki/hki/registration'
+import {UserProfilePage} from '@/pages/modules/website-utama/user-profile'
+import {ChangePassword} from '@/pages/modules/website-utama/change-password'
+import {DetailProfileLPPM} from '@/pages/modules/LPPM/data-lppm'
+import {UpdatedDataLPPM} from '@/pages/modules/LPPM/data-lppm/updated'
+import {AboutProfile} from '@/pages/modules/LPPM/about/profile'
+import {StructureOrganizationProfile} from '@/pages/modules/LPPM/about/structure'
+import {VisionMissionAbout} from '@/pages/modules/LPPM/about/vision-mission'
+import {ProfileLeaderPage} from '@/pages/modules/LPPM/about/leader'
+import {ProfileSecretaryPage} from '@/pages/modules/LPPM/about/secretary'
+import {ProfileStaffLPPM} from '@/pages/modules/LPPM/about/staff'
+import {StaffMemberList} from '@/pages/modules/LPPM/about/staff/member'
+import {CreateStaffMember} from '@/pages/modules/LPPM/about/staff/member/component/create.tsx'
+import {UpdateStaffMember} from '@/pages/modules/LPPM/about/staff/member/component/update.tsx'
+import {MainResearch} from '@/pages/modules/LPPM/research/main'
+import {SchemaDoctoralResearch} from '@/pages/modules/LPPM/research/schema/doctoral'
+import {SchemaInternalResearch} from '@/pages/modules/LPPM/research/schema/internal'
+import {PlanMainResearch} from '@/pages/modules/LPPM/research/plan'
+import {DocumentPLanResearch} from '@/pages/modules/LPPM/research/plan/document'
+import {GuideCategoryResearch} from '@/pages/modules/LPPM/research/guide'
+import {DocumentGuideCategory} from '@/pages/modules/LPPM/research/guide/document'
+import {StudyCenterList} from '@/pages/modules/LPPM/research/study-center/study-list'
+import {CreatedStudyCenter} from '@/pages/modules/LPPM/research/study-center/study-list/component/created.tsx'
+import {UpdateStudyCenter} from '@/pages/modules/LPPM/research/study-center/study-list/component/updated.tsx'
+import {DetailStudyCenter} from '@/pages/modules/LPPM/research/study-center/study-list/component/detail.tsx'
+import {StandardOperationalStudy} from '@/pages/modules/LPPM/research/study-center/operational-standard'
+import {MainDevotion} from '@/pages/modules/LPPM/devotion/main'
+import {DevotionInternalSchema} from '@/pages/modules/LPPM/devotion/schema/internal'
+import {ActivityProgramSchema} from '@/pages/modules/LPPM/devotion/schema/internal/activity-program'
+import {
+  CreatedActivityProgram
+} from '@/pages/modules/LPPM/devotion/schema/internal/activity-program/component/created.tsx'
+import {
+  UpdatedActivityProgram
+} from '@/pages/modules/LPPM/devotion/schema/internal/activity-program/component/updated.tsx'
+import {
+  DetailActivityProgram
+} from '@/pages/modules/LPPM/devotion/schema/internal/activity-program/component/detail.tsx'
+import {SchemaDataDRTPM} from '@/pages/modules/LPPM/devotion/schema/drtpm'
+import {CreatedDRTPM} from '@/pages/modules/LPPM/devotion/schema/drtpm/component/created.tsx'
+import {UpdatedDataDRTPM} from '@/pages/modules/LPPM/devotion/schema/drtpm/component/updated.tsx'
+import {DetailDataDRTPM} from '@/pages/modules/LPPM/devotion/schema/drtpm/component/detail.tsx'
+import {SchemaDataBRIN} from '@/pages/modules/LPPM/devotion/schema/brin'
+import {CreatedBRIN} from '@/pages/modules/LPPM/devotion/schema/brin/component/created.tsx'
+import {UpdatedDataBRIN} from '@/pages/modules/LPPM/devotion/schema/brin/component/updated.tsx'
+import {DetailDataBRIN} from '@/pages/modules/LPPM/devotion/schema/brin/component/detail.tsx'
+import {SchemaFundingOther} from '@/pages/modules/LPPM/devotion/schema/other'
+import {CreatedOtherFunding} from '@/pages/modules/LPPM/devotion/schema/other/component/created.tsx'
+import {UpdatedOtherFunding} from '@/pages/modules/LPPM/devotion/schema/other/component/updated.tsx'
+import {DetailOtherFunding} from '@/pages/modules/LPPM/devotion/schema/other/component/detail.tsx'
+import {MainDevotionHub} from '@/pages/modules/LPPM/devotion/stain-hub'
+import {BookPublisherPage} from '@/pages/modules/LPPM/publication-hki/book/publisher'
+import {BookMediaPage} from '@/pages/modules/LPPM/publication-hki/book/media'
+import {BookCenterPage} from '@/pages/modules/LPPM/publication-hki/book/book-center'
+import {UserManagementBook} from '@/pages/modules/LPPM/publication-hki/book/book-center/manangement'
+import {
+  CreatedUserManagementContext
+} from '@/pages/modules/LPPM/publication-hki/book/book-center/manangement/component/created.tsx'
+import {
+  UpdatedUserManagementContext
+} from '@/pages/modules/LPPM/publication-hki/book/book-center/manangement/component/Updated.tsx'
+import {HKICenterPage} from '@/pages/modules/LPPM/publication-hki/hki/hki-center'
+import {UserManagementHKI} from '@/pages/modules/LPPM/publication-hki/hki/hki-center/management'
+import {
+  CreatedUserManagementHKI
+} from '@/pages/modules/LPPM/publication-hki/hki/hki-center/management/component/created.tsx'
+import {
+  UpdatedUserManagementHKI
+} from '@/pages/modules/LPPM/publication-hki/hki/hki-center/management/component/Updated.tsx'
+import {HKIDescriptionPage} from '@/pages/modules/LPPM/publication-hki/hki/description'
+import {HKIRegistrationPage} from '@/pages/modules/LPPM/publication-hki/hki/registration'
+import {JourNalPLPPage} from "@/pages/modules/LPPM/publication-hki/journal/plp";
+import {UserManagementPLP} from "@/pages/modules/LPPM/publication-hki/journal/plp/management";
+import {
+  CreatedUserManagementPLP
+} from "@/pages/modules/LPPM/publication-hki/journal/plp/management/component/created.tsx";
+import {
+  UpdatedUserManagementPLP
+} from "@/pages/modules/LPPM/publication-hki/journal/plp/management/component/Updated.tsx";
+import {JourNalPPJSPage} from "@/pages/modules/LPPM/publication-hki/journal/ppjs";
+import {UserManagementPPJS} from "@/pages/modules/LPPM/publication-hki/journal/ppjs/management";
+import {
+  CreatedUserManagementPPJS
+} from "@/pages/modules/LPPM/publication-hki/journal/ppjs/management/component/created.tsx";
+import {
+  UpdatedUserManagementPPJS
+} from "@/pages/modules/LPPM/publication-hki/journal/ppjs/management/component/Updated.tsx";
+import {PPIDInformationPage} from "@/pages/modules/LPPM/PPID";
+import {ServicesListPage} from "@/pages/modules/LPPM/services";
 
 export const routesLPPM = [
   {
@@ -65,11 +97,11 @@ export const routesLPPM = [
       },
       {
         path: 'user-profile',
-        element: <UserProfilePage />,
+        element: <UserProfilePage/>,
       },
       {
         path: 'change-password',
-        element: <ChangePassword />,
+        element: <ChangePassword/>,
       },
     ],
   },
@@ -78,11 +110,11 @@ export const routesLPPM = [
     children: [
       {
         index: true,
-        element: <DetailProfileLPPM />,
+        element: <DetailProfileLPPM/>,
       },
       {
         path: 'edit',
-        element: <UpdatedDataLPPM />,
+        element: <UpdatedDataLPPM/>,
       },
     ],
   },
@@ -91,42 +123,42 @@ export const routesLPPM = [
     children: [
       {
         path: 'profile',
-        element: <AboutProfile />,
+        element: <AboutProfile/>,
       },
       {
         path: 'vision-mission',
-        element: <VisionMissionAbout />,
+        element: <VisionMissionAbout/>,
       },
       {
         path: 'structure',
-        element: <StructureOrganizationProfile />,
+        element: <StructureOrganizationProfile/>,
       },
       {
         path: 'leader',
-        element: <ProfileLeaderPage />,
+        element: <ProfileLeaderPage/>,
       },
       {
         path: 'secretary',
-        element: <ProfileSecretaryPage />,
+        element: <ProfileSecretaryPage/>,
       },
       {
         path: 'staff',
         children: [
           {
             index: true,
-            element: <ProfileStaffLPPM />,
+            element: <ProfileStaffLPPM/>,
           },
           {
             path: 'member/:id',
-            element: <StaffMemberList />,
+            element: <StaffMemberList/>,
           },
           {
             path: 'member/:id/add',
-            element: <CreateStaffMember />,
+            element: <CreateStaffMember/>,
           },
           {
             path: 'member/:id/edit/:memberId',
-            element: <UpdateStaffMember />,
+            element: <UpdateStaffMember/>,
           },
         ],
       },
@@ -137,18 +169,18 @@ export const routesLPPM = [
     children: [
       {
         path: 'main',
-        element: <MainResearch />,
+        element: <MainResearch/>,
       },
       {
         path: 'schema',
         children: [
           {
             path: 'doctoral',
-            element: <SchemaDoctoralResearch />,
+            element: <SchemaDoctoralResearch/>,
           },
           {
             path: 'internal',
-            element: <SchemaInternalResearch />,
+            element: <SchemaInternalResearch/>,
           },
         ],
       },
@@ -157,11 +189,11 @@ export const routesLPPM = [
         children: [
           {
             index: true,
-            element: <PlanMainResearch />,
+            element: <PlanMainResearch/>,
           },
           {
             path: 'document/:id',
-            element: <DocumentPLanResearch />,
+            element: <DocumentPLanResearch/>,
           },
         ],
       },
@@ -170,11 +202,11 @@ export const routesLPPM = [
         children: [
           {
             index: true,
-            element: <GuideCategoryResearch />,
+            element: <GuideCategoryResearch/>,
           },
           {
             path: 'document/:id',
-            element: <DocumentGuideCategory />,
+            element: <DocumentGuideCategory/>,
           },
         ],
       },
@@ -186,19 +218,19 @@ export const routesLPPM = [
             children: [
               {
                 index: true,
-                element: <StudyCenterList />,
+                element: <StudyCenterList/>,
               },
               {
                 path: 'add',
-                element: <CreatedStudyCenter />,
+                element: <CreatedStudyCenter/>,
               },
               {
                 path: 'edit/:id',
-                element: <UpdateStudyCenter />,
+                element: <UpdateStudyCenter/>,
               },
               {
                 path: 'detail/:id',
-                element: <DetailStudyCenter />,
+                element: <DetailStudyCenter/>,
               },
             ],
           },
@@ -207,7 +239,7 @@ export const routesLPPM = [
             children: [
               {
                 index: true,
-                element: <StandardOperationalStudy />,
+                element: <StandardOperationalStudy/>,
               },
             ],
           },
@@ -220,7 +252,7 @@ export const routesLPPM = [
     children: [
       {
         path: 'main',
-        element: <MainDevotion />,
+        element: <MainDevotion/>,
       },
       {
         path: 'schema',
@@ -230,26 +262,26 @@ export const routesLPPM = [
             children: [
               {
                 index: true,
-                element: <DevotionInternalSchema />,
+                element: <DevotionInternalSchema/>,
               },
               {
                 path: 'activity-program',
                 children: [
                   {
                     index: true,
-                    element: <ActivityProgramSchema />,
+                    element: <ActivityProgramSchema/>,
                   },
                   {
                     path: 'add',
-                    element: <CreatedActivityProgram />,
+                    element: <CreatedActivityProgram/>,
                   },
                   {
                     path: 'edit/:id',
-                    element: <UpdatedActivityProgram />,
+                    element: <UpdatedActivityProgram/>,
                   },
                   {
                     path: 'detail/:id',
-                    element: <DetailActivityProgram />,
+                    element: <DetailActivityProgram/>,
                   },
                 ],
               },
@@ -260,19 +292,19 @@ export const routesLPPM = [
             children: [
               {
                 index: true,
-                element: <SchemaDataDRTPM />,
+                element: <SchemaDataDRTPM/>,
               },
               {
                 path: 'add',
-                element: <CreatedDRTPM />,
+                element: <CreatedDRTPM/>,
               },
               {
                 path: 'edit/:id',
-                element: <UpdatedDataDRTPM />,
+                element: <UpdatedDataDRTPM/>,
               },
               {
                 path: 'detail/:id',
-                element: <DetailDataDRTPM />,
+                element: <DetailDataDRTPM/>,
               },
             ],
           },
@@ -281,19 +313,19 @@ export const routesLPPM = [
             children: [
               {
                 index: true,
-                element: <SchemaDataBRIN />,
+                element: <SchemaDataBRIN/>,
               },
               {
                 path: 'add',
-                element: <CreatedBRIN />,
+                element: <CreatedBRIN/>,
               },
               {
                 path: 'edit/:id',
-                element: <UpdatedDataBRIN />,
+                element: <UpdatedDataBRIN/>,
               },
               {
                 path: 'detail/:id',
-                element: <DetailDataBRIN />,
+                element: <DetailDataBRIN/>,
               },
             ],
           },
@@ -302,19 +334,19 @@ export const routesLPPM = [
             children: [
               {
                 index: true,
-                element: <SchemaFundingOther />,
+                element: <SchemaFundingOther/>,
               },
               {
                 path: 'add',
-                element: <CreatedOtherFunding />,
+                element: <CreatedOtherFunding/>,
               },
               {
                 path: 'edit/:id',
-                element: <UpdatedOtherFunding />,
+                element: <UpdatedOtherFunding/>,
               },
               {
                 path: 'detail/:id',
-                element: <DetailOtherFunding />,
+                element: <DetailOtherFunding/>,
               },
             ],
           },
@@ -322,7 +354,7 @@ export const routesLPPM = [
       },
       {
         path: 'stain-hub',
-        element: <MainDevotionHub />,
+        element: <MainDevotionHub/>,
       },
     ],
   },
@@ -337,22 +369,22 @@ export const routesLPPM = [
             children: [
               {
                 index: true,
-                element: <BookCenterPage />,
+                element: <BookCenterPage/>,
               },
               {
                 path: 'management',
                 children: [
                   {
                     index: true,
-                    element: <UserManagementBook />,
+                    element: <UserManagementBook/>,
                   },
                   {
                     path: 'add',
-                    element: <CreatedUserManagementContext />,
+                    element: <CreatedUserManagementContext/>,
                   },
                   {
                     path: 'edit/:id',
-                    element: <UpdatedUserManagementContext />,
+                    element: <UpdatedUserManagementContext/>,
                   },
                 ],
               },
@@ -360,11 +392,11 @@ export const routesLPPM = [
           },
           {
             path: 'publisher',
-            element: <BookPublisherPage />,
+            element: <BookPublisherPage/>,
           },
           {
             path: 'media',
-            element: <BookMediaPage />,
+            element: <BookMediaPage/>,
           },
         ],
       },
@@ -376,22 +408,22 @@ export const routesLPPM = [
             children: [
               {
                 index: true,
-                element: <HKICenterPage />,
+                element: <HKICenterPage/>,
               },
               {
                 path: 'management',
                 children: [
                   {
                     index: true,
-                    element: <UserManagementHKI />,
+                    element: <UserManagementHKI/>,
                   },
                   {
                     path: 'add',
-                    element: <CreatedUserManagementHKI />,
+                    element: <CreatedUserManagementHKI/>,
                   },
                   {
                     path: 'edit/:id',
-                    element: <UpdatedUserManagementHKI />,
+                    element: <UpdatedUserManagementHKI/>,
                   },
                 ],
               },
@@ -399,15 +431,85 @@ export const routesLPPM = [
           },
           {
             path: 'description',
-            element: <HKIDescriptionPage />,
+            element: <HKIDescriptionPage/>,
           },
           {
             path: 'registration',
-            element: <HKIRegistrationPage />,
+            element: <HKIRegistrationPage/>,
           },
         ],
       },
+      {
+        path: 'journal',
+        children: [
+          {
+            path: 'plp',
+            children: [
+              {
+                index: true,
+                element: <JourNalPLPPage/>,
+              },
+              {
+                path: 'management',
+                children: [
+                  {
+                    index: true,
+                    element: <UserManagementPLP/>,
+                  },
+                  {
+                    path: 'add',
+                    element: <CreatedUserManagementPLP/>
+                  },
+                  {
+                    path: 'edit/:id',
+                    element: <UpdatedUserManagementPLP/>
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            path: 'PPJS',
+            children: [
+              {
+                index: true,
+                element: <JourNalPPJSPage/>,
+              },
+              {
+                path: 'management',
+                children: [
+                  {
+                    index: true,
+                    element: <UserManagementPPJS/>
+                  },
+                  {
+                    path: 'add',
+                    element: <CreatedUserManagementPPJS/>
+                  },
+                  {
+                    path: 'edit/:id',
+                    element: <UpdatedUserManagementPPJS/>
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
     ],
+  },
+  {
+    path: 'ppid',
+    children: [
+      {
+        index: true,
+        element: <PPIDInformationPage/>
+      }
+    ]
+  },
+  {
+    path: 'services',
+    element: <ServicesListPage/>
   },
   {
     path: '*',

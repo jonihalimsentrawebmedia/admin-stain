@@ -1,21 +1,24 @@
-import {Form} from '@/components/ui/form.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import {useEffect, useState} from 'react'
+import {Form} from '@/components/ui/form.tsx'
+import {useForm} from 'react-hook-form'
 import {RichText} from '@/components/common/richtext'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
-import {useEffect, useState} from 'react'
-import {useForm} from 'react-hook-form'
-import {UseGetSchemaDevotion} from '@/pages/modules/LPPM/devotion/schema/internal/hooks'
 import AxiosClient from '@/provider/axios.tsx'
 import {toast} from 'react-toastify'
 import {useQueryClient} from '@tanstack/react-query'
-import {FaListUl} from 'react-icons/fa'
+import {FaUserFriends} from 'react-icons/fa'
 import {Link} from 'react-router-dom'
+import {UseGetPublicationCenter} from '@/pages/modules/LPPM/publication-hki/book/book-center/hooks'
 
-export const DevotionInternalSchema = () => {
+export const JourNalPPJSPage = () => {
   const [isEdit, setIsEdit] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const {responseData} = UseGetSchemaDevotion()
+  const {responseData} = UseGetPublicationCenter({
+    context: 'pusat-ppjs',
+  })
+  const form = useForm()
 
   useEffect(() => {
     if (responseData) {
@@ -23,20 +26,17 @@ export const DevotionInternalSchema = () => {
     }
   }, [responseData])
 
-  const form = useForm()
-
   const queryClient = useQueryClient()
 
   const handleSave = async (e: any) => {
-    setLoading(true)
-    await AxiosClient.post('/lppm/pengabdian-pendanaan-internal', e)
+    await AxiosClient.post('/lppm/pusat-publikasi/pusat-ppjs', e)
       .then((res) => {
         if (res.data.status) {
           setIsEdit(!isEdit)
           setLoading(false)
           toast.success(res.data.message || 'Success Pengajuan update data universitas')
           queryClient.invalidateQueries({
-            queryKey: ['schema-devotion'],
+            queryKey: ['center-publication'],
           })
         }
       })
@@ -53,7 +53,7 @@ export const DevotionInternalSchema = () => {
           <Form {...form}>
             <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(handleSave)}>
               <ButtonTitleGroup
-                label={'Pengabdian Pendanaan Internal'}
+                label={'PPJS'}
                 buttonGroup={[
                   {
                     type: 'cancel',
@@ -77,19 +77,19 @@ export const DevotionInternalSchema = () => {
         <>
           <div className={'mt-5'}>
             <ButtonTitleGroup
-              label={'Pengabdian Pendanaan Internal'}
+              label={'PPJS'}
               buttonGroup={[
                 {
                   type: 'custom',
                   element: (
                     <Link
-                      to={'activity-program'}
+                      to={'management'}
                       className={
-                        'flex items-center gap-1.5 border border-primary text-primary rounded p-1.5 px-4 bg-white text-sm'
+                        'border border-primary px-3 py-1.5 rounded-md text-primary flex items-center bg-white gap-1.5'
                       }
                     >
-                      <FaListUl className={'size-4'}/>
-                      Program Kegiatan
+                      <FaUserFriends className={'size-4'}/>
+                      Pengelola
                     </Link>
                   ),
                 },

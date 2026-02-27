@@ -6,9 +6,10 @@ import {
   MdInfo,
   MdScience,
 } from 'react-icons/md'
-import { FaGraduationCap } from 'react-icons/fa'
-import { IoMdSettings } from 'react-icons/io'
-import { GiWorld } from 'react-icons/gi'
+import {FaGraduationCap, FaNewspaper} from 'react-icons/fa'
+import {IoMdSettings} from 'react-icons/io'
+import {GiWorld} from 'react-icons/gi'
+import {FaGears} from "react-icons/fa6";
 
 const baseDomain = '/modules/lppm'
 
@@ -17,19 +18,19 @@ export const MenuListLPPM = [
     id: 1,
     name: 'Beranda',
     path: `${baseDomain}/dashboard`,
-    icon: <MdDashboard className={'size-5'} />,
+    icon: <MdDashboard className={'size-5'}/>,
   },
   {
     id: 2,
     name: 'Data Lembaga',
     path: `${baseDomain}/data-lppm`,
-    icon: <MdBusiness className={'size-5'} />,
+    icon: <MdBusiness className={'size-5'}/>,
   },
   {
     id: 3,
     name: 'Tentang LPPM',
     path: `${baseDomain}/about`,
-    icon: <FaGraduationCap className={'size-5'} />,
+    icon: <FaGraduationCap className={'size-5'}/>,
     child: [
       {
         id: 31,
@@ -67,7 +68,7 @@ export const MenuListLPPM = [
     id: 4,
     name: 'Penelitian',
     path: `${baseDomain}/research`,
-    icon: <MdScience className={'size-5'} />,
+    icon: <MdScience className={'size-5'}/>,
     child: [
       {
         id: 41,
@@ -124,7 +125,7 @@ export const MenuListLPPM = [
     id: 5,
     name: 'Pengabdian',
     path: `${baseDomain}/devotion`,
-    icon: <MdHomeRepairService className={'size-5'} />,
+    icon: <MdHomeRepairService className={'size-5'}/>,
     child: [
       {
         id: 51,
@@ -168,7 +169,7 @@ export const MenuListLPPM = [
   {
     id: 6,
     name: 'Publikasi & HKI',
-    icon: <GiWorld className={'size-5'} />,
+    icon: <GiWorld className={'size-5'}/>,
     path: `${baseDomain}/publication-hki`,
     child: [
       {
@@ -237,65 +238,77 @@ export const MenuListLPPM = [
   {
     id: 7,
     name: 'Data',
-    icon: <MdDataset />,
+    icon: <MdDataset/>,
     path: `${baseDomain}/data`,
   },
   {
     id: 8,
+    name: 'Layanan',
+    icon: <FaGears className={'size-5'}/>,
+    path: `${baseDomain}/services`,
+  },
+  {
+    id: 9,
+    name: 'PPID',
+    icon: <FaNewspaper className={'size-5'}/>,
+    path: `${baseDomain}/ppid`,
+  },
+  {
+    id: 9,
     name: 'Konten Publik',
-    icon: <MdInfo className={'size-5'} />,
+    icon: <MdInfo className={'size-5'}/>,
     path: `${baseDomain}/public-content`,
     child: [
       {
-        id: 81,
+        id: 91,
         name: 'Berita',
         path: `${baseDomain}/public-content/news`,
       },
       {
-        id: 82,
+        id: 92,
         name: 'pengumuman',
         path: `${baseDomain}/public-content/announcement`,
       },
       {
-        id: 83,
+        id: 93,
         name: 'Agenda',
         path: `${baseDomain}/public-content/agenda`,
       },
       {
-        id: 84,
+        id: 94,
         name: 'Artikel',
         path: `${baseDomain}/public-content/article`,
       },
       {
-        id: 85,
+        id: 95,
         name: 'Download',
         path: `${baseDomain}/public-content/download`,
       },
     ],
   },
   {
-    id: 9,
+    id: 10,
     name: 'Pengaturan Website',
-    icon: <IoMdSettings className={'size-5'} />,
+    icon: <IoMdSettings className={'size-5'}/>,
     path: `${baseDomain}/settings`,
     child: [
       {
-        id: 91,
+        id: 101,
         name: 'Landing Page',
         path: `${baseDomain}/settings/landing-page`,
       },
       {
-        id: 92,
+        id: 102,
         name: 'Gambar Background',
         path: `${baseDomain}/settings/background`,
       },
       {
-        id: 93,
+        id: 103,
         name: 'Pengaturan Warna Unit',
         path: `${baseDomain}/settings/primary-color`,
       },
       {
-        id: 94,
+        id: 104,
         name: 'Template Website',
         path: `${baseDomain}/settings/template`,
       },

@@ -4,18 +4,18 @@ import {RichText} from '@/components/common/richtext'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import {useEffect, useState} from 'react'
 import {useForm} from 'react-hook-form'
-import {UseGetSchemaDevotion} from '@/pages/modules/LPPM/devotion/schema/internal/hooks'
+import {UseGetInformationPPID} from './hooks/index.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import {toast} from 'react-toastify'
 import {useQueryClient} from '@tanstack/react-query'
 import {FaListUl} from 'react-icons/fa'
 import {Link} from 'react-router-dom'
 
-export const DevotionInternalSchema = () => {
+export const PPIDInformationPage = () => {
   const [isEdit, setIsEdit] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const {responseData} = UseGetSchemaDevotion()
+  const {responseData} = UseGetInformationPPID()
 
   useEffect(() => {
     if (responseData) {
@@ -29,14 +29,14 @@ export const DevotionInternalSchema = () => {
 
   const handleSave = async (e: any) => {
     setLoading(true)
-    await AxiosClient.post('/lppm/pengabdian-pendanaan-internal', e)
+    await AxiosClient.post('/lppm/ppid', e)
       .then((res) => {
         if (res.data.status) {
           setIsEdit(!isEdit)
           setLoading(false)
           toast.success(res.data.message || 'Success Pengajuan update data universitas')
           queryClient.invalidateQueries({
-            queryKey: ['schema-devotion'],
+            queryKey: ['ppid-information'],
           })
         }
       })
@@ -53,7 +53,7 @@ export const DevotionInternalSchema = () => {
           <Form {...form}>
             <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(handleSave)}>
               <ButtonTitleGroup
-                label={'Pengabdian Pendanaan Internal'}
+                label={'PPID'}
                 buttonGroup={[
                   {
                     type: 'cancel',
@@ -77,19 +77,19 @@ export const DevotionInternalSchema = () => {
         <>
           <div className={'mt-5'}>
             <ButtonTitleGroup
-              label={'Pengabdian Pendanaan Internal'}
+              label={'PPID'}
               buttonGroup={[
                 {
                   type: 'custom',
                   element: (
                     <Link
-                      to={'activity-program'}
+                      to={'information'}
                       className={
                         'flex items-center gap-1.5 border border-primary text-primary rounded p-1.5 px-4 bg-white text-sm'
                       }
                     >
                       <FaListUl className={'size-4'}/>
-                      Program Kegiatan
+                      Daftar Informasi
                     </Link>
                   ),
                 },
