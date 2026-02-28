@@ -41,17 +41,19 @@ export const DetailProfileLPPM = () => {
             }
           />
 
-          <div
-            className={'border border-blue-500 rounded flex p-2 w-fit items-center gap-1.5 mt-5'}
-          >
-            <MdInfo className={'size-5 text-blue-500'} />
-            {realData
-              ? 'Data yang tampil adalah data yang asli. Untuk melihat data yang anda ajukan'
-              : 'Data yang tampil adalah data yang anda ajukan. Untuk melihat data asli'}
-            <button className={'text-blue-500'} onClick={() => setRealData(!realData)}>
-              KLIK DISINI
-            </button>
-          </div>
+          {dataLPPM?.status_publish == 'DIAJUKAN_EDITOR' && (
+            <div
+              className={'border border-blue-500 rounded flex p-2 w-fit items-center gap-1.5 mt-5'}
+            >
+              <MdInfo className={'size-5 text-blue-500'} />
+              {realData
+                ? 'Data yang tampil adalah data yang asli. Untuk melihat data yang anda ajukan'
+                : 'Data yang tampil adalah data yang anda ajukan. Untuk melihat data asli'}
+              <button className={'text-blue-500'} onClick={() => setRealData(!realData)}>
+                KLIK DISINI
+              </button>
+            </div>
+          )}
 
           <div className="flex items-start gap-5 mt-5">
             <div className="flex flex-col gap-1">
