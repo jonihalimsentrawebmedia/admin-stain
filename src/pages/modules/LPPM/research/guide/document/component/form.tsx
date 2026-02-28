@@ -8,6 +8,7 @@ import TextInput from '@/components/common/form/TextInput.tsx'
 import { InputRadio } from '@/components/common/form/InputRadio.tsx'
 import { UploadFileInput } from '@/components/common/form/uploadFileInput.tsx'
 import type { schemaGuideBook } from '../data/resolver'
+import FormUploadPhotoImage from '@/pages/modules/LPPM/components/common/uploadPhoto.tsx'
 
 interface FormProps {
   form: UseFormReturn<schemaGuideBook>
@@ -28,6 +29,10 @@ export const FormDocumentGuideBook = (props: FormProps) => {
     <>
       <Form {...form}>
         <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(handleSubmit)}>
+          <div className="w-fit">
+            <FormUploadPhotoImage form={form} name={'url_gambar'} />
+          </div>
+
           <SelectBasicInput
             name={'id_kategori'}
             form={form}

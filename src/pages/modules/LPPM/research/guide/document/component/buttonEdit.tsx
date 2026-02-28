@@ -35,6 +35,7 @@ export const ButtonEditDocumentGuideBook = (data: IGuideBookDocument) => {
         url_file: data?.url_file,
         key_url_file: data?.key_file,
         public: data?.public,
+        url_gambar: data?.url_gambar,
       })
     }
   }, [data])

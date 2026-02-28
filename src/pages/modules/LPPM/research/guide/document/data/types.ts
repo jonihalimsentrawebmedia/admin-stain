@@ -7,6 +7,7 @@ export interface IGuideBookDocument {
   jenis: 'URL' | 'DOKUMEN'
   url: string | null
   url_file: string
+  url_gambar: string
   key_file: string
   public: boolean
   urutan: number

@@ -9,6 +9,7 @@ export const ResolverGuideBook = z.object({
   key_url_file: z.string().optional().nullable(),
   public: z.boolean(),
   urutan: z.number(),
+  url_gambar: z.string(),
 })
 
 export type schemaGuideBook = z.infer<typeof ResolverGuideBook>
