@@ -91,6 +91,8 @@ import DownloadFileLppmPage from '@/pages/modules/LPPM/public-content/Download'
 import { CategoryDownloadLppmPage } from '@/pages/modules/LPPM/public-content/Download/category'
 import { AddDownloadLppmPage } from '@/pages/modules/LPPM/public-content/Download/created'
 import { UpdatedDownloadLppmPage } from '@/pages/modules/LPPM/public-content/Download/updated'
+import { ListInformationPPID } from '@/pages/modules/LPPM/PPID/information'
+import DashboardLPPM from '@/pages/modules/LPPM/dashboard'
 
 export const routesLPPM = [
   {
@@ -98,7 +100,7 @@ export const routesLPPM = [
     children: [
       {
         index: true,
-        element: <></>,
+        element: <DashboardLPPM />,
       },
       {
         path: 'user-profile',
@@ -510,13 +512,16 @@ export const routesLPPM = [
         index: true,
         element: <PPIDInformationPage />,
       },
+      {
+        path: 'information',
+        element: <ListInformationPPID />,
+      },
     ],
   },
   {
     path: 'services',
     element: <ServicesListPage />,
   },
-
   {
     path: 'settings',
     children: [
@@ -534,132 +539,132 @@ export const routesLPPM = [
       },
     ],
   },
-   {
-      path: 'public-content',
-      children: [
-        {
-          path: 'news',
-          children: [
-            {
-              index: true,
-              element: <NewsLppmPublicContentPage />,
-            },
-            {
-              path: 'add',
-              element: <NewsLppmCreated />,
-            },
-            {
-              path: 'edit/:id',
-              element: <NewsLppmUpdated />,
-            },
-            {
-              path: 'detail/:id',
-              element: <DetailNewsLppmPage />,
-            },
-            {
-              path: 'log/:id',
-              element: <LogActivityNewsLppmPage />,
-            },
-          ],
-        },
-        {
-          path: 'announcement',
-          children: [
-            {
-              index: true,
-              element: <AnnouncementLppmPublicContent />,
-            },
-            {
-              path: 'add',
-              element: <CreatedAnnouncementLppm />,
-            },
-            {
-              path: 'edit/:id',
-              element: <UpdatedAnnouncementLppm />,
-            },
-            {
-              path: 'detail/:id',
-              element: <AnnouncementLppmDetailPage />,
-            },
-            {
-              path: 'log/:id',
-              element: <LogActivityAnnouncementProdiPage />,
-            },
-          ],
-        },
-        {
-          path: 'agenda',
-          children: [
-            {
-              index: true,
-              element: <AgendaLppmPublicContent />,
-            },
-            {
-              path: 'add',
-              element: <CreateAgendaLppmPage />,
-            },
-            {
-              path: 'edit/:id',
-              element: <UpdatedAgendaLppmPage />,
-            },
-            {
-              path: 'detail/:id',
-              element: <AgendaLppmDetailPage />,
-            },
-            {
-              path: 'log/:id',
-              element: <LogActivityAgendaLppmPage />,
-            },
-          ],
-        },
-        {
-          path: 'article',
-          children: [
-            {
-              index: true,
-              element: <ArticleLppmPage />,
-            },
-            {
-              path: 'add',
-              element: <CreatedArticleLppm />,
-            },
-            {
-              path: 'edit/:id',
-              element: <UpdatedArticleLppm />,
-            },
-            {
-              path: 'detail/:id',
-              element: <DetailArticlePage />,
-            },
-            {
-              path: 'log/:id',
-              element: <LogActivityArticleLppmPage />,
-            },
-          ],
-        },
-        {
-          path: 'download',
-          children: [
-            {
-              index: true,
-              element: <DownloadFileLppmPage />,
-            },
-            {
-              path: 'category',
-              element: <CategoryDownloadLppmPage />,
-            },
-            {
-              path: 'add',
-              element: <AddDownloadLppmPage />,
-            },
-            {
-              path: 'edit/:id',
-              element: <UpdatedDownloadLppmPage />,
-            },
-          ],
-        },
-      ],
-    },
+  {
+    path: 'public-content',
+    children: [
+      {
+        path: 'news',
+        children: [
+          {
+            index: true,
+            element: <NewsLppmPublicContentPage />,
+          },
+          {
+            path: 'add',
+            element: <NewsLppmCreated />,
+          },
+          {
+            path: 'edit/:id',
+            element: <NewsLppmUpdated />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailNewsLppmPage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityNewsLppmPage />,
+          },
+        ],
+      },
+      {
+        path: 'announcement',
+        children: [
+          {
+            index: true,
+            element: <AnnouncementLppmPublicContent />,
+          },
+          {
+            path: 'add',
+            element: <CreatedAnnouncementLppm />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedAnnouncementLppm />,
+          },
+          {
+            path: 'detail/:id',
+            element: <AnnouncementLppmDetailPage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityAnnouncementProdiPage />,
+          },
+        ],
+      },
+      {
+        path: 'agenda',
+        children: [
+          {
+            index: true,
+            element: <AgendaLppmPublicContent />,
+          },
+          {
+            path: 'add',
+            element: <CreateAgendaLppmPage />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedAgendaLppmPage />,
+          },
+          {
+            path: 'detail/:id',
+            element: <AgendaLppmDetailPage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityAgendaLppmPage />,
+          },
+        ],
+      },
+      {
+        path: 'article',
+        children: [
+          {
+            index: true,
+            element: <ArticleLppmPage />,
+          },
+          {
+            path: 'add',
+            element: <CreatedArticleLppm />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedArticleLppm />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailArticlePage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityArticleLppmPage />,
+          },
+        ],
+      },
+      {
+        path: 'download',
+        children: [
+          {
+            index: true,
+            element: <DownloadFileLppmPage />,
+          },
+          {
+            path: 'category',
+            element: <CategoryDownloadLppmPage />,
+          },
+          {
+            path: 'add',
+            element: <AddDownloadLppmPage />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedDownloadLppmPage />,
+          },
+        ],
+      },
+    ],
+  },
   {
     path: '*',
     element: <></>,

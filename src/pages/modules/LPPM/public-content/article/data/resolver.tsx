@@ -12,7 +12,6 @@ export const ResolverArticle = z.object({
       keterangan: z.string().optional().nullable(),
     })
   ),
-  id_kategori_berita: z.string(),
 })
 
 export type IResolverArticleType = z.infer<typeof ResolverArticle>

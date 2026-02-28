@@ -17,10 +17,10 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
-import { UseGetNotificationUnit } from '@/pages/modules/LPPM/components/notification/hooks'
+import { UseGetNotificationLPPM } from '@/pages/modules/LPPM/components/notification/hooks'
 
 export const NotificationListUnit = () => {
-  const { notification } = UseGetNotificationUnit()
+  const { notification } = UseGetNotificationLPPM()
   const count = notification?.length ?? 0
 
   const form = useForm<IMessageResolver>({
@@ -35,7 +35,7 @@ export const NotificationListUnit = () => {
 
   const HandleReply = async (value: IMessageResolver) => {
     setLoading(true)
-    await AxiosClient.post(`/unit/pertanyaan/${data?.id_pertanyaan}/kirim-jawaban`, value)
+    await AxiosClient.post(`/lppm/pertanyaan/${data?.id_pertanyaan}/kirim-jawaban`, value)
       .then((res) => {
         if (res.data.status) {
           setLoading(false)

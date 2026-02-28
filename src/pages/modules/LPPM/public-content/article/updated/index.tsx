@@ -29,7 +29,6 @@ export const UpdatedArticleLppm = () => {
         penulis: detail?.penulis,
         keterangan_gambar: detail?.keterangan_gambar,
         artikel_gambar_tambahan: detail?.artikel_gambar_tambahan,
-        id_kategori_berita:detail.id_kategori_berita
       })
     }
   }, [detail])
@@ -42,7 +41,7 @@ export const UpdatedArticleLppm = () => {
         if (res.data.status) {
           setLoading(false)
           toast.success(res.data.message || 'Success Pengajuan tambah data promosi')
-          navigate('/modules/lppm/public-content/artikel')
+          navigate('/modules/lppm/public-content/article')
         }
       })
       .catch((err) => {

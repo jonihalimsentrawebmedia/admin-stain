@@ -4,7 +4,6 @@ import React from 'react'
 import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/hooks/getProfile.tsx'
 import ButtonProfile from '@/pages/modules/settings/components/button/ButtonProfile.tsx'
 import { Link } from 'react-router-dom'
-import { NotificationListUnit } from '../notification'
 import { UseGetSessionLPPM } from '@/pages/modules/LPPM/hooks'
 
 interface Props {
@@ -37,7 +36,7 @@ export function HeaderUnit(props: Props) {
           <IconModules />
         </Link>
         <div className="flex items-center gap-4">
-          <NotificationListUnit />
+          {/*<NotificationListUnit />*/}
           <ButtonProfile module={module} profileUser={profileUser} />
           <button onClick={() => setCollapsed(!collapsed)}>
             <RiMenuLine />

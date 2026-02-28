@@ -297,11 +297,11 @@ export const MenuListLPPM = [
         name: 'Landing Page',
         path: `${baseDomain}/settings/landing-page`,
       },
-      {
-        id: 102,
-        name: 'Gambar Background',
-        path: `${baseDomain}/settings/background`,
-      },
+      // {
+      //   id: 102,
+      //   name: 'Gambar Background',
+      //   path: `${baseDomain}/settings/background`,
+      // },
       {
         id: 103,
         name: 'Pengaturan Warna Unit',

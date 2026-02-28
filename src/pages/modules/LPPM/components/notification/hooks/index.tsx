@@ -10,7 +10,7 @@ interface notification {
   email: string
 }
 
-export const UseGetNotificationUnit = () => {
+export const UseGetNotificationLPPM = () => {
   const [notification, setNotification] = useState<notification[]>([])
 
   const ParamsSearch = new URLSearchParams({ page: '0', limit: '0' })
@@ -19,7 +19,7 @@ export const UseGetNotificationUnit = () => {
     queryKey: ['notification', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get(`/unit/notification?${ParamsSearch}`).then((res) => res.data.data),
+      AxiosClient.get(`/lppm/notification?${ParamsSearch}`).then((res) => res.data.data),
   })
 
   const loading = isLoading || isFetching
