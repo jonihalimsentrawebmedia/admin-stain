@@ -8,6 +8,8 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { UseGetSchemaInternalResearch } from './hooks/index'
+import { FaListUl } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 
 export const SchemaInternalResearch = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -74,6 +76,20 @@ export const SchemaInternalResearch = () => {
             <ButtonTitleGroup
               label={'Penelitian Pendanaan Internal'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <Link
+                      to={'activity'}
+                      className={
+                        'flex items-center gap-1.5 border border-primary p-1.5 px-4 bg-white text-sm text-primary rounded-md'
+                      }
+                    >
+                      <FaListUl />
+                      Program Kegiatan
+                    </Link>
+                  ),
+                },
                 {
                   type: 'edit',
                   label: 'Edit Konten',

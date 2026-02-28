@@ -93,6 +93,10 @@ import { AddDownloadLppmPage } from '@/pages/modules/LPPM/public-content/Downloa
 import { UpdatedDownloadLppmPage } from '@/pages/modules/LPPM/public-content/Download/updated'
 import { ListInformationPPID } from '@/pages/modules/LPPM/PPID/information'
 import DashboardLPPM from '@/pages/modules/LPPM/dashboard'
+import { ActivityProgramPage } from '@/pages/modules/LPPM/research/schema/internal/activity'
+import { CreatedFormActivity } from '@/pages/modules/LPPM/research/schema/internal/activity/component/created.tsx'
+import { UpdatedFormActivity } from '@/pages/modules/LPPM/research/schema/internal/activity/component/updated.tsx'
+import { DetailActivityProgramInternal } from '@/pages/modules/LPPM/research/schema/internal/activity/component/detail.tsx'
 
 export const routesLPPM = [
   {
@@ -187,7 +191,33 @@ export const routesLPPM = [
           },
           {
             path: 'internal',
-            element: <SchemaInternalResearch />,
+            children: [
+              {
+                index: true,
+                element: <SchemaInternalResearch />,
+              },
+              {
+                path: 'activity',
+                children: [
+                  {
+                    index: true,
+                    element: <ActivityProgramPage />,
+                  },
+                  {
+                    path: 'add',
+                    element: <CreatedFormActivity />,
+                  },
+                  {
+                    path: 'edit/:id',
+                    element: <UpdatedFormActivity />,
+                  },
+                  {
+                    path: 'detail/:id',
+                    element: <DetailActivityProgramInternal />,
+                  },
+                ],
+              },
+            ],
           },
         ],
       },
