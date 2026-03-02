@@ -28,7 +28,6 @@ const ButtonNewEditor = ({
   keySend,
   linkSend,
 }: Props) => {
-  console.log(status)
   return (
     <div className="flex gap-2 items-center">
       <div className="flex items-center gap-2">

@@ -35,7 +35,6 @@ export const ListInformationPPID = () => {
   })
 
   const HandleSearch = (e: string) => {
-    console.log(e)
     const Params = new URLSearchParams()
     Params.append('search', e)
     if (e === '') {

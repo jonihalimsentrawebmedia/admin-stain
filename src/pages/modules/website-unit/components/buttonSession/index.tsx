@@ -41,7 +41,6 @@ export const ButtonSessionUnit = ({ session }: { session?: ISessionUnit }) => {
       form.setValue('id_university', session?.id_universitas)
       form.setValue('id_unit', session?.id_unit)
       const module = JSON.parse(localStorage.getItem('module') ?? '')
-      console.log(module)
       setParentId({
         id_university: session?.id_universitas,
         id_module: module.id_module,

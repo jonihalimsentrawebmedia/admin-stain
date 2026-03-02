@@ -19,9 +19,7 @@ export const DownloadFileLanguage = () => {
 
   useEffect(() => {
     if (detail) {
-      console.log(detail)
       const data = detail[language as 'id']
-      console.log(data)
       form.reset({
         nama_berkas: data?.nama_berkas,
       })

@@ -31,7 +31,6 @@ export default function FormUploadImage<T extends FieldValues>({ form, name }: P
 
     await AxiosClient.post('/upload', formData)
       .then((res) => {
-        console.log(res)
         if (res.data.status) {
           toast.success(res.data.message)
           setValue(name, res.data.url)

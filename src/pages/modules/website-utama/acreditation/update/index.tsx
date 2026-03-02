@@ -22,7 +22,6 @@ export const UpdateAccreditation = () => {
   const navigate = useNavigate()
   const { acreditationDetail: detail } = useGetAcreditationDetail()
 
-  console.log(detail)
 
   useEffect(() => {
     if (detail) {
@@ -60,7 +59,6 @@ export const UpdateAccreditation = () => {
     resolver: zodResolver(AcreditationResolver),
   })
 
-  console.log(form.formState.errors)
 
   const HandleSave = async (e: IAcreditationTypeForm) => {
     setLoading(true)

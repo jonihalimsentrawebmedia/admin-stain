@@ -19,9 +19,7 @@ export const FacilitiesLanguage = () => {
 
   useEffect(() => {
     if (detail) {
-      console.log(detail)
       const data = detail[language as 'id']
-      console.log(data)
       form.reset({
         nama_fasilitas: data?.nama_fasilitas,
         deskripsi: data?.deskripsi,

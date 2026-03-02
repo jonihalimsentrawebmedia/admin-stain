@@ -104,7 +104,6 @@ const ButtonAddDocument = ({
       setLoading(false)
     }
   }
-  console.log(form.watch())
   return (
     <div className="flex items-center justify-between">
       <Button

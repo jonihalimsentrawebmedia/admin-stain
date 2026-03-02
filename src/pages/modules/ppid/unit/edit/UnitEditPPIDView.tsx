@@ -9,7 +9,6 @@ import useDraftUnit from '../controller/useDraftUnit'
 const UnitEditPPIDView = () => {
   const [open, setOpen] = useState(false)
   const { form, handleSave, loading, goToBack } = useDraftUnit()
-  console.log(form.watch())
   const onError = (errors: any) => {
     console.log('VALIDATION ERROR', errors)
   }
@@ -18,8 +17,7 @@ const UnitEditPPIDView = () => {
     <div className="flex flex-col gap-4 ">
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit((data) => {
-            console.log(data)
+          onSubmit={form.handleSubmit(() => {
             setOpen(true)
           }, onError)}
           className="flex flex-col gap-4"

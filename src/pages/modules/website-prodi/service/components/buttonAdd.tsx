@@ -22,7 +22,6 @@ export const ButtonAddServiceProdi = () => {
   })
 
   const queryClient = useQueryClient()
-  console.log(form.formState.errors)
 
   const HandleSave = async (value: ServiceProdiResolverType) => {
     setLoading(true)

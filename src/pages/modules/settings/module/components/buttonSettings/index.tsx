@@ -28,7 +28,6 @@ export const ButtonSettings = (props: Props) => {
     id_module: data?.id_module,
   })
 
-  console.log(listSettings)
 
   const [open, setOpen] = useState(false)
   const form = useForm()
@@ -48,7 +47,6 @@ export const ButtonSettings = (props: Props) => {
   const queryClient = useQueryClient()
 
   const HandleSave = async (e: any) => {
-    console.log(e?.id)
     setLoading(true)
     await AxiosClient.post(`/pengaturan/modules-unit/${data?.id_module}`, e?.id)
       .then((res) => {

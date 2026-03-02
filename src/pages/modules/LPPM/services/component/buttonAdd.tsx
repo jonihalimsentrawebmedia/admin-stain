@@ -25,7 +25,6 @@ export const ButtonAddService = () => {
 
   const queryClient = useQueryClient()
 
-  console.log(form.formState.errors)
 
   const HandleAddService = async (data: SchemaService) => {
     setLoading(true)

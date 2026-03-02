@@ -19,9 +19,7 @@ export const AnnouncementLanguage = () => {
 
   useEffect(() => {
     if (detail) {
-      console.log(detail)
       const data = detail[language as 'id']
-      console.log(data)
       form.reset({
         judul_pengumuman: data?.judul_pengumuman,
         isi_pengumuman: data?.isi_pengumuman,

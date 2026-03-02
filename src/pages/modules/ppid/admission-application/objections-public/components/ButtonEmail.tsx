@@ -86,7 +86,6 @@ const ButtonEmail = ({ data: dataProps, id, isForTable }: Props) => {
       setLoading(false)
     }
   }
-  console.log(form.watch())
   return (
     <>
       <Button

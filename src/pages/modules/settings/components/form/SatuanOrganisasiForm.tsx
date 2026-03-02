@@ -28,7 +28,6 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
   const { dikti } = useGetListDikti(
     kelompok == 'PRODI' ? form.watch('parent_id_temp') : form.watch('parent_id')
   )
-  console.log(dikti)
   const [searchParams, setSearchParams] = useSearchParams()
   let educationalLevelOption: any = []
 

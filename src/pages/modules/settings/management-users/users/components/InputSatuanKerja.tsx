@@ -230,7 +230,6 @@ const InputSatuanKerja = ({ form }: Props) => {
                   <Checkbox
                     id={item.id_satuan_organisasi}
                     onCheckedChange={(e) => {
-                      console.log(e)
                       if (e) {
                         const temp = [
                           ...valueSatuanKerja,

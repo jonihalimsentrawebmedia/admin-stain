@@ -15,7 +15,6 @@ const BackupDataView = () => {
     progress,
     loadingDownload,
   } = BackupDataViewModel()
-  console.log(progress)
   if (loadingBackup) {
     return <Skeleton className="h-[200px]" />
   }
