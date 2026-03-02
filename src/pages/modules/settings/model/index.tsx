@@ -36,10 +36,10 @@ export const SatuanOrganisasiResolver = z.object({
   instagram: z.string().url('URL Instagram tidak valid').optional(),
   youtube: z.string().url('URL YouTube tidak valid').optional(),
   is_alamat_sama_parent: z.boolean(),
-  api_dikti_id_pengguna: z.string().optional(),
-  api_dikti_username: z.string().optional(),
-  api_dikti_password: z.string().optional(),
-  id_unit_kerja_dikti: z.string().optional(),
+  api_dikti_id_pengguna: z.string().optional().nullable(),
+  api_dikti_username: z.string().optional().nullable(),
+  api_dikti_password: z.string().optional().nullable(),
+  id_unit_kerja_dikti: z.string().optional().nullable(),
 })
 
 /**
@@ -123,4 +123,15 @@ export interface SatuanOrganisasiDetail {
   updated_at: Date
   updated_user: string
   id_parent_satuan_organisasi: string
+}
+
+export interface SatuanOrganisasiLanguage {
+  content_hash: string
+  last_translated_at: string
+  status_translate: string
+  id_satuan_organisasi_translate: number
+  id_satuan_organisasi: string
+  language: string
+  nama: string
+  singkatan: null
 }

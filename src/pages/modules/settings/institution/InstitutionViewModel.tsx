@@ -3,6 +3,7 @@ import { IconDetail, IconEdit } from "@/components/common/table/icon";
 import type { ColumnDef } from "@tanstack/react-table";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import type { SatuanOrganisasiList } from "../model";
+import { IoLanguage } from "react-icons/io5";
 
 const InstitutionViewModel = () => {
   const [searchParams] = useSearchParams();
@@ -38,6 +39,12 @@ const InstitutionViewModel = () => {
         return (
           <div className="flex gap-2 items-center">
             {/* Tombol Biru (Asumsi: Detail/Lihat) */}
+              <Link
+                          to={`language/${values?.id_satuan_organisasi}`}
+                          className={'p-1.5 bg-primary text-white rounded'}
+                        >
+                          <IoLanguage />
+                        </Link>
             <Link
               to={`/modules/settings/institution/detail/${values.id_satuan_organisasi}`}
             >

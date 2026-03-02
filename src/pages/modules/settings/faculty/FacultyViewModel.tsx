@@ -4,6 +4,7 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import ButtonDelete from './components/ButtonDelete'
 import type { SatuanOrganisasiList } from '../model'
 import { ButtonShow } from '@/pages/modules/settings/faculty/components/buttonShow.tsx'
+import { IoLanguage } from 'react-icons/io5'
 
 const FacultyViewModel = () => {
   const [searchParams] = useSearchParams()
@@ -54,6 +55,12 @@ const FacultyViewModel = () => {
 
         return (
           <div className="flex gap-2 items-center">
+              <Link
+                          to={`language/${values?.id_satuan_organisasi}`}
+                          className={'p-1.5 bg-primary text-white rounded'}
+                        >
+                          <IoLanguage />
+                        </Link>
             <Link to={`/modules/settings/faculty/detail/${values.id_satuan_organisasi}`}>
               <IconDetail />
             </Link>

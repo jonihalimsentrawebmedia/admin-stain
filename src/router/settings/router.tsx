@@ -47,6 +47,12 @@ import { RankedGroupCategoryLanguagePage } from '@/pages/modules/settings/refere
 import { RankedAcademicLanguagePage } from '@/pages/modules/settings/reference/academic-rank/language'
 import IdentityView from '@/pages/modules/settings/identity/IdentityView'
 import BackupDataView from '@/pages/modules/settings/backup-data/BackupDataView'
+import { EducationLevelLanguagePage } from '@/pages/modules/settings/reference/educational-level/language'
+import MainDataUniversityLanguageView from '@/pages/modules/settings/main-data-university/language/MainDataUniversityLanguageView'
+import FacultyLanguageView from '@/pages/modules/settings/faculty/language/FacultyLanguageView'
+import ProdiLanguageView from '@/pages/modules/settings/prodi/language/ProdiLanguageView'
+import UnitLanguageView from '@/pages/modules/settings/unit/language/UnitLanguageView'
+import InstitutionLanguageView from '@/pages/modules/settings/institution/language/InstitutionLanguageView'
 export const SettingRouter = [
   {
     path: 'dashboard',
@@ -89,6 +95,10 @@ export const SettingRouter = [
         path: 'detail/:id',
         element: <UniversityDetailView />,
       },
+      {
+        path: 'language/:id',
+        element: <MainDataUniversityLanguageView />,
+      },
     ],
   },
   {
@@ -109,6 +119,10 @@ export const SettingRouter = [
       {
         path: 'detail/:id',
         element: <FacultyDetailView />,
+      },
+      {
+        path: 'language/:id',
+        element: <FacultyLanguageView />,
       },
     ],
   },
@@ -131,6 +145,10 @@ export const SettingRouter = [
         path: 'detail/:id',
         element: <ProdiDetailView />,
       },
+      {
+        path: 'language/:id',
+        element: <ProdiLanguageView />,
+      },
     ],
   },
   {
@@ -152,6 +170,10 @@ export const SettingRouter = [
         path: 'detail/:id',
         element: <UnitDetailView />,
       },
+      {
+        path: 'language/:id',
+        element: <UnitLanguageView />,
+      },
     ],
   },
   {
@@ -172,6 +194,10 @@ export const SettingRouter = [
       {
         path: 'detail/:id',
         element: <InstitutionDetailView />,
+      },
+      {
+        path: 'language/:id',
+        element: <InstitutionLanguageView />,
       },
     ],
   },
@@ -269,6 +295,10 @@ export const SettingRouter = [
       {
         path: 'educational-level',
         element: <EducationalLevelView />,
+      },
+      {
+        path: 'educational-level/language/:id',
+        element: <EducationLevelLanguagePage />,
       },
       {
         path: 'countries',
