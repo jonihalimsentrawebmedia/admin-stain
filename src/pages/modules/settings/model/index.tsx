@@ -36,6 +36,10 @@ export const SatuanOrganisasiResolver = z.object({
   instagram: z.string().url('URL Instagram tidak valid').optional(),
   youtube: z.string().url('URL YouTube tidak valid').optional(),
   is_alamat_sama_parent: z.boolean(),
+  api_dikti_id_pengguna: z.string().optional(),
+  api_dikti_username: z.string().optional(),
+  api_dikti_password: z.string().optional(),
+  id_unit_kerja_dikti: z.string().optional(),
 })
 
 /**

@@ -9,6 +9,7 @@ import useGetSatuanOrganisasi from '../../controller/useGetSatuanOrganisasi'
 import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import useGetEducationalLevel from '../../reference/educational-level/controller/useGetEducationalLevel'
+import useGetListDikti from '../../controller/useGetListDikti'
 
 interface Props {
   form: UseFormReturn<any>
@@ -24,12 +25,18 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
     kelompok: 'FAKULTAS',
     isGetAll: true,
   })
+  const { dikti } = useGetListDikti(
+    kelompok == 'PRODI' ? form.watch('parent_id_temp') : form.watch('parent_id')
+  )
+  console.log(dikti)
   const [searchParams, setSearchParams] = useSearchParams()
   let educationalLevelOption: any = []
+
   if (kelompok == 'PRODI') {
     const { educationalLevel } = useGetEducationalLevel({
       isGetAll: true,
     })
+
     educationalLevelOption = educationalLevel.map((item) => {
       return {
         value: item.id_jenjang,
@@ -331,6 +338,52 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
           placeholder="Masukkan link disini"
         />
       </CardInput>
+      {kelompok == 'UNIVERSITAS' ? (
+        <>
+          <CardInput title="Media Sosial">
+            <InputText
+              form={form}
+              name="api_dikti_id_pengguna"
+              isRow
+              label="API DIKTI ID PENGGUNA"
+              placeholder="Masukkan API DIKTI ID PENGGUNA"
+              //   inputClassName="lg:max-w-[300px]"
+            />
+
+            <InputText
+              form={form}
+              name="api_dikti_username"
+              isRow
+              label="API DIKTI USERNAME"
+              placeholder="Masukan API DIKTI USERNAME"
+            />
+            <InputText
+              form={form}
+              name="api_dikti_password"
+              isRow
+              label="API DIKTI PASSWORD"
+              placeholder="Masukkan API DIKTI PASSWORD"
+            />
+          </CardInput>
+        </>
+      ) : (
+        <CardInput title="Unit Kerja Dikti">
+          <SelectCustom
+            data={dikti.map((item) => {
+              return {
+                value: item.id,
+                label: item.nama,
+              }
+            })}
+            name={'id_unit_kerja_dikti'}
+            label={'Unit Kerja Dikti'}
+            placeholder={'Unit Kerja Dikti'}
+            form={form}
+            isRow
+            level1
+          />
+        </CardInput>
+      )}
     </>
   )
 }

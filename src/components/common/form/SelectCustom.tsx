@@ -125,7 +125,7 @@ export function SelectCustom({
                   menuPortal: (base) => ({
                     ...base,
                     zIndex: menuPortalTarget ? 99 : base.zIndex,
-                     maxWidth:"300px",
+                     maxWidth:"500px",
                   }),
                   ...customStyles,
                   control: (provided) => ({
@@ -154,7 +154,7 @@ export function SelectCustom({
                     alignItems: "flex-start", // agar tag bisa ke atas bukan center
                     paddingTop: "4px",
                     paddingBottom: "4px",
-                     maxWidth:"300px",
+                     maxWidth:"500px",
                   }),
                   multiValue: (provided) => ({
                     ...provided,

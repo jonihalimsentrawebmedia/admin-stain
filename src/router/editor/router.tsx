@@ -107,6 +107,9 @@ import FacultyDetailView from '@/pages/modules/manajeman-editor/faculty/detail/F
 import FaculityDetailHistoryView from '@/pages/modules/manajeman-editor/faculty/detail-history/FaculityDetailHistoryView'
 import LembagaDetailView from '@/pages/modules/manajeman-editor/lembaga/detail/LembagaDetailView.tsx'
 import LembagaEditView from '@/pages/modules/manajeman-editor/lembaga/edit/LembagaEditView.tsx'
+import { UpdatedArticleManagementEditor } from '@/pages/modules/new_editor/publict-content/article/updated'
+import { DetailArticlePage } from '@/pages/modules/new_editor/publict-content/article/detail'
+import { LogActivityArticleManagementEditorPage } from '@/pages/modules/new_editor/publict-content/article/log'
 
 export const EditorRouter = [
   {
@@ -301,6 +304,24 @@ export const EditorRouter = [
           {
             path: 'log/:id',
             element: <LogActivityFacilitiesUnitPage />,
+          },
+        ],
+      },
+
+      {
+        path: 'article',
+        children: [
+          {
+            path: 'edit/:id',
+            element: <UpdatedArticleManagementEditor />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailArticlePage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityArticleManagementEditorPage />,
           },
         ],
       },
