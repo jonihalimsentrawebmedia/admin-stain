@@ -339,7 +339,7 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
       </CardInput>
       {kelompok == 'UNIVERSITAS' ? (
         <>
-          <CardInput title="Media Sosial">
+          <CardInput title="API KEY DIKTI">
             <InputText
               form={form}
               name="api_dikti_id_pengguna"
