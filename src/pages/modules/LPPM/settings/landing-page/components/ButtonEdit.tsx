@@ -13,6 +13,7 @@ import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
 import { SwitchInput } from '@/components/common/form/switchInput.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
+import { format } from 'date-fns'
 
 interface Props {
   data: LandingList
@@ -22,6 +23,8 @@ const ButtonEdit = ({ data: dataProps }: Props) => {
   const form = useForm<LandingPageInstutationType>({
     resolver: zodResolver(LandingPageInstutationResolver),
   })
+
+  console.log(dataProps)
 
   const [loading, setLoading] = useState(false)
 
@@ -58,7 +61,7 @@ const ButtonEdit = ({ data: dataProps }: Props) => {
           setOpen(true)
           form.reset({
             gambar_url: dataProps.gambar_url,
-            aktif_sampai_at: dataProps.aktif_sampai_at.split('T')[0],
+            aktif_sampai_at: dataProps?.is_aktif_sampai_at ? format(dataProps?.aktif_sampai_at,'yyyy-MM-dd') : '',
             is_aktif_sampai_at: dataProps.is_aktif_sampai_at,
           })
         }}

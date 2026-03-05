@@ -37,6 +37,7 @@ import { SelectSessionLPPM } from '@/pages/modules/LPPM/select-lppm'
 import LPPMWebTheme from '@/pages/modules/LPPM/components/layout/theme.tsx'
 import MainLayoutLPPM from '@/pages/modules/LPPM/components/layout'
 import { routesLPPM } from '@/router/lppm/router.tsx'
+import ThemeSettings from '@/pages/modules/settings/components/layout/thema.tsx'
 
 export const Router = createBrowserRouter([
   {
@@ -114,7 +115,11 @@ export const Router = createBrowserRouter([
       },
       {
         path: 'settings',
-        element: <LayoutSetting />,
+        element: (
+          <ThemeSettings>
+            <LayoutSetting />
+          </ThemeSettings>
+        ),
         children: [...SettingRouter],
       },
       {

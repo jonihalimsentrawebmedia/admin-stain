@@ -11,9 +11,19 @@ import AxiosClient from '@/provider/axios'
 import { useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 import { Skeleton } from '@/components/ui/skeleton'
+import { useSearchParams } from 'react-router-dom'
 
 const LecturerProfilePage = () => {
-  const { loading, lecturer, meta } = UseGetLecturer()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') || '1'
+  const limit = searchParams.get('limit') || '10'
+  const search = searchParams.get('search') || ''
+
+  const { loading, lecturer, meta } = UseGetLecturer({
+    page: page,
+    limit: limit,
+    search: search,
+  })
   const { loading: loadingStatus, lecturerStatus } = UseGetLecturerStatus()
 
   const { columns } = LecturerColumnsProfile()
