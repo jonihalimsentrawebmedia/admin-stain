@@ -45,7 +45,7 @@ export default function CaptchaMath({setSameAction}: Props) {
             generateNumbers();
           }}
           variant={'ghost'}
-          className={'text-primary hover:text-primary'}>
+          className={'text-primary hover:text-primary w-fit'}>
           (Ganti Soal)
         </Button>
         <Input
