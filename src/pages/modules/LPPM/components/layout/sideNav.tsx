@@ -1,6 +1,6 @@
-import { useState, useMemo, useEffect } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { MenuListLPPM } from './menu.tsx'
+import { GenerateMenu } from './menu.tsx'
 import { cn } from '@/lib/utils.ts'
 import { ChevronRight } from 'lucide-react'
 
@@ -20,6 +20,8 @@ export function SideNavUnit({ collapsed }: Props) {
   const pathname = location.pathname
 
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({})
+
+  const MenuListLPPM = GenerateMenu()
 
   const makeGroupId = (parentId: string, index: number, name: string) =>
     `${parentId}-${index}-${name}`
@@ -54,10 +56,6 @@ export function SideNavUnit({ collapsed }: Props) {
   }, [pathname])
 
   const groups = { ...defaultOpenGroups, ...openGroups }
-
-  // const toggleGroup = (groupId: string) => {
-  //   setOpenGroups((prev) => ({ ...prev, [groupId]: !prev[groupId] }))
-  // }
 
   useEffect(() => {
     if (collapsed) setOpenGroups({})
@@ -200,11 +198,6 @@ export function SideNavUnit({ collapsed }: Props) {
   )
 }
 
-/**
- * TreeNodeWrapper:
- * - buat container garis + hitung groupId
- * - panggil recursive TreeNode
- */
 function TreeNodeWrapper({
   item,
   parentGroupId,
@@ -240,10 +233,6 @@ function TreeNodeWrapper({
   )
 }
 
-/**
- * TreeNode: recursive renderer for an item (could be leaf or parent)
- * - groupId prop is passed from wrapper to ensure IDs match the collector
- */
 function TreeNode({
   item,
   depth,
@@ -323,10 +312,6 @@ function TreeNode({
   return <li>{item.path ? <Link to={item.path}>{itemContent}</Link> : itemContent}</li>
 }
 
-/* ---------------------------
-   Active helpers (unchanged)
-   - isActiveTree: returns true if item or any descendant matches pathname
-----------------------------*/
 export function isActiveTree(item: MenuItem, pathname: string): boolean {
   if (item.path && (pathname === item.path || pathname.startsWith(item.path + '/'))) {
     return true
