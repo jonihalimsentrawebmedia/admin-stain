@@ -6,13 +6,14 @@ import AxiosClient from '@/provider/axios.tsx'
 import type { StaffProfileStatus } from '@/pages/modules/website-utama/program-studi/detail/model/staff'
 
 interface Props {
-  page: string
-  limit: string
-  search: string
+  page?: string
+  limit?: string
+  search?: string
+  enabled?: boolean
 }
 
 export const UseGetLecturer = (props?: Props) => {
-  const { page, limit, search } = props ?? {}
+  const { page, limit, search, enabled } = props ?? {}
 
   const [lecturer, setLecturer] = useState<Dosen[]>([])
   const [meta, setMeta] = useState<Meta>()
@@ -24,6 +25,7 @@ export const UseGetLecturer = (props?: Props) => {
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['lecturer-profile', ParamsSearch.toString()],
+    enabled: !!enabled,
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/prodi/profil/dosen?${ParamsSearch}`).then((res) => res.data),
   })
