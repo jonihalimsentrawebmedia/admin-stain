@@ -28,6 +28,7 @@ import { TracerStudyPage } from '@/pages/modules/pusat-karir/tracer-study'
 import { ServiceJobVacancy } from '@/pages/modules/pusat-karir/service/job-vacancy'
 import { SpecializationPage } from '@/pages/modules/pusat-karir/reference/specialization'
 import { SubSpecializationPage } from '@/pages/modules/pusat-karir/reference/specialization/sub-specialization'
+import { CreatedJobVacancy } from '@/pages/modules/pusat-karir/service/job-vacancy/created'
 
 export const CarrierCenterRoute = [
   {
@@ -82,6 +83,10 @@ export const CarrierCenterRoute = [
           {
             index: true,
             element: <ServiceJobVacancy />,
+          },
+          {
+            path: 'add',
+            element: <CreatedJobVacancy />,
           },
         ],
       },
