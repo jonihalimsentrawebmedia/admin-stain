@@ -1,4 +1,17 @@
-import { format, formatDistanceToNow, parse } from 'date-fns'
+import {
+  differenceInDays,
+  differenceInHours,
+  differenceInMinutes,
+  differenceInMonths,
+  differenceInSeconds,
+  differenceInWeeks,
+  differenceInYears,
+  format,
+  formatDistanceToNow,
+  isValid,
+  parse,
+  parseISO,
+} from 'date-fns'
 import { id } from 'date-fns/locale'
 
 export const urlStringEncode = (str: string) => {
@@ -44,7 +57,7 @@ export const GetModuleUrl = (moduleSelect: {
     case 'lppm': {
       return `/modules/select-lppm?url=lppm&id=${moduleSelect?.id_module}`
     }
-    
+
     case 'website_lembaga': {
       return `/modules/select-lembaga?url=website-lembaga&id=${moduleSelect?.id_module}`
     }
@@ -58,6 +71,9 @@ export const GetModuleUrl = (moduleSelect: {
     case 'ppid':
       return `/modules/select-ppid?url=ppid&id=${moduleSelect?.id_module}`
 
+    case 'pusat_karir':
+      return `/modules/session-carrier?url=pusat-karir&id=${moduleSelect?.id_module}`
+
     default:
       return `/modules/${urlStringEncode(moduleSelect?.controller ?? '')}/dashboard`
   }
@@ -69,18 +85,6 @@ export function isEmpetyReturn(value: any) {
   }
   return value
 }
-
-import {
-  differenceInSeconds,
-  differenceInMinutes,
-  differenceInHours,
-  differenceInDays,
-  differenceInWeeks,
-  differenceInMonths,
-  differenceInYears,
-  parseISO,
-  isValid,
-} from 'date-fns'
 
 export function FormatTimeAgo(dateInput: string | Date): string {
   const date = typeof dateInput === 'string' ? parseISO(dateInput) : dateInput

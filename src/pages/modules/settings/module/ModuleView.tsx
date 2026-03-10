@@ -1,21 +1,21 @@
-import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup";
-import ModuleViewModel from "./ModuleViewModel";
-import TableCustom from "@/components/common/table/TableCustom";
-import ButtonAddModule from "./components/ButtonAddModule";
-import useGetModules from "./conntroller/useGetModules";
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
+import ModuleViewModel from './ModuleViewModel'
+import TableCustom from '@/components/common/table/TableCustom'
+import ButtonAddModule from './components/ButtonAddModule'
+import useGetModules from './conntroller/useGetModules'
 
 const ModuleView = () => {
-  const { columns } = ModuleViewModel();
-  const { loading, modules ,meta} = useGetModules();
+  const { columns } = ModuleViewModel()
+  const { loading, modules, meta } = useGetModules()
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
         label="Modul"
         buttonGroup={[
           {
-            label: "Tambah Data",
+            label: 'Tambah Data',
             onClick: () => {},
-            type: "add",
+            type: 'add',
             element: <ButtonAddModule />,
           },
         ]}
@@ -25,13 +25,14 @@ const ModuleView = () => {
         columns={columns}
         data={modules}
         loading={loading}
+        columnsName={['gambar']}
         meta={meta}
         placeHolderSearch="Cari Modul"
-        tdClassName='whitespace-pre-line'
-        thClassName='whitespace-pre-line'
+        tdClassName="whitespace-pre-line"
+        thClassName="whitespace-pre-line"
       />
     </div>
-  );
-};
+  )
+}
 
-export default ModuleView;
+export default ModuleView

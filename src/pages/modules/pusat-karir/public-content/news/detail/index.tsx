@@ -3,15 +3,15 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button.tsx'
 import { HiPencil } from 'react-icons/hi'
 import { Separator } from '@/components/ui/separator.tsx'
-import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel'
+import { Carousel, type CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { useEffect, useState } from 'react'
 import { format } from 'date-fns'
-import { UseGetUnitNewsDetail } from '../hooks/index'
+import { UseGetCarrierNewsDetail } from '../hooks/index'
 import { ButtonSubmissionNewsUnit } from '../components/buttonSubmission'
 
-export const DetailNewsUnitPage = () => {
+export const DetailNewsCarrierPage = () => {
   const { id } = useParams()
-  const { unitNewsDetail: detail } = UseGetUnitNewsDetail(id ?? '')
+  const { unitNewsDetail: detail } = UseGetCarrierNewsDetail(id ?? '')
   const navigate = useNavigate()
 
   const [api, setApi] = useState<CarouselApi>()
@@ -44,7 +44,7 @@ export const DetailNewsUnitPage = () => {
                 </p>
                 <Button
                   onClick={() =>
-                    navigate(`/modules/website-unit/public-content/news/edit/${detail?.id_berita}`)
+                    navigate(`/modules/pusat-karir/public-content/news/edit/${detail?.id_berita}`)
                   }
                   className={'border-primary text-primary hover:text-primary'}
                   variant={'outline'}
@@ -58,7 +58,7 @@ export const DetailNewsUnitPage = () => {
             type: 'edit',
             label: 'Edit Data',
             onClick: () => {
-              navigate(`/modules/website-unit/public-content/news/edit/${detail?.id_berita}`)
+              navigate(`/modules/pusat-karir/public-content/news/edit/${detail?.id_berita}`)
             },
             element:
               detail?.status_publish === 'DRAFT' ? (
@@ -89,9 +89,7 @@ export const DetailNewsUnitPage = () => {
                   <div className="size-3.5 rounded-full bg-yellow-500" />
                   <p>{detail?.nama_kategori_berita}</p>
                 </div>
-                <p className={'text-3xl font-semibold text-white'}>
-                  STAIN MADINA Menggelar Kegiatan Microteaching di SMP Negeri 9 Medan
-                </p>
+                <p className={'text-3xl font-semibold text-white'}>{detail?.judul ?? ''}</p>
                 <div className="flex items-center justify-between gap-5 w-full">
                   <div>
                     <p className="text-white">Tanggal Terbit</p>

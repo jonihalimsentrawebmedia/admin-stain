@@ -3,15 +3,15 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button.tsx'
 import { HiPencil } from 'react-icons/hi'
 import { Separator } from '@/components/ui/separator.tsx'
-import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel'
+import { Carousel, type CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { useEffect, useState } from 'react'
 import { format } from 'date-fns'
-import { UseGetUnitNewsDetail } from '../hooks/index'
-import { ButtonSubmissionNewsUnit } from '../components/buttonSubmission'
+import { UseGetCarrierArticleDetail } from '../hooks/index'
+import { ButtonSubmissionArticle } from '../components/buttonSubmission'
 
-export const DetailNewsUnitPage = () => {
+export const DetailArticleCarrierPage = () => {
   const { id } = useParams()
-  const { unitNewsDetail: detail } = UseGetUnitNewsDetail(id ?? '')
+  const { unitNewsDetail: detail } = UseGetCarrierArticleDetail(id ?? '')
   const navigate = useNavigate()
 
   const [api, setApi] = useState<CarouselApi>()
@@ -27,7 +27,7 @@ export const DetailNewsUnitPage = () => {
     })
   }, [api])
 
-  const images = detail?.berita_gambar_tambahan ?? []
+  const images = detail?.artikel_gambar_tambahan ?? []
 
   return (
     <>
@@ -44,7 +44,9 @@ export const DetailNewsUnitPage = () => {
                 </p>
                 <Button
                   onClick={() =>
-                    navigate(`/modules/website-unit/public-content/news/edit/${detail?.id_berita}`)
+                    navigate(
+                      `/modules/pusat-karir/public-content/article/edit/${detail?.id_artikel}`
+                    )
                   }
                   className={'border-primary text-primary hover:text-primary'}
                   variant={'outline'}
@@ -58,11 +60,11 @@ export const DetailNewsUnitPage = () => {
             type: 'edit',
             label: 'Edit Data',
             onClick: () => {
-              navigate(`/modules/website-unit/public-content/news/edit/${detail?.id_berita}`)
+              navigate(`/modules/pusat-karir/public-content/article/edit/${detail?.id_artikel}`)
             },
             element:
               detail?.status_publish === 'DRAFT' ? (
-                <ButtonSubmissionNewsUnit {...(detail as any)} />
+                <ButtonSubmissionArticle {...(detail as any)} />
               ) : (
                 <></>
               ),
@@ -81,17 +83,7 @@ export const DetailNewsUnitPage = () => {
           >
             <div className="flex items-start gap-2 w-8/12 h-full">
               <div className="flex gap-5 flex-col justify-between items-start h-full">
-                <div
-                  className={
-                    'bg-white p-2 rounded-full text-primary flex items-center px-4 gap-1.5 text-sm'
-                  }
-                >
-                  <div className="size-3.5 rounded-full bg-yellow-500" />
-                  <p>{detail?.nama_kategori_berita}</p>
-                </div>
-                <p className={'text-3xl font-semibold text-white'}>
-                  STAIN MADINA Menggelar Kegiatan Microteaching di SMP Negeri 9 Medan
-                </p>
+                <p className={'text-3xl font-semibold text-white'}>{detail?.judul}</p>
                 <div className="flex items-center justify-between gap-5 w-full">
                   <div>
                     <p className="text-white">Tanggal Terbit</p>
@@ -145,7 +137,7 @@ export const DetailNewsUnitPage = () => {
         <div className="max-w-4xl mx-auto mt-5">
           <div
             className={'space-y-5'}
-            dangerouslySetInnerHTML={{ __html: detail?.isi_berita ?? '' }}
+            dangerouslySetInnerHTML={{ __html: detail?.isi_artikel ?? '' }}
           />
         </div>
       </div>

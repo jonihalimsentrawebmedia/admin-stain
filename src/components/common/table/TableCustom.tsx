@@ -11,7 +11,7 @@ import {
 
 import { useSearchParams } from 'react-router-dom'
 
-import { useEffect, useState, type ReactNode } from 'react'
+import { type ReactNode, useEffect, useState } from 'react'
 import SetLimitList from './SetLimitList'
 import Search from './Search'
 import TablePaginate, { type Meta } from './TablePagination'
@@ -20,6 +20,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { IconListTable } from './icon'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
+
 interface Props {
   data: any
   columns: any
@@ -36,6 +37,7 @@ interface Props {
   placeHolderSearch?: string
   loading?: boolean
   meta?: Meta
+  columnsName?: string[]
   isShowLimit?: boolean
   isShowChoiceColumn?: boolean
   setPage?: (value: any) => void
@@ -64,6 +66,14 @@ const TableCustom = (props: Props) => {
     setLimit,
     setPage,
     setSearch,
+    columnsName = [
+      'id_satuan_organisasi',
+      'parent_id',
+      'ip',
+      'endpoint_be',
+      'uraian',
+      'lembaga_penilaian',
+    ],
   } = props
   const table = useReactTable({
     data: data ?? [],
@@ -88,21 +98,15 @@ const TableCustom = (props: Props) => {
   const columnCount = columns?.length || 5
   const totalData = meta?.total ?? 0
   const limitData = searchparams.get('limit') ? Number(searchparams.get('limit')) : 10
+
   useEffect(() => {
     const temp = columns
       .map((item: any) => item.accessorKey)
-      .filter(
-        (item: any) =>
-          item !== 'id_satuan_organisasi' &&
-          item != 'parent_id' &&
-          item != 'ip' &&
-          item !== 'endpoint_be' &&
-          item !== 'gambar' &&
-          item !== 'uraian' &&
-          item !== 'lembaga_penilaian'
-      )
+      .filter((item: string) => !columnsName.includes(item))
+
     setColumnChecked(temp)
   }, [])
+
   return (
     <div className="flex flex-col w-full gap-4 ">
       {isShowFilter && (
