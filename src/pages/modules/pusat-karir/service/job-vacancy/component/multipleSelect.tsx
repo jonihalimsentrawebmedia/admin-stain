@@ -1,5 +1,5 @@
 import { Label } from '@/components/ui/label.tsx'
-import { useEffect, useRef, useState } from 'react'
+import { type Dispatch, type SetStateAction, useEffect, useRef, useState } from 'react'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import { UseGetSpecialization } from '@/pages/modules/pusat-karir/reference/specialization/hooks'
 import { UseGetSubSpecialization } from '@/pages/modules/pusat-karir/reference/specialization/sub-specialization/hooks'
@@ -21,6 +21,7 @@ interface FormProps<T extends FieldValues> {
 export const MultipleSelectCategory = <T extends FieldValues>({ form, name }: FormProps<T>) => {
   const [open, setOpen] = useState(false)
   const [selected, setSelected] = useState<SelectedSub[]>([])
+  const [subMap, setSubMap] = useState<Record<string, { nama: string; parentId: string }>>({})
 
   const formValue = useWatch({
     control: form.control,
@@ -52,8 +53,8 @@ export const MultipleSelectCategory = <T extends FieldValues>({ form, name }: Fo
         .filter((id) => !prevIds.includes(id))
         .map((id) => ({
           id,
-          nama: id,
-          parentId: '',
+          nama: subMap[id]?.nama ?? id,
+          parentId: subMap[id]?.parentId ?? '',
         }))
 
       if (newItems.length === 0) return prev
@@ -120,6 +121,7 @@ export const MultipleSelectCategory = <T extends FieldValues>({ form, name }: Fo
               selected={selected}
               toggleSub={toggleSub}
               removeByParent={removeByParent}
+              setSubMap={setSubMap}
             />
           ))}
         </div>
@@ -133,14 +135,30 @@ type Props = {
   selected: SelectedSub[]
   toggleSub: (sub: SelectedSub) => void
   removeByParent: (parentId: string) => void
+  setSubMap: Dispatch<SetStateAction<Record<string, { nama: string; parentId: string }>>>
 }
 
-const CategoryItem = ({ item, selected, toggleSub, removeByParent }: Props) => {
+const CategoryItem = ({ item, selected, toggleSub, removeByParent, setSubMap }: Props) => {
   const { subSpecialization } = UseGetSubSpecialization({
     id: item.id_spesialisasi,
     page: '0',
     limit: '0',
   })
+
+  useEffect(() => {
+    setSubMap((prev) => {
+      const newMap = { ...prev }
+
+      subSpecialization.forEach((sub) => {
+        newMap[sub.id_sub_spesialisasi] = {
+          nama: sub.nama_spesialisasi,
+          parentId: item.id_spesialisasi,
+        }
+      })
+
+      return newMap
+    })
+  }, [subSpecialization])
 
   const parentRef = useRef<HTMLInputElement>(null)
 

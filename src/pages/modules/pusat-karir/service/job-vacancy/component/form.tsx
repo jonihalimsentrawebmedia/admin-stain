@@ -5,11 +5,11 @@ import TextInput from '@/components/common/form/TextInput.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import { useNavigate } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { MultipleSelectCategory } from '@/pages/modules/pusat-karir/service/job-vacancy/component/multipleSelect.tsx'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import UseGetProvince from '@/pages/modules/settings/reference/province/controller/useGetProvince.tsx'
 import useGetRegency from '@/pages/modules/settings/reference/regency/controller/useGetRegency.tsx'
 import { RichText } from '@/components/common/richtext'
+import { NewMultipleSelectCategory } from '@/pages/modules/pusat-karir/service/job-vacancy/component/newMultiple.tsx'
 
 interface Props {
   form: UseFormReturn<JobVacancyType>
@@ -68,7 +68,9 @@ export const FormJobVacancy = (props: Props) => {
             isRow
           />
 
-          <MultipleSelectCategory form={form} name={'list_spesialisasi'} />
+          {/*<MultipleSelectCategory form={form} name={'list_spesialisasi'} />*/}
+
+          <NewMultipleSelectCategory form={form} name={'list_spesialisasi'} />
 
           <TextInput
             form={form}

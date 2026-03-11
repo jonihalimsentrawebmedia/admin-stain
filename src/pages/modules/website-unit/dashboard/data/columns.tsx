@@ -21,7 +21,11 @@ export const ColumnsApprovalUnit = () => {
       accessorKey: 'tanggal',
       header: 'Tanggal Diajukan',
       cell: ({ row }) => {
-        return <>{format(row?.original?.tanggal, 'dd/MM/yyyy HH:mm:ss')}</>
+        return (
+          <>
+            {row?.original?.tanggal ? format(row?.original?.tanggal, 'dd/MM/yyyy HH:mm:ss') : '-'}
+          </>
+        )
       },
     },
     {

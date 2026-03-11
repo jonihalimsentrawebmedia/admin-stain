@@ -29,6 +29,13 @@ import { ServiceJobVacancy } from '@/pages/modules/pusat-karir/service/job-vacan
 import { SpecializationPage } from '@/pages/modules/pusat-karir/reference/specialization'
 import { SubSpecializationPage } from '@/pages/modules/pusat-karir/reference/specialization/sub-specialization'
 import { CreatedJobVacancy } from '@/pages/modules/pusat-karir/service/job-vacancy/created'
+import { UpdatedJobVacancy } from '@/pages/modules/pusat-karir/service/job-vacancy/updated'
+import { DetailJobVacancy } from '@/pages/modules/pusat-karir/service/job-vacancy/detail'
+import { ApplicantJobVacancy } from '@/pages/modules/pusat-karir/service/job-vacancy/Applicant-user'
+import { CarrierConsultationPage } from '@/pages/modules/pusat-karir/service/carrier-consultation'
+import { PortalCVATS } from '@/pages/modules/pusat-karir/service/portal-cv'
+import { MainService } from '@/pages/modules/pusat-karir/service/main'
+import { FooterServicePage } from '@/pages/modules/pusat-karir/service/Footer'
 
 export const CarrierCenterRoute = [
   {
@@ -88,7 +95,43 @@ export const CarrierCenterRoute = [
             path: 'add',
             element: <CreatedJobVacancy />,
           },
+          {
+            path: ':id',
+            children: [
+              {
+                path: 'edit',
+                element: <UpdatedJobVacancy />,
+              },
+              {
+                path: 'detail',
+                element: <DetailJobVacancy />,
+              },
+              {
+                path: 'applicant',
+                element: <ApplicantJobVacancy />,
+              },
+            ],
+          },
         ],
+      },
+      {
+        path: 'internship-vacancy',
+      },
+      {
+        path: 'consultation',
+        element: <CarrierConsultationPage />,
+      },
+      {
+        path: 'portal-cv',
+        element: <PortalCVATS />,
+      },
+      {
+        path: 'main',
+        element: <MainService />,
+      },
+      {
+        path: 'footer',
+        element: <FooterServicePage />,
       },
     ],
   },

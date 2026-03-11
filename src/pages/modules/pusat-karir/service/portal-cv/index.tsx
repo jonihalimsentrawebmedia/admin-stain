@@ -5,40 +5,39 @@ import { Form } from '@/components/ui/form.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import { MdInfo } from 'react-icons/md'
-import { UseGetTracerStudy } from '@/pages/modules/pusat-karir/tracer-study/hooks'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
+import { UseGetUrlPortalCV } from '@/pages/modules/pusat-karir/service/portal-cv/hooks'
 
-export const TracerStudyPage = () => {
+export const PortalCVATS = () => {
   const [isEdit, setIsEdit] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const { tracerStudy } = UseGetTracerStudy()
-
+  const { urlPortal } = UseGetUrlPortalCV()
   const form = useForm()
 
   useEffect(() => {
-    if (tracerStudy) {
+    if (urlPortal) {
       form.reset({
-        url: tracerStudy?.url,
+        url: urlPortal?.url,
       })
     }
-  }, [tracerStudy])
+  }, [urlPortal])
 
   const queryClient = useQueryClient()
 
   const handleSave = async (value: any) => {
     setLoading(true)
-    await AxiosClient.post('/pusat-karir/studytracer', value)
+    await AxiosClient.post('/pusat-karir/portacvats', value)
       .then((res) => {
         if (res.data.status) {
           setLoading(false)
           setIsEdit(false)
-          toast.success(res.data.message || 'Success Pengajuan update data universitas')
           queryClient.invalidateQueries({
-            queryKey: ['tracer-study'],
+            queryKey: ['portal-cv'],
           })
+          toast.success(res.data.message || 'Success Pengajuan update data universitas')
         }
       })
       .catch((err) => {
@@ -55,7 +54,7 @@ export const TracerStudyPage = () => {
             <Form {...form}>
               <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(handleSave)}>
                 <ButtonTitleGroup
-                  label={'Tracer Study'}
+                  label={'Portal CV ATS'}
                   buttonGroup={[
                     {
                       type: 'cancel',
@@ -72,7 +71,7 @@ export const TracerStudyPage = () => {
                 />
                 <TextInput
                   form={form}
-                  name={'link_url'}
+                  name={'url'}
                   label={'Link URL'}
                   placeholder={'Link URL'}
                   className={'w-1/2 bg-white'}
@@ -88,7 +87,7 @@ export const TracerStudyPage = () => {
         ) : (
           <>
             <ButtonTitleGroup
-              label={'Tracer Study'}
+              label={'Portal CV ATS'}
               buttonGroup={[{ type: 'edit', label: 'Edit URL', onClick: () => setIsEdit(!isEdit) }]}
             />
 
@@ -98,14 +97,13 @@ export const TracerStudyPage = () => {
               }
             >
               <MdInfo className={'size-5'} />
-              Masukkan URL atau link tracer study perguruan tinggi anda.
+              Masukkan URL atau link portal CV ATS perguruan tinggi anda.
             </div>
 
             <div className="grid grid-cols-[12rem_1fr]">
               <p className="text-gray-500">URL/Link</p>
-              <p>{tracerStudy?.url}</p>
+              <p>{urlPortal?.url}</p>
             </div>
-
           </>
         )}
       </div>

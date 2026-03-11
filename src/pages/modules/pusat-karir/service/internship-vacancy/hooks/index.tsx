@@ -1,50 +1,48 @@
-// pusat-karir/lowongan-pekerjaan
-
 import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { IJobVacancy } from '@/pages/modules/pusat-karir/service/job-vacancy/data/types.ts'
 
-export const UseGetListJobVacancy = () => {
-  const [jobVacancy, setJobVacancy] = useState<IJobVacancy[]>([])
+export const UseGetListInternshipVacancy = () => {
+  const [internshipVacancy, setInternshipVacancy] = useState<IJobVacancy[]>([])
   const [meta, setMeta] = useState<Meta>()
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['job-vacancy'],
+    queryKey: ['internship-vacancy'],
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get('/pusat-karir/lowongan-pekerjaan').then((res) => res.data),
+    queryFn: () => AxiosClient.get('/pusat-karir/lowongan-magang').then((res) => res.data),
   })
 
   const loading = isLoading || isFetching
 
   useEffect(() => {
     if (data) {
-      setJobVacancy(data?.data)
+      setInternshipVacancy(data?.data)
       setMeta(data?.meta)
     }
   }, [data])
 
-  return { jobVacancy, loading, meta }
+  return { internshipVacancy, loading, meta }
 }
 
-export const UseGetDetailJobVacancy = (id: string) => {
-  const [jobVacancy, setJobVacancy] = useState<IJobVacancy>()
+export const UseGetDetailInternshipVacancy = (id: string) => {
+  const [internshipVacancy, setInternshipVacancy] = useState<IJobVacancy>()
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['job-vacancy-detail', id],
+    queryKey: ['internship-vacancy-detail', id],
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get(`/pusat-karir/lowongan-pekerjaan/${id}`).then((res) => res.data?.data),
+      AxiosClient.get(`/pusat-karir/lowongan-magang/${id}`).then((res) => res.data?.data),
   })
 
   const loading = isLoading || isFetching
 
   useEffect(() => {
     if (data) {
-      setJobVacancy(data)
+      setInternshipVacancy(data)
     }
   }, [data])
 
-  return { jobVacancy, loading }
+  return { internshipVacancy, loading }
 }

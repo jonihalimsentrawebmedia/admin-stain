@@ -6,7 +6,7 @@ import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import type { ISubSpecialization } from '../data/types'
 
 interface Props extends BasicProps {
-  id: string
+  id?: string
 }
 
 export const UseGetSubSpecialization = (props?: Props) => {

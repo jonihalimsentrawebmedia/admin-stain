@@ -3,6 +3,10 @@ import type { ColumnDef } from '@tanstack/react-table'
 import type { IJobVacancy } from '@/pages/modules/pusat-karir/service/job-vacancy/data/types.ts'
 import { format } from 'date-fns'
 import { HiPencil } from 'react-icons/hi'
+import { MdInfo } from 'react-icons/md'
+import { FaUserFriends } from 'react-icons/fa'
+import { Button } from '@/components/ui/button.tsx'
+import { ButtonDeleteJobVacancy } from '@/pages/modules/pusat-karir/service/job-vacancy/component/buttonDelete.tsx'
 
 export const ColumnsJobVacancy = () => {
   const [searchParams] = useSearchParams()
@@ -61,16 +65,42 @@ export const ColumnsJobVacancy = () => {
       },
     },
     {
+      accessorKey: 'jumlah_pelamar',
+      header: 'Lihat Pelamar',
+      cell: ({ row }) => {
+        const { jumlah_pelamar, id_lowongan_pekerjaan } = row?.original
+        return (
+          <Link to={`${id_lowongan_pekerjaan}/applicant`}>
+            <Button
+              variant={'outline'}
+              size={'sm'}
+              className={'border-primary text-primary hover:text-primary'}
+            >
+              <FaUserFriends />
+              Lihat Pelamar ({jumlah_pelamar})
+            </Button>
+          </Link>
+        )
+      },
+    },
+    {
       accessorKey: 'action',
       header: '',
       cell: ({ row }) => (
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
+          <Link
+            to={`${row?.original.id_lowongan_pekerjaan}/detail`}
+            className={'p-1.5 bg-blue-500 hover:bg-blue-600 text-white rounded'}
+          >
+            <MdInfo />
+          </Link>
           <Link
             to={`${row?.original.id_lowongan_pekerjaan}/edit`}
             className={'p-1.5 bg-yellow-500 hover:bg-yellow-600 text-white rounded'}
           >
             <HiPencil />
           </Link>
+          <ButtonDeleteJobVacancy data={row?.original} />
         </div>
       ),
     },

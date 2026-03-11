@@ -49,3 +49,5 @@ export interface ISpecializationData {
 export type JobLocationType = 'ONSITE' | 'REMOTE' | 'HYBRID'
 
 export type JobType = 'FULLTIME' | 'PARTTIME' | 'INTERNSHIP' | 'CONTRACT' | 'MAGANG'
+
+export type StatusApplicant = 'MASUK' | 'DITERIMA' | 'DITOLAK' | 'DIPROSES' | 'DIBATALKAN'

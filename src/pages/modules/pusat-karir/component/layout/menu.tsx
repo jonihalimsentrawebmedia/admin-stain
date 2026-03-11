@@ -86,8 +86,8 @@ export const GenerateMenu = () => {
         },
         {
           id: 46,
-          name: 'Posisi Layanan',
-          path: `${baseDomain}/service/position`,
+          name: 'Posisi Footer',
+          path: `${baseDomain}/service/footer`,
         },
       ],
     },
