@@ -57,7 +57,7 @@ export const DetailSurvey = () => {
               <form className={'space-y-4'}>
                 {ActiveSection?.pertanyaan?.map((row, k) => (
                   <div key={k} className={'border p-2.5 rounded'}>
-                    <ContentType item={row} form={form} />
+                    <ContentType index={k} item={row} form={form} />
                   </div>
                 ))}
               </form>
