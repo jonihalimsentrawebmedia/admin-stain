@@ -44,7 +44,7 @@ export const DetailNewsUnitPage = () => {
                 </p>
                 <Button
                   onClick={() =>
-                    navigate(`/modules/website-prodi/public-content/news/edit/${detail?.id_berita}`)
+                    navigate(`/modules/website-unit/public-content/news/edit/${detail?.id_berita}`)
                   }
                   className={'border-primary text-primary hover:text-primary'}
                   variant={'outline'}
@@ -58,7 +58,7 @@ export const DetailNewsUnitPage = () => {
             type: 'edit',
             label: 'Edit Data',
             onClick: () => {
-              navigate(`/modules/website-prodi/public-content/news/edit/${detail?.id_berita}`)
+              navigate(`/modules/website-unit/public-content/news/edit/${detail?.id_berita}`)
             },
             element:
               detail?.status_publish === 'DRAFT' ? (

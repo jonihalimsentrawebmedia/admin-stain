@@ -1,4 +1,5 @@
 export interface Dosen {
+  id_dosen:string
   gambar_url: string;
   nama: string;
   nip: string;

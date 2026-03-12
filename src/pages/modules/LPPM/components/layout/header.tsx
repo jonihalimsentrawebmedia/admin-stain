@@ -1,10 +1,11 @@
 import type { IModulesList } from '@/pages/modules/interface'
 import { RiMenuLine } from 'react-icons/ri'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/hooks/getProfile.tsx'
 import ButtonProfile from '@/pages/modules/settings/components/button/ButtonProfile.tsx'
 import { Link } from 'react-router-dom'
 import { UseGetSessionLPPM } from '@/pages/modules/LPPM/hooks'
+import { UseLPPMContext } from '@/pages/modules/LPPM/components/context'
 
 interface Props {
   collapsed: boolean
@@ -19,6 +20,14 @@ export function HeaderUnit(props: Props) {
 
   const { profileUser } = UseGetUserProfile()
   const { session } = UseGetSessionLPPM()
+
+  const { setProfileSession } = UseLPPMContext()
+
+  useEffect(() => {
+    if (session) {
+      setProfileSession(session)
+    }
+  }, [session])
 
   return (
     <header className="py-4 px-5 bg-[#E9FFF1] border-b border-green-200 flex items-center justify-between w-full">

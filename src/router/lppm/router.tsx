@@ -97,6 +97,7 @@ import { ActivityProgramPage } from '@/pages/modules/LPPM/research/schema/intern
 import { CreatedFormActivity } from '@/pages/modules/LPPM/research/schema/internal/activity/component/created.tsx'
 import { UpdatedFormActivity } from '@/pages/modules/LPPM/research/schema/internal/activity/component/updated.tsx'
 import { DetailActivityProgramInternal } from '@/pages/modules/LPPM/research/schema/internal/activity/component/detail.tsx'
+import { ListJournalPage } from '@/pages/modules/LPPM/publication-hki/journal/list'
 
 export const routesLPPM = [
   {
@@ -530,6 +531,10 @@ export const routesLPPM = [
                 ],
               },
             ],
+          },
+          {
+            path: 'list',
+            element: <ListJournalPage />,
           },
         ],
       },

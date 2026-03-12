@@ -8,10 +8,13 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { UseGetMainDevotion } from './hooks/index'
+import { UseLPPMContext } from '@/pages/modules/LPPM/components/context'
 
 export const MainDevotionHub = () => {
   const [isEdit, setIsEdit] = useState(false)
   const [loading, setLoading] = useState(false)
+
+  const { profileSession } = UseLPPMContext()
 
   const { responseData } = UseGetMainDevotion()
   const form = useForm()
@@ -49,7 +52,7 @@ export const MainDevotionHub = () => {
           <Form {...form}>
             <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(handleSave)}>
               <ButtonTitleGroup
-                label={'STAIN Hub'}
+                label={`${profileSession?.singkatan_universitas} Hub`}
                 buttonGroup={[
                   {
                     type: 'cancel',
@@ -72,7 +75,7 @@ export const MainDevotionHub = () => {
         <>
           <div className={'mt-5'}>
             <ButtonTitleGroup
-              label={'STAIN Hub'}
+              label={`${profileSession?.singkatan_universitas} Hub`}
               buttonGroup={[
                 {
                   type: 'edit',

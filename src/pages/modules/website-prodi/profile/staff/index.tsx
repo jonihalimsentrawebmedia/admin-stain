@@ -43,7 +43,7 @@ const StaffProfilePage = () => {
   if (loadingStatus || staffStatus?.status == 'in_progress') {
     return (
       <div>
-        Menunggu Proses
+        Menunggu {staffStatus?.job_can_running} Proses
         <Skeleton className="h-[100px]" />
       </div>
     )
