@@ -28,8 +28,12 @@ export const UseGetUUID = (id: string) => {
   return { uuid, loading }
 }
 
-export const UseGetSurvey = (props?: BasicProps) => {
-  const { page, limit, search } = props ?? {}
+interface props extends BasicProps {
+  status?: string
+}
+
+export const UseGetSurvey = (props?: props) => {
+  const { page, limit, search, status } = props ?? {}
 
   const [survey, setSurvey] = useState<ISurveyQuestion[]>([])
   const [meta, setMeta] = useState<Meta>()
@@ -38,6 +42,7 @@ export const UseGetSurvey = (props?: BasicProps) => {
   if (page) ParamsSearch.append('page', page ?? '1')
   if (limit) ParamsSearch.append('limit', limit ?? '10')
   if (search) ParamsSearch.append('search', search ?? '')
+  if (status) ParamsSearch.append('status', status ?? 'DRAFT')
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['survey', ParamsSearch.toString()],

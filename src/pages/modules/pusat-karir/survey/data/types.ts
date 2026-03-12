@@ -10,6 +10,7 @@ export type TipePertanyaan =
 
 export interface IPilihanSurvey {
   judul_pilihan: string
+  value: string
 }
 
 export interface IKonfigurasiPilihan {
@@ -27,6 +28,7 @@ export interface IKonfigurasiSkalaLinear {
 export type TKonfigurasiPertanyaan = IKonfigurasiPilihan | IKonfigurasiSkalaLinear | null
 
 export interface IPertanyaanSurvey {
+  id_pertanyaan: string
   pertanyaan: string
   deskripsi: string
   type: TipePertanyaan

@@ -5,6 +5,12 @@ import { format } from 'date-fns'
 import { MdInfo } from 'react-icons/md'
 import { HiPencil } from 'react-icons/hi'
 import { ButtonDeleteSurvey } from '@/pages/modules/pusat-karir/survey/component/buttonDelete.tsx'
+import { ButtonPublish } from '@/pages/modules/pusat-karir/survey/component/buttonPublish.tsx'
+import { ButtonChangeDate } from '@/pages/modules/pusat-karir/survey/component/buttonChangeDate.tsx'
+import { ButtonCopy } from '@/pages/modules/pusat-karir/survey/component/form/buttonCoppy.tsx'
+import { ButtonArchive } from '@/pages/modules/pusat-karir/survey/component/form/buttonArchive.tsx'
+import { BiSolidBarChartAlt2 } from 'react-icons/bi'
+import { ButtonPublishAgain } from '@/pages/modules/pusat-karir/survey/component/buttonAgain.tsx'
 
 export const SurveyColumns = () => {
   const [searchParams] = useSearchParams()
@@ -31,6 +37,17 @@ export const SurveyColumns = () => {
       },
     },
     {
+      accessorKey: 'id_survei_pertanyaan',
+      header: 'Terbitkan',
+      cell: ({ row }) => {
+        return (
+          <>
+            <ButtonPublish data={row?.original} />
+          </>
+        )
+      },
+    },
+    {
       accessorKey: 'action',
       header: '',
       cell: ({ row }) => (
@@ -48,6 +65,150 @@ export const SurveyColumns = () => {
             >
               <HiPencil className={'size-4'} />
             </Link>
+            <ButtonDeleteSurvey data={row?.original} />
+          </div>
+        </>
+      ),
+    },
+  ]
+
+  return columns
+}
+
+export const PublishSurveyColumns = () => {
+  const [searchParams] = useSearchParams()
+  const page = Number(searchParams.get('page') ?? '1')
+  const limit = Number(searchParams.get('limit') ?? '10')
+
+  const columns: ColumnDef<ISurveyQuestion>[] = [
+    {
+      accessorKey: 'no',
+      header: 'No',
+      cell: ({ row }) => {
+        return <>{(page - 1) * limit + row.index + 1}</>
+      },
+    },
+    {
+      accessorKey: 'judul',
+      header: 'Judul',
+    },
+    {
+      accessorKey: 'tanggal_mulai',
+      header: 'Periode Pengisian',
+      cell: ({ row }) => {
+        return (
+          <>
+            <div className={'flex gap-1.5 items-center'}>
+              <p>
+                {row.original.tanggal_mulai
+                  ? format(row?.original.tanggal_mulai, 'dd-MM-yyyy')
+                  : ''}
+              </p>
+              <p>s.d</p>
+              <p>
+                {row.original.tanggal_selesai
+                  ? format(row?.original.tanggal_selesai, 'dd-MM-yyyy')
+                  : ''}
+              </p>
+            </div>
+          </>
+        )
+      },
+    },
+    {
+      accessorKey: 'kategori_responden',
+      header: 'Kategori Responden',
+    },
+    {
+      accessorKey: 'jumlah_responden',
+      header: 'Jumlah Responden',
+    },
+    {
+      accessorKey: 'action',
+      header: '',
+      cell: ({ row }) => (
+        <>
+          <div className="flex items-center justify-end gap-2.5">
+            <Link
+              to={`${row?.original?.id_survei_pertanyaan}/statistic`}
+              className={`p-1.5 bg-blue-500 flex w-fit rounded text-white`}
+            >
+              <BiSolidBarChartAlt2 className={'size-4'} />
+            </Link>
+            <ButtonChangeDate data={row?.original} />
+            <ButtonCopy />
+            <ButtonArchive data={row?.original} />
+          </div>
+        </>
+      ),
+    },
+  ]
+
+  return columns
+}
+
+export const ArchivedSurveyColumns = () => {
+  const [searchParams] = useSearchParams()
+  const page = Number(searchParams.get('page') ?? '1')
+  const limit = Number(searchParams.get('limit') ?? '10')
+
+  const columns: ColumnDef<ISurveyQuestion>[] = [
+    {
+      accessorKey: 'no',
+      header: 'No',
+      cell: ({ row }) => {
+        return <>{(page - 1) * limit + row.index + 1}</>
+      },
+    },
+    {
+      accessorKey: 'judul',
+      header: 'Judul',
+    },
+    {
+      accessorKey: 'tanggal_mulai',
+      header: 'Periode Pengisian',
+      cell: ({ row }) => {
+        return (
+          <>
+            <div className={'flex gap-1.5 items-center'}>
+              <p>
+                {row.original.tanggal_mulai
+                  ? format(row?.original.tanggal_mulai, 'dd-MM-yyyy')
+                  : ''}
+              </p>
+              <p>s.d</p>
+              <p>
+                {row.original.tanggal_selesai
+                  ? format(row?.original.tanggal_selesai, 'dd-MM-yyyy')
+                  : ''}
+              </p>
+            </div>
+          </>
+        )
+      },
+    },
+    {
+      accessorKey: 'kategori_responden',
+      header: 'Kategori Responden',
+    },
+    {
+      accessorKey: 'jumlah_responden',
+      header: 'Jumlah Responden',
+    },
+    {
+      accessorKey: 'action',
+      header: '',
+      cell: ({ row }) => (
+        <>
+          <div className="flex items-center justify-end gap-2.5">
+            <Link
+              to={`${row?.original?.id_survei_pertanyaan}/statistic`}
+              className={`p-1.5 bg-blue-500 flex w-fit rounded text-white`}
+            >
+              <BiSolidBarChartAlt2 className={'size-4'} />
+            </Link>
+            <ButtonPublishAgain data={row?.original} />
+            <ButtonCopy />
             <ButtonDeleteSurvey data={row?.original} />
           </div>
         </>

@@ -224,7 +224,7 @@ export const TypeSelect = (props: Props) => {
               })
               setData({
                 ...data,
-                bagian: newBagian,
+                bagian: newBagian as any,
               })
             }}
             className={'text-sm text-primary'}

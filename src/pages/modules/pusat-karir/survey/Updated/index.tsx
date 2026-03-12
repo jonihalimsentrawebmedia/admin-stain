@@ -21,15 +21,11 @@ export const UpdatedSurveyData = () => {
   const [activeIndex, setActiveIndex] = useState(0)
   const [loading, setLoading] = useState(false)
 
-  console.log(data)
-
   useEffect(() => {
     if (detailSurvey) {
       setData(detailSurvey)
     }
   }, [detailSurvey])
-
-  console.log(detailSurvey)
 
   const HandleSaveSurvey = async () => {
     setLoading(true)
