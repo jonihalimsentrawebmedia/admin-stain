@@ -44,6 +44,8 @@ import ColorSettingCarrier from '@/pages/modules/pusat-karir/settings/warna/Colo
 import { SurveyListPage } from '@/pages/modules/pusat-karir/survey'
 import { CreateSurveyData } from '@/pages/modules/pusat-karir/survey/create'
 import { UpdatedSurveyData } from '@/pages/modules/pusat-karir/survey/Updated'
+import { DetailSurvey } from '@/pages/modules/pusat-karir/survey/detail'
+import { PreviewSurveyCreate } from '@/pages/modules/pusat-karir/survey/preview'
 
 export const CarrierCenterRoute = [
   {
@@ -323,11 +325,19 @@ export const CarrierCenterRoute = [
         element: <CreateSurveyData />,
       },
       {
+        path: 'preview',
+        element: <PreviewSurveyCreate />,
+      },
+      {
         path: ':id',
         children: [
           {
             path: 'edit',
             element: <UpdatedSurveyData />,
+          },
+          {
+            path: 'detail',
+            element: <DetailSurvey />,
           },
         ],
       },

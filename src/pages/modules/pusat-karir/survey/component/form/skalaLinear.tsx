@@ -31,6 +31,9 @@ export const ScaleLinearSection = (props: Props) => {
       ? (question.konfigurasi as IKonfigurasiSkalaLinear)
       : undefined
 
+  console.log(question)
+  console.log(LinearOption)
+
   const updateLinear = (
     field: 'min' | 'max' | 'judul_min' | 'judul_max',
     value: number | string
@@ -49,7 +52,7 @@ export const ScaleLinearSection = (props: Props) => {
             q.konfigurasi && 'min' in q.konfigurasi
               ? q.konfigurasi
               : {
-                  min: 0,
+                  min: 1,
                   max: 5,
                   judul_min: '',
                   judul_max: '',
@@ -79,7 +82,7 @@ export const ScaleLinearSection = (props: Props) => {
       <div className="flex items-center gap-2.5 mt-2">
         {/* MIN */}
         <Select
-          value={(LinearOption?.min ?? 0).toString()}
+          value={(LinearOption?.min ?? 1).toString()}
           onValueChange={(v) => updateLinear('min', Number(v))}
         >
           <SelectTrigger className="rounded w-[80px]">
