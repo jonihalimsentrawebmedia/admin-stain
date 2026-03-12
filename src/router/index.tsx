@@ -42,6 +42,7 @@ import { ProviderLPPM } from '@/pages/modules/LPPM/components/context'
 import { CarrierCenterRoute } from '@/router/pusat-karir'
 import MainLayoutCarrierCenter from '@/pages/modules/pusat-karir/component/layout'
 import { SelectSessionCarrierCenter } from '@/pages/modules/pusat-karir/component/select-session'
+import CarrierWebTheme from '@/pages/modules/pusat-karir/component/layout/theme.tsx'
 
 export const Router = createBrowserRouter([
   {
@@ -199,7 +200,11 @@ export const Router = createBrowserRouter([
       },
       {
         path: 'pusat-karir',
-        element: <MainLayoutCarrierCenter />,
+        element: (
+          <CarrierWebTheme>
+            <MainLayoutCarrierCenter />
+          </CarrierWebTheme>
+        ),
         children: [...CarrierCenterRoute],
       },
     ],

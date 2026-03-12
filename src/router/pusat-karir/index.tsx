@@ -36,6 +36,13 @@ import { CarrierConsultationPage } from '@/pages/modules/pusat-karir/service/car
 import { PortalCVATS } from '@/pages/modules/pusat-karir/service/portal-cv'
 import { MainService } from '@/pages/modules/pusat-karir/service/main'
 import { FooterServicePage } from '@/pages/modules/pusat-karir/service/Footer'
+import { CompanySizePage } from '@/pages/modules/pusat-karir/reference/company-size'
+import { IndustryCategoryPage } from '@/pages/modules/pusat-karir/reference/industry-category'
+import { LandingPageCarrier } from '@/pages/modules/pusat-karir/settings/landing-page'
+import { TemplateWebCarrierSettings } from '@/pages/modules/pusat-karir/settings/template-web'
+import ColorSettingCarrier from '@/pages/modules/pusat-karir/settings/warna/ColorSettingService.tsx'
+import { SurveyListPage } from '@/pages/modules/pusat-karir/survey'
+import { CreateSurveyData } from '@/pages/modules/pusat-karir/survey/create'
 
 export const CarrierCenterRoute = [
   {
@@ -265,6 +272,54 @@ export const CarrierCenterRoute = [
             ],
           },
         ],
+      },
+      {
+        path: 'company-size',
+        children: [
+          {
+            index: true,
+            element: <CompanySizePage />,
+          },
+        ],
+      },
+      {
+        path: 'industry-category',
+        children: [
+          {
+            index: true,
+            element: <IndustryCategoryPage />,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: 'settings',
+    children: [
+      {
+        path: 'landing-page',
+        element: <LandingPageCarrier />,
+      },
+      {
+        path: 'template',
+        element: <TemplateWebCarrierSettings />,
+      },
+      {
+        path: 'color',
+        element: <ColorSettingCarrier />,
+      },
+    ],
+  },
+  {
+    path: 'survey',
+    children: [
+      {
+        index: true,
+        element: <SurveyListPage />,
+      },
+      {
+        path: 'add',
+        element: <CreateSurveyData />,
       },
     ],
   },

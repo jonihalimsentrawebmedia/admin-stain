@@ -6,7 +6,7 @@ import {
   MdOutlineTrackChanges,
   MdQuiz,
 } from 'react-icons/md'
-import { FaGraduationCap } from 'react-icons/fa'
+import { FaGraduationCap, FaUserFriends } from 'react-icons/fa'
 import { FaGears } from 'react-icons/fa6'
 
 const baseDomain = '/modules/pusat-karir'
@@ -27,129 +27,168 @@ export const GenerateMenu = () => {
     },
     {
       id: 3,
+      name: 'Management User',
+      icon: <FaUserFriends className={'size-5'} />,
+      child: [
+        {
+          id: 31,
+          name: 'Verifikasi User',
+          path: `${baseDomain}/management-user/user-verification`,
+        },
+        {
+          id: 32,
+          name: 'Role User',
+          path: `${baseDomain}/management-user/role-user`,
+        },
+      ],
+    },
+    {
+      id: 4,
       name: 'Tentang Pusat Karir',
       path: `${baseDomain}/about`,
       icon: <FaGraduationCap className={'size-5'} />,
       child: [
         {
-          id: 31,
+          id: 41,
           name: 'Profile unit',
           path: `${baseDomain}/about/profile`,
         },
         {
-          id: 32,
+          id: 42,
           name: 'Visi & Misi',
           path: `${baseDomain}/about/vision-mission`,
         },
         {
-          id: 33,
+          id: 43,
           name: 'Struktur Organisasi',
           path: `${baseDomain}/about/structure`,
         },
         {
-          id: 34,
+          id: 44,
           name: 'Sambutan Ketua',
           path: `${baseDomain}/about/greeting-leader`,
         },
       ],
     },
     {
-      id: 4,
+      id: 5,
       name: 'Layanan',
       path: `${baseDomain}/service`,
       icon: <FaGears className={'size-5'} />,
       child: [
         {
-          id: 41,
+          id: 51,
           name: 'Lowongan Perkerjaan',
           path: `${baseDomain}/service/job-vacancy`,
         },
         {
-          id: 42,
+          id: 52,
           name: 'lowongan Magang',
           path: `${baseDomain}/service/internship-vacancy`,
         },
         {
-          id: 43,
+          id: 53,
           name: 'Konsultasi Karir',
           path: `${baseDomain}/service/consultation`,
         },
         {
-          id: 44,
+          id: 54,
           name: 'Portal CV ATS',
           path: `${baseDomain}/service/portal-cv`,
         },
         {
-          id: 45,
+          id: 55,
           name: 'Layanan Utama',
           path: `${baseDomain}/service/main`,
         },
         {
-          id: 46,
+          id: 56,
           name: 'Posisi Footer',
           path: `${baseDomain}/service/footer`,
         },
       ],
     },
     {
-      id: 5,
+      id: 6,
       name: 'Tracer Study',
       path: `${baseDomain}/tracer-study`,
       icon: <MdOutlineTrackChanges className={'size-5'} />,
     },
     {
-      id: 6,
+      id: 7,
       name: 'Konten Publik',
       icon: <MdInfo className={'size-5'} />,
       path: `${baseDomain}/public-content`,
       child: [
         {
-          id: 61,
+          id: 71,
           name: 'Berita',
           path: `${baseDomain}/public-content/news`,
         },
         {
-          id: 62,
+          id: 72,
           name: 'Agenda',
           path: `${baseDomain}/public-content/agenda`,
         },
         {
-          id: 63,
+          id: 73,
           name: 'Artikel',
           path: `${baseDomain}/public-content/article`,
         },
         {
-          id: 64,
+          id: 74,
           name: 'Download',
           path: `${baseDomain}/public-content/download`,
         },
       ],
     },
     {
-      id: 7,
+      id: 8,
       name: 'Survei',
       icon: <MdQuiz className={'size-5'} />,
       path: `${baseDomain}/survey`,
     },
     {
-      id: 8,
+      id: 9,
       name: 'Referensi',
       icon: <MdDataset className={'size-5'} />,
       child: [
         {
-          id: 81,
+          id: 91,
           name: 'Spesialisasi',
           path: `${baseDomain}/reference/Specialization`,
         },
         {
-          id: 82,
+          id: 92,
           name: 'Ukuran Perusahaan',
           path: `${baseDomain}/reference/company-size`,
         },
         {
-          id: 83,
+          id: 93,
           name: 'Kategori Industri',
           path: `${baseDomain}/reference/industry-category`,
+        },
+      ],
+    },
+    {
+      id: 10,
+      name: 'Pengaturan Website',
+      icon: <FaGears className={'size-5'} />,
+      child: [
+        {
+          id: 101,
+          name: 'Landing Page',
+          path: `${baseDomain}/settings/landing-page`,
+        },
+        {
+          id: 102,
+          name: 'Pengaturan Warna',
+          path: `${baseDomain}/settings/color`,
+        },
+        {
+          id: 103,
+          name: 'Template',
+          path: `${baseDomain}/settings/template`,
         },
       ],
     },

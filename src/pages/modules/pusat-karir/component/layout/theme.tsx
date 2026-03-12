@@ -1,10 +1,10 @@
 import { type ReactNode, useEffect } from 'react'
 import { useThemeColor } from '@/hooks/custom/themeColor.tsx'
-import { UseGetAdminThemeUUID } from '@/pages/modules/LPPM/settings/warna/hooks'
+import { UseGetAdminThemeCarrier } from '@/pages/modules/pusat-karir/settings/warna/hooks'
 
-const LPPMWebTheme = ({ children }: { children: ReactNode }) => {
+const CarrierWebTheme = ({ children }: { children: ReactNode }) => {
   const { setTheme } = useThemeColor()
-  const { color } = UseGetAdminThemeUUID()
+  const { color } = UseGetAdminThemeCarrier()
 
   useEffect(() => {
     setTheme({
@@ -15,4 +15,4 @@ const LPPMWebTheme = ({ children }: { children: ReactNode }) => {
 
   return <>{children}</>
 }
-export default LPPMWebTheme
+export default CarrierWebTheme
