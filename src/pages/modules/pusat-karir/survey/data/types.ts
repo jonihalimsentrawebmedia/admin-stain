@@ -45,10 +45,9 @@ export interface ISurveyDataPost {
   bagian: IBagianSurvey[]
 }
 
-
-export type StatusSurvei = "DITERBITKAN" | "DRAFT" | "DIARSIPKAN";
-export type StatusPublikasi = "BERLANGSUNG" | "SELESAI" | "MENDATANG";
-export type KategoriResponden = "MITRA_KERJA" | "PENCARI_KERJA";
+export type StatusSurvei = 'DITERBITKAN' | 'DRAFT' | 'DIARSIPKAN'
+export type StatusPublikasi = 'BERLANGSUNG' | 'SELESAI' | 'MENDATANG'
+export type KategoriResponden = 'MITRA_KERJA' | 'PENCARI_KERJA'
 
 export interface ISurveyQuestion {
   id_survei_pertanyaan: string
@@ -73,4 +72,8 @@ export interface ISurveyQuestion {
   nama_user_arsip: string | null
   kategori_responden: KategoriResponden[]
   jumlah_responden: number
+}
+
+export interface IDetailSurveyQuestion extends ISurveyDataPost {
+  id_survei: string
 }

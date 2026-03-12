@@ -107,7 +107,12 @@ export const CreateSurveyData = () => {
               />
             </div>
 
-            <QuestionActive activeIndex={activeIndex} data={data} setData={setData} />
+            <QuestionActive
+              actionSave={HandleSaveSurvey}
+              activeIndex={activeIndex}
+              data={data}
+              setData={setData}
+            />
           </div>
         </div>
       </div>

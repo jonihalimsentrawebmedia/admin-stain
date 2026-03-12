@@ -4,6 +4,7 @@ import type { ISurveyQuestion } from '@/pages/modules/pusat-karir/survey/data/ty
 import { format } from 'date-fns'
 import { MdInfo } from 'react-icons/md'
 import { HiPencil } from 'react-icons/hi'
+import { ButtonDeleteSurvey } from '@/pages/modules/pusat-karir/survey/component/buttonDelete.tsx'
 
 export const SurveyColumns = () => {
   const [searchParams] = useSearchParams()
@@ -47,6 +48,7 @@ export const SurveyColumns = () => {
             >
               <HiPencil className={'size-4'} />
             </Link>
+            <ButtonDeleteSurvey data={row?.original} />
           </div>
         </>
       ),

@@ -3,7 +3,10 @@ import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import type { BasicProps } from '@/utils/globalType.ts'
-import type { ISurveyQuestion } from '@/pages/modules/pusat-karir/survey/data/types.ts'
+import type {
+  IDetailSurveyQuestion,
+  ISurveyQuestion,
+} from '@/pages/modules/pusat-karir/survey/data/types.ts'
 
 export const UseGetUUID = (id: string) => {
   const [uuid, setUuid] = useState()
@@ -52,4 +55,24 @@ export const UseGetSurvey = (props?: BasicProps) => {
   }, [data])
 
   return { survey, meta, loading }
+}
+
+export const UseGetDetailSurvey = (id: string) => {
+  const [detailSurvey, setDetailSurvey] = useState<IDetailSurveyQuestion>()
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['detail-survey', id],
+    refetchOnWindowFocus: false,
+    queryFn: () => AxiosClient.get(`/pusat-karir/survei/${id}`).then((res) => res.data?.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setDetailSurvey(data)
+    }
+  }, [data])
+
+  return { detailSurvey, loading }
 }

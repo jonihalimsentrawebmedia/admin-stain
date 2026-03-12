@@ -3,12 +3,12 @@ import type {
   ISurveyDataPost,
   TipePertanyaan,
 } from '@/pages/modules/pusat-karir/survey/data/types.ts'
-import { TypeSelect } from '@/pages/modules/pusat-karir/survey/component/typeSelect.tsx'
-import { ScaleLinearSection } from '@/pages/modules/pusat-karir/survey/component/skalaLinear.tsx'
-import { ShortText } from '@/pages/modules/pusat-karir/survey/component/ShortText.tsx'
-import { LongText } from '@/pages/modules/pusat-karir/survey/component/longText.tsx'
-import { NumberText } from '@/pages/modules/pusat-karir/survey/component/NumberText.tsx'
-import { DateText } from '@/pages/modules/pusat-karir/survey/component/DateText.tsx'
+import { TypeSelect } from '@/pages/modules/pusat-karir/survey/component/form/typeSelect.tsx'
+import { ScaleLinearSection } from '@/pages/modules/pusat-karir/survey/component/form/skalaLinear.tsx'
+import { ShortText } from '@/pages/modules/pusat-karir/survey/component/form/ShortText.tsx'
+import { LongText } from '@/pages/modules/pusat-karir/survey/component/form/longText.tsx'
+import { NumberText } from '@/pages/modules/pusat-karir/survey/component/form/NumberText.tsx'
+import { DateText } from '@/pages/modules/pusat-karir/survey/component/form/DateText.tsx'
 
 interface Props {
   type: TipePertanyaan

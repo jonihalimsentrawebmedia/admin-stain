@@ -4,12 +4,12 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
+} from '@/components/ui/select.tsx'
 import type {
   IKonfigurasiSkalaLinear,
   IPertanyaanSurvey,
   ISurveyDataPost,
-} from '@/pages/modules/pusat-karir/survey/data/types'
+} from '@/pages/modules/pusat-karir/survey/data/types.ts'
 import { Button } from '@/components/ui/button.tsx'
 import { Input } from '@/components/ui/input.tsx'
 import { Label } from '@radix-ui/react-label'

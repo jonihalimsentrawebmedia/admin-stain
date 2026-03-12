@@ -43,6 +43,7 @@ import { TemplateWebCarrierSettings } from '@/pages/modules/pusat-karir/settings
 import ColorSettingCarrier from '@/pages/modules/pusat-karir/settings/warna/ColorSettingService.tsx'
 import { SurveyListPage } from '@/pages/modules/pusat-karir/survey'
 import { CreateSurveyData } from '@/pages/modules/pusat-karir/survey/create'
+import { UpdatedSurveyData } from '@/pages/modules/pusat-karir/survey/Updated'
 
 export const CarrierCenterRoute = [
   {
@@ -320,6 +321,15 @@ export const CarrierCenterRoute = [
       {
         path: 'add',
         element: <CreateSurveyData />,
+      },
+      {
+        path: ':id',
+        children: [
+          {
+            path: 'edit',
+            element: <UpdatedSurveyData />,
+          },
+        ],
       },
     ],
   },
