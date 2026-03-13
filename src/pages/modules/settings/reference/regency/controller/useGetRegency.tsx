@@ -19,7 +19,7 @@ const useGetRegency = (props?: Props) => {
 
   let ParamsSearch: URLSearchParams
   if (isGetAll) {
-    ParamsSearch = new URLSearchParams({ page: '1', limit: '10000' })
+    ParamsSearch = new URLSearchParams({ page: '0', limit: '0' })
     ParamsSearch.append('search', search)
     ParamsSearch.append('id_provinsi', id_provinsi ?? '')
   } else {

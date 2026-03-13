@@ -110,6 +110,7 @@ export const UpdatedSurveyData = () => {
               activeIndex={activeIndex}
               data={data}
               setData={setData}
+              isEdit={true}
             />
           </div>
         </div>

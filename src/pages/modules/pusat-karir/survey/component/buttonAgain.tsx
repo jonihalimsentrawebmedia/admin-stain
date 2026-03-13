@@ -37,6 +37,7 @@ export const ButtonPublishAgain = (props: Props) => {
       value
     )
       .then((res) => {
+        console.log(res)
         if (res.data.status) {
           queryClient.invalidateQueries({
             queryKey: ['survey'],
@@ -47,6 +48,7 @@ export const ButtonPublishAgain = (props: Props) => {
         }
       })
       .catch((err) => {
+        console.log(err)
         toast.error(err?.response?.data?.message || 'Gagal menerbitkan survei')
         setLoading(false)
       })
@@ -104,11 +106,7 @@ export const ButtonPublishAgain = (props: Props) => {
                   { type: 'cancel', label: 'Batal', onClick: () => setOpen(false) },
                   {
                     type: 'custom',
-                    element: (
-                      <Button onClick={HandlePublishAgain} disabled={loading}>
-                        Terbitkan Kembali
-                      </Button>
-                    ),
+                    element: <Button disabled={loading}>Terbitkan Kembali</Button>,
                   },
                 ]}
               />

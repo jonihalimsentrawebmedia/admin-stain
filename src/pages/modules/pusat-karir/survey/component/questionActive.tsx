@@ -20,10 +20,11 @@ interface Props {
   data?: ISurveyDataPost
   setData: (data: ISurveyDataPost) => void
   actionSave?: () => void
+  isEdit?: boolean
 }
 
 export const QuestionActive = (props: Props) => {
-  const { data, setData, activeIndex, actionSave } = props
+  const { data, setData, activeIndex, actionSave, isEdit } = props
   const navigate = useNavigate()
 
   const bagianActive = data?.bagian?.[activeIndex] ?? []
@@ -54,7 +55,7 @@ export const QuestionActive = (props: Props) => {
 
   const HandlePreview = async () => {
     const id = localStorage.getItem('uuid')
-    await AxiosClient.post(`/pusat-karir/tmp-survei/${id}`,data)
+    await AxiosClient.post(`/pusat-karir/tmp-survei/${id}`, data)
       .then((res) => {
         if (res.data.status) {
           navigate('/modules/pusat-karir/survey/preview')
@@ -257,7 +258,7 @@ export const QuestionActive = (props: Props) => {
           buttonGroup={[
             {
               type: 'custom',
-              element: (
+              element: !isEdit && (
                 <Button
                   onClick={HandlePreview}
                   disabled={(data?.bagian?.[activeIndex]?.pertanyaan?.length ?? 0) === 0}

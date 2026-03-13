@@ -127,3 +127,15 @@ export function StatusPublish(value: string) {
       return <div className="text-green-500">Disetujui</div>
   }
 }
+
+
+export const GetCharacterFirst = (text?: string | null): string => {
+  if (!text) return ''
+
+  return text
+    .trim()
+    .split(/\s+/) // pisah berdasarkan spasi
+    .map((word) => word.charAt(0))
+    .join('')
+    .toUpperCase()
+}
