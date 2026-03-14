@@ -58,6 +58,11 @@ import { ProcedurePartnershipPage } from '@/pages/modules/pusat-karir/management
 import { UserVerificationPage } from '@/pages/modules/pusat-karir/management-user/user-verification'
 import { DetailDataUserVerification } from '@/pages/modules/pusat-karir/management-user/user-verification/job-seeker/check-data'
 import { DetailDataCompanyVerification } from '@/pages/modules/pusat-karir/management-user/user-verification/partnership/check-data'
+import { ServiceInternshipVacancy } from '@/pages/modules/pusat-karir/service/internship-vacancy'
+import { CreatedInternshipVacancy } from '@/pages/modules/pusat-karir/service/internship-vacancy/created'
+import { UpdatedInternshipVacancy } from '@/pages/modules/pusat-karir/service/internship-vacancy/updated'
+import { DetailInternshipVacancy } from '@/pages/modules/pusat-karir/service/internship-vacancy/detail'
+import { ApplicantInternshipVacancy } from '@/pages/modules/pusat-karir/service/internship-vacancy/aplicant'
 
 export const CarrierCenterRoute = [
   {
@@ -131,6 +136,36 @@ export const CarrierCenterRoute = [
               {
                 path: 'applicant',
                 element: <ApplicantJobVacancy />,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: 'internship-vacancy',
+        children: [
+          {
+            index: true,
+            element: <ServiceInternshipVacancy />,
+          },
+          {
+            path: 'add',
+            element: <CreatedInternshipVacancy />,
+          },
+          {
+            path: ':id',
+            children: [
+              {
+                path: 'edit',
+                element: <UpdatedInternshipVacancy />,
+              },
+              {
+                path: 'detail',
+                element: <DetailInternshipVacancy />,
+              },
+              {
+                path: 'applicant',
+                element: <ApplicantInternshipVacancy />,
               },
             ],
           },

@@ -3,6 +3,7 @@ import { BottonSelectTypeVacancy } from '@/pages/modules/pusat-karir/service/job
 import { UseGetListJobVacancy } from '@/pages/modules/pusat-karir/service/job-vacancy/hoooks'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsJobVacancy } from '@/pages/modules/pusat-karir/service/job-vacancy/data/columns.tsx'
+import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 
 export const ServiceJobVacancy = () => {
   const { jobVacancy, meta, loading } = UseGetListJobVacancy()
@@ -22,7 +23,23 @@ export const ServiceJobVacancy = () => {
           ]}
         />
 
-        <TableCustom data={jobVacancy} columns={columns} meta={meta} loading={loading} />
+        <TableCustom
+          addFilter={
+            <SelectFilter
+              selectClassName={'min-w-[150px]'}
+              label={'Jenis Pekerjaan'}
+              options={['FULLTIME', 'PARTTIME', 'FREELANCE', 'CONTRACT', 'MAGANG']?.map((row) => ({
+                label: row,
+                value: row,
+              }))}
+              name={'type'}
+            />
+          }
+          data={jobVacancy}
+          columns={columns}
+          meta={meta}
+          loading={loading}
+        />
       </div>
     </>
   )

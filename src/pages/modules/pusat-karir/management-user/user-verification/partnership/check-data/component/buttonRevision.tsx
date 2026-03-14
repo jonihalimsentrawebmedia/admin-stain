@@ -8,11 +8,11 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import { Form } from '@/components/ui/form.tsx'
 import { useForm } from 'react-hook-form'
-import type { IPartnershipRegistered } from '../../data/types.ts'
+import type { IPartnershipDetail } from '../../data/types.ts'
 import { MdEditNote } from 'react-icons/md'
 
 interface props {
-  data?: IPartnershipRegistered
+  data?: IPartnershipDetail
 }
 
 export const ButtonRevision = (props: props) => {
@@ -30,7 +30,7 @@ export const ButtonRevision = (props: props) => {
       status_pendaftaran_asal: data?.status_pendaftaran,
       status_pendaftaran: 'REVISI',
       alasan: values.alasan,
-      ids: [data?.id_pencari_kerja],
+      ids: [data?.id],
     })
       .then((res) => {
         if (res?.data?.status) {

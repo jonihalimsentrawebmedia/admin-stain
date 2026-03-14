@@ -36,6 +36,7 @@ export const RichText = <T extends FieldValues>(props: Props<T>) => {
 
       <div className={'w-full'}>
         <SimpleEditor
+          name={name}
           value={form.watch(name) ?? ''}
           onchange={(e) => {
             form.setValue(name, e as PathValue<T, Path<T>>)

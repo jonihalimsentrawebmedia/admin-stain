@@ -11,7 +11,7 @@ export const UseGetListInternshipVacancy = () => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['internship-vacancy'],
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get('/pusat-karir/lowongan-magang').then((res) => res.data),
+    queryFn: () => AxiosClient.get('/pusat-karir/lowongan-magang-pekerjaan').then((res) => res.data),
   })
 
   const loading = isLoading || isFetching
@@ -33,7 +33,7 @@ export const UseGetDetailInternshipVacancy = (id: string) => {
     queryKey: ['internship-vacancy-detail', id],
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get(`/pusat-karir/lowongan-magang/${id}`).then((res) => res.data?.data),
+      AxiosClient.get(`/pusat-karir/lowongan-magang-pekerjaan/${id}`).then((res) => res.data?.data),
   })
 
   const loading = isLoading || isFetching

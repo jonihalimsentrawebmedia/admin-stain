@@ -3,7 +3,10 @@ import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import type { BasicProps } from '@/utils/globalType.ts'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
-import type { IPartnershipRegistered } from '@/pages/modules/pusat-karir/management-user/user-verification/partnership/data/types.tsx'
+import type {
+  IPartnershipDetail,
+  IPartnershipRegistered,
+} from '@/pages/modules/pusat-karir/management-user/user-verification/partnership/data/types.tsx'
 
 export type Status = 'PENDING' | 'REVISI' | 'DITOLAK' | 'DISETUJUI'
 
@@ -45,7 +48,7 @@ export const UseGetVerificationPartnership = (props?: Props) => {
 }
 
 export const UseGetDetailVerificationPartnership = (id: string) => {
-  const [detail, setDetail] = useState<IPartnershipRegistered>()
+  const [detail, setDetail] = useState<IPartnershipDetail>()
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['detail-verification-partnership', id],

@@ -45,7 +45,7 @@ export const PartnershipUserVerification = () => {
             columns={columns1 as any}
             data={verification as any}
             loading={loadVerification}
-            rowIdKey={'id_pencari_kerja'}
+            rowIdKey={'id_mitra_kerja'}
             onSelectedRowsChange={setCollectId}
           />
         </>
@@ -69,7 +69,7 @@ export const PartnershipUserVerification = () => {
             columns={columns2 as any}
             data={verification as any}
             loading={loadVerification}
-            rowIdKey={'id_pencari_kerja'}
+            rowIdKey={'id_mitra_kerja'}
             onSelectedRowsChange={setCollectId}
           />
         </>
@@ -93,7 +93,7 @@ export const PartnershipUserVerification = () => {
             columns={columns3 as any}
             data={verification as any}
             loading={loadVerification}
-            rowIdKey={'id_pencari_kerja'}
+            rowIdKey={'id_mitra_kerja'}
             onSelectedRowsChange={setCollectId}
           />
         </>
