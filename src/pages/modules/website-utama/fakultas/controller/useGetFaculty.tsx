@@ -4,6 +4,7 @@ import type { Meta } from '@/components/common/table/TablePagination'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import type { SatuanOrganisasiList } from '@/pages/modules/settings/model'
+
 interface Props {
   isGetAll?: boolean
 }
@@ -17,7 +18,7 @@ const useGetFaculty = (props?: Props) => {
 
   let ParamsSearch: URLSearchParams
   if (isGetAll) {
-    ParamsSearch = new URLSearchParams({ page: '1', limit: '10000' })
+    ParamsSearch = new URLSearchParams({ page: '0', limit: '0' })
     ParamsSearch.append('search', search)
   } else {
     ParamsSearch = new URLSearchParams({ page, limit, search })

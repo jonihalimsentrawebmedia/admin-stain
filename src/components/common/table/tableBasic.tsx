@@ -63,13 +63,10 @@ export function TableBasic<TData, TValue>({
     <div className={clsx('overflow-hidden rounded-md border', className)}>
       <Table>
         <TableHeader className={clsx('bg-primary')}>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id} className={'hover:bg-primary'}>
-              {headerGroup.headers.map((header) => (
-                <TableHead
-                  key={header.id}
-                  className={clsx('text-white last:text-center', thClassName)}
-                >
+          {table.getHeaderGroups().map((headerGroup, k) => (
+            <TableRow key={k} className={'hover:bg-primary'}>
+              {headerGroup.headers.map((header, l) => (
+                <TableHead key={l} className={clsx('text-white last:text-center', thClassName)}>
                   {header.isPlaceholder
                     ? null
                     : flexRender(header.column.columnDef.header, header.getContext())}
@@ -92,10 +89,10 @@ export function TableBasic<TData, TValue>({
               </TableRow>
             ))
           ) : table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => (
-              <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id} className={clsx('last:text-center', tdClassName)}>
+            table.getRowModel().rows.map((row, k) => (
+              <TableRow key={k} data-state={row.getIsSelected() && 'selected'}>
+                {row.getVisibleCells().map((cell, l) => (
+                  <TableCell key={l} className={clsx('last:text-center', tdClassName)}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}

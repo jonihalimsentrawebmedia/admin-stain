@@ -18,10 +18,11 @@ interface Props<T extends FieldValues & Record<string, string>> {
   required?: boolean
   innerClassName?: string
   accept?: string
+  disabled?: boolean
 }
 
 export const UploadFileInput = <T extends FieldValues>(props: Props<T>) => {
-  const { label, required, form, name, keyname, isRow, innerClassName, accept } = props
+  const { label, required, form, name, keyname, isRow, innerClassName, accept, disabled } = props
 
   const HandleUploadBerkas = async (e: FileList | null) => {
     if (e) {
@@ -96,12 +97,14 @@ export const UploadFileInput = <T extends FieldValues>(props: Props<T>) => {
           onChange={(e) => HandleUploadBerkas(e.target.files)}
           className={`bg-white w-full ${innerClassName}`}
           type={'file'}
+          disabled={disabled}
           accept={accept}
         />
       )}
 
       <input
         accept={accept}
+        disabled={disabled}
         type={'file'}
         className="w-full"
         hidden

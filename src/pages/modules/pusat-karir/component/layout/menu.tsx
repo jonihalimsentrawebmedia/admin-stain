@@ -32,13 +32,30 @@ export const GenerateMenu = () => {
       child: [
         {
           id: 31,
+          name: 'Daftar User',
+          path: `${baseDomain}/management-user/user`,
+        },
+        {
+          id: 32,
           name: 'Verifikasi User',
           path: `${baseDomain}/management-user/user-verification`,
         },
         {
-          id: 32,
-          name: 'Role User',
-          path: `${baseDomain}/management-user/role-user`,
+          id: 33,
+          name: 'Prosedur Pendaftaran',
+          path: `${baseDomain}/management-user/procedure`,
+          child: [
+            {
+              id: 331,
+              name: 'Pencari Kerja',
+              path: `${baseDomain}/management-user/procedure/job-seeker`,
+            },
+            {
+              id: 332,
+              name: 'Mitra Kerja',
+              path: `${baseDomain}/management-user/procedure/partnership`,
+            },
+          ],
         },
       ],
     },

@@ -46,6 +46,18 @@ import { CreateSurveyData } from '@/pages/modules/pusat-karir/survey/create'
 import { UpdatedSurveyData } from '@/pages/modules/pusat-karir/survey/Updated'
 import { DetailSurvey } from '@/pages/modules/pusat-karir/survey/detail'
 import { PreviewSurveyCreate } from '@/pages/modules/pusat-karir/survey/preview'
+import { ManagementListUserPage } from '@/pages/modules/pusat-karir/management-user/list-user'
+import { CreateJobsSeekers } from '@/pages/modules/pusat-karir/management-user/list-user/jobs-seekers/create'
+import { UpdateJobsSeekers } from '@/pages/modules/pusat-karir/management-user/list-user/jobs-seekers/update'
+import { DetailUserJobsSeekers } from '@/pages/modules/pusat-karir/management-user/list-user/jobs-seekers/detail'
+import { CreatePartnership } from '@/pages/modules/pusat-karir/management-user/list-user/Partnership/create'
+import { UpdatePartnershipData } from '@/pages/modules/pusat-karir/management-user/list-user/Partnership/update'
+import { DetailProfilePartnership } from '@/pages/modules/pusat-karir/management-user/list-user/Partnership/detail'
+import { ProcedureJobSeekerPage } from '@/pages/modules/pusat-karir/management-user/procedure/job-seeker'
+import { ProcedurePartnershipPage } from '@/pages/modules/pusat-karir/management-user/procedure/partnership'
+import { UserVerificationPage } from '@/pages/modules/pusat-karir/management-user/user-verification'
+import { DetailDataUserVerification } from '@/pages/modules/pusat-karir/management-user/user-verification/job-seeker/check-data'
+import { DetailDataCompanyVerification } from '@/pages/modules/pusat-karir/management-user/user-verification/partnership/check-data'
 
 export const CarrierCenterRoute = [
   {
@@ -338,6 +350,84 @@ export const CarrierCenterRoute = [
           {
             path: 'detail',
             element: <DetailSurvey />,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: 'management-user',
+    children: [
+      {
+        path: 'user',
+        children: [
+          {
+            index: true,
+            element: <ManagementListUserPage />,
+          },
+          {
+            path: 'pencari-kerja',
+            children: [
+              {
+                path: 'add',
+                element: <CreateJobsSeekers />,
+              },
+              {
+                path: 'edit/:id',
+                element: <UpdateJobsSeekers />,
+              },
+              {
+                path: 'detail/:id',
+                element: <DetailUserJobsSeekers />,
+              },
+            ],
+          },
+          {
+            path: 'mitra-kerja',
+            children: [
+              {
+                path: 'add',
+                element: <CreatePartnership />,
+              },
+              {
+                path: 'edit/:id',
+                element: <UpdatePartnershipData />,
+              },
+              {
+                path: 'detail/:id',
+                element: <DetailProfilePartnership />,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: 'procedure',
+        children: [
+          {
+            path: 'job-seeker',
+            element: <ProcedureJobSeekerPage />,
+          },
+          {
+            path: 'partnership',
+            element: <ProcedurePartnershipPage />,
+          },
+        ],
+      },
+      {
+        path: 'user-verification',
+        children: [
+          {
+            index: true,
+            element: <UserVerificationPage />,
+          },
+          {
+            path: 'job-seeker/:id',
+            element: <DetailDataUserVerification />,
+          },
+          {
+            path: 'partnership/:id',
+            element: <DetailDataCompanyVerification />,
           },
         ],
       },

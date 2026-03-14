@@ -11,6 +11,7 @@ import { ButtonCopy } from '@/pages/modules/pusat-karir/survey/component/form/bu
 import { ButtonArchive } from '@/pages/modules/pusat-karir/survey/component/form/buttonArchive.tsx'
 import { BiSolidBarChartAlt2 } from 'react-icons/bi'
 import { ButtonPublishAgain } from '@/pages/modules/pusat-karir/survey/component/buttonAgain.tsx'
+import { ButtonDraft } from '@/pages/modules/pusat-karir/survey/component/buttonDraft.tsx'
 
 export const SurveyColumns = () => {
   const [searchParams] = useSearchParams()
@@ -96,6 +97,10 @@ export const PublishSurveyColumns = () => {
       accessorKey: 'tanggal_mulai',
       header: 'Periode Pengisian',
       cell: ({ row }) => {
+        const Start_date = new Date(row.original.tanggal_mulai)
+        const End_date = new Date(row.original.tanggal_selesai)
+        const Now_date = new Date()
+
         return (
           <>
             <div className={'flex gap-1.5 items-center'}>
@@ -111,6 +116,13 @@ export const PublishSurveyColumns = () => {
                   : ''}
               </p>
             </div>
+            {Start_date > Now_date ? (
+              <p className="text-yellow-500 font-semibold">Belum Dibuka</p>
+            ) : End_date < Now_date ? (
+              <p className="text-red-500 font-semibold">Telah Berakhir</p>
+            ) : (
+              <p className="text-blue-500 font-semibold">Berlangsung</p>
+            )}
           </>
         )
       },
@@ -122,6 +134,16 @@ export const PublishSurveyColumns = () => {
     {
       accessorKey: 'jumlah_responden',
       header: 'Jumlah Responden',
+    },
+    {
+      accessorKey: 'tanggal_mulai',
+      header: 'Kembalikan Ke Draft',
+      cell: ({ row }) => {
+        const startDate = new Date(row.original.tanggal_mulai)
+        const NowDate = new Date()
+
+        return <>{startDate > NowDate && <ButtonDraft data={row?.original} />}</>
+      },
     },
     {
       accessorKey: 'action',
@@ -168,6 +190,10 @@ export const ArchivedSurveyColumns = () => {
       accessorKey: 'tanggal_mulai',
       header: 'Periode Pengisian',
       cell: ({ row }) => {
+        const Start_date = new Date(row.original.tanggal_mulai)
+        const End_date = new Date(row.original.tanggal_selesai)
+        const Now_date = new Date()
+
         return (
           <>
             <div className={'flex gap-1.5 items-center'}>
@@ -183,6 +209,13 @@ export const ArchivedSurveyColumns = () => {
                   : ''}
               </p>
             </div>
+            {Start_date > Now_date ? (
+              <p className="text-yellow-500 font-semibold">Belum Dibuka</p>
+            ) : End_date < Now_date ? (
+              <p className="text-red-500 font-semibold">Telah Berakhir</p>
+            ) : (
+              <p className="text-blue-500 font-semibold">Berlangsung</p>
+            )}
           </>
         )
       },
