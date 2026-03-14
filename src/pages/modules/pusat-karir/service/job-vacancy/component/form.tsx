@@ -10,21 +10,29 @@ import UseGetProvince from '@/pages/modules/settings/reference/province/controll
 import useGetRegency from '@/pages/modules/settings/reference/regency/controller/useGetRegency.tsx'
 import { RichText } from '@/components/common/richtext'
 import { NewMultipleSelectCategory } from '@/pages/modules/pusat-karir/service/job-vacancy/component/newMultiple.tsx'
+import { UseGetPartnership } from '@/pages/modules/pusat-karir/management-user/list-user/Partnership/hooks'
 
 interface Props {
   form: UseFormReturn<JobVacancyType>
   loading: boolean
   HandleSave: (e: JobVacancyType) => void
+  label: string
+  isMagang?: boolean
 }
 
 export const FormJobVacancy = (props: Props) => {
-  const { form, loading, HandleSave } = props
+  const { form, loading, HandleSave, label, isMagang } = props
   const navigate = useNavigate()
-  const { province, loading: load1 } = UseGetProvince({ isGetAll: true })
 
+  const { province, loading: load1 } = UseGetProvince({ isGetAll: true })
   const { regency, loading: load2 } = useGetRegency({
     isGetAll: true,
     id_provinsi: form.watch('id_provinsi'),
+  })
+
+  const { partnership, loading: load3 } = UseGetPartnership({
+    page: '0',
+    limit: '0',
   })
 
   return (
@@ -32,7 +40,7 @@ export const FormJobVacancy = (props: Props) => {
       <Form {...form}>
         <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(HandleSave)}>
           <ButtonTitleGroup
-            label={'Buka Lowongan Pekerjaan'}
+            label={label}
             buttonGroup={[
               {
                 type: 'cancel',
@@ -46,7 +54,7 @@ export const FormJobVacancy = (props: Props) => {
               },
             ]}
           />
-          {form.watch('lowongan_internal') && (
+          {form.watch('lowongan_internal') ? (
             <TextInput
               form={form}
               name={'id_mitra_kerja'}
@@ -56,7 +64,25 @@ export const FormJobVacancy = (props: Props) => {
               isDisabled
               isRow
             />
+          ) : (
+            <SelectBasicInput
+              name={'id_mitra_kerja'}
+              form={form}
+              placeholder={'Mitra Kerja'}
+              isRequired
+              isRow
+              isLoading={load3}
+              label={'Mitra Kerja'}
+              className={'bg-white'}
+              data={
+                partnership?.map((row) => ({
+                  label: row?.nama_perusahaan,
+                  value: row?.id_mitra_kerja,
+                })) ?? []
+              }
+            />
           )}
+
           <TextInput
             name={'nama_pekerjaan'}
             form={form}
@@ -67,8 +93,6 @@ export const FormJobVacancy = (props: Props) => {
             isRequired
             isRow
           />
-
-          {/*<MultipleSelectCategory form={form} name={'list_spesialisasi'} />*/}
 
           <NewMultipleSelectCategory form={form} name={'list_spesialisasi'} />
 
@@ -141,6 +165,7 @@ export const FormJobVacancy = (props: Props) => {
             placeholder={'Jenis Pekerjaan'}
             label={'Jenis Pekerjaan'}
             className={'w-1/2'}
+            isDisabled={isMagang}
             isRequired
             isRow
             usePortal

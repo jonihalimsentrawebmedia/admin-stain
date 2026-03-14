@@ -13,6 +13,7 @@ import type {
   IWorkPartnerStep,
   StepStatus,
 } from '../data/types'
+import type { BasicProps } from '@/utils/globalType.ts'
 
 export const UseGetDetailStatusForm = (id_temp?: string) => {
   const [detail, setDetail] = useState<ICompanyProfile>()
@@ -40,14 +41,22 @@ export const UseGetDetailStatusForm = (id_temp?: string) => {
   return { detail, loading, status }
 }
 
-export const UseGetPartnership = () => {
+export const UseGetPartnership = (props?: BasicProps) => {
+  const { page, limit, search } = props ?? {}
+
   const [partnership, setPartnership] = useState<IPartnership[]>([])
   const [meta, setMeta] = useState<Meta>()
 
+  const ParamsSearch = new URLSearchParams()
+  if (page) ParamsSearch.append('page', page ?? '1')
+  if (limit) ParamsSearch.append('limit', limit ?? '10')
+  if (search) ParamsSearch.append('search', search ?? '')
+
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['partnership'],
+    queryKey: ['partnership', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get('/pusat-karir/mitra-kerja').then((res) => res.data),
+    queryFn: () =>
+      AxiosClient.get(`/pusat-karir/mitra-kerja?${ParamsSearch}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching
