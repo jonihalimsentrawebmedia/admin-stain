@@ -44,6 +44,18 @@ export const GenerateMenu = () => {
           id: 33,
           name: 'Prosedur Pendaftaran',
           path: `${baseDomain}/management-user/procedure`,
+          child: [
+            {
+              id: 331,
+              name: 'Pencari Kerja',
+              path: `${baseDomain}/management-user/procedure/job-seeker`,
+            },
+            {
+              id: 332,
+              name: 'Mitra Kerja',
+              path: `${baseDomain}/management-user/procedure/partnership`,
+            },
+          ],
         },
       ],
     },

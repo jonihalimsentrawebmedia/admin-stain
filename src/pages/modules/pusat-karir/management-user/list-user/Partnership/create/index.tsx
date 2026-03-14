@@ -90,7 +90,7 @@ export const CreatePartnership = () => {
                   disabled={isLocked}
                   value={row?.value}
                   className={clsx(
-                    'shadow-none! border! border-primary rounded-full text-gray-400 p-1.5',
+                    'shadow-none! border! border-primary rounded-full text-gray-400 p-1.5 px-3',
                     'group data-[state=active]:text-primary',
                     row?.status ? 'text-primary' : ''
                   )}
