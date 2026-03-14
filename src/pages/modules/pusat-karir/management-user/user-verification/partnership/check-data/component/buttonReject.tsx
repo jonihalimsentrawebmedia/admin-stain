@@ -8,11 +8,11 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import { Form } from '@/components/ui/form.tsx'
 import { useForm } from 'react-hook-form'
-import type { IPartnershipRegistered } from '../../data/types.ts'
+import type { IPartnershipDetail } from '../../data/types.ts'
 import { BiX } from 'react-icons/bi'
 
 interface props {
-  data?: IPartnershipRegistered
+  data?: IPartnershipDetail
 }
 
 export const ButtonReject = (props: props) => {
@@ -31,7 +31,7 @@ export const ButtonReject = (props: props) => {
       status_pendaftaran_asal: data?.status_pendaftaran,
       status_pendaftaran: 'DITOLAK',
       alasan: values.alasan,
-      ids: [data?.id_pencari_kerja],
+      ids: [data?.id],
     })
       .then((res) => {
         if (res?.data?.status) {

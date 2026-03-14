@@ -18,10 +18,8 @@ export const VisionMissionCarrierPage = () => {
 
   useEffect(() => {
     if (visionMission) {
-      form.reset({
-        visi: visionMission?.isi_visi,
-        misi: visionMission?.isi_misi,
-      })
+      form.setValue('isi_visi', visionMission?.isi_visi)
+      form.setValue('isi_misi', visionMission?.isi_misi)
     }
   }, [visionMission])
 

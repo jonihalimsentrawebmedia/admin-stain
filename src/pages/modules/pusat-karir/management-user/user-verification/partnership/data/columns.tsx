@@ -84,11 +84,11 @@ export const ColumnsPendingPartnership = () => {
       accessorKey: 'action',
       header: 'Periksa Data',
       cell: ({ row }) => {
-        const { id_pencari_kerja } = row.original
+        const { id_mitra_kerja } = row.original
 
         return (
           <>
-            <Link to={`partnership/${id_pencari_kerja}`}>
+            <Link to={`partnership/${id_mitra_kerja}`}>
               <Button
                 variant={'outline'}
                 className={'text-primary border-primary hover:text-primary'}
@@ -200,11 +200,11 @@ export const ColumnsRevisionPartnership = () => {
       accessorKey: 'action',
       header: 'Periksa Data',
       cell: ({ row }) => {
-        const { id_pencari_kerja } = row.original
+        const { id_mitra_kerja } = row.original
 
         return (
           <>
-            <Link to={`partnership/${id_pencari_kerja}`}>
+            <Link to={`partnership/${id_mitra_kerja}`}>
               <Button
                 variant={'outline'}
                 className={'text-primary border-primary hover:text-primary'}
@@ -316,11 +316,11 @@ export const ColumnsRejectPartnership = () => {
       accessorKey: 'action',
       header: 'Periksa Data',
       cell: ({ row }) => {
-        const { id_pencari_kerja } = row.original
+        const { id_mitra_kerja } = row.original
 
         return (
           <>
-            <Link to={`partnership/${id_pencari_kerja}`}>
+            <Link to={`partnership/${id_mitra_kerja}`}>
               <Button
                 variant={'outline'}
                 className={'text-primary border-primary hover:text-primary'}

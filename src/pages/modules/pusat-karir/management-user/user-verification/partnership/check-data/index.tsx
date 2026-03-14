@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { MdInfo } from 'react-icons/md'
 import { ButtonRevision } from './component/buttonRevision.tsx'
@@ -20,12 +20,60 @@ export const DetailDataCompanyVerification = () => {
     {
       value: 'step_1',
       label: 'Informasi Perusahaan',
-      element: <></>,
+      element: (
+        <>
+          <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
+            <p className="text-gray-500">Nama Perusahaan</p>
+            <p>{detail?.data.informasi_perusahaan.nama_perusahaan}</p>
+            <p className="text-gray-500">Lokasi</p>
+            <p className={'capitalize'}>
+              {detail?.data?.informasi_perusahaan?.lokasi.split('_').join(' ').toLowerCase()}
+            </p>
+            <p className="text-gray-500">Negara</p>
+            <p>{detail?.data?.informasi_perusahaan?.nama_negara}</p>
+            <p className="text-gray-500">Provinsi</p>
+            <p>{detail?.data?.informasi_perusahaan?.nama_provinsi}</p>
+            <p className="text-gray-500">Kabupaten/ Kota</p>
+            <p>{detail?.data?.informasi_perusahaan?.nama_perusahaan}</p>
+            <p className="text-gray-500">Kode Pos</p>
+            <p>{detail?.data?.informasi_perusahaan?.kode_pos}</p>
+            <p className="text-gray-500">No Telepon Kantor</p>
+            <p>{detail?.data?.informasi_perusahaan?.no_telepon}</p>
+            <p className="text-gray-500">Website Perusahaan</p>
+            <p>{detail?.data?.informasi_perusahaan?.url_website ?? ''}</p>
+            <p className="text-gray-500">Surat Permohonan Kerjasama*</p>
+            <Link
+              to={detail?.data.informasi_perusahaan.url_file_permohonan ?? '#'}
+              target={'_blank'}
+              className={'underline underline-offset-4 decoration-2 udeline-blue-500 text-blue-500'}
+            >
+              Buka File
+            </Link>
+          </div>
+        </>
+      ),
     },
     {
       value: 'step_2',
       label: 'Informasi Kontak',
-      element: <></>,
+      element: (
+        <>
+          <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
+            <p className="text-gray-500">Nama Lengkap</p>
+            <p>{detail?.data.informasi_kontak?.nama_lengkap}</p>
+            <p className="text-gray-500">Jabaan</p>
+            <p className={'capitalize'}>{detail?.data?.informasi_kontak?.jabatan}</p>
+            <p className="text-gray-500">No. Handphone</p>
+            <p>{detail?.data?.informasi_kontak?.no_handphone}</p>
+            <p className="text-gray-500">Email</p>
+            <p>{detail?.data?.informasi_kontak?.email}</p>
+            <p className="text-gray-500">Telepon Kerja</p>
+            <p>{detail?.data?.informasi_kontak?.telepon_kerja}</p>
+            <p className="text-gray-500">Username</p>
+            <p>{detail?.data?.informasi_kontak?.username}</p>
+          </div>
+        </>
+      ),
     },
   ]
 

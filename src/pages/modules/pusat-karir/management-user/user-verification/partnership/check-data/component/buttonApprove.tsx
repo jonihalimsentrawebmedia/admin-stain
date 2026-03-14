@@ -5,11 +5,11 @@ import { toast } from 'react-toastify'
 import { Button } from '@/components/ui/button.tsx'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import type { IPartnershipRegistered } from '../../data/types.ts'
+import type { IPartnershipDetail } from '../../data/types.ts'
 import { Check } from 'lucide-react'
 
 interface props {
-  data?: IPartnershipRegistered
+  data?: IPartnershipDetail
 }
 
 export const ButtonApprove = (props: props) => {
@@ -25,7 +25,7 @@ export const ButtonApprove = (props: props) => {
     await AxiosClient.patch('/pusat-karir/verifikasi-mitra-kerja/update-status', {
       status_pendaftaran_asal: data?.status_pendaftaran,
       status_pendaftaran: 'DISETUJUI',
-      ids: [data?.id_pencari_kerja],
+      ids: [data?.id],
     })
       .then((res) => {
         if (res?.data?.status) {

@@ -22,7 +22,7 @@ export const ButtonDeletePartnership = (props: Props) => {
 
   const HandleDelete = async () => {
     setLoading(true)
-    await AxiosClient.delete(`pusat-karir/mitra-kerja/${data.id_pencari_kerja}`)
+    await AxiosClient.delete(`pusat-karir/mitra-kerja/${data.id_mitra_kerja}`)
       .then((res) => {
         if (res.data.status) {
           setOpen(false)

@@ -33,7 +33,6 @@ import '@/components/tiptap-node/list-node/list-node.scss'
 import '@/components/tiptap-node/image-node/image-node.scss'
 import '@/components/tiptap-node/heading-node/heading-node.scss'
 import '@/components/tiptap-node/paragraph-node/paragraph-node.scss'
-import { Dropcursor } from '@tiptap/extensions'
 
 // --- Tiptap UI ---
 import { HeadingDropdownMenu } from '@/components/tiptap-ui/heading-dropdown-menu'
@@ -43,10 +42,10 @@ import { BlockquoteButton } from '@/components/tiptap-ui/blockquote-button'
 import { CodeBlockButton } from '@/components/tiptap-ui/code-block-button'
 import {
   ColorHighlightPopover,
-  ColorHighlightPopoverContent,
   ColorHighlightPopoverButton,
+  ColorHighlightPopoverContent,
 } from '@/components/tiptap-ui/color-highlight-popover'
-import { LinkPopover, LinkContent, LinkButton } from '@/components/tiptap-ui/link-popover'
+import { LinkButton, LinkContent, LinkPopover } from '@/components/tiptap-ui/link-popover'
 import { MarkButton } from '@/components/tiptap-ui/mark-button'
 import { TextAlignButton } from '@/components/tiptap-ui/text-align-button'
 import { UndoRedoButton } from '@/components/tiptap-ui/undo-redo-button'
@@ -176,10 +175,11 @@ const MobileToolbarContent = ({
 interface props {
   value: string
   onchange: (value: string) => void
+  name?: string
 }
 
 export function SimpleEditor(props: props) {
-  const { value, onchange } = props
+  const { value, onchange, name } = props
 
   const isMobile = useIsBreakpoint()
   const { height } = useWindowSize()
@@ -200,6 +200,7 @@ export function SimpleEditor(props: props) {
     },
     extensions: [
       StarterKit.configure({
+        dropcursor: false,
         horizontalRule: false,
         link: {
           openOnClick: false,
@@ -232,7 +233,6 @@ export function SimpleEditor(props: props) {
           alwaysPreserveAspectRatio: true,
         },
       }),
-      Dropcursor,
       Typography,
       Superscript,
       Subscript,
@@ -294,7 +294,12 @@ export function SimpleEditor(props: props) {
           )}
         </Toolbar>
         <TableFloatingToolbar />
-        <EditorContent editor={editor} role="presentation" className="simple-editor-content min-h-[120px] bg-white" />
+        <EditorContent
+          name={name}
+          editor={editor}
+          role="presentation"
+          className="simple-editor-content min-h-[120px] bg-white"
+        />
       </EditorContext.Provider>
     </div>
   )
