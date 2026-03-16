@@ -110,6 +110,8 @@ import LembagaEditView from '@/pages/modules/manajeman-editor/lembaga/edit/Lemba
 import { UpdatedArticleManagementEditor } from '@/pages/modules/new_editor/publict-content/article/updated'
 import { DetailArticlePage } from '@/pages/modules/new_editor/publict-content/article/detail'
 import { LogActivityArticleManagementEditorPage } from '@/pages/modules/new_editor/publict-content/article/log'
+import { DetailEditorArticleCarrier } from '@/pages/modules/new_editor/publict-content/article-carier/detail'
+import { LogEditorArticleCarrierPage } from '@/pages/modules/new_editor/publict-content/article-carier/log'
 
 export const EditorRouter = [
   {
@@ -322,6 +324,19 @@ export const EditorRouter = [
           {
             path: 'log/:id',
             element: <LogActivityArticleManagementEditorPage />,
+          },
+        ],
+      },
+      {
+        path: 'article-carrier',
+        children: [
+          {
+            path: 'detail/:id',
+            element: <DetailEditorArticleCarrier />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogEditorArticleCarrierPage />,
           },
         ],
       },
