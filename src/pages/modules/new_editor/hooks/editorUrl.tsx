@@ -26,6 +26,9 @@ export const RenderUrlEditor = (url: string, id: string) => {
     case 'slider_atas': {
       return `slider/top-slider/detail/${id}`
     }
+    case 'pusat_karir_artikel': {
+      return `article-carrier/detail/${id}`
+    }
     case 'fasilitas': {
       return `facilities/detail/${id}`
     }
