@@ -10,10 +10,11 @@ import { Button } from '@/components/ui/button.tsx'
 
 interface props {
   data: ISurveyQuestion
+  complete?: boolean
 }
 
 export const ButtonArchive = (props: props) => {
-  const { data } = props
+  const { data, complete } = props
 
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -41,12 +42,22 @@ export const ButtonArchive = (props: props) => {
 
   return (
     <>
-      <button
-        className={'bg-red-500 text-white p-1.5 rounded hover:bg-red-600'}
-        onClick={() => setOpen(!open)}
-      >
-        <MdArchive className={'size-4'} />
-      </button>
+      {complete ? (
+        <button
+          className={'flex items-center gap-1.5 text-sm text-red-500'}
+          onClick={() => setOpen(!open)}
+        >
+          <MdArchive className={'size-4'} />
+          Arsipkan Survei
+        </button>
+      ) : (
+        <button
+          className={'bg-red-500 text-white p-1.5 rounded hover:bg-red-600'}
+          onClick={() => setOpen(!open)}
+        >
+          <MdArchive className={'size-4'} />
+        </button>
+      )}
 
       <DialogBasic title={'Arsipkan Survei'} open={open} setOpen={setOpen} className={'rounded'}>
         <div className={'flex flex-col gap-4'}>

@@ -15,7 +15,7 @@ export const SurveyListPage = () => {
   const uuid = uuidv4()
   const navigate = useNavigate()
 
-  const [searchParams, setSearcchPrams] = useSearchParams()
+  const [searchParams, setSearchPrams] = useSearchParams()
   const status = searchParams?.get('status') ?? 'DRAFT'
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
@@ -73,7 +73,7 @@ export const SurveyListPage = () => {
           onValueChange={(value) => {
             const params = new URLSearchParams()
             params.append('status', value)
-            setSearcchPrams(params)
+            setSearchPrams(params)
           }}
         >
           <TabsList className={'rounded-none! bg-white! shadow-none! w-full flex gap-x-2 h-full'}>

@@ -158,7 +158,7 @@ export const PublishSurveyColumns = () => {
               <BiSolidBarChartAlt2 className={'size-4'} />
             </Link>
             <ButtonChangeDate data={row?.original} />
-            <ButtonCopy />
+            <ButtonCopy data={row?.original} />
             <ButtonArchive data={row?.original} />
           </div>
         </>
