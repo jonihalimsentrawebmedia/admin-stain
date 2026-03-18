@@ -7,6 +7,7 @@ import type {
   IDetailSurveyQuestion,
   ISurveyQuestion,
 } from '@/pages/modules/pusat-karir/survey/data/types.ts'
+import type { SurveyDetail } from '@/pages/modules/pusat-karir/survey/statistic/types.ts'
 
 export const UseGetUUID = (id: string) => {
   const [uuid, setUuid] = useState()
@@ -80,4 +81,24 @@ export const UseGetDetailSurvey = (id: string) => {
   }, [data])
 
   return { detailSurvey, loading }
+}
+
+export const UseGetSurveyResult = (id: string) => {
+  const [surveyResult, setSurveyResult] = useState<SurveyDetail>()
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['survey-result', id],
+    refetchOnWindowFocus: false,
+    queryFn: () => AxiosClient.get(`/pusat-karir/survei/${id}/hasil`).then((res) => res.data?.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setSurveyResult(data)
+    }
+  }, [data])
+
+  return { surveyResult, loading }
 }

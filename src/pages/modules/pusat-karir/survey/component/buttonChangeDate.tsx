@@ -15,7 +15,8 @@ import { format } from 'date-fns'
 import TextInput from '@/components/common/form/TextInput.tsx'
 
 interface Props {
-  data: ISurveyQuestion
+  data?: ISurveyQuestion
+  complete?: boolean
 }
 
 const ResolverChangeDate = z.object({
@@ -26,7 +27,7 @@ const ResolverChangeDate = z.object({
 type TypeChange = z.infer<typeof ResolverChangeDate>
 
 export const ButtonChangeDate = (props: Props) => {
-  const { data } = props
+  const { data, complete } = props
 
   const form = useForm<TypeChange>({
     resolver: zodResolver(ResolverChangeDate),
@@ -40,7 +41,7 @@ export const ButtonChangeDate = (props: Props) => {
   const HandleChangeDate = async (value: TypeChange) => {
     setLoading(true)
     await AxiosClient.patch(
-      `/pusat-karir/survei/${data.id_survei_pertanyaan}/update-tanggal-akhir`,
+      `/pusat-karir/survei/${data?.id_survei_pertanyaan}/update-tanggal-akhir`,
       value
     )
       .then((res) => {
@@ -61,12 +62,22 @@ export const ButtonChangeDate = (props: Props) => {
 
   return (
     <>
-      <button
-        className={'border p-1.5 border-primary text-primary rounded'}
-        onClick={() => setOpen(!open)}
-      >
-        <MdEditCalendar className={'size-4'} />
-      </button>
+      {complete ? (
+        <button
+          className={'flex items-center gap-1.5 text-sm text-primary'}
+          onClick={() => setOpen(!open)}
+        >
+          <MdEditCalendar className={'size-4'} />
+          Ubah Batas Akhir
+        </button>
+      ) : (
+        <button
+          className={'border p-1.5 border-primary text-primary rounded'}
+          onClick={() => setOpen(!open)}
+        >
+          <MdEditCalendar className={'size-4'} />
+        </button>
+      )}
 
       <DialogBasic
         className={'rounded min-w-2xl'}

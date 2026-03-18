@@ -63,6 +63,7 @@ import { CreatedInternshipVacancy } from '@/pages/modules/pusat-karir/service/in
 import { UpdatedInternshipVacancy } from '@/pages/modules/pusat-karir/service/internship-vacancy/updated'
 import { DetailInternshipVacancy } from '@/pages/modules/pusat-karir/service/internship-vacancy/detail'
 import { ApplicantInternshipVacancy } from '@/pages/modules/pusat-karir/service/internship-vacancy/aplicant'
+import { ResultStatistic } from '@/pages/modules/pusat-karir/survey/statistic'
 
 export const CarrierCenterRoute = [
   {
@@ -385,6 +386,10 @@ export const CarrierCenterRoute = [
           {
             path: 'detail',
             element: <DetailSurvey />,
+          },
+          {
+            path: 'statistic',
+            element: <ResultStatistic />,
           },
         ],
       },

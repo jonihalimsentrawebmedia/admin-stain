@@ -21,8 +21,6 @@ export const CreateSurveyData = () => {
   const [activeIndex, setActiveIndex] = useState(0)
   const [loading, setLoading] = useState(false)
 
-  console.log(data)
-
   useEffect(() => {
     if (uuid) {
       setData(uuid)
