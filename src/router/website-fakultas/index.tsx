@@ -40,6 +40,7 @@ import { AcademicPPSMPage } from '@/pages/modules/website-fakultas/academic/ppsm
 import DashboardFaculty from '@/pages/modules/website-fakultas/dashboard'
 import { AlumniStoriesPPSM } from '@/pages/modules/website-fakultas/academic/ppsm/story'
 import { CreatedStoryAlumni } from '@/pages/modules/website-fakultas/academic/ppsm/story/create'
+import { ProdiGallery } from '@/pages/modules/website-fakultas/academic/program-studi/detail/gallery'
 
 export const RouterFaculty = [
   {
@@ -150,7 +151,7 @@ export const RouterFaculty = [
               },
               {
                 path: 'galeri',
-                element: <></>,
+                element: <ProdiGallery />,
               },
               {
                 path: 'hubungi-kami',
