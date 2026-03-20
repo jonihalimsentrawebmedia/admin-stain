@@ -43,6 +43,10 @@ import { CarrierCenterRoute } from '@/router/pusat-karir'
 import MainLayoutCarrierCenter from '@/pages/modules/pusat-karir/component/layout'
 import { SelectSessionCarrierCenter } from '@/pages/modules/pusat-karir/component/select-session'
 import CarrierWebTheme from '@/pages/modules/pusat-karir/component/layout/theme.tsx'
+import FacultyWebTheme from '@/pages/modules/website-fakultas/component/layout/theme.tsx'
+import MainLayoutFaculty from '@/pages/modules/website-fakultas/component/layout'
+import { SelectSessionFaculty } from '@/pages/modules/website-fakultas/component/select-session'
+import { RouterFaculty } from '@/router/website-fakultas'
 
 export const Router = createBrowserRouter([
   {
@@ -121,6 +125,10 @@ export const Router = createBrowserRouter([
       {
         path: 'session-carrier',
         element: <SelectSessionCarrierCenter />,
+      },
+      {
+        path: 'select-fakultas',
+        element: <SelectSessionFaculty />,
       },
       {
         path: 'settings',
@@ -206,6 +214,17 @@ export const Router = createBrowserRouter([
           </CarrierWebTheme>
         ),
         children: [...CarrierCenterRoute],
+      },
+      {
+        path: 'website-fakultas',
+        element: (
+          <>
+            <FacultyWebTheme>
+              <MainLayoutFaculty />
+            </FacultyWebTheme>
+          </>
+        ),
+        children: [...RouterFaculty],
       },
     ],
   },

@@ -1,9 +1,10 @@
 import { useState } from 'react'
-import { Dialog, DialogContent } from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Pipette } from 'lucide-react'
 import { useFormContext } from 'react-hook-form'
+
 export function getContrastTextColor(hex?: string) {
   if (!hex) return '#0F172A' // default gelap
 
@@ -77,6 +78,8 @@ export function ColorPickerField({ name, title, description, disabled }: ColorPi
       {/* Dialog Color Picker */}
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="w-[260px] rounded-xl p-4">
+          <DialogTitle />
+          <DialogDescription />
           <p className="font-medium mb-2">Pilih Warna</p>
 
           <div

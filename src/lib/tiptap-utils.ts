@@ -447,7 +447,7 @@ export function sanitizeUrl(inputUrl: string, baseUrl: string, protocols?: Proto
  * @param attrName - Attribute key to update
  * @param next - New value OR updater function receiving previous value
  *               Pass `undefined` to remove the attribute.
- * @returns true if at least one node was updated, false otherwise
+ * @returns true if at least one node was create, false otherwise
  */
 export function updateNodesAttr<A extends string = string, V = unknown>(
   tr: Transaction,
