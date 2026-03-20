@@ -5,12 +5,12 @@ importScripts('https://www.gstatic.com/firebasejs/10.13.2/firebase-messaging-com
 
 /* eslint-disable no-undef */
 firebase.initializeApp({
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_APP_ID,
+  apiKey: 'AIzaSyD83RUcIXok5MJg-rWqm2KibdsY-u-bDJo',
+  authDomain: 'dev-fcm-cbeb6.firebaseapp.com',
+  projectId: 'dev-fcm-cbeb6',
+  storageBucket: 'dev-fcm-cbeb6.firebasestorage.app',
+  messagingSenderId: '255076626826',
+  appId: '1:255076626826:web:6c4e34a5a975e261185873',
 })
 
 const messaging = firebase.messaging()

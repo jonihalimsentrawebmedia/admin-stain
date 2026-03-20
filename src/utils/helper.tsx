@@ -62,17 +62,25 @@ export const GetModuleUrl = (moduleSelect: {
       return `/modules/select-lembaga?url=website-lembaga&id=${moduleSelect?.id_module}`
     }
 
-    case 'editor':
+    case 'editor': {
       return '/modules/editor-university?url=editor'
+    }
 
-    case 'website_prodi':
+    case 'website_prodi': {
       return `/modules/select-prodi?url=website-prodi&id=${moduleSelect?.id_module}`
+    }
 
-    case 'ppid':
+    case 'ppid': {
       return `/modules/select-ppid?url=ppid&id=${moduleSelect?.id_module}`
+    }
 
-    case 'pusat_karir':
+    case 'pusat_karir': {
       return `/modules/session-carrier?url=pusat-karir&id=${moduleSelect?.id_module}`
+    }
+
+    case 'website_fakultas': {
+      return `/modules/select-fakultas?url=website-fakultas&id=${moduleSelect?.id_module}`
+    }
 
     default:
       return `/modules/${urlStringEncode(moduleSelect?.controller ?? '')}/dashboard`
@@ -127,7 +135,6 @@ export function StatusPublish(value: string) {
       return <div className="text-green-500">Disetujui</div>
   }
 }
-
 
 export const GetCharacterFirst = (text?: string | null): string => {
   if (!text) return ''
