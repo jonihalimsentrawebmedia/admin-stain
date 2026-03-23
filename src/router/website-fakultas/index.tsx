@@ -40,6 +40,40 @@ import { AcademicPPSMPage } from '@/pages/modules/website-fakultas/academic/ppsm
 import DashboardFaculty from '@/pages/modules/website-fakultas/dashboard'
 import { AlumniStoriesPPSM } from '@/pages/modules/website-fakultas/academic/ppsm/story'
 import { CreatedStoryAlumni } from '@/pages/modules/website-fakultas/academic/ppsm/story/create'
+import { ProdiGallery } from '@/pages/modules/website-fakultas/academic/program-studi/detail/gallery'
+import { StaffDetailProdi } from '@/pages/modules/website-fakultas/academic/program-studi/detail/staff'
+import { LecturerDetailProfile } from '@/pages/modules/website-fakultas/academic/program-studi/detail/lecturer'
+import { CurriculumPerProdi } from '@/pages/modules/website-fakultas/academic/curriculum/per-prodi'
+import { UpdateStoryPPSM } from '@/pages/modules/website-fakultas/academic/ppsm/story/update'
+import { AcademicInternationalMobility } from '@/pages/modules/website-fakultas/academic/international-mobility'
+import { AlumniStoriesMobility } from '@/pages/modules/website-fakultas/academic/international-mobility/story'
+import { CreatedStoryAlumniMobility } from '@/pages/modules/website-fakultas/academic/international-mobility/story/create'
+import { UpdateStoryMobility } from '@/pages/modules/website-fakultas/academic/international-mobility/story/update'
+import { AcademicInternationalUnderGraduated } from '@/pages/modules/website-fakultas/academic/undergraduate-program'
+import { AlumniStoriesUnderGraduated } from '@/pages/modules/website-fakultas/academic/undergraduate-program/story'
+import { CreatedStoryUnderGraduated } from '@/pages/modules/website-fakultas/academic/undergraduate-program/story/create'
+import { UnderGraduatedProgram } from '@/pages/modules/website-fakultas/academic/undergraduate-program/program'
+import { DetailProgram } from '@/pages/modules/website-fakultas/academic/undergraduate-program/program/detail'
+import { ResearchGroupPage } from '@/pages/modules/website-fakultas/research/research-group'
+import { GroupSkillResearch } from '@/pages/modules/website-fakultas/research/research-group/group-skill'
+import { CreatedGroupSkill } from '@/pages/modules/website-fakultas/research/research-group/group-skill/created'
+import { OurPartnerPage } from '@/pages/modules/website-fakultas/research/collaboration'
+import { MitraOurPartners } from '@/pages/modules/website-fakultas/research/collaboration/mitra'
+import { TypeOurPartners } from '@/pages/modules/website-fakultas/research/collaboration/type'
+import { CommunityCollegeSystem } from '@/pages/modules/website-fakultas/community/study-faculty/college-system'
+import { CommunityStudyProgram } from '@/pages/modules/website-fakultas/community/study-faculty/college-system/study-program'
+import { AccreditationFacultyCommunity } from '@/pages/modules/website-fakultas/community/study-faculty/college-system/accreditation'
+import { CarrierProspectCommunity } from '@/pages/modules/website-fakultas/community/study-faculty/college-system/carrier-prospect'
+import { SectorCarrierProspect } from '@/pages/modules/website-fakultas/community/study-faculty/college-system/carrier-prospect/sector'
+import { AccommodationStudentLife } from '@/pages/modules/website-fakultas/community/student-life/accommodation'
+import { StudentOrganizationCommunity } from '@/pages/modules/website-fakultas/community/student-life/student-organization'
+import { ListOrganizationStudentLife } from '@/pages/modules/website-fakultas/community/student-life/student-organization/list-Organization'
+import { CreatedStudentOrganization } from '@/pages/modules/website-fakultas/community/student-life/student-organization/list-Organization/created'
+import { EntertainmentCommunity } from '@/pages/modules/website-fakultas/community/student-life/entertainment'
+import { ListPlaceStudentOrganization } from '@/pages/modules/website-fakultas/community/student-life/entertainment/list-place'
+import { CreatedStudentListOrganization } from '@/pages/modules/website-fakultas/community/student-life/entertainment/list-place/created'
+import { CommunityAlumniStory } from '@/pages/modules/website-fakultas/community/alumni/story'
+import { CreatedStoryAlumniCommunity } from '@/pages/modules/website-fakultas/community/alumni/story/create'
 
 export const RouterFaculty = [
   {
@@ -138,11 +172,11 @@ export const RouterFaculty = [
               },
               {
                 path: 'staff',
-                element: <></>,
+                element: <StaffDetailProdi />,
               },
               {
                 path: 'dosen',
-                element: <></>,
+                element: <LecturerDetailProfile />,
               },
               {
                 path: 'berita',
@@ -150,7 +184,7 @@ export const RouterFaculty = [
               },
               {
                 path: 'galeri',
-                element: <></>,
+                element: <ProdiGallery />,
               },
               {
                 path: 'hubungi-kami',
@@ -166,6 +200,15 @@ export const RouterFaculty = [
           {
             index: true,
             element: <ProdiCurriculumView />,
+          },
+          {
+            path: ':id',
+            children: [
+              {
+                index: true,
+                element: <CurriculumPerProdi />,
+              },
+            ],
           },
         ],
       },
@@ -186,6 +229,221 @@ export const RouterFaculty = [
               {
                 path: 'add',
                 element: <CreatedStoryAlumni />,
+              },
+              {
+                path: 'edit/:id',
+                element: <UpdateStoryPPSM />,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: 'international-mobility',
+        children: [
+          {
+            index: true,
+            element: <AcademicInternationalMobility />,
+          },
+          {
+            path: 'story',
+            children: [
+              {
+                index: true,
+                element: <AlumniStoriesMobility />,
+              },
+              {
+                path: 'add',
+                element: <CreatedStoryAlumniMobility />,
+              },
+              {
+                path: 'edit/:id',
+                element: <UpdateStoryMobility />,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: 'undergraduate-program',
+        children: [
+          {
+            index: true,
+            element: <AcademicInternationalUnderGraduated />,
+          },
+          {
+            path: 'story',
+            children: [
+              {
+                index: true,
+                element: <AlumniStoriesUnderGraduated />,
+              },
+              {
+                path: 'add',
+                element: <CreatedStoryUnderGraduated />,
+              },
+            ],
+          },
+          {
+            path: 'program',
+            children: [
+              {
+                index: true,
+                element: <UnderGraduatedProgram />,
+              },
+              {
+                path: ':id',
+                element: <DetailProgram />,
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: 'research',
+    children: [
+      {
+        path: 'research-group',
+        children: [
+          {
+            index: true,
+            element: <ResearchGroupPage />,
+          },
+          {
+            path: 'group-skill',
+            children: [
+              {
+                index: true,
+                element: <GroupSkillResearch />,
+              },
+              {
+                path: 'add',
+                element: <CreatedGroupSkill />,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: 'collaboration',
+        children: [
+          {
+            index: true,
+            element: <OurPartnerPage />,
+          },
+          {
+            path: 'mitra',
+            element: <MitraOurPartners />,
+          },
+          {
+            path: 'type',
+            element: <TypeOurPartners />,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: 'community',
+    children: [
+      {
+        path: 'study-faculty',
+        children: [
+          {
+            path: 'college-system',
+            children: [
+              {
+                index: true,
+                element: <CommunityCollegeSystem />,
+              },
+              {
+                path: 'study-program',
+                element: <CommunityStudyProgram />,
+              },
+            ],
+          },
+          {
+            path: 'accreditation',
+            element: <AccreditationFacultyCommunity />,
+          },
+          {
+            path: 'carrier-prospect',
+            element: <CarrierProspectCommunity />,
+          },
+          {
+            path: 'carrier-prospect/sector',
+            element: <SectorCarrierProspect />,
+          },
+        ],
+      },
+      {
+        path: 'student-life',
+        children: [
+          {
+            path: 'accommodation',
+            children: [
+              {
+                index: true,
+                element: <AccommodationStudentLife />,
+              },
+            ],
+          },
+          {
+            path: 'student-organization',
+            children: [
+              {
+                index: true,
+                element: <StudentOrganizationCommunity />,
+              },
+              {
+                path: 'list-organization',
+                children: [
+                  {
+                    index: true,
+                    element: <ListOrganizationStudentLife />,
+                  },
+                  {
+                    path: 'add',
+                    element: <CreatedStudentOrganization />,
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            path: 'entertainment',
+            children: [
+              {
+                index: true,
+                element: <EntertainmentCommunity />,
+              },
+              {
+                path: 'list-place',
+                element: <ListPlaceStudentOrganization />,
+              },
+              {
+                path: 'list-place/add',
+                element: <CreatedStudentListOrganization />,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: 'Alumni',
+        children: [
+          {
+            path: 'story',
+            children: [
+              {
+                index: true,
+                element: <CommunityAlumniStory />,
+              },
+              {
+                path: 'add',
+                element: <CreatedStoryAlumniCommunity />,
               },
             ],
           },
