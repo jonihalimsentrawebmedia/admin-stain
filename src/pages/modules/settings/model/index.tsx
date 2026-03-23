@@ -108,6 +108,9 @@ export interface SatuanOrganisasiDetail {
   alamat: string
   provinsi: string
   kabupaten_kota: string
+  nama_parent: string
+  nama_jenjang_pendidikan:string
+  kode_jenjang: string
   kecamatan?: string
   kelurahan?: string
   kode_pos?: string

@@ -3,6 +3,7 @@ import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { BasicProps } from '@/utils/globalType.ts'
+import type { IGaleriAlbum } from '../data/types'
 
 interface AlbumProps extends BasicProps {
   id_unit: string

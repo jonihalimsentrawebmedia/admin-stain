@@ -1,4 +1,4 @@
-interface IGaleriAlbum {
+export interface IGaleriAlbum {
   id_galeri_album: string // UUID
   id_satuan_organisasi: string // UUID
   thumbnail: string // URL gambar thumbnail

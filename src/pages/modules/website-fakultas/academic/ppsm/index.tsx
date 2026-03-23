@@ -85,7 +85,7 @@ export const AcademicPPSMPage = () => {
                       <Button
                         variant={'outline'}
                         className={'border-primary text-primary hover:text-primary'}
-                        onClick={() => navigate('/modules/website-fakultas/academic/ppsm/story')}
+                        onClick={() => navigate('story')}
                       >
                         <MdMenuBook className={'size-4 mr-2'} />
                         Cerita Alumni
