@@ -8,6 +8,7 @@ export interface ISessionCarrierCenter {
   nama_fakultas: string
   nama_universitas: string
   singkatan: string
+  singkatan_fakultas: string
   singkatan_universitas: string
 }
 

@@ -74,6 +74,12 @@ import { ListPlaceStudentOrganization } from '@/pages/modules/website-fakultas/c
 import { CreatedStudentListOrganization } from '@/pages/modules/website-fakultas/community/student-life/entertainment/list-place/created'
 import { CommunityAlumniStory } from '@/pages/modules/website-fakultas/community/alumni/story'
 import { CreatedStoryAlumniCommunity } from '@/pages/modules/website-fakultas/community/alumni/story/create'
+import { FacilitiesPage } from '@/pages/modules/website-fakultas/facilities'
+import { CreatedFacilities } from '@/pages/modules/website-fakultas/facilities/created'
+import { DescriptionPMBText } from '@/pages/modules/website-fakultas/pmb'
+import { ZoneIntegrityPage } from '@/pages/modules/website-fakultas/zone-integrity'
+import { DetailZoneIntegrity } from '@/pages/modules/website-fakultas/zone-integrity/detail'
+import { CreatedSubCategory } from '@/pages/modules/website-fakultas/zone-integrity/detail/created'
 
 export const RouterFaculty = [
   {
@@ -447,7 +453,50 @@ export const RouterFaculty = [
               },
             ],
           },
+          {
+            path: 'inbox',
+            children: [],
+          },
         ],
+      },
+    ],
+  },
+  {
+    path: 'facilities',
+    children: [
+      {
+        index: true,
+        element: <FacilitiesPage />,
+      },
+      {
+        path: 'add',
+        element: <CreatedFacilities />,
+      },
+    ],
+  },
+  {
+    path: 'pmb',
+    children: [
+      {
+        index: true,
+        element: <DescriptionPMBText />,
+      },
+    ],
+  },
+  {
+    path: 'zone-integrity',
+    children: [
+      {
+        index: true,
+        element: <ZoneIntegrityPage />,
+      },
+      {
+        path: ':id/detail',
+        element: <DetailZoneIntegrity />,
+      },
+      {
+        path: ':id/detail/add',
+        element: <CreatedSubCategory />,
       },
     ],
   },

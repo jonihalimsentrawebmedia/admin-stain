@@ -5,6 +5,7 @@ import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/ho
 import ButtonProfile from '@/pages/modules/settings/components/button/ButtonProfile.tsx'
 import { Link } from 'react-router-dom'
 import { UseGetSessionFaculty } from '../select-session/get-seeion.tsx'
+import { DialogSessionFaculty } from '@/pages/modules/website-fakultas/component/select-session/dialog-session.tsx'
 
 interface Props {
   collapsed: boolean
@@ -32,6 +33,7 @@ export function HeaderFaculty(props: Props) {
         </div>
       </div>
       <div className="flex items-center gap-5">
+        <DialogSessionFaculty />
         <Link to={'/modules'}>
           <IconModules />
         </Link>
