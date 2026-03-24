@@ -1,4 +1,4 @@
-export interface IDescriptionPPSM {
+export interface IDescription {
   id_satuan_organisasi: string
   id_unit: string
   isi: string

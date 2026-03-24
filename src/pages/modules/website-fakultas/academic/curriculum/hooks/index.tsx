@@ -9,7 +9,7 @@ export const UseGetCurriculumPerProdi = () => {
   const [meta, setMeta] = useState<Meta>()
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['curriculum-per-prodi'],
+    queryKey: ['curriculum-faculty'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/fakultas/kurikulum').then((res) => res.data),
   })
@@ -24,4 +24,24 @@ export const UseGetCurriculumPerProdi = () => {
   }, [data])
 
   return { curriculum, loading, meta }
+}
+
+export const UseGetCurriculumDetail = (id: string) => {
+  const [curriculumDetail, setCurriculumDetail] = useState<ICurriculum>()
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['curriculum-faculty', id],
+    refetchOnWindowFocus: false,
+    queryFn: () => AxiosClient.get(`/fakultas/kurikulum/${id}`).then((res) => res.data?.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setCurriculumDetail(data)
+    }
+  }, [data])
+
+  return { curriculumDetail, loading }
 }

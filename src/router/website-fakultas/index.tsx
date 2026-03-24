@@ -80,6 +80,11 @@ import { DescriptionPMBText } from '@/pages/modules/website-fakultas/pmb'
 import { ZoneIntegrityPage } from '@/pages/modules/website-fakultas/zone-integrity'
 import { DetailZoneIntegrity } from '@/pages/modules/website-fakultas/zone-integrity/detail'
 import { CreatedSubCategory } from '@/pages/modules/website-fakultas/zone-integrity/detail/created'
+import { StaffProfileFaculty } from '@/pages/modules/website-fakultas/about-faculty/staff'
+import { LecturerProfileFaculty } from '@/pages/modules/website-fakultas/about-faculty/lecturer'
+import { NewsFaculty } from '@/pages/modules/website-fakultas/about-faculty/news'
+import { CurriculumSubjectDetail } from '@/pages/modules/website-fakultas/academic/curriculum/subject'
+import { NewsProdiFaculty } from '@/pages/modules/website-fakultas/academic/program-studi/detail/news'
 
 export const RouterFaculty = [
   {
@@ -126,15 +131,15 @@ export const RouterFaculty = [
       },
       {
         path: 'staff',
-        element: <></>,
+        element: <StaffProfileFaculty />,
       },
       {
         path: 'dosen',
-        element: <></>,
+        element: <LecturerProfileFaculty />,
       },
       {
         path: 'berita',
-        element: <></>,
+        element: <NewsFaculty />,
       },
       {
         path: 'galeri',
@@ -186,7 +191,7 @@ export const RouterFaculty = [
               },
               {
                 path: 'berita',
-                element: <></>,
+                element: <NewsProdiFaculty />,
               },
               {
                 path: 'galeri',
@@ -213,6 +218,15 @@ export const RouterFaculty = [
               {
                 index: true,
                 element: <CurriculumPerProdi />,
+              },
+              {
+                path: 'subject',
+                children: [
+                  {
+                    path: ':id_subject',
+                    element: <CurriculumSubjectDetail />,
+                  },
+                ],
               },
             ],
           },
