@@ -1,5 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Form } from '@/components/ui/form.tsx'
 import { useForm } from 'react-hook-form'
 import { RichText } from '@/components/common/richtext'
@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button.tsx'
 import { useNavigate } from 'react-router-dom'
 import { FaListUl } from 'react-icons/fa'
 import { MdAddBusiness } from 'react-icons/md'
+import { UseGetDetailCollaboration } from '@/pages/modules/website-fakultas/research/collaboration/hooks'
 
 export const OurPartnerPage = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -18,11 +19,20 @@ export const OurPartnerPage = () => {
 
   const form = useForm()
   const navigate = useNavigate()
+  const { description } = UseGetDetailCollaboration()
+
+  useEffect(() => {
+    if (description) {
+      form.reset({
+        isi: description?.isi,
+      })
+    }
+  }, [description])
 
   const queryClient = useQueryClient()
 
   const handleSave = async (e: any) => {
-    await AxiosClient.post('/penelitian/group-penelitian', e)
+    await AxiosClient.post('/fakultas/bekerjasama-dengan-kami', e)
       .then((res) => {
         if (res.data.status) {
           setIsEdit(!isEdit)
@@ -110,7 +120,7 @@ export const OurPartnerPage = () => {
             />
             <div
               className={'tiptap ProseMirror simple-editor mt-5'}
-              dangerouslySetInnerHTML={{ __html: '' }}
+              dangerouslySetInnerHTML={{ __html: description?.isi ?? '' }}
             />
           </div>
         </>

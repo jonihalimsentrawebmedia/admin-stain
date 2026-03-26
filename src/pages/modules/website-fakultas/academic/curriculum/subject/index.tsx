@@ -1,6 +1,7 @@
 import { UseGetCurriculumDetail } from '../hooks/index.tsx'
 import { useParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import { SidenavSubjectCurriculum } from './component/sidenav.tsx'
 
 export const CurriculumSubjectDetail = () => {
   const { id_subject } = useParams()
@@ -13,7 +14,7 @@ export const CurriculumSubjectDetail = () => {
 
         <div className="grid grid-cols-2 gap-5">
           <div className="flex flex-col gap-1.5 col-span-2">
-            <p className="text-sm text-gray-500">Fakultas</p>
+            <p className="text-sm text-gray-500">Prodi</p>
             <p className="text-2xl text-green-700 font-semibold">
               {curriculumDetail?.nama_satuan_organisasi}
             </p>
@@ -33,7 +34,7 @@ export const CurriculumSubjectDetail = () => {
 
         <div className={'w-full border border-dashed'} />
 
-        {/*<SidenavSubjectCurriculum detail={curriculumDetail} />*/}
+        <SidenavSubjectCurriculum detail={curriculumDetail} />
       </div>
     </>
   )

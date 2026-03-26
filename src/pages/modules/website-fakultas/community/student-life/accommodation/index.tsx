@@ -1,5 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Form } from '@/components/ui/form.tsx'
 import { useForm } from 'react-hook-form'
 import { RichText } from '@/components/common/richtext'
@@ -7,24 +7,33 @@ import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
+import { UseGetDetailAccommodation } from './hooks/index'
 
 export const AccommodationStudentLife = () => {
   const [isEdit, setIsEdit] = useState(false)
   const [loading, setLoading] = useState(false)
 
   const form = useForm()
+  const { description } = UseGetDetailAccommodation()
+
+  useEffect(() => {
+    if (description) {
+      form.reset({
+        isi: description?.isi,
+      })
+    }
+  }, [description])
 
   const queryClient = useQueryClient()
-
   const handleSave = async (e: any) => {
-    await AxiosClient.post('/fakultas/ppsm', e)
+    await AxiosClient.post('/fakultas/akomodasi', e)
       .then((res) => {
         if (res.data.status) {
           setIsEdit(!isEdit)
           setLoading(false)
           toast.success(res.data.message || 'Success Pengajuan update data universitas')
           queryClient.invalidateQueries({
-            queryKey: ['faculty-ppsm'],
+            queryKey: ['accommodation'],
           })
         }
       })
@@ -75,7 +84,7 @@ export const AccommodationStudentLife = () => {
             />
             <div
               className={'tiptap ProseMirror simple-editor mt-5'}
-              dangerouslySetInnerHTML={{ __html: '' }}
+              dangerouslySetInnerHTML={{ __html: description?.isi ?? '' }}
             />
           </div>
         </>

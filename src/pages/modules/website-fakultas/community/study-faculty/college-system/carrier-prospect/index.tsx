@@ -10,10 +10,13 @@ import { useQueryClient } from '@tanstack/react-query'
 import { Button } from '@/components/ui/button.tsx'
 import { useNavigate } from 'react-router-dom'
 import { FaListUl } from 'react-icons/fa'
+import { UseGetDetailCarrierProspect } from './hooks/index'
 
 export const CarrierProspectCommunity = () => {
   const [isEdit, setIsEdit] = useState(false)
   const [loading, setLoading] = useState(false)
+
+  const { description } = UseGetDetailCarrierProspect()
 
   const form = useForm()
   const navigate = useNavigate()
@@ -21,14 +24,14 @@ export const CarrierProspectCommunity = () => {
   const queryClient = useQueryClient()
 
   const handleSave = async (e: any) => {
-    await AxiosClient.post('/fakultas/ppsm', e)
+    await AxiosClient.post('/fakultas/prospek-karir', e)
       .then((res) => {
         if (res.data.status) {
           setIsEdit(!isEdit)
           setLoading(false)
           toast.success(res.data.message || 'Success Pengajuan update data universitas')
           queryClient.invalidateQueries({
-            queryKey: ['faculty-ppsm'],
+            queryKey: ['carrier-prospect'],
           })
         }
       })
@@ -94,7 +97,7 @@ export const CarrierProspectCommunity = () => {
             />
             <div
               className={'tiptap ProseMirror simple-editor mt-5'}
-              dangerouslySetInnerHTML={{ __html: '' }}
+              dangerouslySetInnerHTML={{ __html: description?.isi ?? '' }}
             />
           </div>
         </>

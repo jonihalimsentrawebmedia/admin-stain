@@ -6,6 +6,9 @@ import { useForm } from 'react-hook-form'
 import { Form } from '@/components/ui/form.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
+import AxiosClient from '@/provider/axios.tsx'
+import { toast } from 'react-toastify'
+import { useQueryClient } from '@tanstack/react-query'
 
 export const ButtonAddZoneIntegrityCategory = () => {
   const [open, setOpen] = useState(false)
@@ -13,9 +16,25 @@ export const ButtonAddZoneIntegrityCategory = () => {
 
   const form = useForm()
 
+  const queryClient = useQueryClient()
   const HandelSubmit = async (e: any) => {
     setLoading(true)
-    console.log(e)
+    await AxiosClient.post('/fakultas/zona-integritas-kategori', e)
+      .then((res) => {
+        if (res.data.status) {
+          setLoading(false)
+          setOpen(false)
+          toast.success(res.data.message || 'Success')
+          queryClient.invalidateQueries({
+            queryKey: ['zone-integrity'],
+          })
+          form.reset()
+        }
+      })
+      .catch((err) => {
+        setLoading(false)
+        toast.error(err.response.data.message || 'Error')
+      })
   }
   return (
     <>

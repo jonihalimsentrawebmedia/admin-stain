@@ -1,10 +1,7 @@
-import { FormStoryAlumni } from '@/pages/modules/website-fakultas/academic/ppsm/story/component/form.tsx'
+import { FormStoryAlumni } from '../component/form.tsx'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
-import {
-  type StoryForm,
-  StoryResolver,
-} from '@/pages/modules/website-fakultas/academic/ppsm/story/data/resolver.tsx'
+import { type StoryForm, StoryResolver } from '../data/resolver.tsx'
 import { zodResolver } from '@hookform/resolvers/zod'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
@@ -20,10 +17,10 @@ export const CreatedStoryAlumniCommunity = () => {
 
   const HandleSave = (data: StoryForm) => {
     setLoading(true)
-    AxiosClient.post('/fakultas/cerita-ppsm', data)
+    AxiosClient.post('/fakultas/cerita-alumni', data)
       .then((res) => {
         if (res.data.status) {
-          navigate('/modules/website-fakultas/academic/ppsm/story')
+          navigate('/modules/website-fakultas/community/alumni/story')
           setLoading(false)
           toast.success(res.data.message || 'Success menambahkan data')
         }

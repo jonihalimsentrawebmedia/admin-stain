@@ -11,7 +11,9 @@ import { UseGetSessionFaculty } from '@/pages/modules/website-fakultas/component
 export const CurriculumPerProdi = () => {
   const { id } = useParams()
   const { detailProdi } = UseGetDetailProdi((id as string) ?? '')
-  const { curriculum, loading, meta } = UseGetCurriculumPerProdi()
+  const { curriculum, loading, meta } = UseGetCurriculumPerProdi({
+    id_prodi: (id as string) ?? '',
+  })
   const { session } = UseGetSessionFaculty()
   const columns = ColumnsCurriculum(session)
 

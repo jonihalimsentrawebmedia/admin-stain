@@ -87,7 +87,7 @@ export const ColumnsStory = () => {
           <>
             <div className="flex items-center gap-2">
               <Link
-                to={`edit/${data?.id_cerita_international_mobility}`}
+                to={`edit/${data?.id_cerita_international_ungaduate_program}`}
                 className="bg-yellow-500 p-1.5 rounded text-white hover:bg-yellow-600"
               >
                 <HiPencil />

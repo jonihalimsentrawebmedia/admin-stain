@@ -3,20 +3,49 @@ import { useForm } from 'react-hook-form'
 import { Form } from '@/components/ui/form.tsx'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import { RichText } from '@/components/common/richtext'
+import { UseGetZoneIntegrity } from '@/pages/modules/website-fakultas/zone-integrity/hooks'
+import {
+  ResolverSubZoneIntegrity,
+  type TypeResolverSubZoneIntegrity,
+} from '@/pages/modules/website-fakultas/zone-integrity/detail/data/resolver.tsx'
+import { zodResolver } from '@hookform/resolvers/zod'
+import AxiosClient from '@/provider/axios.tsx'
+import { toast } from 'react-toastify'
 
 export const CreatedSubCategory = () => {
   const [loading, setLoading] = useState(false)
-
   const navigate = useNavigate()
+  const { id } = useParams()
 
-  const form = useForm()
+  const { zoneIntegrity } = UseGetZoneIntegrity({
+    page: '0',
+    limit: '0',
+  })
+
+  const form = useForm<TypeResolverSubZoneIntegrity>({
+    defaultValues: {
+      id_zona_integritas_kategori: id,
+    },
+    resolver: zodResolver(ResolverSubZoneIntegrity),
+  })
 
   const HandelSubmit = async (e: any) => {
     setLoading(true)
-    console.log(e)
+    await AxiosClient.post('/fakultas/zona-integritas-sub-kategori', e)
+      .then((res) => {
+        if (res.data.status) {
+          setLoading(false)
+          toast.success(res.data.message || 'Success')
+          navigate(-1)
+        }
+      })
+      .catch((err) => {
+        setLoading(false)
+        toast.error(err.response.data.message || 'Error')
+      })
   }
 
   return (
@@ -24,10 +53,16 @@ export const CreatedSubCategory = () => {
       <Form {...form}>
         <form className={'space-y-5'} onSubmit={form.handleSubmit(HandelSubmit)}>
           <SelectBasicInput
-            name={'id_kategori'}
+            name={'id_zona_integritas_kategori'}
             form={form}
             placeholder={'Kategori'}
-            data={[]}
+            data={
+              zoneIntegrity?.map((row) => ({
+                label: row?.nama_kategori,
+                value: row?.id_zona_integritas_kategori,
+              })) ?? []
+            }
+            isDisabled
             label={'Kategori'}
             selectClassName={'bg-white'}
             isRequired
@@ -36,8 +71,9 @@ export const CreatedSubCategory = () => {
 
           <TextInput
             form={form}
-            name={'nama_kategori'}
+            name={'nama_sub_kategori'}
             label={'Nama Kategori'}
+            inputClassName={'bg-white'}
             placeholder={'Masukkan Nama Kategori'}
             isRequired
             isRow

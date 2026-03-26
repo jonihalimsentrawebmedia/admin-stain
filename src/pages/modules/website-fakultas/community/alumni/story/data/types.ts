@@ -1,11 +1,11 @@
-export interface IStoryPPSM {
-  id_cerita_ppsm: string // UUID
+export interface IStoryAlumni {
+  id_cerita_alumni: string // UUID
   id_satuan_organisasi: string // UUID
   url_gambar: string // URL gambar
   key_gambar: string // Nama file gambar
   nama_lengkap: string
   id_prodi: string // UUID program studi
-  tahun_lulus: number // Tahun kelulusan
+  tahun_masuk: number // Tahun kelulusan
   cerita: string // HTML string untuk cerita
   created_at: string // ISO timestamp dengan timezone
   created_user: string // UUID user pembuat

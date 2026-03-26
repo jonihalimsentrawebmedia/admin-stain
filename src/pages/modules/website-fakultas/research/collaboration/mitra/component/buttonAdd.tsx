@@ -6,6 +6,9 @@ import { UploadPhotoImage } from '@/pages/modules/pusat-karir/component/common/u
 import { useForm } from 'react-hook-form'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import { Form } from '@/components/ui/form.tsx'
+import AxiosClient from '@/provider/axios.tsx'
+import { toast } from 'react-toastify'
+import { useQueryClient } from '@tanstack/react-query'
 
 export const ButtonAddMitra = () => {
   const [open, setOpen] = useState(false)
@@ -13,9 +16,24 @@ export const ButtonAddMitra = () => {
 
   const form = useForm()
 
+  const queryClient = useQueryClient()
   const HandleSave = async (e: any) => {
     setLoading(true)
-    console.log(e)
+    await AxiosClient.post('/fakultas/mitra-kerjasama', e)
+      .then((res) => {
+        if (res?.data?.status) {
+          setLoading(false)
+          setOpen(false)
+          toast.success(res?.data?.message || 'Success')
+          queryClient.invalidateQueries({
+            queryKey: ['mitra-partner'],
+          })
+        }
+      })
+      .catch((err) => {
+        setLoading(false)
+        toast.error(err?.response?.data?.message || 'Error')
+      })
   }
 
   return (
