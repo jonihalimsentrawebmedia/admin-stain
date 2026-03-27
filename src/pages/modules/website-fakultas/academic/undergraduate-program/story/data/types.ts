@@ -1,5 +1,5 @@
 export interface IStoryMobility {
-  id_cerita_international_mobility: string // UUID
+  id_cerita_international_ungaduate_program: string // UUID
   id_satuan_organisasi: string // UUID
   url_gambar: string // URL gambar
   key_gambar: string // Nama file gambar

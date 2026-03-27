@@ -2,13 +2,14 @@ import {
   MdBusiness,
   MdDashboard,
   MdEmojiPeople,
+  MdHomeRepairService,
   MdInfo,
   MdMenuBook,
   MdMiscellaneousServices,
   MdScience,
 } from 'react-icons/md'
 import { FaGear, FaGears } from 'react-icons/fa6'
-import { IoMdSchool } from 'react-icons/io'
+import { IoMdImage, IoMdSchool } from 'react-icons/io'
 import { IoPeople } from 'react-icons/io5'
 
 const baseDomain = '/modules/website-fakultas'
@@ -166,61 +167,85 @@ export const GenerateMenu = () => {
     },
     {
       id: 8,
+      icon: <MdHomeRepairService className={'size-5'} />,
+      name: 'Layanan',
+      path: `${baseDomain}/services`,
+    },
+    {
+      id: 9,
       name: 'Konten Publik',
       icon: <MdInfo className={'size-5'} />,
       path: `${baseDomain}/public-content`,
       child: [
         {
-          id: 81,
+          id: 91,
           name: 'Berita',
           path: `${baseDomain}/public-content/news`,
         },
         {
-          id: 82,
+          id: 92,
           name: 'Agenda',
           path: `${baseDomain}/public-content/agenda`,
         },
         {
-          id: 83,
+          id: 93,
           name: 'Pengumuman',
           path: `${baseDomain}/public-content/announcement`,
         },
         {
-          id: 84,
+          id: 94,
           name: 'Download',
           path: `${baseDomain}/public-content/download`,
         },
       ],
     },
     {
-      id: 9,
+      id: 10,
+      name: 'Galeri',
+      icon: <IoMdImage className={'size-5'} />,
+      path: `${baseDomain}/gallery`,
+      child: [
+        {
+          id: 101,
+          name: 'Galeri Foto',
+          path: `${baseDomain}/gallery/photo`,
+        },
+        {
+          id: 102,
+          name: 'Galeri Video',
+          path: `${baseDomain}/gallery/video`,
+        },
+      ],
+    },
+    {
+      id: 11,
       name: 'PMB',
       icon: <MdEmojiPeople className={'size-5'} />,
       path: `${baseDomain}/pmb`,
     },
     {
-      id: 10,
+      id: 12,
       name: 'Zona Integritas',
       icon: <FaGears className={'size-5'} />,
       path: `${baseDomain}/zone-integrity`,
     },
     {
-      id: 11,
+      id: 13,
       name: 'Pengaturan Website',
       icon: <FaGear className={'size-5'} />,
       child: [
         {
-          id: 111,
+          id: 131,
           name: 'Landing Page',
           path: `${baseDomain}/settings/landing-page`,
         },
         {
-          id: 112,
+          id: 132,
           name: 'Pengaturan Warna',
           path: `${baseDomain}/settings/color`,
         },
         {
-          id: 113,
+          id: 133,
           name: 'Template',
           path: `${baseDomain}/settings/template`,
         },

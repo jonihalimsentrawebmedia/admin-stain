@@ -1,5 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Form } from '@/components/ui/form.tsx'
 import { useForm } from 'react-hook-form'
 import { RichText } from '@/components/common/richtext'
@@ -10,6 +10,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { Button } from '@/components/ui/button.tsx'
 import { MdMenuBook } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
+import { UseGetDetailMobilityFaculty } from '@/pages/modules/website-fakultas/academic/international-mobility/hooks'
 
 export const AcademicInternationalMobility = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -17,18 +18,27 @@ export const AcademicInternationalMobility = () => {
 
   const form = useForm()
   const navigate = useNavigate()
+  const { description } = UseGetDetailMobilityFaculty()
+
+  useEffect(() => {
+    if (description) {
+      form.reset({
+        isi: description?.isi,
+      })
+    }
+  }, [description])
 
   const queryClient = useQueryClient()
 
   const handleSave = async (e: any) => {
-    await AxiosClient.post('/fakultas/ppsm', e)
+    await AxiosClient.post('/fakultas/deskripsi-international-mobility', e)
       .then((res) => {
         if (res.data.status) {
           setIsEdit(!isEdit)
           setLoading(false)
           toast.success(res.data.message || 'Success Pengajuan update data universitas')
           queryClient.invalidateQueries({
-            queryKey: ['faculty-ppsm'],
+            queryKey: ['mobility-faculty'],
           })
         }
       })
@@ -94,7 +104,7 @@ export const AcademicInternationalMobility = () => {
             />
             <div
               className={'tiptap ProseMirror simple-editor mt-5'}
-              dangerouslySetInnerHTML={{ __html: '' }}
+              dangerouslySetInnerHTML={{ __html: description?.isi ?? '' }}
             />
           </div>
         </>

@@ -7,15 +7,40 @@ import { Form } from '@/components/ui/form.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import { RichText } from '@/components/common/richtext'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
+import { useParams } from 'react-router-dom'
+import AxiosClient from '@/provider/axios.tsx'
+import { toast } from 'react-toastify'
+import { useQueryClient } from '@tanstack/react-query'
 
 export const ButtonAddSectorCarrierProspect = () => {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
+  const { id: id_prodi } = useParams()
   const form = useForm()
+
+  const queryClient = useQueryClient()
   const HandleSave = async (e: any) => {
     setLoading(true)
-    console.log(e)
+    await AxiosClient.post('/fakultas/detail-sektor-pendidikan', {
+      ...e,
+      id_prodi: id_prodi,
+    })
+      .then((res) => {
+        if (res.data?.status) {
+          toast.success(res.data.message || 'Success')
+          setLoading(false)
+          setOpen(false)
+          queryClient.invalidateQueries({
+            queryKey: ['sector-work'],
+          })
+          form.reset()
+        }
+      })
+      .catch((err) => {
+        setLoading(false)
+        toast.error(err.response?.data?.message || 'Error')
+      })
   }
 
   return (
@@ -36,9 +61,9 @@ export const ButtonAddSectorCarrierProspect = () => {
         setOpen={setOpen}
       >
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(HandleSave)}>
+          <form onSubmit={form.handleSubmit(HandleSave)} className={'flex flex-col gap-4'}>
             <TextInput
-              name={'nama_sektor'}
+              name={'nama_sektor_pendidikan'}
               form={form}
               label={'Nama Sektor Pekerjaan'}
               placeholder={'Nama Sektor Pekerjaan'}
@@ -46,7 +71,7 @@ export const ButtonAddSectorCarrierProspect = () => {
             />
             <RichText
               form={form}
-              name={'decripstion'}
+              name={'deskripsi_sektor_pendidikan'}
               isRow={false}
               showLabel={true}
               label={'Deskripsi Sektor Pekerjaan'}

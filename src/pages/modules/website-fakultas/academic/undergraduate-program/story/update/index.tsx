@@ -37,12 +37,12 @@ export const UpdateStoryUnderGraduated = () => {
   const HandleSave = (data: StoryForm) => {
     setLoading(true)
     AxiosClient.put(
-      `/fakultas/cerita-international-mobility/${storyDetail?.id_cerita_international_mobility}`,
+      `/fakultas/cerita-international-ungreaduate-program/${storyDetail?.id_cerita_international_ungaduate_program}`,
       data
     )
       .then((res) => {
         if (res.data.status) {
-          navigate('/modules/website-fakultas/academic/international-mobility/story')
+          navigate('/modules/website-fakultas/academic/undergraduate-program/story')
           setLoading(false)
           toast.success(res.data.message || 'Success menambahkan data')
         }

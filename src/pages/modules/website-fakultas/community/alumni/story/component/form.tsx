@@ -1,7 +1,7 @@
 import type { UseFormReturn } from 'react-hook-form'
 import { Form } from '@/components/ui/form.tsx'
 import { UploadPhotoImage } from '@/pages/modules/pusat-karir/component/common/uploadPhoto.tsx'
-import type { StoryForm } from '@/pages/modules/website-fakultas/academic/ppsm/story/data/resolver.tsx'
+import type { StoryForm } from '../data/resolver.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import { useNavigate } from 'react-router-dom'
 import TextInput from '@/components/common/form/TextInput.tsx'
@@ -73,10 +73,10 @@ export const FormStoryAlumni = (props: Props) => {
           />
 
           <TextInput
-            name={'tahun_lulus'}
+            name={'tahun_masuk'}
             form={form}
-            label={'Tahun Lulus'}
-            placeholder={'Tahun Lulus'}
+            label={'Tahun Masuk'}
+            placeholder={'Tahun Masuk'}
             inputClassName={'bg-white w-1/2'}
             type={'number'}
             isNumber

@@ -1,5 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Form } from '@/components/ui/form.tsx'
 import { useForm } from 'react-hook-form'
 import { RichText } from '@/components/common/richtext'
@@ -10,6 +10,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { Button } from '@/components/ui/button.tsx'
 import { useNavigate } from 'react-router-dom'
 import { FaListUl } from 'react-icons/fa'
+import { UseGetDetailCollegeSystem } from './hook/index'
 
 export const CommunityCollegeSystem = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -17,18 +18,26 @@ export const CommunityCollegeSystem = () => {
 
   const form = useForm()
   const navigate = useNavigate()
+  const { description } = UseGetDetailCollegeSystem()
+
+  useEffect(() => {
+    if (description) {
+      form.reset({
+        isi: description?.isi,
+      })
+    }
+  }, [description])
 
   const queryClient = useQueryClient()
-
   const handleSave = async (e: any) => {
-    await AxiosClient.post('/fakultas/ppsm', e)
+    await AxiosClient.post('/fakultas/sistem-perkuliahan', e)
       .then((res) => {
         if (res.data.status) {
           setIsEdit(!isEdit)
           setLoading(false)
           toast.success(res.data.message || 'Success Pengajuan update data universitas')
           queryClient.invalidateQueries({
-            queryKey: ['faculty-ppsm'],
+            queryKey: ['college-system'],
           })
         }
       })
@@ -94,7 +103,7 @@ export const CommunityCollegeSystem = () => {
             />
             <div
               className={'tiptap ProseMirror simple-editor mt-5'}
-              dangerouslySetInnerHTML={{ __html: '' }}
+              dangerouslySetInnerHTML={{ __html: description?.isi ?? '' }}
             />
           </div>
         </>

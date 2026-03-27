@@ -1,4 +1,4 @@
-export interface ProfileData {
+export interface IDescriptionPPSM {
   id_satuan_organisasi: string
   id_unit: string
   isi: string

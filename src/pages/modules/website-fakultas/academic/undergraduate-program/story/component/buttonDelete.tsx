@@ -22,14 +22,14 @@ export const ButtonDeleteMobility = (props: Props) => {
   const handleDelete = async () => {
     setLoading(true)
     await AxiosClient.delete(
-      `/fakultas/cerita-international-mobility/${data?.id_cerita_international_mobility}`
+      `/fakultas/cerita-international-ungreaduate-program/${data?.id_cerita_international_ungaduate_program}`
     )
       .then((res) => {
         if (res?.data?.status) {
           setOpen(false)
           setLoading(false)
           queryClient.invalidateQueries({
-            queryKey: ['story-mobility'],
+            queryKey: ['story-undergraduate'],
           })
           toast.success(res.data.message || 'Success menghapus data')
         }

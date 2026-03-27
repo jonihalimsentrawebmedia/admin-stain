@@ -7,16 +7,33 @@ import TextInput from '@/components/common/form/TextInput.tsx'
 import { RichText } from '@/components/common/richtext'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import { useState } from 'react'
+import AxiosClient from '@/provider/axios.tsx'
+import { toast } from 'react-toastify'
+import { GroupSkillResolver, type IGroupSkillResolver } from '../data/resolver.tsx'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 export const CreatedGroupSkill = () => {
   const navigate = useNavigate()
-  const form = useForm()
+  const form = useForm<IGroupSkillResolver>({
+    resolver: zodResolver(GroupSkillResolver),
+  })
 
   const [loading, setLoading] = useState(false)
 
-  const handleSave = async (e: any) => {
+  const handleSave = async (e: IGroupSkillResolver) => {
     setLoading(true)
-    console.log(e)
+    AxiosClient.post('/fakultas/kelompok-keahlian', e)
+      .then((res) => {
+        if (res.data.status) {
+          setLoading(false)
+          navigate('/modules/website-fakultas/research/research-group/group-skill')
+          toast.success(res.data.message || 'Success')
+        }
+      })
+      .catch((err) => {
+        toast.error(err.message || 'Something went wrong')
+        setLoading(false)
+      })
   }
 
   return (

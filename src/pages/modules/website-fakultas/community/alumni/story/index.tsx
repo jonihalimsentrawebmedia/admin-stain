@@ -1,11 +1,13 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { useNavigate } from 'react-router-dom'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
-import { ColumnsStory } from '@/pages/modules/website-fakultas/academic/ppsm/story/data/columns.tsx'
+import { ColumnsStory } from './data/columns'
+import { UseGetStoryAlumni } from './hooks/index'
 
 export const CommunityAlumniStory = () => {
   const navigate = useNavigate()
   const columns = ColumnsStory()
+  const { story, loading, meta } = UseGetStoryAlumni()
 
   return (
     <>
@@ -22,7 +24,7 @@ export const CommunityAlumniStory = () => {
           label="Cerita Alumni"
         />
 
-        <TableCustom data={[]} columns={columns} loading={false} />
+        <TableCustom data={story} columns={columns} loading={loading} meta={meta} />
       </div>
     </>
   )

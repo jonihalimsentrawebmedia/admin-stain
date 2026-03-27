@@ -13,7 +13,7 @@ import { MdMenuBook } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 
 export const AcademicPPSMPage = () => {
-  const { profile } = UseGetDetailPPSM()
+  const { description } = UseGetDetailPPSM()
   const [isEdit, setIsEdit] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -21,22 +21,22 @@ export const AcademicPPSMPage = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (profile) {
-      form.setValue('isi', profile?.isi)
+    if (description) {
+      form.setValue('isi', description?.isi)
     }
-  }, [profile])
+  }, [description])
 
   const queryClient = useQueryClient()
 
   const handleSave = async (e: any) => {
-    await AxiosClient.post('/fakultas/ppsm', e)
+    await AxiosClient.post('/fakultas/deskripsi-ppsm', e)
       .then((res) => {
         if (res.data.status) {
           setIsEdit(!isEdit)
           setLoading(false)
           toast.success(res.data.message || 'Success Pengajuan update data universitas')
           queryClient.invalidateQueries({
-            queryKey: ['faculty-ppsm'],
+            queryKey: ['ppsm-faculty'],
           })
         }
       })
@@ -102,7 +102,7 @@ export const AcademicPPSMPage = () => {
             />
             <div
               className={'tiptap ProseMirror simple-editor mt-5'}
-              dangerouslySetInnerHTML={{ __html: profile?.isi ?? '' }}
+              dangerouslySetInnerHTML={{ __html: description?.isi ?? '' }}
             />
           </div>
         </>

@@ -1,17 +1,17 @@
 import { Link, useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
-import type { IStoryPPSM } from '@/pages/modules/website-fakultas/academic/ppsm/story/data/types.ts'
+import type { IStoryAlumni } from '../data/types.ts'
 import RenderHTMLContent from '@/components/common/richtext/RenderHTMLContent.tsx'
 import { format } from 'date-fns'
 import { HiPencil } from 'react-icons/hi'
-import { ButtonDeletePPSM } from '@/pages/modules/website-fakultas/academic/ppsm/story/component/buttonDelete.tsx'
+import { ButtonDeleteStoryAlumni } from '../component/buttonDelete.tsx'
 
 export const ColumnsStory = () => {
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') ?? 1)
   const limit = Number(searchParams.get('limit') ?? 10)
 
-  const columns: ColumnDef<IStoryPPSM>[] = [
+  const columns: ColumnDef<IStoryAlumni>[] = [
     {
       accessorKey: 'No',
       header: '#',
@@ -41,14 +41,14 @@ export const ColumnsStory = () => {
     },
     {
       accessorKey: 'nama_prodi',
-      header: 'Prodi - Tahun',
+      header: 'Prodi - Tahun Masuk',
       cell: ({ row }) => {
         const data = row.original
         return (
           <>
             <div>
               <p>{data.nama_prodi}</p>
-              <p>Alumni Tahun {data.tahun_lulus}</p>
+              <p>Alumni Tahun {data.tahun_masuk}</p>
             </div>
           </>
         )
@@ -87,12 +87,12 @@ export const ColumnsStory = () => {
           <>
             <div className="flex items-center gap-2">
               <Link
-                to={`edit/${data?.id_cerita_ppsm}`}
+                to={`edit/${data?.id_cerita_alumni}`}
                 className="bg-yellow-500 p-1.5 rounded text-white hover:bg-yellow-600"
               >
                 <HiPencil />
               </Link>
-              <ButtonDeletePPSM data={data} />
+              <ButtonDeleteStoryAlumni data={data} />
             </div>
           </>
         )

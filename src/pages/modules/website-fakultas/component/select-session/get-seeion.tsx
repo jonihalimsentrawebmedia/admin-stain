@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
-export interface ISessionCarrierCenter {
+export interface ISessionFaculty {
   id_universitas: string
   id_fakultas: string
   nama_fakultas: string
@@ -13,7 +13,7 @@ export interface ISessionCarrierCenter {
 }
 
 export const UseGetSessionFaculty = () => {
-  const [session, setSession] = useState<ISessionCarrierCenter>()
+  const [session, setSession] = useState<ISessionFaculty>()
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['session-faculty'],

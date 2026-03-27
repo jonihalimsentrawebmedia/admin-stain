@@ -1,19 +1,16 @@
-import { UseGetStoryPPSMDetail } from '@/pages/modules/website-fakultas/academic/ppsm/story/hooks'
+import { UseGetDetailStoryAlumni } from '../hooks/index.tsx'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import {
-  type StoryForm,
-  StoryResolver,
-} from '@/pages/modules/website-fakultas/academic/ppsm/story/data/resolver.tsx'
+import { type StoryForm, StoryResolver } from '../data/resolver'
 import { zodResolver } from '@hookform/resolvers/zod'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import { FormStoryAlumni } from '@/pages/modules/website-fakultas/academic/ppsm/story/component/form.tsx'
+import { FormStoryAlumni } from '../component/form'
 
-export const UpdateStoryPPSM = () => {
+export const UpdateStoryAlumni = () => {
   const { id } = useParams()
-  const { storyDetail } = UseGetStoryPPSMDetail(id as string)
+  const { storyDetail } = UseGetDetailStoryAlumni(id as string)
 
   const [loading, setLoading] = useState(false)
 
@@ -24,7 +21,7 @@ export const UpdateStoryPPSM = () => {
         cerita: storyDetail?.cerita,
         nama_lengkap: storyDetail?.nama_lengkap,
         id_prodi: storyDetail?.id_prodi,
-        tahun_lulus: storyDetail?.tahun_lulus,
+        tahun_masuk: storyDetail?.tahun_masuk,
       })
     }
   }, [storyDetail])
@@ -36,10 +33,10 @@ export const UpdateStoryPPSM = () => {
 
   const HandleSave = (data: StoryForm) => {
     setLoading(true)
-    AxiosClient.put(`/fakultas/cerita-ppsm/${storyDetail?.id_cerita_ppsm}`, data)
+    AxiosClient.put(`/fakultas/cerita-alumni/${storyDetail?.id_cerita_alumni}`, data)
       .then((res) => {
         if (res.data.status) {
-          navigate('/modules/website-fakultas/academic/ppsm/story')
+          navigate('/modules/website-fakultas/community/alumni/story')
           setLoading(false)
           toast.success(res.data.message || 'Success menambahkan data')
         }

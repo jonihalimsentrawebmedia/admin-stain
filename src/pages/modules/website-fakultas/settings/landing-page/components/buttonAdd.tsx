@@ -1,7 +1,6 @@
 import { BiPlus } from 'react-icons/bi'
 import { useState } from 'react'
 import { Button } from '@/components/ui/button.tsx'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { Form } from '@/components/ui/form.tsx'
 import { UploadImageRatio } from '@/pages/modules/website-utama/public-content/facilities/components/uploadImageRatio.tsx'
 import { useForm } from 'react-hook-form'
@@ -9,6 +8,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonAddLandingFaculty = () => {
   const [open, setOpen] = useState(false)
@@ -50,7 +50,7 @@ export const ButtonAddLandingFaculty = () => {
         Tambah Gambar
       </Button>
 
-      <DialogCustom
+      <DialogBasic
         open={open}
         setOpen={setOpen}
         title={'Tambah Gambar'}
@@ -71,7 +71,7 @@ export const ButtonAddLandingFaculty = () => {
             </form>
           </Form>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

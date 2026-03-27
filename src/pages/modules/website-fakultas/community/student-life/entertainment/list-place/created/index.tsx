@@ -6,6 +6,8 @@ import { RichText } from '@/components/common/richtext'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import AxiosClient from '@/provider/axios.tsx'
+import { toast } from 'react-toastify'
 
 export const CreatedStudentListOrganization = () => {
   const form = useForm()
@@ -15,16 +17,30 @@ export const CreatedStudentListOrganization = () => {
 
   const handleSave = async (e: any) => {
     setLoading(true)
-    console.log(e)
+    await AxiosClient.post('/fakultas/daftar-hiburan-mahasiswa', e)
+      .then((res) => {
+        if (res?.data?.status) {
+          setLoading(false)
+          navigate('/modules/website-fakultas/community/student-life/entertainment/list-place')
+          toast.success(res?.data?.message || 'Success')
+        }
+      })
+      .catch((err) => {
+        setLoading(false)
+        toast.error(err?.response?.data?.message || 'Error')
+      })
   }
 
   return (
     <>
       <Form {...form}>
         <form className={'space-y-5'} onSubmit={form.handleSubmit(handleSave)}>
-          <UploadPhotoImage name={'url_gambar'} form={form} />
+          <UploadPhotoImage
+            name={'url_gambar'}
+            form={form}
+          />
           <TextInput
-            name={'nama_hiburang'}
+            name={'nama'}
             form={form}
             label={'Nama Hiburan Mahasiswa'}
             placeholder={'Nama Hiburan Mahasiswa'}

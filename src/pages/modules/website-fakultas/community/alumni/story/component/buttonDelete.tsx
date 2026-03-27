@@ -2,18 +2,18 @@ import { FaTrash } from 'react-icons/fa'
 import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
-import type { IStoryPPSM } from '@/pages/modules/website-fakultas/academic/ppsm/story/data/types.ts'
 import { toast } from 'react-toastify'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import RenderHTMLContent from '@/components/common/richtext/RenderHTMLContent.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Button } from '@/components/ui/button.tsx'
+import type { IStoryAlumni } from '../data/types'
 
 interface Props {
-  data: IStoryPPSM
+  data: IStoryAlumni
 }
 
-export const ButtonDeletePPSM = (props: Props) => {
+export const ButtonDeleteStoryAlumni = (props: Props) => {
   const { data } = props
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -21,13 +21,13 @@ export const ButtonDeletePPSM = (props: Props) => {
   const queryClient = useQueryClient()
   const handleDelete = async () => {
     setLoading(true)
-    await AxiosClient.delete(`/fakultas/cerita-ppsm/${data?.id_cerita_ppsm}`)
+    await AxiosClient.delete(`/fakultas/cerita-alumni/${data?.id_cerita_alumni}`)
       .then((res) => {
         if (res?.data?.status) {
           setOpen(false)
           setLoading(false)
           queryClient.invalidateQueries({
-            queryKey: ['story-ppsm'],
+            queryKey: ['story-alumni'],
           })
           toast.success(res.data.message || 'Success menghapus data')
         }
@@ -59,7 +59,7 @@ export const ButtonDeletePPSM = (props: Props) => {
           <p className="text-gray-500">Program Studi</p>
           <p>{data?.nama_prodi}</p>
           <p className="text-gray-500">Tahun Lulus</p>
-          <p>{data?.tahun_lulus}</p>
+          <p>{data?.tahun_masuk}</p>
           <p className="text-gray-500">Nama Alumni</p>
           <RenderHTMLContent content={data?.cerita ?? ''} />
         </div>

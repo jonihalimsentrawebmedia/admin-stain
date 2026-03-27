@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { UseGetDetailJobsSeekers } from '@/pages/modules/pusat-karir/management-user/list-user/jobs-seekers/hooks'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Button } from '@/components/ui/button.tsx'
@@ -18,6 +18,7 @@ const DataItem = ({ label, value }: { label: string; value: string }) => {
 export const DetailUserJobsSeekers = () => {
   const { id } = useParams()
   const { detail } = UseGetDetailJobsSeekers((id as string) ?? '')
+  const navigate = useNavigate()
 
   return (
     <>
@@ -33,6 +34,9 @@ export const DetailUserJobsSeekers = () => {
                   Aktif
                   <Button
                     variant={'outline'}
+                    onClick={() =>
+                      navigate(`/modules/pusat-karir/management-user/user/pencari-kerja/edit/${id}`)
+                    }
                     className={'border-primary text-primary hover:text-primary'}
                   >
                     <HiPencil />
@@ -128,7 +132,8 @@ export const DetailUserJobsSeekers = () => {
         <div className="grid grid-cols-[12rem_1fr] gap-5">
           <p className="text-gray-500">Universitas Asal*</p>
           <p className="font-semibold text-gray-800 capitalize">
-            {detail?.pendidikan_terakhir?.universitas_asal?.split('_').join(' ').toLowerCase() ?? ''}
+            {detail?.pendidikan_terakhir?.universitas_asal?.split('_').join(' ').toLowerCase() ??
+              ''}
           </p>
           <p className="text-gray-500">Tingkat</p>
           <p className="font-semibold text-gray-800 capitalize">

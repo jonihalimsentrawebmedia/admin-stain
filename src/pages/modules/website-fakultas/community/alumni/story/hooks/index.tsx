@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
-import type { IStoryPPSM } from '@/pages/modules/website-fakultas/academic/ppsm/story/data/types.ts'
+import type { IStoryAlumni } from '../data/types'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
 export const UseGetStoryAlumni = () => {
-  const [story, setStory] = useState<IStoryPPSM[]>([])
+  const [story, setStory] = useState<IStoryAlumni[]>([])
   const [meta, setMeta] = useState<Meta>()
 
   const { data, isLoading, isFetching } = useQuery({
@@ -26,8 +26,8 @@ export const UseGetStoryAlumni = () => {
   return { story, loading, meta }
 }
 
-export const UseGetStoryPPSMDetail = (id: string) => {
-  const [storyDetail, setStoryDetail] = useState<IStoryPPSM>()
+export const UseGetDetailStoryAlumni = (id: string) => {
+  const [storyDetail, setStoryDetail] = useState<IStoryAlumni>()
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['story-ppsm', id],

@@ -64,7 +64,6 @@ import { CommunityCollegeSystem } from '@/pages/modules/website-fakultas/communi
 import { CommunityStudyProgram } from '@/pages/modules/website-fakultas/community/study-faculty/college-system/study-program'
 import { AccreditationFacultyCommunity } from '@/pages/modules/website-fakultas/community/study-faculty/college-system/accreditation'
 import { CarrierProspectCommunity } from '@/pages/modules/website-fakultas/community/study-faculty/college-system/carrier-prospect'
-import { SectorCarrierProspect } from '@/pages/modules/website-fakultas/community/study-faculty/college-system/carrier-prospect/sector'
 import { AccommodationStudentLife } from '@/pages/modules/website-fakultas/community/student-life/accommodation'
 import { StudentOrganizationCommunity } from '@/pages/modules/website-fakultas/community/student-life/student-organization'
 import { ListOrganizationStudentLife } from '@/pages/modules/website-fakultas/community/student-life/student-organization/list-Organization'
@@ -78,8 +77,30 @@ import { FacilitiesPage } from '@/pages/modules/website-fakultas/facilities'
 import { CreatedFacilities } from '@/pages/modules/website-fakultas/facilities/created'
 import { DescriptionPMBText } from '@/pages/modules/website-fakultas/pmb'
 import { ZoneIntegrityPage } from '@/pages/modules/website-fakultas/zone-integrity'
-import { DetailZoneIntegrity } from '@/pages/modules/website-fakultas/zone-integrity/detail'
 import { CreatedSubCategory } from '@/pages/modules/website-fakultas/zone-integrity/detail/created'
+import { StaffProfileFaculty } from '@/pages/modules/website-fakultas/about-faculty/staff'
+import { LecturerProfileFaculty } from '@/pages/modules/website-fakultas/about-faculty/lecturer'
+import { NewsFaculty } from '@/pages/modules/website-fakultas/about-faculty/news'
+import { CurriculumSubjectDetail } from '@/pages/modules/website-fakultas/academic/curriculum/subject'
+import { NewsProdiFaculty } from '@/pages/modules/website-fakultas/academic/program-studi/detail/news'
+import { UpdateStoryUnderGraduated } from '@/pages/modules/website-fakultas/academic/undergraduate-program/story/update'
+import { UpdatedGroupSkill } from '@/pages/modules/website-fakultas/research/research-group/group-skill/updated'
+import DetailGroupSkillPage from '@/pages/modules/website-fakultas/research/research-group/group-skill/detail'
+import ProdiSectorCarrier from '@/pages/modules/website-fakultas/community/study-faculty/college-system/carrier-prospect/prodi'
+import { SectorCarrierProspect } from '@/pages/modules/website-fakultas/community/study-faculty/college-system/carrier-prospect/sector'
+import { UpdatedStudentOrganization } from '@/pages/modules/website-fakultas/community/student-life/student-organization/list-Organization/updated'
+import { DetailStudentOrganization } from '@/pages/modules/website-fakultas/community/student-life/student-organization/list-Organization/detail'
+import { UpdatedStudentListOrganization } from '@/pages/modules/website-fakultas/community/student-life/entertainment/list-place/updated'
+import { DetailStudentEntertainment } from '@/pages/modules/website-fakultas/community/student-life/entertainment/list-place/detail'
+import { UpdateStoryAlumni } from '@/pages/modules/website-fakultas/community/alumni/story/update'
+import { UpdatedFacilities } from '@/pages/modules/website-fakultas/facilities/updated'
+import { DetailFacilitiesPage } from '@/pages/modules/website-fakultas/facilities/detail'
+import { DetailZoneIntegrity } from '@/pages/modules/website-fakultas/zone-integrity/detail'
+import { UpdatedSubCategory } from '@/pages/modules/website-fakultas/zone-integrity/detail/updated'
+import { ServiceListPage } from '@/pages/modules/website-fakultas/service'
+import { ListAlbumVideo } from '@/pages/modules/website-fakultas/gallery/video'
+import { ListGalleryAlbum } from '@/pages/modules/website-fakultas/gallery/album'
+import { ListGalleryPhoto } from '@/pages/modules/website-fakultas/gallery/photo'
 
 export const RouterFaculty = [
   {
@@ -126,15 +147,15 @@ export const RouterFaculty = [
       },
       {
         path: 'staff',
-        element: <></>,
+        element: <StaffProfileFaculty />,
       },
       {
         path: 'dosen',
-        element: <></>,
+        element: <LecturerProfileFaculty />,
       },
       {
         path: 'berita',
-        element: <></>,
+        element: <NewsFaculty />,
       },
       {
         path: 'galeri',
@@ -186,7 +207,7 @@ export const RouterFaculty = [
               },
               {
                 path: 'berita',
-                element: <></>,
+                element: <NewsProdiFaculty />,
               },
               {
                 path: 'galeri',
@@ -213,6 +234,15 @@ export const RouterFaculty = [
               {
                 index: true,
                 element: <CurriculumPerProdi />,
+              },
+              {
+                path: 'subject',
+                children: [
+                  {
+                    path: ':id_subject',
+                    element: <CurriculumSubjectDetail />,
+                  },
+                ],
               },
             ],
           },
@@ -288,6 +318,10 @@ export const RouterFaculty = [
                 path: 'add',
                 element: <CreatedStoryUnderGraduated />,
               },
+              {
+                path: 'edit/:id',
+                element: <UpdateStoryUnderGraduated />,
+              },
             ],
           },
           {
@@ -327,6 +361,14 @@ export const RouterFaculty = [
               {
                 path: 'add',
                 element: <CreatedGroupSkill />,
+              },
+              {
+                path: 'edit/:id',
+                element: <UpdatedGroupSkill />,
+              },
+              {
+                path: 'detail/:id',
+                element: <DetailGroupSkillPage />,
               },
             ],
           },
@@ -376,11 +418,20 @@ export const RouterFaculty = [
           },
           {
             path: 'carrier-prospect',
-            element: <CarrierProspectCommunity />,
-          },
-          {
-            path: 'carrier-prospect/sector',
-            element: <SectorCarrierProspect />,
+            children: [
+              {
+                index: true,
+                element: <CarrierProspectCommunity />,
+              },
+              {
+                path: 'sector',
+                element: <ProdiSectorCarrier />,
+              },
+              {
+                path: 'sector/:id/detail',
+                element: <SectorCarrierProspect />,
+              },
+            ],
           },
         ],
       },
@@ -414,6 +465,14 @@ export const RouterFaculty = [
                     path: 'add',
                     element: <CreatedStudentOrganization />,
                   },
+                  {
+                    path: 'edit/:id',
+                    element: <UpdatedStudentOrganization />,
+                  },
+                  {
+                    path: 'detail/:id',
+                    element: <DetailStudentOrganization />,
+                  },
                 ],
               },
             ],
@@ -427,11 +486,24 @@ export const RouterFaculty = [
               },
               {
                 path: 'list-place',
-                element: <ListPlaceStudentOrganization />,
-              },
-              {
-                path: 'list-place/add',
-                element: <CreatedStudentListOrganization />,
+                children: [
+                  {
+                    index: true,
+                    element: <ListPlaceStudentOrganization />,
+                  },
+                  {
+                    path: 'add',
+                    element: <CreatedStudentListOrganization />,
+                  },
+                  {
+                    path: 'edit/:id',
+                    element: <UpdatedStudentListOrganization />,
+                  },
+                  {
+                    path: 'detail/:id',
+                    element: <DetailStudentEntertainment />,
+                  },
+                ],
               },
             ],
           },
@@ -450,6 +522,10 @@ export const RouterFaculty = [
               {
                 path: 'add',
                 element: <CreatedStoryAlumniCommunity />,
+              },
+              {
+                path: 'edit/:id',
+                element: <UpdateStoryAlumni />,
               },
             ],
           },
@@ -472,6 +548,50 @@ export const RouterFaculty = [
         path: 'add',
         element: <CreatedFacilities />,
       },
+      {
+        path: 'edit/:id',
+        element: <UpdatedFacilities />,
+      },
+      {
+        path: 'detail/:id',
+        element: <DetailFacilitiesPage />,
+      },
+    ],
+  },
+  {
+    path: 'services',
+    children: [
+      {
+        index: true,
+        element: <ServiceListPage />,
+      },
+    ],
+  },
+  {
+    path: 'gallery',
+    children: [
+      {
+        path: 'video',
+        element: <ListAlbumVideo />,
+      },
+      {
+        path: 'photo',
+        children: [
+          {
+            index: true,
+            element: <ListGalleryAlbum />,
+          },
+          {
+            path: 'album',
+            children: [
+              {
+                path: ':id',
+                element: <ListGalleryPhoto />,
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
   {
@@ -491,12 +611,21 @@ export const RouterFaculty = [
         element: <ZoneIntegrityPage />,
       },
       {
-        path: ':id/detail',
-        element: <DetailZoneIntegrity />,
-      },
-      {
-        path: ':id/detail/add',
-        element: <CreatedSubCategory />,
+        path: 'detail/:id',
+        children: [
+          {
+            index: true,
+            element: <DetailZoneIntegrity />,
+          },
+          {
+            path: 'add',
+            element: <CreatedSubCategory />,
+          },
+          {
+            path: 'edit/:id_sub',
+            element: <UpdatedSubCategory />,
+          },
+        ],
       },
     ],
   },

@@ -68,8 +68,8 @@ export const NewMultipleSelectCategory = ({ form, name }: any) => {
           onClick={() => setOpen(true)}
         >
           {value?.length ? (
-            value.map((id) => (
-              <div key={id} className="text-sm border px-2 py-1 rounded flex items-center gap-1">
+            value.map((id, k) => (
+              <div key={k} className="text-sm border px-2 py-1 rounded flex items-center gap-1">
                 {subMap[id] ?? id}
 
                 <FaTrash
@@ -96,9 +96,9 @@ export const NewMultipleSelectCategory = ({ form, name }: any) => {
         />
 
         <div className="grid grid-cols-3 gap-6">
-          {specialization.map((cat: any) => (
+          {specialization.map((cat: any, k: number) => (
             <CategoryItem
-              key={cat.id_spesialisasi}
+              key={k}
               cat={cat}
               subList={groupData[cat.id_spesialisasi] ?? []}
               value={value}
@@ -158,8 +158,8 @@ const CategoryItem = ({ cat, subList, value, form, name, search }: any) => {
       </Label>
 
       <ul className="ml-5">
-        {filtered.map((sub: any) => (
-          <Label key={sub.id_sub_spesialisasi} className="flex gap-2 py-1">
+        {filtered.map((sub: any, k: number) => (
+          <Label key={k} className="flex gap-2 py-1">
             <input
               type="checkbox"
               checked={value?.includes(sub.id_sub_spesialisasi)}
