@@ -9,7 +9,9 @@ export const DetailZoneIntegrity = () => {
   const navigate = useNavigate()
   const { id } = useParams()
   const { detail } = UseGetDetailZoneIntegrity((id as string) ?? '')
-  const { subZoneIntegrity, loading, meta } = UseGetSubZoneIntegrity()
+  const { subZoneIntegrity, loading, meta } = UseGetSubZoneIntegrity({
+    id: id as string,
+  })
   const columns = ColumnsSubZoneIntegrity()
 
   return (
