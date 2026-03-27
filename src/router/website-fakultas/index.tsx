@@ -97,6 +97,10 @@ import { UpdatedFacilities } from '@/pages/modules/website-fakultas/facilities/u
 import { DetailFacilitiesPage } from '@/pages/modules/website-fakultas/facilities/detail'
 import { DetailZoneIntegrity } from '@/pages/modules/website-fakultas/zone-integrity/detail'
 import { UpdatedSubCategory } from '@/pages/modules/website-fakultas/zone-integrity/detail/updated'
+import { ServiceListPage } from '@/pages/modules/website-fakultas/service'
+import { ListAlbumVideo } from '@/pages/modules/website-fakultas/gallery/video'
+import { ListGalleryAlbum } from '@/pages/modules/website-fakultas/gallery/album'
+import { ListGalleryPhoto } from '@/pages/modules/website-fakultas/gallery/photo'
 
 export const RouterFaculty = [
   {
@@ -551,6 +555,42 @@ export const RouterFaculty = [
       {
         path: 'detail/:id',
         element: <DetailFacilitiesPage />,
+      },
+    ],
+  },
+  {
+    path: 'services',
+    children: [
+      {
+        index: true,
+        element: <ServiceListPage />,
+      },
+    ],
+  },
+  {
+    path: 'gallery',
+    children: [
+      {
+        path: 'video',
+        element: <ListAlbumVideo />,
+      },
+      {
+        path: 'photo',
+        children: [
+          {
+            index: true,
+            element: <ListGalleryAlbum />,
+          },
+          {
+            path: 'album',
+            children: [
+              {
+                path: ':id',
+                element: <ListGalleryPhoto />,
+              },
+            ],
+          },
+        ],
       },
     ],
   },
