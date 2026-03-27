@@ -5,8 +5,12 @@ import AxiosClient from '@/provider/axios.tsx'
 import type { BasicProps } from '@/utils/globalType.ts'
 import type { ISbuZoneIntegrity } from '@/pages/modules/website-fakultas/zone-integrity/detail/data/types.ts'
 
-export const UseGetSubZoneIntegrity = (props?: BasicProps) => {
-  const { page, limit, search } = props ?? {}
+interface props extends BasicProps {
+  id: string
+}
+
+export const UseGetSubZoneIntegrity = (props?: props) => {
+  const { page, limit, search, id } = props ?? {}
   const [subZoneIntegrity, setSubZoneIntegrity] = useState<ISbuZoneIntegrity[]>([])
   const [meta, setMeta] = useState<Meta>()
 
@@ -14,6 +18,7 @@ export const UseGetSubZoneIntegrity = (props?: BasicProps) => {
   if (page) ParamsSearch.append('page', page.toString())
   if (limit) ParamsSearch.append('limit', limit.toString())
   if (search) ParamsSearch.append('search', search)
+  if (id) ParamsSearch.append('id-kategori', id)
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['zone-integrity', ParamsSearch.toString()],
