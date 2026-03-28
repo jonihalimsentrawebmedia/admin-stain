@@ -70,7 +70,9 @@ export const UploadPhotoImage = <T extends FieldValues>({
         <p className="text-xl font-semibold">Foto Profil</p>
 
         <ul className="list-disc pl-5">
-          <li>Ukuran 3:4</li>
+          <li>
+            Ukuran {ratio_width}:{ratio_height}
+          </li>
           <li>Max. 2MB</li>
           <li>Jenis File: .jpg/.jpeg/.png</li>
         </ul>

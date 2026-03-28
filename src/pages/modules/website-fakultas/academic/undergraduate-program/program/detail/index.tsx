@@ -34,8 +34,9 @@ export const DetailProgram = () => {
 
         <Tabs value={tab} onValueChange={(value) => setTab(value)} className="w-full">
           <TabsList className={'w-full rounded-none bg-white h-full border-b-2 border-primary p-0'}>
-            {TabsData.map((item) => (
+            {TabsData.map((item, k) => (
               <TabsTrigger
+                key={k}
                 className={clsx(
                   'rounded-t-xl! rounded-bl-none! rounded-br-none! p-2',
                   'data-[state=active]:bg-primary data-[state=active]:text-white'
@@ -46,8 +47,10 @@ export const DetailProgram = () => {
               </TabsTrigger>
             ))}
           </TabsList>
-          {TabsData?.map((item) => (
-            <TabsContent value={item?.id}>{item?.element}</TabsContent>
+          {TabsData?.map((item, k) => (
+            <TabsContent key={k} value={item?.id}>
+              {item?.element}
+            </TabsContent>
           ))}
         </Tabs>
       </div>

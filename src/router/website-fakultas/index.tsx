@@ -332,7 +332,7 @@ export const RouterFaculty = [
                 element: <UnderGraduatedProgram />,
               },
               {
-                path: ':id',
+                path: 'detail/:id',
                 element: <DetailProgram />,
               },
             ],
