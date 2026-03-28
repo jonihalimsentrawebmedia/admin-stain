@@ -1,4 +1,4 @@
-import { UseGetDetailDataCarrierCenter } from './hooks'
+import { UseGetDetailDataPulsikom } from './hooks'
 import { ProfilePageSkeleton } from '@/pages/modules/website-utama/profile/components/skeleton.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Accordion } from '@/components/ui/accordion.tsx'
@@ -8,9 +8,9 @@ import { ButtonCancelApproval } from '@/pages/modules/pusat-karir/data-unit/comp
 import { MdInfo } from 'react-icons/md'
 import { useState } from 'react'
 
-export const DetailProfileCarrierCenter = () => {
+export const DetailProfilePuslikom = () => {
   const [realData, setRealData] = useState(true)
-  const { carrierCenter, loading } = UseGetDetailDataCarrierCenter({
+  const { carrierCenter, loading } = UseGetDetailDataPulsikom({
     real_data: realData,
   })
   const navigate = useNavigate()
@@ -22,7 +22,7 @@ export const DetailProfileCarrierCenter = () => {
       ) : (
         <>
           <ButtonTitleGroup
-            label={'Data Utama Universitas'}
+            label={'Data Utama Pulsikom'}
             buttonGroup={
               carrierCenter?.status_publish == 'DIAJUKAN_EDITOR'
                 ? [

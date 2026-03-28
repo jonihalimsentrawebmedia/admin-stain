@@ -101,6 +101,11 @@ import { ServiceListPage } from '@/pages/modules/website-fakultas/service'
 import { ListAlbumVideo } from '@/pages/modules/website-fakultas/gallery/video'
 import { ListGalleryAlbum } from '@/pages/modules/website-fakultas/gallery/album'
 import { ListGalleryPhoto } from '@/pages/modules/website-fakultas/gallery/photo'
+import { StudyResearchPage } from '@/pages/modules/website-fakultas/research/study-research'
+import { InboxStoryPage } from '@/pages/modules/website-fakultas/community/alumni/inbox'
+import { AlumniMessageInbox } from '@/pages/modules/website-fakultas/community/alumni/inbox/message'
+import { UserProfilePage } from '@/pages/modules/website-utama/user-profile'
+import { ChangePassword } from '@/pages/modules/website-utama/change-password'
 
 export const RouterFaculty = [
   {
@@ -109,6 +114,14 @@ export const RouterFaculty = [
       {
         index: true,
         element: <DashboardFaculty />,
+      },
+      {
+        path: 'user-profile',
+        element: <UserProfilePage />,
+      },
+      {
+        path: 'change-password',
+        element: <ChangePassword />,
       },
     ],
   },
@@ -391,6 +404,10 @@ export const RouterFaculty = [
           },
         ],
       },
+      {
+        path: 'study-research',
+        element: <StudyResearchPage />,
+      },
     ],
   },
   {
@@ -531,7 +548,16 @@ export const RouterFaculty = [
           },
           {
             path: 'inbox',
-            children: [],
+            children: [
+              {
+                index: true,
+                element: <InboxStoryPage />,
+              },
+              {
+                path: 'message/:id',
+                element: <AlumniMessageInbox />,
+              },
+            ],
           },
         ],
       },

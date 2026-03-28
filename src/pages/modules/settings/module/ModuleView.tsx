@@ -3,10 +3,21 @@ import ModuleViewModel from './ModuleViewModel'
 import TableCustom from '@/components/common/table/TableCustom'
 import ButtonAddModule from './components/ButtonAddModule'
 import useGetModules from './conntroller/useGetModules'
+import { useSearchParams } from 'react-router-dom'
 
 const ModuleView = () => {
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
   const { columns } = ModuleViewModel()
-  const { loading, modules, meta } = useGetModules()
+  const { loading, modules, meta } = useGetModules({
+    page: page,
+    limit: limit,
+    search: search,
+  })
+
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup

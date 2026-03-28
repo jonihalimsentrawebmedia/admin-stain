@@ -64,6 +64,8 @@ import { UpdatedInternshipVacancy } from '@/pages/modules/pusat-karir/service/in
 import { DetailInternshipVacancy } from '@/pages/modules/pusat-karir/service/internship-vacancy/detail'
 import { ApplicantInternshipVacancy } from '@/pages/modules/pusat-karir/service/internship-vacancy/aplicant'
 import { ResultStatistic } from '@/pages/modules/pusat-karir/survey/statistic'
+import { UserProfilePage } from '@/pages/modules/website-utama/user-profile'
+import { ChangePassword } from '@/pages/modules/website-utama/change-password'
 
 export const CarrierCenterRoute = [
   {
@@ -72,6 +74,14 @@ export const CarrierCenterRoute = [
       {
         index: true,
         element: <DashboardCarrierCenter />,
+      },
+      {
+        path: 'user-profile',
+        element: <UserProfilePage />,
+      },
+      {
+        path: 'change-password',
+        element: <ChangePassword />,
       },
     ],
   },
