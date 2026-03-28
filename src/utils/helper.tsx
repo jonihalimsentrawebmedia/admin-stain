@@ -146,3 +146,21 @@ export const GetCharacterFirst = (text?: string | null): string => {
     .join('')
     .toUpperCase()
 }
+
+export const getRelativeTime = (date: Date | string): string => {
+  const parsedDate = typeof date === 'string' ? new Date(date) : date
+  const distance = formatDistanceToNow(parsedDate, { addSuffix: true, locale: id })
+
+  let result = distance
+    .replace('yang lalu', 'lalu')
+    .replace(/^kurang dari /, '') // remove "kurang dari" for very recent
+    .trim()
+
+  result = result.charAt(0).toUpperCase() + result.slice(1)
+
+  if (!result || result === 'Lalu') {
+    return 'Baru saja'
+  }
+
+  return result
+}

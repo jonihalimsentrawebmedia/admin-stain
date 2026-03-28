@@ -102,6 +102,8 @@ import { ListAlbumVideo } from '@/pages/modules/website-fakultas/gallery/video'
 import { ListGalleryAlbum } from '@/pages/modules/website-fakultas/gallery/album'
 import { ListGalleryPhoto } from '@/pages/modules/website-fakultas/gallery/photo'
 import { StudyResearchPage } from '@/pages/modules/website-fakultas/research/study-research'
+import { InboxStoryPage } from '@/pages/modules/website-fakultas/community/alumni/inbox'
+import { AlumniMessageInbox } from '@/pages/modules/website-fakultas/community/alumni/inbox/message'
 
 export const RouterFaculty = [
   {
@@ -536,7 +538,16 @@ export const RouterFaculty = [
           },
           {
             path: 'inbox',
-            children: [],
+            children: [
+              {
+                index: true,
+                element: <InboxStoryPage />,
+              },
+              {
+                path: 'message/:id',
+                element: <AlumniMessageInbox />,
+              },
+            ],
           },
         ],
       },

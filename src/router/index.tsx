@@ -5,10 +5,8 @@ import SuccessView from '@/pages/forget-password/success/SuccessView'
 import LoginView from '@/pages/login/LoginView'
 import ModulesView from '@/pages/modules/ModulesView'
 import LayoutSetting from '@/pages/modules/settings/components/layout/LayoutSetting'
-
 import { createBrowserRouter, Navigate } from 'react-router-dom'
 import { SelectUniversity } from '@/pages/modules/website-utama/select-university'
-
 import MainLayout from '@/pages/modules/website-utama/component/layout'
 import ModuleProfileView from '@/pages/modules/profile/ModuleProfileView'
 import { MainWebsiteRouter } from '@/router/main-website/router.tsx'
@@ -47,6 +45,8 @@ import FacultyWebTheme from '@/pages/modules/website-fakultas/component/layout/t
 import MainLayoutFaculty from '@/pages/modules/website-fakultas/component/layout'
 import { SelectSessionFaculty } from '@/pages/modules/website-fakultas/component/select-session'
 import { RouterFaculty } from '@/router/website-fakultas'
+import { PusilkomRoutes } from '@/router/pusilkom'
+import MainLayoutPulsikom from '@/pages/modules/Pulsikom/component/layout'
 
 export const Router = createBrowserRouter([
   {
@@ -225,6 +225,11 @@ export const Router = createBrowserRouter([
           </>
         ),
         children: [...RouterFaculty],
+      },
+      {
+        path: 'pulsikom',
+        element: <MainLayoutPulsikom />,
+        children: [...PusilkomRoutes],
       },
     ],
   },
