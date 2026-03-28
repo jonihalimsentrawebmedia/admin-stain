@@ -4,6 +4,7 @@ import React from 'react'
 import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/hooks/getProfile.tsx'
 import ButtonProfile from '@/pages/modules/settings/components/button/ButtonProfile.tsx'
 import { Link } from 'react-router-dom'
+import { UseGetSessionPusilkom } from '@/pages/modules/Pulsikom/component/select-session/get-seeion.tsx'
 
 interface Props {
   collapsed: boolean
@@ -13,6 +14,7 @@ interface Props {
 export function HeaderPulsikom(props: Props) {
   const { collapsed, setCollapsed } = props
 
+  const {session} = UseGetSessionPusilkom()
   const localStorage = window.localStorage.getItem('module')
   const module: IModulesList = JSON.parse(localStorage || '{}')
 
@@ -26,7 +28,7 @@ export function HeaderPulsikom(props: Props) {
         </Link>
         <div className="flex flex-col">
           <p className="text-sm font-semibold text-primary">Manajemen Pengelolaan Website</p>
-          {/*<p className="text-2xl font-semibold">{session?.nama_fakultas}</p>*/}
+          <p className="text-2xl font-semibold">{session?.nama_unit}</p>
         </div>
       </div>
       <div className="flex items-center gap-5">

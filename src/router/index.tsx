@@ -47,6 +47,7 @@ import { SelectSessionFaculty } from '@/pages/modules/website-fakultas/component
 import { RouterFaculty } from '@/router/website-fakultas'
 import { PusilkomRoutes } from '@/router/pusilkom'
 import MainLayoutPulsikom from '@/pages/modules/Pulsikom/component/layout'
+import { SelectSessionPusilkom } from '@/pages/modules/Pulsikom/component/select-session'
 
 export const Router = createBrowserRouter([
   {
@@ -129,6 +130,10 @@ export const Router = createBrowserRouter([
       {
         path: 'select-fakultas',
         element: <SelectSessionFaculty />,
+      },
+      {
+        path: 'session-pulsikom',
+        element: <SelectSessionPusilkom />,
       },
       {
         path: 'settings',

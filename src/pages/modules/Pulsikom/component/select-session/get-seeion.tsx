@@ -4,8 +4,8 @@ import AxiosClient from '@/provider/axios.tsx'
 
 export interface ISessionPusilkom {
   id_universitas: string
-  id_fakultas: string
-  nama_fakultas: string
+  id_unit: string
+  nama_unit: string
   nama_universitas: string
   singkatan: string
   singkatan_fakultas: string
@@ -16,9 +16,9 @@ export const UseGetSessionPusilkom = () => {
   const [session, setSession] = useState<ISessionPusilkom>()
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['session-faculty'],
+    queryKey: ['session-pulsikom'],
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get('/fakultas/user-session').then((res) => res.data?.data),
+    queryFn: () => AxiosClient.get('/pusilkom/user-session').then((res) => res.data?.data),
   })
 
   const loading = isLoading || isFetching

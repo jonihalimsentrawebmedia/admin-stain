@@ -81,6 +81,9 @@ export const GetModuleUrl = (moduleSelect: {
     case 'website_fakultas': {
       return `/modules/select-fakultas?url=website-fakultas&id=${moduleSelect?.id_module}`
     }
+    case 'pulsikom': {
+      return `/modules/session-pulsikom?url=pulsikom&id=${moduleSelect?.id_module}`
+    }
 
     default:
       return `/modules/${urlStringEncode(moduleSelect?.controller ?? '')}/dashboard`

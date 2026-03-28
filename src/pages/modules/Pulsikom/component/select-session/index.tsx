@@ -11,6 +11,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { UseGetUniversityDomainExist } from '@/pages/modules/website-utama/select-university/hooks'
 import { UseGetUnitList } from '@/pages/modules/website-unit/select-unit/hook'
+import { useQueryClient } from '@tanstack/react-query'
 
 export const SelectSessionPusilkom = () => {
   const [parentId, setParentId] = useState({
@@ -25,7 +26,7 @@ export const SelectSessionPusilkom = () => {
     kelompok: 'UNIVERSITAS',
   })
   const { unitList: unit, loading: load2 } = UseGetUnitList({
-    kelompok: 'FAKULTAS',
+    kelompok: 'UNIT',
     id_parent: parentId?.id_university,
     id_module: id_module ?? '',
   })
@@ -34,16 +35,20 @@ export const SelectSessionPusilkom = () => {
 
   const form = useForm()
 
+  const queryClient = useQueryClient()
   const HandleSaveSession = async (value: any) => {
-    await AxiosClient.post('/fakultas/user-session', {
+    await AxiosClient.post('/pusilkom/user-session', {
       id_universitas: value?.id_university,
-      id_fakultas: value?.id_fakultas,
+      id_unit: value?.id_unit,
     })
       .then((res) => {
         const url = searchParams.get('url')
         if (res.data.status) {
           toast.success('Berhasil membuat session')
           navigate(`/modules/${url}/dashboard`)
+          queryClient.invalidateQueries({
+            queryKey: ['session-pulsikom'],
+          })
         }
       })
       .catch((err) => {
@@ -91,13 +96,13 @@ export const SelectSessionPusilkom = () => {
                             id_university: form.watch('id_university'),
                           })
                         }
-                        form.setValue('id_fakultas', '')
+                        form.setValue('id_unit', '')
                       }}
                     />
                     <SelectBasicInput
                       form={form}
-                      name={'id_fakultas'}
-                      placeholder={'Pilih Fakultas'}
+                      name={'id_unit'}
+                      placeholder={'Pilih Unit'}
                       selectClassName={'z-40'}
                       isDisabled={loading}
                       data={

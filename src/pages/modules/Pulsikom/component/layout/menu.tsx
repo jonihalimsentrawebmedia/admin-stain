@@ -21,8 +21,8 @@ export const GenerateMenu = () => {
     },
     {
       id: 2,
-      name: 'Data Pusilkom',
-      path: `${baseDomain}/data-faculty`,
+      name: 'Data Pulsikom',
+      path: `${baseDomain}/data-pulsikom`,
       icon: <MdBusiness className={'size-5'} />,
     },
     {
