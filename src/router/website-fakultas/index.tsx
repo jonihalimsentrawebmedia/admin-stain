@@ -101,6 +101,7 @@ import { ServiceListPage } from '@/pages/modules/website-fakultas/service'
 import { ListAlbumVideo } from '@/pages/modules/website-fakultas/gallery/video'
 import { ListGalleryAlbum } from '@/pages/modules/website-fakultas/gallery/album'
 import { ListGalleryPhoto } from '@/pages/modules/website-fakultas/gallery/photo'
+import { StudyResearchPage } from '@/pages/modules/website-fakultas/research/study-research'
 
 export const RouterFaculty = [
   {
@@ -390,6 +391,10 @@ export const RouterFaculty = [
             element: <TypeOurPartners />,
           },
         ],
+      },
+      {
+        path: 'study-research',
+        element: <StudyResearchPage />,
       },
     ],
   },
