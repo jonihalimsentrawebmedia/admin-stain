@@ -1,6 +1,4 @@
-import { Button } from '@/components/ui/button.tsx'
-import { BiPlus } from 'react-icons/bi'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import { useForm } from 'react-hook-form'
 import { Form } from '@/components/ui/form.tsx'
@@ -12,19 +10,37 @@ import AxiosClient from '@/provider/axios.tsx'
 import { useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
+import type { IProgramUndergraduatePartner } from '../data/types'
+import { HiPencil } from 'react-icons/hi'
 
-export const ButtonAddPartner = () => {
+interface Props {
+  data: IProgramUndergraduatePartner
+}
+
+export const ButtonEditPartner = (props: Props) => {
+  const { data } = props
+
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
   const form = useForm()
   const { id } = useParams()
 
+  useEffect(() => {
+    if (data) {
+      form.reset({
+        url_gambar: data?.url_gambar,
+        nama_universitas: data?.nama_universitas,
+        deskripsi: data?.deskripsi,
+      })
+    }
+  }, [data])
+
   const queryClient = useQueryClient()
   const HandleSave = async (e: any) => {
     setLoading(true)
-    await AxiosClient.post(
-      `/fakultas/international-ungreaduate-program-universitas-partner/${id}`,
+    await AxiosClient.put(
+      `/fakultas/international-ungreaduate-program-universitas-partner/${id}/${data?.id_fakultas_international_ungreaduate_program_universitas_partner}`,
       e
     )
       .then((res) => {
@@ -46,15 +62,13 @@ export const ButtonAddPartner = () => {
 
   return (
     <>
-      <Button
-        variant={'outline'}
-        className={'border-primary text-primary hover:text-primary'}
+      <button
+        className={'bg-yellow-500 text-white p-1.5 rounded hover:bg-yellow-600'}
         onClick={() => setOpen(true)}
         disabled={loading}
       >
-        <BiPlus />
-        Tambah Partner
-      </Button>
+        <HiPencil />
+      </button>
 
       <DialogBasic
         title={'Tambah Universitas Partner'}

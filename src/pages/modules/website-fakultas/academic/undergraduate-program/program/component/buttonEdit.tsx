@@ -1,6 +1,4 @@
-import { useState } from 'react'
-import { Button } from '@/components/ui/button.tsx'
-import { BiPlus } from 'react-icons/bi'
+import { useEffect, useState } from 'react'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import { Form } from '@/components/ui/form.tsx'
 import { useForm } from 'react-hook-form'
@@ -10,12 +8,28 @@ import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
+import type { IProgramUndergraduate } from '../data/types.ts'
+import { HiPencil } from 'react-icons/hi'
 
-export const ButtonAddProgram = () => {
+interface Props {
+  data: IProgramUndergraduate
+}
+
+export const ButtonEditProgram = (props: Props) => {
+  const { data } = props
+
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
   const form = useForm()
+  useEffect(() => {
+    if (data) {
+      form.reset({
+        url_gambar: data?.url_gambar,
+        nama_program: data?.nama_program,
+      })
+    }
+  }, [])
 
   const queryClient = useQueryClient()
   const handleSave = async (e: any) => {
@@ -40,15 +54,13 @@ export const ButtonAddProgram = () => {
 
   return (
     <>
-      <Button
-        variant={'outline'}
+      <button
         onClick={() => setOpen(true)}
         disabled={loading}
-        className={'border-primary text-primary hover:text-primary'}
+        className={'bg-yellow-500 text-white p-1.5 rounded hover:bg-yellow-600'}
       >
-        <BiPlus />
-        Tambah Program
-      </Button>
+        <HiPencil />
+      </button>
 
       <DialogBasic
         title={'Tambah Program'}
