@@ -6,15 +6,37 @@ import { toast } from 'react-toastify'
 import { RichText } from '@/components/common/richtext'
 import { Form } from '@/components/ui/form.tsx'
 import { Button } from '@/components/ui/button.tsx'
-import { ChevronRight } from 'lucide-react'
+import { ArrowLeft, ChevronRight } from 'lucide-react'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { useQueryClient } from '@tanstack/react-query'
+import { useSearchParams } from 'react-router-dom'
 
-export const FormCondition = () => {
+interface IProps {
+  prev_value: string
+  next_value: string
+}
+
+export const FormCondition = (props: IProps) => {
+  const { prev_value, next_value } = props
   const id = window.localStorage.getItem('id_training')
   const { condition } = UseGetConditionTraining(id as string)
   const [loading, setLoading] = useState(false)
   const form = useForm()
+  const [_, setSearchParams] = useSearchParams()
+
+  const HandlePrev = () => {
+    const Params = new URLSearchParams()
+    Params.append('step', prev_value)
+    setSearchParams(Params)
+  }
+
+  const HandleNext = () => {
+    if (prev_value) {
+      const Params = new URLSearchParams()
+      Params.append('step', next_value)
+      setSearchParams(Params)
+    }
+  }
 
   useEffect(() => {
     if (condition) {
@@ -35,6 +57,7 @@ export const FormCondition = () => {
           queryClient.invalidateQueries({
             queryKey: ['status-training'],
           })
+          HandleNext()
         }
       })
       .catch((err) => {
@@ -48,23 +71,37 @@ export const FormCondition = () => {
       <Form {...form}>
         <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
           <RichText form={form} name={'isi'} label={'Persyaratan'} isRow={false} />
-          <ButtonTitleGroup
-            label={''}
-            buttonGroup={[
-              {
-                type: 'cancel',
-                label: 'Batal',
-              },
-              {
-                type: 'custom',
-                element: (
-                  <Button disabled={loading}>
-                    Lanjutkan <ChevronRight className={'size-4'} />
-                  </Button>
-                ),
-              },
-            ]}
-          />
+
+          <div className="flex items-center justify-between">
+            <Button
+              variant={'outline'}
+              className={'border-primary text-primary hover:text-primary'}
+              onClick={(e) => {
+                e.preventDefault()
+                HandlePrev()
+              }}
+            >
+              <ArrowLeft className={'size-4'} />
+              Topik Bahasan & Jadwal
+            </Button>
+            <ButtonTitleGroup
+              label={''}
+              buttonGroup={[
+                {
+                  type: 'cancel',
+                  label: 'Batal',
+                },
+                {
+                  type: 'custom',
+                  element: (
+                    <Button disabled={loading}>
+                      Lanjutkan <ChevronRight className={'size-4'} />
+                    </Button>
+                  ),
+                },
+              ]}
+            />
+          </div>
         </form>
       </Form>
     </>

@@ -41,6 +41,9 @@ import ColorSettingPulsikom from '@/pages/modules/Pulsikom/settings/color/ColorS
 import { TemplateWebPulsikomSettings } from '@/pages/modules/Pulsikom/settings/template-web'
 import { ListTraining } from '@/pages/modules/Pulsikom/training/list-training'
 import { CreatedTraining } from '@/pages/modules/Pulsikom/training/list-training/created'
+import { DetailTraining } from '@/pages/modules/Pulsikom/training/list-training/detail'
+import { Participant } from '@/pages/modules/Pulsikom/training/list-training/participant'
+import { CalendarTrainingCollect } from '@/pages/modules/Pulsikom/training/Calendar'
 
 export const PusilkomRoutes = [
   {
@@ -286,7 +289,27 @@ export const PusilkomRoutes = [
             path: 'add',
             element: <CreatedTraining />,
           },
+          {
+            path: 'edit/:id',
+            element: <CreatedTraining />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailTraining />,
+          },
+          {
+            path: 'detail/:id/participant',
+            element: <Participant />,
+          },
         ],
+      },
+      {
+        path: 'calendar',
+        element: <CalendarTrainingCollect />,
+      },
+      {
+        path: 'credit-earning',
+        element: <></>,
       },
     ],
   },

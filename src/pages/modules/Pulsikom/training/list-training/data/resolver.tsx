@@ -23,6 +23,15 @@ export const ResolverPricing = z.object({
   keuntungan: z.string(),
 })
 
+export const ContactMoreNoted = z.object({
+  is_kontak_unit: z.boolean(),
+  no_telepon: z.string(),
+  email: z.email(),
+  alamat: z.string(),
+  catatan_tambahan: z.string(),
+})
+
 export type TResolverInformationTraining = z.infer<typeof ResolverInformationTraining>
 export type TResolverTopicSchedule = z.infer<typeof ResolverTopicSchedule>
 export type TResolverPricing = z.infer<typeof ResolverPricing>
+export type TContactMoreNoted = z.infer<typeof ContactMoreNoted>

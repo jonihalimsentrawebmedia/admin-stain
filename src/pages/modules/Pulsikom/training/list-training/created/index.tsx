@@ -1,10 +1,26 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs.tsx'
 import { clsx } from 'clsx'
 import { GenerateTabsData } from '@/pages/modules/Pulsikom/training/list-training/data'
+import { useSearchParams } from 'react-router-dom'
 
 export const CreatedTraining = () => {
-  const [tabsActive, setTabsActive] = useState('is_informasi_pendaftaran')
+  const [searchParams, setSearchParams] = useSearchParams()
+  const step = searchParams.get('step')
+
+  useEffect(() => {
+    if (!step) {
+      const Params = new URLSearchParams()
+      Params.append('step', 'is_informasi_pendaftaran')
+      setSearchParams(Params)
+    }
+  }, [step])
+
+  const HandleStep = (e: string) => {
+    const Params = new URLSearchParams()
+    Params.append('step', e)
+    setSearchParams(Params)
+  }
 
   const TabsData = GenerateTabsData()
 
@@ -18,8 +34,8 @@ export const CreatedTraining = () => {
     <>
       <div className="py-5 bg-white">
         <Tabs
-          value={tabsActive}
-          onValueChange={setTabsActive}
+          value={step ?? 'is_informasi_pendaftaran'}
+          onValueChange={(e) => HandleStep(e)}
           className={'flex flex-row! items-start gap-x-5'}
         >
           <TabsList
@@ -42,7 +58,7 @@ export const CreatedTraining = () => {
                     className={clsx(
                       'flex items-center justify-center',
                       'size-8 min-w-8 h-8 rounded text-white',
-                      item?.value === tabsActive
+                      item?.value === step
                         ? 'bg-primary'
                         : item?.status
                           ? 'bg-green-500'
@@ -51,9 +67,7 @@ export const CreatedTraining = () => {
                   >
                     {k + 1}
                   </div>
-                  <p
-                    className={clsx(item?.value === tabsActive ? 'text-gray-800' : 'text-gray-400')}
-                  >
+                  <p className={clsx(item?.value === step ? 'text-gray-800' : 'text-gray-400')}>
                     {item?.label}
                   </p>
                 </div>

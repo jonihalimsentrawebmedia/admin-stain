@@ -2,10 +2,37 @@ import { UseGetRegisterPricing } from '@/pages/modules/Pulsikom/training/list-tr
 import { ButtonAddRegisterPricing } from './buttonAdd.tsx'
 import { ButtonEditRegisterPricing } from '@/pages/modules/Pulsikom/training/list-training/component/register-pricing/buttonEdit.tsx'
 import { ButtonDeleteRegisterPricing } from '@/pages/modules/Pulsikom/training/list-training/component/register-pricing/buttonDelete.tsx'
+import { useSearchParams } from 'react-router-dom'
+import { Button } from '@/components/ui/button.tsx'
+import { ArrowLeft, ChevronRight } from 'lucide-react'
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 
-export const RegisterPricing = () => {
+interface Props {
+  prev_value: string
+  next_value: string
+}
+
+export const RegisterPricing = (props: Props) => {
+  const { prev_value, next_value } = props
+
   const id = window.localStorage.getItem('id_training')
   const { registerPricing } = UseGetRegisterPricing(id as string)
+
+  const [_, setSearchParams] = useSearchParams()
+
+  const HandlePrev = () => {
+    const Params = new URLSearchParams()
+    Params.append('step', prev_value)
+    setSearchParams(Params)
+  }
+
+  const HandleNext = () => {
+    if (prev_value) {
+      const Params = new URLSearchParams()
+      Params.append('step', next_value)
+      setSearchParams(Params)
+    }
+  }
 
   return (
     <>
@@ -38,6 +65,34 @@ export const RegisterPricing = () => {
           </>
         )}
         <ButtonAddRegisterPricing />
+
+        <div className="flex items-center justify-between">
+          <Button
+            variant={'outline'}
+            className={'border-primary text-primary hover:text-primary'}
+            onClick={HandlePrev}
+          >
+            <ArrowLeft className={'size-4'} />
+            Persyaratan
+          </Button>
+          <ButtonTitleGroup
+            label={''}
+            buttonGroup={[
+              {
+                type: 'cancel',
+                label: 'Batal',
+              },
+              {
+                type: 'custom',
+                element: (
+                  <Button onClick={HandleNext}>
+                    Lanjutkan <ChevronRight className={'size-4'} />
+                  </Button>
+                ),
+              },
+            ]}
+          />
+        </div>
       </div>
     </>
   )

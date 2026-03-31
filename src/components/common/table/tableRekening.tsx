@@ -11,7 +11,6 @@ import {
 } from '@/components/ui/table'
 import { Skeleton } from '@/components/ui/skeleton'
 import { clsx } from 'clsx'
-import { useEffect, useState } from 'react'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -20,12 +19,13 @@ interface DataTableProps<TData, TValue> {
   className?: string
   thClassName?: string
   tdClassName?: string
-  rowIdKey?: string
-  // eslint-disable-next-line no-unused-vars
-  onSelectedRowsChange?: (rows: TData[]) => void
+  rowIdKey?: keyof TData
+  rowSelection?: Record<string, boolean>
+  onRowSelectionChange?: (selection: Record<string, boolean>) => void
+  onSelectedRowsChange?: (selectedIds: TData[]) => void
 }
 
-export function TableBasic<TData, TValue>({
+export function TableBasicBank<TData, TValue>({
   columns,
   data,
   rowIdKey,
@@ -33,10 +33,11 @@ export function TableBasic<TData, TValue>({
   className,
   thClassName,
   tdClassName,
+  rowSelection = {}, // default empty object
+  onRowSelectionChange,
   onSelectedRowsChange,
 }: DataTableProps<TData, TValue>) {
-  const [rowSelection, setRowSelection] = useState({})
-  // eslint-disable-next-line react-hooks/incompatible-library
+  // Gunakan rowSelection dari prop langsung, tanpa useState
   const table = useReactTable({
     data,
     columns,
@@ -44,20 +45,31 @@ export function TableBasic<TData, TValue>({
       rowSelection,
     },
     enableRowSelection: true,
-    onRowSelectionChange: setRowSelection,
+    onRowSelectionChange: (updaterOrValue) => {
+      // TanStack Table bisa mengirim updater function atau value langsung
+      let newSelection: Record<string, boolean>
+      if (typeof updaterOrValue === 'function') {
+        newSelection = updaterOrValue(rowSelection)
+      } else {
+        newSelection = updaterOrValue
+      }
+      // Kirim ke parent (jika ada callback)
+      onRowSelectionChange?.(newSelection)
+      // Opsional: konversi ke array ID untuk kemudahan parent
+      if (onSelectedRowsChange) {
+        const selectedIds = Object.keys(newSelection).filter((key) => newSelection[key])
+        onSelectedRowsChange(selectedIds as any)
+      }
+    },
     getRowId: (row, index) => {
-      const id = row[rowIdKey as keyof TData] as TData[keyof TData]
-      return id ? String(id) : `row-${index}`
+      if (rowIdKey) {
+        const id = row[rowIdKey as keyof TData]
+        return id ? String(id) : `row-${index}`
+      }
+      return `row-${index}`
     },
     getCoreRowModel: getCoreRowModel(),
   })
-
-  useEffect(() => {
-    const selectedIds = Object.keys(rowSelection)
-
-    onSelectedRowsChange?.(selectedIds as TData[])
-    //eslint-disable-next-line
-  }, [rowSelection])
 
   return (
     <div className={clsx('overflow-hidden rounded-md border', className)}>
@@ -78,7 +90,6 @@ export function TableBasic<TData, TValue>({
 
         <TableBody>
           {loading ? (
-            // ✅ Skeleton Rows
             Array.from({ length: 5 }).map((_, rowIndex) => (
               <TableRow key={rowIndex}>
                 {columns.map((_, colIndex) => (

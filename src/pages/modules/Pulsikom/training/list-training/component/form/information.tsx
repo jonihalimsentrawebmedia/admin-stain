@@ -18,8 +18,16 @@ import { Button } from '@/components/ui/button.tsx'
 import { ChevronRight } from 'lucide-react'
 import { v4 as uuidv4 } from 'uuid'
 import { useQueryClient } from '@tanstack/react-query'
+import { useSearchParams } from 'react-router-dom'
 
-const FormInformation = () => {
+interface IProps {
+  next_value: string
+}
+
+const FormInformation = (props: IProps) => {
+  const { next_value } = props
+  const [_, setSearchParams] = useSearchParams()
+
   const [loading, setLoading] = useState(false)
   const form = useForm<TResolverInformationTraining>({
     resolver: zodResolver(ResolverInformationTraining),
@@ -58,6 +66,9 @@ const FormInformation = () => {
           queryClient.invalidateQueries({
             queryKey: ['status-training'],
           })
+          const Params = new URLSearchParams()
+          Params.append('step', next_value)
+          setSearchParams(Params)
         }
       })
       .catch((err) => {

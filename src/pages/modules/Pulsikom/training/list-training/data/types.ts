@@ -40,19 +40,70 @@ export interface IRegisterPricing {
   id_biaya_pendaftaran: string
   id_training: string
   id_satuan_organisasi: string
-
   nama_biaya: string
   urutan: number
-
   harga: number
-
   keuntungan: string
-
   created_at: string
   created_user: string
   updated_at: string
   updated_user: string
-
   nama_user_created: string
   nama_user_updated: string
+}
+
+export interface IContactTraining {
+  id_training: string
+  id_satuan_organisasi: string
+  is_kontak_unit: boolean
+  no_telepon: string
+  email: string
+  alamat: string
+  catatan_tambahan: string
+  created_at: string
+  created_user: string
+  updated_at: string
+  updated_user: string
+  nama_user_created: string
+  nama_user_updated: string
+}
+
+
+export interface IStatus {
+  is_informasi_pendaftaran: boolean
+  is_topik_bahasan_jadwal: boolean
+  is_persyaratan: boolean
+  is_biaya_pendaftaran: boolean
+  is_rekening_penerimaan: boolean
+  is_kontak_catatan_tambahan: boolean
+}
+
+interface AuditTrail {
+  created_at: string
+  created_user: string
+  updated_at: string
+  updated_user: string
+  nama_user_created: string
+  nama_user_updated: string
+}
+
+export interface ITrainingList extends AuditTrail {
+  id_training: string
+  id_satuan_organisasi: string
+  nama_training: string
+  slug: string
+  status_pengisian: IStatus
+  status: string
+  tgl_buka_pendaftaran: string | null
+  tgl_tutup_pendaftaran: string | null
+  terbit_at: string | null
+  terbit_user: string | null
+  alasan_tutup: string | null
+  tutup_at: string | null
+  tutup_user: string | null
+  minimal_pendaftar: number
+  maksimal_pendaftar: number | null
+  is_tidak_ada_batas: boolean | null
+  pending: number
+  terkonfirmasi: number
 }
