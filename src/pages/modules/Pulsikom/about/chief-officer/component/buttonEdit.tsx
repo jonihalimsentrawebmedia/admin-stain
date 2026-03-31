@@ -52,7 +52,7 @@ export const ButtonEditChiefOfficer = (prop: IProps) => {
   return (
     <>
       <button
-        className={'bg-yellow-500 p-1.5 text-white hover:text-yellow-600 rounded'}
+        className={'bg-yellow-500 p-1.5 text-white hover:bg-yellow-600 rounded'}
         onClick={() => setOpen(!open)}
       >
         <HiPencil />

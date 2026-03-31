@@ -7,6 +7,40 @@ import { HistoryAboutPulsikom } from '@/pages/modules/Pulsikom/about/history'
 import { VisionMissionPulsikom } from '@/pages/modules/Pulsikom/about/vision-mission'
 import { ChiefOfficer } from '@/pages/modules/Pulsikom/about/chief-officer'
 import { OfficiallyData } from '@/pages/modules/Pulsikom/about/chief-officer/officialy'
+import { ServicesPulsikom } from '@/pages/modules/Pulsikom/services'
+import { CreatedService } from '@/pages/modules/Pulsikom/services/created'
+import { UpdatedService } from '@/pages/modules/Pulsikom/services/updated'
+import { DetailServicePulsikom } from '@/pages/modules/Pulsikom/services/detail'
+import { ProductListPage } from '@/pages/modules/Pulsikom/product'
+import { CreatedProduct } from '@/pages/modules/Pulsikom/product/created'
+import { UpdatedProduct } from '@/pages/modules/Pulsikom/product/updated'
+import { DetailProduct } from '@/pages/modules/Pulsikom/product/detail'
+import { ReferenceBankAccount } from '@/pages/modules/Pulsikom/reference/bank-account'
+import { LandingPagePulsikom } from '@/pages/modules/Pulsikom/settings/landing-page'
+import { WebsiteCarrierPage } from '@/pages/modules/Pulsikom/website-carrier'
+import { NewsPusilkomPublicContentPage } from '@/pages/modules/Pulsikom/public-content/news'
+import { NewsPusilkomCreated } from '@/pages/modules/Pulsikom/public-content/news/created'
+import { NewsPulsikomUpdated } from '@/pages/modules/Pulsikom/public-content/news/updated'
+import { DetailNewsPulsikomPage } from '@/pages/modules/Pulsikom/public-content/news/detail'
+import { LogActivityNewsPulsikomPage } from '@/pages/modules/Pulsikom/public-content/news/log-data'
+import { AgendaPulsikomPublicContent } from '@/pages/modules/Pulsikom/public-content/agenda'
+import { CreateAgendaPulsikomPage } from '@/pages/modules/Pulsikom/public-content/agenda/created'
+import { AgendaPulsikomDetailPage } from '@/pages/modules/Pulsikom/public-content/agenda/detail'
+import { UpdatedAgendaPulsikomPage } from '@/pages/modules/Pulsikom/public-content/agenda/updated'
+import { LogActivityAgendaPulsikomPage } from '@/pages/modules/Pulsikom/public-content/agenda/log'
+import { AnnouncementPulsikom } from '@/pages/modules/Pulsikom/public-content/announcement'
+import { CreatedAnnouncementPulsikom } from '@/pages/modules/Pulsikom/public-content/announcement/created'
+import { AnnouncementPulsikomDetailPage } from '@/pages/modules/Pulsikom/public-content/announcement/detail'
+import { UpdatedAnnouncementPulsikom } from '@/pages/modules/Pulsikom/public-content/announcement/updated'
+import { LogActivityAnnouncementPulsikom } from '@/pages/modules/Pulsikom/public-content/announcement/log'
+import DownloadFilePulsikom from '@/pages/modules/Pulsikom/public-content/Download'
+import { CategoryDownloadPulsikom } from '@/pages/modules/Pulsikom/public-content/Download/category'
+import { AddDownloadPage } from '@/pages/modules/Pulsikom/public-content/Download/created'
+import { UpdatedDownload } from '@/pages/modules/Pulsikom/public-content/Download/updated'
+import ColorSettingPulsikom from '@/pages/modules/Pulsikom/settings/color/ColorSettingService.tsx'
+import { TemplateWebPulsikomSettings } from '@/pages/modules/Pulsikom/settings/template-web'
+import { ListTraining } from '@/pages/modules/Pulsikom/training/list-training'
+import { CreatedTraining } from '@/pages/modules/Pulsikom/training/list-training/created'
 
 export const PusilkomRoutes = [
   {
@@ -60,6 +94,197 @@ export const PusilkomRoutes = [
           {
             path: 'official/:id',
             element: <OfficiallyData />,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: 'services',
+    children: [
+      {
+        index: true,
+        element: <ServicesPulsikom />,
+      },
+      {
+        path: 'add',
+        element: <CreatedService />,
+      },
+      {
+        path: 'edit/:id',
+        element: <UpdatedService />,
+      },
+      {
+        path: 'detail/:id',
+        element: <DetailServicePulsikom />,
+      },
+    ],
+  },
+  {
+    path: 'products',
+    children: [
+      {
+        index: true,
+        element: <ProductListPage />,
+      },
+      {
+        path: 'add',
+        element: <CreatedProduct />,
+      },
+      {
+        path: 'edit/:id',
+        element: <UpdatedProduct />,
+      },
+      {
+        path: 'detail/:id',
+        element: <DetailProduct />,
+      },
+    ],
+  },
+  {
+    path: 'reference',
+    children: [
+      {
+        path: 'bank-account',
+        element: <ReferenceBankAccount />,
+      },
+    ],
+  },
+  {
+    path: 'carrier-website',
+    element: <WebsiteCarrierPage />,
+  },
+  {
+    path: 'public-content',
+    children: [
+      {
+        path: 'news',
+        children: [
+          {
+            index: true,
+            element: <NewsPusilkomPublicContentPage />,
+          },
+          {
+            path: 'add',
+            element: <NewsPusilkomCreated />,
+          },
+          {
+            path: 'edit/:id',
+            element: <NewsPulsikomUpdated />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailNewsPulsikomPage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityNewsPulsikomPage />,
+          },
+        ],
+      },
+      {
+        path: 'agenda',
+        children: [
+          {
+            index: true,
+            element: <AgendaPulsikomPublicContent />,
+          },
+          {
+            path: 'add',
+            element: <CreateAgendaPulsikomPage />,
+          },
+          {
+            path: 'detail/:id',
+            element: <AgendaPulsikomDetailPage />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedAgendaPulsikomPage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityAgendaPulsikomPage />,
+          },
+        ],
+      },
+      {
+        path: 'announcement',
+        children: [
+          {
+            index: true,
+            element: <AnnouncementPulsikom />,
+          },
+          {
+            path: 'add',
+            element: <CreatedAnnouncementPulsikom />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedAnnouncementPulsikom />,
+          },
+          {
+            path: 'detail/:id',
+            element: <AnnouncementPulsikomDetailPage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityAnnouncementPulsikom />,
+          },
+        ],
+      },
+      {
+        path: 'download',
+        children: [
+          {
+            index: true,
+            element: <DownloadFilePulsikom />,
+          },
+          {
+            path: 'category',
+            element: <CategoryDownloadPulsikom />,
+          },
+          {
+            path: 'add',
+            element: <AddDownloadPage />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedDownload />,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: 'settings',
+    children: [
+      {
+        path: 'landing-page',
+        element: <LandingPagePulsikom />,
+      },
+      {
+        path: 'color',
+        element: <ColorSettingPulsikom />,
+      },
+      {
+        path: 'template',
+        element: <TemplateWebPulsikomSettings />,
+      },
+    ],
+  },
+  {
+    path: 'training',
+    children: [
+      {
+        path: 'list-training',
+        children: [
+          {
+            index: true,
+            element: <ListTraining />,
+          },
+          {
+            path: 'add',
+            element: <CreatedTraining />,
           },
         ],
       },

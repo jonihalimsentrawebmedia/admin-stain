@@ -21,6 +21,7 @@ interface DataTableProps<TData, TValue> {
   thClassName?: string
   tdClassName?: string
   rowIdKey?: string
+
   // eslint-disable-next-line no-unused-vars
   onSelectedRowsChange?: (rows: TData[]) => void
 }

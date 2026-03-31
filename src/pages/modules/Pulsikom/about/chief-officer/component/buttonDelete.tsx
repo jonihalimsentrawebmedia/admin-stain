@@ -47,7 +47,7 @@ export const ButtonDeleteChief = (props: Props) => {
       </button>
 
       <DialogBasic
-        title={'Hapus Cerita Alumni'}
+        title={'Hapus Kelompok Jabatan'}
         description={'Apakah anda yakin untuk menghapus data dibawah ini?'}
         open={open}
         setOpen={setOpen}

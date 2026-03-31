@@ -1,10 +1,12 @@
 import {
   MdBusiness,
+  MdChat,
   MdDashboard,
-  MdHomeRepairService,
+  MdDatasetLinked,
   MdInfo,
-  MdMenuBook,
-  MdScience,
+  MdInventory,
+  MdMiscellaneousServices,
+  MdWidgets,
 } from 'react-icons/md'
 import { FaGear, FaGears } from 'react-icons/fa6'
 import { IoMdSchool } from 'react-icons/io'
@@ -50,7 +52,7 @@ export const GenerateMenu = () => {
     },
     {
       id: 4,
-      icon: <MdHomeRepairService className={'size-5'} />,
+      icon: <MdMiscellaneousServices className={'size-5'} />,
       name: 'Layanan',
       path: `${baseDomain}/services`,
     },
@@ -58,13 +60,13 @@ export const GenerateMenu = () => {
       id: 5,
       name: 'Produk',
       path: `${baseDomain}/products`,
-      icon: <MdMenuBook className={'size-5'} />,
+      icon: <MdInventory className={'size-5'} />,
     },
     {
       id: 6,
       name: 'Training',
       path: `${baseDomain}/training`,
-      icon: <MdScience className={'size-5'} />,
+      icon: <MdWidgets className={'size-5'} />,
       child: [
         {
           id: 61,
@@ -106,8 +108,8 @@ export const GenerateMenu = () => {
         },
         {
           id: 73,
-          name: 'Artikel',
-          path: `${baseDomain}/public-content/article`,
+          name: 'Pengumuman',
+          path: `${baseDomain}/public-content/announcement`,
         },
         {
           id: 74,
@@ -120,7 +122,26 @@ export const GenerateMenu = () => {
       id: 8,
       name: 'Webisite Karir',
       icon: <FaGears className={'size-5'} />,
-      path: `${baseDomain}/carreer-website`,
+      path: `${baseDomain}/carrier-website`,
+    },
+    {
+      id: 9,
+      name: 'Pesan Masuk',
+      icon: <MdChat className={'size-5'} />,
+      path: `${baseDomain}/inbox`,
+    },
+    {
+      id: 10,
+      name: 'Referensi',
+      icon: <MdDatasetLinked className={'size-5'} />,
+      path: `${baseDomain}/reference`,
+      child: [
+        {
+          id: 101,
+          name: 'Daftar Rekening',
+          path: `${baseDomain}/reference/bank-account`,
+        },
+      ],
     },
     {
       id: 13,

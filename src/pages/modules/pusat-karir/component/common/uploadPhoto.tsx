@@ -8,18 +8,21 @@ import { useRef } from 'react'
 import AxiosClient from '@/provider/axios'
 import type { FieldValues, Path, PathValue, UseFormReturn } from 'react-hook-form'
 import { toast } from 'react-toastify'
+import { clsx } from 'clsx'
 
 interface Props<T extends FieldValues> {
   name: Path<T>
   form: UseFormReturn<T>
   ratio_width?: number
   ratio_height?: number
+  className?: string
 }
 
 export const UploadPhotoImage = <T extends FieldValues>({
   name,
   form,
   ratio_height = 4,
+  className,
   ratio_width = 3,
 }: Props<T>) => {
   const refUpload = useRef<HTMLInputElement | null>(null)
@@ -53,7 +56,7 @@ export const UploadPhotoImage = <T extends FieldValues>({
 
   return (
     <div className="flex items-center gap-4">
-      <div className="w-[200px]">
+      <div className={clsx('w-[200px]', className)}>
         <AspectRatio ratio={ratio_width / ratio_height}>
           {form?.watch(name) ? (
             <img src={form.watch(name)} alt={'image'} className={'object-cover w-full h-full'} />

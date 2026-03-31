@@ -48,6 +48,7 @@ import { RouterFaculty } from '@/router/website-fakultas'
 import { PusilkomRoutes } from '@/router/pusilkom'
 import MainLayoutPulsikom from '@/pages/modules/Pulsikom/component/layout'
 import { SelectSessionPusilkom } from '@/pages/modules/Pulsikom/component/select-session'
+import PulsikomThema from '@/pages/modules/Pulsikom/component/layout/theme.tsx'
 
 export const Router = createBrowserRouter([
   {
@@ -233,7 +234,11 @@ export const Router = createBrowserRouter([
       },
       {
         path: 'pulsikom',
-        element: <MainLayoutPulsikom />,
+        element: (
+          <PulsikomThema>
+            <MainLayoutPulsikom />
+          </PulsikomThema>
+        ),
         children: [...PusilkomRoutes],
       },
     ],
