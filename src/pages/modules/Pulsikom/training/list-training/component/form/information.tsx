@@ -1,0 +1,170 @@
+import { Controller, useForm } from 'react-hook-form'
+import {
+  ResolverInformationTraining,
+  type TResolverInformationTraining,
+} from '@/pages/modules/Pulsikom/training/list-training/data/resolver.tsx'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Form } from '@/components/ui/form.tsx'
+import TextInput from '@/components/common/form/TextInput.tsx'
+import { UploadPhotoImage } from '@/pages/modules/pusat-karir/component/common/uploadPhoto.tsx'
+import { RichText } from '@/components/common/richtext'
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import { Label } from '@/components/ui/label.tsx'
+import { UseGetDetailInformation } from '../../hooks/index'
+import { useEffect, useState } from 'react'
+import AxiosClient from '@/provider/axios.tsx'
+import { toast } from 'react-toastify'
+import { Button } from '@/components/ui/button.tsx'
+import { ChevronRight } from 'lucide-react'
+import { v4 as uuidv4 } from 'uuid'
+import { useQueryClient } from '@tanstack/react-query'
+import { useSearchParams } from 'react-router-dom'
+
+interface IProps {
+  next_value: string
+}
+
+const FormInformation = (props: IProps) => {
+  const { next_value } = props
+  const [_, setSearchParams] = useSearchParams()
+
+  const [loading, setLoading] = useState(false)
+  const form = useForm<TResolverInformationTraining>({
+    resolver: zodResolver(ResolverInformationTraining),
+  })
+
+  const uuid = uuidv4()
+
+  const id = localStorage.getItem('id_training')
+
+  const { detail } = UseGetDetailInformation(id)
+
+  useEffect(() => {
+    if (detail) {
+      form.reset({
+        nama_training: detail?.nama_training,
+        deskripsi: detail?.deskripsi,
+        minimal_pendaftar: detail?.minimal_pendaftar,
+        maksimal_pendaftar: detail?.maksimal_pendaftar,
+        is_tidak_ada_batas: detail?.is_tidak_ada_batas,
+        url_gambar: detail?.url_gambar,
+      })
+    }
+  }, [detail])
+
+  const queryClient = useQueryClient()
+  const HandleSave = async (value: TResolverInformationTraining) => {
+    setLoading(true)
+    const myUUid = id ?? uuid
+    await AxiosClient.post(`/pusilkom/training/${myUUid}/informasi`, value)
+      .then((res) => {
+        if (res.data.status) {
+          setLoading(false)
+          window.localStorage.setItem('id_training', res.data.data.id_training)
+          form.reset()
+          toast.success(res.data.message || 'Success')
+          queryClient.invalidateQueries({
+            queryKey: ['status-training'],
+          })
+          const Params = new URLSearchParams()
+          Params.append('step', next_value)
+          setSearchParams(Params)
+        }
+      })
+      .catch((err) => {
+        setLoading(false)
+        toast.error(err.response.data.message || 'Error')
+      })
+  }
+
+  return (
+    <>
+      <Form {...form}>
+        <form className={'flex flex-col gap-4 w-full'} onSubmit={form.handleSubmit(HandleSave)}>
+          <UploadPhotoImage
+            form={form}
+            name={'url_gambar'}
+            ratio_width={4}
+            ratio_height={3}
+            className={'w-[320px]'}
+          />
+          <TextInput
+            name={'nama_training'}
+            form={form}
+            label={'Nama Training'}
+            placeholder={'Nama Training'}
+            isRequired
+          />
+
+          <RichText form={form} name={'deskripsi'} label={'Deskripsi'} isRow={false} required />
+
+          <div className="flex items-start gap-4 w-full">
+            <TextInput
+              name={'minimal_pendaftar'}
+              form={form}
+              label={'Minimal Pendaftar'}
+              placeholder={'Minimal Pendaftar'}
+              className={'w-full'}
+              type={'number'}
+              isNumber
+              isRequired
+            />
+
+            <div className={'w-full'}>
+              <TextInput
+                name={'maksimal_pendaftar'}
+                form={form}
+                label={'Maksimal Pendaftar'}
+                placeholder={'Maksimal Pendaftar'}
+                className={'w-full'}
+                type={'number'}
+                isDisabled={form.watch('is_tidak_ada_batas') === true}
+                isNumber
+                isRequired
+              />
+
+              <Controller
+                control={form.control}
+                name="is_tidak_ada_batas"
+                render={({ field }) => (
+                  <Label htmlFor="infinite" className="mt-1 flex items-center gap-1.5">
+                    <input
+                      type="checkbox"
+                      id="infinite"
+                      checked={field.value ?? false}
+                      onChange={(e) => {
+                        field.onChange(e.target.checked)
+                        form.setValue('maksimal_pendaftar', null)
+                      }}
+                    />
+                    Tidak ada batas
+                  </Label>
+                )}
+              />
+            </div>
+          </div>
+
+          <ButtonTitleGroup
+            label={''}
+            buttonGroup={[
+              {
+                type: 'cancel',
+                label: 'Batal',
+              },
+              {
+                type: 'custom',
+                element: (
+                  <Button disabled={loading}>
+                    Lanjutkan <ChevronRight className={'size-4'} />
+                  </Button>
+                ),
+              },
+            ]}
+          />
+        </form>
+      </Form>
+    </>
+  )
+}
+
+export default FormInformation

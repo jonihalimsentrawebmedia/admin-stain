@@ -1,10 +1,10 @@
 import { type ReactNode, useEffect } from 'react'
 import { useThemeColor } from '@/hooks/custom/themeColor.tsx'
-import { UseGetAdminThemeFaculty } from '@/pages/modules/website-fakultas/settings/color/hooks'
+import { UseGetAdminThemePulsikom } from '../../settings/color/hooks/index'
 
-const FacultyWebTheme = ({ children }: { children: ReactNode }) => {
+const PulsikomThema = ({ children }: { children: ReactNode }) => {
   const { setTheme } = useThemeColor()
-  const { color } = UseGetAdminThemeFaculty()
+  const { color } = UseGetAdminThemePulsikom()
 
   useEffect(() => {
     setTheme({
@@ -15,4 +15,4 @@ const FacultyWebTheme = ({ children }: { children: ReactNode }) => {
 
   return <>{children}</>
 }
-export default FacultyWebTheme
+export default PulsikomThema

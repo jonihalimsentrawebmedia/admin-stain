@@ -100,7 +100,7 @@ const ButtonTitleGroup = (props: Props) => {
                   className="border-primary text-white bg-primary hover:text-white hover:bg-primary/80"
                 >
                   <Save />
-                  Save
+                  {row?.label ?? 'Save'}
                 </Button>
               )
             }

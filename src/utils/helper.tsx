@@ -167,3 +167,74 @@ export const getRelativeTime = (date: Date | string): string => {
 
   return result
 }
+
+
+type TableRow = {
+  topik: string
+  januari?: string
+  februari?: string
+  maret?: string
+  april?: string
+  mei?: string
+  juni?: string
+  juli?: string
+  agustus?: string
+}
+
+const MONTH_MAP: Record<string, keyof TableRow> = {
+  januari: 'januari',
+  februari: 'februari',
+  maret: 'maret',
+  april: 'april',
+  mei: 'mei',
+  juni: 'juni',
+  juli: 'juli',
+  agustus: 'agustus',
+}
+
+const formatRange = (start: string, end: string) => {
+  const s = new Date(start)
+  const e = new Date(end)
+
+  const format = (d: Date) =>
+    d.toLocaleDateString('id-ID', {
+      day: '2-digit',
+      month: 'short',
+    })
+
+  return `${format(s)} - ${format(e)}`
+}
+
+export const transformToTable = (data: any[]) => {
+  return data.map((training) => {
+    const rows: TableRow[] = []
+
+    training.list_topik.forEach((topik: any) => {
+      const row: TableRow = {
+        topik: topik.nama_topik.trim(),
+      }
+
+      const jadwal = topik.jadwal_topik || {}
+
+      Object.entries(jadwal).forEach(([bulan, list]: any) => {
+        const key = MONTH_MAP[bulan.toLowerCase()]
+        if (!key) return
+
+        const item = list?.[0]
+        if (!item) return
+
+        row[key] = formatRange(
+          item.tanggal_mulai_bahasan,
+          item.tanggal_selesai_bahasan
+        )
+      })
+
+      rows.push(row)
+    })
+
+    return {
+      nama_training: training.nama_training,
+      rows,
+    }
+  })
+}
