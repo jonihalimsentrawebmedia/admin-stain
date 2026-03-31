@@ -44,6 +44,7 @@ import { CreatedTraining } from '@/pages/modules/Pulsikom/training/list-training
 import { DetailTraining } from '@/pages/modules/Pulsikom/training/list-training/detail'
 import { Participant } from '@/pages/modules/Pulsikom/training/list-training/participant'
 import { CalendarTrainingCollect } from '@/pages/modules/Pulsikom/training/Calendar'
+import { CreditEarningPage } from '@/pages/modules/Pulsikom/training/credit-earning'
 
 export const PusilkomRoutes = [
   {
@@ -309,7 +310,7 @@ export const PusilkomRoutes = [
       },
       {
         path: 'credit-earning',
-        element: <></>,
+        element: <CreditEarningPage />,
       },
     ],
   },

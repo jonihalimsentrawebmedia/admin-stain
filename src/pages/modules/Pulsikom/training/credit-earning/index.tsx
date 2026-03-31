@@ -30,13 +30,13 @@ export const CreditEarningPage = () => {
   const queryClient = useQueryClient()
   const HandleSave = async (value: any) => {
     setLoading(true)
-    await AxiosClient.post('/pusilkom/credit-earning', value)
+    await AxiosClient.post('/pusilkom/program-credit-earning', value)
       .then((res) => {
         if (res.data?.status) {
           setIsEdit(!isEdit)
           setLoading(false)
           queryClient.invalidateQueries({
-            queryKey: ['credit-earning'],
+            queryKey: ['program-earning'],
           })
           toast.success(res.data.message || 'Success')
         }
@@ -67,10 +67,22 @@ export const CreditEarningPage = () => {
                   },
                 ]}
               />
-              <p className="text-yellow-500 text-lg font-semibold">Visi</p>
-              <RichText form={form} name={'visi'} label={'Visi'} isRow={false} showLabel={false} />
-              <p className="text-yellow-500 text-lg font-semibold">Misi</p>
-              <RichText form={form} name={'misi'} label={'Misi'} isRow={false} showLabel={false} />
+              <p className="text-yellow-500 text-lg font-semibold">Deskripsi</p>
+              <RichText
+                form={form}
+                name={'deskripsi'}
+                label={'Deskripsi'}
+                isRow={false}
+                showLabel={false}
+              />
+              <p className="text-yellow-500 text-lg font-semibold">keuntungan</p>
+              <RichText
+                form={form}
+                name={'keuntungan'}
+                label={'Keuntungan'}
+                isRow={false}
+                showLabel={false}
+              />
 
               <ButtonForm loading={loading} onCancel={() => setIsEdit(false)} />
             </form>

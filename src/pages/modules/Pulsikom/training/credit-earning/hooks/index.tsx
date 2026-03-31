@@ -11,7 +11,7 @@ export const UseGetCreditEarning = () => {
   const { data, isFetching, isLoading } = useQuery({
     queryKey: ['program-earning'],
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get('/pusilkom/detail-program-earning').then((res) => res.data.data),
+    queryFn: () => AxiosClient.get('/pusilkom/program-credit-earning').then((res) => res.data.data),
   })
 
   const loading = isFetching || isLoading
