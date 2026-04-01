@@ -3,6 +3,7 @@ import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { BasicProps } from '@/utils/globalType.ts'
+import type { IParticipant } from '@/pages/modules/Pulsikom/training/list-training/participant/data'
 
 interface Props extends BasicProps {
   status: 'PENDING' | 'DIKONFIRMASI' | 'DITOLAK' | 'DIBATALKAN'
@@ -12,7 +13,7 @@ interface Props extends BasicProps {
 export const UseGetTrainingParticipant = (props: Props) => {
   const { status, page, limit, search, id_training } = props
 
-  const [participant, setParticipant] = useState([])
+  const [participant, setParticipant] = useState<IParticipant[]>([])
   const [meta, setMeta] = useState<Meta>()
 
   const ParamsSearch = new URLSearchParams()

@@ -7,6 +7,8 @@ export const ResolverInformationTraining = z.object({
   minimal_pendaftar: z.number(),
   maksimal_pendaftar: z.number().optional().nullable(),
   is_tidak_ada_batas: z.boolean(),
+  tgl_buka_pendaftaran: z.string().optional().nullable(),
+  tgl_tutup_pendaftaran: z.string().optional().nullable(),
 })
 
 export const ResolverTopicSchedule = z.object({

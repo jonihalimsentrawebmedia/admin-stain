@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button.tsx'
 import { ArrowLeft, ChevronRight } from 'lucide-react'
 import { useSearchParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import { useQueryClient } from '@tanstack/react-query'
 
 interface Props {
   prev_value: string
@@ -26,8 +27,12 @@ export const TopicScheduleSection = (props: Props) => {
     setSearchParams(Params)
   }
 
-  const HandleNext = () => {
+  const queryClient = useQueryClient()
+  const HandleNext = async () => {
     if (prev_value) {
+      await queryClient.invalidateQueries({
+        queryKey: ['status-training'],
+      })
       const Params = new URLSearchParams()
       Params.append('step', next_value)
       setSearchParams(Params)

@@ -5,6 +5,7 @@ import { clsx } from 'clsx'
 import { DraftSection } from '@/pages/modules/Pulsikom/training/list-training/component/TabsData/DraftSection.tsx'
 import { useState } from 'react'
 import { PublishSection } from '@/pages/modules/Pulsikom/training/list-training/component/TabsData/PublishSection.tsx'
+import { ClosedSection } from '@/pages/modules/Pulsikom/training/list-training/component/TabsData/closedSection.tsx'
 
 export const ListTraining = () => {
   const navigate = useNavigate()
@@ -25,7 +26,7 @@ export const ListTraining = () => {
     {
       label: 'Ditutup',
       value: 'closed',
-      element: <></>,
+      element: <ClosedSection />,
     },
   ]
 
@@ -38,7 +39,10 @@ export const ListTraining = () => {
             {
               type: 'add',
               label: 'Tambah Training',
-              onClick: () => navigate('add'),
+              onClick: () => {
+                window.localStorage.removeItem('id_training')
+                navigate('add')
+              },
             },
           ]}
         />

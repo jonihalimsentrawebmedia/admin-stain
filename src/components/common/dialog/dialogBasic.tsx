@@ -6,6 +6,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog'
 import type { Dispatch, ReactNode, SetStateAction } from 'react'
+import { clsx } from 'clsx'
 
 interface Props {
   children: ReactNode
@@ -31,7 +32,7 @@ export const DialogBasic = (props: Props) => {
     <>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent
-          className={className}
+          className={clsx(className, 'overflow-y-auto')}
           onInteractOutside={(event) => {
             if (disableOutsideDialog) {
               event.preventDefault()
