@@ -68,9 +68,7 @@ export const SelectSessionPusilkom = () => {
                   <ArrowLeft className={'text-primary'} />
                   Kembali
                 </Link>
-                <p className="text-xl mt-5 font-semibold">
-                  Pilih Data Fakultas yang akan digunakan
-                </p>
+                <p className="text-xl mt-5 font-semibold">Pilih Data Unit yang akan digunakan</p>
 
                 <Form {...form}>
                   <form
