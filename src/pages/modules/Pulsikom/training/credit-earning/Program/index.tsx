@@ -3,13 +3,18 @@ import { useNavigate } from 'react-router-dom'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs.tsx'
 import { clsx } from 'clsx'
 import { useState } from 'react'
-import { DraftSection } from './component/TabsData/DraftSection.tsx'
+import { UseGetListProgram } from './hooks/index'
+import { DraftSection } from './component/TabsData/DraftSection'
 import { PublishSection } from './component/TabsData/PublishSection.tsx'
-import { ClosedSection } from './component/TabsData/closedSection.tsx'
+import { ClosedSection } from '@/pages/modules/Pulsikom/training/credit-earning/Program/component/TabsData/closedSection.tsx'
 
-export const ListTraining = () => {
+export const ListProgram = () => {
   const navigate = useNavigate()
   const [status, setStatus] = useState('DRAFT')
+
+  const {} = UseGetListProgram({
+    status: (status as 'DRAFT') ?? 'DRAFT',
+  })
 
   const TabsData = [
     {
@@ -39,7 +44,7 @@ export const ListTraining = () => {
               type: 'add',
               label: 'Tambah Training',
               onClick: () => {
-                window.localStorage.removeItem('id_training')
+                window.localStorage.removeItem('id_program')
                 navigate('add')
               },
             },

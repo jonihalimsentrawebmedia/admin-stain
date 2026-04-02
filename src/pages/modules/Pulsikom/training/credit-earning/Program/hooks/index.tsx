@@ -2,15 +2,15 @@ import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type {
-  IContactTraining,
-  IInformationTraining,
+  IContactProgram,
+  IInformationProgram,
+  IProgramList,
   IRegisterPricing,
   ITopicSchedule,
-  ITrainingList,
 } from '../data/types'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import type { IBankAccount } from '@/pages/modules/Pulsikom/reference/bank-account/data/types.ts'
-import type { TrainingDetailData } from '@/pages/modules/Pulsikom/training/list-training/data/fullDetail.ts'
+import type { ProgramDetailData } from '@/pages/modules/Pulsikom/training/credit-earning/Program/data/fullDetail.ts'
 
 export interface IstatusTraining {
   is_informasi_pendaftaran: boolean
@@ -25,19 +25,19 @@ interface Props {
   status: 'DRAFT' | 'DITERBITKAN' | 'DITUTUP'
 }
 
-export const UseGetListTraining = (props: Props) => {
+export const UseGetListProgram = (props: Props) => {
   const { status } = props
 
-  const [listTraining, setListTraining] = useState<ITrainingList[]>([])
+  const [listProgram, setListProgram] = useState<IProgramList[]>([])
   const [meta, setMeta] = useState<Meta>()
 
   const ParamsSearch = new URLSearchParams()
   if (status) ParamsSearch.append('status', status)
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['list-training', ParamsSearch.toString()],
+    queryKey: ['list-program', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get(`/pusilkom/training?${ParamsSearch}`).then((res) => res.data),
+    queryFn: () => AxiosClient.get(`/pusilkom/program?${ParamsSearch}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching
@@ -45,30 +45,31 @@ export const UseGetListTraining = (props: Props) => {
   useEffect(() => {
     if (data) {
       setMeta(data.meta)
-      setListTraining(data?.data)
+      setListProgram(data?.data)
     }
   }, [data])
 
-  return { listTraining, meta, loading }
+  return { listProgram, meta, loading }
 }
 
-export const UseGetStatusTraining = (id?: string | null) => {
+export const UseGetStatusProgram = (id?: string | null) => {
   const [detail, setDetail] = useState<{
     status_pengisian: IstatusTraining
     status: 'DRAFT' | 'DITERBITKAN' | 'DITUTUP'
   }>()
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['status-training', id],
+    queryKey: ['status-program', id],
     enabled: !!id,
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get(`/pusilkom/training/${id}`).then((res) => res.data?.data),
+    queryFn: () => AxiosClient.get(`/pusilkom/program/${id}`).then((res) => res.data?.data),
   })
 
   const loading = isLoading || isFetching
 
   useEffect(() => {
     if (data) {
+      console.log(data)
       setDetail(data)
     }
   }, [data])
@@ -76,15 +77,15 @@ export const UseGetStatusTraining = (id?: string | null) => {
   return { detail, loading }
 }
 
-export const UseGetDetailInformation = (id?: string | null) => {
-  const [detail, setDetail] = useState<IInformationTraining>()
+export const UseGetDetailInformationProgram = (id?: string | null) => {
+  const [detail, setDetail] = useState<IInformationProgram>()
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['detail-information', id],
     enabled: !!id,
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get(`/pusilkom/training/${id}/informasi`).then((res) => res.data?.data),
+      AxiosClient.get(`/pusilkom/program/${id}/informasi`).then((res) => res.data?.data),
   })
 
   const loading = isLoading || isFetching
@@ -98,7 +99,7 @@ export const UseGetDetailInformation = (id?: string | null) => {
   return { detail, loading }
 }
 
-export const UseGetTopicAndSchedule = (id?: string | null) => {
+export const UseGetTopicAndScheduleProgram = (id?: string | null) => {
   const [topic, setTopic] = useState<ITopicSchedule[]>([])
   const [meta, setMeta] = useState<Meta>()
 
@@ -107,7 +108,7 @@ export const UseGetTopicAndSchedule = (id?: string | null) => {
     enabled: !!id,
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get(`/pusilkom/training/${id}/bahasan-dan-topik`).then((res) => res.data),
+      AxiosClient.get(`/pusilkom/program/${id}/bahasan-dan-topik`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching
@@ -122,15 +123,15 @@ export const UseGetTopicAndSchedule = (id?: string | null) => {
   return { topic, meta, loading }
 }
 
-export const UseGetConditionTraining = (id?: string | null) => {
+export const UseGetConditionProgram = (id?: string | null) => {
   const [condition, setCondition] = useState<{ isi: string }>()
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['condition-training', id],
+    queryKey: ['condition-program', id],
     enabled: !!id,
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get(`/pusilkom/training/${id}/persyaratan`).then((res) => res.data?.data),
+      AxiosClient.get(`/pusilkom/program/${id}/persyaratan`).then((res) => res.data?.data),
   })
 
   const loading = isLoading || isFetching
@@ -144,7 +145,7 @@ export const UseGetConditionTraining = (id?: string | null) => {
   return { condition, loading }
 }
 
-export const UseGetRegisterPricing = (id?: string | null) => {
+export const UseGetRegisterPricingProgram = (id?: string | null) => {
   const [registerPricing, setRegisterPricing] = useState<IRegisterPricing[]>([])
 
   const { data, isLoading, isFetching } = useQuery({
@@ -152,7 +153,7 @@ export const UseGetRegisterPricing = (id?: string | null) => {
     enabled: !!id,
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get(`/pusilkom/training/${id}/biaya-pendaftaran`).then((res) => res.data?.data),
+      AxiosClient.get(`/pusilkom/program/${id}/biaya-pendaftaran`).then((res) => res.data?.data),
   })
 
   const loading = isLoading || isFetching
@@ -166,7 +167,7 @@ export const UseGetRegisterPricing = (id?: string | null) => {
   return { registerPricing, loading }
 }
 
-export const UseGetBankAccount = (id?: string | null) => {
+export const UseGetBankAccountProgram = (id?: string | null) => {
   const [bankAccount, setBankAccount] = useState<IBankAccount[]>([])
 
   const { data, isLoading, isFetching } = useQuery({
@@ -174,7 +175,7 @@ export const UseGetBankAccount = (id?: string | null) => {
     enabled: !!id,
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get(`/pusilkom/training/${id}/rekening`).then((res) => res.data?.data),
+      AxiosClient.get(`/pusilkom/program/${id}/rekening`).then((res) => res.data?.data),
   })
 
   const loading = isLoading || isFetching
@@ -188,14 +189,14 @@ export const UseGetBankAccount = (id?: string | null) => {
   return { bankAccount, loading }
 }
 
-export const UseGetContactAndMoreNote = (id?: string | null) => {
-  const [contact, setContact] = useState<IContactTraining>()
+export const UseGetContactAndMoreNoteProgram = (id?: string | null) => {
+  const [contact, setContact] = useState<IContactProgram>()
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['contact-and-more-note', id],
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get(`/pusilkom/training/${id}/kontak-dan-catatan-tambahan`).then(
+      AxiosClient.get(`/pusilkom/program/${id}/kontak-dan-catatan-tambahan`).then(
         (res) => res?.data.data
       ),
   })
@@ -211,14 +212,14 @@ export const UseGetContactAndMoreNote = (id?: string | null) => {
   return { loading, contact }
 }
 
-export const UseGetDetailTraining = (id?: string | null) => {
-  const [detail, setDetail] = useState<TrainingDetailData>()
+export const UseGetDetailProgram = (id?: string | null) => {
+  const [detail, setDetail] = useState<ProgramDetailData>()
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['detail-training', id],
+    queryKey: ['detail-program', id],
     enabled: !!id,
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get(`/pusilkom/training/${id}/detail`).then((res) => res.data?.data),
+    queryFn: () => AxiosClient.get(`/pusilkom/program/${id}/detail`).then((res) => res.data?.data),
   })
 
   const loading = isLoading || isFetching

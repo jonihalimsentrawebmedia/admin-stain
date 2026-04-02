@@ -1,4 +1,4 @@
-import { UseGetDetailTraining } from '@/pages/modules/Pulsikom/training/list-training/hooks'
+import { UseGetDetailProgram } from '../hooks/index'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { HiPencil } from 'react-icons/hi'
@@ -10,16 +10,16 @@ import { format } from 'date-fns'
 import { FaLocationPin, FaPhone } from 'react-icons/fa6'
 import { MdEmail } from 'react-icons/md'
 
-export const DetailTraining = () => {
+export const DetailProgramEarning = () => {
   const { id } = useParams()
-  const { detail } = UseGetDetailTraining((id as string) ?? '')
+  const { detail } = UseGetDetailProgram((id as string) ?? '')
   const navigate = useNavigate()
   return (
     <>
       <div className={'space-y-4'}>
         <ButtonTitleGroup
           isBack
-          label={'Detail Training'}
+          label={'Detail program'}
           buttonGroup={[
             {
               type: 'custom',
@@ -45,7 +45,7 @@ export const DetailTraining = () => {
                     variant={'outline'}
                     onClick={() =>
                       navigate(
-                        `/modules/pulsikom/training/list-training/edit/${detail?.training.id_training}`
+                        `/modules/pulsikom/training/credit-earning/program/edit/${detail?.program.id_program}`
                       )
                     }
                   >
@@ -58,15 +58,15 @@ export const DetailTraining = () => {
           ]}
         />
 
-        <p className="text-xl font-semibold">{detail?.training.nama_training}</p>
+        <p className="text-xl font-semibold">{detail?.program.nama_program}</p>
         <p className="flex items-center gap-1.5">
           <FaCalendarAlt className={'size-4'} />
           Dipublish :{' '}
-          {detail?.training?.updated_at ? format(detail?.training?.updated_at, 'dd MMMM yyyy') : ''}
+          {detail?.program?.updated_at ? format(detail?.program?.updated_at, 'dd MMMM yyyy') : ''}
         </p>
 
         <img
-          src={detail?.training?.url_gambar}
+          src={detail?.program?.url_gambar}
           alt="gambar"
           className={'w-[500px] h-[360px] object-cover'}
         />
@@ -74,17 +74,17 @@ export const DetailTraining = () => {
         <div className="grid grid-cols-[12rem_1fr] gap-4">
           <p className="text-gray-500">Peserta Terkonfirmasi</p>
           <p className={'text-xl font-semibold text-primary'}>
-            {`${detail?.training?.terkonfirmasi}  Peserta` || '0 Peserta'}
+            {`${detail?.program?.terkonfirmasi}  Peserta` || '0 Peserta'}
           </p>
           <p className="text-gray-500">Maks Peserta</p>
           <p className={'text-xl font-semibold text-primary'}>
-            {detail?.training?.is_tidak_ada_batas
+            {detail?.program?.is_tidak_ada_batas
               ? 'Tidak Ada Batas'
-              : `${detail?.training?.maksimal_pendaftar} Peserta`}
+              : `${detail?.program?.maksimal_pendaftar} Peserta`}
           </p>
           <p className="text-gray-500">Jumlah Peserta Minimum</p>
           <p className={'text-xl font-semibold text-primary'}>
-            {detail?.training?.minimal_pendaftar} Peserta
+            {detail?.program?.minimal_pendaftar} Peserta
           </p>
         </div>
 
@@ -94,12 +94,12 @@ export const DetailTraining = () => {
         <div className="grid grid-cols-[12rem_1fr] gap-2">
           <p className="text-gray-500">Periode Pendaftaran</p>
           <p>
-            {detail?.training?.tgl_buka_pendaftaran
-              ? format(detail?.training?.tgl_buka_pendaftaran, 'dd MMM')
+            {detail?.program?.tgl_buka_pendaftaran
+              ? format(detail?.program?.tgl_buka_pendaftaran, 'dd MMM')
               : ''}{' '}
             -{' '}
-            {detail?.training?.tgl_tutup_pendaftaran
-              ? format(detail?.training?.tgl_tutup_pendaftaran, 'dd MMM yyyy')
+            {detail?.program?.tgl_tutup_pendaftaran
+              ? format(detail?.program?.tgl_tutup_pendaftaran, 'dd MMM yyyy')
               : ''}
           </p>
         </div>

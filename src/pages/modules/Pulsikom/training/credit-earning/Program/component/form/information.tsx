@@ -1,8 +1,5 @@
 import { Controller, useForm } from 'react-hook-form'
-import {
-  ResolverInformationTraining,
-  type TResolverInformationTraining,
-} from '@/pages/modules/Pulsikom/training/list-training/data/resolver.tsx'
+import { ResolverInformationProgram, type TResolverInformationProgram } from '../../data/resolver'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form } from '@/components/ui/form.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
@@ -10,7 +7,6 @@ import { UploadPhotoImage } from '@/pages/modules/pusat-karir/component/common/u
 import { RichText } from '@/components/common/richtext'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Label } from '@/components/ui/label.tsx'
-import { UseGetDetailInformation } from '../../hooks/index'
 import { useEffect, useState } from 'react'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
@@ -20,6 +16,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { useQueryClient } from '@tanstack/react-query'
 import { useSearchParams } from 'react-router-dom'
 import { format } from 'date-fns'
+import { UseGetDetailInformationProgram } from '../../hooks/index'
 
 interface IProps {
   next_value: string
@@ -31,21 +28,20 @@ const FormInformation = (props: IProps) => {
   const [_, setSearchParams] = useSearchParams()
 
   const [loading, setLoading] = useState(false)
-  const form = useForm<TResolverInformationTraining>({
-    resolver: zodResolver(ResolverInformationTraining),
+  const form = useForm<TResolverInformationProgram>({
+    resolver: zodResolver(ResolverInformationProgram),
     defaultValues: {
       is_tidak_ada_batas: false,
     },
   })
   const uuid = uuidv4()
-
-  const id = localStorage.getItem('id_training')
-  const { detail } = UseGetDetailInformation(id)
+  const id = localStorage.getItem('id_program')
+  const { detail } = UseGetDetailInformationProgram(id)
 
   useEffect(() => {
     if (detail) {
       form.reset({
-        nama_training: detail?.nama_training,
+        nama_program: detail?.nama_program,
         deskripsi: detail?.deskripsi,
         minimal_pendaftar: detail?.minimal_pendaftar,
         maksimal_pendaftar: detail?.maksimal_pendaftar,
@@ -62,10 +58,10 @@ const FormInformation = (props: IProps) => {
   }, [detail])
 
   const queryClient = useQueryClient()
-  const HandleSave = async (value: TResolverInformationTraining) => {
+  const HandleSave = async (value: TResolverInformationProgram) => {
     setLoading(true)
     const myUUid = id ?? uuid
-    await AxiosClient.post(`/pusilkom/training/${myUUid}/informasi`, {
+    await AxiosClient.post(`/pusilkom/program/${myUUid}/informasi`, {
       ...value,
       tgl_buka_pendaftaran: value?.tgl_buka_pendaftaran
         ? new Date(value?.tgl_buka_pendaftaran).toISOString()
@@ -77,11 +73,11 @@ const FormInformation = (props: IProps) => {
       .then((res) => {
         if (res.data.status) {
           setLoading(false)
-          window.localStorage.setItem('id_training', res.data.data.id_training)
+          window.localStorage.setItem('id_program', res.data.data.id_program)
           form.reset()
           toast.success(res.data.message || 'Success')
           queryClient.invalidateQueries({
-            queryKey: ['status-training'],
+            queryKey: ['status-program'],
           })
           const Params = new URLSearchParams()
           Params.append('step', next_value)
@@ -93,8 +89,6 @@ const FormInformation = (props: IProps) => {
         toast.error(err.response.data.message || 'Error')
       })
   }
-
-  console.log(form.formState.errors, 'errors')
 
   return (
     <>
@@ -108,10 +102,10 @@ const FormInformation = (props: IProps) => {
             className={'w-[320px]'}
           />
           <TextInput
-            name={'nama_training'}
+            name={'nama_program'}
             form={form}
-            label={'Nama Training'}
-            placeholder={'Nama Training'}
+            label={'Nama Program'}
+            placeholder={'Nama Program'}
             isRequired
           />
 

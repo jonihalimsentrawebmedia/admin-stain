@@ -10,6 +10,9 @@ import { useQueryClient } from '@tanstack/react-query'
 import { UseGetCreditEarning } from './hooks/index'
 import RenderHTMLContent from '@/components/common/richtext/RenderHTMLContent.tsx'
 import { TitleLine } from '@/pages/modules/pusat-karir/component/common/titleLine.tsx'
+import { Button } from '@/components/ui/button.tsx'
+import { FaList } from 'react-icons/fa'
+import { useNavigate } from 'react-router-dom'
 
 export const CreditEarningPage = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -27,6 +30,7 @@ export const CreditEarningPage = () => {
     }
   }, [creditEarning])
 
+  const navigate = useNavigate()
   const queryClient = useQueryClient()
   const HandleSave = async (value: any) => {
     setLoading(true)
@@ -59,7 +63,7 @@ export const CreditEarningPage = () => {
                   {
                     type: 'cancel',
                     label: 'Batal',
-                    onClick: () => setIsEdit(true),
+                    onClick: () => setIsEdit(!isEdit),
                   },
                   {
                     type: 'save',
@@ -92,6 +96,19 @@ export const CreditEarningPage = () => {
             <ButtonTitleGroup
               label={'Visi Misi'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <Button
+                      className={'border-primary text-primary hover:text-primary'}
+                      variant={'outline'}
+                      onClick={() => navigate('program')}
+                    >
+                      <FaList />
+                      Daftar Program
+                    </Button>
+                  ),
+                },
                 {
                   type: 'edit',
                   label: 'Edit Visi Misi',

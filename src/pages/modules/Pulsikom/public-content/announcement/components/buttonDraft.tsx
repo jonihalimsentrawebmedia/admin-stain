@@ -25,10 +25,10 @@ export const ButtonDraftAnnouncementFaculty = (data: IAnnouncement) => {
           setLoading(false)
           toast.success(res.data.message || 'Success Mengajukan data Pengumuman')
           queryClient.invalidateQueries({
-            queryKey: ['faculty-announcement'],
+            queryKey: ['pusilkom-announcement'],
           })
           queryClient.invalidateQueries({
-            queryKey: ['faculty-announcement-status'],
+            queryKey: ['pusilkom-announcement-status'],
           })
         }
       })

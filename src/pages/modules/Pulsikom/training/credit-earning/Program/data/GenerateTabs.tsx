@@ -1,21 +1,21 @@
-import FormInformation from '@/pages/modules/Pulsikom/training/list-training/component/form/information.tsx'
-import { UseGetStatusTraining } from '@/pages/modules/Pulsikom/training/list-training/hooks'
-import { TopicScheduleSection } from '@/pages/modules/Pulsikom/training/list-training/component/topic-schedule'
-import { FormCondition } from '@/pages/modules/Pulsikom/training/list-training/component/form/formCondition.tsx'
-import { RegisterPricing } from '@/pages/modules/Pulsikom/training/list-training/component/register-pricing'
-import ListBankAccount from '@/pages/modules/Pulsikom/training/list-training/component/bankAccount'
-import { FormContactAndMoreNoted } from '@/pages/modules/Pulsikom/training/list-training/component/form/formContactAndMoreNoted.tsx'
+import FormInformation from '../component/form/information'
+import { UseGetStatusProgram } from '../hooks/index'
+import { TopicScheduleSection } from '../component/topic-schedule/index.tsx'
+import { FormCondition } from '../component/form/formCondition.tsx'
+import { RegisterPricing } from '../component/register-pricing/index.tsx'
+import ListBankAccount from '../component/bankAccount/index.tsx'
+import { FormContactAndMoreNoted } from '../component/form/formContactAndMoreNoted.tsx'
 
 export const GenerateTabsData = () => {
-  const id = window.localStorage.getItem('id_training')
-  const { detail } = UseGetStatusTraining(id as string)
+  const id = window.localStorage.getItem('id_program')
+  const { detail } = UseGetStatusProgram(id as string)
   const status = detail?.status_pengisian
 
   return [
     {
       value: 'is_informasi_pendaftaran',
       status: status?.is_informasi_pendaftaran ?? false,
-      label: 'Informasi Training',
+      label: 'Informasi Program',
       element: <FormInformation status={detail?.status} next_value={'is_topik_bahasan_jadwal'} />,
     },
     {
@@ -34,7 +34,7 @@ export const GenerateTabsData = () => {
       status: status?.is_persyaratan ?? false,
       label: 'Persyaratan',
       element: (
-        <FormCondition prev_value={'is_topik_bahasan_jadwal'} next_value={'is_biaya_pendaftaran'} />
+        <FormCondition next_value={'is_biaya_pendaftaran'} prev_value={'is_topik_bahasan_jadwal'} />
       ),
     },
     {

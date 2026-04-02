@@ -58,7 +58,7 @@ export const VisionMissionPulsikom = () => {
                   {
                     type: 'cancel',
                     label: 'Batal',
-                    onClick: () => setIsEdit(true),
+                    onClick: () => setIsEdit(!isEdit),
                   },
                   {
                     type: 'save',
