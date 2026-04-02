@@ -19,24 +19,27 @@ import { ChevronRight } from 'lucide-react'
 import { v4 as uuidv4 } from 'uuid'
 import { useQueryClient } from '@tanstack/react-query'
 import { useSearchParams } from 'react-router-dom'
+import { format } from 'date-fns'
 
 interface IProps {
   next_value: string
+  status?: 'DRAFT' | 'DITERBITKAN' | 'DITUTUP'
 }
 
 const FormInformation = (props: IProps) => {
-  const { next_value } = props
+  const { next_value, status } = props
   const [_, setSearchParams] = useSearchParams()
 
   const [loading, setLoading] = useState(false)
   const form = useForm<TResolverInformationTraining>({
     resolver: zodResolver(ResolverInformationTraining),
+    defaultValues: {
+      is_tidak_ada_batas: false,
+    },
   })
-
   const uuid = uuidv4()
 
   const id = localStorage.getItem('id_training')
-
   const { detail } = UseGetDetailInformation(id)
 
   useEffect(() => {
@@ -47,7 +50,13 @@ const FormInformation = (props: IProps) => {
         minimal_pendaftar: detail?.minimal_pendaftar,
         maksimal_pendaftar: detail?.maksimal_pendaftar,
         is_tidak_ada_batas: detail?.is_tidak_ada_batas,
-        url_gambar: detail?.url_gambar,
+        url_gambar: detail?.url_gambar ?? '',
+        tgl_buka_pendaftaran: detail?.tgl_buka_pendaftaran
+          ? format(detail?.tgl_buka_pendaftaran, 'yyyy-MM-dd')
+          : '',
+        tgl_tutup_pendaftaran: detail?.tgl_tutup_pendaftaran
+          ? format(detail?.tgl_tutup_pendaftaran, 'yyyy-MM-dd')
+          : '',
       })
     }
   }, [detail])
@@ -56,7 +65,15 @@ const FormInformation = (props: IProps) => {
   const HandleSave = async (value: TResolverInformationTraining) => {
     setLoading(true)
     const myUUid = id ?? uuid
-    await AxiosClient.post(`/pusilkom/training/${myUUid}/informasi`, value)
+    await AxiosClient.post(`/pusilkom/training/${myUUid}/informasi`, {
+      ...value,
+      tgl_buka_pendaftaran: value?.tgl_buka_pendaftaran
+        ? new Date(value?.tgl_buka_pendaftaran).toISOString()
+        : null,
+      tgl_tutup_pendaftaran: value?.tgl_tutup_pendaftaran
+        ? new Date(value?.tgl_tutup_pendaftaran).toISOString()
+        : null,
+    })
       .then((res) => {
         if (res.data.status) {
           setLoading(false)
@@ -76,6 +93,8 @@ const FormInformation = (props: IProps) => {
         toast.error(err.response.data.message || 'Error')
       })
   }
+
+  console.log(form.formState.errors, 'errors')
 
   return (
     <>
@@ -143,6 +162,27 @@ const FormInformation = (props: IProps) => {
               />
             </div>
           </div>
+
+          {status === 'DITERBITKAN' && (
+            <div className="flex items-start gap-4 w-full">
+              <TextInput
+                name={'tgl_buka_pendaftaran'}
+                form={form}
+                label={'Tanggal Buka Pendaftaran'}
+                className={'w-full'}
+                type={'date'}
+                isRequired
+              />
+              <TextInput
+                name={'tgl_tutup_pendaftaran'}
+                form={form}
+                label={'Tanggal Tutup Pendaftaran'}
+                className={'w-full'}
+                type={'date'}
+                isRequired
+              />
+            </div>
+          )}
 
           <ButtonTitleGroup
             label={''}

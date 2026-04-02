@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form'
+import { useForm, useWatch } from 'react-hook-form'
 import { Form } from '@/components/ui/form.tsx'
 import { ContactMoreNoted, type TContactMoreNoted } from '../../data/resolver'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -33,23 +33,29 @@ export const FormContactAndMoreNoted = (props: IProps) => {
     resolver: zodResolver(ContactMoreNoted),
   })
 
-  const contactUnit = form.watch('is_kontak_unit')
+  const contactUnit = useWatch({
+    control: form.control,
+    name: 'is_kontak_unit',
+  })
 
   useEffect(() => {
-    if (contact) {
-      form.reset({
-        is_kontak_unit: contact?.is_kontak_unit ?? false,
-        no_telepon: contact?.no_telepon ?? '',
-        email: contact?.email ?? '',
-        alamat: contact?.alamat ?? '',
-        catatan_tambahan: contact?.catatan_tambahan ?? '',
-      })
-    } else if (contactUnit) {
-      form.setValue('email', carrierCenter?.email ?? '')
-      form.setValue('alamat', carrierCenter?.alamat ?? '')
-      form.setValue('no_telepon', carrierCenter?.telepon ?? '')
-    }
-  }, [contactUnit, carrierCenter])
+    if (!contact) return
+
+    form.reset({
+      is_kontak_unit: contact.is_kontak_unit ?? false,
+      no_telepon: contact.no_telepon ?? '',
+      email: contact.email ?? '',
+      alamat: contact.alamat ?? '',
+      catatan_tambahan: contact.catatan_tambahan ?? '',
+    })
+  }, [contact])
+
+  useEffect(() => {
+    if (!contactUnit) return
+    form.setValue('email', carrierCenter?.email ?? '')
+    form.setValue('alamat', carrierCenter?.alamat ?? '')
+    form.setValue('no_telepon', carrierCenter?.telepon ?? '')
+  }, [contactUnit, carrierCenter, form])
 
   const HandleSave = async (value: TContactMoreNoted) => {
     setLoading(true)

@@ -3,13 +3,14 @@ import { useState } from 'react'
 import AxiosClient from '@/provider/axios.tsx'
 import type { ITrainingList } from '@/pages/modules/Pulsikom/training/list-training/data/types.ts'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
-import { format } from 'date-fns'
+import { format, subDays } from 'date-fns'
 import { Form } from '@/components/ui/form.tsx'
 import { useForm } from 'react-hook-form'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
+import { id } from 'date-fns/locale'
 
 interface Props {
   data?: ITrainingList
@@ -81,7 +82,12 @@ export const ButtonPublish = (props: Props) => {
         <ArrowUp className={'size-4'} />
       </button>
 
-      <DialogBasic open={open} setOpen={setOpen} title={'Buka Pendaftaran'}>
+      <DialogBasic
+        open={open}
+        setOpen={setOpen}
+        title={'Buka Pendaftaran'}
+        className={'rounded min-w-2xl'}
+      >
         <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
           <p className="text-gray-500">Nama Pelatihan</p>
           <p>{data?.nama_training}</p>
@@ -89,9 +95,11 @@ export const ButtonPublish = (props: Props) => {
           <p>{data?.minimal_pendaftar}</p>
           <p className="text-gray-500">Max. Pendaftar</p>
           <p>{data?.is_tidak_ada_batas ? 'Tidak Ada Batas' : data?.maksimal_pendaftar}</p>
-          <p className="text-gray-500">Nama Pelatihan</p>
+          <p className="text-gray-500">Tanggal</p>
           <p>
-            {data?.tgl_buka_pendaftaran ? format(data?.tgl_buka_pendaftaran, 'dd-MM-yyyy') : ''}
+            {data?.tanggal_mulai_pelatihan
+              ? format(data?.tanggal_mulai_pelatihan, 'dd MMMM yyyy', { locale: id })
+              : ''}
           </p>
         </div>
 
@@ -115,6 +123,17 @@ export const ButtonPublish = (props: Props) => {
               isRow
               isRequired
             />
+            <div className="grid grid-cols-[12rem_1fr] gap-5">
+              <div />
+              <p className="text-sm text-blue-500">
+                Maksimal{' '}
+                {data?.tanggal_mulai_pelatihan
+                  ? format(subDays(new Date(data?.tanggal_mulai_pelatihan), 3), 'dd MMMM yyyy', {
+                      locale: id,
+                    })
+                  : ''}
+              </p>
+            </div>
 
             <ButtonForm loading={loading} onCancel={() => setOpen(!open)} />
           </form>

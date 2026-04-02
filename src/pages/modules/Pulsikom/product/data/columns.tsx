@@ -3,6 +3,7 @@ import type { ColumnDef } from '@tanstack/react-table'
 import type { IProduct } from '../data/types.ts'
 import { MdInfo } from 'react-icons/md'
 import { HiPencil } from 'react-icons/hi'
+import { ButtonDeleteProduct } from '@/pages/modules/Pulsikom/product/component/buttonDelete.tsx'
 
 export const ColumnsProduct = () => {
   const [searchParams] = useSearchParams()
@@ -46,6 +47,7 @@ export const ColumnsProduct = () => {
               >
                 <HiPencil className={'size-4'} />
               </Link>
+              <ButtonDeleteProduct data={data} />
             </div>
           </>
         )

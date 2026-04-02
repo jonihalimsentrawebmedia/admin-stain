@@ -45,6 +45,11 @@ import { DetailTraining } from '@/pages/modules/Pulsikom/training/list-training/
 import { Participant } from '@/pages/modules/Pulsikom/training/list-training/participant'
 import { CalendarTrainingCollect } from '@/pages/modules/Pulsikom/training/Calendar'
 import { CreditEarningPage } from '@/pages/modules/Pulsikom/training/credit-earning'
+import { DetailParticipant } from '@/pages/modules/Pulsikom/training/list-training/participant/detail'
+import { HistoryEmail } from '@/pages/modules/Pulsikom/training/list-training/participant/history-email'
+import { ListProgram } from '@/pages/modules/Pulsikom/training/credit-earning/Program'
+import { CreatedProgram } from '@/pages/modules/Pulsikom/training/credit-earning/Program/created'
+import { DetailProgramEarning } from '@/pages/modules/Pulsikom/training/credit-earning/Program/detail'
 
 export const PusilkomRoutes = [
   {
@@ -302,6 +307,14 @@ export const PusilkomRoutes = [
             path: 'detail/:id/participant',
             element: <Participant />,
           },
+          {
+            path: 'detail/:id/participant/detail/:participant_id',
+            element: <DetailParticipant />,
+          },
+          {
+            path: 'detail/:id/participant/email/:participant_id',
+            element: <HistoryEmail />,
+          },
         ],
       },
       {
@@ -310,7 +323,33 @@ export const PusilkomRoutes = [
       },
       {
         path: 'credit-earning',
-        element: <CreditEarningPage />,
+        children: [
+          {
+            index: true,
+            element: <CreditEarningPage />,
+          },
+          {
+            path: 'program',
+            children: [
+              {
+                index: true,
+                element: <ListProgram />,
+              },
+              {
+                path: 'add',
+                element: <CreatedProgram />,
+              },
+              {
+                path: 'edit/:id',
+                element: <CreatedProgram />,
+              },
+              {
+                path: 'detail/:id',
+                element: <DetailProgramEarning />,
+              },
+            ],
+          },
+        ],
       },
     ],
   },

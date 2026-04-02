@@ -1,0 +1,204 @@
+import { Controller, useForm } from 'react-hook-form'
+import { ResolverInformationProgram, type TResolverInformationProgram } from '../../data/resolver'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Form } from '@/components/ui/form.tsx'
+import TextInput from '@/components/common/form/TextInput.tsx'
+import { UploadPhotoImage } from '@/pages/modules/pusat-karir/component/common/uploadPhoto.tsx'
+import { RichText } from '@/components/common/richtext'
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import { Label } from '@/components/ui/label.tsx'
+import { useEffect, useState } from 'react'
+import AxiosClient from '@/provider/axios.tsx'
+import { toast } from 'react-toastify'
+import { Button } from '@/components/ui/button.tsx'
+import { ChevronRight } from 'lucide-react'
+import { v4 as uuidv4 } from 'uuid'
+import { useQueryClient } from '@tanstack/react-query'
+import { useSearchParams } from 'react-router-dom'
+import { format } from 'date-fns'
+import { UseGetDetailInformationProgram } from '../../hooks/index'
+
+interface IProps {
+  next_value: string
+  status?: 'DRAFT' | 'DITERBITKAN' | 'DITUTUP'
+}
+
+const FormInformation = (props: IProps) => {
+  const { next_value, status } = props
+  const [_, setSearchParams] = useSearchParams()
+
+  const [loading, setLoading] = useState(false)
+  const form = useForm<TResolverInformationProgram>({
+    resolver: zodResolver(ResolverInformationProgram),
+    defaultValues: {
+      is_tidak_ada_batas: false,
+    },
+  })
+  const uuid = uuidv4()
+  const id = localStorage.getItem('id_program')
+  const { detail } = UseGetDetailInformationProgram(id)
+
+  useEffect(() => {
+    if (detail) {
+      form.reset({
+        nama_program: detail?.nama_program,
+        deskripsi: detail?.deskripsi,
+        minimal_pendaftar: detail?.minimal_pendaftar,
+        maksimal_pendaftar: detail?.maksimal_pendaftar,
+        is_tidak_ada_batas: detail?.is_tidak_ada_batas,
+        url_gambar: detail?.url_gambar ?? '',
+        tgl_buka_pendaftaran: detail?.tgl_buka_pendaftaran
+          ? format(detail?.tgl_buka_pendaftaran, 'yyyy-MM-dd')
+          : '',
+        tgl_tutup_pendaftaran: detail?.tgl_tutup_pendaftaran
+          ? format(detail?.tgl_tutup_pendaftaran, 'yyyy-MM-dd')
+          : '',
+      })
+    }
+  }, [detail])
+
+  const queryClient = useQueryClient()
+  const HandleSave = async (value: TResolverInformationProgram) => {
+    setLoading(true)
+    const myUUid = id ?? uuid
+    await AxiosClient.post(`/pusilkom/program/${myUUid}/informasi`, {
+      ...value,
+      tgl_buka_pendaftaran: value?.tgl_buka_pendaftaran
+        ? new Date(value?.tgl_buka_pendaftaran).toISOString()
+        : null,
+      tgl_tutup_pendaftaran: value?.tgl_tutup_pendaftaran
+        ? new Date(value?.tgl_tutup_pendaftaran).toISOString()
+        : null,
+    })
+      .then((res) => {
+        if (res.data.status) {
+          setLoading(false)
+          window.localStorage.setItem('id_program', res.data.data.id_program)
+          form.reset()
+          toast.success(res.data.message || 'Success')
+          queryClient.invalidateQueries({
+            queryKey: ['status-program'],
+          })
+          const Params = new URLSearchParams()
+          Params.append('step', next_value)
+          setSearchParams(Params)
+        }
+      })
+      .catch((err) => {
+        setLoading(false)
+        toast.error(err.response.data.message || 'Error')
+      })
+  }
+
+  return (
+    <>
+      <Form {...form}>
+        <form className={'flex flex-col gap-4 w-full'} onSubmit={form.handleSubmit(HandleSave)}>
+          <UploadPhotoImage
+            form={form}
+            name={'url_gambar'}
+            ratio_width={4}
+            ratio_height={3}
+            className={'w-[320px]'}
+          />
+          <TextInput
+            name={'nama_program'}
+            form={form}
+            label={'Nama Program'}
+            placeholder={'Nama Program'}
+            isRequired
+          />
+
+          <RichText form={form} name={'deskripsi'} label={'Deskripsi'} isRow={false} required />
+
+          <div className="flex items-start gap-4 w-full">
+            <TextInput
+              name={'minimal_pendaftar'}
+              form={form}
+              label={'Minimal Pendaftar'}
+              placeholder={'Minimal Pendaftar'}
+              className={'w-full'}
+              type={'number'}
+              isNumber
+              isRequired
+            />
+
+            <div className={'w-full'}>
+              <TextInput
+                name={'maksimal_pendaftar'}
+                form={form}
+                label={'Maksimal Pendaftar'}
+                placeholder={'Maksimal Pendaftar'}
+                className={'w-full'}
+                type={'number'}
+                isDisabled={form.watch('is_tidak_ada_batas') === true}
+                isNumber
+                isRequired
+              />
+
+              <Controller
+                control={form.control}
+                name="is_tidak_ada_batas"
+                render={({ field }) => (
+                  <Label htmlFor="infinite" className="mt-1 flex items-center gap-1.5">
+                    <input
+                      type="checkbox"
+                      id="infinite"
+                      checked={field.value ?? false}
+                      onChange={(e) => {
+                        field.onChange(e.target.checked)
+                        form.setValue('maksimal_pendaftar', null)
+                      }}
+                    />
+                    Tidak ada batas
+                  </Label>
+                )}
+              />
+            </div>
+          </div>
+
+          {status === 'DITERBITKAN' && (
+            <div className="flex items-start gap-4 w-full">
+              <TextInput
+                name={'tgl_buka_pendaftaran'}
+                form={form}
+                label={'Tanggal Buka Pendaftaran'}
+                className={'w-full'}
+                type={'date'}
+                isRequired
+              />
+              <TextInput
+                name={'tgl_tutup_pendaftaran'}
+                form={form}
+                label={'Tanggal Tutup Pendaftaran'}
+                className={'w-full'}
+                type={'date'}
+                isRequired
+              />
+            </div>
+          )}
+
+          <ButtonTitleGroup
+            label={''}
+            buttonGroup={[
+              {
+                type: 'cancel',
+                label: 'Batal',
+              },
+              {
+                type: 'custom',
+                element: (
+                  <Button disabled={loading}>
+                    Lanjutkan <ChevronRight className={'size-4'} />
+                  </Button>
+                ),
+              },
+            ]}
+          />
+        </form>
+      </Form>
+    </>
+  )
+}
+
+export default FormInformation

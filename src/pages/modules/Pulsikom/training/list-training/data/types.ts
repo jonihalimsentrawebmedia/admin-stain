@@ -14,6 +14,8 @@ export interface IInformationTraining {
   updated_user: string
   nama_user_created: string
   nama_user_updated: string
+  tgl_buka_pendaftaran: string
+  tgl_tutup_pendaftaran: string
 }
 
 export interface ITopicSchedule {
@@ -96,6 +98,8 @@ export interface ITrainingList extends AuditTrail {
   status: string
   tgl_buka_pendaftaran: string | null
   tgl_tutup_pendaftaran: string | null
+  tanggal_mulai_pelatihan: string | null
+  tanggal_selesai_pelatihan: string | null
   terbit_at: string | null
   terbit_user: string | null
   alasan_tutup: string | null

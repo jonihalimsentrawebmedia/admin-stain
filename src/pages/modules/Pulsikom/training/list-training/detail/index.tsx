@@ -61,7 +61,8 @@ export const DetailTraining = () => {
         <p className="text-xl font-semibold">{detail?.training.nama_training}</p>
         <p className="flex items-center gap-1.5">
           <FaCalendarAlt className={'size-4'} />
-          Dipublish :
+          Dipublish :{' '}
+          {detail?.training?.updated_at ? format(detail?.training?.updated_at, 'dd MMMM yyyy') : ''}
         </p>
 
         <img
@@ -73,7 +74,7 @@ export const DetailTraining = () => {
         <div className="grid grid-cols-[12rem_1fr] gap-4">
           <p className="text-gray-500">Peserta Terkonfirmasi</p>
           <p className={'text-xl font-semibold text-primary'}>
-            {detail?.training?.terkonfirmasi || '0 Peserta'}
+            {`${detail?.training?.terkonfirmasi}  Peserta` || '0 Peserta'}
           </p>
           <p className="text-gray-500">Maks Peserta</p>
           <p className={'text-xl font-semibold text-primary'}>

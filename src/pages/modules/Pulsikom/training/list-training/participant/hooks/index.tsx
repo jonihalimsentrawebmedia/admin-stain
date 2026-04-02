@@ -3,6 +3,10 @@ import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { BasicProps } from '@/utils/globalType.ts'
+import type {
+  IMessageEmailHistory,
+  IParticipant,
+} from '@/pages/modules/Pulsikom/training/list-training/participant/data'
 
 interface Props extends BasicProps {
   status: 'PENDING' | 'DIKONFIRMASI' | 'DITOLAK' | 'DIBATALKAN'
@@ -12,7 +16,7 @@ interface Props extends BasicProps {
 export const UseGetTrainingParticipant = (props: Props) => {
   const { status, page, limit, search, id_training } = props
 
-  const [participant, setParticipant] = useState([])
+  const [participant, setParticipant] = useState<IParticipant[]>([])
   const [meta, setMeta] = useState<Meta>()
 
   const ParamsSearch = new URLSearchParams()
@@ -40,4 +44,59 @@ export const UseGetTrainingParticipant = (props: Props) => {
   }, [data])
 
   return { participant, meta, loading }
+}
+
+interface detailProps {
+  id_training: string
+  id_participant: string
+}
+
+export const UseGetDetailParticipant = (props: detailProps) => {
+  const { id_training, id_participant } = props
+  const [detail, setDetail] = useState<IParticipant>()
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['detail-participant', id_participant, id_training],
+    enabled: !!id_participant && !!id_training,
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get(`/pusilkom/training/${id_training}/peserta/${id_participant}`).then(
+        (res) => res.data?.data
+      ),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setDetail(data)
+    }
+  }, [data])
+
+  return { detail, loading }
+}
+
+export const UseGetHistoryEmail = (props: detailProps) => {
+  const { id_training, id_participant } = props
+  const [historyEmail, setHistoryEmail] = useState<IMessageEmailHistory[]>([])
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['email-participant', id_participant, id_training],
+    enabled: !!id_participant && !!id_training,
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get(
+        `/pusilkom/training/${id_training}/peserta/${id_participant}/email-riwayat`
+      ).then((res) => res.data?.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setHistoryEmail(data)
+    }
+  }, [data])
+
+  return { historyEmail, loading }
 }

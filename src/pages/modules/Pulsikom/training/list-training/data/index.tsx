@@ -16,7 +16,7 @@ export const GenerateTabsData = () => {
       value: 'is_informasi_pendaftaran',
       status: status?.is_informasi_pendaftaran ?? false,
       label: 'Informasi Training',
-      element: <FormInformation next_value={'is_topik_bahasan_jadwal'} />,
+      element: <FormInformation status={detail?.status} next_value={'is_topik_bahasan_jadwal'} />,
     },
     {
       value: 'is_topik_bahasan_jadwal',

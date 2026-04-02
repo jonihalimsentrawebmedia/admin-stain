@@ -17,6 +17,10 @@ export const CalendarTrainingCollect = () => {
     { key: 'juni', label: 'Juni' },
     { key: 'juli', label: 'Juli' },
     { key: 'agustus', label: 'Agustus' },
+    { key: 'semptember', label: 'Semptember' },
+    { key: 'oktober', label: 'Oktober' },
+    { key: 'november', label: 'November' },
+    { key: 'desember', label: 'Desember' },
   ]
 
   return (
@@ -47,7 +51,10 @@ export const CalendarTrainingCollect = () => {
               <React.Fragment key={training.nama_training}>
                 {/* 🔥 GROUP HEADER */}
                 <tr className="bg-green-700 text-white">
-                  <td colSpan={months.length + 1} className="p-2 font-semibold border-primary border">
+                  <td
+                    colSpan={months.length + 1}
+                    className="p-2 font-semibold border-primary border"
+                  >
                     {training.nama_training}
                   </td>
                 </tr>

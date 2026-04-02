@@ -55,6 +55,7 @@ export const UseGetListTraining = (props: Props) => {
 export const UseGetStatusTraining = (id?: string | null) => {
   const [detail, setDetail] = useState<{
     status_pengisian: IstatusTraining
+    status: 'DRAFT' | 'DITERBITKAN' | 'DITUTUP'
   }>()
 
   const { data, isLoading, isFetching } = useQuery({

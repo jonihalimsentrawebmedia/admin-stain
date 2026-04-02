@@ -59,7 +59,7 @@ export const HistoryAboutPulsikom = () => {
                   {
                     type: 'cancel',
                     label: 'Batal',
-                    onClick: () => setIsEdit(true),
+                    onClick: () => setIsEdit(!isEdit),
                   },
                   {
                     type: 'save',

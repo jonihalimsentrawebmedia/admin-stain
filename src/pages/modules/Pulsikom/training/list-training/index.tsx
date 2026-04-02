@@ -2,30 +2,30 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { useNavigate } from 'react-router-dom'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs.tsx'
 import { clsx } from 'clsx'
-import { DraftSection } from '@/pages/modules/Pulsikom/training/list-training/component/TabsData/DraftSection.tsx'
 import { useState } from 'react'
-import { PublishSection } from '@/pages/modules/Pulsikom/training/list-training/component/TabsData/PublishSection.tsx'
+import { DraftSection } from './component/TabsData/DraftSection.tsx'
+import { PublishSection } from './component/TabsData/PublishSection.tsx'
+import { ClosedSection } from './component/TabsData/closedSection.tsx'
 
 export const ListTraining = () => {
   const navigate = useNavigate()
-
-  const [status, setStatus] = useState('draft')
+  const [status, setStatus] = useState('DRAFT')
 
   const TabsData = [
     {
       label: 'Draft',
-      value: 'draft',
+      value: 'DRAFT',
       element: <DraftSection />,
     },
     {
       label: 'Diterbitkan',
-      value: 'publish',
+      value: 'DITERBITKAN',
       element: <PublishSection />,
     },
     {
       label: 'Ditutup',
-      value: 'closed',
-      element: <></>,
+      value: 'DITUTUP',
+      element: <ClosedSection />,
     },
   ]
 
@@ -38,7 +38,10 @@ export const ListTraining = () => {
             {
               type: 'add',
               label: 'Tambah Training',
-              onClick: () => navigate('add'),
+              onClick: () => {
+                window.localStorage.removeItem('id_training')
+                navigate('add')
+              },
             },
           ]}
         />
