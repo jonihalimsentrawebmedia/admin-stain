@@ -1,16 +1,16 @@
 import { Link } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
 import { MdInfo } from 'react-icons/md'
-import { ButtonCancel } from '@/pages/modules/Pulsikom/training/list-training/participant/component/buttonCancel.tsx'
-import { ButtonReject } from '@/pages/modules/Pulsikom/training/list-training/participant/component/buttonReject.tsx'
-import { ButtonConfirm } from '@/pages/modules/Pulsikom/training/list-training/participant/component/buttonConfirm.tsx'
+import { ButtonCancel } from '../component/buttonCancel.tsx'
+import { ButtonReject } from '../component/buttonReject.tsx'
+import { ButtonConfirm } from '../component/buttonConfirm.tsx'
 import { format } from 'date-fns'
-import { ButtonEmail } from '@/pages/modules/Pulsikom/training/list-training/participant/component/buttonEmail.tsx'
+import { ButtonEmail } from '../component/buttonEmail.tsx'
 
 export interface IParticipant {
   id_peserta: string
   id_satuan_organisasi: string
-  id_training: string
+  id_program: string
   id_biaya_pendaftaran: string
   id_rekening: string
   nama_biaya_pendaftaran: string
@@ -305,7 +305,7 @@ export const ColumnsConfirm: ColumnDef<IParticipant>[] = [
   },
 
   {
-    accessorKey: 'KonfirmasiAt',
+    accessorKey: 'konfirmasi_at',
     header: 'Tgl. Konfirmasi',
     cell: ({ row }) => {
       const date = row?.original?.konfirmasi_at
