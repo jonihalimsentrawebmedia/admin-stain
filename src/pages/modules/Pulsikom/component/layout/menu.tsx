@@ -6,6 +6,7 @@ import {
   MdInfo,
   MdInventory,
   MdMiscellaneousServices,
+  MdStars,
   MdWidgets,
 } from 'react-icons/md'
 import { FaGear, FaGears } from 'react-icons/fa6'
@@ -58,93 +59,99 @@ export const GenerateMenu = () => {
     },
     {
       id: 5,
+      name: 'Keunggulan',
+      path: `${baseDomain}/advantage`,
+      icon: <MdStars className={'size-5'} />,
+    },
+    {
+      id: 6,
       name: 'Produk',
       path: `${baseDomain}/products`,
       icon: <MdInventory className={'size-5'} />,
     },
     {
-      id: 6,
+      id: 7,
       name: 'Training',
       path: `${baseDomain}/training`,
       icon: <MdWidgets className={'size-5'} />,
       child: [
         {
-          id: 61,
+          id: 71,
           name: 'Daftar Training',
           path: `${baseDomain}/training/list-training`,
         },
         {
-          id: 62,
+          id: 72,
           name: 'Kalender Training',
           path: `${baseDomain}/training/calendar`,
         },
         {
-          id: 63,
+          id: 73,
           name: 'Program Credit Earning',
           path: `${baseDomain}/training/credit-earning`,
         },
         {
-          id: 64,
+          id: 74,
           name: 'Verifikasi Pendaftaran',
           path: `${baseDomain}/training/verify-registration`,
         },
       ],
     },
     {
-      id: 7,
+      id: 8,
       name: 'Konten Publik',
       icon: <MdInfo className={'size-5'} />,
       path: `${baseDomain}/public-content`,
       child: [
         {
-          id: 71,
+          id: 81,
           name: 'Berita',
           path: `${baseDomain}/public-content/news`,
         },
         {
-          id: 72,
+          id: 82,
           name: 'Agenda',
           path: `${baseDomain}/public-content/agenda`,
         },
         {
-          id: 73,
+          id: 83,
           name: 'Pengumuman',
           path: `${baseDomain}/public-content/announcement`,
         },
         {
-          id: 74,
+          id: 84,
           name: 'Download',
           path: `${baseDomain}/public-content/download`,
         },
       ],
     },
     {
-      id: 8,
+      id: 9,
       name: 'Webisite Karir',
       icon: <FaGears className={'size-5'} />,
       path: `${baseDomain}/carrier-website`,
     },
     {
-      id: 9,
+      id: 10,
       name: 'Pesan Masuk',
       icon: <MdChat className={'size-5'} />,
       path: `${baseDomain}/inbox`,
     },
     {
-      id: 10,
+      id: 11,
       name: 'Referensi',
       icon: <MdDatasetLinked className={'size-5'} />,
       path: `${baseDomain}/reference`,
       child: [
         {
-          id: 101,
+          id: 111,
           name: 'Daftar Rekening',
           path: `${baseDomain}/reference/bank-account`,
         },
       ],
     },
     {
-      id: 13,
+      id: 12,
       name: 'Pengaturan Website',
       icon: <FaGear className={'size-5'} />,
       child: [

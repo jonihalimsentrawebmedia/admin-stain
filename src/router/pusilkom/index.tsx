@@ -50,6 +50,13 @@ import { HistoryEmail } from '@/pages/modules/Pulsikom/training/list-training/pa
 import { ListProgram } from '@/pages/modules/Pulsikom/training/credit-earning/Program'
 import { CreatedProgram } from '@/pages/modules/Pulsikom/training/credit-earning/Program/created'
 import { DetailProgramEarning } from '@/pages/modules/Pulsikom/training/credit-earning/Program/detail'
+import { ParticipantProgram } from '@/pages/modules/Pulsikom/training/credit-earning/Program/participant'
+import { DetailParticipantProgram } from '@/pages/modules/Pulsikom/training/credit-earning/Program/participant/detail'
+import { VerifyRegistration } from '@/pages/modules/Pulsikom/training/verify-registration'
+import { HistoryEmailProgram } from '@/pages/modules/Pulsikom/training/credit-earning/Program/participant/history-email'
+import { AdvantagePage } from '@/pages/modules/Pulsikom/advantage'
+import { CreatedAdvantage } from '@/pages/modules/Pulsikom/advantage/created'
+import { UpdatedAdvantage } from '@/pages/modules/Pulsikom/advantage/updated'
 
 export const PusilkomRoutes = [
   {
@@ -126,6 +133,23 @@ export const PusilkomRoutes = [
       {
         path: 'detail/:id',
         element: <DetailServicePulsikom />,
+      },
+    ],
+  },
+  {
+    path: 'advantage',
+    children: [
+      {
+        index: true,
+        element: <AdvantagePage />,
+      },
+      {
+        path: 'add',
+        element: <CreatedAdvantage />,
+      },
+      {
+        path: 'edit/:id',
+        element: <UpdatedAdvantage />,
       },
     ],
   },
@@ -345,7 +369,72 @@ export const PusilkomRoutes = [
               },
               {
                 path: 'detail/:id',
-                element: <DetailProgramEarning />,
+                children: [
+                  {
+                    index: true,
+                    element: <DetailProgramEarning />,
+                  },
+                  {
+                    path: 'participant',
+                    children: [
+                      {
+                        index: true,
+                        element: <ParticipantProgram />,
+                      },
+                      {
+                        path: 'detail/:participant_id',
+                        element: <DetailParticipantProgram />,
+                      },
+                      {
+                        path: 'email/:participant_id',
+                        element: <HistoryEmailProgram />,
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: 'verify-registration',
+        children: [
+          {
+            index: true,
+            element: <VerifyRegistration />,
+          },
+          {
+            path: 'training/:id',
+            children: [
+              {
+                index: true,
+                element: <Participant />,
+              },
+              {
+                path: 'detail/:participant_id',
+                element: <DetailParticipant />,
+              },
+              {
+                path: 'email/:participant_id',
+                element: <HistoryEmail />,
+              },
+            ],
+          },
+          {
+            path: 'program/:id',
+            children: [
+              {
+                index: true,
+                element: <ParticipantProgram />,
+              },
+              {
+                path: 'detail/:participant_id',
+                element: <DetailParticipantProgram />,
+              },
+              {
+                path: 'email/:participant_id',
+                element: <HistoryEmailProgram />,
               },
             ],
           },

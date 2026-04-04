@@ -1,15 +1,13 @@
 import { Link, useParams } from 'react-router-dom'
-import {
-  UseGetDetailParticipant,
-  UseGetHistoryEmail,
-} from '@/pages/modules/Pulsikom/training/list-training/participant/hooks'
+
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { TitleLine } from '@/pages/modules/pusat-karir/component/common/titleLine.tsx'
 import { format } from 'date-fns'
+import { UseGetDetailParticipantProgram, UseGetHistoryEmail } from '../hooks/index'
 
-export const HistoryEmail = () => {
+export const HistoryEmailProgram = () => {
   const { id, participant_id } = useParams()
-  const { detail } = UseGetDetailParticipant({
+  const { detail } = UseGetDetailParticipantProgram({
     id_participant: participant_id ?? '',
     id_training: id ?? '',
   })
@@ -70,7 +68,7 @@ export const HistoryEmail = () => {
             <p>{item?.subjek}</p>
             <p className="text-gray-500">Pesan</p>
             <p>{item?.pesan}</p>
-            <p className="text-gray-500">File Lampiran</p>
+            <p className="text-gray-500">Lampiran</p>
             <ul className={'list-decimal list-inside'}>
               {item?.file_lampiran?.map((file, index) => (
                 <li
