@@ -33,7 +33,7 @@ export const UpdatedService = () => {
 
   const HandleSave = async (value: TResolverService) => {
     setLoading(true)
-    await AxiosClient.put('/pusilkom/layanan', value)
+    await AxiosClient.put(`/pusilkom/layanan/${detail?.id_layanan}`, value)
       .then((res) => {
         if (res.data.status) {
           setLoading(false)
