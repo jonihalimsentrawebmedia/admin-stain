@@ -50,5 +50,8 @@ export const RenderUrlEditor = (url: string, id: string) => {
 
     case 'lppm_artikel':
       return `/article/detail/${id}`
+
+    case 'profil_fakultas':
+      return `/faculty/detail/${id}`
   }
 }
