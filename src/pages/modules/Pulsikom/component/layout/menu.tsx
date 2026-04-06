@@ -156,17 +156,22 @@ export const GenerateMenu = () => {
       icon: <FaGear className={'size-5'} />,
       child: [
         {
-          id: 131,
+          id: 231,
           name: 'Landing Page',
           path: `${baseDomain}/settings/landing-page`,
         },
         {
-          id: 132,
+          id: 232,
+          name: 'Gambar Background',
+          path: `${baseDomain}/settings/background-image`,
+        },
+        {
+          id: 123,
           name: 'Pengaturan Warna',
           path: `${baseDomain}/settings/color`,
         },
         {
-          id: 133,
+          id: 124,
           name: 'Template',
           path: `${baseDomain}/settings/template`,
         },
