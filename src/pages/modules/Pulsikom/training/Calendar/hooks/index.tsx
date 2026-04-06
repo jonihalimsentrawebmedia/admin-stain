@@ -18,7 +18,7 @@ export const UseGetCalendar = () => {
   useEffect(() => {
     if (data) {
       setMeta(data.meta)
-      setCalendar(data?.data)
+      setCalendar(data?.data ?? [])
     }
   }, [data])
 
