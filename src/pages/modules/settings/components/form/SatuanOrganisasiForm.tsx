@@ -18,7 +18,7 @@ interface Props {
 const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
   const { satuanOrganisasi } = useGetSatuanOrganisasi({
     kelompok: 'UNIVERSITAS',
-    isFilter: kelompok == 'PRODI' ? true : false,
+    isFilter: kelompok == 'PRODI',
     isGetAll: true,
   })
   const { satuanOrganisasi: fakultas } = useGetSatuanOrganisasi({
@@ -276,6 +276,15 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
           label="Kode Pos"
           placeholder="Kode Pos"
           type="number"
+          inputClassName="lg:max-w-[300px]"
+        />
+
+        <InputText
+          form={form}
+          name="link_google_map"
+          isRow
+          label="Link Google Map"
+          placeholder="Masukkan Link Google Map"
           inputClassName="lg:max-w-[300px]"
         />
       </CardInput>

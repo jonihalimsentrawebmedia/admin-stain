@@ -100,6 +100,8 @@ export const DetailProfileLPPM = () => {
                 <p>{dataLPPM?.kelurahan ?? '-'}</p>
                 <p className="text-gray-500">Kode Pos</p>
                 <p>{dataLPPM?.kode_pos ?? '-'}</p>
+                <p className="text-gray-500">Link Google Map</p>
+                <p>{dataLPPM?.link_google_map ?? '-'}</p>
               </div>
             </AccordionCustom>
 

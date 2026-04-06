@@ -24,6 +24,7 @@ export const SatuanOrganisasiResolver = z.object({
     .string()
     .regex(/^\d{5}$/, 'Kode Pos harus terdiri dari 5 digit angka')
     .optional(),
+  link_google_map: z.url().optional().nullable(),
 
   // Informasi Kontak
   telepon: z.string().optional(),
@@ -31,10 +32,10 @@ export const SatuanOrganisasiResolver = z.object({
   email: z.string().email('Format email tidak valid').optional(),
 
   // Informasi Media Sosial
-  facebook: z.string().url('URL Facebook tidak valid').optional(),
-  twitter: z.string().url('URL Twitter tidak valid').optional(),
-  instagram: z.string().url('URL Instagram tidak valid').optional(),
-  youtube: z.string().url('URL YouTube tidak valid').optional(),
+  facebook: z.url('URL Facebook tidak valid').optional(),
+  twitter: z.url('URL Twitter tidak valid').optional(),
+  instagram: z.url('URL Instagram tidak valid').optional(),
+  youtube: z.url('URL YouTube tidak valid').optional(),
   is_alamat_sama_parent: z.boolean(),
   api_dikti_id_pengguna: z.string().optional().nullable(),
   api_dikti_username: z.string().optional().nullable(),
@@ -67,6 +68,7 @@ export interface SatuanOrganisasiList {
   kecamatan: string
   kelurahan: string
   kode_pos: string
+  link_google_map: string
   singkatan_fakultas: string
   singkatan_universitas: string
 
@@ -109,7 +111,7 @@ export interface SatuanOrganisasiDetail {
   provinsi: string
   kabupaten_kota: string
   nama_parent: string
-  nama_jenjang_pendidikan:string
+  nama_jenjang_pendidikan: string
   kode_jenjang: string
   kecamatan?: string
   kelurahan?: string

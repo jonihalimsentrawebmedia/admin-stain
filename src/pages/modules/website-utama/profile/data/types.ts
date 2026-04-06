@@ -12,6 +12,7 @@ export interface IDetailUniversity {
   kecamatan: string
   kelurahan: string
   kode_pos: string
+  link_google_map: string
   telepon: string
   fax: string
   email: string

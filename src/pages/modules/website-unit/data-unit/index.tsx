@@ -71,6 +71,8 @@ export const DetailProfileUnit = () => {
                 <p>{dataUnit?.kelurahan ?? '-'}</p>
                 <p className="text-gray-500">Kode Pos</p>
                 <p>{dataUnit?.kode_pos ?? '-'}</p>
+                <p className="text-gray-500">Link Google Map</p>
+                <p>{dataUnit?.link_google_map ?? '-'}</p>
               </div>
             </AccordionCustom>
 
