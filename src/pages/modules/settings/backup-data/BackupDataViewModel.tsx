@@ -33,7 +33,7 @@ const BackupDataViewModel = () => {
     {
       name: 'download_at',
       label: 'Tanggal Download',
-      component: <div>{session ? format(session.download_at, 'dd:mm:yyyy, hh:mm') : '-'}</div>,
+      component: <div>{session ? format(session.download_at, 'dd:MM:yyyy, hh:mm') : '-'}</div>,
     },
   ]
   const queryClient = useQueryClient()
