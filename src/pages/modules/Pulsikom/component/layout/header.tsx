@@ -24,7 +24,7 @@ export function HeaderPulsikom(props: Props) {
     <header className="py-4 px-5 bg-[#E9FFF1] border-b border-green-200 flex items-center justify-between w-full">
       <div className="flex items-center gap-4">
         <Link to={'/modules'}>
-          <img src={module?.gambar} alt="gambar" className="size-14" />
+          <img src={module?.gambar} alt="gambar" className="size-14 object-cover" />
         </Link>
         <div className="flex flex-col">
           <p className="text-sm font-semibold text-primary">Manajemen Pengelolaan Website</p>
