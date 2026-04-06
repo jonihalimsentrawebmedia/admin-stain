@@ -70,6 +70,10 @@ const UniversityDetailViewModel = () => {
       label: 'Kode Pos',
       name: 'kode_pos',
     },
+    {
+      label: 'Link Google Map',
+      name: 'link_google_map',
+    },
   ]
   const fieldContact = [
     {
