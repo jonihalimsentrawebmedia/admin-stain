@@ -32,12 +32,16 @@ export const UpdatedDataUnit = () => {
   const handleSave = async (e: SatuanOrganisasiType) => {
     await AxiosClient.post('/unit/profil/draft', {
       ...e,
-    }).then((res) => {
-      if (res.data.status) {
-        toast.success(res.data.message || 'Success Pengajuan update data universitas')
-        navigate('/modules/website-unit/data-unit')
-      }
     })
+      .then((res) => {
+        if (res.data.status) {
+          toast.success(res.data.message || 'Success Pengajuan update data universitas')
+          navigate('/modules/website-unit/data-unit')
+        }
+      })
+      .catch((err) => {
+        toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
+      })
   }
 
   return (

@@ -26,4 +26,5 @@ export interface IDetailUniversity {
   updated_user: string
   nama_parent: string
   id_parent_satuan_organisasi: string
+  status_publish: string
 }

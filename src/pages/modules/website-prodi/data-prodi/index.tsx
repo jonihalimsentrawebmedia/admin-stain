@@ -4,6 +4,7 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Accordion } from '@/components/ui/accordion.tsx'
 import { AccordionCustom } from '@/components/common/accordion'
 import { useNavigate } from 'react-router-dom'
+import { ButtonCancelApproval } from './component/buttonCancel.tsx'
 
 export const DataProdiProfile = () => {
   const { dataProdi, loading } = UseGetDetailDataProdi()
@@ -17,13 +18,22 @@ export const DataProdiProfile = () => {
         <>
           <ButtonTitleGroup
             label={'Data Utama Universitas'}
-            buttonGroup={[
-              {
-                label: 'Ajukan Edit Data',
-                onClick: () => navigate('edit'),
-                type: 'edit',
-              },
-            ]}
+            buttonGroup={
+              dataProdi?.status_publish == 'DIAJUKAN_EDITOR'
+                ? [
+                    {
+                      type: 'cancel',
+                      element: <ButtonCancelApproval />,
+                    },
+                  ]
+                : [
+                    {
+                      label: 'Ajukan Edit Data',
+                      onClick: () => navigate('edit'),
+                      type: 'edit',
+                    },
+                  ]
+            }
           />
 
           <div className="flex items-start gap-5 mt-5">
