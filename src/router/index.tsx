@@ -49,6 +49,7 @@ import { PusilkomRoutes } from '@/router/pusilkom'
 import MainLayoutPulsikom from '@/pages/modules/Pulsikom/component/layout'
 import { SelectSessionPusilkom } from '@/pages/modules/Pulsikom/component/select-session'
 import PulsikomThema from '@/pages/modules/Pulsikom/component/layout/theme.tsx'
+import { SPI_ROUTES } from '@/router/SPI'
 
 export const Router = createBrowserRouter([
   {
@@ -240,6 +241,10 @@ export const Router = createBrowserRouter([
           </PulsikomThema>
         ),
         children: [...PusilkomRoutes],
+      },
+      {
+        path: 'spi',
+        children: [...SPI_ROUTES],
       },
     ],
   },

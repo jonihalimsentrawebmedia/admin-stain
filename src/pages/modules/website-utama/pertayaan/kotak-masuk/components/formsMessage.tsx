@@ -12,7 +12,7 @@ import { IoSendSharp } from 'react-icons/io5'
 interface Props {
   form: UseFormReturn<IMessageResolver>
   HandleSave: (value: IMessageResolver) => void
-  data?: IMessage
+  data?: IMessage | any
   open: boolean
   setOpen: Dispatch<SetStateAction<boolean>>
   loading: boolean

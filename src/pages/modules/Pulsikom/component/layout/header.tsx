@@ -5,6 +5,7 @@ import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/ho
 import ButtonProfile from '@/pages/modules/settings/components/button/ButtonProfile.tsx'
 import { Link } from 'react-router-dom'
 import { UseGetSessionPusilkom } from '@/pages/modules/Pulsikom/component/select-session/get-seeion.tsx'
+import { NotificationList } from '@/pages/modules/Pulsikom/component/layout/notification'
 
 interface Props {
   collapsed: boolean
@@ -14,7 +15,7 @@ interface Props {
 export function HeaderPulsikom(props: Props) {
   const { collapsed, setCollapsed } = props
 
-  const {session} = UseGetSessionPusilkom()
+  const { session } = UseGetSessionPusilkom()
   const localStorage = window.localStorage.getItem('module')
   const module: IModulesList = JSON.parse(localStorage || '{}')
 
@@ -36,6 +37,7 @@ export function HeaderPulsikom(props: Props) {
           <IconModules />
         </Link>
         <div className="flex items-center gap-4">
+          <NotificationList />
           <ButtonProfile module={module} profileUser={profileUser} />
           <button onClick={() => setCollapsed(!collapsed)}>
             <RiMenuLine />
