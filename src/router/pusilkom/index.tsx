@@ -57,6 +57,7 @@ import { HistoryEmailProgram } from '@/pages/modules/Pulsikom/training/credit-ea
 import { AdvantagePage } from '@/pages/modules/Pulsikom/advantage'
 import { CreatedAdvantage } from '@/pages/modules/Pulsikom/advantage/created'
 import { UpdatedAdvantage } from '@/pages/modules/Pulsikom/advantage/updated'
+import { SettingsBackground } from '@/pages/modules/Pulsikom/settings/background'
 
 export const PusilkomRoutes = [
   {
@@ -294,6 +295,10 @@ export const PusilkomRoutes = [
       {
         path: 'landing-page',
         element: <LandingPagePulsikom />,
+      },
+      {
+        path: 'background-image',
+        element: <SettingsBackground />,
       },
       {
         path: 'color',

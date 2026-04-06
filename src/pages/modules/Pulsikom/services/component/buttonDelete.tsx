@@ -7,6 +7,7 @@ import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import type { IServices } from '../data/types'
+import RenderHTMLContent from '@/components/common/richtext/RenderHTMLContent.tsx'
 
 interface Props {
   data: IServices
@@ -58,7 +59,7 @@ export const ButtonDeleteServices = (props: Props) => {
           <p className="text-gray-500">Urutan</p>
           <p>{data?.urutan}</p>
           <p className="text-gray-500">Deskripsi Singkat</p>
-          <p>{data?.deskripsi_singkat}</p>
+          <RenderHTMLContent content={data?.deskripsi_singkat} />
         </div>
 
         <ButtonTitleGroup
