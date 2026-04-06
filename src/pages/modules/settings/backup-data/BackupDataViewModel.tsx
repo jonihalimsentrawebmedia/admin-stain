@@ -24,7 +24,7 @@ const BackupDataViewModel = () => {
     {
       name: 'backup_at',
       label: 'Tanggal Backup',
-      component: <div>{session ? format(session.backup_at, 'dd:mm:yyyy, hh:mm') : '-'}</div>,
+      component: <div>{session ? format(session.backup_at, 'dd MM yyyy, hh:mm') : '-'}</div>,
     },
     {
       name: 'nama_download_user',
@@ -136,7 +136,8 @@ const BackupDataViewModel = () => {
     loadingBackup,
     field,
     form,
-    progress,loadingDownload
+    progress,
+    loadingDownload,
   }
 }
 
