@@ -58,6 +58,7 @@ import { AdvantagePage } from '@/pages/modules/Pulsikom/advantage'
 import { CreatedAdvantage } from '@/pages/modules/Pulsikom/advantage/created'
 import { UpdatedAdvantage } from '@/pages/modules/Pulsikom/advantage/updated'
 import { SettingsBackground } from '@/pages/modules/Pulsikom/settings/background'
+import { InboxMessage } from '@/pages/modules/Pulsikom/inbox'
 
 export const PusilkomRoutes = [
   {
@@ -187,6 +188,10 @@ export const PusilkomRoutes = [
   {
     path: 'carrier-website',
     element: <WebsiteCarrierPage />,
+  },
+  {
+    path: 'inbox',
+    element: <InboxMessage />,
   },
   {
     path: 'public-content',
