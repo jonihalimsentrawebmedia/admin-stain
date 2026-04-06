@@ -26,7 +26,7 @@ export const ColumnsAdvantage = () => {
           <img
             src={row?.original?.url_gambar}
             alt="gambar"
-            className="w-[75px] h-[75px] object-cover"
+            className="w-[50px] h-[50px] object-cover size-[50px]"
           />
         )
       },
@@ -36,7 +36,7 @@ export const ColumnsAdvantage = () => {
       header: 'Nama Keunggulan',
     },
     {
-      accessorKey: 'deskripsi_keunggulan',
+      accessorKey: 'deskripsi_singkat',
       header: 'Deskripsi Keunggulan',
     },
     {

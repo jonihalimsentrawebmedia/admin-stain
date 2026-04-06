@@ -106,6 +106,7 @@ import { InboxStoryPage } from '@/pages/modules/website-fakultas/community/alumn
 import { AlumniMessageInbox } from '@/pages/modules/website-fakultas/community/alumni/inbox/message'
 import { UserProfilePage } from '@/pages/modules/website-utama/user-profile'
 import { ChangePassword } from '@/pages/modules/website-utama/change-password'
+import { FacultyGalleryProfile } from '@/pages/modules/website-fakultas/about-faculty/gallery'
 
 export const RouterFaculty = [
   {
@@ -172,7 +173,7 @@ export const RouterFaculty = [
       },
       {
         path: 'galeri',
-        element: <></>,
+        element: <FacultyGalleryProfile />,
       },
       {
         path: 'hubungi-kami',
