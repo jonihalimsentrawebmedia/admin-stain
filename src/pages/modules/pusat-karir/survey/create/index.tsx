@@ -44,6 +44,8 @@ export const CreateSurveyData = () => {
       })
   }
 
+  console.log(activeIndex)
+
   return (
     <>
       <div className={'space-y-5'}>

@@ -23,6 +23,9 @@ export const SideSection = (props: Props) => {
       ...data,
       bagian: tempData,
     })
+    if (activeIndex > data.bagian.length - 2) {
+      setActiveIndex(data.bagian.length - 2)
+    }
   }
 
   return (
@@ -45,7 +48,13 @@ export const SideSection = (props: Props) => {
                   <p>{row?.judul}</p>
                 </div>
                 {k > 0 && (
-                  <button className={'text-red-500'} onClick={() => RemoveSection(k)}>
+                  <button
+                    className={'text-red-500'}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      RemoveSection(k)
+                    }}
+                  >
                     <FaTrash />
                   </button>
                 )}
