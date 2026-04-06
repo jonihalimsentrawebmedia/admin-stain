@@ -30,12 +30,16 @@ export const EditPageUniversity = () => {
   const handleSave = async (e: SatuanOrganisasiType) => {
     await AxiosClient.post('/website-utama/profil/draft', {
       ...e,
-    }).then((res) => {
-      if (res.data.status) {
-        toast.success(res.data.message || 'Success Pengajuan update data universitas')
-        navigate('/modules/website-utama/profile')
-      }
     })
+      .then((res) => {
+        if (res.data.status) {
+          toast.success(res.data.message || 'Success Pengajuan update data universitas')
+          navigate('/modules/website-utama/profile')
+        }
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message || 'Terjadi kesalahan, silakan coba lagi.')
+      })
   }
 
   return (

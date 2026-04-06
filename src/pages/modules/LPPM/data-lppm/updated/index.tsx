@@ -37,6 +37,8 @@ export const UpdatedDataLPPM = () => {
         toast.success(res.data.message || 'Success Pengajuan update data universitas')
         navigate('/modules/lppm/data-lppm')
       }
+    }).catch((err) => {
+      toast.error(err?.response?.data?.message || 'Gagal mengirim data')
     })
   }
 

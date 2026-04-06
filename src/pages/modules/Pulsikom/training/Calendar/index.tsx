@@ -37,7 +37,7 @@ export const CalendarTrainingCollect = () => {
           <thead>
             <tr className="bg-gray-200 text-sm">
               <th className="border p-2 text-left w-[250px] border-primary">Topik Pembahasan</th>
-              {months.map((m) => (
+              {months?.map((m) => (
                 <th key={m.key} className="border p-2 text-center border-primary">
                   {m.label}
                 </th>
@@ -47,26 +47,26 @@ export const CalendarTrainingCollect = () => {
 
           {/* ✅ BODY */}
           <tbody>
-            {data.map((training) => (
-              <React.Fragment key={training.nama_training}>
+            {data?.map((training) => (
+              <React.Fragment key={training?.nama_training}>
                 {/* 🔥 GROUP HEADER */}
                 <tr className="bg-green-700 text-white">
                   <td
-                    colSpan={months.length + 1}
+                    colSpan={months?.length + 1}
                     className="p-2 font-semibold border-primary border"
                   >
-                    {training.nama_training}
+                    {training?.nama_training}
                   </td>
                 </tr>
 
                 {/* 🔥 ROW DATA */}
-                {training.rows.map((row, i) => (
+                {training?.rows?.map((row, i) => (
                   <tr key={i} className="border-b">
-                    <td className="p-2 border border-primary">{row.topik}</td>
+                    <td className="p-2 border border-primary">{row?.topik}</td>
 
                     {months.map((m) => (
-                      <td key={m.key} className="p-2 text-center border border-primary">
-                        {row[m.key as keyof typeof row] || ''}
+                      <td key={m?.key} className="p-2 text-center border border-primary">
+                        {row[m?.key as keyof typeof row] || ''}
                       </td>
                     ))}
                   </tr>

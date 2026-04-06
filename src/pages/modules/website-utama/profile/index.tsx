@@ -4,6 +4,7 @@ import { UseGetUniversityData } from '@/pages/modules/website-utama/profile/hook
 import { AccordionCustom } from '@/components/common/accordion'
 import { Accordion } from '@/components/ui/accordion.tsx'
 import { ProfilePageSkeleton } from '@/pages/modules/website-utama/profile/components/skeleton.tsx'
+import { ButtonCancelApproval } from './components/buttonCancel'
 
 export const ProfilePageMainWebsite = () => {
   const navigate = useNavigate()
@@ -17,13 +18,22 @@ export const ProfilePageMainWebsite = () => {
         <>
           <ButtonTitleGroup
             label={'Data Utama Universitas'}
-            buttonGroup={[
-              {
-                label: 'Ajukan Edit Data',
-                onClick: () => navigate('edit'),
-                type: 'edit',
-              },
-            ]}
+            buttonGroup={
+              detailUniversity?.status_publish == 'DIAJUKAN_EDITOR'
+                ? [
+                    {
+                      type: 'cancel',
+                      element: <ButtonCancelApproval />,
+                    },
+                  ]
+                : [
+                    {
+                      label: 'Ajukan Edit Data',
+                      onClick: () => navigate('edit'),
+                      type: 'edit',
+                    },
+                  ]
+            }
           />
 
           <div className="flex items-start gap-5 mt-5">
