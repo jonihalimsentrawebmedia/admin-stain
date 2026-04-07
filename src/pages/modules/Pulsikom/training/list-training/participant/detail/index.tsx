@@ -6,6 +6,7 @@ import { ButtonCancel } from '../component/buttonCancel.tsx'
 import { ButtonReject } from '../component/buttonReject.tsx'
 import { ButtonConfirm } from '../component/buttonConfirm.tsx'
 import { format } from 'date-fns'
+import { SectionRefund } from '@/pages/modules/Pulsikom/training/list-training/participant/component/sectionRefund.tsx'
 
 export const DetailParticipant = () => {
   const { id, participant_id } = useParams()
@@ -84,6 +85,8 @@ export const DetailParticipant = () => {
           className={'object-contain h-[200px]'}
         />
       </div>
+
+      <SectionRefund data={detail} />
     </>
   )
 }

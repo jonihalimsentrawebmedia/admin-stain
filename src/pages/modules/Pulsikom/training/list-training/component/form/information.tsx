@@ -94,12 +94,11 @@ const FormInformation = (props: IProps) => {
       })
   }
 
-  console.log(form.formState.errors, 'errors')
-
   return (
     <>
       <Form {...form}>
         <form className={'flex flex-col gap-4 w-full'} onSubmit={form.handleSubmit(HandleSave)}>
+          <p className="text-xl font-semibold">1. Informasi Training</p>
           <UploadPhotoImage
             form={form}
             name={'url_gambar'}
