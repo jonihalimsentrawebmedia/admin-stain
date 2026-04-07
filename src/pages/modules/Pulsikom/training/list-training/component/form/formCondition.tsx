@@ -70,8 +70,8 @@ export const FormCondition = (props: IProps) => {
     <>
       <Form {...form}>
         <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
+          <p className="text-xl font-semibold">3. Persyaratan</p>
           <RichText form={form} name={'isi'} label={'Persyaratan'} isRow={false} />
-
           <div className="flex items-center justify-between">
             <Button
               variant={'outline'}

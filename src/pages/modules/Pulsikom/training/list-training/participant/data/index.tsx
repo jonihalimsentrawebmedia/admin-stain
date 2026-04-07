@@ -20,6 +20,8 @@ export interface IParticipant {
   atas_nama_pembayaran: string
   url_gambar_training: string
   nama_lengkap: string
+  is_batal_public: boolean
+  nama_user_batal: string
   email: string
   no_handphone: string
   institusi: string
@@ -57,6 +59,7 @@ export interface IParticipant {
 }
 
 export type ParticipantStatus = 'PENDING' | 'DIKONFIRMASI' | 'DITOLAK' | 'BATAL'
+
 export interface IMessageEmailHistory {
   id_peserta_email_riwayat: string
   id_peserta: string
@@ -564,15 +567,47 @@ export const ColumnsCancel: ColumnDef<IParticipant>[] = [
   },
 
   {
-    accessorKey: 'tanggal_bayar',
-    header: 'Waktu Bayar',
+    accessorKey: 'batal_at',
+    header: 'Tanggal Batal',
     cell: ({ row }) => {
-      const date = new Date(row.original.tanggal_bayar)
+      const data = row?.original
+      const date = data?.batal_at ? format(data.batal_at, 'dd-MM-yyyy HH:mm:ss') : ''
 
       return (
         <div className="text-sm">
-          <p>{date.toLocaleDateString('id-ID')}</p>
-          <p>{date.toLocaleTimeString('id-ID')}</p>
+          <p>
+            {date}
+            <br />
+            oleh: {data?.is_batal_public ? data?.nama_lengkap : data?.nama_user_batal} (
+            {data?.is_batal_public ? 'Peserta' : 'Admin'})
+          </p>
+        </div>
+      )
+    },
+  },
+  {
+    accessorKey: 'is_refund_pembayaran',
+    header: 'Refund',
+    cell: ({ row }) => {
+      const data = row?.original
+      return (
+        <div className="text-sm">
+          <p>
+            {data?.jumlah_refund
+              ? new Intl.NumberFormat('id-ID', {
+                  style: 'currency',
+                  currency: 'IDR',
+                  maximumFractionDigits: 0,
+                }).format(data?.jumlah_refund)
+              : ''}
+          </p>
+          <p>
+            {!data?.is_refund_pembayaran && data?.jumlah_refund === null
+              ? 'Belum'
+              : !data.is_refund_pembayaran && data.jumlah_refund === 0
+                ? 'Tiddak ada'
+                : 'Sudah Refund'}
+          </p>
         </div>
       )
     },
