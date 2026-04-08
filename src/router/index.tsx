@@ -50,6 +50,8 @@ import MainLayoutPulsikom from '@/pages/modules/Pulsikom/component/layout'
 import { SelectSessionPusilkom } from '@/pages/modules/Pulsikom/component/select-session'
 import PulsikomThema from '@/pages/modules/Pulsikom/component/layout/theme.tsx'
 import { SPI_ROUTES } from '@/router/SPI'
+import { SelectSessionSPI } from '@/pages/modules/SPI/component/select-session'
+import MainLayoutSPI from '@/pages/modules/SPI/layout'
 
 export const Router = createBrowserRouter([
   {
@@ -136,6 +138,10 @@ export const Router = createBrowserRouter([
       {
         path: 'session-pulsikom',
         element: <SelectSessionPusilkom />,
+      },
+      {
+        path: 'session-spi',
+        element: <SelectSessionSPI />,
       },
       {
         path: 'settings',
@@ -244,6 +250,7 @@ export const Router = createBrowserRouter([
       },
       {
         path: 'spi',
+        element: <MainLayoutSPI />,
         children: [...SPI_ROUTES],
       },
     ],

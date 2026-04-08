@@ -85,6 +85,10 @@ export const GetModuleUrl = (moduleSelect: {
       return `/modules/session-pulsikom?url=pulsikom&id=${moduleSelect?.id_module}`
     }
 
+    case 'spi':{
+      return `/modules/session-spi?url=spi&id=${moduleSelect?.id_module}`
+    }
+
     default:
       return `/modules/${urlStringEncode(moduleSelect?.controller ?? '')}/dashboard`
   }
