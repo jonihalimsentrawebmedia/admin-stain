@@ -1,18 +1,18 @@
 import { type ReactNode, useEffect } from 'react'
 import { useThemeColor } from '@/hooks/custom/themeColor.tsx'
-// import { UseGetAdminThemePulsikom } from '../../settings/color/hooks/index'
+import { UseGetAdminThemeSPI } from '@/pages/modules/SPI/settings/color/hooks'
 
-const PulsikomThema = ({ children }: { children: ReactNode }) => {
+const SPIThema = ({ children }: { children: ReactNode }) => {
   const { setTheme } = useThemeColor()
-  // const { color } = UseGetAdminThemePulsikom()
+  const { color } = UseGetAdminThemeSPI()
 
   useEffect(() => {
     setTheme({
-      primary: '#1fa22c',
-      'primary-foreground': '#FFFFFF',
+      primary: color?.warna_primer ?? '#1fa22c',
+      'primary-foreground': color?.warna_sekunder ?? '#FFFFFF',
     })
-  }, [])
+  }, [color])
 
   return <>{children}</>
 }
-export default PulsikomThema
+export default SPIThema

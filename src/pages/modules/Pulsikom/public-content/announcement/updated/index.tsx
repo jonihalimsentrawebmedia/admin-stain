@@ -35,7 +35,7 @@ export const UpdatedAnnouncementPulsikom = () => {
 
   const HandleSave = async (e: AnnouncementType) => {
     setLoading(true)
-    await AxiosClient.put(`/fakultas/pengumuman/${detail?.id_pengumuman}`, e)
+    await AxiosClient.put(`/pusilkom/pengumuman/${detail?.id_pengumuman}`, e)
       .then((res) => {
         if (res.data.status) {
           setLoading(false)
