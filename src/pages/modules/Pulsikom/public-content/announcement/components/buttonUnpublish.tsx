@@ -16,7 +16,7 @@ export const ButtonAnnouncementUnpublishFaculty = (data: IAnnouncement) => {
 
   const HandleSubmission = async () => {
     setLoading(true)
-    await AxiosClient.patch(`/fakultas/pengumuman/${data?.id_pengumuman}/status-publish`, {
+    await AxiosClient.patch(`/pusilkom/pengumuman/${data?.id_pengumuman}/status-publish`, {
       status_publish: 'UNPUBLISH',
     })
       .then((res) => {

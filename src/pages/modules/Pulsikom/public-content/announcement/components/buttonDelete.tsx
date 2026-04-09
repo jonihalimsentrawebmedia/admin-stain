@@ -20,7 +20,7 @@ export const ButtonDeleteAnnouncement = (data: IAnnouncement) => {
 
   const HandlerDelete = async () => {
     setLoading(true)
-    await AxiosClient.delete(`/fakultas/pengumuman/${data?.id_pengumuman}`)
+    await AxiosClient.delete(`/pusilkom/pengumuman/${data?.id_pengumuman}`)
       .then((res) => {
         if (res?.data?.status) {
           setOpen(false)
