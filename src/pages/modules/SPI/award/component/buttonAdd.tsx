@@ -9,6 +9,7 @@ import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import { Form } from '@/components/ui/form.tsx'
 import { UploadImageRatio } from '@/pages/modules/website-utama/public-content/facilities/components/uploadImageRatio.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
+import TextInput from '@/components/common/form/TextInput.tsx'
 
 export const ButtonAddAward = () => {
   const [open, setOpen] = useState(false)
@@ -55,6 +56,17 @@ export const ButtonAddAward = () => {
       >
         <Form {...form}>
           <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleAdd)}>
+            <TextInput
+              name={'urutan'}
+              form={form}
+              label={'Urutan'}
+              placeholder={'Urutan'}
+              isRow
+              isRequired
+              isNumber
+              type={'number'}
+            />
+
             <div className="flex justify-center w-full">
               <UploadImageRatio
                 label={'Gambar(Ukuran 4:2)'}

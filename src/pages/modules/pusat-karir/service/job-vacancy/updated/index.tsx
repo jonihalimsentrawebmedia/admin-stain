@@ -7,6 +7,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { UseGetDetailJobVacancy } from '@/pages/modules/pusat-karir/service/job-vacancy/hoooks'
+import { format } from 'date-fns'
 
 export const UpdatedJobVacancy = () => {
   const { id } = useParams()
@@ -19,6 +20,12 @@ export const UpdatedJobVacancy = () => {
     if (jobVacancy) {
       form.reset({
         ...(jobVacancy as any),
+        tgl_buka_pekerjaan: jobVacancy.tgl_buka_pekerjaan
+          ? format(jobVacancy?.tgl_buka_pekerjaan, 'yyyy-MM-dd')
+          : '',
+        tgl_tutup_pekerjaan: jobVacancy.tgl_tutup_pekerjaan
+          ? format(jobVacancy?.tgl_tutup_pekerjaan, 'yyyy-MM-dd')
+          : '',
         lowongan_internal: jobVacancy.lowongan_internal,
         id_mitra_kerja: jobVacancy.lowongan_internal
           ? jobVacancy.nama_mitra_kerja
@@ -33,6 +40,7 @@ export const UpdatedJobVacancy = () => {
 
   const handleSave = async (e: JobVacancyType) => {
     setLoading(true)
+    console.log(e?.tgl_buka_pekerjaan)
     await AxiosClient.put(`/pusat-karir/lowongan-pekerjaan/${id}`, {
       ...e,
       tgl_buka_pekerjaan: new Date(e.tgl_buka_pekerjaan).toISOString(),
@@ -54,7 +62,12 @@ export const UpdatedJobVacancy = () => {
   return (
     <>
       <div className="space-y-5">
-        <FormJobVacancy label={'Ubah Data Lowongan Pekerjaan'} form={form} loading={loading} HandleSave={handleSave} />
+        <FormJobVacancy
+          label={'Ubah Data Lowongan Pekerjaan'}
+          form={form}
+          loading={loading}
+          HandleSave={handleSave}
+        />
       </div>
     </>
   )
