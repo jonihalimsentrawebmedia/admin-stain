@@ -7,12 +7,12 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { Button } from '@/components/ui/button.tsx'
 import { FaGear } from 'react-icons/fa6'
-import { UseGetSessionFaculty } from '@/pages/modules/website-fakultas/component/select-session/get-seeion.tsx'
+import { UseGetSessionSPI } from './get-seeion.tsx'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import { Form } from '@/components/ui/form.tsx'
 
-export const DialogSessionFaculty = () => {
+export const DialogSessionSPI = () => {
   const [open, setOpen] = useState(false)
 
   const [parentId, setParentId] = useState({
@@ -30,13 +30,13 @@ export const DialogSessionFaculty = () => {
     id_parent: parentId?.id_university,
     id_module: id_module ?? '',
   })
-  const { session } = UseGetSessionFaculty()
+  const { session } = UseGetSessionSPI()
 
   useEffect(() => {
     if (session) {
       form.reset({
         id_university: session?.id_universitas,
-        id_fakultas: session?.id_fakultas,
+        id_unit: session?.id_unit,
       })
     }
   }, [session])
@@ -45,7 +45,7 @@ export const DialogSessionFaculty = () => {
   const form = useForm()
 
   const HandleSaveSession = async (value: any) => {
-    await AxiosClient.post('/fakultas/user-session', {
+    await AxiosClient.post('/spi/user-session', {
       id_universitas: value?.id_university,
       id_fakultas: value?.id_fakultas,
     })
