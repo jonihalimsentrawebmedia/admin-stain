@@ -9,6 +9,7 @@ import { UploadImageRatio } from '@/pages/modules/website-utama/public-content/f
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import { HiPencil } from 'react-icons/hi'
 import type { IAwardList } from '@/pages/modules/SPI/award/hooks'
+import TextInput from '@/components/common/form/TextInput.tsx'
 
 interface Props {
   data: IAwardList
@@ -26,6 +27,7 @@ export const ButtonEditAward = (props: Props) => {
     if (data) {
       form.reset({
         url_gambar: data.url_gambar,
+        urutan: data.urutan,
       })
     }
   }, [data])
@@ -67,6 +69,17 @@ export const ButtonEditAward = (props: Props) => {
       >
         <Form {...form}>
           <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleAdd)}>
+            <TextInput
+              name={'urutan'}
+              form={form}
+              label={'Urutan'}
+              placeholder={'Urutan'}
+              isRow
+              isRequired
+              isNumber
+              type={'number'}
+            />
+
             <div className="mx-auto w-full flex justify-center">
               <UploadImageRatio
                 label={'Gambar(Ukuran 4:2)'}
