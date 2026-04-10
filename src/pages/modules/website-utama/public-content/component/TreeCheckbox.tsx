@@ -1,6 +1,5 @@
-// TreeCheckbox.tsx
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-
+// TreeCheckbox.tsx (lengkap dengan Select All)
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { type Control, Controller, type FieldValues, type Path } from 'react-hook-form'
 
 export interface TreeNode {
@@ -17,8 +16,8 @@ interface NodeMapValue {
 
 export interface SelectionMetadata {
   selectedIds: string[]
-  parentIds: string[] // id dari node yang memiliki children dan terpilih
-  childIds: string[] // id dari node tanpa children yang terpilih
+  parentIds: string[]
+  childIds: string[]
   allRelations: Record<string, { parentId: string | null; childrenIds: string[] }>
 }
 
@@ -86,57 +85,7 @@ function buildMetadata(
   return { selectedIds, parentIds, childIds, allRelations }
 }
 
-// ==================== Komponen Node Internal ====================
-interface TreeCheckboxNodeProps {
-  node: TreeNode
-  state: { checked: boolean; indeterminate: boolean }
-  onToggle: (id: string, checked: boolean) => void
-  level?: number
-}
-
-const TreeCheckboxNode: React.FC<TreeCheckboxNodeProps> = ({
-  node,
-  state,
-  onToggle,
-  level = 0,
-}) => {
-  const inputRef = useRef<HTMLInputElement>(null)
-
-  useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.indeterminate = state.indeterminate
-    }
-  }, [state.indeterminate])
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onToggle(node.id_satuan_organisasi, e.target.checked)
-  }
-
-  return (
-    <div style={{ marginLeft: level * 24 }}>
-      <label style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
-        <input type="checkbox" ref={inputRef} checked={state.checked} onChange={handleChange} />
-        <span>{node.nama}</span>
-      </label>
-      {node.children?.map((child) => (
-        <TreeCheckboxNode
-          key={child.id_satuan_organisasi}
-          node={child}
-          state={{
-            checked: false,
-            indeterminate: false,
-          }}
-          onToggle={function (id: string, checked: boolean): void {
-            console.log('checked', checked)
-            console.log('id', id)
-          }}
-        />
-      ))}
-    </div>
-  )
-}
-
-// Versi perbaikan: kita render dengan menyediakan statesMap untuk semua node
+// ==================== Komponen Render Tree ====================
 const RenderTree: React.FC<{
   nodes: TreeNode[]
   statesMap: Map<string, { checked: boolean; indeterminate: boolean }>
@@ -175,24 +124,28 @@ const RenderTree: React.FC<{
   )
 }
 
-// ==================== Komponen Utama ====================
+// ==================== Komponen Utama dengan Select All ====================
 export interface TreeCheckboxProps {
-  data: TreeNode[] // data tree
-  selectedIds?: string[] // untuk controlled component
+  data: TreeNode[]
+  selectedIds?: string[]
   onChange?: (selectedIds: string[], metadata: SelectionMetadata) => void
+  showSelectAll?: boolean // tambahan: tampilkan checkbox "Pilih Semua"
+  selectAllLabel?: string // tambahan: label untuk select all, default "Pilih Semua"
 }
 
 export const TreeCheckbox: React.FC<TreeCheckboxProps> = ({
   data,
   selectedIds: externalSelectedIds,
   onChange,
+  showSelectAll = false,
+  selectAllLabel = 'Pilih Semua',
 }) => {
   const nodeMap = useMemo(() => buildNodeMap(data), [data])
   const [internalSelectedSet, setInternalSelectedSet] = useState<Set<string>>(
     () => new Set(externalSelectedIds || [])
   )
 
-  // Sinkronisasi dengan external selectedIds jika diperlukan
+  // Sinkronisasi dengan external selectedIds
   useEffect(() => {
     if (externalSelectedIds !== undefined) {
       setInternalSelectedSet(new Set(externalSelectedIds))
@@ -203,6 +156,37 @@ export const TreeCheckbox: React.FC<TreeCheckboxProps> = ({
     () => computeStates(internalSelectedSet, nodeMap),
     [internalSelectedSet, nodeMap]
   )
+
+  // Ambil semua ID node (flatten)
+  const allNodeIds = useMemo(() => Array.from(nodeMap.keys()), [nodeMap])
+
+  // Status untuk checkbox "Select All"
+  const selectAllState = useMemo(() => {
+    if (allNodeIds.length === 0) return { checked: false, indeterminate: false }
+    let checkedCount = 0
+    for (const id of allNodeIds) {
+      if (internalSelectedSet.has(id)) checkedCount++
+    }
+    const allChecked = checkedCount === allNodeIds.length
+    const someChecked = checkedCount > 0 && !allChecked
+    return { checked: allChecked, indeterminate: someChecked }
+  }, [internalSelectedSet, allNodeIds])
+
+  // Handler untuk toggle select all
+  const handleSelectAll = useCallback(() => {
+    const newSelected = new Set<string>()
+    if (!selectAllState.checked) {
+      // Pilih semua node
+      for (const id of allNodeIds) {
+        newSelected.add(id)
+      }
+    }
+    // Jika sudah checked, biarkan kosong (uncheck semua)
+    setInternalSelectedSet(newSelected)
+    const selectedIdsArray = Array.from(newSelected)
+    const metadata = buildMetadata(selectedIdsArray, nodeMap)
+    onChange?.(selectedIdsArray, metadata)
+  }, [selectAllState.checked, allNodeIds, nodeMap, onChange])
 
   const toggleNode = useCallback(
     (nodeId: string, isChecked: boolean) => {
@@ -236,7 +220,7 @@ export const TreeCheckbox: React.FC<TreeCheckboxProps> = ({
         }
         removeRecursive(nodeId)
 
-        // Update ancestors: jika ancestor terpilih, hapus karena tidak semua children terpilih
+        // Update ancestors: hapus ancestor yang terpilih
         let parentId = item.parentId
         while (parentId !== null) {
           if (newSelected.has(parentId)) newSelected.delete(parentId)
@@ -253,16 +237,34 @@ export const TreeCheckbox: React.FC<TreeCheckboxProps> = ({
   )
 
   return (
-    <div className={'w-fit'}>
+    <div className="w-fit">
+      {showSelectAll && (
+        <div style={{ marginBottom: 16 }}>
+          <label style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <input
+              type="checkbox"
+              checked={selectAllState.checked}
+              ref={(el) => {
+                if (el) el.indeterminate = selectAllState.indeterminate
+              }}
+              onChange={handleSelectAll}
+            />
+            <span>{selectAllLabel}</span>
+          </label>
+        </div>
+      )}
       <RenderTree nodes={data} statesMap={statesMap} onToggle={toggleNode} />
     </div>
   )
 }
 
-interface TreeCheckboxControllerProps<TFieldValues extends FieldValues> {
+// ==================== React Hook Form Controller ====================
+interface TreeCheckboxControllerProps<TFieldValues extends FieldValues> extends Omit<
+  TreeCheckboxProps,
+  'selectedIds' | 'onChange'
+> {
   name: Path<TFieldValues>
   control: Control<TFieldValues>
-  data: TreeNode[]
   rules?: any
 }
 
@@ -271,6 +273,7 @@ export function TreeCheckboxController<TFieldValues extends FieldValues>({
   control,
   data,
   rules,
+  ...restProps
 }: TreeCheckboxControllerProps<TFieldValues>) {
   return (
     <Controller
@@ -281,9 +284,8 @@ export function TreeCheckboxController<TFieldValues extends FieldValues>({
         <TreeCheckbox
           data={data}
           selectedIds={value}
-          onChange={(selectedIds) => {
-            onChange(selectedIds)
-          }}
+          onChange={(selectedIds) => onChange(selectedIds)}
+          {...restProps}
         />
       )}
     />

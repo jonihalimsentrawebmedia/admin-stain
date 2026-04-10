@@ -10,6 +10,9 @@ import TextInput from '@/components/common/form/TextInput.tsx'
 import { UploadMultipleImages } from '@/pages/modules/website-utama/public-content/news/components/multipleUploadImg.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { useNavigate } from 'react-router-dom'
+import { Separator } from '@/components/ui/separator.tsx'
+import { TreeCheckboxController } from '@/pages/modules/website-utama/public-content/component/TreeCheckbox.tsx'
+import { UseGetTreeData } from '@/pages/modules/website-utama/public-content/component/hooks.tsx'
 
 interface Props {
   form: UseFormReturn<INewsTypeForm>
@@ -20,6 +23,7 @@ interface Props {
 export const FormNewsContent = (props: Props) => {
   const { form, HandleSave, loading } = props
   const { newsCategory, loading: laod1 } = useGetNewsCategory({ isGetAll: true })
+  const { treeNodes } = UseGetTreeData()
 
   const navigate = useNavigate()
 
@@ -112,6 +116,21 @@ export const FormNewsContent = (props: Props) => {
             placeholder={'Gambar Tambahan'}
             maxFiles={10}
           />
+
+          <Separator />
+
+          <div className="p-4 bg-white w-full space-y-4">
+            <p className="text-2xl font-semibold text-primary">Unit Kerja Terkait</p>
+            <TreeCheckboxController
+              name="list_unit"
+              control={form.control}
+              data={treeNodes}
+              rules={{ required: 'Pilih minimal satu' }}
+              showSelectAll
+              selectAllLabel={'Pilih Semua'}
+            />
+          </div>
+
           <ButtonTitleGroup
             label={''}
             buttonGroup={[

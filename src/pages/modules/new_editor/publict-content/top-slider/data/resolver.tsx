@@ -6,7 +6,7 @@ export const TopSliderResolver = z.object({
   url: z.string().optional().nullable(),
   is_aktif_sampai_at: z.boolean(),
   aktif_sampai_at: z.string().optional().nullable(),
-  unit_kerja_terkait: z.array(z.string().optional().nullable()).optional().nullable(),
+  list_unit: z.array(z.string().optional().nullable()).optional().nullable(),
 })
 
 export type TopSliderType = z.infer<typeof TopSliderResolver>
