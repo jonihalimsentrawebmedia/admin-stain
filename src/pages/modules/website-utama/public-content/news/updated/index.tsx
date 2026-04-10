@@ -28,6 +28,7 @@ export const UpdatedNewsPage = () => {
           keterangan: row.keterangan,
         })
       })
+      const tempUnit = detailNews?.list_unit_terkait?.map((row) => row?.id_unit)
 
       form.reset({
         gambar: detailNews?.gambar,
@@ -38,6 +39,7 @@ export const UpdatedNewsPage = () => {
         penulis: detailNews?.penulis,
         tanggal_berita: format(detailNews?.tanggal_berita, 'yyyy-MM-dd'),
         berita_gambar_tambahan: temp,
+        list_unit: tempUnit as any,
       })
     }
   }, [detailNews])

@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
+import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { Plus } from 'lucide-react'
 import {
   UseGetApprovedList,
@@ -14,6 +14,8 @@ import { Link, useLocation } from 'react-router-dom'
 import { SelectBasic } from '@/components/common/select/basic.tsx'
 import type { Mode } from '@/pages/modules/website-utama/beranda/types'
 import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/hooks/getProfile.tsx'
+import { FiExternalLink } from 'react-icons/fi'
+import { UseGetSession } from '@/pages/modules/website-utama/session'
 
 export default function DashboardAdmin() {
   const [tabsName, setTabsName] = useState('DIAJUKAN_EDITOR')
@@ -34,6 +36,7 @@ export default function DashboardAdmin() {
   const { status } = UseGetTotalVisitor()
   const { profileUser } = UseGetUserProfile()
   const { approvedList } = UseGetApprovedList(tabsName ?? '')
+  const { session } = UseGetSession()
 
   const TabsList = [
     {
@@ -83,9 +86,22 @@ export default function DashboardAdmin() {
 
   return (
     <div className="min-h-screen space-y-6">
-      <h1 className="text-2xl font-semibold">
-        Selamat Datang <span className="text-primary">{profileUser?.nama_lengkap}</span>
-      </h1>
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-semibold">
+          Selamat Datang <span className="text-primary">{profileUser?.nama_lengkap}</span>
+        </h1>
+        <Link
+          to={session?.domain ? `https://${session?.domain}` : '#'}
+          target={'_blank'}
+          className={'flex flex-col gap-1 items-center justify-center'}
+        >
+          <Button variant={'outline'} className={'border-primary text-primary hover:text-primary'}>
+            <FiExternalLink />
+            Buka Website
+          </Button>
+          <p className="text-primary text-sm">{session?.domain}</p>
+        </Link>
+      </div>
 
       {/* Statistik */}
       <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-6 gap-4">

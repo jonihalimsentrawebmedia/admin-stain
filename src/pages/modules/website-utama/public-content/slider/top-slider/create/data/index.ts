@@ -48,6 +48,12 @@ export type IListSlider = {
   nama_level: string
   nama_user_created: string
   nama_user_updated: string
+  list_unit_terkait: {
+    id_slider_atas_terkait: string
+    id_slider_atas_utama: string
+    id_unit: string
+    nama_unit: string
+  }[]
 }
 
 export type IListBottomSlider = Omit<IListSlider, 'id_slider_atas'> & {

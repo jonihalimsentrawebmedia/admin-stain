@@ -28,3 +28,11 @@ export const UseGetTreeData = () => {
 
   return { loading, treeNodes }
 }
+
+export interface list_unit_terkait {
+  id_slider_atas_terkait: string
+  id_slider_atas_utama: string
+  id_unit: string
+  nama_unit: string
+}
+;[]

@@ -7,8 +7,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useNavigate, useParams } from 'react-router-dom'
 import { UseGetAgendaDetail } from '@/pages/modules/website-utama/public-content/agenda/hooks'
-import { format, parseISO } from 'date-fns'
-import { TimeStampLocal } from '@/utils/helper.tsx'
+import { format } from 'date-fns'
 
 export const UpdatedAgendaPage = () => {
   const [loading, setLoading] = useState(false)
@@ -17,6 +16,7 @@ export const UpdatedAgendaPage = () => {
 
   useEffect(() => {
     if (detailAgenda) {
+      const tempUnit = detailAgenda?.list_unit_terkait?.map((row) => row?.id_unit)
       form.reset({
         penulis: detailAgenda?.penulis,
         isi_agenda: detailAgenda?.isi_agenda,
@@ -24,8 +24,13 @@ export const UpdatedAgendaPage = () => {
         gambar: detailAgenda?.gambar,
         keterangan_gambar: detailAgenda?.keterangan_gambar,
         lokasi_kegiatan: detailAgenda?.lokasi_kegiatan,
-        waktu_mulai: format(parseISO(detailAgenda?.waktu_mulai), "yyyy-MM-dd'T'HH:mm"),
-        waktu_selesai: format(parseISO(detailAgenda?.waktu_selesai), "yyyy-MM-dd'T'HH:mm"),
+        list_unit: tempUnit,
+        waktu_mulai: detailAgenda?.waktu_mulai
+          ? format(detailAgenda?.waktu_mulai, 'yyyy-MM-dd HH:mm')
+          : '',
+        waktu_selesai: detailAgenda?.waktu_selesai
+          ? format(detailAgenda?.waktu_selesai, 'yyyy-MM-dd HH:mm')
+          : '',
       })
     }
   }, [detailAgenda])
@@ -40,8 +45,8 @@ export const UpdatedAgendaPage = () => {
     setLoading(true)
     await AxiosClient.put(`/website-utama/agenda/${detailAgenda?.id_agenda}`, {
       ...e,
-      waktu_mulai: TimeStampLocal(e?.waktu_mulai),
-      waktu_selesai: e?.waktu_selesai ? TimeStampLocal(e?.waktu_selesai) : null,
+      waktu_mulai: new Date(e.waktu_mulai).toISOString(),
+      waktu_selesai: e?.waktu_selesai ? new Date(e.waktu_selesai).toISOString() : null,
     })
       .then((res) => {
         if (res.data.status) {
