@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button.tsx'
 import { useState } from 'react'
 import AxiosClient from '@/provider/axios.tsx'
-import type { INewsDetail } from '@/pages/modules/website-utama/public-content/news/data'
+import type { INewsDetail } from '../data/index'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import {

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { FaTrash } from 'react-icons/fa'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
-import type { INewsDetail } from '@/pages/modules/website-utama/public-content/news/data'
+import type { INewsDetail } from '../data/index.tsx'
 import {
   Carousel,
   CarouselContent,

@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { useQueryClient } from '@tanstack/react-query'
-import type { IAnnouncement } from '@/pages/modules/website-utama/public-content/announcement/data'
+import type { IAnnouncement } from '../data/index'
 
 export const ButtonSubmissionAnnouncement = (data: IAnnouncement) => {
   const [open, setOpen] = useState(false)
