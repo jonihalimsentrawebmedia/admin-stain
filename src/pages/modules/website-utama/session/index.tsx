@@ -3,9 +3,10 @@ import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
 interface session {
-  singkatan:string
-  id_satuan_organisasi:string
-  nama_satuan_organisasi:string
+  singkatan: string
+  id_satuan_organisasi: string
+  nama_satuan_organisasi: string
+  domain: string
 }
 
 export const UseGetSession = () => {

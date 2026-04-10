@@ -1,3 +1,5 @@
+import type { list_unit_terkait } from '@/pages/modules/website-utama/public-content/component/hooks.tsx'
+
 export interface IDocumentAnnouncement {
   id_pengumuman_dokumen: number
   url_dokumen: string
@@ -50,6 +52,8 @@ export interface IAnnouncement {
   nama_satuan_organisasi: string
 
   dokumens: IDocumentAnnouncement[]
+
+  list_unit_terkait:list_unit_terkait[]
 }
 
 export interface IstatusAnnouncement {

@@ -7,6 +7,9 @@ import { UploadImageWitAlt } from '@/pages/modules/website-utama/public-content/
 import TextAreaInput from '@/components/common/form/textAreaInput.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import { RichText } from '@/components/common/richtext'
+import { Separator } from '@/components/ui/separator.tsx'
+import { TreeCheckboxController } from '@/pages/modules/website-utama/public-content/component/TreeCheckbox.tsx'
+import { UseGetTreeData } from '@/pages/modules/website-utama/public-content/component/hooks.tsx'
 
 interface props {
   loading: boolean
@@ -16,7 +19,10 @@ interface props {
 
 export const AgendaForm = (props: props) => {
   const { form, HandleSave, loading } = props
+  const { treeNodes } = UseGetTreeData()
+
   const navigate = useNavigate()
+
   return (
     <>
       <Form {...form}>
@@ -97,6 +103,20 @@ export const AgendaForm = (props: props) => {
             isRow
             isRequired
           />
+
+          <Separator />
+
+          <div className="p-4 bg-white w-full space-y-4">
+            <p className="text-2xl font-semibold text-primary">Unit Kerja Terkait</p>
+            <TreeCheckboxController
+              name="list_unit"
+              control={form.control}
+              data={treeNodes}
+              rules={{ required: 'Pilih minimal satu' }}
+              showSelectAll
+              selectAllLabel={'Pilih Semua'}
+            />
+          </div>
 
           <ButtonTitleGroup
             label={''}

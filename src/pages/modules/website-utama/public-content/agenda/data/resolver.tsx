@@ -9,6 +9,7 @@ export const AgendaResolver = z.object({
   waktu_mulai: z.string({ error: 'Waktu Mulai wajib di isi' }),
   waktu_selesai: z.string().optional().nullable(),
   lokasi_kegiatan: z.string().optional().nullable(),
+  list_unit: z.array(z.string().optional().nullable()).optional().nullable(),
   isi_agenda: z
     .string({ error: 'Isi Agenda wajib di isi' })
     .min(1, { error: 'Isi Agenda minimal 1 karakter' }),

@@ -1,4 +1,5 @@
 import type { StatusPublish } from '@/pages/modules/website-prodi/public-content/news/data/types.ts'
+import type { list_unit_terkait } from '@/pages/modules/website-utama/public-content/component/hooks.tsx'
 
 export interface INewsDetail {
   id_berita: string
@@ -34,6 +35,7 @@ export interface INewsDetail {
   berita_gambar_tambahan: IImageNewsMore[] // kalau ada struktur, kasihkan, nanti kubuatin
   nama_kategori_berita: string
 
+  list_unit_terkait: list_unit_terkait[]
   nama_user_created: string
   nama_user_updated: string
   nama_disetujui: string

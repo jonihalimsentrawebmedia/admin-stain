@@ -1,3 +1,5 @@
+import type { list_unit_terkait } from '@/pages/modules/website-utama/public-content/component/hooks.tsx'
+
 export interface IStatusAgenda {
   DIAJUKAN_EDITOR: number
   DISETUJUI_EDITOR: number
@@ -27,6 +29,7 @@ export interface IAgendaDetail {
   penulis: string
   status: string
   status_publish: string
+  list_unit_terkait: list_unit_terkait[]
 
   diajukan_at: string | null
   ditolak_at: string | null
@@ -50,7 +53,7 @@ export interface IAgendaDetail {
   updated_user: string
 
   nama_user_created: string
- 
+
   nama_user_updated: string
 
   nama_disetujui: string
@@ -65,5 +68,5 @@ export interface IAgendaDetail {
   level_ditolak: string
   level_proses: string
   level_unpublished: string
-  nama_satuan_organisasi:string
+  nama_satuan_organisasi: string
 }

@@ -15,11 +15,13 @@ export const UpdatedAnnouncementPage = () => {
 
   useEffect(() => {
     if (detailAnnouncement) {
+      const tempUnit = detailAnnouncement?.list_unit_terkait?.map((row) => row?.id_unit)
       form.reset({
         penulis: detailAnnouncement?.penulis,
         isi_pengumuman: detailAnnouncement?.isi_pengumuman,
         judul_pengumuman: detailAnnouncement?.judul_pengumuman,
         dokumens: detailAnnouncement?.dokumens,
+        list_unit: tempUnit,
       })
     }
   }, [detailAnnouncement])
