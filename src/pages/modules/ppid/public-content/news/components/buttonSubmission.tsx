@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { INewsDetail } from '@/pages/modules/website-utama/public-content/news/data'
+import type { INewsDetail } from '../data/index'
 import { MdSend } from 'react-icons/md'
 import { Button } from '@/components/ui/button.tsx'
 import AxiosClient from '@/provider/axios.tsx'

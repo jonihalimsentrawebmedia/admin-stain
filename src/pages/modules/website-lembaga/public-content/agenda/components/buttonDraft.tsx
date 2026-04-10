@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { useQueryClient } from '@tanstack/react-query'
-import type { IAgendaDetail } from '@/pages/modules/website-utama/public-content/agenda/data'
+import type { IAgendaDetail } from '../data/index'
 import { format } from 'date-fns'
 import { IconCancel } from '@/components/common/icon'
 
