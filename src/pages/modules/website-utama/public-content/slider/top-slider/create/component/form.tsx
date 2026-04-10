@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom'
 import { RichText } from '@/components/common/richtext'
 import { SwitchInput } from '@/components/common/form/switchInput.tsx'
 import type { TopSliderType } from '@/pages/modules/new_editor/publict-content/top-slider/data/resolver.tsx'
+import { UseGetTreeData } from '@/pages/modules/website-utama/public-content/component/hooks.tsx'
+import { TreeCheckboxController } from '@/pages/modules/website-utama/public-content/component/TreeCheckbox.tsx'
 
 interface Props {
   form: UseFormReturn<TopSliderType>
@@ -17,6 +19,9 @@ interface Props {
 export const FormCreateSliderOnTop = (props: Props) => {
   const { form, HandleSave, position = 'Atas' } = props
   const navigate = useNavigate()
+  const { treeNodes } = UseGetTreeData()
+
+  console.log(form.watch('unit_kerja_terkait') as any)
 
   return (
     <>
@@ -80,6 +85,15 @@ export const FormCreateSliderOnTop = (props: Props) => {
               inputClassName={'w-1/2 bg-white'}
               isRow
             />
+
+            <div className="p-4 bg-white w-full">
+              <TreeCheckboxController
+                name="unit_kerja_terkait"
+                control={form.control}
+                data={treeNodes}
+                rules={{ required: 'Pilih minimal satu' }}
+              />
+            </div>
 
             <ButtonTitleGroup
               label={''}

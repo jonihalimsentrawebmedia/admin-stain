@@ -28,7 +28,7 @@ const ModulesView = () => {
       }}
       className={`w-screen min-h-full bg-cover lg:bg-fixed relative flex justify-center lg:items-center items-start lg:py-6 overflow-y-auto`}
     >
-      <Card className="max-w-7xl w-full backdrop-blur-md bg-white/40">
+      <Card className="max-w-6xl w-full backdrop-blur-md bg-white/40">
         <CardContent className="flex flex-col gap-4">
           <div className="bg-green-800 rounded-lg overflow-hidden">
             <div
@@ -69,7 +69,7 @@ const ModulesView = () => {
           <div className="rounded-lg gap-4 md:gap-0 grid grid-cols-12">
             <div className="col-span-12 lg:col-span-8 flex flex-col gap-4 p-4 rounded-lg lg:rounded-none lg:rounded-l-lg bg-white">
               <div className="font-bold text-neutral text-xl">Daftar Modul</div>
-              <div className="grid w-full text-center grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 lg:h-full max-h-[300px] overflow-auto">
+              <div className="grid w-full text-center grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5 lg:h-full max-h-[400px] overflow-auto">
                 {modules.map((item, k) => (
                   <div
                     key={k}
@@ -81,7 +81,7 @@ const ModulesView = () => {
                     <div className="mx-auto mb-2">
                       <img src={item?.gambar} className={'size-10 object-contain'} />
                     </div>
-                    <div className="text-[14px]">{item.nama_module}</div>
+                    <div className="text-[12px]">{item.nama_module}</div>
                   </div>
                 ))}
               </div>

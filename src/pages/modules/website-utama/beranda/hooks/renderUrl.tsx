@@ -16,13 +16,13 @@ export const RenderUrl = (url: string, id: string) => {
       return `agenda/detail/${id}`
     }
     case 'slider_bawah': {
-      return `slider/bottom-slider/detail/${id}`
+      return `slider/bottom-slider`
     }
     case 'promosi': {
       return `promotion/detail/${id}`
     }
     case 'slider_atas': {
-      return `slider/top-slider/detail/${id}`
+      return `slider/top-slider`
     }
     case 'fasilitas': {
       return `facilities/detail/${id}`
