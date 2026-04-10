@@ -25,6 +25,7 @@ export const UpdatedTopSliderPage = () => {
         gambar: detailSlider.gambar,
         is_aktif_sampai_at: detailSlider?.is_aktif_sampai_at,
         aktif_sampai_at: format(detailSlider?.aktif_sampai_at, 'yyyy-MM-dd'),
+
       })
     }
   }, [detailSlider])
