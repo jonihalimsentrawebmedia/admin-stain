@@ -9,6 +9,7 @@ export interface ISessionLPPM {
   nama_universitas: string
   singkatan: string
   singkatan_universitas: string
+  domain: string
 }
 
 export const UseGetSessionLPPM = () => {

@@ -12,6 +12,7 @@ export interface ISessionProdi {
   id_prodi: string
   nama_prodi: string
   singkatan: string
+  domain: string
 }
 
 export const UseGetProdiSession = () => {
