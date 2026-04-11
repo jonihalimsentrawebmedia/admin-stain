@@ -107,9 +107,14 @@ export const PublishedStatusColumns = () => {
       accessorKey: 'action',
       header: 'Aksi',
       cell: ({ row }) => {
+        const data = row?.original
         return (
           <>
-            <ButtonAnnouncementUnpublishUnit {...row?.original} />
+            {data?.is_content_website_utama ? (
+              <p>Konten Website Utama</p>
+            ) : (
+              <ButtonAnnouncementUnpublishUnit {...row?.original} />
+            )}
           </>
         )
       },

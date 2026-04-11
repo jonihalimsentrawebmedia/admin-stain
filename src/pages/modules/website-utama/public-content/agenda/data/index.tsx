@@ -30,6 +30,7 @@ export interface IAgendaDetail {
   status: string
   status_publish: string
   list_unit_terkait: list_unit_terkait[]
+  is_content_website_utama: boolean
 
   diajukan_at: string | null
   ditolak_at: string | null

@@ -66,7 +66,7 @@ export const UpdatedNewsPage = () => {
 
   return (
     <>
-      <FormNewsContent loading={loading} form={form} HandleSave={HandleSubmit} />
+      <FormNewsContent is_website_main loading={loading} form={form} HandleSave={HandleSubmit} />
     </>
   )
 }

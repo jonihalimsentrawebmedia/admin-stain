@@ -106,7 +106,16 @@ export const PublishedStatusColumns = () => {
       accessorKey: 'status_publish',
       header: 'Aksi',
       cell: ({ row }) => {
-        return <ButtonUnpublishAgendaUnit {...row?.original} />
+        const data = row?.original
+        return (
+          <>
+            {data?.is_content_website_utama ? (
+              <p className={'text-primary text-sm font-semibold'}>Konten Website Utama</p>
+            ) : (
+              <ButtonUnpublishAgendaUnit {...row?.original} />
+            )}
+          </>
+        )
       },
     },
     {

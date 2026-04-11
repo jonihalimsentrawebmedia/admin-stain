@@ -4,4 +4,5 @@ export interface LandingList {
   gambar_url: string
   gambar_key: string
   status: boolean
+  is_content_website_utama: boolean
 }

@@ -46,18 +46,20 @@ export const AnnouncementProdiDetailUnit = () => {
                   <p className="text-blue-600 font-semibold">
                     {detail?.status_publish.split('_').join(' ')}
                   </p>
-                  <Button
-                    size={'sm'}
-                    onClick={() =>
-                      navigate(
-                        `/modules/website-prodi/public-content/announcement/edit/${detail?.id_pengumuman}`
-                      )
-                    }
-                    className={'border-primary text-primary hover:text-primary'}
-                    variant={'outline'}
-                  >
-                    <HiPencil /> Edit Data
-                  </Button>
+                  {detail?.status_publish !== 'PUBLISHED' && (
+                    <Button
+                      size={'sm'}
+                      onClick={() =>
+                        navigate(
+                          `/modules/website-prodi/public-content/announcement/edit/${detail?.id_pengumuman}`
+                        )
+                      }
+                      className={'border-primary text-primary hover:text-primary'}
+                      variant={'outline'}
+                    >
+                      <HiPencil /> Edit Data
+                    </Button>
+                  )}
                 </div>
               ),
             },
@@ -133,12 +135,14 @@ export const AnnouncementProdiDetailUnit = () => {
               />
             </div>
 
-            <iframe
-              src={document?.value ?? ''}
-              width="100%"
-              height="950px"
-              style={{ border: 'none' }}
-            />
+            {document?.value && (
+              <iframe
+                src={document?.value}
+                width="100%"
+                height="950px"
+                style={{ border: 'none' }}
+              />
+            )}
           </div>
         </div>
       </div>

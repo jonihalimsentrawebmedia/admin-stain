@@ -101,7 +101,16 @@ export const PublishColumns = () => {
       accessorKey: 'action',
       header: 'Aksi',
       cell: ({ row }) => {
-        return <ButtonUnpublishNews {...row?.original} />
+        const data = row?.original
+        return (
+          <>
+            {data?.is_content_website_utama ? (
+              <p>Konten Website Utama</p>
+            ) : (
+              <ButtonUnpublishNews {...row?.original} />
+            )}
+          </>
+        )
       },
     },
     {

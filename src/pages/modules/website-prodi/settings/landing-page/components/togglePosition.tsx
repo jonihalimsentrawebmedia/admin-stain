@@ -39,7 +39,11 @@ export const TogglePosition = (props: IProps) => {
 
   return (
     <>
-      <Switch checked={status} onCheckedChange={handleCheckedChange} />
+      {data?.is_content_website_utama ? (
+        <p>Hanya Bisa Dilakukan di Admin Website Utama</p>
+      ) : (
+        <Switch checked={status} onCheckedChange={handleCheckedChange} />
+      )}
     </>
   )
 }

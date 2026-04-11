@@ -46,18 +46,20 @@ export const AnnouncementPulsikomDetailPage = () => {
                   <p className="text-blue-600 font-semibold">
                     {detail?.status_publish.split('_').join(' ')}
                   </p>
-                  <Button
-                    size={'sm'}
-                    onClick={() =>
-                      navigate(
-                        `/modules/pulsikom/public-content/announcement/edit/${detail?.id_pengumuman}`
-                      )
-                    }
-                    className={'border-primary text-primary hover:text-primary'}
-                    variant={'outline'}
-                  >
-                    <HiPencil /> Edit Data
-                  </Button>
+                  {detail?.status_publish !== 'PUBLISHED' && (
+                    <Button
+                      size={'sm'}
+                      onClick={() =>
+                        navigate(
+                          `/modules/pulsikom/public-content/announcement/edit/${detail?.id_pengumuman}`
+                        )
+                      }
+                      className={'border-primary text-primary hover:text-primary'}
+                      variant={'outline'}
+                    >
+                      <HiPencil /> Edit Data
+                    </Button>
+                  )}
                 </div>
               ),
             },

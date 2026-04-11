@@ -18,10 +18,11 @@ interface Props {
   form: UseFormReturn<INewsTypeForm>
   HandleSave: (e: any) => void
   loading: boolean
+  is_website_main?: boolean
 }
 
 export const FormNewsContent = (props: Props) => {
-  const { form, HandleSave, loading } = props
+  const { form, HandleSave, loading, is_website_main } = props
   const { newsCategory, loading: laod1 } = useGetNewsCategory({ isGetAll: true })
   const { treeNodes } = UseGetTreeData()
 
@@ -117,19 +118,22 @@ export const FormNewsContent = (props: Props) => {
             maxFiles={10}
           />
 
-          <Separator />
-
-          <div className="p-4 bg-white w-full space-y-4">
-            <p className="text-2xl font-semibold text-primary">Unit Kerja Terkait</p>
-            <TreeCheckboxController
-              name="list_unit"
-              control={form.control}
-              data={treeNodes}
-              rules={{ required: 'Pilih minimal satu' }}
-              showSelectAll
-              selectAllLabel={'Pilih Semua'}
-            />
-          </div>
+          {is_website_main && (
+            <>
+              <Separator />
+              <div className="p-4 bg-white w-full space-y-4">
+                <p className="text-2xl font-semibold text-primary">Unit Kerja Terkait</p>
+                <TreeCheckboxController
+                  name="list_unit"
+                  control={form.control}
+                  data={treeNodes}
+                  rules={{ required: 'Pilih minimal satu' }}
+                  showSelectAll
+                  selectAllLabel={'Pilih Semua'}
+                />
+              </div>
+            </>
+          )}
 
           <ButtonTitleGroup
             label={''}

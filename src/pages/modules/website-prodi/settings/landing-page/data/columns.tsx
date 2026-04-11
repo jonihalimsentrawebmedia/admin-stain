@@ -62,13 +62,21 @@ export const ProdiLandingPageColumns = () => {
     {
       accessorKey: 'action',
       header: '',
+      maxSize: 100,
+      size: 100,
       cell: ({ row }) => {
         const data = row?.original
         return (
-          <div className={'flex items-center gap-2 flex-col'}>
-            <ButtonEditLandingProdi data={data} />
-            <ButtonDeleteLandingProdi data={data} />
-          </div>
+          <>
+            {data?.is_content_website_utama ? (
+              <p className={'whitespace-pre-wrap text-sm text-primary'}>Content Website Utama</p>
+            ) : (
+              <div className={'flex items-center gap-2 flex-col'}>
+                <ButtonEditLandingProdi data={data} />
+                <ButtonDeleteLandingProdi data={data} />
+              </div>
+            )}
+          </>
         )
       },
     },

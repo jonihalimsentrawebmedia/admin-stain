@@ -53,10 +53,16 @@ export const UnitLandingPageColumns = () => {
       cell: ({ row }) => {
         const data = row?.original
         return (
-          <div className={'flex items-center gap-2 flex-col'}>
-            <ButtonEditLandingUnit data={data} />
-            <ButtonDeleteLandingUnit data={data} />
-          </div>
+          <>
+            {data?.is_content_website_utama ? (
+              <p className={'text-primary text-sm font-semibold'}>Konten Website Utama</p>
+            ) : (
+              <div className={'flex items-center gap-2 flex-col'}>
+                <ButtonEditLandingUnit data={data} />
+                <ButtonDeleteLandingUnit data={data} />
+              </div>
+            )}
+          </>
         )
       },
     },

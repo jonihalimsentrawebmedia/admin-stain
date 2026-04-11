@@ -66,4 +66,5 @@ export interface IAgendaDetail {
   level_proses: string
   level_unpublished: string
   nama_satuan_organisasi:string
+  is_content_website_utama:boolean
 }

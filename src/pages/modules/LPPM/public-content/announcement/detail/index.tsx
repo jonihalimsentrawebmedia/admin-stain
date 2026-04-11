@@ -7,7 +7,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { format } from 'date-fns'
 import Select from 'react-select'
 import { useEffect, useState } from 'react'
-import { UseGetLppmAnnouncementDetail,  } from '../hooks/index'
+import { UseGetLppmAnnouncementDetail } from '../hooks/index'
 import type { IAnnouncement } from '@/pages/modules/website-utama/public-content/announcement/data'
 import { ButtonSubmissionAnnouncementLppm } from '../components/buttonSubmission'
 
@@ -46,18 +46,20 @@ export const AnnouncementLppmDetailPage = () => {
                   <p className="text-blue-600 font-semibold">
                     {detail?.status_publish.split('_').join(' ')}
                   </p>
-                  <Button
-                    size={'sm'}
-                    onClick={() =>
-                      navigate(
-                        `/modules/lppm/public-content/announcement/edit/${detail?.id_pengumuman}`
-                      )
-                    }
-                    className={'border-primary text-primary hover:text-primary'}
-                    variant={'outline'}
-                  >
-                    <HiPencil /> Edit Data
-                  </Button>
+                  {detail?.status_publish !== 'PUBLISHED' && (
+                    <Button
+                      size={'sm'}
+                      onClick={() =>
+                        navigate(
+                          `/modules/lppm/public-content/announcement/edit/${detail?.id_pengumuman}`
+                        )
+                      }
+                      className={'border-primary text-primary hover:text-primary'}
+                      variant={'outline'}
+                    >
+                      <HiPencil /> Edit Data
+                    </Button>
+                  )}
                 </div>
               ),
             },

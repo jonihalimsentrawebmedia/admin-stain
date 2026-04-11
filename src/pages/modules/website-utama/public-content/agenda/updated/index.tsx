@@ -63,7 +63,7 @@ export const UpdatedAgendaPage = () => {
 
   return (
     <>
-      <AgendaForm form={form} HandleSave={HandleSave} loading={loading} />
+      <AgendaForm is_website_main form={form} HandleSave={HandleSave} loading={loading} />
     </>
   )
 }

@@ -65,6 +65,10 @@ const ServiceCommitmentViewModel = () => {
     {
       accessorKey: 'urutan',
       header: 'Urutan',
+      cell: (row) => {
+        const idx = row.row.index
+        return <div>{(page - 1) * limit + idx + 1}</div>
+      },
     },
 
     // ✅ Aksi (Ikon Edit dan Hapus)

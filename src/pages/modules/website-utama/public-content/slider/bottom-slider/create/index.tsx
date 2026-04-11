@@ -35,7 +35,12 @@ export const CreateBottomSlider = () => {
   return (
     <>
       <div className={'flex flex-col gap-5'}>
-        <FormCreateSliderOnTop position={'Bawah'} form={form} HandleSave={HandlerSubmit} />
+        <FormCreateSliderOnTop
+          is_website_main
+          position={'Bawah'}
+          form={form}
+          HandleSave={HandlerSubmit}
+        />
       </div>
     </>
   )

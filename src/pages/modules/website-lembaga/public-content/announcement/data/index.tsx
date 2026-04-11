@@ -50,6 +50,7 @@ export interface IAnnouncement {
   nama_satuan_organisasi: string
 
   dokumens: IDocumentAnnouncement[]
+  is_content_website_utama: boolean
 }
 
 export interface IstatusAnnouncement {

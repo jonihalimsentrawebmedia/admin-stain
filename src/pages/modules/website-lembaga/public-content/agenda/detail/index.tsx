@@ -27,17 +27,19 @@ export const DetailAgendaPage = () => {
                   <p className="text-blue-600 font-semibold">
                     {detail?.status_publish.split('_').join(' ')}
                   </p>
-                  <Button
-                    onClick={() =>
-                      navigate(
-                        `/modules/website-lembaga/public-content/agenda/edit/${detail?.id_agenda}`
-                      )
-                    }
-                    className={'border-primary text-primary hover:text-primary'}
-                    variant={'outline'}
-                  >
-                    <HiPencil /> Edit Data
-                  </Button>
+                  {detail?.status_publish !== 'PUBLISHED' && (
+                    <Button
+                      onClick={() =>
+                        navigate(
+                          `/modules/website-lembaga/public-content/agenda/edit/${detail?.id_agenda}`
+                        )
+                      }
+                      className={'border-primary text-primary hover:text-primary'}
+                      variant={'outline'}
+                    >
+                      <HiPencil /> Edit Data
+                    </Button>
+                  )}
                 </div>
               ),
             },
