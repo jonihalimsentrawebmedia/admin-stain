@@ -5,7 +5,7 @@ import { format } from 'date-fns'
 import { Button } from '@/components/ui/button.tsx'
 import { MdInfo, MdOutlineHistory } from 'react-icons/md'
 import { TimeAgo } from '@/utils/helper.tsx'
-import { ButtonUnpublishAgendaLppm, } from '../buttonUnpublish.tsx'
+import { ButtonUnpublishAgendaLppm } from '../buttonUnpublish.tsx'
 
 export const PublishedStatusColumns = () => {
   const [searchParams] = useSearchParams()
@@ -106,7 +106,16 @@ export const PublishedStatusColumns = () => {
       accessorKey: 'status_publish',
       header: 'Aksi',
       cell: ({ row }) => {
-        return <ButtonUnpublishAgendaLppm {...row?.original} />
+        const data = row?.original
+        return (
+          <>
+            {data?.is_content_website_utama ? (
+              <p className={'text-primary text-sm font-semibold'}>Konten Website Utama</p>
+            ) : (
+              <ButtonUnpublishAgendaLppm {...row?.original} />
+            )}
+          </>
+        )
       },
     },
     {

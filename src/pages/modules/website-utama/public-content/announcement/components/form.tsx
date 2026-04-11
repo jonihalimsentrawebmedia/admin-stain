@@ -15,10 +15,11 @@ interface props {
   form: UseFormReturn<AnnouncementType>
   HandleSave: (e: AnnouncementType) => void
   loading: boolean
+  is_website_main?: boolean
 }
 
 export const AnnouncementForm = (props: props) => {
-  const { form, HandleSave } = props
+  const { form, HandleSave, is_website_main } = props
   const { treeNodes } = UseGetTreeData()
 
   const navigate = useNavigate()
@@ -62,19 +63,22 @@ export const AnnouncementForm = (props: props) => {
 
           <UploadDocument form={form} name={'dokumens'} label={'Dokumen'} required />
 
-          <Separator />
-
-          <div className="p-4 bg-white w-full space-y-4">
-            <p className="text-2xl font-semibold text-primary">Unit Kerja Terkait</p>
-            <TreeCheckboxController
-              name="list_unit"
-              control={form.control}
-              data={treeNodes}
-              rules={{ required: 'Pilih minimal satu' }}
-              showSelectAll
-              selectAllLabel={'Pilih Semua'}
-            />
-          </div>
+          {is_website_main && (
+            <>
+              <Separator />
+              <div className="p-4 bg-white w-full space-y-4">
+                <p className="text-2xl font-semibold text-primary">Unit Kerja Terkait</p>
+                <TreeCheckboxController
+                  name="list_unit"
+                  control={form.control}
+                  data={treeNodes}
+                  rules={{ required: 'Pilih minimal satu' }}
+                  showSelectAll
+                  selectAllLabel={'Pilih Semua'}
+                />
+              </div>
+            </>
+          )}
 
           <ButtonTitleGroup
             label={''}

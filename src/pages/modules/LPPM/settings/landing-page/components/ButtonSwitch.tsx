@@ -4,9 +4,10 @@ import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
 import { Skeleton } from '@/components/ui/skeleton'
+import type { LandingList } from '../model/index'
 
 interface Props {
-  data: any
+  data: LandingList
   link?: string
   keyList?: string
   isActive?: boolean
@@ -39,17 +40,23 @@ const ButtonSwitch = ({ data, link, keyList, isActive }: Props) => {
     return <Skeleton />
   }
   return (
-    <div className="flex justify-center flex-col items-center">
-      <Switch
-        onCheckedChange={() => {
-          updateStatus()
-        }}
-        checked={isActive?isActive:isAktif}
-      />
-      <span className="text-xs text-center text-gray-500 mt-1">
-        {isActive || isAktif ? 'Aktif' : 'Tidak Aktif'}
-      </span>
-    </div>
+    <>
+      {data?.is_content_website_utama ? (
+        <p className={'text-sm text-primary font-semibold'}>Konten Website Utama</p>
+      ) : (
+        <div className="flex justify-center flex-col items-center">
+          <Switch
+            onCheckedChange={() => {
+              updateStatus()
+            }}
+            checked={isActive ? isActive : isAktif}
+          />
+          <span className="text-xs text-center text-gray-500 mt-1">
+            {isActive || isAktif ? 'Aktif' : 'Tidak Aktif'}
+          </span>
+        </div>
+      )}
+    </>
   )
 }
 

@@ -42,17 +42,19 @@ export const DetailNewsFacultyPage = () => {
                 <p className="text-blue-600 font-semibold">
                   {detail?.status_publish?.split('_').join(' ')}
                 </p>
-                <Button
-                  onClick={() =>
-                    navigate(
-                      `/modules/website-fakultas/public-content/news/edit/${detail?.id_berita}`
-                    )
-                  }
-                  className={'border-primary text-primary hover:text-primary'}
-                  variant={'outline'}
-                >
-                  <HiPencil /> Edit Data
-                </Button>
+                {detail?.status_publish !== 'PUBLISHED' && (
+                  <Button
+                    onClick={() =>
+                      navigate(
+                        `/modules/website-fakultas/public-content/news/edit/${detail?.id_berita}`
+                      )
+                    }
+                    className={'border-primary text-primary hover:text-primary'}
+                    variant={'outline'}
+                  >
+                    <HiPencil /> Edit Data
+                  </Button>
+                )}
               </div>
             ),
           },

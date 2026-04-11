@@ -15,10 +15,11 @@ interface props {
   loading: boolean
   form: UseFormReturn<AgendaType>
   HandleSave: (e: AgendaType) => void
+  is_website_main?: boolean
 }
 
 export const AgendaForm = (props: props) => {
-  const { form, HandleSave, loading } = props
+  const { form, HandleSave, loading, is_website_main } = props
   const { treeNodes } = UseGetTreeData()
 
   const navigate = useNavigate()
@@ -104,19 +105,22 @@ export const AgendaForm = (props: props) => {
             isRequired
           />
 
-          <Separator />
-
-          <div className="p-4 bg-white w-full space-y-4">
-            <p className="text-2xl font-semibold text-primary">Unit Kerja Terkait</p>
-            <TreeCheckboxController
-              name="list_unit"
-              control={form.control}
-              data={treeNodes}
-              rules={{ required: 'Pilih minimal satu' }}
-              showSelectAll
-              selectAllLabel={'Pilih Semua'}
-            />
-          </div>
+          {is_website_main && (
+            <>
+              <Separator />
+              <div className="p-4 bg-white w-full space-y-4">
+                <p className="text-2xl font-semibold text-primary">Unit Kerja Terkait</p>
+                <TreeCheckboxController
+                  name="list_unit"
+                  control={form.control}
+                  data={treeNodes}
+                  rules={{ required: 'Pilih minimal satu' }}
+                  showSelectAll
+                  selectAllLabel={'Pilih Semua'}
+                />
+              </div>
+            </>
+          )}
 
           <ButtonTitleGroup
             label={''}

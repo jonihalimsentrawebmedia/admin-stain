@@ -11,15 +11,15 @@ import { UseGetTreeData } from '@/pages/modules/website-utama/public-content/com
 import { TreeCheckboxController } from '@/pages/modules/website-utama/public-content/component/TreeCheckbox.tsx'
 import { Separator } from '@/components/ui/separator.tsx'
 
-
 interface Props {
   form: UseFormReturn<TopSliderType>
   HandleSave: (e: TopSliderType) => void
   position?: string
+  is_website_main?: boolean
 }
 
 export const FormCreateSliderOnTop = (props: Props) => {
-  const { form, HandleSave, position = 'Atas' } = props
+  const { form, HandleSave, position = 'Atas', is_website_main } = props
   const navigate = useNavigate()
   const { treeNodes } = UseGetTreeData()
 
@@ -86,19 +86,22 @@ export const FormCreateSliderOnTop = (props: Props) => {
               isRow
             />
 
-            <Separator />
-
-            <div className="p-4 bg-white w-full space-y-4">
-              <p className="text-2xl font-semibold text-primary">Unit Kerja Terkait</p>
-              <TreeCheckboxController
-                name="list_unit"
-                control={form.control}
-                data={treeNodes}
-                rules={{ required: 'Pilih minimal satu' }}
-                showSelectAll
-                selectAllLabel={'Pilih Semua'}
-              />
-            </div>
+            {is_website_main && (
+              <>
+                <Separator />
+                <div className="p-4 bg-white w-full space-y-4">
+                  <p className="text-2xl font-semibold text-primary">Unit Kerja Terkait</p>
+                  <TreeCheckboxController
+                    name="list_unit"
+                    control={form.control}
+                    data={treeNodes}
+                    rules={{ required: 'Pilih minimal satu' }}
+                    showSelectAll
+                    selectAllLabel={'Pilih Semua'}
+                  />
+                </div>
+              </>
+            )}
 
             <ButtonTitleGroup
               label={''}

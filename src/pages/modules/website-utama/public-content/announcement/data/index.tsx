@@ -50,10 +50,9 @@ export interface IAnnouncement {
   level_proses: string
   level_unpublished: string
   nama_satuan_organisasi: string
-
   dokumens: IDocumentAnnouncement[]
-
-  list_unit_terkait:list_unit_terkait[]
+  list_unit_terkait: list_unit_terkait[]
+  is_content_website_utama: boolean
 }
 
 export interface IstatusAnnouncement {

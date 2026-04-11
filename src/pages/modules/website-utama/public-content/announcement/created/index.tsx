@@ -37,7 +37,7 @@ export const CreateAnnouncementPage = () => {
   return (
     <>
       <div>
-        <AnnouncementForm form={form} HandleSave={HandleSave} loading={loading} />
+        <AnnouncementForm is_website_main form={form} HandleSave={HandleSave} loading={loading} />
       </div>
     </>
   )

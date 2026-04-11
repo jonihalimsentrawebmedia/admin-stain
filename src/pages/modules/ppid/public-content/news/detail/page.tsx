@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button.tsx'
 import { HiPencil } from 'react-icons/hi'
 import { Separator } from '@/components/ui/separator.tsx'
-import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel'
+import { Carousel, type CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { useEffect, useState } from 'react'
 import { format } from 'date-fns'
 import { ButtonSubmissionNews } from '../components/buttonSubmission.tsx'
@@ -44,17 +44,19 @@ export const DetailNewsPage = () => {
                 <p className="text-blue-600 font-semibold">
                   {detailNews?.status_publish?.split('_').join(' ')}
                 </p>
-                <Button
-                  onClick={() =>
-                    navigate(
-                      `/modules/website-lembaga/public-content/news/edit/${detailNews?.id_berita}`
-                    )
-                  }
-                  className={'border-primary text-primary hover:text-primary'}
-                  variant={'outline'}
-                >
-                  <HiPencil /> Edit Data
-                </Button>
+                {detailNews?.status_publish !== 'PUBLISHED' && (
+                  <Button
+                    onClick={() =>
+                      navigate(
+                        `/modules/website-lembaga/public-content/news/edit/${detailNews?.id_berita}`
+                      )
+                    }
+                    className={'border-primary text-primary hover:text-primary'}
+                    variant={'outline'}
+                  >
+                    <HiPencil /> Edit Data
+                  </Button>
+                )}
               </div>
             ),
           },

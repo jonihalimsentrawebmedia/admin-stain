@@ -6,4 +6,5 @@ export interface IUnitLandingPage {
   is_status: boolean
   nama_user_created: string
   nama_user_updated: string
+  is_content_website_utama: boolean
 }

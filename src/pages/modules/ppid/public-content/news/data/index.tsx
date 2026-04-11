@@ -33,7 +33,7 @@ export interface INewsDetail {
   updated_user: string
   berita_gambar_tambahan: IImageNewsMore[] // kalau ada struktur, kasihkan, nanti kubuatin
   nama_kategori_berita: string
-
+  is_content_website_utama: boolean
   nama_user_created: string
   nama_user_updated: string
   nama_disetujui: string

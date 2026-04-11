@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button.tsx'
 import { HiPencil } from 'react-icons/hi'
 import { Separator } from '@/components/ui/separator.tsx'
-import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel'
+import { Carousel, type CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { useEffect, useState } from 'react'
 import { format } from 'date-fns'
 import { UseGetProdiNewsDetail } from '../hooks/index'
@@ -42,15 +42,19 @@ export const DetailNewsProdiPage = () => {
                 <p className="text-blue-600 font-semibold">
                   {detail?.status_publish?.split('_').join(' ')}
                 </p>
-                <Button
-                  onClick={() =>
-                    navigate(`/modules/website-prodi/public-content/news/edit/${detail?.id_berita}`)
-                  }
-                  className={'border-primary text-primary hover:text-primary'}
-                  variant={'outline'}
-                >
-                  <HiPencil /> Edit Data
-                </Button>
+                {detail?.status_publish !== 'PUBLISHED' && (
+                  <Button
+                    onClick={() =>
+                      navigate(
+                        `/modules/website-prodi/public-content/news/edit/${detail?.id_berita}`
+                      )
+                    }
+                    className={'border-primary text-primary hover:text-primary'}
+                    variant={'outline'}
+                  >
+                    <HiPencil /> Edit Data
+                  </Button>
+                )}
               </div>
             ),
           },

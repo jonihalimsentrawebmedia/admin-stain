@@ -6,4 +6,5 @@ export interface LandingList {
   status: boolean
   is_aktif_sampai_at: boolean
   aktif_sampai_at: string
+  is_content_website_utama: boolean
 }

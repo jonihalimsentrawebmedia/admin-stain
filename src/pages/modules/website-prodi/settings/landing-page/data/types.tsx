@@ -11,4 +11,5 @@ export interface IProdiLandingPage {
   updated_user: string
   nama_user_created: string
   nama_user_updated: string
+  is_content_website_utama: boolean
 }
