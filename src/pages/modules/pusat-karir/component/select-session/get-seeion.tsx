@@ -9,6 +9,7 @@ export interface ISessionCarrierCenter {
   nama_universitas: string
   singkatan: string
   singkatan_universitas: string
+  domain: string
 }
 
 export const UseGetSessionCarrierCenter = () => {

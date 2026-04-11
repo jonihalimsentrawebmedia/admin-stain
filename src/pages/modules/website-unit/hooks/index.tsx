@@ -9,6 +9,7 @@ export interface ISessionUnit {
   id_unit: string
   nama_unit: string
   singkatan: string
+  domain: string
 }
 
 export const UseGetSessionUnit = () => {

@@ -10,6 +10,7 @@ export interface ISessionSPI {
   singkatan: string
   singkatan_fakultas: string
   singkatan_universitas: string
+  domain: string
 }
 
 export const UseGetSessionSPI = () => {

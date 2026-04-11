@@ -10,6 +10,7 @@ export interface ISessionPusilkom {
   singkatan: string
   singkatan_fakultas: string
   singkatan_universitas: string
+  domain: string
 }
 
 export const UseGetSessionPusilkom = () => {

@@ -9,6 +9,9 @@ import { ApprovedSection } from './components/Approved/section'
 import { Link, useLocation } from 'react-router-dom'
 import { SelectBasic } from '@/components/common/select/basic.tsx'
 import type { Mode } from './types/index'
+import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/hooks/getProfile.tsx'
+import { UseGetSessionPusilkom } from '@/pages/modules/Pulsikom/component/select-session/get-seeion.tsx'
+import { FiExternalLink } from 'react-icons/fi'
 
 export default function DashboardPulsikom() {
   const [tabsName, setTabsName] = useState('DIAJUKAN_EDITOR')
@@ -27,6 +30,8 @@ export default function DashboardPulsikom() {
     []
 
   const { status } = UseGetTotalVisitor()
+  const { profileUser } = UseGetUserProfile()
+  const { session } = UseGetSessionPusilkom()
   const { approvedList } = UseGetApprovedList(tabsName ?? '')
 
   const TabsList = [
@@ -72,7 +77,22 @@ export default function DashboardPulsikom() {
 
   return (
     <div className=" mt-4 flex flex-col gap-4 ">
-      <h1 className="text-2xl text-primary font-semibold">Statistik Pengunjung Website</h1>
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-semibold">
+          Selamat Datang <span className="text-primary">{profileUser?.nama_lengkap}</span>
+        </h1>
+        <Link
+          to={session?.domain ? `https://${session?.domain}` : '#'}
+          target={'_blank'}
+          className={'flex flex-col gap-1 items-start justify-center'}
+        >
+          <Button variant={'outline'} className={'border-primary text-primary hover:text-primary'}>
+            <FiExternalLink />
+            Buka Website
+          </Button>
+          <p className="text-primary text-sm">{session?.domain}</p>
+        </Link>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-6 gap-4">
         {status?.map((item, i) => (

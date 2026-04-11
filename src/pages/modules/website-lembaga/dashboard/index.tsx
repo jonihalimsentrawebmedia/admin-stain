@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts'
+import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { Plus } from 'lucide-react'
 import { UseGetApprovedList, UseGetTotalVisitor, UseGetTrentVisitor } from './hooks/index.tsx'
 import { TabsListCustom } from '@/pages/modules/website-utama/public-content/slider/components/tabsList.tsx'
@@ -9,6 +9,8 @@ import { ApprovedSection } from './components/Approved/section'
 import { Link, useLocation } from 'react-router-dom'
 import { SelectBasic } from '@/components/common/select/basic.tsx'
 import type { Mode } from './types/index'
+import { FiExternalLink } from 'react-icons/fi'
+import { UseGetSessionInstitution } from '@/pages/modules/website-lembaga/select-institution/get-session.tsx'
 
 export default function DashboardLPMI() {
   const [tabsName, setTabsName] = useState('DIAJUKAN_EDITOR')
@@ -29,6 +31,7 @@ export default function DashboardLPMI() {
   const { status } = UseGetTotalVisitor()
   // const { profileUser } = UseGetUserProfile()
   const { approvedList } = UseGetApprovedList(tabsName ?? '')
+  const { session } = UseGetSessionInstitution()
 
   const TabsList = [
     {
@@ -72,10 +75,23 @@ export default function DashboardLPMI() {
 
   return (
     <div className=" mt-4 flex flex-col gap-4 ">
-      <h1 className="text-2xl text-primary font-semibold">
-        {/* Selamat Datang <span className="text-primary">{profileUser?.nama_lengkap}</span> */}
-        Statistik Pengunjung Website
-      </h1>
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl text-primary font-semibold">
+          {/* Selamat Datang <span className="text-primary">{profileUser?.nama_lengkap}</span> */}
+          Statistik Pengunjung Website
+        </h1>
+        <Link
+          to={session?.domain ? `https://${session?.domain}` : '#'}
+          target={'_blank'}
+          className={'flex flex-col gap-1 items-start justify-center'}
+        >
+          <Button variant={'outline'} className={'border-primary text-primary hover:text-primary'}>
+            <FiExternalLink />
+            Buka Website
+          </Button>
+          <p className="text-primary text-sm">{session?.domain}</p>
+        </Link>
+      </div>
 
       {/* Statistik */}
       <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-6 gap-4">

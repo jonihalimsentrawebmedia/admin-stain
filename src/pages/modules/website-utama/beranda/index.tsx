@@ -93,7 +93,7 @@ export default function DashboardAdmin() {
         <Link
           to={session?.domain ? `https://${session?.domain}` : '#'}
           target={'_blank'}
-          className={'flex flex-col gap-1 items-center justify-center'}
+          className={'flex flex-col gap-1 items-start justify-center'}
         >
           <Button variant={'outline'} className={'border-primary text-primary hover:text-primary'}>
             <FiExternalLink />
