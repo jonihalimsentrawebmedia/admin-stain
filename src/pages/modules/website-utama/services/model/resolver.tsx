@@ -9,7 +9,7 @@ export const ServicesResolver = z.object({
     .string({ error: 'Controller Wajib Diisi' })
     .min(1, { error: 'Controller Wajib Diisi' }),
   header: z.array(z.string()).optional().nullable(),
- 
+  gambar_url: z.string().optional().nullable(),
 })
 
 export type IServicesTypeForm = z.infer<typeof ServicesResolver>

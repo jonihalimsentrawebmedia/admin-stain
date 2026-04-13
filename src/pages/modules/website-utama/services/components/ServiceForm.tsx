@@ -4,6 +4,9 @@ import TextInput from '@/components/common/form/TextInput'
 import { InputCheckbox } from '@/components/common/form/InputCheckbox'
 import { Form } from '@/components/ui/form'
 import ButtonForm from '@/components/common/button/ButtonForm'
+import {
+  UploadImageRatio
+} from '@/pages/modules/website-utama/public-content/facilities/components/uploadImageRatio.tsx'
 
 interface Props {
   form: UseFormReturn<IServicesTypeForm>
@@ -16,6 +19,17 @@ const ServiceForm = ({ form, handleCancel, handleSave, loading }: Props) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSave)}>
         <div className="flex flex-col gap-4">
+          <UploadImageRatio
+            isRow
+            aspectRatioWidth={1}
+            aspectRatioHeight={1}
+            name={'gambar_url'}
+            label={'Icon'}
+            form={form}
+            maxWidthClassName={'max-w-[150px]!'}
+            placeholder={'icon'}
+          />
+
           <TextInput
             form={form}
             name="nama_layanan"

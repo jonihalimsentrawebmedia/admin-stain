@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
-import { ServicesResolver, type IServicesTypeForm } from '../model/resolver'
+import { type IServicesTypeForm, ServicesResolver } from '../model/resolver'
 import ServiceForm from './ServiceForm'
 
 const ButtonAddServices = () => {
@@ -58,7 +58,12 @@ const ButtonAddServices = () => {
         Tambah
       </Button>
 
-      <DialogCustom width='50%' open={open} className={'rounded lg:min-w-2xl'} setOpen={setOpen} title={'Tambah Menu'}>
+      <DialogCustom
+        open={open}
+        className={'rounded lg:max-w-4xl'}
+        setOpen={setOpen}
+        title={'Tambah Menu'}
+      >
         <ServiceForm
           form={form}
           loading={loading}

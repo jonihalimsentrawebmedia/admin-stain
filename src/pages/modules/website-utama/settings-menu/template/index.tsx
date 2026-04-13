@@ -3,9 +3,19 @@ import { MdInfo } from 'react-icons/md'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsTemplateWebsite } from './data/columns.tsx'
 import { UseGetTemplateMainWeb } from './hooks/index.tsx'
+import { useSearchParams } from 'react-router-dom'
 
 export const TemplateMainWeb = () => {
-  const { template, loading } = UseGetTemplateMainWeb()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { template, loading } = UseGetTemplateMainWeb({
+    page: page,
+    limit: limit,
+    search: search,
+  })
   const columns = ColumnsTemplateWebsite()
   return (
     <>
