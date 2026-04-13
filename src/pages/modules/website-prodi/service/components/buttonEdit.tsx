@@ -27,6 +27,7 @@ export const ButtonEditServiceProdi = (data: IServiceProdi) => {
         nama_layanan: data.nama_layanan,
         url_layanan: data.url_layanan,
         tampil: data.tampil as 'Y',
+        gambar_url: data?.gambar_url,
       })
     }
   }, [data])

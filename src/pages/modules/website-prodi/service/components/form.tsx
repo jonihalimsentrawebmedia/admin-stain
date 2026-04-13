@@ -4,6 +4,7 @@ import type { ServiceProdiResolverType } from '@/pages/modules/website-prodi/ser
 import TextInput from '@/components/common/form/TextInput.tsx'
 import { InputRadio } from '@/components/common/form/InputRadio.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
+import { UploadImageRatio } from '@/pages/modules/website-utama/public-content/facilities/components/uploadImageRatio.tsx'
 
 interface Props {
   form: UseFormReturn<ServiceProdiResolverType>
@@ -18,6 +19,16 @@ export const FormServiceProdi = (props: Props) => {
   return (
     <Form {...form}>
       <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
+        <UploadImageRatio
+          isRow
+          aspectRatioWidth={1}
+          aspectRatioHeight={1}
+          name={'gambar_url'}
+          label={'Icon'}
+          form={form}
+          maxWidthClassName={'max-w-[150px]!'}
+          placeholder={'icon'}
+        />
         <TextInput
           name={'nama_layanan'}
           label={'Nama Layan'}
