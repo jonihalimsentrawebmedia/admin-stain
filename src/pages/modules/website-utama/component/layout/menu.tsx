@@ -133,6 +133,11 @@ export const MENULIST = [
         name: 'Pengaturan Warna Halaman',
         path: `${baseDomain}/pengaturan-menu/primary-color`,
       },
+      {
+        id: 4,
+        name: 'Template Website',
+        path: `${baseDomain}/pengaturan-menu/template`,
+      },
     ],
   },
   {

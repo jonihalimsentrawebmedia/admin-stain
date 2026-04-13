@@ -177,6 +177,7 @@ import { BottomSliderLanguagePage } from '@/pages/modules/website-utama/public-c
 import { HeaderMenuContentLanguagePage } from '@/pages/modules/website-utama/settings-menu/header/content/language'
 import { CreateAccreditation } from '@/pages/modules/website-utama/acreditation/create'
 import { UpdateAccreditation } from '@/pages/modules/website-utama/acreditation/update'
+import { TemplateMainWeb } from '@/pages/modules/website-utama/settings-menu/template'
 
 export const MainWebsiteRouter = [
   {
@@ -667,6 +668,15 @@ export const MainWebsiteRouter = [
           {
             index: true,
             element: <ChangePrimaryAndFooterColor />,
+          },
+        ],
+      },
+      {
+        path: 'template',
+        children: [
+          {
+            index: true,
+            element: <TemplateMainWeb />,
           },
         ],
       },
