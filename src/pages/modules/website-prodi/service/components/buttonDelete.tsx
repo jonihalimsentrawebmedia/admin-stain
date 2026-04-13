@@ -62,7 +62,7 @@ export const ButtonDeleteServiceProdi = (data: IServiceProdi) => {
             </Button>
             <Button disabled={loading} variant={'destructive'} onClick={HandleSave}>
               <FaTrash />
-              Batal
+              Hapus
             </Button>
           </div>
         </div>

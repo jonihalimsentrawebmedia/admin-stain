@@ -2,8 +2,8 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { ButtonAddServiceProdi } from '@/pages/modules/website-prodi/service/components/buttonAdd.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
-import { ColumnsServiceProdi } from '@/pages/modules/website-prodi/service/data/columns.tsx'
-import { UseGetServiceProdi } from '@/pages/modules/website-prodi/service/hooks'
+import { ColumnsServiceProdi } from './data/columns'
+import { UseGetServiceProdi } from './hooks/index.tsx'
 
 export const ServiceProdiPage = () => {
   const { serviceProdi, loading, meta } = UseGetServiceProdi()

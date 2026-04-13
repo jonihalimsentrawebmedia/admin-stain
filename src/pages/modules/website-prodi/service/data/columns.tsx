@@ -21,6 +21,16 @@ export const ColumnsServiceProdi = () => {
       },
     },
     {
+      accessorKey: 'gambar_url',
+      header: 'Icon',
+      cell: ({ row }) => {
+        const data = row?.original
+        return (
+          <img src={data?.gambar_url} alt="gambar" className={'size-14 w-14 h-14 object-contain'} />
+        )
+      },
+    },
+    {
       accessorKey: 'nama_layanan',
       header: 'Nama',
     },

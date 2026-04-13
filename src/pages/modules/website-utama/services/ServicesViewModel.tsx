@@ -24,6 +24,16 @@ const ServicesViewModel = () => {
       },
     },
     {
+      accessorKey: 'gambar_url',
+      header: 'Icon',
+      cell: ({ row }) => {
+        const data = row?.original
+        return (
+          <img src={data?.gambar_url} alt="icon" className={'object-contain size-12 w-12 h-12'} />
+        )
+      },
+    },
+    {
       accessorKey: 'nama_layanan',
       header: 'Nama',
     },
