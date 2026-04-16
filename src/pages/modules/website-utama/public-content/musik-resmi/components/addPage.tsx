@@ -19,6 +19,8 @@ export const AddOfficialMusicPage = () => {
     resolver: zodResolver(OfficialMusicResolver),
   })
 
+  console.log(form.formState.errors)
+
   const HandleSave = async (data: OfficialMusicType) => {
     await AxiosClient.post('/website-utama/mars-musik', data)
       .then((res) => {
