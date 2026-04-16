@@ -54,7 +54,6 @@ const LecturerProfilePage = () => {
       topik: 'fcm_sync_sdm_dosen',
     })
       .then(async (res) => {
-        console.log(res)
         if (res.status == 200) {
           await AxiosClient.post(`/prodi/profil/dosen/sync`)
             .then((res) => {
@@ -85,7 +84,6 @@ const LecturerProfilePage = () => {
     })
   }
 
-  console.log(response)
 
   if (response && !response?.is_success) {
     return (

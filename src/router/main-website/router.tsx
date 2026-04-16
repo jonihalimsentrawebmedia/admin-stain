@@ -182,6 +182,7 @@ import UnitInstitutionPage from '@/pages/modules/website-utama/unit-lembaga'
 import DetailUnitInstitution from '@/pages/modules/website-utama/unit-lembaga/detail'
 import UKKUKMPage from '@/pages/modules/website-utama/UKK-UKM'
 import { UnitInstitutionBackgroundPage } from '@/pages/modules/website-utama/unit-lembaga/background'
+import DetailUkkUKMPage from '@/pages/modules/website-utama/UKK-UKM/detail'
 
 export const MainWebsiteRouter = [
   {
@@ -1250,7 +1251,17 @@ export const MainWebsiteRouter = [
   },
   {
     path: 'ukk-ukm',
-    element: <UKKUKMPage />,
+    // element: <UKKUKMPage />,
+    children: [
+      {
+        index: true,
+        element: <UKKUKMPage />,
+      },
+      {
+        path: 'detail/:id',
+        element: <DetailUkkUKMPage />,
+      },
+    ],
   },
   {
     path: '*',

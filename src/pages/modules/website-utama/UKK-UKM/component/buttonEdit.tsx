@@ -1,6 +1,6 @@
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import FormUkkUkm from '@/pages/modules/website-utama/UKK-UKM/component/form.tsx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import AxiosClient from '@/provider/axios.tsx'
 import { useForm } from 'react-hook-form'
 import {
@@ -9,11 +9,17 @@ import {
 } from '@/pages/modules/website-utama/UKK-UKM/data/resolver.tsx'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'react-toastify'
-import { Button } from '@/components/ui/button.tsx'
-import { BiPlus } from 'react-icons/bi'
 import { useQueryClient } from '@tanstack/react-query'
+import type { IUkkUkm } from '@/pages/modules/website-utama/UKK-UKM/data/types.ts'
+import { HiPencil } from 'react-icons/hi'
 
-const ButtonAddUkkUkm = () => {
+interface props {
+  data: IUkkUkm
+}
+
+const ButtonEditUkkUkm = (props: props) => {
+  const { data } = props
+
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -21,10 +27,19 @@ const ButtonAddUkkUkm = () => {
     resolver: zodResolver(ResolverUkkUkm),
   })
 
+  useEffect(() => {
+    if (data) {
+      form.reset({
+        nama_ukk_ukm: data.nama_ukk_ukm,
+        urutan: data?.urutan,
+      })
+    }
+  }, [data])
+
   const queryClient = useQueryClient()
   const HandleSave = async (value: TResolverUkkUkm) => {
     setLoading(true)
-    await AxiosClient.post('/website-utama/ukk-ukm', value)
+    await AxiosClient.put(`/website-utama/ukk-ukm/${data?.id_ukk_ukm}`, value)
       .then((res) => {
         if (res.data.status) {
           setLoading(false)
@@ -44,14 +59,12 @@ const ButtonAddUkkUkm = () => {
 
   return (
     <>
-      <Button
-        variant={'outline'}
+      <button
         onClick={() => setOpen(!open)}
-        className="border border-primary hover:text-primay text-primary"
+        className={'bg-yellow-500 p-1.5 text-white hover:bg-yellow-600 rounded'}
       >
-        <BiPlus />
-        Tambah Data
-      </Button>
+        <HiPencil />
+      </button>
 
       <DialogBasic title={'Tambah UKK UKM'} open={open} setOpen={setOpen}>
         <FormUkkUkm
@@ -66,4 +79,4 @@ const ButtonAddUkkUkm = () => {
   )
 }
 
-export default ButtonAddUkkUkm
+export default ButtonEditUkkUkm

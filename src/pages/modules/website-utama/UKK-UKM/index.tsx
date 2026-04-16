@@ -3,9 +3,14 @@ import { useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button.tsx'
 import { IoMdImage } from 'react-icons/io'
 import ButtonAddUkkUkm from '@/pages/modules/website-utama/UKK-UKM/component/buttonAdd.tsx'
+import { USeGetUkkUkm } from '@/pages/modules/website-utama/UKK-UKM/hooks'
+import { ColoumnsUkkUkm } from '@/pages/modules/website-utama/UKK-UKM/data/coloumns.tsx'
+import TableCustom from '@/components/common/table/TableCustom.tsx'
 
 const UKKUKMPage = () => {
   const navigate = useNavigate()
+  const { ukkUkm, loading, meta } = USeGetUkkUkm()
+  const columns = ColoumnsUkkUkm()
 
   return (
     <>
@@ -32,6 +37,7 @@ const UKKUKMPage = () => {
           ]}
           label="UKK UKM"
         />
+        <TableCustom data={ukkUkm} columns={columns} loading={loading} meta={meta} />
       </div>
     </>
   )

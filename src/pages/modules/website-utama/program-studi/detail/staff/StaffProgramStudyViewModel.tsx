@@ -99,7 +99,7 @@ const StaffProgramStudyViewModel = () => {
               <Checkbox
                 checked={values.tampil_no_hp}
                 onCheckedChange={() => {
-                  checkedHp(values.nip)
+                  checkedHp(values.id_staff)
                 }}
               />
               <Label className={`${values.tampil_no_hp ? 'text-primary' : 'text-[#999]'}`}>
@@ -122,7 +122,7 @@ const StaffProgramStudyViewModel = () => {
               <Checkbox
                 checked={values.tampil_email}
                 onCheckedChange={() => {
-                  checkedEmail(values.nip)
+                  checkedEmail(values.id_staff)
                 }}
               />
               <Label className={`${values.tampil_email ? 'text-primary' : 'text-[#999]'}`}>

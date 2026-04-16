@@ -9,6 +9,7 @@ export interface StaffProfile {
   tampil_no_hp: boolean
   email: string
   tampil_email: boolean
+  id_staff: string
 }
 
 export interface StaffProfileStatus {

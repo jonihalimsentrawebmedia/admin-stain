@@ -15,15 +15,16 @@ const DosenProgramStudyViewModel = () => {
   const limit = Number(searchParams.get('limit') ?? 10)
   const { id } = useParams()
   const queryClient = useQueryClient()
+
   async function checkedHp(idStaff: string) {
     await AxiosClient.patch(
-      `/website-utama/satuan-organisasi/${id}/staff/${idStaff}/no-telepon`,
+      `/website-utama/satuan-organisasi/${id}/dosen/${idStaff}/no-telepon`,
       {}
     )
       .then((res) => {
         if (res.data.status) {
           queryClient.invalidateQueries({
-            queryKey: ['program-studi-staff'],
+            queryKey: ['program-studi-dosen'],
           })
 
           toast.success(res.data.message || 'Success Pengajuan tambah bidang kerjasama')
@@ -34,11 +35,11 @@ const DosenProgramStudyViewModel = () => {
       })
   }
   async function checkedEmail(idStaff: string) {
-    await AxiosClient.patch(`/website-utama/satuan-organisasi/${id}/staff/${idStaff}/email`, {})
+    await AxiosClient.patch(`/website-utama/satuan-organisasi/${id}/dosen/${idStaff}/email`)
       .then((res) => {
         if (res.data.status) {
           queryClient.invalidateQueries({
-            queryKey: ['program-studi-staff'],
+            queryKey: ['program-studi-dosen'],
           })
 
           toast.success(res.data.message || 'Success Pengajuan tambah bidang kerjasama')
@@ -99,7 +100,7 @@ const DosenProgramStudyViewModel = () => {
               <Checkbox
                 checked={values.tampil_no_hp}
                 onCheckedChange={() => {
-                  checkedHp(values.nip)
+                  checkedHp(values.id_dosen)
                 }}
               />
               <Label className={`${values.tampil_no_hp ? 'text-primary' : 'text-[#999]'}`}>
@@ -117,12 +118,12 @@ const DosenProgramStudyViewModel = () => {
         const values = row.original
         return (
           <div>
-            <div>{values.no_hp}</div>
+            <div>{values.email}</div>
             <div className="flex gap-2 items-center">
               <Checkbox
                 checked={values.tampil_email}
                 onCheckedChange={() => {
-                  checkedEmail(values.nip)
+                  checkedEmail(values.id_dosen)
                 }}
               />
               <Label className={`${values.tampil_email ? 'text-primary' : 'text-[#999]'}`}>
