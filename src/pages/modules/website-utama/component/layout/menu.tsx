@@ -7,10 +7,11 @@ import {
   MdHowToReg,
   MdOutlineRunCircle,
   MdQuestionAnswer,
+  MdWorkspaces,
 } from 'react-icons/md'
 import { IoBusinessSharp, IoSchool, IoStorefront } from 'react-icons/io5'
 import { TbWorld } from 'react-icons/tb'
-import { FaGear, FaGears } from 'react-icons/fa6'
+import { FaGear, FaGears, FaUsers } from 'react-icons/fa6'
 import { Calendar } from 'lucide-react'
 import { IconCertificate } from '@/components/common/icon'
 
@@ -234,25 +235,37 @@ export const MENULIST = [
     path: `${baseDomain}/fakultas`,
   },
   {
+    id: 16,
+    name: 'Unit - Lembaga',
+    icon: <MdWorkspaces className={'size-5'} />,
+    path: `${baseDomain}/unit-lembaga`,
+  },
+  {
     id: 17,
+    name: 'UKK & UKM',
+    icon: <FaUsers />,
+    path: `${baseDomain}/ukk-ukm`,
+  },
+  {
+    id: 18,
     name: 'Pertanyaan',
     path: `${baseDomain}/pertanyaan`,
     icon: <MdQuestionAnswer className={'size-5'} />,
     child: [
       {
-        id: 1,
+        id: 181,
         name: 'Kotak Masuk',
         path: `${baseDomain}/pertanyaan/kotak-masuk`,
       },
       {
-        id: 1,
+        id: 182,
         name: 'F.A.Q',
         path: `${baseDomain}/pertanyaan/faq`,
       },
     ],
   },
   {
-    id: 18,
+    id: 19,
     name: 'Jalur Pendaftaran',
     path: `${baseDomain}/jalur-pendaftaran`,
     icon: <MdHowToReg className={'size-5'} />,

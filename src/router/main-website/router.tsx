@@ -178,6 +178,11 @@ import { HeaderMenuContentLanguagePage } from '@/pages/modules/website-utama/set
 import { CreateAccreditation } from '@/pages/modules/website-utama/acreditation/create'
 import { UpdateAccreditation } from '@/pages/modules/website-utama/acreditation/update'
 import { TemplateMainWeb } from '@/pages/modules/website-utama/settings-menu/template'
+import UnitInstitutionPage from '@/pages/modules/website-utama/unit-lembaga'
+import DetailUnitInstitution from '@/pages/modules/website-utama/unit-lembaga/detail'
+import UKKUKMPage from '@/pages/modules/website-utama/UKK-UKM'
+import { UnitInstitutionBackgroundPage } from '@/pages/modules/website-utama/unit-lembaga/background'
+import DetailUkkUKMPage from '@/pages/modules/website-utama/UKK-UKM/detail'
 
 export const MainWebsiteRouter = [
   {
@@ -1226,5 +1231,40 @@ export const MainWebsiteRouter = [
         element: <RegisteredPathLanguagePage />,
       },
     ],
+  },
+  {
+    path: 'unit-lembaga',
+    children: [
+      {
+        index: true,
+        element: <UnitInstitutionPage />,
+      },
+      {
+        path: 'detail/:id',
+        element: <DetailUnitInstitution />,
+      },
+      {
+        path: 'background',
+        element: <UnitInstitutionBackgroundPage />,
+      },
+    ],
+  },
+  {
+    path: 'ukk-ukm',
+    // element: <UKKUKMPage />,
+    children: [
+      {
+        index: true,
+        element: <UKKUKMPage />,
+      },
+      {
+        path: 'detail/:id',
+        element: <DetailUkkUKMPage />,
+      },
+    ],
+  },
+  {
+    path: '*',
+    element: <></>,
   },
 ]
