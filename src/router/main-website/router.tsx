@@ -183,6 +183,14 @@ import DetailUnitInstitution from '@/pages/modules/website-utama/unit-lembaga/de
 import UKKUKMPage from '@/pages/modules/website-utama/UKK-UKM'
 import { UnitInstitutionBackgroundPage } from '@/pages/modules/website-utama/unit-lembaga/background'
 import DetailUkkUKMPage from '@/pages/modules/website-utama/UKK-UKM/detail'
+import { ThemaChangeColor } from '@/pages/modules/website-utama/settings-menu/template/color'
+import { CreatedEmployee } from '@/pages/modules/website-utama/lecturer-staff/created'
+import LecturerStaff from '@/pages/modules/website-utama/lecturer-staff'
+import StatusEmployeePage from '@/pages/modules/website-utama/lecturer-staff/status-employee'
+import { UpdatedEmployee } from '@/pages/modules/website-utama/lecturer-staff/updated'
+import DetailEmployee from '@/pages/modules/website-utama/lecturer-staff/detail'
+import SetUnitEmployeePage from '@/pages/modules/website-utama/lecturer-staff/set-unit'
+import SetStatusEmployeePage from '@/pages/modules/website-utama/lecturer-staff/set-status'
 
 export const MainWebsiteRouter = [
   {
@@ -682,6 +690,10 @@ export const MainWebsiteRouter = [
           {
             index: true,
             element: <TemplateMainWeb />,
+          },
+          {
+            path: ':id',
+            element: <ThemaChangeColor />,
           },
         ],
       },
@@ -1251,7 +1263,6 @@ export const MainWebsiteRouter = [
   },
   {
     path: 'ukk-ukm',
-    // element: <UKKUKMPage />,
     children: [
       {
         index: true,
@@ -1260,6 +1271,44 @@ export const MainWebsiteRouter = [
       {
         path: 'detail/:id',
         element: <DetailUkkUKMPage />,
+      },
+    ],
+  },
+  {
+    path: 'staff-lecturer',
+    children: [
+      {
+        path: 'data',
+        children: [
+          {
+            index: true,
+            element: <LecturerStaff />,
+          },
+          {
+            path: 'add',
+            element: <CreatedEmployee />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedEmployee />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailEmployee />,
+          },
+        ],
+      },
+      {
+        path: 'status',
+        element: <StatusEmployeePage />,
+      },
+      {
+        path: 'set-unit',
+        element: <SetUnitEmployeePage />,
+      },
+      {
+        path: 'set-status',
+        element: <SetStatusEmployeePage />,
       },
     ],
   },
