@@ -6,6 +6,7 @@ import {
   MdHandshake,
   MdHowToReg,
   MdOutlineRunCircle,
+  MdPeopleAlt,
   MdQuestionAnswer,
   MdWorkspaces,
 } from 'react-icons/md'
@@ -245,6 +246,34 @@ export const MENULIST = [
     name: 'UKK & UKM',
     icon: <FaUsers />,
     path: `${baseDomain}/ukk-ukm`,
+  },
+  {
+    id: 18,
+    name: 'Dosen & Staff',
+    icon: <MdPeopleAlt className={'size-5'} />,
+    path: `${baseDomain}/staff-lecturer`,
+    child: [
+      {
+        id: 181,
+        name: 'Data Dosen & Staff',
+        path: `${baseDomain}/staff-lecturer/data`,
+      },
+      {
+        id: 182,
+        name: 'Status',
+        path: `${baseDomain}/staff-lecturer/status`,
+      },
+      {
+        id: 183,
+        name: 'Set Unit Kerja',
+        path: `${baseDomain}/staff-lecturer/set-unit`,
+      },
+      {
+        id: 184,
+        name: 'Set Status',
+        path: `${baseDomain}/staff-lecturer/set-status`,
+      },
+    ],
   },
   {
     id: 18,

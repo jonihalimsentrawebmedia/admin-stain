@@ -35,7 +35,7 @@ export const SelectBasic = (props: Props) => {
           <SelectContent>
             {data.map((item, k) => (
               <SelectItem key={k} value={item?.value}>
-                {item?.value}
+                {item?.label}
               </SelectItem>
             ))}
           </SelectContent>
