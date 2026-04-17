@@ -20,8 +20,8 @@ export const PrimaryAndFooterColorProdi = () => {
     if (colorPrimary) {
       form.reset({
         warna_admin: colorPrimary?.warna_admin,
-        warna_halaman_utama: colorPrimary?.warna_halaman_utama,
-        warna_background_footer: colorPrimary?.warna_background_footer,
+        // warna_halaman_utama: colorPrimary?.warna_halaman_utama,
+        // warna_background_footer: colorPrimary?.warna_background_footer,
       })
     }
   }, [colorPrimary])
@@ -70,33 +70,33 @@ export const PrimaryAndFooterColorProdi = () => {
             <div className="flex items-center gap-2.5">
               <Input
                 type={'color'}
-                value={colorPrimary?.warna_admin}
+                value={colorPrimary?.warna_admin ?? ''}
                 readOnly
                 className={'w-[50px]'}
               />
               <p>{colorPrimary?.warna_admin}</p>
             </div>
-            <p className="text-gray-500">Warna Halaman Utama</p>
-            <div className="flex items-center gap-2.5">
-              <Input
-                type={'color'}
-                value={colorPrimary?.warna_halaman_utama}
-                readOnly
-                className={'w-[50px]'}
-              />
-              <p>{colorPrimary?.warna_halaman_utama}</p>
-            </div>
+            {/*<p className="text-gray-500">Warna Halaman Utama</p>*/}
+            {/*<div className="flex items-center gap-2.5">*/}
+            {/*  <Input*/}
+            {/*    type={'color'}*/}
+            {/*    value={colorPrimary?.warna_halaman_utama}*/}
+            {/*    readOnly*/}
+            {/*    className={'w-[50px]'}*/}
+            {/*  />*/}
+            {/*  <p>{colorPrimary?.warna_halaman_utama}</p>*/}
+            {/*</div>*/}
 
-            <p className="text-gray-500">Warna background Footer</p>
-            <div className="flex items-center gap-2.5">
-              <Input
-                type={'color'}
-                value={colorPrimary?.warna_background_footer}
-                readOnly
-                className={'w-[50px]'}
-              />
-              <p>{colorPrimary?.warna_background_footer}</p>
-            </div>
+            {/*<p className="text-gray-500">Warna background Footer</p>*/}
+            {/*<div className="flex items-center gap-2.5">*/}
+            {/*  <Input*/}
+            {/*    type={'color'}*/}
+            {/*    value={colorPrimary?.warna_background_footer}*/}
+            {/*    readOnly*/}
+            {/*    className={'w-[50px]'}*/}
+            {/*  />*/}
+            {/*  <p>{colorPrimary?.warna_background_footer}</p>*/}
+            {/*</div>*/}
           </>
         ) : (
           <>
@@ -132,29 +132,29 @@ export const PrimaryAndFooterColorProdi = () => {
                   {form.watch('warna_admin')}
                 </div>
 
-                <div className="flex items-center gap-1.5">
-                  <TextInput
-                    name={'warna_halaman_utama'}
-                    form={form}
-                    label={'Warna Halaman Utama'}
-                    type={'color'}
-                    inputClassName={'w-[50px]'}
-                    isRow
-                  />
-                  {form.watch('warna_halaman_utama')}
-                </div>
+                {/*<div className="flex items-center gap-1.5">*/}
+                {/*  <TextInput*/}
+                {/*    name={'warna_halaman_utama'}*/}
+                {/*    form={form}*/}
+                {/*    label={'Warna Halaman Utama'}*/}
+                {/*    type={'color'}*/}
+                {/*    inputClassName={'w-[50px]'}*/}
+                {/*    isRow*/}
+                {/*  />*/}
+                {/*  {form.watch('warna_halaman_utama')}*/}
+                {/*</div>*/}
 
-                <div className="flex items-center gap-1.5">
-                  <TextInput
-                    name={'warna_background_footer'}
-                    form={form}
-                    label={'Warna Background Footer'}
-                    type={'color'}
-                    inputClassName={'w-[50px]'}
-                    isRow
-                  />
-                  {form.watch('warna_background_footer')}
-                </div>
+                {/*<div className="flex items-center gap-1.5">*/}
+                {/*  <TextInput*/}
+                {/*    name={'warna_background_footer'}*/}
+                {/*    form={form}*/}
+                {/*    label={'Warna Background Footer'}*/}
+                {/*    type={'color'}*/}
+                {/*    inputClassName={'w-[50px]'}*/}
+                {/*    isRow*/}
+                {/*  />*/}
+                {/*  {form.watch('warna_background_footer')}*/}
+                {/*</div>*/}
 
                 <ButtonTitleGroup
                   label={''}

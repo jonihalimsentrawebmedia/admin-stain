@@ -47,6 +47,7 @@ import StructureOrganitationInstitutionView from '@/pages/modules/website-lembag
 import HummanResourceInstitutaionView from '@/pages/modules/website-lembaga/profile/sumber-daya-manusia/HummanResourceInstitutaionView'
 import LembagaView from '@/pages/modules/website-lembaga/lembaga/LembagaView'
 import LembagaEditView from '@/pages/modules/website-lembaga/lembaga/edit/LembagaEditView'
+import { ThemaChangeColorInstitution } from '@/pages/modules/website-lembaga/pengaturan/template/color'
 
 export const WebsiteInstitutionRouter = [
   {
@@ -169,7 +170,17 @@ export const WebsiteInstitutionRouter = [
       },
       {
         path: 'template',
-        element: <SettingTemplateServiceView />,
+        // element: <SettingTemplateServiceView />,
+        children: [
+          {
+            index: true,
+            element: <SettingTemplateServiceView />,
+          },
+          {
+            path: ':id',
+            element: <ThemaChangeColorInstitution />,
+          },
+        ],
       },
     ],
   },
@@ -267,58 +278,58 @@ export const WebsiteInstitutionRouter = [
   },
 
   {
-    path:"profile",
-    children:[
+    path: 'profile',
+    children: [
       {
-        path:"visi-misi",
-        children:[
+        path: 'visi-misi',
+        children: [
           {
-            index:true,
-            element:<VisiMisiView/>
+            index: true,
+            element: <VisiMisiView />,
           },
           {
-            path:"add",
-             element:<VisiMisiLembagaAdd/>
+            path: 'add',
+            element: <VisiMisiLembagaAdd />,
           },
           {
-            path:"edit/:id",
-             element:<VisiMisiLembagaEdit/>
+            path: 'edit/:id',
+            element: <VisiMisiLembagaEdit />,
           },
-        ]
+        ],
       },
       {
-        path:"prestasi",
-        element:<PerformanceInstitutaionView/>
+        path: 'prestasi',
+        element: <PerformanceInstitutaionView />,
       },
       {
-        path:"selayang-pandang",
-        element:<SelayangPandangView/>
+        path: 'selayang-pandang',
+        element: <SelayangPandangView />,
       },
       {
-        path:"program-kerja",
-        element:<WorkProgramInstitutaionView/>
+        path: 'program-kerja',
+        element: <WorkProgramInstitutaionView />,
       },
       {
-        path:"struktur-organisasi",
-        element:<StructureOrganitationInstitutionView/>
+        path: 'struktur-organisasi',
+        element: <StructureOrganitationInstitutionView />,
       },
       {
-        path:"sumber-daya-manusia",
-        element:<HummanResourceInstitutaionView/>
+        path: 'sumber-daya-manusia',
+        element: <HummanResourceInstitutaionView />,
       },
-    ]
+    ],
   },
   {
-    path:"lembaga",
-    children:[
+    path: 'lembaga',
+    children: [
       {
-        index:true,
-        element:<LembagaView/>
+        index: true,
+        element: <LembagaView />,
       },
       {
-        path:"edit",
-        element:<LembagaEditView/>
+        path: 'edit',
+        element: <LembagaEditView />,
       },
-    ]
-  }
+    ],
+  },
 ]

@@ -5,6 +5,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import type { ThemaLembaga } from './model'
 import ButtonSwitch from './components/ButtonSwitch'
 import { format } from 'date-fns'
+import { FaGear } from 'react-icons/fa6'
 
 const SettingTemplateServiceViewModel = () => {
   const [searchParams] = useSearchParams()
@@ -43,8 +44,29 @@ const SettingTemplateServiceViewModel = () => {
         return (
           <div>
             <div>{format(row.original.tanggal_aktif, 'd-M-yyyy, HH:mm')}</div>
-            <div>(Oleh: {row.original.nama_user_updated??"-"})</div>
+            <div>(Oleh: {row.original.nama_user_updated ?? '-'})</div>
           </div>
+        )
+      },
+    },
+    {
+      accessorKey: 'id_template',
+      header: 'Pengaturan Warna',
+      cell: ({ row }) => {
+        const data = row?.original
+        return (
+          <>
+            <Link to={`${data?.thema}`}>
+              <Button
+                variant={'outline'}
+                className={'border-primary hover:text-primary text-primary'}
+              >
+                <FaGear />
+                Atur Warna
+              </Button>
+            </Link>
+            <p>Warna :{data?.default === 'DEFAULT' ? 'Default' : 'Custom'}</p>
+          </>
         )
       },
     },

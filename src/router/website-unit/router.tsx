@@ -61,6 +61,7 @@ import DashboardAdminUnit from '@/pages/modules/website-unit/dashboard'
 import { LogActivityFacilitiesUnitPage } from '@/pages/modules/website-unit/public-content/Facilities/log'
 import { PrimaryAndFooterColorUnit } from '@/pages/modules/website-unit/settings/color'
 import { TemplateWebSettings } from '@/pages/modules/website-unit/settings/template-web'
+import { ThemaChangeColorUnit } from '@/pages/modules/website-unit/settings/template-web/color'
 
 export const WebsiteUnitRouter = [
   {
@@ -408,7 +409,17 @@ export const WebsiteUnitRouter = [
       },
       {
         path: 'template',
-        element: <TemplateWebSettings />,
+        // element: <TemplateWebSettings />,
+        children: [
+          {
+            index: true,
+            element: <TemplateWebSettings />,
+          },
+          {
+            path: ':id',
+            element: <ThemaChangeColorUnit />,
+          },
+        ],
       },
     ],
   },
