@@ -4,4 +4,5 @@ export interface IThemeUnit {
   image: string
   tanggal_aktif: string | null
   nama_user_updated: string | null
+  default: string
 }

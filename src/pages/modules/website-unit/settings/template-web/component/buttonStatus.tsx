@@ -1,10 +1,10 @@
 import { Switch } from '@/components/ui/switch.tsx'
-import type { IThemeProdi } from '@/pages/modules/website-prodi/settings/template-website/data/types.ts'
+import type { IThemeUnit } from '../data/types'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 
-export const ButtonStatus = (data: IThemeProdi) => {
+export const ButtonStatus = (data: IThemeUnit) => {
   const queryClient = useQueryClient()
 
   const HandleCheckedChange = async () => {

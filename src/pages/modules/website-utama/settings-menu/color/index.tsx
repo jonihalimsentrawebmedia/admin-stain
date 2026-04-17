@@ -20,8 +20,8 @@ export const ChangePrimaryAndFooterColor = () => {
     if (colorPrimary) {
       form.reset({
         warna_admin: colorPrimary?.warna_admin,
-        warna_halaman_utama: colorPrimary?.warna_halaman_utama,
-        warna_background_footer: colorPrimary?.warna_background_footer,
+        // warna_halaman_utama: colorPrimary?.warna_halaman_utama,
+        // warna_background_footer: colorPrimary?.warna_background_footer,
       })
     }
   }, [colorPrimary])

@@ -57,6 +57,7 @@ import { ServiceProdiPage } from '@/pages/modules/website-prodi/service'
 import { LogDataServicePage } from '@/pages/modules/website-prodi/service/log'
 import { PrimaryAndFooterColorProdi } from '@/pages/modules/website-prodi/settings/color'
 import { TemplateWebsite } from '@/pages/modules/website-prodi/settings/template-website'
+import { ThemaChangeColorProdi } from '@/pages/modules/website-prodi/settings/template-website/color'
 
 export const WebsiteProdiRouter = [
   {
@@ -377,7 +378,16 @@ export const WebsiteProdiRouter = [
       },
       {
         path: 'template',
-        element: <TemplateWebsite />,
+        children: [
+          {
+            index: true,
+            element: <TemplateWebsite />,
+          },
+          {
+            path: ':id',
+            element: <ThemaChangeColorProdi />,
+          },
+        ],
       },
     ],
   },

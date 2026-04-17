@@ -11,7 +11,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import ButtonReset from './component/ButtonReset'
 
-export const ThemaChangeColor = () => {
+export const ThemaChangeColorProdi = () => {
   const { id } = useParams()
   const { detail } = UseGetTemplateDetail(id as string)
 
@@ -30,11 +30,11 @@ export const ThemaChangeColor = () => {
 
   const HandleSave = async (e: any) => {
     setLoading(true)
-    await AxiosClient.post(`/website-utama/thema/${id}/color`, e)
+    await AxiosClient.post(`/prodi/thema/${id}/color`, e)
       .then((res) => {
         if (res.data.status) {
           setLoading(false)
-          navigate('/modules/website-utama/pengaturan-menu/template')
+          navigate('/modules/website-prodi/settings/template')
           toast.success(res.data.message || 'Success Pengajuan tambah data berita')
         }
       })
