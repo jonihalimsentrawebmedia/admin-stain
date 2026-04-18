@@ -4,9 +4,11 @@ import { Fragment, type ReactNode } from 'react'
 import { HiPencil, HiPlus } from 'react-icons/hi'
 import { useNavigate } from 'react-router-dom'
 import { IconBackTitle } from '../icon'
+import { clsx } from 'clsx'
 
 interface Props {
   label: string
+  rootButtonClassName?: string
   buttonGroup: {
     type: 'add' | 'edit' | 'save' | 'cancel' | 'custom'
     label?: string
@@ -19,7 +21,7 @@ interface Props {
 }
 
 const ButtonTitleGroup = (props: Props) => {
-  const { buttonGroup, label, isBack, link } = props
+  const { buttonGroup, label, isBack, link, rootButtonClassName } = props
   const navigate = useNavigate()
   return (
     <div className="flex gap-4 flex-wrap items-center justify-between">
@@ -41,7 +43,7 @@ const ButtonTitleGroup = (props: Props) => {
         )}
         <p className="text-3xl font-semibold text-neutral">{label}</p>
       </div>
-      <div className="flex gap-4 items-center">
+      <div className={clsx(rootButtonClassName, `flex gap-4 items-start`)}>
         {buttonGroup.map((row, K) => {
           if (row.element) {
             return <Fragment key={K}>{row.element}</Fragment>

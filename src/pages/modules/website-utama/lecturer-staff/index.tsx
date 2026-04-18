@@ -3,6 +3,7 @@ import { ColumnsEmployee } from '@/pages/modules/website-utama/lecturer-staff/da
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import { ButtonSyncLecturer } from '@/pages/modules/website-utama/lecturer-staff/component/buttonSync.tsx'
 
 const LecturerStaff = () => {
   const [searchParams] = useSearchParams()
@@ -22,7 +23,12 @@ const LecturerStaff = () => {
     <>
       <div className={'space-y-4'}>
         <ButtonTitleGroup
+          rootButtonClassName={'items-stat!'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonSyncLecturer />,
+            },
             {
               type: 'add',
               label: 'Tambah Data',
