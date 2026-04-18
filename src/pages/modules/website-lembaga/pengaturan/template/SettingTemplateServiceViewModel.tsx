@@ -1,6 +1,5 @@
 import { Button } from '@/components/ui/button'
 import type { ColumnDef } from '@tanstack/react-table'
-import { MdOpenInNew } from 'react-icons/md'
 import { Link, useSearchParams } from 'react-router-dom'
 import type { ThemaLembaga } from './model'
 import ButtonSwitch from './components/ButtonSwitch'
@@ -70,22 +69,21 @@ const SettingTemplateServiceViewModel = () => {
         )
       },
     },
-
     // ✅ Aksi (Ikon Edit dan Hapus)
-    {
-      accessorKey: 'aksi',
-      header: 'Lihat Demo',
-      cell: () => {
-        return (
-          <Link to={'#'}>
-            <Button variant={'outline'} className="border-primary text-primary">
-              <MdOpenInNew />
-              Demo Template Website
-            </Button>
-          </Link>
-        )
-      },
-    },
+    // {
+    //   accessorKey: 'aksi',
+    //   header: 'Lihat Demo',
+    //   cell: () => {
+    //     return (
+    //       <Link to={'#'}>
+    //         <Button variant={'outline'} className="border-primary text-primary">
+    //           <MdOpenInNew />
+    //           Demo Template Website
+    //         </Button>
+    //       </Link>
+    //     )
+    //   },
+    // },
   ]
   return {
     columns,

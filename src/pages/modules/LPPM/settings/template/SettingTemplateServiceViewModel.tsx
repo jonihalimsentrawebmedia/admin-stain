@@ -1,12 +1,10 @@
 import { Button } from '@/components/ui/button'
 import type { ColumnDef } from '@tanstack/react-table'
-import { MdOpenInNew } from 'react-icons/md'
 import { Link, useSearchParams } from 'react-router-dom'
 import ButtonSwitch from './components/ButtonSwitch'
 import { format } from 'date-fns'
 import type { ThemaLPPM } from './model'
 import { FaGear } from 'react-icons/fa6'
-
 
 const SettingTemplateServiceViewModel = () => {
   const [searchParams] = useSearchParams()
@@ -45,7 +43,7 @@ const SettingTemplateServiceViewModel = () => {
         return (
           <div>
             <div>{format(row.original.tanggal_aktif, 'd-M-yyyy, HH:mm')}</div>
-            <div>(Oleh: {row.original.nama_user_updated??"-"})</div>
+            <div>(Oleh: {row.original.nama_user_updated ?? '-'})</div>
           </div>
         )
       },
@@ -72,22 +70,21 @@ const SettingTemplateServiceViewModel = () => {
         )
       },
     },
-
     // ✅ Aksi (Ikon Edit dan Hapus)
-    {
-      accessorKey: 'aksi',
-      header: 'Lihat Demo',
-      cell: () => {
-        return (
-          <Link to={'#'}>
-            <Button variant={'outline'} className="border-primary text-primary">
-              <MdOpenInNew />
-              Demo Template Website
-            </Button>
-          </Link>
-        )
-      },
-    },
+    // {
+    //   accessorKey: 'aksi',
+    //   header: 'Lihat Demo',
+    //   cell: () => {
+    //     return (
+    //       <Link to={'#'}>
+    //         <Button variant={'outline'} className="border-primary text-primary">
+    //           <MdOpenInNew />
+    //           Demo Template Website
+    //         </Button>
+    //       </Link>
+    //     )
+    //   },
+    // },
   ]
   return {
     columns,
