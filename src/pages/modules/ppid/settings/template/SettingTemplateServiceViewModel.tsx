@@ -71,22 +71,21 @@ const SettingTemplateServiceViewModel = () => {
         )
       },
     },
-
     // ✅ Aksi (Ikon Edit dan Hapus)
-    {
-      accessorKey: 'aksi',
-      header: 'Lihat Demo',
-      cell: () => {
-        return (
-          <Link to={'#'}>
-            <Button variant={'outline'} className="border-primary text-primary">
-              <MdOpenInNew />
-              Demo Template Website
-            </Button>
-          </Link>
-        )
-      },
-    },
+    // {
+    //   accessorKey: 'aksi',
+    //   header: 'Lihat Demo',
+    //   cell: () => {
+    //     return (
+    //       <Link to={'#'}>
+    //         <Button variant={'outline'} className="border-primary text-primary">
+    //           <MdOpenInNew />
+    //           Demo Template Website
+    //         </Button>
+    //       </Link>
+    //     )
+    //   },
+    // },
   ]
   return {
     columns,
