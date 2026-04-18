@@ -19,7 +19,7 @@ const AboutProdiView = () => {
 
   const [loading, setLoading] = useState(false)
   const [isEditContent, setIsEditContent] = useState(false)
-  const [image, setImage] = useState([''])
+  const [image, setImage] = useState<{ is_thumbnail: boolean; url: string }[]>([])
 
   const form = useForm()
 
@@ -45,29 +45,39 @@ const AboutProdiView = () => {
 
   useEffect(() => {
     if (about) {
-      let tempImage = []
-      for (let i = 0; i < 3; i++) {
-        if (about.gambar !== null && about.gambar[i]) {
-          tempImage.push(about.gambar[i])
-        } else {
-          tempImage.push('')
-        }
-      }
+      const tempImage = Array.from({ length: 3 }, (_, i) => {
+        return about.gambar?.[i] || { is_thumbnail: false, url: '' }
+      })
       setImage(tempImage)
+
+      form.reset({
+        isi_konten: about.isi_konten || '',
+        gambar: tempImage,
+      })
     }
   }, [about])
 
   useEffect(() => {
-    if (image) {
-      const temp = form.watch()
-      form.reset({
-        ...temp,
-        gambar: image,
-      })
-    }
+    form.setValue('gambar', image)
   }, [image])
 
-  console.log(about)
+  const updateImage = (index: number, newImage: { is_thumbnail: boolean; url: string }) => {
+    setImage((prev) => {
+      const updated = [...prev]
+
+      // Jika user mengaktifkan thumbnail
+      if (newImage.is_thumbnail) {
+        // Matikan semua thumbnail yang lain
+        updated.forEach((img, i) => {
+          img.is_thumbnail = i === index
+        })
+      } else {
+        updated[index] = newImage
+      }
+
+      return updated
+    })
+  }
 
   return (
     <Form {...form}>
@@ -122,11 +132,7 @@ const AboutProdiView = () => {
                   key={index}
                   img={item}
                   isEdit={isEditContent}
-                  setImage={(value) => {
-                    const temp = [...image]
-                    temp[index] = value
-                    setImage(temp)
-                  }}
+                  setImage={(newImage) => updateImage(index, newImage)}
                 />
               ))}
             </div>

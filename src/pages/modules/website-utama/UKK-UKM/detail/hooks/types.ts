@@ -3,7 +3,7 @@ export interface IAboutUkkUkm {
   id_unit: string
   isi_konten: string
 
-  gambar: string | null
+  gambar: { is_thumbnail: boolean; url: string }[]
 
   created_at: string
   created_user: string
