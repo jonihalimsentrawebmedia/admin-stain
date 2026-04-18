@@ -1,11 +1,11 @@
-import { Outlet } from 'react-router-dom'
-import { Header } from './header'
-import { Sidebar } from './sidebar.tsx'
-import { useEffect, useState } from 'react'
-import { useMobile } from '@/utils/useMobile.tsx'
+import {Outlet} from 'react-router-dom'
+import {Header} from './header'
+import {Sidebar} from './sidebar.tsx'
+import {useEffect, useState} from 'react'
+import {useMobile} from '@/utils/useMobile.tsx'
 
 export default function MainLayout() {
-  const { isMobile } = useMobile()
+  const {isMobile} = useMobile()
   const [collapsed, setCollapsed] = useState(false)
 
   useEffect(() => {
@@ -16,19 +16,22 @@ export default function MainLayout() {
   return (
     <>
       <div className="h-screen flex flex-col bg-[#F8FFF9]">
-        <Header collapsed={collapsed} setCollapsed={setCollapsed} />
+        <Header collapsed={collapsed} setCollapsed={setCollapsed}/>
 
         <div className="flex flex-1 overflow-hidden">
-          <Sidebar collapsed={collapsed} />
+          <Sidebar collapsed={collapsed}/>
 
-          <main className="flex-1 overflow-auto p-4">
-            <Outlet />
+          <main className="flex-1 overflow-auto">
+            <div className="p-4">
+              <Outlet/>
+            </div>
+            <footer className={'bg-white shadow mt-5 text-center border'}>Admin Website © {new Date().getFullYear()}</footer>
           </main>
         </div>
 
-        <footer className="text-center py-2 text-xs text-gray-400 border-t">
-          Admin Website © 2025
-        </footer>
+        {/*<footer className="text-center py-2 text-xs text-gray-400 border-t">*/}
+        {/*  Admin Website © 2025*/}
+        {/*</footer>*/}
       </div>
     </>
   )

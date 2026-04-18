@@ -37,7 +37,7 @@ const DetailEmployee = () => {
             <p className="text-gray-500">NIK</p>
             <p>{employee?.nik}</p>
             <p className="text-gray-500">Tempat Lahir</p>
-            <p>{employee?.tanggal_lahir}</p>
+            <p>{employee?.tempat_lahir}</p>
             <p className="text-gray-500">Tanggal Lahir</p>
             <p>{employee?.tanggal_lahir ? format(employee?.tanggal_lahir, 'dd-MM-yyy') : ''}</p>
             <p className="text-gray-500">No. HP</p>
@@ -56,7 +56,7 @@ const DetailEmployee = () => {
           <p className="text-gray-500">NIDN</p>
           <p>{employee?.nidn}</p>
           <p className="text-gray-500">Unit Kerja</p>
-          <p>{employee?.unit_kerja}</p>
+          <p>{employee?.nama_unit_kerja}</p>
           <p className="text-gray-500">Golongan</p>
           <p>{employee?.golongan}</p>
           <p className="text-gray-500">Jabatan Struktural</p>
