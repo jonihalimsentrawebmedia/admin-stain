@@ -2,6 +2,9 @@ import type { ColumnDef } from '@tanstack/react-table'
 import type { IThemeUnit } from './types.ts'
 import { format } from 'date-fns'
 import { ButtonStatus } from '../component/buttonStatus.tsx'
+import { Link } from 'react-router-dom'
+import { Button } from '@/components/ui/button.tsx'
+import { FaGear } from 'react-icons/fa6'
 
 export const ColumnsTemplateWebsite = () => {
   const columns: ColumnDef<IThemeUnit>[] = [
@@ -44,6 +47,27 @@ export const ColumnsTemplateWebsite = () => {
         const data = row?.original
         return (
           <p>{data?.tanggal_aktif ? format(data?.tanggal_aktif, 'dd MMMM yyyy, HH:mm:ss') : '-'}</p>
+        )
+      },
+    },
+    {
+      accessorKey: 'id_template',
+      header: 'Pengaturan Warna',
+      cell: ({ row }) => {
+        const data = row?.original
+        return (
+          <>
+            <Link to={`${data?.thema}`}>
+              <Button
+                variant={'outline'}
+                className={'border-primary hover:text-primary text-primary'}
+              >
+                <FaGear />
+                Atur Warna
+              </Button>
+            </Link>
+            <p>Warna :{data?.default === 'DEFAULT' ? 'Default' : 'Custom'}</p>
+          </>
         )
       },
     },

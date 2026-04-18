@@ -66,6 +66,7 @@ import { ApplicantInternshipVacancy } from '@/pages/modules/pusat-karir/service/
 import { ResultStatistic } from '@/pages/modules/pusat-karir/survey/statistic'
 import { UserProfilePage } from '@/pages/modules/website-utama/user-profile'
 import { ChangePassword } from '@/pages/modules/website-utama/change-password'
+import { ThemaChangeColorCarrierCenter } from '@/pages/modules/pusat-karir/settings/template-web/color'
 
 export const CarrierCenterRoute = [
   {
@@ -363,7 +364,17 @@ export const CarrierCenterRoute = [
       },
       {
         path: 'template',
-        element: <TemplateWebCarrierSettings />,
+        // element: <TemplateWebCarrierSettings />,
+        children: [
+          {
+            index: true,
+            element: <TemplateWebCarrierSettings />,
+          },
+          {
+            path: ':id',
+            element: <ThemaChangeColorCarrierCenter />,
+          },
+        ],
       },
       {
         path: 'color',

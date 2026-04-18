@@ -11,7 +11,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import ButtonReset from './component/ButtonReset'
 
-export const ThemaChangeColorInstitution = () => {
+export const ThemaChangeColorInstitutionLppm = () => {
   const { id } = useParams()
   const { detail } = UseGetTemplateDetail(id as string)
 
@@ -30,11 +30,11 @@ export const ThemaChangeColorInstitution = () => {
 
   const HandleSave = async (e: any) => {
     setLoading(true)
-    await AxiosClient.post(`/lembaga/thema/${id}/color`, e)
+    await AxiosClient.post(`/lppm/thema/${id}/color`, e)
       .then((res) => {
         if (res.data.status) {
           setLoading(false)
-          navigate('/modules/website-lembaga/pengaturan/template')
+          navigate('/modules/lppm/settings/template')
           toast.success(res.data.message || 'Success Pengajuan tambah data berita')
         }
       })

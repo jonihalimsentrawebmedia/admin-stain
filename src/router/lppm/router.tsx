@@ -98,6 +98,7 @@ import { CreatedFormActivity } from '@/pages/modules/LPPM/research/schema/intern
 import { UpdatedFormActivity } from '@/pages/modules/LPPM/research/schema/internal/activity/component/updated.tsx'
 import { DetailActivityProgramInternal } from '@/pages/modules/LPPM/research/schema/internal/activity/component/detail.tsx'
 import { ListJournalPage } from '@/pages/modules/LPPM/publication-hki/journal/list'
+import { ThemaChangeColorInstitutionLppm } from '@/pages/modules/LPPM/settings/template/color'
 
 export const routesLPPM = [
   {
@@ -570,7 +571,17 @@ export const routesLPPM = [
       },
       {
         path: 'template',
-        element: <SettingTemplateServiceView />,
+        // element: <SettingTemplateServiceView />,
+        children: [
+          {
+            index: true,
+            element: <SettingTemplateServiceView />,
+          },
+          {
+            path: ':id',
+            element: <ThemaChangeColorInstitutionLppm />,
+          },
+        ],
       },
     ],
   },

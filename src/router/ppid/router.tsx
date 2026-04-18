@@ -50,6 +50,7 @@ import UnitView from '@/pages/modules/ppid/unit/UnitView'
 import { ChangePassword } from '@/pages/modules/website-utama/change-password'
 import { UserProfilePage } from '@/pages/modules/website-utama/user-profile'
 import { SettingsBackground } from '@/pages/modules/ppid/settings/background'
+import { ThemaChangeColorPPID } from '@/pages/modules/ppid/settings/template/color'
 
 export const routesPPID = [
   {
@@ -230,7 +231,17 @@ export const routesPPID = [
       },
       {
         path: 'template',
-        element: <SettingTemplateServiceView />,
+        // element: <SettingTemplateServiceView />,
+        children: [
+          {
+            index: true,
+            element: <SettingTemplateServiceView />,
+          },
+          {
+            path: ':id',
+            element: <ThemaChangeColorPPID />,
+          },
+        ],
       },
       {
         path: 'video',
