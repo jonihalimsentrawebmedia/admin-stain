@@ -52,7 +52,7 @@ export const ButtonSyncLecturer = () => {
   return (
     <>
       <div className="flex flex-col items-start gap-1.5">
-        <Button onClick={() => setOpen(!open)} disabled={!!response}>
+        <Button onClick={() => setOpen(!open)} disabled={!!response && !response?.is_success}>
           {!!response && !response?.is_success ? (
             <>
               <Spinner />
@@ -65,7 +65,7 @@ export const ButtonSyncLecturer = () => {
             </>
           )}
         </Button>
-        {response && (
+        {!!response && !response?.is_success && (
           <p className="text-xs text-primary font-semibold">
             Menunggu {response?.data_count?.job_can_running} Proses
           </p>
