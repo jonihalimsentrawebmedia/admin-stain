@@ -9,7 +9,6 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
-import { UseGetUniversityDomainExist } from '@/pages/modules/website-utama/select-university/hooks'
 import { UseGetIdentityPublic } from '@/pages/login/hooks'
 import { UseGetUnitList } from '@/pages/modules/website-unit/select-unit/hook'
 
@@ -24,10 +23,10 @@ export const SelectProdi = () => {
     id_university: '',
     id_faculty: '',
   })
-  const { satuanOrganisasi: university, loading: load1 } = UseGetUniversityDomainExist({
+  const { unitList: university, loading: load1 } = UseGetUnitList({
     kelompok: 'UNIVERSITAS',
   })
-  const { satuanOrganisasi: faculty, loading: load2 } = UseGetUniversityDomainExist({
+  const { unitList: faculty, loading: load2 } = UseGetUnitList({
     kelompok: 'FAKULTAS',
     id_parent: parentId?.id_university,
   })
