@@ -46,6 +46,7 @@ import { LandingPageSPI } from '@/pages/modules/SPI/settings/landing-page'
 import { SettingsBackground } from '@/pages/modules/SPI/settings/background'
 import ColorSettingSPI from '@/pages/modules/SPI/settings/color/ColorSettingService.tsx'
 import { TemplateWebSPI } from '@/pages/modules/SPI/settings/template-web'
+import { ThemaChangeColorSPI } from '@/pages/modules/SPI/settings/template-web/color'
 
 export const SPI_ROUTES = [
   {
@@ -311,7 +312,17 @@ export const SPI_ROUTES = [
       },
       {
         path: 'template',
-        element: <TemplateWebSPI />,
+        // element: <TemplateWebSPI />,
+        children: [
+          {
+            index: true,
+            element: <TemplateWebSPI />,
+          },
+          {
+            path: ':id',
+            element: <ThemaChangeColorSPI />,
+          },
+        ],
       },
     ],
   },

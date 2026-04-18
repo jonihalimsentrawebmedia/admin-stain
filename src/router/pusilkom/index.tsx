@@ -59,6 +59,7 @@ import { CreatedAdvantage } from '@/pages/modules/Pulsikom/advantage/created'
 import { UpdatedAdvantage } from '@/pages/modules/Pulsikom/advantage/updated'
 import { SettingsBackground } from '@/pages/modules/Pulsikom/settings/background'
 import { InboxMessage } from '@/pages/modules/Pulsikom/inbox'
+import { ThemaChangeColorPusilkom } from '@/pages/modules/Pulsikom/settings/template-web/color'
 
 export const PusilkomRoutes = [
   {
@@ -311,7 +312,17 @@ export const PusilkomRoutes = [
       },
       {
         path: 'template',
-        element: <TemplateWebPulsikomSettings />,
+        // element: <TemplateWebPulsikomSettings />,
+        children: [
+          {
+            index: true,
+            element: <TemplateWebPulsikomSettings />,
+          },
+          {
+            path: ':id',
+            element: <ThemaChangeColorPusilkom />,
+          },
+        ],
       },
     ],
   },

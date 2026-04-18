@@ -107,6 +107,7 @@ import { AlumniMessageInbox } from '@/pages/modules/website-fakultas/community/a
 import { UserProfilePage } from '@/pages/modules/website-utama/user-profile'
 import { ChangePassword } from '@/pages/modules/website-utama/change-password'
 import { FacultyGalleryProfile } from '@/pages/modules/website-fakultas/about-faculty/gallery'
+import { ThemaChangeColorFaculty } from '@/pages/modules/website-fakultas/settings/template-web/color'
 
 export const RouterFaculty = [
   {
@@ -770,7 +771,17 @@ export const RouterFaculty = [
       },
       {
         path: 'template',
-        element: <TemplateWebFacultySettings />,
+        // element: <TemplateWebFacultySettings />,
+        children: [
+          {
+            index: true,
+            element: <TemplateWebFacultySettings />,
+          },
+          {
+            path: ':id',
+            element: <ThemaChangeColorFaculty />,
+          },
+        ],
       },
     ],
   },
