@@ -1,6 +1,5 @@
 import { Button } from '@/components/ui/button'
 import type { ColumnDef } from '@tanstack/react-table'
-import { MdOpenInNew } from 'react-icons/md'
 import { Link, useSearchParams } from 'react-router-dom'
 import ButtonSwitch from './components/ButtonSwitch'
 import { format } from 'date-fns'
