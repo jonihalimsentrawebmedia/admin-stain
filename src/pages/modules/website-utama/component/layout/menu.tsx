@@ -8,6 +8,7 @@ import {
   MdOutlineRunCircle,
   MdPeopleAlt,
   MdQuestionAnswer,
+  MdUnarchive,
   MdWorkspaces,
 } from 'react-icons/md'
 import { IoBusinessSharp, IoSchool, IoStorefront } from 'react-icons/io5'
@@ -212,6 +213,12 @@ export const MENULIST = [
     icon: <MdChecklist className={'size-5'} />,
   },
   {
+    id: 21,
+    name: 'Publikasi',
+    path: `${baseDomain}/publication`,
+    icon: <MdUnarchive className={'size-5'} />,
+  },
+  {
     id: 12,
     name: 'Kehidupan Kampus',
     path: `${baseDomain}/campus-life`,
@@ -276,25 +283,25 @@ export const MENULIST = [
     ],
   },
   {
-    id: 18,
+    id: 19,
     name: 'Pertanyaan',
     path: `${baseDomain}/pertanyaan`,
     icon: <MdQuestionAnswer className={'size-5'} />,
     child: [
       {
-        id: 181,
+        id: 191,
         name: 'Kotak Masuk',
         path: `${baseDomain}/pertanyaan/kotak-masuk`,
       },
       {
-        id: 182,
+        id: 192,
         name: 'F.A.Q',
         path: `${baseDomain}/pertanyaan/faq`,
       },
     ],
   },
   {
-    id: 19,
+    id: 20,
     name: 'Jalur Pendaftaran',
     path: `${baseDomain}/jalur-pendaftaran`,
     icon: <MdHowToReg className={'size-5'} />,

@@ -191,6 +191,9 @@ import { UpdatedEmployee } from '@/pages/modules/website-utama/lecturer-staff/up
 import DetailEmployee from '@/pages/modules/website-utama/lecturer-staff/detail'
 import SetUnitEmployeePage from '@/pages/modules/website-utama/lecturer-staff/set-unit'
 import SetStatusEmployeePage from '@/pages/modules/website-utama/lecturer-staff/set-status'
+import PublicationPage from '@/pages/modules/website-utama/publication'
+import ListDataPublication from '@/pages/modules/website-utama/publication/List-data'
+import { PublicationLanguagePage } from '@/pages/modules/website-utama/publication/language'
 
 export const MainWebsiteRouter = [
   {
@@ -890,6 +893,23 @@ export const MainWebsiteRouter = [
       {
         path: 'update',
         element: <AddPageAcademicRule />,
+      },
+    ],
+  },
+  {
+    path: 'publication',
+    children: [
+      {
+        index: true,
+        element: <PublicationPage />,
+      },
+      {
+        path: 'list/:id',
+        element: <ListDataPublication />,
+      },
+      {
+        path: 'list/:id/language/:id_publication',
+        element: <PublicationLanguagePage />,
       },
     ],
   },
