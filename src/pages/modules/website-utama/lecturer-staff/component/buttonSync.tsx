@@ -8,6 +8,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { messaging, onMessage } from '@/provider/firebase.tsx'
 import type { IJobStatus } from '@/pages/modules/website-prodi/profile/dosen'
+import { Spinner } from '@/components/ui/spinner.tsx'
 
 export const ButtonSyncLecturer = () => {
   const [open, setOpen] = useState(false)
@@ -52,8 +53,17 @@ export const ButtonSyncLecturer = () => {
     <>
       <div className="flex flex-col items-start gap-1.5">
         <Button onClick={() => setOpen(!open)} disabled={!!response}>
-          <IoSyncOutline />
-          Sinkronisasi SISTER
+          {!!response && !response?.is_success ? (
+            <>
+              <Spinner />
+              Sinkronisasi Berlangsung
+            </>
+          ) : (
+            <>
+              <IoSyncOutline />
+              Sinkronisasi SISTER
+            </>
+          )}
         </Button>
         {response && (
           <p className="text-xs text-primary font-semibold">
