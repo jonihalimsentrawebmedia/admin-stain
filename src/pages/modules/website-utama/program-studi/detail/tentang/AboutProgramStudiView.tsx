@@ -1,7 +1,7 @@
 import CardInput from '@/components/common/card/CardInput'
 import { Button } from '@/components/ui/button'
 
-import { useEffect, useState } from 'react'
+import { type FormEvent, useEffect, useState } from 'react'
 import { HiPencil } from 'react-icons/hi'
 import useGetAbout from '../controller/useGetAbout'
 import usePostAbout from '../controller/post/usePostAbout'
@@ -14,34 +14,54 @@ const AboutProgramStudiView = () => {
   const { aboutDetail } = useGetAbout()
   const { form, handleSave, loading } = usePostAbout()
   const [isEditContent, setIsEditContent] = useState(false)
-  const [image, setImage] = useState([''])
+  const [image, setImage] = useState<{ is_thumbnail: boolean; url: string }[]>([])
 
   useEffect(() => {
     if (aboutDetail) {
-      let tempImage = []
-      for (let i = 0; i < 3; i++) {
-        if (aboutDetail.gambar !== null && aboutDetail.gambar[i]) {
-          tempImage.push(aboutDetail.gambar[i])
-        } else {
-          tempImage.push('')
-        }
-      }
+      const tempImage = Array.from({ length: 3 }, (_, i) => {
+        return aboutDetail.gambar?.[i] || { is_thumbnail: false, url: '' }
+      })
       setImage(tempImage)
+
+      form.reset({
+        isi_konten: aboutDetail.isi_konten || '',
+        gambar: tempImage,
+      })
     }
   }, [aboutDetail])
 
   useEffect(() => {
-    if (image) {
-      const temp = form.watch()
-      form.reset({
-        ...temp,
-        gambar: image,
-      })
-    }
+    form.setValue('gambar', image)
   }, [image])
+
+  const updateImage = (index: number, newImage: { is_thumbnail: boolean; url: string }) => {
+    setImage((prev) => {
+      const updated = [...prev]
+
+      // Jika user mengaktifkan thumbnail
+      if (newImage.is_thumbnail) {
+        // Matikan semua thumbnail yang lain
+        updated.forEach((img, i) => {
+          img.is_thumbnail = i === index
+        })
+      } else {
+        updated[index] = newImage
+      }
+
+      return updated
+    })
+  }
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault()
+    const values = form.getValues()
+    await handleSave(values)
+    setIsEditContent(false)
+  }
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSave)}>
+      <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-4">
           <div className="flex justify-between items-center">
             <div className="text-primary text-2xl font-medium">Tentang Prodi</div>
@@ -92,11 +112,7 @@ const AboutProgramStudiView = () => {
                   key={index}
                   img={item}
                   isEdit={isEditContent}
-                  setImage={(value) => {
-                    const temp = [...image]
-                    temp[index] = value
-                    setImage(temp)
-                  }}
+                  setImage={(newImage) => updateImage(index, newImage)}
                 />
               ))}
             </div>

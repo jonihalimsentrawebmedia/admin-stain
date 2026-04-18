@@ -66,6 +66,7 @@ export const ColumnsTemplateWebsite = () => {
                 Atur Warna
               </Button>
             </Link>
+            <p>{data?.default === 'CUSTOM' ? 'custom' : 'Default'}</p>
           </>
         )
       },

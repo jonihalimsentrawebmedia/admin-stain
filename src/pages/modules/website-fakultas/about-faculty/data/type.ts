@@ -2,7 +2,7 @@ export interface IFacultyAbout {
   id_satuan_organisasi: string;  // UUID
   id_unit: string;                // UUID
   isi_konten: string;             // HTML string
-  gambar: string[];                // Array URL gambar
+  gambar: { is_thumbnail: boolean; url: string }[];                // Array URL gambar
   created_at: string;              // ISO timestamp
   created_user: string;            // UUID user pembuat
   updated_at: string;              // ISO timestamp

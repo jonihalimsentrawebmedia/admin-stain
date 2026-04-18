@@ -3,7 +3,7 @@ export interface IAboutUnitInstitution {
   id_unit: string
   isi_konten: string
 
-  gambar: string | null
+  gambar: []
 
   created_at: string
   created_user: string
