@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button.tsx'
 import { IoWarning } from 'react-icons/io5'
 import { Image } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
+import ButtonGoToGuide from '../../panduan/components/ButtonGoToGuide.tsx'
 
 export const StructureOrganizationPage = () => {
   const columns = GroupOrganizationColumns()
@@ -24,6 +25,10 @@ export const StructureOrganizationPage = () => {
         <ButtonTitleGroup
           label={'Struktur Organisasi'}
           buttonGroup={[
+             {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_STRUKTUR_ORGANISASI" />,
+            },
             {
               type: 'custom',
               element:

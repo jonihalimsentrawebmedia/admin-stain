@@ -194,6 +194,7 @@ import SetStatusEmployeePage from '@/pages/modules/website-utama/lecturer-staff/
 import PublicationPage from '@/pages/modules/website-utama/publication'
 import ListDataPublication from '@/pages/modules/website-utama/publication/List-data'
 import { PublicationLanguagePage } from '@/pages/modules/website-utama/publication/language'
+import GuideListView from '@/pages/modules/website-utama/panduan/GuideListView'
 
 export const MainWebsiteRouter = [
   {
@@ -212,6 +213,10 @@ export const MainWebsiteRouter = [
         element: <ChangePassword />,
       },
     ],
+  },
+  {
+    path:"panduan",
+    element:<GuideListView/>
   },
   {
     path: 'profile',

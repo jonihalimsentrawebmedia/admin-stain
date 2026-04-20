@@ -15,6 +15,7 @@ import { UnpublishSectionAchievement } from '@/pages/modules/website-utama/publi
 import { IoWarning } from 'react-icons/io5'
 import { Image } from 'lucide-react'
 import { toast } from 'react-toastify'
+import ButtonGoToGuide from '../../panduan/components/ButtonGoToGuide.tsx'
 
 export const AchievementPage = () => {
   const navigate = useNavigate()
@@ -129,6 +130,10 @@ export const AchievementPage = () => {
         <ButtonTitleGroup
           label={'Prestasi'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_PRESTASI" />,
+            },
             {
               type: 'custom',
               element:

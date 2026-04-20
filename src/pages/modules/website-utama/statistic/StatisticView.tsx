@@ -12,6 +12,7 @@ import { dateOptions, generateYearData, monthOptions } from './data'
 import { RichText } from '@/components/common/richtext'
 import { Link } from 'react-router-dom'
 import { IoLanguage } from 'react-icons/io5'
+import ButtonGoToGuide from '../panduan/components/ButtonGoToGuide'
 
 const StatisticView = () => {
   const {
@@ -55,6 +56,10 @@ const StatisticView = () => {
                         <IoLanguage />
                       </Link>
                     ),
+                  },
+                  {
+                    type: 'custom',
+                    element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_STATISTIK" />,
                   },
                   {
                     onClick: () => {},

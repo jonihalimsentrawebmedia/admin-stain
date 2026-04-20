@@ -11,6 +11,7 @@ import { BottomEditorApproveSection } from '@/pages/modules/website-utama/public
 import { BottomPublishSection } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/components/table/publishSection.tsx'
 import { UnPublishSectionBottom } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/components/table/unpublishSection.tsx'
 import { toast } from 'react-toastify'
+import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide'
 
 export const BottomSliderPublicContent = () => {
   const navigate = useNavigate()
@@ -130,6 +131,10 @@ export const BottomSliderPublicContent = () => {
         <ButtonTitleGroup
           label={'Slider Bawah'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_SLIDER_BAWAH" />,
+            },
             {
               label: 'Tambah Data',
               type: 'add',

@@ -11,6 +11,7 @@ import { EditorProcessSection } from './components/table/editorProcesSection.tsx
 import { RejectSection } from './components/table/RejectSection.tsx'
 import { EditorApproveSection } from './components/table/EditorApproveSection'
 import { toast } from 'react-toastify'
+import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide.tsx'
 
 export const TopSliderPublicContent = () => {
   const navigate = useNavigate()
@@ -124,6 +125,10 @@ export const TopSliderPublicContent = () => {
         <ButtonTitleGroup
           label={'Slider Atas'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_SLIDER_ATAS" />,
+            },
             {
               label: 'Tambah Data',
               type: 'add',

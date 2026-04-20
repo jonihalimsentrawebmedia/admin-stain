@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 import { UseGetColorPrimary } from '@/pages/modules/website-utama/settings-menu/color/hooks'
 import { useQueryClient } from '@tanstack/react-query'
 import { Input } from '@/components/ui/input.tsx'
+import ButtonGoToGuide from '../../panduan/components/ButtonGoToGuide'
 
 export const ChangePrimaryAndFooterColor = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -56,6 +57,10 @@ export const ChangePrimaryAndFooterColor = () => {
             <ButtonTitleGroup
               label={'Pengaturan Warna Halaman'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_PENGATURAN_WARNA_HALAMAN" />,
+                },
                 {
                   type: 'edit',
                   label: 'Edit Warna',

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { ColumnsOfficialMusic } from '@/pages/modules/website-utama/public-content/musik-resmi/types/columns.tsx'
 import { UseGetOfficialMusic } from '@/pages/modules/website-utama/public-content/musik-resmi/hooks'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '../../panduan/components/ButtonGoToGuide'
 
 export const OfficialMusicPage = () => {
   const navigate = useNavigate()
@@ -14,6 +15,10 @@ export const OfficialMusicPage = () => {
       <div className={'flex flex-col gap-5'}>
         <ButtonTitleGroup
           buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_MARS_MUSIK" />,
+            },
             {
               type: 'add',
               label: 'Tambah Data',
