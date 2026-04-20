@@ -15,10 +15,12 @@ export default function MainLayoutProdi() {
           <SidebarProdi collapsed={collapsed} />
 
           <main className="flex-1 overflow-auto">
-            <div className="p-4">
-              <Outlet/>
+            <div className="p-4 min-h-[calc(100vh-135px)]">
+              <Outlet />
             </div>
-            <footer className={'bg-white shadow mt-5 text-center border'}>Admin Website © {new Date().getFullYear()}</footer>
+            <footer className={'bg-white shadow mt-5 text-center border'}>
+              Admin Website © {new Date().getFullYear()}
+            </footer>
           </main>
         </div>
 
