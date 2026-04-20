@@ -1,7 +1,7 @@
 import { InputText } from '@/components/common/form/InputText'
 import { SelectCustom } from '@/components/common/form/SelectCustom'
 import type { UseFormReturn } from 'react-hook-form'
-import useGetSatuanOrganisasi from '../../controller/useGetSatuanOrganisasi'
+import { UseGetDomainNotExists } from '@/pages/modules/settings/domain/controller/DomainNotExists.tsx'
 
 interface Props {
   form: UseFormReturn<any>
@@ -45,10 +45,14 @@ const DomainForm = ({ form }: Props) => {
       value: 'UPT',
     },
   ]
-  const { satuanOrganisasi } = useGetSatuanOrganisasi({
-    kelompok: form.watch('kelompok'),
-    isGetAll: true,
+  const { organizationUnit } = UseGetDomainNotExists({
+    group: form.watch('kelompok'),
   })
+
+  // const { satuanOrganisasi } = useGetSatuanOrganisasi({
+  //   kelompok: form.watch('kelompok'),
+  //   isGetAll: true,
+  // })
 
   return (
     <>
@@ -63,7 +67,7 @@ const DomainForm = ({ form }: Props) => {
       />
       <SelectCustom
         isDisabled={!form.watch('kelompok')}
-        data={satuanOrganisasi.map((item) => {
+        data={organizationUnit.map((item) => {
           return {
             label: item.nama,
             value: item.id_satuan_organisasi,
