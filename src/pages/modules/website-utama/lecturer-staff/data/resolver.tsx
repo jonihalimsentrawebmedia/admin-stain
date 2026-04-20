@@ -14,7 +14,7 @@ export const EmployeeResolver = z.object({
   nidn: z.string().optional().nullable(),
   id_unit_kerja: z.string(),
   golongan: z.string(),
-  jabatan_struktural: z.string(),
+  jabatan_struktural: z.string().optional().nullable(),
 })
 
 export type TEmployeeResolver = z.infer<typeof EmployeeResolver>
