@@ -2,13 +2,13 @@ import { UploadPasPhoto } from '@/pages/modules/website-utama/public-content/str
 import type { UseFormReturn } from 'react-hook-form'
 import { Form } from '@/components/ui/form.tsx'
 import type { PlacemanType } from '../data/resolver'
-import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import useGetGroupRank from '@/pages/modules/settings/reference/group-rank/controller/useGetGroupRank.tsx'
 import useGetAcademicRank from '@/pages/modules/settings/reference/academic-rank/controller/useGetAcademicRank.tsx'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import Checkbox from '@/components/common/form/checkbox.tsx'
 import type { Dispatch, SetStateAction } from 'react'
+import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 
 interface Props {
   form: UseFormReturn<PlacemanType>
@@ -114,20 +114,7 @@ export const FormPlacemanUser = (props: Props) => {
             isRow
           />
 
-          <ButtonTitleGroup
-            label={''}
-            buttonGroup={[
-              {
-                label: 'Batal',
-                type: 'cancel',
-                onClick: (e) => {
-                  e.preventDefault()
-                  setOpen(!open)
-                },
-              },
-              { isDisabled: loading, label: 'Simpan', type: 'save', onClick: () => {} },
-            ]}
-          />
+          <ButtonForm loading={loading} onCancel={() => setOpen(!open)} />
         </form>
       </Form>
     </>
