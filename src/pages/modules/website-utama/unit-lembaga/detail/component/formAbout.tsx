@@ -10,6 +10,7 @@ import { UsePostAbout } from '../hooks/postAbout.tsx'
 import type { IUnitInstitution } from '@/pages/modules/website-utama/unit-lembaga/data/types.ts'
 import { useParams } from 'react-router-dom'
 import ImageAbout from '@/pages/modules/website-utama/program-studi/detail/tentang/components/ImageAbout.tsx'
+import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide.tsx'
 
 interface Props {
   detail?: IUnitInstitution
@@ -75,7 +76,9 @@ export const FormAbout = (props: Props) => {
           <div className="flex justify-between items-center">
             <div className="text-primary text-2xl font-medium">Tentang {detail?.nama}</div>
 
-            {isEditContent ? (
+          <div className='flex gap-4 items-center'>
+            <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_SATUAN_ORGANISASI_TENTANG" />
+              {isEditContent ? (
               <ButtonForm loading={loading} onCancel={() => setIsEditContent(false)} />
             ) : (
               <Button
@@ -89,6 +92,7 @@ export const FormAbout = (props: Props) => {
                 Edit
               </Button>
             )}
+          </div>
           </div>
 
           <CardInput title={`Tentang ${detail?.nama}`}>

@@ -14,6 +14,7 @@ import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsStudentLetter } from '@/pages/modules/website-utama/surat-keterangan-mahasiswa/types/columns.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import { IoLanguage } from 'react-icons/io5'
+import ButtonGoToGuide from '../panduan/components/ButtonGoToGuide.tsx'
 
 export const CertificateStudent = () => {
   const navigate = useNavigate()
@@ -27,6 +28,10 @@ export const CertificateStudent = () => {
         <ButtonTitleGroup
           label={'Surat Keterangan Mahasiswa'}
           buttonGroup={[
+             {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_SURAT_MAHASISWA_SURAT_KETERANGAN_MAHASISWA" />,
+            },
             {
               type: 'custom',
               element: (

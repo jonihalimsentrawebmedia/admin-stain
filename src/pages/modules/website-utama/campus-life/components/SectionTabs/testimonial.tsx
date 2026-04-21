@@ -4,6 +4,7 @@ import { UseGetCampusTestimonial } from '@/pages/modules/website-utama/campus-li
 import { TestimonialColumns } from '@/pages/modules/website-utama/campus-life/types/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
+import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide'
 
 export const TestimonialSection = () => {
   const { testimonial, meta, loading } = UseGetCampusTestimonial()
@@ -15,6 +16,10 @@ export const TestimonialSection = () => {
         <ButtonTitleGroup
           label={'Testimoni'}
           buttonGroup={[
+              {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_KEHIDUPAN_KAMPUS_TESTIMONI" />,
+            },
             {
               type: 'custom',
               element: <ButtonAddTestimonial />,

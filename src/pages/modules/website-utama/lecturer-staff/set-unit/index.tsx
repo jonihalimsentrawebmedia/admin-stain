@@ -6,6 +6,7 @@ import { TableBasic } from '@/components/common/table/tableBasic.tsx'
 import { useState } from 'react'
 import TablePaginate from '@/components/common/table/TablePagination.tsx'
 import MultipleUnit from '@/pages/modules/website-utama/lecturer-staff/set-unit/component/multipleUnit.tsx'
+import ButtonGoToGuide from '../../panduan/components/ButtonGoToGuide.tsx'
 
 const SetUnitEmployeePage = () => {
   const [searchParams] = useSearchParams()
@@ -30,6 +31,10 @@ const SetUnitEmployeePage = () => {
       <div className={'space-y-4'}>
         <ButtonTitleGroup
           buttonGroup={[
+             {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_DOSEN_STAFF_SET_UNIT_KERJA" />,
+            },
             {
               type: 'add',
               label: 'Tambah Data',

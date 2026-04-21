@@ -4,6 +4,7 @@ import ButtonAddCalloborationCategory from './components/ButtonAddCalloborationC
 import TableCustom from '@/components/common/table/TableCustom'
 import SelectFilter from '@/components/common/filter/SelectFilter'
 import useGetCalloborationCategory from './controller/useGetCalloborationCategory'
+import ButtonGoToGuide from '../../panduan/components/ButtonGoToGuide'
 
 const CalloborationCategoryView = () => {
   const { columns } = CalloborationCategoryViewModel()
@@ -13,6 +14,10 @@ const CalloborationCategoryView = () => {
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
         buttonGroup={[
+          {
+            type: 'custom',
+            element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_KATEGORI_KERJASAMA" />,
+          },
           {
             label: '',
             onClick: () => {},

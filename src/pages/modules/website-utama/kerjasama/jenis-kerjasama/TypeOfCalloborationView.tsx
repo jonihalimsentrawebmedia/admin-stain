@@ -4,6 +4,7 @@ import TypeOfCalloborationViewModel from './TypeOfCalloborationViewModel'
 import ButtonAddTypeOfCalloboration from './components/ButtonAddTypeOfCalloboration'
 import TableCustom from '@/components/common/table/TableCustom'
 import SelectFilter from '@/components/common/filter/SelectFilter'
+import ButtonGoToGuide from '../../panduan/components/ButtonGoToGuide'
 
 const TypeOfCalloborationView = () => {
   const { columns } = TypeOfCalloborationViewModel()
@@ -13,6 +14,10 @@ const TypeOfCalloborationView = () => {
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
         buttonGroup={[
+           {
+            type: 'custom',
+            element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_JENIS_KERJASAMA" />,
+          },
           {
             label: '',
             onClick: () => {},

@@ -6,6 +6,7 @@ import { Accordion } from '@/components/ui/accordion.tsx'
 import { PerformanceForm } from '@/pages/modules/website-utama/campus-life/components/SectionTabs/performanceForm.tsx'
 import { Link } from 'react-router-dom'
 import { IoLanguage } from 'react-icons/io5'
+import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide.tsx'
 
 export const PerformanceSection = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -26,6 +27,10 @@ export const PerformanceSection = () => {
                   </Link>
                 ),
               },
+                {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_KEHIDUPAN_KAMPUS_PRESTASI" />,
+            },
               {
                 type: 'edit',
                 label: 'Edit Data',

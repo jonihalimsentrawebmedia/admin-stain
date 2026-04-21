@@ -7,6 +7,7 @@ import { useState } from 'react'
 import TablePaginate from '@/components/common/table/TablePagination.tsx'
 import { UseGetStatusEmployee } from '@/pages/modules/website-utama/lecturer-staff/status-employee/hooks'
 import { MultipleStatus } from '@/pages/modules/website-utama/lecturer-staff/set-status/component/multipleUnit.tsx'
+import ButtonGoToGuide from '../../panduan/components/ButtonGoToGuide.tsx'
 
 const SetStatusEmployeePage = () => {
   const [searchParams] = useSearchParams()
@@ -34,6 +35,10 @@ const SetStatusEmployeePage = () => {
       <div className={'space-y-4'}>
         <ButtonTitleGroup
           buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_DOSEN_STAFF_SET_STATUS" />,
+            },
             {
               type: 'add',
               label: 'Tambah Data',

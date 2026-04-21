@@ -15,6 +15,7 @@ import {
   OrganizationalStructureResolver,
 } from '@/pages/modules/website-utama/program-studi/detail/model/organizational-structure.ts'
 import { UseGetStructureUkkUkm } from '@/pages/modules/website-utama/UKK-UKM/detail/hooks'
+import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide'
 
 const OrganizationalStructureForm = () => {
   const { id } = useParams()
@@ -58,28 +59,26 @@ const OrganizationalStructureForm = () => {
       <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
         <div className="flex justify-between items-center">
           <div className="text-primary">Struktur Organisasi</div>
-          {isEdit ? (
-            <ButtonForm
-              loading={loading}
-              onCancel={() => {
-                setIsEdit(false)
-              }}
-            />
-          ) : (
-            <Button
-              onClick={() => {
-                setIsEdit(!isEdit)
-                form.reset({
+          <div className="flex items-center gap-4">
+            <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_UKK_UKM_STRUKTUR_ORGANISASI" />
+            {isEdit ? (
+              <ButtonForm loading={loading} onCancel={() => setIsEdit(false)} />
+            ) : (
+              <Button
+                onClick={() => {
+                  setIsEdit(true)
+                   form.reset({
                   url_gambar: structure?.url_gambar,
                 })
-              }}
-              variant={'outline'}
-              className={'bg-white text-primary border-primary hover:text-primary'}
-            >
-              <HiPencil />
-              Edit
-            </Button>
-          )}
+                }}
+                variant={'outline'}
+                className="bg-white text-primary border-primary hover:text-primary"
+              >
+                <HiPencil />
+                Edit
+              </Button>
+            )}
+          </div>
         </div>
         <ImageOrganization
           image={form.watch('url_gambar')}

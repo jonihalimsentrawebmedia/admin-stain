@@ -15,6 +15,7 @@ import ButtonForm from '@/components/common/button/ButtonForm'
 import { Button } from '@/components/ui/button'
 import { HiPencil } from 'react-icons/hi'
 import ImageOrganization from './components/ImageOrganization'
+import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide'
 
 const OrganizationalStructureView = () => {
   const { organizationalStructureDetail } = useGetOrganizationalStructure()
@@ -58,28 +59,32 @@ const OrganizationalStructureView = () => {
       <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
         <div className="flex justify-between items-center">
           <div className="text-primary">Struktur Organisasi</div>
-          {isEdit ? (
-            <ButtonForm
-              loading={loading}
-              onCancel={() => {
-                setIsEdit(false)
-              }}
-            />
-          ) : (
-            <Button
-              onClick={() => {
-                setIsEdit(!isEdit)
-                form.reset({
-                  url_gambar: organizationalStructureDetail?.url_gambar,
-                })
-              }}
-              variant={'outline'}
-              className={'bg-white text-primary border-primary hover:text-primary'}
-            >
-              <HiPencil />
-              Edit
-            </Button>
-          )}
+        <div className="flex gap-4 items-center">
+            <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_SATUAN_ORGANISASI_STRUKTUR_ORGANISASI" />
+
+            {isEdit ? (
+              <ButtonForm
+                loading={loading}
+                onCancel={() => {
+                  setIsEdit(false)
+                }}
+              />
+            ) : (
+              <Button
+                onClick={() => {
+                  setIsEdit(!isEdit)
+                  form.reset({
+                    ...organizationalStructureDetail,
+                  })
+                }}
+                variant={'outline'}
+                className={'bg-white text-primary border-primary hover:text-primary'}
+              >
+                <HiPencil />
+                Edit
+              </Button>
+            )}
+          </div>
         </div>
         <ImageOrganization
           image={form.watch('url_gambar')}

@@ -6,6 +6,7 @@ import { UseGetCampusLifeFacilities } from '../../hooks/index.tsx'
 import { FormFacilities } from '@/pages/modules/website-utama/campus-life/components/SectionTabs/formFacilities.tsx'
 import { Link } from 'react-router-dom'
 import { IoLanguage } from 'react-icons/io5'
+import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide.tsx'
 
 export const FacilitiesSection = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -25,6 +26,10 @@ export const FacilitiesSection = () => {
                   </Link>
                 ),
               },
+                {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_KEHIDUPAN_KAMPUS_FASILITAS" />,
+            },
               {
                 type: 'edit',
                 label: 'Edit Data',

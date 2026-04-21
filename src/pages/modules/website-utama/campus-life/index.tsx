@@ -34,6 +34,25 @@ const CampusLifePage = () => {
     { id: 7, name: 'Link Arahan', value: 'link', element: <UrlDirectionSection /> },
   ]
 
+  function returnValueGuide(){
+   switch(statusParams){
+      case "pengantar":
+        return "WEBSITE_UTAMA_KEHIDUPAN_KAMPUS_PENGANTAR"
+      case "fasilitas":
+        return "WEBSITE_UTAMA_KEHIDUPAN_KAMPUS_FASILITAS"
+      case "ukm":
+        return "WEBSITE_UTAMA_KEHIDUPAN_KAMPUS_UNIT_KEGIATAN"
+      case "prestasi":
+        return "WEBSITE_UTAMA_KEHIDUPAN_KAMPUS_PRESTASI"
+      case "testimoni":
+        return "WEBSITE_UTAMA_KEHIDUPAN_KAMPUS_TESTIMONI"
+      case "galery":
+        return ""
+      default:
+        return "link"
+   }
+  }
+
   return (
     <>
       <div className={'flex flex-col gap-4'}>

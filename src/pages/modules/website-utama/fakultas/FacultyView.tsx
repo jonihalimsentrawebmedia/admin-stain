@@ -2,6 +2,7 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
 import useGetFaculty from './controller/useGetFaculty'
 import FacultyViewModel from './FacultyViewModel'
 import TableCustom from '@/components/common/table/TableCustom'
+import ButtonGoToGuide from '../panduan/components/ButtonGoToGuide'
 
 const FacultyView = () => {
   const { columns } = FacultyViewModel()
@@ -10,7 +11,15 @@ const FacultyView = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <ButtonTitleGroup buttonGroup={[]} label="Fakultas" />
+      <ButtonTitleGroup
+        buttonGroup={[
+          {
+            type: 'custom',
+            element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_FAKULTAS" />,
+          },
+        ]}
+        label="Fakultas"
+      />
       <TableCustom columns={columns} data={faculty} loading={loading} meta={meta} />
     </div>
   )

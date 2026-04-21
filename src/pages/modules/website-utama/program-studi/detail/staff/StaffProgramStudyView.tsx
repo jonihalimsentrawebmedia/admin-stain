@@ -3,6 +3,7 @@ import useGetStaff from '../controller/useGetStaff'
 import StaffProgramStudyViewModel from './StaffProgramStudyViewModel'
 import { Button } from '@/components/ui/button'
 import { BiSync } from 'react-icons/bi'
+import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide'
 
 const StaffProgramStudyView = () => {
   const { loading, staff, meta } = useGetStaff()
@@ -11,13 +12,16 @@ const StaffProgramStudyView = () => {
     <div className="flex flex-col gap-4">
       <div className="flex justify-between items-center">
         <div className="text-primary text-2xl font-medium">Staff</div>
-        <Button
-          variant={'outline'}
-          className="border border-primary text-primary hover:text-primary"
-        >
-          <BiSync />
-          Sinkronisasi Dari SIMPEG
-        </Button>
+        <div className="flex gap-4 items-center">
+          <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_SATUAN_ORGANISASI_STAFF" />
+          <Button
+            variant={'outline'}
+            className="border border-primary text-primary hover:text-primary"
+          >
+            <BiSync />
+            Sinkronisasi Dari SIMPEG
+          </Button>
+        </div>
       </div>
       <TableCustom columns={columns} data={staff} loading={loading} meta={meta} />
     </div>

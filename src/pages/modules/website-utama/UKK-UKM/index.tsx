@@ -6,6 +6,7 @@ import ButtonAddUkkUkm from '@/pages/modules/website-utama/UKK-UKM/component/but
 import { USeGetUkkUkm } from '@/pages/modules/website-utama/UKK-UKM/hooks'
 import { ColoumnsUkkUkm } from '@/pages/modules/website-utama/UKK-UKM/data/coloumns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '../panduan/components/ButtonGoToGuide'
 
 const UKKUKMPage = () => {
   const navigate = useNavigate()
@@ -17,6 +18,10 @@ const UKKUKMPage = () => {
       <div className="space-y-4">
         <ButtonTitleGroup
           buttonGroup={[
+             {
+            type: 'custom',
+            element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_UKK_UKM" />,
+          },
             {
               type: 'custom',
               element: (

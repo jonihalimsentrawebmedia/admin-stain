@@ -4,6 +4,7 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { ButtonSyncLecturer } from '@/pages/modules/website-utama/lecturer-staff/component/buttonSync.tsx'
+import ButtonGoToGuide from '../panduan/components/ButtonGoToGuide'
 
 const LecturerStaff = () => {
   const [searchParams] = useSearchParams()
@@ -29,6 +30,10 @@ const LecturerStaff = () => {
               type: 'custom',
               element: <ButtonSyncLecturer />,
             },
+            {
+            type: 'custom',
+            element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_DOSEN_STAFF" />,
+          },
             {
               type: 'add',
               label: 'Tambah Data',

@@ -6,6 +6,7 @@ import { Accordion } from '@/components/ui/accordion.tsx'
 import { LifeActivityForm } from '@/pages/modules/website-utama/campus-life/components/SectionTabs/lifeActivityForm.tsx'
 import { Link } from 'react-router-dom'
 import { IoLanguage } from 'react-icons/io5'
+import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide'
 
 export const LifeActivitySection = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -26,6 +27,7 @@ export const LifeActivitySection = () => {
                   </Link>
                 ),
               },
+              
               {
                 type: 'edit',
                 label: 'Edit Data',
