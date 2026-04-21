@@ -4,6 +4,7 @@ import { CategoryServiceColumns } from '@/pages/modules/website-unit/services/ca
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { UseGetSessionUnit } from '@/pages/modules/website-unit/hooks'
 import { ButtonAddCategoryService } from '@/pages/modules/website-unit/services/category/component/buttonAdd.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const ServicesList = () => {
   const { listServices, loading, meta } = UseGetListServices()
@@ -16,6 +17,10 @@ export const ServicesList = () => {
         <ButtonTitleGroup
           label={'Daftar Layanan'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="PERPUSTAKAAN_LAYANAN" />,
+            },
             {
               type: 'custom',
               element: <ButtonAddCategoryService session={session} />,

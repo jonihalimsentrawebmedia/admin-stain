@@ -16,7 +16,7 @@ const FieldOfCooperationView = () => {
         buttonGroup={[
            {
             type: 'custom',
-            element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_BIDANG_KERJASAMA" />,
+            element: <ButtonGoToGuide titleGuide="Bidang Kerjasama" valueGuide="WEBSITE_UTAMA_BIDANG_KERJASAMA" />,
           },
           {
             label: '',

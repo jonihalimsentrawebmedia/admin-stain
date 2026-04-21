@@ -22,7 +22,7 @@ export const FaqListData = () => {
           buttonGroup={[
              {
               type:"custom",
-              element:<ButtonGoToGuide valueGuide="WEBSITE_UTAMA_FAQS" />
+              element:<ButtonGoToGuide titleGuide='F.A.Q' valueGuide="WEBSITE_UTAMA_FAQS" />
             },
             {
               type: 'custom',

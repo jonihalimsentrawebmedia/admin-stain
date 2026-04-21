@@ -21,7 +21,7 @@ export const InboxMessagePage = () => {
           buttonGroup={[
             {
               type:"custom",
-              element:<ButtonGoToGuide valueGuide="WEBSITE_UTAMA_PERTANYAAN" />
+              element:<ButtonGoToGuide titleGuide='Kotak Masuk' valueGuide="WEBSITE_UTAMA_PERTANYAAN" />
             },
 
             {

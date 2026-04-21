@@ -129,7 +129,7 @@ const NewsPublicContentPage = () => {
           buttonGroup={[
              {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_BERITA" />,
+              element: <ButtonGoToGuide titleGuide='Berita' valueGuide="WEBSITE_UTAMA_BERITA" />,
             },
             {
               label: 'Tulis Berita',

@@ -30,7 +30,7 @@ export const CertificateStudent = () => {
           buttonGroup={[
              {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_SURAT_MAHASISWA_SURAT_KETERANGAN_MAHASISWA" />,
+              element: <ButtonGoToGuide titleGuide='Surat Keterangan Mahasiswa' valueGuide="WEBSITE_UTAMA_SURAT_MAHASISWA_SURAT_KETERANGAN_MAHASISWA" />,
             },
             {
               type: 'custom',

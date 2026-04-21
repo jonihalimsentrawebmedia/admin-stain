@@ -30,7 +30,7 @@ export const AcademicRegulation = () => {
             },
              {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_PENGATURAN_AKADEMIK" />,
+              element: <ButtonGoToGuide titleGuide='Peraturan Akademik' valueGuide="WEBSITE_UTAMA_PENGATURAN_AKADEMIK" />,
             },
             {
               type: 'custom',

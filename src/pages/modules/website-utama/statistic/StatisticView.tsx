@@ -59,7 +59,7 @@ const StatisticView = () => {
                   },
                   {
                     type: 'custom',
-                    element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_STATISTIK" />,
+                    element: <ButtonGoToGuide titleGuide='Statistik' valueGuide="WEBSITE_UTAMA_STATISTIK" />,
                   },
                   {
                     onClick: () => {},

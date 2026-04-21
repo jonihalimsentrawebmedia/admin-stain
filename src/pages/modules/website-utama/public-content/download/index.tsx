@@ -23,7 +23,7 @@ const DownloadFilePage = () => {
           buttonGroup={[
              {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_DOWNLOADS" />,
+              element: <ButtonGoToGuide titleGuide='Download' valueGuide="WEBSITE_UTAMA_DOWNLOADS" />,
             },
             {
               type: 'custom',

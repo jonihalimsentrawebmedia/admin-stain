@@ -30,7 +30,7 @@ export const SectionIntroduction = () => {
               },
                 {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_KEHIDUPAN_KAMPUS_PENGANTAR" />,
+              element: <ButtonGoToGuide titleGuide='Kehidupan Kampus Pengantar' valueGuide="WEBSITE_UTAMA_KEHIDUPAN_KAMPUS_PENGANTAR" />,
             },
               {
                 type: 'edit',

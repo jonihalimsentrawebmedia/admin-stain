@@ -18,7 +18,7 @@ export const TestimonialSection = () => {
           buttonGroup={[
               {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_KEHIDUPAN_KAMPUS_TESTIMONI" />,
+              element: <ButtonGoToGuide titleGuide='Kehidupan Kampus Testimoni' valueGuide="WEBSITE_UTAMA_KEHIDUPAN_KAMPUS_TESTIMONI" />,
             },
             {
               type: 'custom',

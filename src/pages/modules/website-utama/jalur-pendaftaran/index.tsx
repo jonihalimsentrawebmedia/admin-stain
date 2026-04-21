@@ -15,10 +15,15 @@ export const RegistrationPathPage = () => {
       <div className={'flex flex-col gap-4'}>
         <ButtonTitleGroup
           buttonGroup={[
-             {
-                          type:"custom",
-                          element:<ButtonGoToGuide valueGuide="WEBSITE_UTAMA_JALUR_PENDAFTARAN" />
-                        },
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide="Jalur Pendaftaran"
+                  valueGuide="WEBSITE_UTAMA_JALUR_PENDAFTARAN"
+                />
+              ),
+            },
             {
               type: 'add',
               label: 'Tambah Data',

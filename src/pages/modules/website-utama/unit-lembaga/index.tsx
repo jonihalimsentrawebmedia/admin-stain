@@ -19,7 +19,7 @@ const UnitInstitutionPage = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_UNIT_LEMBAGA" />,
+              element: <ButtonGoToGuide titleGuide='Unit Lembaga' valueGuide="WEBSITE_UTAMA_UNIT_LEMBAGA" />,
             },
             {
               type: 'custom',

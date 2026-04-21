@@ -91,7 +91,7 @@ const ContactUsForm = () => {
         <div className="flex justify-between items-center">
           <div className="text-primary text-2xl font-medium">Hubungi Kami</div>
           <div className="flex items-center gap-4">
-            <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_UKK_UKM_HUBUNGI_KAMI" />
+            <ButtonGoToGuide titleGuide='Hubungi Kami' valueGuide="WEBSITE_UTAMA_UKK_UKM_HUBUNGI_KAMI" />
             {isEdit ? (
               <ButtonForm loading={loading} onCancel={() => setIsEdit(false)} />
             ) : (

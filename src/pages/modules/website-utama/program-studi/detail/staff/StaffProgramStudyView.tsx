@@ -13,7 +13,7 @@ const StaffProgramStudyView = () => {
       <div className="flex justify-between items-center">
         <div className="text-primary text-2xl font-medium">Staff</div>
         <div className="flex gap-4 items-center">
-          <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_SATUAN_ORGANISASI_STAFF" />
+          <ButtonGoToGuide titleGuide='Staff' valueGuide="WEBSITE_UTAMA_SATUAN_ORGANISASI_STAFF" />
           <Button
             variant={'outline'}
             className="border border-primary text-primary hover:text-primary"

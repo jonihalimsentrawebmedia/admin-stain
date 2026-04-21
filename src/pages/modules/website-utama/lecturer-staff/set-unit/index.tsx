@@ -33,7 +33,7 @@ const SetUnitEmployeePage = () => {
           buttonGroup={[
              {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_DOSEN_STAFF_SET_UNIT_KERJA" />,
+              element: <ButtonGoToGuide titleGuide='Data Dosen dan Staff' valueGuide="WEBSITE_UTAMA_DOSEN_STAFF_SET_UNIT_KERJA" />,
             },
             {
               type: 'add',

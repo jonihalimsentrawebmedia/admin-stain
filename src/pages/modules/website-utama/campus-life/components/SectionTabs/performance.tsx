@@ -29,7 +29,7 @@ export const PerformanceSection = () => {
               },
                 {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_KEHIDUPAN_KAMPUS_PRESTASI" />,
+              element: <ButtonGoToGuide titleGuide='Kehidupan Kampus Prestasi' valueGuide="WEBSITE_UTAMA_KEHIDUPAN_KAMPUS_PRESTASI" />,
             },
               {
                 type: 'edit',

@@ -16,7 +16,7 @@ const CalloborationCategoryView = () => {
         buttonGroup={[
           {
             type: 'custom',
-            element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_KATEGORI_KERJASAMA" />,
+            element: <ButtonGoToGuide titleGuide='Kategori Kerjasama' valueGuide="WEBSITE_UTAMA_KATEGORI_KERJASAMA" />,
           },
           {
             label: '',

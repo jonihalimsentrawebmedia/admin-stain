@@ -14,7 +14,7 @@ const NewsProgramStudyView = () => {
       <div className={'space-y-5'}>
         <div className='flex gap-4 items-center justify-between'>
  <p className="text-2xl text-primary font-semibold">Berita</p>
-          <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_SATUAN_ORGANISASI_BERITA" />
+          <ButtonGoToGuide titleGuide='Berita' valueGuide="WEBSITE_UTAMA_SATUAN_ORGANISASI_BERITA" />
 
         </div>
        

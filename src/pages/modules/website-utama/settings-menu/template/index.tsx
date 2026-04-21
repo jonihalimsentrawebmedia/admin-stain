@@ -23,7 +23,7 @@ export const TemplateMainWeb = () => {
       <div className={'flex flex-col gap-5'}>
         <ButtonTitleGroup label={'Template Website'} buttonGroup={[ {
             type: 'custom',
-            element: <ButtonGoToGuide valueGuide="THEMA " />,
+            element: <ButtonGoToGuide valueGuide="THEMA" titleGuide='Template Website' />,
           },]} />
         <div
           className={`text-blue-500 w-fit p-1.5 text-sm border border-blue-500 rounded-md flex items-center gap-1.5`}

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { CollaborationColumns } from '@/pages/modules/website-unit/profile/collaboration/data/columns.tsx'
 import { UseGetUnitCollaboration } from '@/pages/modules/website-unit/profile/collaboration/hooks'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const Collaboration = () => {
   const navigate = useNavigate()
@@ -15,6 +16,10 @@ export const Collaboration = () => {
         <ButtonTitleGroup
           label={'Kerjasama Unit'}
           buttonGroup={[
+             {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="PERPUSTAKAAN_PROFIL_KERJASAMA" />,
+            },
             {
               type: 'add',
               label: 'Tambah kerjasama',

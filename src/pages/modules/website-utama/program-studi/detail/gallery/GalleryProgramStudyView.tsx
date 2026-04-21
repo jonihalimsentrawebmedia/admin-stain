@@ -28,6 +28,11 @@ const GalleryProgramStudyView = () => {
               ? 'WEBSITE_UTAMA_SATUAN_ORGANISASI_GALERI_VIDEO'
               : 'WEBSITE_UTAMA_SATUAN_ORGANISASI_GALERI_FOTO'
           }
+          titleGuide={
+            type == 'video'
+              ? 'Video'
+              : 'Foto'
+          }
         />
       </div>
       <TableCustom

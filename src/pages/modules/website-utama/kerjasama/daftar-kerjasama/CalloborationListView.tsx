@@ -15,7 +15,7 @@ const CalloborationListView = () => {
         buttonGroup={[
             {
             type: 'custom',
-            element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_KERJASAMA" />,
+            element: <ButtonGoToGuide titleGuide='Daftar Kerjasama' valueGuide="WEBSITE_UTAMA_KERJASAMA" />,
           },
           {
             label: 'Tambah Daftar Kerjasama',

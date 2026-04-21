@@ -12,7 +12,7 @@ const ManagementUnitProgramStudyView = () => {
       <div className="flex justify-between items-center">
         <div className="text-primary text-2xl">Unit Pengelola</div>
         <div className="flex gap-4 items-center">
-          <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_SATUAN_ORGANISASI_UNIT_PENGELOLA" />
+          <ButtonGoToGuide titleGuide='Unit Pengelola' valueGuide="WEBSITE_UTAMA_SATUAN_ORGANISASI_UNIT_PENGELOLA" />
           <ButtonAddManagementUnit />
         </div>
       </div>

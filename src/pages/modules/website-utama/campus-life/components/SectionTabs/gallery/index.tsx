@@ -23,6 +23,11 @@ export const GallerySection = () => {
               ? 'WEBSITE_UTAMA_KEHIDUPAN_KAMPUS_GALERI_VIDEO'
               : 'WEBSITE_UTAMA_KEHIDUPAN_KAMPUS_GALERI_FOTO'
           }
+          titleGuide={
+            tabsActive == 'video'
+              ? 'Kehidupan Kampus Gallery - Video'
+              : 'Kehidupan Kampus Gallery - Foto'
+          }
         />
       </div>
 

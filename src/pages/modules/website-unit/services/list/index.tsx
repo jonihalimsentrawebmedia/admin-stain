@@ -6,6 +6,7 @@ import { ColumnsListService } from '@/pages/modules/website-unit/services/list/d
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ButtonAddListCategory } from '@/pages/modules/website-unit/services/list/component/buttonAdd.tsx'
 import type { ICategoryServices } from '@/pages/modules/website-unit/services/category/data/types.ts'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const ListServiceCategory = () => {
   const { id } = useParams()
@@ -20,6 +21,10 @@ export const ListServiceCategory = () => {
           isBack
           label={`Daftar Layanan-${detailServices?.nama_layanan}`}
           buttonGroup={[
+              {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="PERPUSTAKAAN_LAYANAN_KATEGORI_LAYANAN" />,
+            },
             {
               type: 'custom',
               element: <ButtonAddListCategory {...(detailServices as ICategoryServices)} />,

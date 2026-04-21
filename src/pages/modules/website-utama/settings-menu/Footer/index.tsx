@@ -62,7 +62,7 @@ export const FooterContent = () => {
               },
               {
                 type: 'custom',
-                element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_FOOTER" />,
+                element: <ButtonGoToGuide titleGuide='Footer' valueGuide="WEBSITE_UTAMA_FOOTER" />,
               },
               { type: 'edit', label: 'Edit', onClick: () => setIsEdit(!isEdit) },
               {

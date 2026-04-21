@@ -9,6 +9,7 @@ import { RichText } from '@/components/common/richtext'
 import AxiosClient from '@/provider/axios.tsx'
 import { useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const AboutProfileUnit = () => {
   const { aboutProfile: detail } = UseGetAboutUnit()
@@ -53,6 +54,10 @@ export const AboutProfileUnit = () => {
               <ButtonTitleGroup
                 label={'Tentang Unit'}
                 buttonGroup={[
+                  {
+                    type: 'custom',
+                    element: <ButtonGoToGuide valueGuide="PERPUSTAKAAN_PROFIL_TENTANG" />,
+                  },
                   { type: 'cancel', label: 'Batal', onClick: () => setIsEdit(!isEdit) },
                   {
                     label: 'Simpan',
@@ -85,7 +90,13 @@ export const AboutProfileUnit = () => {
           <>
             <ButtonTitleGroup
               label={'Tentang Unit'}
-              buttonGroup={[{ label: 'Edit', type: 'edit', onClick: () => setIsEdit(!isEdit) }]}
+              buttonGroup={[
+                {
+                  type: 'custom',
+                  element: <ButtonGoToGuide valueGuide="PERPUSTAKAAN_PROFIL_TENTANG" />,
+                },
+                { label: 'Edit', type: 'edit', onClick: () => setIsEdit(!isEdit) },
+              ]}
             />
             <Accordion type={'single'} defaultValue={'isi'}>
               <AccordionCustom name={'isi'} title={'Isi Konten'}>

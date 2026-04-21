@@ -16,7 +16,7 @@ const StatusEmployeePage = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_DOSEN_STAFF_STATUS" />,
+              element: <ButtonGoToGuide titleGuide='Status Karyawan' valueGuide="WEBSITE_UTAMA_DOSEN_STAFF_STATUS" />,
             },
             { type: 'custom', element: <ButtonAddEmployeeStatus /> },
           ]}

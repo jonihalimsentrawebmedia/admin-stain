@@ -16,7 +16,7 @@ const TypeOfCalloborationView = () => {
         buttonGroup={[
            {
             type: 'custom',
-            element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_JENIS_KERJASAMA" />,
+            element: <ButtonGoToGuide titleGuide='Jenis Kerjasama' valueGuide="WEBSITE_UTAMA_JENIS_KERJASAMA" />,
           },
           {
             label: '',

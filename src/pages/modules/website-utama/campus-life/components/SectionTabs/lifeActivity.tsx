@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import { IoLanguage } from 'react-icons/io5'
 import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide'
 
+
 export const LifeActivitySection = () => {
   const [isEdit, setIsEdit] = useState(false)
   const { campusActivity } = UseGetCampusActivityUnit()
@@ -27,7 +28,10 @@ export const LifeActivitySection = () => {
                   </Link>
                 ),
               },
-              
+               {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide='Kehidupan Kampus UKM' valueGuide="WEBSITE_UTAMA_KEHIDUPAN_KAMPUS_UKM" />,
+            },
               {
                 type: 'edit',
                 label: 'Edit Data',

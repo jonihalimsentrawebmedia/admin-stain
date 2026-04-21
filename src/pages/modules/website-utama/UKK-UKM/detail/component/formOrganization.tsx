@@ -60,7 +60,7 @@ const OrganizationalStructureForm = () => {
         <div className="flex justify-between items-center">
           <div className="text-primary">Struktur Organisasi</div>
           <div className="flex items-center gap-4">
-            <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_UKK_UKM_STRUKTUR_ORGANISASI" />
+            <ButtonGoToGuide titleGuide='Struktur Organisasi' valueGuide="WEBSITE_UTAMA_UKK_UKM_STRUKTUR_ORGANISASI" />
             {isEdit ? (
               <ButtonForm loading={loading} onCancel={() => setIsEdit(false)} />
             ) : (

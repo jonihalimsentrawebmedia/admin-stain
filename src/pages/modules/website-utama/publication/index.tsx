@@ -13,10 +13,15 @@ const PublicationPage = () => {
     <>
       <div className="space-y-4 py-5">
         <ButtonTitleGroup
-          buttonGroup={[   {
+          buttonGroup={[
+            {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_PUBLIKASI" />,
-            },{ type: 'custom', element: <ButtonAddPublication /> }]}
+              element: (
+                <ButtonGoToGuide titleGuide="Publikasi" valueGuide="WEBSITE_UTAMA_PUBLIKASI" />
+              ),
+            },
+            { type: 'custom', element: <ButtonAddPublication /> },
+          ]}
           label="Publikasi"
         />
         <TableCustom columns={columns} data={year} loading={loading} meta={meta} />

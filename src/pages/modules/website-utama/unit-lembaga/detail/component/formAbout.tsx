@@ -77,7 +77,7 @@ export const FormAbout = (props: Props) => {
             <div className="text-primary text-2xl font-medium">Tentang {detail?.nama}</div>
 
           <div className='flex gap-4 items-center'>
-            <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_SATUAN_ORGANISASI_TENTANG" />
+            <ButtonGoToGuide titleGuide='Tentang' valueGuide="WEBSITE_UTAMA_SATUAN_ORGANISASI_TENTANG" />
               {isEditContent ? (
               <ButtonForm loading={loading} onCancel={() => setIsEditContent(false)} />
             ) : (

@@ -28,7 +28,7 @@ export const FacilitiesSection = () => {
               },
                 {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_KEHIDUPAN_KAMPUS_FASILITAS" />,
+              element: <ButtonGoToGuide titleGuide='Kehidupan Kampus Fasilitas' valueGuide="WEBSITE_UTAMA_KEHIDUPAN_KAMPUS_FASILITAS" />,
             },
               {
                 type: 'edit',

@@ -32,7 +32,7 @@ const LecturerStaff = () => {
             },
             {
             type: 'custom',
-            element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_DOSEN_STAFF" />,
+            element: <ButtonGoToGuide titleGuide='Data Dosen dan Staff' valueGuide="WEBSITE_UTAMA_DOSEN_STAFF" />,
           },
             {
               type: 'add',

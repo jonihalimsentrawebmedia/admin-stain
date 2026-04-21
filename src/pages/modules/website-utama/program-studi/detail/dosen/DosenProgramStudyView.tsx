@@ -77,7 +77,7 @@ const DosenProgramStudyView = () => {
       <div className="flex justify-between items-center">
         <div className="text-primary text-2xl font-medium">Dosen</div>
         <div className="flex gap-4 items-center">
-          <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_SATUAN_ORGANISASI_DOSEN" />
+          <ButtonGoToGuide titleGuide='Dosen' valueGuide="WEBSITE_UTAMA_SATUAN_ORGANISASI_DOSEN" />
           <Button
             variant={'outline'}
             onClick={HandleFCM}

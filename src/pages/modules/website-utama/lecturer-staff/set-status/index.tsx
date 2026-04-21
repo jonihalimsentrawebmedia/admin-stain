@@ -37,7 +37,7 @@ const SetStatusEmployeePage = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_DOSEN_STAFF_SET_STATUS" />,
+              element: <ButtonGoToGuide titleGuide='Data Dosen dan Staff' valueGuide="WEBSITE_UTAMA_DOSEN_STAFF_SET_STATUS" />,
             },
             {
               type: 'add',

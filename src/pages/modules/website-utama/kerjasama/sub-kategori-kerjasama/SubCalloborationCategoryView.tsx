@@ -16,7 +16,7 @@ const SubCalloborationCategoryView = () => {
         buttonGroup={[
           {
             type: 'custom',
-            element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_SUB_KATEGORI_KERJASAMA" />,
+            element: <ButtonGoToGuide titleGuide='Sub Kategori Kerjasama' valueGuide="WEBSITE_UTAMA_SUB_KATEGORI_KERJASAMA" />,
           },
           {
             label: '',

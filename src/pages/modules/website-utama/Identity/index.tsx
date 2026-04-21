@@ -29,7 +29,7 @@ export const PageIdentity = () => {
             },
             {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_IDENTITAS" />,
+              element: <ButtonGoToGuide titleGuide='Identitas' valueGuide="WEBSITE_UTAMA_IDENTITAS" />,
             },
             {
               type: 'custom',

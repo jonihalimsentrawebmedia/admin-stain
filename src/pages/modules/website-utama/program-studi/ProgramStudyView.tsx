@@ -18,7 +18,7 @@ const ProgramStudyView = () => {
           {
             type: 'custom',
             element: (
-              <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_PROGRAM_STUDI" />
+              <ButtonGoToGuide titleGuide='Program Studi' valueGuide="WEBSITE_UTAMA_PROGRAM_STUDI" />
             ),
           },
         ]}

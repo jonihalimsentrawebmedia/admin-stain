@@ -20,7 +20,7 @@ const UKKUKMPage = () => {
           buttonGroup={[
              {
             type: 'custom',
-            element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_UKK_UKM" />,
+            element: <ButtonGoToGuide titleGuide='UKK UKM' valueGuide="WEBSITE_UTAMA_UKK_UKM" />,
           },
             {
               type: 'custom',

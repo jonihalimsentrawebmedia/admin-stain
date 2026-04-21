@@ -15,7 +15,7 @@ const FacultyView = () => {
         buttonGroup={[
           {
             type: 'custom',
-            element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_FAKULTAS" />,
+            element: <ButtonGoToGuide titleGuide='Fakultas' valueGuide="WEBSITE_UTAMA_FAKULTAS" />,
           },
         ]}
         label="Fakultas"
