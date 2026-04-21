@@ -6,9 +6,11 @@ import { useParams } from 'react-router-dom'
 import { ButtonAddPublication } from '@/pages/modules/website-utama/publication/List-data/component/buttonAdd.tsx'
 
 const ListDataPublication = () => {
-  const { meta, loading, year } = UseGetPublication()
-  const columns = ColumnsPublicationList()
   const { id } = useParams()
+  const { meta, loading, year } = UseGetPublication({
+    id_tahun_publikasi: id as string,
+  })
+  const columns = ColumnsPublicationList()
 
   return (
     <>
