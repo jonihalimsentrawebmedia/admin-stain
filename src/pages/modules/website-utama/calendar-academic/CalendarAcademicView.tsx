@@ -9,16 +9,21 @@ import { Button } from '@/components/ui/button'
 import { IoWarning } from 'react-icons/io5'
 import { Image } from 'lucide-react'
 import { Skeleton } from '@/components/ui/skeleton'
+import ButtonGoToGuide from '../panduan/components/ButtonGoToGuide'
 
 const CalendarAcademicView = () => {
   const { columns, goToBackground } = CalendarAcademicViewModel()
   const { academicYearList, loading, meta } = useGetCalendarAcademic()
   const { background, loading: loadingBg } = useGetBgCalendarAcademic()
-  
+
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
         buttonGroup={[
+          {
+            type: 'custom',
+            element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_KALENDAR_AKADEMIK_KEGIATAN" />,
+          },
           {
             label: '',
             onClick: () => {},
@@ -45,6 +50,7 @@ const CalendarAcademicView = () => {
               </Button>
             ),
           },
+
           {
             label: '',
             onClick: () => {},

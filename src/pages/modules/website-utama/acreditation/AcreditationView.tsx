@@ -10,6 +10,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import SelectFilter from '@/components/common/filter/SelectFilter'
+import ButtonGoToGuide from '../panduan/components/ButtonGoToGuide'
 
 const AcreditationView = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -30,6 +31,10 @@ const AcreditationView = () => {
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
         buttonGroup={[
+          {
+            type: 'custom',
+            element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_AKREDITAS" />,
+          },
           {
             label: '',
             onClick: () => {},

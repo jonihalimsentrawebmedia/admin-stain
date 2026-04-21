@@ -18,6 +18,7 @@ import { UnpublishAnnouncementSection } from '@/pages/modules/website-utama/publ
 import { Image } from 'lucide-react'
 import { IoWarning } from 'react-icons/io5'
 import { toast } from 'react-toastify'
+import ButtonGoToGuide from '../../panduan/components/ButtonGoToGuide'
 
 export const AnnouncementPage = () => {
   const navigate = useNavigate()
@@ -132,6 +133,10 @@ export const AnnouncementPage = () => {
         <ButtonTitleGroup
           label={'Pengumuman'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_PENGUMUMAN" />,
+            },
             {
               type: 'custom',
               element:

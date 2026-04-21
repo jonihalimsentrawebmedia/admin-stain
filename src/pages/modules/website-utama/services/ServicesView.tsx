@@ -4,6 +4,7 @@ import useGetServices from './controller/useGetServices'
 import TableCustom from '@/components/common/table/TableCustom'
 import SelectFilter from '@/components/common/filter/SelectFilter'
 import ButtonAddServices from './components/ButtonAddServices'
+import ButtonGoToGuide from '../panduan/components/ButtonGoToGuide'
 
 const ServicesView = () => {
   const { columns } = ServicesViewModel()
@@ -12,6 +13,10 @@ const ServicesView = () => {
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
         buttonGroup={[
+          {
+            type: 'custom',
+            element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_LAYANAN" />,
+          },
           {
             label: '',
             onClick: () => {},

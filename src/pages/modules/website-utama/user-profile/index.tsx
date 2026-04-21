@@ -4,6 +4,8 @@ import { AccordionCustom } from '@/components/common/accordion'
 import { FormUserProfile } from '@/pages/modules/website-utama/user-profile/components/form.tsx'
 import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/hooks/getProfile.tsx'
 import { useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { IoInformationCircle } from 'react-icons/io5'
 
 export const UserProfilePage = () => {
   const { profileUser } = UseGetUserProfile()
@@ -17,7 +19,18 @@ export const UserProfilePage = () => {
         <div>
           <ButtonTitleGroup
             isBack
-            buttonGroup={[{ type: 'edit', label: 'Edit Data', onClick: () => setEdit(!edit) }]}
+            buttonGroup={[
+              {
+                type: 'custom',
+                element: (
+                  <Button variant={'outline'} className="text-primary border-primary">
+                    <IoInformationCircle />
+                    Panduan
+                  </Button>
+                ),
+              },
+              { type: 'edit', label: 'Edit Data', onClick: () => setEdit(!edit) },
+            ]}
             label="User Profile"
           />
 

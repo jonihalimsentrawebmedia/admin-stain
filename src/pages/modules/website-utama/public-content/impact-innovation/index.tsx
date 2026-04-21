@@ -15,6 +15,7 @@ import { UnpublishSectionImpactInnovation } from '@/pages/modules/website-utama/
 import { IoWarning } from 'react-icons/io5'
 import { Image } from 'lucide-react'
 import { toast } from 'react-toastify'
+import ButtonGoToGuide from '../../panduan/components/ButtonGoToGuide.tsx'
 
 export const ImpactInnovationPage = () => {
   const navigate = useNavigate()
@@ -128,6 +129,10 @@ export const ImpactInnovationPage = () => {
         <ButtonTitleGroup
           label={'Inovasi Berdampak'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_INOVASI_BERDAMPAK" />,
+            },
             {
               type: 'custom',
               element:

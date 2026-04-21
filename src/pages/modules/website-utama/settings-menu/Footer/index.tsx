@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button.tsx'
 import { MdOutlineHistory } from 'react-icons/md'
 import { Link, useNavigate } from 'react-router-dom'
 import { IoLanguage } from 'react-icons/io5'
+import ButtonGoToGuide from '../../panduan/components/ButtonGoToGuide'
 
 export const FooterContent = () => {
   const form = useForm()
@@ -58,6 +59,10 @@ export const FooterContent = () => {
                     <IoLanguage />
                   </Link>
                 ),
+              },
+              {
+                type: 'custom',
+                element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_FOOTER" />,
               },
               { type: 'edit', label: 'Edit', onClick: () => setIsEdit(!isEdit) },
               {

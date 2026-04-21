@@ -13,6 +13,7 @@ import { ApproveSection } from '@/pages/modules/website-utama/public-content/new
 import { PublishSection } from '@/pages/modules/website-utama/public-content/news/components/table/publishSection.tsx'
 import { UpPublishSection } from '@/pages/modules/website-utama/public-content/news/components/table/upPublishSection.tsx'
 import { toast } from 'react-toastify'
+import ButtonGoToGuide from '../../panduan/components/ButtonGoToGuide'
 
 const NewsPublicContentPage = () => {
   const navigate = useNavigate()
@@ -126,6 +127,10 @@ const NewsPublicContentPage = () => {
         <ButtonTitleGroup
           label={'Berita'}
           buttonGroup={[
+             {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_BERITA" />,
+            },
             {
               label: 'Tulis Berita',
               type: 'add',

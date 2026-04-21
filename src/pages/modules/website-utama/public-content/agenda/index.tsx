@@ -15,6 +15,7 @@ import { UnpublishSectionAgenda } from '@/pages/modules/website-utama/public-con
 import { IoWarning } from 'react-icons/io5'
 import { Image } from 'lucide-react'
 import { toast } from 'react-toastify'
+import ButtonGoToGuide from '../../panduan/components/ButtonGoToGuide.tsx'
 
 export const AgendaPage = () => {
   const navigate = useNavigate()
@@ -129,6 +130,10 @@ export const AgendaPage = () => {
         <ButtonTitleGroup
           label={'Agenda'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_AGENDA" />,
+            },
             {
               type: 'custom',
               element:

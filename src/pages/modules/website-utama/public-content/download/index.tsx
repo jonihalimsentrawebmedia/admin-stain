@@ -8,6 +8,7 @@ import {
 } from '@/pages/modules/website-utama/public-content/download/hooks'
 import { DownloadFileColumns } from '@/pages/modules/website-utama/public-content/download/types/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '../../panduan/components/ButtonGoToGuide'
 
 const DownloadFilePage = () => {
   const navigate = useNavigate()
@@ -20,6 +21,10 @@ const DownloadFilePage = () => {
       <div className="flex flex-col gap-5">
         <ButtonTitleGroup
           buttonGroup={[
+             {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_DOWNLOADS" />,
+            },
             {
               type: 'custom',
               element: <ButtonAddCategory />,

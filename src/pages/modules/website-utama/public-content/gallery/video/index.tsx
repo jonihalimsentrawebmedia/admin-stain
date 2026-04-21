@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button.tsx'
 import { IoWarning } from 'react-icons/io5'
 import { Image } from 'lucide-react'
+import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide'
 
 export const GalleryVideoPage = () => {
   const { galleryVideo, loading, meta } = UseGetGalleryVideo()
@@ -24,6 +25,10 @@ export const GalleryVideoPage = () => {
         <ButtonTitleGroup
           label={'Gallery Video'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_GALERI_VIDEO" />,
+            },
             {
               type: 'custom',
               element:
