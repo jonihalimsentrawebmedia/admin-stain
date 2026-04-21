@@ -7,6 +7,7 @@ import { UseGetInboxMessage } from './hooks/index'
 import { ColumnsMessageProdi } from './data/columns'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const InboxMessage = () => {
   const navigate = useNavigate()
@@ -29,6 +30,10 @@ export const InboxMessage = () => {
         <ButtonTitleGroup
           label={'Kotak Masuk'}
           buttonGroup={[
+             {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="PRODI_PERTANYAAN_KONTAK_MASUK" />,
+            },
             {
               type: 'custom',
               element: (

@@ -16,6 +16,7 @@ import {
 } from '@/pages/modules/website-utama/program-studi/detail/model/about-resolver.tsx'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useQueryClient } from '@tanstack/react-query'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const FormAboutProdi = () => {
   const form = useForm<IAboutTypeForm>({
@@ -90,29 +91,32 @@ export const FormAboutProdi = () => {
         <div className="flex flex-col gap-4">
           <div className="flex justify-between items-center">
             <p className="text-2xl font-medium">Tentang Prodi</p>
-            {isEditContent ? (
-              <ButtonForm
-                loading={loading}
-                onCancel={() => {
-                  setIsEditContent(false)
-                }}
-              />
-            ) : (
-              <Button
-                onClick={() => {
-                  setIsEditContent(!isEditContent)
-                  form.reset({
-                    isi_konten: detail?.isi_konten,
-                    gambar: image,
-                  })
-                }}
-                variant={'outline'}
-                className={'bg-white text-primary border-primary hover:text-primary'}
-              >
-                <HiPencil />
-                Edit
-              </Button>
-            )}
+            <div className="flex gap-4 items-center">
+              <ButtonGoToGuide valueGuide="PRODI_PROFIL_TENTANG" />
+              {isEditContent ? (
+                <ButtonForm
+                  loading={loading}
+                  onCancel={() => {
+                    setIsEditContent(false)
+                  }}
+                />
+              ) : (
+                <Button
+                  onClick={() => {
+                    setIsEditContent(!isEditContent)
+                    form.reset({
+                      isi_konten: detail?.isi_konten,
+                      gambar: image,
+                    })
+                  }}
+                  variant={'outline'}
+                  className={'bg-white text-primary border-primary hover:text-primary'}
+                >
+                  <HiPencil />
+                  Edit
+                </Button>
+              )}
+            </div>
           </div>
           <CardInput title="Tentang Prodi">
             {isEditContent ? (

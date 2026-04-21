@@ -1,6 +1,7 @@
 import { UseGetProdiNews } from '@/pages/modules/website-prodi/public-content/news/hooks'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ProfileNewsColumns } from '@/pages/modules/website-prodi/profile/news/data/columns.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const NewsPublishedProfile = () => {
   const { loading, prodiNews, meta } = UseGetProdiNews({
@@ -12,7 +13,11 @@ export const NewsPublishedProfile = () => {
   return (
     <>
       <div className={'space-y-5'}>
-        <p className="text-2xl text-primary font-semibold">Berita</p>
+        <div className="flex gap-4 items-center justify-between">
+          <p className="text-2xl text-primary font-semibold">Berita</p>
+
+          <ButtonGoToGuide valueGuide="PRODI_PROFIL_BERITA" />
+        </div>
         <TableCustom
           className={'border'}
           tdClassName={'whitespace-pre-line border'}

@@ -3,6 +3,7 @@ import { ButtonAddLandingProdi } from './components/buttonAdd.tsx'
 import { ProdiLandingPageColumns } from './data/columns'
 import { UseGetProdiLandingPage } from './hooks/index'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const LandingPageProdi = () => {
   const columns = ProdiLandingPageColumns()
@@ -14,6 +15,10 @@ export const LandingPageProdi = () => {
         <ButtonTitleGroup
           label={'Landing Page'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="PRODI_LANDING_PAGE" />,
+            },
             {
               type: 'custom',
               element: <ButtonAddLandingProdi />,

@@ -17,6 +17,7 @@ import {
   ContactUsResolver,
   type IContactUsTypeForm,
 } from '@/pages/modules/website-utama/program-studi/detail/model/contact-us.ts'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const ContactUsProfilePage = () => {
   const { contactUs } = UseGetProfileContactUs()
@@ -91,28 +92,31 @@ const ContactUsProfilePage = () => {
       <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
         <div className="flex justify-between items-center">
           <div className="text-primary text-2xl font-medium">Hubungi Kami</div>
-          {isEdit ? (
-            <ButtonForm
-              loading={loading}
-              onCancel={() => {
-                setIsEdit(false)
-              }}
-            />
-          ) : (
-            <Button
-              onClick={() => {
-                setIsEdit(!isEdit)
-                form.reset({
-                  ...contactUs,
-                })
-              }}
-              variant={'outline'}
-              className={'bg-white text-primary border-primary hover:text-primary'}
-            >
-              <HiPencil />
-              Edit
-            </Button>
-          )}
+          <div className="flexx gap-4 items-center">
+            <ButtonGoToGuide valueGuide="PRODI_PROFIL_HUBUNGI_KAMI" />
+            {isEdit ? (
+              <ButtonForm
+                loading={loading}
+                onCancel={() => {
+                  setIsEdit(false)
+                }}
+              />
+            ) : (
+              <Button
+                onClick={() => {
+                  setIsEdit(!isEdit)
+                  form.reset({
+                    ...contactUs,
+                  })
+                }}
+                variant={'outline'}
+                className={'bg-white text-primary border-primary hover:text-primary'}
+              >
+                <HiPencil />
+                Edit
+              </Button>
+            )}
+          </div>
         </div>
         <CardInput title="Hubungi Kami">
           {isEdit ? (

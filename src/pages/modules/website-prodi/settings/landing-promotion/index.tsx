@@ -6,6 +6,7 @@ import { AccordionCustom } from '@/components/common/accordion'
 import { UseLandingPromotion } from '@/pages/modules/website-prodi/settings/landing-promotion/hooks'
 import { ProdiLandingPromotionColumns } from '@/pages/modules/website-prodi/settings/landing-promotion/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const LandingPromotion = () => {
   const { landingPromotion, meta, loading } = UseLandingPromotion()
@@ -17,6 +18,10 @@ export const LandingPromotion = () => {
         <ButtonTitleGroup
           label={'Landing Page Promosi'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="PRODI_LANDING_PAGE_PROMOSI" />,
+            },
             {
               type: 'custom',
               element: <ButtonAddPromotionLanding />,

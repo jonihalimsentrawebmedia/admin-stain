@@ -2,6 +2,7 @@ import ButtonAddManagementUnit from '@/pages/modules/website-prodi/profile/manag
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { UseGetManagementUnit } from '@/pages/modules/website-prodi/profile/management-unit/hooks'
 import UnitUserManagement from './data/columns'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const ManagementUnitPage = () => {
   const { loading, unitUser, meta } = UseGetManagementUnit()
@@ -12,7 +13,10 @@ export const ManagementUnitPage = () => {
       <div className="flex flex-col gap-4">
         <div className="flex justify-between items-center">
           <p className="text-2xl font-medium">Unit Pengelola</p>
-          <ButtonAddManagementUnit />
+          <div className="flex gap-4 items-center">
+            <ButtonGoToGuide valueGuide="PRODI_PROFIL_UNIT_PENGELOLA" />
+            <ButtonAddManagementUnit />
+          </div>
         </div>
 
         <TableCustom columns={columns} data={unitUser} loading={loading} meta={meta} />

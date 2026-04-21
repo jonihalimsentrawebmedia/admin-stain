@@ -7,6 +7,7 @@ import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { Separator } from '@/components/ui/separator.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import { useSearchParams } from 'react-router-dom'
+import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
 
 export const CurriculumProdiPage = () => {
   const { session } = UseGetProdiSession()
@@ -27,7 +28,13 @@ export const CurriculumProdiPage = () => {
       <div className={'flex flex-col gap-4'}>
         <ButtonTitleGroup
           label={'Kurikulum Program Studi'}
-          buttonGroup={[{ type: 'custom', element: <ButtonAddCurriculum session={session} /> }]}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="PRODI_KURIKULUM" />,
+            },
+            { type: 'custom', element: <ButtonAddCurriculum session={session} /> },
+          ]}
         />
 
         <div className="flex flex-col gap-1.5">

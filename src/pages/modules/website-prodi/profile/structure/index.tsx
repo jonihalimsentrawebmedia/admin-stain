@@ -14,6 +14,7 @@ import {
   OrganizationalStructureResolver,
 } from '@/pages/modules/website-utama/program-studi/detail/model/organizational-structure.ts'
 import ImageOrganization from '@/pages/modules/website-utama/program-studi/detail/struktur-organisasi/components/ImageOrganization.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const StructureOganizationProfilePage = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -58,28 +59,32 @@ const StructureOganizationProfilePage = () => {
       <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
         <div className="flex justify-between items-center">
           <p className="text-2xl font-medium">Struktur Organisasi</p>
-          {isEdit ? (
-            <ButtonForm
-              loading={loading}
-              onCancel={() => {
-                setIsEdit(false)
-              }}
-            />
-          ) : (
-            <Button
-              onClick={() => {
-                setIsEdit(!isEdit)
-                form.reset({
-                  url_gambar: structure?.url_gambar,
-                })
-              }}
-              variant={'outline'}
-              className={'bg-white text-primary border-primary hover:text-primary'}
-            >
-              <HiPencil />
-              Edit
-            </Button>
-          )}
+          <div className="flex gap-4 items-center">
+            <ButtonGoToGuide valueGuide="PRODI_PROFIL_STRUKTUR_ORGANISASI" />
+
+            {isEdit ? (
+              <ButtonForm
+                loading={loading}
+                onCancel={() => {
+                  setIsEdit(false)
+                }}
+              />
+            ) : (
+              <Button
+                onClick={() => {
+                  setIsEdit(!isEdit)
+                  form.reset({
+                    url_gambar: structure?.url_gambar,
+                  })
+                }}
+                variant={'outline'}
+                className={'bg-white text-primary border-primary hover:text-primary'}
+              >
+                <HiPencil />
+                Edit
+              </Button>
+            )}
+          </div>
         </div>
         <ImageOrganization
           image={form.watch('url_gambar')}

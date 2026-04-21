@@ -4,6 +4,7 @@ import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsServiceProdi } from './data/columns'
 import { UseGetServiceProdi } from './hooks/index.tsx'
+import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const ServiceProdiPage = () => {
   const { serviceProdi, loading, meta } = UseGetServiceProdi()
@@ -14,6 +15,10 @@ export const ServiceProdiPage = () => {
       <div className="flex flex-col gap-4">
         <ButtonTitleGroup
           buttonGroup={[
+            {
+              type:"custom",
+              element:<ButtonGoToGuide valueGuide="PRODI_PRODI_LAYANAN" />
+            },
             {
               type: 'custom',
               element: <ButtonAddServiceProdi />,
