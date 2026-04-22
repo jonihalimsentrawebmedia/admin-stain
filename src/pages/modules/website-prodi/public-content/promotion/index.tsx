@@ -120,7 +120,7 @@ export const PromotionProdiPage = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="PRODI_PROMOSI" />,
+              element: <ButtonGoToGuide titleGuide='Konten Publik - Promosi' valueGuide="PRODI_PROMOSI" />,
             },
             { type: 'edit', label: 'Tulis Promosi', onClick: () => navigate('add') },
           ]}

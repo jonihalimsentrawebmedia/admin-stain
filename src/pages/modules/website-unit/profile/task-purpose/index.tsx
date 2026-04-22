@@ -62,6 +62,15 @@ export const TaskPurposeUnit = () => {
               <ButtonTitleGroup
                 label={'Tugas, Fungsi, & Tujuan'}
                 buttonGroup={[
+                  {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide="Tugas, Fungsi, & Tujuan"
+                        valueGuide="PERPUSTAKAAN_PROFIL_TUJUAN_FUNGSI"
+                      />
+                    ),
+                  },
                   { type: 'cancel', label: 'Batal', onClick: () => setIsEdit(!isEdit) },
                   {
                     label: 'Simpan',
@@ -117,7 +126,12 @@ export const TaskPurposeUnit = () => {
               buttonGroup={[
                 {
                   type: 'custom',
-                  element: <ButtonGoToGuide valueGuide="PERPUSTAKAAN_PROFIL_TUJUAN_FUNGSI" />,
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide="Tugas, Fungsi, & Tujuan"
+                      valueGuide="PERPUSTAKAAN_PROFIL_TUJUAN_FUNGSI"
+                    />
+                  ),
                 },
                 { label: 'Edit', type: 'edit', onClick: () => setIsEdit(!isEdit) },
               ]}

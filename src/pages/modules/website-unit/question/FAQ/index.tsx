@@ -6,6 +6,7 @@ import { ButtonAddFAQUnit } from './components/buttonAdd'
 import { UseGetListFAQUnit } from './hooks/index'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsFAQUnit } from './data/columns.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const QuestionFAQUnitPage = () => {
   const navigate = useNavigate()
@@ -18,6 +19,15 @@ export const QuestionFAQUnitPage = () => {
         <ButtonTitleGroup
           label={'F.A.Q'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide="F.A.Q"
+                  valueGuide="PERPUSTAKAAN_PERTANYAAN_FAQ"
+                />
+              ),
+            },
             {
               type: 'custom',
               element: (

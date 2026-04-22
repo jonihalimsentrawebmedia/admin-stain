@@ -4,6 +4,7 @@ import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import { UseGetFaqCategoryUnit } from './hooks/index'
 import { ColumnsCategoryFAQUnit } from './data/columns'
 import { ButtonAddCategoryFAQUnit } from './components/buttonAdd.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const CategoryFAQUnitPage = () => {
   const { loading, categoryFaq, meta } = UseGetFaqCategoryUnit()
@@ -16,6 +17,15 @@ export const CategoryFAQUnitPage = () => {
           label={'Kategori F.A.Q'}
           isBack
           buttonGroup={[
+             {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide="Kategori F.A.Q"
+                  valueGuide="PERPUSTAKAAN_PERTANYAAN_KATEGORI_FAQ"
+                />
+              ),
+            },
             {
               type: 'custom',
               element: <ButtonAddCategoryFAQUnit />,

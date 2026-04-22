@@ -22,7 +22,7 @@ export const QuestionFAQProdiPage = () => {
           buttonGroup={[
              {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="PRODI_FAQ" />,
+              element: <ButtonGoToGuide titleGuide='F.A.Q' valueGuide="PRODI_FAQ" />,
             },
             {
               type: 'custom',

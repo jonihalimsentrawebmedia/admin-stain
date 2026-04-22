@@ -32,7 +32,7 @@ export const InboxMessage = () => {
           buttonGroup={[
              {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="PRODI_PERTANYAAN_KONTAK_MASUK" />,
+              element: <ButtonGoToGuide titleGuide='Kotak Masuk' valueGuide="PRODI_PERTANYAAN_KONTAK_MASUK" />,
             },
             {
               type: 'custom',

@@ -19,7 +19,7 @@ export const AccreditationProdiPage = () => {
           buttonGroup={[
               {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="PRODI_AKREDITAS" />,
+              element: <ButtonGoToGuide titleGuide='Akreditasi' valueGuide="PRODI_AKREDITAS" />,
             },
             { type: 'custom', element: <ButtonAddAccreditationProdi session={session} /> },
           ]}

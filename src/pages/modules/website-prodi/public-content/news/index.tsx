@@ -120,7 +120,7 @@ export const NewsProdiPublicContentPage = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="PRODI_BERITA" />,
+              element: <ButtonGoToGuide titleGuide='Konten Publik - Berita' valueGuide="PRODI_BERITA" />,
             },
             { type: 'add', label: 'Tulis Berita', onClick: () => navigate('add') },
           ]}

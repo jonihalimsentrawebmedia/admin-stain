@@ -5,6 +5,7 @@ import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { UseGetInboxUnit } from '@/pages/modules/website-unit/question/inbox/hooks'
 import { ColumnsInboxUnit } from '@/pages/modules/website-unit/question/inbox/data/columns.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const InboxMessageUnit = () => {
   const [searchParams] = useSearchParams()
@@ -22,7 +23,20 @@ export const InboxMessageUnit = () => {
   return (
     <>
       <div className={'flex flex-col gap-5'}>
-        <ButtonTitleGroup label={'Kotak Masuk'} buttonGroup={[]} />
+        <ButtonTitleGroup
+          label={'Kotak Masuk'}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide="Kotak Masuk"
+                  valueGuide="PERPUSTAKAAN_PERTANYAAN_PERTANYAAN"
+                />
+              ),
+            },
+          ]}
+        />
 
         <FilterSelect
           label={'status'}

@@ -6,6 +6,7 @@ import { ButtonAddBackgroundUnit } from './components/buttonAdd'
 import { UseGetUnitBackground } from './hooks/index'
 import { UnitLandingPageColumns } from './data/columns'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const BackgroundWebsiteUnitSettings = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -23,6 +24,12 @@ export const BackgroundWebsiteUnitSettings = () => {
 
   return (
     <>
+      <div className="flex justify-end mb-4">
+        <ButtonGoToGuide
+          titleGuide="Gambar Background"
+          valueGuide="PERPUSTAKAAN_PENGATURAN_BACKGROUND"
+        />
+      </div>
       <Tabs
         value={context}
         onValueChange={(value) => {

@@ -5,6 +5,7 @@ import { UseGetUnitAnnouncementStatus } from './hooks/index'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { TabsListCustom } from '@/pages/modules/website-utama/public-content/slider/components/tabsList.tsx'
 import { TableDataListAnnouncementUnit } from './components/listAnnouncement'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const AnnouncementUnitPublicContent = () => {
   const navigate = useNavigate()
@@ -115,7 +116,18 @@ export const AnnouncementUnitPublicContent = () => {
       <div className="flex flex-col gap-5">
         <ButtonTitleGroup
           label={'Pengumuman'}
-          buttonGroup={[{ type: 'add', label: 'Tulis Pengumuman', onClick: () => navigate('add') }]}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide="Konten Publik - Pengumuman"
+                  valueGuide="PERPUSTAKAAN_KONTEN_PUBLIK_PENGUMUMAN"
+                />
+              ),
+            },
+            { type: 'add', label: 'Tulis Pengumuman', onClick: () => navigate('add') },
+          ]}
         />
 
         <TabsListCustom

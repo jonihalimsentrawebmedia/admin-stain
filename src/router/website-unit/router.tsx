@@ -62,6 +62,7 @@ import { LogActivityFacilitiesUnitPage } from '@/pages/modules/website-unit/publ
 import { PrimaryAndFooterColorUnit } from '@/pages/modules/website-unit/settings/color'
 import { TemplateWebSettings } from '@/pages/modules/website-unit/settings/template-web'
 import { ThemaChangeColorUnit } from '@/pages/modules/website-unit/settings/template-web/color'
+import GuideListView from '@/pages/modules/website-utama/panduan/GuideListView'
 
 export const WebsiteUnitRouter = [
   {
@@ -80,6 +81,10 @@ export const WebsiteUnitRouter = [
         element: <ChangePassword />,
       },
     ],
+  },
+   {
+    path:"panduan",
+    element:<GuideListView/>
   },
   {
     path: 'data-unit',

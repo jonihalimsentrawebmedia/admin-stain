@@ -33,7 +33,7 @@ export const GalleryProfileDetail = () => {
         <div className="flex gap-4 items-center justify-between">
           <p className="text-2xl font-semibold">Gallery</p>
 
-          <ButtonGoToGuide valueGuide="PRODI_PROFIL_GALERI_FOTO" />
+          <ButtonGoToGuide titleGuide='Gallery' valueGuide="PRODI_PROFIL_GALERI_FOTO" />
         </div>
 
         <TableCustom

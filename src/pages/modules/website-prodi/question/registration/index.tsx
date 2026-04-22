@@ -15,7 +15,7 @@ export const RegistrationQuestionPage = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="PRODI_JALUR_PENDAFTARAN" />,
+              element: <ButtonGoToGuide titleGuide='Pendaftaran' valueGuide="PRODI_JALUR_PENDAFTARAN" />,
             },
           ]}
           label="Pendaftaran"

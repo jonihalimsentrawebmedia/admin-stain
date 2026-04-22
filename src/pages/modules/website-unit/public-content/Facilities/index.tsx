@@ -5,6 +5,7 @@ import { UseGetFacilitiesUnitStatus } from './hooks/index'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { TabsListCustom } from '@/pages/modules/website-utama/public-content/slider/components/tabsList.tsx'
 import { TableDataListFacilities } from './components/facilitiesList'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const FacilitiesUnitPublicContent = () => {
   const navigate = useNavigate()
@@ -115,7 +116,18 @@ export const FacilitiesUnitPublicContent = () => {
       <div className="flex flex-col gap-5">
         <ButtonTitleGroup
           label={'Fasilitas Unit'}
-          buttonGroup={[{ type: 'add', label: 'Tambah Fasilitas', onClick: () => navigate('add') }]}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide="Konten Publik - Fasilitas Unit"
+                  valueGuide="PERPUSTAKAAN_KONTEN_PUBLIK_FASILITAS_UNIT"
+                />
+              ),
+            },
+            { type: 'add', label: 'Tambah Fasilitas', onClick: () => navigate('add') },
+          ]}
         />
 
         <TabsListCustom

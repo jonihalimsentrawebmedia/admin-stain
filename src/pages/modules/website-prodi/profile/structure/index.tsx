@@ -60,7 +60,7 @@ const StructureOganizationProfilePage = () => {
         <div className="flex justify-between items-center">
           <p className="text-2xl font-medium">Struktur Organisasi</p>
           <div className="flex gap-4 items-center">
-            <ButtonGoToGuide valueGuide="PRODI_PROFIL_STRUKTUR_ORGANISASI" />
+            <ButtonGoToGuide titleGuide='Struktur Organisasi' valueGuide="PRODI_PROFIL_STRUKTUR_ORGANISASI" />
 
             {isEdit ? (
               <ButtonForm

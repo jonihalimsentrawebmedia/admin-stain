@@ -31,7 +31,7 @@ export const CurriculumProdiPage = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="PRODI_KURIKULUM" />,
+              element: <ButtonGoToGuide titleGuide='Kurikulum Program Studi' valueGuide="PRODI_KURIKULUM" />,
             },
             { type: 'custom', element: <ButtonAddCurriculum session={session} /> },
           ]}

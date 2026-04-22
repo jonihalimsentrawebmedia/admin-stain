@@ -21,7 +21,16 @@ export const ListServiceCategory = () => {
           isBack
           label={`Daftar Layanan-${detailServices?.nama_layanan}`}
           buttonGroup={[
-              {
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={`Daftar Layanan-${detailServices?.nama_layanan}`}
+                  valueGuide="PERPUSTAKAAN_LAYANAN_KATEGORI_LAYANAN"
+                />
+              ),
+            },
+            {
               type: 'custom',
               element: <ButtonGoToGuide valueGuide="PERPUSTAKAAN_LAYANAN_KATEGORI_LAYANAN" />,
             },

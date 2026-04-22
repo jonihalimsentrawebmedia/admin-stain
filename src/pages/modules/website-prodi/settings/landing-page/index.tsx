@@ -17,7 +17,7 @@ export const LandingPageProdi = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="PRODI_LANDING_PAGE" />,
+              element: <ButtonGoToGuide titleGuide='Landing Page' valueGuide="PRODI_LANDING_PAGE" />,
             },
             {
               type: 'custom',

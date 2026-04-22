@@ -93,7 +93,7 @@ const ContactUsProfilePage = () => {
         <div className="flex justify-between items-center">
           <div className="text-primary text-2xl font-medium">Hubungi Kami</div>
           <div className="flexx gap-4 items-center">
-            <ButtonGoToGuide valueGuide="PRODI_PROFIL_HUBUNGI_KAMI" />
+            <ButtonGoToGuide titleGuide='Hubungi Kami' valueGuide="PRODI_PROFIL_HUBUNGI_KAMI" />
             {isEdit ? (
               <ButtonForm
                 loading={loading}

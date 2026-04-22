@@ -14,7 +14,7 @@ export const ManagementUnitPage = () => {
         <div className="flex justify-between items-center">
           <p className="text-2xl font-medium">Unit Pengelola</p>
           <div className="flex gap-4 items-center">
-            <ButtonGoToGuide valueGuide="PRODI_PROFIL_UNIT_PENGELOLA" />
+            <ButtonGoToGuide titleGuide='Unit Pengelola' valueGuide="PRODI_PROFIL_UNIT_PENGELOLA" />
             <ButtonAddManagementUnit />
           </div>
         </div>

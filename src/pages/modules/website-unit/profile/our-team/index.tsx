@@ -17,7 +17,7 @@ export const OurTeamUnit = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="PERPUSTAKAAN_PROFIL_TIM" />,
+              element: <ButtonGoToGuide titleGuide='Tim Unit' valueGuide="PERPUSTAKAAN_PROFIL_TIM" />,
             },
             { type: 'custom', element: <ButtonAddOurTeam /> },
           ]}
