@@ -99,6 +99,7 @@ import { UpdatedFormActivity } from '@/pages/modules/LPPM/research/schema/intern
 import { DetailActivityProgramInternal } from '@/pages/modules/LPPM/research/schema/internal/activity/component/detail.tsx'
 import { ListJournalPage } from '@/pages/modules/LPPM/publication-hki/journal/list'
 import { ThemaChangeColorInstitutionLppm } from '@/pages/modules/LPPM/settings/template/color'
+import GuideListView from '@/pages/modules/website-utama/panduan/GuideListView'
 
 export const routesLPPM = [
   {
@@ -117,6 +118,10 @@ export const routesLPPM = [
         element: <ChangePassword />,
       },
     ],
+  },
+  {
+    path:"panduan",
+    element:<GuideListView/>
   },
   {
     path: 'data-lppm',

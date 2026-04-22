@@ -4,6 +4,7 @@ import TableCustom from '@/components/common/table/TableCustom.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import { UseGetUserManagementContext } from '@/pages/modules/LPPM/publication-hki/book/hooks'
 import { ColumnsUserManagement } from '@/pages/modules/LPPM/publication-hki/book/book-center/manangement/data/columns.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const UserManagementHKI = () => {
   const navigate = useNavigate()
@@ -31,6 +32,15 @@ export const UserManagementHKI = () => {
           isBack
           label={'Pengelola - Pusat KI & Layanan Teknis'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Pengelola - Pusat KI & Layanan Teknis'}
+                  valueGuide="LPPM_PUBLIKASI_HKI_PUSAT_KL_ANGGOTA"
+                />
+              ),
+            },
             {
               type: 'add',
               label: 'Tambah Pengelola',

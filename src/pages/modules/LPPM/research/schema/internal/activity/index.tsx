@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { UseGetActivityProgram } from '@/pages/modules/LPPM/research/schema/internal/activity/hooks'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsActivityProgram } from '@/pages/modules/LPPM/research/schema/internal/activity/data/columns.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const ActivityProgramPage = () => {
   const navigate = useNavigate()
@@ -25,6 +26,15 @@ export const ActivityProgramPage = () => {
         <ButtonTitleGroup
           label={'Daftar Program Kegiatan'}
           buttonGroup={[
+             {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide="Daftar Program Kegiatan"
+                      valueGuide="LPPM_PENELITIAN_SKEMA_PENDANAAN_INTERNAL_PROGRAM_PENELITIAN"
+                    />
+                  ),
+                },
             {
               type: 'add',
               label: 'Tambah Program Kegiatan',

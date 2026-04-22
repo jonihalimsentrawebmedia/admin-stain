@@ -3,6 +3,7 @@ import LandingPageViewModel from './LandingPageViewModel'
 import ButtonAdd from './components/ButtonAdd'
 import TableCustom from '@/components/common/table/TableCustom'
 import useGetLandingPage from './controller/useGetLandingPage'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const LPPMLandingPageView = () => {
   const { columns } = LandingPageViewModel()
@@ -11,6 +12,15 @@ const {landing,loading,meta}=useGetLandingPage({})
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
         buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Landing Page'}
+                  valueGuide="LPPM_KONTEN_PUBLIK_LANDING_PAGE"
+                />
+              ),
+            },
           {
             label: '',
             onClick: () => {},

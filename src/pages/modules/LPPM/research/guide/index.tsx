@@ -5,6 +5,7 @@ import { useSearchParams } from 'react-router-dom'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import { ColumnsGuideCategory } from './data/columns'
 import { ButtonAddGuideCategory } from '@/pages/modules/LPPM/research/guide/component/buttonAdd.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const GuideCategoryResearch = () => {
   const [searchParams] = useSearchParams()
@@ -26,6 +27,10 @@ export const GuideCategoryResearch = () => {
         <ButtonTitleGroup
           label={'Buku Panduan'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide="Buku Panduan" valueGuide="LPPM_BUKU_PANDUAN" />,
+            },
             {
               type: 'custom',
               element: <ButtonAddGuideCategory />,

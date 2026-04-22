@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button.tsx'
 import { IoList } from 'react-icons/io5'
 import { UseGetCategoryDownloadLppm, UseGetDownloadLppm } from './hooks'
 import { DownloadFileLppmColumns } from './data/columns'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const DownloadFileLppmPage = () => {
   const navigate = useNavigate()
@@ -19,6 +20,15 @@ const DownloadFileLppmPage = () => {
       <div className="flex flex-col gap-5">
         <ButtonTitleGroup
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Konten Publik - Download'}
+                  valueGuide="LPPM_KONTEN_PUBLIK_DOWNLOAD"
+                />
+              ),
+            },
             {
               type: 'custom',
               element: (

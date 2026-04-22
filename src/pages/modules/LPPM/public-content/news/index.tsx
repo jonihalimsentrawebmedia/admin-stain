@@ -5,6 +5,7 @@ import { TabsListCustom } from '@/pages/modules/website-utama/public-content/sli
 import type { StatusPublish } from '@/pages/modules/website-prodi/public-content/news/data/types.ts'
 import { TableDataListNews } from './components/listNews'
 import { UseGetLppmNewsStatus } from './hooks'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const NewsLppmPublicContentPage = () => {
   const navigate = useNavigate()
@@ -116,7 +117,13 @@ export const NewsLppmPublicContentPage = () => {
       <div className="flex flex-col gap-5">
         <ButtonTitleGroup
           label={'Berita'}
-          buttonGroup={[{ type: 'add', label: 'Tulis Berita', onClick: () => navigate('add') }]}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide={'Konten Publik - Berita'} valueGuide="LPPM_KONTEN_PUBLIK_BERITA" />,
+            },
+            { type: 'add', label: 'Tulis Berita', onClick: () => navigate('add') },
+          ]}
         />
 
         <TabsListCustom

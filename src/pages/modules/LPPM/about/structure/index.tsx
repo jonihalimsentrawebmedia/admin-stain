@@ -8,6 +8,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { UseGetStructureOrganization } from '@/pages/modules/LPPM/about/structure/hooks'
 import { useQueryClient } from '@tanstack/react-query'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const StructureOrganizationProfile = () => {
   const { detailData } = UseGetStructureOrganization()
@@ -52,6 +53,15 @@ export const StructureOrganizationProfile = () => {
                 label={'Struktur Organisasi'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide="Struktur Organisasi"
+                        valueGuide="LPPM_TENTANG_STRUKTUR_ORGANISASI"
+                      />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -74,6 +84,15 @@ export const StructureOrganizationProfile = () => {
             <ButtonTitleGroup
               label={'Struktur Organisasi'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide="Struktur Organisasi"
+                      valueGuide="LPPM_TENTANG_STRUKTUR_ORGANISASI"
+                    />
+                  ),
+                },
                 {
                   type: 'edit',
                   label: 'Edit Konten',

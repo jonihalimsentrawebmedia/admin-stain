@@ -4,6 +4,7 @@ import { UseGetListBRIN } from './hooks/index'
 import { ColumnsDataDRTPM } from './data/columns'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const SchemaDataBRIN = () => {
   const navigate = useNavigate()
@@ -27,6 +28,15 @@ export const SchemaDataBRIN = () => {
         <ButtonTitleGroup
           label={'Pendanan BRIN'}
           buttonGroup={[
+             {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide="Pendanan BRIN"
+                  valueGuide="LPPM_PENGABIDAN_SKEMA_BRIN"
+                />
+              ),
+            },
             {
               type: 'add',
               label: 'Tambah Skema',

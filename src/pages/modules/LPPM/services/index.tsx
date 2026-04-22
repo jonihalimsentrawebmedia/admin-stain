@@ -1,10 +1,11 @@
-import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup.tsx";
-import {UseGetServices} from "@/pages/modules/LPPM/services/hooks";
-import {useSearchParams} from "react-router-dom";
-import {ColumnsService} from "@/pages/modules/LPPM/services/data/columns.tsx";
-import TableCustom from "@/components/common/table/TableCustom.tsx";
-import SelectFilter from "@/components/common/filter/SelectFilter.tsx";
-import {ButtonAddService} from "@/pages/modules/LPPM/services/component/buttonAdd.tsx";
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import { UseGetServices } from '@/pages/modules/LPPM/services/hooks'
+import { useSearchParams } from 'react-router-dom'
+import { ColumnsService } from '@/pages/modules/LPPM/services/data/columns.tsx'
+import TableCustom from '@/components/common/table/TableCustom.tsx'
+import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
+import { ButtonAddService } from '@/pages/modules/LPPM/services/component/buttonAdd.tsx'
+import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
 
 export const ServicesListPage = () => {
   const [searchParams] = useSearchParams()
@@ -12,7 +13,7 @@ export const ServicesListPage = () => {
   const page = searchParams.get('page') ?? '1'
   const search = searchParams.get('search') ?? ''
 
-  const {service, meta, loading} = UseGetServices({
+  const { service, meta, loading } = UseGetServices({
     limit: limit,
     page: page,
     search: search,
@@ -23,12 +24,19 @@ export const ServicesListPage = () => {
   return (
     <>
       <div className={'flex flex-col gap-5'}>
-        <ButtonTitleGroup label={'Layanan'} buttonGroup={[
-          {
-            type: 'custom',
-            element: <ButtonAddService/>
-          }
-        ]}/>
+        <ButtonTitleGroup
+          label={'Layanan'}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide={'Layanan'} valueGuide="LPPM_LAYANAN" />,
+            },
+            {
+              type: 'custom',
+              element: <ButtonAddService />,
+            },
+          ]}
+        />
 
         <TableCustom
           addFilter={
@@ -44,7 +52,11 @@ export const ServicesListPage = () => {
               })}
             />
           }
-          data={service} columns={columns} loading={loading} meta={meta}/>
+          data={service}
+          columns={columns}
+          loading={loading}
+          meta={meta}
+        />
       </div>
     </>
   )
