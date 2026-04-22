@@ -4,6 +4,7 @@ import FieldOfCooperationViewModel from "./FieldOfCooperationViewModel"
 import ButtonAddFieldOfCooperation from "./components/ButtonAddFieldOfCooperation"
 import TableCustom from "@/components/common/table/TableCustom"
 import SelectFilter from "@/components/common/filter/SelectFilter"
+import ButtonGoToGuide from "../../panduan/components/ButtonGoToGuide"
 
 const FieldOfCooperationView = () => {
  const { columns } = FieldOfCooperationViewModel()
@@ -13,6 +14,10 @@ const FieldOfCooperationView = () => {
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
         buttonGroup={[
+           {
+            type: 'custom',
+            element: <ButtonGoToGuide titleGuide="Bidang Kerjasama" valueGuide="WEBSITE_UTAMA_BIDANG_KERJASAMA" />,
+          },
           {
             label: '',
             onClick: () => {},

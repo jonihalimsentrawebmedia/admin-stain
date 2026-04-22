@@ -5,6 +5,7 @@ import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { useSearchParams } from 'react-router-dom'
 import FilterBasic from '@/components/common/filter/filterBasic.tsx'
 import { useEffect } from 'react'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const GalleryProfileDetail = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -29,7 +30,11 @@ export const GalleryProfileDetail = () => {
   return (
     <>
       <div className="flex flex-col gap-5">
-        <p className="text-2xl font-semibold">Gallery</p>
+        <div className="flex gap-4 items-center justify-between">
+          <p className="text-2xl font-semibold">Gallery</p>
+
+          <ButtonGoToGuide valueGuide="PRODI_PROFIL_GALERI_FOTO" />
+        </div>
 
         <TableCustom
           classNameSearch={'p-1.5 pl-8'}

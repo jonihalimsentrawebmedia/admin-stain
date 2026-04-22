@@ -3,6 +3,7 @@ import { UseGetRegisterPath } from '@/pages/modules/website-utama/jalur-pendafta
 import { ColumnsRegistrationPath } from '@/pages/modules/website-utama/jalur-pendaftaran/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { useNavigate } from 'react-router-dom'
+import ButtonGoToGuide from '../panduan/components/ButtonGoToGuide'
 
 export const RegistrationPathPage = () => {
   const { loading, registerPath, meta } = UseGetRegisterPath()
@@ -14,6 +15,15 @@ export const RegistrationPathPage = () => {
       <div className={'flex flex-col gap-4'}>
         <ButtonTitleGroup
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide="Jalur Pendaftaran"
+                  valueGuide="WEBSITE_UTAMA_JALUR_PENDAFTARAN"
+                />
+              ),
+            },
             {
               type: 'add',
               label: 'Tambah Data',

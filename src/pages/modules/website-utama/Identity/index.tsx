@@ -7,6 +7,7 @@ import { AccordionCustom } from '@/components/common/accordion'
 import { UseGetIdentity } from '@/pages/modules/website-utama/Identity/hooks'
 import { TbExternalLink } from 'react-icons/tb'
 import { IoLanguage } from 'react-icons/io5'
+import ButtonGoToGuide from '../panduan/components/ButtonGoToGuide'
 
 export const PageIdentity = () => {
   const navigate = useNavigate()
@@ -25,6 +26,10 @@ export const PageIdentity = () => {
                   <IoLanguage />
                 </Link>
               ),
+            },
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide='Identitas' valueGuide="WEBSITE_UTAMA_IDENTITAS" />,
             },
             {
               type: 'custom',

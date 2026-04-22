@@ -6,6 +6,7 @@ import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { IoMdImage } from 'react-icons/io'
 import { useNavigate } from 'react-router-dom'
+import ButtonGoToGuide from '../../panduan/components/ButtonGoToGuide'
 
 export const InboxMessagePage = () => {
   const { meta, listMessage, loading } = UseGetInboxMessage()
@@ -18,6 +19,11 @@ export const InboxMessagePage = () => {
         <ButtonTitleGroup
           label={'Kotak Masuk'}
           buttonGroup={[
+            {
+              type:"custom",
+              element:<ButtonGoToGuide titleGuide='Kotak Masuk' valueGuide="WEBSITE_UTAMA_PERTANYAAN" />
+            },
+
             {
               type: 'custom',
               element: (

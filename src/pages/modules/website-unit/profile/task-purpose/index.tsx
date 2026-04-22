@@ -11,6 +11,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { UseGetTaskPurpose } from './hooks/index'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const TaskPurposeUnit = () => {
   const { taskPurpose: detail } = UseGetTaskPurpose()
@@ -113,7 +114,13 @@ export const TaskPurposeUnit = () => {
           <>
             <ButtonTitleGroup
               label={'Tugas, Fungsi, & Tujuan'}
-              buttonGroup={[{ label: 'Edit', type: 'edit', onClick: () => setIsEdit(!isEdit) }]}
+              buttonGroup={[
+                {
+                  type: 'custom',
+                  element: <ButtonGoToGuide valueGuide="PERPUSTAKAAN_PROFIL_TUJUAN_FUNGSI" />,
+                },
+                { label: 'Edit', type: 'edit', onClick: () => setIsEdit(!isEdit) },
+              ]}
             />
             <Accordion
               type={'multiple'}

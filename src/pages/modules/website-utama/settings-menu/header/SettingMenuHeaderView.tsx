@@ -10,7 +10,7 @@ const SettingMenuHeaderView = () => {
         buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_HEADER" />,
+              element: <ButtonGoToGuide titleGuide='Header' valueGuide="WEBSITE_UTAMA_HEADER" />,
             },
           {
             label: '',

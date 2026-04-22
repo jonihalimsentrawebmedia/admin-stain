@@ -4,6 +4,7 @@ import { UseGetGalleryVideoProdi } from './hooks/index'
 import { ColumnsVideoProdi } from './components/columns'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const GalleryVideoProdiPage = () => {
   const { galleryVideo, loading, meta } = UseGetGalleryVideoProdi()
@@ -15,6 +16,10 @@ export const GalleryVideoProdiPage = () => {
         <ButtonTitleGroup
           label={'Galeri Video'}
           buttonGroup={[
+              {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="PRODI_GALERI_VIDEO" />,
+            },
             {
               type: 'custom',
               element: <ButtonAddVideoProdi />,

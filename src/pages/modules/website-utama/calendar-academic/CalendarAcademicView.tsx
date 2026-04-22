@@ -22,7 +22,7 @@ const CalendarAcademicView = () => {
         buttonGroup={[
           {
             type: 'custom',
-            element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_KALENDAR_AKADEMIK_KEGIATAN" />,
+            element: <ButtonGoToGuide titleGuide='Kalender Akademik' valueGuide="WEBSITE_UTAMA_KALENDAR_AKADEMIK_KEGIATAN" />,
           },
           {
             label: '',

@@ -13,6 +13,7 @@ import { RichText } from '@/components/common/richtext'
 import ButtonForm from '@/components/common/button/ButtonForm'
 import { Button } from '@/components/ui/button'
 import { HiPencil } from 'react-icons/hi'
+import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide'
 
 const VisiMisiProgramStudyView = () => {
   const { visiMisiDetail } = useGetVisiMisi()
@@ -51,29 +52,33 @@ const VisiMisiProgramStudyView = () => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
         <div className="flex justify-between items-center">
-          <div className="text-primary">Tentang Prodi</div>
-          {isEdit ? (
-            <ButtonForm
-              loading={loading}
-              onCancel={() => {
-                setIsEdit(false)
-              }}
-            />
-          ) : (
-            <Button
-              onClick={() => {
-                setIsEdit(!isEdit)
-                form.reset({
-                  ...visiMisiDetail,
-                })
-              }}
-              variant={'outline'}
-              className={'bg-white text-primary border-primary hover:text-primary'}
-            >
-              <HiPencil />
-              Edit
-            </Button>
-          )}
+          <div className="text-primary">Visi, Misi, & Tujuan</div>
+          <div className="flex gap-4 items-center">
+            <ButtonGoToGuide titleGuide='Visi, Misi, & Tujuan' valueGuide="WEBSITE_UTAMA_SATUAN_ORGANISASI_VISI_MISI" />
+
+            {isEdit ? (
+              <ButtonForm
+                loading={loading}
+                onCancel={() => {
+                  setIsEdit(false)
+                }}
+              />
+            ) : (
+              <Button
+                onClick={() => {
+                  setIsEdit(!isEdit)
+                  form.reset({
+                    ...visiMisiDetail,
+                  })
+                }}
+                variant={'outline'}
+                className={'bg-white text-primary border-primary hover:text-primary'}
+              >
+                <HiPencil />
+                Edit
+              </Button>
+            )}
+          </div>
         </div>
         <CardInput title="Visi">
           {isEdit ? (

@@ -5,6 +5,7 @@ import { Accordion } from '@/components/ui/accordion.tsx'
 import { AccordionCustom } from '@/components/common/accordion'
 import { useNavigate } from 'react-router-dom'
 import { ButtonCancelApproval } from './component/buttonCancel.tsx'
+import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const DetailProfileUnit = () => {
   const { dataUnit, loading } = UseGetDetailDataUnit()
@@ -25,8 +26,20 @@ export const DetailProfileUnit = () => {
                       type: 'cancel',
                       element: <ButtonCancelApproval />,
                     },
+                    {
+                      type: 'custom',
+                      element: (
+                        <ButtonGoToGuide valueGuide="PERPUSTAKAAN_PROFIL_SATUAN_ORGANISASI" />
+                      ),
+                    },
                   ]
                 : [
+                    {
+                      type: 'custom',
+                      element: (
+                        <ButtonGoToGuide valueGuide="PERPUSTAKAAN_PROFIL_SATUAN_ORGANISASI" />
+                      ),
+                    },
                     {
                       label: 'Ajukan Edit Data',
                       onClick: () => navigate('edit'),

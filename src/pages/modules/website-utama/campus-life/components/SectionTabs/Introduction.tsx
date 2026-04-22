@@ -6,6 +6,7 @@ import { FormIntroduction } from '@/pages/modules/website-utama/campus-life/comp
 import { UseGetCampusLifeIntroduction } from '@/pages/modules/website-utama/campus-life/hooks'
 import { Link } from 'react-router-dom'
 import { IoLanguage } from 'react-icons/io5'
+import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide'
 
 export const SectionIntroduction = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -18,6 +19,7 @@ export const SectionIntroduction = () => {
           <ButtonTitleGroup
             label={'Pengantar'}
             buttonGroup={[
+            
               {
                 type: 'custom',
                 element: (
@@ -26,6 +28,10 @@ export const SectionIntroduction = () => {
                   </Link>
                 ),
               },
+                {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide='Kehidupan Kampus Pengantar' valueGuide="WEBSITE_UTAMA_KEHIDUPAN_KAMPUS_PENGANTAR" />,
+            },
               {
                 type: 'edit',
                 label: 'Edit Data',

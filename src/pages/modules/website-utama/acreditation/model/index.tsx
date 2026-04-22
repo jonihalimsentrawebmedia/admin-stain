@@ -15,6 +15,8 @@ export interface AcreditationList {
   nama_user_updated: string
   nama_satuan_organisasi_akreditas: string
   nama_satuan_organisasi: string
+  dokumen_akreditas: string
+  dokumen_sk_akreditas: string
 }
 
 export interface AcreditationDetail {

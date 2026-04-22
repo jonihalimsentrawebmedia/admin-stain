@@ -19,7 +19,7 @@ export const ButtonDeleteGuide = (props: Props) => {
   const { data } = props
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
-
+const title=Cookies.get('title-guide')
   const queryClient = useQueryClient()
   const valueGuide = Cookies.get('guide')
   const HandleSave = async () => {
@@ -53,7 +53,7 @@ export const ButtonDeleteGuide = (props: Props) => {
       <DialogCustom
         open={open}
         setOpen={setOpen}
-        title={<p className={'text-red-500 text-2xl'}>Hapus Panduan</p>}
+        title={<p className={'text-red-500 text-2xl'}>Hapus Panduan {title}</p>}
         className={'rounded lg:max-w-4xl'}
         description={'Apakah Anda yakin ingin menghapus Panduan ini?'}
         disableOutsideDialog

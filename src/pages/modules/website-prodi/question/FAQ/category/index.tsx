@@ -4,6 +4,7 @@ import { UseGetFaqCategoryProdi } from '@/pages/modules/website-prodi/question/F
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsCategoryFAQProdi } from '@/pages/modules/website-prodi/question/FAQ/category/data/columns.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const CategoryFAQProdiPage = () => {
   const { loading, categoryFaq, meta } = UseGetFaqCategoryProdi()
@@ -16,6 +17,10 @@ export const CategoryFAQProdiPage = () => {
           label={'Kategori F.A.Q'}
           isBack
           buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="PRODI_KATEGORI_FAQ" />,
+            },
             {
               type: 'custom',
               element: <ButtonAddCategoryFAQProdi />,

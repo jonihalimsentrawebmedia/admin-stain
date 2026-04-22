@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const OrganizationStructure = () => {
   const { organization } = UseGetOrganizationStructure()
@@ -51,6 +52,12 @@ export const OrganizationStructure = () => {
               <ButtonTitleGroup
                 label={'Struktur Organisasi'}
                 buttonGroup={[
+                  {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide valueGuide="PERPUSTAKAAN_PROFIL_STRUKTUR_ORGANISASI" />
+                    ),
+                  },
                   { type: 'edit', label: 'Edit', onClick: () => setIsEdit(!isEdit) },
                   { type: 'save', label: 'Simpan', onClick: () => {}, isDisabled: loading },
                 ]}
@@ -68,7 +75,13 @@ export const OrganizationStructure = () => {
           <>
             <ButtonTitleGroup
               label={'Struktur Organisasi'}
-              buttonGroup={[{ type: 'edit', label: 'Edit', onClick: () => setIsEdit(!isEdit) }]}
+              buttonGroup={[
+                {
+                  type: 'custom',
+                  element: <ButtonGoToGuide valueGuide="PERPUSTAKAAN_PROFIL_STRUKTUR_ORGANISASI" />,
+                },
+                { type: 'edit', label: 'Edit', onClick: () => setIsEdit(!isEdit) },
+              ]}
             />
 
             <img

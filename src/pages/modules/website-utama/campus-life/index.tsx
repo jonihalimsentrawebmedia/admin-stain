@@ -34,6 +34,8 @@ const CampusLifePage = () => {
     { id: 7, name: 'Link Arahan', value: 'link', element: <UrlDirectionSection /> },
   ]
 
+ 
+
   return (
     <>
       <div className={'flex flex-col gap-4'}>

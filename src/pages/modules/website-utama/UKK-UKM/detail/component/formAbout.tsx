@@ -10,6 +10,7 @@ import { useParams } from 'react-router-dom'
 import type { IUkkUkm } from '@/pages/modules/website-utama/UKK-UKM/data/types.ts'
 import { UseGetAboutUkkUkm } from '../hooks/index.tsx'
 import { UsePostAboutUkkUkm } from '../hooks/postAbout.tsx'
+import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide.tsx'
 
 interface props {
   detail?: IUkkUkm
@@ -75,20 +76,23 @@ export const FormAbout = (props: props) => {
           <div className="flex justify-between items-center">
             <div className="text-primary text-2xl font-medium">Tentang {detail?.nama_ukk_ukm}</div>
 
-            {isEditContent ? (
-              <ButtonForm loading={loading} onCancel={() => setIsEditContent(false)} />
-            ) : (
-              <Button
-                onClick={() => {
-                  setIsEditContent(true)
-                }}
-                variant={'outline'}
-                className="bg-white text-primary border-primary hover:text-primary"
-              >
-                <HiPencil />
-                Edit
-              </Button>
-            )}
+            <div className="flex items-center gap-4">
+              <ButtonGoToGuide titleGuide='Tentang UKK' valueGuide="WEBSITE_UTAMA_UKK_UKM_TENTANG" />
+              {isEditContent ? (
+                <ButtonForm loading={loading} onCancel={() => setIsEditContent(false)} />
+              ) : (
+                <Button
+                  onClick={() => {
+                    setIsEditContent(true)
+                  }}
+                  variant={'outline'}
+                  className="bg-white text-primary border-primary hover:text-primary"
+                >
+                  <HiPencil />
+                  Edit
+                </Button>
+              )}
+            </div>
           </div>
 
           <CardInput title={`Tentang ${detail?.nama_ukk_ukm}`}>

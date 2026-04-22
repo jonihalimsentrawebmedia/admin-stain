@@ -4,6 +4,7 @@ import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsTemplateWebsite } from './data/columns.tsx'
 import { UseGetTemplateMainWeb } from './hooks/index.tsx'
 import { useSearchParams } from 'react-router-dom'
+import ButtonGoToGuide from '../../panduan/components/ButtonGoToGuide.tsx'
 
 export const TemplateMainWeb = () => {
   const [searchParams] = useSearchParams()
@@ -20,7 +21,10 @@ export const TemplateMainWeb = () => {
   return (
     <>
       <div className={'flex flex-col gap-5'}>
-        <ButtonTitleGroup label={'Template Website'} buttonGroup={[]} />
+        <ButtonTitleGroup label={'Template Website'} buttonGroup={[ {
+            type: 'custom',
+            element: <ButtonGoToGuide valueGuide="THEMA" titleGuide='Template Website' />,
+          },]} />
         <div
           className={`text-blue-500 w-fit p-1.5 text-sm border border-blue-500 rounded-md flex items-center gap-1.5`}
         >

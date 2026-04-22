@@ -132,7 +132,7 @@ export const AchievementPage = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_PRESTASI" />,
+              element: <ButtonGoToGuide titleGuide='Prestasi' valueGuide="WEBSITE_UTAMA_PRESTASI" />,
             },
             {
               type: 'custom',

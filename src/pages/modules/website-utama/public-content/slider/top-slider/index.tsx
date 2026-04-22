@@ -127,7 +127,7 @@ export const TopSliderPublicContent = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_SLIDER_ATAS" />,
+              element: <ButtonGoToGuide titleGuide='Slider Atas' valueGuide="WEBSITE_UTAMA_SLIDER_ATAS" />,
             },
             {
               label: 'Tambah Data',

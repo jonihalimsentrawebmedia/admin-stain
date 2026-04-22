@@ -6,6 +6,7 @@ import { UseGetCategoryDownloadProdi, UseGetDownloadProdi } from './hooks/index'
 import { DownloadFileProdiColumns } from './data/columns'
 import { Button } from '@/components/ui/button.tsx'
 import { IoList } from 'react-icons/io5'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const DownloadFileProdiPage = () => {
   const navigate = useNavigate()
@@ -18,6 +19,10 @@ const DownloadFileProdiPage = () => {
       <div className="flex flex-col gap-5">
         <ButtonTitleGroup
           buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="PRODI_DOWNLOADS" />,
+            },
             {
               type: 'custom',
               element: (

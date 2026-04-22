@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 import { UseGetProdiPrimary } from './hooks/index'
 import { useQueryClient } from '@tanstack/react-query'
 import { Input } from '@/components/ui/input.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const PrimaryAndFooterColorProdi = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -56,6 +57,10 @@ export const PrimaryAndFooterColorProdi = () => {
             <ButtonTitleGroup
               label={'Pengaturan Warna Halaman'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: <ButtonGoToGuide valueGuide="PRODI_PENGATURAN_WARNA_HALAMAN" />,
+                },
                 {
                   type: 'edit',
                   label: 'Edit Warna',

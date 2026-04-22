@@ -5,6 +5,7 @@ import { UseGetProdiAnnouncementStatus } from './hooks/index'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { TabsListCustom } from '@/pages/modules/website-utama/public-content/slider/components/tabsList.tsx'
 import { TableDataListAnnouncement } from '@/pages/modules/website-prodi/public-content/announcement/components/listAnnouncement.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const AnnouncementProdiPublicContent = () => {
   const navigate = useNavigate()
@@ -115,7 +116,13 @@ export const AnnouncementProdiPublicContent = () => {
       <div className="flex flex-col gap-5">
         <ButtonTitleGroup
           label={'Pengumuman'}
-          buttonGroup={[{ type: 'add', label: 'Tulis Pengumuman', onClick: () => navigate('add') }]}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="PRODI_PENGUMUMAN" />,
+            },
+            { type: 'add', label: 'Tulis Pengumuman', onClick: () => navigate('add') },
+          ]}
         />
 
         <TabsListCustom

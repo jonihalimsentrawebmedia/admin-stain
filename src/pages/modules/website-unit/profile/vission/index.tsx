@@ -11,6 +11,7 @@ import { RichText } from '@/components/common/richtext'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const VisionMission = () => {
   const { visionMission: detail } = UseGetVisionMissionUnit()
@@ -61,6 +62,10 @@ export const VisionMission = () => {
               <ButtonTitleGroup
                 label={'Visi, Misi, & Sasaran'}
                 buttonGroup={[
+                   {
+                  type: 'custom',
+                  element: <ButtonGoToGuide valueGuide="PERPUSTAKAAN_PROFIL_VISI_MISI" />,
+                },
                   { type: 'cancel', label: 'Batal', onClick: () => setIsEdit(!isEdit) },
                   {
                     label: 'Simpan',
@@ -117,7 +122,13 @@ export const VisionMission = () => {
           <>
             <ButtonTitleGroup
               label={'Visi, Misi, & Sasaran'}
-              buttonGroup={[{ label: 'Edit', type: 'edit', onClick: () => setIsEdit(!isEdit) }]}
+              buttonGroup={[
+                {
+                  type: 'custom',
+                  element: <ButtonGoToGuide valueGuide="PERPUSTAKAAN_PROFIL_VISI_MISI" />,
+                },
+                { label: 'Edit', type: 'edit', onClick: () => setIsEdit(!isEdit) },
+              ]}
             />
             <Accordion
               type={'multiple'}

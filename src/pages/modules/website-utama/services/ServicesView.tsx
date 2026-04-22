@@ -15,7 +15,7 @@ const ServicesView = () => {
         buttonGroup={[
           {
             type: 'custom',
-            element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_LAYANAN" />,
+            element: <ButtonGoToGuide titleGuide='Layanan' valueGuide="WEBSITE_UTAMA_LAYANAN" />,
           },
           {
             label: '',

@@ -5,6 +5,7 @@ import { UseGetAgendaProdiStatus } from './hooks/index'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { TabsListCustom } from '@/pages/modules/website-utama/public-content/slider/components/tabsList.tsx'
 import { TableDataListAgenda } from '@/pages/modules/website-prodi/public-content/agenda/components/AgendaList.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const AgendaProdiPublicContent = () => {
   const navigate = useNavigate()
@@ -115,7 +116,13 @@ export const AgendaProdiPublicContent = () => {
       <div className="flex flex-col gap-5">
         <ButtonTitleGroup
           label={'Agenda'}
-          buttonGroup={[{ type: 'add', label: 'Tulis Agenda', onClick: () => navigate('add') }]}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="PRODI_AGENDA" />,
+            },
+            { type: 'add', label: 'Tulis Agenda', onClick: () => navigate('add') },
+          ]}
         />
 
         <TabsListCustom

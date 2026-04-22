@@ -4,6 +4,7 @@ import { UseGetHistoryUnit } from '@/pages/modules/website-unit/profile/history/
 import { ColumnsHistory } from '@/pages/modules/website-unit/profile/history/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { useSearchParams } from 'react-router-dom'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const HistoryUnit = () => {
   const [searchParams] = useSearchParams()
@@ -23,10 +24,22 @@ export const HistoryUnit = () => {
       <div className="flex flex-col gap-4">
         <ButtonTitleGroup
           label={'Sejarah Unit'}
-          buttonGroup={[{ type: 'custom', element: <ButtonAddHistory />, onClick: () => {} }]}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="PERPUSTAKAAN_PROFIL_SEJARAH" />,
+            },
+            { type: 'custom', element: <ButtonAddHistory />, onClick: () => {} },
+          ]}
         />
 
-        <TableCustom isShowFilter={false} columns={columns} data={historyUnit} loading={loading} meta={meta} />
+        <TableCustom
+          isShowFilter={false}
+          columns={columns}
+          data={historyUnit}
+          loading={loading}
+          meta={meta}
+        />
       </div>
     </>
   )

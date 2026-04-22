@@ -3,6 +3,7 @@ import { ButtonAddAlbumProdi } from '@/pages/modules/website-prodi/gallery/album
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { UseGetGalleryAlbumProdi } from '@/pages/modules/website-prodi/gallery/album/hooks'
 import { ColumnsGalleryAlbumProdi } from '@/pages/modules/website-prodi/gallery/album/components/columns.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const GalleryAlbumProdiPage = () => {
   const { albumProdi, loading, meta } = UseGetGalleryAlbumProdi()
@@ -12,7 +13,13 @@ export const GalleryAlbumProdiPage = () => {
       <div className={'flex flex-col gap-5'}>
         <ButtonTitleGroup
           label={'Galeri Foto'}
-          buttonGroup={[{ type: 'custom', element: <ButtonAddAlbumProdi /> }]}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="PRODI_GALERI_ALBUM" />,
+            },
+            { type: 'custom', element: <ButtonAddAlbumProdi /> },
+          ]}
         />
 
         <TableCustom data={albumProdi} loading={loading} meta={meta} columns={columns} />

@@ -4,6 +4,7 @@ import GalleryProgramStudyViewModel from './GalleryProgramStudyViewModel'
 import SelectFilter from '@/components/common/filter/SelectFilter'
 import { useSearchParams } from 'react-router-dom'
 import { UseGetGalleryVideo } from '../../../public-content/gallery/video/hooks'
+import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide'
 
 const GalleryProgramStudyView = () => {
   const { loading, gallery, meta } = useGetGallery()
@@ -21,6 +22,18 @@ const GalleryProgramStudyView = () => {
     <div className="flex flex-col gap-4">
       <div className="flex justify-between items-center">
         <div className="text-primary text-2xl">Galeri</div>
+        <ButtonGoToGuide
+          valueGuide={
+            type == 'video'
+              ? 'WEBSITE_UTAMA_SATUAN_ORGANISASI_GALERI_VIDEO'
+              : 'WEBSITE_UTAMA_SATUAN_ORGANISASI_GALERI_FOTO'
+          }
+          titleGuide={
+            type == 'video'
+              ? 'Video'
+              : 'Foto'
+          }
+        />
       </div>
       <TableCustom
         addFilter={

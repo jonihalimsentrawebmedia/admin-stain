@@ -33,7 +33,7 @@ const AcreditationView = () => {
         buttonGroup={[
           {
             type: 'custom',
-            element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_AKREDITAS" />,
+            element: <ButtonGoToGuide titleGuide='Akreditasi' valueGuide="WEBSITE_UTAMA_AKREDITAS" />,
           },
           {
             label: '',

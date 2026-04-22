@@ -135,7 +135,7 @@ export const AnnouncementPage = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_PENGUMUMAN" />,
+              element: <ButtonGoToGuide titleGuide='Pengumuman' valueGuide="WEBSITE_UTAMA_PENGUMUMAN" />,
             },
             {
               type: 'custom',

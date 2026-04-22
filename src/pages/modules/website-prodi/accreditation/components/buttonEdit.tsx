@@ -32,6 +32,8 @@ const ButtonEditAccreditationProdi = (props: Props) => {
       const startAt = formatDateTime(data.mulai_berlaku)
       const endAt = formatDateTime(data.akhir_berlaku)
       form.reset({
+        dokumen_akreditas: data?.dokumen_akreditas,
+        dokumen_sk_akreditas: data?.dokumen_sk_akreditas,
         id_satuan_organisasi_akreditas: data?.id_satuan_organisasi_akreditas,
         uraian: data?.uraian,
         lembaga_penilaian: data?.lembaga_penilaian,
@@ -69,6 +71,8 @@ const ButtonEditAccreditationProdi = (props: Props) => {
         setLoading(false)
       })
   }
+
+  console.log(form.formState.errors)
 
   return (
     <>
