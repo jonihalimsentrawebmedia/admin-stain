@@ -8,6 +8,7 @@ const WorkProgramInstitutaionView = () => {
       queryKeyGetData="lembaga-program-kerja"
       queryKeyPostData="lembaga-program-kerja"
       title="Program Kerja"
+      valueGuide="P2M_TENTANG_PROGRAM_KERJA"
     />
   )
 }

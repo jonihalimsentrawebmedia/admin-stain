@@ -8,6 +8,7 @@ const ManagementReviewView = () => {
       queryKeyGetData="lembaga-tinjauan-manajemen"
       queryKeyPostData="lembaga-tinjauan-manajemen"
       title='Tinjauan Manajemen'
+      valueGuide='P2M_JAMINAN_TINJAUAN_MANAJEMEN_RESIKO'
     />
   )
 }

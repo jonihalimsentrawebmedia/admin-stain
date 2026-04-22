@@ -4,6 +4,7 @@ import DocumentSupportViewModel from './DocumentSupportViewModel'
 import TableCustom from '@/components/common/table/TableCustom'
 import SelectFilter from '@/components/common/filter/SelectFilter'
 import useGetDokumentPendukung from './controller/useGetDokumentPendukung'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 
 const DocumentSupportView = () => {
@@ -14,6 +15,15 @@ const DocumentSupportView = () => {
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
         buttonGroup={[
+          {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide="Dokumen Pendukung Akreditasi"
+                      valueGuide="P2M_JAMINAN_SPMI_DOKUMEN_PENDUKUNG_AKREDITAS"
+                    />
+                  ),
+                },
           {
             label: '',
             onClick: () => {},

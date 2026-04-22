@@ -13,6 +13,7 @@ import { ApproveAnnouncementSection } from './components/table/approveSection'
 import { PublishAnnouncementSection } from './components/table/publishSection.tsx'
 import { UnpublishAnnouncementSection } from './components/table/unpublishSection.tsx'
 import { toast } from 'react-toastify'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const AnnouncementPage = () => {
   const navigate = useNavigate()
@@ -126,6 +127,15 @@ export const AnnouncementPage = () => {
         <ButtonTitleGroup
           label={'Pengumuman'}
           buttonGroup={[
+            {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide="Konten Publik - Pengumuman"
+                      valueGuide="P2M_KONTEN_PUBLIK_PENGUMUMAN"
+                    />
+                  ),
+                },
             {
               type: 'add',
               label: '',

@@ -8,6 +8,7 @@ const SpmiReviewerView = () => {
       queryKeyGetData="lembaga-/reviewer"
       queryKeyPostData="lembaga-/reviewer"
       title="Reviewer"
+      valueGuide='P2M_JAMINAN_SPMI_REVIEWER'
     />
   )
 }

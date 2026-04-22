@@ -1,4 +1,4 @@
-import FormRichEditor from "../../component/form/FormRichEditor"
+import FormRichEditor from '../../component/form/FormRichEditor'
 
 const HummanResourceInstitutaionView = () => {
   return (
@@ -8,6 +8,7 @@ const HummanResourceInstitutaionView = () => {
       queryKeyGetData="lembaga-sumber-daya-manusia"
       queryKeyPostData="lembaga-sumber-daya-manusia"
       title="Sumber Daya Manusia"
+      valueGuide="P2M_TENTANG_SUMBER_DAYA_MANUSIA"
     />
   )
 }

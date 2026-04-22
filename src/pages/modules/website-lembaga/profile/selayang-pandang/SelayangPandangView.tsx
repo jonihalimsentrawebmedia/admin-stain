@@ -8,6 +8,7 @@ const SelayangPandangView = () => {
       queryKeyGetData="lembaga-profil-lembaga"
       queryKeyPostData="lembaga-profil-lembaga"
       title="Selayang Pandang"
+      valueGuide="P2M_TENTANG_SELAYANG_PADANG"
     />
   )
 }

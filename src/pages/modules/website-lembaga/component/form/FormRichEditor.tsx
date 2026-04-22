@@ -8,12 +8,15 @@ import { RichText } from '@/components/common/richtext'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 interface Props {
   linkGetData: string
   queryKeyGetData: string
   linkPostData: string
   queryKeyPostData: string
   title: string
+
+  valueGuide?: string
 }
 const FormRichEditor = ({
   linkGetData,
@@ -21,6 +24,8 @@ const FormRichEditor = ({
   queryKeyGetData,
   queryKeyPostData,
   title,
+
+  valueGuide,
 }: Props) => {
   const form = useForm()
   const [isEdit, setIsEdit] = useState(false)
@@ -66,6 +71,10 @@ const FormRichEditor = ({
               ? [
                   {
                     type: 'custom',
+                    element: <ButtonGoToGuide titleGuide={title} valueGuide={valueGuide ?? ''} />,
+                  },
+                  {
+                    type: 'custom',
                     element: (
                       <ButtonForm
                         loading={loading}
@@ -77,6 +86,12 @@ const FormRichEditor = ({
                   },
                 ]
               : [
+                  {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide titleGuide={title} valueGuide={valueGuide ?? ''} />
+                    ),
+                  },
                   {
                     type: 'edit',
                     label: 'Edit Konten',

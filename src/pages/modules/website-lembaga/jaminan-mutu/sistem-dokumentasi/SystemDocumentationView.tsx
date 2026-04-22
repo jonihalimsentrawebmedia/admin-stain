@@ -8,6 +8,7 @@ const SystemDocumentationView = () => {
       queryKeyGetData="lembaga-sistem-dokumentasi"
       queryKeyPostData="lembaga-sistem-dokumentasi"
       title='Sistem Dokumentasi'
+      valueGuide='P2M_JAMINAN_SISTEM_DOKUMENTASI'
     />
   )
 }

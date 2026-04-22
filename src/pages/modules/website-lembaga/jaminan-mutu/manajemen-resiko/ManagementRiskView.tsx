@@ -8,6 +8,7 @@ const ManagementRiskView = () => {
       queryKeyGetData="lembaga-manajemen-resiko"
       queryKeyPostData="lembaga-manajemen-resiko"
       title='Manajemen Resiko'
+      valueGuide='P2M_JAMINAN_MANAJEMEN_RESIKO'
     />
   )
 }

@@ -14,6 +14,7 @@ import { PublishSectionAgenda } from '@/pages/modules/website-lembaga/public-con
 import { UnpublishSectionAgenda } from '@/pages/modules/website-lembaga/public-content/agenda/components/table/unpublishSection.tsx'
 
 import { toast } from 'react-toastify'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const AgendaPage = () => {
   const navigate = useNavigate()
@@ -127,6 +128,15 @@ export const AgendaPage = () => {
         <ButtonTitleGroup
           label={'Agenda'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide="Konten Publik - Agenda"
+                  valueGuide="P2M_KONTEN_PUBLIK_AGENDA"
+                />
+              ),
+            },
             {
               type: 'add',
               label: '',
