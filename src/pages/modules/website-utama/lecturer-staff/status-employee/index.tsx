@@ -3,6 +3,7 @@ import { ColumnsEmployee } from '@/pages/modules/website-utama/lecturer-staff/st
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import ButtonAddEmployeeStatus from '@/pages/modules/website-utama/lecturer-staff/status-employee/component/buttonAdd.tsx'
+import ButtonGoToGuide from '../../panduan/components/ButtonGoToGuide'
 
 const StatusEmployeePage = () => {
   const { status, meta, loading } = UseGetStatusEmployee()
@@ -12,7 +13,13 @@ const StatusEmployeePage = () => {
     <>
       <div className={'space-y-4'}>
         <ButtonTitleGroup
-          buttonGroup={[{ type: 'custom', element: <ButtonAddEmployeeStatus /> }]}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide='Status Karyawan' valueGuide="WEBSITE_UTAMA_DOSEN_STAFF_STATUS" />,
+            },
+            { type: 'custom', element: <ButtonAddEmployeeStatus /> },
+          ]}
           label="Status Karyawan"
         />
         <TableCustom columns={coloumns} data={status} loading={loading} meta={meta} />

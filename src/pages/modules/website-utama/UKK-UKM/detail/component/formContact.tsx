@@ -17,6 +17,7 @@ import {
   type IContactUsTypeForm,
 } from '@/pages/modules/website-fakultas/about-faculty/contact-us/resolver.tsx'
 import { UseGetContactUkkUkm } from '../hooks/index'
+import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide'
 
 const ContactUsForm = () => {
   const { id } = useParams()
@@ -89,28 +90,23 @@ const ContactUsForm = () => {
       <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
         <div className="flex justify-between items-center">
           <div className="text-primary text-2xl font-medium">Hubungi Kami</div>
-          {isEdit ? (
-            <ButtonForm
-              loading={loading}
-              onCancel={() => {
-                setIsEdit(false)
-              }}
-            />
-          ) : (
-            <Button
-              onClick={() => {
-                setIsEdit(!isEdit)
-                form.reset({
-                  ...contact,
-                })
-              }}
-              variant={'outline'}
-              className={'bg-white text-primary border-primary hover:text-primary'}
-            >
-              <HiPencil />
-              Edit
-            </Button>
-          )}
+          <div className="flex items-center gap-4">
+            <ButtonGoToGuide titleGuide='Hubungi Kami' valueGuide="WEBSITE_UTAMA_UKK_UKM_HUBUNGI_KAMI" />
+            {isEdit ? (
+              <ButtonForm loading={loading} onCancel={() => setIsEdit(false)} />
+            ) : (
+              <Button
+                onClick={() => {
+                  setIsEdit(true)
+                }}
+                variant={'outline'}
+                className="bg-white text-primary border-primary hover:text-primary"
+              >
+                <HiPencil />
+                Edit
+              </Button>
+            )}
+          </div>
         </div>
         <CardInput title="Hubungi Kami">
           {isEdit ? (

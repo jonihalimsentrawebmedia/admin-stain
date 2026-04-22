@@ -132,7 +132,7 @@ export const AgendaPage = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_AGENDA" />,
+              element: <ButtonGoToGuide titleGuide='Agenda' valueGuide="WEBSITE_UTAMA_AGENDA" />,
             },
             {
               type: 'custom',

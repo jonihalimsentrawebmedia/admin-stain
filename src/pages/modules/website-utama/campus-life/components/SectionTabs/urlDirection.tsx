@@ -7,6 +7,7 @@ import { FormUrlDirection } from '@/pages/modules/website-utama/campus-life/comp
 import { Button } from '@/components/ui/button.tsx'
 import { Link } from 'react-router-dom'
 import { IoLanguage } from 'react-icons/io5'
+import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide'
 
 export const UrlDirectionSection = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -27,6 +28,10 @@ export const UrlDirectionSection = () => {
                   </Link>
                 ),
               },
+                {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_KEHIDUPAN_KAMPUS_LINK_ARAHAN" />,
+            },
               {
                 type: 'edit',
                 label: 'Edit Data',

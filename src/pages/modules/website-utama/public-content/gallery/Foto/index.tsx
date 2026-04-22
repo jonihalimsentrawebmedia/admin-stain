@@ -27,7 +27,7 @@ export const GalleryPhotoPage = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_GALERI_FOTO" />,
+              element: <ButtonGoToGuide titleGuide='Gallery Foto' valueGuide="WEBSITE_UTAMA_GALERI_FOTO" />,
             },
             {
               type: 'custom',

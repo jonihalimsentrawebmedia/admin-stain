@@ -59,7 +59,7 @@ export const ChangePrimaryAndFooterColor = () => {
               buttonGroup={[
                 {
                   type: 'custom',
-                  element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_PENGATURAN_WARNA_HALAMAN" />,
+                  element: <ButtonGoToGuide titleGuide='Pengaturan Warna Halaman' valueGuide="WEBSITE_UTAMA_PENGATURAN_WARNA_HALAMAN" />,
                 },
                 {
                   type: 'edit',

@@ -9,6 +9,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { messaging, onMessage } from '@/provider/firebase.tsx'
 import { useQueryClient } from '@tanstack/react-query'
+import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide'
 
 const DosenProgramStudyView = () => {
   const { loading, dosen, meta } = useGetDosen()
@@ -75,15 +76,17 @@ const DosenProgramStudyView = () => {
     <div className="flex flex-col gap-4">
       <div className="flex justify-between items-center">
         <div className="text-primary text-2xl font-medium">Dosen</div>
-
-        <Button
-          variant={'outline'}
-          onClick={HandleFCM}
-          className="border border-primary text-primary hover:text-primary"
-        >
-          <BiSync />
-          Sinkronisasi Dari SIMPEG
-        </Button>
+        <div className="flex gap-4 items-center">
+          <ButtonGoToGuide titleGuide='Dosen' valueGuide="WEBSITE_UTAMA_SATUAN_ORGANISASI_DOSEN" />
+          <Button
+            variant={'outline'}
+            onClick={HandleFCM}
+            className="border border-primary text-primary hover:text-primary"
+          >
+            <BiSync />
+            Sinkronisasi Dari SIMPEG
+          </Button>
+        </div>
       </div>
       <TableCustom columns={columns} data={dosen} loading={loading} meta={meta} />
     </div>

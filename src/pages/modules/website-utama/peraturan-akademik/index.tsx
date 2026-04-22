@@ -7,6 +7,7 @@ import { AccordionCustom } from '@/components/common/accordion'
 import { UseGetDetailAcademicRules } from '@/pages/modules/website-utama/peraturan-akademik/hooks'
 import { TbExternalLink } from 'react-icons/tb'
 import { IoLanguage } from 'react-icons/io5'
+import ButtonGoToGuide from '../panduan/components/ButtonGoToGuide'
 
 export const AcademicRegulation = () => {
   const navigate = useNavigate()
@@ -26,6 +27,10 @@ export const AcademicRegulation = () => {
                   <IoLanguage />
                 </Link>
               ),
+            },
+             {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide='Peraturan Akademik' valueGuide="WEBSITE_UTAMA_PENGATURAN_AKADEMIK" />,
             },
             {
               type: 'custom',

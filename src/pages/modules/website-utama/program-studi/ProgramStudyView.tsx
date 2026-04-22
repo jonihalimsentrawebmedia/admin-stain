@@ -4,6 +4,7 @@ import ProgramStudyViewModel from './ProgramStudyViewModel'
 import TableCustom from '@/components/common/table/TableCustom'
 import SelectFilter from '@/components/common/filter/SelectFilter'
 import useGetListFakultas from './controller/useGetListFakultas'
+import ButtonGoToGuide from '../panduan/components/ButtonGoToGuide'
 
 const ProgramStudyView = () => {
   const { columns } = ProgramStudyViewModel()
@@ -12,7 +13,17 @@ const ProgramStudyView = () => {
   const { programStudy: fakultas } = useGetListFakultas()
   return (
     <div className="flex flex-col gap-4">
-      <ButtonTitleGroup buttonGroup={[]} label="Program Studi" />
+      <ButtonTitleGroup
+        buttonGroup={[
+          {
+            type: 'custom',
+            element: (
+              <ButtonGoToGuide titleGuide='Program Studi' valueGuide="WEBSITE_UTAMA_PROGRAM_STUDI" />
+            ),
+          },
+        ]}
+        label="Program Studi"
+      />
       <TableCustom
         addFilter={
           <div className="flex gap-4">

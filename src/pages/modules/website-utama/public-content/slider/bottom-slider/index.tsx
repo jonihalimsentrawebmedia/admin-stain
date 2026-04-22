@@ -133,7 +133,7 @@ export const BottomSliderPublicContent = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_SLIDER_BAWAH" />,
+              element: <ButtonGoToGuide titleGuide='Slider Bawah' valueGuide="WEBSITE_UTAMA_SLIDER_BAWAH" />,
             },
             {
               label: 'Tambah Data',

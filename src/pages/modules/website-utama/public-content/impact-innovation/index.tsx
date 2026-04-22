@@ -131,7 +131,7 @@ export const ImpactInnovationPage = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_INOVASI_BERDAMPAK" />,
+              element: <ButtonGoToGuide titleGuide='Inovasi Berdampak' valueGuide="WEBSITE_UTAMA_INOVASI_BERDAMPAK" />,
             },
             {
               type: 'custom',

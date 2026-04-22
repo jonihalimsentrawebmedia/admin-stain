@@ -5,6 +5,7 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { TabsListCustom } from '@/pages/modules/website-utama/public-content/slider/components/tabsList.tsx'
 import { TableDataListNews } from '@/pages/modules/website-prodi/public-content/news/components/listNews.tsx'
 import type { StatusPublish } from '@/pages/modules/website-prodi/public-content/news/data/types.ts'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const NewsProdiPublicContentPage = () => {
   const navigate = useNavigate()
@@ -116,7 +117,13 @@ export const NewsProdiPublicContentPage = () => {
       <div className="flex flex-col gap-5">
         <ButtonTitleGroup
           label={'Berita'}
-          buttonGroup={[{ type: 'add', label: 'Tulis Berita', onClick: () => navigate('add') }]}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="PRODI_BERITA" />,
+            },
+            { type: 'add', label: 'Tulis Berita', onClick: () => navigate('add') },
+          ]}
         />
 
         <TabsListCustom

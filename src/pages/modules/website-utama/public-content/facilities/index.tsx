@@ -135,7 +135,7 @@ export const FacilitiesPage = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_FASILITAS" />,
+              element: <ButtonGoToGuide titleGuide='Fasilitas' valueGuide="WEBSITE_UTAMA_FASILITAS" />,
             },
             {
               type: 'custom',

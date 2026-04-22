@@ -9,6 +9,7 @@ import { useSearchParams } from 'react-router-dom'
 import { messaging, onMessage } from '@/provider/firebase.tsx'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export interface IDataCount {
   pending: number
@@ -84,7 +85,6 @@ const LecturerProfilePage = () => {
     })
   }
 
-
   if (response && !response?.is_success) {
     return (
       <div>
@@ -106,15 +106,18 @@ const LecturerProfilePage = () => {
     <div className="flex flex-col gap-4">
       <div className="flex justify-between items-center">
         <p className="text-2xl font-medium">Dosen</p>
-        <Button
-          disabled={false}
-          onClick={HandleFCM}
-          variant={'outline'}
-          className="border border-primary text-primary hover:text-primary"
-        >
-          <BiSync />
-          Sinkronisasi Dari SIMPEG
-        </Button>
+        <div className="flex gap-4 items-center">
+          <ButtonGoToGuide valueGuide="PRODI_PROFIL_DOSEN" />
+          <Button
+            disabled={false}
+            onClick={HandleFCM}
+            variant={'outline'}
+            className="border border-primary text-primary hover:text-primary"
+          >
+            <BiSync />
+            Sinkronisasi Dari SIMPEG
+          </Button>
+        </div>
       </div>
       <TableCustom columns={columns} data={lecturer} loading={loading} meta={meta} />
     </div>

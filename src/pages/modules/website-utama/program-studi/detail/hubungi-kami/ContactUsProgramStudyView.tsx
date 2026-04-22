@@ -14,6 +14,7 @@ import { Form } from '@/components/ui/form'
 import CardInput from '@/components/common/card/CardInput'
 import TextInput from '@/components/common/form/TextInput'
 import DetailField from '@/components/common/field/DetailField'
+import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide'
 
 const ContactUsProgramStudyView = () => {
   const { contactUsDetail } = useGetContactUs()
@@ -88,28 +89,31 @@ const ContactUsProgramStudyView = () => {
       <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
         <div className="flex justify-between items-center">
           <div className="text-primary text-2xl font-medium">Hubungi Kami</div>
-          {isEdit ? (
-            <ButtonForm
-              loading={loading}
-              onCancel={() => {
-                setIsEdit(false)
-              }}
-            />
-          ) : (
-            <Button
-              onClick={() => {
-                setIsEdit(!isEdit)
-                form.reset({
-                  ...contactUsDetail,
-                })
-              }}
-              variant={'outline'}
-              className={'bg-white text-primary border-primary hover:text-primary'}
-            >
-              <HiPencil />
-              Edit
-            </Button>
-          )}
+          <div className="flex gap-4 items-center">
+            <ButtonGoToGuide titleGuide='Hubungi Kami' valueGuide="WEBSITE_UTAMA_SATUAN_ORGANISASI_HUBUNGI_KAMI" />
+            {isEdit ? (
+              <ButtonForm
+                loading={loading}
+                onCancel={() => {
+                  setIsEdit(false)
+                }}
+              />
+            ) : (
+              <Button
+                onClick={() => {
+                  setIsEdit(!isEdit)
+                  form.reset({
+                    ...contactUsDetail,
+                  })
+                }}
+                variant={'outline'}
+                className={'bg-white text-primary border-primary hover:text-primary'}
+              >
+                <HiPencil />
+                Edit
+              </Button>
+            )}
+          </div>
         </div>
         <CardInput title="Hubungi Kami">
           {isEdit ? (

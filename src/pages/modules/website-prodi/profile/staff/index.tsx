@@ -11,6 +11,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
 import { Skeleton } from '@/components/ui/skeleton'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const StaffProfilePage = () => {
   const { loading, staff, meta } = UseGetStaffProfileProdi()
@@ -53,15 +54,19 @@ const StaffProfilePage = () => {
     <div className="flex flex-col gap-4">
       <div className="flex justify-between items-center">
         <p className="text-2xl font-medium">Staff</p>
-        <Button
-          onClick={handleSyncSimpeg}
-          disabled={loadingSync}
-          variant={'outline'}
-          className="border border-primary text-primary hover:text-primary"
-        >
-          <BiSync />
-          Sinkronisasi Dari SIMPEG
-        </Button>
+        <div className="flex gap-4 items-center">
+          <ButtonGoToGuide valueGuide="PRODI_PROFIL_STAFF" />
+
+          <Button
+            onClick={handleSyncSimpeg}
+            disabled={loadingSync}
+            variant={'outline'}
+            className="border border-primary text-primary hover:text-primary"
+          >
+            <BiSync />
+            Sinkronisasi Dari SIMPEG
+          </Button>
+        </div>
       </div>
       <TableCustom columns={columns} data={staff} loading={loading} meta={meta} />
     </div>

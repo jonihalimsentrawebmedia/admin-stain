@@ -22,7 +22,7 @@ const ButtonEditGuide = (props: Props) => {
   const form = useForm<IGuideResolver>({
     resolver: zodResolver(GuideResolver),
   })
-
+const title=Cookies.get('title-guide')
   const queryClient = useQueryClient()
 
   const valueGuide = Cookies.get('guide')
@@ -65,7 +65,7 @@ const ButtonEditGuide = (props: Props) => {
       <DialogCustom
         open={open}
         setOpen={setOpen}
-        title={'Edit Panduan'}
+        title={`Edit Panduan ${title}`}
         className={'rounded lg:max-w-7xl'}
         disableOutsideDialog
       >

@@ -17,7 +17,7 @@ export const OfficialMusicPage = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_MARS_MUSIK" />,
+              element: <ButtonGoToGuide titleGuide='Musik Resmi' valueGuide="WEBSITE_UTAMA_MARS_MUSIK" />,
             },
             {
               type: 'add',

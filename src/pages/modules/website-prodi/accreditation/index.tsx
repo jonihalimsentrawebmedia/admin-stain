@@ -4,6 +4,7 @@ import { UseGetAccreditationProdi } from '@/pages/modules/website-prodi/accredit
 import { AccreditationColumns } from '@/pages/modules/website-prodi/accreditation/components/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { UseGetProdiSession } from '@/pages/modules/website-prodi/hooks'
+import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
 
 export const AccreditationProdiPage = () => {
   const { session } = UseGetProdiSession()
@@ -16,6 +17,10 @@ export const AccreditationProdiPage = () => {
         <ButtonTitleGroup
           label={'Akreditasi'}
           buttonGroup={[
+              {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="PRODI_AKREDITAS" />,
+            },
             { type: 'custom', element: <ButtonAddAccreditationProdi session={session} /> },
           ]}
         />

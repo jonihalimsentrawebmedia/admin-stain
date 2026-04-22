@@ -17,6 +17,7 @@ import {
   type IContactUsTypeForm,
 } from '@/pages/modules/website-fakultas/about-faculty/contact-us/resolver.tsx'
 import { UseGetContactUnitInstitution } from '@/pages/modules/website-utama/unit-lembaga/detail/hooks'
+import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide'
 
 const ContactUsForm = () => {
   const { id } = useParams()
@@ -89,28 +90,31 @@ const ContactUsForm = () => {
       <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
         <div className="flex justify-between items-center">
           <div className="text-primary text-2xl font-medium">Hubungi Kami</div>
-          {isEdit ? (
-            <ButtonForm
-              loading={loading}
-              onCancel={() => {
-                setIsEdit(false)
-              }}
-            />
-          ) : (
-            <Button
-              onClick={() => {
-                setIsEdit(!isEdit)
-                form.reset({
-                  ...contact,
-                })
-              }}
-              variant={'outline'}
-              className={'bg-white text-primary border-primary hover:text-primary'}
-            >
-              <HiPencil />
-              Edit
-            </Button>
-          )}
+          <div className="flex gap-4 items-center">
+            <ButtonGoToGuide titleGuide='Hubungi Kami' valueGuide="WEBSITE_UTAMA_SATUAN_ORGANISASI_HUBUNGI_KAMI" />
+            {isEdit ? (
+              <ButtonForm
+                loading={loading}
+                onCancel={() => {
+                  setIsEdit(false)
+                }}
+              />
+            ) : (
+              <Button
+                onClick={() => {
+                  setIsEdit(!isEdit)
+                  form.reset({
+                    ...contact,
+                  })
+                }}
+                variant={'outline'}
+                className={'bg-white text-primary border-primary hover:text-primary'}
+              >
+                <HiPencil />
+                Edit
+              </Button>
+            )}
+          </div>
         </div>
         <CardInput title="Hubungi Kami">
           {isEdit ? (

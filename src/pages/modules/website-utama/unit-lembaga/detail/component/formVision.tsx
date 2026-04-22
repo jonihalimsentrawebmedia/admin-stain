@@ -16,6 +16,7 @@ import {
   VisiMisiResolver,
 } from '@/pages/modules/website-utama/program-studi/detail/model/visi-misi.tsx'
 import { UseGetVisionMissionUnitInstitution } from '../hooks/index'
+import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide'
 
 const VisionMissionForm = () => {
   const { id } = useParams()
@@ -54,29 +55,32 @@ const VisionMissionForm = () => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
         <div className="flex justify-between items-center">
-          <div className="text-primary">Tentang Prodi</div>
-          {isEdit ? (
-            <ButtonForm
-              loading={loading}
-              onCancel={() => {
-                setIsEdit(false)
-              }}
-            />
-          ) : (
-            <Button
-              onClick={() => {
-                setIsEdit(!isEdit)
-                form.reset({
-                  ...visionMission,
-                })
-              }}
-              variant={'outline'}
-              className={'bg-white text-primary border-primary hover:text-primary'}
-            >
-              <HiPencil />
-              Edit
-            </Button>
-          )}
+          <div className="text-primary">Visi, Misi, & Tujuan</div>
+          <div className="flex gap-4 items-center">
+            <ButtonGoToGuide titleGuide='Visi, Misi, & Tujuan' valueGuide="WEBSITE_UTAMA_SATUAN_ORGANISASI_VISI_MISI" />
+            {isEdit ? (
+              <ButtonForm
+                loading={loading}
+                onCancel={() => {
+                  setIsEdit(false)
+                }}
+              />
+            ) : (
+              <Button
+                onClick={() => {
+                  setIsEdit(!isEdit)
+                  form.reset({
+                    ...visionMission,
+                  })
+                }}
+                variant={'outline'}
+                className={'bg-white text-primary border-primary hover:text-primary'}
+              >
+                <HiPencil />
+                Edit
+              </Button>
+            )}
+          </div>
         </div>
         <CardInput title="Visi">
           {isEdit ? (

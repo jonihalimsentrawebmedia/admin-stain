@@ -6,6 +6,7 @@ import { ButtonAddBackgroundProdi } from '@/pages/modules/website-prodi/settings
 import { UseGetProdiBackground } from '@/pages/modules/website-prodi/settings/background/hooks'
 import { ProdiLandingPageColumns } from '@/pages/modules/website-prodi/settings/background/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const BackgroundWebsiteSettings = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -23,6 +24,9 @@ export const BackgroundWebsiteSettings = () => {
 
   return (
     <>
+      <div className="flex justify-end mb-4">
+        <ButtonGoToGuide valueGuide="PRODI_PENGATURAN_BACKGROUND" />
+      </div>
       <Tabs
         value={context}
         onValueChange={(value) => {

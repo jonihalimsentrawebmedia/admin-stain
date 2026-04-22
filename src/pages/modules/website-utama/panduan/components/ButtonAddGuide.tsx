@@ -14,7 +14,7 @@ import GuideForm from './GuideForm'
 const ButtonAddGuide = () => {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
-
+const title=Cookies.get('title-guide')
   const form = useForm<IGuideResolver>({
     resolver: zodResolver(GuideResolver),
   })
@@ -49,13 +49,13 @@ const ButtonAddGuide = () => {
         onClick={() => setOpen(!open)}
       >
         <BiPlus />
-        Tambah Panduan
+        Tambah Panduan {title}
       </Button>
 
       <DialogCustom
         open={open}
         setOpen={setOpen}
-        title={'Tambah Panduan'}
+        title={`Tambah Panduan ${title}`}
         className={'rounded lg:max-w-7xl'}
         disableOutsideDialog
       >

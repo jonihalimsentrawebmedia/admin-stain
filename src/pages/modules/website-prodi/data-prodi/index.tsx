@@ -5,6 +5,7 @@ import { Accordion } from '@/components/ui/accordion.tsx'
 import { AccordionCustom } from '@/components/common/accordion'
 import { useNavigate } from 'react-router-dom'
 import { ButtonCancelApproval } from './component/buttonCancel.tsx'
+import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const DataProdiProfile = () => {
   const { dataProdi, loading } = UseGetDetailDataProdi()
@@ -22,11 +23,19 @@ export const DataProdiProfile = () => {
               dataProdi?.status_publish == 'DIAJUKAN_EDITOR'
                 ? [
                     {
+                      type: 'custom',
+                      element: <ButtonGoToGuide valueGuide="PRODI_PROFILE_SATUAN_ORGANISASI" />,
+                    },
+                    {
                       type: 'cancel',
                       element: <ButtonCancelApproval />,
                     },
                   ]
                 : [
+                    {
+                      type: 'custom',
+                      element: <ButtonGoToGuide valueGuide="PRODI_PROFILE_SATUAN_ORGANISASI" />,
+                    },
                     {
                       label: 'Ajukan Edit Data',
                       onClick: () => navigate('edit'),

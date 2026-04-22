@@ -15,6 +15,7 @@ import {
   type IOrganizationalStructureTypeForm,
   OrganizationalStructureResolver,
 } from '@/pages/modules/website-utama/program-studi/detail/model/organizational-structure.ts'
+import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide'
 
 const OrganizationalStructureForm = () => {
   const { id } = useParams()
@@ -58,7 +59,9 @@ const OrganizationalStructureForm = () => {
       <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
         <div className="flex justify-between items-center">
           <div className="text-primary">Struktur Organisasi</div>
-          {isEdit ? (
+          <div className='flex gap-4 items-center'>
+            <ButtonGoToGuide titleGuide='Struktur Organisasi' valueGuide="WEBSITE_UTAMA_SATUAN_ORGANISASI_TENTANG" />
+ {isEdit ? (
             <ButtonForm
               loading={loading}
               onCancel={() => {
@@ -80,6 +83,8 @@ const OrganizationalStructureForm = () => {
               Edit
             </Button>
           )}
+          </div>
+         
         </div>
         <ImageOrganization
           image={form.watch('url_gambar')}

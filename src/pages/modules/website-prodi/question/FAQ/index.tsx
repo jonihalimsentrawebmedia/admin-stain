@@ -7,6 +7,7 @@ import { ButtonAddFAQProdi } from '@/pages/modules/website-prodi/question/FAQ/co
 import { UseGetListFAQProdi } from '@/pages/modules/website-prodi/question/FAQ/hooks'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsFAQProdi } from '@/pages/modules/website-prodi/question/FAQ/data/columns.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const QuestionFAQProdiPage = () => {
   const navigate = useNavigate()
@@ -19,6 +20,10 @@ export const QuestionFAQProdiPage = () => {
         <ButtonTitleGroup
           label={'F.A.Q'}
           buttonGroup={[
+             {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="PRODI_FAQ" />,
+            },
             {
               type: 'custom',
               element: (

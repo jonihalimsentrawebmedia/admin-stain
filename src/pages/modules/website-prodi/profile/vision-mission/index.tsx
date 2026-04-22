@@ -15,6 +15,7 @@ import {
   type IVisiMisiTypeForm,
   VisiMisiResolver,
 } from '@/pages/modules/website-utama/program-studi/detail/model/visi-misi.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const ProfileVisionMissionPage = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -53,28 +54,32 @@ const ProfileVisionMissionPage = () => {
       <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
         <div className="flex justify-between items-center">
           <p className="text-2xl font-medium">Visi, Misi, Dan Tujuan</p>
-          {isEdit ? (
-            <ButtonForm
-              loading={loading}
-              onCancel={() => {
-                setIsEdit(false)
-              }}
-            />
-          ) : (
-            <Button
-              onClick={() => {
-                setIsEdit(!isEdit)
-                form.reset({
-                  ...visionMission,
-                })
-              }}
-              variant={'outline'}
-              className={'bg-white text-primary border-primary hover:text-primary'}
-            >
-              <HiPencil />
-              Edit
-            </Button>
-          )}
+          <div className="flex gap-4 items-center">
+            <ButtonGoToGuide valueGuide="PRODI_PROFIL_VISI_MISI" />
+
+            {isEdit ? (
+              <ButtonForm
+                loading={loading}
+                onCancel={() => {
+                  setIsEdit(false)
+                }}
+              />
+            ) : (
+              <Button
+                onClick={() => {
+                  setIsEdit(!isEdit)
+                  form.reset({
+                    ...visionMission,
+                  })
+                }}
+                variant={'outline'}
+                className={'bg-white text-primary border-primary hover:text-primary'}
+              >
+                <HiPencil />
+                Edit
+              </Button>
+            )}
+          </div>
         </div>
         <CardInput title="Visi">
           {isEdit ? (

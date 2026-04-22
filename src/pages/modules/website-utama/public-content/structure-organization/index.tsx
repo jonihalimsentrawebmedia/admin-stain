@@ -27,7 +27,7 @@ export const StructureOrganizationPage = () => {
           buttonGroup={[
              {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="WEBSITE_UTAMA_STRUKTUR_ORGANISASI" />,
+              element: <ButtonGoToGuide titleGuide='Struktur Organisasi' valueGuide="WEBSITE_UTAMA_STRUKTUR_ORGANISASI" />,
             },
             {
               type: 'custom',

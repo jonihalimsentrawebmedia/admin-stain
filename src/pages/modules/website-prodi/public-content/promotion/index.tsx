@@ -5,6 +5,7 @@ import type { StatusPublish } from '@/pages/modules/website-prodi/public-content
 import { useEffect } from 'react'
 import { UseGetPromotionProdiStatus } from './hooks/index'
 import { TableDataListPromotion } from '@/pages/modules/website-prodi/public-content/promotion/components/listPromotion.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const PromotionProdiPage = () => {
   const navigate = useNavigate()
@@ -116,7 +117,13 @@ export const PromotionProdiPage = () => {
       <div className="flex flex-col gap-4">
         <ButtonTitleGroup
           label={'Promosi'}
-          buttonGroup={[{ type: 'edit', label: 'Tulis Promosi', onClick: () => navigate('add') }]}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="PRODI_PROMOSI" />,
+            },
+            { type: 'edit', label: 'Tulis Promosi', onClick: () => navigate('add') },
+          ]}
         />
 
         <TabsListCustom
