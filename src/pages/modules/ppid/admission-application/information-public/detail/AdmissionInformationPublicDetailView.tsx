@@ -7,6 +7,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { FaWhatsapp } from 'react-icons/fa'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const AdmissionInformationPublicDetailView = () => {
   const { field, field2, form, loading, admissionPublic, id } =
@@ -19,6 +20,15 @@ const AdmissionInformationPublicDetailView = () => {
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
         buttonGroup={[
+          {
+            type: 'custom',
+            element: (
+              <ButtonGoToGuide
+                titleGuide={'Detail Permohonan Informasi Publik'}
+                valueGuide="PPID_PERMOHONAN_MASUK_INFORMASI_PUBLIK"
+              />
+            ),
+          },
           {
             type: 'custom',
             element: (

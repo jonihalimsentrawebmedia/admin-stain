@@ -24,6 +24,7 @@ const StandartServiceView = () => {
                 titleField={title}
                 idCategory={undefined}
                 idName="id_kategori"
+                valueGuide='PPID_INFORMASI_PUBLIK_PELAYANAN'
               />
             ),
           },

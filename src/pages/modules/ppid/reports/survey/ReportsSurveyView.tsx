@@ -3,6 +3,7 @@ import useGetReportsSurvey from "./controller/useGetReportsSurvey"
 import ReportSurveyViewModel from "./ReportsSurveyViewModel"
 import ButtonAdd from "./components/ButtonAdd"
 import TableCustom from "@/components/common/table/TableCustom"
+import ButtonGoToGuide from "@/pages/modules/website-utama/panduan/components/ButtonGoToGuide"
 
 const ReportsSurveyView = () => {
    const { columns } = ReportSurveyViewModel()
@@ -11,6 +12,15 @@ const ReportsSurveyView = () => {
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
         buttonGroup={[
+           {
+            type: 'custom',
+            element: (
+              <ButtonGoToGuide
+                titleGuide={'Laporan Layanan Informasi Publik'}
+                valueGuide="PPID_LAPORAN_SURVEI_LAYANAN_INFORMASI_PUBLIK"
+              />
+            ),
+          },
           {
             label: '',
             onClick: () => {},

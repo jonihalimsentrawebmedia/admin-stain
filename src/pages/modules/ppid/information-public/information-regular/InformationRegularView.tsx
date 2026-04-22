@@ -23,6 +23,7 @@ const InformationRegularView = () => {
         keyLinkPost="information-regular-ppip"
         linkPost="/unit-ppid/informasi-berkala-kategori"
         title="Informasi Berkala"
+        valueGuide='PPID_INFORMASI_PUBLIK_BERKALA'
       />
       <TableCustom
         addFilter={

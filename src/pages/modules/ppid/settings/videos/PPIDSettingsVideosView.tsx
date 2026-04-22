@@ -14,6 +14,7 @@ import { Button } from '@/components/ui/button'
 import { Pencil } from 'lucide-react'
 import ButtonForm from '@/components/common/button/ButtonForm'
 import { Skeleton } from '@/components/ui/skeleton'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 const getEmbedUrl = (url: string) => {
   if (!url) return ''
 
@@ -74,7 +75,20 @@ const PPIDSettingsVideosView = () => {
   }
   return (
     <div className="flex flex-col gap-4">
-      <ButtonTitleGroup buttonGroup={[]} label="Video Profil" />
+      <ButtonTitleGroup
+        buttonGroup={[
+          {
+            type: 'custom',
+            element: (
+              <ButtonGoToGuide
+                titleGuide={'Video Profil'}
+                valueGuide="PPID_PENGATURAN_VIDEO"
+              />
+            ),
+          },
+        ]}
+        label="Video Profil"
+      />
       <Form {...form}>
         <form className="flex flex-col gap-4" onSubmit={form.handleSubmit(handleSave)}>
           {!isEdit ? (

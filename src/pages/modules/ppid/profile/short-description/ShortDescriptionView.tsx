@@ -8,6 +8,7 @@ const ShortDescriptionView = () => {
       queryKeyGetData="ppid-gambaran-singkat"
       queryKeyPostData="ppid-gambaran-singkat"
       title="Gambaran Singkat Pembentukan"
+      valueGuide="PPID_PROFIL_GAMBARAN_SINGKAT"
     />
   )
 }

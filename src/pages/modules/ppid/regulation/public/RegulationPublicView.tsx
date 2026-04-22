@@ -4,6 +4,7 @@ import TableCustom from '@/components/common/table/TableCustom'
 import SelectFilter from '@/components/common/filter/SelectFilter'
 import RegulationPublicViewModel from './RegulationPublicViewModel'
 import ButtonAddDocument from '../../information-public/components/button/ButtonAddDocument'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const RegulationPublicView = () => {
   const { columns } = RegulationPublicViewModel()
@@ -12,6 +13,15 @@ const RegulationPublicView = () => {
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
         buttonGroup={[
+          {
+            type: 'custom',
+            element: (
+              <ButtonGoToGuide
+                titleGuide={'Regulasi Mengenai Keterbukaan Informasi Publik'}
+                valueGuide="PPID_REGULASI_TERKAIT"
+              />
+            ),
+          },
           {
             label: '',
             onClick: () => {},

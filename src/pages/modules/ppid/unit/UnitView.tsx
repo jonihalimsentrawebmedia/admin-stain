@@ -4,6 +4,7 @@ import CardInput from '@/components/common/card/CardInput'
 import ButtonCancelDraft from './components/ButtonCancelDraft'
 import { IoInformationCircle } from 'react-icons/io5'
 import UnitViewModel from './UnitViewModel'
+import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
 
 const UnitView = () => {
   const {
@@ -28,8 +29,26 @@ const UnitView = () => {
                   type: 'custom',
                   element: <ButtonCancelDraft form={form} />,
                 },
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Data Unit'}
+                      valueGuide="PPID_PROFIL_SATUAN_ORGANISASI"
+                    />
+                  ),
+                },
               ]
             : [
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Data Unit'}
+                      valueGuide="PPID_PROFIL_SATUAN_ORGANISASI"
+                    />
+                  ),
+                },
                 {
                   label: 'Edit Data',
                   onClick: () => {
@@ -46,7 +65,7 @@ const UnitView = () => {
           <div className="flex gap-2 items-center w-fit px-2 py-1 text-[#2769CD] border border-[#2769CD] rounded">
             <IoInformationCircle className="size-8" />
             <div className="text-black">
-              Data yang tampil adalah data yang asli. Untuk melihat data yang anda ajukan {' '}
+              Data yang tampil adalah data yang asli. Untuk melihat data yang anda ajukan{' '}
               <span
                 onClick={() => {
                   setIsCurrent(false)
@@ -61,7 +80,7 @@ const UnitView = () => {
           <div className="flex gap-2 items-center w-fit px-2 py-1 text-[#2769CD] border border-[#2769CD] rounded">
             <IoInformationCircle className="size-8" />
             <div className="text-black">
-              Data yang tampil adalah data yang anda ajukan. Untuk melihat data asli {" "}
+              Data yang tampil adalah data yang anda ajukan. Untuk melihat data asli{' '}
               <span
                 onClick={() => {
                   setIsCurrent(true)

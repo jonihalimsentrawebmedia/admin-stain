@@ -5,6 +5,7 @@ import SelectFilter from '@/components/common/filter/SelectFilter'
 import RegulationEnviromentViewModel from './RegulationEnviromentViewModel'
 import useGetRegulationEnviroment from './controller/useGetRegulationEnviroment'
 import ButtonAddDocument from '../../information-public/components/button/ButtonAddDocument'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const RegulationEnviromentView = () => {
   const { columns } = RegulationEnviromentViewModel()
@@ -13,6 +14,15 @@ const RegulationEnviromentView = () => {
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
         buttonGroup={[
+           {
+            type: 'custom',
+            element: (
+              <ButtonGoToGuide
+                titleGuide={'Regulasi Mengenai Keterbukaan Informasi di Lingkungan STAIN Madina'}
+                valueGuide="PPID_REGULASI_LINGKUNGAN"
+              />
+            ),
+          },
           {
             label: '',
             onClick: () => {},
