@@ -29,6 +29,14 @@ export const ColumnsTemplateWebsite = () => {
       header: 'Nama Template',
     },
     {
+      accessorKey: 'is_tersedia',
+      header: 'Status Tersedia',
+      cell: ({ row }) => {
+        const data = row?.original
+        return <p>{data?.is_tersedia ? 'Tersedia' : 'Tidak Tersedia'}</p>
+      },
+    },
+    {
       accessorKey: 'active',
       header: 'Status Active',
       cell: ({ row }) => {

@@ -22,7 +22,11 @@ export const ButtonStatus = (data: IThemeProdi) => {
 
   return (
     <>
-      <Switch checked={data?.active} onCheckedChange={HandleCheckedChange} />
+      <Switch
+        disabled={!data?.is_tersedia}
+        checked={data?.active}
+        onCheckedChange={HandleCheckedChange}
+      />
     </>
   )
 }
