@@ -6,6 +6,7 @@ import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsGalleryAlbum } from '@/pages/modules/website-fakultas/gallery/album/data/columns.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import { ColumnsGalleryVideo } from '@/pages/modules/website-fakultas/gallery/video/data/columns.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const FacultyGalleryProfile = () => {
   const [searchParams] = useSearchParams()
@@ -19,7 +20,20 @@ export const FacultyGalleryProfile = () => {
   return (
     <>
       <div className={'space-y-5'}>
-        <ButtonTitleGroup label={'Galeri'} buttonGroup={[]} />
+        <ButtonTitleGroup
+          label={'Galeri'}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Galeri'}
+                  valueGuide="FAKULTAS_PROFIL_GALERI"
+                />
+              ),
+            },
+          ]}
+        />
 
         {type === 'VIDEO' ? (
           <TableCustom

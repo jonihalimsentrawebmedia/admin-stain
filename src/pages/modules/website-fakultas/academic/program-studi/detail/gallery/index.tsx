@@ -10,6 +10,7 @@ import {
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import { useEffect } from 'react'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const ProdiGallery = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -41,7 +42,14 @@ export const ProdiGallery = () => {
   return (
     <>
       <div className={'space-y-5'}>
-        <p className="text-2xl font-semibold text-primary">Galeri</p>
+        <div className="flex gap-4 items-center justify-between">
+          <p className="text-2xl font-semibold text-primary">Galeri</p>
+
+          <ButtonGoToGuide
+            titleGuide={'Galeri'}
+            valueGuide="FAKULTAS_AKADEMIK_PROGRAM_STUDI_GALERI"
+          />
+        </div>
         {type === 'PHOTO' ? (
           <TableCustom
             addFilter={

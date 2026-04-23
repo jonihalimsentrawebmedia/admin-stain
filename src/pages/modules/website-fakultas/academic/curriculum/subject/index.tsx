@@ -2,6 +2,7 @@ import { UseGetCurriculumDetail } from '../hooks/index.tsx'
 import { useParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { SidenavSubjectCurriculum } from './component/sidenav.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const CurriculumSubjectDetail = () => {
   const { id_subject } = useParams()
@@ -10,7 +11,21 @@ export const CurriculumSubjectDetail = () => {
   return (
     <>
       <div className="flex flex-col gap-5">
-        <ButtonTitleGroup label={'Detail Kurikulum Program Studi'} buttonGroup={[]} isBack />
+        <ButtonTitleGroup
+          label={'Detail Kurikulum Program Studi'}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Detail Kurikulum Program Studi'}
+                  valueGuide="FAKULTAS_AKADEMIK_KURIKULUM_PROGRAM_STUDI_MATA_KULIAH"
+                />
+              ),
+            },
+          ]}
+          isBack
+        />
 
         <div className="grid grid-cols-2 gap-5">
           <div className="flex flex-col gap-1.5 col-span-2">

@@ -11,6 +11,7 @@ import { UseGetDetailPPSM } from './hooks/index'
 import { Button } from '@/components/ui/button.tsx'
 import { MdMenuBook } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const AcademicPPSMPage = () => {
   const { description } = UseGetDetailPPSM()
@@ -56,6 +57,12 @@ export const AcademicPPSMPage = () => {
                 label={'PPSM'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide titleGuide={'PPSM'} valueGuide="FAKULTAS_AKADEMIK_PSSM" />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -78,6 +85,12 @@ export const AcademicPPSMPage = () => {
             <ButtonTitleGroup
               label={'PPSM'}
               buttonGroup={[
+                {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide titleGuide={'PPSM'} valueGuide="FAKULTAS_AKADEMIK_PSSM" />
+                    ),
+                  },
                 {
                   type: 'custom',
                   element: (

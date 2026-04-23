@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button.tsx'
 import { MdMenuBook } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import { UseGetDetailMobilityFaculty } from '@/pages/modules/website-fakultas/academic/international-mobility/hooks'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const AcademicInternationalMobility = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -58,6 +59,15 @@ export const AcademicInternationalMobility = () => {
                 label={'International Mobility'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={'International Mobility'}
+                        valueGuide="FAKULTAS_AKADEMIK_INTERNATIONAL_MOBILITY"
+                      />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -80,6 +90,15 @@ export const AcademicInternationalMobility = () => {
             <ButtonTitleGroup
               label={'International Mobility'}
               buttonGroup={[
+                {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={'International Mobility'}
+                        valueGuide="FAKULTAS_AKADEMIK_INTERNATIONAL_MOBILITY"
+                      />
+                    ),
+                  },
                 {
                   type: 'custom',
                   element: (

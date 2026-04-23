@@ -4,6 +4,7 @@ import TableCustom from '@/components/common/table/TableCustom.tsx'
 import LecturerColumnsFaculty from '@/pages/modules/website-fakultas/academic/program-studi/detail/lecturer/data/columns.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import ButtonSyncLecturerFCM from '@/pages/modules/website-fakultas/academic/program-studi/detail/lecturer/component/buttonSync.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const LecturerDetailProfile = () => {
   const { id } = useParams()
@@ -26,6 +27,15 @@ export const LecturerDetailProfile = () => {
       <div className="space-y-5">
         <ButtonTitleGroup
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Dosen'}
+                  valueGuide="FAKULTAS_AKADEMIK_PROGRAM_STUDI_DOSEN"
+                />
+              ),
+            },
             {
               type: 'custom',
               element: <ButtonSyncLecturerFCM />,

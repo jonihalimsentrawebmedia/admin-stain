@@ -12,6 +12,7 @@ import { MdMenuBook } from 'react-icons/md'
 import { useNavigate } from 'react-router-dom'
 import { FaListUl } from 'react-icons/fa'
 import { UseGetDetailUndergraduate } from '@/pages/modules/website-fakultas/academic/undergraduate-program/hooks'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const AcademicInternationalUnderGraduated = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -59,6 +60,15 @@ export const AcademicInternationalUnderGraduated = () => {
                 label={'International Undergraduate Program'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={'International Undergraduate Program'}
+                        valueGuide="FAKULTAS_AKADEMIK_INTERNATIONAL_UNDERGRADUATE_PROGRAM"
+                      />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -81,6 +91,15 @@ export const AcademicInternationalUnderGraduated = () => {
             <ButtonTitleGroup
               label={'International Undergraduate Program'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'International Undergraduate Program'}
+                      valueGuide="FAKULTAS_AKADEMIK_INTERNATIONAL_UNDERGRADUATE_PROGRAM"
+                    />
+                  ),
+                },
                 {
                   type: 'custom',
                   element: (

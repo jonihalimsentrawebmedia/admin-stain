@@ -11,6 +11,7 @@ import { useForm } from 'react-hook-form'
 import { UseGetFacultyAbout } from '@/pages/modules/website-fakultas/about-faculty/hooks'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
+import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
 
 const AboutFacultyView = () => {
   const { facultyAbout } = UseGetFacultyAbout()
@@ -73,37 +74,39 @@ const AboutFacultyView = () => {
     })
   }
 
-
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(HandlerSave)}>
         <div className="flex flex-col gap-4">
           <div className="flex justify-between items-center">
             <div className="text-primary text-2xl font-medium">Tentang Fakultas</div>
+            <div className="flex gap-4 items-center">
+              <ButtonGoToGuide titleGuide={'Tentang Fakultas'} valueGuide="FAKULTAS_TENTANG" />
 
-            {isEditContent ? (
-              <ButtonForm
-                loading={loading}
-                onCancel={() => {
-                  setIsEditContent(false)
-                }}
-              />
-            ) : (
-              <Button
-                onClick={() => {
-                  setIsEditContent(!isEditContent)
-                  form.reset({
-                    isi_konten: facultyAbout?.isi_konten,
-                    gambar: image,
-                  })
-                }}
-                variant={'outline'}
-                className={'bg-white text-primary border-primary hover:text-primary'}
-              >
-                <HiPencil />
-                Edit
-              </Button>
-            )}
+              {isEditContent ? (
+                <ButtonForm
+                  loading={loading}
+                  onCancel={() => {
+                    setIsEditContent(false)
+                  }}
+                />
+              ) : (
+                <Button
+                  onClick={() => {
+                    setIsEditContent(!isEditContent)
+                    form.reset({
+                      isi_konten: facultyAbout?.isi_konten,
+                      gambar: image,
+                    })
+                  }}
+                  variant={'outline'}
+                  className={'bg-white text-primary border-primary hover:text-primary'}
+                >
+                  <HiPencil />
+                  Edit
+                </Button>
+              )}
+            </div>
           </div>
           <CardInput title="Tentang Fakultas">
             {isEditContent ? (

@@ -15,6 +15,7 @@ import TextInput from '@/components/common/form/TextInput.tsx'
 import DetailField from '@/components/common/field/DetailField.tsx'
 import { ContactUsResolver, type IContactUsTypeForm } from './resolver.tsx'
 import { UseGetProdiContactUs } from '@/pages/modules/website-fakultas/academic/program-studi/detail/hooks'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 const ProdiContactUsView = () => {
   const { id } = useParams()
@@ -98,28 +99,34 @@ const ProdiContactUsView = () => {
       <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
         <div className="flex justify-between items-center">
           <div className="text-primary text-2xl font-medium">Hubungi Kami</div>
-          {isEdit ? (
-            <ButtonForm
-              loading={loading}
-              onCancel={() => {
-                setIsEdit(false)
-              }}
+          <div className="flex gap-4 items-center">
+            <ButtonGoToGuide
+              titleGuide={'Hubungi Kami'}
+              valueGuide="FAKULTAS_AKADEMIK_PROGRAM_STUDI_HUBUNGI_KAMI"
             />
-          ) : (
-            <Button
-              onClick={() => {
-                setIsEdit(!isEdit)
-                form.reset({
-                  ...contactUs,
-                })
-              }}
-              variant={'outline'}
-              className={'bg-white text-primary border-primary hover:text-primary'}
-            >
-              <HiPencil />
-              Edit
-            </Button>
-          )}
+            {isEdit ? (
+              <ButtonForm
+                loading={loading}
+                onCancel={() => {
+                  setIsEdit(false)
+                }}
+              />
+            ) : (
+              <Button
+                onClick={() => {
+                  setIsEdit(!isEdit)
+                  form.reset({
+                    ...contactUs,
+                  })
+                }}
+                variant={'outline'}
+                className={'bg-white text-primary border-primary hover:text-primary'}
+              >
+                <HiPencil />
+                Edit
+              </Button>
+            )}
+          </div>
         </div>
         <CardInput title="Hubungi Kami">
           {isEdit ? (

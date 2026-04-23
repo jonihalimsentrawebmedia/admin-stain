@@ -3,6 +3,7 @@ import { ButtonAddProgram } from './component/buttonAdd.tsx'
 import { UseGetListProgram } from '@/pages/modules/website-fakultas/academic/undergraduate-program/program/hooks'
 import { ColumnsProgramUndergraduate } from '@/pages/modules/website-fakultas/academic/undergraduate-program/program/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const UnderGraduatedProgram = () => {
   const { program, meta, loading } = UseGetListProgram()
@@ -14,6 +15,15 @@ export const UnderGraduatedProgram = () => {
         <ButtonTitleGroup
           isBack
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'International Undergraduate Program  - Daftar Program'}
+                  valueGuide="FAKULTAS_AKADEMIK_INTERNATIONAL_UNDERGRADUATE_PROGRAM_DAFTAR_PRORAM"
+                />
+              ),
+            },
             {
               type: 'custom',
               element: <ButtonAddProgram />,
