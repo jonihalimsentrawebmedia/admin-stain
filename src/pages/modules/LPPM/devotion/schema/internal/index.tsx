@@ -10,6 +10,7 @@ import {toast} from 'react-toastify'
 import {useQueryClient} from '@tanstack/react-query'
 import {FaListUl} from 'react-icons/fa'
 import {Link} from 'react-router-dom'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const DevotionInternalSchema = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -55,6 +56,15 @@ export const DevotionInternalSchema = () => {
               <ButtonTitleGroup
                 label={'Pengabdian Pendanaan Internal'}
                 buttonGroup={[
+                    {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide="Pengabdian Pendanaan Internal"
+                        valueGuide="LPPM_PENGABIDAN_SKEMA_PENGABDIAN_PENDANAAN_INTERNAL"
+                      />
+                    ),
+                  },
                   {
                     type: 'cancel',
                     label: 'Batal',
@@ -79,6 +89,15 @@ export const DevotionInternalSchema = () => {
             <ButtonTitleGroup
               label={'Pengabdian Pendanaan Internal'}
               buttonGroup={[
+                  {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide="Pengabdian Pendanaan Internal"
+                        valueGuide="LPPM_PENGABIDAN_SKEMA_PENGABDIAN_PENDANAAN_INTERNAL"
+                      />
+                    ),
+                  },
                 {
                   type: 'custom',
                   element: (

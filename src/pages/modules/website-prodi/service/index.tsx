@@ -17,7 +17,7 @@ export const ServiceProdiPage = () => {
           buttonGroup={[
             {
               type:"custom",
-              element:<ButtonGoToGuide valueGuide="PRODI_PRODI_LAYANAN" />
+              element:<ButtonGoToGuide titleGuide='Layanan' valueGuide="PRODI_PRODI_LAYANAN" />
             },
             {
               type: 'custom',

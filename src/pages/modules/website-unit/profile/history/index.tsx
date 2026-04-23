@@ -27,7 +27,7 @@ export const HistoryUnit = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="PERPUSTAKAAN_PROFIL_SEJARAH" />,
+              element: <ButtonGoToGuide titleGuide='Sejarah Unit' valueGuide="PERPUSTAKAAN_PROFIL_SEJARAH" />,
             },
             { type: 'custom', element: <ButtonAddHistory />, onClick: () => {} },
           ]}

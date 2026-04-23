@@ -4,6 +4,7 @@ import { ColumnsStudyCenter } from '@/pages/modules/LPPM/research/study-center/s
 import { UseGetStudyCenterList } from '@/pages/modules/LPPM/research/study-center/study-list/hook'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const StudyCenterList = () => {
   const navigate = useNavigate()
@@ -26,6 +27,10 @@ export const StudyCenterList = () => {
         <ButtonTitleGroup
           label={'Pusat Studi'}
           buttonGroup={[
+             {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide="Pusat Studi" valueGuide="LPPM_PUSAT_STUDI" />,
+            },
             {
               type: 'add',
               label: 'Tambah Data',

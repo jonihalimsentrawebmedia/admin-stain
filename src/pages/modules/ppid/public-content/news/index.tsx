@@ -13,6 +13,7 @@ import { ApproveSection } from '../news/components/table/ApproveSection.tsx'
 import { PublishSection } from '../news/components/table/publishSection.tsx'
 import { UpPublishSection } from '../news/components/table/upPublishSection.tsx'
 import { toast } from 'react-toastify'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 const PPIDNewsPublicContentPage = () => {
   const navigate = useNavigate()
@@ -126,6 +127,15 @@ const PPIDNewsPublicContentPage = () => {
         <ButtonTitleGroup
           label={'Berita'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Konten Publik - Berita'}
+                  valueGuide="PPID_KONTEN_PUBLIK_BERITA"
+                />
+              ),
+            },
             {
               label: 'Tulis Berita',
               type: 'add',

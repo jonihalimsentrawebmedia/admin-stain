@@ -10,6 +10,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { FaUserFriends } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { UseGetPublicationCenter } from '@/pages/modules/LPPM/publication-hki/book/book-center/hooks'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const HKICenterPage = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -56,6 +57,15 @@ export const HKICenterPage = () => {
                 label={'Pusat KI & Layanan Teknis'}
                 buttonGroup={[
                   {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Pusat KI & Layanan Teknis'}
+                      valueGuide="LPPM_PUBLIKASI_HKI_PUSAT_KL"
+                    />
+                  ),
+                },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -78,6 +88,15 @@ export const HKICenterPage = () => {
             <ButtonTitleGroup
               label={'Pusat KI & Layanan Teknis'}
               buttonGroup={[
+                  {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Pusat KI & Layanan Teknis'}
+                      valueGuide="LPPM_PUBLIKASI_HKI_PUSAT_KL"
+                    />
+                  ),
+                },
                 {
                   type: 'custom',
                   element: (

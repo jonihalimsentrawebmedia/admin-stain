@@ -29,7 +29,7 @@ export const DetailProfileUnit = () => {
                     {
                       type: 'custom',
                       element: (
-                        <ButtonGoToGuide valueGuide="PERPUSTAKAAN_PROFIL_SATUAN_ORGANISASI" />
+                        <ButtonGoToGuide titleGuide='Data Utama Universitas' valueGuide="PERPUSTAKAAN_PROFIL_SATUAN_ORGANISASI" />
                       ),
                     },
                   ]
@@ -37,7 +37,7 @@ export const DetailProfileUnit = () => {
                     {
                       type: 'custom',
                       element: (
-                        <ButtonGoToGuide valueGuide="PERPUSTAKAAN_PROFIL_SATUAN_ORGANISASI" />
+                        <ButtonGoToGuide titleGuide='Data Utama Universitas' valueGuide="PERPUSTAKAAN_PROFIL_SATUAN_ORGANISASI" />
                       ),
                     },
                     {

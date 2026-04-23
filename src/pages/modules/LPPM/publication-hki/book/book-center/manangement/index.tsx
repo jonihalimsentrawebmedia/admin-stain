@@ -4,6 +4,7 @@ import { UseGetUserManagementContext } from '../../hooks/index'
 import { ColumnsUserManagement } from './data/columns'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const UserManagementBook = () => {
   const navigate = useNavigate()
@@ -31,6 +32,15 @@ export const UserManagementBook = () => {
           isBack
           label={'Pengelola - Pusat Buku dan Media Massa'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Pengelola - Pusat Buku dan Media Massa'}
+                  valueGuide="LPPM_PUBLIKASI_BUKU_PUSAT_ANGGOTA"
+                />
+              ),
+            },
             {
               type: 'add',
               label: 'Tambah Pengelola',

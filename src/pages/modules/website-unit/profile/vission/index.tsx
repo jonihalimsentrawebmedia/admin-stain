@@ -64,7 +64,7 @@ export const VisionMission = () => {
                 buttonGroup={[
                    {
                   type: 'custom',
-                  element: <ButtonGoToGuide valueGuide="PERPUSTAKAAN_PROFIL_VISI_MISI" />,
+                  element: <ButtonGoToGuide titleGuide='Visi, Misi, & Sasaran' valueGuide="PERPUSTAKAAN_PROFIL_VISI_MISI" />,
                 },
                   { type: 'cancel', label: 'Batal', onClick: () => setIsEdit(!isEdit) },
                   {

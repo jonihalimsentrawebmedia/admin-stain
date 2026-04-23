@@ -11,6 +11,7 @@ import { HiPlus } from 'react-icons/hi'
 import { toast } from 'react-toastify'
 import { z } from 'zod'
 import InformationPublicFormDocument from '../form/InformationPublicFormDocument'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const InformationPublicGlobalResolver = z
   .object({
@@ -55,6 +56,7 @@ interface Props {
   idName: string
   idCategory?: string
   titleField: string
+  valueGuide?: string
 }
 const ButtonAddDocument = ({
   keyLinkPost,
@@ -64,6 +66,7 @@ const ButtonAddDocument = ({
   idName,
   idCategory,
   titleField,
+  valueGuide,
 }: Props) => {
   const [open, setOpen] = useState(false)
   const form = useForm<InformationPublicGlobalType>({
@@ -75,10 +78,10 @@ const ButtonAddDocument = ({
   const queryClient = useQueryClient()
   async function handleSave(data: InformationPublicGlobalType) {
     setLoading(true)
-    if(data.jenis === 'URL') {
+    if (data.jenis === 'URL') {
       delete data.url_file
     }
-    if(data.jenis === 'DOKUMEN') {
+    if (data.jenis === 'DOKUMEN') {
       delete data.url
     }
     try {
@@ -86,7 +89,6 @@ const ButtonAddDocument = ({
         ...data,
         urutan: Number(data.urutan),
         [idName]: idCategory,
-
       })
 
       if (res.data.status) {
@@ -106,26 +108,34 @@ const ButtonAddDocument = ({
   }
   return (
     <div className="flex items-center justify-between">
-      <Button
-        onClick={() => {
-          setOpen(true)
-          form.reset({
-            judul: titleField,
-          })
-        }}
-        variant={'outline'}
-        className={'bg-white text-primary border-primary hover:text-primary'}
-      >
-        {labelDokumen ? (
-          labelDokumen
-        ) : (
-          <>
-            {' '}
-            <HiPlus />
-            Tambah data
-          </>
+      <div className="flex gap-4 items-center">
+        {valueGuide && (
+          <ButtonGoToGuide
+            titleGuide={titleField ? titleField : title}
+            valueGuide={valueGuide ?? ''}
+          />
         )}
-      </Button>
+        <Button
+          onClick={() => {
+            setOpen(true)
+            form.reset({
+              judul: titleField,
+            })
+          }}
+          variant={'outline'}
+          className={'bg-white text-primary border-primary hover:text-primary'}
+        >
+          {labelDokumen ? (
+            labelDokumen
+          ) : (
+            <>
+              {' '}
+              <HiPlus />
+              Tambah data
+            </>
+          )}
+        </Button>
+      </div>
 
       <DialogCustom
         className="max-w-2xl! w-[90wdv] md:w-full! "

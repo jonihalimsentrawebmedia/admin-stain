@@ -3,6 +3,7 @@ import ServiceCommitmentViewModel from './ServiceCommitmentViewModel'
 import useGetServiceCommitment from './controller/useGetServiceCommitment'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
 import TableCustom from '@/components/common/table/TableCustom'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const ServiceCommitmentView = () => {
   const navigate = useNavigate()
@@ -12,6 +13,15 @@ const ServiceCommitmentView = () => {
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
         buttonGroup={[
+          {
+            type: 'custom',
+            element: (
+              <ButtonGoToGuide
+                titleGuide={'Maklumat Layanan'}
+                valueGuide="PPID_PROFIL_MAKLUMAT_LAYANAN"
+              />
+            ),
+          },
           {
             type: 'add',
             label: 'Tambah',

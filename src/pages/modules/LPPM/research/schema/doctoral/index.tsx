@@ -8,6 +8,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { UseGetSchemaDoctoralResearch } from './hooks/index'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const SchemaDoctoralResearch = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -52,6 +53,15 @@ export const SchemaDoctoralResearch = () => {
                 label={'Program Post Doctoral'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide="Program Post Doctoral"
+                        valueGuide="LPPM_PENELITIAN_SKEMA_PROGRAM_POST_DOKTORAL"
+                      />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -74,6 +84,15 @@ export const SchemaDoctoralResearch = () => {
             <ButtonTitleGroup
               label={'Program Post Doctoral'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide="Program Post Doctoral"
+                      valueGuide="LPPM_PENELITIAN_SKEMA_PROGRAM_POST_DOKTORAL"
+                    />
+                  ),
+                },
                 {
                   type: 'edit',
                   label: 'Edit Konten',

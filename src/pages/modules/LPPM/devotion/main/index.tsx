@@ -8,6 +8,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { UseGetMainDevotion } from './hooks/index'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const MainDevotion = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -52,6 +53,15 @@ export const MainDevotion = () => {
                 label={'Pusat Pengabdian'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide="Pusat Pengabdian"
+                        valueGuide="LPPM_PENGABDIAN_PUSAT"
+                      />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -74,6 +84,15 @@ export const MainDevotion = () => {
             <ButtonTitleGroup
               label={'Pusat Pengabdian'}
               buttonGroup={[
+                  {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide="Pusat Pengabdian"
+                        valueGuide="LPPM_PENGABDIAN_PUSAT"
+                      />
+                    ),
+                  },
                 {
                   type: 'edit',
                   label: 'Edit Konten',

@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 import { UseGetUnitPrimary } from './hooks/index'
 import { useQueryClient } from '@tanstack/react-query'
 import { Input } from '@/components/ui/input.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const PrimaryAndFooterColorUnit = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -57,6 +58,15 @@ export const PrimaryAndFooterColorUnit = () => {
               label={'Pengaturan Warna Halaman'}
               buttonGroup={[
                 {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide="Pengaturan Warna Halaman"
+                      valueGuide="PERPUSTAKAAN_PENGATURAN_WARNA_HALAMAN"
+                    />
+                  ),
+                },
+                {
                   type: 'edit',
                   label: 'Edit Warna',
                   onClick: () => {
@@ -105,6 +115,15 @@ export const PrimaryAndFooterColorUnit = () => {
                 <ButtonTitleGroup
                   label={'Pengaturan Warna Halaman'}
                   buttonGroup={[
+                    {
+                      type: 'custom',
+                      element: (
+                        <ButtonGoToGuide
+                          titleGuide="Pengaturan Warna Halaman"
+                          valueGuide="PERPUSTAKAAN_PENGATURAN_WARNA_HALAMAN"
+                        />
+                      ),
+                    },
                     {
                       type: 'cancel',
                       label: 'Batal',

@@ -9,6 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import AxiosClient from '@/provider/axios.tsx'
 import { useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const ProfileLeaderPage = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -73,6 +74,15 @@ export const ProfileLeaderPage = () => {
             <ButtonTitleGroup
               label={'Profil Ketua LPPM'}
               buttonGroup={[
+                   {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide="Profil Ketua LPPM"
+                      valueGuide="LPPM_TENTANG_PROFIL_KETUA"
+                    />
+                  ),
+                },
                 {
                   type: 'edit',
                   label: 'Edit Konten',

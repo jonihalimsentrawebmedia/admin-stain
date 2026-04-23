@@ -6,6 +6,7 @@ import Search from '@/components/common/table/Search.tsx'
 import { ButtonEditPhotoUnit } from './components/buttonEdit.tsx'
 import { ButtonDeletePhotoUnit } from './components/buttonDelete.tsx'
 import { UseGetGalleryAlbumUnitById } from '../album/hooks/index'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const GalleryPhotoUnitPage = () => {
   const { id } = useParams()
@@ -21,6 +22,15 @@ export const GalleryPhotoUnitPage = () => {
         <ButtonTitleGroup
           label={'Isi Galeri Foto'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide="Isi Galeri Foto"
+                  valueGuide="PERPUSTAKAAN_GALERI_FOTO"
+                />
+              ),
+            },
             {
               type: 'custom',
               element: <ButtonAddPhotoUnit />,

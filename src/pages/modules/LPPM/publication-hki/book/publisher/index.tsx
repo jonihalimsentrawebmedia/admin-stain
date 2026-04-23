@@ -8,6 +8,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { UseGetBookPublisher } from './hooks/index'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const BookPublisherPage = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -52,6 +53,15 @@ export const BookPublisherPage = () => {
                 label={'Penerbitan Buku'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={'Penerbitan Buku'}
+                        valueGuide="LPPM_PUBLIKASI_BUKU_PENERBITAN"
+                      />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -74,6 +84,15 @@ export const BookPublisherPage = () => {
             <ButtonTitleGroup
               label={'Penerbitan Buku'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Penerbitan Buku'}
+                      valueGuide="LPPM_PUBLIKASI_BUKU_PENERBITAN"
+                    />
+                  ),
+                },
                 {
                   type: 'edit',
                   label: 'Edit Konten',

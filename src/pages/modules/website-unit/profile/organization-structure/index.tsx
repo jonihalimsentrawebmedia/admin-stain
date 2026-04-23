@@ -55,7 +55,7 @@ export const OrganizationStructure = () => {
                   {
                     type: 'custom',
                     element: (
-                      <ButtonGoToGuide valueGuide="PERPUSTAKAAN_PROFIL_STRUKTUR_ORGANISASI" />
+                      <ButtonGoToGuide titleGuide='Struktur Organisasi' valueGuide="PERPUSTAKAAN_PROFIL_STRUKTUR_ORGANISASI" />
                     ),
                   },
                   { type: 'edit', label: 'Edit', onClick: () => setIsEdit(!isEdit) },
@@ -78,7 +78,7 @@ export const OrganizationStructure = () => {
               buttonGroup={[
                 {
                   type: 'custom',
-                  element: <ButtonGoToGuide valueGuide="PERPUSTAKAAN_PROFIL_STRUKTUR_ORGANISASI" />,
+                  element: <ButtonGoToGuide titleGuide='Struktur Organisasi' valueGuide="PERPUSTAKAAN_PROFIL_STRUKTUR_ORGANISASI" />,
                 },
                 { type: 'edit', label: 'Edit', onClick: () => setIsEdit(!isEdit) },
               ]}

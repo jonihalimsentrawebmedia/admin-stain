@@ -24,6 +24,7 @@ const InformationAvailableDetailView = () => {
                 titleField={title}
                 idCategory={idCategory}
                 idName="id_kategori"
+                valueGuide='PPID_INFORMASI_PUBLIK_TERSEDIA_DOKUMEN'
               />
             ),
           },

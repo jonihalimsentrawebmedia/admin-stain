@@ -13,6 +13,7 @@ import { ApproveSection } from '@/pages/modules/website-lembaga/public-content/n
 import { PublishSection } from '@/pages/modules/website-lembaga/public-content/news/components/table/publishSection.tsx'
 import { UpPublishSection } from '@/pages/modules/website-lembaga/public-content/news/components/table/upPublishSection.tsx'
 import { toast } from 'react-toastify'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const NewsPublicContentPage = () => {
   const navigate = useNavigate()
@@ -126,6 +127,15 @@ const NewsPublicContentPage = () => {
         <ButtonTitleGroup
           label={'Berita'}
           buttonGroup={[
+              {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide="Konten Publik - Berita"
+                      valueGuide="P2M_KONTEN_PUBLIK_BERITA"
+                    />
+                  ),
+                },
             {
               label: 'Tulis Berita',
               type: 'add',

@@ -6,6 +6,7 @@ import useGetInformationImmediately from './controller/useGetInformationImmediat
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Plus } from 'lucide-react'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const InformationImmediatelyView = () => {
   const { informationImmediately, loading, meta } = useGetInformationImmediately()
@@ -21,11 +22,17 @@ const InformationImmediatelyView = () => {
       />
       <div className="flex items-center justify-between">
         <div className="text-primary text-2xl font-medium">Daftar Informasi</div>
-        <Link to={'/modules/ppid/information-public/information-immediately/add'}>
-          <Button variant="outline" className="border-primary text-primary hover:text-primary">
-            <Plus /> Tambah Data
-          </Button>
-        </Link>
+        <div className="flex gap-4 items-center">
+          <ButtonGoToGuide
+            titleGuide={'Daftar Informasi'}
+            valueGuide="PPID_INFORMASI_PUBLIK_SERTA_MERTA"
+          />
+          <Link to={'/modules/ppid/information-public/information-immediately/add'}>
+            <Button variant="outline" className="border-primary text-primary hover:text-primary">
+              <Plus /> Tambah Data
+            </Button>
+          </Link>
+        </div>
       </div>
 
       <TableCustom
@@ -47,7 +54,7 @@ const InformationImmediatelyView = () => {
         data={informationImmediately}
         loading={loading}
         meta={meta}
-            thClassName='whitespace-pre-line!'
+        thClassName="whitespace-pre-line!"
       />
     </div>
   )

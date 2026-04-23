@@ -8,6 +8,7 @@ const SpmiAuditorInternalView = () => {
       queryKeyGetData="lembaga-/auditor-internal"
       queryKeyPostData="lembaga-/auditor-internal"
       title="Auditor Internal"
+      valueGuide='P2M_JAMINAN_SPMI_AUDITOR_INTERNAL'
     />
   )
 }

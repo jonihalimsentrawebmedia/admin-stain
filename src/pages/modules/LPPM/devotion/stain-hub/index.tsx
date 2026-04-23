@@ -9,6 +9,7 @@ import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { UseGetMainDevotion } from './hooks/index'
 import { UseLPPMContext } from '@/pages/modules/LPPM/components/context'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const MainDevotionHub = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -55,6 +56,15 @@ export const MainDevotionHub = () => {
                 label={`${profileSession?.singkatan_universitas} Hub`}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={`${profileSession?.singkatan_universitas} Hub`}
+                        valueGuide="LPPM_PENGABDIAN_HUB"
+                      />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -77,6 +87,15 @@ export const MainDevotionHub = () => {
             <ButtonTitleGroup
               label={`${profileSession?.singkatan_universitas} Hub`}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={`${profileSession?.singkatan_universitas} Hub`}
+                      valueGuide="LPPM_PENGABDIAN_HUB"
+                    />
+                  ),
+                },
                 {
                   type: 'edit',
                   label: 'Edit Konten',

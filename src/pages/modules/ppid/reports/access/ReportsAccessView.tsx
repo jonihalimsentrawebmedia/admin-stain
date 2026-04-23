@@ -8,6 +8,7 @@ import BasicPieChart from './components/BasicPieCharts'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Button } from '@/components/ui/button'
 import { useState } from 'react'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 export function objectToChartArray<T extends Record<string, number>>(
   obj: T
 ): { name: keyof T; value: number }[] {
@@ -65,7 +66,20 @@ const ReportsAccessView = () => {
   ]
   return (
     <div className="flex flex-col gap-4">
-      <ButtonTitleGroup buttonGroup={[]} label="Laporan Layanan Akses Publik" />
+      <ButtonTitleGroup
+        buttonGroup={[
+          {
+            type: 'custom',
+            element: (
+              <ButtonGoToGuide
+                titleGuide={'Laporan Layanan Akses Publik'}
+                valueGuide="PPID_LAPORAN_AKSES_INFORMASI_PUBLIK"
+              />
+            ),
+          },
+        ]}
+        label="Laporan Layanan Akses Publik"
+      />
       <div className="flex gap-4 items-center">
         <div className=" text-[#444]">Pilih Tahun</div>
         <SelectFilter

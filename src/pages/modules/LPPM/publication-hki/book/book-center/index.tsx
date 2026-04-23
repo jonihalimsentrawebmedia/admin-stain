@@ -10,6 +10,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { UseGetPublicationCenter } from './hooks/index'
 import { FaUserFriends } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const BookCenterPage = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -56,6 +57,15 @@ export const BookCenterPage = () => {
                 label={'Pusat Buku dan Media Massa'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={'Pusat Buku dan Media Massa'}
+                        valueGuide="LPPM_PUBLIKASI_BUKU_PUSAT"
+                      />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -78,6 +88,15 @@ export const BookCenterPage = () => {
             <ButtonTitleGroup
               label={'Pusat Buku dan Media Massa'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Pusat Buku dan Media Massa'}
+                      valueGuide="LPPM_PUBLIKASI_BUKU_PUSAT"
+                    />
+                  ),
+                },
                 {
                   type: 'custom',
                   element: (

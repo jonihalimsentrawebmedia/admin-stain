@@ -119,7 +119,7 @@ export const AnnouncementProdiPublicContent = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="PRODI_PENGUMUMAN" />,
+              element: <ButtonGoToGuide titleGuide='Konten Publik - Pengumuman' valueGuide="PRODI_PENGUMUMAN" />,
             },
             { type: 'add', label: 'Tulis Pengumuman', onClick: () => navigate('add') },
           ]}

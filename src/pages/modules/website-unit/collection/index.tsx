@@ -4,6 +4,7 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ButtonAddCollection } from '@/pages/modules/website-unit/collection/component/buttonAdd.tsx'
 import { UseGetSessionUnit } from '@/pages/modules/website-unit/hooks'
+import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
 
 export const CategoryCollection = () => {
   const { session } = UseGetSessionUnit()
@@ -15,7 +16,18 @@ export const CategoryCollection = () => {
       <div className={'flex flex-col gap-4'}>
         <ButtonTitleGroup
           label={'Daftar Koleksi'}
-          buttonGroup={[{ type: 'custom', element: <ButtonAddCollection session={session} /> }]}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide="Daftar Koleksi"
+                  valueGuide="PERPUSTAKAAN_KOLEKSI"
+                />
+              ),
+            },
+            { type: 'custom', element: <ButtonAddCollection session={session} /> },
+          ]}
         />
         <TableCustom columns={columns} data={collection} loading={loading} meta={meta} />
       </div>

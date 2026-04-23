@@ -5,6 +5,7 @@ import type { StatusPublish } from '@/pages/modules/website-prodi/public-content
 import { useEffect } from 'react'
 import { UseGetArticleLppmStatus } from './hooks'
 import { TableDataListArticle } from './components/listArtice'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const ArticleLppmPage = () => {
   const navigate = useNavigate()
@@ -116,7 +117,18 @@ export const ArticleLppmPage = () => {
       <div className="flex flex-col gap-4">
         <ButtonTitleGroup
           label={'Artikel'}
-          buttonGroup={[{ type: 'edit', label: 'Tulis Artikel', onClick: () => navigate('add') }]}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Konten Publik - Artikel'}
+                  valueGuide="LPPM_KONTEN_PUBLIK_ARTIKEL"
+                />
+              ),
+            },
+            { type: 'edit', label: 'Tulis Artikel', onClick: () => navigate('add') },
+          ]}
         />
 
         <TabsListCustom

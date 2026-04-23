@@ -55,7 +55,7 @@ const StaffProfilePage = () => {
       <div className="flex justify-between items-center">
         <p className="text-2xl font-medium">Staff</p>
         <div className="flex gap-4 items-center">
-          <ButtonGoToGuide valueGuide="PRODI_PROFIL_STAFF" />
+          <ButtonGoToGuide titleGuide='Staff' valueGuide="PRODI_PROFIL_STAFF" />
 
           <Button
             onClick={handleSyncSimpeg}

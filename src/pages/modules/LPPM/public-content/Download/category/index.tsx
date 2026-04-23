@@ -4,6 +4,7 @@ import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import { ButtonAddCategoryDownloadLppm } from './components/buttonAdd'
 import { UseGetCategoryDownloadLppm } from '../hooks'
 import { CategoryDownloadLppmColumns } from './components/columns'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const CategoryDownloadLppmPage = () => {
   const { categoryDownload, loading, meta } = UseGetCategoryDownloadLppm()
@@ -15,6 +16,15 @@ export const CategoryDownloadLppmPage = () => {
         <ButtonTitleGroup
           label={'Kategori Berkas'}
           buttonGroup={[
+             {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Konten Publik - Kategori Berkas'}
+                  valueGuide="LPPM_KONTEN_PUBLIK_KATEGORI_DOWNLOAD"
+                />
+              ),
+            },
             {
               type: 'custom',
               element: <ButtonAddCategoryDownloadLppm />,

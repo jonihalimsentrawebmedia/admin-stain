@@ -15,7 +15,7 @@ export const AchievementUnitPage = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="PERPUSTAKAAN_PROFIL_PENGHARGAAN" />,
+              element: <ButtonGoToGuide titleGuide='Penghargaan Unit' valueGuide="PERPUSTAKAAN_PROFIL_PENGHARGAAN" />,
             },
           ]}
         />

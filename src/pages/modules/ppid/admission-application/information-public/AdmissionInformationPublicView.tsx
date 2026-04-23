@@ -3,13 +3,27 @@ import AdmissionInformationPublicViewModel from './AdmissionInformationPublicVie
 import { useGetAdmissionInformationPublic } from './hooks'
 import TableCustom from '@/components/common/table/TableCustom'
 import SelectFilter from '@/components/common/filter/SelectFilter'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const AdmissionInformationPublicView = () => {
   const { columns } = AdmissionInformationPublicViewModel()
   const { loading, admissionPublic, meta } = useGetAdmissionInformationPublic({})
   return (
     <div className="flex flex-col gap-4">
-      <ButtonTitleGroup buttonGroup={[]} label="Permohonan Informasi Publik" />
+      <ButtonTitleGroup
+        buttonGroup={[
+          {
+            type: 'custom',
+            element: (
+              <ButtonGoToGuide
+                titleGuide={'Permohonan Informasi Publik'}
+                valueGuide="PPID_PERMOHONAN_MASUK_PUBLIK"
+              />
+            ),
+          },
+        ]}
+        label="Permohonan Informasi Publik"
+      />
 
       <TableCustom
         addFilter={

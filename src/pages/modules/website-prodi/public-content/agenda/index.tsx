@@ -119,7 +119,7 @@ export const AgendaProdiPublicContent = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="PRODI_AGENDA" />,
+              element: <ButtonGoToGuide titleGuide='Konten Publik - Agenda' valueGuide="PRODI_AGENDA" />,
             },
             { type: 'add', label: 'Tulis Agenda', onClick: () => navigate('add') },
           ]}

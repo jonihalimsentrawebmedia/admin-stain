@@ -1,21 +1,22 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import {useEffect, useState} from 'react'
-import {Form} from '@/components/ui/form.tsx'
-import {useForm} from 'react-hook-form'
-import {RichText} from '@/components/common/richtext'
+import { useEffect, useState } from 'react'
+import { Form } from '@/components/ui/form.tsx'
+import { useForm } from 'react-hook-form'
+import { RichText } from '@/components/common/richtext'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import AxiosClient from '@/provider/axios.tsx'
-import {toast} from 'react-toastify'
-import {useQueryClient} from '@tanstack/react-query'
-import {FaUserFriends} from 'react-icons/fa'
-import {Link} from 'react-router-dom'
-import {UseGetPublicationCenter} from '@/pages/modules/LPPM/publication-hki/book/book-center/hooks'
+import { toast } from 'react-toastify'
+import { useQueryClient } from '@tanstack/react-query'
+import { FaUserFriends } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
+import { UseGetPublicationCenter } from '@/pages/modules/LPPM/publication-hki/book/book-center/hooks'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const JourNalPPJSPage = () => {
   const [isEdit, setIsEdit] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const {responseData} = UseGetPublicationCenter({
+  const { responseData } = UseGetPublicationCenter({
     context: 'pusat-ppjs',
   })
   const form = useForm()
@@ -56,6 +57,15 @@ export const JourNalPPJSPage = () => {
                 label={'PPJS'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={'PPJS'}
+                        valueGuide="LPPM_PUBLIKASI_JURNAL_PPJS"
+                      />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -63,13 +73,12 @@ export const JourNalPPJSPage = () => {
                   {
                     type: 'save',
                     label: 'Simpan',
-                    onClick: () => {
-                    },
+                    onClick: () => {},
                   },
                 ]}
               />
-              <RichText form={form} name={'isi'} isRow={false} showLabel={false} label={''}/>
-              <ButtonForm loading={loading} onCancel={() => setIsEdit(!isEdit)}/>
+              <RichText form={form} name={'isi'} isRow={false} showLabel={false} label={''} />
+              <ButtonForm loading={loading} onCancel={() => setIsEdit(!isEdit)} />
             </form>
           </Form>
         </>
@@ -82,13 +91,19 @@ export const JourNalPPJSPage = () => {
                 {
                   type: 'custom',
                   element: (
+                    <ButtonGoToGuide titleGuide={'PPJS'} valueGuide="LPPM_PUBLIKASI_JURNAL_PPJS" />
+                  ),
+                },
+                {
+                  type: 'custom',
+                  element: (
                     <Link
                       to={'management'}
                       className={
                         'border border-primary px-3 py-1.5 rounded-md text-primary flex items-center bg-white gap-1.5'
                       }
                     >
-                      <FaUserFriends className={'size-4'}/>
+                      <FaUserFriends className={'size-4'} />
                       Pengelola
                     </Link>
                   ),
@@ -102,7 +117,7 @@ export const JourNalPPJSPage = () => {
             />
             <div
               className={'tiptap ProseMirror simple-editor mt-5'}
-              dangerouslySetInnerHTML={{__html: responseData?.isi ?? ''}}
+              dangerouslySetInnerHTML={{ __html: responseData?.isi ?? '' }}
             />
           </div>
         </>

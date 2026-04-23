@@ -5,6 +5,7 @@ import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import { useSearchParams } from 'react-router-dom'
 import { ColumnsStaff } from '@/pages/modules/LPPM/about/staff/hooks/columns.tsx'
 import { ButtonAddStaffLPPM } from '@/pages/modules/LPPM/about/staff/component/buttonAdd.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const ProfileStaffLPPM = () => {
   const [searchParams] = useSearchParams()
@@ -25,6 +26,15 @@ export const ProfileStaffLPPM = () => {
       <ButtonTitleGroup
         label={'Staff LPPM'}
         buttonGroup={[
+            {
+                type: 'custom',
+                element: (
+                  <ButtonGoToGuide
+                    titleGuide="Staff LPPM"
+                    valueGuide="LPPM_TENTANG_STAFF"
+                  />
+                ),
+              },
           {
             type: 'custom',
             element: <ButtonAddStaffLPPM />,

@@ -25,7 +25,7 @@ export const BackgroundWebsiteSettings = () => {
   return (
     <>
       <div className="flex justify-end mb-4">
-        <ButtonGoToGuide valueGuide="PRODI_PENGATURAN_BACKGROUND" />
+        <ButtonGoToGuide titleGuide='Gambar Background' valueGuide="PRODI_PENGATURAN_BACKGROUND" />
       </div>
       <Tabs
         value={context}

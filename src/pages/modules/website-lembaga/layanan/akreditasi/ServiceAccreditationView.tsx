@@ -5,6 +5,7 @@ import useGetServiceAccreditation from './controller/useGetServiceAccreditation'
 import SelectFilter from '@/components/common/filter/SelectFilter'
 import useGetSatuanOrganisasi from '@/pages/modules/settings/controller/useGetSatuanOrganisasi'
 import Cookies from 'js-cookie'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const ServiceAccreditationView = () => {
   const { columns } = ServiceAccreditationViewModel()
@@ -28,7 +29,15 @@ const ServiceAccreditationView = () => {
   ]
   return (
     <div className="flex flex-col gap-4">
-      <ButtonTitleGroup buttonGroup={[]} label="Akreditasi" />
+      <ButtonTitleGroup
+        buttonGroup={[
+          {
+            type: 'custom',
+            element: <ButtonGoToGuide titleGuide="Akreditasi" valueGuide="P2M_AKREDITAS" />,
+          },
+        ]}
+        label="Akreditasi"
+      />
       <SelectFilter
         selectClassName={'min-w-[8rem] max-w-[12rem]'}
         label="Pilih Universitas / Prodi"

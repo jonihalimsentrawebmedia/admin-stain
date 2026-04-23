@@ -24,7 +24,7 @@ export const GalleryPhotoProdiPage = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="PRODI_GALERI_FOTO" />,
+              element: <ButtonGoToGuide titleGuide='Galeri Foto' valueGuide="PRODI_GALERI_FOTO" />,
             },
             {
               type: 'custom',

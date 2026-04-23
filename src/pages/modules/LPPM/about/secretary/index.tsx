@@ -9,6 +9,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 import { type ProfileData, ProfileResolver } from '../leader/hooks/resolver'
 import { UseGetSecretary } from '@/pages/modules/LPPM/about/secretary/hooks'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const ProfileSecretaryPage = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -73,6 +74,15 @@ export const ProfileSecretaryPage = () => {
             <ButtonTitleGroup
               label={'Profil Sekretaris LPPM'}
               buttonGroup={[
+                 {
+                type: 'custom',
+                element: (
+                  <ButtonGoToGuide
+                    titleGuide="Profil Sekretaris LPPM"
+                    valueGuide="LPPM_TENTANG_PROFIL_SEKRETARIS"
+                  />
+                ),
+              },
                 {
                   type: 'edit',
                   label: 'Edit Konten',

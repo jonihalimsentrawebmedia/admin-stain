@@ -8,6 +8,7 @@ const PublicServiceView = () => {
       queryKeyGetData="lembaga-pelayanan-publik"
       queryKeyPostData="lembaga-pelayanan-publik"
       title="Pelayanan Publik"
+      valueGuide='P2M_LAYANAN_PUBLIK'
     />
   )
 }

@@ -5,6 +5,7 @@ import { UseGetCollectionCategory } from '@/pages/modules/website-unit/collectio
 import { ColumnsCategoryCollection } from '@/pages/modules/website-unit/collection/listCollection/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ButtonAddCollectionCategory } from '@/pages/modules/website-unit/collection/listCollection/component/buttonAdd.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const ListCollectionCategory = () => {
   const { id } = useParams()
@@ -19,6 +20,15 @@ export const ListCollectionCategory = () => {
           label={`Daftar Koleksi-${collection?.nama_kategori}`}
           isBack
           buttonGroup={[
+             {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={`Daftar Koleksi-${collection?.nama_kategori}`}
+                  valueGuide="PERPUSTAKAAN_KATEGORI_KOLEKSI"
+                />
+              ),
+            },
             { type: 'custom', element: <ButtonAddCollectionCategory rootData={collection} /> },
           ]}
         />
