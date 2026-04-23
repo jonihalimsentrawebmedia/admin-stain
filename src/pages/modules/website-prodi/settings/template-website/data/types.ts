@@ -3,6 +3,7 @@ export interface IThemeProdi {
   active: boolean
   image: string
   tanggal_aktif: string | null
+  is_tersedia: boolean
   nama_user_updated: string | null
   default: string
 }
