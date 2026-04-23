@@ -14,6 +14,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button.tsx'
 import { UseGetContactAndMoreNote } from '@/pages/modules/Pulsikom/training/list-training/hooks'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 interface IProps {
   prev_value: string
@@ -85,7 +86,14 @@ export const FormContactAndMoreNoted = (props: IProps) => {
     <>
       <Form {...form}>
         <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
-          <p className="text-xl font-semibold text-primary">6. Kontak & Catatan Tambahan </p>
+          <div className="flex gap-4 justify-between items-center">
+                  <p className="text-xl font-semibold text-primary">6. Kontak & Catatan Tambahan </p>
+            <ButtonGoToGuide
+              titleGuide={`6. Kontak & Catatan Tambahan`}
+              valueGuide="PUSILKOM_TRAINING_DAFTAR_TRAINING_FORM_KONTAK_CATATAN_TAMBAHAN"
+            />
+          </div>
+
           <CheckboxInputBasic
             name={'is_kontak_unit'}
             form={form}

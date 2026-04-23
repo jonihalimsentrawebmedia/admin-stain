@@ -20,6 +20,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { useQueryClient } from '@tanstack/react-query'
 import { useSearchParams } from 'react-router-dom'
 import { format } from 'date-fns'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 interface IProps {
   next_value: string
@@ -98,7 +99,13 @@ const FormInformation = (props: IProps) => {
     <>
       <Form {...form}>
         <form className={'flex flex-col gap-4 w-full'} onSubmit={form.handleSubmit(HandleSave)}>
-          <p className="text-xl font-semibold">1. Informasi Training</p>
+          <div className="flex gap-4 justify-between items-center">
+            <p className="text-xl font-semibold">1. Informasi Training</p>
+            <ButtonGoToGuide
+              titleGuide={`1. Informasi Training`}
+              valueGuide="PUSILKOM_TRAINING_DAFTAR_TRAINING_FORM_INFORMASI"
+            />
+          </div>
           <UploadPhotoImage
             form={form}
             name={'url_gambar'}

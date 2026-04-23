@@ -5,6 +5,7 @@ import { UseGetOfficially } from '@/pages/modules/Pulsikom/about/chief-officer/o
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ButtonAddOfficially } from '@/pages/modules/Pulsikom/about/chief-officer/officialy/component/buttonadd.tsx'
 import { ColumnsOfficially } from '@/pages/modules/Pulsikom/about/chief-officer/officialy/data/columns.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const OfficiallyData = () => {
   const { id } = useParams()
@@ -21,6 +22,15 @@ export const OfficiallyData = () => {
           isBack
           label={`Lihat Pejabat - ${detail?.nama_kelompok}`}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={`Lihat Pejabat - ${detail?.nama_kelompok}`}
+                  valueGuide="PUSILKOM_TENTANG_PIMPINAN_PEJABAT"
+                />
+              ),
+            },
             {
               type: 'custom',
               element: <ButtonAddOfficially />,

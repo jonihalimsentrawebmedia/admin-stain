@@ -9,6 +9,7 @@ import { UseGetCarrierWebsite } from './hooks/index'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
+import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
 
 export const WebsiteCarrierPage = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -58,6 +59,15 @@ export const WebsiteCarrierPage = () => {
                   label={'Webiste Karir'}
                   buttonGroup={[
                     {
+                      type: 'custom',
+                      element: (
+                        <ButtonGoToGuide
+                          titleGuide={'Webiste Karir'}
+                          valueGuide="PUSILKOM_WEBSITE_KARIR"
+                        />
+                      ),
+                    },
+                    {
                       type: 'cancel',
                       label: 'Batal',
                       onClick: () => setIsEdit(!isEdit),
@@ -88,8 +98,19 @@ export const WebsiteCarrierPage = () => {
         ) : (
           <>
             <ButtonTitleGroup
-              label={'Tracer Study'}
-              buttonGroup={[{ type: 'edit', label: 'Edit URL', onClick: () => setIsEdit(!isEdit) }]}
+              label={'Webiste Karir'}
+              buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Webiste Karir'}
+                      valueGuide="PUSILKOM_WEBSITE_KARIR"
+                    />
+                  ),
+                },
+                { type: 'edit', label: 'Edit URL', onClick: () => setIsEdit(!isEdit) },
+              ]}
             />
 
             <div

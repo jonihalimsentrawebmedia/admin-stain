@@ -3,6 +3,7 @@ import { ColumnsChiefOfficer } from '@/pages/modules/Pulsikom/about/chief-office
 import { UseGetChiefOfficerGroup } from '@/pages/modules/Pulsikom/about/chief-officer/hooks'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ButtonAddChiefOfficer } from '@/pages/modules/Pulsikom/about/chief-officer/component/buttonAdd.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const ChiefOfficer = () => {
   const columns = ColumnsChiefOfficer()
@@ -14,6 +15,12 @@ export const ChiefOfficer = () => {
         <ButtonTitleGroup
           label={'Pimpinan'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide titleGuide={'Pimpinan'} valueGuide="PUSILKOM_TENTANG_PIMPINAN" />
+              ),
+            },
             {
               type: 'custom',
               element: <ButtonAddChiefOfficer />,

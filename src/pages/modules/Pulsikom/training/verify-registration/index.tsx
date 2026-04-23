@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { clsx } from 'clsx'
 import { TrainingList } from './component/trainingList'
 import { ProgramList } from '@/pages/modules/Pulsikom/training/verify-registration/component/programList.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const VerifyRegistration = () => {
   const [tabsValue, setTabsValue] = useState('training')
@@ -24,7 +25,20 @@ export const VerifyRegistration = () => {
   return (
     <>
       <div className={'space-y-5'}>
-        <ButtonTitleGroup label={'Verifikasi Pendaftaran'} buttonGroup={[]} />
+        <ButtonTitleGroup
+          label={'Verifikasi Pendaftaran'}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Verifikasi Pendaftaran'}
+                  valueGuide="PUSILKOM_TRAINING_VERIFIKASI_PENDAFTARAN"
+                />
+              ),
+            },
+          ]}
+        />
 
         <Tabs className={'bg-white p-0'} value={tabsValue} onValueChange={(e) => setTabsValue(e)}>
           <TabsList

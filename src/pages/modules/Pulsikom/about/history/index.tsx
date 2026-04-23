@@ -10,6 +10,7 @@ import { toast } from 'react-toastify'
 import { UseGetHistoryAbout } from '@/pages/modules/Pulsikom/about/history/hooks'
 import RenderHTMLContent from '@/components/common/richtext/RenderHTMLContent.tsx'
 import { useQueryClient } from '@tanstack/react-query'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const HistoryAboutPulsikom = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -57,6 +58,15 @@ export const HistoryAboutPulsikom = () => {
                 label={'Edit Sejarah'}
                 buttonGroup={[
                   {
+                      type: 'custom',
+                      element: (
+                        <ButtonGoToGuide
+                          titleGuide={'Sejarah'}
+                          valueGuide="PUSILKOM_TENTANG_SEJARAH"
+                        />
+                      ),
+                    },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -79,6 +89,15 @@ export const HistoryAboutPulsikom = () => {
             <ButtonTitleGroup
               label={'Edit Sejarah'}
               buttonGroup={[
+                 {
+                      type: 'custom',
+                      element: (
+                        <ButtonGoToGuide
+                          titleGuide={'Sejarah'}
+                          valueGuide="PUSILKOM_TENTANG_SEJARAH"
+                        />
+                      ),
+                    },
                 {
                   type: 'edit',
                   label: 'Edit Sejarah',
