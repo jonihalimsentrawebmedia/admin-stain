@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsAuditDocument } from '@/pages/modules/SPI/quality-assurance/audit/Document/data/columns.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const DocumentAuditPage = () => {
   const navigate = useNavigate()
@@ -16,6 +17,15 @@ export const DocumentAuditPage = () => {
           isBack
           label={'Dokumen Tinjauan Manajemen'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Dokumen Tinjauan Manajemen'}
+                  valueGuide="SPI_JAMINAN_MUTU_TINJUAUAN_MANAJEMEN_DOKUMEN"
+                />
+              ),
+            },
             {
               type: 'add',
               label: 'Tambah Data',

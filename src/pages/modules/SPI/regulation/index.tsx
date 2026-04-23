@@ -3,6 +3,7 @@ import { UseGetRegulation } from '@/pages/modules/SPI/regulation/hooks'
 import { ButtonAddRegulation } from '@/pages/modules/SPI/regulation/component/buttonAdd.tsx'
 import { ColumnsRegulation } from '@/pages/modules/SPI/regulation/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
 
 export const RegulationPage = () => {
   const { regulation, meta, loading } = UseGetRegulation()
@@ -13,6 +14,15 @@ export const RegulationPage = () => {
         <ButtonTitleGroup
           label={'Peraturan'}
           buttonGroup={[
+             {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Peraturan'}
+                  valueGuide="SPI_PERATURAN"
+                />
+              ),
+            },
             {
               type: 'custom',
               element: <ButtonAddRegulation />,

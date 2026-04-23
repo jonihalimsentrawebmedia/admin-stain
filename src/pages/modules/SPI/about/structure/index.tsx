@@ -8,6 +8,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { UseGetStructureOrganization } from './hooks/index'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const ProfileStructurePage = () => {
   const { structure } = UseGetStructureOrganization()
@@ -51,6 +52,15 @@ export const ProfileStructurePage = () => {
               <ButtonTitleGroup
                 label={'Struktur Organisasi'}
                 buttonGroup={[
+                   {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Struktur Organisasi'}
+                      valueGuide="SPI_TENTANG_STRUKTUR_ORGANISASI"
+                    />
+                  ),
+                },
                   {
                     type: 'cancel',
                     label: 'Batal',
@@ -74,6 +84,15 @@ export const ProfileStructurePage = () => {
             <ButtonTitleGroup
               label={'Update Data Struktur Organisasi'}
               buttonGroup={[
+                  {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Struktur Organisasi'}
+                      valueGuide="SPI_TENTANG_STRUKTUR_ORGANISASI"
+                    />
+                  ),
+                },
                 {
                   type: 'edit',
                   label: 'Edit Konten',

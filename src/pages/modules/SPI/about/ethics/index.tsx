@@ -8,6 +8,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { UseGetEthicsCode } from './hooks/index'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const ProfileCodeEthicsPage = () => {
   const { codeEthics } = UseGetEthicsCode()
@@ -52,6 +53,15 @@ export const ProfileCodeEthicsPage = () => {
                 label={'Kode Etik'}
                 buttonGroup={[
                   {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Kode Etik'}
+                      valueGuide="SPI_TENTANG_KODE_ETIK"
+                    />
+                  ),
+                },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -74,6 +84,15 @@ export const ProfileCodeEthicsPage = () => {
             <ButtonTitleGroup
               label={'Update Data Kode Etik'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Kode Etik'}
+                      valueGuide="SPI_TENTANG_KODE_ETIK"
+                    />
+                  ),
+                },
                 {
                   type: 'edit',
                   label: 'Edit Konten',

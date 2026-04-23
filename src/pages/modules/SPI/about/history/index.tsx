@@ -8,6 +8,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { UseGetHistory } from './hooks/index'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const ProfileHistoryPage = () => {
   const { history } = UseGetHistory()
@@ -51,6 +52,15 @@ export const ProfileHistoryPage = () => {
               <ButtonTitleGroup
                 label={'Sejarah'}
                 buttonGroup={[
+                   {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Sejarah'}
+                      valueGuide="SPI_TENTANG_SEJARAH"
+                    />
+                  ),
+                },
                   {
                     type: 'cancel',
                     label: 'Batal',
@@ -74,6 +84,15 @@ export const ProfileHistoryPage = () => {
             <ButtonTitleGroup
               label={'Update Data Sejarah'}
               buttonGroup={[
+                 {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Sejarah'}
+                      valueGuide="SPI_TENTANG_SEJARAH"
+                    />
+                  ),
+                },
                 {
                   type: 'edit',
                   label: 'Edit Konten',

@@ -8,6 +8,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { UseGetVisionMissionSPI } from './hooks/index'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const VisionMissionSPIPage = () => {
   const { visionMission } = UseGetVisionMissionSPI()
@@ -53,6 +54,15 @@ export const VisionMissionSPIPage = () => {
                 label={'Visi & Misi'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={'Visi & Misi'}
+                        valueGuide="SPI_TENTANG_VISI_MISI"
+                      />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -76,6 +86,15 @@ export const VisionMissionSPIPage = () => {
             <ButtonTitleGroup
               label={'Profil Pusat Karir'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Visi & Misi'}
+                      valueGuide="SPI_TENTANG_VISI_MISI"
+                    />
+                  ),
+                },
                 {
                   type: 'edit',
                   label: 'Edit Konten',
