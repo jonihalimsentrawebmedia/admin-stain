@@ -4,6 +4,7 @@ import { UseGetFooterService } from '@/pages/modules/pusat-karir/service/Footer/
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsService } from '@/pages/modules/pusat-karir/service/Footer/data/columns.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const FooterServicePage = () => {
   const { service, meta, loading } = UseGetFooterService()
@@ -15,6 +16,15 @@ export const FooterServicePage = () => {
         <ButtonTitleGroup
           label={'Posisi Footer'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Posisi Footer'}
+                  valueGuide="PUSAT_KARIR_POSISI_FOOTER"
+                />
+              ),
+            },
             {
               type: 'custom',
               element: <ButtonAddFooterService />,

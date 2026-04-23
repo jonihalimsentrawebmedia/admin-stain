@@ -9,6 +9,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { UseGetUrlPortalCV } from '@/pages/modules/pusat-karir/service/portal-cv/hooks'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const PortalCVATS = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -57,6 +58,15 @@ export const PortalCVATS = () => {
                   label={'Portal CV ATS'}
                   buttonGroup={[
                     {
+                      type: 'custom',
+                      element: (
+                        <ButtonGoToGuide
+                          titleGuide={'Portal CV ATS'}
+                          valueGuide="PUSAT_KARIR_LAYANAN_PORTAL_CV_ATS"
+                        />
+                      ),
+                    },
+                    {
                       type: 'cancel',
                       label: 'Batal',
                       onClick: () => setIsEdit(!isEdit),
@@ -88,7 +98,18 @@ export const PortalCVATS = () => {
           <>
             <ButtonTitleGroup
               label={'Portal CV ATS'}
-              buttonGroup={[{ type: 'edit', label: 'Edit URL', onClick: () => setIsEdit(!isEdit) }]}
+              buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Portal CV ATS'}
+                      valueGuide="PUSAT_KARIR_LAYANAN_PORTAL_CV_ATS"
+                    />
+                  ),
+                },
+                { type: 'edit', label: 'Edit URL', onClick: () => setIsEdit(!isEdit) },
+              ]}
             />
 
             <div

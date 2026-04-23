@@ -67,6 +67,7 @@ import { ResultStatistic } from '@/pages/modules/pusat-karir/survey/statistic'
 import { UserProfilePage } from '@/pages/modules/website-utama/user-profile'
 import { ChangePassword } from '@/pages/modules/website-utama/change-password'
 import { ThemaChangeColorCarrierCenter } from '@/pages/modules/pusat-karir/settings/template-web/color'
+import GuideListView from '@/pages/modules/website-utama/panduan/GuideListView'
 
 export const CarrierCenterRoute = [
   {
@@ -85,6 +86,10 @@ export const CarrierCenterRoute = [
         element: <ChangePassword />,
       },
     ],
+  },
+   {
+    path: 'panduan',
+    element: <GuideListView />,
   },
   {
     path: 'data-unit',

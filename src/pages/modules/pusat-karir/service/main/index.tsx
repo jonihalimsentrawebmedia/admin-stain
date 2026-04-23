@@ -5,13 +5,27 @@ import { ButtonEditService } from '@/pages/modules/pusat-karir/service/main/comp
 import { ButtonDeleteService } from '@/pages/modules/pusat-karir/service/main/component/buttonDelete.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { MdInfo } from 'react-icons/md'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const MainService = () => {
   const { mainService } = UseGetMainService()
   return (
     <>
       <div className={'space-y-5'}>
-        <ButtonTitleGroup label={'Layanan Utama'} buttonGroup={[]} />
+        <ButtonTitleGroup
+          label={'Layanan Utama'}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Layanan Utama'}
+                  valueGuide="PUSAT_KARIR_LAYANAN_UTAMA"
+                />
+              ),
+            },
+          ]}
+        />
         <div
           className={
             'bg-blue-50 border-blue-500 p-2 text-sm text-blue-500 rounded-full flex items-center gap-2 w-fit border'

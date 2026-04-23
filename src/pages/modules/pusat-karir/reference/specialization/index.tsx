@@ -4,6 +4,7 @@ import { UseGetSpecialization } from '@/pages/modules/pusat-karir/reference/spec
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsSpecialization } from '@/pages/modules/pusat-karir/reference/specialization/data/columns.tsx'
 import { useSearchParams } from 'react-router-dom'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const SpecializationPage = () => {
   const [searchParams] = useSearchParams()
@@ -24,6 +25,15 @@ export const SpecializationPage = () => {
         <ButtonTitleGroup
           label={'Spesialisasi'}
           buttonGroup={[
+             {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Spesialisasi'}
+                  valueGuide="PUSAT_KARIR_REFERENSI_SPESIALISASI"
+                />
+              ),
+            },
             {
               type: 'custom',
               element: <ButtonAddSpecialization />,

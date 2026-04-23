@@ -8,6 +8,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { UseGetVisionMissionCarrier } from './hooks/index'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const VisionMissionCarrierPage = () => {
   const { visionMission } = UseGetVisionMissionCarrier()
@@ -53,6 +54,15 @@ export const VisionMissionCarrierPage = () => {
                 label={'Visi & Misi'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={'Visi & Misi'}
+                        valueGuide="PUSAT_KARIR_PROFIL_VISI_MISI"
+                      />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -76,6 +86,15 @@ export const VisionMissionCarrierPage = () => {
             <ButtonTitleGroup
               label={'Profil Pusat Karir'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Visi & Misi'}
+                      valueGuide="PUSAT_KARIR_PROFIL_VISI_MISI"
+                    />
+                  ),
+                },
                 {
                   type: 'edit',
                   label: 'Edit Konten',

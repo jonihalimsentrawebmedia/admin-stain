@@ -5,6 +5,7 @@ import { clsx } from 'clsx'
 import { BottonSelectTypeUser } from '@/pages/modules/pusat-karir/management-user/list-user/component/ButtonAdd.tsx'
 import { JobsSeekersTableList } from '@/pages/modules/pusat-karir/management-user/list-user/jobs-seekers'
 import { PartnershipListData } from '@/pages/modules/pusat-karir/management-user/list-user/Partnership'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const ManagementListUserPage = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -35,6 +36,19 @@ export const ManagementListUserPage = () => {
         <ButtonTitleGroup
           label={'Daftar User'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={type == 'PENCARI_KERJA' ? 'Pencari Kerja' : 'Mitra Kerja'}
+                  valueGuide={
+                    type == 'PENCARI_KERJA'
+                      ? 'PUSAT_KARIR_USER_DAFTAR_PENCARI_KERJA'
+                      : 'PUSAT_KARIR_USER_DAFTAR_MITRA_KERJA'
+                  }
+                />
+              ),
+            },
             {
               type: 'custom',
               element: <BottonSelectTypeUser />,
