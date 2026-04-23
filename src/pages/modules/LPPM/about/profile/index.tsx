@@ -8,6 +8,7 @@ import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const AboutProfile = () => {
   const { profile } = UseGetAboutProfile()
@@ -52,6 +53,12 @@ export const AboutProfile = () => {
                 label={'Profil LPPM'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide titleGuide="Profil LPPM" valueGuide="LPPM_TENTANG_PROFIL" />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -74,6 +81,12 @@ export const AboutProfile = () => {
             <ButtonTitleGroup
               label={'Profil LPPM'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide titleGuide="Profil LPPM" valueGuide="LPPM_TENTANG_PROFIL" />
+                  ),
+                },
                 {
                   type: 'edit',
                   label: 'Edit Konten',

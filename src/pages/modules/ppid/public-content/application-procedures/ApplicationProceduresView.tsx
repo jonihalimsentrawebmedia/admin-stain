@@ -3,6 +3,7 @@ import ApplicationProceduresViewModel from './ApplicationProceduresViewModel'
 import ButtonAdd from './components/ButtonAdd'
 import TableCustom from '@/components/common/table/TableCustom'
 import useGetApplicationProcedures from './controller/useApplicationProcedures'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const ApplicationProceduresView = () => {
   const { columns } = ApplicationProceduresViewModel()
@@ -11,6 +12,15 @@ const ApplicationProceduresView = () => {
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
         buttonGroup={[
+          {
+            type: 'custom',
+            element: (
+              <ButtonGoToGuide
+                titleGuide={'Konten Publik - Tata Cara Permohonan'}
+                valueGuide="PPID_KONTEN_PUBLIK_TATA_CARA_PERMOHONAN"
+              />
+            ),
+          },
           {
             label: '',
             onClick: () => {},

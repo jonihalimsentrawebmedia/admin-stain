@@ -9,6 +9,7 @@ const PerformanceInstitutaionView = () => {
       queryKeyGetData="lembaga-prestasi"
       queryKeyPostData="lembaga-prestasi"
       title="Prestasi"
+      valueGuide="P2M_TENTANG_PRESTASI"
     />
   )
 }

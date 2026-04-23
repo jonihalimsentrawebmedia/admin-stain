@@ -8,6 +8,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { UseGetBookPublisher } from './hooks/index'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const HKIDescriptionPage = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -52,6 +53,15 @@ export const HKIDescriptionPage = () => {
                 label={'Deskripsi KI'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={'Deskripsi KI'}
+                        valueGuide="LPPM_PUBLIKASI_HKI_DESKRIPSI"
+                      />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -74,6 +84,15 @@ export const HKIDescriptionPage = () => {
             <ButtonTitleGroup
               label={'Deskripsi KI'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Deskripsi KI'}
+                      valueGuide="LPPM_PUBLIKASI_HKI_DESKRIPSI"
+                    />
+                  ),
+                },
                 {
                   type: 'edit',
                   label: 'Edit Konten',

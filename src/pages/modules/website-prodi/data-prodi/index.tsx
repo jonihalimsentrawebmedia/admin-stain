@@ -24,7 +24,7 @@ export const DataProdiProfile = () => {
                 ? [
                     {
                       type: 'custom',
-                      element: <ButtonGoToGuide valueGuide="PRODI_PROFILE_SATUAN_ORGANISASI" />,
+                      element: <ButtonGoToGuide titleGuide='Data Utama Universitas' valueGuide="PRODI_PROFILE_SATUAN_ORGANISASI" />,
                     },
                     {
                       type: 'cancel',
@@ -34,7 +34,7 @@ export const DataProdiProfile = () => {
                 : [
                     {
                       type: 'custom',
-                      element: <ButtonGoToGuide valueGuide="PRODI_PROFILE_SATUAN_ORGANISASI" />,
+                      element: <ButtonGoToGuide titleGuide='Data Utama Universitas' valueGuide="PRODI_PROFILE_SATUAN_ORGANISASI" />,
                     },
                     {
                       label: 'Ajukan Edit Data',

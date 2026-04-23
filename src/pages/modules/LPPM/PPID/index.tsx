@@ -1,21 +1,22 @@
-import {Form} from '@/components/ui/form.tsx'
+import { Form } from '@/components/ui/form.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import {RichText} from '@/components/common/richtext'
+import { RichText } from '@/components/common/richtext'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
-import {useEffect, useState} from 'react'
-import {useForm} from 'react-hook-form'
-import {UseGetInformationPPID} from './hooks/index.tsx'
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { UseGetInformationPPID } from './hooks/index.tsx'
 import AxiosClient from '@/provider/axios.tsx'
-import {toast} from 'react-toastify'
-import {useQueryClient} from '@tanstack/react-query'
-import {FaListUl} from 'react-icons/fa'
-import {Link} from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { useQueryClient } from '@tanstack/react-query'
+import { FaListUl } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
+import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const PPIDInformationPage = () => {
   const [isEdit, setIsEdit] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const {responseData} = UseGetInformationPPID()
+  const { responseData } = UseGetInformationPPID()
 
   useEffect(() => {
     if (responseData) {
@@ -56,6 +57,10 @@ export const PPIDInformationPage = () => {
                 label={'PPID'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: <ButtonGoToGuide titleGuide={'PPID'} valueGuide="LPPM_PPID" />,
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -63,13 +68,12 @@ export const PPIDInformationPage = () => {
                   {
                     type: 'save',
                     label: 'Simpan',
-                    onClick: () => {
-                    },
+                    onClick: () => {},
                   },
                 ]}
               />
-              <RichText form={form} name={'isi'} isRow={false} showLabel={false} label={''}/>
-              <ButtonForm loading={loading} onCancel={() => setIsEdit(!isEdit)}/>
+              <RichText form={form} name={'isi'} isRow={false} showLabel={false} label={''} />
+              <ButtonForm loading={loading} onCancel={() => setIsEdit(!isEdit)} />
             </form>
           </Form>
         </>
@@ -81,6 +85,10 @@ export const PPIDInformationPage = () => {
               buttonGroup={[
                 {
                   type: 'custom',
+                  element: <ButtonGoToGuide titleGuide={'PPID'} valueGuide="LPPM_PPID" />,
+                },
+                {
+                  type: 'custom',
                   element: (
                     <Link
                       to={'information'}
@@ -88,7 +96,7 @@ export const PPIDInformationPage = () => {
                         'flex items-center gap-1.5 border border-primary text-primary rounded p-1.5 px-4 bg-white text-sm'
                       }
                     >
-                      <FaListUl className={'size-4'}/>
+                      <FaListUl className={'size-4'} />
                       Daftar Informasi
                     </Link>
                   ),
@@ -102,7 +110,7 @@ export const PPIDInformationPage = () => {
             />
             <div
               className={'tiptap ProseMirror simple-editor mt-5'}
-              dangerouslySetInnerHTML={{__html: responseData?.isi ?? ''}}
+              dangerouslySetInnerHTML={{ __html: responseData?.isi ?? '' }}
             />
           </div>
         </>

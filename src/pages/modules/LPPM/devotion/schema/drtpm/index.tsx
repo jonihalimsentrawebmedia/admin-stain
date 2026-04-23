@@ -4,6 +4,7 @@ import { UseGetListDRTPM } from './hooks/index'
 import { ColumnsDataDRTPM } from './data/columns'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const SchemaDataDRTPM = () => {
   const navigate = useNavigate()
@@ -27,6 +28,15 @@ export const SchemaDataDRTPM = () => {
         <ButtonTitleGroup
           label={'Pendanan DRTPM'}
           buttonGroup={[
+             {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide="Pendanan DRTPM"
+                  valueGuide="LPPM_PENGABIDAN_SKEMA_DRTPM"
+                />
+              ),
+            },
             {
               type: 'add',
               label: 'Tambah Skema',

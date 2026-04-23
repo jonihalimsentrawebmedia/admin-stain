@@ -3,6 +3,7 @@ import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import { InputText } from '@/components/common/form/InputText'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import AxiosClient from '@/provider/axios'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useQueryClient } from '@tanstack/react-query'
@@ -21,9 +22,10 @@ interface Props {
   title: string
   linkPost: string
   keyLinkPost: string
+  valueGuide?: string
 }
 
-const ButtonAddInformationPublic = ({ title, keyLinkPost, linkPost }: Props) => {
+const ButtonAddInformationPublic = ({ title, keyLinkPost, linkPost, valueGuide }: Props) => {
   const [open, setOpen] = useState(false)
   const form = useForm<InformationPublicGlobalType>({
     resolver: zodResolver(InformationPublicGlobalResolver),
@@ -58,16 +60,20 @@ const ButtonAddInformationPublic = ({ title, keyLinkPost, linkPost }: Props) => 
   return (
     <div className="flex items-center justify-between">
       <div className="font-medium text-xl text-primary">Daftar Informasi</div>
-      <Button
-        onClick={() => {
-          setOpen(true)
-        }}
-        variant={'outline'}
-        className={'bg-white text-primary border-primary hover:text-primary'}
-      >
-        <HiPlus />
-        Tambah data
-      </Button>
+      <div className="flex gap-4 items-center justify-between">
+        <ButtonGoToGuide titleGuide={title} valueGuide={valueGuide??""} />
+
+        <Button
+          onClick={() => {
+            setOpen(true)
+          }}
+          variant={'outline'}
+          className={'bg-white text-primary border-primary hover:text-primary'}
+        >
+          <HiPlus />
+          Tambah data
+        </Button>
+      </div>
 
       <DialogCustom
         className="max-w-2xl! w-[90wdv] md:w-full! "

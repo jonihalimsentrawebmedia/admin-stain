@@ -3,6 +3,7 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { UseGetProfileVisionMission } from '@/pages/modules/LPPM/about/vision-mission/hooks'
 import { FormVisionMission } from '@/pages/modules/LPPM/about/vision-mission/component/form.tsx'
 import RenderHTMLContent from '@/components/common/richtext/RenderHTMLContent.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const VisionMissionAbout = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -20,6 +21,12 @@ export const VisionMissionAbout = () => {
             <ButtonTitleGroup
               label={'Visi & Misi'}
               buttonGroup={[
+                 {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide titleGuide="Visi & Misi" valueGuide="LPPM_TENTANG_VISI_MISI" />
+                  ),
+                },
                 {
                   type: 'edit',
                   label: 'Edit Konten',

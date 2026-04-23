@@ -4,6 +4,7 @@ import TableCustom from '@/components/common/table/TableCustom.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import {UseGetUserManagementContext} from '@/pages/modules/LPPM/publication-hki/book/hooks'
 import {ColumnsUserManagement} from '@/pages/modules/LPPM/publication-hki/book/book-center/manangement/data/columns.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const UserManagementPPJS = () => {
   const navigate = useNavigate()
@@ -31,6 +32,15 @@ export const UserManagementPPJS = () => {
           isBack
           label={'Pengelola - PPJS'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Pengelola - PPJS'}
+                  valueGuide="LPPM_PUBLIKASI_JURNAL_PPJS_ANGGOTA"
+                />
+              ),
+            },
             {
               type: 'add',
               label: 'Tambah Pengelola',

@@ -8,6 +8,7 @@ const StructureOrganitationInstitutionView = () => {
       queryKeyGetData="lembaga-struktur-organisasi"
       queryKeyPostData="lembaga-struktur-organisasi"
       title="Struktur Organisasi"
+      valueGuide='P2M_TENTANG_STRUKTUR_ORGANISASI'
     />
   )
 }

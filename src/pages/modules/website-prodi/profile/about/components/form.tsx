@@ -92,7 +92,7 @@ export const FormAboutProdi = () => {
           <div className="flex justify-between items-center">
             <p className="text-2xl font-medium">Tentang Prodi</p>
             <div className="flex gap-4 items-center">
-              <ButtonGoToGuide valueGuide="PRODI_PROFIL_TENTANG" />
+              <ButtonGoToGuide titleGuide='Tentang Prodi' valueGuide="PRODI_PROFIL_TENTANG" />
               {isEditContent ? (
                 <ButtonForm
                   loading={loading}

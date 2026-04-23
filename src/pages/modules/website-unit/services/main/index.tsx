@@ -4,13 +4,24 @@ import { UseGetMainListService } from '@/pages/modules/website-unit/services/mai
 import { AddMainService } from './component/AddMainService'
 import { ButtonEditMainService } from './component/buttonEdit'
 import { ButtonDeleteMainService } from '@/pages/modules/website-unit/services/main/component/buttonDelete.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const MainServiceList = () => {
   const { mainService } = UseGetMainListService()
   return (
     <>
       <div className={'flex flex-col gap-4'}>
-        <ButtonTitleGroup label={'Layanan Utama'} buttonGroup={[]} />
+        <ButtonTitleGroup
+          label={'Layanan Utama'}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide titleGuide="Daftar Layanan" valueGuide="PERPUSTAKAAN_LAYANAN_LAYANAN_UTAMA" />
+              ),
+            },
+          ]}
+        />
         <div className="bg-blue-100 border-blue-500 p-1.5 border rounded-full flex items-center gap-1.5 text-blue-500 w-fit px-3 text-sm">
           <MdInfo />
           Layanan utama adalah layanan yang ditampilkan di beranda website. Maksimal 4 Layanan

@@ -55,7 +55,7 @@ const ProfileVisionMissionPage = () => {
         <div className="flex justify-between items-center">
           <p className="text-2xl font-medium">Visi, Misi, Dan Tujuan</p>
           <div className="flex gap-4 items-center">
-            <ButtonGoToGuide valueGuide="PRODI_PROFIL_VISI_MISI" />
+            <ButtonGoToGuide titleGuide='Visi, Misi, Dan Tujuan' valueGuide="PRODI_PROFIL_VISI_MISI" />
 
             {isEdit ? (
               <ButtonForm

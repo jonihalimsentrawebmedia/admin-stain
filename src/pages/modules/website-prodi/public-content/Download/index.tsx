@@ -21,7 +21,7 @@ const DownloadFileProdiPage = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="PRODI_DOWNLOADS" />,
+              element: <ButtonGoToGuide titleGuide='Konten Publik - Download' valueGuide="PRODI_DOWNLOADS" />,
             },
             {
               type: 'custom',

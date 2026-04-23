@@ -56,7 +56,7 @@ export const AboutProfileUnit = () => {
                 buttonGroup={[
                   {
                     type: 'custom',
-                    element: <ButtonGoToGuide valueGuide="PERPUSTAKAAN_PROFIL_TENTANG" />,
+                    element: <ButtonGoToGuide titleGuide='Tentang Unit' valueGuide="PERPUSTAKAAN_PROFIL_TENTANG" />,
                   },
                   { type: 'cancel', label: 'Batal', onClick: () => setIsEdit(!isEdit) },
                   {
@@ -93,7 +93,7 @@ export const AboutProfileUnit = () => {
               buttonGroup={[
                 {
                   type: 'custom',
-                  element: <ButtonGoToGuide valueGuide="PERPUSTAKAAN_PROFIL_TENTANG" />,
+                  element: <ButtonGoToGuide titleGuide='Tentang Unit' valueGuide="PERPUSTAKAAN_PROFIL_TENTANG" />,
                 },
                 { label: 'Edit', type: 'edit', onClick: () => setIsEdit(!isEdit) },
               ]}

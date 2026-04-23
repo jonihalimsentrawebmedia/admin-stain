@@ -10,6 +10,7 @@ const SpmiAsesorView = () => {
       queryKeyGetData="lembaga-/asesor"
       queryKeyPostData="lembaga-/asesor"
       title="Asesor"
+      valueGuide="P2M_JAMINAN_SPMI_ASESOR"
     />
  )
 }

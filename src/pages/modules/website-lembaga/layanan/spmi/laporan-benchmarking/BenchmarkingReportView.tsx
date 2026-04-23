@@ -9,6 +9,7 @@ const BenchmarkingReportView = () => {
       queryKeyGetData="lembaga-/laporan-benchmarking"
       queryKeyPostData="lembaga-/laporan-benchmarking"
       title="Laporan Benchmarking"
+      valueGuide="P2M_JAMINAN_SPMI_LAPORAN_BENCHMARKING"
     />
   )
 }

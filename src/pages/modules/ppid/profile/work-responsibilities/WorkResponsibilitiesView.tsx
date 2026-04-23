@@ -3,6 +3,7 @@ import TableCustom from '@/components/common/table/TableCustom'
 import { useNavigate } from 'react-router-dom'
 import WorkResponsibilitiesViewModel from './WorkResponsibilitiesViewModel'
 import useGetWorkResponsibilities from '@/pages/modules/ppid/profile/work-responsibilities/controller/useGetWorkResponsibilities'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const WorkResponsibilitiesView = () => {
   const navigate = useNavigate()
@@ -12,6 +13,15 @@ const WorkResponsibilitiesView = () => {
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
         buttonGroup={[
+          {
+            type: 'custom',
+            element: (
+              <ButtonGoToGuide
+                titleGuide={'Tugas, Fungsi, & Tanggung Jawab'}
+                valueGuide="PPID_PROFIL_TUGAS_FUNGSI_DAN_TANGGUNG_JAWAB"
+              />
+            ),
+          },
           {
             type: 'add',
             label: 'Tambah',

@@ -51,6 +51,7 @@ import { ChangePassword } from '@/pages/modules/website-utama/change-password'
 import { UserProfilePage } from '@/pages/modules/website-utama/user-profile'
 import { SettingsBackground } from '@/pages/modules/ppid/settings/background'
 import { ThemaChangeColorPPID } from '@/pages/modules/ppid/settings/template/color'
+import GuideListView from '@/pages/modules/website-utama/panduan/GuideListView'
 
 export const routesPPID = [
   {
@@ -69,6 +70,10 @@ export const routesPPID = [
         element: <ChangePassword />,
       },
     ],
+  },
+  {
+    path: 'panduan',
+    element: <GuideListView />,
   },
   {
     path: 'unit',

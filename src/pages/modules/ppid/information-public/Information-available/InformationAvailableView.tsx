@@ -21,7 +21,7 @@ const InformationAvailableView = () => {
         keyLinkPost="information-available-ppip"
         linkPost="/unit-ppid/informasi-tersedia-kategori"
         title="Informasi Informasi Tersedia Setiap Saat"
-        
+        valueGuide="PPID_INFORMASI_PUBLIK_TERSEDIA"
       />
       <TableCustom
         addFilter={
@@ -42,7 +42,7 @@ const InformationAvailableView = () => {
         data={document}
         loading={loading}
         meta={meta}
-            thClassName='whitespace-pre-line!'
+        thClassName="whitespace-pre-line!"
       />
     </div>
   )

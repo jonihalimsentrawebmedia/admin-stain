@@ -5,6 +5,7 @@ import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { useSearchParams } from 'react-router-dom'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import { ColumnsResearchPlan } from '@/pages/modules/LPPM/research/plan/data/columns.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const PlanMainResearch = () => {
   const [searchParams] = useSearchParams()
@@ -26,6 +27,15 @@ export const PlanMainResearch = () => {
         <ButtonTitleGroup
           label={'Rencana Induk Penelitian'}
           buttonGroup={[
+            {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide="Rencana Induk Penelitian"
+                      valueGuide="LPPM_PENELITIAN_RENCANA_INDUK_PENELITIAN"
+                    />
+                  ),
+                },
             {
               type: 'custom',
               element: <ButtonAddPlanning />,

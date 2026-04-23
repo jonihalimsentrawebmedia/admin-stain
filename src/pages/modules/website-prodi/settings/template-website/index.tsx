@@ -17,7 +17,7 @@ export const TemplateWebsite = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="THEME" />,
+              element: <ButtonGoToGuide titleGuide='Template Website' valueGuide="THEME" />,
             },
           ]}
         />

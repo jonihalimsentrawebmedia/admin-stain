@@ -7,6 +7,7 @@ const ComplaintService = () => {
     queryKeyGetData="lembaga-keluhan"
     queryKeyPostData="lembaga-keluhan"
     title='Keluhan'
+    valueGuide='P2M_KELUHAN'
   />
 }
 

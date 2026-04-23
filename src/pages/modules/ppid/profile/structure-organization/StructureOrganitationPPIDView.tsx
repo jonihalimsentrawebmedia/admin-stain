@@ -11,6 +11,7 @@ import StructureOrganizationForm from './components/StructureOrganizationForm'
 import { StructureOrganizationResolver, type StructureOrganizationType } from './model/resolver'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Skeleton } from '@/components/ui/skeleton'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const StructureOrganitationPPIDView = () => {
   const form = useForm<StructureOrganizationType>({
@@ -74,6 +75,15 @@ const StructureOrganitationPPIDView = () => {
                   {
                     type: 'custom',
                     element: (
+                      <ButtonGoToGuide
+                        titleGuide={'Struktur Organisasi'}
+                        valueGuide="PPID_PROFIL_STRUKTUR_ORGANISASI"
+                      />
+                    ),
+                  },
+                  {
+                    type: 'custom',
+                    element: (
                       <ButtonForm
                         loading={loading}
                         onCancel={() => {
@@ -84,6 +94,15 @@ const StructureOrganitationPPIDView = () => {
                   },
                 ]
               : [
+                  {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={'Struktur Organisasi'}
+                        valueGuide="PPID_PROFIL_STRUKTUR_ORGANISASI"
+                      />
+                    ),
+                  },
                   {
                     type: 'edit',
                     label: 'Edit Konten',

@@ -19,7 +19,7 @@ export const ServicesList = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="PERPUSTAKAAN_LAYANAN" />,
+              element: <ButtonGoToGuide titleGuide='Daftar Layanan' valueGuide="PERPUSTAKAAN_LAYANAN" />,
             },
             {
               type: 'custom',

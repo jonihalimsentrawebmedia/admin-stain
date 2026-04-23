@@ -48,6 +48,7 @@ import HummanResourceInstitutaionView from '@/pages/modules/website-lembaga/prof
 import LembagaView from '@/pages/modules/website-lembaga/lembaga/LembagaView'
 import LembagaEditView from '@/pages/modules/website-lembaga/lembaga/edit/LembagaEditView'
 import { ThemaChangeColorInstitution } from '@/pages/modules/website-lembaga/pengaturan/template/color'
+import GuideListView from '@/pages/modules/website-utama/panduan/GuideListView'
 
 export const WebsiteInstitutionRouter = [
   {
@@ -66,6 +67,10 @@ export const WebsiteInstitutionRouter = [
         element: <ChangePassword />,
       },
     ],
+  },
+   {
+    path:"panduan",
+    element:<GuideListView/>
   },
   {
     path: 'jaminan-mutu',

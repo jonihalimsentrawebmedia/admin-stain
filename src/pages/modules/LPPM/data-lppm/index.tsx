@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { ButtonCancelApproval } from '@/pages/modules/LPPM/data-lppm/component/buttonCancel.tsx'
 import { MdInfo } from 'react-icons/md'
 import { useState } from 'react'
+import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
 
 export const DetailProfileLPPM = () => {
   const [realData, setRealData] = useState(false)
@@ -27,11 +28,29 @@ export const DetailProfileLPPM = () => {
               dataLPPM?.status_publish == 'DIAJUKAN_EDITOR'
                 ? [
                     {
+                      type: 'custom',
+                      element: (
+                        <ButtonGoToGuide
+                          titleGuide="Data Utama Universitas"
+                          valueGuide="LPPM_PROFIL_SATUAN_ORGANISASI"
+                        />
+                      ),
+                    },
+                    {
                       type: 'cancel',
                       element: <ButtonCancelApproval />,
                     },
                   ]
                 : [
+                    {
+                      type: 'custom',
+                      element: (
+                        <ButtonGoToGuide
+                          titleGuide="Data Utama Universitas"
+                          valueGuide="LPPM_PROFIL_SATUAN_ORGANISASI"
+                        />
+                      ),
+                    },
                     {
                       label: 'Ajukan Edit Data',
                       onClick: () => navigate('edit'),

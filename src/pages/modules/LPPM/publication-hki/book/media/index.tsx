@@ -8,6 +8,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { UseGetBookPublisher } from './hooks/index'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const BookMediaPage = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -52,6 +53,15 @@ export const BookMediaPage = () => {
                 label={'Penerbitan Media Massa'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={'Penerbitan Media Massa'}
+                        valueGuide="LPPM_PUBLIKASI_BUKU_PENERBITAN_MEDIA_MASA"
+                      />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -74,6 +84,15 @@ export const BookMediaPage = () => {
             <ButtonTitleGroup
               label={'Penerbitan Media Massa'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Penerbitan Media Massa'}
+                      valueGuide="LPPM_PUBLIKASI_BUKU_PENERBITAN_MEDIA_MASA"
+                    />
+                  ),
+                },
                 {
                   type: 'edit',
                   label: 'Edit Konten',

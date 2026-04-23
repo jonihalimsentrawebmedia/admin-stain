@@ -18,7 +18,7 @@ export const Collaboration = () => {
           buttonGroup={[
              {
               type: 'custom',
-              element: <ButtonGoToGuide valueGuide="PERPUSTAKAAN_PROFIL_KERJASAMA" />,
+              element: <ButtonGoToGuide titleGuide='Kerjasama Unit' valueGuide="PERPUSTAKAAN_PROFIL_KERJASAMA" />,
             },
             {
               type: 'add',

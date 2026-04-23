@@ -3,6 +3,7 @@ import { ButtonAddServiceHeaderFooter } from '@/pages/modules/website-unit/servi
 import { ColumnsHeaderFooterService } from '@/pages/modules/website-unit/services/header-footer/data/columns.tsx'
 import { UseGetHeaderFooterService } from '@/pages/modules/website-unit/services/header-footer/hooks'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const HeaderFooterServices = () => {
   const { serviceHeaderFooter, meta, loading } = UseGetHeaderFooterService()
@@ -13,6 +14,15 @@ export const HeaderFooterServices = () => {
         <ButtonTitleGroup
           label={'Layanan Header & Footer'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide="Layanan Header & Footer"
+                  valueGuide="PERPUSTAKAAN_LAYANAN_HEADER_FOOTER"
+                />
+              ),
+            },
             {
               type: 'custom',
               element: <ButtonAddServiceHeaderFooter />,

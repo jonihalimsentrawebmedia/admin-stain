@@ -16,7 +16,7 @@ export const NewsPublishedProfile = () => {
         <div className="flex gap-4 items-center justify-between">
           <p className="text-2xl text-primary font-semibold">Berita</p>
 
-          <ButtonGoToGuide valueGuide="PRODI_PROFIL_BERITA" />
+          <ButtonGoToGuide titleGuide='Berita' valueGuide="PRODI_PROFIL_BERITA" />
         </div>
         <TableCustom
           className={'border'}

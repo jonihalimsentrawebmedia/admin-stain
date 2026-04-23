@@ -6,6 +6,7 @@ import type { ProfileData } from '@/pages/modules/LPPM/about/leader/hooks/resolv
 import FormUploadPhotoImage from '@/pages/modules/LPPM/components/common/uploadPhoto.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import { RichText } from '@/components/common/richtext'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 interface FormProps {
   form: UseFormReturn<ProfileData>
@@ -26,6 +27,24 @@ export const FormProfileInformation = (props: FormProps) => {
           <ButtonTitleGroup
             label={label ?? ''}
             buttonGroup={[
+              {
+                type: 'custom',
+                element: (
+                  <ButtonGoToGuide
+                    titleGuide="Profil Sekretaris LPPM"
+                    valueGuide="LPPM_TENTANG_PROFIL_SEKRETARIS"
+                  />
+                ),
+              },
+              {
+                type: 'custom',
+                element: (
+                  <ButtonGoToGuide
+                    titleGuide="Profil Ketua LPPM"
+                    valueGuide="LPPM_TENTANG_PROFIL_KETUA"
+                  />
+                ),
+              },
               {
                 type: 'cancel',
                 label: 'Batal',

@@ -4,6 +4,7 @@ import { UseGetOtherFunding } from './hooks/index'
 import { ColumnsOtherFunding } from './data/columns'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const SchemaFundingOther = () => {
   const navigate = useNavigate()
@@ -27,6 +28,15 @@ export const SchemaFundingOther = () => {
         <ButtonTitleGroup
           label={'Pendanan Lainnya'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide="Pendanan Lainnya"
+                  valueGuide="LPPM_PENGABIDAN_SKEMA_LAINNYA"
+                />
+              ),
+            },
             {
               type: 'add',
               label: 'Tambah Skema',

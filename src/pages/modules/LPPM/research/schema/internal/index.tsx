@@ -10,6 +10,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { UseGetSchemaInternalResearch } from './hooks/index'
 import { FaListUl } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const SchemaInternalResearch = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -54,6 +55,15 @@ export const SchemaInternalResearch = () => {
                 label={'Penelitian Pendanaan Internal'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide="Penelitian Pendanaan Internal"
+                        valueGuide="LPPM_PENELITIAN_SKEMA_PPENDANAAN_INTERNAL"
+                      />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -76,6 +86,15 @@ export const SchemaInternalResearch = () => {
             <ButtonTitleGroup
               label={'Penelitian Pendanaan Internal'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide="Penelitian Pendanaan Internal"
+                      valueGuide="LPPM_PENELITIAN_SKEMA_PENDANAAN_INTERNAL"
+                    />
+                  ),
+                },
                 {
                   type: 'custom',
                   element: (

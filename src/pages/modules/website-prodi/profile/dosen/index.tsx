@@ -107,7 +107,7 @@ const LecturerProfilePage = () => {
       <div className="flex justify-between items-center">
         <p className="text-2xl font-medium">Dosen</p>
         <div className="flex gap-4 items-center">
-          <ButtonGoToGuide valueGuide="PRODI_PROFIL_DOSEN" />
+          <ButtonGoToGuide titleGuide='Dosen' valueGuide="PRODI_PROFIL_DOSEN" />
           <Button
             disabled={false}
             onClick={HandleFCM}

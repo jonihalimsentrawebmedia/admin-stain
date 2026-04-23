@@ -10,6 +10,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { useQueryClient } from '@tanstack/react-query'
 import { UseGetListJournal } from '@/pages/modules/LPPM/publication-hki/journal/list/hooks'
 import { Link } from 'react-router-dom'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const ListJournalPage = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -56,6 +57,15 @@ export const ListJournalPage = () => {
             <ButtonTitleGroup
               label={'Edit URL'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Daftar Jurnal'}
+                      valueGuide="LPPM_PUBLIKASI_JURNAL_DAFTAR"
+                    />
+                  ),
+                },
                 { type: 'cancel', label: 'Batal', onClick: () => setIsEdit(!isEdit) },
                 {
                   type: 'save',
@@ -82,6 +92,15 @@ export const ListJournalPage = () => {
           <ButtonTitleGroup
             label={'Daftar Jurnal'}
             buttonGroup={[
+              {
+                type: 'custom',
+                element: (
+                  <ButtonGoToGuide
+                    titleGuide={'Daftar Jurnal'}
+                    valueGuide="LPPM_PUBLIKASI_JURNAL_DAFTAR"
+                  />
+                ),
+              },
               {
                 type: 'edit',
                 label: 'Edit URL',

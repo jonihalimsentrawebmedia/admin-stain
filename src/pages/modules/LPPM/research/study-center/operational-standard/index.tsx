@@ -5,6 +5,7 @@ import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import { UseGetDocumentStandardOperational } from './hooks/index'
 import { ButtonAddStandardOperational } from './component/buttonAdd.tsx'
 import { ColumnsGuideBook } from './data/columns'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const StandardOperationalStudy = () => {
   const [searchParams] = useSearchParams()
@@ -27,6 +28,10 @@ export const StandardOperationalStudy = () => {
           isBack
           label={`Standar Operasional Pusat Studi`}
           buttonGroup={[
+             {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide="Standar Operasional Pusat Studi" valueGuide="LPPM_PUSAT_STUDI_STANDARD_OPERASIONAL" />,
+            },
             {
               type: 'custom',
               element: <ButtonAddStandardOperational />,

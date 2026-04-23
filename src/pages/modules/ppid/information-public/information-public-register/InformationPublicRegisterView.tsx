@@ -3,6 +3,7 @@ import { useGetInformationPublicRegister } from './controller'
 import InformationPublicRegisterViewModel from './InformationPublicRegisterViewModel'
 import TableCustom from '@/components/common/table/TableCustom'
 import SelectFilter from '@/components/common/filter/SelectFilter'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const InformationPublicRegisterView = () => {
   const { columns, goToAdd } = InformationPublicRegisterViewModel()
@@ -11,6 +12,15 @@ const InformationPublicRegisterView = () => {
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
         buttonGroup={[
+          {
+            type: 'custom',
+            element: (
+              <ButtonGoToGuide
+                titleGuide={'Daftar Informasi Publik'}
+                valueGuide="PPID_INFORMASI_PUBLIK_DAFTAR_INFORMASI"
+              />
+            ),
+          },
           {
             label: 'Tambah Data',
             onClick: () => {
@@ -41,7 +51,7 @@ const InformationPublicRegisterView = () => {
         loading={loading}
         meta={meta}
         isShowLimit={false}
-            thClassName='whitespace-pre-line!'
+        thClassName="whitespace-pre-line!"
       />
     </div>
   )

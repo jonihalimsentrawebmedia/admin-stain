@@ -3,13 +3,22 @@ import { useGetObjectionsPublic } from './hooks'
 import ObjectionInformationPublicViewModel from './ObjectionInformationPublicViewModel'
 import TableCustom from '@/components/common/table/TableCustom'
 import SelectFilter from '@/components/common/filter/SelectFilter'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const ObjectionInformationPublicView = () => {
   const { columns } = ObjectionInformationPublicViewModel()
   const { loading, objecionsPublic, meta } = useGetObjectionsPublic({})
   return (
     <div className="flex flex-col gap-4">
-      <ButtonTitleGroup buttonGroup={[]} label="Keberatan Atas Layanan Informasi Publik" />
+      <ButtonTitleGroup buttonGroup={[ {
+            type: 'custom',
+            element: (
+              <ButtonGoToGuide
+                titleGuide={'Keberatan Atas Layanan Informasi Publik'}
+                valueGuide="PPID_PERMOHONAN_MASUK_INFORMASI_PUBLIK"
+              />
+            ),
+          },]} label="Keberatan Atas Layanan Informasi Publik" />
 
       <TableCustom
         addFilter={

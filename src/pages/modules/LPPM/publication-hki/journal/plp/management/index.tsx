@@ -1,9 +1,10 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import {useNavigate, useSearchParams} from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
-import {UseGetUserManagementContext} from '@/pages/modules/LPPM/publication-hki/book/hooks'
-import {ColumnsUserManagement} from '@/pages/modules/LPPM/publication-hki/book/book-center/manangement/data/columns.tsx'
+import { UseGetUserManagementContext } from '@/pages/modules/LPPM/publication-hki/book/hooks'
+import { ColumnsUserManagement } from '@/pages/modules/LPPM/publication-hki/book/book-center/manangement/data/columns.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const UserManagementPLP = () => {
   const navigate = useNavigate()
@@ -13,7 +14,7 @@ export const UserManagementPLP = () => {
   const page = searchParams.get('page') ?? '1'
   const search = searchParams.get('search') ?? ''
 
-  const {userManagement, loading, meta} = UseGetUserManagementContext({
+  const { userManagement, loading, meta } = UseGetUserManagementContext({
     context: 'pusat-plp',
     page: page,
     limit: limit,
@@ -31,6 +32,15 @@ export const UserManagementPLP = () => {
           isBack
           label={'Pengelola - PLP'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Pengelola - PLP'}
+                  valueGuide="LPPM_PUBLIKASI_JURNAL_PLP_ANGGOTA"
+                />
+              ),
+            },
             {
               type: 'add',
               label: 'Tambah Pengelola',

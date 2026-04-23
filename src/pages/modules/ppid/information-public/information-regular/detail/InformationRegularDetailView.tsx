@@ -4,6 +4,7 @@ import InformationRegularDetailViewModel from './InformationRegularDetailViewMod
 import ButtonAddDocument from '../../components/button/ButtonAddDocument'
 import TableCustom from '@/components/common/table/TableCustom'
 import SelectFilter from '@/components/common/filter/SelectFilter'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const InformationRegularDetailView = () => {
   const { columns } = InformationRegularDetailViewModel()
@@ -12,7 +13,9 @@ const InformationRegularDetailView = () => {
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
         link="/modules/ppid/information-public/information-regular"
+
         buttonGroup={[
+         
           {
             label: '',
             onClick: () => {},
@@ -25,6 +28,7 @@ const InformationRegularDetailView = () => {
                 titleField={title}
                 idCategory={idCategory}
                 idName="id_kategori"
+                valueGuide='PPID_INFORMASI_PUBLIK_BERKALA_DOKUMEN'
               />
             ),
           },

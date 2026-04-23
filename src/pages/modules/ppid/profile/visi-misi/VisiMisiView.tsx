@@ -3,6 +3,7 @@ import VisiMisiViewModel from './VisiMisiViewModel'
 import TableCustom from '@/components/common/table/TableCustom'
 import { useNavigate } from 'react-router-dom'
 import useGetVisiMisiUnit from './controller/useGetVisiMisiUnit'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const VisiMisiPPIDView = () => {
   const navigate = useNavigate()
@@ -12,6 +13,12 @@ const VisiMisiPPIDView = () => {
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
         buttonGroup={[
+          {
+            type: 'custom',
+            element: (
+              <ButtonGoToGuide titleGuide={'Visi Misi'} valueGuide="PPID_PROFIL_VISI_MISI" />
+            ),
+          },
           {
             type: 'add',
             label: 'Tambah',
