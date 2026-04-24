@@ -9,7 +9,7 @@ const LembagaViewModel = () => {
     real_data: realData,
   })
 
-  const formCurrent = useForm()
+ 
 
   const navigate = useNavigate()
   const form = useForm()
@@ -130,7 +130,7 @@ const LembagaViewModel = () => {
     form,
     goToEdit,
     loading,
-    formCurrent,
+  
     realData,
     setRealData,
   }

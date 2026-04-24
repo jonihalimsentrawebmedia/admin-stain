@@ -3,7 +3,6 @@ import LembagaViewModel from './LembagaViewModel'
 import DetailField from '@/components/common/field/DetailField'
 import CardInput from '@/components/common/card/CardInput'
 import ButtonCancelDraft from './components/ButtonCancelDraft'
-import { IoInformationCircle } from 'react-icons/io5'
 import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
 import { MdInfo } from 'react-icons/md'
 
@@ -16,7 +15,6 @@ const LembagaView = () => {
     fieldUniversity,
     form,
     goToEdit,
-    formCurrent,
     realData,
     setRealData,
   } = LembagaViewModel()
