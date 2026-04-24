@@ -3,6 +3,7 @@ import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { UseGetLecturerFaculty } from './hooks/index.tsx'
 import LecturerColumnsFaculty from './data/columns.tsx'
 import { useSearchParams } from 'react-router-dom'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const LecturerProfileFaculty = () => {
   const [searchParams] = useSearchParams()
@@ -21,7 +22,20 @@ export const LecturerProfileFaculty = () => {
   return (
     <>
       <div className="space-y-5">
-        <ButtonTitleGroup buttonGroup={[]} label="Dosen" />
+        <ButtonTitleGroup
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Dosen'}
+                  valueGuide="FAKULTAS_PROFIL_DOSEN"
+                />
+              ),
+            },
+          ]}
+          label="Dosen"
+        />
 
         <TableCustom data={lecturer} columns={columns} loading={loading} meta={meta} />
       </div>

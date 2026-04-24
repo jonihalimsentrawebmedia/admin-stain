@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { ButtonCancelApproval } from './component/buttonCancel.tsx'
 import { MdInfo } from 'react-icons/md'
 import { useState } from 'react'
+import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const DetailProfileFaculty = () => {
   const [realData, setRealData] = useState(false)
@@ -27,11 +28,29 @@ export const DetailProfileFaculty = () => {
               carrierCenter?.status_publish == 'DIAJUKAN_EDITOR'
                 ? [
                     {
+                      type: 'custom',
+                      element: (
+                        <ButtonGoToGuide
+                          titleGuide={'Data Utama Fakultas'}
+                          valueGuide="FAKULTAS_PROFIL_SATUAN_ORGANISASI"
+                        />
+                      ),
+                    },
+                    {
                       type: 'cancel',
                       element: <ButtonCancelApproval />,
                     },
                   ]
                 : [
+                    {
+                      type: 'custom',
+                      element: (
+                        <ButtonGoToGuide
+                          titleGuide={'Data Utama Fakultas'}
+                          valueGuide="FAKULTAS_PROFIL_SATUAN_ORGANISASI"
+                        />
+                      ),
+                    },
                     {
                       label: 'Ajukan Edit Data',
                       onClick: () => navigate('edit'),

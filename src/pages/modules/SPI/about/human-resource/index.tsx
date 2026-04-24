@@ -3,6 +3,7 @@ import { ColumnsChiefOfficer } from './data/columns.tsx'
 import { UseGetChiefOfficerGroup } from './hooks/index'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ButtonAddChiefOfficer } from './component/buttonAdd.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const HumanResourcePage = () => {
   const columns = ColumnsChiefOfficer()
@@ -14,6 +15,15 @@ export const HumanResourcePage = () => {
         <ButtonTitleGroup
           label={'Pimpinan'}
           buttonGroup={[
+              {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Pimpinan'}
+                      valueGuide="SPI_TENTANG_SUMBER_DAYA_MANUSIA"
+                    />
+                  ),
+                },
             {
               type: 'custom',
               element: <ButtonAddChiefOfficer />,

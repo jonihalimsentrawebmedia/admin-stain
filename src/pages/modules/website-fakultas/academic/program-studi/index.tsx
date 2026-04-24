@@ -4,6 +4,7 @@ import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import UseGetSatuanOrganisasi from '@/pages/modules/settings/controller/useGetSatuanOrganisasi.tsx'
 import FacultyProdiColumns from '@/pages/modules/website-fakultas/academic/program-studi/data/columns.tsx'
 import { UseGetSessionFaculty } from '@/pages/modules/website-fakultas/component/select-session/get-seeion.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const ProgramStudyView = () => {
   const { session } = UseGetSessionFaculty()
@@ -19,7 +20,20 @@ const ProgramStudyView = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <ButtonTitleGroup buttonGroup={[]} label="Program Studi" />
+      <ButtonTitleGroup
+        buttonGroup={[
+          {
+            type: 'custom',
+            element: (
+              <ButtonGoToGuide
+                titleGuide={'Program Studi'}
+                valueGuide="FAKULTAS_AKADEMIK_PROGRAM_STUDI"
+              />
+            ),
+          },
+        ]}
+        label="Program Studi"
+      />
       <TableCustom
         addFilter={
           <div className="flex gap-4">

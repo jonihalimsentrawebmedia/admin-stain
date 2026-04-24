@@ -6,6 +6,7 @@ import { useSearchParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button.tsx'
 import { ArrowLeft, ChevronRight } from 'lucide-react'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 interface Props {
   prev_value: string
@@ -37,7 +38,14 @@ export const RegisterPricing = (props: Props) => {
   return (
     <>
       <div className={'space-y-5'}>
-        <p className="text-xl font-semibold">4. Biaya Pendaftaran</p>
+         <div className="flex gap-4 justify-between items-center">
+            <p className="text-xl font-semibold">4. Biaya Pendaftaran</p>
+            <ButtonGoToGuide
+              titleGuide={`4. Biaya Pendaftaran`}
+              valueGuide="PUSILKOM_TRAINING_DAFTAR_TRAINING_FORM_BIAYA_PENDAFTARAN"
+            />
+          </div>
+     
         {registerPricing?.length === 0 ? (
           <p className={'text-red-500'}>Belum ada Biaya Pendaftaran</p>
         ) : (

@@ -8,6 +8,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { UseGetProcedurePartnership } from './hooks/index'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const ProcedurePartnershipPage = () => {
   const { procedure } = UseGetProcedurePartnership()
@@ -51,6 +52,15 @@ export const ProcedurePartnershipPage = () => {
               <ButtonTitleGroup
                 label={'Prosedur Pendaftaran - Mitra Kerja'}
                 buttonGroup={[
+                   {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Prosedur Pendaftaran - Mitra Kerja'}
+                      valueGuide="PUSAT_KARIR_USER_PROSEDURE_PENDAFTARAN_MITRA_KERJA"
+                    />
+                  ),
+                },
                   {
                     type: 'cancel',
                     label: 'Batal',

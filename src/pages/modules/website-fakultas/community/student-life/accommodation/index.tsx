@@ -8,6 +8,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { UseGetDetailAccommodation } from './hooks/index'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const AccommodationStudentLife = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -53,6 +54,15 @@ export const AccommodationStudentLife = () => {
                 label={'Sistem Perkuliahan'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={'Sistem Perkuliahan'}
+                        valueGuide="FAKULTAS_KEHIDUPAN_AKOMODASI"
+                      />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -75,6 +85,15 @@ export const AccommodationStudentLife = () => {
             <ButtonTitleGroup
               label={'Sistem Perkuliahan'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Sistem Perkuliahan'}
+                      valueGuide="FAKULTAS_KEHIDUPAN_AKOMODASI"
+                    />
+                  ),
+                },
                 {
                   type: 'edit',
                   label: 'Edit Deskripsi',

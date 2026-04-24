@@ -9,6 +9,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 import { FormGreetingLeader } from './component/form.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const ProfileGreetingLeaderPage = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -72,6 +73,15 @@ export const ProfileGreetingLeaderPage = () => {
             <ButtonTitleGroup
               label={'Sambutan Ketua Pusat Karir'}
               buttonGroup={[
+                  {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Sambutan Ketua Pusat Karir'}
+                      valueGuide="PUSAT_KARIR_PROFIL_SAMBUTAN_KETUA"
+                    />
+                  ),
+                },
                 {
                   type: 'edit',
                   label: 'Edit Konten',

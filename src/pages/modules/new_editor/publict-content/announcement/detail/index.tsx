@@ -11,6 +11,7 @@ import { HiPencil } from 'react-icons/hi'
 import ButtonProcessManagementEditor from '@/pages/modules/new_editor/publict-content/announcement/component/buttonProcess.tsx'
 import ButtonAgreeManagementEditor from '@/pages/modules/new_editor/publict-content/announcement/component/buttonAggree.tsx'
 import { ButtonRejectAnnouncementManagementEditor } from '@/pages/modules/new_editor/publict-content/announcement/component/buttonReject.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const AnnouncementManagementEditorDetailPage = () => {
   const { id } = useParams()
@@ -47,6 +48,10 @@ export const AnnouncementManagementEditorDetailPage = () => {
                     <p className="text-blue-600 font-semibold">
                       {detail?.status_publish?.split('_').join(' ')}
                     </p>
+                       <ButtonGoToGuide
+                      titleGuide={`Detail Pengumuman`}
+                      valueGuide="EDITOR_APPROVE_KONTEN_PUBLIK"
+                    />
                     <Link
                       to={`/modules/editor/public-content/announcement/edit/${detail?.id_pengumuman}`}
                     >

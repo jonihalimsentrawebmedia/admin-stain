@@ -14,7 +14,8 @@ import GuideForm from './GuideForm'
 const ButtonAddGuide = () => {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
-const title=Cookies.get('title-guide')
+  const title = Cookies.get('title-guide')
+
   const form = useForm<IGuideResolver>({
     resolver: zodResolver(GuideResolver),
   })
@@ -39,6 +40,10 @@ const title=Cookies.get('title-guide')
         setLoading(false)
         toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
       })
+  }
+  const isAdmin = Cookies.get('is_admin') == 'true' ? true : false
+  if (!isAdmin) {
+    return <></>
   }
 
   return (

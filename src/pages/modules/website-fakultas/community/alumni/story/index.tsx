@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsStory } from './data/columns'
 import { UseGetStoryAlumni } from './hooks/index'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const CommunityAlumniStory = () => {
   const navigate = useNavigate()
@@ -15,6 +16,15 @@ export const CommunityAlumniStory = () => {
         <ButtonTitleGroup
           isBack
           buttonGroup={[
+              {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Cerita Alumni'}
+                  valueGuide="FAKULTAS_ALUMNI_CERITA"
+                />
+              ),
+            },
             {
               type: 'add',
               label: 'Tulis Cerita',

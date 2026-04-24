@@ -7,6 +7,7 @@ import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import { ColumnsCurriculum } from './data/columns'
 import { ButtonAddCurriculum } from './component/buttonAdd'
 import { UseGetSessionFaculty } from '@/pages/modules/website-fakultas/component/select-session/get-seeion.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const CurriculumPerProdi = () => {
   const { id } = useParams()
@@ -22,6 +23,15 @@ export const CurriculumPerProdi = () => {
       <div className={'space-y-5'}>
         <ButtonTitleGroup
           buttonGroup={[
+             {
+            type: 'custom',
+            element: (
+              <ButtonGoToGuide
+                titleGuide={'Kurikulum Program Studi'}
+                valueGuide="FAKULTAS_AKADMEIK_KURIKULUM_PROGRAM_STUDI"
+              />
+            ),
+          },
             {
               type: 'custom',
               element: <ButtonAddCurriculum session={session} />,

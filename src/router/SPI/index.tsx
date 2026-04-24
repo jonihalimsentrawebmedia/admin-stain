@@ -47,6 +47,7 @@ import { SettingsBackground } from '@/pages/modules/SPI/settings/background'
 import ColorSettingSPI from '@/pages/modules/SPI/settings/color/ColorSettingService.tsx'
 import { TemplateWebSPI } from '@/pages/modules/SPI/settings/template-web'
 import { ThemaChangeColorSPI } from '@/pages/modules/SPI/settings/template-web/color'
+import GuideListView from '@/pages/modules/website-utama/panduan/GuideListView'
 
 export const SPI_ROUTES = [
   {
@@ -65,6 +66,10 @@ export const SPI_ROUTES = [
         element: <ChangePassword />,
       },
     ],
+  },
+  {
+    path:"panduan",
+    element:<GuideListView/>
   },
   {
     path: 'data-spi',

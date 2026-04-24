@@ -3,6 +3,7 @@ import { useParams, useSearchParams } from 'react-router-dom'
 import { UseGetNewsProdiFaculty } from '@/pages/modules/website-fakultas/academic/program-studi/detail/news/hooks'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsNewsFaculty } from '@/pages/modules/website-fakultas/academic/program-studi/detail/news/data/columns.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const NewsProdiFaculty = () => {
   const { id } = useParams()
@@ -22,7 +23,20 @@ export const NewsProdiFaculty = () => {
   return (
     <>
       <div className={'space-y-5'}>
-        <ButtonTitleGroup buttonGroup={[]} label="Berita" />
+        <ButtonTitleGroup
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Berita'}
+                  valueGuide="FAKULTAS_AKADEMIK_PROGRAM_STUDI_BERITA"
+                />
+              ),
+            },
+          ]}
+          label="Berita"
+        />
         <TableCustom data={news} columns={columns} loading={loading} meta={meta} />
       </div>
     </>

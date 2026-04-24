@@ -8,6 +8,7 @@ import ButtonProcessManagementEditor from '../component/buttonProcess.tsx'
 import { Separator } from '@/components/ui/separator.tsx'
 import ButtonAgreeManagementEditor from '../component/buttonAgree.tsx'
 import { ButtonRejectManagementEditor } from '../component/buttonReject.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const UseGetBottomSliderDetail = () => {
   const { id } = useParams()
@@ -29,6 +30,10 @@ export const UseGetBottomSliderDetail = () => {
                     <p className="text-blue-600 font-semibold">
                       {detail?.status_publish?.split('_').join(' ')}
                     </p>
+                     <ButtonGoToGuide
+                      titleGuide={`Detail Slider Bawah`}
+                      valueGuide="EDITOR_APPROVE_KONTEN_PUBLIK"
+                    />
                     <Link
                       to={`/modules/editor/public-content/slider/bottom-slider/edit/${detail?.id_slider_bawah}`}
                     >

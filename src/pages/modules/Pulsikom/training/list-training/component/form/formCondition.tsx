@@ -10,6 +10,7 @@ import { ArrowLeft, ChevronRight } from 'lucide-react'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { useQueryClient } from '@tanstack/react-query'
 import { useSearchParams } from 'react-router-dom'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 interface IProps {
   prev_value: string
@@ -70,7 +71,14 @@ export const FormCondition = (props: IProps) => {
     <>
       <Form {...form}>
         <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
+           <div className="flex gap-4 justify-between items-center">
           <p className="text-xl font-semibold">3. Persyaratan</p>
+            <ButtonGoToGuide
+              titleGuide={`3. Persyaratan`}
+              valueGuide="PUSILKOM_TRAINING_DAFTAR_TRAINING_FORM_PERSYARATAN"
+            />
+          </div>
+         
           <RichText form={form} name={'isi'} label={'Persyaratan'} isRow={false} />
           <div className="flex items-center justify-between">
             <Button

@@ -16,6 +16,7 @@ import { MdOutlineHistory } from 'react-icons/md'
 import ButtonProcessManagementEditor from '../component/buttonProcess.tsx'
 import ButtonAgreeManagementEditor from '../component/buttonAggree.tsx'
 import { ButtonRejectNewsManagementEditor } from '../component/buttonReject.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const DetailNewsManagementEditorPage = () => {
   const { id } = useParams()
@@ -50,6 +51,10 @@ export const DetailNewsManagementEditorPage = () => {
                   <p className="text-blue-600 font-semibold">
                     {detail?.status_publish?.split('_').join(' ')}
                   </p>
+                     <ButtonGoToGuide
+                      titleGuide={`Detail Berita`}
+                      valueGuide="EDITOR_APPROVE_KONTEN_PUBLIK"
+                    />
                   <Link
                     to={`/modules/editor/public-content/news/edit/${detail?.id_berita}`}
                   >

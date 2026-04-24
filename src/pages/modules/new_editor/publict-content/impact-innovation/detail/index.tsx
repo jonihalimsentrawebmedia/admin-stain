@@ -16,6 +16,7 @@ import { MdOutlineHistory } from 'react-icons/md'
 import ButtonProcessManagementEditor from '../component/buttonProcess'
 import ButtonAgreeManagementEditor from '../component/buttonAggree.tsx'
 import { ButtonRejectManagementEditor } from '../component/buttonReject.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const DetailImpactInnovationPage = () => {
   const { id } = useParams()
@@ -50,6 +51,10 @@ export const DetailImpactInnovationPage = () => {
                   <p className="text-blue-600 font-semibold">
                     {detail?.status_publish?.split('_').join(' ')}
                   </p>
+                     <ButtonGoToGuide
+                      titleGuide={`Detail Inovasi Berdampak`}
+                      valueGuide="EDITOR_APPROVE_KONTEN_PUBLIK"
+                    />
                   <Link
                     to={`/modules/editor/public-content/impact-innovation/edit/${detail?.id_inovasi_berdampak}`}
                   >

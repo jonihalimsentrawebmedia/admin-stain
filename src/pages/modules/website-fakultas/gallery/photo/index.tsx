@@ -4,6 +4,7 @@ import { ButtonAddPhoto } from './component/buttonAdd.tsx'
 import { useParams } from 'react-router-dom'
 import { ButtonEditPhoto } from '@/pages/modules/website-fakultas/gallery/photo/component/buttonEdit.tsx'
 import { ButtonDeletePhoto } from '@/pages/modules/website-fakultas/gallery/photo/component/buttonDelete.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const ListGalleryPhoto = () => {
   const { id } = useParams()
@@ -17,6 +18,15 @@ export const ListGalleryPhoto = () => {
         <ButtonTitleGroup
           label="Galeri Foto"
           buttonGroup={[
+             {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Galeri Foto'}
+                  valueGuide="FAKULTAS_GALERI_FOTO"
+                />
+              ),
+            },
             {
               type: 'custom',
               element: <ButtonAddPhoto />,

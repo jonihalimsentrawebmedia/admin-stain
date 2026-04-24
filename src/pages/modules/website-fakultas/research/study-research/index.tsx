@@ -8,6 +8,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { UseGetDetailStudyResearch } from './hooks/index'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const StudyResearchPage = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -53,6 +54,15 @@ export const StudyResearchPage = () => {
                 label={'Riset & Penelitian'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={'Riset & Penelitian'}
+                        valueGuide="FAKULTAS_PENELITIAN_RISET_DAN_PENELITIAN"
+                      />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -75,6 +85,15 @@ export const StudyResearchPage = () => {
             <ButtonTitleGroup
               label={'Riset & Penelitian'}
               buttonGroup={[
+                 {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={'Riset & Penelitian'}
+                        valueGuide="FAKULTAS_PENELITIAN_RISET_DAN_PENELITIAN"
+                      />
+                    ),
+                  },
                 {
                   type: 'edit',
                   label: 'Edit Deskripsi',

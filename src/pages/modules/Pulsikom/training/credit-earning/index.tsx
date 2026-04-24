@@ -13,6 +13,7 @@ import { TitleLine } from '@/pages/modules/pusat-karir/component/common/titleLin
 import { Button } from '@/components/ui/button.tsx'
 import { FaList } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const CreditEarningPage = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -60,6 +61,15 @@ export const CreditEarningPage = () => {
               <ButtonTitleGroup
                 label={'Visi Misi'}
                 buttonGroup={[
+                  {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={`Visi Misi`}
+                        valueGuide="PUSILKOM_TRAINING_PROGRAM_CREDIT_EARNING"
+                      />
+                    ),
+                  },
                   {
                     type: 'cancel',
                     label: 'Batal',

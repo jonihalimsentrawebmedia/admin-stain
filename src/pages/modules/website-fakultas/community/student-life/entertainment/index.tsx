@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button.tsx'
 import { useNavigate } from 'react-router-dom'
 import { FaListUl } from 'react-icons/fa'
 import { UseGetStudentEntertainment } from '@/pages/modules/website-fakultas/community/student-life/entertainment/hooks'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const EntertainmentCommunity = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -58,6 +59,15 @@ export const EntertainmentCommunity = () => {
                 label={'Hiburan Mahasiswa'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={'Hiburan Mahasiswa'}
+                        valueGuide="FAKULTAS_KEHIDUPAN_TEMPAT_HIBURAN"
+                      />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -80,6 +90,15 @@ export const EntertainmentCommunity = () => {
             <ButtonTitleGroup
               label={'Hiburan Mahasiswa'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Hiburan Mahasiswa'}
+                      valueGuide="FAKULTAS_KEHIDUPAN_TEMPAT_HIBURAN"
+                    />
+                  ),
+                },
                 {
                   type: 'custom',
                   element: (

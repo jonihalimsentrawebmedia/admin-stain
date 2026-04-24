@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { UseGetStoryPPSM } from '@/pages/modules/website-fakultas/academic/ppsm/story/hooks'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsStory } from '@/pages/modules/website-fakultas/academic/ppsm/story/data/columns.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const AlumniStoriesPPSM = () => {
   const navigate = useNavigate()
@@ -15,6 +16,15 @@ export const AlumniStoriesPPSM = () => {
         <ButtonTitleGroup
           isBack
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'PPSM - Cerita Alumni'}
+                  valueGuide="FAKULTAS_AKADEMIK_PSSM_CERITA_ALUMNI"
+                />
+              ),
+            },
             {
               type: 'add',
               label: 'Tambah Cerita',

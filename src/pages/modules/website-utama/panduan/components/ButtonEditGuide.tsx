@@ -22,7 +22,7 @@ const ButtonEditGuide = (props: Props) => {
   const form = useForm<IGuideResolver>({
     resolver: zodResolver(GuideResolver),
   })
-const title=Cookies.get('title-guide')
+  const title = Cookies.get('title-guide')
   const queryClient = useQueryClient()
 
   const valueGuide = Cookies.get('guide')
@@ -46,7 +46,10 @@ const title=Cookies.get('title-guide')
         toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
       })
   }
-
+  const isAdmin = Cookies.get('is_admin') == 'true' ? true : false
+  if (!isAdmin) {
+    return <></>
+  }
   return (
     <>
       <button

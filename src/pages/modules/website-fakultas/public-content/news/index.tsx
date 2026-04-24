@@ -5,6 +5,7 @@ import { TabsListCustom } from '@/pages/modules/website-utama/public-content/sli
 import { UseGetFacultyNewsStatus } from './hooks/index'
 import { TableDataListNews } from './components/listNews.tsx'
 import type { StatusPublish } from './data/types.ts'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const NewsCarrierPublicContentPage = () => {
   const navigate = useNavigate()
@@ -116,7 +117,13 @@ export const NewsCarrierPublicContentPage = () => {
       <div className="flex flex-col gap-5">
         <ButtonTitleGroup
           label={'Berita'}
-          buttonGroup={[{ type: 'add', label: 'Tulis Berita', onClick: () => navigate('add') }]}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide={'Konten Publik - Berita'} valueGuide="FAKULTAS_KONTEN_PUBLIK_BERITA" />,
+            },
+            { type: 'add', label: 'Tulis Berita', onClick: () => navigate('add') },
+          ]}
         />
 
         <TabsListCustom

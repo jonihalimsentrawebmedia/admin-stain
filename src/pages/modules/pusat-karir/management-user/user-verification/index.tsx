@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs.t
 import { clsx } from 'clsx'
 import { JobSeekerUserVerification } from './job-seeker/index'
 import { PartnershipUserVerification } from './partnership/index'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const UserVerificationPage = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -31,7 +32,24 @@ export const UserVerificationPage = () => {
   return (
     <>
       <div className={'space-y-4'}>
-        <ButtonTitleGroup label={'Verifikasi Pendaftar'} buttonGroup={[]} />
+        <ButtonTitleGroup
+          label={'Verifikasi Pendaftar'}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={type == 'PENCARI_KERJA' ? 'Verifikasi Pendaftar Pencari Kerja' : 'Verifikasi Pendaftar Mitra Kerja'}
+                  valueGuide={
+                    type == 'PENCARI_KERJA'
+                      ? 'PUSAT_KARIR_USER_VERIFIKASI_PENCARI_KERJA'
+                      : 'PUSAT_KARIR_USER_VERIFIKASI_MITRA_KERJA'
+                  }
+                />
+              ),
+            },
+          ]}
+        />
 
         <Tabs value={type} onValueChange={(e) => HandleTabs(e)} className="w-full">
           <TabsList className={'bg-white rounded w-full! h-full! flex gap-x-4'}>

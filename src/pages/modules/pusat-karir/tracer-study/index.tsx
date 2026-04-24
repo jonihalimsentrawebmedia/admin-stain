@@ -9,6 +9,7 @@ import { UseGetTracerStudy } from '@/pages/modules/pusat-karir/tracer-study/hook
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
+import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
 
 export const TracerStudyPage = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -58,6 +59,15 @@ export const TracerStudyPage = () => {
                   label={'Tracer Study'}
                   buttonGroup={[
                     {
+                      type: 'custom',
+                      element: (
+                        <ButtonGoToGuide
+                          titleGuide={'Tracer Study'}
+                          valueGuide="PUSAT_KARIR_TRACER_STUDY"
+                        />
+                      ),
+                    },
+                    {
                       type: 'cancel',
                       label: 'Batal',
                       onClick: () => setIsEdit(!isEdit),
@@ -89,7 +99,18 @@ export const TracerStudyPage = () => {
           <>
             <ButtonTitleGroup
               label={'Tracer Study'}
-              buttonGroup={[{ type: 'edit', label: 'Edit URL', onClick: () => setIsEdit(!isEdit) }]}
+              buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Tracer Study'}
+                      valueGuide="PUSAT_KARIR_TRACER_STUDY"
+                    />
+                  ),
+                },
+                { type: 'edit', label: 'Edit URL', onClick: () => setIsEdit(!isEdit) },
+              ]}
             />
 
             <div
@@ -105,7 +126,6 @@ export const TracerStudyPage = () => {
               <p className="text-gray-500">URL/Link</p>
               <p>{tracerStudy?.url}</p>
             </div>
-
           </>
         )}
       </div>

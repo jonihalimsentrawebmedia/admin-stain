@@ -8,6 +8,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { UseGetDetailPmb } from '@/pages/modules/website-fakultas/pmb/hooks'
+import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
 
 export const DescriptionPMBText = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -53,6 +54,10 @@ export const DescriptionPMBText = () => {
                 label={'PMB'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: <ButtonGoToGuide titleGuide={'PMB'} valueGuide="FAKULTAS_PMB" />,
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -75,6 +80,10 @@ export const DescriptionPMBText = () => {
             <ButtonTitleGroup
               label={'PMB'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: <ButtonGoToGuide titleGuide={'PMB'} valueGuide="FAKULTAS_PMB" />,
+                },
                 {
                   type: 'edit',
                   label: 'Edit Deskripsi',

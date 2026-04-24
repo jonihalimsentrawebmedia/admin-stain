@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { DraftSection } from './component/TabsData/DraftSection.tsx'
 import { PublishSection } from './component/TabsData/PublishSection.tsx'
 import { ClosedSection } from './component/TabsData/closedSection.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const ListTraining = () => {
   const navigate = useNavigate()
@@ -35,6 +36,15 @@ export const ListTraining = () => {
         <ButtonTitleGroup
           label="Daftar Training"
           buttonGroup={[
+             {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={`Daftar Training`}
+                  valueGuide="PUSILKOM_TRAINING_DAFTAR_TRAINING"
+                />
+              ),
+            },
             {
               type: 'add',
               label: 'Tambah Training',

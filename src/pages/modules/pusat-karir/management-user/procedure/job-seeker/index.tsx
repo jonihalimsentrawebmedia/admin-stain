@@ -8,6 +8,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { UseGetProcedureJobseeker } from './hooks/index'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const ProcedureJobSeekerPage = () => {
   const { procedure } = UseGetProcedureJobseeker()
@@ -52,6 +53,15 @@ export const ProcedureJobSeekerPage = () => {
                 label={'Prosedur Pendaftaran - Pencari Kerja'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={'Prosedur Pendaftaran - Pencari Kerja'}
+                        valueGuide="PUSAT_KARIR_USER_PROSEDURE_PENDAFTARAN_MITRA_KERJA"
+                      />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -74,6 +84,15 @@ export const ProcedureJobSeekerPage = () => {
             <ButtonTitleGroup
               label={'Prosedur Pendaftaran - Pencari Kerja'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Prosedur Pendaftaran - Pencari Kerja'}
+                      valueGuide="PUSAT_KARIR_USER_PROSEDURE_PENDAFTARAN_MITRA_KERJA"
+                    />
+                  ),
+                },
                 {
                   type: 'edit',
                   label: 'Edit Konten',

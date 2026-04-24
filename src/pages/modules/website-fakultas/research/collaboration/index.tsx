@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom'
 import { FaListUl } from 'react-icons/fa'
 import { MdAddBusiness } from 'react-icons/md'
 import { UseGetDetailCollaboration } from '@/pages/modules/website-fakultas/research/collaboration/hooks'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const OurPartnerPage = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -58,6 +59,15 @@ export const OurPartnerPage = () => {
               <ButtonTitleGroup
                 label={'Bekerjasama Dengan Kami'}
                 buttonGroup={[
+                   {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Bekerjasama Dengan Kami'}
+                  valueGuide="FAKULTAS_PENELITIAN_BERKERJASAMA_DENGAN_KAMI"
+                />
+              ),
+            },
                   {
                     type: 'cancel',
                     label: 'Batal',
@@ -81,6 +91,15 @@ export const OurPartnerPage = () => {
             <ButtonTitleGroup
               label={'Bekerjasama Dengan Kami'}
               buttonGroup={[
+                    {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Bekerjasama Dengan Kami'}
+                  valueGuide="FAKULTAS_PENELITIAN_BERKERJASAMA_DENGAN_KAMI"
+                />
+              ),
+            },
                 {
                   type: 'custom',
                   element: (

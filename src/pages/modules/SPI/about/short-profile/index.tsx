@@ -10,6 +10,7 @@ import { toast } from 'react-toastify'
 import { UseGetShortProfile } from './hooks/index'
 import RenderHTMLContent from '@/components/common/richtext/RenderHTMLContent.tsx'
 import { useQueryClient } from '@tanstack/react-query'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const ShortProfilePage = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -57,6 +58,15 @@ export const ShortProfilePage = () => {
                 label={'Edit Profil Singkat'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={'Edit Profil Singkat'}
+                        valueGuide="SPI_TENTANG_PROFIL"
+                      />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -79,6 +89,15 @@ export const ShortProfilePage = () => {
             <ButtonTitleGroup
               label={'Profil Singkat'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Edit Profil Singkat'}
+                      valueGuide="SPI_TENTANG_PROFIL"
+                    />
+                  ),
+                },
                 {
                   type: 'edit',
                   label: 'Edit Sejarah',

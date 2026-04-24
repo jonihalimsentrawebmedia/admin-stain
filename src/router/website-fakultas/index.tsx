@@ -108,6 +108,7 @@ import { UserProfilePage } from '@/pages/modules/website-utama/user-profile'
 import { ChangePassword } from '@/pages/modules/website-utama/change-password'
 import { FacultyGalleryProfile } from '@/pages/modules/website-fakultas/about-faculty/gallery'
 import { ThemaChangeColorFaculty } from '@/pages/modules/website-fakultas/settings/template-web/color'
+import GuideListView from '@/pages/modules/website-utama/panduan/GuideListView'
 
 export const RouterFaculty = [
   {
@@ -126,6 +127,10 @@ export const RouterFaculty = [
         element: <ChangePassword />,
       },
     ],
+  },
+   {
+    path:"panduan",
+    element:<GuideListView/>
   },
   {
     path: 'data-faculty',

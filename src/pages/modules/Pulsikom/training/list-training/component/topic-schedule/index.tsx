@@ -8,6 +8,7 @@ import { ArrowLeft, ChevronRight } from 'lucide-react'
 import { useSearchParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { useQueryClient } from '@tanstack/react-query'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 interface Props {
   prev_value: string
@@ -42,7 +43,14 @@ export const TopicScheduleSection = (props: Props) => {
   return (
     <>
       <div className={'space-y-5'}>
-        <p className="text-xl font-semibold">2. Topik Bahasan & Jadwal</p>
+        <div className="flex gap-4 justify-between items-center">
+          <p className="text-xl font-semibold">2. Topik Bahasan & Jadwal</p>
+          <ButtonGoToGuide
+            titleGuide={`Topik Bahasan & Jadwal`}
+            valueGuide="PUSILKOM_TRAINING_DAFTAR_TRAINING_FORM_TOPIK_BAHASAN_JADWAL"
+          />
+        </div>
+
         {topic?.length === 0 ? (
           <p className={'text-red-500'}>Belum ada topik bahasan & jadwal</p>
         ) : (

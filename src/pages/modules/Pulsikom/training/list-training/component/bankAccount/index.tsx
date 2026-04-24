@@ -9,6 +9,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useSearchParams } from 'react-router-dom'
 import { TableBasicBank } from '@/components/common/table/tableRekening.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 interface Props {
   prev_value: string
@@ -68,7 +69,14 @@ const ListBankAccount = (props: Props) => {
 
   return (
     <>
-      <p className="text-xl font-semibold text-primary pb-2.5">5. Rekening Penerimaan</p>
+     <div className="flex gap-4 justify-between items-center">
+           <p className="text-xl font-semibold text-primary pb-2.5">5. Rekening Penerimaan</p>
+            <ButtonGoToGuide
+              titleGuide={`5. Rekening Penerimaan`}
+              valueGuide="PUSILKOM_TRAINING_DAFTAR_TRAINING_FORM_REKENING_PENDAFTARAN"
+            />
+          </div>
+    
       <TableBasicBank
         className={'pb-2.5'}
         columns={columns as any}

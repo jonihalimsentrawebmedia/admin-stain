@@ -11,6 +11,7 @@ import { UseGetDescriptionAuditManagement } from './hooks/index'
 import { Button } from '@/components/ui/button.tsx'
 import { FaListUl } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const AuditManagementPage = () => {
   const { description } = UseGetDescriptionAuditManagement()
@@ -56,6 +57,15 @@ export const AuditManagementPage = () => {
                 label={'Update Tinjauan Manajemen'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={'Tinjauan Manajemen'}
+                        valueGuide="SPI_JAMINAN_MUTU_TINJUAUAN_MANAJEMEN"
+                      />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -78,6 +88,15 @@ export const AuditManagementPage = () => {
             <ButtonTitleGroup
               label={'Tinjauan Manajemen'}
               buttonGroup={[
+                 {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Tinjauan Manajemen'}
+                      valueGuide="SPI_JAMINAN_MUTU_TINJUAUAN_MANAJEMEN"
+                    />
+                  ),
+                },
                 {
                   type: 'custom',
                   element: (
