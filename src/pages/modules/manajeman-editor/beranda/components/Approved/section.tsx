@@ -1,7 +1,7 @@
 import type { IContent } from '@/pages/modules/website-utama/beranda/types'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
-import type { status } from '@/pages/modules/new_editor/data/types/data.tsx'
-import { RendersColumnsData } from '@/pages/modules/new_editor/data/columns'
+import type { status } from '@/pages/modules/manajeman-editor/data/types/data'
+import { RendersColumnsData } from '@/pages/modules/manajeman-editor/data/columns'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 
 interface Props {

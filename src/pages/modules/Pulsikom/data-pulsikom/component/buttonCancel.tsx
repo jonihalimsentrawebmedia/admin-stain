@@ -15,14 +15,14 @@ export const ButtonCancelApproval = () => {
 
   const HandleCancelApproval = async () => {
     setLoading(true)
-    await AxiosClient.post('/pusat-karir/profil/batalkan-draft')
+    await AxiosClient.post('/pusilkom/profil/batalkan-draft')
       .then((res) => {
         if (res.data.status) {
           setOpen(false)
           toast.success(res.data.message)
           setLoading(false)
           queryClient.invalidateQueries({
-            queryKey: ['data-carrier','data-pusilkom'],
+            queryKey: ['data-pulsikom'],
           })
         }
       })

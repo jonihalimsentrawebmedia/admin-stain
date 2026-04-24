@@ -3,17 +3,21 @@ import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import type { SatuanOrganisasiList } from '@/pages/modules/settings/model'
-
-const useGetLembaga = () => {
+interface props {
+  real_data?: boolean
+}
+const useGetLembaga = (props?: props) => {
+    const { real_data } = props ?? {}
   const [lembaga, setLembaga] = useState<SatuanOrganisasiList>()
-
+const ParamsSearch = new URLSearchParams()
+  if (real_data) ParamsSearch.append('is_real_data', real_data.toString() ?? 'false')
   const { data, isLoading, isFetching } = useQuery<{
     data: SatuanOrganisasiList
     meta: Meta
   }>({
     refetchOnWindowFocus: false,
-    queryKey: ['lembaga'],
-    queryFn: () => AxiosClient.get(`/lembaga/profil`).then((res) => res.data),
+    queryKey: ['lembaga',ParamsSearch.toString()],
+    queryFn: () => AxiosClient.get(`/lembaga/profil?${ParamsSearch}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching
