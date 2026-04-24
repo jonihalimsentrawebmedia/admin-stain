@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button.tsx'
 import { useNavigate } from 'react-router-dom'
 import { FaListUl } from 'react-icons/fa'
 import { UseGetStudentOrganization } from './hooks/index'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const StudentOrganizationCommunity = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -56,6 +57,15 @@ export const StudentOrganizationCommunity = () => {
               <ButtonTitleGroup
                 label={'Organisasi Mahasiswa'}
                 buttonGroup={[
+                   {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Organisasi Mahasiswa'}
+                      valueGuide="FAKULTAS_KEHIDUPAN_ORGANISASI_MAHASISWA"
+                    />
+                  ),
+                },
                   {
                     type: 'cancel',
                     label: 'Batal',
@@ -79,6 +89,15 @@ export const StudentOrganizationCommunity = () => {
             <ButtonTitleGroup
               label={'Organisasi Mahasiswa'}
               buttonGroup={[
+                  {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Organisasi Mahasiswa'}
+                      valueGuide="FAKULTAS_KEHIDUPAN_ORGANISASI_MAHASISWA"
+                    />
+                  ),
+                },
                 {
                   type: 'custom',
                   element: (

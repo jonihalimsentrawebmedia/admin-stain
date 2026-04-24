@@ -16,6 +16,7 @@ import { MdOutlineHistory } from 'react-icons/md'
 import ButtonProcessManagementEditor from '../component/buttonProcess'
 import ButtonAgreeManagementEditor from '../component/buttonAggree'
 import { ButtonRejectManagementEditor } from '../component/buttonReject'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const DetailAchievementPage = () => {
   const { id } = useParams()
@@ -50,6 +51,10 @@ export const DetailAchievementPage = () => {
                   <p className="text-blue-600 font-semibold">
                     {detail?.status_publish?.split('_').join(' ')}
                   </p>
+                    <ButtonGoToGuide
+                      titleGuide={`Detail Prestasi`}
+                      valueGuide="EDITOR_APPROVE_KONTEN_PUBLIK"
+                    />
                   <Link
                     to={`/modules/editor/public-content/achievement/edit/${detail?.id_prestasi}`}
                   >

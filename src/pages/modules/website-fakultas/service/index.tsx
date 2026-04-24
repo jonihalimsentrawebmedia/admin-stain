@@ -3,6 +3,7 @@ import { UseGetService } from '@/pages/modules/website-fakultas/service/hooks'
 import { ColumnsService } from '@/pages/modules/website-fakultas/service/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ButtonAddService } from '@/pages/modules/website-fakultas/service/component/buttonAdd.tsx'
+import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
 
 export const ServiceListPage = () => {
   const { service, meta, loading } = UseGetService()
@@ -14,6 +15,15 @@ export const ServiceListPage = () => {
         <ButtonTitleGroup
           label="Layanan"
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Layanan'}
+                  valueGuide="FAKULTAS_LAYANAN"
+                />
+              ),
+            },
             {
               type: 'custom',
               element: <ButtonAddService />,

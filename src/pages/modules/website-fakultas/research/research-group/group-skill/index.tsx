@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { UseGetListGroupSkills } from './hooks/index'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsGroupSkill } from './data/columns'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const GroupSkillResearch = () => {
   const navigate = useNavigate()
@@ -17,6 +18,15 @@ export const GroupSkillResearch = () => {
           label="Daftar Kelompok Keahlian"
           buttonGroup={[
             {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Daftar Kelompok Keahlian'}
+                  valueGuide="FAKULTAS_PENELITIAN_KELOMPOK_KEAHLIAN_DAFTAR_KK"
+                />
+              ),
+            },
+            {
               type: 'add',
               label: 'Tambah Data',
               onClick: () => {
@@ -27,7 +37,6 @@ export const GroupSkillResearch = () => {
         />
 
         <TableCustom data={listGroupSkill} columns={columns} loading={loading} meta={meta} />
-
       </div>
     </>
   )

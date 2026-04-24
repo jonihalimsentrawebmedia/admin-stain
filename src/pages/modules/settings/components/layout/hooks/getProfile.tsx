@@ -19,6 +19,7 @@ export const UseGetUserProfile = () => {
     if (data) {
       setProfileUser(data)
       Cookies.set('profile', data.nama_lengkap)
+      Cookies.set('is_admin', data.is_administrator)
     }
   }, [data])
 

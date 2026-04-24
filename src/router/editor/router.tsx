@@ -112,6 +112,7 @@ import { DetailArticlePage } from '@/pages/modules/new_editor/publict-content/ar
 import { LogActivityArticleManagementEditorPage } from '@/pages/modules/new_editor/publict-content/article/log'
 import { DetailEditorArticleCarrier } from '@/pages/modules/new_editor/publict-content/article-carier/detail'
 import { LogEditorArticleCarrierPage } from '@/pages/modules/new_editor/publict-content/article-carier/log'
+import GuideListView from '@/pages/modules/website-utama/panduan/GuideListView'
 
 export const EditorRouter = [
   {
@@ -130,6 +131,10 @@ export const EditorRouter = [
         element: <ChangePassword />,
       },
     ],
+  },
+  {
+    path: 'panduan',
+    element: <GuideListView />,
   },
   {
     path: 'public-content',

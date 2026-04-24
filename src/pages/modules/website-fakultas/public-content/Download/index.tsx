@@ -6,6 +6,7 @@ import { UseGetCategoryDownloadFaculty, UseGetDownloadFaculty } from './hooks/in
 import { DownloadFileCarrierColumns } from './data/columns'
 import { Button } from '@/components/ui/button.tsx'
 import { IoList } from 'react-icons/io5'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const DownloadFileFacultyPage = () => {
   const navigate = useNavigate()
@@ -18,6 +19,15 @@ const DownloadFileFacultyPage = () => {
       <div className="flex flex-col gap-5">
         <ButtonTitleGroup
           buttonGroup={[
+             {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Konten Publik - Download'}
+                  valueGuide="FAKULTAS_KONTEN_PUBLIK_DOWNLOAD"
+                />
+              ),
+            },
             {
               type: 'custom',
               element: (

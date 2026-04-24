@@ -3,6 +3,7 @@ import { MdInfo } from 'react-icons/md'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsTemplateWebsite } from './data/columns.tsx'
 import { UseGetTemplateFaculty } from './hooks/index.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const TemplateWebFacultySettings = () => {
   const { template, loading } = UseGetTemplateFaculty()
@@ -10,7 +11,15 @@ export const TemplateWebFacultySettings = () => {
   return (
     <>
       <div className={'flex flex-col gap-5'}>
-        <ButtonTitleGroup label={'Template Website'} buttonGroup={[]} />
+        <ButtonTitleGroup
+          label={'Template Website'}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide={`Template Website`} valueGuide="THEMA" />,
+            },
+          ]}
+        />
         <div
           className={`text-blue-500 w-fit p-1.5 text-sm border border-blue-500 rounded-md flex items-center gap-1.5`}
         >

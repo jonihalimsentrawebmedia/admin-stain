@@ -3,6 +3,7 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { ColumnsGalleryAlbum } from './data/columns'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ButtonAddAlbum } from './component/buttonAdd.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const ListGalleryAlbum = () => {
   const { album, loading, meta } = UseGetGalleryAlbum()
@@ -14,6 +15,12 @@ export const ListGalleryAlbum = () => {
         <ButtonTitleGroup
           label="Galeri Foto"
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide titleGuide={'Galeri Foto'} valueGuide="FAKULTAS_GALERI_ALBUM" />
+              ),
+            },
             {
               type: 'custom',
               element: <ButtonAddAlbum />,

@@ -3,6 +3,7 @@ import { ButtonAddZoneIntegrityCategory } from '@/pages/modules/website-fakultas
 import { UseGetZoneIntegrity } from '@/pages/modules/website-fakultas/zone-integrity/hooks'
 import ColumnsZoneIntegrity from '@/pages/modules/website-fakultas/zone-integrity/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
 
 export const ZoneIntegrityPage = () => {
   const { zoneIntegrity, meta, loading } = UseGetZoneIntegrity()
@@ -14,6 +15,10 @@ export const ZoneIntegrityPage = () => {
         <ButtonTitleGroup
           label={'Zona Integritas'}
           buttonGroup={[
+              {
+                  type: 'custom',
+                  element: <ButtonGoToGuide titleGuide={'Zona Integritas'} valueGuide="FAKULTAS_ZONA_INTEGRITAS" />,
+                },
             {
               type: 'custom',
               element: <ButtonAddZoneIntegrityCategory />,

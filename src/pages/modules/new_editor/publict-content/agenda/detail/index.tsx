@@ -9,6 +9,7 @@ import { MdOutlineHistory } from 'react-icons/md'
 import ButtonProcessManagementEditor from '../component/buttonProcess.tsx'
 import ButtonAgreeManagementEditor from '../component/buttonAggree.tsx'
 import { ButtonRejectAgendaManagementEditor } from '../component/buttonReject.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const AgendaManagementEditorDetailPage = () => {
   const { id } = useParams()
@@ -29,6 +30,10 @@ export const AgendaManagementEditorDetailPage = () => {
                     <p className="text-blue-600 font-semibold">
                       {detail?.status_publish?.split('_').join(' ')}
                     </p>
+                    <ButtonGoToGuide
+                      titleGuide={`Detail Agenda`}
+                      valueGuide="EDITOR_APPROVE_KONTEN_PUBLIK"
+                    />
                     <Link to={`/modules/editor/public-content/agenda/edit/${detail?.id_agenda}`}>
                       <Button
                         size={'sm'}

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { UseGetListPlace } from './hook/index'
 import ColumnsStudentEntertainment from './data/columns'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const ListPlaceStudentOrganization = () => {
   const navigate = useNavigate()
@@ -15,6 +16,15 @@ export const ListPlaceStudentOrganization = () => {
         <ButtonTitleGroup
           label={'Daftar Hiburan Mahasiswa'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Daftar Hiburan Mahasiswa'}
+                  valueGuide="FAKULTAS_KEHIDUPAN_TEMPAT_HIBURAN_DAFTAR_TEMPAT"
+                />
+              ),
+            },
             {
               type: 'add',
               label: 'Tambah',

@@ -3,6 +3,7 @@ import { UseGetGalleryVideo } from './hooks/index'
 import { ButtonAddVideo } from './component/buttonAdd'
 import { ColumnsGalleryVideo } from './data/columns'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const ListAlbumVideo = () => {
   const { video, loading, meta } = UseGetGalleryVideo()
@@ -14,6 +15,12 @@ export const ListAlbumVideo = () => {
         <ButtonTitleGroup
           label="Galeri Video"
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide titleGuide={'Galeri Video'} valueGuide="FAKULTAS_GALERI_VIDEO" />
+              ),
+            },
             {
               type: 'custom',
               element: <ButtonAddVideo />,

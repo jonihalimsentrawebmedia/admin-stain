@@ -40,7 +40,10 @@ const title=Cookies.get('title-guide')
         toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
       })
   }
-
+ const isAdmin = Cookies.get('is_admin') == 'true' ? true : false
+  if (!isAdmin) {
+    return <></>
+  }
   return (
     <>
       <button

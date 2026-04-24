@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button.tsx'
 import { useNavigate } from 'react-router-dom'
 import { FaListUl } from 'react-icons/fa'
 import { UseGetDetailCollegeSystem } from './hook/index'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const CommunityCollegeSystem = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -57,6 +58,15 @@ export const CommunityCollegeSystem = () => {
                 label={'Sistem Perkuliahan'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={'Sistem Perkuliahan'}
+                        valueGuide="FAKULTAS_KOMUNITAS_KULIAH_SITEM_PERKULIAHAN"
+                      />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -79,6 +89,15 @@ export const CommunityCollegeSystem = () => {
             <ButtonTitleGroup
               label={'Sistem Perkuliahan'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Sistem Perkuliahan'}
+                      valueGuide="FAKULTAS_KOMUNITAS_KULIAH_SITEM_PERKULIAHAN"
+                    />
+                  ),
+                },
                 {
                   type: 'custom',
                   element: (

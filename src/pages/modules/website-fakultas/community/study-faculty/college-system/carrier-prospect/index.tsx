@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button.tsx'
 import { useNavigate } from 'react-router-dom'
 import { FaListUl } from 'react-icons/fa'
 import { UseGetDetailCarrierProspect } from './hooks/index'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const CarrierProspectCommunity = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -51,6 +52,15 @@ export const CarrierProspectCommunity = () => {
                 label={'Prospek Karir'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={'Prospek Karir'}
+                        valueGuide="FAKULTAS_KOMULITAS_KULIAH_PROSPEK_KARIR"
+                      />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -73,6 +83,15 @@ export const CarrierProspectCommunity = () => {
             <ButtonTitleGroup
               label={'Prospek Karir'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Prospek Karir'}
+                      valueGuide="FAKULTAS_KOMULITAS_KULIAH_PROSPEK_KARIR"
+                    />
+                  ),
+                },
                 {
                   type: 'custom',
                   element: (
