@@ -4,6 +4,7 @@ import { ButtonAddSectorCarrierProspect } from './component/buttonAdd.tsx'
 import { UseGetListSectorStudy } from './hooks/index.tsx'
 import { ColumnsSectorStudy } from './data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const SectorCarrierProspect = () => {
   const { satuanOrganisasi } = UseGetSatuanOrganisasiDetail({
@@ -20,6 +21,15 @@ export const SectorCarrierProspect = () => {
           isBack
           label={'Detail Sektor Pekerjaan'}
           buttonGroup={[
+             {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Detail Sektor Pekerjaan'}
+                      valueGuide="FAKULTAS_KOMULITAS_KULIAH_PROSPEK_KARIR_SEKTOR_PEKERJAAN"
+                    />
+                  ),
+                },
             {
               type: 'custom',
               element: <ButtonAddSectorCarrierProspect />,

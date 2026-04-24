@@ -8,6 +8,8 @@ export interface IUserProfile {
   email: string
   level_user: string
   satuan_kerja: string[]
+
+  is_administrator: boolean
 }
 
 export interface LevelUsersMulti {

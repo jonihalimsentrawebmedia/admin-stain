@@ -3,6 +3,7 @@ import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { UseGetAward } from './hooks/index'
 import { ColumnsAward } from './data/columns'
 import { ButtonAddAward } from '@/pages/modules/SPI/award/component/buttonAdd.tsx'
+import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
 
 export const AwardListPage = () => {
   const { award, meta, loading } = UseGetAward()
@@ -13,6 +14,15 @@ export const AwardListPage = () => {
         <ButtonTitleGroup
           label={'Penghargaan'}
           buttonGroup={[
+             {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Penghargaan'}
+                  valueGuide="SPI_PENGHARGAAN"
+                />
+              ),
+            },
             {
               type: 'custom',
               element: <ButtonAddAward />,

@@ -4,6 +4,7 @@ import { UseGetListJobVacancy } from '@/pages/modules/pusat-karir/service/job-va
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsJobVacancy } from '@/pages/modules/pusat-karir/service/job-vacancy/data/columns.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const ServiceJobVacancy = () => {
   const { jobVacancy, meta, loading } = UseGetListJobVacancy()
@@ -16,6 +17,15 @@ export const ServiceJobVacancy = () => {
         <ButtonTitleGroup
           label={'Lowongan Pekerjaan'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Lowongan Pekerjaan'}
+                  valueGuide="PUSAT_KARIR_LAYANAN_LOWONGAN_PEKERJAAN"
+                />
+              ),
+            },
             {
               type: 'custom',
               element: <BottonSelectTypeVacancy />,

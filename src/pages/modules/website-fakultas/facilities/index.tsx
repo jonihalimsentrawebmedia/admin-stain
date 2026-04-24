@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { UseGetFacilitiesList } from '@/pages/modules/website-fakultas/facilities/hooks'
 import ColumnsFacilities from '@/pages/modules/website-fakultas/facilities/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
 
 export const FacilitiesPage = () => {
   const navigate = useNavigate()
@@ -15,6 +16,15 @@ export const FacilitiesPage = () => {
         <ButtonTitleGroup
           label={'Fasilitas'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Fasilitas'}
+                  valueGuide="FAKULTAS_FASILITAS"
+                />
+              ),
+            },
             {
               type: 'add',
               label: 'Tambah Fasilitas',

@@ -5,6 +5,7 @@ import { UseGetAgendaFacultyStatus } from './hooks/index'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { TabsListCustom } from '@/pages/modules/website-utama/public-content/slider/components/tabsList.tsx'
 import { TableDataListAgenda } from './components/AgendaList'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const AgendaFacultyPublicContent = () => {
   const navigate = useNavigate()
@@ -115,7 +116,18 @@ export const AgendaFacultyPublicContent = () => {
       <div className="flex flex-col gap-5">
         <ButtonTitleGroup
           label={'Agenda'}
-          buttonGroup={[{ type: 'add', label: 'Tulis Agenda', onClick: () => navigate('add') }]}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Konten Publik - Agenda'}
+                  valueGuide="FAKULTAS_KONTEN_PUBLIK_AGENDA"
+                />
+              ),
+            },
+            { type: 'add', label: 'Tulis Agenda', onClick: () => navigate('add') },
+          ]}
         />
 
         <TabsListCustom

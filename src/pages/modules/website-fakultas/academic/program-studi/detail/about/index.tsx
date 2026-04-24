@@ -12,6 +12,7 @@ import { toast } from 'react-toastify'
 import { UseGetProdiAbout } from '@/pages/modules/website-fakultas/academic/program-studi/detail/hooks'
 import { useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const AboutProdiView = () => {
   const { id } = useParams()
@@ -85,30 +86,35 @@ const AboutProdiView = () => {
         <div className="flex flex-col gap-4">
           <div className="flex justify-between items-center">
             <div className="text-primary text-2xl font-medium">Tentang Program Studi</div>
-
-            {isEditContent ? (
-              <ButtonForm
-                loading={loading}
-                onCancel={() => {
-                  setIsEditContent(false)
-                }}
+            <div className="flex gap-4">
+              <ButtonGoToGuide
+                titleGuide={'Tentang Program Studi'}
+                valueGuide="FAKULTAS_AKADEMIK_PROGRAM_STUDI_TENTANG"
               />
-            ) : (
-              <Button
-                onClick={() => {
-                  setIsEditContent(!isEditContent)
-                  form.reset({
-                    isi_konten: about?.isi_konten,
-                    gambar: image,
-                  })
-                }}
-                variant={'outline'}
-                className={'bg-white text-primary border-primary hover:text-primary'}
-              >
-                <HiPencil />
-                Edit
-              </Button>
-            )}
+              {isEditContent ? (
+                <ButtonForm
+                  loading={loading}
+                  onCancel={() => {
+                    setIsEditContent(false)
+                  }}
+                />
+              ) : (
+                <Button
+                  onClick={() => {
+                    setIsEditContent(!isEditContent)
+                    form.reset({
+                      isi_konten: about?.isi_konten,
+                      gambar: image,
+                    })
+                  }}
+                  variant={'outline'}
+                  className={'bg-white text-primary border-primary hover:text-primary'}
+                >
+                  <HiPencil />
+                  Edit
+                </Button>
+              )}
+            </div>
           </div>
           <CardInput title="Tentang Program Studi">
             {isEditContent ? (

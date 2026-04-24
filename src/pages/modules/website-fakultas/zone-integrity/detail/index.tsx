@@ -4,6 +4,7 @@ import { UseGetDetailZoneIntegrity } from '../hooks/index'
 import { UseGetSubZoneIntegrity } from './hooks/index.tsx'
 import ColumnsSubZoneIntegrity from './data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const DetailZoneIntegrity = () => {
   const navigate = useNavigate()
@@ -20,6 +21,15 @@ export const DetailZoneIntegrity = () => {
         <ButtonTitleGroup
           label={`Sub Kategori - ${detail?.nama_kategori}`}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={`Sub Kategori - ${detail?.nama_kategori}`}
+                  valueGuide="FAKULTAS_ZONA_INTEGRITAS_KATEGORI"
+                />
+              ),
+            },
             {
               type: 'add',
               label: 'Tambah Sub Kategori',

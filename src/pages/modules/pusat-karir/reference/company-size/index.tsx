@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom'
 import { UseGetCompanySize } from './hooks/index.tsx'
 import { ColumnsCompanySize } from './data/columns.tsx'
 import { ButtonAddCompanySize } from './component/buttonAdd.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const CompanySizePage = () => {
   const [searchParams] = useSearchParams()
@@ -25,6 +26,15 @@ export const CompanySizePage = () => {
         <ButtonTitleGroup
           label={'Ukuran Perusahaan'}
           buttonGroup={[
+             {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Ukuran Perusahaan'}
+                  valueGuide="PUSAT_KARIR_REFERENSI_UKURAN_PERUSAHAAN"
+                />
+              ),
+            },
             {
               type: 'custom',
               element: <ButtonAddCompanySize />,

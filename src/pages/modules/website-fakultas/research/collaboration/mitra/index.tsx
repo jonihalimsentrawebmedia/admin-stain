@@ -5,6 +5,7 @@ import TablePaginate from '@/components/common/table/TablePagination.tsx'
 import { useSearchParams } from 'react-router-dom'
 import { ButtonEditMitra } from '@/pages/modules/website-fakultas/research/collaboration/mitra/component/buttonEdit.tsx'
 import { ButtonDeletePartnerMitra } from '@/pages/modules/website-fakultas/research/collaboration/mitra/component/buttonDelete.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const MitraOurPartners = () => {
   const [searchParams] = useSearchParams()
@@ -25,6 +26,15 @@ export const MitraOurPartners = () => {
           isBack
           label={'Bekerjasama Dengan Kami'}
           buttonGroup={[
+              {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Bekerjasama Dengan Kami'}
+                  valueGuide="FAKULTAS_PENELITIAN_BERKERJASAMA_DENGAN_KAMI_MITRA"
+                />
+              ),
+            },
             {
               type: 'custom',
               element: <ButtonAddMitra />,

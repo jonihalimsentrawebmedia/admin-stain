@@ -8,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs.t
 import { clsx } from 'clsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsCancel, ColumnsConfirm, ColumnsParticipant, ColumnsReject } from './data/index'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const Participant = () => {
   const { id } = useParams()
@@ -66,7 +67,21 @@ export const Participant = () => {
   return (
     <>
       <div className={'space-y-4'}>
-        <ButtonTitleGroup isBack label={'Lihat Pendaftar'} buttonGroup={[]} />
+        <ButtonTitleGroup
+          isBack
+          label={'Lihat Pendaftar'}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Lihat Pendaftar'}
+                  valueGuide="PUSILKOM_TRAINING_VERIFIKASI_PENDAFTARAN_DAFTAR"
+                />
+              ),
+            },
+          ]}
+        />
 
         <div className="flex items-center gap-5">
           <img

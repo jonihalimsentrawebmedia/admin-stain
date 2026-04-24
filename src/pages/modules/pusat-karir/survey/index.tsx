@@ -10,6 +10,7 @@ import {
 } from '@/pages/modules/pusat-karir/survey/data/columns.tsx'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs.tsx'
 import { clsx } from 'clsx'
+import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
 
 export const SurveyListPage = () => {
   const uuid = uuidv4()
@@ -56,6 +57,15 @@ export const SurveyListPage = () => {
         <ButtonTitleGroup
           label={'Survey'}
           buttonGroup={[
+               {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Survey'}
+                  valueGuide="PUSAT_KARIR_SURVEI"
+                />
+              ),
+            },
             {
               type: 'add',
               label: 'Buat Survei',

@@ -9,6 +9,7 @@ import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { UseGetHistoryVisionMission } from './hooks/index'
 import RenderHTMLContent from '@/components/common/richtext/RenderHTMLContent.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const VisionMissionPulsikom = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -56,6 +57,15 @@ export const VisionMissionPulsikom = () => {
                 label={'Visi Misi'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={'Visi Misi'}
+                        valueGuide="PUSILKOM_TENTANG_VISI_MISI"
+                      />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -79,6 +89,15 @@ export const VisionMissionPulsikom = () => {
             <ButtonTitleGroup
               label={'Visi Misi'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Visi Misi'}
+                      valueGuide="PUSILKOM_TENTANG_VISI_MISI"
+                    />
+                  ),
+                },
                 {
                   type: 'edit',
                   label: 'Edit Visi Misi',

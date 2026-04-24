@@ -5,6 +5,7 @@ import { UseGetOfficially } from './hooks/index'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ButtonAddOfficially } from './component/buttonadd.tsx'
 import { ColumnsOfficially } from './data/columns.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const OfficiallyDataSPI = () => {
   const { id } = useParams()
@@ -21,6 +22,15 @@ export const OfficiallyDataSPI = () => {
           isBack
           label={`Lihat Pejabat - ${detail?.nama_kelompok}`}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={`Lihat Pejabat - ${detail?.nama_kelompok}`}
+                  valueGuide="SPI_TENTANG_SUMBER_DAYA_MANUSIA_PEJABAT"
+                />
+              ),
+            },
             {
               type: 'custom',
               element: <ButtonAddOfficially />,

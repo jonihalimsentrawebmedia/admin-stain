@@ -1,11 +1,16 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { IoInformationCircle } from 'react-icons/io5'
 import AdminTabs from './components/Admintabs'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const ColorSettingSPI = () => {
   return (
     <div className="flex flex-col gap-4">
-      <p className="text-2xl text-[#444] font-medium">Pengaturan Warna</p>
+      <div className="flex items-center justify-between">
+        <p className="text-2xl text-[#444] font-medium">Pengaturan Warna</p>
+        <ButtonGoToGuide titleGuide={'Pengaturan Warna'} valueGuide="SPI_PENGATURAN_WARNA" />
+      </div>
+
       <div className="flex gap-2 items-center w-fit px-2 py-1 text-[#2769CD] border border-[#2769CD] rounded">
         <IoInformationCircle className="size-4" />
         <div>Silahkan pilih warna yang ingin anda gunakan</div>

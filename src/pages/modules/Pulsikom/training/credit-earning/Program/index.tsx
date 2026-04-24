@@ -7,6 +7,7 @@ import { UseGetListProgram } from './hooks/index'
 import { DraftSection } from './component/TabsData/DraftSection'
 import { PublishSection } from './component/TabsData/PublishSection.tsx'
 import { ClosedSection } from '@/pages/modules/Pulsikom/training/credit-earning/Program/component/TabsData/closedSection.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const ListProgram = () => {
   const navigate = useNavigate()
@@ -40,6 +41,15 @@ export const ListProgram = () => {
         <ButtonTitleGroup
           label="Daftar Training"
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={`Daftar Training`}
+                  valueGuide="PUSILKOM_TRAINING_PROGRAM_CREDIT_EARNING_PROGRAM"
+                />
+              ),
+            },
             {
               type: 'add',
               label: 'Tambah Training',

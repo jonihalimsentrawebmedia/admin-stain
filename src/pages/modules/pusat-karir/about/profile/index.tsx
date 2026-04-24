@@ -8,6 +8,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { UseGetAboutProfileCarrier } from './hooks/index'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const AboutProfileCarrier = () => {
   const { profile } = UseGetAboutProfileCarrier()
@@ -52,6 +53,15 @@ export const AboutProfileCarrier = () => {
                 label={'Profil Pusat Karir'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={'Profil Pusat Karir'}
+                        valueGuide="PUSAT_KARIR_PROFIL_TENTANG"
+                      />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -74,6 +84,15 @@ export const AboutProfileCarrier = () => {
             <ButtonTitleGroup
               label={'Profil Pusat Karir'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Profil Pusat Karir'}
+                      valueGuide="PUSAT_KARIR_PROFIL_TENTANG"
+                    />
+                  ),
+                },
                 {
                   type: 'edit',
                   label: 'Edit Konten',

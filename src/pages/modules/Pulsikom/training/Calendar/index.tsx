@@ -3,6 +3,7 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { MdInfo } from 'react-icons/md'
 import { transformToTable } from '@/utils/helper.tsx'
 import React from 'react'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const CalendarTrainingCollect = () => {
   const { calendar } = UseGetCalendar()
@@ -26,7 +27,21 @@ export const CalendarTrainingCollect = () => {
   return (
     <>
       <div className={'space-y-4'}>
-        <ButtonTitleGroup isBack label={'Kalender Training'} buttonGroup={[]} />
+        <ButtonTitleGroup
+          isBack
+          label={'Kalender Training'}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={`Kalender Training`}
+                  valueGuide="PUSILKOM_TRAINING_KALENDAR"
+                />
+              ),
+            },
+          ]}
+        />
         <div className="bg-blue-50 border border-blue-500 text-blue-500 p-1.5 rounded-full flex items-center gap-1">
           <MdInfo className={'size-4 text-blue-500'} />
           Training yang muncul disini adalah training yang pendaftarannya sedang dibuka.

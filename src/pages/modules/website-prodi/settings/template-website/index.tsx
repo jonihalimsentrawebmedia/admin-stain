@@ -6,7 +6,7 @@ import TableCustom from '@/components/common/table/TableCustom.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const TemplateWebsite = () => {
-  const { templateProdi, loading } = UseGetTemplateProdi()
+  const { templateProdi, loading, meta } = UseGetTemplateProdi()
   const columns = ColumnsTemplateWebsite()
 
   return (
@@ -17,7 +17,7 @@ export const TemplateWebsite = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide titleGuide='Template Website' valueGuide="THEME" />,
+              element: <ButtonGoToGuide titleGuide="Template Website" valueGuide="THEME" />,
             },
           ]}
         />
@@ -29,7 +29,7 @@ export const TemplateWebsite = () => {
           Pilih template yang ingin anda gunakan untuk website anda.
         </div>
 
-        <TableCustom data={templateProdi} columns={columns} loading={loading} />
+        <TableCustom data={templateProdi} columns={columns} loading={loading} meta={meta} />
       </div>
     </>
   )

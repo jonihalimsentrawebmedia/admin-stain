@@ -11,6 +11,7 @@ import { UseGetDetailELHKPN } from './hooks/index'
 import RenderHTMLContent from '@/components/common/richtext/RenderHTMLContent.tsx'
 import { useQueryClient } from '@tanstack/react-query'
 import { ButtonAddUrl } from '@/pages/modules/SPI/e-lhkpn/component/buttonAddUrl.tsx'
+import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
 
 export const ELHKPNDetailPage = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -58,6 +59,12 @@ export const ELHKPNDetailPage = () => {
                 label={'Edit Profil Singkat'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide titleGuide={'Profil Singkat'} valueGuide="SPI_E_LHKPN" />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -80,6 +87,12 @@ export const ELHKPNDetailPage = () => {
             <ButtonTitleGroup
               label={'Profil Singkat'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide titleGuide={'Profil Singkat'} valueGuide="SPI_E_LHKPN" />
+                  ),
+                },
                 {
                   type: 'custom',
                   element: <ButtonAddUrl data={ELHKPN} />,

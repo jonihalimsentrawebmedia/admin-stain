@@ -6,6 +6,7 @@ import ButtonAddBackground from './component/buttonAdd'
 import { type Context, UseGetListBackground } from './hooks/index'
 import { ColumnsBackground } from './data/columns'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const SettingsBackground = () => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -16,6 +17,10 @@ export const SettingsBackground = () => {
 
   return (
     <>
+    <div className='mb-4 flex justify-end'>
+      <ButtonGoToGuide titleGuide={'Gambar Background'} valueGuide="SPI_PENGATURAN_BACKGROUND" />
+
+    </div>
       <Tabs
         value={context}
         onValueChange={(value) => {

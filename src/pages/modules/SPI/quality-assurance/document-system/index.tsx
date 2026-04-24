@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button.tsx'
 import { UseGetDocumentSystem } from '@/pages/modules/SPI/quality-assurance/document-system/hooks'
 import { ColumnsSystemDocument } from '@/pages/modules/SPI/quality-assurance/document-system/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const DocumentSystemPage = () => {
   const navigate = useNavigate()
@@ -17,6 +18,15 @@ export const DocumentSystemPage = () => {
         <ButtonTitleGroup
           label={'Sistem Dokumen'}
           buttonGroup={[
+              {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Sistem Dokumen'}
+                  valueGuide="SPI_JAMINAN_MUTU_SITEM_DOKUMEN"
+                />
+              ),
+            },
             {
               type: 'custom',
               element: (

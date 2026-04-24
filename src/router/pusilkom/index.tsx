@@ -60,6 +60,7 @@ import { UpdatedAdvantage } from '@/pages/modules/Pulsikom/advantage/updated'
 import { SettingsBackground } from '@/pages/modules/Pulsikom/settings/background'
 import { InboxMessage } from '@/pages/modules/Pulsikom/inbox'
 import { ThemaChangeColorPusilkom } from '@/pages/modules/Pulsikom/settings/template-web/color'
+import GuideListView from '@/pages/modules/website-utama/panduan/GuideListView'
 
 export const PusilkomRoutes = [
   {
@@ -78,6 +79,10 @@ export const PusilkomRoutes = [
         element: <ChangePassword />,
       },
     ],
+  },
+  {
+    path: 'panduan',
+    element: <GuideListView />,
   },
   {
     path: 'data-pulsikom',

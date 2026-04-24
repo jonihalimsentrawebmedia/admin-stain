@@ -13,6 +13,7 @@ import { HiPencil } from 'react-icons/hi'
 import { UseGetProdiVisionMission } from '@/pages/modules/website-fakultas/academic/program-studi/detail/hooks'
 import { type IVisionMissionForm, VisionMissionResolver } from './resolver.tsx'
 import { useParams } from 'react-router-dom'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 const VisionMissionProdi = () => {
   const { id } = useParams()
@@ -51,29 +52,35 @@ const VisionMissionProdi = () => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
         <div className="flex justify-between items-center">
-          <div className="text-primary">Tentang Prodi</div>
-          {isEdit ? (
-            <ButtonForm
-              loading={loading}
-              onCancel={() => {
-                setIsEdit(false)
-              }}
+          <div className="text-primary">Visi, Misi & Tujuan</div>
+          <div className="flex gap-4 items-center">
+            <ButtonGoToGuide
+              titleGuide={'Visi, Misi & Tujuan'}
+              valueGuide="FAKULTAS_AKADEMIK_PROGRAM_STUDI_VISI_MISI"
             />
-          ) : (
-            <Button
-              onClick={() => {
-                setIsEdit(!isEdit)
-                form.reset({
-                  ...visionMission,
-                })
-              }}
-              variant={'outline'}
-              className={'bg-white text-primary border-primary hover:text-primary'}
-            >
-              <HiPencil />
-              Edit
-            </Button>
-          )}
+            {isEdit ? (
+              <ButtonForm
+                loading={loading}
+                onCancel={() => {
+                  setIsEdit(false)
+                }}
+              />
+            ) : (
+              <Button
+                onClick={() => {
+                  setIsEdit(!isEdit)
+                  form.reset({
+                    ...visionMission,
+                  })
+                }}
+                variant={'outline'}
+                className={'bg-white text-primary border-primary hover:text-primary'}
+              >
+                <HiPencil />
+                Edit
+              </Button>
+            )}
+          </div>
         </div>
         <CardInput title="Visi">
           {isEdit ? (

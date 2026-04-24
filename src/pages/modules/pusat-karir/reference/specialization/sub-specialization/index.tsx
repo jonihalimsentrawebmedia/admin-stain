@@ -5,6 +5,7 @@ import { ButtonAddSubSpecialization } from '@/pages/modules/pusat-karir/referenc
 import { UseGetSubSpecialization } from '@/pages/modules/pusat-karir/reference/specialization/sub-specialization/hooks'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsSubSpecialization } from '@/pages/modules/pusat-karir/reference/specialization/sub-specialization/data/columns.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const SubSpecializationPage = () => {
   const { id } = useParams()
@@ -22,6 +23,15 @@ export const SubSpecializationPage = () => {
           isBack
           label={`Sub Spesialisasi - ${detail?.nama_spesialisasi}`}
           buttonGroup={[
+             {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={`Sub Spesialisasi - ${detail?.nama_spesialisasi}`}
+                  valueGuide="PUSAT_KARIR_REFERENSI_SUB_SPESIALISASI"
+                />
+              ),
+            },
             {
               type: 'custom',
               element: <ButtonAddSubSpecialization />,

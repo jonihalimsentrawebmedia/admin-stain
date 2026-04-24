@@ -6,6 +6,7 @@ import FormUploadPhotoImage from '@/pages/modules/LPPM/components/common/uploadP
 import TextInput from '@/components/common/form/TextInput.tsx'
 import { RichText } from '@/components/common/richtext'
 import { type ProfileData } from '../hooks/resolver'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 interface FormProps {
   form: UseFormReturn<ProfileData>
@@ -26,6 +27,15 @@ export const FormGreetingLeader = (props: FormProps) => {
           <ButtonTitleGroup
             label={label ?? ''}
             buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Sambutan Ketua Pusat Karir'}
+                      valueGuide="PUSAT_KARIR_PROFIL_SAMBUTAN_KETUA"
+                    />
+                  ),
+                },
               {
                 type: 'cancel',
                 label: 'Batal',

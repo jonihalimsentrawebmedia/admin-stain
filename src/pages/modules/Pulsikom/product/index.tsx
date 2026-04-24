@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { UseGetProduct } from './hooks/index.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsProduct } from '@/pages/modules/Pulsikom/product/data/columns.tsx'
+import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const ProductListPage = () => {
   const { product, meta, loading } = UseGetProduct()
@@ -15,6 +16,15 @@ export const ProductListPage = () => {
         <ButtonTitleGroup
           label={'Produk'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={`Produk`}
+                  valueGuide="PUSILKOM_PRODUK"
+                />
+              ),
+            },
             {
               type: 'add',
               label: 'Tambah Produk',

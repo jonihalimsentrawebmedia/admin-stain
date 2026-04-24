@@ -8,6 +8,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { UseGetAuthoritySPI } from './hooks/index'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const AuthoritySPIPage = () => {
   const { authority } = UseGetAuthoritySPI()
@@ -53,6 +54,15 @@ export const AuthoritySPIPage = () => {
                 label={'Tugas & Wewenang'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={'Tugas & Wewenang'}
+                        valueGuide="SPI_TENTANG_TUGAS_WEWENANG"
+                      />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -76,6 +86,15 @@ export const AuthoritySPIPage = () => {
             <ButtonTitleGroup
               label={'Ubah Data Tugas & Wewenang'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Tugas & Wewenang'}
+                      valueGuide="SPI_TENTANG_TUGAS_WEWENANG"
+                    />
+                  ),
+                },
                 {
                   type: 'edit',
                   label: 'Edit Konten',

@@ -11,6 +11,7 @@ import { MdOutlineHistory } from 'react-icons/md'
 import { ButtonProcessEditor } from '../component/buttonProcess.tsx'
 import { ButtonAgreeEditor } from '../component/buttonAgree.tsx'
 import { ButtonRejectEditor } from '@/pages/modules/new_editor/publict-content/article-carier/component/buttonReject.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const DetailEditorArticleCarrier = () => {
   const { id } = useParams()
@@ -45,6 +46,10 @@ export const DetailEditorArticleCarrier = () => {
                   <p className="text-blue-600 font-semibold">
                     {detail?.status_publish?.split('_').join(' ')}
                   </p>
+                    <ButtonGoToGuide
+                      titleGuide={`Detail Artikel`}
+                      valueGuide="EDITOR_APPROVE_KONTEN_PUBLIK"
+                    />
                   <Link to={`/modules/editor/public-content/article/edit/${detail?.id_artikel}`}>
                     <Button
                       size={'sm'}

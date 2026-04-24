@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button.tsx'
 import { useNavigate } from 'react-router-dom'
 import { FaListUl } from 'react-icons/fa'
 import { UseGetDetailGroupSKill } from '@/pages/modules/website-fakultas/research/research-group/hooks'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const ResearchGroupPage = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -57,6 +58,15 @@ export const ResearchGroupPage = () => {
                 label={'Kelompok Penelitian'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={'Kelompok Penelitian'}
+                        valueGuide="FAKULTAS_PENELITIAN_KELOMPOK_KEAHLIAN"
+                      />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -79,6 +89,15 @@ export const ResearchGroupPage = () => {
             <ButtonTitleGroup
               label={'Kelompok Penelitian'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Kelompok Penelitian'}
+                      valueGuide="FAKULTAS_PENELITIAN_KELOMPOK_KEAHLIAN"
+                    />
+                  ),
+                },
                 {
                   type: 'custom',
                   element: (

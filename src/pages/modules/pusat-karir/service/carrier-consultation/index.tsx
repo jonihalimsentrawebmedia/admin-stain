@@ -8,6 +8,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { UseGetConsultationCarrier } from './hooks/index'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const CarrierConsultationPage = () => {
   const { consultation } = UseGetConsultationCarrier()
@@ -52,6 +53,15 @@ export const CarrierConsultationPage = () => {
                 label={'Konsultasi Karir'}
                 buttonGroup={[
                   {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={'Konsultasi Karir'}
+                        valueGuide="PUSAT_KARIR_LAYANAN_KONSULTASI_KARIR"
+                      />
+                    ),
+                  },
+                  {
                     type: 'cancel',
                     label: 'Batal',
                     onClick: () => setIsEdit(!isEdit),
@@ -74,6 +84,15 @@ export const CarrierConsultationPage = () => {
             <ButtonTitleGroup
               label={'Konsultasi Karir'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Konsultasi Karir'}
+                      valueGuide="PUSAT_KARIR_LAYANAN_KONSULTASI_KARIR"
+                    />
+                  ),
+                },
                 {
                   type: 'edit',
                   label: 'Edit Konten',
