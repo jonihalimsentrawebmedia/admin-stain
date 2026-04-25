@@ -7,6 +7,7 @@ import CardLog from '../../components/card/CardLog'
 import CardPengajuan from '../../components/card/CardPengajuan'
 import ButtonNewEditor from '../../components/buttonSumission/ButtonNewEditor'
 import CardReject from '../../components/card/CardReject'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const ProdiDetailView = () => {
   const {
@@ -29,6 +30,15 @@ const ProdiDetailView = () => {
       <ButtonTitleGroup
         isBack
         buttonGroup={[
+           {
+            type: 'custom',
+            element: (
+              <ButtonGoToGuide
+                titleGuide={`Pengajuan Data - Profil Program Studi`}
+                valueGuide="EDITOR_APPROVE_PENGAJUAN_PROFIL"
+              />
+            ),
+          },
           {
             type: 'custom',
             element: (

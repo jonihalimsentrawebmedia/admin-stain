@@ -4,10 +4,10 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Accordion } from '@/components/ui/accordion.tsx'
 import { AccordionCustom } from '@/components/common/accordion'
 import { useNavigate } from 'react-router-dom'
-import { ButtonCancelApproval } from '@/pages/modules/pusat-karir/data-unit/component/buttonCancel.tsx'
 import { MdInfo } from 'react-icons/md'
 import { useState } from 'react'
 import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
+import { ButtonCancelApproval } from './component/buttonCancel'
 
 export const DetailProfilePuslikom = () => {
   const [realData, setRealData] = useState(true)

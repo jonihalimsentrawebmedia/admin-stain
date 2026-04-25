@@ -5,10 +5,15 @@ import { AccordionCustom } from '@/components/common/accordion'
 import { Accordion } from '@/components/ui/accordion.tsx'
 import { ProfilePageSkeleton } from '@/pages/modules/website-utama/profile/components/skeleton.tsx'
 import { ButtonCancelApproval } from './components/buttonCancel'
+import { useState } from 'react'
+import { MdInfo } from 'react-icons/md'
 
 export const ProfilePageMainWebsite = () => {
+  const [realData, setRealData] = useState(true)
   const navigate = useNavigate()
-  const { loading, detailUniversity } = UseGetUniversityData()
+  const { loading, detailUniversity } = UseGetUniversityData({
+    real_data: realData,
+  })
 
   return (
     <>
@@ -35,6 +40,19 @@ export const ProfilePageMainWebsite = () => {
                   ]
             }
           />
+          {detailUniversity?.status_publish == 'DIAJUKAN_EDITOR' && (
+            <div
+              className={'border border-blue-500 rounded flex p-2 w-fit items-center gap-1.5 mt-5'}
+            >
+              <MdInfo className={'size-5 text-blue-500'} />
+              {realData
+                ? 'Data yang tampil adalah data yang asli. Untuk melihat data yang anda ajukan'
+                : 'Data yang tampil adalah data yang anda ajukan. Untuk melihat data asli'}
+              <button className={'text-blue-500'} onClick={() => setRealData(!realData)}>
+                KLIK DISINI
+              </button>
+            </div>
+          )}
 
           <div className="flex items-start gap-5 mt-5">
             <div className="flex flex-col gap-1">

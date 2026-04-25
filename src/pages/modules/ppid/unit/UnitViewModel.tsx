@@ -2,13 +2,15 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import useGetUnit from './controller/useGetLembaga'
-import useGetUnitCurrent from './controller/useGetUnitCurrent'
 
 const UnitViewModel = () => {
-  const { unit, loading } = useGetUnit()
-  const [isCurrent, setIsCurrent] = useState(true)
-  const { unitCurrent } = useGetUnitCurrent()
-  const formCurrent = useForm()
+  const [realData, setRealData] = useState(true)
+
+  const { unit, loading } = useGetUnit({
+    real_data: realData,
+  })
+
+
   const navigate = useNavigate()
   const form = useForm()
   const fieldImage = [
@@ -118,13 +120,7 @@ const UnitViewModel = () => {
       })
     }
   }, [unit])
-  useEffect(() => {
-    if (unitCurrent) {
-      formCurrent.reset({
-        ...unitCurrent,
-      })
-    }
-  }, [unitCurrent])
+ 
   return {
     fieldAddress,
     fieldContact,
@@ -134,9 +130,7 @@ const UnitViewModel = () => {
     form,
     goToEdit,
     loading,
-    formCurrent,
-    isCurrent,
-    setIsCurrent,
+    realData,setRealData
   }
 }
 

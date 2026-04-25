@@ -15,7 +15,7 @@ import {
   UseGetTrentVisitorEditor,
 } from '@/pages/modules/manajeman-editor/beranda/hooks'
 import { ApprovedSectionEditor } from '@/pages/modules/manajeman-editor/beranda/components/Approved/section.tsx'
-import type { status } from '@/pages/modules/new_editor/data/types/data.tsx'
+import type { status } from '@/pages/modules/manajeman-editor/data/types/data'
 import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
 
 export default function DashboardAdminEditor() {

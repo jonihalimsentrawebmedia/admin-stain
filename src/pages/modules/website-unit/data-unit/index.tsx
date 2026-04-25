@@ -6,9 +6,15 @@ import { AccordionCustom } from '@/components/common/accordion'
 import { useNavigate } from 'react-router-dom'
 import { ButtonCancelApproval } from './component/buttonCancel.tsx'
 import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide.tsx'
+import { useState } from 'react'
+import { MdInfo } from 'react-icons/md'
 
 export const DetailProfileUnit = () => {
-  const { dataUnit, loading } = UseGetDetailDataUnit()
+  const [realData, setRealData] = useState(true)
+
+  const { dataUnit, loading } = UseGetDetailDataUnit({
+    real_data: realData,
+  })
   const navigate = useNavigate()
 
   return (
@@ -23,21 +29,27 @@ export const DetailProfileUnit = () => {
               dataUnit?.status_publish == 'DIAJUKAN_EDITOR'
                 ? [
                     {
-                      type: 'cancel',
-                      element: <ButtonCancelApproval />,
-                    },
-                    {
                       type: 'custom',
                       element: (
-                        <ButtonGoToGuide titleGuide='Data Utama Universitas' valueGuide="PERPUSTAKAAN_PROFIL_SATUAN_ORGANISASI" />
+                        <ButtonGoToGuide
+                          titleGuide="Data Utama Universitas"
+                          valueGuide="PERPUSTAKAAN_PROFIL_SATUAN_ORGANISASI"
+                        />
                       ),
+                    },
+                    {
+                      type: 'cancel',
+                      element: <ButtonCancelApproval />,
                     },
                   ]
                 : [
                     {
                       type: 'custom',
                       element: (
-                        <ButtonGoToGuide titleGuide='Data Utama Universitas' valueGuide="PERPUSTAKAAN_PROFIL_SATUAN_ORGANISASI" />
+                        <ButtonGoToGuide
+                          titleGuide="Data Utama Universitas"
+                          valueGuide="PERPUSTAKAAN_PROFIL_SATUAN_ORGANISASI"
+                        />
                       ),
                     },
                     {
@@ -48,6 +60,19 @@ export const DetailProfileUnit = () => {
                   ]
             }
           />
+          {dataUnit?.status_publish == 'DIAJUKAN_EDITOR' && (
+            <div
+              className={'border border-blue-500 rounded flex p-2 w-fit items-center gap-1.5 mt-5'}
+            >
+              <MdInfo className={'size-5 text-blue-500'} />
+              {realData
+                ? 'Data yang tampil adalah data yang asli. Untuk melihat data yang anda ajukan'
+                : 'Data yang tampil adalah data yang anda ajukan. Untuk melihat data asli'}
+              <button className={'text-blue-500'} onClick={() => setRealData(!realData)}>
+                KLIK DISINI
+              </button>
+            </div>
+          )}
 
           <div className="flex items-start gap-5 mt-5">
             <div className="flex flex-col gap-1">
