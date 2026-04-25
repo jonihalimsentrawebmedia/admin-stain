@@ -3,17 +3,21 @@ import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import type { SatuanOrganisasiList } from '@/pages/modules/settings/model'
-
-const useGetUnit = () => {
+interface props {
+  real_data?: boolean
+}
+const useGetUnit = (props?: props) => {
+    const { real_data } = props ?? {}
   const [unit, setUnit] = useState<SatuanOrganisasiList>()
-
+ const ParamsSearch = new URLSearchParams()
+  if (real_data) ParamsSearch.append('is_real_data', real_data.toString() ?? 'false')
   const { data, isLoading, isFetching } = useQuery<{
     data: SatuanOrganisasiList
     meta: Meta
   }>({
     refetchOnWindowFocus: false,
-    queryKey: ['unit-ppid'],
-    queryFn: () => AxiosClient.get(`/unit-ppid/profil`).then((res) => res.data),
+    queryKey: ['unit-ppid', ParamsSearch.toString()],
+    queryFn: () => AxiosClient.get(`/unit-ppid/profil?${ParamsSearch}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching
