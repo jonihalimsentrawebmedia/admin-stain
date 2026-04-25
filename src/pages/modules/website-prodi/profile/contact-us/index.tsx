@@ -18,6 +18,7 @@ import {
   type IContactUsTypeForm,
 } from '@/pages/modules/website-utama/program-studi/detail/model/contact-us.ts'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
+import RenderHTMLContent from '@/components/common/richtext/RenderHTMLContent.tsx'
 
 const ContactUsProfilePage = () => {
   const { contactUs } = UseGetProfileContactUs()
@@ -78,6 +79,15 @@ const ContactUsProfilePage = () => {
       label: 'Email',
       name: 'email',
     },
+    {
+      label: 'Iframe Embed Google Maps',
+      name: 'iframe',
+      component: (
+        <>
+          <RenderHTMLContent content={contactUs?.iframe ?? ''} />
+        </>
+      ),
+    },
   ]
 
   useEffect(() => {
@@ -93,7 +103,7 @@ const ContactUsProfilePage = () => {
         <div className="flex justify-between items-center">
           <div className="text-primary text-2xl font-medium">Hubungi Kami</div>
           <div className="flexx gap-4 items-center">
-            <ButtonGoToGuide titleGuide='Hubungi Kami' valueGuide="PRODI_PROFIL_HUBUNGI_KAMI" />
+            <ButtonGoToGuide titleGuide="Hubungi Kami" valueGuide="PRODI_PROFIL_HUBUNGI_KAMI" />
             {isEdit ? (
               <ButtonForm
                 loading={loading}
@@ -127,6 +137,13 @@ const ContactUsProfilePage = () => {
                 name="link_google_map"
                 type="url"
                 label="Link Google Maps"
+                isRow
+              />
+              <TextInput
+                form={form}
+                name="iframe"
+                type="text"
+                label="Iframe Embed Google Maps"
                 isRow
               />
               <TextInput form={form} name="no_telepon" label="Telepon" isRow />
