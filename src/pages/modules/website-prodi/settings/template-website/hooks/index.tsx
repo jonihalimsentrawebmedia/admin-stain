@@ -3,15 +3,23 @@ import type { IThemeProdi, ThemeColor } from '../data/types.ts'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
+import type { BasicProps } from '@/utils/globalType.ts'
 
-export const UseGetTemplateProdi = () => {
+export const UseGetTemplateProdi = (props?: BasicProps) => {
+  const { page, limit, search } = props ?? {}
+
   const [templateProdi, setTemplateProdi] = useState<IThemeProdi[]>([])
   const [meta, setMeta] = useState<Meta>()
 
+  const ParamsSearch = new URLSearchParams()
+  if (page) ParamsSearch.append('page', page ?? '1')
+  if (limit) ParamsSearch.append('limit', limit ?? '10')
+  if (search) ParamsSearch.append('search', search ?? '')
+
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['template-prodi'],
+    queryKey: ['template-prodi', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get('/prodi/thema').then((res) => res.data),
+    queryFn: () => AxiosClient.get(`/prodi/thema?${ParamsSearch}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching

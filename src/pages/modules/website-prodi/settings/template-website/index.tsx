@@ -4,9 +4,18 @@ import { UseGetTemplateProdi } from '@/pages/modules/website-prodi/settings/temp
 import { ColumnsTemplateWebsite } from '@/pages/modules/website-prodi/settings/template-website/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
+import { useSearchParams } from 'react-router-dom'
 
 export const TemplateWebsite = () => {
-  const { templateProdi, loading, meta } = UseGetTemplateProdi()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+
+  const { templateProdi, loading, meta } = UseGetTemplateProdi({
+    page: page,
+    limit: limit,
+  })
+
   const columns = ColumnsTemplateWebsite()
 
   return (
