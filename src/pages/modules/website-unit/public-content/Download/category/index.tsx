@@ -4,6 +4,7 @@ import { UseGetCategoryDownloadUnit } from '../hooks/index'
 import { CategoryDownloadUnitColumns } from './components/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const CategoryDownloadProdiPage = () => {
   const { categoryDownload, loading, meta } = UseGetCategoryDownloadUnit()
@@ -15,6 +16,15 @@ export const CategoryDownloadProdiPage = () => {
         <ButtonTitleGroup
           label={'Kategori Berkas'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide="Kategori Berkas"
+                  valueGuide="PERPUSTAKAAN_KONTEN_PUBLIK_KATEGORI_BERKAS"
+                />
+              ),
+            },
             {
               type: 'custom',
               element: <ButtonAddCategoryDownloadUnit />,

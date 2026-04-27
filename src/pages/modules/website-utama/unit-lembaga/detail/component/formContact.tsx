@@ -18,6 +18,7 @@ import {
 } from '@/pages/modules/website-fakultas/about-faculty/contact-us/resolver.tsx'
 import { UseGetContactUnitInstitution } from '@/pages/modules/website-utama/unit-lembaga/detail/hooks'
 import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide'
+import RenderHTMLContent from '@/components/common/richtext/RenderHTMLContent'
 
 const ContactUsForm = () => {
   const { id } = useParams()
@@ -74,6 +75,15 @@ const ContactUsForm = () => {
     {
       label: 'Email',
       name: 'email',
+    },
+      {
+      label: 'Iframe Embed Google Maps',
+      name: 'iframe',
+      component: (
+        <>
+          <RenderHTMLContent content={contact?.iframe ?? ''} />
+        </>
+      ),
     },
   ]
 

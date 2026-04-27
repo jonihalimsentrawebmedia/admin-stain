@@ -16,6 +16,7 @@ import DetailField from '@/components/common/field/DetailField'
 import { UseGetContactUs } from '@/pages/modules/website-fakultas/about-faculty/hooks'
 import { ContactUsResolver, type IContactUsTypeForm } from './resolver.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
+import RenderHTMLContent from '@/components/common/richtext/RenderHTMLContent.tsx'
 
 const ContactUsView = () => {
   const { contactUs } = UseGetContactUs()
@@ -81,6 +82,15 @@ const ContactUsView = () => {
     {
       label: 'Email',
       name: 'email',
+    },
+     {
+      label: 'Iframe Embed Google Maps',
+      name: 'iframe',
+      component: (
+        <>
+          <RenderHTMLContent content={contactUs?.iframe ?? ''} />
+        </>
+      ),
     },
   ]
 
