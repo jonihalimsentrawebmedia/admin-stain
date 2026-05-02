@@ -12,12 +12,14 @@ const useGetDomain = () => {
   const page = searchParams.get('page') || '1'
   const limit = searchParams.get('limit') || '10'
   const search = searchParams.get('search') || ''
+  const kelompok = searchParams.get('kelompok') || ''
+
   const { data, isLoading, isFetching } = useQuery<{
     data: DomainList[]
     meta: Meta
   }>({
     refetchOnWindowFocus: false,
-    queryKey: ['settings-domain', { page, limit, search }],
+    queryKey: ['settings-domain', { page, limit, search, kelompok }],
     queryFn: () =>
       AxiosClient.get(`/pengaturan/domains?${searchParams.toString()}`).then((res) => res.data),
   })
@@ -26,7 +28,7 @@ const useGetDomain = () => {
 
   useEffect(() => {
     if (data) {
-      setDomains(data.data??[])
+      setDomains(data.data ?? [])
       setMeta(data.meta)
     }
   }, [data])

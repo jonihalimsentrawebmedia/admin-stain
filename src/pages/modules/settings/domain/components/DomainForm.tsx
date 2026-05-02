@@ -5,8 +5,9 @@ import { UseGetDomainNotExists } from '@/pages/modules/settings/domain/controlle
 
 interface Props {
   form: UseFormReturn<any>
+  id?: string
 }
-const DomainForm = ({ form }: Props) => {
+const DomainForm = ({ form, id }: Props) => {
   const optionsGroup = [
     {
       label: 'Universitas',
@@ -47,6 +48,7 @@ const DomainForm = ({ form }: Props) => {
   ]
   const { organizationUnit } = UseGetDomainNotExists({
     group: form.watch('kelompok'),
+    id: (id as string) ?? '',
   })
 
   // const { satuanOrganisasi } = useGetSatuanOrganisasi({

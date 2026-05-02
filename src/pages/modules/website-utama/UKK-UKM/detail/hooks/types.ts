@@ -17,7 +17,7 @@ export interface IAboutUkkUkm {
 export interface IContactUkkUkm {
   id_satuan_organisasi: string
   id_unit: string
-
+iframe:string
   alamat: string
   email: string
   no_telepon: string

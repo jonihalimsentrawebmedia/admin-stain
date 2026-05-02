@@ -13,6 +13,7 @@ export interface IContactUs {
   updated_user: string
   nama_user_created: string
   nama_user_updated: string
+  iframe:any
 }
 
 export const ContactUsResolver = z.object({

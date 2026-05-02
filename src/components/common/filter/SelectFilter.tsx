@@ -103,6 +103,7 @@ const SelectFilter = ({
             if (name) {
               const newParams = new URLSearchParams(searchParams.toString())
               newParams.set(name, e.value)
+              newParams.set('page', '1')
               if (e.value === '') newParams.delete(name)
               setSearchParams(newParams)
               setValue(e)
