@@ -6,6 +6,7 @@ export interface IThemeProdi {
   is_tersedia: boolean
   nama_user_updated: string | null
   default: string
+  keterangan: string
 }
 
 export interface ThemeColor {

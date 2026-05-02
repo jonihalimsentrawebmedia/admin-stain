@@ -7,11 +7,11 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
-import type { IThemeUnit } from '../data/types.ts'
+import type { ThemaLembaga } from '../model/index'
 import { useQueryClient } from '@tanstack/react-query'
 
 interface Props {
-  data: IThemeUnit
+  data: ThemaLembaga
 }
 
 const ButtonEditDescription = (props: Props) => {
@@ -32,13 +32,13 @@ const ButtonEditDescription = (props: Props) => {
   const queryClient = useQueryClient()
   const HandleSave = async (e: any) => {
     setLoading(true)
-    await AxiosClient.post(`/website-utama/thema/${data?.thema}/keterangan`, e)
+    await AxiosClient.post(`/lembaga/thema/${data?.thema}/keterangan`, e)
       .then((res) => {
         if (res.data.status) {
           setLoading(false)
           setOpen(false)
           toast.success(res.data.message || 'Success Pengajuan update data keterangan thema')
-          queryClient.invalidateQueries({ queryKey: ['template-main'] })
+          queryClient.invalidateQueries({ queryKey: ['template-pengaturan'] })
         }
       })
       .catch((err) => {
@@ -49,13 +49,19 @@ const ButtonEditDescription = (props: Props) => {
 
   return (
     <>
-      <button
-        onClick={() => setOpen(!open)}
-        disabled={loading}
-        className={'bg-yellow-500 p-1.5 rounded text-white hover:bg-yellow-600'}
-      >
-        <HiPencil />
-      </button>
+      <div className={'flex items-center gap-2'}>
+        {data?.keterangan}
+
+        <button
+          onClick={() => setOpen(!open)}
+          disabled={loading}
+          className={
+            'bg-yellow-500 p-1.5 rounded text-white hover:bg-yellow-600 disabled:bg-gray-300'
+          }
+        >
+          <HiPencil />
+        </button>
+      </div>
 
       <DialogBasic title={'Ubah Data Keterangan Thema'} open={open} setOpen={setOpen}>
         <Form {...form}>

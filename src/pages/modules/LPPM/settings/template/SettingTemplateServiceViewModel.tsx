@@ -5,6 +5,7 @@ import ButtonSwitch from './components/ButtonSwitch'
 import { format } from 'date-fns'
 import type { ThemaLPPM } from './model'
 import { FaGear } from 'react-icons/fa6'
+import ButtonEditDescription from './components/buttonEdit.tsx'
 
 const SettingTemplateServiceViewModel = () => {
   const [searchParams] = useSearchParams()
@@ -48,7 +49,14 @@ const SettingTemplateServiceViewModel = () => {
         )
       },
     },
-
+    {
+      accessorKey: 'keterangan',
+      header: 'Keterangan',
+      cell: ({ row }) => {
+        const data = row?.original
+        return <ButtonEditDescription data={data} />
+      },
+    },
     {
       accessorKey: 'id_template',
       header: 'Pengaturan Warna',
