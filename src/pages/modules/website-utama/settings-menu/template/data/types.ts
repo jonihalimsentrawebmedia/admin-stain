@@ -3,6 +3,7 @@ export interface IThemeUnit {
   active: boolean
   image: string
   tanggal_aktif: string | null
+  keterangan:string | null
   nama_user_updated: string | null
   default: string
 }

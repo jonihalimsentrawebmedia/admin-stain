@@ -5,6 +5,7 @@ import { ButtonStatus } from '../component/buttonStatus.tsx'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button.tsx'
 import { FaGear } from 'react-icons/fa6'
+import ButtonEditDescription from '@/pages/modules/website-utama/settings-menu/template/component/buttonEdit.tsx'
 
 export const ColumnsTemplateWebsite = () => {
   const columns: ColumnDef<IThemeUnit>[] = [
@@ -47,6 +48,19 @@ export const ColumnsTemplateWebsite = () => {
         const data = row?.original
         return (
           <p>{data?.tanggal_aktif ? format(data?.tanggal_aktif, 'dd MMMM yyyy, HH:mm:ss') : '-'}</p>
+        )
+      },
+    },
+    {
+      accessorKey: 'Keterangan',
+      header: 'Keterangan',
+      cell: ({ row }) => {
+        const data = row?.original
+        return (
+          <div className={'flex gap-2 items-center'}>
+            <p>{data?.keterangan ?? 'Keterangan'}</p>
+            <ButtonEditDescription />
+          </div>
         )
       },
     },

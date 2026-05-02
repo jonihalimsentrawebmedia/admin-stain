@@ -1,0 +1,62 @@
+import { HiPencil } from 'react-icons/hi'
+import { useState } from 'react'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
+import { useForm } from 'react-hook-form'
+import { Form } from '@/components/ui/form.tsx'
+import AxiosClient from '@/provider/axios.tsx'
+import { toast } from 'react-toastify'
+import TextInput from '@/components/common/form/TextInput.tsx'
+import ButtonForm from '@/components/common/button/ButtonForm.tsx'
+
+const ButtonEditDescription = () => {
+  const [open, setOpen] = useState(false)
+  const [loading, setLoading] = useState(false)
+
+  const form = useForm<{ keterangan: string }>()
+
+  const HandleSave = async (e: any) => {
+    setLoading(true)
+    await AxiosClient.post(`/website-utama/thema/description`, e)
+      .then((res) => {
+        if (res.data.status) {
+          setLoading(false)
+          setOpen(false)
+          toast.success(res.data.message || 'Success Pengajuan update data keterangan thema')
+        }
+      })
+      .catch((err) => {
+        setLoading(false)
+        toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
+      })
+  }
+
+  return (
+    <>
+      <button
+        onClick={() => setOpen(!open)}
+        disabled={loading}
+        className={'bg-yellow-500 p-1.5 rounded text-white hover:bg-yellow-600'}
+      >
+        <HiPencil />
+      </button>
+
+      <DialogBasic title={'Ubah Data Keterangan Thema'} open={open} setOpen={setOpen}>
+        <Form {...form}>
+          <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
+            <TextInput
+              name={'keterangan'}
+              form={form}
+              label={'Keterangan'}
+              placeholder={'Keterangan Thema'}
+              isRow
+              isRequired
+            />
+            <ButtonForm loading={loading} onCancel={() => setOpen(false)} />
+          </form>
+        </Form>
+      </DialogBasic>
+    </>
+  )
+}
+
+export default ButtonEditDescription
