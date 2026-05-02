@@ -4,6 +4,7 @@ import { UseGetCategoryDownloadProdi } from '@/pages/modules/website-prodi/publi
 import { CategoryDownloadProdiColumns } from '@/pages/modules/website-prodi/public-content/Download/category/components/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const CategoryDownloadProdiPage = () => {
   const { categoryDownload, loading, meta } = UseGetCategoryDownloadProdi()
@@ -15,6 +16,10 @@ export const CategoryDownloadProdiPage = () => {
         <ButtonTitleGroup
           label={'Kategori Berkas'}
           buttonGroup={[
+              {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide='Kategori Berkas' valueGuide="PRODI_KONTEN_PUBLIK_KATEGORI_BERKAS" />,
+            },
             {
               type: 'custom',
               element: <ButtonAddCategoryDownloadProdi />,

@@ -22,7 +22,7 @@ const ButtonGoToGuide = ({ valueGuide, titleGuide }: Props) => {
         navigate(link)
       }}
       variant={'outline'}
-      className="text-primary border-primary items-center"
+      className="text-primary border-primary items-center hover:text-primary"
     >
       <IoInformationCircle />
       Panduan

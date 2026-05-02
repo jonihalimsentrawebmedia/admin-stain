@@ -4,6 +4,7 @@ import TableCustom from '@/components/common/table/TableCustom'
 import SelectFilter from '@/components/common/filter/SelectFilter'
 import TemplateAimDetailViewModel from './TemplateAimDetailViewModel'
 import useGetTemplateAimDetail from '../comtroller/useGetTemplateAimDetail'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const TemplateAimDetailView = () => {
   const { columns } = TemplateAimDetailViewModel()
@@ -12,6 +13,12 @@ const TemplateAimDetailView = () => {
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
         buttonGroup={[
+          {
+            type: 'custom',
+            element: (
+              <ButtonGoToGuide titleGuide={title} valueGuide="P2M_JAMINAN_AIM_TEMPLATE_DOKUMEN" />
+            ),
+          },
           {
             label: '',
             onClick: () => {},

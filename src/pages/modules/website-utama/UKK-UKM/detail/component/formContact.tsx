@@ -18,6 +18,7 @@ import {
 } from '@/pages/modules/website-fakultas/about-faculty/contact-us/resolver.tsx'
 import { UseGetContactUkkUkm } from '../hooks/index'
 import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide'
+import RenderHTMLContent from '@/components/common/richtext/RenderHTMLContent'
 
 const ContactUsForm = () => {
   const { id } = useParams()
@@ -75,6 +76,15 @@ const ContactUsForm = () => {
       label: 'Email',
       name: 'email',
     },
+    {
+      label: 'Iframe Embed Google Maps',
+      name: 'iframe',
+      component: (
+        <>
+          <RenderHTMLContent content={contact?.iframe ?? ''} />
+        </>
+      ),
+    },
   ]
 
   useEffect(() => {
@@ -91,7 +101,10 @@ const ContactUsForm = () => {
         <div className="flex justify-between items-center">
           <div className="text-primary text-2xl font-medium">Hubungi Kami</div>
           <div className="flex items-center gap-4">
-            <ButtonGoToGuide titleGuide='Hubungi Kami' valueGuide="WEBSITE_UTAMA_UKK_UKM_HUBUNGI_KAMI" />
+            <ButtonGoToGuide
+              titleGuide="Hubungi Kami"
+              valueGuide="WEBSITE_UTAMA_UKK_UKM_HUBUNGI_KAMI"
+            />
             {isEdit ? (
               <ButtonForm loading={loading} onCancel={() => setIsEdit(false)} />
             ) : (
