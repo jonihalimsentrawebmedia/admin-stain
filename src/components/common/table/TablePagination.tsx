@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router-dom'
 import { IoChevronBack, IoChevronForwardOutline } from 'react-icons/io5'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export interface Meta {
   last_page: number
@@ -58,6 +58,12 @@ const TablePaginate = ({ meta, setPage }: Props) => {
   }
 
   const pages = generatePageNumbers()
+
+  useEffect(()=>{
+    if(searchParams.toString()){
+      setCurrentPage(parseInt(searchParams.get('page') ?? '1'))
+    }
+  },[searchParams.toString()])
 
   return (
     <div className="mt-5 flex flex-col gap-2 items-start lg:flex-row lg:items-center justify-between">
