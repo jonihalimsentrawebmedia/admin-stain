@@ -100,9 +100,10 @@ const TableCustom = (props: Props) => {
   const limitData = searchparams.get('limit') ? Number(searchparams.get('limit')) : 10
 
   useEffect(() => {
-    const temp = columns
-      .map((item: any) => item.accessorKey)
-      .filter((item: string) => !columnsName.includes(item))
+    const temp =
+      columns
+        ?.map((item: any) => item.accessorKey)
+        .filter((item: string) => !columnsName.includes(item)) ?? []
 
     setColumnChecked(temp)
   }, [])
@@ -127,7 +128,7 @@ const TableCustom = (props: Props) => {
                 <IconListTable />
               </PopoverTrigger>
               <PopoverContent className="w-fit flex flex-col gap-2">
-                {columns.map((item: any) => (
+                {columns?.map((item: any) => (
                   <div
                     className={`flex gap-2 items-center ${item.header == '' || item.header == '#' || item.accessorKey == 'aksi' || item.accessorKey == 'action' || item.accessorKey == 'no' ? 'hidden' : ''}`}
                   >
@@ -159,9 +160,9 @@ const TableCustom = (props: Props) => {
 
       <Table className={`${className}`}>
         <TableHeader>
-          {table?.getHeaderGroups().map((headerGroup) => (
+          {table?.getHeaderGroups()?.map((headerGroup) => (
             <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header, l) => (
+              {headerGroup?.headers?.map((header, l) => (
                 <TableHead
                   colSpan={header.colSpan}
                   key={l}
@@ -184,7 +185,7 @@ const TableCustom = (props: Props) => {
             </TableRow>
           )}
           {loading
-            ? Array.from({ length: 5 }).map((_, rowIndex) => (
+            ? Array.from({ length: 5 })?.map((_, rowIndex) => (
                 <TableRow key={`skeleton-${rowIndex}`}>
                   {Array.from({ length: columnCount }).map((_, colIndex) => (
                     <TableCell key={colIndex} className={`${tdClassName}`}>
@@ -193,9 +194,9 @@ const TableCustom = (props: Props) => {
                   ))}
                 </TableRow>
               ))
-            : table.getRowModel().rows.map((row) => (
+            : table.getRowModel()?.rows?.map((row) => (
                 <TableRow key={row.id}>
-                  {row.getVisibleCells().map((cell: any, k) => (
+                  {row.getVisibleCells()?.map((cell: any, k) => (
                     <TableCell
                       className={`whitespace-pre-wrap border ${tdClassName + ' text-[#3E3E3E]'} ${columnChecked.includes(cell.column.columnDef.accessorKey) ? '' : 'hidden'}`}
                       key={k}
@@ -212,7 +213,7 @@ const TableCustom = (props: Props) => {
           <TableFooter>
             {table?.getFooterGroups()?.map((footerGroup) => (
               <TableRow key={footerGroup.id}>
-                {footerGroup.headers.map((header) => (
+                {footerGroup?.headers?.map((header) => (
                   <TableCell
                     key={header.id}
                     colSpan={header.colSpan}

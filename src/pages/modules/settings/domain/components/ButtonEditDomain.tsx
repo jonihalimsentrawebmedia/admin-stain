@@ -1,60 +1,57 @@
-import { DialogCustom } from "@/components/common/dialog/DialogCustom";
-import { Form } from "@/components/ui/form";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import ButtonForm from "@/components/common/button/ButtonForm";
-import { IconEdit } from "@/components/common/table/icon";
-import DomainForm from "./DomainForm";
-import { DomainResolver, type DomainList, type DomainType } from "../model";
-import { useQueryClient } from "@tanstack/react-query";
-import { zodResolver } from "@hookform/resolvers/zod";
-import AxiosClient from "@/provider/axios";
-import { toast } from "react-toastify";
-interface Props{
-  data:DomainList
+import { DialogCustom } from '@/components/common/dialog/DialogCustom'
+import { Form } from '@/components/ui/form'
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import ButtonForm from '@/components/common/button/ButtonForm'
+import { IconEdit } from '@/components/common/table/icon'
+import DomainForm from './DomainForm'
+import { type DomainList, DomainResolver, type DomainType } from '../model'
+import { useQueryClient } from '@tanstack/react-query'
+import { zodResolver } from '@hookform/resolvers/zod'
+import AxiosClient from '@/provider/axios'
+import { toast } from 'react-toastify'
+
+interface Props {
+  data: DomainList
 }
-const ButtonEditDomain = ({data}:Props) => {
-  const [open, setOpen] = useState(false);
- const form = useForm<DomainType>({
+const ButtonEditDomain = ({ data }: Props) => {
+  const [open, setOpen] = useState(false)
+  const form = useForm<DomainType>({
     resolver: zodResolver(DomainResolver),
-  });
+  })
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
   async function handleSave(values: DomainType) {
-    setLoading(true);
+    setLoading(true)
     try {
-      const res = await AxiosClient.put(`/pengaturan/domains/${data.id_domain}`, values);
+      const res = await AxiosClient.put(`/pengaturan/domains/${data.id_domain}`, values)
 
       if (res.data.status) {
-        toast.success(res.data.message);
+        toast.success(res.data.message)
 
         await queryClient.invalidateQueries({
-          queryKey: ["settings-domain"],
-        });
-        setOpen(false);
-             form.reset();
+          queryKey: ['settings-domain'],
+        })
+        setOpen(false)
+        form.reset()
       }
     } catch (err: any) {
       console.log(err)
-      toast.error(
-        err?.response?.data?.message || "Terjadi kesalahan, silakan coba lagi."
-      );
+      toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
     } finally {
-      setLoading(false);
-   
- 
+      setLoading(false)
     }
   }
-  
+
   return (
     <>
       <button
         onClick={() => {
-          setOpen(true);
+          setOpen(true)
           form.reset({
-            ...data
+            ...data,
           })
         }}
       >
@@ -69,15 +66,12 @@ const ButtonEditDomain = ({data}:Props) => {
       >
         <div className="flex flex-col gap-4">
           <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(handleSave)}
-              className="flex flex-col gap-4"
-            >
-              <DomainForm form={form} />
+            <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
+              <DomainForm form={form} id={data?.id_satuan_organisasi} />
               <ButtonForm
                 loading={loading}
                 onCancel={() => {
-                  setOpen(false);
+                  setOpen(false)
                 }}
               />
             </form>
@@ -85,7 +79,7 @@ const ButtonEditDomain = ({data}:Props) => {
         </div>
       </DialogCustom>
     </>
-  );
-};
+  )
+}
 
-export default ButtonEditDomain;
+export default ButtonEditDomain
