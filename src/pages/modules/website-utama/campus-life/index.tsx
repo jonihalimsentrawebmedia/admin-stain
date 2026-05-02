@@ -11,6 +11,7 @@ import { PerformanceSection } from '@/pages/modules/website-utama/campus-life/co
 import { TestimonialSection } from '@/pages/modules/website-utama/campus-life/components/SectionTabs/testimonial.tsx'
 import { GallerySection } from '@/pages/modules/website-utama/campus-life/components/SectionTabs/gallery'
 import { UrlDirectionSection } from '@/pages/modules/website-utama/campus-life/components/SectionTabs/urlDirection.tsx'
+import ButtonGoToGuide from '../panduan/components/ButtonGoToGuide'
 
 const CampusLifePage = () => {
   const navigate = useNavigate()
@@ -34,14 +35,21 @@ const CampusLifePage = () => {
     { id: 7, name: 'Link Arahan', value: 'link', element: <UrlDirectionSection /> },
   ]
 
- 
-
   return (
     <>
       <div className={'flex flex-col gap-4'}>
         <ButtonTitleGroup
           label={'Kehidupan Kampus'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Kehidupan Kampus'}
+                  valueGuide="WEBSITE_UTAMA_KEHIDUPAN_KAMPUS"
+                />
+              ),
+            },
             {
               type: 'custom',
               element: (

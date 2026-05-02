@@ -7,6 +7,7 @@ import { ProfilePageSkeleton } from '@/pages/modules/website-utama/profile/compo
 import { ButtonCancelApproval } from './components/buttonCancel'
 import { useState } from 'react'
 import { MdInfo } from 'react-icons/md'
+import ButtonGoToGuide from '../panduan/components/ButtonGoToGuide'
 
 export const ProfilePageMainWebsite = () => {
   const [realData, setRealData] = useState(true)
@@ -27,11 +28,29 @@ export const ProfilePageMainWebsite = () => {
               detailUniversity?.status_publish == 'DIAJUKAN_EDITOR'
                 ? [
                     {
+                      type: 'custom',
+                      element: (
+                        <ButtonGoToGuide
+                          titleGuide={'Data Utama Universitas'}
+                          valueGuide="WEBSITE_UTAMA_PROFIL_SATUAN_ORGANISASI"
+                        />
+                      ),
+                    },
+                    {
                       type: 'cancel',
                       element: <ButtonCancelApproval />,
                     },
                   ]
                 : [
+                    {
+                      type: 'custom',
+                      element: (
+                        <ButtonGoToGuide
+                          titleGuide={'Data Utama Universitas'}
+                          valueGuide="WEBSITE_UTAMA_PROFIL_SATUAN_ORGANISASI"
+                        />
+                      ),
+                    },
                     {
                       label: 'Ajukan Edit Data',
                       onClick: () => navigate('edit'),

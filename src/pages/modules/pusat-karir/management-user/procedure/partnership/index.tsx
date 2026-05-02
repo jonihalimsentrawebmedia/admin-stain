@@ -52,15 +52,15 @@ export const ProcedurePartnershipPage = () => {
               <ButtonTitleGroup
                 label={'Prosedur Pendaftaran - Mitra Kerja'}
                 buttonGroup={[
-                   {
-                  type: 'custom',
-                  element: (
-                    <ButtonGoToGuide
-                      titleGuide={'Prosedur Pendaftaran - Mitra Kerja'}
-                      valueGuide="PUSAT_KARIR_USER_PROSEDURE_PENDAFTARAN_MITRA_KERJA"
-                    />
-                  ),
-                },
+                  {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={'Prosedur Pendaftaran - Mitra Kerja'}
+                        valueGuide="PUSAT_KARIR_USER_PROSEDURE_PENDAFTARAN_MITRA_KERJA"
+                      />
+                    ),
+                  },
                   {
                     type: 'cancel',
                     label: 'Batal',
@@ -84,6 +84,15 @@ export const ProcedurePartnershipPage = () => {
             <ButtonTitleGroup
               label={'Prosedur Pendaftaran - Mitra Kerja'}
               buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={'Prosedur Pendaftaran - Mitra Kerja'}
+                      valueGuide="PUSAT_KARIR_USER_PROSEDURE_PENDAFTARAN_MITRA_KERJA"
+                    />
+                  ),
+                },
                 {
                   type: 'edit',
                   label: 'Edit Konten',
