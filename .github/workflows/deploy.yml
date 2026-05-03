@@ -30,6 +30,7 @@ jobs:
       - name: 🏗 Build Vite
         run: pnpm build
         env:
+          VITE_APP_TITLE: Admin Pengelolaan Website STAIN Madina
           VITE_API_URL: ${{ secrets.VITE_API_URL }}
           VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
           VITE_AUTH_DOMAIN: ${{ secrets.VITE_AUTH_DOMAIN }}
