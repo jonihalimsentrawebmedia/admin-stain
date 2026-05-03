@@ -1,0 +1,51 @@
+name: Deploy Simalungun Vite to VPS (yarn)
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: yarn
+
+      - name: 📦 Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: 🏗 Build Vite
+        run: yarn build
+        env:
+          VITE_API_URL: ${{ secrets.SIMALUNGUN_VITE_API_URL }}
+          VITE_FIREBASE_API_KEY: ${{ secrets.SIMALUNGUN_VITE_FIREBASE_API_KEY }}
+          VITE_AUTH_DOMAIN: ${{ secrets.SIMALUNGUN_VITE_AUTH_DOMAIN }}
+          VITE_PROJECT_ID: ${{ secrets.SIMALUNGUN_VITE_PROJECT_ID }}
+          VITE_STORAGE_BUCKET: ${{ secrets.SIMALUNGUN_VITE_STORAGE_BUCKET }}
+          VITE_MESSAGING_SENDER_ID: ${{ secrets.SIMALUNGUN_VITE_MESSAGING_SENDER_ID }}
+          VITE_APP_ID: ${{ secrets.SIMALUNGUN_VITE_APP_ID }}
+          VITE_MEASUREMENT_ID: ${{ secrets.SIMALUNGUN_VITE_MEASUREMENT_ID }}
+
+      - name: 🔐 Setup SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SIMALUNGUN_VPS_SSH_KEY }}
+
+      - name: 🗝️ Add VPS to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.SIMALUNGUN_VPS_HOST }} >> ~/.ssh/known_hosts
+
+      - name: 🚀 Deploy dist to VPS
+        run: |
+          rsync -avz --delete \
+            dist/ \
+            ${{ secrets.SIMALUNGUN_VPS_USER }}@${{ secrets.SIMALUNGUN_VPS_HOST }}:/var/www/${{ secrets.SIMALUNGUN_DEPLOY_DOMAIN }}/
