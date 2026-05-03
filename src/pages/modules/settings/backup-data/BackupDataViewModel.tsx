@@ -71,8 +71,10 @@ const BackupDataViewModel = () => {
         },
       })
 
-      const contentType = res.headers['content-type']
-      const disposition = res.headers['content-disposition']
+      const rawContentType = res.headers['content-type']
+      const rawDisposition = res.headers['content-disposition']
+      const contentType = typeof rawContentType === 'string' ? rawContentType : undefined
+      const disposition = typeof rawDisposition === 'string' ? rawDisposition : undefined
 
       // 🔥 Kalau backend kirim JSON error
       if (contentType?.includes('application/json')) {
