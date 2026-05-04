@@ -141,6 +141,11 @@ export const MENULIST = [
         name: 'Template Website',
         path: `${baseDomain}/pengaturan-menu/template`,
       },
+      {
+        id: 5,
+        name: 'Qoutes',
+        path: `${baseDomain}/pengaturan-menu/quotes`,
+      },
     ],
   },
   {

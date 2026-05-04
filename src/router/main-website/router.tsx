@@ -195,6 +195,7 @@ import PublicationPage from '@/pages/modules/website-utama/publication'
 import ListDataPublication from '@/pages/modules/website-utama/publication/List-data'
 import { PublicationLanguagePage } from '@/pages/modules/website-utama/publication/language'
 import GuideListView from '@/pages/modules/website-utama/panduan/GuideListView'
+import { QuotesPage } from '@/pages/modules/website-utama/settings-menu/qoutes'
 
 export const MainWebsiteRouter = [
   {
@@ -215,8 +216,8 @@ export const MainWebsiteRouter = [
     ],
   },
   {
-    path:"panduan",
-    element:<GuideListView/>
+    path: 'panduan',
+    element: <GuideListView />,
   },
   {
     path: 'profile',
@@ -702,6 +703,15 @@ export const MainWebsiteRouter = [
           {
             path: ':id',
             element: <ThemaChangeColor />,
+          },
+        ],
+      },
+      {
+        path: 'quotes',
+        children: [
+          {
+            index: true,
+            element: <QuotesPage />,
           },
         ],
       },
