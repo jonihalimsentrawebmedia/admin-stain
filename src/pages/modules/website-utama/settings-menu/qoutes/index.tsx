@@ -1,27 +1,99 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Form } from '@/components/ui/form.tsx'
 import TextAreaInput from '@/components/common/form/textAreaInput.tsx'
+import TextInput from '@/components/common/form/TextInput.tsx'
+import ButtonForm from '@/components/common/button/ButtonForm.tsx'
+import AxiosClient from '@/provider/axios.tsx'
+import { toast } from 'react-toastify'
+import { useQueryClient } from '@tanstack/react-query'
+import { UploadImageRatio } from '@/pages/modules/website-utama/public-content/facilities/components/uploadImageRatio.tsx'
+import { useGetQuotes } from '@/pages/modules/website-utama/settings-menu/qoutes/hooks'
 
 export const QuotesPage = () => {
   const [isEdit, setIsEdit] = useState(false)
+  const [loading, setLoading] = useState(false)
   const form = useForm()
+
+  const { quotes } = useGetQuotes()
+
+  useEffect(() => {
+    if (quotes) {
+      form.reset({
+        isi: quotes?.isi,
+        pengarang: quotes?.pengarang,
+        gambar_background: quotes?.gambar_background,
+      })
+    }
+  }, [quotes])
+
+  const queryClient = useQueryClient()
+  const HandleSave = async (e: any) => {
+    setLoading(true)
+    await AxiosClient.post('/website-utama/quotes', e)
+      .then((res) => {
+        if (res.data.status) {
+          setIsEdit(false)
+          setLoading(false)
+          toast.success(res.data.message || 'Success Pengajuan tambah data quotes')
+          queryClient.invalidateQueries({
+            queryKey: ['quotes'],
+          })
+        }
+      })
+      .catch((err) => {
+        setLoading(false)
+        toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
+      })
+  }
 
   return (
     <>
       {isEdit ? (
         <>
           <Form {...form}>
-            <form>
+            <form className={'flex flex-col gap-4 mt-5'} onSubmit={form.handleSubmit(HandleSave)}>
+              <ButtonTitleGroup
+                label={'Quotes'}
+                buttonGroup={[
+                  { type: 'cancel', onClick: () => setIsEdit(false) },
+                  {
+                    type: 'save',
+                    label: 'Simpan',
+                  },
+                ]}
+              />
+
+              <UploadImageRatio
+                name={'gambar_background'}
+                form={form}
+                label={'Gambar Background'}
+                placeholder={'Gambar Background'}
+                aspectRatioWidth={16}
+                aspectRatioHeight={9}
+                maxWidthClassName={'w-[500px]'}
+                required
+                isRow
+              />
               <TextAreaInput
-                name={'isi_quotes'}
+                name={'isi'}
                 form={form}
                 label={'Quotes'}
                 placeholder={'Quotes'}
                 isRow
                 isRequired
               />
+              <TextInput
+                name={'pengarang'}
+                form={form}
+                label={'Pengarang'}
+                placeholder={'Pengarang'}
+                isRow
+                isRequired
+              />
+
+              <ButtonForm loading={loading} onCancel={() => setIsEdit(false)} />
             </form>
           </Form>
         </>
