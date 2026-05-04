@@ -5,7 +5,7 @@ import AxiosClient from '@/provider/axios.tsx'
 interface quotes {
   isi: string
   pengarang: string
-  gambar_background: string
+  url_gambar_background: string
 }
 
 export const useGetQuotes = () => {

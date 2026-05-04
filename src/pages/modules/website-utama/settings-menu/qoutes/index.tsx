@@ -23,7 +23,7 @@ export const QuotesPage = () => {
       form.reset({
         isi: quotes?.isi,
         pengarang: quotes?.pengarang,
-        gambar_background: quotes?.gambar_background,
+        url_gambar_background: quotes?.url_gambar_background,
       })
     }
   }, [quotes])
@@ -66,7 +66,7 @@ export const QuotesPage = () => {
               />
 
               <UploadImageRatio
-                name={'gambar_background'}
+                name={'url_gambar_background'}
                 form={form}
                 label={'Gambar Background'}
                 placeholder={'Gambar Background'}
@@ -109,6 +109,19 @@ export const QuotesPage = () => {
               },
             ]}
           />
+
+          <img
+            src={quotes?.url_gambar_background}
+            alt="quotes"
+            className="w-[400px] object-contain h-[250px]"
+          />
+
+          <div className="grid grid-cols-[12rem_1fr] gap-4">
+            <p className="text-gray-500">Isi</p>
+            <p>{quotes?.isi}</p>
+            <p className="text-gray-500">Pengarang</p>
+            <p>{quotes?.pengarang}</p>
+          </div>
         </div>
       )}
     </>
