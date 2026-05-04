@@ -15,6 +15,10 @@ export const EditPageUniversity = () => {
 
   const form = useForm<SatuanOrganisasiType>({
     resolver: zodResolver(SatuanOrganisasiResolver),
+    defaultValues: {
+      show_singkatan: false,
+      show_title: false,
+    },
   })
 
   const { detailUniversity } = UseGetUniversityData()
