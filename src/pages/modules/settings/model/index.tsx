@@ -41,6 +41,10 @@ export const SatuanOrganisasiResolver = z.object({
   api_dikti_username: z.string().optional().nullable(),
   api_dikti_password: z.string().optional().nullable(),
   id_unit_kerja_dikti: z.string().optional().nullable(),
+  ukuran_singkatan: z.string().optional().nullable(),
+  show_singkatan: z.boolean(),
+  ukuran_title: z.string().optional().nullable(),
+  show_title: z.boolean(),
 })
 
 /**
