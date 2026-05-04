@@ -1,0 +1,57 @@
+name: Deploy Admin Vite to Simalungun VPS
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.0
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: 📦 Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: 🏗 Build Vite
+        run: pnpm build
+        env:
+          VITE_APP_TITLE: Admin Pengelolaan Website Universitas Simalungun
+          VITE_API_URL: ${{ secrets.VITE_SIMALUNGUN_API_URL }}
+          VITE_FIREBASE_API_KEY: ${{ secrets.VITE_SIMALUNGUN_FIREBASE_API_KEY }}
+          VITE_AUTH_DOMAIN: ${{ secrets.VITE_SIMALUNGUN_AUTH_DOMAIN }}
+          VITE_PROJECT_ID: ${{ secrets.VITE_SIMALUNGUN_PROJECT_ID }}
+          VITE_STORAGE_BUCKET: ${{ secrets.VITE_SIMALUNGUN_STORAGE_BUCKET }}
+          VITE_MESSAGING_SENDER_ID: ${{ secrets.VITE_SIMALUNGUN_MESSAGING_SENDER_ID }}
+          VITE_APP_ID: ${{ secrets.VITE_SIMALUNGUN_APP_ID }}
+          VITE_MEASUREMENT_ID: ${{ secrets.VITE_SIMALUNGUN_MEASUREMENT_ID }}
+
+      - name: 🔐 Setup SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SIMALUNGUN_VPS_SSH_KEY }}
+
+      - name: 🗝️ Add VPS to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ secrets.SIMALUNGUN_VPS_HOST }} >> ~/.ssh/known_hosts
+
+      - name: 🚀 Deploy dist to VPS
+        run: |
+          rsync -avz --delete \
+            dist/ \
+            ${{ secrets.SIMALUNGUN_VPS_USER }}@${{ secrets.SIMALUNGUN_VPS_HOST }}:/var/www/${{ secrets.SIMALUNGUN_DEPLOY_DOMAIN }}/
