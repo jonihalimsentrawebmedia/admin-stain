@@ -2,7 +2,6 @@ import type { UseFormReturn } from 'react-hook-form'
 import CardInput from '@/components/common/card/CardInput'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput'
 import type { ICollaborationTypeForm } from '../model/resolver'
-import useGetSatuanOrganisasi from '@/pages/modules/settings/controller/useGetSatuanOrganisasi'
 import TextInput from '@/components/common/form/TextInput'
 import useGetCountry from '@/pages/modules/settings/reference/country/controller/useGetCountry'
 import useGetProvince from '@/pages/modules/settings/reference/province/controller/useGetProvince'
@@ -12,56 +11,27 @@ import useGetTypeOfCalloboration from '../../jenis-kerjasama/controller/useGetTy
 import useGetFieldOfCooperation from '../../bidang-kerjasama/controller/useGetFieldOfCooperation'
 import useGetCalloborationCategory from '../../kategori-kerjasama/controller/useGetCalloborationCategory'
 import useGetSubCalloborationCategory from '../../sub-kategori-kerjasama/controller/useGetSubCalloborationCategory'
+import Cookies from 'js-cookie'
+import useGetGroup from '../controller/useGetGroup'
+import useGetGroupUnit from '../controller/useGetUnitGroup'
 
 interface Props {
   form: UseFormReturn<ICollaborationTypeForm>
 }
 
 const CalloborationForm = ({ form }: Props) => {
-  const optionKelompok = [
-    {
-      value: 'UNIVERSITAS',
-      label: 'Universitas',
-    },
-    {
-      value: 'FAKULTAS',
-      label: 'Fakultas',
-    },
-    {
-      value: 'PRODI',
-      label: 'Prodi',
-    },
-    {
-      value: 'UNIT',
-      label: 'Unit',
-    },
-    {
-      value: 'LEMBAGA',
-      label: 'Lembaga',
-    },
-    {
-      value: 'UKK_UKM',
-      label: 'Ukk_ukm',
-    },
-    {
-      value: 'REKTORAT',
-      label: 'Rektorat',
-    },
-    {
-      value: 'BIRO',
-      label: 'Biro',
-    },
-    {
-      value: 'UPT',
-      label: 'Upt',
-    },
-  ]
-  const { satuanOrganisasi, loading: loadingSatuanOrganisasi } = useGetSatuanOrganisasi({
-    isGetAll: true,
+  const isSatuanOrganisasi = Cookies.get('id_satuan_organisasi')
+  const { groups, loading: loadingGroups } = useGetGroup({
+    id_universitas: isSatuanOrganisasi,
+  })
+
+  const { groupUnit, loading: loadingGroupUnit } = useGetGroupUnit({
     kelompok: form.watch('kelompok'),
   })
 
-  const { country, loading: loadingCountry } = useGetCountry()
+  const { country, loading: loadingCountry } = useGetCountry({
+    isGetAll: true,
+  })
   const { province, loading: loadingProvince } = useGetProvince({
     isGetAll: true,
     id_negara: form.watch('id_negara'),
@@ -86,28 +56,36 @@ const CalloborationForm = ({ form }: Props) => {
       isGetAll: true,
       id_kategori_kerjasama: form.watch('id_kategori_kerjasama'),
     })
+    console.log(form.watch('id_negara'))
   return (
     <div className="flex flex-col gap-4">
       <CardInput title="Unit Yang Melakukan Kerjasama">
         <div className="flex flex-col gap-4">
           <SelectBasicInput
-            data={optionKelompok}
+            data={groups.map((item) => {
+              return {
+                value: item,
+                label: item.split('_').join(' '),
+              }
+            })}
             form={form}
             name="kelompok"
             placeholder="Pilih"
             isRow
             label="Kelompok*"
             usePortal
+            isLoading={loadingGroups}
+            
           />
           <SelectBasicInput
             label="Unit*"
-            data={satuanOrganisasi.map((item) => {
+            data={groupUnit.map((item) => {
               return {
-                label: item.nama,
+                label: item.nama_satuan_organisasi,
                 value: item.id_satuan_organisasi,
               }
             })}
-            isLoading={form.watch('kelompok') == undefined ? false : loadingSatuanOrganisasi}
+            isLoading={form.watch('kelompok') == undefined ? false : loadingGroupUnit}
             form={form}
             name="id_unit"
             placeholder="Pilih"
@@ -142,6 +120,7 @@ const CalloborationForm = ({ form }: Props) => {
               placeholder="Pilih"
               isRow
               label="Negara*"
+              apiValue={form.watch('id_negara')}
             />
             <div></div>
             <SelectBasicInput

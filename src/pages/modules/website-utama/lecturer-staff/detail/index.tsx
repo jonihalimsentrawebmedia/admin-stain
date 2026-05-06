@@ -27,7 +27,7 @@ const DetailEmployee = () => {
     <>
       <div className={'space-y-4'}>
         <ButtonTitleGroup
-        isBack
+          isBack
           buttonGroup={[
             {
               type: 'edit',
