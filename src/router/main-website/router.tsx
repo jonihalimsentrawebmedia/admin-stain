@@ -1153,11 +1153,11 @@ export const MainWebsiteRouter = [
       },
       {
         path: ':id',
-        element: <LayoutFaculty />,
+        element: <LayoutFaculty title={'Fakultas'} />,
         children: [
           {
             path: 'tentang',
-            element: <AboutProgramStudiView />,
+            element: <AboutProgramStudiView title={"Fakultas"} />,
           },
           {
             path: 'unit-pengelola',
