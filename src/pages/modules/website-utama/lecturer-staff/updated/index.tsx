@@ -56,7 +56,7 @@ export const UpdatedEmployee = () => {
         form={form}
         loading={loading}
         HandlerSave={HandleSave}
-        label={'Tambah Data Dosen & Staff'}
+        label={'Edit Data Dosen & Staff'}
       />
     </>
   )

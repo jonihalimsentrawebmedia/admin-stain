@@ -143,7 +143,7 @@ export default function TabsFunctionalPosition() {
   return (
     <div className="space-y-4 rounded-md bg-white">
       <div className="flex gap-4 items-center justify-between">
-        <div className="text-xl text-primary font-medium">Pendidikan Formal</div>
+        <div className="text-xl text-primary font-medium">Jabatan Fungsional</div>
         <div className="flex gap-4 items-center">
           <ButtonSyncLecturerDetail
             link={`/website-utama/sdm/${id}/jabatan-fungsional/sync`}
