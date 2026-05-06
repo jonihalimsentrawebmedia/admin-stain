@@ -11,7 +11,12 @@ import { Form } from '@/components/ui/form'
 import { RichText } from '@/components/common/richtext'
 import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide'
 
-const AboutProgramStudiView = () => {
+interface props {
+ title: string;
+}
+
+const AboutProgramStudiView = (props:props) => {
+  const { title='Program Studi' } = props;
   const { aboutDetail } = useGetAbout()
   const { form, handleSave, loading } = usePostAbout()
   const [isEditContent, setIsEditContent] = useState(false)
@@ -60,14 +65,19 @@ const AboutProgramStudiView = () => {
     setIsEditContent(false)
   }
 
+  console.log(aboutDetail)
+
   return (
     <Form {...form}>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-4">
           <div className="flex justify-between items-center">
-            <div className="text-primary text-2xl font-medium">Tentang Prodi</div>
+            <div className="text-primary text-2xl font-medium">Tentang {title}</div>
             <div className="flex gap-4 items-center">
-              <ButtonGoToGuide titleGuide='Tentang' valueGuide="WEBSITE_UTAMA_SATUAN_ORGANISASI_TENTANG" />
+              <ButtonGoToGuide
+                titleGuide="Tentang"
+                valueGuide="WEBSITE_UTAMA_SATUAN_ORGANISASI_TENTANG"
+              />
               {isEditContent ? (
                 <ButtonForm
                   loading={loading}
@@ -93,7 +103,7 @@ const AboutProgramStudiView = () => {
               )}
             </div>
           </div>
-          <CardInput title="Tentang Prodi">
+          <CardInput title={`Tentang ${title}`}>
             {isEditContent ? (
               <RichText form={form} name="isi_konten" label="" isRow={false} />
             ) : (
