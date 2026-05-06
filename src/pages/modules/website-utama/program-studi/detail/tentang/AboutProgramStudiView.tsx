@@ -12,7 +12,7 @@ import { RichText } from '@/components/common/richtext'
 import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide'
 
 interface props {
- title: string;
+ title?: string;
 }
 
 const AboutProgramStudiView = (props:props) => {

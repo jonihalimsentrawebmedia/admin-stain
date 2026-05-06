@@ -33,6 +33,7 @@ const useGetSatuanOrganisasi = (props: Props) => {
   const { data, isLoading, isFetching } = useQuery({
     refetchOnWindowFocus: false,
     queryKey: ['satuan-organisasi-list', kelompok, { search, page, limit, id_parent }],
+    enabled: !!kelompok,
     queryFn: () =>
       AxiosClient.get(
         `/pengaturan/satuan-organisasi/${kelompok ?? ''}?${isGetAll ? ParamsSearchParent : ParamsSearch}`
