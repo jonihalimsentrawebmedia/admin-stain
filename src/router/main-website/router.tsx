@@ -1157,7 +1157,7 @@ export const MainWebsiteRouter = [
         children: [
           {
             path: 'tentang',
-            element: <AboutProgramStudiView title={"Fakultas"} />,
+            element: <AboutProgramStudiView title={'Fakultas'} />,
           },
           {
             path: 'unit-pengelola',

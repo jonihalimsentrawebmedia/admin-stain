@@ -12,11 +12,11 @@ import { RichText } from '@/components/common/richtext'
 import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide'
 
 interface props {
- title?: string;
+  title?: string
 }
 
-const AboutProgramStudiView = (props:props) => {
-  const { title='Program Studi' } = props;
+const AboutProgramStudiView = (props?: props) => {
+  const { title = 'Program Studi' } = props ?? {}
   const { aboutDetail } = useGetAbout()
   const { form, handleSave, loading } = usePostAbout()
   const [isEditContent, setIsEditContent] = useState(false)
