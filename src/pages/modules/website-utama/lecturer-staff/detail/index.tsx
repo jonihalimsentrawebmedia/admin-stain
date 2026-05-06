@@ -19,6 +19,7 @@ const DetailEmployee = () => {
     if (employee) {
       form.reset({
         ...employee,
+        tanggal_lahir: format(employee.tanggal_lahir, 'dd-MM-yyy'),
       })
     }
   }, [employee])
@@ -26,6 +27,7 @@ const DetailEmployee = () => {
     <>
       <div className={'space-y-4'}>
         <ButtonTitleGroup
+        isBack
           buttonGroup={[
             {
               type: 'edit',

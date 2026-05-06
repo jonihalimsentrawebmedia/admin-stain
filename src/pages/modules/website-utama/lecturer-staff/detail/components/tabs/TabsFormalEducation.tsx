@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Pencil, Plus, RefreshCw, Save, Trash2 } from 'lucide-react'
+import { Pencil, Plus,  Save, Trash2 } from 'lucide-react'
 
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -18,6 +18,7 @@ import { useParams } from 'react-router-dom'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
+import { ButtonSyncLecturerDetail } from '../ButtonSyncDetail'
 
 type EducationType = {
   id: string
@@ -156,14 +157,18 @@ export default function TabsFormalEducation() {
       <div className="flex gap-4 items-center justify-between">
         <div className="text-xl text-primary font-medium">Pendidikan Formal</div>
         <div className="flex gap-4 items-center">
-          <Button
+          <ButtonSyncLecturerDetail
+            link={`/website-utama/sdm/${id}/pendidikan-formal/sync`}
+            topik="fcm_sync_sdm_pendidikan_formal"
+          />
+          {/* <Button
             disabled={loading}
             variant={'outline'}
             className="border-primary text-primary hover:text-primary"
           >
             <RefreshCw className="w-4 h-4 mr-2" />
             Sinkronisasi SISTER
-          </Button>
+          </Button> */}
           <Button
             disabled={loading}
             onClick={() => {
@@ -198,6 +203,7 @@ export default function TabsFormalEducation() {
               <TableCell className="text-black whitespace-pre-line">
                 {item.isEditing ? (
                   <Input
+                    placeholder="Jenjang"
                     disabled={loading}
                     className="focus-visible:ring-0 rounded"
                     value={item.jenjang}
@@ -214,6 +220,7 @@ export default function TabsFormalEducation() {
               <TableCell className="text-black whitespace-pre-line">
                 {item.isEditing ? (
                   <Input
+                    placeholder="Gelar"
                     disabled={loading}
                     className="focus-visible:ring-0 rounded"
                     value={item.gelar}
@@ -230,6 +237,7 @@ export default function TabsFormalEducation() {
               <TableCell className="text-black whitespace-pre-line">
                 {item.isEditing ? (
                   <Input
+                    placeholder="Bidang Studi"
                     disabled={loading}
                     className="focus-visible:ring-0 rounded"
                     value={item.bidang_studi}
@@ -246,6 +254,7 @@ export default function TabsFormalEducation() {
               <TableCell className="text-black whitespace-pre-line">
                 {item.isEditing ? (
                   <Input
+                    placeholder="Perguruan Tinggi / Sekolah"
                     disabled={loading}
                     className="focus-visible:ring-0 rounded"
                     value={item.perguruan_tinggi}
@@ -262,6 +271,7 @@ export default function TabsFormalEducation() {
               <TableCell className="text-black whitespace-pre-line">
                 {item.isEditing ? (
                   <Input
+                    placeholder="Tahun Lulus"
                     disabled={loading}
                     className="focus-visible:ring-0 rounded"
                     value={item.tahun_lulus}

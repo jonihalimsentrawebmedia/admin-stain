@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Pencil, Plus, RefreshCw, Save, Trash2 } from 'lucide-react'
+import { Pencil, Plus, Save, Trash2 } from 'lucide-react'
 
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -18,6 +18,8 @@ import { useParams } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
+import { format } from 'date-fns'
+import { ButtonSyncLecturerDetail } from '../ButtonSyncDetail'
 
 type JabatanFungsionalType = {
   id: string
@@ -143,14 +145,10 @@ export default function TabsFunctionalPosition() {
       <div className="flex gap-4 items-center justify-between">
         <div className="text-xl text-primary font-medium">Pendidikan Formal</div>
         <div className="flex gap-4 items-center">
-          <Button
-            disabled={loading}
-            variant={'outline'}
-            className="border-primary text-primary hover:text-primary"
-          >
-            <RefreshCw className="w-4 h-4 mr-2" />
-            Sinkronisasi SISTER
-          </Button>
+          <ButtonSyncLecturerDetail
+            link={`/website-utama/sdm/${id}/jabatan-fungsional/sync`}
+            topik="fcm_sync_sdm_jabatan_fungsional"
+          />
           <Button
             disabled={loading}
             onClick={() => {
@@ -185,6 +183,7 @@ export default function TabsFunctionalPosition() {
               <TableCell className="text-black whitespace-pre-line">
                 {item.isEditing ? (
                   <Input
+                    placeholder="Jabatan Fungsional"
                     className="focus-visible:ring-0 rounded"
                     value={item.jabatan_fungsional}
                     onChange={(e) => {
@@ -201,6 +200,7 @@ export default function TabsFunctionalPosition() {
               <TableCell className="text-black whitespace-pre-line">
                 {item.isEditing ? (
                   <Input
+                    placeholder="No. SK"
                     className="focus-visible:ring-0 rounded"
                     value={item.no_sk}
                     onChange={(e) => {
@@ -217,6 +217,7 @@ export default function TabsFunctionalPosition() {
               <TableCell className="text-black whitespace-pre-line">
                 {item.isEditing ? (
                   <Input
+                    placeholder="DD-MM-YYYY"
                     className="focus-visible:ring-0 rounded"
                     type="date"
                     value={item.terhitung_mulai}
@@ -226,7 +227,7 @@ export default function TabsFunctionalPosition() {
                     }}
                   />
                 ) : (
-                  item.terhitung_mulai
+                  format(new Date(item.terhitung_mulai), 'dd-MM-yyyy')
                 )}
               </TableCell>
 

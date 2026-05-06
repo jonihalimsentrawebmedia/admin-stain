@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Pencil, Save, Trash2, Plus, RefreshCw } from 'lucide-react'
+import { Pencil, Save, Trash2, Plus,  } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -18,6 +18,8 @@ import { UseGetRank } from '../../hooks'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
+import { format } from 'date-fns'
+import { ButtonSyncLecturerDetail } from '../ButtonSyncDetail'
 
 type KepangkatanType = {
   id: string
@@ -127,9 +129,7 @@ export default function TabsRank() {
   }
 
   // Dummy sync
-  const handleSync = () => {
-    alert('Sinkronisasi SISTER berhasil')
-  }
+ 
 
   useEffect(() => {
     if (rank) {
@@ -152,15 +152,10 @@ export default function TabsRank() {
         <h2 className="text-lg font-semibold text-primary">Kepangkatan</h2>
 
         <div className="flex gap-2">
-          <Button
-            disabled={loading}
-            variant="outline"
-            className="border-primary text-primary hover:text-primary"
-            onClick={handleSync}
-          >
-            <RefreshCw className="w-4 h-4 mr-2" />
-            Sinkronisasi SISTER
-          </Button>
+          <ButtonSyncLecturerDetail
+            link={`/website-utama/sdm/${id}/kepangkatan/sync`}
+            topik="fcm_sync_sdm_kepangkatan"
+          />
 
           <Button
             disabled={loading}
@@ -198,6 +193,7 @@ export default function TabsRank() {
                 <TableCell className="text-black whitespace-pre-line">
                   {item.isEditing ? (
                     <Input
+                      placeholder="Gol/ Pangkat"
                       className="focus-visible:ring-0 rounded"
                       value={item.golongan_pangkat}
                       onChange={(e) => {
@@ -214,6 +210,7 @@ export default function TabsRank() {
                 <TableCell className="text-black whitespace-pre-line">
                   {item.isEditing ? (
                     <Input
+                      placeholder="No. SK"
                       className="focus-visible:ring-0 rounded"
                       value={item.no_sk}
                       onChange={(e) => {
@@ -230,6 +227,7 @@ export default function TabsRank() {
                 <TableCell className="text-black whitespace-pre-line">
                   {item.isEditing ? (
                     <Input
+                      placeholder="dd-mm-yyyy"
                       className="focus-visible:ring-0 rounded"
                       type="date"
                       value={item.tanggal_mulai}
@@ -239,7 +237,7 @@ export default function TabsRank() {
                       }}
                     />
                   ) : (
-                    item.tanggal_mulai
+                    format(new Date(item.tanggal_mulai), 'dd-MM-yyyy')
                   )}
                 </TableCell>
 

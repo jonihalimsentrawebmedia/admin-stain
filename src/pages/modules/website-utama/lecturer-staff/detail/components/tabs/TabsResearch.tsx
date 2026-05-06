@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Pencil, Plus, RefreshCw, Save, Trash2 } from 'lucide-react'
+import { Pencil, Plus,  Save, Trash2 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -18,6 +18,7 @@ import { UseGetReseacrh } from '../../hooks'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
+import { ButtonSyncLecturerDetail } from '../ButtonSyncDetail'
 
 type PenelitianType = {
   id: string
@@ -135,18 +136,14 @@ export default function TabsResearch() {
   }, [research])
 
   return (
-    <div className="border space-y-4 rounded-md bg-white">
+    <div className=" space-y-4 rounded-md bg-white">
       <div className="flex gap-4 items-center justify-between">
         <div className="text-xl text-primary font-medium">Penelitian</div>
         <div className="flex gap-4 items-center">
-          <Button
-            disabled={loading}
-            variant={'outline'}
-            className="border-primary text-primary hover:text-primary"
-          >
-            <RefreshCw className="w-4 h-4 mr-2" />
-            Sinkronisasi SISTER
-          </Button>
+          <ButtonSyncLecturerDetail
+            link={`/website-utama/sdm/${id}/penelitian/sync`}
+            topik="fcm_sync_sdm_penelitian"
+          />
           <Button
             disabled={loading}
             onClick={() => {
@@ -184,6 +181,7 @@ export default function TabsResearch() {
               <TableCell className="text-black whitespace-pre-line">
                 {item.isEditing ? (
                   <Input
+                    placeholder="Judul Penelitian"
                     className="focus-visible:ring-0 rounded"
                     value={item.judul_penelitian}
                     onChange={(e) => {
@@ -200,6 +198,7 @@ export default function TabsResearch() {
               <TableCell className="text-black whitespace-pre-line">
                 {item.isEditing ? (
                   <Input
+                    placeholder="Tahun"
                     className="focus-visible:ring-0 rounded"
                     type="number"
                     value={item.tahun_pelaksanaan}

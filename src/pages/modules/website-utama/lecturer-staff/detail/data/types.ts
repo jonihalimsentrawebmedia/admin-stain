@@ -69,3 +69,70 @@ export interface IResearch {
   last_sync_at: string | null
   sumber_data: 'SISTER' | 'manual' | string
 }
+
+export interface IPublication {
+  id_publikasi: string // UUID
+  id_sdm: string // UUID
+  id_sister: string // UUID
+  id_satuan_organisasi: string // UUID
+  judul_publikasi: string
+  jenis_publikasi: string
+  tanggal_terbit: string // Format: YYYY-MM-DD
+  url_jurnal: string
+  created_at: string // ISO8601 Timestamp
+  created_user: string
+  updated_at: string // ISO8601 Timestamp
+  updated_user: string
+  deleted_at: string | null
+  deleted_user: string | null
+  last_sync_at: string // ISO8601 Timestamp
+  sumber_data: 'SISTER' | string
+}
+
+export interface IHKI {
+  id_hki_paten: string
+  id_sdm: string
+  id_sister: string
+  id_satuan_organisasi: string
+  judul: string
+  jenis_publikasi: string
+  tanggal_terbit: string // Format: YYYY-MM-DD
+  created_at: string // ISO8601 Timestamp
+  created_user: string
+  updated_at: string // ISO8601 Timestamp
+  updated_user: string
+  deleted_at: string | null
+  deleted_user: string | null
+  last_sync_at: string // ISO8601 Timestamp
+  sumber_data: string
+}
+
+export interface IDevotion {
+  id_pengabdian: string
+  id_sdm: string
+  id_sister: string | null
+  id_satuan_organisasi: string
+  judul_pengabdian: string
+  tahun_pelaksanaan: string
+  lama_kegiatan: string
+  created_at: string // ISO8601 Timestamp
+  created_user: string
+  updated_at: string // ISO8601 Timestamp
+  updated_user: string
+  deleted_at: string | null
+  deleted_user: string | null
+  last_sync_at: string | null
+  sumber_data: 'manual' | 'SISTER' | string
+}
+
+export interface ISyncStatus {
+  status: 'not_started' | 'pending' | 'running' | 'completed' | 'failed' | string
+  pending: number
+  completed: number
+  running: number
+  failed: number
+  too_many_retries: number
+  not_retry: number
+  job_can_running: number
+  job_cannot_running: number
+}

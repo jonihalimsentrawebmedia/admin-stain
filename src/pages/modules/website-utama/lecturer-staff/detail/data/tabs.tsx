@@ -1,4 +1,3 @@
-import TabsPersonalInformation from '../components/tabs/TabsPersonalInformation'
 import TabsFormalEducation from '../components/tabs/TabsFormalEducation'
 import TabsFunctionalPosition from '../components/tabs/TabsFunctionalPosition'
 import TabsRank from '../components/tabs/TabsRank'

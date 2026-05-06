@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { Pencil, Save, Trash2, Plus, RefreshCw, ExternalLink } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { Pencil, Save, Trash2, Plus,  } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -14,36 +14,31 @@ import {
   TableBody,
   TableCell,
 } from '@/components/ui/table'
+import { useParams } from 'react-router-dom'
+import { UseGetPublication } from '../../hooks'
+import AxiosClient from '@/provider/axios'
+import { useQueryClient } from '@tanstack/react-query'
+import { toast } from 'react-toastify'
+import { format } from 'date-fns'
+import { ButtonSyncLecturerDetail } from '../ButtonSyncDetail'
 
 type PublikasiType = {
-  id: number
+  id: string
   judul_publikasi: string
   jenis_publikasi: string
   tanggal_terbit: string
   url_jurnal: string
   isEditing?: boolean
+  isAdd?: boolean
 }
 
 export default function TabsPublication() {
-  const [data, setData] = useState<PublikasiType[]>([
-    {
-      id: 1,
-      judul_publikasi: 'Integrasi Design System pada Platform Layanan Publik Digital',
-      jenis_publikasi: 'Jurnal Nasional Terakreditasi',
-      tanggal_terbit: '2026-04-04',
-      url_jurnal: 'https://jurnal-demo.com',
-      isEditing: false,
-    },
-    {
-      id: 2,
-      judul_publikasi:
-        'Analisis User Experience pada Sistem Pendaftaran Siswa Baru di Kabupaten Labuhanbatu Selatan',
-      jenis_publikasi: 'Jurnal Nasional Terakreditasi',
-      tanggal_terbit: '2024-04-04',
-      url_jurnal: 'https://jurnal.oo.id/acsdaceqw123123',
-      isEditing: true,
-    },
-  ])
+  const { id } = useParams()
+  const { publication } = UseGetPublication({
+    id_sdm: id,
+  })
+  const [loading, setLoading] = useState(false)
+  const [data, setData] = useState<PublikasiType[]>([])
 
   const [newRow, setNewRow] = useState({
     judul_publikasi: '',
@@ -51,35 +46,71 @@ export default function TabsPublication() {
     tanggal_terbit: '',
     url_jurnal: '',
   })
+  const temp = [...data]
+  const queryClient = useQueryClient()
+  async function handleSaveAdd(values: PublikasiType) {
+    setLoading(true)
+    await AxiosClient.post(`/website-utama/sdm/${id}/publikasi`, {
+      judul_publikasi: values.judul_publikasi,
+      jenis_publikasi: values.jenis_publikasi,
+      tanggal_terbit: values.tanggal_terbit,
+      url_jurnal: values.url_jurnal,
+    })
+      .then((res) => {
+        if (res.data.status) {
+          setLoading(false)
 
-  const handleEdit = (id: number) => {
-    setData((prev) =>
-      prev.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              isEditing: !item.isEditing,
-            }
-          : item
-      )
-    )
+          toast.success(res.data.message || 'Success ')
+          queryClient.invalidateQueries({
+            queryKey: ['publication'],
+          })
+        }
+      })
+      .catch((err) => {
+        setLoading(false)
+        toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
+      })
   }
+  async function handleSaveEdit(values: PublikasiType) {
+    setLoading(true)
+    await AxiosClient.put(`/website-utama/sdm/${id}/publikasi/${values.id}`, {
+      judul_publikasi: values.judul_publikasi,
+      jenis_publikasi: values.jenis_publikasi,
+      tanggal_terbit: values.tanggal_terbit,
+      url_jurnal: values.url_jurnal,
+    })
+      .then((res) => {
+        if (res.data.status) {
+          setLoading(false)
 
-  const handleChange = (id: number, field: keyof PublikasiType, value: string) => {
-    setData((prev) =>
-      prev.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              [field]: value,
-            }
-          : item
-      )
-    )
+          toast.success(res.data.message || 'Success ')
+          queryClient.invalidateQueries({
+            queryKey: ['publication'],
+          })
+        }
+      })
+      .catch((err) => {
+        setLoading(false)
+        toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
+      })
   }
+  const handleDelete = async (values: PublikasiType) => {
+    setLoading(true)
+    await AxiosClient.delete(`/website-utama/sdm/${id}/publikasi/${values.id}`)
+      .then((res) => {
+        if (res.data.status) {
+          setLoading(false)
 
-  const handleDelete = (id: number) => {
-    setData((prev) => prev.filter((item) => item.id !== id))
+          toast.success(res.data.message || 'Success ')
+          queryClient.invalidateQueries({
+            queryKey: ['publication'],
+          })
+        }
+      })
+      .catch((err) => {
+        setLoading(false)
+        toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
+      })
   }
 
   const handleAdd = () => {
@@ -88,9 +119,10 @@ export default function TabsPublication() {
     setData((prev) => [
       ...prev,
       {
-        id: Date.now(),
+        id: '',
         ...newRow,
-        isEditing: false,
+        isEditing: true,
+        isAdd: true,
       },
     ])
 
@@ -102,9 +134,23 @@ export default function TabsPublication() {
     })
   }
 
-  const handleSync = () => {
-    alert('Sinkronisasi SISTER berhasil')
-  }
+ 
+
+  useEffect(() => {
+    if (publication) {
+      const temp = publication.map((item) => {
+        return {
+          judul_publikasi: item.judul_publikasi,
+          jenis_publikasi: item.jenis_publikasi,
+          tanggal_terbit: item.tanggal_terbit,
+          url_jurnal: item.url_jurnal,
+          id: item.id_publikasi,
+          isEditing: false,
+        }
+      })
+      setData(temp)
+    }
+  }, [publication])
 
   return (
     <div className="w-full space-y-4">
@@ -113,16 +159,13 @@ export default function TabsPublication() {
         <h2 className="text-xl font-medium text-primary">Publikasi</h2>
 
         <div className="flex gap-2">
-          <Button
-            variant="outline"
-            className="border-primary text-primary hover:text-primary"
-            onClick={handleSync}
-          >
-            <RefreshCw className="w-4 h-4 mr-2" />
-            Sinkronisasi SISTER
-          </Button>
+          <ButtonSyncLecturerDetail
+            link={`/website-utama/sdm/${id}/publikasi/sync`}
+            topik="fcm_sync_sdm_publikasi"
+          />
 
           <Button
+            disabled={loading}
             onClick={() => {
               handleAdd()
             }}
@@ -163,9 +206,13 @@ export default function TabsPublication() {
                 <TableCell className="text-black whitespace-pre-line">
                   {item.isEditing ? (
                     <Input
+                      placeholder="Judul Publikasi"
                       className="focus-visible:ring-0 rounded"
                       value={item.judul_publikasi}
-                      onChange={(e) => handleChange(item.id, 'judul_publikasi', e.target.value)}
+                      onChange={(e) => {
+                        temp[index].judul_publikasi = e.target.value
+                        setData(temp)
+                      }}
                     />
                   ) : (
                     item.judul_publikasi
@@ -176,9 +223,13 @@ export default function TabsPublication() {
                 <TableCell className="text-black whitespace-pre-line">
                   {item.isEditing ? (
                     <Input
+                      placeholder="Jenis Publikasi"
                       className="focus-visible:ring-0 rounded"
                       value={item.jenis_publikasi}
-                      onChange={(e) => handleChange(item.id, 'jenis_publikasi', e.target.value)}
+                      onChange={(e) => {
+                        temp[index].jenis_publikasi = e.target.value
+                        setData(temp)
+                      }}
                     />
                   ) : (
                     item.jenis_publikasi
@@ -189,13 +240,17 @@ export default function TabsPublication() {
                 <TableCell className="text-black whitespace-pre-line">
                   {item.isEditing ? (
                     <Input
+                      placeholder="dd-mm-yyyy"
                       className="focus-visible:ring-0 rounded"
                       type="date"
                       value={item.tanggal_terbit}
-                      onChange={(e) => handleChange(item.id, 'tanggal_terbit', e.target.value)}
+                      onChange={(e) => {
+                        temp[index].tanggal_terbit = e.target.value
+                        setData(temp)
+                      }}
                     />
                   ) : (
-                    item.tanggal_terbit
+                    format(new Date(item.tanggal_terbit), 'dd-MM-yyyy')
                   )}
                 </TableCell>
 
@@ -203,42 +258,67 @@ export default function TabsPublication() {
                 <TableCell className="text-black whitespace-pre-line">
                   {item.isEditing ? (
                     <Input
+                      type="url"
                       className="focus-visible:ring-0 rounded"
                       value={item.url_jurnal}
-                      onChange={(e) => handleChange(item.id, 'url_jurnal', e.target.value)}
+                      onChange={(e) => {
+                        temp[index].url_jurnal = e.target.value
+                        setData(temp)
+                      }}
                     />
                   ) : (
                     <a href={item.url_jurnal} target="_blank" rel="noopener noreferrer">
-                      <Button variant="outline" className="text-green-600">
+                      <Button variant="outline" className="text-primary hover:text-primary">
                         Buka Jurnal
-                        <ExternalLink className="ml-2 w-4 h-4" />
                       </Button>
                     </a>
                   )}
                 </TableCell>
 
-                {/* Actions */}
                 <TableCell className="text-black whitespace-pre-line">
                   <div className="flex gap-2">
                     {item.isEditing ? (
                       <Button
+                        disabled={loading}
                         size="icon"
-                        className="bg-green-500 hover:bg-green-600"
-                        onClick={() => handleEdit(item.id)}
+                        className="bg-green-600"
+                        onClick={() => {
+                          if (item.isAdd) {
+                            handleSaveAdd(item)
+                          } else {
+                            handleSaveEdit(item)
+                          }
+                        }}
                       >
                         <Save size={16} />
                       </Button>
                     ) : (
                       <Button
+                        disabled={loading}
                         size="icon"
-                        className="bg-yellow-500 hover:bg-yellow-600"
-                        onClick={() => handleEdit(item.id)}
+                        className="bg-yellow-500"
+                        onClick={() => {
+                          temp[index].isEditing = true
+                          setData(temp)
+                        }}
                       >
                         <Pencil size={16} />
                       </Button>
                     )}
 
-                    <Button size="icon" variant="destructive" onClick={() => handleDelete(item.id)}>
+                    <Button
+                      size="icon"
+                      disabled={loading}
+                      variant="destructive"
+                      onClick={() => {
+                        if (item.isAdd) {
+                          temp.splice(index, 1)
+                          setData(temp)
+                        } else {
+                          handleDelete(item)
+                        }
+                      }}
+                    >
                       <Trash2 size={16} />
                     </Button>
                   </div>

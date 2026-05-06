@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { Pencil, Save, Trash2, Plus, RefreshCw } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { Pencil, Save, Trash2, Plus,  } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -14,91 +14,138 @@ import {
   TableBody,
   TableCell,
 } from '@/components/ui/table'
+import { useQueryClient } from '@tanstack/react-query'
+import AxiosClient from '@/provider/axios'
+import { useParams } from 'react-router-dom'
+import { UseGetHKI } from '../../hooks'
+import { toast } from 'react-toastify'
+import { format } from 'date-fns'
+import { ButtonSyncLecturerDetail } from '../ButtonSyncDetail'
 
 type HKIPatenType = {
-  id: number
-  judul_hki_paten: string
-  jenis_hki_paten: string
+  id: string
+  judul: string
+  jenis_publikasi: string
   tanggal_terbit: string
   isEditing?: boolean
+  isAdd?: boolean
 }
 
 export default function TabsHKI() {
-  const [data, setData] = useState<HKIPatenType[]>([
-    {
-      id: 1,
-      judul_hki_paten: 'Sistem UI Kit "Madina Design System" untuk Standardisasi Platform Kampus',
-      jenis_hki_paten: 'Hak Cipta',
-      tanggal_terbit: '2026-04-04',
-      isEditing: false,
-    },
-    {
-      id: 2,
-      judul_hki_paten: 'Modul Antarmuka Pengguna untuk Aplikasi PPDB Online Tingkat Distrik',
-      jenis_hki_paten: 'Hak Cipta',
-      tanggal_terbit: '2022-04-04',
-      isEditing: true,
-    },
-  ])
+  const { id } = useParams()
+  const { HKI } = UseGetHKI({
+    id_sdm: id,
+  })
+  const [data, setData] = useState<HKIPatenType[]>([])
 
   const [newRow, setNewRow] = useState({
-    judul_hki_paten: '',
-    jenis_hki_paten: '',
+    judul: '',
+    jenis_publikasi: '',
     tanggal_terbit: '',
   })
-
-  const handleEdit = (id: number) => {
-    setData((prev) =>
-      prev.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              isEditing: !item.isEditing,
-            }
-          : item
-      )
-    )
-  }
-
-  const handleChange = (id: number, field: keyof HKIPatenType, value: string) => {
-    setData((prev) =>
-      prev.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              [field]: value,
-            }
-          : item
-      )
-    )
-  }
-
-  const handleDelete = (id: number) => {
-    setData((prev) => prev.filter((item) => item.id !== id))
-  }
+  const [loading, setLoading] = useState(false)
 
   const handleAdd = () => {
-    // if (!newRow.judul_hki_paten) return;
+    // if (!newRow.judul) return;
 
     setData((prev) => [
       ...prev,
       {
-        id: Date.now(),
+        id: '',
         ...newRow,
-        isEditing: false,
+        isEditing: true,
+        isAdd: true,
       },
     ])
 
     setNewRow({
-      judul_hki_paten: '',
-      jenis_hki_paten: '',
+      judul: '',
+      jenis_publikasi: '',
       tanggal_terbit: '',
     })
   }
 
-  const handleSync = () => {
-    alert('Sinkronisasi SISTER berhasil')
+  const temp = [...data]
+  const queryClient = useQueryClient()
+  async function handleSaveAdd(values: HKIPatenType) {
+    setLoading(true)
+    await AxiosClient.post(`/website-utama/sdm/${id}/hki-paten`, {
+      judul: values.judul,
+      jenis_publikasi: values.jenis_publikasi,
+      tanggal_terbit: values.tanggal_terbit,
+    })
+      .then((res) => {
+        if (res.data.status) {
+          setLoading(false)
+
+          toast.success(res.data.message || 'Success ')
+          queryClient.invalidateQueries({
+            queryKey: ['hki-paten'],
+          })
+        }
+      })
+      .catch((err) => {
+        setLoading(false)
+        toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
+      })
   }
+  async function handleSaveEdit(values: HKIPatenType) {
+    setLoading(true)
+    await AxiosClient.put(`/website-utama/sdm/${id}/hki-paten/${values.id}`, {
+      judul: values.judul,
+      jenis_publikasi: values.jenis_publikasi,
+      tanggal_terbit: values.tanggal_terbit,
+    })
+      .then((res) => {
+        if (res.data.status) {
+          setLoading(false)
+
+          toast.success(res.data.message || 'Success ')
+          queryClient.invalidateQueries({
+            queryKey: ['hki-paten'],
+          })
+        }
+      })
+      .catch((err) => {
+        setLoading(false)
+        toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
+      })
+  }
+  const handleDelete = async (values: HKIPatenType) => {
+    setLoading(true)
+    await AxiosClient.delete(`/website-utama/sdm/${id}/hki-paten/${values.id}`)
+      .then((res) => {
+        if (res.data.status) {
+          setLoading(false)
+
+          toast.success(res.data.message || 'Success ')
+          queryClient.invalidateQueries({
+            queryKey: ['hki-paten'],
+          })
+        }
+      })
+      .catch((err) => {
+        setLoading(false)
+        toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
+      })
+  }
+
+
+
+  useEffect(() => {
+    if (HKI) {
+      const temp = HKI.map((item) => {
+        return {
+          judul: item.judul,
+          jenis_publikasi: item.jenis_publikasi,
+          tanggal_terbit: item.tanggal_terbit,
+          isEditing: false,
+          id: item.id_hki_paten,
+        }
+      })
+      setData(temp)
+    }
+  }, [HKI])
 
   return (
     <div className="w-full space-y-4">
@@ -107,14 +154,10 @@ export default function TabsHKI() {
         <h2 className="text-lg font-semibold text-primary">HKI/PATEN</h2>
 
         <div className="flex gap-2">
-          <Button
-            variant="outline"
-            className="border-primary text-primary hover:text-primary"
-            onClick={handleSync}
-          >
-            <RefreshCw className="w-4 h-4 mr-2" />
-            Sinkronisasi SISTER
-          </Button>
+          <ButtonSyncLecturerDetail
+            link={`/website-utama/sdm/${id}/hki-paten/sync`}
+            topik="fcm_sync_sdm_hki_paten"
+          />
 
           <Button
             onClick={() => {
@@ -156,12 +199,16 @@ export default function TabsHKI() {
                 <TableCell className="text-black whitespace-pre-line">
                   {item.isEditing ? (
                     <Input
+                      placeholder="Judul HKI/PATEN"
                       className="focus-visible:ring-0 rounded"
-                      value={item.judul_hki_paten}
-                      onChange={(e) => handleChange(item.id, 'judul_hki_paten', e.target.value)}
+                      value={item.judul}
+                      onChange={(e) => {
+                        temp[index].judul = e.target.value
+                        setData(temp)
+                      }}
                     />
                   ) : (
-                    item.judul_hki_paten
+                    item.judul
                   )}
                 </TableCell>
 
@@ -169,12 +216,16 @@ export default function TabsHKI() {
                 <TableCell className="text-black whitespace-pre-line">
                   {item.isEditing ? (
                     <Input
+                      placeholder="Jenis HKI/PATEN"
                       className="focus-visible:ring-0 rounded"
-                      value={item.jenis_hki_paten}
-                      onChange={(e) => handleChange(item.id, 'jenis_hki_paten', e.target.value)}
+                      value={item.jenis_publikasi}
+                      onChange={(e) => {
+                        temp[index].jenis_publikasi = e.target.value
+                        setData(temp)
+                      }}
                     />
                   ) : (
-                    item.jenis_hki_paten
+                    item.jenis_publikasi
                   )}
                 </TableCell>
 
@@ -185,35 +236,59 @@ export default function TabsHKI() {
                       className="focus-visible:ring-0 rounded"
                       type="date"
                       value={item.tanggal_terbit}
-                      onChange={(e) => handleChange(item.id, 'tanggal_terbit', e.target.value)}
+                      onChange={(e) => {
+                        temp[index].tanggal_terbit = e.target.value
+                        setData(temp)
+                      }}
                     />
                   ) : (
-                    item.tanggal_terbit
+                    format(new Date(item.tanggal_terbit), 'dd-MM-yyyy')
                   )}
                 </TableCell>
-
-                {/* Actions */}
                 <TableCell className="text-black whitespace-pre-line">
                   <div className="flex gap-2">
                     {item.isEditing ? (
                       <Button
+                        disabled={loading}
                         size="icon"
-                        className="bg-green-500 hover:bg-green-600"
-                        onClick={() => handleEdit(item.id)}
+                        className="bg-green-600"
+                        onClick={() => {
+                          if (item.isAdd) {
+                            handleSaveAdd(item)
+                          } else {
+                            handleSaveEdit(item)
+                          }
+                        }}
                       >
                         <Save size={16} />
                       </Button>
                     ) : (
                       <Button
+                        disabled={loading}
                         size="icon"
-                        className="bg-yellow-500 hover:bg-yellow-600"
-                        onClick={() => handleEdit(item.id)}
+                        className="bg-yellow-500"
+                        onClick={() => {
+                          temp[index].isEditing = true
+                          setData(temp)
+                        }}
                       >
                         <Pencil size={16} />
                       </Button>
                     )}
 
-                    <Button size="icon" variant="destructive" onClick={() => handleDelete(item.id)}>
+                    <Button
+                      size="icon"
+                      disabled={loading}
+                      variant="destructive"
+                      onClick={() => {
+                        if (item.isAdd) {
+                          temp.splice(index, 1)
+                          setData(temp)
+                        } else {
+                          handleDelete(item)
+                        }
+                      }}
+                    >
                       <Trash2 size={16} />
                     </Button>
                   </div>

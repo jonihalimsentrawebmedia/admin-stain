@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { Pencil, Save, Trash2, Plus, RefreshCw } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { Pencil, Save, Trash2, Plus, } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -14,70 +14,34 @@ import {
   TableBody,
   TableCell,
 } from '@/components/ui/table'
+import { useParams } from 'react-router-dom'
+import { UseGetDevotion } from '../../hooks'
+import AxiosClient from '@/provider/axios'
+import { useQueryClient } from '@tanstack/react-query'
+import { toast } from 'react-toastify'
+import { ButtonSyncLecturerDetail } from '../ButtonSyncDetail'
 
 type PengabdianType = {
-  id: number
+  id: string
   judul_pengabdian: string
   tahun_pelaksanaan: string
   lama_kegiatan: string
   isEditing?: boolean
+  isAdd?: boolean
 }
 
 export default function TabsDevotion() {
-  const [data, setData] = useState<PengabdianType[]>([
-    {
-      id: 1,
-      judul_pengabdian:
-        'Sosialisasi Penggunaan Platform PPDB Online bagi Operator Sekolah Tingkat Distrik',
-      tahun_pelaksanaan: '2026',
-      lama_kegiatan: '3 Bulan',
-      isEditing: false,
-    },
-    {
-      id: 2,
-      judul_pengabdian:
-        'Workshop Literasi Digital dan Keamanan Data bagi Tenaga Kependidikan STAIN Madina',
-      tahun_pelaksanaan: '2024',
-      lama_kegiatan: '1 Bulan',
-      isEditing: true,
-    },
-  ])
-
+  const { id } = useParams()
+  const { devotion } = UseGetDevotion({
+    id_sdm: id,
+  })
+  const [data, setData] = useState<PengabdianType[]>([])
+  const [loading, setLoading] = useState(false)
   const [newRow, setNewRow] = useState({
     judul_pengabdian: '',
     tahun_pelaksanaan: '',
     lama_kegiatan: '',
   })
-
-  const handleEdit = (id: number) => {
-    setData((prev) =>
-      prev.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              isEditing: !item.isEditing,
-            }
-          : item
-      )
-    )
-  }
-
-  const handleChange = (id: number, field: keyof PengabdianType, value: string) => {
-    setData((prev) =>
-      prev.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              [field]: value,
-            }
-          : item
-      )
-    )
-  }
-
-  const handleDelete = (id: number) => {
-    setData((prev) => prev.filter((item) => item.id !== id))
-  }
 
   const handleAdd = () => {
     // if (!newRow.judul_pengabdian) return;
@@ -85,9 +49,10 @@ export default function TabsDevotion() {
     setData((prev) => [
       ...prev,
       {
-        id: Date.now(),
+        id: '',
         ...newRow,
-        isEditing: false,
+        isEditing: true,
+        isAdd: true,
       },
     ])
 
@@ -98,9 +63,87 @@ export default function TabsDevotion() {
     })
   }
 
-  const handleSync = () => {
-    alert('Sinkronisasi SISTER berhasil')
+ 
+
+  const temp = [...data]
+  const queryClient = useQueryClient()
+  async function handleSaveAdd(values: PengabdianType) {
+    setLoading(true)
+    await AxiosClient.post(`/website-utama/sdm/${id}/pengabdian`, {
+      judul_pengabdian: values.judul_pengabdian,
+      tahun_pelaksanaan: values.tahun_pelaksanaan,
+      lama_kegiatan: values.lama_kegiatan,
+    })
+      .then((res) => {
+        if (res.data.status) {
+          setLoading(false)
+
+          toast.success(res.data.message || 'Success ')
+          queryClient.invalidateQueries({
+            queryKey: ['devotion'],
+          })
+        }
+      })
+      .catch((err) => {
+        setLoading(false)
+        toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
+      })
   }
+  async function handleSaveEdit(values: PengabdianType) {
+    setLoading(true)
+    await AxiosClient.put(`/website-utama/sdm/${id}/pengabdian/${values.id}`, {
+      judul_pengabdian: values.judul_pengabdian,
+      tahun_pelaksanaan: values.tahun_pelaksanaan,
+      lama_kegiatan: values.lama_kegiatan,
+    })
+      .then((res) => {
+        if (res.data.status) {
+          setLoading(false)
+
+          toast.success(res.data.message || 'Success ')
+          queryClient.invalidateQueries({
+            queryKey: ['devotion'],
+          })
+        }
+      })
+      .catch((err) => {
+        setLoading(false)
+        toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
+      })
+  }
+  const handleDelete = async (values: PengabdianType) => {
+    setLoading(true)
+    await AxiosClient.delete(`/website-utama/sdm/${id}/pengabdian/${values.id}`)
+      .then((res) => {
+        if (res.data.status) {
+          setLoading(false)
+
+          toast.success(res.data.message || 'Success ')
+          queryClient.invalidateQueries({
+            queryKey: ['devotion'],
+          })
+        }
+      })
+      .catch((err) => {
+        setLoading(false)
+        toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
+      })
+  }
+
+  useEffect(() => {
+    if (devotion) {
+      const temp = devotion.map((item) => {
+        return {
+          judul_pengabdian: item.judul_pengabdian,
+          tahun_pelaksanaan: item.tahun_pelaksanaan,
+          lama_kegiatan: item.lama_kegiatan,
+          isEditing: false,
+          id: item.id_pengabdian,
+        }
+      })
+      setData(temp)
+    }
+  }, [devotion])
 
   return (
     <div className="w-full space-y-4">
@@ -109,14 +152,10 @@ export default function TabsDevotion() {
         <h2 className="text-xl  font-medium text-primary">Pengabdian</h2>
 
         <div className="flex gap-2">
-          <Button
-            variant="outline"
-            className="border-primary hover:text-primary text-primary"
-            onClick={handleSync}
-          >
-            <RefreshCw className="w-4 h-4 mr-2" />
-            Sinkronisasi SISTER
-          </Button>
+          <ButtonSyncLecturerDetail
+            link={`/website-utama/sdm/${id}/pengabdian/sync`}
+            topik="fcm_sync_sdm_pengabdian"
+          />
           <Button
             onClick={() => {
               handleAdd()
@@ -157,9 +196,13 @@ export default function TabsDevotion() {
                 <TableCell className="text-black whitespace-pre-line">
                   {item.isEditing ? (
                     <Input
+                      placeholder="Judul Pengabdian"
                       className="focus-visible:ring-0 rounded"
                       value={item.judul_pengabdian}
-                      onChange={(e) => handleChange(item.id, 'judul_pengabdian', e.target.value)}
+                      onChange={(e) => {
+                        temp[index].judul_pengabdian = e.target.value
+                        setData(temp)
+                      }}
                     />
                   ) : (
                     item.judul_pengabdian
@@ -172,8 +215,12 @@ export default function TabsDevotion() {
                     <Input
                       className="focus-visible:ring-0 rounded"
                       type="number"
+                      placeholder="Tahun Pelaksanaan"
                       value={item.tahun_pelaksanaan}
-                      onChange={(e) => handleChange(item.id, 'tahun_pelaksanaan', e.target.value)}
+                      onChange={(e) => {
+                        temp[index].tahun_pelaksanaan = e.target.value
+                        setData(temp)
+                      }}
                     />
                   ) : (
                     item.tahun_pelaksanaan
@@ -184,94 +231,69 @@ export default function TabsDevotion() {
                 <TableCell className="text-black whitespace-pre-line">
                   {item.isEditing ? (
                     <Input
+                      placeholder="Lama Kegiatan. Cth: 3 Bulan, 3 Tahun."
                       className="focus-visible:ring-0 rounded"
                       value={item.lama_kegiatan}
-                      onChange={(e) => handleChange(item.id, 'lama_kegiatan', e.target.value)}
+                      onChange={(e) => {
+                        temp[index].lama_kegiatan = e.target.value
+                        setData(temp)
+                      }}
                     />
                   ) : (
                     item.lama_kegiatan
                   )}
                 </TableCell>
 
-                {/* Actions */}
                 <TableCell className="text-black whitespace-pre-line">
                   <div className="flex gap-2">
                     {item.isEditing ? (
                       <Button
+                        disabled={loading}
                         size="icon"
-                        className="bg-green-500 hover:bg-green-600"
-                        onClick={() => handleEdit(item.id)}
+                        className="bg-green-600"
+                        onClick={() => {
+                          if (item.isAdd) {
+                            handleSaveAdd(item)
+                          } else {
+                            handleSaveEdit(item)
+                          }
+                        }}
                       >
                         <Save size={16} />
                       </Button>
                     ) : (
                       <Button
+                        disabled={loading}
                         size="icon"
-                        className="bg-yellow-500 hover:bg-yellow-600"
-                        onClick={() => handleEdit(item.id)}
+                        className="bg-yellow-500"
+                        onClick={() => {
+                          temp[index].isEditing = true
+                          setData(temp)
+                        }}
                       >
                         <Pencil size={16} />
                       </Button>
                     )}
 
-                    <Button size="icon" variant="destructive" onClick={() => handleDelete(item.id)}>
+                    <Button
+                      size="icon"
+                      disabled={loading}
+                      variant="destructive"
+                      onClick={() => {
+                        if (item.isAdd) {
+                          temp.splice(index, 1)
+                          setData(temp)
+                        } else {
+                          handleDelete(item)
+                        }
+                      }}
+                    >
                       <Trash2 size={16} />
                     </Button>
                   </div>
                 </TableCell>
               </TableRow>
             ))}
-
-            {/* Add New Row */}
-            <TableRow>
-              <TableCell className="text-black whitespace-pre-line">{data.length + 1}</TableCell>
-
-              <TableCell className="text-black whitespace-pre-line">
-                <Input
-                  placeholder="Judul Pengabdian"
-                  value={newRow.judul_pengabdian}
-                  onChange={(e) =>
-                    setNewRow({
-                      ...newRow,
-                      judul_pengabdian: e.target.value,
-                    })
-                  }
-                />
-              </TableCell>
-
-              <TableCell className="text-black whitespace-pre-line">
-                <Input
-                  type="number"
-                  placeholder="Tahun Pelaksanaan"
-                  value={newRow.tahun_pelaksanaan}
-                  onChange={(e) =>
-                    setNewRow({
-                      ...newRow,
-                      tahun_pelaksanaan: e.target.value,
-                    })
-                  }
-                />
-              </TableCell>
-
-              <TableCell className="text-black whitespace-pre-line">
-                <Input
-                  placeholder="Lama Kegiatan (contoh: 3 Bulan)"
-                  value={newRow.lama_kegiatan}
-                  onChange={(e) =>
-                    setNewRow({
-                      ...newRow,
-                      lama_kegiatan: e.target.value,
-                    })
-                  }
-                />
-              </TableCell>
-
-              <TableCell className="text-black whitespace-pre-line">
-                <Button size="icon" className="bg-green-500 hover:bg-green-600" onClick={handleAdd}>
-                  <Save size={16} />
-                </Button>
-              </TableCell>
-            </TableRow>
           </TableBody>
         </Table>
       </div>
