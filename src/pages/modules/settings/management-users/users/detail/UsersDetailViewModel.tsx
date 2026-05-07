@@ -51,7 +51,7 @@ const UsersDetailViewModel = () => {
       label: 'Satuan Kerja',
       component: (
         <div>
-          <span >{user?.satuan_kerja.join(', ')}</span>
+          <span >{user?.satuan_kerja?.join(', ')}</span>
         </div>
       ),
     },
