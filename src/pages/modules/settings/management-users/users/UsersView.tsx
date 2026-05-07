@@ -4,11 +4,18 @@ import TableCustom from '@/components/common/table/TableCustom'
 import SelectFilter from '@/components/common/filter/SelectFilter'
 import useGetUsers from './controller/useGetUsers'
 import useGetLevelUser from '../level/controller/useGetLevelUser'
+import { useSearchParams } from 'react-router-dom'
 
 const UsersView = () => {
   const { columns, goToAdd } = UsersViewModel()
   const { loading, users, meta } = useGetUsers()
-  const { levelUser } = useGetLevelUser(true)
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const { levelUser } = useGetLevelUser({
+    page: page,
+    limit: limit,
+  })
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
@@ -40,8 +47,8 @@ const UsersView = () => {
         loading={loading}
         meta={meta}
         placeHolderSearch="Cari  User"
-        tdClassName='whitespace-pre-line'
-        thClassName='whitespace-pre-line'
+        tdClassName="whitespace-pre-line"
+        thClassName="whitespace-pre-line"
       />
     </div>
   )
