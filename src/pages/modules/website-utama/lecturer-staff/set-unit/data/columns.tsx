@@ -1,7 +1,6 @@
 import { useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
 import type { IEmployee } from '@/pages/modules/website-utama/lecturer-staff/data/types.ts'
-import { format } from 'date-fns'
 import { SelectUnit } from '@/pages/modules/website-utama/lecturer-staff/set-unit/component/selectUnit.tsx'
 
 interface props {
@@ -61,14 +60,15 @@ export const ColumnsSetUnit = (props: props) => {
     {
       accessorKey: 'nama',
       header: 'Nama',
-    },
-    {
-      accessorKey: 'nik',
-      header: 'NIK',
-    },
-    {
-      accessorKey: 'nip',
-      header: 'NIP',
+      cell: ({ row }) => {
+        const data = row?.original
+        return (
+          <>
+            <p>{data?.nama}</p>
+            <p>{data?.nik}</p>
+          </>
+        )
+      },
     },
     {
       accessorKey: 'golongan',
@@ -77,19 +77,6 @@ export const ColumnsSetUnit = (props: props) => {
     {
       accessorKey: 'nama_status',
       header: 'Status',
-    },
-    {
-      accessorKey: 'tempat_lahir',
-      header: 'TTL',
-      cell: ({ row }) => {
-        const data = row.original
-        return (
-          <div>
-            {data.tempat_lahir},{' '}
-            {data.tanggal_lahir ? format(data?.tanggal_lahir, 'dd-MM-yyyy') : ''}
-          </div>
-        )
-      },
     },
     {
       accessorKey: 'nama_unit_kerja',

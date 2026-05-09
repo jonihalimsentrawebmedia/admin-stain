@@ -31,9 +31,14 @@ const LecturerStaff = () => {
               element: <ButtonSyncLecturer />,
             },
             {
-            type: 'custom',
-            element: <ButtonGoToGuide titleGuide='Data Dosen dan Staff' valueGuide="WEBSITE_UTAMA_DOSEN_STAFF" />,
-          },
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide="Data Dosen dan Staff"
+                  valueGuide="WEBSITE_UTAMA_DOSEN_STAFF"
+                />
+              ),
+            },
             {
               type: 'add',
               label: 'Tambah Data',
@@ -42,7 +47,13 @@ const LecturerStaff = () => {
           ]}
           label="Data Dosen dan Staff"
         />
-        <TableCustom columns={columns} data={employee} loading={loading} meta={meta} />
+        <TableCustom
+          columnsName={['tempat_lahir', 'nip']}
+          columns={columns}
+          data={employee}
+          loading={loading}
+          meta={meta}
+        />
       </div>
     </>
   )

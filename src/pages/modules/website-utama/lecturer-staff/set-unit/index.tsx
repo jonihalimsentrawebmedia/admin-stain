@@ -31,9 +31,14 @@ const SetUnitEmployeePage = () => {
       <div className={'space-y-4'}>
         <ButtonTitleGroup
           buttonGroup={[
-             {
+            {
               type: 'custom',
-              element: <ButtonGoToGuide titleGuide='Data Dosen dan Staff' valueGuide="WEBSITE_UTAMA_DOSEN_STAFF_SET_UNIT_KERJA" />,
+              element: (
+                <ButtonGoToGuide
+                  titleGuide="Data Dosen dan Staff"
+                  valueGuide="WEBSITE_UTAMA_DOSEN_STAFF_SET_UNIT_KERJA"
+                />
+              ),
             },
             {
               type: 'add',
