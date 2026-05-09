@@ -5,9 +5,10 @@ interface MetaProps {
   description?: string
   image?: string
   url?: string
+  favicon?: string
 }
 
-export const Meta = ({ title, description = 'Website resmi', image, url }: MetaProps) => {
+export const Meta = ({ favicon, title, description = 'Website resmi', image, url }: MetaProps) => {
   return (
     <Helmet>
       <title>{title}</title>
@@ -24,6 +25,10 @@ export const Meta = ({ title, description = 'Website resmi', image, url }: MetaP
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       {image && <meta name="twitter:image" content={image} />}
+
+      {favicon && <link rel="icon" type="image/png" href={favicon} />}
+
+      {favicon && <link rel="apple-touch-icon" href={favicon} />}
     </Helmet>
   )
 }
