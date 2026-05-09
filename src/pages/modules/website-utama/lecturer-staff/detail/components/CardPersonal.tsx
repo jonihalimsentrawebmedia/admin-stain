@@ -7,7 +7,7 @@ const CardPersonal = ({ form }: Props) => {
   const field = [
     {
       label: 'Name',
-      name: 'name',
+      name: 'nama',
     },
     {
       label: 'NIK',
