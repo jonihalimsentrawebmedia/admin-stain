@@ -42,3 +42,15 @@ export interface IEmployee {
   nama_unit_kerja: string
   nama_status: string
 }
+
+export interface ISDMNavigation {
+  next: {
+    id_sdm: string
+    nama: string
+  } | null
+
+  previous: {
+    id_sdm: string
+    nama: string
+  } | null
+}

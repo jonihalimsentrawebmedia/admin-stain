@@ -68,6 +68,10 @@ export interface IResearch {
   deleted_user: string | null
   last_sync_at: string | null
   sumber_data: 'SISTER' | 'manual' | string
+  penulis: Array<{
+    id_penulis: string
+    nama_penulis: string
+  }>
 }
 
 export interface IPublication {
@@ -87,6 +91,10 @@ export interface IPublication {
   deleted_user: string | null
   last_sync_at: string // ISO8601 Timestamp
   sumber_data: 'SISTER' | string
+  penulis:Array<{
+    id_penulis: string
+    nama_penulis: string
+  }>
 }
 
 export interface IHKI {

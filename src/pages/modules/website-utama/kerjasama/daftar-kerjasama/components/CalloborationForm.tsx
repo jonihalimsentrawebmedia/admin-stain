@@ -56,7 +56,7 @@ const CalloborationForm = ({ form }: Props) => {
       isGetAll: true,
       id_kategori_kerjasama: form.watch('id_kategori_kerjasama'),
     })
-    console.log(form.watch('id_negara'))
+
   return (
     <div className="flex flex-col gap-4">
       <CardInput title="Unit Yang Melakukan Kerjasama">

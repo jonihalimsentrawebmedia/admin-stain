@@ -2,7 +2,10 @@ import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
-import type { IEmployee } from '@/pages/modules/website-utama/lecturer-staff/data/types.ts'
+import type {
+  IEmployee,
+  ISDMNavigation,
+} from '@/pages/modules/website-utama/lecturer-staff/data/types.ts'
 import type { BasicProps } from '@/utils/globalType.ts'
 
 interface props extends BasicProps {
@@ -43,6 +46,7 @@ export const UseGetEmployee = (props?: props) => {
 
 export const UseGetEmployeeById = (id: string) => {
   const [employee, setEmployee] = useState<IEmployee>()
+  const [nextPrevId, setNextPrevId] = useState<ISDMNavigation>()
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['employee-by-id', id],
     refetchOnWindowFocus: false,
@@ -53,11 +57,12 @@ export const UseGetEmployeeById = (id: string) => {
 
   useEffect(() => {
     if (data) {
-      setEmployee(data)
+      setEmployee(data?.data)
+      setNextPrevId(data?.step)
     }
   }, [data])
 
-  return { employee, loading }
+  return { employee, loading, nextPrevId }
 }
 
 export const UseGetReFUnit = () => {
