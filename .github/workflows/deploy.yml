@@ -1,4 +1,4 @@
-name: Deploy Vite to VPS (yarn)
+name: Deploy Admin Vite to VPS
 
 on:
   push:
@@ -13,18 +13,24 @@ jobs:
       - name: 📥 Checkout repository
         uses: actions/checkout@v4
 
+      - name: 🟢 Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.0
+
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: yarn
+          cache: pnpm
 
       - name: 📦 Install dependencies
-        run: yarn install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: 🏗 Build Vite
-        run: yarn build
+        run: pnpm build
         env:
+          VITE_APP_TITLE: Admin Pengelolaan Website STAIN Madina
           VITE_API_URL: ${{ secrets.VITE_API_URL }}
           VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
           VITE_AUTH_DOMAIN: ${{ secrets.VITE_AUTH_DOMAIN }}

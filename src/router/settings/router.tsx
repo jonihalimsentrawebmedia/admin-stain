@@ -53,6 +53,7 @@ import FacultyLanguageView from '@/pages/modules/settings/faculty/language/Facul
 import ProdiLanguageView from '@/pages/modules/settings/prodi/language/ProdiLanguageView'
 import UnitLanguageView from '@/pages/modules/settings/unit/language/UnitLanguageView'
 import InstitutionLanguageView from '@/pages/modules/settings/institution/language/InstitutionLanguageView'
+
 export const SettingRouter = [
   {
     path: 'dashboard',

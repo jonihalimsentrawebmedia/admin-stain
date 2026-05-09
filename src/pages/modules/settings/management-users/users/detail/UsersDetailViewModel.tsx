@@ -35,11 +35,11 @@ const UsersDetailViewModel = () => {
       component: (
         <div>
           {user?.level_users_multi.length == 1 ? (
-            user.level_users_multi[0].nama_level_user
+            user?.level_users_multi[0]?.nama_level_user
           ) : (
             <ul className="list-outside list-disc pl-2 ml-2">
               {user?.level_users_multi.map((item) => (
-                <li key={item.id_users_multi_level + item.id_user}>{item.nama_level_user}</li>
+                <li key={item?.id_users_multi_level + item?.id_user}>{item?.nama_level_user}</li>
               ))}
             </ul>
           )}
@@ -51,7 +51,7 @@ const UsersDetailViewModel = () => {
       label: 'Satuan Kerja',
       component: (
         <div>
-          <span >{user?.satuan_kerja.join(', ')}</span>
+          <span >{user?.satuan_kerja?.join(', ')}</span>
         </div>
       ),
     },

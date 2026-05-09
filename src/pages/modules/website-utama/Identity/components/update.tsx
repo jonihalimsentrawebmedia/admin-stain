@@ -23,35 +23,39 @@ export const UpdateIdentityPage = () => {
   const form = useForm<IIdentityCampus>({
     resolver: zodResolver(CampusIdentityResolver),
   })
-  
 
   useEffect(() => {
     if (identityCampus) {
       form.reset({
-        teks_pengantar:identityCampus?.teks_pengantar,
-        dokumen_status_url:identityCampus?.dokumen_status_url,
-        isi_nama:identityCampus?.isi_nama,
-        isi_kedudukan:identityCampus?.isi_kedudukan,
-        isi_berdiri:identityCampus?.isi_berdiri,
-        isi_busana_akademik:identityCampus?.isi_busana_akademik,
-        lambang_url:identityCampus?.lambang_url,
-        isi_lambang:identityCampus?.isi_lambang,
-        bendera_url:identityCampus?.bendera_url,
-        isi_bendera:identityCampus?.isi_bendera,
-        isi_mars_hymne:identityCampus?.isi_mars_hymne,
+        teks_pengantar: identityCampus?.teks_pengantar,
+        dokumen_status_url: identityCampus?.dokumen_status_url,
+        isi_nama: identityCampus?.isi_nama,
+        isi_kedudukan: identityCampus?.isi_kedudukan,
+        isi_berdiri: identityCampus?.isi_berdiri,
+        isi_busana_akademik: identityCampus?.isi_busana_akademik,
+        lambang_url: identityCampus?.lambang_url,
+        isi_lambang: identityCampus?.isi_lambang,
+        bendera_url: identityCampus?.bendera_url,
+        isi_bendera: identityCampus?.isi_bendera,
+        isi_mars_hymne: identityCampus?.isi_mars_hymne,
       })
     }
   }, [identityCampus])
 
   const HandleSave = async (value: IIdentityCampus) => {
     setLoading(true)
-    await AxiosClient.post('/website-utama/identitas', value).then((res) => {
-      if (res?.data?.status) {
-        setLoading(false)
-        navigate('/modules/website-utama/identity')
-        toast.success('Data berhasil disimpan')
-      }
-    })
+    try {
+      await AxiosClient.post('/website-utama/identitas', value).then((res) => {
+        if (res?.data?.status) {
+          setLoading(false)
+          navigate('/modules/website-utama/identity')
+          toast.success('Data berhasil disimpan')
+        }
+      })
+    } catch (error:any) {
+      setLoading(false)
+      toast.error(error?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
+    }
   }
 
   return (

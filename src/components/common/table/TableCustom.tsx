@@ -236,12 +236,12 @@ const TableCustom = (props: Props) => {
               <SetLimitList
                 setLimit={setLimit}
                 text={`${limitData > totalData ? totalData : limitData} Data dari
-                ${meta?.total} `}
+                ${meta?.total??0} `}
               />
             ) : (
               <div>
                 Menampilkan 1 - {limitData > totalData ? totalData : limitData} Data dari{' '}
-                {meta?.total} Data
+                {meta?.total??0} Data
               </div>
             )}
           </div>

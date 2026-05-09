@@ -20,7 +20,7 @@ export const CollaborationResolver = z.object({
   id_jenis_kerjasama: z.string({ message: 'Jenis kerjasama wajib dipilih.' }),
   id_bidang_kerjasama: z.string({ message: 'Bidang kerjasama wajib dipilih.' }),
   id_kategori_kerjasama: z.string({ message: 'Kategori kerjasama wajib dipilih.' }),
-  id_sub_kategori_kerjasama: z.string({ message: 'Sub kategori kerjasama wajib dipilih.' }),
+  id_sub_kategori_kerjasama: z.string({ message: 'Sub kategori kerjasama wajib dipilih.' }).nullable().optional(),
   tanggal_mulai: z
     .string({ message: 'Tanggal mulai wajib diisi.' })
     .min(1, { message: 'Tanggal mulai wajib diisi.' }),

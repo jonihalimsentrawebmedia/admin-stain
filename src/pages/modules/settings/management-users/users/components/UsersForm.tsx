@@ -17,7 +17,10 @@ interface Props {
   isEdit?: boolean
 }
 const UsersForm = ({ form, isEdit }: Props) => {
-  const { levelUser } = useGetLevelUser()
+  const { levelUser } = useGetLevelUser({
+    page:'0',
+    limit:'0',
+  })
   const idLevelUser = form.watch('level_user.id_level_user')
   const [isSatuanKerja, setIsSatuanKerja] = useState(false)
 

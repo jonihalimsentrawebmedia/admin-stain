@@ -9,7 +9,9 @@ import useGetLevelUser from '../level/controller/useGetLevelUser'
 const HistoryLoginView = () => {
   const { columns } = HistoryLoginViewModel()
   const { histories, loading, meta } = useGetHistoryLogin()
-  const { levelUser } = useGetLevelUser(true)
+  const { levelUser } = useGetLevelUser({
+    page:'0',limit:'0',
+  })
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup label="Histori Login" buttonGroup={[]} />

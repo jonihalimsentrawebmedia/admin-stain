@@ -8,7 +8,10 @@ import useGetLevelUser from '../level/controller/useGetLevelUser'
 const UsersView = () => {
   const { columns, goToAdd } = UsersViewModel()
   const { loading, users, meta } = useGetUsers()
-  const { levelUser } = useGetLevelUser(true)
+  const { levelUser } = useGetLevelUser({
+    page: '0',
+    limit: '0',
+  })
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
@@ -40,8 +43,8 @@ const UsersView = () => {
         loading={loading}
         meta={meta}
         placeHolderSearch="Cari  User"
-        tdClassName='whitespace-pre-line'
-        thClassName='whitespace-pre-line'
+        tdClassName="whitespace-pre-line"
+        thClassName="whitespace-pre-line"
       />
     </div>
   )

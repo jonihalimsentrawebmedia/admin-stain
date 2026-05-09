@@ -13,7 +13,10 @@ import useGetLevelUser from '../level/controller/useGetLevelUser'
 import ButtonSwitch from './components/ButtonSwitch'
 const UsersViewModel = () => {
   const { satuanOrganisasi } = useGetSatuanOrganisasiAll()
-  const { levelUser } = useGetLevelUser()
+  const { levelUser } = useGetLevelUser({
+    page:'0',
+    limit:'0',
+  })
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') || 1)

@@ -5,6 +5,7 @@ import { ButtonStatus } from '@/pages/modules/website-prodi/settings/template-we
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button.tsx'
 import { FaGear } from 'react-icons/fa6'
+import ButtonEditDescription from '../component/buttonEdit.tsx'
 
 export const ColumnsTemplateWebsite = () => {
   const columns: ColumnDef<IThemeProdi>[] = [
@@ -56,6 +57,14 @@ export const ColumnsTemplateWebsite = () => {
         return (
           <p>{data?.tanggal_aktif ? format(data?.tanggal_aktif, 'dd MMMM yyyy, HH:mm:ss') : '-'}</p>
         )
+      },
+    },
+    {
+      accessorKey: 'keterangan',
+      header: 'Keterangan',
+      cell: ({ row }) => {
+        const data = row?.original
+        return <ButtonEditDescription data={data} />
       },
     },
     {

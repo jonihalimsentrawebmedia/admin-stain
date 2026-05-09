@@ -5,6 +5,7 @@ import type { ThemaLembaga } from './model'
 import ButtonSwitch from './components/ButtonSwitch'
 import { format } from 'date-fns'
 import { FaGear } from 'react-icons/fa6'
+import ButtonEditDescription from './components/buttonEdit'
 
 const SettingTemplateServiceViewModel = () => {
   const [searchParams] = useSearchParams()
@@ -46,6 +47,14 @@ const SettingTemplateServiceViewModel = () => {
             <div>(Oleh: {row.original.nama_user_updated ?? '-'})</div>
           </div>
         )
+      },
+    },
+    {
+      accessorKey: 'keterangan',
+      header: 'Keterangan',
+      cell: ({ row }) => {
+        const data = row.original
+        return <ButtonEditDescription data={data} />
       },
     },
     {

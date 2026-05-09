@@ -5,6 +5,7 @@ export interface ThemaLPPM {
   tanggal_aktif: string // ISO Date string
   nama_user_updated: string
   default: string
+  keterangan: string
 }
 
 export interface ThemeColor {

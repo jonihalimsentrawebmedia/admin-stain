@@ -5,6 +5,7 @@ import { ButtonStatus } from '../component/buttonStatus.tsx'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button.tsx'
 import { FaGear } from 'react-icons/fa6'
+import ButtonEditDescription from '../component/buttonEdit.tsx'
 
 export const ColumnsTemplateWebsite = () => {
   const columns: ColumnDef<IThemeUnit>[] = [
@@ -14,14 +15,6 @@ export const ColumnsTemplateWebsite = () => {
       cell: ({ row }) => {
         const i = row?.index
         return <>{i + 1}</>
-      },
-    },
-    {
-      accessorKey: 'image',
-      header: 'Template',
-      cell: ({ row }) => {
-        const image = row?.original?.image
-        return <img src={image} alt="gambar" className={'w-[250px] h-[100px] object-contain'} />
       },
     },
     {
@@ -47,6 +40,18 @@ export const ColumnsTemplateWebsite = () => {
         const data = row?.original
         return (
           <p>{data?.tanggal_aktif ? format(data?.tanggal_aktif, 'dd MMMM yyyy, HH:mm:ss') : '-'}</p>
+        )
+      },
+    },
+    {
+      accessorKey: 'Keterangan',
+      header: 'Keterangan',
+      cell: ({ row }) => {
+        const data = row?.original
+        return (
+          <div className={'flex gap-2 items-center'}>
+            <ButtonEditDescription data={data} />
+          </div>
         )
       },
     },

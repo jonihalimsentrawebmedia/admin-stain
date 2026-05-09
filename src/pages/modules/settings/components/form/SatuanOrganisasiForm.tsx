@@ -10,6 +10,7 @@ import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import useGetEducationalLevel from '../../reference/educational-level/controller/useGetEducationalLevel'
 import useGetListDikti from '../../controller/useGetListDikti'
+import CheckboxInputBasic from '@/components/common/form/checkbox.tsx'
 
 interface Props {
   form: UseFormReturn<any>
@@ -161,27 +162,65 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
           />
         )}
 
-        <InputText form={form} name="nama" isRow label={labelName} placeholder={placeHolderName} />
+        <div className="flex items-center gap-5">
+          <InputText
+            form={form}
+            className={'w-full'}
+            name="nama"
+            isRow
+            label={labelName}
+            placeholder={placeHolderName}
+          />
+          <InputText
+            className={'w-full'}
+            form={form}
+            name={'ukuran_title'}
+            isRow
+            label="Ukuran Title"
+            placeholder="Ukuran Title"
+            type="number"
+          />
+          <CheckboxInputBasic name={'show_title'} form={form} label={'Tampilkan'} />
+          {/*<InputCheckbox*/}
+          {/*  form={form}*/}
+          {/*  name={'show_title'}*/}
+          {/*  data={[{ label: 'Tampilkan', value: true }]}*/}
+          {/*/>*/}
+        </div>
         {kelompok == 'PRODI' && (
           <SelectCustom
             data={educationalLevelOption}
             name="id_jenjang_pendidikan"
             label={'Jenjang Pendidikan'}
-            placeholder={'Pilih '}
+            placeholder={'Pilih'}
             form={form}
             isRow
             level3
           />
         )}
         {kelompok !== 'PRODI' && kelompok !== 'UNIT' && (
-          <InputText
-            form={form}
-            name="singkatan"
-            isRow
-            label="Singkatan "
-            placeholder="Singkatan Nama Universitas / Perguruan Tinggi"
-          />
+          <div className={'flex items-center gap-5'}>
+            <InputText
+              className={'w-full'}
+              form={form}
+              name="singkatan"
+              isRow
+              label="Singkatan "
+              placeholder="Singkatan Nama Universitas / Perguruan Tinggi"
+            />
+            <InputText
+              form={form}
+              className={'w-full'}
+              name={'ukuran_singkatan'}
+              isRow
+              label="Ukuran Singkatan"
+              placeholder="Ukuran Singkatan"
+              type="number"
+            />
+            <CheckboxInputBasic name={'show_singkatan'} form={form} label={'Tampilkan'} />
+          </div>
         )}
+
         <InputText
           form={form}
           name="keyword"
