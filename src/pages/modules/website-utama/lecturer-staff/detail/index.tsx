@@ -1,5 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import {useNavigate, useParams} from 'react-router-dom'
+import {useNavigate, useParams, useSearchParams} from 'react-router-dom'
 import {UseGetEmployeeById} from '@/pages/modules/website-utama/lecturer-staff/hooks'
 import {format} from 'date-fns'
 import TabsData from './data/tabs'
@@ -17,6 +17,10 @@ const DetailEmployee = () => {
   const {employee, nextPrevId} = UseGetEmployeeById(id as string)
   const navigate = useNavigate()
   const {tabs} = TabsData()
+
+  const [searchParams, setSearchParams] = useSearchParams()
+  const tabsValue = searchParams.get('tab') ?? "informasi-pribadi"
+
   useEffect(() => {
     if (employee) {
       form.reset({
@@ -84,7 +88,11 @@ const DetailEmployee = () => {
           label="Detail Data Dosen & Staff"
         />
 
-        <Tabs defaultValue="informasi-pribadi" className="w-full mt-5">
+        <Tabs value={tabsValue} onValueChange={(e) => {
+          const Params = new URLSearchParams()
+          Params.append('tab', e)
+          setSearchParams(Params.toString(), {replace: true})
+        }} className="w-full mt-5">
           <TabsList className="h-auto bg-transparent p-0 flex flex-wrap justify-start gap-2">
             {tabs.map((tab) => (
               <TabsTrigger

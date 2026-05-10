@@ -63,11 +63,13 @@ export const publicationColumns = () => {
         const data = row.original
         return (
           <>
-            <Link to={data?.url_jurnal} target={'_blank'}>
-              <Button variant={'outline'} className={'border-primary text-primary hover:text-primary'}>
-                Link Publikasi
-              </Button>
-            </Link>
+            {data?.url_jurnal && (
+              <Link to={data?.url_jurnal} target={'_blank'}>
+                <Button variant={'outline'} className={'border-primary text-primary hover:text-primary'}>
+                  Link Publikasi
+                </Button>
+              </Link>
+            )}
           </>
         )
       },

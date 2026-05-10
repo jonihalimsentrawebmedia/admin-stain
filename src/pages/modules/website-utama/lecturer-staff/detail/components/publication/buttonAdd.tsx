@@ -1,32 +1,33 @@
-import { useState } from 'react'
-import { Button } from '@/components/ui/button.tsx'
-import { useFieldArray, useForm } from 'react-hook-form'
+import {useState} from 'react'
+import {Button} from '@/components/ui/button.tsx'
+import {useFieldArray, useForm} from 'react-hook-form'
 import {
   PublicationResolver,
   type TPublicationResolver,
 } from '@/pages/modules/website-utama/lecturer-staff/detail/components/publication/resolver.tsx'
-import { zodResolver } from '@hookform/resolvers/zod'
+import {zodResolver} from '@hookform/resolvers/zod'
 import AxiosClient from '@/provider/axios.tsx'
-import { toast } from 'react-toastify'
-import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
-import { Form } from '@/components/ui/form.tsx'
+import {toast} from 'react-toastify'
+import {DialogBasic} from '@/components/common/dialog/dialogBasic.tsx'
+import {Form} from '@/components/ui/form.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
-import { FaTrash } from 'react-icons/fa'
-import { useQueryClient } from '@tanstack/react-query'
+import {FaTrash} from 'react-icons/fa'
+import {useQueryClient} from '@tanstack/react-query'
+import TextAreaInput from "@/components/common/form/textAreaInput.tsx";
 
 interface Props {
   id_sdm: string
 }
 
 export const ButtonAddPublication = (props: Props) => {
-  const { id_sdm } = props
+  const {id_sdm} = props
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const form = useForm<TPublicationResolver>({
     resolver: zodResolver(PublicationResolver),
   })
-  const { fields, append, remove } = useFieldArray({
+  const {fields, append, remove} = useFieldArray({
     control: form.control,
     name: 'penulis',
   })
@@ -70,7 +71,7 @@ export const ButtonAddPublication = (props: Props) => {
       >
         <Form {...form}>
           <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(HandleSave)}>
-            <TextInput
+            <TextAreaInput
               name={'judul_publikasi'}
               form={form}
               label={'Judul Publikasi'}
@@ -141,14 +142,14 @@ export const ButtonAddPublication = (props: Props) => {
 
                   {fields.length > 1 && (
                     <Button type="button" variant="destructive" onClick={() => remove(index)}>
-                      <FaTrash />
+                      <FaTrash/>
                     </Button>
                   )}
                 </div>
               ))}
             </div>
 
-            <ButtonForm loading={loading} onCancel={() => setOpen(!open)} />
+            <ButtonForm loading={loading} onCancel={() => setOpen(!open)}/>
           </form>
         </Form>
       </DialogBasic>
