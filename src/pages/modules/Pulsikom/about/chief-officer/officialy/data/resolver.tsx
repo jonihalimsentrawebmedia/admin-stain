@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const OfficiallyResolver = z.object({
+export const    OfficiallyResolver = z.object({
   url_gambar: z.string(),
   nama_penjabat: z.string(),
   jabatan: z.string(),
