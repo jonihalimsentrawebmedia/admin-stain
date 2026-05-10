@@ -3,6 +3,7 @@ import { FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/for
 import { type ReactNode, useEffect } from 'react'
 import Select from 'react-select'
 import { Skeleton } from '@/components/ui/skeleton'
+import { BiX } from 'react-icons/bi'
 
 interface Props<T extends FieldValues> {
   name: Path<T>
@@ -23,6 +24,7 @@ interface Props<T extends FieldValues> {
   isRequired?: boolean
   fx?: (e: any) => void
   usePortal?: boolean
+  showNull?: boolean
 }
 
 export const SelectBasicInput = <T extends FieldValues>({
@@ -39,6 +41,7 @@ export const SelectBasicInput = <T extends FieldValues>({
   isRequired,
   label,
   isLoading,
+  showNull,
   fx,
 }: Props<T>) => {
   useEffect(() => {
@@ -71,25 +74,35 @@ export const SelectBasicInput = <T extends FieldValues>({
             {isLoading ? (
               <Skeleton className="h-10 bg-gray-300" />
             ) : (
-              <Select
-                styles={{
-                  menuPortal: (base) => (usePortal ? { ...base, zIndex: 9999 } : base),
-                }}
-                menuPosition={usePortal ? 'fixed' : 'absolute'}
-                menuPortalTarget={usePortal ? document.body : undefined}
-                isDisabled={isDisabled}
-                options={data}
-                value={selectedOption}
-                placeholder={placeholder}
-                onChange={(option) => {
-                  field.onChange(option ? option.value : '')
-                  if (fx) {
-                    fx(option)
-                  }
-                }}
-                classNamePrefix="react-select"
-                className={`min-h-10 z-20 ${selectClassName}`}
-              />
+              <div className={'flex items-center gap-1.5'}>
+                <Select
+                  styles={{
+                    menuPortal: (base) => (usePortal ? { ...base, zIndex: 9999 } : base),
+                  }}
+                  menuPosition={usePortal ? 'fixed' : 'absolute'}
+                  menuPortalTarget={usePortal ? document.body : undefined}
+                  isDisabled={isDisabled}
+                  options={data}
+                  value={selectedOption}
+                  placeholder={placeholder}
+                  onChange={(option) => {
+                    field.onChange(option ? option.value : '')
+                    if (fx) {
+                      fx(option)
+                    }
+                  }}
+                  classNamePrefix="react-select"
+                  className={`min-h-10 z-20 ${selectClassName}`}
+                />
+                {showNull && (
+                  <BiX
+                    className={'text-red-500 size-4'}
+                    onClick={() => {
+                      form.setValue(name, null as any)
+                    }}
+                  />
+                )}
+              </div>
             )}
             <FormMessage />
           </FormItem>

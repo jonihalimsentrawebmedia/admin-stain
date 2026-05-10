@@ -55,6 +55,7 @@ export const FormPlacemanUser = (props: Props) => {
             isDisabled={load1}
             selectClassName={'w-[20rem]'}
             usePortal
+            showNull
             isRow
             data={
               groupRank?.map((row) => ({
@@ -72,6 +73,7 @@ export const FormPlacemanUser = (props: Props) => {
             selectClassName={'w-[20rem]'}
             isDisabled={load2}
             usePortal
+            showNull
             isRow
             data={
               academicRank?.map((row) => ({
