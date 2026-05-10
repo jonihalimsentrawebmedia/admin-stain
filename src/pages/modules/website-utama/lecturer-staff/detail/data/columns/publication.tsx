@@ -1,9 +1,14 @@
-import { Link, useParams, useSearchParams } from 'react-router-dom'
-import type { ColumnDef } from '@tanstack/react-table'
-import type { IPublication } from '@/pages/modules/website-utama/lecturer-staff/detail/data/types.ts'
-import { format } from 'date-fns'
-import { ButtonEditPublication } from '@/pages/modules/website-utama/lecturer-staff/detail/components/publication/buttonEdit.tsx'
-import { ButtonDeletePublication } from '@/pages/modules/website-utama/lecturer-staff/detail/components/publication/buttonDelete.tsx'
+import {Link, useParams, useSearchParams} from 'react-router-dom'
+import type {ColumnDef} from '@tanstack/react-table'
+import type {IPublication} from '@/pages/modules/website-utama/lecturer-staff/detail/data/types.ts'
+import {format} from 'date-fns'
+import {
+  ButtonEditPublication
+} from '@/pages/modules/website-utama/lecturer-staff/detail/components/publication/buttonEdit.tsx'
+import {
+  ButtonDeletePublication
+} from '@/pages/modules/website-utama/lecturer-staff/detail/components/publication/buttonDelete.tsx'
+import {Button} from "@/components/ui/button.tsx";
 
 export const publicationColumns = () => {
   const [searchParams] = useSearchParams()
@@ -14,7 +19,7 @@ export const publicationColumns = () => {
     {
       accessorKey: 'No',
       header: '#',
-      cell: ({ row }) => {
+      cell: ({row}) => {
         const i = row?.index
         return <>{(page - 1) * limit + i + 1}</>
       },
@@ -26,7 +31,7 @@ export const publicationColumns = () => {
     {
       accessorKey: 'penulis',
       header: 'Penulis',
-      cell: ({ row }) => {
+      cell: ({row}) => {
         const data = row.original
         return (
           <div>
@@ -42,7 +47,7 @@ export const publicationColumns = () => {
     {
       accessorKey: 'tanggal_terbit',
       header: 'Tanggal Publikasi',
-      cell: ({ row }) => {
+      cell: ({row}) => {
         const data = row.original
         return (
           <div>
@@ -54,12 +59,14 @@ export const publicationColumns = () => {
     {
       accessorKey: 'url_jurnal',
       header: 'URL Jurnal',
-      cell: ({ row }) => {
+      cell: ({row}) => {
         const data = row.original
         return (
           <>
             <Link to={data?.url_jurnal} target={'_blank'}>
-              {data?.url_jurnal}
+              <Button variant={'outline'} className={'border-primary text-primary hover:text-primary'}>
+                Link Publikasi
+              </Button>
             </Link>
           </>
         )
@@ -68,14 +75,14 @@ export const publicationColumns = () => {
     {
       accessorKey: 'action',
       header: '',
-      cell: ({ row }) => {
+      cell: ({row}) => {
         const data = row.original
-        const { id } = useParams()
+        const {id} = useParams()
         return (
           <>
             <div className="flex items-center gap-2">
-              <ButtonEditPublication data={data} id_sdm={id as string} />
-              <ButtonDeletePublication data={data} id_sdm={id as string} />
+              <ButtonEditPublication data={data} id_sdm={id as string}/>
+              <ButtonDeletePublication data={data} id_sdm={id as string}/>
             </div>
           </>
         )

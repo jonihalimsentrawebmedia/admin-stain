@@ -1,22 +1,22 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { useNavigate, useParams } from 'react-router-dom'
-import { UseGetEmployeeById } from '@/pages/modules/website-utama/lecturer-staff/hooks'
-import { format } from 'date-fns'
+import {useNavigate, useParams} from 'react-router-dom'
+import {UseGetEmployeeById} from '@/pages/modules/website-utama/lecturer-staff/hooks'
+import {format} from 'date-fns'
 import TabsData from './data/tabs'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs'
 import CardPersonal from './components/CardPersonal'
-import { useForm } from 'react-hook-form'
-import { useEffect } from 'react'
+import {useForm} from 'react-hook-form'
+import {useEffect} from 'react'
 import TabsPersonalInformation from './components/tabs/TabsPersonalInformation'
-import { Button } from '@/components/ui/button.tsx'
-import { ArrowLeft, ArrowRight } from 'lucide-react'
+import {Button} from '@/components/ui/button.tsx'
+import {ArrowLeft, ArrowRight} from 'lucide-react'
 
 const DetailEmployee = () => {
-  const { id } = useParams()
+  const {id} = useParams()
   const form = useForm()
-  const { employee, nextPrevId } = UseGetEmployeeById(id as string)
+  const {employee, nextPrevId} = UseGetEmployeeById(id as string)
   const navigate = useNavigate()
-  const { tabs } = TabsData()
+  const {tabs} = TabsData()
   useEffect(() => {
     if (employee) {
       form.reset({
@@ -31,6 +31,7 @@ const DetailEmployee = () => {
       <div className={'space-y-5'}>
         <ButtonTitleGroup
           isBack
+          link={'/modules/website-utama/staff-lecturer/data'}
           buttonGroup={[
             {
               type: 'custom',
@@ -46,7 +47,7 @@ const DetailEmployee = () => {
                       variant={'outline'}
                       className={'border-primary text-primary hover:text-primary'}
                     >
-                      <ArrowLeft />
+                      <ArrowLeft/>
                       {nextPrevId?.previous?.nama}
                     </Button>
                   )}
@@ -68,7 +69,7 @@ const DetailEmployee = () => {
                       className={'border-primary text-primary hover:text-primary'}
                     >
                       {nextPrevId?.next?.nama}
-                      <ArrowRight />
+                      <ArrowRight/>
                     </Button>
                   )}
                 </>
@@ -107,13 +108,13 @@ const DetailEmployee = () => {
             ))}
           </TabsList>
           <TabsContent value={'informasi-pribadi'} className="mt-6 space-y-4">
-            <CardPersonal form={form} />
-            <TabsPersonalInformation form={form} />
+            <CardPersonal form={form}/>
+            <TabsPersonalInformation form={form}/>
           </TabsContent>
 
           {tabs.map((item, index) => (
             <TabsContent key={item.label + index} value={item.value} className="mt-6 space-y-4">
-              {item.value !== 'informasi-pribadi' && <CardPersonal form={form} />}
+              {item.value !== 'informasi-pribadi' && <CardPersonal form={form}/>}
               {item.element}
             </TabsContent>
           ))}

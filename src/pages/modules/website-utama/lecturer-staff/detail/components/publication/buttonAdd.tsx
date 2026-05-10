@@ -66,7 +66,7 @@ export const ButtonAddPublication = (props: Props) => {
         title={'Tambah Publikasi'}
         open={open}
         setOpen={setOpen}
-        className={'lg:min-w-3xl'}
+        className={'lg:min-w-3xl max-h-[600px] overflow-auto'}
       >
         <Form {...form}>
           <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(HandleSave)}>
@@ -129,6 +129,7 @@ export const ButtonAddPublication = (props: Props) => {
                 <div key={field.id} className="flex items-end gap-2">
                   <div className="flex-1">
                     <TextInput
+                      isRow
                       name={`penulis.${index}.nama_penulis`}
                       form={form}
                       label={`Penulis ${index + 1}`}

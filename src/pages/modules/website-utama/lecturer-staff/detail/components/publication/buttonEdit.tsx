@@ -76,7 +76,7 @@ export const ButtonEditPublication = (props: Props) => {
         title={'Ubah Publikasi'}
         open={open}
         setOpen={setOpen}
-        className={'lg:min-w-3xl'}
+        className={'lg:min-w-3xl max-h-[600px] overflow-auto'}
       >
         <Form {...form}>
           <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(HandleSave)}>
@@ -145,6 +145,7 @@ export const ButtonEditPublication = (props: Props) => {
                       htmlFor={`penulis.${index}.nama_penulis`}
                       placeholder={'Masukkan Nama Penulis'}
                       isRequired
+                      isRow
                     />
                   </div>
 
