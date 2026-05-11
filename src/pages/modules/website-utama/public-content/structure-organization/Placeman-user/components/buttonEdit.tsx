@@ -17,6 +17,9 @@ export const ButtonEditPlaceman = (data: IPlacemanUser) => {
   useEffect(() => {
     if (data) {
       form.reset({
+        is_local_data: !!data?.id_sdm,
+        id_sdm: data?.id_sdm,
+        is_dosen: data?.is_dosen,
         gambar: data.gambar,
         nama_lengkap: data.nama_lengkap,
         id_kelompok_organisasi: data.id_kelompok_organisasi,

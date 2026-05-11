@@ -121,6 +121,7 @@ export const FormPlacemanUser = (props: Props) => {
             name={'nama_lengkap'}
             form={form}
             label={'Nama Lengkap'}
+            isDisabled={!!form.watch('is_local_data')}
             placeholder={'Nama Lengkap beserta gelar'}
             isRequired
             isRow
