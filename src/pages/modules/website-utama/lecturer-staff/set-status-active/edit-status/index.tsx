@@ -61,7 +61,7 @@ export const EditStatusActiveEmployee = () => {
 
   return (
     <>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 bg-white">
         <Form {...form}>
           <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
             <ButtonTitleGroup
@@ -145,8 +145,8 @@ export const EditStatusActiveEmployee = () => {
             <TextAreaInput
               name={'alasan'}
               form={form}
-              label={'ALasam'}
-              placeholder={'Alasan'}
+              label={'Alasan / Keterangan'}
+              placeholder={'Alasan / Keterangan'}
               htmlFor={'Alasan'}
               isDisabled={loading}
               isRow
