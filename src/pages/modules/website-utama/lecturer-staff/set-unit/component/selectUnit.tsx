@@ -48,6 +48,8 @@ export const SelectUnit = (props: props) => {
           <SelectBasicInput
             isDisabled={!status}
             placeholder={'Pilih Unit Kerja'}
+            selectClassName={'text-start'}
+            selectItemClassName={'text-start'}
             className={'w-full'}
             form={form}
             usePortal

@@ -4,6 +4,7 @@ export interface AcademicYearList {
   tahun_akademik: number
   semester: 'GANJIL' | 'GENAP' | string
   nama_tahun_akademik: string
+  urutan: number
   created_at: string
   created_user: string
   updated_at: string

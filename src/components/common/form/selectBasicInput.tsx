@@ -74,7 +74,7 @@ export const SelectBasicInput = <T extends FieldValues>({
             {isLoading ? (
               <Skeleton className="h-10 bg-gray-300" />
             ) : (
-              <div className={'flex items-center gap-1.5'}>
+              <div className={'flex items-center gap-1.5 w-full'}>
                 <Select
                   styles={{
                     menuPortal: (base) => (usePortal ? { ...base, zIndex: 9999 } : base),
@@ -92,7 +92,7 @@ export const SelectBasicInput = <T extends FieldValues>({
                     }
                   }}
                   classNamePrefix="react-select"
-                  className={`min-h-10 z-20 ${selectClassName}`}
+                  className={`min-h-10 w-full z-20 ${selectClassName}`}
                 />
                 {showNull && (
                   <BiX

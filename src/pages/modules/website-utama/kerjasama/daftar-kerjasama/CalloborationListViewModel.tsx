@@ -71,7 +71,9 @@ const CalloborationListViewModel = () => {
             {startDate.date} s/d <br />
             {endDate.date}
             <br />
-            <span className="text-primary">{values.periode} Tahun</span>
+            <span className="text-primary">
+              {}
+              Tahun</span>
           </div>
         )
       },

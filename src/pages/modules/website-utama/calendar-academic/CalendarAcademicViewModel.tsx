@@ -65,6 +65,10 @@ const CalendarAcademicViewModel = () => {
       },
     },
     {
+      accessorKey: 'urutan',
+      header: 'Urutan',
+    },
+    {
       accessorKey: 'action',
       header: '',
       cell: ({ row }) => {

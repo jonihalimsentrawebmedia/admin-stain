@@ -68,7 +68,8 @@ export const SelectStatus = (props: props) => {
             isDisabled={!disabled}
             placeholder={'Pilih Unit Kerja'}
             className={'w-full min-w-[250px]'}
-            selectClassName={'w-full'}
+            selectClassName={'w-full text-start'}
+            selectItemClassName={'text-start'}
             form={form}
             usePortal
             name={'id_status'}

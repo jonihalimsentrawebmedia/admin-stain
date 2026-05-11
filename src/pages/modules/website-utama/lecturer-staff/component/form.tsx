@@ -9,6 +9,7 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { UseGetStatusEmployee } from '@/pages/modules/website-utama/lecturer-staff/status-employee/hooks'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import { UseGetReFUnit } from '@/pages/modules/website-utama/lecturer-staff/hooks'
+import { InputRadio } from '@/components/common/form/InputRadio.tsx'
 
 interface props {
   form: UseFormReturn<TEmployeeResolver>
@@ -51,6 +52,24 @@ const FormEmployee = (props: props) => {
             ratio_width={3}
             ratio_height={4}
             className={'max-w-[180px] w-[180px]'}
+          />
+
+          <InputRadio
+            form={form}
+            name={'type_pegawai'}
+            label={'Jenis Kepegawaian'}
+            isRequired
+            isRow
+            data={[
+              {
+                label: 'Dosen',
+                value: 'DOSEN',
+              },
+              {
+                label: 'Staff',
+                value: 'STAFF',
+              },
+            ]}
           />
 
           <TextInput
