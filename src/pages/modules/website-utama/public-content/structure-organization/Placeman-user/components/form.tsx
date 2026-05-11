@@ -69,7 +69,6 @@ export const FormPlacemanUser = (props: Props) => {
           <InputRadio
             form={form}
             name={'is_dosen'}
-            isDisabled={!form?.watch('is_local_data')}
             label={'Jenis User'}
             data={[
               { label: 'Dosen', value: true },
