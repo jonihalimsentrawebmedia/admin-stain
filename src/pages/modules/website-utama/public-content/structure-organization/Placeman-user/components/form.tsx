@@ -58,6 +58,7 @@ export const FormPlacemanUser = (props: Props) => {
               form.setValue('nama_lengkap', '')
               form.setValue('jabatan', '')
               form.setValue('nip', null)
+              form.setValue('nidn', null)
               form.setValue('id_pangkat_golongan', null)
               form.setValue('email', '')
               form.setValue('no_hp', '')
@@ -79,6 +80,7 @@ export const FormPlacemanUser = (props: Props) => {
               form.setValue('nama_lengkap', '')
               form.setValue('jabatan', '')
               form.setValue('nip', null)
+              form.setValue('nidn', null)
               form.setValue('id_pangkat_golongan', null)
               form.setValue('email', '')
               form.setValue('no_hp', '')
@@ -95,6 +97,7 @@ export const FormPlacemanUser = (props: Props) => {
               form.setValue('nama_lengkap', employeeFind?.nama ?? '')
               form.setValue('jabatan', employeeFind?.nama_jabatan_struktural ?? '')
               form.setValue('nip', employeeFind?.nip ?? '')
+              form.setValue('nidn', employeeFind?.nidn ?? '')
               form.setValue('id_pangkat_golongan', employeeFind?.id_pangkat_golongan)
               form.setValue('email', employeeFind?.email ?? '')
               form.setValue('no_hp', employeeFind?.no_hp ?? '')
@@ -124,6 +127,9 @@ export const FormPlacemanUser = (props: Props) => {
           />
           <TextInput name={'jabatan'} form={form} label={'Jabatan'} placeholder={'Jabatan'} isRow />
           <TextInput name={'nip'} form={form} label={'NIP'} placeholder={'NIP'} isRow />
+          {form?.watch('is_dosen') && (
+            <TextInput name={'nidn'} form={form} label={'NIDN'} placeholder={'NIDN'} isRow />
+          )}
 
           <SelectBasicInput
             label={'Pangkat Golongan'}
