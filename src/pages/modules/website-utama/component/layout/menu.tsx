@@ -277,11 +277,21 @@ export const MENULIST = [
       },
       {
         id: 183,
+        name: 'Status Aktif',
+        path: `${baseDomain}/staff-lecturer/status-active`,
+      },
+      {
+        id: 184,
+        name: 'Set Status Aktif',
+        path: `${baseDomain}/staff-lecturer/set-status-active`,
+      },
+      {
+        id: 185,
         name: 'Set Unit Kerja',
         path: `${baseDomain}/staff-lecturer/set-unit`,
       },
       {
-        id: 184,
+        id: 186,
         name: 'Set Status',
         path: `${baseDomain}/staff-lecturer/set-status`,
       },

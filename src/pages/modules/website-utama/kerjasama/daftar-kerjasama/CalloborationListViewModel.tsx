@@ -3,10 +3,10 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import type { CalloborationList } from './model'
 import { History } from 'lucide-react'
 import ButtonDeleteCalloborationList from './components/ButtonDeleteCalloborationList'
-import { formatDateTime } from '@/utils/date'
 import { IoLanguage } from 'react-icons/io5'
 import { MdInfo } from 'react-icons/md'
 import { HiPencil } from 'react-icons/hi'
+import { differenceInYears, format } from 'date-fns'
 
 const CalloborationListViewModel = () => {
   const navigate = useNavigate()
@@ -64,16 +64,15 @@ const CalloborationListViewModel = () => {
       header: 'Periode',
       cell: ({ row }) => {
         const values = row.original
-        const startDate = formatDateTime(values.tanggal_mulai)
-        const endDate = formatDateTime(values.tanggal_selesai)
         return (
-          <div className="whitespace-pre-line">
-            {startDate.date} s/d <br />
-            {endDate.date}
-            <br />
-            <span className="text-primary">
-              {}
-              Tahun</span>
+          <div>
+            <p className={'whitespace-nowrap'}>
+              {format(values?.tanggal_mulai, 'dd-MM-yyyy')} s/d{' '}
+              {format(values?.tanggal_selesai, 'dd-MM-yyyy')}
+            </p>
+            <p className="text-primary">
+              {differenceInYears(values.tanggal_selesai, values?.tanggal_mulai)} Tahun
+            </p>
           </div>
         )
       },

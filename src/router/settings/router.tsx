@@ -53,6 +53,8 @@ import FacultyLanguageView from '@/pages/modules/settings/faculty/language/Facul
 import ProdiLanguageView from '@/pages/modules/settings/prodi/language/ProdiLanguageView'
 import UnitLanguageView from '@/pages/modules/settings/unit/language/UnitLanguageView'
 import InstitutionLanguageView from '@/pages/modules/settings/institution/language/InstitutionLanguageView'
+import StructuralOfficialPage from '@/pages/modules/settings/reference/structural-official'
+import { StructuralOfficialLanguagePage } from '@/pages/modules/settings/reference/structural-official/language'
 
 export const SettingRouter = [
   {
@@ -312,6 +314,14 @@ export const SettingRouter = [
       {
         path: 'regency',
         element: <RegencyView />,
+      },
+      {
+        path: 'structural-official',
+        element: <StructuralOfficialPage />,
+      },
+      {
+        path: 'structural-official/language/:id',
+        element: <StructuralOfficialLanguagePage />,
       },
     ],
   },

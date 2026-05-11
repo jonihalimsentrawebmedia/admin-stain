@@ -11,10 +11,11 @@ import type { BasicProps } from '@/utils/globalType.ts'
 interface props extends BasicProps {
   id_unit_kerja?: string
   id_status?: string
+  filter?: string
 }
 
 export const UseGetEmployee = (props?: props) => {
-  const { page, limit, search, id_unit_kerja, id_status } = props ?? {}
+  const { page, limit, search, id_unit_kerja, id_status, filter } = props ?? {}
 
   const [employee, setEmployee] = useState<IEmployee[]>([])
   const [meta, setMeta] = useState<Meta>()
@@ -25,6 +26,7 @@ export const UseGetEmployee = (props?: props) => {
   if (search) Params.append('search', search ?? '')
   if (id_unit_kerja) Params.append('id_unit_kerja', id_unit_kerja ?? '')
   if (id_status) Params.append('id_status', id_status ?? '')
+  if (filter) Params.append('filter', props?.filter ?? '')
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['employee', Params.toString()],

@@ -25,6 +25,7 @@ export const UpdatedEmployee = () => {
     if (employee) {
       form.reset({
         ...employee,
+        type_pegawai: employee?.is_dosen ? 'DOSEN' : 'STAFF',
         tanggal_lahir: format(employee.tanggal_lahir, 'yyyy-MM-dd'),
       })
     }

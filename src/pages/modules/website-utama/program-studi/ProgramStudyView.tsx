@@ -5,9 +5,13 @@ import TableCustom from '@/components/common/table/TableCustom'
 import SelectFilter from '@/components/common/filter/SelectFilter'
 import useGetListFakultas from './controller/useGetListFakultas'
 import ButtonGoToGuide from '../panduan/components/ButtonGoToGuide'
+import { Button } from '@/components/ui/button.tsx'
+import { IoMdImage } from 'react-icons/io'
+import { useNavigate } from 'react-router-dom'
 
 const ProgramStudyView = () => {
   const { columns } = ProgramStudyViewModel()
+  const navigate = useNavigate()
 
   const { programStudy, loading, meta } = useGetProgramStudy()
   const { programStudy: fakultas } = useGetListFakultas()
@@ -18,7 +22,23 @@ const ProgramStudyView = () => {
           {
             type: 'custom',
             element: (
-              <ButtonGoToGuide titleGuide='Program Studi' valueGuide="WEBSITE_UTAMA_PROGRAM_STUDI" />
+              <ButtonGoToGuide
+                titleGuide="Program Studi"
+                valueGuide="WEBSITE_UTAMA_PROGRAM_STUDI"
+              />
+            ),
+          },
+          {
+            type: 'custom',
+            element: (
+              <Button
+                onClick={() => navigate('background')}
+                variant={'outline'}
+                className={'border border-primary text-primary hover:text-primary'}
+              >
+                <IoMdImage />
+                Gambar Background
+              </Button>
             ),
           },
         ]}

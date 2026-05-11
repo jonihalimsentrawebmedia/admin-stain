@@ -57,7 +57,6 @@ export const ButtonAddPlaceman = () => {
       })
   }
 
-
   return (
     <>
       <Button
@@ -70,7 +69,7 @@ export const ButtonAddPlaceman = () => {
       </Button>
 
       <DialogCustom
-        className={'rounded min-w-4xl'}
+        className={'rounded max-w-5xl'}
         open={open}
         setOpen={setOpen}
         title={'Tambah Pejabat'}

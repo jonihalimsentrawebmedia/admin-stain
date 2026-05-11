@@ -43,7 +43,7 @@ export const ColumnsEmployee = () => {
       },
     },
     {
-      accessorKey: 'golongan',
+      accessorKey: 'nama_pangkat_golongan',
       header: 'Golongan',
     },
     {

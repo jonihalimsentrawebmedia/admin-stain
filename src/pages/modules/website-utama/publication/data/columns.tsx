@@ -1,16 +1,15 @@
 import { Link, useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
-import type { IYearPublication } from '@/pages/modules/website-utama/publication/data/types.ts'
+import type { IPublication } from '@/pages/modules/website-utama/publication/data/types.ts'
+import { format } from 'date-fns'
 import { Button } from '@/components/ui/button.tsx'
-import ButtonEditPublication from '@/pages/modules/website-utama/publication/component/buttonEdit.tsx'
-import ButtonDeletePublication from '@/pages/modules/website-utama/publication/component/buttonDelete.tsx'
 
 export const ColumnsPublication = () => {
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') ?? 1)
   const limit = Number(searchParams.get('limit') ?? 10)
 
-  const columns: ColumnDef<IYearPublication>[] = [
+  const columns: ColumnDef<IPublication>[] = [
     {
       accessorKey: 'No',
       header: '#',
@@ -20,39 +19,62 @@ export const ColumnsPublication = () => {
       },
     },
     {
-      accessorKey: 'nama_tahun_publikasi',
-      header: 'Tahun',
-    },
-    {
-      accessorKey: 'id_tahun_publikasi',
-      header: 'Daftar Publikasi',
+      accessorKey: 'nama_sdm',
+      header: 'Nama Dosen',
       cell: ({ row }) => {
-        const data = row.original
+        const data = row?.original
         return (
-          <div className="flex gap-2 items-center">
-            <Link to={`list/${data?.id_tahun_publikasi}`}>
-              <Button variant="outline" className="text-primary border-primary hover:text-primary">
-                Lihat Daftar Publikasi
-              </Button>
-            </Link>
-          </div>
+          <>
+            <p>{data?.nama_sdm}</p>
+          </>
         )
       },
     },
     {
-      accessorKey: 'urutan',
-      header: 'Urutan',
+      accessorKey: 'judul_publikasi',
+      header: 'Judul',
     },
     {
-      accessorKey: 'action',
-      header: '',
+      accessorKey: 'jenis_publikasi',
+      header: 'Jenis Publikasi',
+    },
+    {
+      accessorKey: 'penulis',
+      header: 'Penulis',
       cell: ({ row }) => {
         const data = row.original
         return (
-          <div className={'flex gap-2 items-center'}>
-            <ButtonEditPublication data={data} />
-            <ButtonDeletePublication data={data} />
-          </div>
+          <>
+            <ul>
+              {data.penulis.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </ul>
+          </>
+        )
+      },
+    },
+    {
+      accessorKey: 'tanggal_terbit',
+      header: 'Tanggal Terbit',
+      cell: ({ row }) => {
+        const data = row.original
+        return <>{data.tanggal_terbit ? format(data.tanggal_terbit, 'dd-MM-yyyy') : ''}</>
+      },
+    },
+    {
+      accessorKey: 'url_jurnal',
+      header: 'URL Jurnal',
+      cell: ({ row }) => {
+        const data = row.original
+        return (
+          <>
+            <Link to={data?.url_jurnal ?? '#'}>
+              <Button variant={'outline'} className={'border-primary text-primary hover:text-primary'}>
+                Buka Link Jurnal
+              </Button>
+            </Link>
+          </>
         )
       },
     },
