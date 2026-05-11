@@ -161,14 +161,18 @@ export const ColumnsHistoryStatusActive = () => {
         const data = row?.original
         return (
           <>
-            <Link to={data?.url_lampiran ?? '#'}>
-              <Button
-                variant={'outline'}
-                className={'border-primary text-primary hover:text-primary'}
-              >
-                Buka Lampiran
-              </Button>
-            </Link>
+            {data?.url_lampiran ? (
+              <Link to={data?.url_lampiran ?? '#'} target="_blank">
+                <Button
+                  variant={'outline'}
+                  className={'border-primary text-primary hover:text-primary'}
+                >
+                  Buka Lampiran
+                </Button>
+              </Link>
+            ) : (
+              'Lampiran Tidak Ada'
+            )}
           </>
         )
       },

@@ -3,6 +3,7 @@ import { columnsSetStatusActive } from '@/pages/modules/website-utama/lecturer-s
 import { useSearchParams } from 'react-router-dom'
 import { UseGetEmployee } from '@/pages/modules/website-utama/lecturer-staff/hooks'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const SetStatusActivePage = () => {
   const [searchParams] = useSearchParams()
@@ -21,7 +22,20 @@ export const SetStatusActivePage = () => {
   return (
     <>
       <div className="flex flex-col gap-4">
-        <ButtonTitleGroup label="Set Status Aktif" buttonGroup={[]} />
+        <ButtonTitleGroup
+          label="Set Status Aktif"
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide="Data Set Status Aktif Dosen"
+                  valueGuide="WEBSITE_UTAMA_DOSEN_SET_STATUS_ACTIVE"
+                />
+              ),
+            },
+          ]}
+        />
 
         <TableCustom columns={columns} data={employee} loading={loading} meta={meta} />
       </div>

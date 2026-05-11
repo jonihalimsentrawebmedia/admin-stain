@@ -19,8 +19,8 @@ const StatusActivePage = () => {
               type: 'custom',
               element: (
                 <ButtonGoToGuide
-                  titleGuide="Data Dosen dan Staff"
-                  valueGuide="WEBSITE_UTAMA_DOSEN_STAFF_SET_STATUS"
+                  titleGuide="Data Status Aktif Dosen"
+                  valueGuide="WEBSITE_UTAMA_DOSEN_STATUS_ACTIVE"
                 />
               ),
             },

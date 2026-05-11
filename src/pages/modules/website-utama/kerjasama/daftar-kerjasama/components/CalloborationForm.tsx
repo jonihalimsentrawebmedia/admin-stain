@@ -75,7 +75,6 @@ const CalloborationForm = ({ form }: Props) => {
             label="Kelompok*"
             usePortal
             isLoading={loadingGroups}
-            
           />
           <SelectBasicInput
             label="Unit*"
@@ -121,37 +120,54 @@ const CalloborationForm = ({ form }: Props) => {
               isRow
               label="Negara*"
               apiValue={form.watch('id_negara')}
+              fx={(e) => {
+                console.log(e)
+                const find = country?.find((item) => item.id_negara == e.value)
+                console.log(find?.nama_negara.toLowerCase().includes('indonesia'))
+                if (find?.nama_negara.toLowerCase().includes('indonesia')) {
+                  form.setValue('id_provinsi', '')
+                  form.setValue('id_kabupaten', '')
+                }
+              }}
             />
             <div></div>
-            <SelectBasicInput
-              isLoading={loadingProvince}
-              data={province.map((item) => {
-                return {
-                  label: item.nama_provinsi,
-                  value: item.id_provinsi,
-                }
-              })}
-              usePortal
-              form={form}
-              name="id_provinsi"
-              placeholder="Pilih"
-              isRow
-              label="Provinsi*"
-            />
-            <SelectBasicInput
-              isLoading={loadingRegency}
-              data={regency.map((item) => {
-                return {
-                  label: item.nama_kabupaten,
-                  value: item.id_kabupaten,
-                }
-              })}
-              form={form}
-              name="id_kabupaten"
-              placeholder="Pilih"
-              isRow
-              label="Kabupaten*"
-            />
+
+            {country
+              ?.find((row) => row?.id_negara === form.watch('id_negara'))
+              ?.nama_negara.toLowerCase()
+              .includes('indonesia') && (
+              <>
+                <SelectBasicInput
+                  isLoading={loadingProvince}
+                  data={province.map((item) => {
+                    return {
+                      label: item.nama_provinsi,
+                      value: item.id_provinsi,
+                    }
+                  })}
+                  usePortal
+                  form={form}
+                  name="id_provinsi"
+                  placeholder="Pilih"
+                  isRow
+                  label="Provinsi*"
+                />
+                <SelectBasicInput
+                  isLoading={loadingRegency}
+                  data={regency.map((item) => {
+                    return {
+                      label: item.nama_kabupaten,
+                      value: item.id_kabupaten,
+                    }
+                  })}
+                  form={form}
+                  name="id_kabupaten"
+                  placeholder="Pilih"
+                  isRow
+                  label="Kabupaten*"
+                />
+              </>
+            )}
             <TextAreaInput
               form={form}
               name="alamat_mitra"
