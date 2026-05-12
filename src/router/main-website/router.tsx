@@ -1361,7 +1361,6 @@ export const MainWebsiteRouter = [
       },
       {
         path: 'set-status-active',
-        // element: <SetStatusActivePage />,
         children: [
           {
             index: true,
