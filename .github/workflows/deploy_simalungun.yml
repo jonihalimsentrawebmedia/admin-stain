@@ -13,22 +13,20 @@ jobs:
       - name: 📥 Checkout repository
         uses: actions/checkout@v4
 
-      - name: 🟢 Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10.33.0
-
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: pnpm
+          cache: yarn
+
+      - name: 🧶 Setup Yarn
+        run: npm install -g yarn@1
 
       - name: 📦 Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: yarn install --frozen-lockfile
 
       - name: 🏗 Build Vite
-        run: pnpm build
+        run: yarn build
         env:
           VITE_APP_TITLE: Admin Pengelolaan Website Universitas Simalungun
           VITE_API_URL: ${{ secrets.VITE_SIMALUNGUN_API_URL }}
