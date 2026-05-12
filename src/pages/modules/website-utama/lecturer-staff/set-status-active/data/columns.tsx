@@ -66,7 +66,6 @@ export const columnsSetStatusActive = () => {
         return (
           <>
             <p>
-              Aktif sejak{' '}
               {data?.sejak ? format(data?.sejak, 'dd MMMM yyyy', {locale: id}) : 'Belum Aktif'}
             </p>
           </>
