@@ -22,6 +22,7 @@ export const SetStatusActivePage = () => {
     search: search,
     filter: filter,
   })
+
   const columns = columnsSetStatusActive()
   return (
     <>

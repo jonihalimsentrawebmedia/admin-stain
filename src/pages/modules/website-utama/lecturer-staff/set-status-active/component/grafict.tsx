@@ -80,9 +80,7 @@ export function ChartStatusActive({ data }: Props) {
 
             <ChartTooltip
               cursor={false}
-              content={
-                <ChartTooltipContent formatter={(value: number) => [`${value}`, 'Jumlah']} />
-              }
+              content={<ChartTooltipContent formatter={(value: any) => [`${value}`, 'Jumlah']} />}
             />
 
             <Bar dataKey="jumlah" fill="var(--color-jumlah)" radius={6} barSize={28}>
