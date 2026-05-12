@@ -3,10 +3,12 @@ import type { ColumnDef } from '@tanstack/react-table'
 import type { IEmployee } from '@/pages/modules/website-utama/lecturer-staff/data/types.ts'
 import { format } from 'date-fns'
 import { Button } from '@/components/ui/button.tsx'
-import { HiPencil } from 'react-icons/hi'
 import { id } from 'date-fns/locale'
 import type { IHistoryStatus } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/data/resolver.tsx'
 import { FaHistory } from 'react-icons/fa'
+import { HiPencil } from 'react-icons/hi'
+import ButtonDeleteHistory from '@/pages/modules/website-utama/lecturer-staff/set-status-active/component/buttonDelete.tsx'
+import type { IReportStatusActive } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/hook'
 
 export const columnsSetStatusActive = () => {
   const [searchParams] = useSearchParams()
@@ -102,12 +104,6 @@ export const columnsSetStatusActive = () => {
           <>
             <div className="flex items-center justify-end gap-2">
               <Link
-                to={`edit/${data?.id_sdm}`}
-                className={'p-1.5 rounded bg-yellow-500 hover:bg-yellow-600 text-white'}
-              >
-                <HiPencil />
-              </Link>
-              <Link
                 to={`history/${data?.id_sdm}`}
                 className={'p-1.5 rounded bg-blue-500 hover:bg-blue-600 text-white'}
               >
@@ -193,6 +189,53 @@ export const ColumnsHistoryStatusActive = () => {
         )
       },
     },
+    {
+      accessorKey: 'action',
+      header: '',
+      cell: ({ row }) => {
+        const data = row.original
+        return (
+          <>
+            <div className="flex items-center justify-end gap-2">
+              <Link
+                to={`edit/${data?.id_aktif_history}`}
+                className={'bg-yellow-500 p-1.5 rounded hover:bg-yellow-600 text-white'}
+              >
+                <HiPencil />
+              </Link>
+              <ButtonDeleteHistory data={data} />
+            </div>
+          </>
+        )
+      },
+    },
   ]
+  return columns
+}
+
+export const ColumnsReports = () => {
+  const columns: ColumnDef<IReportStatusActive>[] = [
+    {
+      accessorKey: 'order',
+      header: '#',
+      cell: ({ row }) => {
+        const i = row?.index
+        return <p>{i + 1}</p>
+      },
+    },
+    {
+      accessorKey: 'kode_status',
+      header: 'Kode',
+    },
+    {
+      accessorKey: 'nama_status',
+      header: 'Nama Status',
+    },
+    {
+      accessorKey: 'jumlah',
+      header: 'Jumlah',
+    },
+  ]
+
   return columns
 }

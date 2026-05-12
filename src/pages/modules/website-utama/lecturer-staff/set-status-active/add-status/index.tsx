@@ -9,7 +9,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form } from '@/components/ui/form.tsx'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { UseGetStatusActive } from '@/pages/modules/website-utama/lecturer-staff/status-active/hooks'
@@ -17,13 +17,11 @@ import TextInput from '@/components/common/form/TextInput.tsx'
 import TextAreaInput from '@/components/common/form/textAreaInput.tsx'
 import { UploadFileInput } from '@/components/common/form/uploadFileInput.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
-import { UseGetDetailHistoryStatusActive } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/hook'
-import { format } from 'date-fns'
 
-export const EditStatusActiveEmployee = () => {
-  const { id, id_status } = useParams()
+export const AddStatusActiveEmployee = () => {
+  const { id } = useParams()
   const { employee } = UseGetEmployeeById(id as string)
-  const { detail } = UseGetDetailHistoryStatusActive(id_status as string)
+
   const { statusActive } = UseGetStatusActive({
     page: '0',
     limit: '0',
@@ -39,20 +37,9 @@ export const EditStatusActiveEmployee = () => {
     },
   })
 
-  useEffect(() => {
-    if (detail) {
-      form.reset({
-        id_status_aktif: detail?.id_status_aktif,
-        sejak: detail?.sejak ? format(detail?.sejak, 'yyyy-MM-dd') : '',
-        alasan: detail?.alasan,
-        url_lampiran: detail?.url_lampiran,
-      })
-    }
-  }, [detail])
-
   const HandleSave = async (value: TStatusActiveResolver) => {
     setLoading(true)
-    await AxiosClient.put(`/website-utama/sdm-status-aktif-history/${id_status}`, {
+    await AxiosClient.post(`/website-utama/sdm-status-aktif-history`, {
       ...value,
       sejak: value?.sejak ? new Date(value?.sejak).toISOString() : null,
     })
@@ -76,7 +63,7 @@ export const EditStatusActiveEmployee = () => {
           <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
             <ButtonTitleGroup
               isBack
-              label="Ubah Status Aktif"
+              label="Tambah Status Aktif"
               buttonGroup={[
                 { type: 'cancel', label: 'Batal', onClick: () => navigate(-1) },
                 { type: 'save', isDisabled: loading, label: 'Simpan' },

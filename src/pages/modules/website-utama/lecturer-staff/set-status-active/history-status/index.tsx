@@ -1,5 +1,5 @@
 import { UseGetHistoryStatusActive } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/hook'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { UseGetEmployeeById } from '@/pages/modules/website-utama/lecturer-staff/hooks'
 import { ColumnsHistoryStatusActive } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/data/columns.tsx'
@@ -11,12 +11,19 @@ export const HistoryStatusPage = () => {
   const { historyStatusActive, meta, loading } = UseGetHistoryStatusActive({
     id_sdm: id as string,
   })
+  const navigate = useNavigate()
+
   const columns = ColumnsHistoryStatusActive()
 
   return (
     <>
       <div className="flex flex-col gap-4">
-        <ButtonTitleGroup label="Riwayat Status Aktif" buttonGroup={[]} />
+        <ButtonTitleGroup
+          isBack
+          link={'/modules/website-utama/staff-lecturer/set-status-active'}
+          label="Riwayat Status Aktif"
+          buttonGroup={[]}
+        />
         <p className="text-xl font-semibold text-green-500">Informasi Dosen / Staff</p>
         <div className="flex items-start gap-4">
           <img
@@ -41,7 +48,16 @@ export const HistoryStatusPage = () => {
           </div>
         </div>
 
-        <p className="text-xl font-semibold text-green-500">Riwayat Status Aktif</p>
+        <ButtonTitleGroup
+          label={'Riwayat Status Aktif'}
+          buttonGroup={[
+            {
+              type: 'add',
+              label: 'Tambah Status',
+              onClick: () => navigate(`add`),
+            },
+          ]}
+        />
         <TableCustom columns={columns} data={historyStatusActive} loading={loading} meta={meta} />
       </div>
     </>

@@ -1,12 +1,16 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { columnsSetStatusActive } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/data/columns.tsx'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { UseGetEmployee } from '@/pages/modules/website-utama/lecturer-staff/hooks'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
+import { Button } from '@/components/ui/button.tsx'
+import { FaChartSimple } from 'react-icons/fa6'
 
 export const SetStatusActivePage = () => {
   const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
+
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
   const search = searchParams.get('search') ?? ''
@@ -32,6 +36,21 @@ export const SetStatusActivePage = () => {
                   titleGuide="Data Set Status Aktif Dosen"
                   valueGuide="WEBSITE_UTAMA_DOSEN_SET_STATUS_ACTIVE"
                 />
+              ),
+            },
+            {
+              type: 'custom',
+              element: (
+                <Button
+                  className={'border-primary text-primary hover:text-primary'}
+                  variant={'outline'}
+                  onClick={() => {
+                    navigate('report')
+                  }}
+                >
+                  <FaChartSimple />
+                  Laporan
+                </Button>
               ),
             },
           ]}

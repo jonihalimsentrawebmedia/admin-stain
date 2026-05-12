@@ -37,3 +37,54 @@ export const UseGetHistoryStatusActive = (props?: Props) => {
 
   return { historyStatusActive, meta, loading }
 }
+
+export const UseGetDetailHistoryStatusActive = (id: string) => {
+  const [detail, setDetail] = useState<IHistoryStatus>()
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['detail-history-status-active', id],
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get(`/website-utama/sdm-status-aktif-history/${id}`).then(
+        (res) => res?.data?.data
+      ),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setDetail(data)
+    }
+  }, [data])
+
+  return { detail, loading }
+}
+
+export interface IReportStatusActive {
+  id_status_aktif: string
+  kode_status: string
+  nama_status: string
+  jumlah: number
+}
+
+export const UseGetReportStatusActive = () => {
+  const [report, setReport] = useState<IReportStatusActive[]>([])
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['report-status-active'],
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get(`/website-utama/sdm-status-aktif/count`).then((res) => res?.data?.data),
+  })
+
+  useEffect(() => {
+    if (data) {
+      setReport(data)
+    }
+  }, [data])
+
+  const loading = isLoading || isFetching
+
+  return { report, loading }
+}
