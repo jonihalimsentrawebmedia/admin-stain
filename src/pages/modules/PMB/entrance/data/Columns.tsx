@@ -53,7 +53,7 @@ export const ColumnsEntrance = () => {
         const data = row.original
         return (
           <>
-            <Link to={`konten/${data.id_jalur_masuk}`}>
+            <Link to={`content/${data.id_jalur_masuk}`}>
               <Button
                 variant={'outline'}
                 className={'border-primary text-primary hover:text-primary'}

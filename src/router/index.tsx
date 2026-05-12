@@ -56,6 +56,7 @@ import SPIThema from '@/pages/modules/SPI/layout/theme.tsx'
 import MainLayoutPMB from '@/pages/modules/PMB/component/layout'
 import { PMB_ROUTES } from '@/router/pmb'
 import { SelectSessionPMB } from '@/pages/modules/PMB/session'
+import PMBThema from '@/pages/modules/PMB/component/layout/thema.tsx'
 
 export const Router = createBrowserRouter([
   {
@@ -268,9 +269,9 @@ export const Router = createBrowserRouter([
       {
         path: 'pmb',
         element: (
-          <>
+          <PMBThema>
             <MainLayoutPMB />
-          </>
+          </PMBThema>
         ),
         children: [...PMB_ROUTES],
       },

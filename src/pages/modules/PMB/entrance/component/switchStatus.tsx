@@ -25,6 +25,9 @@ export const SwitchStatus = (props: props) => {
           queryClient.invalidateQueries({
             queryKey: ['entrance-pmb'],
           })
+          queryClient.invalidateQueries({
+            queryKey: ['entrance-pmb-detail'],
+          })
         }
       })
       .catch((err) => {

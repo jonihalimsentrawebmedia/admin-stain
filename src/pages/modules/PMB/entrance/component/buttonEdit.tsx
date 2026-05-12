@@ -12,13 +12,15 @@ import { FormEntrance } from '@/pages/modules/PMB/entrance/component/form.tsx'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import type { IEntrance } from '@/pages/modules/PMB/entrance/data/types.ts'
 import { HiPencil } from 'react-icons/hi'
+import { Button } from '@/components/ui/button.tsx'
 
 interface props {
   data: IEntrance
+  showIcon?: boolean
 }
 
 const ButtonEditEntrancePMB = (props: props) => {
-  const { data } = props
+  const { data, showIcon = true } = props
 
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -60,12 +62,23 @@ const ButtonEditEntrancePMB = (props: props) => {
 
   return (
     <>
-      <button
-        className={'bg-yellow-500 p-1.5 text-white hover:bg-yellow-600 rounded'}
-        onClick={() => setOpen(!open)}
-      >
-        <HiPencil />
-      </button>
+      {showIcon ? (
+        <button
+          className={'bg-yellow-500 p-1.5 text-white hover:bg-yellow-600 rounded'}
+          onClick={() => setOpen(!open)}
+        >
+          <HiPencil />
+        </button>
+      ) : (
+        <Button
+          variant={'outline'}
+          onClick={() => setOpen(!open)}
+          className={'border-primary text-primary hover:text-primary'}
+        >
+          <HiPencil />
+          Edit Jalur Masuk
+        </Button>
+      )}
 
       <DialogBasic
         title={'Tambah Jalur Masuk'}
