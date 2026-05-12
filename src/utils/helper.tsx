@@ -85,8 +85,11 @@ export const GetModuleUrl = (moduleSelect: {
       return `/modules/session-pulsikom?url=pulsikom&id=${moduleSelect?.id_module}`
     }
 
-    case 'spi':{
+    case 'spi': {
       return `/modules/session-spi?url=spi&id=${moduleSelect?.id_module}`
+    }
+    case 'pmb': {
+      return `/modules/session-pmb?url=pmb&id=${moduleSelect?.id_module}`
     }
 
     default:
@@ -172,7 +175,6 @@ export const getRelativeTime = (date: Date | string): string => {
   return result
 }
 
-
 type TableRow = {
   topik: string
   januari?: string
@@ -227,10 +229,7 @@ export const transformToTable = (data: any[]) => {
         const item = list?.[0]
         if (!item) return
 
-        row[key] = formatRange(
-          item.tanggal_mulai_bahasan,
-          item.tanggal_selesai_bahasan
-        )
+        row[key] = formatRange(item.tanggal_mulai_bahasan, item.tanggal_selesai_bahasan)
       })
 
       rows.push(row)

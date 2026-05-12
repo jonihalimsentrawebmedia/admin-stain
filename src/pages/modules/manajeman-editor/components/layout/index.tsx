@@ -1,6 +1,5 @@
 import { Outlet } from 'react-router-dom'
 import { Header } from './header'
-// import { Sidebar } from './sidebar.tsx'
 import { useState } from 'react'
 
 export default function MainLayoutEditor() {
@@ -12,8 +11,6 @@ export default function MainLayoutEditor() {
         <Header collapsed={collapsed} setCollapsed={setCollapsed} />
 
         <div className="flex flex-1 overflow-hidden">
-          {/*<Sidebar collapsed={collapsed} />*/}
-
           <main className="flex-1 overflow-auto p-4 px-28">
             <Outlet />
           </main>

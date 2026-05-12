@@ -8,12 +8,14 @@ import TablePaginate from '@/components/common/table/TablePagination.tsx'
 import { UseGetStatusEmployee } from '@/pages/modules/website-utama/lecturer-staff/status-employee/hooks'
 import { MultipleStatus } from '@/pages/modules/website-utama/lecturer-staff/set-status/component/multipleUnit.tsx'
 import ButtonGoToGuide from '../../panduan/components/ButtonGoToGuide.tsx'
+import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 
 const SetStatusEmployeePage = () => {
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
   const search = searchParams.get('search') ?? ''
+  const filter = searchParams.get('filter') ?? ''
 
   const [selected, setSelected] = useState<string[]>([])
   const { status } = UseGetStatusEmployee({
@@ -24,6 +26,7 @@ const SetStatusEmployeePage = () => {
     page: page,
     limit: limit,
     search: search,
+    filter: filter,
   })
   const columns = ColumnsSetStatus({
     status: status,
@@ -37,7 +40,12 @@ const SetStatusEmployeePage = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide titleGuide='Data Dosen dan Staff' valueGuide="WEBSITE_UTAMA_DOSEN_STAFF_SET_STATUS" />,
+              element: (
+                <ButtonGoToGuide
+                  titleGuide="Data Dosen dan Staff"
+                  valueGuide="WEBSITE_UTAMA_DOSEN_STAFF_SET_STATUS"
+                />
+              ),
             },
             {
               type: 'add',
@@ -58,6 +66,16 @@ const SetStatusEmployeePage = () => {
             />
           </>
         )}
+
+        <SelectFilter
+          label={'Dosen / Staff'}
+          selectClassName={'max-w-[250px]'}
+          options={[
+            { label: 'Dosen', value: 'DOSEN' },
+            { label: 'Staff', value: 'STAFF' },
+          ]}
+          name={'filter'}
+        />
 
         <TableBasic
           onSelectedRowsChange={setSelected}

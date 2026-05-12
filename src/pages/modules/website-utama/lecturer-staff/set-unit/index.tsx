@@ -7,12 +7,14 @@ import { useState } from 'react'
 import TablePaginate from '@/components/common/table/TablePagination.tsx'
 import MultipleUnit from '@/pages/modules/website-utama/lecturer-staff/set-unit/component/multipleUnit.tsx'
 import ButtonGoToGuide from '../../panduan/components/ButtonGoToGuide.tsx'
+import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 
 const SetUnitEmployeePage = () => {
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
   const search = searchParams.get('search') ?? ''
+  const filter = searchParams.get('filter') ?? ''
 
   const [selected, setSelected] = useState<string[]>([])
   const { workUnit } = UseGetReFUnit()
@@ -20,6 +22,7 @@ const SetUnitEmployeePage = () => {
     page: page,
     limit: limit,
     search: search,
+    filter: filter,
   })
   const columns = ColumnsSetUnit({
     unit: workUnit,
@@ -31,9 +34,14 @@ const SetUnitEmployeePage = () => {
       <div className={'space-y-4'}>
         <ButtonTitleGroup
           buttonGroup={[
-             {
+            {
               type: 'custom',
-              element: <ButtonGoToGuide titleGuide='Data Dosen dan Staff' valueGuide="WEBSITE_UTAMA_DOSEN_STAFF_SET_UNIT_KERJA" />,
+              element: (
+                <ButtonGoToGuide
+                  titleGuide="Data Dosen dan Staff"
+                  valueGuide="WEBSITE_UTAMA_DOSEN_STAFF_SET_UNIT_KERJA"
+                />
+              ),
             },
             {
               type: 'add',
@@ -47,6 +55,16 @@ const SetUnitEmployeePage = () => {
         {selected.length > 0 && (
           <MultipleUnit setSelected={setSelected} workUnit={workUnit} selected={selected} />
         )}
+
+        <SelectFilter
+          label={'Dosen / Staff'}
+          selectClassName={'max-w-[250px]'}
+          options={[
+            { label: 'Dosen', value: 'DOSEN' },
+            { label: 'Staff', value: 'STAFF' },
+          ]}
+          name={'filter'}
+        />
 
         <TableBasic
           onSelectedRowsChange={setSelected}

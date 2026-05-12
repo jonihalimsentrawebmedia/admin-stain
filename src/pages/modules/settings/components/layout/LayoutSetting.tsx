@@ -106,6 +106,10 @@ export default function DashboardLayout() {
           label: 'Pangkat Akademik',
         },
         {
+          link: '/modules/settings/reference/structural-official',
+          label: 'Jabatan Struktural',
+        },
+        {
           link: '/modules/settings/reference/educational-level',
           label: 'Jenjang Pendidikan',
         },

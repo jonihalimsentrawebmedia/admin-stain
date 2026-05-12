@@ -1,17 +1,17 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Pencil, Plus,  Save, Trash2 } from 'lucide-react'
+import { Pencil, Plus, Save, Trash2 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
   Table,
-  TableHeader,
-  TableHead,
-  TableRow,
   TableBody,
   TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from '@/components/ui/table'
 import { useParams } from 'react-router-dom'
 import { UseGetReseacrh } from '../../hooks'
@@ -26,6 +26,10 @@ type PenelitianType = {
   tahun_pelaksanaan: string
   isEditing?: boolean
   isAdd?: boolean
+  penulis: Array<{
+    id_penulis: string
+    nama_penulis: string
+  }>
 }
 
 export default function TabsResearch() {
@@ -42,8 +46,6 @@ export default function TabsResearch() {
   const [loading, setLoading] = useState(false)
 
   const handleAdd = () => {
-    // if (!newRow.judul_penelitian) return;
-
     setData((prev) => [
       ...prev,
       {
@@ -51,9 +53,9 @@ export default function TabsResearch() {
         ...newRow,
         isEditing: true,
         isAdd: true,
+        penulis: [],
       },
     ])
-
     setNewRow({
       judul_penelitian: '',
       tahun_pelaksanaan: '',
@@ -129,6 +131,7 @@ export default function TabsResearch() {
           judul_penelitian: item.judul_penelitian,
           tahun_pelaksanaan: item.tahun_pelaksanaan,
           id: item.id_penelitian,
+          penulis: item.penulis,
         }
       })
       setData(temp)
@@ -190,7 +193,10 @@ export default function TabsResearch() {
                     }}
                   />
                 ) : (
-                  item.judul_penelitian
+                  <div className={'flex flex-col gap2'}>
+                    <p>{item.judul_penelitian}</p>
+                    <p>{item?.penulis?.map((row) => row?.nama_penulis).join(', ')}</p>
+                  </div>
                 )}
               </TableCell>
 

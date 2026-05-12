@@ -48,6 +48,17 @@ const AcademicYearForm = ({ form, handleCancel, handleSave, loading }: Props) =>
             placeholder="Nama Tahun Akademik"
             isRow
           />
+
+          <TextInput
+            form={form}
+            name={'urutan'}
+            label={'Urutan'}
+            placeholder={'Urutan'}
+            type="number"
+            isNumber
+            isRow
+          />
+
           <ButtonForm loading={loading} onCancel={handleCancel} />
         </div>
       </form>

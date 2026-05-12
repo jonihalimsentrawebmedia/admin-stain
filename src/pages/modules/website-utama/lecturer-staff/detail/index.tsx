@@ -1,34 +1,84 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { useNavigate, useParams } from 'react-router-dom'
-import { UseGetEmployeeById } from '@/pages/modules/website-utama/lecturer-staff/hooks'
-import { format } from 'date-fns'
+import {useNavigate, useParams, useSearchParams} from 'react-router-dom'
+import {UseGetEmployeeById} from '@/pages/modules/website-utama/lecturer-staff/hooks'
+import {format} from 'date-fns'
 import TabsData from './data/tabs'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs'
 import CardPersonal from './components/CardPersonal'
-import { useForm } from 'react-hook-form'
-import { useEffect } from 'react'
+import {useForm} from 'react-hook-form'
+import {useEffect} from 'react'
 import TabsPersonalInformation from './components/tabs/TabsPersonalInformation'
+import {Button} from '@/components/ui/button.tsx'
+import {ArrowLeft, ArrowRight} from 'lucide-react'
 
 const DetailEmployee = () => {
-  const { id } = useParams()
+  const {id} = useParams()
   const form = useForm()
-  const { employee } = UseGetEmployeeById(id as string)
+  const {employee, nextPrevId} = UseGetEmployeeById(id as string)
   const navigate = useNavigate()
-  const { tabs } = TabsData()
+  const {tabs} = TabsData()
+
+  const [searchParams, setSearchParams] = useSearchParams()
+  const tabsValue = searchParams.get('tab') ?? "informasi-pribadi"
+
   useEffect(() => {
     if (employee) {
       form.reset({
         ...employee,
-        tanggal_lahir: format(employee.tanggal_lahir, 'dd-MM-yyy'),
+        tanggal_lahir: employee?.tanggal_lahir ? format(employee?.tanggal_lahir, 'dd-MM-yyy') : '',
       })
     }
   }, [employee])
+
   return (
     <>
-      <div className={'space-y-4'}>
+      <div className={'space-y-5'}>
         <ButtonTitleGroup
           isBack
+          link={'/modules/website-utama/staff-lecturer/data'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <>
+                  {nextPrevId?.previous && (
+                    <Button
+                      onClick={() =>
+                        navigate(
+                          `/modules/website-utama/staff-lecturer/data/detail/${nextPrevId?.previous?.id_sdm}`
+                        )
+                      }
+                      variant={'outline'}
+                      className={'border-primary text-primary hover:text-primary'}
+                    >
+                      <ArrowLeft/>
+                      {nextPrevId?.previous?.nama}
+                    </Button>
+                  )}
+                </>
+              ),
+            },
+            {
+              type: 'custom',
+              element: (
+                <>
+                  {nextPrevId?.next && (
+                    <Button
+                      onClick={() =>
+                        navigate(
+                          `/modules/website-utama/staff-lecturer/data/detail/${nextPrevId?.next?.id_sdm}`
+                        )
+                      }
+                      variant={'outline'}
+                      className={'border-primary text-primary hover:text-primary'}
+                    >
+                      {nextPrevId?.next?.nama}
+                      <ArrowRight/>
+                    </Button>
+                  )}
+                </>
+              ),
+            },
             {
               type: 'edit',
               label: 'Edit Data',
@@ -37,49 +87,12 @@ const DetailEmployee = () => {
           ]}
           label="Detail Data Dosen & Staff"
         />
-        {/* 
-        <p className="text-primary text-xl font-semibold">Informasi Pribadi</p>
 
-        <div className="flex items-start gap-x-8">
-          <img
-            src={employee?.gambar_url}
-            alt="gambar"
-            className="w-[220px] h-[300px] rounded-md object-cover"
-          />
-
-          <div className={'grid grid-cols-2 gap-4'}>
-            <p className="text-gray-500">Nama</p>
-            <p>{employee?.nama}</p>
-            <p className="text-gray-500">NIK</p>
-            <p>{employee?.nik}</p>
-            <p className="text-gray-500">Tempat Lahir</p>
-            <p>{employee?.tempat_lahir}</p>
-            <p className="text-gray-500">Tanggal Lahir</p>
-            <p>{employee?.tanggal_lahir ? format(employee?.tanggal_lahir, 'dd-MM-yyy') : ''}</p>
-            <p className="text-gray-500">No. HP</p>
-            <p>{employee?.no_hp}</p>
-            <p className="text-gray-500">Email</p>
-            <p>{employee?.email}</p>
-          </div>
-        </div>
-
-        <p className="text-primary text-xl font-semibold mt-5">Informasi Kepegawaian</p>
-        <div className={'grid grid-cols-2 gap-4'}>
-          <p className="text-gray-500">Status</p>
-          <p>{employee?.nama_status}</p>
-          <p className="text-gray-500">NIP</p>
-          <p>{employee?.nip}</p>
-          <p className="text-gray-500">NIDN</p>
-          <p>{employee?.nidn}</p>
-          <p className="text-gray-500">Unit Kerja</p>
-          <p>{employee?.nama_unit_kerja}</p>
-          <p className="text-gray-500">Golongan</p>
-          <p>{employee?.golongan}</p>
-          <p className="text-gray-500">Jabatan Struktural</p>
-          <p>{employee?.jabatan_struktural}</p>
-        </div> */}
-
-        <Tabs defaultValue="informasi-pribadi" className="w-full">
+        <Tabs value={tabsValue} onValueChange={(e) => {
+          const Params = new URLSearchParams()
+          Params.append('tab', e)
+          setSearchParams(Params.toString(), {replace: true})
+        }} className="w-full mt-5">
           <TabsList className="h-auto bg-transparent p-0 flex flex-wrap justify-start gap-2">
             {tabs.map((tab) => (
               <TabsTrigger
@@ -103,13 +116,13 @@ const DetailEmployee = () => {
             ))}
           </TabsList>
           <TabsContent value={'informasi-pribadi'} className="mt-6 space-y-4">
-            <CardPersonal form={form} />
-            <TabsPersonalInformation form={form} />
+            <CardPersonal form={form}/>
+            <TabsPersonalInformation form={form}/>
           </TabsContent>
 
           {tabs.map((item, index) => (
             <TabsContent key={item.label + index} value={item.value} className="mt-6 space-y-4">
-              {item.value !== 'informasi-pribadi' && <CardPersonal form={form} />}
+              {item.value !== 'informasi-pribadi' && <CardPersonal form={form}/>}
               {item.element}
             </TabsContent>
           ))}

@@ -69,6 +69,9 @@ export const InputManyFile = <T extends FieldValues>(props: Props<T>) => {
             Upload Dokumen
             <MdUpload />
           </Button>
+          <p className="text-xs text-red-500">
+            {form.formState.errors?.[name]?.message?.toString()}
+          </p>
 
           {listFileLink.map((row, index) => (
             <Link

@@ -9,6 +9,9 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { UseGetStatusEmployee } from '@/pages/modules/website-utama/lecturer-staff/status-employee/hooks'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import { UseGetReFUnit } from '@/pages/modules/website-utama/lecturer-staff/hooks'
+import { InputRadio } from '@/components/common/form/InputRadio.tsx'
+import { UseStructuralOfficial } from '@/pages/modules/settings/reference/structural-official/hooks'
+import useGetGroupRank from '@/pages/modules/settings/reference/group-rank/controller/useGetGroupRank.tsx'
 
 interface props {
   form: UseFormReturn<TEmployeeResolver>
@@ -22,9 +25,16 @@ const FormEmployee = (props: props) => {
   const navigate = useNavigate()
 
   const { workUnit } = UseGetReFUnit()
+  const { groupRank } = useGetGroupRank({ isGetAll: true })
+  const { structural } = UseStructuralOfficial({
+    page: '0',
+    limit: '0',
+  })
+
   const { status } = UseGetStatusEmployee({
     page: '0',
     limit: '0',
+    filter: form.watch('type_pegawai') ?? '',
   })
 
   return (
@@ -51,6 +61,23 @@ const FormEmployee = (props: props) => {
             ratio_width={3}
             ratio_height={4}
             className={'max-w-[180px] w-[180px]'}
+          />
+
+          <InputRadio
+            form={form}
+            name={'type_pegawai'}
+            label={'Jenis Kepegawaian'}
+            isRequired
+            isRow
+            data={[
+              { label: 'Dosen', value: 'DOSEN' },
+              { label: 'Staff', value: 'STAFF' },
+            ]}
+            fx={() => {
+              form.setValue('nidn', '')
+              form.setValue('id_pangkat_golongan', '')
+              form.setValue('id_jabatan_struktural', '')
+            }}
           />
 
           <TextInput
@@ -143,9 +170,21 @@ const FormEmployee = (props: props) => {
             placeholder={'Masukan NIP'}
             htmlFor={'nip'}
             type={'number'}
-            isRequired
             isRow
           />
+
+          {form?.watch('type_pegawai') === 'DOSEN' && (
+            <TextInput
+              form={form}
+              name={'nidn'}
+              label={'NIDN'}
+              placeholder={'Masukan NIDN'}
+              htmlFor={'nidn'}
+              type={'number'}
+              isRequired
+              isRow
+            />
+          )}
 
           {status?.find((row) => row.id_status_sdm === form.watch('id_status'))?.is_ada_nidn && (
             <TextInput
@@ -165,6 +204,7 @@ const FormEmployee = (props: props) => {
             form={form}
             placeholder={'Pilih Unit Kerja'}
             label={'Unit Kerja'}
+            showNull
             isRequired
             isRow
             usePortal
@@ -176,24 +216,42 @@ const FormEmployee = (props: props) => {
             }
           />
 
-          <TextInput
-            form={form}
-            name={'golongan'}
-            label={'Golongan'}
-            placeholder={'Golongan'}
-            htmlFor={'golongan'}
-            isRequired
-            isRow
-          />
-          <TextInput
-            form={form}
-            name={'jabatan_struktural'}
-            label={'Jabatan Struktural'}
-            placeholder={'Jabatan Struktural'}
-            htmlFor={'jabatan_struktural'}
-            isRequired
-            isRow
-          />
+          {form?.watch('type_pegawai') === 'DOSEN' && (
+            <>
+              <SelectBasicInput
+                name={'id_pangkat_golongan'}
+                showNull
+                form={form}
+                placeholder={'Pilih Pangkat Golongan'}
+                label={'Pangkat Golongan'}
+                isRequired
+                isRow
+                usePortal
+                data={
+                  groupRank?.map((row) => ({
+                    label: row?.nama_golongan,
+                    value: row?.id_golongan,
+                  })) ?? []
+                }
+              />
+              <SelectBasicInput
+                name={'id_jabatan_struktural'}
+                form={form}
+                placeholder={'Pilih Jabatan Struktural'}
+                label={'Jabatan Struktural'}
+                isRequired
+                showNull
+                isRow
+                usePortal
+                data={
+                  structural?.map((row) => ({
+                    label: row?.nama_jabatan_struktural,
+                    value: row?.id_jabatan_struktural,
+                  })) ?? []
+                }
+              />
+            </>
+          )}
 
           <ButtonForm loading={loading} onCancel={() => navigate(-1)} />
         </form>

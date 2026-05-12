@@ -11,6 +11,7 @@ export const AcademicYearResolver = z.object({
   tahun_akademik: z
     .number({ error: 'Tahun Akademik Wajib Diisi' })
     .min(1, { error: 'Tahun Akademik Wajib Diisi' }),
+  urutan: z.number({ error: 'Urutan Wajib Diisi' }),
 })
 
 export type IAcademicYearTypeForm = z.infer<typeof AcademicYearResolver>

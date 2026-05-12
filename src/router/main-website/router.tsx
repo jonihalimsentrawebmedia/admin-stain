@@ -191,11 +191,15 @@ import { UpdatedEmployee } from '@/pages/modules/website-utama/lecturer-staff/up
 import DetailEmployee from '@/pages/modules/website-utama/lecturer-staff/detail'
 import SetUnitEmployeePage from '@/pages/modules/website-utama/lecturer-staff/set-unit'
 import SetStatusEmployeePage from '@/pages/modules/website-utama/lecturer-staff/set-status'
-import PublicationPage from '@/pages/modules/website-utama/publication'
-import ListDataPublication from '@/pages/modules/website-utama/publication/List-data'
-import { PublicationLanguagePage } from '@/pages/modules/website-utama/publication/language'
 import GuideListView from '@/pages/modules/website-utama/panduan/GuideListView'
 import { QuotesPage } from '@/pages/modules/website-utama/settings-menu/qoutes'
+import { FacultyBackground } from '@/pages/modules/website-utama/fakultas/background'
+import { ProdiBackground } from '@/pages/modules/website-utama/program-studi/background'
+import { PublicationLecturerPage } from '@/pages/modules/website-utama/publication'
+import StatusActivePage from '@/pages/modules/website-utama/lecturer-staff/status-active'
+import { SetStatusActivePage } from '@/pages/modules/website-utama/lecturer-staff/set-status-active'
+import { EditStatusActiveEmployee } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/edit-status'
+import { HistoryStatusPage } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/history-status'
 
 export const MainWebsiteRouter = [
   {
@@ -913,21 +917,25 @@ export const MainWebsiteRouter = [
   },
   {
     path: 'publication',
-    children: [
-      {
-        index: true,
-        element: <PublicationPage />,
-      },
-      {
-        path: 'list/:id',
-        element: <ListDataPublication />,
-      },
-      {
-        path: 'list/:id/language/:id_publication',
-        element: <PublicationLanguagePage />,
-      },
-    ],
+    element: <PublicationLecturerPage />,
   },
+  // {
+  //   path: 'publication',
+  //   children: [
+  //     {
+  //       index: true,
+  //       element: <PublicationPage />,
+  //     },
+  //     {
+  //       path: 'list/:id',
+  //       element: <ListDataPublication />,
+  //     },
+  //     {
+  //       path: 'list/:id/language/:id_publication',
+  //       element: <PublicationLanguagePage />,
+  //     },
+  //   ],
+  // },
   {
     path: 'campus-life',
     children: [
@@ -1142,6 +1150,10 @@ export const MainWebsiteRouter = [
           },
         ],
       },
+      {
+        path: 'background',
+        element: <ProdiBackground />,
+      },
     ],
   },
   {
@@ -1196,6 +1208,10 @@ export const MainWebsiteRouter = [
             element: <></>,
           },
         ],
+      },
+      {
+        path: 'background',
+        element: <FacultyBackground />,
       },
     ],
   },
@@ -1336,6 +1352,28 @@ export const MainWebsiteRouter = [
       {
         path: 'status',
         element: <StatusEmployeePage />,
+      },
+      {
+        path: 'status-active',
+        element: <StatusActivePage />,
+      },
+      {
+        path: 'set-status-active',
+        // element: <SetStatusActivePage />,
+        children: [
+          {
+            index: true,
+            element: <SetStatusActivePage />,
+          },
+          {
+            path: 'edit/:id',
+            element: <EditStatusActiveEmployee />,
+          },
+          {
+            path: 'history/:id',
+            element: <HistoryStatusPage />,
+          },
+        ],
       },
       {
         path: 'set-unit',

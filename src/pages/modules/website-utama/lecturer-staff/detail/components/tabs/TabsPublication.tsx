@@ -1,18 +1,18 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Pencil, Save, Trash2, Plus,  } from 'lucide-react'
+import { Pencil, Plus, Save, Trash2 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
 import {
   Table,
-  TableHeader,
-  TableHead,
-  TableRow,
   TableBody,
   TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from '@/components/ui/table'
 import { useParams } from 'react-router-dom'
 import { UseGetPublication } from '../../hooks'
@@ -30,6 +30,10 @@ type PublikasiType = {
   url_jurnal: string
   isEditing?: boolean
   isAdd?: boolean
+  penulis: Array<{
+    id_penulis: string
+    nama_penulis: string
+  }>
 }
 
 export default function TabsPublication() {
@@ -123,6 +127,7 @@ export default function TabsPublication() {
         ...newRow,
         isEditing: true,
         isAdd: true,
+        penulis: [],
       },
     ])
 
@@ -134,8 +139,6 @@ export default function TabsPublication() {
     })
   }
 
- 
-
   useEffect(() => {
     if (publication) {
       const temp = publication.map((item) => {
@@ -146,6 +149,7 @@ export default function TabsPublication() {
           url_jurnal: item.url_jurnal,
           id: item.id_publikasi,
           isEditing: false,
+          penulis: item.penulis,
         }
       })
       setData(temp)
@@ -205,17 +209,35 @@ export default function TabsPublication() {
                 {/* Judul */}
                 <TableCell className="text-black whitespace-pre-line">
                   {item.isEditing ? (
-                    <Input
-                      placeholder="Judul Publikasi"
-                      className="focus-visible:ring-0 rounded"
-                      value={item.judul_publikasi}
-                      onChange={(e) => {
-                        temp[index].judul_publikasi = e.target.value
-                        setData(temp)
-                      }}
-                    />
+                    <>
+                      <Input
+                        placeholder="Judul Publikasi"
+                        className="focus-visible:ring-0 rounded"
+                        value={item.judul_publikasi}
+                        onChange={(e) => {
+                          temp[index].judul_publikasi = e.target.value
+                          setData(temp)
+                        }}
+                      />
+                      <Input
+                        placeholder="Judul Publikasi"
+                        className="focus-visible:ring-0 rounded"
+                        value={item.judul_publikasi}
+                        onChange={(e) => {
+                          temp[index].judul_publikasi = e.target.value
+                          setData(temp)
+                        }}
+                      />
+                    </>
                   ) : (
-                    item.judul_publikasi
+                    <div className={'flex flex-col gap-1.5'}>
+                      <p>{item.judul_publikasi}</p>
+                      <ul className={'pl-4 list-decimal'}>
+                        {item?.penulis?.map((row, k) => (
+                          <li key={k}>{row?.nama_penulis}</li>
+                        ))}
+                      </ul>
+                    </div>
                   )}
                 </TableCell>
 

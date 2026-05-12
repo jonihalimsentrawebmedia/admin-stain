@@ -2,12 +2,12 @@ import TabsFormalEducation from '../components/tabs/TabsFormalEducation'
 import TabsFunctionalPosition from '../components/tabs/TabsFunctionalPosition'
 import TabsRank from '../components/tabs/TabsRank'
 import TabsResearch from '../components/tabs/TabsResearch'
-import TabsPublication from '../components/tabs/TabsPublication'
 import TabsHKI from '../components/tabs/TabsHKI'
 import TabsDevotion from '../components/tabs/TabsDevotion'
+import NewSectionPublication from '@/pages/modules/website-utama/lecturer-staff/detail/components/publication/newSectonPublication.tsx'
 
 const TabsData = () => {
-   const tabs = [
+  const tabs = [
     {
       value: 'informasi-pribadi',
       label: 'Informasi Pribadi',
@@ -21,32 +21,33 @@ const TabsData = () => {
     {
       value: 'jabatan-fungsional',
       label: 'Jabatan Fungsional',
-      element: <TabsFunctionalPosition/>,
+      element: <TabsFunctionalPosition />,
     },
     {
       value: 'kepangkatan',
       label: 'Kepangkatan',
-      element: <TabsRank/>,
+      element: <TabsRank />,
     },
     {
       value: 'penelitian',
       label: 'Penelitian',
-      element: <TabsResearch/>,
+      element: <TabsResearch />,
     },
     {
       value: 'publikasi',
       label: 'Publikasi',
-      element: <TabsPublication/>,
+      // element: <TabsPublication/>,
+      element: <NewSectionPublication />,
     },
     {
       value: 'hki-paten',
       label: 'HKI/PATEN',
-      element: <TabsHKI/>,
+      element: <TabsHKI />,
     },
     {
       value: 'pengabdian',
       label: 'Pengabdian',
-      element: <TabsDevotion/>,
+      element: <TabsDevotion />,
     },
   ]
   return { tabs }

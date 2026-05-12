@@ -2,16 +2,20 @@ import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
-import type { IEmployee } from '@/pages/modules/website-utama/lecturer-staff/data/types.ts'
+import type {
+  IEmployee,
+  ISDMNavigation,
+} from '@/pages/modules/website-utama/lecturer-staff/data/types.ts'
 import type { BasicProps } from '@/utils/globalType.ts'
 
 interface props extends BasicProps {
   id_unit_kerja?: string
   id_status?: string
+  filter?: string
 }
 
 export const UseGetEmployee = (props?: props) => {
-  const { page, limit, search, id_unit_kerja, id_status } = props ?? {}
+  const { page, limit, search, id_unit_kerja, id_status, filter } = props ?? {}
 
   const [employee, setEmployee] = useState<IEmployee[]>([])
   const [meta, setMeta] = useState<Meta>()
@@ -22,6 +26,7 @@ export const UseGetEmployee = (props?: props) => {
   if (search) Params.append('search', search ?? '')
   if (id_unit_kerja) Params.append('id_unit_kerja', id_unit_kerja ?? '')
   if (id_status) Params.append('id_status', id_status ?? '')
+  if (filter) Params.append('filter', props?.filter ?? '')
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['employee', Params.toString()],
@@ -43,6 +48,7 @@ export const UseGetEmployee = (props?: props) => {
 
 export const UseGetEmployeeById = (id: string) => {
   const [employee, setEmployee] = useState<IEmployee>()
+  const [nextPrevId, setNextPrevId] = useState<ISDMNavigation>()
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['employee-by-id', id],
     refetchOnWindowFocus: false,
@@ -53,11 +59,12 @@ export const UseGetEmployeeById = (id: string) => {
 
   useEffect(() => {
     if (data) {
-      setEmployee(data)
+      setEmployee(data?.data)
+      setNextPrevId(data?.step)
     }
   }, [data])
 
-  return { employee, loading }
+  return { employee, loading, nextPrevId }
 }
 
 export const UseGetReFUnit = () => {

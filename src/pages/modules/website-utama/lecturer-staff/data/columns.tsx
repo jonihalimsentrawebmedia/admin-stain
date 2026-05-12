@@ -1,7 +1,6 @@
 import { Link, useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
 import type { IEmployee } from '@/pages/modules/website-utama/lecturer-staff/data/types.ts'
-import { format } from 'date-fns'
 import { MdInfo } from 'react-icons/md'
 import { HiPencil } from 'react-icons/hi'
 import ButtonDeleteEmployee from '@/pages/modules/website-utama/lecturer-staff/component/buttonDelete.tsx'
@@ -33,35 +32,23 @@ export const ColumnsEmployee = () => {
     {
       accessorKey: 'nama',
       header: 'Nama',
+      cell: ({ row }) => {
+        const data = row?.original
+        return (
+          <>
+            <p>{data?.nama}</p>
+            <p>{data?.nik}</p>
+          </>
+        )
+      },
     },
     {
-      accessorKey: 'nik',
-      header: 'NIK',
-    },
-    {
-      accessorKey: 'nip',
-      header: 'NIP',
-    },
-    {
-      accessorKey: 'golongan',
+      accessorKey: 'nama_pangkat_golongan',
       header: 'Golongan',
     },
     {
       accessorKey: 'nama_status',
       header: 'Status',
-    },
-    {
-      accessorKey: 'tempat_lahir',
-      header: 'TTL',
-      cell: ({ row }) => {
-        const data = row.original
-        return (
-          <div>
-            {data.tempat_lahir},{' '}
-            {data.tanggal_lahir ? format(data?.tanggal_lahir, 'dd-MM-yyyy') : ''}
-          </div>
-        )
-      },
     },
     {
       accessorKey: 'nama_unit_kerja',

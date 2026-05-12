@@ -1,0 +1,48 @@
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import { ButtonAddLandingPMB } from './components/buttonAdd.tsx'
+import { UnitLandingPageColumns } from './data/columns'
+import { UseGetUnitLandingPage } from './hooks/index'
+import TableCustom from '@/components/common/table/TableCustom.tsx'
+import { useSearchParams } from 'react-router-dom'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
+
+export const LandingPagePMB = () => {
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const columns = UnitLandingPageColumns()
+  const { meta, unitLanding, loading } = UseGetUnitLandingPage({
+    page: page,
+    limit: limit,
+    search: search,
+  })
+
+  return (
+    <>
+      <div className={'flex flex-col gap-5'}>
+        <ButtonTitleGroup
+          label={'Landing Page'}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Landing Page'}
+                  valueGuide="SPI_PENGATURAN_LANDING_PAGE"
+                />
+              ),
+            },
+            {
+              type: 'custom',
+              element: <ButtonAddLandingPMB />,
+            },
+          ]}
+        />
+
+        <TableCustom data={unitLanding} columns={columns} loading={loading} meta={meta} />
+      </div>
+    </>
+  )
+}
