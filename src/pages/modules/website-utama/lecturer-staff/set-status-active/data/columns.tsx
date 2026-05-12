@@ -1,14 +1,15 @@
-import { Link, useSearchParams } from 'react-router-dom'
-import type { ColumnDef } from '@tanstack/react-table'
-import type { IEmployee } from '@/pages/modules/website-utama/lecturer-staff/data/types.ts'
-import { format } from 'date-fns'
-import { Button } from '@/components/ui/button.tsx'
-import { id } from 'date-fns/locale'
-import type { IHistoryStatus } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/data/resolver.tsx'
-import { FaHistory } from 'react-icons/fa'
-import { HiPencil } from 'react-icons/hi'
-import ButtonDeleteHistory from '@/pages/modules/website-utama/lecturer-staff/set-status-active/component/buttonDelete.tsx'
-import type { IReportStatusActive } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/hook'
+import {Link, useSearchParams} from 'react-router-dom'
+import type {ColumnDef} from '@tanstack/react-table'
+import type {IEmployee} from '@/pages/modules/website-utama/lecturer-staff/data/types.ts'
+import {format} from 'date-fns'
+import {Button} from '@/components/ui/button.tsx'
+import {id} from 'date-fns/locale'
+import type {IHistoryStatus} from '@/pages/modules/website-utama/lecturer-staff/set-status-active/data/resolver.tsx'
+import {FaHistory} from 'react-icons/fa'
+import {HiPencil} from 'react-icons/hi'
+import ButtonDeleteHistory
+  from '@/pages/modules/website-utama/lecturer-staff/set-status-active/component/buttonDelete.tsx'
+import type {IReportStatusActive} from '@/pages/modules/website-utama/lecturer-staff/set-status-active/hook'
 
 export const columnsSetStatusActive = () => {
   const [searchParams] = useSearchParams()
@@ -19,7 +20,7 @@ export const columnsSetStatusActive = () => {
     {
       accessorKey: 'No',
       header: '#',
-      cell: ({ row }) => {
+      cell: ({row}) => {
         const i = row?.index
         return <>{(page - 1) * limit + i + 1}</>
       },
@@ -27,7 +28,7 @@ export const columnsSetStatusActive = () => {
     {
       accessorKey: 'gambar_url',
       header: 'Gambar',
-      cell: ({ row }) => {
+      cell: ({row}) => {
         const data = row?.original
         return (
           <div className={'flex items-center gap-2'}>
@@ -60,37 +61,13 @@ export const columnsSetStatusActive = () => {
     {
       accessorKey: 'sejak',
       header: 'Status Aktif',
-      cell: ({ row }) => {
+      cell: ({row}) => {
         const data = row.original
         return (
           <>
             <p>
-              Aktif sejak{' '}
-              {data?.sejak ? format(data?.sejak, 'dd MMMM yyyy', { locale: id }) : 'Belum Aktif'}
+              {data?.sejak ? format(data?.sejak, 'dd MMMM yyyy', {locale: id}) : 'Belum Aktif'}
             </p>
-          </>
-        )
-      },
-    },
-    {
-      accessorKey: 'url_lampiran',
-      header: 'Lampiran',
-      cell: ({ row }) => {
-        const data = row.original
-        return (
-          <>
-            {data?.url_lampiran ? (
-              <Link to={data?.url_lampiran ?? '#'}>
-                <Button
-                  variant={'outline'}
-                  className={'border-primary text-primary hover:text-primary'}
-                >
-                  Buka Lampiran
-                </Button>
-              </Link>
-            ) : (
-              <p>Belum Ada Lampiran</p>
-            )}
           </>
         )
       },
@@ -98,7 +75,7 @@ export const columnsSetStatusActive = () => {
     {
       accessorKey: 'action',
       header: '',
-      cell: ({ row }) => {
+      cell: ({row}) => {
         const data = row.original
         return (
           <>
@@ -107,7 +84,7 @@ export const columnsSetStatusActive = () => {
                 to={`history/${data?.id_sdm}`}
                 className={'p-1.5 rounded bg-blue-500 hover:bg-blue-600 text-white'}
               >
-                <FaHistory />
+                <FaHistory/>
               </Link>
             </div>
           </>
@@ -128,7 +105,7 @@ export const ColumnsHistoryStatusActive = () => {
     {
       accessorKey: 'No',
       header: '#',
-      cell: ({ row }) => {
+      cell: ({row}) => {
         const i = row?.index
         return <>{(page - 1) * limit + i + 1}</>
       },
@@ -140,7 +117,7 @@ export const ColumnsHistoryStatusActive = () => {
     {
       accessorKey: 'sejak',
       header: 'Sejak',
-      cell: ({ row }) => {
+      cell: ({row}) => {
         const data = row.original
         return (
           <>
@@ -156,7 +133,7 @@ export const ColumnsHistoryStatusActive = () => {
     {
       accessorKey: 'url_lampiran',
       header: 'Lampiran',
-      cell: ({ row }) => {
+      cell: ({row}) => {
         const data = row?.original
         return (
           <>
@@ -179,7 +156,7 @@ export const ColumnsHistoryStatusActive = () => {
     {
       accessorKey: 'nama_diset_user',
       header: 'Diset Oleh',
-      cell: ({ row }) => {
+      cell: ({row}) => {
         const data = row.original
         return (
           <>
@@ -192,7 +169,7 @@ export const ColumnsHistoryStatusActive = () => {
     {
       accessorKey: 'action',
       header: '',
-      cell: ({ row }) => {
+      cell: ({row}) => {
         const data = row.original
         return (
           <>
@@ -201,9 +178,9 @@ export const ColumnsHistoryStatusActive = () => {
                 to={`edit/${data?.id_aktif_history}`}
                 className={'bg-yellow-500 p-1.5 rounded hover:bg-yellow-600 text-white'}
               >
-                <HiPencil />
+                <HiPencil/>
               </Link>
-              <ButtonDeleteHistory data={data} />
+              <ButtonDeleteHistory data={data}/>
             </div>
           </>
         )
@@ -218,7 +195,7 @@ export const ColumnsReports = () => {
     {
       accessorKey: 'order',
       header: '#',
-      cell: ({ row }) => {
+      cell: ({row}) => {
         const i = row?.index
         return <p>{i + 1}</p>
       },
