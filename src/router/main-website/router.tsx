@@ -200,6 +200,8 @@ import StatusActivePage from '@/pages/modules/website-utama/lecturer-staff/statu
 import { SetStatusActivePage } from '@/pages/modules/website-utama/lecturer-staff/set-status-active'
 import { HistoryStatusPage } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/history-status'
 import { EditStatusActiveEmployee } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/edit-status'
+import { AddStatusActiveEmployee } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/add-status'
+import { ReportData } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/reportData'
 
 export const MainWebsiteRouter = [
   {
@@ -1366,6 +1368,10 @@ export const MainWebsiteRouter = [
             element: <SetStatusActivePage />,
           },
           {
+            path: 'report',
+            element: <ReportData />,
+          },
+          {
             path: 'history/:id',
             children: [
               {
@@ -1374,6 +1380,10 @@ export const MainWebsiteRouter = [
               },
               {
                 path: 'add',
+                element: <AddStatusActiveEmployee />,
+              },
+              {
+                path: 'edit/:id_status',
                 element: <EditStatusActiveEmployee />,
               },
             ],

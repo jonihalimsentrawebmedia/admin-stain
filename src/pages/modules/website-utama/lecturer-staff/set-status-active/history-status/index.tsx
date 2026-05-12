@@ -18,7 +18,12 @@ export const HistoryStatusPage = () => {
   return (
     <>
       <div className="flex flex-col gap-4">
-        <ButtonTitleGroup label="Riwayat Status Aktif" buttonGroup={[]} />
+        <ButtonTitleGroup
+          isBack
+          link={'/modules/website-utama/staff-lecturer/set-status-active'}
+          label="Riwayat Status Aktif"
+          buttonGroup={[]}
+        />
         <p className="text-xl font-semibold text-green-500">Informasi Dosen / Staff</p>
         <div className="flex items-start gap-4">
           <img

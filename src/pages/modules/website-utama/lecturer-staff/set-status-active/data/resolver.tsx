@@ -12,6 +12,7 @@ export const StatusActiveResolver = z.object({
 export type TStatusActiveResolver = z.infer<typeof StatusActiveResolver>
 
 export interface IHistoryStatus {
+  id_aktif_history: string
   id_sdm: string
   id_satuan_organisasi: string
   id_status_aktif: string
