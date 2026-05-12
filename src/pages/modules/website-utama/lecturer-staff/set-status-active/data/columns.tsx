@@ -3,7 +3,6 @@ import type { ColumnDef } from '@tanstack/react-table'
 import type { IEmployee } from '@/pages/modules/website-utama/lecturer-staff/data/types.ts'
 import { format } from 'date-fns'
 import { Button } from '@/components/ui/button.tsx'
-import { HiPencil } from 'react-icons/hi'
 import { id } from 'date-fns/locale'
 import type { IHistoryStatus } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/data/resolver.tsx'
 import { FaHistory } from 'react-icons/fa'
@@ -101,12 +100,6 @@ export const columnsSetStatusActive = () => {
         return (
           <>
             <div className="flex items-center justify-end gap-2">
-              <Link
-                to={`edit/${data?.id_sdm}`}
-                className={'p-1.5 rounded bg-yellow-500 hover:bg-yellow-600 text-white'}
-              >
-                <HiPencil />
-              </Link>
               <Link
                 to={`history/${data?.id_sdm}`}
                 className={'p-1.5 rounded bg-blue-500 hover:bg-blue-600 text-white'}

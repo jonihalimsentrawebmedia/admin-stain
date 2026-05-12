@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
 export const StatusActiveResolver = z.object({
+  id_sdm: z.string().optional().nullable(),
   id_status_aktif: z.string({ error: 'Status Aktif Wajib Diisi' }),
   sejak: z.string({ error: 'Sejak wajib diisi' }),
   alasan: z.string({ error: 'Alasan wajib diisi' }),

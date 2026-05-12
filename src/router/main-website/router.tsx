@@ -198,8 +198,8 @@ import { ProdiBackground } from '@/pages/modules/website-utama/program-studi/bac
 import { PublicationLecturerPage } from '@/pages/modules/website-utama/publication'
 import StatusActivePage from '@/pages/modules/website-utama/lecturer-staff/status-active'
 import { SetStatusActivePage } from '@/pages/modules/website-utama/lecturer-staff/set-status-active'
-import { EditStatusActiveEmployee } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/edit-status'
 import { HistoryStatusPage } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/history-status'
+import { EditStatusActiveEmployee } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/edit-status'
 
 export const MainWebsiteRouter = [
   {
@@ -1366,12 +1366,17 @@ export const MainWebsiteRouter = [
             element: <SetStatusActivePage />,
           },
           {
-            path: 'edit/:id',
-            element: <EditStatusActiveEmployee />,
-          },
-          {
             path: 'history/:id',
-            element: <HistoryStatusPage />,
+            children: [
+              {
+                index: true,
+                element: <HistoryStatusPage />,
+              },
+              {
+                path: 'add',
+                element: <EditStatusActiveEmployee />,
+              },
+            ],
           },
         ],
       },

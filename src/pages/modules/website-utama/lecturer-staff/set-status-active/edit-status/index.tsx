@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { UseGetEmployeeById } from '@/pages/modules/website-utama/lecturer-staff/hooks'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { useForm } from 'react-hook-form'
@@ -17,39 +17,36 @@ import TextInput from '@/components/common/form/TextInput.tsx'
 import TextAreaInput from '@/components/common/form/textAreaInput.tsx'
 import { UploadFileInput } from '@/components/common/form/uploadFileInput.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
-import { UseGetHistoryStatusActive } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/hook'
-import { format } from 'date-fns'
 
 export const EditStatusActiveEmployee = () => {
   const { id } = useParams()
   const { employee } = UseGetEmployeeById(id as string)
-  const { historyStatusActive } = UseGetHistoryStatusActive({
-    id_sdm: id as string,
-  })
+
   const { statusActive } = UseGetStatusActive({
     page: '0',
     limit: '0',
   })
-
-  const lastData = historyStatusActive[0]
 
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
 
   const form = useForm<TStatusActiveResolver>({
     resolver: zodResolver(StatusActiveResolver),
+    defaultValues: {
+      id_sdm: id,
+    },
   })
 
   const HandleSave = async (value: TStatusActiveResolver) => {
     setLoading(true)
-    await AxiosClient.patch(`/website-utama/sdm/${id}/update_status_aktif`, {
+    await AxiosClient.post(`/website-utama/sdm-status-aktif-history`, {
       ...value,
       sejak: value?.sejak ? new Date(value?.sejak).toISOString() : null,
     })
       .then((res) => {
         if (res.data.status) {
           setLoading(false)
-          navigate('/modules/website-utama/staff-lecturer/set-status-active')
+          navigate(`/modules/website-utama/staff-lecturer/set-status-active/history/${id}`)
           toast.success(res.data.message || 'Success')
         }
       })
@@ -65,7 +62,7 @@ export const EditStatusActiveEmployee = () => {
         <Form {...form}>
           <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
             <ButtonTitleGroup
-              label="Edit Status Aktif"
+              label="Tambah Status Aktif"
               buttonGroup={[
                 { type: 'cancel', label: 'Batal', onClick: () => navigate(-1) },
                 { type: 'save', isDisabled: loading, label: 'Simpan' },
@@ -95,25 +92,7 @@ export const EditStatusActiveEmployee = () => {
               </div>
             </div>
 
-            <p className="text-xl font-semibold text-green-500">Status Aktif Lama</p>
-            <div className="grid grid-cols-[12rem_1fr] gap-4">
-              <p className="text-gray-500">Status</p>
-              <p>{lastData?.nama_status_aktif}</p>
-              <p className="text-gray-500">Sejak</p>
-              <p>{lastData?.sejak ? format(lastData?.sejak, 'dd-MM-yyyyy') : ''}</p>
-              <p className="text-gray-500">Alasan</p>
-              <p>{lastData?.alasan}</p>
-              <p className="text-gray-500">Lampiran (Opsional)</p>
-              <div>
-                {lastData?.url_lampiran ? (
-                  <Link to={lastData?.url_lampiran}>Lampiran</Link>
-                ) : (
-                  'Tidak Ada Lampiran'
-                )}
-              </div>
-            </div>
-
-            <p className="text-xl font-semibold text-green-500">Status Aktif Baru</p>
+            <p className="text-xl font-semibold text-green-500">Tambah Status Aktif Baru</p>
 
             <SelectBasicInput
               name={'id_status_aktif'}
