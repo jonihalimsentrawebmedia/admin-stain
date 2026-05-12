@@ -28,17 +28,20 @@ export const columnsSetStatusActive = () => {
       cell: ({ row }) => {
         const data = row?.original
         return (
-          <img src={data?.gambar_url} alt="icon" className={'object-contain size-12 w-12 h-12'} />
+          <div className={'flex items-center gap-2'}>
+            <img
+              src={data?.gambar_url}
+              alt="gambar user"
+              className={'object-contain size-12 w-12 h-12'}
+            />
+            <p>{data?.nama}</p>
+          </div>
         )
       },
     },
     {
       accessorKey: 'nik',
       header: 'NIK',
-    },
-    {
-      accessorKey: 'nip',
-      header: 'NIP',
     },
     {
       accessorKey: 'nama_pangkat_golongan',

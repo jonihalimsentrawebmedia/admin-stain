@@ -53,6 +53,9 @@ import { SPI_ROUTES } from '@/router/SPI'
 import { SelectSessionSPI } from '@/pages/modules/SPI/component/select-session'
 import MainLayoutSPI from '@/pages/modules/SPI/layout'
 import SPIThema from '@/pages/modules/SPI/layout/theme.tsx'
+import MainLayoutPMB from '@/pages/modules/PMB/component/layout'
+import { PMB_ROUTES } from '@/router/pmb'
+import { SelectSessionPMB } from '@/pages/modules/PMB/session'
 
 export const Router = createBrowserRouter([
   {
@@ -143,6 +146,10 @@ export const Router = createBrowserRouter([
       {
         path: 'session-spi',
         element: <SelectSessionSPI />,
+      },
+      {
+        path: 'session-pmb',
+        element: <SelectSessionPMB />,
       },
       {
         path: 'settings',
@@ -257,6 +264,15 @@ export const Router = createBrowserRouter([
           </SPIThema>
         ),
         children: [...SPI_ROUTES],
+      },
+      {
+        path: 'pmb',
+        element: (
+          <>
+            <MainLayoutPMB />
+          </>
+        ),
+        children: [...PMB_ROUTES],
       },
     ],
   },

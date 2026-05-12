@@ -16,7 +16,6 @@ const ModulesView = () => {
 
   useEffect(() => {
     requestNotificationPermission().then((res) => {
-      console.log(res)
       window.localStorage.setItem('token_fcm', res as string)
     })
   }, [])
