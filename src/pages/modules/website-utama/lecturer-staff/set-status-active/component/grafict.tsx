@@ -30,6 +30,8 @@ interface Props {
   data: StatusAktif[]
 }
 
+// comentar kjontol gk bulap
+
 const chartConfig = {
   jumlah: {
     label: 'Jumlah',
