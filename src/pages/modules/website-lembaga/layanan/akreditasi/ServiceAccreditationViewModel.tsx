@@ -16,8 +16,6 @@ const ServiceAccreditationViewModel = () => {
         return <div>{(page - 1) * limit + idx + 1}</div>
       },
     },
-
-    // ✅ Nama Pangkat Golongan
     {
       accessorKey: 'gambar',
       header: 'Gambar',
@@ -25,7 +23,6 @@ const ServiceAccreditationViewModel = () => {
         return (
           <div className="text-center">
             <img src={row.original.gambar} className="w-[100px] h-[70px]" alt="" />
-            <div className="text-blue-500 text-xs">100 x</div>
           </div>
         )
       },

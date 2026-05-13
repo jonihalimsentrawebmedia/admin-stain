@@ -3,7 +3,6 @@ import { Label } from '@/components/ui/label'
 import { Link } from 'react-router-dom'
 import { FaTrash } from 'react-icons/fa'
 import { useRef } from 'react'
-import { FormMessage } from '@/components/ui/form'
 import { toast } from 'react-toastify'
 import AxiosClient from '@/provider/axios.tsx'
 import type { FieldValues, Path, PathValue, UseFormReturn } from 'react-hook-form'
@@ -111,7 +110,8 @@ export const UploadFileInput = <T extends FieldValues>(props: Props<T>) => {
         ref={refButtton}
         onChange={(e) => HandleUploadBerkas(e.target.files)}
       />
-      <FormMessage />
+      {/*<FormMessage />*/}
+      <p className="text-sm text-red-500">{form?.formState?.errors?.[name]?.message as string}</p>
     </div>
   )
 }

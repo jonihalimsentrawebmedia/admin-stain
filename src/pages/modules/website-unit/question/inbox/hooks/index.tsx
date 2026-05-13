@@ -7,10 +7,11 @@ interface Props {
   page?: string
   limit?: string
   search?: string
+  status: string
 }
 
 export const UseGetInboxUnit = (props?: Props) => {
-  const { page, limit, search } = props ?? {}
+  const { page, limit, search, status } = props ?? {}
 
   const [inboxMessage, setInboxMessage] = useState<[]>([])
   const [meta, setMeta] = useState<Meta>()
@@ -19,6 +20,7 @@ export const UseGetInboxUnit = (props?: Props) => {
   if (page) ParamsSearch.append('page', page)
   if (limit) ParamsSearch.append('limit', limit)
   if (search) ParamsSearch.append('search', search)
+  if (status) ParamsSearch.append('status', status)
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['inbox-unit', ParamsSearch.toString()],

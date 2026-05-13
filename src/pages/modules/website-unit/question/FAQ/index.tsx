@@ -1,7 +1,7 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { FaListUl } from 'react-icons/fa'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { ButtonAddFAQUnit } from './components/buttonAdd'
 import { UseGetListFAQUnit } from './hooks/index'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
@@ -10,7 +10,15 @@ import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/Bu
 
 export const QuestionFAQUnitPage = () => {
   const navigate = useNavigate()
-  const { listFaq, loading, metta } = UseGetListFAQUnit()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+  const { listFaq, loading, metta } = UseGetListFAQUnit({
+    page,
+    limit,
+    search,
+  })
   const columns = ColumnsFAQUnit()
 
   return (
@@ -22,10 +30,7 @@ export const QuestionFAQUnitPage = () => {
             {
               type: 'custom',
               element: (
-                <ButtonGoToGuide
-                  titleGuide="F.A.Q"
-                  valueGuide="PERPUSTAKAAN_PERTANYAAN_FAQ"
-                />
+                <ButtonGoToGuide titleGuide="F.A.Q" valueGuide="PERPUSTAKAAN_PERTANYAAN_FAQ" />
               ),
             },
             {

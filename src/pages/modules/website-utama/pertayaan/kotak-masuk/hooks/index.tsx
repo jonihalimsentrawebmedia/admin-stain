@@ -12,8 +12,9 @@ export const UseGetInboxMessage = () => {
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
 
-  const ParamsSearch = new URLSearchParams({ page, limit })
+  const ParamsSearch = new URLSearchParams({ page, limit, search })
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['list-inbox-message', ParamsSearch.toString()],

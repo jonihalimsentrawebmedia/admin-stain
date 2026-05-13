@@ -68,7 +68,13 @@ export const BackgroundWebsiteUnitSettings = () => {
               ]}
             />
 
-            <TableCustom data={unitBackground} columns={columns} loading={loading} meta={meta} />
+            <TableCustom
+              isShowFilter={false}
+              data={unitBackground}
+              columns={columns}
+              loading={loading}
+              meta={meta}
+            />
           </TabsContent>
         ))}
       </Tabs>

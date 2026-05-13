@@ -4,9 +4,18 @@ import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsTemplateWebsite } from './data/columns.tsx'
 import { UseGetTemplateUnit } from './hooks/index.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
+import { useSearchParams } from 'react-router-dom'
 
 export const TemplateWebSettings = () => {
-  const { templateUnit, loading } = UseGetTemplateUnit()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+  const { templateUnit, loading } = UseGetTemplateUnit({
+    page,
+    limit,
+    search,
+  })
   const columns = ColumnsTemplateWebsite()
   return (
     <>
@@ -16,12 +25,7 @@ export const TemplateWebSettings = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: (
-                <ButtonGoToGuide
-                  titleGuide="Template Website"
-                  valueGuide="THEME"
-                />
-              ),
+              element: <ButtonGoToGuide titleGuide="Template Website" valueGuide="THEME" />,
             },
           ]}
         />
@@ -32,7 +36,7 @@ export const TemplateWebSettings = () => {
           Pilih template yang ingin anda gunakan untuk website anda.
         </div>
 
-        <TableCustom data={templateUnit} columns={columns} loading={loading} />
+        <TableCustom isShowFilter={false} data={templateUnit} columns={columns} loading={loading} />
       </div>
     </>
   )

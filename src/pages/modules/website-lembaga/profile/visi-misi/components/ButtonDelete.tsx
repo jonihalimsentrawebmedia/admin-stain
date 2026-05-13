@@ -43,7 +43,7 @@ const ButtonDelete = ({ data }: Props) => {
         toast.success(res.data.message)
 
         await queryClient.invalidateQueries({
-          queryKey: ['lembaga-visi-misi'],
+          queryKey: ['visi-misi-lembaga'],
         })
       }
     } catch (err: any) {

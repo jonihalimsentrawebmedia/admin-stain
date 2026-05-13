@@ -10,8 +10,15 @@ import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/Bu
 
 export const GalleryPhotoUnitPage = () => {
   const { id } = useParams()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
   const { photoAlbumUnit } = UseGetPhotoAlbumUnit({
     id_album: id,
+    page,
+    limit,
+    search,
   })
   const { albumUnitDetail: detail } = UseGetGalleryAlbumUnitById(id ?? '')
   const [_, setSearchParams] = useSearchParams()

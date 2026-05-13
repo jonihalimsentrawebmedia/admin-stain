@@ -33,7 +33,6 @@ const VisiMisiView = () => {
         meta={meta}
         data={visiMisi}
         isShowFilter={false}
-        isShowPagination={false}
       />
     </div>
   )

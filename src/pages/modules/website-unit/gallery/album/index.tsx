@@ -4,9 +4,18 @@ import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { UseGetGalleryAlbumUnit } from './hooks/index'
 import { ColumnsGalleryAlbumUnit } from './components/columns'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
+import { useSearchParams } from 'react-router-dom'
 
 export const GalleryAlbumUnitPage = () => {
-  const { albumUnit, loading, meta } = UseGetGalleryAlbumUnit()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+  const { albumUnit, loading, meta } = UseGetGalleryAlbumUnit({
+    page,
+    limit,
+    search,
+  })
   const columns = ColumnsGalleryAlbumUnit()
   return (
     <>

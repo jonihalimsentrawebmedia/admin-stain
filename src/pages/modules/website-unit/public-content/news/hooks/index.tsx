@@ -7,7 +7,7 @@ import type { IPropsData } from '../data/types'
 import type { INewsStatus } from '@/pages/modules/website-utama/public-content/news/hooks'
 
 export const UseGetUnitNews = (props?: IPropsData) => {
-  const { page, limit, status_publish } = props ?? {}
+  const { page, limit, status_publish, search } = props ?? {}
 
   const [unitNews, setUnitNews] = useState<INewsDetail[]>([])
   const [meta, setMeta] = useState<Meta>()
@@ -16,6 +16,7 @@ export const UseGetUnitNews = (props?: IPropsData) => {
   if (page) ParamsSearch.append('page', page ?? '1')
   if (limit) ParamsSearch.append('limit', limit ?? '10')
   if (status_publish) ParamsSearch.append('status-publish', status_publish)
+  if (search) ParamsSearch.append('search', search ?? '')
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['unit-news', ParamsSearch.toString()],

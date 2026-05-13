@@ -8,16 +8,16 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect } from 'react'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import { UseGetDetailDataCarrierCenter } from '../hooks'
+import { UseGetDetailDataSPI } from '../hooks'
 
-export const UpdatedDataCarrierCenter = () => {
+export const UpdatedDataSPI = () => {
   const navigate = useNavigate()
 
   const form = useForm<SatuanOrganisasiType>({
     resolver: zodResolver(SatuanOrganisasiResolver),
   })
 
-  const { carrierCenter } = UseGetDetailDataCarrierCenter()
+  const { carrierCenter } = UseGetDetailDataSPI()
 
   useEffect(() => {
     if (carrierCenter) {
@@ -30,12 +30,12 @@ export const UpdatedDataCarrierCenter = () => {
   }, [carrierCenter])
 
   const handleSave = async (e: SatuanOrganisasiType) => {
-    await AxiosClient.post('/pusat-karir/profil/draft', {
+    await AxiosClient.post('/spi/profil/draft', {
       ...e,
     }).then((res) => {
       if (res.data.status) {
         toast.success(res.data.message || 'Success Pengajuan update data universitas')
-        navigate('/modules/pusat-karir/data-unit')
+        navigate('/modules/spi/data-unit')
       }
     })
   }

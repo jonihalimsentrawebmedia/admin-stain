@@ -7,6 +7,7 @@ import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import type { IBGThumbnail } from '@/pages/modules/website-utama/public-content/announcement/data'
+import type { BasicProps } from '@/utils/globalType.ts'
 
 export const UseGetStepApproved = () => {
   const [stepApproval, setStepApproval] = useState<IStepApproval>()
@@ -29,15 +30,23 @@ export const UseGetStepApproved = () => {
   return { stepApproval, loading }
 }
 
-export const UseGetStudentLetter = () => {
+export const UseGetStudentLetter = (props: BasicProps) => {
+  const { page, search, limit } = props
   const [studentLetter, setStudentLetter] = useState<IStudentLetter[]>([])
   const [meta, setMeta] = useState<Meta>()
 
+  const params = new URLSearchParams()
+  if (page) params.append('page', page ?? '1')
+  if (limit) params.append('limit', limit ?? '10')
+  if (search) params.append('search', search ?? '')
+
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['surat-keterangan-mahasiswa'],
+    queryKey: ['surat-keterangan-mahasiswa', params.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get('/website-utama/surat-keterangan-mahasiswa').then((res) => res.data),
+      AxiosClient.get(`/website-utama/surat-keterangan-mahasiswa?${params}`).then(
+        (res) => res.data
+      ),
   })
 
   const loading = isLoading || isFetching

@@ -12,11 +12,13 @@ export const InboxMessageUnit = () => {
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
   const search = searchParams.get('search') ?? ''
+  const status = searchParams.get('status') ?? ''
 
   const { inboxMessage, meta, loading } = UseGetInboxUnit({
     limit: limit,
     page: page,
     search: search,
+    status: status,
   })
   const columns = ColumnsInboxUnit()
 

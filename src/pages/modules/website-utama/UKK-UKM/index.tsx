@@ -1,5 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button.tsx'
 import { IoMdImage } from 'react-icons/io'
 import ButtonAddUkkUkm from '@/pages/modules/website-utama/UKK-UKM/component/buttonAdd.tsx'
@@ -10,7 +10,16 @@ import ButtonGoToGuide from '../panduan/components/ButtonGoToGuide'
 
 const UKKUKMPage = () => {
   const navigate = useNavigate()
-  const { ukkUkm, loading, meta } = USeGetUkkUkm()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { ukkUkm, loading, meta } = USeGetUkkUkm({
+    page,
+    limit,
+    search,
+  })
   const columns = ColoumnsUkkUkm()
 
   return (
@@ -18,10 +27,10 @@ const UKKUKMPage = () => {
       <div className="space-y-4">
         <ButtonTitleGroup
           buttonGroup={[
-             {
-            type: 'custom',
-            element: <ButtonGoToGuide titleGuide='UKK UKM' valueGuide="WEBSITE_UTAMA_UKK_UKM" />,
-          },
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide="UKK UKM" valueGuide="WEBSITE_UTAMA_UKK_UKM" />,
+            },
             {
               type: 'custom',
               element: (

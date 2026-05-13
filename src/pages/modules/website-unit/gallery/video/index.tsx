@@ -16,13 +16,10 @@ export const GalleryVideoUnitPage = () => {
         <ButtonTitleGroup
           label={'Galeri Video'}
           buttonGroup={[
-              {
+            {
               type: 'custom',
               element: (
-                <ButtonGoToGuide
-                  titleGuide="Galeri Video"
-                  valueGuide="PERPUSTAKAAN_GALERI_VIDEO"
-                />
+                <ButtonGoToGuide titleGuide="Galeri Video" valueGuide="PERPUSTAKAAN_GALERI_VIDEO" />
               ),
             },
             {
