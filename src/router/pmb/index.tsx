@@ -15,6 +15,7 @@ import { LandingPagePMB } from '@/pages/modules/PMB/settings/landing'
 import ColorSettingPMB from '@/pages/modules/PMB/settings/color/ColorSettingService.tsx'
 import { TemplateWebPMB } from '@/pages/modules/PMB/settings/template-web'
 import { ThemaChangeColorPMB } from '@/pages/modules/PMB/settings/template-web/color'
+import DashboardPMB from '@/pages/modules/PMB/dashboard'
 
 export const PMB_ROUTES = [
   {
@@ -22,7 +23,7 @@ export const PMB_ROUTES = [
     children: [
       {
         index: true,
-        element: <></>,
+        element: <DashboardPMB />,
       },
       {
         path: 'user-profile',
