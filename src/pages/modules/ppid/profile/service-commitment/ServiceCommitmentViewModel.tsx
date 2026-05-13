@@ -28,7 +28,7 @@ const ServiceCommitmentViewModel = () => {
         return (
           <img
             src={row.original.url_gambar}
-            className="w-[250px] h-[250px] object-cover"
+            className="w-[250px] min-w-[250px] h-[250px] object-cover"
             alt={row.original.key_gambar}
           />
         )

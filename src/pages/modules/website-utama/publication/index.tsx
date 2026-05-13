@@ -4,10 +4,22 @@ import FilterSelect from '@/components/common/filter/filterBasic.tsx'
 import { ColumnsPublication } from '@/pages/modules/website-utama/publication/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
+import { useSearchParams } from 'react-router-dom'
 
 export const PublicationLecturerPage = () => {
   const { year } = UseGetYearPublication()
-  const { publication, meta, loading } = UseGetPublicationLecturer()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+  const tahun = searchParams.get('year') ?? ''
+
+  const { publication, meta, loading } = UseGetPublicationLecturer({
+    search,
+    page,
+    limit,
+    year: tahun,
+  })
   const columns = ColumnsPublication()
 
   return (

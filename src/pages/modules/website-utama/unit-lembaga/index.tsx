@@ -4,12 +4,21 @@ import { ColumnsUnitInstitution } from '@/pages/modules/website-utama/unit-lemba
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { IoMdImage } from 'react-icons/io'
 import { Button } from '@/components/ui/button.tsx'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import ButtonGoToGuide from '../panduan/components/ButtonGoToGuide'
 
 const UnitInstitutionPage = () => {
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
   const columns = ColumnsUnitInstitution()
-  const { unitInstitution, loading, meta } = UseGetUnitInstitution()
+  const { unitInstitution, loading, meta } = UseGetUnitInstitution({
+    page,
+    limit,
+    search,
+  })
+
   const navigate = useNavigate()
   return (
     <>
@@ -19,7 +28,12 @@ const UnitInstitutionPage = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide titleGuide='Unit Lembaga' valueGuide="WEBSITE_UTAMA_UNIT_LEMBAGA" />,
+              element: (
+                <ButtonGoToGuide
+                  titleGuide="Unit Lembaga"
+                  valueGuide="WEBSITE_UTAMA_UNIT_LEMBAGA"
+                />
+              ),
             },
             {
               type: 'custom',

@@ -4,10 +4,20 @@ import { UnitLandingPageColumns } from './data/columns'
 import { UseGetUnitLandingPage } from './hooks/index'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
+import { useSearchParams } from 'react-router-dom'
 
 export const LandingPageUnit = () => {
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
   const columns = UnitLandingPageColumns()
-  const { meta, unitLanding, loading } = UseGetUnitLandingPage()
+  const { meta, unitLanding, loading } = UseGetUnitLandingPage({
+    page,
+    limit,
+    search,
+  })
 
   return (
     <>
@@ -18,7 +28,10 @@ export const LandingPageUnit = () => {
             {
               type: 'custom',
               element: (
-                <ButtonGoToGuide titleGuide="Landing Page" valueGuide="PERPUSTAKAAN_PENGATURAN_LANDING_PAGE" />
+                <ButtonGoToGuide
+                  titleGuide="Landing Page"
+                  valueGuide="PERPUSTAKAAN_PENGATURAN_LANDING_PAGE"
+                />
               ),
             },
             {
@@ -28,7 +41,13 @@ export const LandingPageUnit = () => {
           ]}
         />
 
-        <TableCustom data={unitLanding} columns={columns} loading={loading} meta={meta} />
+        <TableCustom
+          isShowFilter={false}
+          data={unitLanding}
+          columns={columns}
+          loading={loading}
+          meta={meta}
+        />
       </div>
     </>
   )

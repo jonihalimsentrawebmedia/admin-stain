@@ -7,12 +7,13 @@ import type { INewsStatus } from '@/pages/modules/website-utama/public-content/n
 import type { IPropsData } from '@/pages/modules/website-prodi/public-content/news/data/types.ts'
 
 export const UseGetLppmAnnouncement = (props?: IPropsData) => {
-  const { page, limit, status_publish } = props ?? {}
+  const { page, limit, status_publish, search } = props ?? {}
   const [lppmAnnouncement, setLppmAnnouncement] = useState<IAnnouncement[]>([])
   const [meta, setMeta] = useState<Meta>()
 
   const ParamsSearch = new URLSearchParams({ page: page ?? '1', limit: limit ?? '10' })
   if (status_publish) ParamsSearch.append('status-publish', status_publish)
+  if (search) ParamsSearch.append('search', search)
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['lppm-announcement', ParamsSearch.toString()],

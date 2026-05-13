@@ -14,7 +14,7 @@ const useGetVisiMisiUnit = (props: Props) => {
 
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') || '1'
-  const limit = searchParams.get('limit') || '1000'
+  const limit = searchParams.get('limit') || '10'
   const search = searchParams.get('search') || ''
 
   const ParamsSearch = new URLSearchParams({ page, limit, search })

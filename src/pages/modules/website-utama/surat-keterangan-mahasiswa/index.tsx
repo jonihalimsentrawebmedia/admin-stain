@@ -1,7 +1,7 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { IoMdImage } from 'react-icons/io'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { Accordion } from '@/components/ui/accordion.tsx'
 import { AccordionCustom } from '@/components/common/accordion'
 import {
@@ -19,7 +19,15 @@ import ButtonGoToGuide from '../panduan/components/ButtonGoToGuide.tsx'
 export const CertificateStudent = () => {
   const navigate = useNavigate()
   const { stepApproval } = UseGetStepApproved()
-  const { studentLetter, meta, loading } = UseGetStudentLetter()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+  const { studentLetter, meta, loading } = UseGetStudentLetter({
+    page,
+    limit,
+    search,
+  })
   const columns = ColumnsStudentLetter()
 
   return (
@@ -28,9 +36,14 @@ export const CertificateStudent = () => {
         <ButtonTitleGroup
           label={'Surat Keterangan Mahasiswa'}
           buttonGroup={[
-             {
+            {
               type: 'custom',
-              element: <ButtonGoToGuide titleGuide='Surat Keterangan Mahasiswa' valueGuide="WEBSITE_UTAMA_SURAT_MAHASISWA_SURAT_KETERANGAN_MAHASISWA" />,
+              element: (
+                <ButtonGoToGuide
+                  titleGuide="Surat Keterangan Mahasiswa"
+                  valueGuide="WEBSITE_UTAMA_SURAT_MAHASISWA_SURAT_KETERANGAN_MAHASISWA"
+                />
+              ),
             },
             {
               type: 'custom',

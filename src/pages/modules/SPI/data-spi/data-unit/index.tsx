@@ -1,17 +1,17 @@
-import { UseGetDetailDataCarrierCenter } from './hooks'
+import { UseGetDetailDataSPI } from './hooks'
 import { ProfilePageSkeleton } from '@/pages/modules/website-utama/profile/components/skeleton.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Accordion } from '@/components/ui/accordion.tsx'
 import { AccordionCustom } from '@/components/common/accordion'
 import { useNavigate } from 'react-router-dom'
-import { ButtonCancelApproval } from '@/pages/modules/pusat-karir/data-unit/component/buttonCancel.tsx'
+import { ButtonCancelApproval } from './component/buttonCancel.tsx'
 import { MdInfo } from 'react-icons/md'
 import { useState } from 'react'
-import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const DetailProfileCarrierCenter = () => {
   const [realData, setRealData] = useState(true)
-  const { carrierCenter, loading } = UseGetDetailDataCarrierCenter({
+  const { carrierCenter, loading } = UseGetDetailDataSPI({
     real_data: realData,
   })
   const navigate = useNavigate()

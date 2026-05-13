@@ -14,11 +14,13 @@ export const TableDataListNews = (props: props) => {
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') || '1'
   const limit = searchParams.get('limit') || '10'
+  const search = searchParams.get('search') || ''
 
   const { loading, meta, lppmNews } = UseGetLPPMNews({
     status_publish: status,
     page: page,
     limit: limit,
+    search,
   })
   const columns = ColumnsReturnByStatus(status)
 

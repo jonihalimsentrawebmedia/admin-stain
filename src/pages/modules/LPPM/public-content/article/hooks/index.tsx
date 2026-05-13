@@ -8,13 +8,14 @@ import { useSearchParams } from 'react-router-dom'
 import type { IArtikel } from '../data/types'
 
 export const UseGetArticleLppm = (props?: IPropsData) => {
-  const { page, limit, status_publish } = props ?? {}
+  const { page, limit, status_publish, search } = props ?? {}
 
   const [article, setArticle] = useState<IArtikel[]>([])
   const [meta, setMeta] = useState<Meta>()
 
   const ParamsSearch = new URLSearchParams({ page: page ?? '1', limit: limit ?? '10' })
   if (status_publish) ParamsSearch.append('status-publish', status_publish)
+  if (search) ParamsSearch.append('search', search)
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['article-lppm', ParamsSearch.toString()],

@@ -4,9 +4,18 @@ import ButtonAddStatusActive from '@/pages/modules/website-utama/lecturer-staff/
 import { ColumnsStatusActive } from '@/pages/modules/website-utama/lecturer-staff/status-active/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
+import { useSearchParams } from 'react-router-dom'
 
 const StatusActivePage = () => {
-  const { statusActive, loading, meta } = UseGetStatusActive()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+  const { statusActive, loading, meta } = UseGetStatusActive({
+    page,
+    limit,
+    search,
+  })
   const coloumns = ColumnsStatusActive()
 
   return (
