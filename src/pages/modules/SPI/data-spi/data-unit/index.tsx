@@ -1,17 +1,17 @@
-import { UseGetDetailDataPMB } from './hooks'
+import { UseGetDetailDataCarrierCenter } from './hooks'
 import { ProfilePageSkeleton } from '@/pages/modules/website-utama/profile/components/skeleton.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Accordion } from '@/components/ui/accordion.tsx'
 import { AccordionCustom } from '@/components/common/accordion'
 import { useNavigate } from 'react-router-dom'
-import { ButtonCancelApproval } from './component/buttonCancel.tsx'
+import { ButtonCancelApproval } from '@/pages/modules/pusat-karir/data-unit/component/buttonCancel.tsx'
 import { MdInfo } from 'react-icons/md'
 import { useState } from 'react'
 import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
 
-export const DetailProfilePMB = () => {
+export const DetailProfileCarrierCenter = () => {
   const [realData, setRealData] = useState(true)
-  const { carrierCenter, loading } = UseGetDetailDataPMB({
+  const { carrierCenter, loading } = UseGetDetailDataCarrierCenter({
     real_data: realData,
   })
   const navigate = useNavigate()
@@ -23,7 +23,7 @@ export const DetailProfilePMB = () => {
       ) : (
         <>
           <ButtonTitleGroup
-            label={'Data Utama Penerimaan Mahasiswa Baru'}
+            label={'Data Utama Universitas'}
             buttonGroup={
               carrierCenter?.status_publish == 'DIAJUKAN_EDITOR'
                 ? [
@@ -31,8 +31,8 @@ export const DetailProfilePMB = () => {
                       type: 'custom',
                       element: (
                         <ButtonGoToGuide
-                          titleGuide={'Data Utama Penerimaan Mahasiswa Baru'}
-                          valueGuide="PMB_PROFIL_SATUAN_ORGANISASI"
+                          titleGuide={'Data Utama Universitas'}
+                          valueGuide="PUSAT_KARIR_PROFIL_SATUAN_ORGANISASI"
                         />
                       ),
                     },
@@ -46,8 +46,8 @@ export const DetailProfilePMB = () => {
                       type: 'custom',
                       element: (
                         <ButtonGoToGuide
-                          titleGuide={'Data Utama Penerimaan Mahasiswa Baru'}
-                          valueGuide="PMB_PROFIL_SATUAN_ORGANISASI"
+                          titleGuide={'Data Utama Universitas'}
+                          valueGuide="PUSAT_KARIR_PROFIL_SATUAN_ORGANISASI"
                         />
                       ),
                     },

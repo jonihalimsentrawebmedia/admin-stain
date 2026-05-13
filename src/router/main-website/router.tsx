@@ -921,23 +921,6 @@ export const MainWebsiteRouter = [
     path: 'publication',
     element: <PublicationLecturerPage />,
   },
-  // {
-  //   path: 'publication',
-  //   children: [
-  //     {
-  //       index: true,
-  //       element: <PublicationPage />,
-  //     },
-  //     {
-  //       path: 'list/:id',
-  //       element: <ListDataPublication />,
-  //     },
-  //     {
-  //       path: 'list/:id/language/:id_publication',
-  //       element: <PublicationLanguagePage />,
-  //     },
-  //   ],
-  // },
   {
     path: 'campus-life',
     children: [
