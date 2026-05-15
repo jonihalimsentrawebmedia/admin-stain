@@ -29,6 +29,7 @@ export const ButtonEditPlaceman = (data: IPlacemanUser) => {
         show_no_hp_public: data.show_no_hp_public,
         urutan: data.urutan,
         nip: data?.nip,
+        nidn: data?.nidn,
         id_pangkat_akademik: data?.id_pangkat_akademik,
         id_pangkat_golongan: data?.id_pangkat_golongan,
         jabatan: data?.jabatan,
