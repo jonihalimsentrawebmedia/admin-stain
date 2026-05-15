@@ -28,5 +28,5 @@ export const UseGetFacultyLandingPage = (props?: BasicProps) => {
   //   }
   // }, [data])
 
-  return { unitLanding: data?.data, loading, meta: data?.meta }
+  return { unitLanding: data?.data ?? [], loading, meta: data?.meta }
 }
