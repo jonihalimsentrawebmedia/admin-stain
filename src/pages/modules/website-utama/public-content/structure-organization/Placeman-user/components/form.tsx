@@ -106,8 +106,8 @@ export const FormPlacemanUser = (props: Props) => {
             form={form}
             label={'Pilih Dosen / Staff'}
             placeholder={'Pilih Dosen / Staff'}
-            usePortal
             showNull
+            selectClassName={'z-[60]'}
             isRow
             data={
               employee?.map((row) => ({
