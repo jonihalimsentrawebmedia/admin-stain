@@ -11,7 +11,7 @@ export const LecturerDetailProfile = () => {
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
-  const search = searchParams.get('search') ?? '10'
+  const search = searchParams.get('search') ?? ''
 
   const { lecturer, meta, loading } = UseGetLecturer({
     id_unit: (id as string) ?? '',
