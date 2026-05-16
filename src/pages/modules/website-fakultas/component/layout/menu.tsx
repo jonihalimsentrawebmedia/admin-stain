@@ -42,7 +42,7 @@ export const GenerateMenu = () => {
       child: [
         {
           id: 41,
-          name: 'Programe Studi',
+          name: 'Program Studi',
           path: `${baseDomain}/academic/study-program`,
         },
         {

@@ -20,22 +20,6 @@ export const UnitLandingPageColumns = () => {
       },
     },
     {
-      accessorKey: 'gambar_key',
-      header: 'Thumbnail',
-      cell: ({ row }) => {
-        const data = row?.original
-        return (
-          <>
-            <img
-              src={data?.gambar_url}
-              alt="gambar"
-              className={'w-[300px] h-[150px] object-cover'}
-            />
-          </>
-        )
-      },
-    },
-    {
       accessorKey: 'status',
       header: 'Status Aktif',
       cell: ({ row }) => {

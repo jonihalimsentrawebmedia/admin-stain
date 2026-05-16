@@ -21,15 +21,6 @@ const SettingTemplateServiceViewModel = () => {
         return <div>{(page - 1) * limit + idx + 1}</div>
       },
     },
-
-    // ✅ Nama Pangkat Golongan
-    {
-      accessorKey: 'image',
-      header: 'Thumbnail',
-      cell: ({ row }) => {
-        return <img className="w-[344px] h-[258px] object-cover" src={row.original.image} />
-      },
-    },
     {
       accessorKey: 'status',
       header: 'Status',
