@@ -12,10 +12,11 @@ interface Props {
   form: UseFormReturn<any>
   required?: boolean
   placeholder?: string
+  canUpload?: boolean
 }
 
 export const UploadPasPhoto = (props: Props) => {
-  const { label, name, form, required, placeholder } = props
+  const { label, name, form, required, placeholder, canUpload = true } = props
   const refButton = useRef<any | null>(null)
 
   const HandleUpload = async (e: null | FileList) => {
@@ -41,7 +42,7 @@ export const UploadPasPhoto = (props: Props) => {
         })
     }
   }
-  
+
   return (
     <>
       <div>
@@ -65,22 +66,24 @@ export const UploadPasPhoto = (props: Props) => {
               alt="gambar"
               className="w-[160px] h-[200px] object-cover rounded"
             />
-            <div className="flex items-center gap-1.5">
-              <Button onClick={() => refButton.current.click()}>Ganti foto</Button>
-              <Button
-                variant={'destructive'}
-                onClick={() => {
-                  form.setValue(name, '')
-                }}
-              >
-                <FaTrash />
-              </Button>
-            </div>
+            {canUpload && (
+              <div className="flex items-center gap-1.5">
+                <Button onClick={() => canUpload && refButton.current.click()}>Ganti foto</Button>
+                <Button
+                  variant={'destructive'}
+                  onClick={() => {
+                    form.setValue(name, '')
+                  }}
+                >
+                  <FaTrash />
+                </Button>
+              </div>
+            )}
           </div>
         ) : (
           <div
             onClick={() => {
-              refButton.current.click()
+              canUpload && refButton.current.click()
             }}
             className={
               'border border-primary rounded p-2 flex flex-col gap-1 items-center justify-center h-[200px] w-[160px]'

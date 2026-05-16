@@ -35,14 +35,6 @@ export const FormPlacemanUser = (props: Props) => {
     <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(HandleSave)} className={'flex flex-col gap-2'}>
-          <UploadPasPhoto
-            label={'Foto Profil (4x6)'}
-            name={'gambar'}
-            form={form}
-            required
-            placeholder={'Uplaod Foto'}
-          />
-
           <InputRadio
             form={form}
             name={'is_local_data'}
@@ -54,7 +46,6 @@ export const FormPlacemanUser = (props: Props) => {
             fx={() => {
               form.setValue('is_dosen', null)
               form.setValue('id_sdm', null)
-              form.setValue('gambar', '')
               form.setValue('nama_lengkap', '')
               form.setValue('jabatan', '')
               form.setValue('nip', null)
@@ -67,55 +58,72 @@ export const FormPlacemanUser = (props: Props) => {
             isRow
           />
 
-          <InputRadio
-            form={form}
-            name={'is_dosen'}
-            label={'Jenis User'}
-            data={[
-              { label: 'Dosen', value: true },
-              { label: 'Staff', value: false },
-            ]}
-            fx={() => {
-              form.setValue('gambar', '')
-              form.setValue('nama_lengkap', '')
-              form.setValue('jabatan', '')
-              form.setValue('nip', null)
-              form.setValue('nidn', null)
-              form.setValue('id_pangkat_golongan', null)
-              form.setValue('email', '')
-              form.setValue('no_hp', '')
-            }}
-            isRequired
-            isRow
-          />
+          {!!form?.watch('is_local_data') && (
+            <>
+              <InputRadio
+                form={form}
+                name={'is_dosen'}
+                label={'Jenis User'}
+                data={[
+                  { label: 'Dosen', value: true },
+                  { label: 'Staff', value: false },
+                ]}
+                fx={() => {
+                  form.setValue('nama_lengkap', '')
+                  form.setValue('jabatan', '')
+                  form.setValue('nip', null)
+                  form.setValue('nidn', null)
+                  form.setValue('id_pangkat_golongan', null)
+                  form.setValue('email', '')
+                  form.setValue('no_hp', '')
+                }}
+                isRequired
+                isRow
+              />
+            </>
+          )}
 
-          <SelectBasicInput
-            isDisabled={loading || !form.watch('is_local_data')}
-            fx={(e) => {
-              const employeeFind = employee?.find((row) => row?.id_sdm === e.value)
-              form.setValue('gambar', employeeFind?.gambar_url ?? '')
-              form.setValue('nama_lengkap', employeeFind?.nama ?? '')
-              form.setValue('jabatan', employeeFind?.nama_jabatan_struktural ?? '')
-              form.setValue('nip', employeeFind?.nip ?? '')
-              form.setValue('nidn', employeeFind?.nidn ?? '')
-              form.setValue('id_pangkat_golongan', employeeFind?.id_pangkat_golongan)
-              form.setValue('email', employeeFind?.email ?? '')
-              form.setValue('no_hp', employeeFind?.no_hp ?? '')
-            }}
-            name={'id_sdm'}
-            form={form}
-            label={'Pilih Dosen / Staff'}
-            placeholder={'Pilih Dosen / Staff'}
-            usePortal
-            showNull
-            isRow
-            data={
-              employee?.map((row) => ({
-                label: row?.nama,
-                value: row?.id_sdm,
-              })) ?? []
-            }
-          />
+          {!!form?.watch('is_local_data') && (
+            <SelectBasicInput
+              isDisabled={loading || !form.watch('is_local_data')}
+              fx={(e) => {
+                const employeeFind = employee?.find((row) => row?.id_sdm === e.value)
+                form.setValue('gambar', employeeFind?.gambar_url ?? '')
+                form.setValue('nama_lengkap', employeeFind?.nama ?? '')
+                form.setValue('jabatan', employeeFind?.nama_jabatan_struktural ?? '')
+                form.setValue('nip', employeeFind?.nip ?? '')
+                form.setValue('nidn', employeeFind?.nidn ?? '')
+                form.setValue('id_pangkat_golongan', employeeFind?.id_pangkat_golongan)
+                form.setValue('email', employeeFind?.email ?? '')
+                form.setValue('no_hp', employeeFind?.no_hp ?? '')
+              }}
+              name={'id_sdm'}
+              form={form}
+              label={'Pilih Dosen / Staff'}
+              placeholder={'Pilih Dosen / Staff'}
+              showNull
+              selectClassName={'z-[60]'}
+              isRow
+              data={
+                employee?.map((row) => ({
+                  label: row?.nama,
+                  value: row?.id_sdm,
+                })) ?? []
+              }
+            />
+          )}
+
+          <div className="grid grid-cols-[12rem_1fr] gap-5">
+            <div />
+            <UploadPasPhoto
+              label={'Foto Profil (4x6)'}
+              name={'gambar'}
+              form={form}
+              required
+              placeholder={'Uplaod Foto'}
+              canUpload={!form.watch('is_local_data')}
+            />
+          </div>
 
           <TextInput
             name={'nama_lengkap'}
@@ -132,41 +140,42 @@ export const FormPlacemanUser = (props: Props) => {
             <TextInput name={'nidn'} form={form} label={'NIDN'} placeholder={'NIDN'} isRow />
           )}
 
-          <SelectBasicInput
-            label={'Pangkat Golongan'}
-            name={'id_pangkat_golongan'}
-            form={form}
-            placeholder={'Pilih Pangkat Golongan'}
-            isDisabled={load1}
-            selectClassName={'w-[20rem]'}
-            usePortal
-            showNull
-            isRow
-            data={
-              groupRank?.map((row) => ({
-                label: row?.nama_golongan,
-                value: row?.id_golongan,
-              })) ?? []
-            }
-          />
-
-          <SelectBasicInput
-            label={'Pangkat Akademik'}
-            name={'id_pangkat_akademik'}
-            form={form}
-            placeholder={'Pilih Pangkat Akademik'}
-            selectClassName={'w-[20rem]'}
-            isDisabled={load2}
-            usePortal
-            showNull
-            isRow
-            data={
-              academicRank?.map((row) => ({
-                label: row?.nama_akademik,
-                value: row?.id_akademik,
-              })) ?? []
-            }
-          />
+          {!!form.watch('is_dosen') && (
+            <>
+              <SelectBasicInput
+                label={'Pangkat Golongan'}
+                name={'id_pangkat_golongan'}
+                form={form}
+                placeholder={'Pilih Pangkat Golongan'}
+                isDisabled={load1}
+                selectClassName={'w-[20rem] z-30'}
+                showNull
+                isRow
+                data={
+                  groupRank?.map((row) => ({
+                    label: row?.nama_golongan,
+                    value: row?.id_golongan,
+                  })) ?? []
+                }
+              />
+              <SelectBasicInput
+                label={'Pangkat Akademik'}
+                name={'id_pangkat_akademik'}
+                form={form}
+                placeholder={'Pilih Pangkat Akademik'}
+                selectClassName={'w-[20rem] z-10'}
+                isDisabled={load2}
+                showNull
+                isRow
+                data={
+                  academicRank?.map((row) => ({
+                    label: row?.nama_akademik,
+                    value: row?.id_akademik,
+                  })) ?? []
+                }
+              />
+            </>
+          )}
 
           <div className="flex items-center gap-1.5">
             <TextInput

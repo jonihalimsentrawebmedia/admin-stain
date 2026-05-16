@@ -14,6 +14,7 @@ export interface IPlacemanUser {
   gambar_key: string
 
   nip: string
+  nidn: string
   no_hp: string
   email: string
 
