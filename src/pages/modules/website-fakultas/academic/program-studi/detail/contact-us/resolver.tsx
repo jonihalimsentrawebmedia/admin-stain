@@ -13,6 +13,7 @@ export interface IContactUs {
   updated_user: string
   nama_user_created: string
   nama_user_updated: string
+  iframe: string
 }
 
 export const ContactUsResolver = z.object({
@@ -28,6 +29,7 @@ export const ContactUsResolver = z.object({
   link_google_map: z
     .string({ message: 'Isi Konten wajib diisi.' })
     .min(1, { message: 'Isi Konten wajib diisi.' }),
+  iframe: z.string().optional().nullable(),
 })
 
 export type IContactUsTypeForm = z.infer<typeof ContactUsResolver>

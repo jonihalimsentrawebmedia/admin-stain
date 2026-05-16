@@ -7,9 +7,9 @@ import AxiosClient from '@/provider/axios'
 import { useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 import { Label } from '@/components/ui/label'
-import type { Dosen } from '@/pages/modules/website-utama/program-studi/detail/model/dosen.ts'
+import type { ISDM } from '@/pages/modules/website-utama/program-studi/detail/model/dosen.ts'
 
-const LecturerColumnsFaculty = () => {
+const StaffColumnsFaculty = () => {
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') ?? 1)
   const limit = Number(searchParams.get('limit') ?? 10)
@@ -48,7 +48,7 @@ const LecturerColumnsFaculty = () => {
       })
   }
 
-  const columns: ColumnDef<Dosen>[] = [
+  const columns: ColumnDef<ISDM>[] = [
     {
       accessorKey: 'No',
       header: '#',
@@ -98,7 +98,7 @@ const LecturerColumnsFaculty = () => {
               <Checkbox
                 checked={values.tampil_no_hp}
                 onCheckedChange={() => {
-                  checkedHp(values.id_dosen)
+                  checkedHp(values?.id_staff)
                 }}
               />
               <Label className={`${values.tampil_no_hp ? 'text-primary' : 'text-[#999]'}`}>
@@ -121,11 +121,11 @@ const LecturerColumnsFaculty = () => {
               <Checkbox
                 checked={values.tampil_email}
                 onCheckedChange={() => {
-                  checkedEmail(values.id_dosen)
+                  checkedEmail(values?.id_staff)
                 }}
               />
               <Label className={`${values.tampil_email ? 'text-primary' : 'text-[#999]'}`}>
-                {values.tampil_email ? 'Tampil' : 'Tidak Tampil'}
+                {values?.tampil_email ? 'Tampil' : 'Tidak Tampil'}
               </Label>
             </div>
           </div>
@@ -137,4 +137,4 @@ const LecturerColumnsFaculty = () => {
   return columns
 }
 
-export default LecturerColumnsFaculty
+export default StaffColumnsFaculty
