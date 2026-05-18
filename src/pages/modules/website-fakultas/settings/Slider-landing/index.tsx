@@ -1,12 +1,12 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { ButtonAddLandingFaculty } from './components/buttonAdd.tsx'
 import { UnitLandingPageColumns } from './data/columns'
-import { UseGetFacultyLandingPage } from './hooks/index'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { useSearchParams } from 'react-router-dom'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
+import { UseGetFacultyLandingPage } from './hooks/index.tsx'
+import { ButtonAddLandingFaculty } from './components/buttonAdd.tsx'
 
-export const LandingPageCarrier = () => {
+export const LandingPageFaculty = () => {
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
@@ -25,7 +25,7 @@ export const LandingPageCarrier = () => {
         <ButtonTitleGroup
           label={'Landing Page'}
           buttonGroup={[
-             {
+            {
               type: 'custom',
               element: (
                 <ButtonGoToGuide

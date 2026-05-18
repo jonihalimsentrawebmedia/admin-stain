@@ -8,7 +8,7 @@ const LayoutFaculty = () => {
 
   return (
     <div className="space-y-8">
-      <ButtonTitleGroup buttonGroup={[]} label="Detail Program Studi" isBack />
+      <ButtonTitleGroup buttonGroup={[]} label="Detail Fakultas" isBack />
       <div className="flex gap-4 flex-col">
         <div>
           <div>

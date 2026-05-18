@@ -19,7 +19,6 @@ import DownloadFileFacultyPage from '@/pages/modules/website-fakultas/public-con
 import { CategoryDownloadFacultyPage } from '@/pages/modules/website-fakultas/public-content/Download/category'
 import { AddDownloadCarrierPage } from '@/pages/modules/website-fakultas/public-content/Download/created'
 import { UpdatedDownloadFacultyPage } from '@/pages/modules/website-fakultas/public-content/Download/updated'
-import { LandingPageCarrier } from '@/pages/modules/website-fakultas/settings/landing-page'
 import ColorSettingFaculty from '@/pages/modules/website-fakultas/settings/color/ColorSettingService.tsx'
 import { TemplateWebFacultySettings } from '@/pages/modules/website-fakultas/settings/template-web'
 import LayoutFaculty from '@/pages/modules/website-fakultas/about-faculty/component/layout'
@@ -109,6 +108,7 @@ import { ChangePassword } from '@/pages/modules/website-utama/change-password'
 import { FacultyGalleryProfile } from '@/pages/modules/website-fakultas/about-faculty/gallery'
 import { ThemaChangeColorFaculty } from '@/pages/modules/website-fakultas/settings/template-web/color'
 import GuideListView from '@/pages/modules/website-utama/panduan/GuideListView'
+import { LandingPageFaculty } from '@/pages/modules/website-fakultas/settings/Slider-landing'
 
 export const RouterFaculty = [
   {
@@ -128,9 +128,9 @@ export const RouterFaculty = [
       },
     ],
   },
-   {
-    path:"panduan",
-    element:<GuideListView/>
+  {
+    path: 'panduan',
+    element: <GuideListView />,
   },
   {
     path: 'data-faculty',
@@ -768,7 +768,7 @@ export const RouterFaculty = [
     children: [
       {
         path: 'landing-page',
-        element: <LandingPageCarrier />,
+        element: <LandingPageFaculty />,
       },
       {
         path: 'color',
@@ -776,7 +776,6 @@ export const RouterFaculty = [
       },
       {
         path: 'template',
-        // element: <TemplateWebFacultySettings />,
         children: [
           {
             index: true,

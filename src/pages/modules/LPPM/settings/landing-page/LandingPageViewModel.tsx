@@ -19,15 +19,6 @@ const LandingPageViewModel = () => {
         return <div>{(page - 1) * limit + idx + 1}</div>
       },
     },
-
-    // ✅ Nama Pangkat Golongan
-    {
-      accessorKey: 'thumbnail',
-      header: 'Thumbnail',
-      cell: ({ row }) => {
-        return <img className="w-[344px] h-[258px] object-cover" src={row.original.gambar_url} />
-      },
-    },
     {
       accessorKey: 'slug',
       header: 'Status Aktif',

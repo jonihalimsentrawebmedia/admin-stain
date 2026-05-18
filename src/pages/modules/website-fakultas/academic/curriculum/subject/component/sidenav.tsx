@@ -46,7 +46,7 @@ export const SidenavSubjectCurriculum = (props: Props) => {
     if (elements.length > 0 && !tabValue) {
       setSearchParams((prev) => {
         const params = new URLSearchParams(prev)
-        params.set('tahun', elements[0].value)
+        params.set('tahun', '1')
         return params
       })
     }

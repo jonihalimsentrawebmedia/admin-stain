@@ -39,6 +39,9 @@ const ContactUsView = () => {
           queryClient.invalidateQueries({
             queryKey: ['program-studi-contact-us'],
           })
+          queryClient.invalidateQueries({
+            queryKey: ['contact-us'],
+          })
 
           setLoading(false)
           setIsEdit(!isEdit)
@@ -83,7 +86,7 @@ const ContactUsView = () => {
       label: 'Email',
       name: 'email',
     },
-     {
+    {
       label: 'Iframe Embed Google Maps',
       name: 'iframe',
       component: (
@@ -145,6 +148,13 @@ const ContactUsView = () => {
                 name="link_google_map"
                 type="url"
                 label="Link Google Maps"
+                isRow
+              />
+              <TextInput
+                form={form}
+                name="iframe"
+                type="text"
+                label="Iframe Embed Google Maps"
                 isRow
               />
               <TextInput form={form} name="no_telepon" label="Telepon" isRow />

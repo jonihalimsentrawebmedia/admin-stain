@@ -17,13 +17,7 @@ const TablePaginate = ({ meta, setPage }: Props) => {
   const [searchParams, setSearchParams] = useSearchParams()
   const [currentPage, setCurrentPage] = useState(parseInt(searchParams.get('page') ?? '1'))
 
-  // const limit = Number(searchParams.get("limit") ?? "10");
-
-  // const total = meta?.total ?? 0;
   const lastPage = meta?.last_page == 0 ? 1 : (meta?.last_page ?? 1)
-
-  // const start = limit * (currentPage - 1) + 1;
-  // const end = Math.min(currentPage * limit, total);
 
   const updatePage = (page: number) => {
     if (setPage) {
@@ -59,11 +53,11 @@ const TablePaginate = ({ meta, setPage }: Props) => {
 
   const pages = generatePageNumbers()
 
-  useEffect(()=>{
-    if(searchParams.toString()){
+  useEffect(() => {
+    if (searchParams.toString()) {
       setCurrentPage(parseInt(searchParams.get('page') ?? '1'))
     }
-  },[searchParams.toString()])
+  }, [searchParams.toString()])
 
   return (
     <div className="mt-5 flex flex-col gap-2 items-start lg:flex-row lg:items-center justify-between">

@@ -16,6 +16,7 @@ import DetailField from '@/components/common/field/DetailField.tsx'
 import { ContactUsResolver, type IContactUsTypeForm } from './resolver.tsx'
 import { UseGetProdiContactUs } from '@/pages/modules/website-fakultas/academic/program-studi/detail/hooks'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
+import RenderHTMLContent from '@/components/common/richtext/RenderHTMLContent.tsx'
 
 const ProdiContactUsView = () => {
   const { id } = useParams()
@@ -85,6 +86,15 @@ const ProdiContactUsView = () => {
       label: 'Email',
       name: 'email',
     },
+    {
+      label: 'Iframe Embed Google Maps',
+      name: 'iframe',
+      component: (
+        <>
+          <RenderHTMLContent content={contactUs?.iframe ?? ''} />
+        </>
+      ),
+    },
   ]
 
   useEffect(() => {
@@ -137,6 +147,13 @@ const ProdiContactUsView = () => {
                 name="link_google_map"
                 type="url"
                 label="Link Google Maps"
+                isRow
+              />
+              <TextInput
+                form={form}
+                name="iframe"
+                type="text"
+                label="Iframe Embed Google Maps"
                 isRow
               />
               <TextInput form={form} name="no_telepon" label="Telepon" isRow />

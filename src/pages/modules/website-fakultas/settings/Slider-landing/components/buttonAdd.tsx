@@ -8,7 +8,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
-import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
+import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 
 export const ButtonAddLandingFaculty = () => {
   const [open, setOpen] = useState(false)
@@ -50,7 +50,7 @@ export const ButtonAddLandingFaculty = () => {
         Tambah Gambar
       </Button>
 
-      <DialogBasic
+      <DialogCustom
         open={open}
         setOpen={setOpen}
         title={'Tambah Gambar'}
@@ -71,7 +71,7 @@ export const ButtonAddLandingFaculty = () => {
             </form>
           </Form>
         </div>
-      </DialogBasic>
+      </DialogCustom>
     </>
   )
 }

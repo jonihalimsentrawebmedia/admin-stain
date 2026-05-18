@@ -10,7 +10,7 @@ import { useState } from 'react'
 import { MdInfo } from 'react-icons/md'
 
 export const DataProdiProfile = () => {
-    const [realData, setRealData] = useState(true)
+  const [realData, setRealData] = useState(true)
   const { dataProdi, loading } = UseGetDetailDataProdi({
     real_data: realData,
   })
@@ -29,7 +29,12 @@ export const DataProdiProfile = () => {
                 ? [
                     {
                       type: 'custom',
-                      element: <ButtonGoToGuide titleGuide='Data Utama Universitas' valueGuide="PRODI_PROFILE_SATUAN_ORGANISASI" />,
+                      element: (
+                        <ButtonGoToGuide
+                          titleGuide="Data Utama Universitas"
+                          valueGuide="PRODI_PROFILE_SATUAN_ORGANISASI"
+                        />
+                      ),
                     },
                     {
                       type: 'cancel',
@@ -39,7 +44,12 @@ export const DataProdiProfile = () => {
                 : [
                     {
                       type: 'custom',
-                      element: <ButtonGoToGuide titleGuide='Data Utama Universitas' valueGuide="PRODI_PROFILE_SATUAN_ORGANISASI" />,
+                      element: (
+                        <ButtonGoToGuide
+                          titleGuide="Data Utama Universitas"
+                          valueGuide="PRODI_PROFILE_SATUAN_ORGANISASI"
+                        />
+                      ),
                     },
                     {
                       label: 'Ajukan Edit Data',
@@ -49,19 +59,19 @@ export const DataProdiProfile = () => {
                   ]
             }
           />
-            {dataProdi?.status_publish == 'DIAJUKAN_EDITOR' && (
-                      <div
-                        className={'border border-blue-500 rounded flex p-2 w-fit items-center gap-1.5 mt-5'}
-                      >
-                        <MdInfo className={'size-5 text-blue-500'} />
-                        {realData
-                          ? 'Data yang tampil adalah data yang asli. Untuk melihat data yang anda ajukan'
-                          : 'Data yang tampil adalah data yang anda ajukan. Untuk melihat data asli'}
-                        <button className={'text-blue-500'} onClick={() => setRealData(!realData)}>
-                          KLIK DISINI
-                        </button>
-                      </div>
-                    )}
+          {dataProdi?.status_publish == 'DIAJUKAN_EDITOR' && (
+            <div
+              className={'border border-blue-500 rounded flex p-2 w-fit items-center gap-1.5 mt-5'}
+            >
+              <MdInfo className={'size-5 text-blue-500'} />
+              {realData
+                ? 'Data yang tampil adalah data yang asli. Untuk melihat data yang anda ajukan'
+                : 'Data yang tampil adalah data yang anda ajukan. Untuk melihat data asli'}
+              <button className={'text-blue-500'} onClick={() => setRealData(!realData)}>
+                KLIK DISINI
+              </button>
+            </div>
+          )}
 
           <div className="flex items-start gap-5 mt-5">
             <div className="flex flex-col gap-1">

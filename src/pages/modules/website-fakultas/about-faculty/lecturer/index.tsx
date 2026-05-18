@@ -17,7 +17,7 @@ export const LecturerProfileFaculty = () => {
     search: search,
   })
 
-  const { columns } = LecturerColumnsFaculty()
+  const columns = LecturerColumnsFaculty()
 
   return (
     <>
@@ -26,12 +26,7 @@ export const LecturerProfileFaculty = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: (
-                <ButtonGoToGuide
-                  titleGuide={'Dosen'}
-                  valueGuide="FAKULTAS_PROFIL_DOSEN"
-                />
-              ),
+              element: <ButtonGoToGuide titleGuide={'Dosen'} valueGuide="FAKULTAS_PROFIL_DOSEN" />,
             },
           ]}
           label="Dosen"
