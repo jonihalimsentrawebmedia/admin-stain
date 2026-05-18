@@ -2,15 +2,25 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { FaListUl } from 'react-icons/fa'
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { Switch } from '@/components/ui/switch.tsx'
-import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
-import UseGetSatuanOrganisasi from '@/pages/modules/settings/controller/useGetSatuanOrganisasi.tsx'
 import UseGetEducationalLevel from '@/pages/modules/settings/reference/educational-level/controller/useGetEducationalLevel.tsx'
+import { UseGetCostEducation } from '@/pages/modules/website-utama/cost-education/hooks'
+import TableCustom from '@/components/common/table/TableCustom.tsx'
+import { ColumnsEducationCost } from '@/pages/modules/website-utama/cost-education/data/columns.tsx'
+import { Switch } from '@/components/ui/switch.tsx'
+import UseGetSatuanOrganisasi from '@/pages/modules/settings/controller/useGetSatuanOrganisasi.tsx'
+import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
+import { UseGetEntrance } from '@/pages/modules/website-utama/cost-education/entrance-list/hooks'
 
-export const CostEducationUKT = () => {
+export const UKTCostEducationPage = () => {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
   const faculty = searchParams.get('faculty') ?? ''
+  const prodi = searchParams.get('prodi') ?? ''
+  const level = searchParams.get('level') ?? ''
+  const entrance = searchParams.get('entrance') ?? ''
 
   const { satuanOrganisasi: facultyList } = UseGetSatuanOrganisasi({
     isGetAll: true,
@@ -22,6 +32,20 @@ export const CostEducationUKT = () => {
     idParent: faculty,
   })
   const { educationalLevel } = UseGetEducationalLevel({ isGetAll: true })
+  const { entrance: listEntrance } = UseGetEntrance({
+    page: '0',
+    limit: '0',
+  })
+  const { costEducation, meta, loading } = UseGetCostEducation({
+    page,
+    limit,
+    search,
+    id_fakultas: faculty,
+    id_prodi: prodi,
+    id_jenjang: level,
+    id_jalur_masuk: entrance,
+  })
+  const columns = ColumnsEducationCost()
 
   return (
     <>
@@ -101,8 +125,21 @@ export const CostEducationUKT = () => {
             name={'level'}
             label={'Jenjang'}
           />
-          <SelectFilter options={[]} name={'entrance'} label={'Jalur Masuk'} />
+          <SelectFilter
+            options={
+              listEntrance?.map((row) => ({
+                value: row?.id_jalur_masuk,
+                label: row?.nama_jalur_masuk,
+              })) ?? []
+            }
+            name={'entrance'}
+            label={'Jalur Masuk'}
+          />
         </div>
+
+        {faculty && prodi && (
+          <TableCustom data={costEducation} columns={columns} meta={meta} loading={loading} />
+        )}
       </div>
     </>
   )

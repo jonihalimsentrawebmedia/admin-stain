@@ -202,7 +202,10 @@ import { HistoryStatusPage } from '@/pages/modules/website-utama/lecturer-staff/
 import { EditStatusActiveEmployee } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/edit-status'
 import { AddStatusActiveEmployee } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/add-status'
 import { ReportData } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/reportData'
-import { CostEducationUKT } from '@/pages/modules/website-utama/cost-education'
+import { UKTCostEducationPage } from '@/pages/modules/website-utama/cost-education'
+import { LevelUktPage } from '@/pages/modules/website-utama/cost-education/level-ukt'
+import { EntranceListUktPage } from '@/pages/modules/website-utama/cost-education/entrance-list'
+import { DetailUktByEntrance } from '@/pages/modules/website-utama/cost-education/detail-ukt'
 
 export const MainWebsiteRouter = [
   {
@@ -1388,15 +1391,22 @@ export const MainWebsiteRouter = [
     children: [
       {
         path: 'ukt',
-        // element: <CostEducationUKT />,
         children: [
           {
             index: true,
-            element: <CostEducationUKT />,
+            element: <UKTCostEducationPage />,
           },
           {
             path: 'level-ukt',
-            element: <></>,
+            element: <LevelUktPage />,
+          },
+          {
+            path: 'list-entrance',
+            element: <EntranceListUktPage />,
+          },
+          {
+            path: ':idUkt',
+            element: <DetailUktByEntrance />,
           },
         ],
       },

@@ -16,7 +16,6 @@ import { TbWorld } from 'react-icons/tb'
 import { FaGear, FaGears, FaUsers } from 'react-icons/fa6'
 import { Calendar } from 'lucide-react'
 import { IconCertificate } from '@/components/common/icon'
-import { FaDollarSign } from 'react-icons/fa'
 
 const baseDomain = '/modules/website-utama'
 
@@ -322,22 +321,22 @@ export const MENULIST = [
     path: `${baseDomain}/jalur-pendaftaran`,
     icon: <MdHowToReg className={'size-5'} />,
   },
-  {
-    id: 22,
-    name: 'Biaya Pendidikan',
-    path: `${baseDomain}/biaya-pendidikan`,
-    icon: <FaDollarSign className={'size-5'} />,
-    child: [
-      {
-        id: 221,
-        name: 'UKT',
-        path: `${baseDomain}/biaya-pendidikan/ukt`,
-      },
-      {
-        id: 222,
-        name: 'Non UKT',
-        path: `${baseDomain}/biaya-pendidikan/non-ukt`,
-      },
-    ],
-  },
+  // {
+  //   id: 22,
+  //   name: 'Biaya Pendidikan',
+  //   path: `${baseDomain}/biaya-pendidikan`,
+  //   icon: <FaDollarSign className={'size-5'} />,
+  //   child: [
+  //     {
+  //       id: 221,
+  //       name: 'UKT',
+  //       path: `${baseDomain}/biaya-pendidikan/ukt`,
+  //     },
+  //     {
+  //       id: 222,
+  //       name: 'Non UKT',
+  //       path: `${baseDomain}/biaya-pendidikan/non-ukt`,
+  //     },
+  //   ],
+  // },
 ]
