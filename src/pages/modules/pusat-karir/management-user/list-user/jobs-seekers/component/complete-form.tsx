@@ -25,6 +25,7 @@ import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import { NewMultipleSelectCategory } from '@/pages/modules/pusat-karir/service/job-vacancy/component/newMultiple.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { MdInfo } from 'react-icons/md'
+import { UseGetSessionCarrierCenter } from '@/pages/modules/pusat-karir/component/select-session/get-seeion.tsx'
 
 export const FormUserProfile = () => {
   const { id } = useParams()
@@ -86,7 +87,7 @@ export const FormUserProfile = () => {
           ...(userPersonalInfo?.pendidikan_terakhir as unknown as ResolverProfileUserType['pendidikan_terakhir']),
           nama_universitas:
             userPersonalInfo?.pendidikan_terakhir?.universitas_asal === 'DALAM_UNIVERSITAS'
-              ? 'Universitas STAIN MADINA'
+              ? `Universitas ${session?.nama_universitas}`
               : userPersonalInfo?.pendidikan_terakhir?.universitas_asal_luar_universitas,
         },
         sub_spesialis: temp ?? [],
@@ -121,8 +122,7 @@ export const FormUserProfile = () => {
         setLoading(false)
       })
   }
-
-  console.log(form.formState.errors)
+  const { session } = UseGetSessionCarrierCenter()
 
   return (
     <>
@@ -514,7 +514,10 @@ export const FormUserProfile = () => {
               usePortal
               data={
                 ['DALAM_UNIVERSITAS', 'LUAR_UNIVERSITAS'].map((row) => ({
-                  label: row === 'DALAM_UNIVERSITAS' ? 'STAIN MADINA' : 'Luar STAIN MADINA',
+                  label:
+                    row === 'DALAM_UNIVERSITAS'
+                      ? `${session?.nama_universitas}`
+                      : `Luar ${session?.nama_universitas}`,
                   value: row,
                 })) ?? []
               }

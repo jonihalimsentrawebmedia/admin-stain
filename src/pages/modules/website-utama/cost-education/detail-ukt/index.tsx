@@ -10,7 +10,7 @@ export const DetailUktByEntrance = () => {
     <>
       <div className={'space-y-5'}>
         <ButtonTitleGroup isBack label={'Lihat UKT'} buttonGroup={[]} />
-        <p className="text-gray-500">Belum ada Jalur Masuk</p>
+        {listPriceUkt?.data ? <></> : <p className="text-gray-500">Belum ada Jalur Masuk</p>}
       </div>
     </>
   )

@@ -94,7 +94,7 @@ export const DetailNewsPage = () => {
                   <p>{detailNews?.nama_kategori_berita}</p>
                 </div>
                 <p className={'text-3xl font-semibold text-white'}>
-                  STAIN MADINA Menggelar Kegiatan Microteaching di SMP Negeri 9 Medan
+                  {detailNews?.judul ?? ''}
                 </p>
                 <div className="flex items-center justify-between gap-5 w-full">
                   <div>

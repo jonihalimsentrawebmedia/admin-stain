@@ -6,19 +6,22 @@ import RegulationEnviromentViewModel from './RegulationEnviromentViewModel'
 import useGetRegulationEnviroment from './controller/useGetRegulationEnviroment'
 import ButtonAddDocument from '../../information-public/components/button/ButtonAddDocument'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
+import { UseGetPPIDSession } from '@/pages/modules/ppid/hooks'
 
 const RegulationEnviromentView = () => {
   const { columns } = RegulationEnviromentViewModel()
   const { document, loading, meta, title } = useGetRegulationEnviroment({})
+  const { session } = UseGetPPIDSession()
+
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
         buttonGroup={[
-           {
+          {
             type: 'custom',
             element: (
               <ButtonGoToGuide
-                titleGuide={'Regulasi Mengenai Keterbukaan Informasi di Lingkungan STAIN Madina'}
+                titleGuide={`Regulasi Mengenai Keterbukaan Informasi di Lingkungan ${session?.nama_universitas}`}
                 valueGuide="PPID_REGULASI_LINGKUNGAN"
               />
             ),
@@ -39,8 +42,7 @@ const RegulationEnviromentView = () => {
             ),
           },
         ]}
-        label={"Regulasi Mengenai Keterbukaan Informasi di Lingkungan STAIN Madina"}
-    
+        label={`Regulasi Mengenai Keterbukaan Informasi di Lingkungan ${session?.nama_universitas}`}
       />
       <TableCustom
         addFilter={
