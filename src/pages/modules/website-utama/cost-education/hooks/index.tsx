@@ -66,3 +66,26 @@ export const UseGetCostEducation = (props: props) => {
 
   return { costEducation, meta, loading }
 }
+
+export const UseGetStatusPublish = () => {
+  const [publish, setPublish] = useState<{
+    tipe: 'NON_UKT' | 'UKT'
+  }>()
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['status_publish'],
+    queryFn: () =>
+      AxiosClient.get(`/website-utama/biaya-pendidikan-ukt/tipe`).then((res) => res.data.data),
+    refetchOnWindowFocus: false,
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setPublish(data)
+    }
+  }, [data])
+
+  return { publish, loading }
+}

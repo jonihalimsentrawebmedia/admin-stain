@@ -206,6 +206,7 @@ import { UKTCostEducationPage } from '@/pages/modules/website-utama/cost-educati
 import { LevelUktPage } from '@/pages/modules/website-utama/cost-education/level-ukt'
 import { EntranceListUktPage } from '@/pages/modules/website-utama/cost-education/entrance-list'
 import { DetailUktByEntrance } from '@/pages/modules/website-utama/cost-education/detail-ukt'
+import { GetDetailEntranceProdiUktPage } from '@/pages/modules/website-utama/cost-education/detail-ukt/detail'
 
 export const MainWebsiteRouter = [
   {
@@ -1405,8 +1406,17 @@ export const MainWebsiteRouter = [
             element: <EntranceListUktPage />,
           },
           {
-            path: ':idUkt',
-            element: <DetailUktByEntrance />,
+            path: ':id_prodi',
+            children: [
+              {
+                index: true,
+                element: <DetailUktByEntrance />,
+              },
+              {
+                path: 'entrance/:id_entrance',
+                element: <GetDetailEntranceProdiUktPage />,
+              },
+            ],
           },
         ],
       },

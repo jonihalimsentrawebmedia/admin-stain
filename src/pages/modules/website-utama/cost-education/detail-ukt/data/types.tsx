@@ -15,6 +15,7 @@ export interface EntranceUkt {
 
 export interface IDataCostUktProdi {
   id_prodi: string
+  nama_fakultas: string
   nama_prodi: string
   kode_jenjang: string
   nama_jenjang: string

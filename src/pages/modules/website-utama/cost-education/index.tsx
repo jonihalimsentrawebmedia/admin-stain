@@ -6,10 +6,10 @@ import UseGetEducationalLevel from '@/pages/modules/settings/reference/education
 import { UseGetCostEducation } from '@/pages/modules/website-utama/cost-education/hooks'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsEducationCost } from '@/pages/modules/website-utama/cost-education/data/columns.tsx'
-import { Switch } from '@/components/ui/switch.tsx'
 import UseGetSatuanOrganisasi from '@/pages/modules/settings/controller/useGetSatuanOrganisasi.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import { UseGetEntrance } from '@/pages/modules/website-utama/cost-education/entrance-list/hooks'
+import { SwitchStatus } from './component/switchStatus.tsx'
 
 export const UKTCostEducationPage = () => {
   const navigate = useNavigate()
@@ -86,13 +86,7 @@ export const UKTCostEducationPage = () => {
           ]}
         />
 
-        <div className={'grid grid-cols-[15rem_1fr] gap-5'}>
-          <p>Status Publish untuk Landing</p>
-          <div className="flex items-center gap-4">
-            <Switch />
-            Ya
-          </div>
-        </div>
+        <SwitchStatus type={'UKT'} />
 
         <div className="flex flex-col gap-5 max-w-[20rem]">
           <SelectFilter
