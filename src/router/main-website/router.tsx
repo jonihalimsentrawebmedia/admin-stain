@@ -202,6 +202,7 @@ import { HistoryStatusPage } from '@/pages/modules/website-utama/lecturer-staff/
 import { EditStatusActiveEmployee } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/edit-status'
 import { AddStatusActiveEmployee } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/add-status'
 import { ReportData } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/reportData'
+import { CostEducationUKT } from '@/pages/modules/website-utama/cost-education'
 
 export const MainWebsiteRouter = [
   {
@@ -1379,6 +1380,25 @@ export const MainWebsiteRouter = [
       {
         path: 'set-status',
         element: <SetStatusEmployeePage />,
+      },
+    ],
+  },
+  {
+    path: 'biaya-pendidikan',
+    children: [
+      {
+        path: 'ukt',
+        // element: <CostEducationUKT />,
+        children: [
+          {
+            index: true,
+            element: <CostEducationUKT />,
+          },
+          {
+            path: 'level-ukt',
+            element: <></>,
+          },
+        ],
       },
     ],
   },
