@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button.tsx'
 import { HiPencil } from 'react-icons/hi'
 import { Separator } from '@/components/ui/separator.tsx'
-import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel'
+import { Carousel, type CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { useEffect, useState } from 'react'
 import { format } from 'date-fns'
 import { ButtonSubmissionNews } from '@/pages/modules/website-utama/public-content/news/components/buttonSubmission.tsx'
@@ -91,9 +91,7 @@ export const DetailNewsPage = () => {
                   <div className="size-3.5 rounded-full bg-yellow-500" />
                   <p>{detailNews?.nama_kategori_berita}</p>
                 </div>
-                <p className={'text-3xl font-semibold text-white'}>
-                  STAIN MADINA Menggelar Kegiatan Microteaching di SMP Negeri 9 Medan
-                </p>
+                <p className={'text-3xl font-semibold text-white'}>{detailNews?.judul ?? ''}</p>
                 <div className="flex items-center justify-between gap-5 w-full">
                   <div>
                     <p className="text-white">Tanggal Terbit</p>

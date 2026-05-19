@@ -55,6 +55,7 @@ export type SatuanOrganisasiType = z.infer<typeof SatuanOrganisasiResolver>
 
 export interface SatuanOrganisasiList {
   id_satuan_organisasi: string // UUID
+  id_jenjang_pendidikan: string
   kelompok: string // Contoh: "UNIVERSITAS", "FAKULTAS", "DEPARTEMEN"
   parent_id: string // UUID dari organisasi induk
   logo: string // Nama file atau URL logo

@@ -202,7 +202,17 @@ import { HistoryStatusPage } from '@/pages/modules/website-utama/lecturer-staff/
 import { EditStatusActiveEmployee } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/edit-status'
 import { AddStatusActiveEmployee } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/add-status'
 import { ReportData } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/reportData'
-import { CostEducationUKT } from '@/pages/modules/website-utama/cost-education'
+import { UKTCostEducationPage } from '@/pages/modules/website-utama/cost-education/ukt'
+import { LevelUktPage } from '@/pages/modules/website-utama/cost-education/ukt/level-ukt'
+import { EntranceListUktPage } from '@/pages/modules/website-utama/cost-education/ukt/entrance-list'
+import { DetailUktByEntrance } from '@/pages/modules/website-utama/cost-education/ukt/detail-ukt'
+import { GetDetailEntranceProdiUktPage } from '@/pages/modules/website-utama/cost-education/ukt/detail-ukt/detail'
+import { EntranceListNonUktPage } from '@/pages/modules/website-utama/cost-education/non-ukt/entrance-list'
+import { NonUKTCostEducationPage } from '@/pages/modules/website-utama/cost-education/non-ukt'
+import { TariffTypePage } from '@/pages/modules/website-utama/cost-education/non-ukt/tariff-type'
+import DetailCostEducationNonUktPage from '@/pages/modules/website-utama/cost-education/non-ukt/detail'
+import { UKTBackground } from '@/pages/modules/website-utama/cost-education/ukt/background'
+import { NONUKTBackground } from '@/pages/modules/website-utama/cost-education/non-ukt/background'
 
 export const MainWebsiteRouter = [
   {
@@ -1388,15 +1398,60 @@ export const MainWebsiteRouter = [
     children: [
       {
         path: 'ukt',
-        // element: <CostEducationUKT />,
         children: [
           {
             index: true,
-            element: <CostEducationUKT />,
+            element: <UKTCostEducationPage />,
           },
           {
             path: 'level-ukt',
-            element: <></>,
+            element: <LevelUktPage />,
+          },
+          {
+            path: 'list-entrance',
+            element: <EntranceListUktPage />,
+          },
+          {
+            path: ':id_prodi',
+            children: [
+              {
+                index: true,
+                element: <DetailUktByEntrance />,
+              },
+              {
+                path: 'entrance/:id_entrance',
+                element: <GetDetailEntranceProdiUktPage />,
+              },
+            ],
+          },
+          {
+            path: 'background',
+            element: <UKTBackground />,
+          },
+        ],
+      },
+      {
+        path: 'non-ukt',
+        children: [
+          {
+            index: true,
+            element: <NonUKTCostEducationPage />,
+          },
+          {
+            path: 'tariff-type',
+            element: <TariffTypePage />,
+          },
+          {
+            path: 'list-entrance',
+            element: <EntranceListNonUktPage />,
+          },
+          {
+            path: ':id',
+            element: <DetailCostEducationNonUktPage />,
+          },
+          {
+            path: 'background',
+            element: <NONUKTBackground />,
           },
         ],
       },

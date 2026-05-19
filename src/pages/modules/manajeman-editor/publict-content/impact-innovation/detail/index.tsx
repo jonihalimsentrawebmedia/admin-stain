@@ -3,9 +3,9 @@ import { Link, useParams } from 'react-router-dom'
 import { Separator } from '@/components/ui/separator.tsx'
 import {
   Carousel,
+  type CarouselApi,
   CarouselContent,
   CarouselItem,
-  type CarouselApi,
 } from '@/components/ui/carousel.tsx'
 import { useEffect, useState } from 'react'
 import { format } from 'date-fns'
@@ -51,10 +51,10 @@ export const DetailImpactInnovationPage = () => {
                   <p className="text-blue-600 font-semibold">
                     {detail?.status_publish?.split('_').join(' ')}
                   </p>
-                     <ButtonGoToGuide
-                      titleGuide={`Detail Inovasi Berdampak`}
-                      valueGuide="EDITOR_APPROVE_KONTEN_PUBLIK"
-                    />
+                  <ButtonGoToGuide
+                    titleGuide={`Detail Inovasi Berdampak`}
+                    valueGuide="EDITOR_APPROVE_KONTEN_PUBLIK"
+                  />
                   <Link
                     to={`/modules/editor/public-content/impact-innovation/edit/${detail?.id_inovasi_berdampak}`}
                   >
@@ -114,9 +114,7 @@ export const DetailImpactInnovationPage = () => {
                   <div className="size-3.5 rounded-full bg-yellow-500" />
                   <p>{detail?.nama_kategori}</p>
                 </div>
-                <p className={'text-3xl font-semibold text-white'}>
-                  STAIN MADINA Menggelar Kegiatan Microteaching di SMP Negeri 9 Medan
-                </p>
+                <p className={'text-3xl font-semibold text-white'}>{detail?.judul}</p>
                 <div className="flex items-center justify-between gap-5 w-full">
                   <div>
                     <p className="text-white">Tanggal Terbit</p>

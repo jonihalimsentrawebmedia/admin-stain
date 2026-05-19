@@ -98,12 +98,6 @@ export const UploadImgBackground = ({ background, context, max = 4, queryName }:
                 Aktifkan Gambar Ini
               </label>
               <ButtonDelete context={context} queryName={queryName} data={item} />
-              {/*<button*/}
-              {/*  onClick={() => HandleDelete(item?.id_background)}*/}
-              {/*  className={'bg-red-500 p-1.5 rounded text-white'}*/}
-              {/*>*/}
-              {/*  <FaTrash />*/}
-              {/*</button>*/}
             </div>
           </div>
         ))}

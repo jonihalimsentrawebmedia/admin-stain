@@ -19,6 +19,7 @@ import { UploadFileInput } from '@/components/common/form/uploadFileInput.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import { useNavigate } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import { UseGetSessionCarrierCenter } from '@/pages/modules/pusat-karir/component/select-session/get-seeion.tsx'
 
 export const FormJobSeekers = () => {
   const form = useForm<JobSeekersResolverType>({
@@ -53,6 +54,7 @@ export const FormJobSeekers = () => {
         toast.error(err?.response?.data?.message || 'Terjadi kesalahan')
       })
   }
+  const { session } = UseGetSessionCarrierCenter()
 
   return (
     <>
@@ -106,7 +108,10 @@ export const FormJobSeekers = () => {
             className={'w-fit'}
             label={'Universitas Asal'}
             data={['DALAM_UNIVERSITAS', 'LUAR_UNIVERSITAS'].map((row) => ({
-              label: row === 'DALAM_UNIVERSITAS' ? 'STAIN MADINA' : 'Luar STAIN MADINA',
+              label:
+                row === 'DALAM_UNIVERSITAS'
+                  ? `${session?.nama_universitas}`
+                  : `Luar ${session?.nama_universitas}`,
               value: row,
             }))}
             fx={() => {

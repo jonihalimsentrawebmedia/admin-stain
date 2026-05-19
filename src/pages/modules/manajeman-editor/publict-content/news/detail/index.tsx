@@ -3,9 +3,9 @@ import { Link, useParams } from 'react-router-dom'
 import { Separator } from '@/components/ui/separator.tsx'
 import {
   Carousel,
+  type CarouselApi,
   CarouselContent,
   CarouselItem,
-  type CarouselApi,
 } from '@/components/ui/carousel.tsx'
 import { useEffect, useState } from 'react'
 import { format } from 'date-fns'
@@ -51,13 +51,11 @@ export const DetailNewsManagementEditorPage = () => {
                   <p className="text-blue-600 font-semibold">
                     {detail?.status_publish?.split('_').join(' ')}
                   </p>
-                     <ButtonGoToGuide
-                      titleGuide={`Detail Berita`}
-                      valueGuide="EDITOR_APPROVE_KONTEN_PUBLIK"
-                    />
-                  <Link
-                    to={`/modules/editor/public-content/news/edit/${detail?.id_berita}`}
-                  >
+                  <ButtonGoToGuide
+                    titleGuide={`Detail Berita`}
+                    valueGuide="EDITOR_APPROVE_KONTEN_PUBLIK"
+                  />
+                  <Link to={`/modules/editor/public-content/news/edit/${detail?.id_berita}`}>
                     <Button
                       size={'sm'}
                       variant={'outline'}
@@ -67,9 +65,7 @@ export const DetailNewsManagementEditorPage = () => {
                       Edit Data
                     </Button>
                   </Link>
-                  <Link
-                    to={`/modules/editor/public-content/news/log/${detail?.id_berita}`}
-                  >
+                  <Link to={`/modules/editor/public-content/news/log/${detail?.id_berita}`}>
                     <Button
                       size={'sm'}
                       variant={'outline'}
@@ -114,9 +110,7 @@ export const DetailNewsManagementEditorPage = () => {
                   <div className="size-3.5 rounded-full bg-yellow-500" />
                   <p>{detail?.nama_kategori_berita}</p>
                 </div>
-                <p className={'text-3xl font-semibold text-white'}>
-                  STAIN MADINA Menggelar Kegiatan Microteaching di SMP Negeri 9 Medan
-                </p>
+                <p className={'text-3xl font-semibold text-white'}>{detail?.judul}</p>
                 <div className="flex items-center justify-between gap-5 w-full">
                   <div>
                     <p className="text-white">Tanggal Terbit</p>
