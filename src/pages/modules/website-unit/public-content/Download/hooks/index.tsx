@@ -35,8 +35,7 @@ export const UseGetCategoryDownloadUnit = (props?: Props) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['category-download-unit', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
-    queryFn: () =>
-      AxiosClient.get(`/unit/kategori-berkas?${ParamsSearch}`).then((res) => res.data),
+    queryFn: () => AxiosClient.get(`/unit/kategori-berkas?${ParamsSearch}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching

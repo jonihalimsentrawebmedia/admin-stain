@@ -5,10 +5,21 @@ import { ColumnsFloorPlan } from '@/pages/modules/website-unit/floor-plan/data/c
 import { UseGetFloorPlan } from '@/pages/modules/website-unit/floor-plan/hooks'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
+import { useSearchParams } from 'react-router-dom'
 
 export const FloorPlanUnitPage = () => {
   const { session } = UseGetSessionUnit()
-  const { floorPlan, meta, loading } = UseGetFloorPlan()
+
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { floorPlan, meta, loading } = UseGetFloorPlan({
+    page: page,
+    limit: limit,
+    search: search,
+  })
   const columns = ColumnsFloorPlan({ ...(session as ISessionUnit) })
   return (
     <>

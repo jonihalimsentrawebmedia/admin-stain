@@ -5,10 +5,20 @@ import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ButtonAddCollection } from '@/pages/modules/website-unit/collection/component/buttonAdd.tsx'
 import { UseGetSessionUnit } from '@/pages/modules/website-unit/hooks'
 import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
+import { useSearchParams } from 'react-router-dom'
 
 export const CategoryCollection = () => {
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
   const { session } = UseGetSessionUnit()
-  const { collection, meta, loading } = UseGetUnitCollection()
+  const { collection, meta, loading } = UseGetUnitCollection({
+    page: page,
+    limit: limit,
+    search: search,
+  })
   const columns = ColumnsUnitCollection(session)
 
   return (

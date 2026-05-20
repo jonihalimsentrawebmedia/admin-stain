@@ -20,6 +20,13 @@ const LandingPageViewModel = () => {
       },
     },
     {
+      accessorKey: 'gambar_url',
+      header: 'Gambar',
+      cell: ({ row }) => {
+        return <img className="w-[150px] h-[100px] object-cover" src={row.original.gambar_url} />
+      },
+    },
+    {
       accessorKey: 'slug',
       header: 'Status Aktif',
       cell: ({ row }) => {

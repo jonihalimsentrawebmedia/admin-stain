@@ -4,10 +4,20 @@ import { UseGetChiefOfficerGroup } from '@/pages/modules/Pulsikom/about/chief-of
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ButtonAddChiefOfficer } from '@/pages/modules/Pulsikom/about/chief-officer/component/buttonAdd.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
+import { useSearchParams } from 'react-router-dom'
 
 export const ChiefOfficer = () => {
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { chiefOfficer, meta, loading } = UseGetChiefOfficerGroup({
+    page,
+    limit,
+    search,
+  })
   const columns = ColumnsChiefOfficer()
-  const { chiefOfficer, meta, loading } = UseGetChiefOfficerGroup()
 
   return (
     <>
