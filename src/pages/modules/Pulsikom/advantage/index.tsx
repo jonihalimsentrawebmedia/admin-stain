@@ -1,5 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { UseGetAdvantage } from '@/pages/modules/Pulsikom/advantage/hooks'
 import { ColumnsAdvantage } from '@/pages/modules/Pulsikom/advantage/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
@@ -7,7 +7,16 @@ import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGu
 
 export const AdvantagePage = () => {
   const navigate = useNavigate()
-  const { advantage, loading, meta } = UseGetAdvantage()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { advantage, loading, meta } = UseGetAdvantage({
+    page,
+    limit,
+    search,
+  })
   const columns = ColumnsAdvantage()
 
   return (
@@ -16,7 +25,7 @@ export const AdvantagePage = () => {
         <ButtonTitleGroup
           label={'Keuntungan'}
           buttonGroup={[
-             {
+            {
               type: 'custom',
               element: (
                 <ButtonGoToGuide titleGuide={'Keuntungan'} valueGuide="PUSILKOM_KEUNGULAN" />

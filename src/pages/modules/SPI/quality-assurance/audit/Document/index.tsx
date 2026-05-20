@@ -1,5 +1,5 @@
 import { UseGetDocumentList } from './hooks/index.tsx'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsAuditDocument } from '@/pages/modules/SPI/quality-assurance/audit/Document/data/columns.tsx'
@@ -7,7 +7,16 @@ import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/Bu
 
 export const DocumentAuditPage = () => {
   const navigate = useNavigate()
-  const { document, meta, loading } = UseGetDocumentList()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { document, meta, loading } = UseGetDocumentList({
+    page,
+    limit,
+    search,
+  })
   const columns = ColumnsAuditDocument()
 
   return (

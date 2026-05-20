@@ -1,5 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { FaListUl } from 'react-icons/fa'
 import { Button } from '@/components/ui/button.tsx'
 import { UseGetDocumentSystem } from '@/pages/modules/SPI/quality-assurance/document-system/hooks'
@@ -9,7 +9,16 @@ import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/Bu
 
 export const DocumentSystemPage = () => {
   const navigate = useNavigate()
-  const { document, meta, loading } = UseGetDocumentSystem()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { document, meta, loading } = UseGetDocumentSystem({
+    page,
+    limit,
+    search,
+  })
   const columns = ColumnsSystemDocument()
 
   return (
@@ -18,7 +27,7 @@ export const DocumentSystemPage = () => {
         <ButtonTitleGroup
           label={'Sistem Dokumen'}
           buttonGroup={[
-              {
+            {
               type: 'custom',
               element: (
                 <ButtonGoToGuide

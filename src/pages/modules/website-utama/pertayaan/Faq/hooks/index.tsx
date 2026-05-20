@@ -3,15 +3,23 @@ import type { IFAQList } from '@/pages/modules/website-utama/pertayaan/Faq/data/
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
+import type { BasicProps } from '@/utils/globalType.ts'
 
-export const UseGetListFAQ = () => {
+export const UseGetListFAQ = (props?: BasicProps) => {
+  const { search, limit, page } = props ?? {}
+
   const [listFaq, setListFaq] = useState<IFAQList[]>([])
   const [metta, setMetta] = useState<Meta>()
 
+  const Params = new URLSearchParams()
+  if (search) Params.append('search', search)
+  if (limit) Params.append('limit', limit)
+  if (page) Params.append('page', page)
+
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['list-faq'],
+    queryKey: ['list-faq', Params.toString()],
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get('/website-utama/faqs').then((res) => res.data),
+    queryFn: () => AxiosClient.get(`/website-utama/faqs?${Params}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching

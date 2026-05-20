@@ -21,7 +21,10 @@ export const ButtonAddOfficially = () => {
   const [loading, setLoading] = useState(false)
 
   const { id } = useParams()
-  const { chiefOfficer } = UseGetChiefOfficerGroup()
+  const { chiefOfficer } = UseGetChiefOfficerGroup({
+    page: '0',
+    limit: '0',
+  })
   const form = useForm<OfficiallyType>({
     resolver: zodResolver(OfficiallyResolver),
     defaultValues: {

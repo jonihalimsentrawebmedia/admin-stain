@@ -18,13 +18,16 @@ export const UseGetFaqCategory = (props?: props) => {
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
 
   let ParamsSearch: URLSearchParams
 
   if (isGetAll) {
     ParamsSearch = new URLSearchParams({ page: '1', limit: '1000' })
+    ParamsSearch.append('search', search)
   } else {
     ParamsSearch = new URLSearchParams({ page, limit })
+    ParamsSearch.append('search', search)
   }
 
   const { data, isLoading, isFetching } = useQuery({

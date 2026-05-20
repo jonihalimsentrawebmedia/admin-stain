@@ -4,9 +4,19 @@ import { UseGetCategoryDocument } from '@/pages/modules/SPI/quality-assurance/do
 import { ColumnsCategory } from '@/pages/modules/SPI/quality-assurance/document-system/category/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
+import { useSearchParams } from 'react-router-dom'
 
 export const CategoryDocumentSystemPage = () => {
-  const { meta, loading, cateegory } = UseGetCategoryDocument()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { meta, loading, cateegory } = UseGetCategoryDocument({
+    page,
+    limit,
+    search,
+  })
   const columns = ColumnsCategory()
   return (
     <>

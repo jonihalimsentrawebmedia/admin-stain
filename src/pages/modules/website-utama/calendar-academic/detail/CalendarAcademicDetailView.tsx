@@ -8,7 +8,7 @@ import ButtonAddActivity from './components/ButtonAddActivity'
 
 const CalendarAcademicDetailView = () => {
   const { field, form, columns } = CalendarAcademicDetailViewModel()
-  const { academicActivityList, loading } = useGetAcademicYearActivity()
+  const { academicActivityList, loading, meta } = useGetAcademicYearActivity()
 
   return (
     <div className="flex flex-col gap-4">
@@ -34,9 +34,10 @@ const CalendarAcademicDetailView = () => {
         <TableCustom
           columns={columns}
           data={academicActivityList}
-          isShowPagination={false}
-          isShowFilter={false}
           loading={loading}
+          meta={meta}
+          // isShowPagination={false}
+          // isShowFilter={false}
         />
       )}
     </div>

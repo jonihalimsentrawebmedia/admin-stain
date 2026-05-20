@@ -3,15 +3,24 @@ import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { IGroupChief } from '../data/types.ts'
+import type { BasicProps } from '@/utils/globalType.ts'
 
-export const UseGetChiefOfficerGroup = () => {
+export const UseGetChiefOfficerGroup = (props?: BasicProps) => {
+  const { search, page, limit } = props ?? {}
+
   const [chiefOfficer, setChiefOfficer] = useState<IGroupChief[]>([])
   const [meta, setMeta] = useState<Meta>()
 
+  const ParamsSearch = new URLSearchParams()
+  if (search) ParamsSearch.append('search', search ?? '')
+  if (page) ParamsSearch.append('page', page ?? '1')
+  if (limit) ParamsSearch.append('limit', limit ?? '10')
+
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['sdm-spi'],
+    queryKey: ['sdm-spi', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get('/spi/kelompok-pimpinan').then((res) => res.data),
+    queryFn: () =>
+      AxiosClient.get(`/spi/kelompok-pimpinan?${ParamsSearch}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching
