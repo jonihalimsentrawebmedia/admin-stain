@@ -213,6 +213,9 @@ import { TariffTypePage } from '@/pages/modules/website-utama/cost-education/non
 import DetailCostEducationNonUktPage from '@/pages/modules/website-utama/cost-education/non-ukt/detail'
 import { UKTBackground } from '@/pages/modules/website-utama/cost-education/ukt/background'
 import { NONUKTBackground } from '@/pages/modules/website-utama/cost-education/non-ukt/background'
+import AcademicResourcePage from '@/pages/modules/website-utama/services/academic-resource'
+import { AcademicResourcesLanguage } from '@/pages/modules/website-utama/services/academic-resource/language'
+import { LogActivityAcademicResource } from '@/pages/modules/website-utama/services/academic-resource/log'
 
 export const MainWebsiteRouter = [
   {
@@ -748,6 +751,23 @@ export const MainWebsiteRouter = [
       {
         path: 'language/:id',
         element: <ServiceLanguagePage />,
+      },
+      {
+        path: 'academic-resource',
+        children: [
+          {
+            index: true,
+            element: <AcademicResourcePage />,
+          },
+          {
+            path: 'language/:id',
+            element: <AcademicResourcesLanguage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityAcademicResource />,
+          },
+        ],
       },
     ],
   },

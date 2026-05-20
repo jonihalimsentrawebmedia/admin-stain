@@ -1,18 +1,33 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { IoMdImage } from 'react-icons/io'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { Accordion } from '@/components/ui/accordion.tsx'
 import { AccordionCustom } from '@/components/common/accordion'
 import { UseGetDetailAcademicRules } from '@/pages/modules/website-utama/peraturan-akademik/hooks'
 import { TbExternalLink } from 'react-icons/tb'
 import { IoLanguage } from 'react-icons/io5'
 import ButtonGoToGuide from '../panduan/components/ButtonGoToGuide'
+import ButtonAddMoreInformation from '@/pages/modules/website-utama/peraturan-akademik/more-information/component/buttonAdd.tsx'
+import { UseGetMoreInformation } from '@/pages/modules/website-utama/peraturan-akademik/more-information/hooks'
+import TableCustom from '@/components/common/table/TableCustom.tsx'
+import { ColumnsMoreInformation } from '@/pages/modules/website-utama/peraturan-akademik/more-information/data/columns.tsx'
 
 export const AcademicRegulation = () => {
   const navigate = useNavigate()
 
   const { academicRules } = UseGetDetailAcademicRules()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { loading, meta, information } = UseGetMoreInformation({
+    page,
+    limit,
+    search,
+  })
+  const columns = ColumnsMoreInformation()
 
   return (
     <>
@@ -23,14 +38,19 @@ export const AcademicRegulation = () => {
             {
               type: 'custom',
               element: (
-                <Link to={'language'} className={'bg-primary p-1.5 rounded text-white'}>
+                <Link to={'language'} className={'bg-primary p-1.5 mt-1 rounded text-white'}>
                   <IoLanguage />
                 </Link>
               ),
             },
-             {
+            {
               type: 'custom',
-              element: <ButtonGoToGuide titleGuide='Peraturan Akademik' valueGuide="WEBSITE_UTAMA_PENGATURAN_AKADEMIK" />,
+              element: (
+                <ButtonGoToGuide
+                  titleGuide="Peraturan Akademik"
+                  valueGuide="WEBSITE_UTAMA_PENGATURAN_AKADEMIK"
+                />
+              ),
             },
             {
               type: 'custom',
@@ -108,6 +128,23 @@ export const AcademicRegulation = () => {
             </div>
           </AccordionCustom>
         </Accordion>
+
+        <ButtonTitleGroup
+          label={'Informasi Tambahan'}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonAddMoreInformation />,
+            },
+          ]}
+        />
+        <TableCustom
+          isShowFilter={false}
+          columns={columns}
+          data={information}
+          loading={loading}
+          meta={meta}
+        />
       </div>
     </>
   )
