@@ -18,10 +18,12 @@ export const UseGetAnnouncement = () => {
   const limit = searchParams.get('limit') ?? '10'
   const search = searchParams.get('search')
   const status = searchParams.get('status')
+  const year = searchParams.get('year') ?? ''
 
   const ParamsSearch = new URLSearchParams({ page, limit })
   if (search) ParamsSearch.append('search', search)
   if (status) ParamsSearch.append('status-publish', status)
+  if (year) ParamsSearch.append('tahun', year)
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['list-announcement', ParamsSearch.toString()],
@@ -122,4 +124,23 @@ export const UseGetAnnouncementBackground = () => {
   }, [data])
 
   return { background, loading }
+}
+
+export const UseGetAnnouncementYear = () => {
+  const [year, setYear] = useState<number[]>([])
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['year-announcement'],
+    refetchOnWindowFocus: false,
+    queryFn: () => AxiosClient.get(`/website-utama/pengumuman/tahun`).then((res) => res.data.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setYear(data)
+    }
+  }, [data])
+  return { year, loading }
 }

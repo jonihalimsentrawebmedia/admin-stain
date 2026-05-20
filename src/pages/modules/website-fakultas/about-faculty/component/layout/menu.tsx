@@ -27,7 +27,7 @@ const Menu = () => {
   const [data] = useState([
     {
       id: 1,
-      name: 'Tentang',
+      name: 'Gambaran Umum',
       link: `${baseUrl}`,
     },
     {

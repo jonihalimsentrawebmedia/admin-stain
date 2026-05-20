@@ -24,12 +24,14 @@ export const UseGetNews = () => {
   const limit = searchParams.get('limit') ?? '10'
   const status = searchParams.get('status')
   const category = searchParams.get('id_category')
-  const search = searchParams.get('search')
+  const search = searchParams.get('search') ?? ''
+  const year = searchParams.get('year') ?? ''
 
   const ParamsSearch = new URLSearchParams({ page, limit })
   if (status) ParamsSearch.append('status-publish', status)
   if (category) ParamsSearch.append('id-kategori-berita', category)
   if (search) ParamsSearch.append('search', search)
+  if (year) ParamsSearch.append('tahun', year)
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['list-news-unit-ppid', ParamsSearch.toString()],
@@ -107,4 +109,24 @@ export const UseGetLogNews = (id: string) => {
   }, [data])
 
   return { logData, loading }
+}
+
+export const UseGetNewsYear = () => {
+  const [year, setYear] = useState<number[]>([])
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['year-news-unit-ppid'],
+    refetchOnWindowFocus: false,
+    queryFn: () => AxiosClient.get('/unit-ppid/berita/tahun').then((res) => res.data.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setYear(data)
+    }
+  }, [data])
+
+  return { year, loading }
 }

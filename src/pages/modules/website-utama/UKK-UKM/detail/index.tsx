@@ -17,7 +17,7 @@ const DetailUkkUKMPage = () => {
   const [tabsValue, setTabsValue] = useState('about')
 
   const TabsData = [
-    { name: 'Tentang', value: 'about', element: <FormAbout detail={detail as any} /> },
+    { name: 'Gambaran Umum', value: 'about', element: <FormAbout detail={detail as any} /> },
     { name: 'Visi, Misi, & Tujuan', value: 'vision', element: <VisionMissionForm /> },
     {
       name: 'Struktur Organisasi',

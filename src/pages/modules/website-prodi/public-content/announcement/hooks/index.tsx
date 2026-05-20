@@ -7,12 +7,13 @@ import type { INewsStatus } from '@/pages/modules/website-utama/public-content/n
 import type { IPropsData } from '@/pages/modules/website-prodi/public-content/news/data/types.ts'
 
 export const UseGetProdiAnnouncement = (props?: IPropsData) => {
-  const { page, limit, status_publish } = props ?? {}
+  const { page, limit, status_publish, year } = props ?? {}
   const [prodiAnnouncement, setProdiAnnouncement] = useState<IAnnouncement[]>([])
   const [meta, setMeta] = useState<Meta>()
 
   const ParamsSearch = new URLSearchParams({ page: page ?? '1', limit: limit ?? '10' })
   if (status_publish) ParamsSearch.append('status-publish', status_publish)
+  if (year) ParamsSearch.append('tahun', year)
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['prodi-announcement', ParamsSearch.toString()],
@@ -90,4 +91,24 @@ export const UseGetLogAnnouncementProdi = (id: string) => {
   }, [data])
 
   return { logData, loading }
+}
+
+export const UseGetAnnouncementYear = () => {
+  const [year, setYear] = useState<number[]>([])
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['announcement-year'],
+    refetchOnWindowFocus: false,
+    queryFn: () => AxiosClient.get('/prodi/pengumuman/tahun').then((res) => res.data?.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setYear(data)
+    }
+  }, [data])
+
+  return { year, loading }
 }

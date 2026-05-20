@@ -1,5 +1,5 @@
 import { DraftNewsColumns } from '@/pages/modules/website-lembaga/public-content/news/components/table/draftColumns.tsx'
-import { UseGetNews } from '../../hooks/index.tsx'
+import { UseGetNews, UseGetNewsYear } from '../../hooks/index.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import useGetNewsCategory from '@/pages/modules/settings/reference/news-category/controller/useGetNewsCategory.tsx'
@@ -7,6 +7,7 @@ import useGetNewsCategory from '@/pages/modules/settings/reference/news-category
 export const DraftSectionTabs = () => {
   const columns = DraftNewsColumns()
   const { loading, meta, newsList } = UseGetNews()
+  const { year } = UseGetNewsYear()
   const { newsCategory } = useGetNewsCategory({ isGetAll: true })
 
   return (
@@ -36,6 +37,15 @@ export const DraftSectionTabs = () => {
                   value: row?.id_kategori,
                 })) ?? []
               }
+            />
+            <SelectFilter
+              selectClassName={'min-w-[8rem]'}
+              label="Tahun"
+              name={'year'}
+              options={year?.map((row) => ({
+                label: row?.toString(),
+                value: row?.toString(),
+              }))}
             />
           </div>
         }

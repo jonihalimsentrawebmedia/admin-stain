@@ -1,5 +1,5 @@
 import { DraftNewsColumns } from '@/pages/modules/website-utama/public-content/news/components/table/draftColumns.tsx'
-import { UseGetNews } from '@/pages/modules/website-utama/public-content/news/hooks'
+import { UseGetNews, UseGetNewsYear } from '@/pages/modules/website-utama/public-content/news/hooks'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import useGetNewsCategory from '@/pages/modules/settings/reference/news-category/controller/useGetNewsCategory.tsx'
@@ -8,6 +8,7 @@ export const DraftSectionTabs = () => {
   const columns = DraftNewsColumns()
   const { loading, meta, newsList } = UseGetNews()
   const { newsCategory } = useGetNewsCategory({ isGetAll: true })
+  const { year } = UseGetNewsYear()
 
   return (
     <>
@@ -36,6 +37,15 @@ export const DraftSectionTabs = () => {
                   value: row?.id_kategori,
                 })) ?? []
               }
+            />
+            <SelectFilter
+              selectClassName={'min-w-[8rem]'}
+              label="Tahun"
+              name={'year'}
+              options={year?.map((row) => ({
+                label: row?.toString(),
+                value: row?.toString(),
+              }))}
             />
           </div>
         }

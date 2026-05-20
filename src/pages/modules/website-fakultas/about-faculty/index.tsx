@@ -79,7 +79,7 @@ const AboutFacultyView = () => {
       <form onSubmit={form.handleSubmit(HandlerSave)}>
         <div className="flex flex-col gap-4">
           <div className="flex justify-between items-center">
-            <div className="text-primary text-2xl font-medium">Tentang Fakultas</div>
+            <div className="text-primary text-2xl font-medium">Gambaran Umum Fakultas</div>
             <div className="flex gap-4 items-center">
               <ButtonGoToGuide titleGuide={'Tentang Fakultas'} valueGuide="FAKULTAS_TENTANG" />
 
@@ -108,7 +108,7 @@ const AboutFacultyView = () => {
               )}
             </div>
           </div>
-          <CardInput title="Tentang Fakultas">
+          <CardInput title="Gambaran Umum Fakultas">
             {isEditContent ? (
               <RichText form={form} name="isi_konten" label="" isRow={false} />
             ) : (
