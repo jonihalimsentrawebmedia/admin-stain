@@ -90,7 +90,7 @@ export const FormAboutProdi = () => {
       <form onSubmit={form.handleSubmit(handleSave)}>
         <div className="flex flex-col gap-4">
           <div className="flex justify-between items-center">
-            <p className="text-2xl font-medium">Tentang Prodi</p>
+            <p className="text-2xl font-medium">Gambaran Umum Prodi</p>
             <div className="flex gap-4 items-center">
               <ButtonGoToGuide titleGuide='Tentang Prodi' valueGuide="PRODI_PROFIL_TENTANG" />
               {isEditContent ? (
@@ -118,7 +118,7 @@ export const FormAboutProdi = () => {
               )}
             </div>
           </div>
-          <CardInput title="Tentang Prodi">
+          <CardInput title="Gambaran Umum Prodi">
             {isEditContent ? (
               <RichText form={form} name="isi_konten" label="" isRow={false} />
             ) : (

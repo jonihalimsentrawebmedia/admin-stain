@@ -10,7 +10,13 @@ import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/Bu
 
 const DownloadFileUNitPage = () => {
   const navigate = useNavigate()
-  const { categoryDownload, meta: metaCategory, loading: load1 } = UseGetCategoryDownloadUnit()
+
+  const {
+    categoryDownload,
+    meta: metaCategory,
+    loading: load1,
+  } = UseGetCategoryDownloadUnit({ isGetAll: true })
+
   const { downloadUnit, meta, loading: load2 } = UseGetDownloadUnit()
   const columns = DownloadFileUnitColumns()
 
@@ -19,7 +25,7 @@ const DownloadFileUNitPage = () => {
       <div className="flex flex-col gap-5">
         <ButtonTitleGroup
           buttonGroup={[
-             {
+            {
               type: 'custom',
               element: (
                 <ButtonGoToGuide

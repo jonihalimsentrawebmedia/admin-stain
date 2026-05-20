@@ -31,7 +31,10 @@ const ListBankAccount = (props: Props) => {
     setRowSelection(result)
   }, [bankAccount])
 
-  const { bankAccount: list, loading } = LinkBank()
+  const { bankAccount: list, loading } = LinkBank({
+    page: '0',
+    limit: '0',
+  })
   const columns = ColumnsBankAccount()
 
   const queryClient = useQueryClient()

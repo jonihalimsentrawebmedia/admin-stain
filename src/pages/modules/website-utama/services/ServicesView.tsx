@@ -5,22 +5,40 @@ import TableCustom from '@/components/common/table/TableCustom'
 import SelectFilter from '@/components/common/filter/SelectFilter'
 import ButtonAddServices from './components/ButtonAddServices'
 import ButtonGoToGuide from '../panduan/components/ButtonGoToGuide'
+import { Button } from '@/components/ui/button.tsx'
+import { FaListUl } from 'react-icons/fa'
+import { useNavigate } from 'react-router-dom'
 
 const ServicesView = () => {
   const { columns } = ServicesViewModel()
   const { loading, meta, serviceList } = useGetServices()
+  const navigate = useNavigate()
+
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup
         buttonGroup={[
           {
             type: 'custom',
-            element: <ButtonGoToGuide titleGuide='Layanan' valueGuide="WEBSITE_UTAMA_LAYANAN" />,
+            element: <ButtonGoToGuide titleGuide="Layanan" valueGuide="WEBSITE_UTAMA_LAYANAN" />,
           },
           {
-            label: '',
-            onClick: () => {},
-            type: 'add',
+            type: 'custom',
+            element: (
+              <Button
+                variant={'outline'}
+                className={'border-primary text-primary hover:text-primary'}
+                onClick={() => {
+                  navigate('academic-resource')
+                }}
+              >
+                <FaListUl />
+                Academic Resource
+              </Button>
+            ),
+          },
+          {
+            type: 'custom',
             element: <ButtonAddServices />,
           },
         ]}

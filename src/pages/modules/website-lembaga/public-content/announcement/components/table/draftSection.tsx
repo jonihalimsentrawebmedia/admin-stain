@@ -1,11 +1,13 @@
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { DraftAnnouncementColumns } from './draftColumns.tsx'
-import { UseGetAnnouncement } from '@/pages/modules/website-lembaga/public-content/announcement/hooks'
+import { UseGetAnnouncement, UseGetAnnouncementYear } from '../../hooks'
 
 export const DraftAnnouncementSection = () => {
   const { announcement, meta, loading } = UseGetAnnouncement()
   const columns = DraftAnnouncementColumns()
+  const { year } = UseGetAnnouncementYear()
+
   return (
     <>
       <TableCustom
@@ -22,6 +24,15 @@ export const DraftAnnouncementSection = () => {
                 { label: '50 Data', value: '50' },
                 { label: '100 Data', value: '100' },
               ]}
+            />
+            <SelectFilter
+              selectClassName={'min-w-[8rem]'}
+              label="Tahun"
+              name={'year'}
+              options={year?.map((row) => ({
+                label: row?.toString(),
+                value: row?.toString(),
+              }))}
             />
           </div>
         }

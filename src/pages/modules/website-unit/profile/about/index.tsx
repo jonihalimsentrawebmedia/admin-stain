@@ -52,11 +52,11 @@ export const AboutProfileUnit = () => {
           <Form {...form}>
             <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(handleSave)}>
               <ButtonTitleGroup
-                label={'Tentang Unit'}
+                label={'Gambaran Umum Unit'}
                 buttonGroup={[
                   {
                     type: 'custom',
-                    element: <ButtonGoToGuide titleGuide='Tentang Unit' valueGuide="PERPUSTAKAAN_PROFIL_TENTANG" />,
+                    element: <ButtonGoToGuide titleGuide='Gambaran Umum Unit' valueGuide="PERPUSTAKAAN_PROFIL_TENTANG" />,
                   },
                   { type: 'cancel', label: 'Batal', onClick: () => setIsEdit(!isEdit) },
                   {
@@ -89,11 +89,11 @@ export const AboutProfileUnit = () => {
         ) : (
           <>
             <ButtonTitleGroup
-              label={'Tentang Unit'}
+              label={'Gambaran Umum Unit'}
               buttonGroup={[
                 {
                   type: 'custom',
-                  element: <ButtonGoToGuide titleGuide='Tentang Unit' valueGuide="PERPUSTAKAAN_PROFIL_TENTANG" />,
+                  element: <ButtonGoToGuide titleGuide='Gambaran Umum Unit' valueGuide="PERPUSTAKAAN_PROFIL_TENTANG" />,
                 },
                 { label: 'Edit', type: 'edit', onClick: () => setIsEdit(!isEdit) },
               ]}

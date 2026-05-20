@@ -4,9 +4,19 @@ import { ButtonAddIndustryCategory } from '@/pages/modules/pusat-karir/reference
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsIndustryCategory } from '@/pages/modules/pusat-karir/reference/industry-category/data/columns.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
+import { useSearchParams } from 'react-router-dom'
 
 export const IndustryCategoryPage = () => {
-  const { categoryIndustry, meta, loading } = UseGetIndustryCategory()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { categoryIndustry, meta, loading } = UseGetIndustryCategory({
+    page: page,
+    limit: limit,
+    search: search,
+  })
   const columns = ColumnsIndustryCategory()
 
   return (
@@ -15,7 +25,7 @@ export const IndustryCategoryPage = () => {
         <ButtonTitleGroup
           label={'Kategori Industri'}
           buttonGroup={[
-             {
+            {
               type: 'custom',
               element: (
                 <ButtonGoToGuide

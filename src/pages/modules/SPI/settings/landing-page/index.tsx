@@ -25,9 +25,14 @@ export const LandingPageSPI = () => {
         <ButtonTitleGroup
           label={'Landing Page'}
           buttonGroup={[
-             {
+            {
               type: 'custom',
-              element: <ButtonGoToGuide titleGuide={'Landing Page'} valueGuide="SPI_PENGATURAN_LANDING_PAGE" />,
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Landing Page'}
+                  valueGuide="SPI_PENGATURAN_LANDING_PAGE"
+                />
+              ),
             },
             {
               type: 'custom',
@@ -36,7 +41,13 @@ export const LandingPageSPI = () => {
           ]}
         />
 
-        <TableCustom data={unitLanding} columns={columns} loading={loading} meta={meta} />
+        <TableCustom
+          isShowFilter={false}
+          data={unitLanding}
+          columns={columns}
+          loading={loading}
+          meta={meta}
+        />
       </div>
     </>
   )

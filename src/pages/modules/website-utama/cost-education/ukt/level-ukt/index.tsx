@@ -6,6 +6,7 @@ import { columnsLevelUkt } from '@/pages/modules/website-utama/cost-education/uk
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import UseGetEducationalLevel from '@/pages/modules/settings/reference/educational-level/controller/useGetEducationalLevel.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
+import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide'
 
 export const LevelUktPage = () => {
   const [searchParams] = useSearchParams()
@@ -31,6 +32,10 @@ export const LevelUktPage = () => {
           isBack
           label="Tingkatan UKT"
           buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide="Tingkat UKT" valueGuide="WEBSITE_UTAMA_TINGKAT_UKT" />,
+            },
             {
               type: 'custom',
               element: <ButtonAddLevelUkt select={educationalLevel} />,

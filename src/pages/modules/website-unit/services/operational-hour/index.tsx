@@ -4,9 +4,20 @@ import { OperHourColumns } from '@/pages/modules/website-unit/services/operation
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ButtonAddOperationalHour } from '@/pages/modules/website-unit/services/operational-hour/component/buttonAdd.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
+import { useSearchParams } from 'react-router-dom'
 
 export const OperationalHourPage = () => {
-  const { operationalHour, meta, loading } = UseGetOperationalHour()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { operationalHour, meta, loading } = UseGetOperationalHour({
+    page: page,
+    limit: limit,
+    search: search,
+  })
+
   const columns = OperHourColumns()
   return (
     <>

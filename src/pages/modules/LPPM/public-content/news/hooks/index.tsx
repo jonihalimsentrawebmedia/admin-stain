@@ -7,7 +7,7 @@ import type { IPropsData } from '@/pages/modules/website-prodi/public-content/ne
 import type { INewsStatus } from '@/pages/modules/website-utama/public-content/news/hooks'
 
 export const UseGetLPPMNews = (props?: IPropsData) => {
-  const { page, limit, status_publish, search } = props ?? {}
+  const { page, limit, status_publish, search, year } = props ?? {}
 
   const [lppmNews, setLppmNews] = useState<INewsDetail[]>([])
   const [meta, setMeta] = useState<Meta>()
@@ -17,6 +17,7 @@ export const UseGetLPPMNews = (props?: IPropsData) => {
   if (limit) ParamsSearch.append('limit', limit ?? '10')
   if (status_publish) ParamsSearch.append('status-publish', status_publish)
   if (search) ParamsSearch.append('search', search ?? '')
+  if (year) ParamsSearch.append('tahun', year ?? '')
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['lppm-news', ParamsSearch.toString()],
@@ -94,4 +95,24 @@ export const UseGetLogNewsLppm = (id: string) => {
   }, [data])
 
   return { logData, loading }
+}
+
+export const UseGetNewsYear = () => {
+  const [year, setYear] = useState<number[]>([])
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['news-year'],
+    refetchOnWindowFocus: false,
+    queryFn: () => AxiosClient.get('/lppm/berita/tahun').then((res) => res.data?.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setYear(data)
+    }
+  }, [data])
+
+  return { year, loading }
 }

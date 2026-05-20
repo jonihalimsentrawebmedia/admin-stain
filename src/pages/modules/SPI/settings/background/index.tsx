@@ -59,7 +59,7 @@ export const SettingsBackground = () => {
               ]}
             />
 
-            <TableCustom data={background} columns={columns} loading={loading} meta={meta} />
+            <TableCustom isShowFilter={false} data={background} columns={columns} loading={loading} meta={meta} />
           </TabsContent>
         ))}
       </Tabs>

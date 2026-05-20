@@ -2,9 +2,10 @@ export type IPropsData = {
   page?: string
   limit?: string
   status_publish: StatusPublish
-  id_satuan_organisasi?:string
-  id_kategori_berita?:string
+  id_satuan_organisasi?: string
+  id_kategori_berita?: string
   search?: string
+  year?: string
 }
 
 export type StatusPublish =

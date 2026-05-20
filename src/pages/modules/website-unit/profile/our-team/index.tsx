@@ -4,9 +4,18 @@ import { UseGetDivisionUnit } from '@/pages/modules/website-unit/profile/our-tea
 import { ColumnsOurTeams } from '@/pages/modules/website-unit/profile/our-team/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
+import { useSearchParams } from 'react-router-dom'
 
 export const OurTeamUnit = () => {
-  const { meta, loading, division } = UseGetDivisionUnit()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+  const { meta, loading, division } = UseGetDivisionUnit({
+    page: page,
+    limit: limit,
+    search: search,
+  })
   const columns = ColumnsOurTeams()
 
   return (
@@ -17,7 +26,9 @@ export const OurTeamUnit = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide titleGuide='Tim Unit' valueGuide="PERPUSTAKAAN_PROFIL_TIM" />,
+              element: (
+                <ButtonGoToGuide titleGuide="Tim Unit" valueGuide="PERPUSTAKAAN_PROFIL_TIM" />
+              ),
             },
             { type: 'custom', element: <ButtonAddOurTeam /> },
           ]}

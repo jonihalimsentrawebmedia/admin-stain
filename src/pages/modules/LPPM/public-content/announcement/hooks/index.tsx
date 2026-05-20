@@ -7,13 +7,14 @@ import type { INewsStatus } from '@/pages/modules/website-utama/public-content/n
 import type { IPropsData } from '@/pages/modules/website-prodi/public-content/news/data/types.ts'
 
 export const UseGetLppmAnnouncement = (props?: IPropsData) => {
-  const { page, limit, status_publish, search } = props ?? {}
+  const { page, limit, status_publish, search, year } = props ?? {}
   const [lppmAnnouncement, setLppmAnnouncement] = useState<IAnnouncement[]>([])
   const [meta, setMeta] = useState<Meta>()
 
   const ParamsSearch = new URLSearchParams({ page: page ?? '1', limit: limit ?? '10' })
   if (status_publish) ParamsSearch.append('status-publish', status_publish)
   if (search) ParamsSearch.append('search', search)
+  if (year) ParamsSearch.append('tahun', year)
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['lppm-announcement', ParamsSearch.toString()],
@@ -91,4 +92,24 @@ export const UseGetLogAnnouncementLppm = (id: string) => {
   }, [data])
 
   return { logData, loading }
+}
+
+export const UseGetAnnouncementYear = () => {
+  const [year, setYear] = useState<number[]>([])
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['announcement-year'],
+    refetchOnWindowFocus: false,
+    queryFn: () => AxiosClient.get('/lppm/pengumuman/tahun').then((res) => res.data?.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setYear(data)
+    }
+  }, [data])
+
+  return { year, loading }
 }

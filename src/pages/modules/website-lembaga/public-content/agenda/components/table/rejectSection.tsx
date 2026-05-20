@@ -1,11 +1,15 @@
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
-import { UseGetAgendaList } from '@/pages/modules/website-lembaga/public-content/agenda/hooks'
+import {
+  UseGetAgendaList,
+  UseGetAgendaYear,
+} from '@/pages/modules/website-lembaga/public-content/agenda/hooks'
 import { RejectColumnsAgenda } from '@/pages/modules/website-lembaga/public-content/agenda/components/table/rejectColumns.tsx'
 
 export const RejectSectionAgenda = () => {
   const { loading, meta, listAgenda } = UseGetAgendaList()
   const columns = RejectColumnsAgenda()
+  const { year } = UseGetAgendaYear()
   
   return (
     <>
@@ -23,6 +27,15 @@ export const RejectSectionAgenda = () => {
                 { label: '50 Data', value: '50' },
                 { label: '100 Data', value: '100' },
               ]}
+            />
+            <SelectFilter
+              selectClassName={'min-w-[8rem]'}
+              label="Tahun"
+              name={'year'}
+              options={year?.map((row) => ({
+                label: row?.toString(),
+                value: row?.toString(),
+              }))}
             />
           </div>
         }

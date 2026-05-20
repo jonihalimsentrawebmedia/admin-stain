@@ -3,7 +3,7 @@ const baseDomain = '/modules/website-prodi/profile'
 export const MENUPROFILE = [
   {
     id: 1,
-    name: 'Tentang',
+    name: 'Gambaran Umum',
     path: `${baseDomain}/about`,
   },
   {

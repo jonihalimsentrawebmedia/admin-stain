@@ -25,10 +25,13 @@ export const LandingPagePulsikom = () => {
         <ButtonTitleGroup
           label={'Landing Page'}
           buttonGroup={[
-              {
+            {
               type: 'custom',
               element: (
-                <ButtonGoToGuide titleGuide={'Landing Page'} valueGuide="PUSILKOM_PENGATURAN_LANDING_PAGE" />
+                <ButtonGoToGuide
+                  titleGuide={'Landing Page'}
+                  valueGuide="PUSILKOM_PENGATURAN_LANDING_PAGE"
+                />
               ),
             },
             {
@@ -38,7 +41,13 @@ export const LandingPagePulsikom = () => {
           ]}
         />
 
-        <TableCustom data={unitLanding} columns={columns} loading={loading} meta={meta} />
+        <TableCustom
+          isShowFilter={false}
+          data={unitLanding}
+          columns={columns}
+          loading={loading}
+          meta={meta}
+        />
       </div>
     </>
   )

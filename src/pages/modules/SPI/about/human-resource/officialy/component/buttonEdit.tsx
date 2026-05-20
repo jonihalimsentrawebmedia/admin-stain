@@ -27,7 +27,10 @@ export const ButtonEditOfficially = (props: Props) => {
   const [loading, setLoading] = useState(false)
 
   const { id } = useParams()
-  const { chiefOfficer } = UseGetChiefOfficerGroup()
+  const { chiefOfficer } = UseGetChiefOfficerGroup({
+    page: '0',
+    limit: '0',
+  })
   const form = useForm<OfficiallyType>({
     resolver: zodResolver(OfficiallyResolver),
   })
@@ -39,7 +42,7 @@ export const ButtonEditOfficially = (props: Props) => {
         id_kelompok: data?.id_kelompok_pimpinan,
         nama_penjabat: data?.nama_penjabat,
         jabatan: data?.jabatan,
-        nip:data?.nip
+        nip: data?.nip,
       })
     }
   }, [data])

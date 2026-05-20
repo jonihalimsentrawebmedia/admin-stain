@@ -4,9 +4,19 @@ import { UseGetAward } from './hooks/index'
 import { ColumnsAward } from './data/columns'
 import { ButtonAddAward } from '@/pages/modules/SPI/award/component/buttonAdd.tsx'
 import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
+import { useSearchParams } from 'react-router-dom'
 
 export const AwardListPage = () => {
-  const { award, meta, loading } = UseGetAward()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { award, meta, loading } = UseGetAward({
+    page,
+    limit,
+    search,
+  })
   const columns = ColumnsAward()
   return (
     <>
@@ -14,14 +24,9 @@ export const AwardListPage = () => {
         <ButtonTitleGroup
           label={'Penghargaan'}
           buttonGroup={[
-             {
+            {
               type: 'custom',
-              element: (
-                <ButtonGoToGuide
-                  titleGuide={'Penghargaan'}
-                  valueGuide="SPI_PENGHARGAAN"
-                />
-              ),
+              element: <ButtonGoToGuide titleGuide={'Penghargaan'} valueGuide="SPI_PENGHARGAAN" />,
             },
             {
               type: 'custom',

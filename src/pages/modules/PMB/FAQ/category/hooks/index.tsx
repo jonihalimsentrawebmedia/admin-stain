@@ -4,8 +4,9 @@ import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import { useSearchParams } from 'react-router-dom'
 import type { ICategoryFAQ } from '@/pages/modules/website-utama/pertayaan/Faq/Category/data/type.ts'
+import type { BasicProps } from '@/utils/globalType.ts'
 
-interface props {
+interface props extends BasicProps {
   isGetAll?: boolean
 }
 
@@ -18,13 +19,16 @@ export const UseGetFaqCategoryPMB = (props?: props) => {
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
 
   let ParamsSearch: URLSearchParams
 
   if (isGetAll) {
     ParamsSearch = new URLSearchParams({ page: '1', limit: '99999' })
+    if (search) ParamsSearch.append('search', search)
   } else {
     ParamsSearch = new URLSearchParams({ page, limit })
+    if (search) ParamsSearch.append('search', search)
   }
 
   const { data, isLoading, isFetching } = useQuery({

@@ -5,6 +5,7 @@ export type IPropsData = {
   id_satuan_organisasi?: string
   id_kategori_berita?: string
   search?: string
+  year?: string
 }
 
 export type StatusPublish =

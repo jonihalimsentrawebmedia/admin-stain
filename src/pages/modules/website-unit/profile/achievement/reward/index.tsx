@@ -1,6 +1,6 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { UseGetAchievementDetail } from '@/pages/modules/website-unit/profile/achievement/hooks'
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { ButtonAddReward } from '@/pages/modules/website-unit/profile/achievement/reward/component/buttonAdd.tsx'
 import { UseGetReward } from '@/pages/modules/website-unit/profile/achievement/reward/hooks'
 import { ColumnsRewardAchievement } from '@/pages/modules/website-unit/profile/achievement/reward/data/columns.tsx'
@@ -9,8 +9,18 @@ import TableCustom from '@/components/common/table/TableCustom.tsx'
 
 export const RewardAchievement = () => {
   const { id } = useParams()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
   const { achievement } = UseGetAchievementDetail(id ?? '')
-  const { reward, meta, loading } = UseGetReward(id ?? '')
+  const { reward, meta, loading } = UseGetReward({
+    id: id as string,
+    limit,
+    page,
+    search,
+  })
   const columns = ColumnsRewardAchievement(achievement as IAchievementCategory)
 
   return (

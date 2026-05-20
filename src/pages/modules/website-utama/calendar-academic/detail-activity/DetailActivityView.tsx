@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom'
 
 const DetailActivityView = () => {
   const { field, form, columns, activity } = DetailActivityViewModel()
-  const { academicActivityDetailList, loading } = useGetActivityDetailList()
+  const { academicActivityDetailList, loading, meta } = useGetActivityDetailList()
 
   const { idAcademicYear } = useParams()
   const link = `/modules/website-utama/calendar-academic/${idAcademicYear}`
@@ -32,17 +32,13 @@ const DetailActivityView = () => {
       <CardInput title="Informasi Kalender Akademik">
         <DetailField data={field} form={form} />
       </CardInput>
-      {academicActivityDetailList.length == 0 ? (
-        <p className="text-red-500 italic">Belum ada kegiatan</p>
-      ) : (
-        <TableCustom
-          columns={columns}
-          data={academicActivityDetailList}
-          loading={loading}
-          isShowFilter={false}
-          isShowPagination={false}
-        />
-      )}
+
+      <TableCustom
+        columns={columns}
+        data={academicActivityDetailList}
+        loading={loading}
+        meta={meta}
+      />
     </div>
   )
 }

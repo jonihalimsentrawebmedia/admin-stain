@@ -15,10 +15,12 @@ export const UseGetAgendaList = () => {
   const limit = searchParams.get('limit') ?? '10'
   const search = searchParams.get('search')
   const status = searchParams.get('status')
+  const year = searchParams.get('year') ?? ''
 
   const ParamsSearch = new URLSearchParams({ page, limit })
   if (search) ParamsSearch.append('search', search)
   if (status) ParamsSearch.append('status-publish', status)
+  if (year) ParamsSearch.append('tahun', year)
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['list-agenda', ParamsSearch.toString()],
@@ -116,4 +118,24 @@ export const UseGetAgendaBackground = () => {
   }, [data])
 
   return { background, loading }
+}
+
+export const UseGetAgendaYear = () => {
+  const [year, setYear] = useState<number[]>([])
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['year-agenda'],
+    refetchOnWindowFocus: false,
+    queryFn: () => AxiosClient.get(`/website-utama/agenda/tahun`).then((res) => res.data.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setYear(data)
+    }
+  }, [data])
+
+  return { year, loading }
 }

@@ -72,7 +72,7 @@ const AboutProgramStudiView = (props?: props) => {
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-4">
           <div className="flex justify-between items-center">
-            <div className="text-primary text-2xl font-medium">Tentang {title}</div>
+            <div className="text-primary text-2xl font-medium">Gambaran Umum {title}</div>
             <div className="flex gap-4 items-center">
               <ButtonGoToGuide
                 titleGuide="Tentang"
@@ -103,7 +103,7 @@ const AboutProgramStudiView = (props?: props) => {
               )}
             </div>
           </div>
-          <CardInput title={`Tentang ${title}`}>
+          <CardInput title={`Gambaran Umum ${title}`}>
             {isEditContent ? (
               <RichText form={form} name="isi_konten" label="" isRow={false} />
             ) : (

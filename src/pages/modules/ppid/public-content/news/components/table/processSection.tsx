@@ -1,4 +1,4 @@
-import { UseGetNews } from '../../hooks/index'
+import { UseGetNews, UseGetNewsYear } from '../../hooks/index'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import useGetNewsCategory from '@/pages/modules/settings/reference/news-category/controller/useGetNewsCategory.tsx'
@@ -6,6 +6,7 @@ import { ProcessColumns } from '@/pages/modules/website-lembaga/public-content/n
 
 export const ProcessSection = () => {
   const columns = ProcessColumns()
+  const { year } = UseGetNewsYear()
   const { loading, meta, newsList } = UseGetNews()
   const { newsCategory } = useGetNewsCategory({ isGetAll: true })
 
@@ -36,6 +37,15 @@ export const ProcessSection = () => {
                   value: row?.id_kategori,
                 })) ?? []
               }
+            />
+            <SelectFilter
+              selectClassName={'min-w-[8rem]'}
+              label="Tahun"
+              name={'year'}
+              options={year?.map((row) => ({
+                label: row?.toString(),
+                value: row?.toString(),
+              }))}
             />
           </div>
         }

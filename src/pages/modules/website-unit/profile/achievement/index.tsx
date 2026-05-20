@@ -3,9 +3,19 @@ import { UseGetCategoryAchievement } from '@/pages/modules/website-unit/profile/
 import { CategoryAchievementColumns } from '@/pages/modules/website-unit/profile/achievement/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
+import { useSearchParams } from 'react-router-dom'
 
 export const AchievementUnitPage = () => {
-  const { meta, categoryAchievement, loading } = UseGetCategoryAchievement()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { meta, categoryAchievement, loading } = UseGetCategoryAchievement({
+    page: page,
+    limit: limit,
+    search: search,
+  })
   const columns = CategoryAchievementColumns()
   return (
     <>
@@ -15,7 +25,12 @@ export const AchievementUnitPage = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide titleGuide='Penghargaan Unit' valueGuide="PERPUSTAKAAN_PROFIL_PENGHARGAAN" />,
+              element: (
+                <ButtonGoToGuide
+                  titleGuide="Penghargaan Unit"
+                  valueGuide="PERPUSTAKAAN_PROFIL_PENGHARGAAN"
+                />
+              ),
             },
           ]}
         />

@@ -11,15 +11,24 @@ import type {
   ITypeCollaboration,
   PropsAction,
 } from '../data/types.ts'
+import type { BasicProps } from '@/utils/globalType.ts'
 
-export const UseGetUnitCollaboration = () => {
+export const UseGetUnitCollaboration = (props: BasicProps) => {
+  const { page, limit, search } = props ?? {}
+
   const [unitCollaboration, setUnitCollaboration] = useState<ICollaborationList[]>([])
   const [meta, setMeta] = useState<Meta>()
 
+  const ParamsSearch = new URLSearchParams()
+  if (page) ParamsSearch.append('page', page.toString() ?? '1')
+  if (limit) ParamsSearch.append('limit', limit.toString() ?? '10')
+  if (search) ParamsSearch.append('search', search ?? '')
+
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['unit-collaboration'],
+    queryKey: ['unit-collaboration', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get('/unit/profil/kerjasama').then((res) => res.data),
+    queryFn: () =>
+      AxiosClient.get(`/unit/profil/kerjasama?${ParamsSearch}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching

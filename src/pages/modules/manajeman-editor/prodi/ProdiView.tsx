@@ -21,6 +21,7 @@ const ProdiView = () => {
         buttonGroup={[
           {
             type: 'custom',
+            
             element: <SubmissionButton kelompok="PRODI" />,
           },
         ]}

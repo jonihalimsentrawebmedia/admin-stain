@@ -5,9 +5,19 @@ import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { UseGetSessionUnit } from '@/pages/modules/website-unit/hooks'
 import { ButtonAddCategoryService } from '@/pages/modules/website-unit/services/category/component/buttonAdd.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
+import { useSearchParams } from 'react-router-dom'
 
 export const ServicesList = () => {
-  const { listServices, loading, meta } = UseGetListServices()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { listServices, loading, meta } = UseGetListServices({
+    page: page,
+    limit: limit,
+    search: search,
+  })
   const { session } = UseGetSessionUnit()
   const columns = CategoryServiceColumns(session)
 
@@ -19,7 +29,9 @@ export const ServicesList = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide titleGuide='Daftar Layanan' valueGuide="PERPUSTAKAAN_LAYANAN" />,
+              element: (
+                <ButtonGoToGuide titleGuide="Daftar Layanan" valueGuide="PERPUSTAKAAN_LAYANAN" />
+              ),
             },
             {
               type: 'custom',

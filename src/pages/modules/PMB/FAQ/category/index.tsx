@@ -5,9 +5,19 @@ import { UseGetFaqCategoryPMB } from './hooks/index'
 import { ColumnsCategoryFAQUnit } from './data/columns'
 import { ButtonAddCategoryFAQPMB } from './components/buttonAdd.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
+import { useSearchParams } from 'react-router-dom'
 
 export const CategoryFAQPMBPage = () => {
-  const { loading, categoryFaq, meta } = UseGetFaqCategoryPMB()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { loading, categoryFaq, meta } = UseGetFaqCategoryPMB({
+    page,
+    limit,
+    search,
+  })
   const columns = ColumnsCategoryFAQUnit()
 
   return (

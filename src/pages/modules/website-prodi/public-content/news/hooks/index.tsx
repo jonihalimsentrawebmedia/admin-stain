@@ -7,7 +7,7 @@ import type { IPropsData } from '@/pages/modules/website-prodi/public-content/ne
 import type { INewsStatus } from '@/pages/modules/website-utama/public-content/news/hooks'
 
 export const UseGetProdiNews = (props?: IPropsData) => {
-  const { page, limit, status_publish } = props ?? {}
+  const { page, limit, status_publish, year } = props ?? {}
 
   const [prodiNews, setProdiNews] = useState<INewsDetail[]>([])
   const [meta, setMeta] = useState<Meta>()
@@ -16,6 +16,7 @@ export const UseGetProdiNews = (props?: IPropsData) => {
   if (page) ParamsSearch.append('page', page ?? '1')
   if (limit) ParamsSearch.append('limit', limit ?? '10')
   if (status_publish) ParamsSearch.append('status-publish', status_publish)
+  if (year) ParamsSearch.append('tahun', year)
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['prodi-news', ParamsSearch.toString()],
@@ -77,20 +78,40 @@ export const UseGetProdiNewsStatus = () => {
 
 export const UseGetLogNewsProdi = (id: string) => {
   const [logData, setLogData] = useState<any[]>([])
-  
+
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['log-berita', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/prodi/berita-log/${id}`).then((res) => res.data.data),
   })
-  
+
   const loading = isLoading || isFetching
-  
+
   useEffect(() => {
     if (data) {
       setLogData(data)
     }
   }, [data])
-  
+
   return { logData, loading }
+}
+
+export const UseGetNewsYear = () => {
+  const [year, setYear] = useState<number[]>([])
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['news-year'],
+    refetchOnWindowFocus: false,
+    queryFn: () => AxiosClient.get('/prodi/berita/tahun').then((res) => res.data?.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setYear(data)
+    }
+  }, [data])
+
+  return { year, loading }
 }

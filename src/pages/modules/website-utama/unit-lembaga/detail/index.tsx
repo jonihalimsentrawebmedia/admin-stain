@@ -17,7 +17,7 @@ const DetailUnitInstitution = () => {
   const [tabsValue, setTabsValue] = useState('about')
 
   const TabsData = [
-    { name: 'Tentang', value: 'about', element: <FormAbout detail={detail} /> },
+    { name: 'Gambaran Umum', value: 'about', element: <FormAbout detail={detail} /> },
     { name: 'Visi, Misi, & Tujuan', value: 'vision', element: <VisionMissionForm /> },
     {
       name: 'Struktur Organisasi',

@@ -5,9 +5,19 @@ import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsService } from '@/pages/modules/pusat-karir/service/Footer/data/columns.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
+import { useSearchParams } from 'react-router-dom'
 
 export const FooterServicePage = () => {
-  const { service, meta, loading } = UseGetFooterService()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { service, meta, loading } = UseGetFooterService({
+    page,
+    limit,
+    search,
+  })
   const columns = ColumnsService()
 
   return (
