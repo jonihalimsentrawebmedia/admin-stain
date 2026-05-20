@@ -7,12 +7,14 @@ import AxiosClient from '@/provider/axios.tsx'
 import type { INewsStatus } from '@/pages/modules/website-utama/public-content/news/hooks'
 
 export const UseGetAgenda = (props: IPropsData) => {
-  const { page, limit, status_publish } = props
+  const { page, limit, status_publish, search, year } = props
   const [agendaUnit, setAgendaUnit] = useState<IAgendaDetail[]>([])
   const [meta, setMeta] = useState<Meta>()
 
   const ParamsSearch = new URLSearchParams({ page: page ?? '1', limit: limit ?? '10' })
   if (status_publish) ParamsSearch.append('status-publish', status_publish)
+  if (search) ParamsSearch.append('search', search)
+  if (year) ParamsSearch.append('tahun', year)
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['agenda-spi', ParamsSearch.toString()],
@@ -90,4 +92,24 @@ export const UseGetLogAgenda = (id: string) => {
   }, [data])
 
   return { logData, loading }
+}
+
+export const UseGetAgendaYear = () => {
+  const [year, setYear] = useState<number[]>([])
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['agenda-spi-year'],
+    refetchOnWindowFocus: false,
+    queryFn: () => AxiosClient.get('/spi/agenda/tahun').then((res) => res.data?.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setYear(data)
+    }
+  }, [data])
+
+  return { year, loading }
 }

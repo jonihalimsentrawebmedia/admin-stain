@@ -7,7 +7,7 @@ import type { IPropsData } from '../data/types'
 import type { INewsStatus } from '@/pages/modules/website-utama/public-content/news/hooks'
 
 export const UseGetFacultyNews = (props?: IPropsData) => {
-  const { page, limit, status_publish } = props ?? {}
+  const { page, limit, status_publish, search, year } = props ?? {}
 
   const [unitNews, setUnitNews] = useState<INewsDetail[]>([])
   const [meta, setMeta] = useState<Meta>()
@@ -16,6 +16,8 @@ export const UseGetFacultyNews = (props?: IPropsData) => {
   if (page) ParamsSearch.append('page', page ?? '1')
   if (limit) ParamsSearch.append('limit', limit ?? '10')
   if (status_publish) ParamsSearch.append('status-publish', status_publish)
+  if (search) ParamsSearch.append('search', search)
+  if (year) ParamsSearch.append('tahun', year)
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['faculty-news', ParamsSearch.toString()],
@@ -93,4 +95,24 @@ export const UseGetLogNewsFaculty = (id: string) => {
   }, [data])
 
   return { logData, loading }
+}
+
+export const UseGetNewsYear = () => {
+  const [year, setYear] = useState<number[]>([])
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['news-year'],
+    refetchOnWindowFocus: false,
+    queryFn: () => AxiosClient.get('/fakultas/berita/tahun').then((res) => res.data.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setYear(data)
+    }
+  }, [data])
+
+  return { year, loading }
 }
