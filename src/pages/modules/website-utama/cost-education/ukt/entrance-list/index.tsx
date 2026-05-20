@@ -4,6 +4,7 @@ import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { UseGetEntrance } from '@/pages/modules/website-utama/cost-education/ukt/entrance-list/hooks'
 import { ColumnsEntranceUkt } from '@/pages/modules/website-utama/cost-education/ukt/entrance-list/data/columns.tsx'
 import { ButtonAddEntranceUkt } from '@/pages/modules/website-utama/cost-education/ukt/entrance-list/component/buttonAdd.tsx'
+import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide'
 
 export const EntranceListUktPage = () => {
   const [searchParams] = useSearchParams()
@@ -24,6 +25,10 @@ export const EntranceListUktPage = () => {
           isBack
           label="Jalur Masuk UKT"
           buttonGroup={[
+             {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide="Jalur Masuk UKT" valueGuide="WEBSITE_UTAMA_JALUT_MASUK_UKT" />,
+            },
             {
               type: 'custom',
               element: <ButtonAddEntranceUkt />,

@@ -5,6 +5,7 @@ import { useSearchParams } from 'react-router-dom'
 import { UseGetTariffType } from './hooks'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsTariffType } from './data/columns.tsx'
+import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide.tsx'
 
 export const TariffTypePage = () => {
   const { educationalLevel } = UseGetEducationalLevel({ isGetAll: true })
@@ -32,6 +33,12 @@ export const TariffTypePage = () => {
           label="Jenis Tarif"
           isBack
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide titleGuide="NON - UKT - Jenis Tarif" valueGuide="WEBSITE_UTAMA_NON_UKT_JENIS_TARIF" />
+              ),
+            },
             {
               type: 'custom',
               element: <ButtonAddTariffType select={educationalLevel} />,

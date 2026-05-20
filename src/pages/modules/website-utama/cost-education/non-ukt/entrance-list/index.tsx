@@ -4,6 +4,7 @@ import { UseGetEntranceNonUkt } from './hooks/index.tsx'
 import { ColumnsEntranceNonUkt } from './data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ButtonAddEntranceNonUkt } from './component/buttonAdd.tsx'
+import ButtonGoToGuide from '../../../panduan/components/ButtonGoToGuide.tsx'
 
 export const EntranceListNonUktPage = () => {
   const [searchParams] = useSearchParams()
@@ -24,6 +25,15 @@ export const EntranceListNonUktPage = () => {
           isBack
           label="Jalur Masuk UKT"
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide="NON - UKT - Jalur Masuk"
+                  valueGuide="WEBSITE_UTAMA_NON_UKT_JALUR_MASUK"
+                />
+              ),
+            },
             {
               type: 'custom',
               element: <ButtonAddEntranceNonUkt />,

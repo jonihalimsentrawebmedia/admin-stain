@@ -11,6 +11,7 @@ import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import { UseGetEntrance } from '@/pages/modules/website-utama/cost-education/ukt/entrance-list/hooks'
 import { SwitchStatus } from '@/pages/modules/website-utama/cost-education/ukt/component/switchStatus.tsx'
 import { IoMdImage } from 'react-icons/io'
+import ButtonGoToGuide from '../../panduan/components/ButtonGoToGuide'
 
 export const UKTCostEducationPage = () => {
   const navigate = useNavigate()
@@ -54,6 +55,10 @@ export const UKTCostEducationPage = () => {
         <ButtonTitleGroup
           label="UKT"
           buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide="UKT" valueGuide="WEBSITE_UTAMA_UKT" />,
+            },
             {
               type: 'custom',
               element: (

@@ -12,6 +12,7 @@ import { UseGetCostEducationNonUkt } from '@/pages/modules/website-utama/cost-ed
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsEducationNonUkt } from '@/pages/modules/website-utama/cost-education/non-ukt/data/columns.tsx'
 import { IoMdImage } from 'react-icons/io'
+import ButtonGoToGuide from '../../panduan/components/ButtonGoToGuide'
 
 export const NonUKTCostEducationPage = () => {
   const navigate = useNavigate()
@@ -62,6 +63,12 @@ export const NonUKTCostEducationPage = () => {
         <ButtonTitleGroup
           label="NON - UKT"
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide titleGuide="NON - UKT" valueGuide="WEBSITE_UTAMA_NON_UKT" />
+              ),
+            },
             {
               type: 'custom',
               element: (
