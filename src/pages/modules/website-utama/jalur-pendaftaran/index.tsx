@@ -2,11 +2,20 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { UseGetRegisterPath } from '@/pages/modules/website-utama/jalur-pendaftaran/hooks'
 import { ColumnsRegistrationPath } from '@/pages/modules/website-utama/jalur-pendaftaran/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import ButtonGoToGuide from '../panduan/components/ButtonGoToGuide'
 
 export const RegistrationPathPage = () => {
-  const { loading, registerPath, meta } = UseGetRegisterPath()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { loading, registerPath, meta } = UseGetRegisterPath({
+    page: page,
+    limit: limit,
+    search: search,
+  })
   const coloumns = ColumnsRegistrationPath()
   const navigate = useNavigate()
 

@@ -31,7 +31,10 @@ const ListBankAccount = (props: Props) => {
     setRowSelection(result)
   }, [bankAccount])
 
-  const { bankAccount: list, loading } = LinkBank()
+  const { bankAccount: list, loading } = LinkBank({
+    page: '0',
+    limit: '0',
+  })
   const columns = ColumnsBankAccount()
 
   const HandleSave = async () => {
@@ -69,14 +72,14 @@ const ListBankAccount = (props: Props) => {
 
   return (
     <>
-     <div className="flex gap-4 justify-between items-center">
-           <p className="text-xl font-semibold text-primary pb-2.5">5. Rekening Penerimaan</p>
-            <ButtonGoToGuide
-              titleGuide={`5. Rekening Penerimaan`}
-              valueGuide="PUSILKOM_TRAINING_DAFTAR_TRAINING_FORM_REKENING_PENDAFTARAN"
-            />
-          </div>
-    
+      <div className="flex gap-4 justify-between items-center">
+        <p className="text-xl font-semibold text-primary pb-2.5">5. Rekening Penerimaan</p>
+        <ButtonGoToGuide
+          titleGuide={`5. Rekening Penerimaan`}
+          valueGuide="PUSILKOM_TRAINING_DAFTAR_TRAINING_FORM_REKENING_PENDAFTARAN"
+        />
+      </div>
+
       <TableBasicBank
         className={'pb-2.5'}
         columns={columns as any}

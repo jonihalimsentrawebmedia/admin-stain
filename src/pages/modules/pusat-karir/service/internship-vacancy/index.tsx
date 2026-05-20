@@ -4,9 +4,18 @@ import { UseGetListInternshipVacancy } from './hooks/index'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsInternship } from './data/columns'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
+import { useSearchParams } from 'react-router-dom'
 
 export const ServiceInternshipVacancy = () => {
-  const { internshipVacancy, meta, loading } = UseGetListInternshipVacancy()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+  const { internshipVacancy, meta, loading } = UseGetListInternshipVacancy({
+    page,
+    limit,
+    search,
+  })
 
   const columns = ColumnsInternship()
 
@@ -16,7 +25,7 @@ export const ServiceInternshipVacancy = () => {
         <ButtonTitleGroup
           label={'Lowongan Magang'}
           buttonGroup={[
-              {
+            {
               type: 'custom',
               element: (
                 <ButtonGoToGuide

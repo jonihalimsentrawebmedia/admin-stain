@@ -4,9 +4,19 @@ import { ColumnsExternalPortal } from '@/pages/modules/SPI/external-portal/data/
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ButtonAddPortal } from '@/pages/modules/SPI/external-portal/component/buttonAdd.tsx'
 import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
+import { useSearchParams } from 'react-router-dom'
 
 export const ExternalPortalPage = () => {
-  const { portal, loading, meta } = UseGetPortal()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { portal, loading, meta } = UseGetPortal({
+    page,
+    limit,
+    search,
+  })
   const columns = ColumnsExternalPortal()
   return (
     <>
@@ -16,7 +26,12 @@ export const ExternalPortalPage = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide titleGuide={'Portal Eksternal'} valueGuide="SPI_PORTAL_EKSTERNAL" />,
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={'Portal Eksternal'}
+                  valueGuide="SPI_PORTAL_EKSTERNAL"
+                />
+              ),
             },
             { type: 'custom', element: <ButtonAddPortal /> },
           ]}

@@ -4,9 +4,19 @@ import { ButtonAddRegulation } from '@/pages/modules/SPI/regulation/component/bu
 import { ColumnsRegulation } from '@/pages/modules/SPI/regulation/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
+import { useSearchParams } from 'react-router-dom'
 
 export const RegulationPage = () => {
-  const { regulation, meta, loading } = UseGetRegulation()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { regulation, meta, loading } = UseGetRegulation({
+    page,
+    limit,
+    search,
+  })
   const columns = ColumnsRegulation()
   return (
     <>
@@ -14,14 +24,9 @@ export const RegulationPage = () => {
         <ButtonTitleGroup
           label={'Peraturan'}
           buttonGroup={[
-             {
+            {
               type: 'custom',
-              element: (
-                <ButtonGoToGuide
-                  titleGuide={'Peraturan'}
-                  valueGuide="SPI_PERATURAN"
-                />
-              ),
+              element: <ButtonGoToGuide titleGuide={'Peraturan'} valueGuide="SPI_PERATURAN" />,
             },
             {
               type: 'custom',

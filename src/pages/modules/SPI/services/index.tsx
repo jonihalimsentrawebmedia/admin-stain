@@ -1,12 +1,21 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { UseGetServices } from './hooks/index'
 import { ColumnsService } from './data/columns'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
 
 export const ServicesSPI = () => {
-  const { service, meta, loading } = UseGetServices()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { service, meta, loading } = UseGetServices({
+    page,
+    limit,
+    search,
+  })
   const columns = ColumnsService()
   const navigate = useNavigate()
 
@@ -16,15 +25,10 @@ export const ServicesSPI = () => {
         <ButtonTitleGroup
           label={'Layanan'}
           buttonGroup={[
-             {
-                  type: 'custom',
-                  element: (
-                    <ButtonGoToGuide
-                      titleGuide={'Layanan'}
-                      valueGuide="SPI_LAYANAN"
-                    />
-                  ),
-                },
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide={'Layanan'} valueGuide="SPI_LAYANAN" />,
+            },
             {
               type: 'add',
               label: 'Tambah Layanan',

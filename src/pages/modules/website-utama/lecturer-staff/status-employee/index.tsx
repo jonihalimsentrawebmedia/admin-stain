@@ -4,9 +4,19 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import ButtonAddEmployeeStatus from '@/pages/modules/website-utama/lecturer-staff/status-employee/component/buttonAdd.tsx'
 import ButtonGoToGuide from '../../panduan/components/ButtonGoToGuide'
+import { useSearchParams } from 'react-router-dom'
 
 const StatusEmployeePage = () => {
-  const { status, meta, loading } = UseGetStatusEmployee()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { status, meta, loading } = UseGetStatusEmployee({
+    page: page,
+    limit: limit,
+    search: search,
+  })
   const coloumns = ColumnsEmployee()
 
   return (
@@ -16,7 +26,12 @@ const StatusEmployeePage = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide titleGuide='Status Karyawan' valueGuide="WEBSITE_UTAMA_DOSEN_STAFF_STATUS" />,
+              element: (
+                <ButtonGoToGuide
+                  titleGuide="Status Karyawan"
+                  valueGuide="WEBSITE_UTAMA_DOSEN_STAFF_STATUS"
+                />
+              ),
             },
             { type: 'custom', element: <ButtonAddEmployeeStatus /> },
           ]}

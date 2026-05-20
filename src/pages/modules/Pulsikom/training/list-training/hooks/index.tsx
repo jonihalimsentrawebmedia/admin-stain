@@ -11,6 +11,7 @@ import type {
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import type { IBankAccount } from '@/pages/modules/Pulsikom/reference/bank-account/data/types.ts'
 import type { TrainingDetailData } from '@/pages/modules/Pulsikom/training/list-training/data/fullDetail.ts'
+import type { BasicProps } from '@/utils/globalType.ts'
 
 export interface IstatusTraining {
   is_informasi_pendaftaran: boolean
@@ -21,18 +22,21 @@ export interface IstatusTraining {
   is_kontak_catatan_tambahan: boolean
 }
 
-interface Props {
+interface Props extends BasicProps {
   status: 'DRAFT' | 'DITERBITKAN' | 'DITUTUP'
 }
 
 export const UseGetListTraining = (props: Props) => {
-  const { status } = props
+  const { status, search, page, limit } = props
 
   const [listTraining, setListTraining] = useState<ITrainingList[]>([])
   const [meta, setMeta] = useState<Meta>()
 
   const ParamsSearch = new URLSearchParams()
   if (status) ParamsSearch.append('status', status)
+  if (page) ParamsSearch.append('page', page ?? '1')
+  if (limit) ParamsSearch.append('limit', limit ?? '10')
+  if (search) ParamsSearch.append('search', search ?? '')
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['list-training', ParamsSearch.toString()],

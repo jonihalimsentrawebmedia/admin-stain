@@ -1,5 +1,5 @@
 import { UseGetChiefOfficerDetail } from './../hooks/index'
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { UseGetOfficially } from './hooks/index'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
@@ -9,9 +9,17 @@ import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/Bu
 
 export const OfficiallyDataSPI = () => {
   const { id } = useParams()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
   const { detail } = UseGetChiefOfficerDetail((id as string) ?? '')
   const { officially, loading, meta } = UseGetOfficially({
     id_group: (id as string) ?? '',
+    page,
+    limit,
+    search,
   })
   const columns = ColumnsOfficially()
 

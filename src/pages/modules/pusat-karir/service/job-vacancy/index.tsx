@@ -5,9 +5,21 @@ import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsJobVacancy } from '@/pages/modules/pusat-karir/service/job-vacancy/data/columns.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
+import { useSearchParams } from 'react-router-dom'
 
 export const ServiceJobVacancy = () => {
-  const { jobVacancy, meta, loading } = UseGetListJobVacancy()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+  const type = searchParams.get('type') ?? ''
+
+  const { jobVacancy, meta, loading } = UseGetListJobVacancy({
+    page,
+    limit,
+    search,
+    jenis_pekerjaan: type as 'FULLTIME',
+  })
 
   const columns = ColumnsJobVacancy()
 
