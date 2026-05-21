@@ -9,7 +9,7 @@ import {
   ResolverCompanyLegal,
   type TypeCompanyLegal,
 } from '@/pages/modules/pusat-karir/management-user/list-user/Partnership/update/form/resolver.tsx'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { UseGetCompanyLegality } from '@/pages/modules/pusat-karir/management-user/list-user/Partnership/hooks'
 import { toast } from 'react-toastify'
 import { TitleLine } from '@/pages/modules/pusat-karir/component/common/titleLine.tsx'
@@ -26,6 +26,7 @@ export const FormLegality = (props: Props) => {
   const { setValue } = props
 
   const { id } = useParams()
+  const navigate = useNavigate()
   const form = useForm<TypeCompanyLegal>({
     resolver: zodResolver(ResolverCompanyLegal),
   })
@@ -65,7 +66,6 @@ export const FormLegality = (props: Props) => {
     <>
       <Form {...form}>
         <form className={'flex flex-col gap-4 w-full'} onSubmit={form.handleSubmit(HandleSave)}>
-
           <ButtonTitleGroup
             label={'Edit User - Mitra Kerja'}
             buttonGroup={[
@@ -78,7 +78,8 @@ export const FormLegality = (props: Props) => {
                     onClick={(e) => {
                       e.preventDefault()
                       const data = form.getValues()
-                      toast.info('Coming Soon...')
+                      HandleSave(data)
+                      navigate('/modules/pusat-karir/management-user/user')
                     }}
                   >
                     Simpan & Keluar

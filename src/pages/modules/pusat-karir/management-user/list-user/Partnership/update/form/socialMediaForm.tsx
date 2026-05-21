@@ -27,6 +27,7 @@ export const FormSocialMedia = (props: Props) => {
 
   const [loading, setLoading] = useState(false)
   const [open, setOpen] = useState(false)
+  const navigate = useNavigate()
 
   const form = useForm<TypeCompanySocialMedia>({
     resolver: zodResolver(ResolverCompanySocialMedia),
@@ -34,8 +35,6 @@ export const FormSocialMedia = (props: Props) => {
 
   const { id } = useParams()
   const { mediaSocial } = UseGetCompanyMediaSocial((id as string) ?? '')
-
-  const navigate = useNavigate()
 
   useEffect(() => {
     if (mediaSocial) {
@@ -82,7 +81,8 @@ export const FormSocialMedia = (props: Props) => {
                     onClick={(e) => {
                       e.preventDefault()
                       const data = form.getValues()
-                      toast.info('Coming Soon...')
+                      HandleSave(data)
+                      navigate('/modules/pusat-karir/management-user/user')
                     }}
                   >
                     Simpan & Keluar
