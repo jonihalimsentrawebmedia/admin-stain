@@ -37,7 +37,6 @@ export const ButtonPublishAgain = (props: Props) => {
       value
     )
       .then((res) => {
-        console.log(res)
         if (res.data.status) {
           queryClient.invalidateQueries({
             queryKey: ['survey'],
@@ -55,7 +54,6 @@ export const ButtonPublishAgain = (props: Props) => {
   }
 
   const Time = differenceInCalendarDays(new Date(), new Date(data.tanggal_mulai))
-  console.log(Time)
 
   return (
     <>

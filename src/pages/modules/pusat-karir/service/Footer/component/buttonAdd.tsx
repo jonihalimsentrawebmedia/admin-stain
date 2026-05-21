@@ -19,7 +19,6 @@ export const ButtonAddFooterService = () => {
 
   const queryClient = useQueryClient()
 
-  console.log(form.formState.errors)
 
   const HandleSave = async (value: FooterServiceType) => {
     setLoading(true)

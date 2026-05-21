@@ -19,7 +19,6 @@ const ButtonSyncLecturerFCM = (props: Props) => {
       topik: 'fcm_sync_sdm_dosen',
     })
       .then(async (res) => {
-        console.log(res)
         if (res.status == 200) {
           await AxiosClient.post(
             `/fakultas/satuan-organisasi/${data?.id_satuan_organisasi}/dosen/sync`

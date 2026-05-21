@@ -24,7 +24,6 @@ const ButtonEdit = ({ data: dataProps }: Props) => {
     resolver: zodResolver(LandingPageInstutationResolver),
   })
 
-  console.log(dataProps)
 
   const [loading, setLoading] = useState(false)
 

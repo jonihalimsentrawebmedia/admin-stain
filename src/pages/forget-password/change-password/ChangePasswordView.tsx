@@ -13,7 +13,6 @@ const ChangePasswordView = () => {
   const { form, getClass, handleSave, loading, validations, isDisabled } =
     ChangePasswordViewModel();
   
-  console.log(form.formState.errors)
   return (
     <div
       style={{

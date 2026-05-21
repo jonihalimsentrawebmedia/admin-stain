@@ -4,6 +4,7 @@ import { UseGetEntrance } from '@/pages/modules/PMB/entrance/hooks'
 import { useSearchParams } from 'react-router-dom'
 import { ColumnsEntrance } from '@/pages/modules/PMB/entrance/data/Columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
 
 const EntrancePMGPage = () => {
   const [searchParams] = useSearchParams()
@@ -21,7 +22,13 @@ const EntrancePMGPage = () => {
       <div className="space-y-5">
         <ButtonTitleGroup
           label={'Jalur Masuk'}
-          buttonGroup={[{ type: 'custom', element: <ButtonAddEntrancePMB /> }]}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide="Jalur Masuk" valueGuide="PMB_JALUR_MASUK" />,
+            },
+            { type: 'custom', element: <ButtonAddEntrancePMB /> },
+          ]}
         />
 
         <TableCustom data={entrance} columns={columns} loading={loading} meta={meta} />

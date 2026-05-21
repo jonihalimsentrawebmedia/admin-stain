@@ -47,7 +47,6 @@ export const ButtonEditOfficially = (props: Props) => {
     }
   }, [data])
 
-  console.log(form.watch('id_kelompok'))
 
   const queryClient = useQueryClient()
   const HandleSave = async (value: any) => {

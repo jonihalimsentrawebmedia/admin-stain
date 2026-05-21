@@ -73,7 +73,6 @@ export const UseGetStatusProgram = (id?: string | null) => {
 
   useEffect(() => {
     if (data) {
-      console.log(data)
       setDetail(data)
     }
   }, [data])

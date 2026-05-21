@@ -89,7 +89,6 @@ export const FormBranding = (props: Props) => {
                     onClick={(e) => {
                       e.preventDefault()
                       const data = form.getValues()
-                      console.log(data)
                       toast.info('Coming Soon...')
                     }}
                   >

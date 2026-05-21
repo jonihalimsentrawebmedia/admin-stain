@@ -16,6 +16,7 @@ import ColorSettingPMB from '@/pages/modules/PMB/settings/color/ColorSettingServ
 import { TemplateWebPMB } from '@/pages/modules/PMB/settings/template-web'
 import { ThemaChangeColorPMB } from '@/pages/modules/PMB/settings/template-web/color'
 import DashboardPMB from '@/pages/modules/PMB/dashboard'
+import GuideListView from '@/pages/modules/website-utama/panduan/GuideListView'
 
 export const PMB_ROUTES = [
   {
@@ -34,6 +35,10 @@ export const PMB_ROUTES = [
         element: <ChangePassword />,
       },
     ],
+  },
+  {
+    path: 'panduan',
+    element: <GuideListView />,
   },
   {
     path: 'data-pmb',

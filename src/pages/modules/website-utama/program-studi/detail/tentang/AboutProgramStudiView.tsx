@@ -65,7 +65,6 @@ const AboutProgramStudiView = (props?: props) => {
     setIsEditContent(false)
   }
 
-  console.log(aboutDetail)
 
   return (
     <Form {...form}>
