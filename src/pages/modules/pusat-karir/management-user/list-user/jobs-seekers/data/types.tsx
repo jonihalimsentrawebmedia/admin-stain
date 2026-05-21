@@ -77,6 +77,7 @@ export interface IEducation {
   id_fakultas: string | null
   id_prodi: string | null
   universitas_asal_luar_universitas: string | null
+  nama_universitas:string
   fakultas: string
   prodi: string
   url_file_ktm: string | null
