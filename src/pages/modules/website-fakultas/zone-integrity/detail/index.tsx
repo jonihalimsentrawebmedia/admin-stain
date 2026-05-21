@@ -1,5 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { UseGetDetailZoneIntegrity } from '../hooks/index'
 import { UseGetSubZoneIntegrity } from './hooks/index.tsx'
 import ColumnsSubZoneIntegrity from './data/columns.tsx'
@@ -7,11 +7,19 @@ import TableCustom from '@/components/common/table/TableCustom.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const DetailZoneIntegrity = () => {
-  const navigate = useNavigate()
   const { id } = useParams()
+  const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
   const { detail } = UseGetDetailZoneIntegrity((id as string) ?? '')
   const { subZoneIntegrity, loading, meta } = UseGetSubZoneIntegrity({
     id: id as string,
+    page: page,
+    limit: limit,
+    search: search,
   })
   const columns = ColumnsSubZoneIntegrity()
 

@@ -3,15 +3,23 @@ import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { IGaleriAlbum } from '@/pages/modules/website-utama/public-content/gallery/Foto/data'
+import type { BasicProps } from '@/utils/globalType.ts'
 
-export const UseGetGalleryAlbumProdi = () => {
+export const UseGetGalleryAlbumProdi = (props?: BasicProps) => {
+  const { page, limit, search } = props ?? {}
+
   const [albumProdi, setAlbumProdi] = useState<IGaleriAlbum[]>([])
   const [meta, setMeta] = useState<Meta>()
 
+  const Params = new URLSearchParams()
+  if (page) Params.append('page', page ?? '1')
+  if (limit) Params.append('limit', limit ?? '10')
+  if (search) Params.append('search', search ?? '')
+
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['album-prodi'],
+    queryKey: ['album-prodi', Params.toString()],
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get(`/prodi/galeri-album`).then((res) => res.data),
+    queryFn: () => AxiosClient.get(`/prodi/galeri-album?${Params}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching

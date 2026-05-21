@@ -3,24 +3,33 @@ import ButtonAddProdiUser from '@/pages/modules/website-fakultas/academic/progra
 import ColumnsManagementUnit from '@/pages/modules/website-fakultas/academic/program-studi/unit-pengelola/data/columns.tsx'
 import { UseGetProdiUnit } from '@/pages/modules/website-fakultas/academic/program-studi/unit-pengelola/hooks'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 
 const UserProdiView = () => {
   const { id } = useParams()
-  const { loading, prodiUser, meta } = UseGetProdiUnit((id as string) ?? '')
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { loading, prodiUser, meta } = UseGetProdiUnit({
+    id_unit: (id as string) ?? '',
+    page: page,
+    limit: limit,
+    search: search,
+  })
   const { columns } = ColumnsManagementUnit()
 
   return (
     <div className="flex flex-col gap-4">
       <div className="flex justify-between items-center">
         <div className="text-primary text-2xl">Unit Pengelola</div>
-        <div className='flex gap-4 items-center'>
-           <ButtonGoToGuide
-                titleGuide={'Unit Pengelola'}
-                valueGuide="FAKULTAS_AKADEMIK_PROGRAM_STUDI_UNIT_PENGELOLA"
-              />
-        <ButtonAddProdiUser />
-
+        <div className="flex gap-4 items-center">
+          <ButtonGoToGuide
+            titleGuide={'Unit Pengelola'}
+            valueGuide="FAKULTAS_AKADEMIK_PROGRAM_STUDI_UNIT_PENGELOLA"
+          />
+          <ButtonAddProdiUser />
         </div>
       </div>
       <TableCustom columns={columns} data={prodiUser} loading={loading} meta={meta} />

@@ -41,7 +41,13 @@ export const LandingPagePMB = () => {
           ]}
         />
 
-        <TableCustom data={unitLanding} columns={columns} loading={loading} meta={meta} />
+        <TableCustom
+          isShowFilter={false}
+          data={unitLanding}
+          columns={columns}
+          loading={loading}
+          meta={meta}
+        />
       </div>
     </>
   )

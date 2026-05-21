@@ -1,5 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { UseGetListGroupSkills } from './hooks/index'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsGroupSkill } from './data/columns'
@@ -7,7 +7,16 @@ import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/Bu
 
 export const GroupSkillResearch = () => {
   const navigate = useNavigate()
-  const { listGroupSkill, loading, meta } = UseGetListGroupSkills()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { listGroupSkill, loading, meta } = UseGetListGroupSkills({
+    page: page,
+    limit: limit,
+    search: search,
+  })
   const columns = ColumnsGroupSkill()
 
   return (

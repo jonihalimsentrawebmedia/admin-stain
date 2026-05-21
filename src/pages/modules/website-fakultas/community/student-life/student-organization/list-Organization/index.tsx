@@ -1,5 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { UseGetStudentOrganizations } from './hooks/index'
 import ColumStudentOrganization from './data/columns'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
@@ -7,7 +7,16 @@ import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/Bu
 
 export const ListOrganizationStudentLife = () => {
   const navigate = useNavigate()
-  const { listOrganization, meta, loading } = UseGetStudentOrganizations()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { listOrganization, meta, loading } = UseGetStudentOrganizations({
+    page,
+    limit,
+    search,
+  })
   const columns = ColumStudentOrganization()
 
   return (

@@ -1,5 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsStory } from './data/columns.tsx'
 import { UseGetStoryUnderGraduated } from './hooks/index.tsx'
@@ -7,7 +7,16 @@ import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/Bu
 
 export const AlumniStoriesUnderGraduated = () => {
   const navigate = useNavigate()
-  const { story, meta, loading } = UseGetStoryUnderGraduated()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { story, meta, loading } = UseGetStoryUnderGraduated({
+    page,
+    limit,
+    search,
+  })
   const columns = ColumnsStory()
 
   return (

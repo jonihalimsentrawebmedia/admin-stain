@@ -4,15 +4,23 @@ import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import { meta } from 'zod'
 import type { IFacilities } from '../data/types'
+import type { BasicProps } from '@/utils/globalType.ts'
 
-export const UseGetFacilitiesList = () => {
+export const UseGetFacilitiesList = (props?: BasicProps) => {
+  const { page, limit, search } = props ?? {}
+
   const [listFacilities, setListFacilities] = useState<IFacilities[]>([])
   const [meta, setMeta] = useState<Meta>()
 
+  const ParamsSearch = new URLSearchParams()
+  if (page) ParamsSearch.append('page', page ?? '1')
+  if (limit) ParamsSearch.append('limit', limit ?? '10')
+  if (props?.search) ParamsSearch.append('search', search ?? '')
+
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['facilities'],
+    queryKey: ['facilities', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get('/fakultas/fasilitas').then((res) => res.data),
+    queryFn: () => AxiosClient.get(`/fakultas/fasilitas?${ParamsSearch}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching

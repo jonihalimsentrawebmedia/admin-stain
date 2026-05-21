@@ -3,15 +3,23 @@ import type { IStoryAlumni } from '../data/types'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
+import type { BasicProps } from '@/utils/globalType.ts'
 
-export const UseGetStoryAlumni = () => {
+export const UseGetStoryAlumni = (props: BasicProps) => {
+  const { page, limit, search } = props
+
   const [story, setStory] = useState<IStoryAlumni[]>([])
   const [meta, setMeta] = useState<Meta>()
 
+  const Params = new URLSearchParams()
+  if (search) Params.append('search', search ?? '')
+  if (page) Params.append('page', page ?? '1')
+  if (limit) Params.append('limit', limit ?? '10')
+
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['story-alumni'],
+    queryKey: ['story-alumni', Params.toString()],
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get('/fakultas/cerita-alumni').then((res) => res.data),
+    queryFn: () => AxiosClient.get(`/fakultas/cerita-alumni?${Params}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching

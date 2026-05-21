@@ -3,16 +3,24 @@ import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { IStoryMobility } from '../data/types.ts'
+import type { BasicProps } from '@/utils/globalType.ts'
 
-export const UseGetStoryInternationalMobility = () => {
+export const UseGetStoryInternationalMobility = (props: BasicProps) => {
+  const { search, page, limit } = props
+
   const [story, setStory] = useState<IStoryMobility[]>([])
   const [meta, setMeta] = useState<Meta>()
 
+  const Params = new URLSearchParams()
+  if (search) Params.append('search', search ?? '')
+  if (page) Params.append('page', page ?? '1')
+  if (limit) Params.append('limit', limit ?? '10')
+
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['story-mobility'],
+    queryKey: ['story-mobility', Params.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get('/fakultas/cerita-international-mobility').then((res) => res.data),
+      AxiosClient.get(`/fakultas/cerita-international-mobility?${Params}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching

@@ -11,16 +11,23 @@ import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/Bu
 export const SettingsBackground = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const context = searchParams.get('context') ?? SPIMENU[0].value
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
 
-  const { meta, background, loading } = UseGetListBackground(context as Context)
+  const { meta, background, loading } = UseGetListBackground({
+    context: context as Context,
+    page: page,
+    limit: limit,
+    search: search,
+  })
   const columns = ColumnsBackground()
 
   return (
     <>
-    <div className='mb-4 flex justify-end'>
-      <ButtonGoToGuide titleGuide={'Gambar Background'} valueGuide="SPI_PENGATURAN_BACKGROUND" />
-
-    </div>
+      <div className="mb-4 flex justify-end">
+        <ButtonGoToGuide titleGuide={'Gambar Background'} valueGuide="SPI_PENGATURAN_BACKGROUND" />
+      </div>
       <Tabs
         value={context}
         onValueChange={(value) => {
@@ -59,7 +66,13 @@ export const SettingsBackground = () => {
               ]}
             />
 
-            <TableCustom isShowFilter={false} data={background} columns={columns} loading={loading} meta={meta} />
+            <TableCustom
+              isShowFilter={false}
+              data={background}
+              columns={columns}
+              loading={loading}
+              meta={meta}
+            />
           </TabsContent>
         ))}
       </Tabs>

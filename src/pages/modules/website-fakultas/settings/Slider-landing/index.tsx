@@ -41,7 +41,13 @@ export const LandingPageFaculty = () => {
           ]}
         />
 
-        <TableCustom data={unitLanding} columns={columns} loading={loading} meta={meta} />
+        <TableCustom
+          isShowFilter={false}
+          data={unitLanding}
+          columns={columns}
+          loading={loading}
+          meta={meta}
+        />
       </div>
     </>
   )

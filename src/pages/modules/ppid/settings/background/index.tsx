@@ -10,18 +10,24 @@ import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/Bu
 
 export const SettingsBackground = () => {
   const [searchParams, setSearchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
   const context = searchParams.get('context') ?? PPID_MENU[0].value
 
-  const { meta, background, loading } = UseGetListBackground(context as Context)
+  const { meta, background, loading } = UseGetListBackground({
+    context: context as Context,
+    page: page,
+    limit: limit,
+    search: search,
+  })
   const columns = ColumnsBackground()
 
   return (
     <>
       <div className="flex gap-4 items-center justify-end">
-        <ButtonGoToGuide
-          titleGuide={'Gambar Background'}
-          valueGuide="PPID_PENGATURAN_BACKGROUND"
-        />
+        <ButtonGoToGuide titleGuide={'Gambar Background'} valueGuide="PPID_PENGATURAN_BACKGROUND" />
       </div>
       <Tabs
         value={context}
@@ -60,8 +66,13 @@ export const SettingsBackground = () => {
                 },
               ]}
             />
-
-            <TableCustom data={background} columns={columns} loading={loading} meta={meta} />
+            <TableCustom
+              isShowFilter={false}
+              data={background}
+              columns={columns}
+              loading={loading}
+              meta={meta}
+            />
           </TabsContent>
         ))}
       </Tabs>

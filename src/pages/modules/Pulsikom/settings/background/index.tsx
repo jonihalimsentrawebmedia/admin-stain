@@ -10,15 +10,27 @@ import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/Bu
 
 export const SettingsBackground = () => {
   const [searchParams, setSearchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
   const context = searchParams.get('context') ?? PULSIKOMMENU[0].value
 
-  const { meta, background, loading } = UseGetListBackground(context as Context)
+  const { meta, background, loading } = UseGetListBackground({
+    page: page,
+    limit: limit,
+    search: search,
+    context: context as Context,
+  })
   const columns = ColumnsBackground()
 
   return (
     <>
       <div className="flex justify-end mb-4">
-        <ButtonGoToGuide titleGuide={'Gambar Background'} valueGuide="PUSILKOM_PENGATURAN_BACKGROUND" />
+        <ButtonGoToGuide
+          titleGuide={'Gambar Background'}
+          valueGuide="PUSILKOM_PENGATURAN_BACKGROUND"
+        />
       </div>
       <Tabs
         value={context}
@@ -58,7 +70,13 @@ export const SettingsBackground = () => {
               ]}
             />
 
-            <TableCustom isShowFilter={false} data={background} columns={columns} loading={loading} meta={meta} />
+            <TableCustom
+              isShowFilter={false}
+              data={background}
+              columns={columns}
+              loading={loading}
+              meta={meta}
+            />
           </TabsContent>
         ))}
       </Tabs>

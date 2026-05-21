@@ -4,9 +4,19 @@ import { ColumnsTypeCollaboration } from '@/pages/modules/website-fakultas/resea
 import { UseGetTypeCollaboration } from '@/pages/modules/website-fakultas/research/collaboration/type/hooks'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
+import { useSearchParams } from 'react-router-dom'
 
 export const TypeOurPartners = () => {
-  const { typeCollaboration, loading, meta } = UseGetTypeCollaboration()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') || '1'
+  const limit = searchParams.get('limit') || '10'
+  const search = searchParams.get('search') || ''
+
+  const { typeCollaboration, loading, meta } = UseGetTypeCollaboration({
+    page: page,
+    limit: limit,
+    search: search,
+  })
   const columns = ColumnsTypeCollaboration()
 
   return (
