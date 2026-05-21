@@ -4,9 +4,19 @@ import { ColumnsService } from '@/pages/modules/website-fakultas/service/data/co
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ButtonAddService } from '@/pages/modules/website-fakultas/service/component/buttonAdd.tsx'
 import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
+import { useSearchParams } from 'react-router-dom'
 
 export const ServiceListPage = () => {
-  const { service, meta, loading } = UseGetService()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { service, meta, loading } = UseGetService({
+    page: page,
+    limit: limit,
+    search: search,
+  })
   const columns = ColumnsService()
 
   return (
@@ -17,12 +27,7 @@ export const ServiceListPage = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: (
-                <ButtonGoToGuide
-                  titleGuide={'Layanan'}
-                  valueGuide="FAKULTAS_LAYANAN"
-                />
-              ),
+              element: <ButtonGoToGuide titleGuide={'Layanan'} valueGuide="FAKULTAS_LAYANAN" />,
             },
             {
               type: 'custom',

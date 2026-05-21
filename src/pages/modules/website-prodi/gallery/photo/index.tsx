@@ -10,11 +10,18 @@ import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/Bu
 
 export const GalleryPhotoProdiPage = () => {
   const { id } = useParams()
+  const [searchParams, setSearchParams] = useSearchParams()
+  const search = searchParams.get('search') ?? ''
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+
   const { photoAlbumProdi } = UseGetPhotoAlbumProdi({
     id_album: id,
+    page: page,
+    limit: limit,
+    search: search,
   })
   const { albumProdi: detail } = UseGetGalleryAlbumProdiById(id ?? '')
-  const [_, setSearchParams] = useSearchParams()
 
   return (
     <>
@@ -24,7 +31,7 @@ export const GalleryPhotoProdiPage = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide titleGuide='Galeri Foto' valueGuide="PRODI_GALERI_FOTO" />,
+              element: <ButtonGoToGuide titleGuide="Galeri Foto" valueGuide="PRODI_GALERI_FOTO" />,
             },
             {
               type: 'custom',
@@ -40,7 +47,12 @@ export const GalleryPhotoProdiPage = () => {
             innerClassName={'p-1.5 pl-9'}
             position={'start'}
             onSearch={(e) => {
-              setSearchParams({ search: e })
+              const params = new URLSearchParams()
+              params.set('search', e)
+              if (e === '') {
+                params.delete('search')
+              }
+              setSearchParams(params.toString(), { replace: true })
             }}
           />
           {detail?.jumlah_foto === 0 && <p className="text-red-500">belum ada foto ditambahkan</p>}

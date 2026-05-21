@@ -25,7 +25,6 @@ export const ButtonAddSubject = () => {
   const semester = searchParams.get('semester')
   const { session } = UseGetSessionFaculty()
 
-  console.log(tahun)
 
   useEffect(() => {
     if (tahun && semester) {
@@ -49,7 +48,6 @@ export const ButtonAddSubject = () => {
 
   const HandleSave = async (value: SubjectResolverType) => {
     setLoading(true)
-    console.log(value)
     await AxiosClient.post('/fakultas/mata-kuliah', {
       id_kurikulum: value?.id_kurikulum,
       nama_mata_kuliah: value?.nama_mata_kuliah,

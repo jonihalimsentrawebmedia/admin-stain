@@ -1,5 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { UseGetFacilitiesList } from '@/pages/modules/website-fakultas/facilities/hooks'
 import ColumnsFacilities from '@/pages/modules/website-fakultas/facilities/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
@@ -7,7 +7,16 @@ import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGu
 
 export const FacilitiesPage = () => {
   const navigate = useNavigate()
-  const { listFacilities, meta, loading } = UseGetFacilitiesList()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { listFacilities, meta, loading } = UseGetFacilitiesList({
+    page: page,
+    limit: limit,
+    search: search,
+  })
   const columns = ColumnsFacilities()
 
   return (
@@ -18,12 +27,7 @@ export const FacilitiesPage = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: (
-                <ButtonGoToGuide
-                  titleGuide={'Fasilitas'}
-                  valueGuide="FAKULTAS_FASILITAS"
-                />
-              ),
+              element: <ButtonGoToGuide titleGuide={'Fasilitas'} valueGuide="FAKULTAS_FASILITAS" />,
             },
             {
               type: 'add',

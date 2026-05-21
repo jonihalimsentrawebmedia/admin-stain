@@ -29,7 +29,6 @@ export const ButtonEmail = (props: Props) => {
     },
   })
 
-  console.log(form.formState.errors)
 
   const HandleSave = async (value: TEmailResolver) => {
     setLoading(true)

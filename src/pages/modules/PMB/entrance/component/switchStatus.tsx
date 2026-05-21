@@ -18,7 +18,6 @@ export const SwitchStatus = (props: props) => {
     setLoading(true)
     await AxiosClient.patch(`/pmb/jalur-masuk/${data?.id_jalur_masuk}/toggle-status-tampil`)
       .then((res) => {
-        console.log(res)
         if (res.data.status) {
           setLoading(false)
           toast.success(res.data.message || 'Success')

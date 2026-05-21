@@ -3,9 +3,19 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { ColumnsInboxStory } from '@/pages/modules/website-fakultas/community/alumni/inbox/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
+import { useSearchParams } from 'react-router-dom'
 
 export const InboxStoryPage = () => {
-  const { storyInbox, loading, meta } = UseGetStoryInbox()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { storyInbox, loading, meta } = UseGetStoryInbox({
+    page,
+    limit,
+    search,
+  })
   const columns = ColumnsInboxStory()
 
   return (

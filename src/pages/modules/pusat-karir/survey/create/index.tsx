@@ -44,7 +44,6 @@ export const CreateSurveyData = () => {
       })
   }
 
-  console.log(activeIndex)
 
   return (
     <>

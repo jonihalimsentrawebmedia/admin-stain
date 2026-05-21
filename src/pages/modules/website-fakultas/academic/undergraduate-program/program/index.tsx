@@ -4,9 +4,19 @@ import { UseGetListProgram } from '@/pages/modules/website-fakultas/academic/und
 import { ColumnsProgramUndergraduate } from '@/pages/modules/website-fakultas/academic/undergraduate-program/program/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
+import { useSearchParams } from 'react-router-dom'
 
 export const UnderGraduatedProgram = () => {
-  const { program, meta, loading } = UseGetListProgram()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { program, meta, loading } = UseGetListProgram({
+    page: page,
+    limit: limit,
+    search: search,
+  })
   const columns = ColumnsProgramUndergraduate()
 
   return (

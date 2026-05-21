@@ -6,7 +6,7 @@ import AxiosClient from '@/provider/axios'
 import { useQueryClient } from '@tanstack/react-query'
 import { ResolverCompanyInformation, type TypeCompanyInformation } from './resolver.tsx'
 import { UseGetCompanyInformation } from '@/pages/modules/pusat-karir/management-user/list-user/Partnership/hooks'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import UseGetCountry from '@/pages/modules/settings/reference/country/controller/useGetCountry.tsx'
 import UseGetProvince from '@/pages/modules/settings/reference/province/controller/useGetProvince.tsx'
 import UseGetRegency from '@/pages/modules/settings/reference/regency/controller/useGetRegency.tsx'
@@ -28,6 +28,7 @@ interface Props {
 export const FormCompanyInformation = (prop: Props) => {
   const { setValue } = prop
   const { id } = useParams()
+  const navigate = useNavigate()
 
   const [loading, setLoading] = useState(false)
 
@@ -97,8 +98,8 @@ export const FormCompanyInformation = (prop: Props) => {
                     onClick={(e) => {
                       e.preventDefault()
                       const data = form.getValues()
-                      console.log(data)
-                      toast.info('Coming Soon...')
+                      HandleSave(data, false)
+                      navigate('/modules/pusat-karir/management-user/user')
                     }}
                   >
                     Simpan & Keluar

@@ -40,7 +40,6 @@ export const ButtonSyncLecturer = () => {
       })
   }
 
-  console.log(response)
 
   if (messaging) {
     onMessage(messaging, (payload) => {

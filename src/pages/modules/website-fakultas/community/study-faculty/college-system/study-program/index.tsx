@@ -4,9 +4,19 @@ import { UseGetStudyProgram } from '@/pages/modules/website-fakultas/community/s
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsCollegeSystemStudy } from '@/pages/modules/website-fakultas/community/study-faculty/college-system/study-program/data/columns.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
+import { useSearchParams } from 'react-router-dom'
 
 export const CommunityStudyProgram = () => {
-  const { listStudyProgram, loading, meta } = UseGetStudyProgram()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { listStudyProgram, loading, meta } = UseGetStudyProgram({
+    page,
+    limit,
+    search,
+  })
   const columns = ColumnsCollegeSystemStudy()
 
   return (

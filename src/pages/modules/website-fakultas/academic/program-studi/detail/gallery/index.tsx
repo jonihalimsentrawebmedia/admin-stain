@@ -15,10 +15,16 @@ import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/Bu
 export const ProdiGallery = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const type = searchParams.get('type')
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
 
   const { id } = useParams()
   const { album, meta, loading } = UseGetGalleryAlbum({
     id_unit: (id as string) ?? '',
+    page,
+    limit,
+    search,
   })
   const {
     video,
@@ -26,6 +32,9 @@ export const ProdiGallery = () => {
     loading: load1,
   } = UseGetGalleryVideo({
     id_unit: (id as string) ?? '',
+    page,
+    limit,
+    search,
   })
 
   const columns = ColumnsGalleryAlbum()

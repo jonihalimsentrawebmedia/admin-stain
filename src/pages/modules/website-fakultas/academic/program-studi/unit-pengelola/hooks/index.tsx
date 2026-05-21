@@ -3,16 +3,28 @@ import type { IManagementUnit } from '@/pages/modules/website-fakultas/about-fac
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
+import type { BasicProps } from '@/utils/globalType.ts'
 
-export const UseGetProdiUnit = (id_unit: string) => {
+interface Props extends BasicProps {
+  id_unit: string
+}
+
+export const UseGetProdiUnit = (props?: Props) => {
+  const { id_unit, search, page, limit } = props ?? {}
+
   const [prodiUser, setProdiUser] = useState<IManagementUnit[]>([])
   const [meta, setMeta] = useState<Meta>()
 
+  const Params = new URLSearchParams()
+  if (page) Params.append('page', page ?? '1')
+  if (limit) Params.append('limit', limit ?? '10')
+  if (search) Params.append('search', search ?? '')
+
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['faculty-unit'],
+    queryKey: ['faculty-unit', id_unit, Params.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get(`/fakultas/satuan-organisasi/${id_unit}/unit-pengelola`).then(
+      AxiosClient.get(`/fakultas/satuan-organisasi/${id_unit}/unit-pengelola?${Params}`).then(
         (res) => res.data
       ),
   })

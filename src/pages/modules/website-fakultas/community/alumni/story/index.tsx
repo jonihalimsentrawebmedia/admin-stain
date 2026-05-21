@@ -1,5 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsStory } from './data/columns'
 import { UseGetStoryAlumni } from './hooks/index'
@@ -7,8 +7,17 @@ import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/Bu
 
 export const CommunityAlumniStory = () => {
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
   const columns = ColumnsStory()
-  const { story, loading, meta } = UseGetStoryAlumni()
+  const { story, loading, meta } = UseGetStoryAlumni({
+    page,
+    limit,
+    search,
+  })
 
   return (
     <>
@@ -16,13 +25,10 @@ export const CommunityAlumniStory = () => {
         <ButtonTitleGroup
           isBack
           buttonGroup={[
-              {
+            {
               type: 'custom',
               element: (
-                <ButtonGoToGuide
-                  titleGuide={'Cerita Alumni'}
-                  valueGuide="FAKULTAS_ALUMNI_CERITA"
-                />
+                <ButtonGoToGuide titleGuide={'Cerita Alumni'} valueGuide="FAKULTAS_ALUMNI_CERITA" />
               ),
             },
             {

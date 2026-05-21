@@ -8,7 +8,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import { ResolverCompanyContact, type TypeCompanyContact } from './resolver.tsx'
 import { UseGetCompanyContact } from '../../hooks/index.tsx'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { TitleLine } from '@/pages/modules/pusat-karir/component/common/titleLine.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
@@ -23,6 +23,7 @@ export const FormContactCompany = (props: Props) => {
   const { setValue } = props
 
   const { id } = useParams()
+  const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
 
   const form = useForm<TypeCompanyContact>({
@@ -74,8 +75,8 @@ export const FormContactCompany = (props: Props) => {
                     onClick={(e) => {
                       e.preventDefault()
                       const data = form.getValues()
-                      console.log(data)
-                      toast.info('Coming Soon...')
+                      HandleSave(data)
+                      navigate('/modules/pusat-karir/management-user/user')
                     }}
                   >
                     Simpan & Keluar

@@ -52,7 +52,6 @@ export const MultipleStatus = (props: props) => {
 
   const queryClient = useQueryClient()
   const HandleSave = async () => {
-    console.log(formValue)
     await AxiosClient.patch('/website-utama/sdm/update-multiple-status', formValue)
       .then((res) => {
         if (res.data.status) {

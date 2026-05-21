@@ -95,7 +95,9 @@ const StatisticViewModel = () => {
       }
       setImageStatistic(temp)
       setImageStatisticTemp(temp)
-      const dateStatistic = statistic.tanggal_berdiri.split('-')
+      const dateStatistic = statistic?.tanggal_berdiri
+        ? statistic?.tanggal_berdiri?.split('-')
+        : ['', '', '']
       form.reset({
         ...statistic,
         tanggal: dateStatistic[0],

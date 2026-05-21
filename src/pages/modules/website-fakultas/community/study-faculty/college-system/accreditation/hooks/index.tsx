@@ -1,27 +1,35 @@
-import { useEffect, useState } from 'react'
-import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
-import type { IAccreditation } from '../data/types.ts'
+import type { BasicProps } from '@/utils/globalType.ts'
+import { useEffect, useState } from 'react'
+import type { IAccreditation } from '@/pages/modules/website-fakultas/community/study-faculty/college-system/accreditation/data/types.ts'
+import type { Meta } from '@/components/common/table/TablePagination.tsx'
 
-export const UseGetAccreditation = () => {
+export const UseGetAccreditation = (props?: BasicProps) => {
+  const { search, page, limit } = props ?? {}
+
   const [accreditation, setAccreditation] = useState<IAccreditation[]>([])
   const [meta, setMeta] = useState<Meta>()
 
+  const Params = new URLSearchParams()
+  if (search) Params.set('search', search ?? '')
+  if (page) Params.set('page', page ?? '1')
+  if (limit) Params.set('limit', limit ?? '10')
+
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['accreditation-faculty'],
+    queryKey: ['accreditation-faculty', Params.toString()],
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get('/fakultas/akreditas').then((res) => res.data),
+    queryFn: () => AxiosClient.get(`/fakultas/akreditas?${Params}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching
 
   useEffect(() => {
     if (data) {
-      setAccreditation(data.data)
+      setAccreditation(data.data ?? [])
       setMeta(data.meta)
     }
   }, [data])
 
-  return { accreditation, meta, loading }
+  return { accreditation, loading, meta }
 }

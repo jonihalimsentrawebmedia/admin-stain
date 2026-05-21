@@ -9,7 +9,7 @@ import {
   ResolverCompanyBranding,
   type TypeCompanyBranding,
 } from '@/pages/modules/pusat-karir/management-user/list-user/Partnership/update/form/resolver.tsx'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { UseGetCompanyBranding } from '@/pages/modules/pusat-karir/management-user/list-user/Partnership/hooks'
 import { toast } from 'react-toastify'
 import { TitleLine } from '@/pages/modules/pusat-karir/component/common/titleLine.tsx'
@@ -31,6 +31,7 @@ export const FormBranding = (props: Props) => {
 
   const { id } = useParams()
   const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
 
   const form = useForm<TypeCompanyBranding>({
     resolver: zodResolver(ResolverCompanyBranding),
@@ -76,7 +77,6 @@ export const FormBranding = (props: Props) => {
     <>
       <Form {...form}>
         <form className={'flex flex-col gap-4 w-full'} onSubmit={form.handleSubmit(HandleSave)}>
-
           <ButtonTitleGroup
             label={'Edit User - Mitra Kerja'}
             buttonGroup={[
@@ -89,8 +89,8 @@ export const FormBranding = (props: Props) => {
                     onClick={(e) => {
                       e.preventDefault()
                       const data = form.getValues()
-                      console.log(data)
-                      toast.info('Coming Soon...')
+                      HandleSave(data)
+                      navigate('/modules/pusat-karir/management-user/user')
                     }}
                   >
                     Simpan & Keluar

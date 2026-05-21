@@ -4,9 +4,20 @@ import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { UseGetGalleryAlbumProdi } from '@/pages/modules/website-prodi/gallery/album/hooks'
 import { ColumnsGalleryAlbumProdi } from '@/pages/modules/website-prodi/gallery/album/components/columns.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
+import { useSearchParams } from 'react-router-dom'
 
 export const GalleryAlbumProdiPage = () => {
-  const { albumProdi, loading, meta } = UseGetGalleryAlbumProdi()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { albumProdi, loading, meta } = UseGetGalleryAlbumProdi({
+    limit: limit,
+    page: page,
+    search: search,
+  })
+
   const columns = ColumnsGalleryAlbumProdi()
   return (
     <>
@@ -16,7 +27,7 @@ export const GalleryAlbumProdiPage = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide titleGuide='Galeri Foto' valueGuide="PRODI_GALERI_ALBUM" />,
+              element: <ButtonGoToGuide titleGuide="Galeri Foto" valueGuide="PRODI_GALERI_ALBUM" />,
             },
             { type: 'custom', element: <ButtonAddAlbumProdi /> },
           ]}

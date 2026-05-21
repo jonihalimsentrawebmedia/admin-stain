@@ -43,7 +43,7 @@ export const AccreditationColumns = () => {
       header: 'Universitas / Prodi',
       cell: ({ row }) => {
         return (
-          <p className={'lowercase'}>
+          <p className={'lowercase whitespace-pre-line'}>
             {row?.original.nama_satuan_organisasi} /{' '}
             {row?.original.nama_satuan_organisasi_akreditas}
           </p>

@@ -54,7 +54,6 @@ export const SectionRefund = (props: Props) => {
       })
   }
 
-  console.log(form.formState.errors)
 
   return (
     <>

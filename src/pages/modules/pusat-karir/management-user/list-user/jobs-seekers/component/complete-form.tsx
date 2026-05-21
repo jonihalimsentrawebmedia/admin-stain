@@ -88,7 +88,7 @@ export const FormUserProfile = () => {
           nama_universitas:
             userPersonalInfo?.pendidikan_terakhir?.universitas_asal === 'DALAM_UNIVERSITAS'
               ? `Universitas ${session?.nama_universitas}`
-              : userPersonalInfo?.pendidikan_terakhir?.universitas_asal_luar_universitas,
+              : userPersonalInfo?.pendidikan_terakhir?.nama_universitas,
         },
         sub_spesialis: temp ?? [],
         data_diri: {
