@@ -44,7 +44,6 @@ export const ButtonSyncLecturerDetail = ({ link, topik }: Props) => {
       })
   }
 
-  console.log(response)
 
   if (messaging) {
     onMessage(messaging, (payload) => {

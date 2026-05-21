@@ -24,7 +24,6 @@ export const ButtonConfirm = (props: props) => {
 
   const form = useForm()
 
-  console.log(form.watch('is_valid_pembayaran'))
 
   const queryClient = useQueryClient()
   const HandleCancel = async (value: any) => {

@@ -40,7 +40,6 @@ export const UpdatedJobVacancy = () => {
 
   const handleSave = async (e: JobVacancyType) => {
     setLoading(true)
-    console.log(e?.tgl_buka_pekerjaan)
     await AxiosClient.put(`/pusat-karir/lowongan-pekerjaan/${id}`, {
       ...e,
       tgl_buka_pekerjaan: new Date(e.tgl_buka_pekerjaan).toISOString(),

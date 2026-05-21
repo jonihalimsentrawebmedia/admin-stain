@@ -31,8 +31,6 @@ export const ScaleLinearSection = (props: Props) => {
       ? (question.konfigurasi as IKonfigurasiSkalaLinear)
       : undefined
 
-  console.log(question)
-  console.log(LinearOption)
 
   const updateLinear = (
     field: 'min' | 'max' | 'judul_min' | 'judul_max',

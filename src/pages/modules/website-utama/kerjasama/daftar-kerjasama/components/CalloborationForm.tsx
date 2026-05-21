@@ -123,7 +123,6 @@ const CalloborationForm = ({ form }: Props) => {
               fx={(e) => {
                 console.log(e)
                 const find = country?.find((item) => item.id_negara == e.value)
-                console.log(find?.nama_negara.toLowerCase().includes('indonesia'))
                 if (find?.nama_negara.toLowerCase().includes('indonesia')) {
                   form.setValue('id_provinsi', '')
                   form.setValue('id_kabupaten', '')

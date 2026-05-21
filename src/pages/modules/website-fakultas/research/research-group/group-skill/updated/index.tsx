@@ -20,7 +20,6 @@ export const UpdatedGroupSkill = () => {
   })
   const { id } = useParams()
   const { groupSKill } = UseGetDetailGroupSkills(id as string)
-  console.log(groupSKill)
 
   useEffect(() => {
     if (groupSKill) {

@@ -72,7 +72,6 @@ const ButtonEditAccreditationProdi = (props: Props) => {
       })
   }
 
-  console.log(form.formState.errors)
 
   return (
     <>

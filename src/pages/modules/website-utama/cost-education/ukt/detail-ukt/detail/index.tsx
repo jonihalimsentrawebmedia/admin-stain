@@ -47,7 +47,6 @@ export const GetDetailEntranceProdiUktPage = () => {
   const navigate = useNavigate()
 
   const HandleSave = async (value: TSchemaUtkProdiEntrance) => {
-    console.log(value)
     const temp = value?.biaya_tingkatan.map((row) => ({
       id_tingkatan: row?.id_tingkatan,
       biaya: row?.biaya?.toString(),
