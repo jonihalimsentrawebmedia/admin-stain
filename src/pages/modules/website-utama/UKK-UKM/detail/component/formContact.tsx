@@ -132,6 +132,7 @@ const ContactUsForm = () => {
                 label="Link Google Maps"
                 isRow
               />
+              <TextInput form={form} name="iframe" type="text" label="Google Maps Embed" isRow />
               <TextInput form={form} name="no_telepon" label="Telepon" isRow />
               <TextInput form={form} name="email" type="email" label="Email" isRow />
             </div>
