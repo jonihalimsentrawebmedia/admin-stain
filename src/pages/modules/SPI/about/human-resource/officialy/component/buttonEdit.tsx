@@ -61,7 +61,7 @@ export const ButtonEditOfficially = (props: Props) => {
   const queryClient = useQueryClient()
   const HandleSave = async (value: any) => {
     setLoading(true)
-    await AxiosClient.put(`/pusilkom/pimpinan/${id}/${data?.id_pimpinan}`, value)
+    await AxiosClient.put(`/spi/pimpinan/${id}/${data?.id_pimpinan}`, value)
       .then((res) => {
         if (res.data.status) {
           setLoading(false)
