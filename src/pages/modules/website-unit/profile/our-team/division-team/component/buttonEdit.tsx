@@ -37,6 +37,9 @@ export const ButtonEditDivisionTeam = (props: Props) => {
         jabatan: data?.jabatan,
         is_kepala_unit: data?.is_kepala_unit,
         urutan: data?.urutan,
+        id_sdm: data?.id_sdm,
+        is_local_data: !!data?.id_sdm,
+        is_dosen: !!data?.id_sdm,
       })
     }
   }, [session, data, rootData])
@@ -53,6 +56,8 @@ export const ButtonEditDivisionTeam = (props: Props) => {
         jabatan: value?.jabatan,
         is_kepala_unit: value?.is_kepala_unit,
         urutan: value?.urutan,
+        id_sdm: value?.is_local_data ? value?.id_sdm : null,
+        is_dosen: value?.is_dosen,
       }
     )
       .then((res) => {

@@ -7,12 +7,15 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import type { IModulesList } from '@/pages/modules/interface'
 import { urlStringEncode } from '@/utils/helper.tsx'
 import type { IUserProfile } from '@/pages/modules/website-utama/user-profile/data/types.ts'
+import { cn } from '@/lib/utils.ts'
 
 interface Props {
   profileUser?: IUserProfile
   module?: IModulesList
+  collapsed?: boolean
+  name_color?: string
 }
-const ButtonProfile = ({ profileUser, module }: Props) => {
+const ButtonProfile = ({ profileUser, module, collapsed, name_color }: Props) => {
   const navigate = useNavigate()
   const handleLogOut = () => {
     toast.success('Anda Berhasil Keluar')
@@ -30,7 +33,11 @@ const ButtonProfile = ({ profileUser, module }: Props) => {
             </AvatarFallback>
           </Avatar>
 
-          <span className="text-sm font-medium text-gray-700">{profileUser?.nama_lengkap}</span>
+          {!collapsed && (
+            <span className={cn(`text-sm font-medium text-gray-700`, name_color)}>
+              {profileUser?.nama_lengkap}
+            </span>
+          )}
         </div>
       </PopoverTrigger>
       <PopoverContent className="w-fit space-y-2 p-0">

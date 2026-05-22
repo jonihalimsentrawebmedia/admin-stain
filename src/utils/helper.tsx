@@ -91,6 +91,9 @@ export const GetModuleUrl = (moduleSelect: {
     case 'pmb': {
       return `/modules/session-pmb?url=pmb&id=${moduleSelect?.id_module}`
     }
+    case 'e-office': {
+      return `/modules/session-e-office?url=e-office&id=${moduleSelect?.id_module}`
+    }
 
     default:
       return `/modules/${urlStringEncode(moduleSelect?.controller ?? '')}/dashboard`

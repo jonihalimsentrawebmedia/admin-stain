@@ -14,4 +14,6 @@ export interface IDivisionTeam {
   updated_user: string
   nama_user_created: string
   nama_user_updated: string
+  id_sdm: string
+  is_dosen: boolean
 }
