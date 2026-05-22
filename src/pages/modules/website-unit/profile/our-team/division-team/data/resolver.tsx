@@ -8,6 +8,9 @@ export const DivisionTeamResolver = z.object({
   urutan: z.number({ error: 'Urutan wajib diisi' }),
   nama_unit: z.string().optional().nullable(),
   nama_divisi: z.string().optional().nullable(),
+  is_local_data: z.boolean().optional().nullable(),
+  is_dosen: z.boolean().optional().nullable(),
+  id_sdm: z.string().optional().nullable(),
 })
 
 export type DivisionTeamResolverType = z.infer<typeof DivisionTeamResolver>

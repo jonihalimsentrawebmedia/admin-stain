@@ -57,6 +57,10 @@ import MainLayoutPMB from '@/pages/modules/PMB/component/layout'
 import { PMB_ROUTES } from '@/router/pmb'
 import { SelectSessionPMB } from '@/pages/modules/PMB/session'
 import PMBThema from '@/pages/modules/PMB/component/layout/thema.tsx'
+import { SelectSessionEOffice } from '@/pages/modules/E-Office/session'
+import MainLayoutEOffice from '@/pages/modules/E-Office/component/layout'
+import { E_OFFICE_ROUTE } from '@/router/E-Office/router.tsx'
+import EOfficeThema from '@/pages/modules/E-Office/component/layout/theme.tsx'
 
 export const Router = createBrowserRouter([
   {
@@ -151,6 +155,10 @@ export const Router = createBrowserRouter([
       {
         path: 'session-pmb',
         element: <SelectSessionPMB />,
+      },
+      {
+        path: 'session-e-office',
+        element: <SelectSessionEOffice />,
       },
       {
         path: 'settings',
@@ -274,6 +282,15 @@ export const Router = createBrowserRouter([
           </PMBThema>
         ),
         children: [...PMB_ROUTES],
+      },
+      {
+        path: 'e-office',
+        element: (
+          <EOfficeThema>
+            <MainLayoutEOffice />,
+          </EOfficeThema>
+        ),
+        children: [...E_OFFICE_ROUTE],
       },
     ],
   },

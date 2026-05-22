@@ -52,3 +52,24 @@ export const UseGetUkkUkmDetail = (id: string) => {
 
   return { ukkUkm, loading }
 }
+
+export const UseGetUkkUkmBackground = () => {
+  const [background, setBackground] = useState<[]>([])
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['ukk-ukm-background'],
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get(`/website-utama/ukk-ukm-background`).then((res) => res.data.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setBackground(data)
+    }
+  }, [data])
+
+  return { background, loading }
+}

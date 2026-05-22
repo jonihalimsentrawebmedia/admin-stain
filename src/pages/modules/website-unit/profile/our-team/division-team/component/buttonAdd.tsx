@@ -40,6 +40,8 @@ export const ButtonAddDivisionTeam = (data?: IUnitTeamGroup) => {
       jabatan: value?.jabatan,
       is_kepala_unit: value?.is_kepala_unit,
       urutan: value?.urutan,
+      id_sdm: value?.is_local_data ? value?.id_sdm : null,
+      is_dosen: value?.is_dosen,
     })
       .then((res) => {
         if (res.data.status) {

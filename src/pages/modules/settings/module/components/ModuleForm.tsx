@@ -15,11 +15,16 @@ const ModuleForm = ({ form }: Props) => {
   // MANAJEMEN_EDITOR
   // LAPORAN_STATISTIK
   // WEBSITE_FAKULTAS
+  //EOFFICE
 
   const optionsCategory = [
     {
       label: 'PENGATURAN',
       value: 'PENGATURAN',
+    },
+    {
+      label: 'E-OFFICE',
+      value: 'EOFFICE',
     },
     {
       label: 'WEBSITE UTAMA',

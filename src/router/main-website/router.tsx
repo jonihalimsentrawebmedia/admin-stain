@@ -216,6 +216,7 @@ import { NONUKTBackground } from '@/pages/modules/website-utama/cost-education/n
 import AcademicResourcePage from '@/pages/modules/website-utama/services/academic-resource'
 import { AcademicResourcesLanguage } from '@/pages/modules/website-utama/services/academic-resource/language'
 import { LogActivityAcademicResource } from '@/pages/modules/website-utama/services/academic-resource/log'
+import { UkkUKMBackgroundPage } from '@/pages/modules/website-utama/UKK-UKM/background'
 
 export const MainWebsiteRouter = [
   {
@@ -1338,6 +1339,10 @@ export const MainWebsiteRouter = [
       {
         path: 'detail/:id',
         element: <DetailUkkUKMPage />,
+      },
+      {
+        path: 'background',
+        element: <UkkUKMBackgroundPage />,
       },
     ],
   },
