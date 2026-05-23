@@ -1,4 +1,6 @@
 import { MdDashboard, MdRoomPreferences } from 'react-icons/md'
+import { FaArchive } from 'react-icons/fa'
+import { IoMailUnread } from 'react-icons/io5'
 
 const baseDomain = '/modules/e-office'
 
@@ -9,6 +11,37 @@ export const GenerateMenu = () => {
       name: 'Beranda',
       path: `${baseDomain}/dashboard`,
       icon: <MdDashboard className={'size-5'} />,
+    },
+    {
+      id: 2,
+      name: 'Layanan',
+      path: `${baseDomain}/service`,
+      icon: <FaArchive className={'size-5'} />,
+      child: [
+        {
+          id: 21,
+          name: 'Jenis Layanan',
+          path: `${baseDomain}/service/service-type`,
+        },
+      ],
+    },
+    {
+      id: 3,
+      name: 'Surat Masuk',
+      path: `${baseDomain}/inbox`,
+      icon: <IoMailUnread className={'size-5'} />,
+      child: [
+        {
+          id: 31,
+          name: 'Registrasi Surat Masuk',
+          path: `${baseDomain}/inbox/registration-inbox`,
+        },
+        {
+          id: 32,
+          name: 'Daftar Surat Masuk',
+          path: `${baseDomain}/inbox/inbox-list`,
+        },
+      ],
     },
     {
       id: 9,
