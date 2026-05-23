@@ -10,7 +10,7 @@ interface Props<T extends FieldValues> {
   className?: string
   isDisabled?: boolean
   isRequired?: boolean
-  fx?: () => void
+  fx?: (e: any) => void
 }
 
 function CheckboxInputBasic<T extends FieldValues>({
@@ -36,7 +36,7 @@ function CheckboxInputBasic<T extends FieldValues>({
               onCheckedChange={(checked) => {
                 field.onChange(checked)
                 if (fx) {
-                  fx()
+                  fx(checked)
                 }
               }}
               disabled={isDisabled}

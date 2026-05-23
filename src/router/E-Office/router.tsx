@@ -5,6 +5,11 @@ import ListLetterType from '@/pages/modules/E-Office/reference/letter-type'
 import ListLetterOrigin from '@/pages/modules/E-Office/reference/letter-origin'
 import ListLetterClassification from '@/pages/modules/E-Office/reference/letter-classification'
 import ListReminderAgenda from '@/pages/modules/E-Office/reference/reminder-agenda'
+import TypeServiceListPage from '@/pages/modules/E-Office/services/type-service'
+import { RegistrationInbox } from '@/pages/modules/E-Office/inbox/registration-inbox'
+import { DetailInboxRegistration } from '@/pages/modules/E-Office/inbox/registration-inbox/detail'
+import { RegistrationInboxEdit } from '@/pages/modules/E-Office/inbox/registration-inbox/edit'
+import { ListInbox } from '@/pages/modules/E-Office/inbox/list-inbox'
 
 export const E_OFFICE_ROUTE = [
   {
@@ -21,6 +26,46 @@ export const E_OFFICE_ROUTE = [
       {
         path: 'change-password',
         element: <ChangePassword />,
+      },
+    ],
+  },
+  {
+    path: 'inbox',
+    children: [
+      {
+        path: 'registration-inbox',
+        children: [
+          {
+            index: true,
+            element: <RegistrationInbox />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailInboxRegistration />,
+          },
+          {
+            path: 'edit/:id',
+            element: <RegistrationInboxEdit />,
+          },
+        ],
+      },
+      {
+        path: 'inbox-list',
+        children: [
+          {
+            index: true,
+            element: <ListInbox />,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: 'service',
+    children: [
+      {
+        path: 'service-type',
+        element: <TypeServiceListPage />,
       },
     ],
   },

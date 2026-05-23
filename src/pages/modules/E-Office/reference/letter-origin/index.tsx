@@ -22,7 +22,7 @@ const ListLetterOrigin = () => {
     <>
       <div className="space-y-5">
         <ButtonTitleGroup
-          label={'Sifat Surat'}
+          label={'Asal Surat'}
           buttonGroup={[
             {
               type: 'custom',
