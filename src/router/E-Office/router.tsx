@@ -20,6 +20,7 @@ import { CopyLetterPage } from '@/pages/modules/E-Office/inbox/copy-letter'
 import { DetailCopyLetterPage } from '@/pages/modules/E-Office/inbox/copy-letter/detail'
 import { ListAgendaInboxPage } from '@/pages/modules/E-Office/agenda/inbox'
 import { ListAgendaOutboxPage } from '@/pages/modules/E-Office/agenda/outbox'
+import { AcceptNotificationPage } from '@/pages/modules/E-Office/settings/accept-notification'
 
 export const E_OFFICE_ROUTE = [
   {
@@ -171,6 +172,15 @@ export const E_OFFICE_ROUTE = [
       {
         path: 'outbox',
         element: <ListAgendaOutboxPage />,
+      },
+    ],
+  },
+  {
+    path: 'settings',
+    children: [
+      {
+        path: 'accept-notification',
+        element: <AcceptNotificationPage />,
       },
     ],
   },
