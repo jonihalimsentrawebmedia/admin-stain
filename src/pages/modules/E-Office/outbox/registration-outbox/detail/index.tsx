@@ -1,23 +1,21 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { UseGetDetailInbox } from '@/pages/modules/E-Office/inbox/registration-inbox/hooks'
+import { UseGetDetailOutbox } from '../hooks/index.tsx'
 import { Card, CardContent } from '@/components/ui/card.tsx'
 import { TitleLine } from '@/pages/modules/pusat-karir/component/common/titleLine.tsx'
 import { format } from 'date-fns'
 import { FaFile } from 'react-icons/fa'
-import { ButtonComment } from '@/pages/modules/E-Office/inbox/registration-inbox/detail/comment/component/buttonComment.tsx'
-import { ButtonShowDisposition } from '@/pages/modules/E-Office/inbox/registration-inbox/detail/disposisi/component/buttonShow.tsx'
 
-export const DetailInboxRegistration = () => {
+export const DetailOutboxRegistration = () => {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { detailInbox } = UseGetDetailInbox(id as string)
+  const { detailInbox } = UseGetDetailOutbox(id as string)
 
   return (
     <>
       <div className="space-y-5 py-10">
         <ButtonTitleGroup
-          label={'Detail Surat Masuk'}
+          label={'Detail Surat Keluar'}
           isBack
           buttonGroup={[
             {
@@ -49,12 +47,12 @@ export const DetailInboxRegistration = () => {
                 <p>{detailInbox?.nama_klasifikasi_surat}</p>
               </div>
               <div className="flex flex-col gap-1.5">
-                <p className="text-gray-500">Asal Surat: </p>
-                <p>{detailInbox?.nama_asal_surat}</p>
+                <p className="text-gray-500">Penandatangan Surat: </p>
+                <p>{detailInbox?.nama_penandatangan}</p>
               </div>
               <div className="flex flex-col gap-1.5">
                 <p className="text-gray-500">Kepada: </p>
-                <p>{detailInbox?.penerima_surat}</p>
+                <p>{detailInbox?.surat_kepada}</p>
               </div>
               <div className="flex flex-col gap-1.5">
                 <p className="text-gray-500">Nomor Surat: </p>
@@ -75,10 +73,6 @@ export const DetailInboxRegistration = () => {
               <div className="flex flex-col gap-1.5 col-span-2">
                 <p className="text-gray-500">Perihal: </p>
                 <p>{detailInbox?.perihal}</p>
-              </div>
-              <div className="flex flex-col gap-1.5 col-span-2">
-                <p className="text-gray-500">Tebusan: </p>
-                <p>{detailInbox?.tembusan}</p>
               </div>
               <div className="flex flex-col gap-1.5 col-span-2">
                 <p className="text-gray-500">Ringkasan Surat: </p>
@@ -196,12 +190,10 @@ export const DetailInboxRegistration = () => {
                       </p>
                     </div>
                   </div>
-                  <ButtonComment id={row?.id_pejabat_surat_masuk} />
+                  {/*<ButtonComment id={row?.id_pejabat_surat_masuk} />*/}
                 </div>
               ))}
             </div>
-
-            <ButtonShowDisposition data={detailInbox} />
           </CardContent>
         </Card>
       </div>

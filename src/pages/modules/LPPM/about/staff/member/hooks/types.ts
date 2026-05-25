@@ -15,4 +15,6 @@ export interface IMemberStaff {
   nama_user_created: string
   nama_user_updated: string
   nama_staff: string
+  id_sdm: string
+  is_dosen: boolean
 }

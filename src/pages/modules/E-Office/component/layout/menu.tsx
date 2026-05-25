@@ -1,5 +1,5 @@
 import { MdDashboard, MdRoomPreferences } from 'react-icons/md'
-import { FaArchive } from 'react-icons/fa'
+import { FaArchive, FaListUl } from 'react-icons/fa'
 import { IoMailUnread } from 'react-icons/io5'
 
 const baseDomain = '/modules/e-office'
@@ -40,6 +40,52 @@ export const GenerateMenu = () => {
           id: 32,
           name: 'Daftar Surat Masuk',
           path: `${baseDomain}/inbox/inbox-list`,
+        },
+        {
+          id: 33,
+          name: 'Disposisi Surat',
+          path: `${baseDomain}/inbox/inbox-disposition`,
+        },
+        {
+          id: 34,
+          name: 'Tembusan Surat',
+          path: `${baseDomain}/inbox/copy-letter`,
+        },
+      ],
+    },
+    {
+      id: 4,
+      name: 'Surat Keluar',
+      path: `${baseDomain}/outbox`,
+      icon: <IoMailUnread className={'size-5'} />,
+      child: [
+        {
+          id: 41,
+          name: 'Registrasi Surat Keluar',
+          path: `${baseDomain}/outbox/registration-outbox`,
+        },
+        {
+          id: 42,
+          name: 'Daftar Surat Keluar',
+          path: `${baseDomain}/outbox/outbox-list`,
+        },
+      ],
+    },
+    {
+      id: 5,
+      name: 'Agenda',
+      path: `${baseDomain}/agenda`,
+      icon: <FaListUl className={'size-5'} />,
+      child: [
+        {
+          id: 51,
+          name: 'Agenda Surat Masuk',
+          path: `${baseDomain}/agenda/inbox`,
+        },
+        {
+          id: 52,
+          name: 'Agenda Surat Keluar',
+          path: `${baseDomain}/agenda/outbox`,
         },
       ],
     },

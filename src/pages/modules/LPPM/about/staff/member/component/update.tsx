@@ -34,6 +34,9 @@ export const UpdateStaffMember = () => {
         nip: detail.nip,
         nama_anggota: detail.nama_anggota,
         url_gambar: detail.url_gambar,
+        id_sdm: detail?.id_sdm,
+        is_dosen: detail?.is_dosen,
+        is_local_data: !!detail?.id_sdm,
       })
     }
   }, [detail])
