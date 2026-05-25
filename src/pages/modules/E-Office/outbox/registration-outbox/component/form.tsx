@@ -8,7 +8,6 @@ import { UseGetSessionEOffice } from '@/pages/modules/E-Office/session/hooks.tsx
 import { USeGetLetterNature } from '@/pages/modules/E-Office/reference/letter-nature/hooks'
 import { USeGetLetterType } from '@/pages/modules/E-Office/reference/letter-type/hooks'
 import { USeGetLetterClassification } from '@/pages/modules/E-Office/reference/letter-classification/hooks'
-import { USeGetLetterOrigin } from '@/pages/modules/E-Office/reference/letter-origin/hooks'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import TextAreaInput from '@/components/common/form/textAreaInput.tsx'
 import CheckboxInputBasic from '@/components/common/form/checkbox.tsx'
@@ -19,22 +18,21 @@ import { UseGetHumanResource } from '@/pages/modules/E-Office/reference/human-re
 import SelectUseRoleData from '@/pages/modules/E-Office/component/common/selectUser.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import type { IOutbox } from '../data/types.ts'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
-import type { IInbox } from '@/pages/modules/E-Office/inbox/registration-inbox/data/types.ts'
 
 interface IProps {
-  data?: IInbox
+  data?: IOutbox
 }
 
-export const FormRegistrationInbox = (props: IProps) => {
+export const FormRegistrationOutbox = (props: IProps) => {
   const { data } = props
 
   const form = useForm<SuratFormType>({
     resolver: zodResolver(SuratSchema),
     defaultValues: {
-      is_otomatis: false,
       is_agenda: false,
       is_penting: false,
       is_disposisi: false,
@@ -49,28 +47,27 @@ export const FormRegistrationInbox = (props: IProps) => {
   const { humanResource } = UseGetHumanResource()
   const { letterNature } = USeGetLetterNature({ page: '0', limit: '0' })
   const { letterType } = USeGetLetterType({ page: '0', limit: '0' })
-  const { letterOrigin } = USeGetLetterOrigin({ page: '0', limit: '0' })
   const { letterClassification } = USeGetLetterClassification({ page: '0', limit: '0' })
   const { reminderAgenda } = USeGetReminderAgenda({ page: '0', limit: '0' })
   const {} = UseGetSessionEOffice()
 
   const [loading, setLoading] = useState(false)
+  console.log(form.formState.errors)
 
   const HandleSave = async (value: SuratFormType) => {
     setLoading(true)
     if (data) {
-      await AxiosClient.put(`/eoffice/surat-masuk/${data?.id_surat_masuk ?? ''}`, {
+      await AxiosClient.put(`/eoffice/surat-keluar/${data?.id_surat_keluar ?? ''}`, {
         ...value,
-        list_lampiran: value?.list_lampiran?.map((row) => row?.url_dokumen),
+        list_lampiran: value?.list_lampiran?.map((row) => row?.url_dokumen) ?? null,
       })
         .then((res) => {
           if (res.data.status) {
-            console.log(res)
             setLoading(false)
             form.reset()
             toast.success('Berhasil membuat surat masuk')
             navigate(
-              `/modules/e-office/inbox/registration-inbox/detail/${res?.data?.data?.id_surat_masuk ?? ''}`
+              `/modules/e-office/outbox/registration-outbox/detail/${res?.data?.data?.id_surat_keluar ?? ''}`
             )
           }
         })
@@ -79,9 +76,9 @@ export const FormRegistrationInbox = (props: IProps) => {
           toast.error(err?.response?.data?.message || 'Gagal membuat surat masuk')
         })
     } else {
-      await AxiosClient.post('/eoffice/surat-masuk', {
+      await AxiosClient.post('/eoffice/surat-keluar', {
         ...value,
-        list_lampiran: value?.list_lampiran?.map((row) => row?.url_dokumen),
+        list_lampiran: value?.list_lampiran?.map((row) => row?.url_dokumen) ?? null,
       })
         .then((res) => {
           if (res.data.status) {
@@ -90,7 +87,7 @@ export const FormRegistrationInbox = (props: IProps) => {
             form.reset()
             toast.success('Berhasil membuat surat masuk')
             navigate(
-              `/modules/e-office/inbox/registration-inbox/detail/${res?.data?.data?.id_surat_masuk ?? ''}`
+              `/modules/e-office/outbox/registration-outbox/detail/${res?.data?.data?.id_surat_keluar ?? ''}`
             )
           }
         })
@@ -178,23 +175,24 @@ export const FormRegistrationInbox = (props: IProps) => {
                 })) ?? []
               }
             />
+
             <SelectBasicInput
               form={form}
-              label={'Pengirim / Asal Surat'}
-              placeholder={'Pengirim / Asal surat'}
-              name={'id_asal_surat'}
+              label={'Penandatangan Surat'}
+              placeholder={'Pilih Pegawai Penandatangan Surat'}
+              name={'id_penandatangan_sdm'}
               isRequired
-              className={'col-span-2'}
+              className={'col-span-2 z-[20]!'}
               data={
-                letterOrigin?.map((row) => ({
-                  label: row?.instansi,
-                  value: row?.id_asal_surat,
+                humanResource?.map((row) => ({
+                  label: row?.nama,
+                  value: row?.id_sdm,
                 })) ?? []
               }
             />
 
             <TextInput
-              name={'penerima_surat'}
+              name={'surat_kepada'}
               form={form}
               label={'Penerima Surat'}
               placeholder={'Penerima surat'}
@@ -225,44 +223,11 @@ export const FormRegistrationInbox = (props: IProps) => {
             />
 
             <TextInput
-              name={'nomor_agenda'}
-              form={form}
-              label={'Nonota Agenda'}
-              placeholder={'Nomor agenda'}
-              className={'col-span-1'}
-              htmlFor={'nomor_agenda'}
-              isDisabled={!!form.watch('is_otomatis')}
-              isRequired
-            />
-
-            <CheckboxInputBasic
-              name={'is_otomatis'}
-              form={form}
-              label={'Otomatis'}
-              isRequired
-              fx={(e) => {
-                if (e) {
-                  form.setValue('nomor_agenda', null)
-                }
-              }}
-            />
-
-            <TextInput
               name={'perihal'}
               form={form}
               label={'Perihal'}
               placeholder={'Perihal'}
               htmlFor={'perihal'}
-              className={'col-span-2'}
-              isRequired
-            />
-
-            <TextInput
-              name={'tembusan'}
-              form={form}
-              label={'Tembusan'}
-              placeholder={'Tembusan'}
-              htmlFor={'tembusan'}
               className={'col-span-2'}
               isRequired
             />
@@ -400,33 +365,19 @@ export const FormRegistrationInbox = (props: IProps) => {
 
           <div className="border p-5 rounded grid grid-cols-2 gap-5 bg-white">
             <div className="col-span-2">
-              <TitleLine title={'Disposisi'} />
+              <TitleLine title={'Tembusan'} />
             </div>
             <div className="col-span-2">
               <CheckboxInputBasic
                 name={'is_disposisi'}
                 form={form}
-                label={'Disposisikan Surat Ke'}
+                label={'Aktifkan Tembusan'}
                 isRequired
               />
             </div>
 
             {form.watch('is_disposisi') === true && (
               <>
-                <SelectBasicInput
-                  name={'jenis_disposisi'}
-                  form={form}
-                  placeholder={'Jenis disposisi'}
-                  label={'Jenis Disposisi'}
-                  className={'col-span-1'}
-                  usePortal
-                  isRequired
-                  data={['Diketahui', 'Dipelajari', 'Dilaksanakan'].map((row) => ({
-                    label: row,
-                    value: row.toLowerCase(),
-                  }))}
-                />
-
                 <div className="col-span-2">
                   <SelectUseRoleData
                     form={form}

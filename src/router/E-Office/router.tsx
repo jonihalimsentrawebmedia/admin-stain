@@ -10,6 +10,16 @@ import { RegistrationInbox } from '@/pages/modules/E-Office/inbox/registration-i
 import { DetailInboxRegistration } from '@/pages/modules/E-Office/inbox/registration-inbox/detail'
 import { RegistrationInboxEdit } from '@/pages/modules/E-Office/inbox/registration-inbox/edit'
 import { ListInbox } from '@/pages/modules/E-Office/inbox/list-inbox'
+import { RegistrationOutbox } from '@/pages/modules/E-Office/outbox/registration-outbox'
+import { DetailOutboxRegistration } from '@/pages/modules/E-Office/outbox/registration-outbox/detail'
+import { ListOutbox } from '@/pages/modules/E-Office/outbox/list-outbox'
+import { RegistrationOutboxEdit } from '@/pages/modules/E-Office/outbox/registration-outbox/edit'
+import DispositionListPage from '@/pages/modules/E-Office/inbox/disposition'
+import { DetailDisposition } from '@/pages/modules/E-Office/inbox/disposition/detail'
+import { CopyLetterPage } from '@/pages/modules/E-Office/inbox/copy-letter'
+import { DetailCopyLetterPage } from '@/pages/modules/E-Office/inbox/copy-letter/detail'
+import { ListAgendaInboxPage } from '@/pages/modules/E-Office/agenda/inbox'
+import { ListAgendaOutboxPage } from '@/pages/modules/E-Office/agenda/outbox'
 
 export const E_OFFICE_ROUTE = [
   {
@@ -58,6 +68,63 @@ export const E_OFFICE_ROUTE = [
           },
         ],
       },
+      {
+        path: 'inbox-disposition',
+        children: [
+          {
+            index: true,
+            element: <DispositionListPage />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailDisposition />,
+          },
+        ],
+      },
+      {
+        path: 'copy-letter',
+        children: [
+          {
+            index: true,
+            element: <CopyLetterPage />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailCopyLetterPage />,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: 'outbox',
+    children: [
+      {
+        path: 'registration-outbox',
+        children: [
+          {
+            index: true,
+            element: <RegistrationOutbox />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailOutboxRegistration />,
+          },
+          {
+            path: 'edit/:id',
+            element: <RegistrationOutboxEdit />,
+          },
+        ],
+      },
+      {
+        path: 'outbox-list',
+        children: [
+          {
+            index: true,
+            element: <ListOutbox />,
+          },
+        ],
+      },
     ],
   },
   {
@@ -91,6 +158,19 @@ export const E_OFFICE_ROUTE = [
       {
         path: 'reminder-agenda',
         element: <ListReminderAgenda />,
+      },
+    ],
+  },
+  {
+    path: 'agenda',
+    children: [
+      {
+        path: 'inbox',
+        element: <ListAgendaInboxPage />,
+      },
+      {
+        path: 'outbox',
+        element: <ListAgendaOutboxPage />,
       },
     ],
   },

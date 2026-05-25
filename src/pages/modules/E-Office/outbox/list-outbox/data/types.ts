@@ -1,8 +1,8 @@
-export interface IInboxList {
+export interface IOutboxList {
   id: string
-  id_pejabat_surat_masuk: string
+  id_pejabat_surat_keluar: string
 
-  dari_kotak_masuk: string
+  dari_kotak_keluar: string
   tanggal_surat: string
   nomor_surat: string
   nomor_agenda: string | null

@@ -1,34 +1,32 @@
 import { Link, useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
-import type { IInboxList } from '@/pages/modules/E-Office/inbox/list-inbox/data/types.ts'
+import type { ICopyLetter } from '@/pages/modules/E-Office/inbox/copy-letter/data/types.ts'
 import { formatDate } from 'date-fns'
 import { MdInfo } from 'react-icons/md'
-import { HiPencil } from 'react-icons/hi'
-import ButtonDeleteInbox from '@/pages/modules/E-Office/inbox/list-inbox/component/buttonDelete.tsx'
 
-export const columnsListInbox = () => {
+const ColumnsCopyLetter = () => {
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') ?? '1')
   const limit = Number(searchParams.get('limit') ?? '10')
 
-  const columns: ColumnDef<IInboxList>[] = [
+  const columns: ColumnDef<ICopyLetter>[] = [
     {
       accessorKey: 'id',
       header: '#',
       cell: ({ row }) => {
         return (
           <div className="flex items-center gap-2">
-            <span className="text-sm font-medium">{row.index + 1 + (page - 1) * limit}</span>
+            <p className="text-sm">{row.index + 1 + (page - 1) * limit}</p>
           </div>
         )
       },
     },
     {
       accessorKey: 'tanggal_surat',
-      header: 'Tanggal',
+      header: 'Tanggal Surat',
       cell: ({ row }) => {
         const date = new Date(row.original.tanggal_surat)
-        return <>{formatDate(date, 'dd/MM/yyyy')}</>
+        return <>{date ? formatDate(date, 'dd/MM/yyyy') : ''}</>
       },
     },
     {
@@ -36,8 +34,8 @@ export const columnsListInbox = () => {
       header: 'Nomor Surat',
     },
     {
-      accessorKey: 'perihal',
-      header: 'Jenis Surat & Perihal',
+      accessorKey: 'nama_jenis_surat',
+      header: 'Nomor Surat',
       cell: ({ row }) => {
         const data = row.original
         return (
@@ -58,20 +56,20 @@ export const columnsListInbox = () => {
     },
     {
       accessorKey: 'nama_asal_surat',
-      header: 'Asal Surat',
+      header: 'Pengirim / Asal Surat',
     },
     {
       accessorKey: 'penerima_surat',
       header: 'Penerima Surat',
     },
     {
-      accessorKey: 'disposisi',
-      header: 'Disposisi',
+      accessorKey: 'tembakau_surat',
+      header: 'Tembusan',
       cell: ({ row }) => {
         const data = row.original
         return (
           <>
-            {data?.list_disposisi?.map((row, index) => (
+            {data?.list_tembusan?.map((row, index) => (
               <p key={index}>{row}</p>
             ))}
           </>
@@ -85,18 +83,12 @@ export const columnsListInbox = () => {
         const data = row.original
         return (
           <>
-            <div className="flex items-center justify-center gap-2">
-              <Link to={`/modules/e-office/inbox/registration-inbox/detail/${data?.id}`}>
+            <div className="flex items-center justify-center">
+              <Link to={`detail/${data?.id}`}>
                 <button className={'bg-blue-500 p-1.5 text-white rounded hover:bg-blue-600'}>
-                  <MdInfo className="size-4" />
+                  <MdInfo />
                 </button>
               </Link>
-              <Link to={`/modules/e-office/inbox/registration-inbox/edit/${data?.id}`}>
-                <button className={'bg-yellow-500 p-1.5 text-white rounded hover:bg-yellow-600'}>
-                  <HiPencil className="size-4" />
-                </button>
-              </Link>
-              <ButtonDeleteInbox data={data} />
             </div>
           </>
         )
@@ -106,3 +98,5 @@ export const columnsListInbox = () => {
 
   return columns
 }
+
+export default ColumnsCopyLetter

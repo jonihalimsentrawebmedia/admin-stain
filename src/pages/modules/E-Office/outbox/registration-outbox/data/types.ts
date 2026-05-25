@@ -1,6 +1,6 @@
 export interface ISDMList {
   id_pejabat_surat_masuk: string
-  id_surat_masuk: string
+  id_surat_keluar: string
   id_sdm: string
   status: string
   dibaca_at: string | null
@@ -18,13 +18,11 @@ export interface ISDMList {
   gambar_sdm: string | null
   nama_dibaca_user?: string
   nama_direspon_user?: string
-  list_disposisi: string[]
-  dikirim_at: string
 }
 
 export interface IFileInbox {
   id_lampiran: string
-  id_surat_masuk: string
+  id_surat_keluar: string
   lampiran_url: string
   lampiran_key: string
   created_at: string
@@ -33,9 +31,11 @@ export interface IFileInbox {
   updated_user: string
 }
 
-export interface IInbox {
-  id_surat_masuk: string
+export interface IOutbox {
+  /** Primary Key */
+  id_surat_keluar: string
 
+  /** Foreign Keys */
   id_satuan_organisasi: string
   id_unit: string
   id_asal_surat: string
@@ -43,9 +43,6 @@ export interface IInbox {
   id_sifat_surat: string
   id_klasifikasi_surat: string
   id_waktu_pengingat_agenda?: string | null
-
-  gambar_user_created: string
-  nama_user_created: string
 
   /** Main Data */
   nomor_surat: string
@@ -72,13 +69,14 @@ export interface IInbox {
 
   jenis_disposisi?: string | null
   status: string
+  surat_kepada: string
 
   created_at: string
   created_user: string
   updated_at: string
   updated_user: string
 
-  nama_asal_surat: string
+  nama_penandatangan: string
   nama_jenis_surat: string
   nama_sifat_surat: string
   nama_klasifikasi_surat: string

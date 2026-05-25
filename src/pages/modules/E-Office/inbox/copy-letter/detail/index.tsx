@@ -1,17 +1,15 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { UseGetDetailInbox } from '@/pages/modules/E-Office/inbox/registration-inbox/hooks'
 import { Card, CardContent } from '@/components/ui/card.tsx'
 import { TitleLine } from '@/pages/modules/pusat-karir/component/common/titleLine.tsx'
 import { format } from 'date-fns'
 import { FaFile } from 'react-icons/fa'
-import { ButtonComment } from '@/pages/modules/E-Office/inbox/registration-inbox/detail/comment/component/buttonComment.tsx'
-import { ButtonShowDisposition } from '@/pages/modules/E-Office/inbox/registration-inbox/detail/disposisi/component/buttonShow.tsx'
+import { UseGetCopyLetterDetail } from '@/pages/modules/E-Office/inbox/copy-letter/hooks'
 
-export const DetailInboxRegistration = () => {
+export const DetailCopyLetterPage = () => {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { detailInbox } = UseGetDetailInbox(id as string)
+  const { copyLetterDetail: detail } = UseGetCopyLetterDetail(id as string)
 
   return (
     <>
@@ -34,55 +32,51 @@ export const DetailInboxRegistration = () => {
             <div className="grid grid-cols-2 w-fit gap-5 gap-y-4">
               <div className="flex flex-col gap-1.5 col-span-2">
                 <p className="text-gray-500">Satuan Kerja: </p>
-                <p>{detailInbox?.nama_unit}</p>
+                <p>{detail?.nama_unit}</p>
               </div>
               <div className="flex flex-col gap-1.5">
                 <p className="text-gray-500">Sifat Surat: </p>
-                <p>{detailInbox?.nama_sifat_surat}</p>
+                <p>{detail?.nama_sifat_surat}</p>
               </div>
               <div className="flex flex-col gap-1.5">
                 <p className="text-gray-500">Jenis Surat: </p>
-                <p>{detailInbox?.nama_jenis_surat}</p>
+                <p>{detail?.nama_jenis_surat}</p>
               </div>
               <div className="flex flex-col gap-1.5">
                 <p className="text-gray-500">Klasifikasi Surat: </p>
-                <p>{detailInbox?.nama_klasifikasi_surat}</p>
+                <p>{detail?.nama_klasifikasi_surat}</p>
               </div>
               <div className="flex flex-col gap-1.5">
                 <p className="text-gray-500">Asal Surat: </p>
-                <p>{detailInbox?.nama_asal_surat}</p>
+                <p>{detail?.nama_asal_surat}</p>
               </div>
               <div className="flex flex-col gap-1.5">
                 <p className="text-gray-500">Kepada: </p>
-                <p>{detailInbox?.penerima_surat}</p>
+                <p>{detail?.penerima_surat}</p>
               </div>
               <div className="flex flex-col gap-1.5">
                 <p className="text-gray-500">Nomor Surat: </p>
-                <p>{detailInbox?.nomor_surat}</p>
+                <p>{detail?.nomor_surat}</p>
               </div>
               <div className="flex flex-col gap-1.5">
                 <p className="text-gray-500">Tanggal: </p>
-                <p>
-                  {detailInbox?.tanggal_surat
-                    ? format(detailInbox?.tanggal_surat, 'dd/MM/yyyy')
-                    : ''}
-                </p>
+                <p>{detail?.tanggal_surat ? format(detail?.tanggal_surat, 'dd/MM/yyyy') : ''}</p>
               </div>
               <div className="flex flex-col gap-1.5">
                 <p className="text-gray-500">Nomor Agenda: </p>
-                <p>{detailInbox?.nomor_agenda}</p>
+                <p>{detail?.nomor_agenda}</p>
               </div>
               <div className="flex flex-col gap-1.5 col-span-2">
                 <p className="text-gray-500">Perihal: </p>
-                <p>{detailInbox?.perihal}</p>
+                <p>{detail?.perihal}</p>
               </div>
               <div className="flex flex-col gap-1.5 col-span-2">
                 <p className="text-gray-500">Tebusan: </p>
-                <p>{detailInbox?.tembusan}</p>
+                <p>{detail?.tembusan}</p>
               </div>
               <div className="flex flex-col gap-1.5 col-span-2">
                 <p className="text-gray-500">Ringkasan Surat: </p>
-                <p>{detailInbox?.ringkasan}</p>
+                <p>{detail?.ringkasan}</p>
               </div>
             </div>
           </CardContent>
@@ -94,50 +88,38 @@ export const DetailInboxRegistration = () => {
             <div className="grid grid-cols-4 w-fit gap-5 gap-y-4">
               <div className="flex flex-col gap-1.5 col-span-4">
                 <p className="text-gray-500">Nama Kegiatan: </p>
-                <p>{detailInbox?.nama_kegiatan}</p>
+                <p>{detail?.nama_kegiatan}</p>
               </div>
               <div className="flex flex-col gap-1.5 col-span-4">
                 <p className="text-gray-500">Keterangan: </p>
-                <p>{detailInbox?.keterangan_agenda}</p>
+                <p>{detail?.keterangan_agenda}</p>
               </div>
 
               <div className="flex flex-col gap-1.5 col-span-1">
                 <p className="text-gray-500">Tanggal Mulai: </p>
-                <p>
-                  {detailInbox?.tanggal_mulai
-                    ? format(detailInbox?.tanggal_mulai, 'dd/MM/yyyy')
-                    : ''}
-                </p>
+                <p>{detail?.tanggal_mulai ? format(detail?.tanggal_mulai, 'dd/MM/yyyy') : ''}</p>
               </div>
               <div className="flex flex-col gap-1.5 col-span-1">
                 <p className="text-gray-500">Jam Mulai: </p>
-                <p>
-                  {detailInbox?.tanggal_mulai ? format(detailInbox?.tanggal_mulai, 'HH:mm') : ''}
-                </p>
+                <p>{detail?.tanggal_mulai ? format(detail?.tanggal_mulai, 'HH:mm') : ''}</p>
               </div>
               <div className="flex flex-col gap-1.5 col-span-1">
                 <p className="text-gray-500">Tanggal Selesai: </p>
                 <p>
-                  {detailInbox?.tanggal_selesai
-                    ? format(detailInbox?.tanggal_selesai, 'dd/MM/yyyy')
-                    : ''}
+                  {detail?.tanggal_selesai ? format(detail?.tanggal_selesai, 'dd/MM/yyyy') : ''}
                 </p>
               </div>
               <div className="flex flex-col gap-1.5 col-span-1">
                 <p className="text-gray-500">Jam Mulai: </p>
-                <p>
-                  {detailInbox?.tanggal_selesai
-                    ? format(detailInbox?.tanggal_selesai, 'HH:mm')
-                    : ''}
-                </p>
+                <p>{detail?.tanggal_selesai ? format(detail?.tanggal_selesai, 'HH:mm') : ''}</p>
               </div>
               <div className="flex flex-col gap-1.5 col-span-4">
                 <p className="text-gray-500">Tempat / Lokasi: </p>
-                <p>{detailInbox?.tempat}</p>
+                <p>{detail?.tempat}</p>
               </div>
               <div className="flex flex-col gap-1.5 col-span-4">
                 <p className="text-gray-500">Pengingat: </p>
-                <p>{detailInbox?.nama_waktu_pengingat_agenda}</p>
+                <p>{detail?.nama_waktu_pengingat_agenda}</p>
               </div>
             </div>
           </CardContent>
@@ -147,7 +129,7 @@ export const DetailInboxRegistration = () => {
           <CardContent className={'space-y-5'}>
             <TitleLine title={'Lampiran'} />
             <div className="grid grid-cols-3 gap-5">
-              {detailInbox?.lampiran?.map((item, index) => (
+              {detail?.lampiran?.map((item, index) => (
                 <Link
                   to={item?.lampiran_url}
                   key={index}
@@ -163,45 +145,25 @@ export const DetailInboxRegistration = () => {
 
         <Card className={'rounded'}>
           <CardContent className={'space-y-5'}>
-            <TitleLine title={'Disposisi'} />
-            <div className="flex flex-col gap-1.5">
-              <p className="text-gray-500">Jenis Disposisi: </p>
-              <p className={'capitalize'}>{detailInbox?.jenis_disposisi}</p>
-            </div>
-
-            <div className={'flex flex-col gap-1.5'}>
-              {detailInbox?.pejabat?.map((row, index) => (
-                <div key={index} className={'flex items-center gap-5 w-full'}>
-                  <div className={`flex flex-col gap-1`}>
-                    <p className="text-sm">{row?.status?.split('_').join(' ')}</p>
-                    <div className={'bg-blue-50 flex items-center gap-2 p-2 rounded w-[350px]'}>
-                      <img
-                        src={row?.gambar_sdm ?? '/img/noimg.png'}
-                        alt={row?.nama_sdm}
-                        className={'w-12 h-12 rounded-full object-cover'}
-                      />
-                      <div>
-                        <p className={'text-primary text-lg font-semibold'}>{row?.nama_sdm}</p>
-                      </div>
-                    </div>
+            <TitleLine title={'Tembusan'} />
+            <div className="grid grid-cols-3 gap-5">
+              {detail?.pejabat.map((row, index) => (
+                <div
+                  key={index}
+                  className={'flex items-center gap-1.5 p-4 border rounded bg-blue-50'}
+                >
+                  <img
+                    src={row?.gambar_sdm ?? '/img/noimg.png'}
+                    alt="gambar"
+                    className="w-14 h-14 rounded-full object-cover"
+                  />
+                  <div>
+                    <p>{row?.nama_sdm}</p>
+                    <p>{row?.list_disposisi?.[0] ?? ''}</p>
                   </div>
-                  <div className={`flex flex-col gap-1 w-full`}>
-                    <div className="flex items-center gap-4">
-                      <p className="text-sm">Dibaca:</p>
-                      <p className="text-sm">Direspon:</p>
-                    </div>
-                    <div className={'bg-blue-50 flex items-center gap-2 p-2 rounded w-full'}>
-                      <p className={'text-lg text-primary font-semibold h-12'}>
-                        {row?.komentar ?? '-'}
-                      </p>
-                    </div>
-                  </div>
-                  <ButtonComment id={row?.id_pejabat_surat_masuk} />
                 </div>
               ))}
             </div>
-
-            <ButtonShowDisposition data={detailInbox} />
           </CardContent>
         </Card>
       </div>

@@ -1,17 +1,17 @@
 import { Link, useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
-import type { IInboxList } from '@/pages/modules/E-Office/inbox/list-inbox/data/types.ts'
+import type { IOutboxList } from '../data/types.ts'
 import { formatDate } from 'date-fns'
 import { MdInfo } from 'react-icons/md'
 import { HiPencil } from 'react-icons/hi'
-import ButtonDeleteInbox from '@/pages/modules/E-Office/inbox/list-inbox/component/buttonDelete.tsx'
+import ButtonDeleteOtbox from '@/pages/modules/E-Office/outbox/list-outbox/component/buttonDelete.tsx'
 
-export const columnsListInbox = () => {
+export const columnsListOutbox = () => {
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') ?? '1')
   const limit = Number(searchParams.get('limit') ?? '10')
 
-  const columns: ColumnDef<IInboxList>[] = [
+  const columns: ColumnDef<IOutboxList>[] = [
     {
       accessorKey: 'id',
       header: '#',
@@ -57,11 +57,11 @@ export const columnsListInbox = () => {
       },
     },
     {
-      accessorKey: 'nama_asal_surat',
+      accessorKey: 'nama_penandatangan',
       header: 'Asal Surat',
     },
     {
-      accessorKey: 'penerima_surat',
+      accessorKey: 'surat_kepada',
       header: 'Penerima Surat',
     },
     {
@@ -86,17 +86,17 @@ export const columnsListInbox = () => {
         return (
           <>
             <div className="flex items-center justify-center gap-2">
-              <Link to={`/modules/e-office/inbox/registration-inbox/detail/${data?.id}`}>
+              <Link to={`/modules/e-office/outbox/registration-outbox/detail/${data?.id}`}>
                 <button className={'bg-blue-500 p-1.5 text-white rounded hover:bg-blue-600'}>
                   <MdInfo className="size-4" />
                 </button>
               </Link>
-              <Link to={`/modules/e-office/inbox/registration-inbox/edit/${data?.id}`}>
+              <Link to={`/modules/e-office/outbox/registration-outbox/edit/${data?.id}`}>
                 <button className={'bg-yellow-500 p-1.5 text-white rounded hover:bg-yellow-600'}>
                   <HiPencil className="size-4" />
                 </button>
               </Link>
-              <ButtonDeleteInbox data={data} />
+              <ButtonDeleteOtbox data={data} />
             </div>
           </>
         )
