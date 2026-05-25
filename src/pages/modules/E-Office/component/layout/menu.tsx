@@ -1,6 +1,7 @@
 import { MdDashboard, MdRoomPreferences } from 'react-icons/md'
 import { FaArchive, FaListUl } from 'react-icons/fa'
 import { IoMailUnread } from 'react-icons/io5'
+import { FaGear } from 'react-icons/fa6'
 
 const baseDomain = '/modules/e-office'
 
@@ -90,7 +91,7 @@ export const GenerateMenu = () => {
       ],
     },
     {
-      id: 9,
+      id: 6,
       name: 'Referensi',
       path: `${baseDomain}/reference`,
       icon: <MdRoomPreferences className={'size-5'} />,
@@ -119,6 +120,19 @@ export const GenerateMenu = () => {
           id: 95,
           name: 'Waktu Pengingat Agenda',
           path: `${baseDomain}/reference/reminder-agenda`,
+        },
+      ],
+    },
+    {
+      id: 7,
+      name: 'Pengaturan',
+      path: `${baseDomain}/settings`,
+      icon: <FaGear />,
+      child: [
+        {
+          id: 71,
+          name: 'Penerima Notifikasi',
+          path: `${baseDomain}/settings/accept-notification`,
         },
       ],
     },
