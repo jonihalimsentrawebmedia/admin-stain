@@ -21,7 +21,6 @@ export const ButtonComment = (props: props) => {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const { comment } = UseGetComment(id ?? '')
-  console.log(comment)
 
   const form = useForm()
 

@@ -6,13 +6,50 @@ import { UseGetDispositionDetail } from '@/pages/modules/E-Office/inbox/disposit
 import { format } from 'date-fns'
 import { FaFile } from 'react-icons/fa'
 import { ButtonShowDisposition } from '@/pages/modules/E-Office/inbox/registration-inbox/detail/disposisi/component/buttonShow.tsx'
-import { Button } from '@/components/ui/button.tsx'
-import { Check } from 'lucide-react'
+import { UseGetComment } from '@/pages/modules/E-Office/inbox/registration-inbox/detail/comment/hooks'
+import { cn } from '@/lib/utils.ts'
+import TextInput from '@/components/common/form/TextInput.tsx'
+import { IoSend } from 'react-icons/io5'
+import { Form } from '@/components/ui/form.tsx'
+import { useForm } from 'react-hook-form'
+import { useQueryClient } from '@tanstack/react-query'
+import AxiosClient from '@/provider/axios.tsx'
+import { toast } from 'react-toastify'
+import { useState } from 'react'
+import ButtonResponseStatusDisposition from '@/pages/modules/E-Office/inbox/disposition/compnent/buttonResponse.tsx'
 
 export const DetailDisposition = () => {
   const { id } = useParams()
   const navigate = useNavigate()
   const { dispositionDetail: detail } = UseGetDispositionDetail(id as string)
+  const { comment } = UseGetComment(id as string)
+  const [loading, setLoading] = useState(false)
+
+  const form = useForm()
+
+  const queryClient = useQueryClient()
+  const HandleSave = async (value: any) => {
+    setLoading(true)
+    await AxiosClient.post(`/eoffice/surat-masuk/komentar/${id}`, {
+      komentar: value.komentar,
+    })
+      .then((res) => {
+        if (res.data.status) {
+          setLoading(false)
+          toast.success(res.data.message || 'Success')
+          queryClient.invalidateQueries({
+            queryKey: ['comment'],
+          })
+          form.reset({
+            comment: '',
+          })
+        }
+      })
+      .catch((err) => {
+        setLoading(false)
+        toast.error(err.response.data.message || 'Error')
+      })
+  }
 
   return (
     <>
@@ -173,10 +210,7 @@ export const DetailDisposition = () => {
             </div>
 
             <div className={'flex items-center gap-5'}>
-              <Button className={'text-white bg-primary rounded-full'}>
-                <Check />
-                Response Disposisi
-              </Button>
+              <ButtonResponseStatusDisposition />
               <ButtonShowDisposition data={detail as any} />
             </div>
           </CardContent>
@@ -185,6 +219,46 @@ export const DetailDisposition = () => {
         <Card>
           <CardContent>
             <CardTitle>Komentar</CardTitle>
+            <div>
+              {comment?.map((row, index) => (
+                <div
+                  key={index}
+                  className={cn(
+                    'flex items-start gap-2 w-full',
+                    row?.posisi === 'kanan' && 'flex-row-reverse'
+                  )}
+                >
+                  <img
+                    src={row?.gambar_penulis ?? '/img/noimg.png'}
+                    alt="gambar_penulis"
+                    className="w-10 h-10 rounded-full"
+                  />
+                  <div className={'w-full'}>
+                    <p className={'text-end'}>{row?.nama_penulis}</p>
+                    <div className={'w-full text-start bg-gray-100 p-4 rounded'}>
+                      <p>{row?.komentar}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <Form {...form}>
+              <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
+                <div className="flex items-center gap-1 w-full">
+                  <TextInput
+                    name={'komentar'}
+                    form={form}
+                    placeholder={'Tulis Pesan ada Disini'}
+                    className={'w-full'}
+                    label={''}
+                  />
+                  <button className={'p-1.5 bg-primary text-white mt-1.5'} disabled={loading}>
+                    <IoSend />
+                  </button>
+                </div>
+              </form>
+            </Form>
           </CardContent>
         </Card>
       </div>
