@@ -3,9 +3,9 @@ import type { TResolverAcceptNotification } from '../data/resolver'
 import { Form } from '@/components/ui/form.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
-import { UseGetHumanResource } from '@/pages/modules/E-Office/reference/human-resource/hooks.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import { InputRadio } from '@/components/common/form/InputRadio.tsx'
+import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan-unit/hooks.tsx'
 
 interface props {
   form: UseFormReturn<TResolverAcceptNotification>
@@ -17,7 +17,7 @@ interface props {
 
 const FormAcceptNotification = (props: props) => {
   const { form, loading, open, setOpen, HandleSave } = props
-  const { humanResource } = UseGetHumanResource()
+  const { institution } = UseGetUnitInstitution()
 
   return (
     <>
@@ -25,14 +25,14 @@ const FormAcceptNotification = (props: props) => {
         <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(HandleSave)}>
           <SelectBasicInput
             form={form}
-            name={'id_sdm'}
+            name={'id_unit'}
             label={'Satuan Kerja'}
             placeholder={'Satuan Kerja'}
             isRequired
             data={
-              humanResource?.map((row) => ({
+              institution?.map((row) => ({
                 label: row?.nama,
-                value: row?.id_sdm,
+                value: row?.id_satuan_organisasi,
               })) ?? []
             }
           />
@@ -47,7 +47,7 @@ const FormAcceptNotification = (props: props) => {
             isRequired
           />
           <TextInput
-            name={'telepon'}
+            name={'no_telepon'}
             form={form}
             label={'Telepon'}
             placeholder={'Telepon'}
