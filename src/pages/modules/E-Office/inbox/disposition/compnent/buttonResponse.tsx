@@ -5,8 +5,16 @@ import { useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
+import type { ISDMList } from '@/pages/modules/E-Office/inbox/registration-inbox/data/types.ts'
+import { cn } from '@/lib/utils.ts'
 
-const ButtonResponseStatusDisposition = () => {
+interface props {
+  data: ISDMList
+}
+
+const ButtonResponseStatusDisposition = (props: props) => {
+  const { data } = props
+
   const { id } = useParams()
   const [loading, setLoading] = useState(false)
 
@@ -31,12 +39,16 @@ const ButtonResponseStatusDisposition = () => {
   return (
     <>
       <Button
-        className={'text-white bg-primary rounded-full'}
+        className={cn(
+          data?.status
+            ? 'bg-green-500 text-white rounded-full'
+            : 'text-white bg-primary rounded-full'
+        )}
         onClick={HandlerResponse}
         disabled={loading}
       >
         <Check />
-        Response Disposisi
+        {data?.status ? 'Sudah Diresponse' : 'Response Disposisi'}
       </Button>
     </>
   )
