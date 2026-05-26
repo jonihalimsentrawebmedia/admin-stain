@@ -21,7 +21,7 @@ export const ButtonAddNotification = () => {
   const queryClient = useQueryClient()
   const HandleSave = async (value: TResolverAcceptNotification) => {
     setLoading(true)
-    await AxiosClient.post('/', value)
+    await AxiosClient.post('/eoffice/notifikasi', value)
       .then((res) => {
         if (res.data.status) {
           setLoading(false)

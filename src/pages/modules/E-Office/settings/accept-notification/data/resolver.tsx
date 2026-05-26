@@ -1,9 +1,9 @@
 import z from 'zod'
 
 export const ResolverAcceptNotification = z.object({
-  id_sdm: z.string(),
-  email: z.string(),
-  telepon: z.string(),
+  id_unit: z.string(),
+  email: z.email(),
+  no_telepon: z.string(),
   id_telegram: z.string(),
   status: z.boolean(),
 })

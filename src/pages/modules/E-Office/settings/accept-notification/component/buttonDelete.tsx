@@ -6,14 +6,10 @@ import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { FaTrash } from 'react-icons/fa'
-import type { TResolverAcceptNotification } from '../data/resolver.tsx'
-
-interface DummyProps extends TResolverAcceptNotification {
-  id_notifikasi: string
-}
+import type { INotification } from '../data/types.ts'
 
 interface props {
-  data: DummyProps
+  data: INotification
 }
 
 const ButtonDeleteAcceptNotification = (props: props) => {
@@ -25,7 +21,7 @@ const ButtonDeleteAcceptNotification = (props: props) => {
   const queryClient = useQueryClient()
   const HandleSave = async () => {
     setLoading(true)
-    await AxiosClient.delete(`/${data?.id_notifikasi}`)
+    await AxiosClient.delete(`/eoffice/notifikasi/${data?.id_notifikasi}`)
       .then((res) => {
         if (res.data.status) {
           setLoading(false)
@@ -55,11 +51,11 @@ const ButtonDeleteAcceptNotification = (props: props) => {
       <DialogBasic title={'Hapus Asal Suret'} open={open} setOpen={setOpen}>
         <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
           <p className="text-gray-500">Nama Unit</p>
-          <p>{data?.id_sdm}</p>
+          <p>{data?.nama_unit}</p>
           <p className="text-gray-500">Email</p>
           <p>{data?.email}</p>
           <p className="text-gray-500">Telepon</p>
-          <p>{data?.telepon}</p>
+          <p>{data?.no_telepon}</p>
           <p className="text-gray-500">ID Telegram</p>
           <p>{data?.id_telegram}</p>
           <p className="text-gray-500">Status</p>

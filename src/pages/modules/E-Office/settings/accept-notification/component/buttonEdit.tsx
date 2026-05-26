@@ -5,13 +5,13 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import { Button } from '@/components/ui/button.tsx'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import FormAcceptNotification from '@/pages/modules/E-Office/settings/accept-notification/component/form.tsx'
-import { BiPlus } from 'react-icons/bi'
+import { type INotification } from '../data/types.ts'
+import { HiPencil } from 'react-icons/hi'
 
 interface props {
-  data: any
+  data: INotification
 }
 
 export const ButtonEditNotification = (props: props) => {
@@ -20,26 +20,26 @@ export const ButtonEditNotification = (props: props) => {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
-    if (data) {
-      form.reset({
-        id_sdm: data.id_sdm,
-        status: data.status,
-        email: data.email,
-        telepon: data.telepon,
-        id_telegram: data.id_telegram,
-      })
-    }
-  }, [data])
-
   const form = useForm<TResolverAcceptNotification>({
     resolver: zodResolver(ResolverAcceptNotification),
   })
 
+  useEffect(() => {
+    if (data) {
+      form.reset({
+        id_unit: data.id_unit ?? '',
+        status: data.status,
+        email: data.email ?? '',
+        no_telepon: data.no_telepon ?? '',
+        id_telegram: data.id_telegram ?? '',
+      })
+    }
+  }, [data])
+
   const queryClient = useQueryClient()
   const HandleSave = async (value: TResolverAcceptNotification) => {
     setLoading(true)
-    await AxiosClient.put(`/${data?.id_notifikasi}`, value)
+    await AxiosClient.put(`/eoffice/notifikasi/${data?.id_notifikasi}`, value)
       .then((res) => {
         if (res.data.status) {
           setLoading(false)
@@ -60,13 +60,12 @@ export const ButtonEditNotification = (props: props) => {
 
   return (
     <>
-      <Button
-        className={'bg-primary text-white rounded-full hover:text-white'}
+      <button
+        className={'bg-yellow-500 text-white p-1.5 rounded hover:bg-yellow-600'}
         onClick={() => setOpen(!open)}
       >
-        <BiPlus />
-        Tambah Penerima
-      </Button>
+        <HiPencil />
+      </button>
 
       <DialogBasic title={'Edit Penerima Notifikasi'} open={open} setOpen={setOpen}>
         <FormAcceptNotification
