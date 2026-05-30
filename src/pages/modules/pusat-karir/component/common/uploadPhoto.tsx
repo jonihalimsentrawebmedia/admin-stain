@@ -16,12 +16,14 @@ interface Props<T extends FieldValues> {
   ratio_width?: number
   ratio_height?: number
   className?: string
+  label?: string
 }
 
 export const UploadPhotoImage = <T extends FieldValues>({
   name,
   form,
   ratio_height = 4,
+  label = 'Foto Profil',
   className,
   ratio_width = 3,
 }: Props<T>) => {
@@ -70,7 +72,7 @@ export const UploadPhotoImage = <T extends FieldValues>({
       </div>
 
       <div className="flex flex-col gap-2">
-        <p className="text-xl font-semibold">Foto Profil</p>
+        <p className="text-xl font-semibold">{label}</p>
 
         <ul className="list-disc pl-5">
           <li>
