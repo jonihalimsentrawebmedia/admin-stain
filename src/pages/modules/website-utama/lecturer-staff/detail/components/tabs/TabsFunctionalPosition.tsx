@@ -7,11 +7,11 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import {
   Table,
-  TableHeader,
-  TableHead,
-  TableRow,
   TableBody,
   TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from '@/components/ui/table'
 import { UseGetFunctionalPosition } from '../../hooks'
 import { useParams } from 'react-router-dom'
@@ -30,7 +30,12 @@ type JabatanFungsionalType = {
   isAdd?: boolean
 }
 
-export default function TabsFunctionalPosition() {
+interface props {
+  show: boolean
+}
+
+export default function TabsFunctionalPosition(props: props) {
+  const { show } = props
   const { id } = useParams()
   const { functionalPosition } = UseGetFunctionalPosition({
     id_sdm: id,
@@ -145,10 +150,12 @@ export default function TabsFunctionalPosition() {
       <div className="flex gap-4 items-center justify-between">
         <div className="text-xl text-primary font-medium">Jabatan Fungsional</div>
         <div className="flex gap-4 items-center">
-          <ButtonSyncLecturerDetail
-            link={`/website-utama/sdm/${id}/jabatan-fungsional/sync`}
-            topik="fcm_sync_sdm_jabatan_fungsional"
-          />
+          {show && (
+            <ButtonSyncLecturerDetail
+              link={`/website-utama/sdm/${id}/jabatan-fungsional/sync`}
+              topik="fcm_sync_sdm_jabatan_fungsional"
+            />
+          )}
           <Button
             disabled={loading}
             onClick={() => {

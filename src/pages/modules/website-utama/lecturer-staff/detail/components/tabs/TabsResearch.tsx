@@ -32,7 +32,12 @@ type PenelitianType = {
   }>
 }
 
-export default function TabsResearch() {
+interface props {
+  show: boolean
+}
+
+export default function TabsResearch(props: props) {
+  const { show } = props
   const { id } = useParams()
   const { research } = UseGetReseacrh({
     id_sdm: id,
@@ -143,10 +148,12 @@ export default function TabsResearch() {
       <div className="flex gap-4 items-center justify-between">
         <div className="text-xl text-primary font-medium">Penelitian</div>
         <div className="flex gap-4 items-center">
-          <ButtonSyncLecturerDetail
-            link={`/website-utama/sdm/${id}/penelitian/sync`}
-            topik="fcm_sync_sdm_penelitian"
-          />
+          {show && (
+            <ButtonSyncLecturerDetail
+              link={`/website-utama/sdm/${id}/penelitian/sync`}
+              topik="fcm_sync_sdm_penelitian"
+            />
+          )}
           <Button
             disabled={loading}
             onClick={() => {

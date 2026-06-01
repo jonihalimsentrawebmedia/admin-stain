@@ -1,18 +1,18 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Pencil, Save, Trash2, Plus,  } from 'lucide-react'
+import { Pencil, Plus, Save, Trash2 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
 import {
   Table,
-  TableHeader,
-  TableHead,
-  TableRow,
   TableBody,
   TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from '@/components/ui/table'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
@@ -31,7 +31,12 @@ type HKIPatenType = {
   isAdd?: boolean
 }
 
-export default function TabsHKI() {
+interface props {
+  show: boolean
+}
+
+export default function TabsHKI(props: props) {
+  const { show } = props
   const { id } = useParams()
   const { HKI } = UseGetHKI({
     id_sdm: id,
@@ -130,8 +135,6 @@ export default function TabsHKI() {
       })
   }
 
-
-
   useEffect(() => {
     if (HKI) {
       const temp = HKI.map((item) => {
@@ -154,10 +157,12 @@ export default function TabsHKI() {
         <h2 className="text-lg font-semibold text-primary">HKI/PATEN</h2>
 
         <div className="flex gap-2">
-          <ButtonSyncLecturerDetail
-            link={`/website-utama/sdm/${id}/hki-paten/sync`}
-            topik="fcm_sync_sdm_hki_paten"
-          />
+          {show && (
+            <ButtonSyncLecturerDetail
+              link={`/website-utama/sdm/${id}/hki-paten/sync`}
+              topik="fcm_sync_sdm_hki_paten"
+            />
+          )}
 
           <Button
             onClick={() => {

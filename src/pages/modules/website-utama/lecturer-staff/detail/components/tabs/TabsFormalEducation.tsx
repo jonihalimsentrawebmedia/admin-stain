@@ -1,17 +1,17 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Pencil, Plus,  Save, Trash2 } from 'lucide-react'
+import { Pencil, Plus, Save, Trash2 } from 'lucide-react'
 
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import {
   Table,
-  TableHeader,
-  TableHead,
-  TableRow,
   TableBody,
   TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from '@/components/ui/table'
 import { UseGetFormalEducation } from '../../hooks'
 import { useParams } from 'react-router-dom'
@@ -31,7 +31,12 @@ type EducationType = {
   isAdd?: boolean
 }
 
-export default function TabsFormalEducation() {
+interface props {
+  show: boolean
+}
+
+export default function TabsFormalEducation(props: props) {
+  const { show } = props
   const { id } = useParams()
   const { formalEducation } = UseGetFormalEducation({ id_sdm: id })
   const [data, setData] = useState<EducationType[]>([])
@@ -157,10 +162,12 @@ export default function TabsFormalEducation() {
       <div className="flex gap-4 items-center justify-between">
         <div className="text-xl text-primary font-medium">Pendidikan Formal</div>
         <div className="flex gap-4 items-center">
-          <ButtonSyncLecturerDetail
-            link={`/website-utama/sdm/${id}/pendidikan-formal/sync`}
-            topik="fcm_sync_sdm_pendidikan_formal"
-          />
+          {show && (
+            <ButtonSyncLecturerDetail
+              link={`/website-utama/sdm/${id}/pendidikan-formal/sync`}
+              topik="fcm_sync_sdm_pendidikan_formal"
+            />
+          )}
           {/* <Button
             disabled={loading}
             variant={'outline'}

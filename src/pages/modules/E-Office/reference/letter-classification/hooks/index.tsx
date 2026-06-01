@@ -19,7 +19,8 @@ export const USeGetLetterClassification = (props?: BasicProps) => {
   const { data, isLoading, isFetching } = useQuery({
     refetchOnWindowFocus: false,
     queryKey: ['letter-classification', Params.toString()],
-    queryFn: () => AxiosClient.get('/eoffice/klasifikasi-surat/tree').then((res) => res.data),
+    queryFn: () =>
+      AxiosClient.get(`/eoffice/klasifikasi-surat/tree?${Params}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching

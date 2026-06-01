@@ -19,7 +19,7 @@ export const USeGetLetterType = (props?: BasicProps) => {
   const { data, isLoading, isFetching } = useQuery({
     refetchOnWindowFocus: false,
     queryKey: ['letter-type', Params.toString()],
-    queryFn: () => AxiosClient.get('/eoffice/jenis-surat').then((res) => res.data),
+    queryFn: () => AxiosClient.get(`/eoffice/jenis-surat?${Params}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching

@@ -8,9 +8,10 @@ import TablePaginate from '@/components/common/table/TablePagination.tsx'
 import MultipleUnit from '@/pages/modules/website-utama/lecturer-staff/set-unit/component/multipleUnit.tsx'
 import ButtonGoToGuide from '../../panduan/components/ButtonGoToGuide.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
+import Search from '@/components/common/table/Search.tsx'
 
 const SetUnitEmployeePage = () => {
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
   const search = searchParams.get('search') ?? ''
@@ -65,6 +66,28 @@ const SetUnitEmployeePage = () => {
           ]}
           name={'filter'}
         />
+
+        <div className="flex items-end gap-4">
+          <SelectFilter
+            label={'Jumlah Data'}
+            selectClassName={'min-w-[150px]'}
+            options={[
+              { label: '10', value: '10' },
+              { label: '25', value: '25' },
+              { label: '50', value: '50' },
+              { label: '100', value: '100' },
+            ]}
+            name={'limit'}
+          />
+          <Search
+            className={'w-full'}
+            onSearch={(e) => {
+              const params = new URLSearchParams()
+              params.append('search', e)
+              setSearchParams(params)
+            }}
+          />
+        </div>
 
         <TableBasic
           onSelectedRowsChange={setSelected}

@@ -19,7 +19,7 @@ export const USeGetLetterOrigin = (props?: BasicProps) => {
   const { data, isLoading, isFetching } = useQuery({
     refetchOnWindowFocus: false,
     queryKey: ['letter-origin', Params.toString()],
-    queryFn: () => AxiosClient.get('/eoffice/asal-surat').then((res) => res.data),
+    queryFn: () => AxiosClient.get(`/eoffice/asal-surat?${Params}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching

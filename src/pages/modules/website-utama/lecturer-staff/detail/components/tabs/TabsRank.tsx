@@ -1,17 +1,17 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Pencil, Save, Trash2, Plus,  } from 'lucide-react'
+import { Pencil, Plus, Save, Trash2 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
   Table,
-  TableHeader,
-  TableHead,
-  TableRow,
   TableBody,
   TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from '@/components/ui/table'
 import { useParams } from 'react-router-dom'
 import { UseGetRank } from '../../hooks'
@@ -30,7 +30,12 @@ type KepangkatanType = {
   isAdd?: boolean
 }
 
-export default function TabsRank() {
+interface props {
+  show: boolean
+}
+
+export default function TabsRank(props: props) {
+  const { show } = props
   const { id } = useParams()
   const { rank } = UseGetRank({
     id_sdm: id,
@@ -129,7 +134,6 @@ export default function TabsRank() {
   }
 
   // Dummy sync
- 
 
   useEffect(() => {
     if (rank) {
@@ -152,10 +156,12 @@ export default function TabsRank() {
         <h2 className="text-lg font-semibold text-primary">Kepangkatan</h2>
 
         <div className="flex gap-2">
-          <ButtonSyncLecturerDetail
-            link={`/website-utama/sdm/${id}/kepangkatan/sync`}
-            topik="fcm_sync_sdm_kepangkatan"
-          />
+          {show && (
+            <ButtonSyncLecturerDetail
+              link={`/website-utama/sdm/${id}/kepangkatan/sync`}
+              topik="fcm_sync_sdm_kepangkatan"
+            />
+          )}
 
           <Button
             disabled={loading}
