@@ -210,7 +210,7 @@ export const DetailDisposition = () => {
             </div>
 
             <div className={'flex items-center gap-5'}>
-              <ButtonResponseStatusDisposition />
+              <ButtonResponseStatusDisposition data={detail?.pejabat[0] as any} />
               <ButtonShowDisposition data={detail as any} />
             </div>
           </CardContent>

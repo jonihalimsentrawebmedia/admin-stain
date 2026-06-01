@@ -16,7 +16,9 @@ const DetailEmployee = () => {
   const form = useForm()
   const {employee, nextPrevId} = UseGetEmployeeById(id as string)
   const navigate = useNavigate()
-  const {tabs} = TabsData()
+  const {tabs} = TabsData({
+    data:employee,
+  })
 
   const [searchParams, setSearchParams] = useSearchParams()
   const tabsValue = searchParams.get('tab') ?? "informasi-pribadi"

@@ -19,7 +19,7 @@ export const USeGetLetterNature = (props?: BasicProps) => {
   const { data, isLoading, isFetching } = useQuery({
     refetchOnWindowFocus: false,
     queryKey: ['letter-nature', Params.toString()],
-    queryFn: () => AxiosClient.get('/eoffice/sifat-surat').then((res) => res.data),
+    queryFn: () => AxiosClient.get(`/eoffice/sifat-surat?${Params}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching

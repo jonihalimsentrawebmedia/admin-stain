@@ -1,7 +1,7 @@
 import { MdDashboard, MdRoomPreferences } from 'react-icons/md'
 import { FaArchive, FaListUl } from 'react-icons/fa'
 import { IoMailUnread } from 'react-icons/io5'
-import { FaGear } from 'react-icons/fa6'
+import { FaGear, FaUsers } from 'react-icons/fa6'
 
 const baseDomain = '/modules/e-office'
 
@@ -121,16 +121,44 @@ export const GenerateMenu = () => {
           name: 'Waktu Pengingat Agenda',
           path: `${baseDomain}/reference/reminder-agenda`,
         },
+        {
+          id: 96,
+          name: 'Jenis Keperluan',
+          path: `${baseDomain}/reference/purpose-type`,
+        },
+        {
+          id: 97,
+          name: 'Tujuan Bertamu',
+          path: `${baseDomain}/reference/purpose-guest`,
+        },
       ],
     },
     {
       id: 7,
+      name: 'Buku Tamu',
+      path: `${baseDomain}/guestbook`,
+      icon: <FaUsers className={'size-5'} />,
+      child: [
+        {
+          id: 71,
+          name: 'Daftar Buku Tamu',
+          path: `${baseDomain}/guestbook/guestbook-list`,
+        },
+        {
+          id: 72,
+          name: 'Kuisioner',
+          path: `${baseDomain}/guestbook/questionnaire`,
+        },
+      ],
+    },
+    {
+      id: 8,
       name: 'Pengaturan',
       path: `${baseDomain}/settings`,
       icon: <FaGear />,
       child: [
         {
-          id: 71,
+          id: 81,
           name: 'Penerima Notifikasi',
           path: `${baseDomain}/settings/accept-notification`,
         },

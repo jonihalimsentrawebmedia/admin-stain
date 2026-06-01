@@ -5,7 +5,12 @@ import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ButtonSyncLecturerDetail } from '@/pages/modules/website-utama/lecturer-staff/detail/components/ButtonSyncDetail.tsx'
 import { ButtonAddPublication } from '@/pages/modules/website-utama/lecturer-staff/detail/components/publication/buttonAdd.tsx'
 
-const NewSectionPublication = () => {
+interface props {
+  show: boolean
+}
+
+const NewSectionPublication = (props: props) => {
+  const { show } = props
   const { id } = useParams()
   const { publication } = UseGetPublication({
     id_sdm: id,
@@ -14,10 +19,12 @@ const NewSectionPublication = () => {
   return (
     <>
       <div className="flex gap-2 justify-end w-full">
-        <ButtonSyncLecturerDetail
-          link={`/website-utama/sdm/${id}/publikasi/sync`}
-          topik="fcm_sync_sdm_publikasi"
-        />
+        {show && (
+          <ButtonSyncLecturerDetail
+            link={`/website-utama/sdm/${id}/publikasi/sync`}
+            topik="fcm_sync_sdm_publikasi"
+          />
+        )}
 
         <ButtonAddPublication id_sdm={id as string} />
       </div>

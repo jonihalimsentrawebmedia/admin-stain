@@ -1,18 +1,18 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Pencil, Save, Trash2, Plus, } from 'lucide-react'
+import { Pencil, Plus, Save, Trash2 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
 import {
   Table,
-  TableHeader,
-  TableHead,
-  TableRow,
   TableBody,
   TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from '@/components/ui/table'
 import { useParams } from 'react-router-dom'
 import { UseGetDevotion } from '../../hooks'
@@ -30,7 +30,12 @@ type PengabdianType = {
   isAdd?: boolean
 }
 
-export default function TabsDevotion() {
+interface props {
+  show: boolean
+}
+
+export default function TabsDevotion(props: props) {
+  const { show } = props
   const { id } = useParams()
   const { devotion } = UseGetDevotion({
     id_sdm: id,
@@ -62,8 +67,6 @@ export default function TabsDevotion() {
       lama_kegiatan: '',
     })
   }
-
- 
 
   const temp = [...data]
   const queryClient = useQueryClient()
@@ -152,10 +155,12 @@ export default function TabsDevotion() {
         <h2 className="text-xl  font-medium text-primary">Pengabdian</h2>
 
         <div className="flex gap-2">
-          <ButtonSyncLecturerDetail
-            link={`/website-utama/sdm/${id}/pengabdian/sync`}
-            topik="fcm_sync_sdm_pengabdian"
-          />
+          {show && (
+            <ButtonSyncLecturerDetail
+              link={`/website-utama/sdm/${id}/pengabdian/sync`}
+              topik="fcm_sync_sdm_pengabdian"
+            />
+          )}
           <Button
             onClick={() => {
               handleAdd()

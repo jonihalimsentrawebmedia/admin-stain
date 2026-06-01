@@ -19,7 +19,8 @@ export const USeGetReminderAgenda = (props?: BasicProps) => {
   const { data, isLoading, isFetching } = useQuery({
     refetchOnWindowFocus: false,
     queryKey: ['reminder-agenda', Params.toString()],
-    queryFn: () => AxiosClient.get('/eoffice/waktu-pengingat-agenda').then((res) => res.data),
+    queryFn: () =>
+      AxiosClient.get(`/eoffice/waktu-pengingat-agenda?${Params}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching

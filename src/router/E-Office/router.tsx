@@ -21,6 +21,13 @@ import { DetailCopyLetterPage } from '@/pages/modules/E-Office/inbox/copy-letter
 import { ListAgendaInboxPage } from '@/pages/modules/E-Office/agenda/inbox'
 import { ListAgendaOutboxPage } from '@/pages/modules/E-Office/agenda/outbox'
 import { AcceptNotificationPage } from '@/pages/modules/E-Office/settings/accept-notification'
+import GustBookList from '@/pages/modules/E-Office/gustbook'
+import CreateGustBook from '@/pages/modules/E-Office/gustbook/create'
+import PurposeTypePage from '@/pages/modules/E-Office/reference/purpose-type'
+import PurposeGuestPage from '@/pages/modules/E-Office/reference/purpose-guest'
+import QuestionnairePage from '@/pages/modules/E-Office/questionnaire'
+import CreateQuantitativeQuestionnaire from '@/pages/modules/E-Office/questionnaire/quantitative'
+import UpdatedGustBook from '@/pages/modules/E-Office/gustbook/Updated'
 
 export const E_OFFICE_ROUTE = [
   {
@@ -160,6 +167,14 @@ export const E_OFFICE_ROUTE = [
         path: 'reminder-agenda',
         element: <ListReminderAgenda />,
       },
+      {
+        path: 'purpose-type',
+        element: <PurposeTypePage />,
+      },
+      {
+        path: 'purpose-guest',
+        element: <PurposeGuestPage />,
+      },
     ],
   },
   {
@@ -181,6 +196,46 @@ export const E_OFFICE_ROUTE = [
       {
         path: 'accept-notification',
         element: <AcceptNotificationPage />,
+      },
+    ],
+  },
+  {
+    path: 'guestbook',
+    children: [
+      {
+        path: 'guestbook-list',
+        children: [
+          {
+            index: true,
+            element: <GustBookList />,
+          },
+          {
+            path: 'add',
+            element: <CreateGustBook />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedGustBook />,
+          },
+        ],
+      },
+      {
+        path: 'questionnaire',
+        children: [
+          {
+            index: true,
+            element: <QuestionnairePage />,
+          },
+          {
+            path: 'quantitative',
+            children: [
+              {
+                path: 'add',
+                element: <CreateQuantitativeQuestionnaire />,
+              },
+            ],
+          },
+        ],
       },
     ],
   },
