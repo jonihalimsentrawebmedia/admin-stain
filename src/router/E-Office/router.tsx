@@ -28,6 +28,12 @@ import PurposeGuestPage from '@/pages/modules/E-Office/reference/purpose-guest'
 import QuestionnairePage from '@/pages/modules/E-Office/questionnaire'
 import CreateQuantitativeQuestionnaire from '@/pages/modules/E-Office/questionnaire/quantitative'
 import UpdatedGustBook from '@/pages/modules/E-Office/gustbook/Updated'
+import CreateQualitativeQuestionnaire from '@/pages/modules/E-Office/questionnaire/qualitative'
+import UpdatedQuantitativeQuestionnaire from '@/pages/modules/E-Office/questionnaire/quantitative/updated'
+import UpdatedQualitativeQuestionnaire from '@/pages/modules/E-Office/questionnaire/qualitative/updated'
+import DetailQuestionnaire from '@/pages/modules/E-Office/questionnaire/detail'
+import EventDataActivity from '@/pages/modules/E-Office/event-activity/event-data'
+import DetailEventActivity from '@/pages/modules/E-Office/event-activity/event-data/detail'
 
 export const E_OFFICE_ROUTE = [
   {
@@ -233,7 +239,51 @@ export const E_OFFICE_ROUTE = [
                 path: 'add',
                 element: <CreateQuantitativeQuestionnaire />,
               },
+              {
+                path: 'edit/:id',
+                element: <UpdatedQuantitativeQuestionnaire />,
+              },
+              {
+                path: 'detail/:id',
+                element: <DetailQuestionnaire />,
+              },
             ],
+          },
+          {
+            path: 'qualitative',
+            children: [
+              {
+                path: 'add',
+                element: <CreateQualitativeQuestionnaire />,
+              },
+              {
+                path: 'edit/:id',
+                element: <UpdatedQualitativeQuestionnaire />,
+              },
+              {
+                path: 'detail/:id',
+                element: <DetailQuestionnaire />,
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: 'event-activity',
+    children: [
+      {
+        path: 'event-data',
+        // element: <EventDataActivity />,
+        children: [
+          {
+            index: true,
+            element: <EventDataActivity />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailEventActivity />,
           },
         ],
       },

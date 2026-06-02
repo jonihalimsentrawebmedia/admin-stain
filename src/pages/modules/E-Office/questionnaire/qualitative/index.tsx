@@ -1,24 +1,24 @@
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
-import { QuestionnaireQuantitative, type TQuestionnaireQuantitative } from './data/resolver.tsx'
+import { QuestionnaireQualitative, type TQuestionnaireQualitative } from './data/resolver.tsx'
 import { zodResolver } from '@hookform/resolvers/zod'
-import FormQuantitativeQuestionnaire from '@/pages/modules/E-Office/questionnaire/quantitative/component/form.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
+import FormQualitativeQuestionnaire from './component/form.tsx'
 
-const CreateQuantitativeQuestionnaire = () => {
+const CreateQualitativeQuestionnaire = () => {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
-  const form = useForm<TQuestionnaireQuantitative>({
-    resolver: zodResolver(QuestionnaireQuantitative),
+  const form = useForm<TQuestionnaireQualitative>({
+    resolver: zodResolver(QuestionnaireQualitative),
     defaultValues: {
-      jenis_survei: 'KUANTITATIF',
+      jenis_survei: 'KUALITATIF',
     },
   })
 
-  const HandleSave = async (value: TQuestionnaireQuantitative) => {
+  const HandleSave = async (value: TQuestionnaireQualitative) => {
     setLoading(true)
     await AxiosClient.post(`/eoffice/survei`, value)
       .then((res) => {
@@ -38,10 +38,10 @@ const CreateQuantitativeQuestionnaire = () => {
   return (
     <>
       <div className="space-y-6 bgwhite">
-        <ButtonTitleGroup isBack label={'Buat Kuisioner Kuantitatif'} buttonGroup={[]} />
-        <FormQuantitativeQuestionnaire form={form} loading={loading} HandleSave={HandleSave} />
+        <ButtonTitleGroup isBack label={'Buat Kuisioner Kualitatif'} buttonGroup={[]} />
+        <FormQualitativeQuestionnaire form={form} loading={loading} HandleSave={HandleSave} />
       </div>
     </>
   )
 }
-export default CreateQuantitativeQuestionnaire
+export default CreateQualitativeQuestionnaire

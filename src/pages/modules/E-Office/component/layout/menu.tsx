@@ -1,5 +1,5 @@
 import { MdDashboard, MdRoomPreferences } from 'react-icons/md'
-import { FaArchive, FaListUl } from 'react-icons/fa'
+import { FaArchive, FaListUl, FaRegCalendarAlt } from 'react-icons/fa'
 import { IoMailUnread } from 'react-icons/io5'
 import { FaGear, FaUsers } from 'react-icons/fa6'
 
@@ -148,6 +148,24 @@ export const GenerateMenu = () => {
           id: 72,
           name: 'Kuisioner',
           path: `${baseDomain}/guestbook/questionnaire`,
+        },
+      ],
+    },
+    {
+      id: 8,
+      name: 'Acara & Kegiatan',
+      path: `${baseDomain}/event-activity`,
+      icon: <FaRegCalendarAlt />,
+      child: [
+        {
+          id: 81,
+          name: 'Data Acara',
+          path: `${baseDomain}/event-activity/event-data`,
+        },
+        {
+          id: 82,
+          name: 'Laporan',
+          path: `${baseDomain}/event-activity/report`,
         },
       ],
     },
