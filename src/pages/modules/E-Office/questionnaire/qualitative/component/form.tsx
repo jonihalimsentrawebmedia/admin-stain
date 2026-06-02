@@ -2,19 +2,19 @@ import type { UseFormReturn } from 'react-hook-form'
 import { Form } from '@/components/ui/form.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import { useNavigate } from 'react-router-dom'
-import type { TQuestionnaireQuantitative } from '@/pages/modules/E-Office/questionnaire/quantitative/data/resolver.tsx'
+import type { TQuestionnaireQualitative } from '../data/resolver.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
-import ButtonAddQuestion from '@/pages/modules/E-Office/questionnaire/quantitative/component/addQuestion.tsx'
-import { ColumnsQuestion } from '@/pages/modules/E-Office/questionnaire/quantitative/component/columns.tsx'
+import ButtonAddQuestion from './addQuestion.tsx'
+import { ColumnsQuestion } from './columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 
 interface props {
-  form: UseFormReturn<TQuestionnaireQuantitative>
+  form: UseFormReturn<TQuestionnaireQualitative>
   loading: boolean
-  HandleSave: (e: TQuestionnaireQuantitative) => void
+  HandleSave: (e: TQuestionnaireQualitative) => void
 }
 
-const FormQuantitativeQuestionnaire = (props: props) => {
+const FormQualitativeQuestionnaire = (props: props) => {
   const { form, HandleSave, loading } = props
   const navigate = useNavigate()
 
@@ -67,4 +67,4 @@ const FormQuantitativeQuestionnaire = (props: props) => {
     </>
   )
 }
-export default FormQuantitativeQuestionnaire
+export default FormQualitativeQuestionnaire

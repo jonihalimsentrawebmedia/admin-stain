@@ -1,14 +1,17 @@
 import { useForm } from 'react-hook-form'
-import { useState } from 'react'
-import { QuestionnaireQuantitative, type TQuestionnaireQuantitative } from './data/resolver.tsx'
+import { useEffect, useState } from 'react'
+import { QuestionnaireQuantitative, type TQuestionnaireQuantitative } from '../data/resolver.tsx'
 import { zodResolver } from '@hookform/resolvers/zod'
 import FormQuantitativeQuestionnaire from '@/pages/modules/E-Office/questionnaire/quantitative/component/form.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { UseGetDetailQuestionnaire } from '@/pages/modules/E-Office/questionnaire/hooks'
 
-const CreateQuantitativeQuestionnaire = () => {
+const UpdatedQuantitativeQuestionnaire = () => {
+  const { id } = useParams()
+  const { questionnaire: detail } = UseGetDetailQuestionnaire(id as string)
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
   const form = useForm<TQuestionnaireQuantitative>({
@@ -17,6 +20,16 @@ const CreateQuantitativeQuestionnaire = () => {
       jenis_survei: 'KUANTITATIF',
     },
   })
+
+  useEffect(() => {
+    if (detail) {
+      form.reset({
+        jenis_survei: detail?.jenis_survei,
+        judul: detail?.judul,
+        pertanyaan: detail?.pertanyaan,
+      })
+    }
+  }, [detail])
 
   const HandleSave = async (value: TQuestionnaireQuantitative) => {
     setLoading(true)
@@ -38,10 +51,10 @@ const CreateQuantitativeQuestionnaire = () => {
   return (
     <>
       <div className="space-y-6 bgwhite">
-        <ButtonTitleGroup isBack label={'Buat Kuisioner Kuantitatif'} buttonGroup={[]} />
+        <ButtonTitleGroup isBack label={'Edit Data Kuisioner Kuantitatif'} buttonGroup={[]} />
         <FormQuantitativeQuestionnaire form={form} loading={loading} HandleSave={HandleSave} />
       </div>
     </>
   )
 }
-export default CreateQuantitativeQuestionnaire
+export default UpdatedQuantitativeQuestionnaire
