@@ -97,37 +97,37 @@ export const GenerateMenu = () => {
       icon: <MdRoomPreferences className={'size-5'} />,
       child: [
         {
-          id: 91,
+          id: 61,
           name: 'Sifat Surat',
           path: `${baseDomain}/reference/letter-nature`,
         },
         {
-          id: 92,
+          id: 62,
           name: 'Jenis Surat',
           path: `${baseDomain}/reference/letter-type`,
         },
         {
-          id: 93,
+          id: 63,
           name: 'Asal Surat',
           path: `${baseDomain}/reference/letter-origin`,
         },
         {
-          id: 94,
+          id: 64,
           name: 'Klasifikasi Surat',
           path: `${baseDomain}/reference/letter-classification`,
         },
         {
-          id: 95,
+          id: 65,
           name: 'Waktu Pengingat Agenda',
           path: `${baseDomain}/reference/reminder-agenda`,
         },
         {
-          id: 96,
+          id: 66,
           name: 'Jenis Keperluan',
           path: `${baseDomain}/reference/purpose-type`,
         },
         {
-          id: 97,
+          id: 67,
           name: 'Tujuan Bertamu',
           path: `${baseDomain}/reference/purpose-guest`,
         },
@@ -170,16 +170,21 @@ export const GenerateMenu = () => {
       ],
     },
     {
-      id: 8,
+      id: 9,
       name: 'Pengaturan',
       path: `${baseDomain}/settings`,
       icon: <FaGear />,
       child: [
         {
-          id: 81,
+          id: 91,
           name: 'Penerima Notifikasi',
           path: `${baseDomain}/settings/accept-notification`,
         },
+        // {
+        //   id: 92,
+        //   name: 'Kop Surat',
+        //   path: `${baseDomain}/settings/letter-header`,
+        // },
       ],
     },
   ]

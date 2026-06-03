@@ -65,7 +65,10 @@ const TablePaginate = ({ meta, setPage }: Props) => {
         <NavButton
           icon={<IoChevronBack />}
           disabled={currentPage <= 1}
-          onClick={() => handleNextPrev('prev')}
+          onClick={(e) => {
+            e.preventDefault()
+            handleNextPrev('prev')
+          }}
         />
 
         {pages.map((page, index) =>
@@ -76,7 +79,10 @@ const TablePaginate = ({ meta, setPage }: Props) => {
               key={index}
               page={page}
               active={page === currentPage}
-              onClick={() => updatePage(Number(page))}
+              onClick={(e) => {
+                e.preventDefault()
+                updatePage(Number(page))
+              }}
             />
           )
         )}
@@ -84,7 +90,10 @@ const TablePaginate = ({ meta, setPage }: Props) => {
         <NavButton
           icon={<IoChevronForwardOutline />}
           disabled={currentPage >= lastPage}
-          onClick={() => handleNextPrev('next')}
+          onClick={(e) => {
+            e.preventDefault()
+            handleNextPrev('next')
+          }}
         />
       </div>
     </div>
@@ -102,7 +111,7 @@ const NavButton = ({
 }: {
   icon: React.ReactNode
   disabled: boolean
-  onClick: () => void
+  onClick: (e: any) => void
 }) => (
   <button
     onClick={onClick}
@@ -120,7 +129,7 @@ const PageButton = ({
 }: {
   page: number | any
   active: boolean
-  onClick: () => void
+  onClick: (e: any) => void
 }) => (
   <button
     onClick={onClick}

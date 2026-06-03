@@ -3,7 +3,10 @@ import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import type { BasicProps } from '@/utils/globalType.ts'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
-import type { IEvent } from '@/pages/modules/E-Office/event-activity/event-data/data/types.ts'
+import type {
+  IDetailEventPrint,
+  IEvent,
+} from '@/pages/modules/E-Office/event-activity/event-data/data/types.ts'
 
 export const UseGetEventActivity = (props: BasicProps) => {
   const { search, limit, page } = props
@@ -52,4 +55,24 @@ export const UseGetDetailEventActivity = (id: string) => {
   }, [data])
 
   return { event, loading }
+}
+
+export const UseGetListAttendance = (id: string) => {
+  const [attendance, setAttendance] = useState<IDetailEventPrint>()
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['attendance-event', id],
+    refetchOnWindowFocus: false,
+    queryFn: () => AxiosClient.get(`/eoffice/acara/${id}/daftar-tamu`).then((res) => res.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setAttendance(data?.data ?? [])
+    }
+  }, [data])
+
+  return { attendance, loading }
 }

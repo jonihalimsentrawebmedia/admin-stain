@@ -76,10 +76,10 @@ export function TableBasicState<TData, TValue>({
     <div className={clsx('overflow-hidden rounded-md border', className)}>
       <Table>
         <TableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <TableHead key={header.id} className={thClassName}>
+          {table.getHeaderGroups().map((headerGroup,k) => (
+            <TableRow key={k}>
+              {headerGroup.headers.map((header,l) => (
+                <TableHead key={l} className={thClassName}>
                   {flexRender(header.column.columnDef.header, header.getContext())}
                 </TableHead>
               ))}
@@ -99,10 +99,10 @@ export function TableBasicState<TData, TValue>({
               </TableRow>
             ))
           ) : table.getRowModel().rows.length ? (
-            table.getRowModel().rows.map((row) => (
-              <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id} className={tdClassName}>
+            table.getRowModel().rows.map((row,m) => (
+              <TableRow key={m} data-state={row.getIsSelected() && 'selected'}>
+                {row.getVisibleCells().map((cell,n) => (
+                  <TableCell key={n} className={tdClassName}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}

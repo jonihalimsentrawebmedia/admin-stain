@@ -32,3 +32,23 @@ export const UseGetUnitInstitution = () => {
 
   return { loading, institution }
 }
+
+export const UseGetUnitActive = () => {
+  const [institution, setInstitution] = useState<IInstitution[]>([])
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['active'],
+    queryFn: () => AxiosClient.get('/eoffice/ref/unit-filter-domain').then((res) => res.data),
+    refetchOnWindowFocus: false,
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setInstitution(data.data)
+    }
+  }, [data])
+
+  return { loading, institution }
+}

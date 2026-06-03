@@ -1,0 +1,42 @@
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import { UseGetEventYear, UseGetReportEventActivity } from './hooks'
+import { useSearchParams } from 'react-router-dom'
+import FilterSelect from '@/components/common/filter/filterBasic.tsx'
+import { ColumnsEventReport } from '@/pages/modules/E-Office/event-activity/report/data/columns.tsx'
+import TableCustom from '@/components/common/table/TableCustom.tsx'
+
+const ReportEventActivity = () => {
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+  const year = searchParams.get('year') ?? ''
+  const { report, meta, loading } = UseGetReportEventActivity({
+    page,
+    year,
+    limit,
+    search,
+  })
+  const { years } = UseGetEventYear()
+  const columns = ColumnsEventReport()
+
+  return (
+    <>
+      <div className="space-y-5">
+        <ButtonTitleGroup label={'Laporan'} buttonGroup={[]} />
+        <FilterSelect
+          className={'w-1/3'}
+          placeholder={'Tahun'}
+          data={years?.map((row) => ({
+            label: row.toString(),
+            value: row.toString(),
+          }))}
+          name={'year'}
+        />
+
+        <TableCustom data={report} columns={columns} meta={meta} loading={loading} />
+      </div>
+    </>
+  )
+}
+export default ReportEventActivity
