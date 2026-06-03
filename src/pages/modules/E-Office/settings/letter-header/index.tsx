@@ -23,15 +23,18 @@ import LetterHeaderPDF from '@/pages/modules/E-Office/settings/letter-header/dat
 import { Button } from '@/components/ui/button.tsx'
 import { MdDownload } from 'react-icons/md'
 import pdfMake from 'pdfmake/build/pdfmake'
+import { IoMdEye } from 'react-icons/io'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const LetterHeader = () => {
   const [idSelected, setIdSelected] = useState<string>('')
   const [loading, setLoading] = useState(false)
+  const [open, setOpen] = useState(false)
+  const [urlPDf, setUrlPDf] = useState<string>()
 
   const { institution } = UseGetUnitActive()
   const { letterHeader } = UseGetLetterHeader(idSelected)
   const { base64 } = ConvertUrlToBase64(letterHeader?.url_logo as string)
-  console.log(base64)
 
   useEffect(() => {
     if (institution) {
@@ -80,16 +83,6 @@ export const LetterHeader = () => {
       })
   }
 
-  const { generateContent } = LetterHeaderPDF({
-    header: letterHeader as any,
-    imageUrl: `data:image/png;base64,${base64}`,
-  })
-
-  const docDefinition: any = {
-    pageMargins: [40, 40, 40, 60],
-    content: [...generateContent()],
-  }
-
   return (
     <>
       <div className="space-y-5">
@@ -119,12 +112,47 @@ export const LetterHeader = () => {
                     type: 'custom',
                     element: (
                       <Button
+                        className={'text-white'}
                         onClick={() => {
-                          pdfMake.createPdf(docDefinition).open()
+                          const { generateContent } = LetterHeaderPDF({
+                            header: letterHeader as any,
+                            imageUrl: `data:image/png;base64,${base64}`,
+                          })
+                          const docDefinition: any = {
+                            pageMargins: [40, 40, 40, 60],
+                            content: generateContent(),
+                          }
+                          pdfMake.createPdf(docDefinition).download('Kop Surat')
                         }}
                       >
                         <MdDownload />
                         Download
+                      </Button>
+                    ),
+                  },
+                  {
+                    type: 'custom',
+                    element: (
+                      <Button
+                        className={'text-white'}
+                        onClick={async () => {
+                          const { generateContent } = LetterHeaderPDF({
+                            header: letterHeader as any,
+                            imageUrl: `data:image/png;base64,${base64}`,
+                          })
+
+                          const docDefinition: any = {
+                            pageMargins: [40, 40, 40, 60],
+                            content: generateContent(),
+                          }
+                          const blob = await pdfMake.createPdf(docDefinition).getBlob()
+                          const url = URL.createObjectURL(blob)
+                          setUrlPDf(url)
+                          setOpen(true)
+                        }}
+                      >
+                        <IoMdEye />
+                        Preview
                       </Button>
                     ),
                   },
@@ -197,6 +225,15 @@ export const LetterHeader = () => {
           </Card>
         </div>
       </div>
+
+      <DialogBasic
+        title={'Preview Kop Surat'}
+        open={open}
+        setOpen={setOpen}
+        className={'min-w-5xl'}
+      >
+        <iframe src={urlPDf} width={'100%'} height={'600'} />
+      </DialogBasic>
     </>
   )
 }

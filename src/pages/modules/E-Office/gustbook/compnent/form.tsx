@@ -7,9 +7,9 @@ import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import TextAreaInput from '@/components/common/form/textAreaInput.tsx'
-import { UploadPhotoImage } from '@/pages/modules/pusat-karir/component/common/uploadPhoto.tsx'
 import { UseGetPurposeType } from '@/pages/modules/E-Office/reference/purpose-type/hooks'
 import { UseGetPurposeGuest } from '@/pages/modules/E-Office/reference/purpose-guest/hooks'
+import { CaptureWebCam } from '@/pages/modules/E-Office/component/common/captureWebCam'
 
 interface props {
   loading: boolean
@@ -23,6 +23,8 @@ const FormGustBook = (props: props) => {
   const { institution } = UseGetUnitInstitution()
   const { purposeType } = UseGetPurposeType({ page: '0', limit: '0' })
   const { purposeGuest } = UseGetPurposeGuest({ page: '0', limit: '0' })
+
+  console.log(form.watch('url_foto'))
 
   return (
     <>
@@ -148,14 +150,16 @@ const FormGustBook = (props: props) => {
               isRequired
             />
 
-            <UploadPhotoImage
-              label={'Foto Tamu'}
-              name={'url_foto'}
-              ratio_width={1}
-              ratio_height={1}
-              form={form}
-              className={'max-w-[250px]'}
-            />
+            <div className="flex flex-col gap-2">
+              {form.watch('url_foto') && (
+                <img
+                  src={form?.watch('url_foto')}
+                  alt="capture"
+                  className="w-[250px] h-[250px] object-contain"
+                />
+              )}
+              <CaptureWebCam form={form} name={'url_foto'} />
+            </div>
           </div>
 
           <ButtonForm loading={loading} onCancel={() => navigate(-1)} />
