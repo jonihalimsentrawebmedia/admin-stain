@@ -20,9 +20,8 @@ const MenuEvent = () => {
       element: <DocumentationEventActivity />,
     },
     { id: 4, value: 'notulen', label: 'Notulen', element: <MeetingMinutes /> },
-    { id: 4, value: 'cost', label: 'Pengeluaran Keuangan', element: <ExpenditureSection /> },
-    { id: 4, value: 'report', label: 'Laporan Kegiatan', element: <ReportActivity /> },
-    { id: 4, value: 'share to', label: 'Dibagikan Ke' },
+    { id: 5, value: 'cost', label: 'Pengeluaran Keuangan', element: <ExpenditureSection /> },
+    { id: 6, value: 'report', label: 'Laporan Kegiatan', element: <ReportActivity /> },
   ]
 
   const [tabValue, setTabValue] = useState(TabsData[0]?.value)

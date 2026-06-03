@@ -34,6 +34,9 @@ import UpdatedQualitativeQuestionnaire from '@/pages/modules/E-Office/questionna
 import DetailQuestionnaire from '@/pages/modules/E-Office/questionnaire/detail'
 import EventDataActivity from '@/pages/modules/E-Office/event-activity/event-data'
 import DetailEventActivity from '@/pages/modules/E-Office/event-activity/event-data/detail'
+import ReportEventActivity from '@/pages/modules/E-Office/event-activity/report'
+import PrintAttendanceList from '@/pages/modules/E-Office/event-activity/event-data/printAttendance'
+import { LetterHeader } from '@/pages/modules/E-Office/settings/letter-header'
 
 export const E_OFFICE_ROUTE = [
   {
@@ -203,6 +206,10 @@ export const E_OFFICE_ROUTE = [
         path: 'accept-notification',
         element: <AcceptNotificationPage />,
       },
+      {
+        path: 'letter-header',
+        element: <LetterHeader />,
+      },
     ],
   },
   {
@@ -275,7 +282,6 @@ export const E_OFFICE_ROUTE = [
     children: [
       {
         path: 'event-data',
-        // element: <EventDataActivity />,
         children: [
           {
             index: true,
@@ -285,7 +291,15 @@ export const E_OFFICE_ROUTE = [
             path: 'detail/:id',
             element: <DetailEventActivity />,
           },
+          {
+            path: 'print/:id',
+            element: <PrintAttendanceList />,
+          },
         ],
+      },
+      {
+        path: 'report',
+        element: <ReportEventActivity />,
       },
     ],
   },

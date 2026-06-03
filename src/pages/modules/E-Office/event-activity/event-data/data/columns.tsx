@@ -3,9 +3,10 @@ import type { IEvent } from '@/pages/modules/E-Office/event-activity/event-data/
 import { Link, useSearchParams } from 'react-router-dom'
 import { format } from 'date-fns'
 import { id } from 'date-fns/locale'
-import { MdInfo } from 'react-icons/md'
+import { MdInfo, MdPrint } from 'react-icons/md'
 import ButtonEditEvent from '@/pages/modules/E-Office/event-activity/event-data/component/buttonEdit.tsx'
 import ButtonDeleteEvent from '@/pages/modules/E-Office/event-activity/event-data/component/buttonDelete.tsx'
+import { Button } from '@/components/ui/button.tsx'
 
 export const ColumnsEvent = () => {
   const [searchParams] = useSearchParams()
@@ -50,6 +51,26 @@ export const ColumnsEvent = () => {
     {
       accessorKey: 'penyelenggara',
       header: 'Penyelenggara',
+    },
+    {
+      accessorKey: 'id_acara',
+      header: 'Daftar Hadir',
+      cell: ({ row }) => {
+        const data = row.original
+        return (
+          <>
+            <Link to={`print/${data?.id_acara}`}>
+              <Button
+                variant={'outline'}
+                className={'border-primary text-primary rounded-full hover:text-primary'}
+              >
+                <MdPrint className={'size-4'} />
+                Cetak
+              </Button>
+            </Link>
+          </>
+        )
+      },
     },
     {
       accessorKey: 'action',
