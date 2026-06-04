@@ -347,5 +347,7 @@ export const generatePreviewAttendancePdf = ({
     },
   }
 
-  pdfMake.createPdf(docDefinition).print()
+  // pdfMake.createPdf(docDefinition).print()
+
+  return { docDefinition }
 }

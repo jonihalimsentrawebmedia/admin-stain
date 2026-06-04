@@ -22,9 +22,9 @@ import { useQueryClient } from '@tanstack/react-query'
 import LetterHeaderPDF from '@/pages/modules/E-Office/settings/letter-header/data/pdfContentConfig.ts'
 import { Button } from '@/components/ui/button.tsx'
 import { MdDownload } from 'react-icons/md'
-import pdfMake from 'pdfmake/build/pdfmake'
 import { IoMdEye } from 'react-icons/io'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
+import pdfMake from '@/utils/pdfmake'
 
 export const LetterHeader = () => {
   const [idSelected, setIdSelected] = useState<string>('')
@@ -83,6 +83,8 @@ export const LetterHeader = () => {
       })
   }
 
+  console.log(pdfMake.fonts)
+
   return (
     <>
       <div className="space-y-5">
@@ -122,7 +124,9 @@ export const LetterHeader = () => {
                             pageMargins: [40, 40, 40, 60],
                             content: generateContent(),
                           }
-                          pdfMake.createPdf(docDefinition).download('Kop Surat')
+                          const pdf = pdfMake.createPdf(docDefinition)
+                          pdf.download()
+                          // pdfMake.createPdf(docDefinition).download('Kop Surat')
                         }}
                       >
                         <MdDownload />
@@ -145,7 +149,7 @@ export const LetterHeader = () => {
                             pageMargins: [40, 40, 40, 60],
                             content: generateContent(),
                           }
-                          const blob = await pdfMake.createPdf(docDefinition).getBlob()
+                          const blob: any = await pdfMake.createPdf(docDefinition).getBlob()
                           const url = URL.createObjectURL(blob)
                           setUrlPDf(url)
                           setOpen(true)

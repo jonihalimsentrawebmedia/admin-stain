@@ -11,15 +11,20 @@ import { useForm } from 'react-hook-form'
 import { Form } from '@/components/ui/form.tsx'
 import { InputRadio } from '@/components/common/form/InputRadio.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button.tsx'
 import { MdPrint } from 'react-icons/md'
 import { generatePreviewAttendancePdf } from '@/pages/modules/E-Office/utils/generateAttendancePdf.ts'
+import pdfMake from 'pdfmake/build/pdfmake'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
+import { FaEye } from 'react-icons/fa'
 
 const PrintAttendanceList = () => {
   const { id: slug } = useParams()
   const { event } = UseGetDetailEventActivity(slug as string)
   const { attendance } = UseGetListAttendance(slug as string)
+  const [open, setOpen] = useState(false)
+  const [url, setUrl] = useState<string>()
 
   const form = useForm<any>({
     defaultValues: {
@@ -45,12 +50,27 @@ const PrintAttendanceList = () => {
     }
   }, [attendance])
 
-  const HandlePrint = async (values: any) => {
-    generatePreviewAttendancePdf({
+  const HandlePreview = async (values: any) => {
+    const { docDefinition } = generatePreviewAttendancePdf({
       attendance,
       values,
       event,
     })
+
+    const blob = await pdfMake.createPdf(docDefinition).getBlob()
+    const url = URL.createObjectURL(blob)
+    setUrl(url)
+    setOpen(true)
+  }
+
+  const HandlePrint = (values: any) => {
+    const { docDefinition } = generatePreviewAttendancePdf({
+      attendance,
+      values,
+      event,
+    })
+
+    pdfMake.createPdf(docDefinition).print()
   }
 
   return (
@@ -77,7 +97,7 @@ const PrintAttendanceList = () => {
         </Card>
 
         <Form {...form}>
-          <form className={'space-y-5'} onSubmit={form.handleSubmit(HandlePrint)}>
+          <form className={'space-y-5'} onSubmit={form.handleSubmit(HandlePreview)}>
             <Card>
               <CardContent className={'space-y-1.5'}>
                 <CardTitle>Kolom Daftar Hadir</CardTitle>
@@ -175,10 +195,22 @@ const PrintAttendanceList = () => {
                       isDisabled
                       isRow
                     />
-                    <Button className={'rounded-full text-white w-fit'}>
-                      <MdPrint />
-                      Cetak
-                    </Button>
+                    <div className="flex items-center gap-2">
+                      <Button className={'rounded-full text-white w-fit'}>
+                        <FaEye />
+                        Preview
+                      </Button>
+                      <Button
+                        className={'rounded-full text-white w-fit'}
+                        onClick={(e) => {
+                          e.preventDefault()
+                          HandlePrint(form.getValues() as any)
+                        }}
+                      >
+                        <MdPrint />
+                        Cetak
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </CardContent>
@@ -232,6 +264,15 @@ const PrintAttendanceList = () => {
           </form>
         </Form>
       </div>
+
+      <DialogBasic
+        title={'Preview Daftar Hadir'}
+        open={open}
+        setOpen={setOpen}
+        className={'min-w-5xl'}
+      >
+        <iframe src={url} width={'100%'} height={'600'} />
+      </DialogBasic>
     </>
   )
 }
