@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
 import type { IEventReport } from '@/pages/modules/E-Office/event-activity/report/data/types.ts'
 import { format } from 'date-fns'
@@ -77,14 +77,16 @@ export const ColumnsEventReport = () => {
         return (
           <>
             {data?.is_laporan_kegiatan ? (
-              <>
+              <Link
+                to={`/modules/e-office/event-activity/event-data/detail/${data?.id_acara}?tabs=report`}
+              >
                 <Button
                   variant={'outline'}
                   className={'border-primary text-primary hover:text-primary rounded-full'}
                 >
-                  Cetak
+                  Detail Laporan
                 </Button>
-              </>
+              </Link>
             ) : (
               <p className={'text-gray-500'}>Belum Ada</p>
             )}
