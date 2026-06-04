@@ -5,6 +5,10 @@ import ListLetterType from '@/pages/modules/E-Office/reference/letter-type'
 import ListLetterOrigin from '@/pages/modules/E-Office/reference/letter-origin'
 import ListLetterClassification from '@/pages/modules/E-Office/reference/letter-classification'
 import ListReminderAgenda from '@/pages/modules/E-Office/reference/reminder-agenda'
+import ListTemplateSurat from '@/pages/modules/E-Office/reference/template-surat'
+import CreateTemplateSurat from '@/pages/modules/E-Office/reference/template-surat/create'
+import UpdateTemplateSurat from '@/pages/modules/E-Office/reference/template-surat/update'
+import DetailTemplateSurat from '@/pages/modules/E-Office/reference/template-surat/detail'
 import TypeServiceListPage from '@/pages/modules/E-Office/services/type-service'
 import { RegistrationInbox } from '@/pages/modules/E-Office/inbox/registration-inbox'
 import { DetailInboxRegistration } from '@/pages/modules/E-Office/inbox/registration-inbox/detail'
@@ -184,6 +188,27 @@ export const E_OFFICE_ROUTE = [
       {
         path: 'purpose-guest',
         element: <PurposeGuestPage />,
+      },
+      {
+        path: 'template-surat',
+        children: [
+          {
+            index: true,
+            element: <ListTemplateSurat />,
+          },
+          {
+            path: 'create',
+            element: <CreateTemplateSurat />,
+          },
+          {
+            path: 'update/:id',
+            element: <UpdateTemplateSurat />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailTemplateSurat />,
+          },
+        ],
       },
     ],
   },
