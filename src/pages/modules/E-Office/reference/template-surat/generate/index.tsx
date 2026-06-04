@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useForm, useFieldArray } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -14,6 +14,7 @@ import { BiPlus, BiTrash } from 'react-icons/bi'
 import { FaFilePdf } from 'react-icons/fa'
 import { UseGetDetailTemplateSurat } from '@/pages/modules/E-Office/reference/template-surat/hooks'
 import { UseGetSumberList, UseGetSumberDetail, UseGenerateSurat } from './hooks'
+import { generatePdfBlobUrl } from '@/pages/modules/E-Office/surat-generated/utils/pdf'
 import { toast } from 'react-toastify'
 
 const GenerateSuratSchema = z.object({
@@ -47,6 +48,17 @@ const GenerateSuratView = () => {
   const { mutateAsync: generateSurat, isPending: loadingGenerate } = UseGenerateSurat()
 
   const [generatedPdf, setGeneratedPdf] = useState<string | null>(null)
+  const generatedId = useRef<string | null>(null)
+  const prevBlobUrl = useRef<string | null>(null)
+
+  // Cleanup blob URL saat component unmount
+  useEffect(() => {
+    return () => {
+      if (prevBlobUrl.current) {
+        URL.revokeObjectURL(prevBlobUrl.current)
+      }
+    }
+  }, [])
 
   const isManual = selectedSumber === 'MANUAL'
 
@@ -133,10 +145,20 @@ const GenerateSuratView = () => {
       if (result?.status) {
         toast.success(result?.message || 'Surat berhasil digenerate')
 
-        // Set PDF URL for preview
         const pdfUrl = result?.data?.pdf_url || result?.data?.file_url
+
         if (pdfUrl) {
           setGeneratedPdf(pdfUrl)
+        } else if (result?.data?.surat_generated && result?.data?.section_values) {
+          // Generate PDF client-side dari data surat
+          const blobUrl = await generatePdfBlobUrl(result.data)
+          // Cleanup blob URL sebelumnya
+          if (prevBlobUrl.current) {
+            URL.revokeObjectURL(prevBlobUrl.current)
+          }
+          prevBlobUrl.current = blobUrl
+          setGeneratedPdf(blobUrl)
+          generatedId.current = result.data.surat_generated.id_surat_generated
         }
       }
     } catch (err: any) {

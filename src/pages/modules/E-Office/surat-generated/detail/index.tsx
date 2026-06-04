@@ -7,6 +7,7 @@ import { format } from 'date-fns'
 import { id as localeId } from 'date-fns/locale'
 import { FaFilePdf } from 'react-icons/fa'
 import { generatePdfSurat } from '../utils/pdf'
+import { toast } from 'react-toastify'
 
 const DetailSuratGenerated = () => {
   const { id } = useParams<{ id: string }>()
@@ -44,9 +45,13 @@ const DetailSuratGenerated = () => {
             element: (
               <Button
                 key="btn-pdf"
-                onClick={() => {
+                onClick={async () => {
                   if (detail) {
-                    generatePdfSurat(detail)
+                    try {
+                      await generatePdfSurat(detail)
+                    } catch {
+                      toast.error('Gagal generate PDF')
+                    }
                   }
                 }}
                 variant="outline"
