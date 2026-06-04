@@ -3,6 +3,7 @@ import type { ColumnDef } from '@tanstack/react-table'
 import type { ITemplateSurat } from './types'
 import { HiPencil } from 'react-icons/hi'
 import { FiEye } from 'react-icons/fi'
+import { MdOutlineFilePresent } from 'react-icons/md'
 import ButtonDeleteTemplateSurat from '../component/buttonDelete'
 
 export const ColumnsTemplateSurat = () => {
@@ -69,6 +70,12 @@ export const ColumnsTemplateSurat = () => {
                 onClick={() => navigate(`detail/${data.id_template_surat}`)}
               >
                 <FiEye />
+              </button>
+              <button
+                className={'p-1.5 bg-green-600 text-white rounded hover:bg-green-700'}
+                onClick={() => navigate(`generate/${data.id_template_surat}`)}
+              >
+                <MdOutlineFilePresent />
               </button>
               <button
                 className={'p-1.5 bg-yellow-500 text-white rounded hover:bg-yellow-600'}

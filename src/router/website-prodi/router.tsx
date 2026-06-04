@@ -1,64 +1,66 @@
-import { UserProfilePage } from '@/pages/modules/website-utama/user-profile'
-import { ChangePassword } from '@/pages/modules/website-utama/change-password'
+import { lazy } from 'react'
 import { Navigate } from 'react-router-dom'
-import { ProfileProdiLayout } from '@/pages/modules/website-prodi/profile/layout'
-import { AboutProfileProdi } from '@/pages/modules/website-prodi/profile/about'
-import { ManagementUnitPage } from '@/pages/modules/website-prodi/profile/management-unit'
-import ProfileVisionMissionPage from '@/pages/modules/website-prodi/profile/vision-mission'
-import StructureOganizationProfilePage from '@/pages/modules/website-prodi/profile/structure'
-import StaffProfilePage from '@/pages/modules/website-prodi/profile/staff'
-import LecturerProfilePage from '@/pages/modules/website-prodi/profile/dosen'
-import { NewsPublishedProfile } from '@/pages/modules/website-prodi/profile/news'
-import ContactUsProfilePage from '@/pages/modules/website-prodi/profile/contact-us'
-import { NewsProdiPublicContentPage } from '@/pages/modules/website-prodi/public-content/news'
-import { NewsProdiCreated } from '@/pages/modules/website-prodi/public-content/news/created'
-import { NewsProdiUpdated } from '@/pages/modules/website-prodi/public-content/news/updated'
-import { DetailNewsProdiPage } from '@/pages/modules/website-prodi/public-content/news/detail'
-import { LogActivityNewsProdiPage } from '@/pages/modules/website-prodi/public-content/news/log-data'
-import { AnnouncementProdiPublicContent } from '@/pages/modules/website-prodi/public-content/announcement'
-import { CreatedAnnouncementProdi } from '@/pages/modules/website-prodi/public-content/announcement/created'
-import { UpdatedAnnouncementProdi } from '@/pages/modules/website-prodi/public-content/announcement/updated'
-import { AnnouncementProdiDetailPage } from '@/pages/modules/website-prodi/public-content/announcement/detail'
-import { LogActivityAnnouncementProdiPage } from '@/pages/modules/website-prodi/public-content/announcement/log'
-import { AgendaProdiPublicContent } from '@/pages/modules/website-prodi/public-content/agenda'
-import { CreateAgendaProdiPage } from '@/pages/modules/website-prodi/public-content/agenda/created'
-import { UpdatedAgendaProdiPage } from '@/pages/modules/website-prodi/public-content/agenda/updated'
-import { AgendaProdiDetailPage } from '@/pages/modules/website-prodi/public-content/agenda/detail'
-import { LogActivityAgendaProdiPage } from '@/pages/modules/website-prodi/public-content/agenda/log'
-import DownloadFileProdiPage from '@/pages/modules/website-prodi/public-content/Download'
-import { CategoryDownloadProdiPage } from '@/pages/modules/website-prodi/public-content/Download/category'
-import { AddDownloadProdiPage } from '@/pages/modules/website-prodi/public-content/Download/created'
-import { UpdatedDownloadProdiPage } from '@/pages/modules/website-prodi/public-content/Download/updated'
-import { PromotionProdiPage } from '@/pages/modules/website-prodi/public-content/promotion'
-import { CreatedPromotionProdi } from '@/pages/modules/website-prodi/public-content/promotion/created'
-import { UpdatedPromotionProdi } from '@/pages/modules/website-prodi/public-content/promotion/updated'
-import { LogActivityPromotionProdiPage } from '@/pages/modules/website-prodi/public-content/promotion/log'
-import { DetailPromotionPage } from '@/pages/modules/website-prodi/public-content/promotion/detail'
-import { QuestionFAQProdiPage } from '@/pages/modules/website-prodi/question/FAQ'
-import { CategoryFAQProdiPage } from '@/pages/modules/website-prodi/question/FAQ/category'
-import { InboxMessage } from '@/pages/modules/website-prodi/question/inbox-message'
-import { CurriculumProdiPage } from '@/pages/modules/website-prodi/curriculum'
-import { DataProdiProfile } from '@/pages/modules/website-prodi/data-prodi'
-import { UpdatedDataProdi } from '@/pages/modules/website-prodi/data-prodi/updated'
-import { AccreditationProdiPage } from '@/pages/modules/website-prodi/accreditation'
-import { GalleryVideoProdiPage } from '@/pages/modules/website-prodi/gallery/video'
-import AccreditationProdiLog from '@/pages/modules/website-prodi/accreditation/log'
-import { GalleryAlbumProdiPage } from '@/pages/modules/website-prodi/gallery/album'
-import { GalleryPhotoProdiPage } from '@/pages/modules/website-prodi/gallery/photo'
-import { LogActivityGalleryAlbum } from '@/pages/modules/website-prodi/gallery/album/log'
-import { GalleryProfileDetail } from '@/pages/modules/website-prodi/profile/gallery'
-import DashboardAdminProdi from '@/pages/modules/website-prodi/dashboard'
-import { CurriculumSubjectDetail } from '@/pages/modules/website-prodi/curriculum/suject-detail'
-import { RegistrationQuestionPage } from '@/pages/modules/website-prodi/question/registration'
-import { LandingPageProdi } from '@/pages/modules/website-prodi/settings/landing-page'
-import { LandingPromotion } from '@/pages/modules/website-prodi/settings/landing-promotion'
-import { BackgroundWebsiteSettings } from '@/pages/modules/website-prodi/settings/background'
-import { ServiceProdiPage } from '@/pages/modules/website-prodi/service'
-import { LogDataServicePage } from '@/pages/modules/website-prodi/service/log'
-import { PrimaryAndFooterColorProdi } from '@/pages/modules/website-prodi/settings/color'
-import { TemplateWebsite } from '@/pages/modules/website-prodi/settings/template-website'
-import { ThemaChangeColorProdi } from '@/pages/modules/website-prodi/settings/template-website/color'
-import GuideListView from '@/pages/modules/website-utama/panduan/GuideListView'
+
+const UserProfilePage = lazy(() => import('@/pages/modules/website-utama/user-profile').then(m => ({ default: m.UserProfilePage })))
+const ChangePassword = lazy(() => import('@/pages/modules/website-utama/change-password').then(m => ({ default: m.ChangePassword })))
+const ProfileProdiLayout = lazy(() => import('@/pages/modules/website-prodi/profile/layout').then(m => ({ default: m.ProfileProdiLayout })))
+const AboutProfileProdi = lazy(() => import('@/pages/modules/website-prodi/profile/about').then(m => ({ default: m.AboutProfileProdi })))
+const ManagementUnitPage = lazy(() => import('@/pages/modules/website-prodi/profile/management-unit').then(m => ({ default: m.ManagementUnitPage })))
+const ProfileVisionMissionPage = lazy(() => import('@/pages/modules/website-prodi/profile/vision-mission'))
+const StructureOganizationProfilePage = lazy(() => import('@/pages/modules/website-prodi/profile/structure'))
+const StaffProfilePage = lazy(() => import('@/pages/modules/website-prodi/profile/staff'))
+const LecturerProfilePage = lazy(() => import('@/pages/modules/website-prodi/profile/dosen'))
+const NewsPublishedProfile = lazy(() => import('@/pages/modules/website-prodi/profile/news').then(m => ({ default: m.NewsPublishedProfile })))
+const ContactUsProfilePage = lazy(() => import('@/pages/modules/website-prodi/profile/contact-us'))
+const NewsProdiPublicContentPage = lazy(() => import('@/pages/modules/website-prodi/public-content/news').then(m => ({ default: m.NewsProdiPublicContentPage })))
+const NewsProdiCreated = lazy(() => import('@/pages/modules/website-prodi/public-content/news/created').then(m => ({ default: m.NewsProdiCreated })))
+const NewsProdiUpdated = lazy(() => import('@/pages/modules/website-prodi/public-content/news/updated').then(m => ({ default: m.NewsProdiUpdated })))
+const DetailNewsProdiPage = lazy(() => import('@/pages/modules/website-prodi/public-content/news/detail').then(m => ({ default: m.DetailNewsProdiPage })))
+const LogActivityNewsProdiPage = lazy(() => import('@/pages/modules/website-prodi/public-content/news/log-data').then(m => ({ default: m.LogActivityNewsProdiPage })))
+const AnnouncementProdiPublicContent = lazy(() => import('@/pages/modules/website-prodi/public-content/announcement').then(m => ({ default: m.AnnouncementProdiPublicContent })))
+const CreatedAnnouncementProdi = lazy(() => import('@/pages/modules/website-prodi/public-content/announcement/created').then(m => ({ default: m.CreatedAnnouncementProdi })))
+const UpdatedAnnouncementProdi = lazy(() => import('@/pages/modules/website-prodi/public-content/announcement/updated').then(m => ({ default: m.UpdatedAnnouncementProdi })))
+const AnnouncementProdiDetailPage = lazy(() => import('@/pages/modules/website-prodi/public-content/announcement/detail').then(m => ({ default: m.AnnouncementProdiDetailPage })))
+const LogActivityAnnouncementProdiPage = lazy(() => import('@/pages/modules/website-prodi/public-content/announcement/log').then(m => ({ default: m.LogActivityAnnouncementProdiPage })))
+const AgendaProdiPublicContent = lazy(() => import('@/pages/modules/website-prodi/public-content/agenda').then(m => ({ default: m.AgendaProdiPublicContent })))
+const CreateAgendaProdiPage = lazy(() => import('@/pages/modules/website-prodi/public-content/agenda/created').then(m => ({ default: m.CreateAgendaProdiPage })))
+const UpdatedAgendaProdiPage = lazy(() => import('@/pages/modules/website-prodi/public-content/agenda/updated').then(m => ({ default: m.UpdatedAgendaProdiPage })))
+const AgendaProdiDetailPage = lazy(() => import('@/pages/modules/website-prodi/public-content/agenda/detail').then(m => ({ default: m.AgendaProdiDetailPage })))
+const LogActivityAgendaProdiPage = lazy(() => import('@/pages/modules/website-prodi/public-content/agenda/log').then(m => ({ default: m.LogActivityAgendaProdiPage })))
+const DownloadFileProdiPage = lazy(() => import('@/pages/modules/website-prodi/public-content/Download'))
+const CategoryDownloadProdiPage = lazy(() => import('@/pages/modules/website-prodi/public-content/Download/category').then(m => ({ default: m.CategoryDownloadProdiPage })))
+const AddDownloadProdiPage = lazy(() => import('@/pages/modules/website-prodi/public-content/Download/created').then(m => ({ default: m.AddDownloadProdiPage })))
+const UpdatedDownloadProdiPage = lazy(() => import('@/pages/modules/website-prodi/public-content/Download/updated').then(m => ({ default: m.UpdatedDownloadProdiPage })))
+const PromotionProdiPage = lazy(() => import('@/pages/modules/website-prodi/public-content/promotion').then(m => ({ default: m.PromotionProdiPage })))
+const CreatedPromotionProdi = lazy(() => import('@/pages/modules/website-prodi/public-content/promotion/created').then(m => ({ default: m.CreatedPromotionProdi })))
+const UpdatedPromotionProdi = lazy(() => import('@/pages/modules/website-prodi/public-content/promotion/updated').then(m => ({ default: m.UpdatedPromotionProdi })))
+const LogActivityPromotionProdiPage = lazy(() => import('@/pages/modules/website-prodi/public-content/promotion/log').then(m => ({ default: m.LogActivityPromotionProdiPage })))
+const DetailPromotionPage = lazy(() => import('@/pages/modules/website-prodi/public-content/promotion/detail').then(m => ({ default: m.DetailPromotionPage })))
+const QuestionFAQProdiPage = lazy(() => import('@/pages/modules/website-prodi/question/FAQ').then(m => ({ default: m.QuestionFAQProdiPage })))
+const CategoryFAQProdiPage = lazy(() => import('@/pages/modules/website-prodi/question/FAQ/category').then(m => ({ default: m.CategoryFAQProdiPage })))
+const InboxMessage = lazy(() => import('@/pages/modules/website-prodi/question/inbox-message').then(m => ({ default: m.InboxMessage })))
+const CurriculumProdiPage = lazy(() => import('@/pages/modules/website-prodi/curriculum').then(m => ({ default: m.CurriculumProdiPage })))
+const DataProdiProfile = lazy(() => import('@/pages/modules/website-prodi/data-prodi').then(m => ({ default: m.DataProdiProfile })))
+const UpdatedDataProdi = lazy(() => import('@/pages/modules/website-prodi/data-prodi/updated').then(m => ({ default: m.UpdatedDataProdi })))
+const AccreditationProdiPage = lazy(() => import('@/pages/modules/website-prodi/accreditation').then(m => ({ default: m.AccreditationProdiPage })))
+const GalleryVideoProdiPage = lazy(() => import('@/pages/modules/website-prodi/gallery/video').then(m => ({ default: m.GalleryVideoProdiPage })))
+const AccreditationProdiLog = lazy(() => import('@/pages/modules/website-prodi/accreditation/log'))
+const GalleryAlbumProdiPage = lazy(() => import('@/pages/modules/website-prodi/gallery/album').then(m => ({ default: m.GalleryAlbumProdiPage })))
+const GalleryPhotoProdiPage = lazy(() => import('@/pages/modules/website-prodi/gallery/photo').then(m => ({ default: m.GalleryPhotoProdiPage })))
+const LogActivityGalleryAlbum = lazy(() => import('@/pages/modules/website-prodi/gallery/album/log').then(m => ({ default: m.LogActivityGalleryAlbum })))
+const GalleryProfileDetail = lazy(() => import('@/pages/modules/website-prodi/profile/gallery').then(m => ({ default: m.GalleryProfileDetail })))
+const DashboardAdminProdi = lazy(() => import('@/pages/modules/website-prodi/dashboard'))
+const CurriculumSubjectDetail = lazy(() => import('@/pages/modules/website-prodi/curriculum/suject-detail').then(m => ({ default: m.CurriculumSubjectDetail })))
+const RegistrationQuestionPage = lazy(() => import('@/pages/modules/website-prodi/question/registration').then(m => ({ default: m.RegistrationQuestionPage })))
+const LandingPageProdi = lazy(() => import('@/pages/modules/website-prodi/settings/landing-page').then(m => ({ default: m.LandingPageProdi })))
+const LandingPromotion = lazy(() => import('@/pages/modules/website-prodi/settings/landing-promotion').then(m => ({ default: m.LandingPromotion })))
+const BackgroundWebsiteSettings = lazy(() => import('@/pages/modules/website-prodi/settings/background').then(m => ({ default: m.BackgroundWebsiteSettings })))
+const ServiceProdiPage = lazy(() => import('@/pages/modules/website-prodi/service').then(m => ({ default: m.ServiceProdiPage })))
+const LogDataServicePage = lazy(() => import('@/pages/modules/website-prodi/service/log').then(m => ({ default: m.LogDataServicePage })))
+const PrimaryAndFooterColorProdi = lazy(() => import('@/pages/modules/website-prodi/settings/color').then(m => ({ default: m.PrimaryAndFooterColorProdi })))
+const TemplateWebsite = lazy(() => import('@/pages/modules/website-prodi/settings/template-website').then(m => ({ default: m.TemplateWebsite })))
+const ThemaChangeColorProdi = lazy(() => import('@/pages/modules/website-prodi/settings/template-website/color').then(m => ({ default: m.ThemaChangeColorProdi })))
+const GuideListView = lazy(() => import('@/pages/modules/website-utama/panduan/GuideListView'))
 
 export const WebsiteProdiRouter = [
   {

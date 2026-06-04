@@ -1,47 +1,52 @@
-import { UserProfilePage } from '@/pages/modules/website-utama/user-profile'
-import { ChangePassword } from '@/pages/modules/website-utama/change-password'
-import ListLetterNature from '@/pages/modules/E-Office/reference/letter-nature'
-import ListLetterType from '@/pages/modules/E-Office/reference/letter-type'
-import ListLetterOrigin from '@/pages/modules/E-Office/reference/letter-origin'
-import ListLetterClassification from '@/pages/modules/E-Office/reference/letter-classification'
-import ListReminderAgenda from '@/pages/modules/E-Office/reference/reminder-agenda'
-import ListTemplateSurat from '@/pages/modules/E-Office/reference/template-surat'
-import CreateTemplateSurat from '@/pages/modules/E-Office/reference/template-surat/create'
-import UpdateTemplateSurat from '@/pages/modules/E-Office/reference/template-surat/update'
-import DetailTemplateSurat from '@/pages/modules/E-Office/reference/template-surat/detail'
-import TypeServiceListPage from '@/pages/modules/E-Office/services/type-service'
-import { RegistrationInbox } from '@/pages/modules/E-Office/inbox/registration-inbox'
-import { DetailInboxRegistration } from '@/pages/modules/E-Office/inbox/registration-inbox/detail'
-import { RegistrationInboxEdit } from '@/pages/modules/E-Office/inbox/registration-inbox/edit'
-import { ListInbox } from '@/pages/modules/E-Office/inbox/list-inbox'
-import { RegistrationOutbox } from '@/pages/modules/E-Office/outbox/registration-outbox'
-import { DetailOutboxRegistration } from '@/pages/modules/E-Office/outbox/registration-outbox/detail'
-import { ListOutbox } from '@/pages/modules/E-Office/outbox/list-outbox'
-import { RegistrationOutboxEdit } from '@/pages/modules/E-Office/outbox/registration-outbox/edit'
-import DispositionListPage from '@/pages/modules/E-Office/inbox/disposition'
-import { DetailDisposition } from '@/pages/modules/E-Office/inbox/disposition/detail'
-import { CopyLetterPage } from '@/pages/modules/E-Office/inbox/copy-letter'
-import { DetailCopyLetterPage } from '@/pages/modules/E-Office/inbox/copy-letter/detail'
-import { ListAgendaInboxPage } from '@/pages/modules/E-Office/agenda/inbox'
-import { ListAgendaOutboxPage } from '@/pages/modules/E-Office/agenda/outbox'
-import { AcceptNotificationPage } from '@/pages/modules/E-Office/settings/accept-notification'
-import GustBookList from '@/pages/modules/E-Office/gustbook'
-import CreateGustBook from '@/pages/modules/E-Office/gustbook/create'
-import PurposeTypePage from '@/pages/modules/E-Office/reference/purpose-type'
-import PurposeGuestPage from '@/pages/modules/E-Office/reference/purpose-guest'
-import QuestionnairePage from '@/pages/modules/E-Office/questionnaire'
-import CreateQuantitativeQuestionnaire from '@/pages/modules/E-Office/questionnaire/quantitative'
-import UpdatedGustBook from '@/pages/modules/E-Office/gustbook/Updated'
-import CreateQualitativeQuestionnaire from '@/pages/modules/E-Office/questionnaire/qualitative'
-import UpdatedQuantitativeQuestionnaire from '@/pages/modules/E-Office/questionnaire/quantitative/updated'
-import UpdatedQualitativeQuestionnaire from '@/pages/modules/E-Office/questionnaire/qualitative/updated'
-import DetailQuestionnaire from '@/pages/modules/E-Office/questionnaire/detail'
-import EventDataActivity from '@/pages/modules/E-Office/event-activity/event-data'
-import DetailEventActivity from '@/pages/modules/E-Office/event-activity/event-data/detail'
-import ReportEventActivity from '@/pages/modules/E-Office/event-activity/report'
-import PrintAttendanceList from '@/pages/modules/E-Office/event-activity/event-data/printAttendance'
-import { LetterHeader } from '@/pages/modules/E-Office/settings/letter-header'
-import DashboardEOfficePage from '@/pages/modules/E-Office/dashboard'
+import { lazy } from 'react'
+
+const UserProfilePage = lazy(() => import('@/pages/modules/website-utama/user-profile').then(m => ({ default: m.UserProfilePage })))
+const ChangePassword = lazy(() => import('@/pages/modules/website-utama/change-password').then(m => ({ default: m.ChangePassword })))
+const ListLetterNature = lazy(() => import('@/pages/modules/E-Office/reference/letter-nature'))
+const ListLetterType = lazy(() => import('@/pages/modules/E-Office/reference/letter-type'))
+const ListLetterOrigin = lazy(() => import('@/pages/modules/E-Office/reference/letter-origin'))
+const ListLetterClassification = lazy(() => import('@/pages/modules/E-Office/reference/letter-classification'))
+const ListReminderAgenda = lazy(() => import('@/pages/modules/E-Office/reference/reminder-agenda'))
+const ListTemplateSurat = lazy(() => import('@/pages/modules/E-Office/reference/template-surat'))
+const CreateTemplateSurat = lazy(() => import('@/pages/modules/E-Office/reference/template-surat/create'))
+const UpdateTemplateSurat = lazy(() => import('@/pages/modules/E-Office/reference/template-surat/update'))
+const DetailTemplateSurat = lazy(() => import('@/pages/modules/E-Office/reference/template-surat/detail'))
+const GenerateSuratView = lazy(() => import('@/pages/modules/E-Office/reference/template-surat/generate'))
+const TypeServiceListPage = lazy(() => import('@/pages/modules/E-Office/services/type-service'))
+const RegistrationInbox = lazy(() => import('@/pages/modules/E-Office/inbox/registration-inbox').then(m => ({ default: m.RegistrationInbox })))
+const DetailInboxRegistration = lazy(() => import('@/pages/modules/E-Office/inbox/registration-inbox/detail').then(m => ({ default: m.DetailInboxRegistration })))
+const RegistrationInboxEdit = lazy(() => import('@/pages/modules/E-Office/inbox/registration-inbox/edit').then(m => ({ default: m.RegistrationInboxEdit })))
+const ListInbox = lazy(() => import('@/pages/modules/E-Office/inbox/list-inbox').then(m => ({ default: m.ListInbox })))
+const RegistrationOutbox = lazy(() => import('@/pages/modules/E-Office/outbox/registration-outbox').then(m => ({ default: m.RegistrationOutbox })))
+const DetailOutboxRegistration = lazy(() => import('@/pages/modules/E-Office/outbox/registration-outbox/detail').then(m => ({ default: m.DetailOutboxRegistration })))
+const ListOutbox = lazy(() => import('@/pages/modules/E-Office/outbox/list-outbox').then(m => ({ default: m.ListOutbox })))
+const RegistrationOutboxEdit = lazy(() => import('@/pages/modules/E-Office/outbox/registration-outbox/edit').then(m => ({ default: m.RegistrationOutboxEdit })))
+const DispositionListPage = lazy(() => import('@/pages/modules/E-Office/inbox/disposition'))
+const DetailDisposition = lazy(() => import('@/pages/modules/E-Office/inbox/disposition/detail').then(m => ({ default: m.DetailDisposition })))
+const CopyLetterPage = lazy(() => import('@/pages/modules/E-Office/inbox/copy-letter').then(m => ({ default: m.CopyLetterPage })))
+const DetailCopyLetterPage = lazy(() => import('@/pages/modules/E-Office/inbox/copy-letter/detail').then(m => ({ default: m.DetailCopyLetterPage })))
+const ListAgendaInboxPage = lazy(() => import('@/pages/modules/E-Office/agenda/inbox').then(m => ({ default: m.ListAgendaInboxPage })))
+const ListAgendaOutboxPage = lazy(() => import('@/pages/modules/E-Office/agenda/outbox').then(m => ({ default: m.ListAgendaOutboxPage })))
+const AcceptNotificationPage = lazy(() => import('@/pages/modules/E-Office/settings/accept-notification').then(m => ({ default: m.AcceptNotificationPage })))
+const GustBookList = lazy(() => import('@/pages/modules/E-Office/gustbook'))
+const CreateGustBook = lazy(() => import('@/pages/modules/E-Office/gustbook/create'))
+const PurposeTypePage = lazy(() => import('@/pages/modules/E-Office/reference/purpose-type'))
+const PurposeGuestPage = lazy(() => import('@/pages/modules/E-Office/reference/purpose-guest'))
+const QuestionnairePage = lazy(() => import('@/pages/modules/E-Office/questionnaire'))
+const CreateQuantitativeQuestionnaire = lazy(() => import('@/pages/modules/E-Office/questionnaire/quantitative'))
+const UpdatedGustBook = lazy(() => import('@/pages/modules/E-Office/gustbook/Updated'))
+const CreateQualitativeQuestionnaire = lazy(() => import('@/pages/modules/E-Office/questionnaire/qualitative'))
+const UpdatedQuantitativeQuestionnaire = lazy(() => import('@/pages/modules/E-Office/questionnaire/quantitative/updated'))
+const UpdatedQualitativeQuestionnaire = lazy(() => import('@/pages/modules/E-Office/questionnaire/qualitative/updated'))
+const DetailQuestionnaire = lazy(() => import('@/pages/modules/E-Office/questionnaire/detail'))
+const EventDataActivity = lazy(() => import('@/pages/modules/E-Office/event-activity/event-data'))
+const DetailEventActivity = lazy(() => import('@/pages/modules/E-Office/event-activity/event-data/detail'))
+const ReportEventActivity = lazy(() => import('@/pages/modules/E-Office/event-activity/report'))
+const PrintAttendanceList = lazy(() => import('@/pages/modules/E-Office/event-activity/event-data/printAttendance'))
+const LetterHeader = lazy(() => import('@/pages/modules/E-Office/settings/letter-header').then(m => ({ default: m.LetterHeader })))
+const DashboardEOfficePage = lazy(() => import('@/pages/modules/E-Office/dashboard'))
+const ListSuratGenerated = lazy(() => import('@/pages/modules/E-Office/surat-generated'))
+const DetailSuratGenerated = lazy(() => import('@/pages/modules/E-Office/surat-generated/detail'))
 
 export const E_OFFICE_ROUTE = [
   {
@@ -150,6 +155,19 @@ export const E_OFFICE_ROUTE = [
     ],
   },
   {
+    path: 'surat-generated',
+    children: [
+      {
+        index: true,
+        element: <ListSuratGenerated />,
+      },
+      {
+        path: 'detail/:id',
+        element: <DetailSuratGenerated />,
+      },
+    ],
+  },
+  {
     path: 'service',
     children: [
       {
@@ -207,6 +225,10 @@ export const E_OFFICE_ROUTE = [
           {
             path: 'detail/:id',
             element: <DetailTemplateSurat />,
+          },
+          {
+            path: 'generate/:id',
+            element: <GenerateSuratView />,
           },
         ],
       },

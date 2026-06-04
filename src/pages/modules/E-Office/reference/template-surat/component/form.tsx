@@ -5,6 +5,7 @@ import { Form } from '@/components/ui/form.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import TextAreaInput from '@/components/common/form/textAreaInput.tsx'
+import { RichText } from '@/components/common/richtext'
 import { Button } from '@/components/ui/button.tsx'
 import { BiPlus, BiTrash } from 'react-icons/bi'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card.tsx'
@@ -95,13 +96,11 @@ export const FormTemplateSurat = (props: Props) => {
                     isRequired
                   />
 
-                  <TextAreaInput
+                  <RichText
                     name={`section.${index}.konten_section`}
                     form={form}
                     label={'Konten Section'}
-                    placeholder={'Masukkan konten section'}
-                    htmlFor={`section.${index}.konten_section`}
-                    isRequired
+                    required
                   />
                 </div>
               ))}

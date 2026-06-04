@@ -2,6 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { UseGetDetailTemplateSurat } from '@/pages/modules/E-Office/reference/template-surat/hooks'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card.tsx'
+import { Button } from '@/components/ui/button.tsx'
 import { format } from 'date-fns'
 import { id as localeId } from 'date-fns/locale'
 
@@ -54,6 +55,19 @@ const DetailTemplateSurat = () => {
           isBack
           label={'Detail Template Surat'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <Button
+                  className={'rounded-full text-white hover:text-white'}
+                  onClick={() =>
+                    navigate(`/modules/e-office/reference/template-surat/generate/${id}`)
+                  }
+                >
+                  Generate Surat
+                </Button>
+              ),
+            },
             {
               type: 'edit',
               label: 'Edit',

@@ -1,53 +1,54 @@
-import { UserProfilePage } from '@/pages/modules/website-utama/user-profile'
-import { ChangePassword } from '@/pages/modules/website-utama/change-password'
-import DashboardSPI from '@/pages/modules/SPI/dashboard'
-import { DetailProfileSPI } from '@/pages/modules/SPI/data-spi'
-import { UpdatedDataSPI } from '@/pages/modules/SPI/data-spi/updated'
-import { ProfileHistoryPage } from '@/pages/modules/SPI/about/history'
-import { VisionMissionSPIPage } from '@/pages/modules/SPI/about/vision-mission'
-import { ProfileStructurePage } from '@/pages/modules/SPI/about/structure'
-import { ShortProfilePage } from '@/pages/modules/SPI/about/short-profile'
-import { AuthoritySPIPage } from '@/pages/modules/SPI/about/authority'
-import { ProfileCodeEthicsPage } from '@/pages/modules/SPI/about/ethics'
-import { ServicesSPI } from '@/pages/modules/SPI/services'
-import { CreatedService } from '@/pages/modules/SPI/services/created'
-import { UpdatedService } from '@/pages/modules/SPI/services/updated'
-import { DetailServiceSPI } from '@/pages/modules/SPI/services/detail'
-import { RegulationPage } from '@/pages/modules/SPI/regulation'
-import { HumanResourcePage } from '@/pages/modules/SPI/about/human-resource'
-import { OfficiallyDataSPI } from '@/pages/modules/SPI/about/human-resource/officialy'
-import { ELHKPNDetailPage } from '@/pages/modules/SPI/e-lhkpn'
-import { AwardListPage } from '@/pages/modules/SPI/award'
-import { ExternalPortalPage } from '@/pages/modules/SPI/external-portal'
-import { AuditManagementPage } from '@/pages/modules/SPI/quality-assurance/audit'
-import { DocumentSystemPage } from '@/pages/modules/SPI/quality-assurance/document-system'
-import { CategoryDocumentSystemPage } from '@/pages/modules/SPI/quality-assurance/document-system/category'
-import { AddDocumentSystem } from '@/pages/modules/SPI/quality-assurance/document-system/created'
-import { EditDocumentSystem } from '@/pages/modules/SPI/quality-assurance/document-system/updated'
-import { DocumentAuditPage } from '@/pages/modules/SPI/quality-assurance/audit/Document'
-import { AddDocumentAudit } from '@/pages/modules/SPI/quality-assurance/audit/Document/created'
-import { UpdatedDocumentAudit } from '@/pages/modules/SPI/quality-assurance/audit/Document/updated'
-import { NewsSPIPublicContentPage } from '@/pages/modules/SPI/publict-content/news'
-import { CreateNewsSPI } from '@/pages/modules/SPI/publict-content/news/created'
-import { UpdatedNewsSPI } from '@/pages/modules/SPI/publict-content/news/updated'
-import { DetailNewsSPI } from '@/pages/modules/SPI/publict-content/news/detail'
-import { LogActivityNewsSPI } from '@/pages/modules/SPI/publict-content/news/log-data'
-import { ListAgendaSPI } from '@/pages/modules/SPI/publict-content/agenda'
-import { CreateAgendaSPI } from '@/pages/modules/SPI/publict-content/agenda/created'
-import { UpdatedAgendaSPI } from '@/pages/modules/SPI/publict-content/agenda/updated'
-import { DetailAgendaSPI } from '@/pages/modules/SPI/publict-content/agenda/detail'
-import { LogActivityAgendaSPI } from '@/pages/modules/SPI/publict-content/agenda/log'
-import { ListAnnouncementSPI } from '@/pages/modules/SPI/publict-content/announcement'
-import { CreatedAnnouncementSPI } from '@/pages/modules/SPI/publict-content/announcement/created'
-import { UpdatedAnnouncementSPI } from '@/pages/modules/SPI/publict-content/announcement/updated'
-import { DetailAnnouncementSPI } from '@/pages/modules/SPI/publict-content/announcement/detail'
-import { LogActivityAnnouncementSPI } from '@/pages/modules/SPI/publict-content/announcement/log'
-import { LandingPageSPI } from '@/pages/modules/SPI/settings/landing-page'
-import { SettingsBackground } from '@/pages/modules/SPI/settings/background'
-import ColorSettingSPI from '@/pages/modules/SPI/settings/color/ColorSettingService.tsx'
-import { TemplateWebSPI } from '@/pages/modules/SPI/settings/template-web'
-import { ThemaChangeColorSPI } from '@/pages/modules/SPI/settings/template-web/color'
-import GuideListView from '@/pages/modules/website-utama/panduan/GuideListView'
+import { lazy } from 'react'
+const UserProfilePage = lazy(() => import('@/pages/modules/website-utama/user-profile').then(m => ({ default: m.UserProfilePage })))
+const ChangePassword = lazy(() => import('@/pages/modules/website-utama/change-password').then(m => ({ default: m.ChangePassword })))
+const DashboardSPI = lazy(() => import('@/pages/modules/SPI/dashboard'))
+const DetailProfileSPI = lazy(() => import('@/pages/modules/SPI/data-spi').then(m => ({ default: m.DetailProfileSPI })))
+const UpdatedDataSPI = lazy(() => import('@/pages/modules/SPI/data-spi/updated').then(m => ({ default: m.UpdatedDataSPI })))
+const ProfileHistoryPage = lazy(() => import('@/pages/modules/SPI/about/history').then(m => ({ default: m.ProfileHistoryPage })))
+const VisionMissionSPIPage = lazy(() => import('@/pages/modules/SPI/about/vision-mission').then(m => ({ default: m.VisionMissionSPIPage })))
+const ProfileStructurePage = lazy(() => import('@/pages/modules/SPI/about/structure').then(m => ({ default: m.ProfileStructurePage })))
+const ShortProfilePage = lazy(() => import('@/pages/modules/SPI/about/short-profile').then(m => ({ default: m.ShortProfilePage })))
+const AuthoritySPIPage = lazy(() => import('@/pages/modules/SPI/about/authority').then(m => ({ default: m.AuthoritySPIPage })))
+const ProfileCodeEthicsPage = lazy(() => import('@/pages/modules/SPI/about/ethics').then(m => ({ default: m.ProfileCodeEthicsPage })))
+const ServicesSPI = lazy(() => import('@/pages/modules/SPI/services').then(m => ({ default: m.ServicesSPI })))
+const CreatedService = lazy(() => import('@/pages/modules/SPI/services/created').then(m => ({ default: m.CreatedService })))
+const UpdatedService = lazy(() => import('@/pages/modules/SPI/services/updated').then(m => ({ default: m.UpdatedService })))
+const DetailServiceSPI = lazy(() => import('@/pages/modules/SPI/services/detail').then(m => ({ default: m.DetailServiceSPI })))
+const RegulationPage = lazy(() => import('@/pages/modules/SPI/regulation').then(m => ({ default: m.RegulationPage })))
+const HumanResourcePage = lazy(() => import('@/pages/modules/SPI/about/human-resource').then(m => ({ default: m.HumanResourcePage })))
+const OfficiallyDataSPI = lazy(() => import('@/pages/modules/SPI/about/human-resource/officialy').then(m => ({ default: m.OfficiallyDataSPI })))
+const ELHKPNDetailPage = lazy(() => import('@/pages/modules/SPI/e-lhkpn').then(m => ({ default: m.ELHKPNDetailPage })))
+const AwardListPage = lazy(() => import('@/pages/modules/SPI/award').then(m => ({ default: m.AwardListPage })))
+const ExternalPortalPage = lazy(() => import('@/pages/modules/SPI/external-portal').then(m => ({ default: m.ExternalPortalPage })))
+const AuditManagementPage = lazy(() => import('@/pages/modules/SPI/quality-assurance/audit').then(m => ({ default: m.AuditManagementPage })))
+const DocumentSystemPage = lazy(() => import('@/pages/modules/SPI/quality-assurance/document-system').then(m => ({ default: m.DocumentSystemPage })))
+const CategoryDocumentSystemPage = lazy(() => import('@/pages/modules/SPI/quality-assurance/document-system/category').then(m => ({ default: m.CategoryDocumentSystemPage })))
+const AddDocumentSystem = lazy(() => import('@/pages/modules/SPI/quality-assurance/document-system/created').then(m => ({ default: m.AddDocumentSystem })))
+const EditDocumentSystem = lazy(() => import('@/pages/modules/SPI/quality-assurance/document-system/updated').then(m => ({ default: m.EditDocumentSystem })))
+const DocumentAuditPage = lazy(() => import('@/pages/modules/SPI/quality-assurance/audit/Document').then(m => ({ default: m.DocumentAuditPage })))
+const AddDocumentAudit = lazy(() => import('@/pages/modules/SPI/quality-assurance/audit/Document/created').then(m => ({ default: m.AddDocumentAudit })))
+const UpdatedDocumentAudit = lazy(() => import('@/pages/modules/SPI/quality-assurance/audit/Document/updated').then(m => ({ default: m.UpdatedDocumentAudit })))
+const NewsSPIPublicContentPage = lazy(() => import('@/pages/modules/SPI/publict-content/news').then(m => ({ default: m.NewsSPIPublicContentPage })))
+const CreateNewsSPI = lazy(() => import('@/pages/modules/SPI/publict-content/news/created').then(m => ({ default: m.CreateNewsSPI })))
+const UpdatedNewsSPI = lazy(() => import('@/pages/modules/SPI/publict-content/news/updated').then(m => ({ default: m.UpdatedNewsSPI })))
+const DetailNewsSPI = lazy(() => import('@/pages/modules/SPI/publict-content/news/detail').then(m => ({ default: m.DetailNewsSPI })))
+const LogActivityNewsSPI = lazy(() => import('@/pages/modules/SPI/publict-content/news/log-data').then(m => ({ default: m.LogActivityNewsSPI })))
+const ListAgendaSPI = lazy(() => import('@/pages/modules/SPI/publict-content/agenda').then(m => ({ default: m.ListAgendaSPI })))
+const CreateAgendaSPI = lazy(() => import('@/pages/modules/SPI/publict-content/agenda/created').then(m => ({ default: m.CreateAgendaSPI })))
+const UpdatedAgendaSPI = lazy(() => import('@/pages/modules/SPI/publict-content/agenda/updated').then(m => ({ default: m.UpdatedAgendaSPI })))
+const DetailAgendaSPI = lazy(() => import('@/pages/modules/SPI/publict-content/agenda/detail').then(m => ({ default: m.DetailAgendaSPI })))
+const LogActivityAgendaSPI = lazy(() => import('@/pages/modules/SPI/publict-content/agenda/log').then(m => ({ default: m.LogActivityAgendaSPI })))
+const ListAnnouncementSPI = lazy(() => import('@/pages/modules/SPI/publict-content/announcement').then(m => ({ default: m.ListAnnouncementSPI })))
+const CreatedAnnouncementSPI = lazy(() => import('@/pages/modules/SPI/publict-content/announcement/created').then(m => ({ default: m.CreatedAnnouncementSPI })))
+const UpdatedAnnouncementSPI = lazy(() => import('@/pages/modules/SPI/publict-content/announcement/updated').then(m => ({ default: m.UpdatedAnnouncementSPI })))
+const DetailAnnouncementSPI = lazy(() => import('@/pages/modules/SPI/publict-content/announcement/detail').then(m => ({ default: m.DetailAnnouncementSPI })))
+const LogActivityAnnouncementSPI = lazy(() => import('@/pages/modules/SPI/publict-content/announcement/log').then(m => ({ default: m.LogActivityAnnouncementSPI })))
+const LandingPageSPI = lazy(() => import('@/pages/modules/SPI/settings/landing-page').then(m => ({ default: m.LandingPageSPI })))
+const SettingsBackground = lazy(() => import('@/pages/modules/SPI/settings/background').then(m => ({ default: m.SettingsBackground })))
+const ColorSettingSPI = lazy(() => import('@/pages/modules/SPI/settings/color/ColorSettingService.tsx'))
+const TemplateWebSPI = lazy(() => import('@/pages/modules/SPI/settings/template-web').then(m => ({ default: m.TemplateWebSPI })))
+const ThemaChangeColorSPI = lazy(() => import('@/pages/modules/SPI/settings/template-web/color').then(m => ({ default: m.ThemaChangeColorSPI })))
+const GuideListView = lazy(() => import('@/pages/modules/website-utama/panduan/GuideListView'))
 
 export const SPI_ROUTES = [
   {
