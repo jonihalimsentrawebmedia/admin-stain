@@ -18,7 +18,7 @@ export const UseGetInbox = (props?: BasicProps) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['inbox', Params.toString()],
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get('/eoffice/surat-masuk').then((res) => res.data),
+    queryFn: () => AxiosClient.get(`/eoffice/surat-masuk?${Params}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching

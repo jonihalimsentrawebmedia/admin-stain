@@ -9,12 +9,25 @@ import {
 import ChartNature from '@/pages/modules/E-Office/inbox/disposition/compnent/chartNature.tsx'
 import { ColumnsDisposition } from '@/pages/modules/E-Office/inbox/disposition/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import { useSearchParams } from 'react-router-dom'
 
 const DispositionListPage = () => {
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+  const id_unit = searchParams.get('id_unit') ?? ''
+
   const { institution } = UseGetUnitInstitution()
   const { count } = UseGetCountDisposition()
   const { nature } = USeGetDispositionByNature()
-  const { disposition, loading, meta } = UseGetDisposition()
+
+  const { disposition, loading, meta } = UseGetDisposition({
+    page,
+    limit,
+    search,
+    id_unit,
+  })
   const columns = ColumnsDisposition()
 
   return (

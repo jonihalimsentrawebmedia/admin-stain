@@ -2,9 +2,19 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { UseGetCopyLetter } from '@/pages/modules/E-Office/inbox/copy-letter/hooks'
 import ColumnsCopyLetter from '@/pages/modules/E-Office/inbox/copy-letter/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import { useSearchParams } from 'react-router-dom'
 
 export const CopyLetterPage = () => {
-  const { meta, copyLetter, loading } = UseGetCopyLetter()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { meta, copyLetter, loading } = UseGetCopyLetter({
+    page,
+    limit,
+    search,
+  })
   const columns = ColumnsCopyLetter()
   return (
     <>

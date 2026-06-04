@@ -4,7 +4,7 @@ import { FormRegistrationOutbox } from '@/pages/modules/E-Office/outbox/registra
 export const RegistrationOutbox = () => {
   return (
     <>
-      <div className={'space-y-5 bg-white py-10'}>
+      <div className={'space-y-5 bg-white'}>
         <ButtonTitleGroup label={'Tulis Surat'} buttonGroup={[]} />
         <FormRegistrationOutbox />
       </div>

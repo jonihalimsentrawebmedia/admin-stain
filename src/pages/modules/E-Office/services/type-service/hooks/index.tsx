@@ -19,7 +19,7 @@ export const UseGetTypeService = (props?: BasicProps) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['type-service', Params.toString()],
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get('/eoffice/jenis-layanan').then((res) => res.data),
+    queryFn: () => AxiosClient.get(`/eoffice/jenis-layanan?${Params}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching

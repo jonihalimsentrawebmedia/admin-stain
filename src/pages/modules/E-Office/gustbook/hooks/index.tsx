@@ -17,8 +17,8 @@ export const UseGetGuestBooks = (props: BasicProps) => {
 
   const { data, isLoading, isFetching } = useQuery({
     refetchOnWindowFocus: false,
-    queryKey: ['guest-book'],
-    queryFn: () => AxiosClient.get('/eoffice/buku-tamu').then((res) => res.data),
+    queryKey: ['guest-book', Params.toString()],
+    queryFn: () => AxiosClient.get(`/eoffice/buku-tamu?${Params}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching

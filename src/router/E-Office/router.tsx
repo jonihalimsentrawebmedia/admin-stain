@@ -37,6 +37,7 @@ import DetailEventActivity from '@/pages/modules/E-Office/event-activity/event-d
 import ReportEventActivity from '@/pages/modules/E-Office/event-activity/report'
 import PrintAttendanceList from '@/pages/modules/E-Office/event-activity/event-data/printAttendance'
 import { LetterHeader } from '@/pages/modules/E-Office/settings/letter-header'
+import DashboardEOfficePage from '@/pages/modules/E-Office/dashboard'
 
 export const E_OFFICE_ROUTE = [
   {
@@ -44,7 +45,7 @@ export const E_OFFICE_ROUTE = [
     children: [
       {
         index: true,
-        element: <></>,
+        element: <DashboardEOfficePage />,
       },
       {
         path: 'user-profile',

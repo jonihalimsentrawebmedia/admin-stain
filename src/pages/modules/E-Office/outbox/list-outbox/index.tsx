@@ -1,18 +1,26 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { UseGetOutbox } from './hooks/index'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { columnsListOutbox } from './data/columns'
 
 export const ListOutbox = () => {
   const navigate = useNavigate()
-  const { listInbox, meta, loading } = UseGetOutbox()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
 
+  const { listInbox, meta, loading } = UseGetOutbox({
+    page,
+    limit,
+    search,
+  })
   const columns = columnsListOutbox()
 
   return (
     <>
-      <div className="space-y-5 py-10">
+      <div className="space-y-5">
         <ButtonTitleGroup
           label={'Daftar Surat Keluar'}
           buttonGroup={[
