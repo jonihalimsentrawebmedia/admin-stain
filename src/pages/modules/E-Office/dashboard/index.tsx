@@ -9,10 +9,6 @@ import {
   UseGetStatisticInbox,
   UseGetStatisticOutbox,
 } from '@/pages/modules/E-Office/dashboard/hooks'
-import ICON1 from '/public/Frame26.png'
-import ICON2 from '/public/Frame25.png'
-import ICON3 from '/public/Frame24.png'
-import ICON4 from '/public/Frame27.png'
 import { ColumnsInboxDashboard } from '@/pages/modules/E-Office/dashboard/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import ChartLetterNature from '@/pages/modules/E-Office/dashboard/component/inboxChart.tsx'
@@ -47,10 +43,10 @@ const DashboardEOfficePage = () => {
     },
   ]
   const countsList = [
-    { image: ICON1, text: 'Total Surat Masuk', counts: counts?.suratMasuk },
-    { image: ICON2, text: 'Total Surat Keluar', counts: counts?.suratKeluar },
-    { image: ICON3, text: 'Total Tamu', counts: counts?.acaraDaftarHadir },
-    { image: ICON4, text: 'Total Acara', counts: counts?.acara },
+    { image: '/public/Frame26.png', text: 'Total Surat Masuk', counts: counts?.suratMasuk },
+    { image: '/public/Frame25.png', text: 'Total Surat Keluar', counts: counts?.suratKeluar },
+    { image: '/public/Frame24.png', text: 'Total Tamu', counts: counts?.acaraDaftarHadir },
+    { image: '/public/Frame27.png', text: 'Total Acara', counts: counts?.acara },
   ]
 
   return (
