@@ -4,15 +4,23 @@ import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { ICopyLetter } from '@/pages/modules/E-Office/inbox/copy-letter/data/types.ts'
 import type { IDispositionInbox } from '@/pages/modules/E-Office/inbox/disposition/data/types.ts'
+import type { BasicProps } from '@/utils/globalType.ts'
 
-export const UseGetCopyLetter = () => {
+export const UseGetCopyLetter = (props?: BasicProps) => {
+  const { page, limit, search } = props ?? {}
   const [copyLetter, setCopyLetter] = useState<ICopyLetter[]>([])
   const [meta, setMeta] = useState<Meta>()
 
+  const Params = new URLSearchParams()
+  if (page) Params.append('page', page ?? '1')
+  if (limit) Params.append('limit', limit ?? '10')
+  if (search) Params.append('search', search ?? '')
+
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['copy-letter'],
+    queryKey: ['copy-letter', Params.toString()],
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get('/eoffice/surat-masuk/tembusan').then((res) => res.data),
+    queryFn: () =>
+      AxiosClient.get(`/eoffice/surat-masuk/tembusan?${Params}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching

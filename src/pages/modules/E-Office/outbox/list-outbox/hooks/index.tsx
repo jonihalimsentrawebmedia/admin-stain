@@ -18,7 +18,7 @@ export const UseGetOutbox = (props?: BasicProps) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['outbox', Params.toString()],
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get('/eoffice/surat-keluar').then((res) => res.data),
+    queryFn: () => AxiosClient.get(`/eoffice/surat-keluar?${Params}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching

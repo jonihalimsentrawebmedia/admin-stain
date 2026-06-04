@@ -21,9 +21,9 @@ export const UseGetQuestionnaire = (props: BasicProps) => {
   if (search) Params.append('search', search ?? '')
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['questionnaire'],
+    queryKey: ['questionnaire', Params.toString()],
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get('/eoffice/survei').then((res) => res.data),
+    queryFn: () => AxiosClient.get(`/eoffice/survei?${Params}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching

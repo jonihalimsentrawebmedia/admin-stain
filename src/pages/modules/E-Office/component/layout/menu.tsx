@@ -180,11 +180,11 @@ export const GenerateMenu = () => {
           name: 'Penerima Notifikasi',
           path: `${baseDomain}/settings/accept-notification`,
         },
-        // {
-        //   id: 92,
-        //   name: 'Kop Surat',
-        //   path: `${baseDomain}/settings/letter-header`,
-        // },
+        {
+          id: 92,
+          name: 'Kop Surat',
+          path: `${baseDomain}/settings/letter-header`,
+        },
       ],
     },
   ]

@@ -10,7 +10,7 @@ interface LetterHeaderProps {
   imageUrl?: string
 }
 
-const PAGE_WIDTH = 515
+// const PAGE_WIDTH = 515
 const LOGO_SIZE = 72
 
 const getValidFont = (jenis_font?: string): string => {
@@ -66,19 +66,33 @@ export default function LetterHeaderPDF({ header, imageUrl }: LetterHeaderProps)
 
     return [
       {
+        table: {
+          widths: ['*'],
+          body: [['']],
+        },
+        layout: {
+          hLineWidth: (i: number) => (i === 0 ? 0 : i === 1 ? 0 : 0),
+          hLineColor: () => '#000',
+          vLineWidth: () => 0,
+          paddingLeft: () => 0,
+          paddingRight: () => 0,
+          paddingTop: () => 0,
+          paddingBottom: () => 0,
+        },
+        margin: [0, 0, 0, 0],
+      },
+      {
         columns,
         columnGap: 12,
         margin: [0, 0, 0, 8] as [number, number, number, number],
       },
-
-      // Garis kop surat
       {
         canvas: [
           {
             type: 'line',
             x1: 0,
             y1: 0,
-            x2: PAGE_WIDTH,
+            x2: 515,
             y2: 0,
             lineWidth: 1.5,
             lineColor: '#000000',
@@ -87,7 +101,7 @@ export default function LetterHeaderPDF({ header, imageUrl }: LetterHeaderProps)
             type: 'line',
             x1: 0,
             y1: 3,
-            x2: PAGE_WIDTH,
+            x2: 515,
             y2: 3,
             lineWidth: 0.5,
             lineColor: '#000000',

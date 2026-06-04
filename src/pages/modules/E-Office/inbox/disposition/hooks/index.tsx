@@ -6,15 +6,29 @@ import type {
   IDispositionInbox,
 } from '@/pages/modules/E-Office/inbox/disposition/data/types.ts'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
+import type { BasicProps } from '@/utils/globalType.ts'
 
-export const UseGetDisposition = () => {
+interface props extends BasicProps {
+  id_unit: string
+}
+
+export const UseGetDisposition = (props?: props) => {
+  const { id_unit, page, limit, search } = props ?? {}
+
   const [disposition, setDisposition] = useState<IDisposition[]>([])
   const [meta, setMeta] = useState<Meta>()
 
+  const Params = new URLSearchParams()
+  if (page) Params.append('page', page ?? '1')
+  if (limit) Params.append('limit', limit ?? '10')
+  if (search) Params.append('search', search ?? '')
+  if (id_unit) Params.append('id_unit', id_unit ?? '')
+
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['disposition'],
+    queryKey: ['disposition', Params.toString()],
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get('/eoffice/surat-masuk/disposisi').then((res) => res.data),
+    queryFn: () =>
+      AxiosClient.get(`/eoffice/surat-masuk/disposisi?${Params}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching

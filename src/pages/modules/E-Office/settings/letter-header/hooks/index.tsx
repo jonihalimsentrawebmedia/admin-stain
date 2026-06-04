@@ -33,6 +33,7 @@ export const ConvertUrlToBase64 = (url: string) => {
   const { data, isLoading, isFetching } = useQuery({
     refetchOnWindowFocus: false,
     queryKey: ['letter-header-image', Params.toString()],
+    enabled: !!url,
     queryFn: () => AxiosClient.get(`/url-to-base64?${Params}`).then((res) => res.data),
   })
 
