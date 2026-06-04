@@ -10,4 +10,5 @@ export interface IEventReport {
   jumlah_pengeluaran: number
   is_laporan_kegiatan: boolean
   jumlah_sharing_data: number
+  id_acara: string
 }

@@ -1,6 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs.tsx'
 import { cn } from '@/lib/utils.ts'
-import { useState } from 'react'
 import { SectionFile } from '@/pages/modules/E-Office/event-activity/event-data/detail/component/file-support/sectionFile.tsx'
 import DocumentationEventActivity from '@/pages/modules/E-Office/event-activity/event-data/detail/component/documentation'
 import MeetingMinutes from '@/pages/modules/E-Office/event-activity/event-data/detail/component/meeting-minutes'
@@ -8,6 +7,7 @@ import ExpenditureSection from '@/pages/modules/E-Office/event-activity/event-da
 import { Check } from 'lucide-react'
 import ReportActivity from '@/pages/modules/E-Office/event-activity/event-data/detail/component/report-activity'
 import ListAttendance from '@/pages/modules/E-Office/event-activity/event-data/detail/component/list-attandaces'
+import { useSearchParams } from 'react-router-dom'
 
 const MenuEvent = () => {
   const TabsData = [
@@ -24,18 +24,23 @@ const MenuEvent = () => {
     { id: 6, value: 'report', label: 'Laporan Kegiatan', element: <ReportActivity /> },
   ]
 
-  const [tabValue, setTabValue] = useState(TabsData[0]?.value)
+  const [searchParams, setSearchParams] = useSearchParams()
+  const tabs = searchParams.get('tabs') ?? 'file'
 
   return (
     <>
       <Tabs
-        value={tabValue}
-        onValueChange={setTabValue}
+        value={tabs}
+        onValueChange={(e) => {
+          const Params = new URLSearchParams(searchParams)
+          Params.set('tabs', e)
+          setSearchParams(Params.toString())
+        }}
         className="w-full h-full flex items-start flex-row! gap-x-5"
       >
         <TabsList
           className={
-            'w-1/5 h-full flex flex-col gap-2 justify-start items-start bg-white shadow border p-5'
+            'w-1/6 h-full flex flex-col gap-2 justify-start items-start bg-white shadow border p-5'
           }
         >
           <p key={'asd'} className="text-2xl font-semibold">
@@ -51,7 +56,7 @@ const MenuEvent = () => {
               )}
             >
               <p className="w-full text-start flex items-center gap-2">
-                {tabValue === row?.value && <Check />}
+                {tabs === row?.value && <Check />}
                 {row?.label}
               </p>
             </TabsTrigger>

@@ -173,6 +173,7 @@ export const DetailDisposition = () => {
                 <Link
                   to={item?.lampiran_url}
                   key={index}
+                  target="_blank"
                   className="flex items-center gap-1.5 border p-1.5 rounded"
                 >
                   <FaFile />

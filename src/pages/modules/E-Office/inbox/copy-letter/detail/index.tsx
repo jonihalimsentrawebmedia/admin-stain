@@ -132,6 +132,7 @@ export const DetailCopyLetterPage = () => {
               {detail?.lampiran?.map((item, index) => (
                 <Link
                   to={item?.lampiran_url}
+                  target="_blank"
                   key={index}
                   className="flex items-center gap-1.5 border p-1.5 rounded"
                 >
