@@ -1,8 +1,9 @@
 import { Link, useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
 import type { IPublication } from '@/pages/modules/website-utama/publication/data/types.ts'
-import { format } from 'date-fns'
 import { Button } from '@/components/ui/button.tsx'
+import { format, parse } from 'date-fns'
+import { id } from 'date-fns/locale'
 
 export const ColumnsPublication = () => {
   const [searchParams] = useSearchParams()
@@ -59,7 +60,17 @@ export const ColumnsPublication = () => {
       header: 'Tanggal Terbit',
       cell: ({ row }) => {
         const data = row.original
-        return <>{data.tanggal_terbit ? format(data.tanggal_terbit, 'dd-MM-yyyy') : ''}</>
+        return (
+          <>
+            {data.tanggal_terbit
+              ? format(parse(data?.tanggal_terbit, 'dd-MM-yyyy', new Date()), 'EEEE, dd-MM-yyyy', {
+                  locale: id,
+                })
+              : ''}
+          </>
+        )
+        // return <>{format(date, 'EEEE dd-MM-yyyy')}</>
+        // return <>{date ? format(date, 'dd-MM-yyyy') : ''}</>
       },
     },
     {
@@ -70,7 +81,10 @@ export const ColumnsPublication = () => {
         return (
           <>
             <Link to={data?.url_jurnal ?? '#'}>
-              <Button variant={'outline'} className={'border-primary text-primary hover:text-primary'}>
+              <Button
+                variant={'outline'}
+                className={'border-primary text-primary hover:text-primary'}
+              >
                 Buka Link Jurnal
               </Button>
             </Link>
