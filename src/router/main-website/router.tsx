@@ -1,222 +1,223 @@
-import { ProfilePageMainWebsite } from '@/pages/modules/website-utama/profile'
-import { EditPageUniversity } from '@/pages/modules/website-utama/profile/editPage'
-import { TopSliderPublicContent } from '@/pages/modules/website-utama/public-content/slider/top-slider'
-import { CreateTopSlider } from '@/pages/modules/website-utama/public-content/slider/top-slider/create'
-import { UpdatedTopSliderPage } from '@/pages/modules/website-utama/public-content/slider/top-slider/updated'
-import { BottomSliderPublicContent } from '@/pages/modules/website-utama/public-content/slider/bottom-slider'
-import { CreateBottomSlider } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/create'
-import { UpdatedBottomSlider } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/updated'
-import NewsPublicContentPage from '@/pages/modules/website-utama/public-content/news'
-import { CreatedNewsPage } from '@/pages/modules/website-utama/public-content/news/created'
-import { UpdatedNewsPage } from '@/pages/modules/website-utama/public-content/news/updated'
-import { DetailNewsPage } from '@/pages/modules/website-utama/public-content/news/detail/page.tsx'
-import { AnnouncementPage } from '@/pages/modules/website-utama/public-content/announcement'
-import { CreateAnnouncementPage } from '@/pages/modules/website-utama/public-content/announcement/created'
-import { UpdatedAnnouncementPage } from '@/pages/modules/website-utama/public-content/announcement/updated'
-import SettingMenuHeaderView from '@/pages/modules/website-utama/settings-menu/header/SettingMenuHeaderView'
-import ContentView from '@/pages/modules/website-utama/settings-menu/header/content/ContentView'
-import ContentCreateView from '@/pages/modules/website-utama/settings-menu/header/content/create/ContentCreateView'
-import ContentEditView from '@/pages/modules/website-utama/settings-menu/header/content/edit/ContentEditView'
-import { AnnouncementDetailPage } from '@/pages/modules/website-utama/public-content/announcement/detail'
-import { AgendaPage } from '@/pages/modules/website-utama/public-content/agenda'
-import { CreateAgendaPage } from '@/pages/modules/website-utama/public-content/agenda/created'
-import { UpdatedAgendaPage } from '@/pages/modules/website-utama/public-content/agenda/updated'
-import { DetailAgendaPage } from '@/pages/modules/website-utama/public-content/agenda/detail'
-import { ImpactInnovationPage } from '@/pages/modules/website-utama/public-content/impact-innovation'
-import { CreateImpactInnovationPage } from '@/pages/modules/website-utama/public-content/impact-innovation/created'
-import BackgroundView from '@/pages/modules/website-utama/settings-menu/header/background/BackgroundView'
-import ServicesView from '@/pages/modules/website-utama/services/ServicesView'
-import LogView from '@/pages/modules/website-utama/services/log/LogView'
-import { UpdatedImpactInnovationPage } from '@/pages/modules/website-utama/public-content/impact-innovation/updated'
-import { DetailImpactInnovationPage } from '@/pages/modules/website-utama/public-content/impact-innovation/detail'
-import { StructureOrganizationPage } from '@/pages/modules/website-utama/public-content/structure-organization'
-import CalendarAcademicView from '@/pages/modules/website-utama/calendar-academic/CalendarAcademicView'
-import CalendarAcademicDetailView from '@/pages/modules/website-utama/calendar-academic/detail/CalendarAcademicDetailView'
-import DetailActivityView from '@/pages/modules/website-utama/calendar-academic/detail-activity/DetailActivityView'
-import LogAcademicYear from '@/pages/modules/website-utama/calendar-academic/log/LogAcademicYear'
-import LogActivityView from '@/pages/modules/website-utama/calendar-academic/log/LogActivityView'
-import LogActivityDetailView from '@/pages/modules/website-utama/calendar-academic/log/LogActivityDetailView'
-import CalendarAcademicBackgroundView from '@/pages/modules/website-utama/calendar-academic/background/CalendarAcademicBackgroundView'
-import { PlacemenUser } from '@/pages/modules/website-utama/public-content/structure-organization/Placeman-user'
-import { FacilitiesPage } from '@/pages/modules/website-utama/public-content/facilities'
-import { CreatedFacilitiesPage } from '@/pages/modules/website-utama/public-content/facilities/created'
-import { UpdatedFacilitiesPage } from '@/pages/modules/website-utama/public-content/facilities/updated'
-import { DetailFacilitiesPage } from '@/pages/modules/website-utama/public-content/facilities/detail'
-import StatisticView from '@/pages/modules/website-utama/statistic/StatisticView'
+import { lazy } from 'react'
+const ProfilePageMainWebsite = lazy(() => import('@/pages/modules/website-utama/profile').then(m => ({ default: m.ProfilePageMainWebsite })))
+const EditPageUniversity = lazy(() => import('@/pages/modules/website-utama/profile/editPage').then(m => ({ default: m.EditPageUniversity })))
+const TopSliderPublicContent = lazy(() => import('@/pages/modules/website-utama/public-content/slider/top-slider').then(m => ({ default: m.TopSliderPublicContent })))
+const CreateTopSlider = lazy(() => import('@/pages/modules/website-utama/public-content/slider/top-slider/create').then(m => ({ default: m.CreateTopSlider })))
+const UpdatedTopSliderPage = lazy(() => import('@/pages/modules/website-utama/public-content/slider/top-slider/updated').then(m => ({ default: m.UpdatedTopSliderPage })))
+const BottomSliderPublicContent = lazy(() => import('@/pages/modules/website-utama/public-content/slider/bottom-slider').then(m => ({ default: m.BottomSliderPublicContent })))
+const CreateBottomSlider = lazy(() => import('@/pages/modules/website-utama/public-content/slider/bottom-slider/create').then(m => ({ default: m.CreateBottomSlider })))
+const UpdatedBottomSlider = lazy(() => import('@/pages/modules/website-utama/public-content/slider/bottom-slider/updated').then(m => ({ default: m.UpdatedBottomSlider })))
+const NewsPublicContentPage = lazy(() => import('@/pages/modules/website-utama/public-content/news'))
+const CreatedNewsPage = lazy(() => import('@/pages/modules/website-utama/public-content/news/created').then(m => ({ default: m.CreatedNewsPage })))
+const UpdatedNewsPage = lazy(() => import('@/pages/modules/website-utama/public-content/news/updated').then(m => ({ default: m.UpdatedNewsPage })))
+const DetailNewsPage = lazy(() => import('@/pages/modules/website-utama/public-content/news/detail/page.tsx').then(m => ({ default: m.DetailNewsPage })))
+const AnnouncementPage = lazy(() => import('@/pages/modules/website-utama/public-content/announcement').then(m => ({ default: m.AnnouncementPage })))
+const CreateAnnouncementPage = lazy(() => import('@/pages/modules/website-utama/public-content/announcement/created').then(m => ({ default: m.CreateAnnouncementPage })))
+const UpdatedAnnouncementPage = lazy(() => import('@/pages/modules/website-utama/public-content/announcement/updated').then(m => ({ default: m.UpdatedAnnouncementPage })))
+const SettingMenuHeaderView = lazy(() => import('@/pages/modules/website-utama/settings-menu/header/SettingMenuHeaderView'))
+const ContentView = lazy(() => import('@/pages/modules/website-utama/settings-menu/header/content/ContentView'))
+const ContentCreateView = lazy(() => import('@/pages/modules/website-utama/settings-menu/header/content/create/ContentCreateView'))
+const ContentEditView = lazy(() => import('@/pages/modules/website-utama/settings-menu/header/content/edit/ContentEditView'))
+const AnnouncementDetailPage = lazy(() => import('@/pages/modules/website-utama/public-content/announcement/detail').then(m => ({ default: m.AnnouncementDetailPage })))
+const AgendaPage = lazy(() => import('@/pages/modules/website-utama/public-content/agenda').then(m => ({ default: m.AgendaPage })))
+const CreateAgendaPage = lazy(() => import('@/pages/modules/website-utama/public-content/agenda/created').then(m => ({ default: m.CreateAgendaPage })))
+const UpdatedAgendaPage = lazy(() => import('@/pages/modules/website-utama/public-content/agenda/updated').then(m => ({ default: m.UpdatedAgendaPage })))
+const DetailAgendaPage = lazy(() => import('@/pages/modules/website-utama/public-content/agenda/detail').then(m => ({ default: m.DetailAgendaPage })))
+const ImpactInnovationPage = lazy(() => import('@/pages/modules/website-utama/public-content/impact-innovation').then(m => ({ default: m.ImpactInnovationPage })))
+const CreateImpactInnovationPage = lazy(() => import('@/pages/modules/website-utama/public-content/impact-innovation/created').then(m => ({ default: m.CreateImpactInnovationPage })))
+const BackgroundView = lazy(() => import('@/pages/modules/website-utama/settings-menu/header/background/BackgroundView'))
+const ServicesView = lazy(() => import('@/pages/modules/website-utama/services/ServicesView'))
+const LogView = lazy(() => import('@/pages/modules/website-utama/services/log/LogView'))
+const UpdatedImpactInnovationPage = lazy(() => import('@/pages/modules/website-utama/public-content/impact-innovation/updated').then(m => ({ default: m.UpdatedImpactInnovationPage })))
+const DetailImpactInnovationPage = lazy(() => import('@/pages/modules/website-utama/public-content/impact-innovation/detail').then(m => ({ default: m.DetailImpactInnovationPage })))
+const StructureOrganizationPage = lazy(() => import('@/pages/modules/website-utama/public-content/structure-organization').then(m => ({ default: m.StructureOrganizationPage })))
+const CalendarAcademicView = lazy(() => import('@/pages/modules/website-utama/calendar-academic/CalendarAcademicView'))
+const CalendarAcademicDetailView = lazy(() => import('@/pages/modules/website-utama/calendar-academic/detail/CalendarAcademicDetailView'))
+const DetailActivityView = lazy(() => import('@/pages/modules/website-utama/calendar-academic/detail-activity/DetailActivityView'))
+const LogAcademicYear = lazy(() => import('@/pages/modules/website-utama/calendar-academic/log/LogAcademicYear'))
+const LogActivityView = lazy(() => import('@/pages/modules/website-utama/calendar-academic/log/LogActivityView'))
+const LogActivityDetailView = lazy(() => import('@/pages/modules/website-utama/calendar-academic/log/LogActivityDetailView'))
+const CalendarAcademicBackgroundView = lazy(() => import('@/pages/modules/website-utama/calendar-academic/background/CalendarAcademicBackgroundView'))
+const PlacemenUser = lazy(() => import('@/pages/modules/website-utama/public-content/structure-organization/Placeman-user').then(m => ({ default: m.PlacemenUser })))
+const FacilitiesPage = lazy(() => import('@/pages/modules/website-utama/public-content/facilities').then(m => ({ default: m.FacilitiesPage })))
+const CreatedFacilitiesPage = lazy(() => import('@/pages/modules/website-utama/public-content/facilities/created').then(m => ({ default: m.CreatedFacilitiesPage })))
+const UpdatedFacilitiesPage = lazy(() => import('@/pages/modules/website-utama/public-content/facilities/updated').then(m => ({ default: m.UpdatedFacilitiesPage })))
+const DetailFacilitiesPage = lazy(() => import('@/pages/modules/website-utama/public-content/facilities/detail').then(m => ({ default: m.DetailFacilitiesPage })))
+const StatisticView = lazy(() => import('@/pages/modules/website-utama/statistic/StatisticView'))
 
-import AcreditationView from '@/pages/modules/website-utama/acreditation/AcreditationView'
-import LogStatisticView from '@/pages/modules/website-utama/statistic/log/LogStatisticView'
-import AcreditationBackgroundView from '@/pages/modules/website-utama/acreditation/background/AcreditationBackgroundView'
-import { GalleryVideoPage } from '@/pages/modules/website-utama/public-content/gallery/video'
-import { GalleryPhotoPage } from '@/pages/modules/website-utama/public-content/gallery/Foto'
-import { DataAlbumListPage } from '@/pages/modules/website-utama/public-content/gallery/Foto/data-album'
-import { AchievementPage } from '@/pages/modules/website-utama/public-content/achievement'
-import { CreatedAchievementPage } from '@/pages/modules/website-utama/public-content/achievement/created'
-import { UpdatedAchievementPage } from '@/pages/modules/website-utama/public-content/achievement/updated'
-import { DetailAchievementPage } from '@/pages/modules/website-utama/public-content/achievement/detail'
-import { LogActivityPage } from '@/pages/modules/website-utama/public-content/slider/top-slider/log'
-import AcreditationLogDetail from '@/pages/modules/website-utama/acreditation/log/AcreditationLogDetail'
-import { LogBottomActivityPage } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/log'
-import { LogActivityNewsPage } from '@/pages/modules/website-utama/public-content/news/log'
-import { LogActivityImpactInnovationPage } from '@/pages/modules/website-utama/public-content/impact-innovation/log'
-import { LogActivityAnnouncementPage } from '@/pages/modules/website-utama/public-content/announcement/log'
-import { LogActivityAgendaPage } from '@/pages/modules/website-utama/public-content/agenda/log'
-import { LogActivityFacilitiesPage } from '@/pages/modules/website-utama/public-content/facilities/log'
-import { LogActivityAchievement } from '@/pages/modules/website-utama/public-content/achievement/log'
-import { AnnouncementBackground } from '@/pages/modules/website-utama/public-content/announcement/background'
-import { AgendaBackgroundPage } from '@/pages/modules/website-utama/public-content/agenda/background'
-import { InnovationBackgroundPage } from '@/pages/modules/website-utama/public-content/impact-innovation/background'
-import { GroupOrganizationBackgroundPage } from '@/pages/modules/website-utama/public-content/structure-organization/background'
-import { FacilitiesBackgroundPage } from '@/pages/modules/website-utama/public-content/facilities/background'
-import { AchievementBackgroundPage } from '@/pages/modules/website-utama/public-content/achievement/background'
-import { GalleryPhotoBackgroundPage } from '@/pages/modules/website-utama/public-content/gallery/Foto/background'
-import { GalleryVideoBackgroundPage } from '@/pages/modules/website-utama/public-content/gallery/video/background'
-import { LogActivityVideoPage } from '@/pages/modules/website-utama/public-content/gallery/video/log'
-import { LogActivityGalleryAlbum } from '@/pages/modules/website-utama/public-content/gallery/Foto/log'
-import { LogActivityGalleryAlbumPhoto } from '@/pages/modules/website-utama/public-content/gallery/Foto/data-album/log'
-import DownloadFilePage from '@/pages/modules/website-utama/public-content/download'
-import { AddDownloadPage } from '@/pages/modules/website-utama/public-content/download/components/addPage.tsx'
-import { EditDownloadPage } from '@/pages/modules/website-utama/public-content/download/components/editPage.tsx'
-import { OfficialMusicPage } from '@/pages/modules/website-utama/public-content/musik-resmi'
-import { AddOfficialMusicPage } from '@/pages/modules/website-utama/public-content/musik-resmi/components/addPage.tsx'
-import { EditOfficialMusicPage } from '@/pages/modules/website-utama/public-content/musik-resmi/components/editPage.tsx'
-import { CertificateStudent } from '@/pages/modules/website-utama/surat-keterangan-mahasiswa'
-import { AcademicRegulation } from '@/pages/modules/website-utama/peraturan-akademik'
-import { AddPageAcademicRule } from '@/pages/modules/website-utama/peraturan-akademik/components/addPage.tsx'
-import { PageIdentity } from '@/pages/modules/website-utama/Identity'
-import DashboardAdmin from '@/pages/modules/website-utama/beranda'
-import { UpdateIdentityPage } from '@/pages/modules/website-utama/Identity/components/update.tsx'
-import { IdentityBackground } from '@/pages/modules/website-utama/Identity/background'
-import { AcademicRulesBackground } from '@/pages/modules/website-utama/peraturan-akademik/background'
-import { StudentLetterBackground } from '@/pages/modules/website-utama/surat-keterangan-mahasiswa/background'
-import CampusLifePage from '@/pages/modules/website-utama/campus-life'
-import CalloborationCategoryView from '@/pages/modules/website-utama/kerjasama/kategori-kerjasama/CalloborationCategoryView'
-import SubCalloborationCategoryView from '@/pages/modules/website-utama/kerjasama/sub-kategori-kerjasama/SubCalloborationCategoryView'
-import TypeOfCalloborationView from '@/pages/modules/website-utama/kerjasama/jenis-kerjasama/TypeOfCalloborationView'
-import FieldOfCooperationView from '@/pages/modules/website-utama/kerjasama/bidang-kerjasama/FieldOfCooperationView'
-import CalloborationListView from '@/pages/modules/website-utama/kerjasama/daftar-kerjasama/CalloborationListView'
-import CalloborationCreateView from '@/pages/modules/website-utama/kerjasama/daftar-kerjasama/create/CalloborationCreateView'
-import CalloborationCategoryLogView from '@/pages/modules/website-utama/kerjasama/kategori-kerjasama/log/CalloborationCategoryLogView'
-import SubCalloborationCategoryLogView from '@/pages/modules/website-utama/kerjasama/sub-kategori-kerjasama/log/SubCalloborationCategoryLogView'
-import TypeOfCalloborationLogView from '@/pages/modules/website-utama/kerjasama/jenis-kerjasama/log/TypeOfCalloborationLogView'
-import FieldOfCooperationLogView from '@/pages/modules/website-utama/kerjasama/bidang-kerjasama/log/FieldOfCooperationLogView'
-import CalloborationEditView from '@/pages/modules/website-utama/kerjasama/daftar-kerjasama/edit/CalloborationEditView'
-import CalloborationDetailView from '@/pages/modules/website-utama/kerjasama/daftar-kerjasama/detail/CalloborationDetailView'
-import CalloborationLogView from '@/pages/modules/website-utama/kerjasama/daftar-kerjasama/log/CalloborationLogView'
-import { CampusLifeBackground } from '@/pages/modules/website-utama/campus-life/background'
-import ProgramStudyView from '@/pages/modules/website-utama/program-studi/ProgramStudyView'
-import AboutProgramStudiView from '@/pages/modules/website-utama/program-studi/detail/tentang/AboutProgramStudiView'
-import LayoutProgramStudy from '@/pages/modules/website-utama/program-studi/detail/components/LayoutProgramStudy'
-import ManagementUnitProgramStudyView from '@/pages/modules/website-utama/program-studi/detail/unit-pengelola/ManagementUnitProgramStudyView'
-import VisiMisiProgramStudyView from '@/pages/modules/website-utama/program-studi/detail/visi-misi/VisiMisiProgramStudyView'
-import OrganizationalStructureView from '@/pages/modules/website-utama/program-studi/detail/struktur-organisasi/OrganizationalStructureView'
-import ContactUsProgramStudyView from '@/pages/modules/website-utama/program-studi/detail/hubungi-kami/ContactUsProgramStudyView'
-import StaffProgramStudyView from '@/pages/modules/website-utama/program-studi/detail/staff/StaffProgramStudyView'
-import DosenProgramStudyView from '@/pages/modules/website-utama/program-studi/detail/dosen/DosenProgramStudyView'
-import GalleryProgramStudyView from '@/pages/modules/website-utama/program-studi/detail/gallery/GalleryProgramStudyView'
-import NewsProgramStudyView from '@/pages/modules/website-utama/program-studi/detail/berita/NewsProgramStudyView.tsx'
-import { DetailNewsProdiPage } from '@/pages/modules/website-utama/program-studi/detail/berita/detail'
-import FacultyView from '@/pages/modules/website-utama/fakultas/FacultyView'
-import LayoutFaculty from '@/pages/modules/website-utama/fakultas/detail/components/LayoutFaculty'
-import GalleryDetailPhotoView from '@/pages/modules/website-utama/program-studi/detail/gallery/detail/GalleryDetailPhotoView'
-import { InboxMessagePage } from '@/pages/modules/website-utama/pertayaan/kotak-masuk'
-import { InboxMessageBackground } from '@/pages/modules/website-utama/pertayaan/kotak-masuk/background'
-import { FaqListData } from '@/pages/modules/website-utama/pertayaan/Faq'
-import { CategoryFAQList } from '@/pages/modules/website-utama/pertayaan/Faq/Category'
-import { RegistrationPathPage } from '@/pages/modules/website-utama/jalur-pendaftaran'
-import { AddPageRegisterPath } from '@/pages/modules/website-utama/jalur-pendaftaran/components/addPage.tsx'
-import { EditPageRegisterPath } from '@/pages/modules/website-utama/jalur-pendaftaran/components/editPage.tsx'
-import { FooterContent } from '@/pages/modules/website-utama/settings-menu/Footer'
-import { UserProfilePage } from '@/pages/modules/website-utama/user-profile'
-import { ChangePassword } from '@/pages/modules/website-utama/change-password'
-import { LogFooterContent } from '@/pages/modules/website-utama/settings-menu/Footer/log'
-import { ChangePrimaryAndFooterColor } from '@/pages/modules/website-utama/settings-menu/color'
-import { NewsWithLanguage } from '@/pages/modules/website-utama/public-content/news/language'
-import { ImpactInnovationLanguage } from '@/pages/modules/website-utama/public-content/impact-innovation/language'
-import { AnnouncementLanguage } from '@/pages/modules/website-utama/public-content/announcement/language'
-import { AgendaLanguagePage } from '@/pages/modules/website-utama/public-content/agenda/language'
-import { StructureOrganizationLanguagePage } from '@/pages/modules/website-utama/public-content/structure-organization/language'
-import { PlacemanUserLanguagePage } from '@/pages/modules/website-utama/public-content/structure-organization/Placeman-user/language'
-import { FacilitiesLanguage } from '@/pages/modules/website-utama/public-content/facilities/language'
-import { GalleryVideoLanguage } from '@/pages/modules/website-utama/public-content/gallery/video/language'
-import { GalleryAlbumLanguage } from '@/pages/modules/website-utama/public-content/gallery/Foto/language'
-import { GalleryPhotoLanguage } from '@/pages/modules/website-utama/public-content/gallery/Foto/data-album/language'
-import { AchievementLanguagePage } from '@/pages/modules/website-utama/public-content/achievement/language'
-import { DownloadCategoryLanguage } from '@/pages/modules/website-utama/public-content/download/category-language'
-import { DownloadFileLanguage } from '@/pages/modules/website-utama/public-content/download/language'
-import { AnthemMusicLanguage } from '@/pages/modules/website-utama/public-content/musik-resmi/language'
-import { ServiceLanguagePage } from '@/pages/modules/website-utama/services/language'
-import { CategoryFAQLanguagePage } from '@/pages/modules/website-utama/pertayaan/Faq/Category/language'
-import { FAQLanguagePage } from '@/pages/modules/website-utama/pertayaan/Faq/language'
-import { SubmissionSKMLanguagePage } from '@/pages/modules/website-utama/surat-keterangan-mahasiswa/pengajuan-language'
-import { SKMLanguagePage } from '@/pages/modules/website-utama/surat-keterangan-mahasiswa/language'
-import { LogActivitySKM } from '@/pages/modules/website-utama/surat-keterangan-mahasiswa/log'
-import { RegisteredPathLanguagePage } from '@/pages/modules/website-utama/jalur-pendaftaran/language'
-import { AcademicRulesLanguagePage } from '@/pages/modules/website-utama/peraturan-akademik/language'
-import { HeaderMenuLanguagePage } from '@/pages/modules/website-utama/settings-menu/header/language'
-import { FooterLanguagePage } from '@/pages/modules/website-utama/settings-menu/Footer/language'
-import { CorporationCategoryLanguagePage } from '@/pages/modules/website-utama/kerjasama/kategori-kerjasama/language'
-import { CorporationSubCategoryLanguagePage } from '@/pages/modules/website-utama/kerjasama/sub-kategori-kerjasama/language'
-import { TypeCollaborationLanguagePage } from '@/pages/modules/website-utama/kerjasama/jenis-kerjasama/language'
-import { FieldCollaborationLanguagePage } from '@/pages/modules/website-utama/kerjasama/bidang-kerjasama/language'
-import { CollaborationLanguagePage } from '@/pages/modules/website-utama/kerjasama/daftar-kerjasama/language'
-import { StatisticLanguagePage } from '@/pages/modules/website-utama/statistic/language'
-import { YearAcademicLanguagePage } from '@/pages/modules/website-utama/calendar-academic/language'
-import { YearAcademicActivityLanguagePage } from '@/pages/modules/website-utama/calendar-academic/detail/language'
-import { YearActivityDetailLanguagePage } from '@/pages/modules/website-utama/calendar-academic/detail-activity/language'
-import { AccreditationLanguagePage } from '@/pages/modules/website-utama/acreditation/language'
-import { IdentityLanguagePage } from '@/pages/modules/website-utama/Identity/language'
-import { TextIntroduceLanguagePage } from '@/pages/modules/website-utama/campus-life/language/pengantar'
-import { TextFacilitiesLanguagePage } from '@/pages/modules/website-utama/campus-life/language/fasilitas'
-import { TextUnitActivityLanguagePage } from '@/pages/modules/website-utama/campus-life/language/ukm'
-import { TextPerformanceLanguagePage } from '@/pages/modules/website-utama/campus-life/language/prestasi'
-import { TextTestimonyLanguagePage } from '@/pages/modules/website-utama/campus-life/language/testimoni'
-import { TextDirectUrlLanguagePage } from '@/pages/modules/website-utama/campus-life/language/directLink'
-import { TopSliderLanguagePage } from '@/pages/modules/website-utama/public-content/slider/top-slider/language'
-import { BottomSliderLanguagePage } from '@/pages/modules/website-utama/public-content/slider/bottom-slider/language'
-import { HeaderMenuContentLanguagePage } from '@/pages/modules/website-utama/settings-menu/header/content/language'
-import { CreateAccreditation } from '@/pages/modules/website-utama/acreditation/create'
-import { UpdateAccreditation } from '@/pages/modules/website-utama/acreditation/update'
-import { TemplateMainWeb } from '@/pages/modules/website-utama/settings-menu/template'
-import UnitInstitutionPage from '@/pages/modules/website-utama/unit-lembaga'
-import DetailUnitInstitution from '@/pages/modules/website-utama/unit-lembaga/detail'
-import UKKUKMPage from '@/pages/modules/website-utama/UKK-UKM'
-import { UnitInstitutionBackgroundPage } from '@/pages/modules/website-utama/unit-lembaga/background'
-import DetailUkkUKMPage from '@/pages/modules/website-utama/UKK-UKM/detail'
-import { ThemaChangeColor } from '@/pages/modules/website-utama/settings-menu/template/color'
-import { CreatedEmployee } from '@/pages/modules/website-utama/lecturer-staff/created'
-import LecturerStaff from '@/pages/modules/website-utama/lecturer-staff'
-import StatusEmployeePage from '@/pages/modules/website-utama/lecturer-staff/status-employee'
-import { UpdatedEmployee } from '@/pages/modules/website-utama/lecturer-staff/updated'
-import DetailEmployee from '@/pages/modules/website-utama/lecturer-staff/detail'
-import SetUnitEmployeePage from '@/pages/modules/website-utama/lecturer-staff/set-unit'
-import SetStatusEmployeePage from '@/pages/modules/website-utama/lecturer-staff/set-status'
-import GuideListView from '@/pages/modules/website-utama/panduan/GuideListView'
-import { QuotesPage } from '@/pages/modules/website-utama/settings-menu/qoutes'
-import { FacultyBackground } from '@/pages/modules/website-utama/fakultas/background'
-import { ProdiBackground } from '@/pages/modules/website-utama/program-studi/background'
-import { PublicationLecturerPage } from '@/pages/modules/website-utama/publication'
-import StatusActivePage from '@/pages/modules/website-utama/lecturer-staff/status-active'
-import { SetStatusActivePage } from '@/pages/modules/website-utama/lecturer-staff/set-status-active'
-import { HistoryStatusPage } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/history-status'
-import { EditStatusActiveEmployee } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/edit-status'
-import { AddStatusActiveEmployee } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/add-status'
-import { ReportData } from '@/pages/modules/website-utama/lecturer-staff/set-status-active/reportData'
-import { UKTCostEducationPage } from '@/pages/modules/website-utama/cost-education/ukt'
-import { LevelUktPage } from '@/pages/modules/website-utama/cost-education/ukt/level-ukt'
-import { EntranceListUktPage } from '@/pages/modules/website-utama/cost-education/ukt/entrance-list'
-import { DetailUktByEntrance } from '@/pages/modules/website-utama/cost-education/ukt/detail-ukt'
-import { GetDetailEntranceProdiUktPage } from '@/pages/modules/website-utama/cost-education/ukt/detail-ukt/detail'
-import { EntranceListNonUktPage } from '@/pages/modules/website-utama/cost-education/non-ukt/entrance-list'
-import { NonUKTCostEducationPage } from '@/pages/modules/website-utama/cost-education/non-ukt'
-import { TariffTypePage } from '@/pages/modules/website-utama/cost-education/non-ukt/tariff-type'
-import DetailCostEducationNonUktPage from '@/pages/modules/website-utama/cost-education/non-ukt/detail'
-import { UKTBackground } from '@/pages/modules/website-utama/cost-education/ukt/background'
-import { NONUKTBackground } from '@/pages/modules/website-utama/cost-education/non-ukt/background'
-import AcademicResourcePage from '@/pages/modules/website-utama/services/academic-resource'
-import { AcademicResourcesLanguage } from '@/pages/modules/website-utama/services/academic-resource/language'
-import { LogActivityAcademicResource } from '@/pages/modules/website-utama/services/academic-resource/log'
-import { UkkUKMBackgroundPage } from '@/pages/modules/website-utama/UKK-UKM/background'
+const AcreditationView = lazy(() => import('@/pages/modules/website-utama/acreditation/AcreditationView'))
+const LogStatisticView = lazy(() => import('@/pages/modules/website-utama/statistic/log/LogStatisticView'))
+const AcreditationBackgroundView = lazy(() => import('@/pages/modules/website-utama/acreditation/background/AcreditationBackgroundView'))
+const GalleryVideoPage = lazy(() => import('@/pages/modules/website-utama/public-content/gallery/video').then(m => ({ default: m.GalleryVideoPage })))
+const GalleryPhotoPage = lazy(() => import('@/pages/modules/website-utama/public-content/gallery/Foto').then(m => ({ default: m.GalleryPhotoPage })))
+const DataAlbumListPage = lazy(() => import('@/pages/modules/website-utama/public-content/gallery/Foto/data-album').then(m => ({ default: m.DataAlbumListPage })))
+const AchievementPage = lazy(() => import('@/pages/modules/website-utama/public-content/achievement').then(m => ({ default: m.AchievementPage })))
+const CreatedAchievementPage = lazy(() => import('@/pages/modules/website-utama/public-content/achievement/created').then(m => ({ default: m.CreatedAchievementPage })))
+const UpdatedAchievementPage = lazy(() => import('@/pages/modules/website-utama/public-content/achievement/updated').then(m => ({ default: m.UpdatedAchievementPage })))
+const DetailAchievementPage = lazy(() => import('@/pages/modules/website-utama/public-content/achievement/detail').then(m => ({ default: m.DetailAchievementPage })))
+const LogActivityPage = lazy(() => import('@/pages/modules/website-utama/public-content/slider/top-slider/log').then(m => ({ default: m.LogActivityPage })))
+const AcreditationLogDetail = lazy(() => import('@/pages/modules/website-utama/acreditation/log/AcreditationLogDetail'))
+const LogBottomActivityPage = lazy(() => import('@/pages/modules/website-utama/public-content/slider/bottom-slider/log').then(m => ({ default: m.LogBottomActivityPage })))
+const LogActivityNewsPage = lazy(() => import('@/pages/modules/website-utama/public-content/news/log').then(m => ({ default: m.LogActivityNewsPage })))
+const LogActivityImpactInnovationPage = lazy(() => import('@/pages/modules/website-utama/public-content/impact-innovation/log').then(m => ({ default: m.LogActivityImpactInnovationPage })))
+const LogActivityAnnouncementPage = lazy(() => import('@/pages/modules/website-utama/public-content/announcement/log').then(m => ({ default: m.LogActivityAnnouncementPage })))
+const LogActivityAgendaPage = lazy(() => import('@/pages/modules/website-utama/public-content/agenda/log').then(m => ({ default: m.LogActivityAgendaPage })))
+const LogActivityFacilitiesPage = lazy(() => import('@/pages/modules/website-utama/public-content/facilities/log').then(m => ({ default: m.LogActivityFacilitiesPage })))
+const LogActivityAchievement = lazy(() => import('@/pages/modules/website-utama/public-content/achievement/log').then(m => ({ default: m.LogActivityAchievement })))
+const AnnouncementBackground = lazy(() => import('@/pages/modules/website-utama/public-content/announcement/background').then(m => ({ default: m.AnnouncementBackground })))
+const AgendaBackgroundPage = lazy(() => import('@/pages/modules/website-utama/public-content/agenda/background').then(m => ({ default: m.AgendaBackgroundPage })))
+const InnovationBackgroundPage = lazy(() => import('@/pages/modules/website-utama/public-content/impact-innovation/background').then(m => ({ default: m.InnovationBackgroundPage })))
+const GroupOrganizationBackgroundPage = lazy(() => import('@/pages/modules/website-utama/public-content/structure-organization/background').then(m => ({ default: m.GroupOrganizationBackgroundPage })))
+const FacilitiesBackgroundPage = lazy(() => import('@/pages/modules/website-utama/public-content/facilities/background').then(m => ({ default: m.FacilitiesBackgroundPage })))
+const AchievementBackgroundPage = lazy(() => import('@/pages/modules/website-utama/public-content/achievement/background').then(m => ({ default: m.AchievementBackgroundPage })))
+const GalleryPhotoBackgroundPage = lazy(() => import('@/pages/modules/website-utama/public-content/gallery/Foto/background').then(m => ({ default: m.GalleryPhotoBackgroundPage })))
+const GalleryVideoBackgroundPage = lazy(() => import('@/pages/modules/website-utama/public-content/gallery/video/background').then(m => ({ default: m.GalleryVideoBackgroundPage })))
+const LogActivityVideoPage = lazy(() => import('@/pages/modules/website-utama/public-content/gallery/video/log').then(m => ({ default: m.LogActivityVideoPage })))
+const LogActivityGalleryAlbum = lazy(() => import('@/pages/modules/website-utama/public-content/gallery/Foto/log').then(m => ({ default: m.LogActivityGalleryAlbum })))
+const LogActivityGalleryAlbumPhoto = lazy(() => import('@/pages/modules/website-utama/public-content/gallery/Foto/data-album/log').then(m => ({ default: m.LogActivityGalleryAlbumPhoto })))
+const DownloadFilePage = lazy(() => import('@/pages/modules/website-utama/public-content/download'))
+const AddDownloadPage = lazy(() => import('@/pages/modules/website-utama/public-content/download/components/addPage.tsx').then(m => ({ default: m.AddDownloadPage })))
+const EditDownloadPage = lazy(() => import('@/pages/modules/website-utama/public-content/download/components/editPage.tsx').then(m => ({ default: m.EditDownloadPage })))
+const OfficialMusicPage = lazy(() => import('@/pages/modules/website-utama/public-content/musik-resmi').then(m => ({ default: m.OfficialMusicPage })))
+const AddOfficialMusicPage = lazy(() => import('@/pages/modules/website-utama/public-content/musik-resmi/components/addPage.tsx').then(m => ({ default: m.AddOfficialMusicPage })))
+const EditOfficialMusicPage = lazy(() => import('@/pages/modules/website-utama/public-content/musik-resmi/components/editPage.tsx').then(m => ({ default: m.EditOfficialMusicPage })))
+const CertificateStudent = lazy(() => import('@/pages/modules/website-utama/surat-keterangan-mahasiswa').then(m => ({ default: m.CertificateStudent })))
+const AcademicRegulation = lazy(() => import('@/pages/modules/website-utama/peraturan-akademik').then(m => ({ default: m.AcademicRegulation })))
+const AddPageAcademicRule = lazy(() => import('@/pages/modules/website-utama/peraturan-akademik/components/addPage.tsx').then(m => ({ default: m.AddPageAcademicRule })))
+const PageIdentity = lazy(() => import('@/pages/modules/website-utama/Identity').then(m => ({ default: m.PageIdentity })))
+const DashboardAdmin = lazy(() => import('@/pages/modules/website-utama/beranda'))
+const UpdateIdentityPage = lazy(() => import('@/pages/modules/website-utama/Identity/components/update.tsx').then(m => ({ default: m.UpdateIdentityPage })))
+const IdentityBackground = lazy(() => import('@/pages/modules/website-utama/Identity/background').then(m => ({ default: m.IdentityBackground })))
+const AcademicRulesBackground = lazy(() => import('@/pages/modules/website-utama/peraturan-akademik/background').then(m => ({ default: m.AcademicRulesBackground })))
+const StudentLetterBackground = lazy(() => import('@/pages/modules/website-utama/surat-keterangan-mahasiswa/background').then(m => ({ default: m.StudentLetterBackground })))
+const CampusLifePage = lazy(() => import('@/pages/modules/website-utama/campus-life'))
+const CalloborationCategoryView = lazy(() => import('@/pages/modules/website-utama/kerjasama/kategori-kerjasama/CalloborationCategoryView'))
+const SubCalloborationCategoryView = lazy(() => import('@/pages/modules/website-utama/kerjasama/sub-kategori-kerjasama/SubCalloborationCategoryView'))
+const TypeOfCalloborationView = lazy(() => import('@/pages/modules/website-utama/kerjasama/jenis-kerjasama/TypeOfCalloborationView'))
+const FieldOfCooperationView = lazy(() => import('@/pages/modules/website-utama/kerjasama/bidang-kerjasama/FieldOfCooperationView'))
+const CalloborationListView = lazy(() => import('@/pages/modules/website-utama/kerjasama/daftar-kerjasama/CalloborationListView'))
+const CalloborationCreateView = lazy(() => import('@/pages/modules/website-utama/kerjasama/daftar-kerjasama/create/CalloborationCreateView'))
+const CalloborationCategoryLogView = lazy(() => import('@/pages/modules/website-utama/kerjasama/kategori-kerjasama/log/CalloborationCategoryLogView'))
+const SubCalloborationCategoryLogView = lazy(() => import('@/pages/modules/website-utama/kerjasama/sub-kategori-kerjasama/log/SubCalloborationCategoryLogView'))
+const TypeOfCalloborationLogView = lazy(() => import('@/pages/modules/website-utama/kerjasama/jenis-kerjasama/log/TypeOfCalloborationLogView'))
+const FieldOfCooperationLogView = lazy(() => import('@/pages/modules/website-utama/kerjasama/bidang-kerjasama/log/FieldOfCooperationLogView'))
+const CalloborationEditView = lazy(() => import('@/pages/modules/website-utama/kerjasama/daftar-kerjasama/edit/CalloborationEditView'))
+const CalloborationDetailView = lazy(() => import('@/pages/modules/website-utama/kerjasama/daftar-kerjasama/detail/CalloborationDetailView'))
+const CalloborationLogView = lazy(() => import('@/pages/modules/website-utama/kerjasama/daftar-kerjasama/log/CalloborationLogView'))
+const CampusLifeBackground = lazy(() => import('@/pages/modules/website-utama/campus-life/background').then(m => ({ default: m.CampusLifeBackground })))
+const ProgramStudyView = lazy(() => import('@/pages/modules/website-utama/program-studi/ProgramStudyView'))
+const AboutProgramStudiView = lazy(() => import('@/pages/modules/website-utama/program-studi/detail/tentang/AboutProgramStudiView'))
+const LayoutProgramStudy = lazy(() => import('@/pages/modules/website-utama/program-studi/detail/components/LayoutProgramStudy'))
+const ManagementUnitProgramStudyView = lazy(() => import('@/pages/modules/website-utama/program-studi/detail/unit-pengelola/ManagementUnitProgramStudyView'))
+const VisiMisiProgramStudyView = lazy(() => import('@/pages/modules/website-utama/program-studi/detail/visi-misi/VisiMisiProgramStudyView'))
+const OrganizationalStructureView = lazy(() => import('@/pages/modules/website-utama/program-studi/detail/struktur-organisasi/OrganizationalStructureView'))
+const ContactUsProgramStudyView = lazy(() => import('@/pages/modules/website-utama/program-studi/detail/hubungi-kami/ContactUsProgramStudyView'))
+const StaffProgramStudyView = lazy(() => import('@/pages/modules/website-utama/program-studi/detail/staff/StaffProgramStudyView'))
+const DosenProgramStudyView = lazy(() => import('@/pages/modules/website-utama/program-studi/detail/dosen/DosenProgramStudyView'))
+const GalleryProgramStudyView = lazy(() => import('@/pages/modules/website-utama/program-studi/detail/gallery/GalleryProgramStudyView'))
+const NewsProgramStudyView = lazy(() => import('@/pages/modules/website-utama/program-studi/detail/berita/NewsProgramStudyView.tsx'))
+const DetailNewsProdiPage = lazy(() => import('@/pages/modules/website-utama/program-studi/detail/berita/detail').then(m => ({ default: m.DetailNewsProdiPage })))
+const FacultyView = lazy(() => import('@/pages/modules/website-utama/fakultas/FacultyView'))
+const LayoutFaculty = lazy(() => import('@/pages/modules/website-utama/fakultas/detail/components/LayoutFaculty'))
+const GalleryDetailPhotoView = lazy(() => import('@/pages/modules/website-utama/program-studi/detail/gallery/detail/GalleryDetailPhotoView'))
+const InboxMessagePage = lazy(() => import('@/pages/modules/website-utama/pertayaan/kotak-masuk').then(m => ({ default: m.InboxMessagePage })))
+const InboxMessageBackground = lazy(() => import('@/pages/modules/website-utama/pertayaan/kotak-masuk/background').then(m => ({ default: m.InboxMessageBackground })))
+const FaqListData = lazy(() => import('@/pages/modules/website-utama/pertayaan/Faq').then(m => ({ default: m.FaqListData })))
+const CategoryFAQList = lazy(() => import('@/pages/modules/website-utama/pertayaan/Faq/Category').then(m => ({ default: m.CategoryFAQList })))
+const RegistrationPathPage = lazy(() => import('@/pages/modules/website-utama/jalur-pendaftaran').then(m => ({ default: m.RegistrationPathPage })))
+const AddPageRegisterPath = lazy(() => import('@/pages/modules/website-utama/jalur-pendaftaran/components/addPage.tsx').then(m => ({ default: m.AddPageRegisterPath })))
+const EditPageRegisterPath = lazy(() => import('@/pages/modules/website-utama/jalur-pendaftaran/components/editPage.tsx').then(m => ({ default: m.EditPageRegisterPath })))
+const FooterContent = lazy(() => import('@/pages/modules/website-utama/settings-menu/Footer').then(m => ({ default: m.FooterContent })))
+const UserProfilePage = lazy(() => import('@/pages/modules/website-utama/user-profile').then(m => ({ default: m.UserProfilePage })))
+const ChangePassword = lazy(() => import('@/pages/modules/website-utama/change-password').then(m => ({ default: m.ChangePassword })))
+const LogFooterContent = lazy(() => import('@/pages/modules/website-utama/settings-menu/Footer/log').then(m => ({ default: m.LogFooterContent })))
+const ChangePrimaryAndFooterColor = lazy(() => import('@/pages/modules/website-utama/settings-menu/color').then(m => ({ default: m.ChangePrimaryAndFooterColor })))
+const NewsWithLanguage = lazy(() => import('@/pages/modules/website-utama/public-content/news/language').then(m => ({ default: m.NewsWithLanguage })))
+const ImpactInnovationLanguage = lazy(() => import('@/pages/modules/website-utama/public-content/impact-innovation/language').then(m => ({ default: m.ImpactInnovationLanguage })))
+const AnnouncementLanguage = lazy(() => import('@/pages/modules/website-utama/public-content/announcement/language').then(m => ({ default: m.AnnouncementLanguage })))
+const AgendaLanguagePage = lazy(() => import('@/pages/modules/website-utama/public-content/agenda/language').then(m => ({ default: m.AgendaLanguagePage })))
+const StructureOrganizationLanguagePage = lazy(() => import('@/pages/modules/website-utama/public-content/structure-organization/language').then(m => ({ default: m.StructureOrganizationLanguagePage })))
+const PlacemanUserLanguagePage = lazy(() => import('@/pages/modules/website-utama/public-content/structure-organization/Placeman-user/language').then(m => ({ default: m.PlacemanUserLanguagePage })))
+const FacilitiesLanguage = lazy(() => import('@/pages/modules/website-utama/public-content/facilities/language').then(m => ({ default: m.FacilitiesLanguage })))
+const GalleryVideoLanguage = lazy(() => import('@/pages/modules/website-utama/public-content/gallery/video/language').then(m => ({ default: m.GalleryVideoLanguage })))
+const GalleryAlbumLanguage = lazy(() => import('@/pages/modules/website-utama/public-content/gallery/Foto/language').then(m => ({ default: m.GalleryAlbumLanguage })))
+const GalleryPhotoLanguage = lazy(() => import('@/pages/modules/website-utama/public-content/gallery/Foto/data-album/language').then(m => ({ default: m.GalleryPhotoLanguage })))
+const AchievementLanguagePage = lazy(() => import('@/pages/modules/website-utama/public-content/achievement/language').then(m => ({ default: m.AchievementLanguagePage })))
+const DownloadCategoryLanguage = lazy(() => import('@/pages/modules/website-utama/public-content/download/category-language').then(m => ({ default: m.DownloadCategoryLanguage })))
+const DownloadFileLanguage = lazy(() => import('@/pages/modules/website-utama/public-content/download/language').then(m => ({ default: m.DownloadFileLanguage })))
+const AnthemMusicLanguage = lazy(() => import('@/pages/modules/website-utama/public-content/musik-resmi/language').then(m => ({ default: m.AnthemMusicLanguage })))
+const ServiceLanguagePage = lazy(() => import('@/pages/modules/website-utama/services/language').then(m => ({ default: m.ServiceLanguagePage })))
+const CategoryFAQLanguagePage = lazy(() => import('@/pages/modules/website-utama/pertayaan/Faq/Category/language').then(m => ({ default: m.CategoryFAQLanguagePage })))
+const FAQLanguagePage = lazy(() => import('@/pages/modules/website-utama/pertayaan/Faq/language').then(m => ({ default: m.FAQLanguagePage })))
+const SubmissionSKMLanguagePage = lazy(() => import('@/pages/modules/website-utama/surat-keterangan-mahasiswa/pengajuan-language').then(m => ({ default: m.SubmissionSKMLanguagePage })))
+const SKMLanguagePage = lazy(() => import('@/pages/modules/website-utama/surat-keterangan-mahasiswa/language').then(m => ({ default: m.SKMLanguagePage })))
+const LogActivitySKM = lazy(() => import('@/pages/modules/website-utama/surat-keterangan-mahasiswa/log').then(m => ({ default: m.LogActivitySKM })))
+const RegisteredPathLanguagePage = lazy(() => import('@/pages/modules/website-utama/jalur-pendaftaran/language').then(m => ({ default: m.RegisteredPathLanguagePage })))
+const AcademicRulesLanguagePage = lazy(() => import('@/pages/modules/website-utama/peraturan-akademik/language').then(m => ({ default: m.AcademicRulesLanguagePage })))
+const HeaderMenuLanguagePage = lazy(() => import('@/pages/modules/website-utama/settings-menu/header/language').then(m => ({ default: m.HeaderMenuLanguagePage })))
+const FooterLanguagePage = lazy(() => import('@/pages/modules/website-utama/settings-menu/Footer/language').then(m => ({ default: m.FooterLanguagePage })))
+const CorporationCategoryLanguagePage = lazy(() => import('@/pages/modules/website-utama/kerjasama/kategori-kerjasama/language').then(m => ({ default: m.CorporationCategoryLanguagePage })))
+const CorporationSubCategoryLanguagePage = lazy(() => import('@/pages/modules/website-utama/kerjasama/sub-kategori-kerjasama/language').then(m => ({ default: m.CorporationSubCategoryLanguagePage })))
+const TypeCollaborationLanguagePage = lazy(() => import('@/pages/modules/website-utama/kerjasama/jenis-kerjasama/language').then(m => ({ default: m.TypeCollaborationLanguagePage })))
+const FieldCollaborationLanguagePage = lazy(() => import('@/pages/modules/website-utama/kerjasama/bidang-kerjasama/language').then(m => ({ default: m.FieldCollaborationLanguagePage })))
+const CollaborationLanguagePage = lazy(() => import('@/pages/modules/website-utama/kerjasama/daftar-kerjasama/language').then(m => ({ default: m.CollaborationLanguagePage })))
+const StatisticLanguagePage = lazy(() => import('@/pages/modules/website-utama/statistic/language').then(m => ({ default: m.StatisticLanguagePage })))
+const YearAcademicLanguagePage = lazy(() => import('@/pages/modules/website-utama/calendar-academic/language').then(m => ({ default: m.YearAcademicLanguagePage })))
+const YearAcademicActivityLanguagePage = lazy(() => import('@/pages/modules/website-utama/calendar-academic/detail/language').then(m => ({ default: m.YearAcademicActivityLanguagePage })))
+const YearActivityDetailLanguagePage = lazy(() => import('@/pages/modules/website-utama/calendar-academic/detail-activity/language').then(m => ({ default: m.YearActivityDetailLanguagePage })))
+const AccreditationLanguagePage = lazy(() => import('@/pages/modules/website-utama/acreditation/language').then(m => ({ default: m.AccreditationLanguagePage })))
+const IdentityLanguagePage = lazy(() => import('@/pages/modules/website-utama/Identity/language').then(m => ({ default: m.IdentityLanguagePage })))
+const TextIntroduceLanguagePage = lazy(() => import('@/pages/modules/website-utama/campus-life/language/pengantar').then(m => ({ default: m.TextIntroduceLanguagePage })))
+const TextFacilitiesLanguagePage = lazy(() => import('@/pages/modules/website-utama/campus-life/language/fasilitas').then(m => ({ default: m.TextFacilitiesLanguagePage })))
+const TextUnitActivityLanguagePage = lazy(() => import('@/pages/modules/website-utama/campus-life/language/ukm').then(m => ({ default: m.TextUnitActivityLanguagePage })))
+const TextPerformanceLanguagePage = lazy(() => import('@/pages/modules/website-utama/campus-life/language/prestasi').then(m => ({ default: m.TextPerformanceLanguagePage })))
+const TextTestimonyLanguagePage = lazy(() => import('@/pages/modules/website-utama/campus-life/language/testimoni').then(m => ({ default: m.TextTestimonyLanguagePage })))
+const TextDirectUrlLanguagePage = lazy(() => import('@/pages/modules/website-utama/campus-life/language/directLink').then(m => ({ default: m.TextDirectUrlLanguagePage })))
+const TopSliderLanguagePage = lazy(() => import('@/pages/modules/website-utama/public-content/slider/top-slider/language').then(m => ({ default: m.TopSliderLanguagePage })))
+const BottomSliderLanguagePage = lazy(() => import('@/pages/modules/website-utama/public-content/slider/bottom-slider/language').then(m => ({ default: m.BottomSliderLanguagePage })))
+const HeaderMenuContentLanguagePage = lazy(() => import('@/pages/modules/website-utama/settings-menu/header/content/language').then(m => ({ default: m.HeaderMenuContentLanguagePage })))
+const CreateAccreditation = lazy(() => import('@/pages/modules/website-utama/acreditation/create').then(m => ({ default: m.CreateAccreditation })))
+const UpdateAccreditation = lazy(() => import('@/pages/modules/website-utama/acreditation/update').then(m => ({ default: m.UpdateAccreditation })))
+const TemplateMainWeb = lazy(() => import('@/pages/modules/website-utama/settings-menu/template').then(m => ({ default: m.TemplateMainWeb })))
+const UnitInstitutionPage = lazy(() => import('@/pages/modules/website-utama/unit-lembaga'))
+const DetailUnitInstitution = lazy(() => import('@/pages/modules/website-utama/unit-lembaga/detail'))
+const UKKUKMPage = lazy(() => import('@/pages/modules/website-utama/UKK-UKM'))
+const UnitInstitutionBackgroundPage = lazy(() => import('@/pages/modules/website-utama/unit-lembaga/background').then(m => ({ default: m.UnitInstitutionBackgroundPage })))
+const DetailUkkUKMPage = lazy(() => import('@/pages/modules/website-utama/UKK-UKM/detail'))
+const ThemaChangeColor = lazy(() => import('@/pages/modules/website-utama/settings-menu/template/color').then(m => ({ default: m.ThemaChangeColor })))
+const CreatedEmployee = lazy(() => import('@/pages/modules/website-utama/lecturer-staff/created').then(m => ({ default: m.CreatedEmployee })))
+const LecturerStaff = lazy(() => import('@/pages/modules/website-utama/lecturer-staff'))
+const StatusEmployeePage = lazy(() => import('@/pages/modules/website-utama/lecturer-staff/status-employee'))
+const UpdatedEmployee = lazy(() => import('@/pages/modules/website-utama/lecturer-staff/updated').then(m => ({ default: m.UpdatedEmployee })))
+const DetailEmployee = lazy(() => import('@/pages/modules/website-utama/lecturer-staff/detail'))
+const SetUnitEmployeePage = lazy(() => import('@/pages/modules/website-utama/lecturer-staff/set-unit'))
+const SetStatusEmployeePage = lazy(() => import('@/pages/modules/website-utama/lecturer-staff/set-status'))
+const GuideListView = lazy(() => import('@/pages/modules/website-utama/panduan/GuideListView'))
+const QuotesPage = lazy(() => import('@/pages/modules/website-utama/settings-menu/qoutes').then(m => ({ default: m.QuotesPage })))
+const FacultyBackground = lazy(() => import('@/pages/modules/website-utama/fakultas/background').then(m => ({ default: m.FacultyBackground })))
+const ProdiBackground = lazy(() => import('@/pages/modules/website-utama/program-studi/background').then(m => ({ default: m.ProdiBackground })))
+const PublicationLecturerPage = lazy(() => import('@/pages/modules/website-utama/publication').then(m => ({ default: m.PublicationLecturerPage })))
+const StatusActivePage = lazy(() => import('@/pages/modules/website-utama/lecturer-staff/status-active'))
+const SetStatusActivePage = lazy(() => import('@/pages/modules/website-utama/lecturer-staff/set-status-active').then(m => ({ default: m.SetStatusActivePage })))
+const HistoryStatusPage = lazy(() => import('@/pages/modules/website-utama/lecturer-staff/set-status-active/history-status').then(m => ({ default: m.HistoryStatusPage })))
+const EditStatusActiveEmployee = lazy(() => import('@/pages/modules/website-utama/lecturer-staff/set-status-active/edit-status').then(m => ({ default: m.EditStatusActiveEmployee })))
+const AddStatusActiveEmployee = lazy(() => import('@/pages/modules/website-utama/lecturer-staff/set-status-active/add-status').then(m => ({ default: m.AddStatusActiveEmployee })))
+const ReportData = lazy(() => import('@/pages/modules/website-utama/lecturer-staff/set-status-active/reportData').then(m => ({ default: m.ReportData })))
+const UKTCostEducationPage = lazy(() => import('@/pages/modules/website-utama/cost-education/ukt').then(m => ({ default: m.UKTCostEducationPage })))
+const LevelUktPage = lazy(() => import('@/pages/modules/website-utama/cost-education/ukt/level-ukt').then(m => ({ default: m.LevelUktPage })))
+const EntranceListUktPage = lazy(() => import('@/pages/modules/website-utama/cost-education/ukt/entrance-list').then(m => ({ default: m.EntranceListUktPage })))
+const DetailUktByEntrance = lazy(() => import('@/pages/modules/website-utama/cost-education/ukt/detail-ukt').then(m => ({ default: m.DetailUktByEntrance })))
+const GetDetailEntranceProdiUktPage = lazy(() => import('@/pages/modules/website-utama/cost-education/ukt/detail-ukt/detail').then(m => ({ default: m.GetDetailEntranceProdiUktPage })))
+const EntranceListNonUktPage = lazy(() => import('@/pages/modules/website-utama/cost-education/non-ukt/entrance-list').then(m => ({ default: m.EntranceListNonUktPage })))
+const NonUKTCostEducationPage = lazy(() => import('@/pages/modules/website-utama/cost-education/non-ukt').then(m => ({ default: m.NonUKTCostEducationPage })))
+const TariffTypePage = lazy(() => import('@/pages/modules/website-utama/cost-education/non-ukt/tariff-type').then(m => ({ default: m.TariffTypePage })))
+const DetailCostEducationNonUktPage = lazy(() => import('@/pages/modules/website-utama/cost-education/non-ukt/detail'))
+const UKTBackground = lazy(() => import('@/pages/modules/website-utama/cost-education/ukt/background').then(m => ({ default: m.UKTBackground })))
+const NONUKTBackground = lazy(() => import('@/pages/modules/website-utama/cost-education/non-ukt/background').then(m => ({ default: m.NONUKTBackground })))
+const AcademicResourcePage = lazy(() => import('@/pages/modules/website-utama/services/academic-resource'))
+const AcademicResourcesLanguage = lazy(() => import('@/pages/modules/website-utama/services/academic-resource/language').then(m => ({ default: m.AcademicResourcesLanguage })))
+const LogActivityAcademicResource = lazy(() => import('@/pages/modules/website-utama/services/academic-resource/log').then(m => ({ default: m.LogActivityAcademicResource })))
+const UkkUKMBackgroundPage = lazy(() => import('@/pages/modules/website-utama/UKK-UKM/background').then(m => ({ default: m.UkkUKMBackgroundPage })))
 
 export const MainWebsiteRouter = [
   {

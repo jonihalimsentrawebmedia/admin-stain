@@ -25,7 +25,7 @@ const ModulesView = () => {
       style={{
         backgroundImage: `url(${publicIdentity?.background})`,
       }}
-      className={`w-screen min-h-full bg-cover lg:bg-fixed relative flex justify-center lg:items-center items-start lg:py-6 overflow-y-auto`}
+      className={`w-screen min-h-screen bg-cover lg:bg-fixed relative flex justify-center lg:items-center items-start lg:py-6 overflow-y-auto`}
     >
       <Card className="max-w-6xl w-full backdrop-blur-md bg-white/40">
         <CardContent className="flex flex-col gap-4">

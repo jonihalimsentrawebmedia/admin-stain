@@ -1,73 +1,74 @@
-import { DetailProfileCarrierCenter } from '@/pages/modules/pusat-karir/data-unit'
-import { UpdatedDataCarrierCenter } from '@/pages/modules/pusat-karir/data-unit/updated'
-import DashboardCarrierCenter from '@/pages/modules/pusat-karir/dashboard'
-import { NewsCarrierPublicContentPage } from '@/pages/modules/pusat-karir/public-content/news'
-import { NewsCarrierCreated } from '@/pages/modules/pusat-karir/public-content/news/created'
-import { NewsCarrierUpdated } from '@/pages/modules/pusat-karir/public-content/news/updated'
-import { DetailNewsCarrierPage } from '@/pages/modules/pusat-karir/public-content/news/detail'
-import { LogActivityNewsCarrierPage } from '@/pages/modules/pusat-karir/public-content/news/log-data'
-import { AgendaCarrierPublicContent } from '@/pages/modules/pusat-karir/public-content/agenda'
-import { CreateAgendaCarrierPage } from '@/pages/modules/pusat-karir/public-content/agenda/created'
-import DownloadFileCarrierPage from '@/pages/modules/pusat-karir/public-content/Download'
-import { CategoryDownloadCarrierPage } from '@/pages/modules/pusat-karir/public-content/Download/category'
-import { AddDownloadCarrierPage } from '@/pages/modules/pusat-karir/public-content/Download/created'
-import { UpdatedDownloadCarrierPage } from '@/pages/modules/pusat-karir/public-content/Download/updated'
-import { UpdatedAgendaCarrierPage } from '@/pages/modules/pusat-karir/public-content/agenda/updated'
-import { AgendaCarrierDetailPage } from '@/pages/modules/pusat-karir/public-content/agenda/detail'
-import { LogActivityAgendaCarrierPage } from '@/pages/modules/pusat-karir/public-content/agenda/log'
-import { AboutProfileCarrier } from '@/pages/modules/pusat-karir/about/profile'
-import { VisionMissionCarrierPage } from '@/pages/modules/pusat-karir/about/vision-mission'
-import { StructureOrganizationProfileCarrier } from '@/pages/modules/pusat-karir/about/structure'
-import { ProfileGreetingLeaderPage } from '@/pages/modules/pusat-karir/about/greeting-leader'
-import { ArticleCarrierPublicContentPage } from '@/pages/modules/pusat-karir/public-content/article'
-import { ArticleCarrierCreated } from '@/pages/modules/pusat-karir/public-content/article/create'
-import { ArticleCarrierUpdated } from '@/pages/modules/pusat-karir/public-content/article/updated'
-import { DetailArticleCarrierPage } from '@/pages/modules/pusat-karir/public-content/article/detail'
-import { LogActivityArticleCarrierPage } from '@/pages/modules/pusat-karir/public-content/article/log-data'
-import { TracerStudyPage } from '@/pages/modules/pusat-karir/tracer-study'
-import { ServiceJobVacancy } from '@/pages/modules/pusat-karir/service/job-vacancy'
-import { SpecializationPage } from '@/pages/modules/pusat-karir/reference/specialization'
-import { SubSpecializationPage } from '@/pages/modules/pusat-karir/reference/specialization/sub-specialization'
-import { CreatedJobVacancy } from '@/pages/modules/pusat-karir/service/job-vacancy/created'
-import { UpdatedJobVacancy } from '@/pages/modules/pusat-karir/service/job-vacancy/updated'
-import { DetailJobVacancy } from '@/pages/modules/pusat-karir/service/job-vacancy/detail'
-import { ApplicantJobVacancy } from '@/pages/modules/pusat-karir/service/job-vacancy/Applicant-user'
-import { CarrierConsultationPage } from '@/pages/modules/pusat-karir/service/carrier-consultation'
-import { PortalCVATS } from '@/pages/modules/pusat-karir/service/portal-cv'
-import { MainService } from '@/pages/modules/pusat-karir/service/main'
-import { FooterServicePage } from '@/pages/modules/pusat-karir/service/Footer'
-import { CompanySizePage } from '@/pages/modules/pusat-karir/reference/company-size'
-import { IndustryCategoryPage } from '@/pages/modules/pusat-karir/reference/industry-category'
-import { LandingPageCarrier } from '@/pages/modules/pusat-karir/settings/landing-page'
-import { TemplateWebCarrierSettings } from '@/pages/modules/pusat-karir/settings/template-web'
-import ColorSettingCarrier from '@/pages/modules/pusat-karir/settings/warna/ColorSettingService.tsx'
-import { SurveyListPage } from '@/pages/modules/pusat-karir/survey'
-import { CreateSurveyData } from '@/pages/modules/pusat-karir/survey/create'
-import { UpdatedSurveyData } from '@/pages/modules/pusat-karir/survey/Updated'
-import { DetailSurvey } from '@/pages/modules/pusat-karir/survey/detail'
-import { PreviewSurveyCreate } from '@/pages/modules/pusat-karir/survey/preview'
-import { ManagementListUserPage } from '@/pages/modules/pusat-karir/management-user/list-user'
-import { CreateJobsSeekers } from '@/pages/modules/pusat-karir/management-user/list-user/jobs-seekers/create'
-import { UpdateJobsSeekers } from '@/pages/modules/pusat-karir/management-user/list-user/jobs-seekers/update'
-import { DetailUserJobsSeekers } from '@/pages/modules/pusat-karir/management-user/list-user/jobs-seekers/detail'
-import { CreatePartnership } from '@/pages/modules/pusat-karir/management-user/list-user/Partnership/create'
-import { UpdatePartnershipData } from '@/pages/modules/pusat-karir/management-user/list-user/Partnership/update'
-import { DetailProfilePartnership } from '@/pages/modules/pusat-karir/management-user/list-user/Partnership/detail'
-import { ProcedureJobSeekerPage } from '@/pages/modules/pusat-karir/management-user/procedure/job-seeker'
-import { ProcedurePartnershipPage } from '@/pages/modules/pusat-karir/management-user/procedure/partnership'
-import { UserVerificationPage } from '@/pages/modules/pusat-karir/management-user/user-verification'
-import { DetailDataUserVerification } from '@/pages/modules/pusat-karir/management-user/user-verification/job-seeker/check-data'
-import { DetailDataCompanyVerification } from '@/pages/modules/pusat-karir/management-user/user-verification/partnership/check-data'
-import { ServiceInternshipVacancy } from '@/pages/modules/pusat-karir/service/internship-vacancy'
-import { CreatedInternshipVacancy } from '@/pages/modules/pusat-karir/service/internship-vacancy/created'
-import { UpdatedInternshipVacancy } from '@/pages/modules/pusat-karir/service/internship-vacancy/updated'
-import { DetailInternshipVacancy } from '@/pages/modules/pusat-karir/service/internship-vacancy/detail'
-import { ApplicantInternshipVacancy } from '@/pages/modules/pusat-karir/service/internship-vacancy/aplicant'
-import { ResultStatistic } from '@/pages/modules/pusat-karir/survey/statistic'
-import { UserProfilePage } from '@/pages/modules/website-utama/user-profile'
-import { ChangePassword } from '@/pages/modules/website-utama/change-password'
-import { ThemaChangeColorCarrierCenter } from '@/pages/modules/pusat-karir/settings/template-web/color'
-import GuideListView from '@/pages/modules/website-utama/panduan/GuideListView'
+import { lazy } from 'react'
+const DetailProfileCarrierCenter = lazy(() => import('@/pages/modules/pusat-karir/data-unit').then(m => ({ default: m.DetailProfileCarrierCenter })))
+const UpdatedDataCarrierCenter = lazy(() => import('@/pages/modules/pusat-karir/data-unit/updated').then(m => ({ default: m.UpdatedDataCarrierCenter })))
+const DashboardCarrierCenter = lazy(() => import('@/pages/modules/pusat-karir/dashboard'))
+const NewsCarrierPublicContentPage = lazy(() => import('@/pages/modules/pusat-karir/public-content/news').then(m => ({ default: m.NewsCarrierPublicContentPage })))
+const NewsCarrierCreated = lazy(() => import('@/pages/modules/pusat-karir/public-content/news/created').then(m => ({ default: m.NewsCarrierCreated })))
+const NewsCarrierUpdated = lazy(() => import('@/pages/modules/pusat-karir/public-content/news/updated').then(m => ({ default: m.NewsCarrierUpdated })))
+const DetailNewsCarrierPage = lazy(() => import('@/pages/modules/pusat-karir/public-content/news/detail').then(m => ({ default: m.DetailNewsCarrierPage })))
+const LogActivityNewsCarrierPage = lazy(() => import('@/pages/modules/pusat-karir/public-content/news/log-data').then(m => ({ default: m.LogActivityNewsCarrierPage })))
+const AgendaCarrierPublicContent = lazy(() => import('@/pages/modules/pusat-karir/public-content/agenda').then(m => ({ default: m.AgendaCarrierPublicContent })))
+const CreateAgendaCarrierPage = lazy(() => import('@/pages/modules/pusat-karir/public-content/agenda/created').then(m => ({ default: m.CreateAgendaCarrierPage })))
+const DownloadFileCarrierPage = lazy(() => import('@/pages/modules/pusat-karir/public-content/Download'))
+const CategoryDownloadCarrierPage = lazy(() => import('@/pages/modules/pusat-karir/public-content/Download/category').then(m => ({ default: m.CategoryDownloadCarrierPage })))
+const AddDownloadCarrierPage = lazy(() => import('@/pages/modules/pusat-karir/public-content/Download/created').then(m => ({ default: m.AddDownloadCarrierPage })))
+const UpdatedDownloadCarrierPage = lazy(() => import('@/pages/modules/pusat-karir/public-content/Download/updated').then(m => ({ default: m.UpdatedDownloadCarrierPage })))
+const UpdatedAgendaCarrierPage = lazy(() => import('@/pages/modules/pusat-karir/public-content/agenda/updated').then(m => ({ default: m.UpdatedAgendaCarrierPage })))
+const AgendaCarrierDetailPage = lazy(() => import('@/pages/modules/pusat-karir/public-content/agenda/detail').then(m => ({ default: m.AgendaCarrierDetailPage })))
+const LogActivityAgendaCarrierPage = lazy(() => import('@/pages/modules/pusat-karir/public-content/agenda/log').then(m => ({ default: m.LogActivityAgendaCarrierPage })))
+const AboutProfileCarrier = lazy(() => import('@/pages/modules/pusat-karir/about/profile').then(m => ({ default: m.AboutProfileCarrier })))
+const VisionMissionCarrierPage = lazy(() => import('@/pages/modules/pusat-karir/about/vision-mission').then(m => ({ default: m.VisionMissionCarrierPage })))
+const StructureOrganizationProfileCarrier = lazy(() => import('@/pages/modules/pusat-karir/about/structure').then(m => ({ default: m.StructureOrganizationProfileCarrier })))
+const ProfileGreetingLeaderPage = lazy(() => import('@/pages/modules/pusat-karir/about/greeting-leader').then(m => ({ default: m.ProfileGreetingLeaderPage })))
+const ArticleCarrierPublicContentPage = lazy(() => import('@/pages/modules/pusat-karir/public-content/article').then(m => ({ default: m.ArticleCarrierPublicContentPage })))
+const ArticleCarrierCreated = lazy(() => import('@/pages/modules/pusat-karir/public-content/article/create').then(m => ({ default: m.ArticleCarrierCreated })))
+const ArticleCarrierUpdated = lazy(() => import('@/pages/modules/pusat-karir/public-content/article/updated').then(m => ({ default: m.ArticleCarrierUpdated })))
+const DetailArticleCarrierPage = lazy(() => import('@/pages/modules/pusat-karir/public-content/article/detail').then(m => ({ default: m.DetailArticleCarrierPage })))
+const LogActivityArticleCarrierPage = lazy(() => import('@/pages/modules/pusat-karir/public-content/article/log-data').then(m => ({ default: m.LogActivityArticleCarrierPage })))
+const TracerStudyPage = lazy(() => import('@/pages/modules/pusat-karir/tracer-study').then(m => ({ default: m.TracerStudyPage })))
+const ServiceJobVacancy = lazy(() => import('@/pages/modules/pusat-karir/service/job-vacancy').then(m => ({ default: m.ServiceJobVacancy })))
+const SpecializationPage = lazy(() => import('@/pages/modules/pusat-karir/reference/specialization').then(m => ({ default: m.SpecializationPage })))
+const SubSpecializationPage = lazy(() => import('@/pages/modules/pusat-karir/reference/specialization/sub-specialization').then(m => ({ default: m.SubSpecializationPage })))
+const CreatedJobVacancy = lazy(() => import('@/pages/modules/pusat-karir/service/job-vacancy/created').then(m => ({ default: m.CreatedJobVacancy })))
+const UpdatedJobVacancy = lazy(() => import('@/pages/modules/pusat-karir/service/job-vacancy/updated').then(m => ({ default: m.UpdatedJobVacancy })))
+const DetailJobVacancy = lazy(() => import('@/pages/modules/pusat-karir/service/job-vacancy/detail').then(m => ({ default: m.DetailJobVacancy })))
+const ApplicantJobVacancy = lazy(() => import('@/pages/modules/pusat-karir/service/job-vacancy/Applicant-user').then(m => ({ default: m.ApplicantJobVacancy })))
+const CarrierConsultationPage = lazy(() => import('@/pages/modules/pusat-karir/service/carrier-consultation').then(m => ({ default: m.CarrierConsultationPage })))
+const PortalCVATS = lazy(() => import('@/pages/modules/pusat-karir/service/portal-cv').then(m => ({ default: m.PortalCVATS })))
+const MainService = lazy(() => import('@/pages/modules/pusat-karir/service/main').then(m => ({ default: m.MainService })))
+const FooterServicePage = lazy(() => import('@/pages/modules/pusat-karir/service/Footer').then(m => ({ default: m.FooterServicePage })))
+const CompanySizePage = lazy(() => import('@/pages/modules/pusat-karir/reference/company-size').then(m => ({ default: m.CompanySizePage })))
+const IndustryCategoryPage = lazy(() => import('@/pages/modules/pusat-karir/reference/industry-category').then(m => ({ default: m.IndustryCategoryPage })))
+const LandingPageCarrier = lazy(() => import('@/pages/modules/pusat-karir/settings/landing-page').then(m => ({ default: m.LandingPageCarrier })))
+const TemplateWebCarrierSettings = lazy(() => import('@/pages/modules/pusat-karir/settings/template-web').then(m => ({ default: m.TemplateWebCarrierSettings })))
+const ColorSettingCarrier = lazy(() => import('@/pages/modules/pusat-karir/settings/warna/ColorSettingService.tsx'))
+const SurveyListPage = lazy(() => import('@/pages/modules/pusat-karir/survey').then(m => ({ default: m.SurveyListPage })))
+const CreateSurveyData = lazy(() => import('@/pages/modules/pusat-karir/survey/create').then(m => ({ default: m.CreateSurveyData })))
+const UpdatedSurveyData = lazy(() => import('@/pages/modules/pusat-karir/survey/Updated').then(m => ({ default: m.UpdatedSurveyData })))
+const DetailSurvey = lazy(() => import('@/pages/modules/pusat-karir/survey/detail').then(m => ({ default: m.DetailSurvey })))
+const PreviewSurveyCreate = lazy(() => import('@/pages/modules/pusat-karir/survey/preview').then(m => ({ default: m.PreviewSurveyCreate })))
+const ManagementListUserPage = lazy(() => import('@/pages/modules/pusat-karir/management-user/list-user').then(m => ({ default: m.ManagementListUserPage })))
+const CreateJobsSeekers = lazy(() => import('@/pages/modules/pusat-karir/management-user/list-user/jobs-seekers/create').then(m => ({ default: m.CreateJobsSeekers })))
+const UpdateJobsSeekers = lazy(() => import('@/pages/modules/pusat-karir/management-user/list-user/jobs-seekers/update').then(m => ({ default: m.UpdateJobsSeekers })))
+const DetailUserJobsSeekers = lazy(() => import('@/pages/modules/pusat-karir/management-user/list-user/jobs-seekers/detail').then(m => ({ default: m.DetailUserJobsSeekers })))
+const CreatePartnership = lazy(() => import('@/pages/modules/pusat-karir/management-user/list-user/Partnership/create').then(m => ({ default: m.CreatePartnership })))
+const UpdatePartnershipData = lazy(() => import('@/pages/modules/pusat-karir/management-user/list-user/Partnership/update').then(m => ({ default: m.UpdatePartnershipData })))
+const DetailProfilePartnership = lazy(() => import('@/pages/modules/pusat-karir/management-user/list-user/Partnership/detail').then(m => ({ default: m.DetailProfilePartnership })))
+const ProcedureJobSeekerPage = lazy(() => import('@/pages/modules/pusat-karir/management-user/procedure/job-seeker').then(m => ({ default: m.ProcedureJobSeekerPage })))
+const ProcedurePartnershipPage = lazy(() => import('@/pages/modules/pusat-karir/management-user/procedure/partnership').then(m => ({ default: m.ProcedurePartnershipPage })))
+const UserVerificationPage = lazy(() => import('@/pages/modules/pusat-karir/management-user/user-verification').then(m => ({ default: m.UserVerificationPage })))
+const DetailDataUserVerification = lazy(() => import('@/pages/modules/pusat-karir/management-user/user-verification/job-seeker/check-data').then(m => ({ default: m.DetailDataUserVerification })))
+const DetailDataCompanyVerification = lazy(() => import('@/pages/modules/pusat-karir/management-user/user-verification/partnership/check-data').then(m => ({ default: m.DetailDataCompanyVerification })))
+const ServiceInternshipVacancy = lazy(() => import('@/pages/modules/pusat-karir/service/internship-vacancy').then(m => ({ default: m.ServiceInternshipVacancy })))
+const CreatedInternshipVacancy = lazy(() => import('@/pages/modules/pusat-karir/service/internship-vacancy/created').then(m => ({ default: m.CreatedInternshipVacancy })))
+const UpdatedInternshipVacancy = lazy(() => import('@/pages/modules/pusat-karir/service/internship-vacancy/updated').then(m => ({ default: m.UpdatedInternshipVacancy })))
+const DetailInternshipVacancy = lazy(() => import('@/pages/modules/pusat-karir/service/internship-vacancy/detail').then(m => ({ default: m.DetailInternshipVacancy })))
+const ApplicantInternshipVacancy = lazy(() => import('@/pages/modules/pusat-karir/service/internship-vacancy/aplicant').then(m => ({ default: m.ApplicantInternshipVacancy })))
+const ResultStatistic = lazy(() => import('@/pages/modules/pusat-karir/survey/statistic').then(m => ({ default: m.ResultStatistic })))
+const UserProfilePage = lazy(() => import('@/pages/modules/website-utama/user-profile').then(m => ({ default: m.UserProfilePage })))
+const ChangePassword = lazy(() => import('@/pages/modules/website-utama/change-password').then(m => ({ default: m.ChangePassword })))
+const ThemaChangeColorCarrierCenter = lazy(() => import('@/pages/modules/pusat-karir/settings/template-web/color').then(m => ({ default: m.ThemaChangeColorCarrierCenter })))
+const GuideListView = lazy(() => import('@/pages/modules/website-utama/panduan/GuideListView'))
 
 export const CarrierCenterRoute = [
   {

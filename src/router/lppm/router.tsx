@@ -1,105 +1,106 @@
-import { UserProfilePage } from '@/pages/modules/website-utama/user-profile'
-import { ChangePassword } from '@/pages/modules/website-utama/change-password'
-import { DetailProfileLPPM } from '@/pages/modules/LPPM/data-lppm'
-import { UpdatedDataLPPM } from '@/pages/modules/LPPM/data-lppm/updated'
-import { AboutProfile } from '@/pages/modules/LPPM/about/profile'
-import { StructureOrganizationProfile } from '@/pages/modules/LPPM/about/structure'
-import { VisionMissionAbout } from '@/pages/modules/LPPM/about/vision-mission'
-import { ProfileLeaderPage } from '@/pages/modules/LPPM/about/leader'
-import { ProfileSecretaryPage } from '@/pages/modules/LPPM/about/secretary'
-import { ProfileStaffLPPM } from '@/pages/modules/LPPM/about/staff'
-import { StaffMemberList } from '@/pages/modules/LPPM/about/staff/member'
-import { CreateStaffMember } from '@/pages/modules/LPPM/about/staff/member/component/create.tsx'
-import { UpdateStaffMember } from '@/pages/modules/LPPM/about/staff/member/component/update.tsx'
-import { MainResearch } from '@/pages/modules/LPPM/research/main'
-import { SchemaDoctoralResearch } from '@/pages/modules/LPPM/research/schema/doctoral'
-import { SchemaInternalResearch } from '@/pages/modules/LPPM/research/schema/internal'
-import { PlanMainResearch } from '@/pages/modules/LPPM/research/plan'
-import { DocumentPLanResearch } from '@/pages/modules/LPPM/research/plan/document'
-import { GuideCategoryResearch } from '@/pages/modules/LPPM/research/guide'
-import { DocumentGuideCategory } from '@/pages/modules/LPPM/research/guide/document'
-import { StudyCenterList } from '@/pages/modules/LPPM/research/study-center/study-list'
-import { CreatedStudyCenter } from '@/pages/modules/LPPM/research/study-center/study-list/component/created.tsx'
-import { UpdateStudyCenter } from '@/pages/modules/LPPM/research/study-center/study-list/component/updated.tsx'
-import { DetailStudyCenter } from '@/pages/modules/LPPM/research/study-center/study-list/component/detail.tsx'
-import { StandardOperationalStudy } from '@/pages/modules/LPPM/research/study-center/operational-standard'
-import { MainDevotion } from '@/pages/modules/LPPM/devotion/main'
-import { DevotionInternalSchema } from '@/pages/modules/LPPM/devotion/schema/internal'
-import { ActivityProgramSchema } from '@/pages/modules/LPPM/devotion/schema/internal/activity-program'
-import { CreatedActivityProgram } from '@/pages/modules/LPPM/devotion/schema/internal/activity-program/component/created.tsx'
-import { UpdatedActivityProgram } from '@/pages/modules/LPPM/devotion/schema/internal/activity-program/component/updated.tsx'
-import { DetailActivityProgram } from '@/pages/modules/LPPM/devotion/schema/internal/activity-program/component/detail.tsx'
-import { SchemaDataDRTPM } from '@/pages/modules/LPPM/devotion/schema/drtpm'
-import { CreatedDRTPM } from '@/pages/modules/LPPM/devotion/schema/drtpm/component/created.tsx'
-import { UpdatedDataDRTPM } from '@/pages/modules/LPPM/devotion/schema/drtpm/component/updated.tsx'
-import { DetailDataDRTPM } from '@/pages/modules/LPPM/devotion/schema/drtpm/component/detail.tsx'
-import { SchemaDataBRIN } from '@/pages/modules/LPPM/devotion/schema/brin'
-import { CreatedBRIN } from '@/pages/modules/LPPM/devotion/schema/brin/component/created.tsx'
-import { UpdatedDataBRIN } from '@/pages/modules/LPPM/devotion/schema/brin/component/updated.tsx'
-import { DetailDataBRIN } from '@/pages/modules/LPPM/devotion/schema/brin/component/detail.tsx'
-import { SchemaFundingOther } from '@/pages/modules/LPPM/devotion/schema/other'
-import { CreatedOtherFunding } from '@/pages/modules/LPPM/devotion/schema/other/component/created.tsx'
-import { UpdatedOtherFunding } from '@/pages/modules/LPPM/devotion/schema/other/component/updated.tsx'
-import { DetailOtherFunding } from '@/pages/modules/LPPM/devotion/schema/other/component/detail.tsx'
-import { MainDevotionHub } from '@/pages/modules/LPPM/devotion/stain-hub'
-import { BookPublisherPage } from '@/pages/modules/LPPM/publication-hki/book/publisher'
-import { BookMediaPage } from '@/pages/modules/LPPM/publication-hki/book/media'
-import { BookCenterPage } from '@/pages/modules/LPPM/publication-hki/book/book-center'
-import { UserManagementBook } from '@/pages/modules/LPPM/publication-hki/book/book-center/manangement'
-import { CreatedUserManagementContext } from '@/pages/modules/LPPM/publication-hki/book/book-center/manangement/component/created.tsx'
-import { UpdatedUserManagementContext } from '@/pages/modules/LPPM/publication-hki/book/book-center/manangement/component/Updated.tsx'
-import { HKICenterPage } from '@/pages/modules/LPPM/publication-hki/hki/hki-center'
-import { UserManagementHKI } from '@/pages/modules/LPPM/publication-hki/hki/hki-center/management'
-import { CreatedUserManagementHKI } from '@/pages/modules/LPPM/publication-hki/hki/hki-center/management/component/created.tsx'
-import { UpdatedUserManagementHKI } from '@/pages/modules/LPPM/publication-hki/hki/hki-center/management/component/Updated.tsx'
-import { HKIDescriptionPage } from '@/pages/modules/LPPM/publication-hki/hki/description'
-import { HKIRegistrationPage } from '@/pages/modules/LPPM/publication-hki/hki/registration'
-import { JourNalPLPPage } from '@/pages/modules/LPPM/publication-hki/journal/plp'
-import { UserManagementPLP } from '@/pages/modules/LPPM/publication-hki/journal/plp/management'
-import { CreatedUserManagementPLP } from '@/pages/modules/LPPM/publication-hki/journal/plp/management/component/created.tsx'
-import { UpdatedUserManagementPLP } from '@/pages/modules/LPPM/publication-hki/journal/plp/management/component/Updated.tsx'
-import { JourNalPPJSPage } from '@/pages/modules/LPPM/publication-hki/journal/ppjs'
-import { UserManagementPPJS } from '@/pages/modules/LPPM/publication-hki/journal/ppjs/management'
-import { CreatedUserManagementPPJS } from '@/pages/modules/LPPM/publication-hki/journal/ppjs/management/component/created.tsx'
-import { UpdatedUserManagementPPJS } from '@/pages/modules/LPPM/publication-hki/journal/ppjs/management/component/Updated.tsx'
-import { PPIDInformationPage } from '@/pages/modules/LPPM/PPID'
-import { ServicesListPage } from '@/pages/modules/LPPM/services'
-import LPPMLandingPageView from '@/pages/modules/LPPM/settings/landing-page/LandingPageView'
-import ColorSettingService from '@/pages/modules/LPPM/settings/warna/ColorSettingService'
-import SettingTemplateServiceView from '@/pages/modules/LPPM/settings/template/SettingTemplateServiceView'
-import { NewsLppmPublicContentPage } from '@/pages/modules/LPPM/public-content/news'
-import { NewsLppmCreated } from '@/pages/modules/LPPM/public-content/news/created'
-import { NewsLppmUpdated } from '@/pages/modules/LPPM/public-content/news/updated'
-import { DetailNewsLppmPage } from '@/pages/modules/LPPM/public-content/news/detail'
-import { LogActivityNewsLppmPage } from '@/pages/modules/LPPM/public-content/news/log-data'
-import { AnnouncementLppmPublicContent } from '@/pages/modules/LPPM/public-content/announcement'
-import { CreatedAnnouncementLppm } from '@/pages/modules/LPPM/public-content/announcement/created'
-import { UpdatedAnnouncementLppm } from '@/pages/modules/LPPM/public-content/announcement/updated'
-import { AnnouncementLppmDetailPage } from '@/pages/modules/LPPM/public-content/announcement/detail'
-import { LogActivityAnnouncementProdiPage } from '@/pages/modules/website-prodi/public-content/announcement/log'
-import { AgendaLppmPublicContent } from '@/pages/modules/LPPM/public-content/agenda'
-import { CreateAgendaLppmPage } from '@/pages/modules/LPPM/public-content/agenda/created'
-import { UpdatedAgendaLppmPage } from '@/pages/modules/LPPM/public-content/agenda/updated'
-import { AgendaLppmDetailPage } from '@/pages/modules/LPPM/public-content/agenda/detail'
-import { LogActivityAgendaLppmPage } from '@/pages/modules/LPPM/public-content/agenda/log'
-import { ArticleLppmPage } from '@/pages/modules/LPPM/public-content/article'
-import { CreatedArticleLppm } from '@/pages/modules/LPPM/public-content/article/created'
-import { UpdatedArticleLppm } from '@/pages/modules/LPPM/public-content/article/updated'
-import { DetailArticlePage } from '@/pages/modules/LPPM/public-content/article/detail'
-import { LogActivityArticleLppmPage } from '@/pages/modules/LPPM/public-content/article/log'
-import DownloadFileLppmPage from '@/pages/modules/LPPM/public-content/Download'
-import { CategoryDownloadLppmPage } from '@/pages/modules/LPPM/public-content/Download/category'
-import { AddDownloadLppmPage } from '@/pages/modules/LPPM/public-content/Download/created'
-import { UpdatedDownloadLppmPage } from '@/pages/modules/LPPM/public-content/Download/updated'
-import { ListInformationPPID } from '@/pages/modules/LPPM/PPID/information'
-import DashboardLPPM from '@/pages/modules/LPPM/dashboard'
-import { ActivityProgramPage } from '@/pages/modules/LPPM/research/schema/internal/activity'
-import { CreatedFormActivity } from '@/pages/modules/LPPM/research/schema/internal/activity/component/created.tsx'
-import { UpdatedFormActivity } from '@/pages/modules/LPPM/research/schema/internal/activity/component/updated.tsx'
-import { DetailActivityProgramInternal } from '@/pages/modules/LPPM/research/schema/internal/activity/component/detail.tsx'
-import { ListJournalPage } from '@/pages/modules/LPPM/publication-hki/journal/list'
-import { ThemaChangeColorInstitutionLppm } from '@/pages/modules/LPPM/settings/template/color'
-import GuideListView from '@/pages/modules/website-utama/panduan/GuideListView'
+import { lazy } from 'react'
+const UserProfilePage = lazy(() => import('@/pages/modules/website-utama/user-profile').then(m => ({ default: m.UserProfilePage })))
+const ChangePassword = lazy(() => import('@/pages/modules/website-utama/change-password').then(m => ({ default: m.ChangePassword })))
+const DetailProfileLPPM = lazy(() => import('@/pages/modules/LPPM/data-lppm').then(m => ({ default: m.DetailProfileLPPM })))
+const UpdatedDataLPPM = lazy(() => import('@/pages/modules/LPPM/data-lppm/updated').then(m => ({ default: m.UpdatedDataLPPM })))
+const AboutProfile = lazy(() => import('@/pages/modules/LPPM/about/profile').then(m => ({ default: m.AboutProfile })))
+const StructureOrganizationProfile = lazy(() => import('@/pages/modules/LPPM/about/structure').then(m => ({ default: m.StructureOrganizationProfile })))
+const VisionMissionAbout = lazy(() => import('@/pages/modules/LPPM/about/vision-mission').then(m => ({ default: m.VisionMissionAbout })))
+const ProfileLeaderPage = lazy(() => import('@/pages/modules/LPPM/about/leader').then(m => ({ default: m.ProfileLeaderPage })))
+const ProfileSecretaryPage = lazy(() => import('@/pages/modules/LPPM/about/secretary').then(m => ({ default: m.ProfileSecretaryPage })))
+const ProfileStaffLPPM = lazy(() => import('@/pages/modules/LPPM/about/staff').then(m => ({ default: m.ProfileStaffLPPM })))
+const StaffMemberList = lazy(() => import('@/pages/modules/LPPM/about/staff/member').then(m => ({ default: m.StaffMemberList })))
+const CreateStaffMember = lazy(() => import('@/pages/modules/LPPM/about/staff/member/component/create.tsx').then(m => ({ default: m.CreateStaffMember })))
+const UpdateStaffMember = lazy(() => import('@/pages/modules/LPPM/about/staff/member/component/update.tsx').then(m => ({ default: m.UpdateStaffMember })))
+const MainResearch = lazy(() => import('@/pages/modules/LPPM/research/main').then(m => ({ default: m.MainResearch })))
+const SchemaDoctoralResearch = lazy(() => import('@/pages/modules/LPPM/research/schema/doctoral').then(m => ({ default: m.SchemaDoctoralResearch })))
+const SchemaInternalResearch = lazy(() => import('@/pages/modules/LPPM/research/schema/internal').then(m => ({ default: m.SchemaInternalResearch })))
+const PlanMainResearch = lazy(() => import('@/pages/modules/LPPM/research/plan').then(m => ({ default: m.PlanMainResearch })))
+const DocumentPLanResearch = lazy(() => import('@/pages/modules/LPPM/research/plan/document').then(m => ({ default: m.DocumentPLanResearch })))
+const GuideCategoryResearch = lazy(() => import('@/pages/modules/LPPM/research/guide').then(m => ({ default: m.GuideCategoryResearch })))
+const DocumentGuideCategory = lazy(() => import('@/pages/modules/LPPM/research/guide/document').then(m => ({ default: m.DocumentGuideCategory })))
+const StudyCenterList = lazy(() => import('@/pages/modules/LPPM/research/study-center/study-list').then(m => ({ default: m.StudyCenterList })))
+const CreatedStudyCenter = lazy(() => import('@/pages/modules/LPPM/research/study-center/study-list/component/created.tsx').then(m => ({ default: m.CreatedStudyCenter })))
+const UpdateStudyCenter = lazy(() => import('@/pages/modules/LPPM/research/study-center/study-list/component/updated.tsx').then(m => ({ default: m.UpdateStudyCenter })))
+const DetailStudyCenter = lazy(() => import('@/pages/modules/LPPM/research/study-center/study-list/component/detail.tsx').then(m => ({ default: m.DetailStudyCenter })))
+const StandardOperationalStudy = lazy(() => import('@/pages/modules/LPPM/research/study-center/operational-standard').then(m => ({ default: m.StandardOperationalStudy })))
+const MainDevotion = lazy(() => import('@/pages/modules/LPPM/devotion/main').then(m => ({ default: m.MainDevotion })))
+const DevotionInternalSchema = lazy(() => import('@/pages/modules/LPPM/devotion/schema/internal').then(m => ({ default: m.DevotionInternalSchema })))
+const ActivityProgramSchema = lazy(() => import('@/pages/modules/LPPM/devotion/schema/internal/activity-program').then(m => ({ default: m.ActivityProgramSchema })))
+const CreatedActivityProgram = lazy(() => import('@/pages/modules/LPPM/devotion/schema/internal/activity-program/component/created.tsx').then(m => ({ default: m.CreatedActivityProgram })))
+const UpdatedActivityProgram = lazy(() => import('@/pages/modules/LPPM/devotion/schema/internal/activity-program/component/updated.tsx').then(m => ({ default: m.UpdatedActivityProgram })))
+const DetailActivityProgram = lazy(() => import('@/pages/modules/LPPM/devotion/schema/internal/activity-program/component/detail.tsx').then(m => ({ default: m.DetailActivityProgram })))
+const SchemaDataDRTPM = lazy(() => import('@/pages/modules/LPPM/devotion/schema/drtpm').then(m => ({ default: m.SchemaDataDRTPM })))
+const CreatedDRTPM = lazy(() => import('@/pages/modules/LPPM/devotion/schema/drtpm/component/created.tsx').then(m => ({ default: m.CreatedDRTPM })))
+const UpdatedDataDRTPM = lazy(() => import('@/pages/modules/LPPM/devotion/schema/drtpm/component/updated.tsx').then(m => ({ default: m.UpdatedDataDRTPM })))
+const DetailDataDRTPM = lazy(() => import('@/pages/modules/LPPM/devotion/schema/drtpm/component/detail.tsx').then(m => ({ default: m.DetailDataDRTPM })))
+const SchemaDataBRIN = lazy(() => import('@/pages/modules/LPPM/devotion/schema/brin').then(m => ({ default: m.SchemaDataBRIN })))
+const CreatedBRIN = lazy(() => import('@/pages/modules/LPPM/devotion/schema/brin/component/created.tsx').then(m => ({ default: m.CreatedBRIN })))
+const UpdatedDataBRIN = lazy(() => import('@/pages/modules/LPPM/devotion/schema/brin/component/updated.tsx').then(m => ({ default: m.UpdatedDataBRIN })))
+const DetailDataBRIN = lazy(() => import('@/pages/modules/LPPM/devotion/schema/brin/component/detail.tsx').then(m => ({ default: m.DetailDataBRIN })))
+const SchemaFundingOther = lazy(() => import('@/pages/modules/LPPM/devotion/schema/other').then(m => ({ default: m.SchemaFundingOther })))
+const CreatedOtherFunding = lazy(() => import('@/pages/modules/LPPM/devotion/schema/other/component/created.tsx').then(m => ({ default: m.CreatedOtherFunding })))
+const UpdatedOtherFunding = lazy(() => import('@/pages/modules/LPPM/devotion/schema/other/component/updated.tsx').then(m => ({ default: m.UpdatedOtherFunding })))
+const DetailOtherFunding = lazy(() => import('@/pages/modules/LPPM/devotion/schema/other/component/detail.tsx').then(m => ({ default: m.DetailOtherFunding })))
+const MainDevotionHub = lazy(() => import('@/pages/modules/LPPM/devotion/stain-hub').then(m => ({ default: m.MainDevotionHub })))
+const BookPublisherPage = lazy(() => import('@/pages/modules/LPPM/publication-hki/book/publisher').then(m => ({ default: m.BookPublisherPage })))
+const BookMediaPage = lazy(() => import('@/pages/modules/LPPM/publication-hki/book/media').then(m => ({ default: m.BookMediaPage })))
+const BookCenterPage = lazy(() => import('@/pages/modules/LPPM/publication-hki/book/book-center').then(m => ({ default: m.BookCenterPage })))
+const UserManagementBook = lazy(() => import('@/pages/modules/LPPM/publication-hki/book/book-center/manangement').then(m => ({ default: m.UserManagementBook })))
+const CreatedUserManagementContext = lazy(() => import('@/pages/modules/LPPM/publication-hki/book/book-center/manangement/component/created.tsx').then(m => ({ default: m.CreatedUserManagementContext })))
+const UpdatedUserManagementContext = lazy(() => import('@/pages/modules/LPPM/publication-hki/book/book-center/manangement/component/Updated.tsx').then(m => ({ default: m.UpdatedUserManagementContext })))
+const HKICenterPage = lazy(() => import('@/pages/modules/LPPM/publication-hki/hki/hki-center').then(m => ({ default: m.HKICenterPage })))
+const UserManagementHKI = lazy(() => import('@/pages/modules/LPPM/publication-hki/hki/hki-center/management').then(m => ({ default: m.UserManagementHKI })))
+const CreatedUserManagementHKI = lazy(() => import('@/pages/modules/LPPM/publication-hki/hki/hki-center/management/component/created.tsx').then(m => ({ default: m.CreatedUserManagementHKI })))
+const UpdatedUserManagementHKI = lazy(() => import('@/pages/modules/LPPM/publication-hki/hki/hki-center/management/component/Updated.tsx').then(m => ({ default: m.UpdatedUserManagementHKI })))
+const HKIDescriptionPage = lazy(() => import('@/pages/modules/LPPM/publication-hki/hki/description').then(m => ({ default: m.HKIDescriptionPage })))
+const HKIRegistrationPage = lazy(() => import('@/pages/modules/LPPM/publication-hki/hki/registration').then(m => ({ default: m.HKIRegistrationPage })))
+const JourNalPLPPage = lazy(() => import('@/pages/modules/LPPM/publication-hki/journal/plp').then(m => ({ default: m.JourNalPLPPage })))
+const UserManagementPLP = lazy(() => import('@/pages/modules/LPPM/publication-hki/journal/plp/management').then(m => ({ default: m.UserManagementPLP })))
+const CreatedUserManagementPLP = lazy(() => import('@/pages/modules/LPPM/publication-hki/journal/plp/management/component/created.tsx').then(m => ({ default: m.CreatedUserManagementPLP })))
+const UpdatedUserManagementPLP = lazy(() => import('@/pages/modules/LPPM/publication-hki/journal/plp/management/component/Updated.tsx').then(m => ({ default: m.UpdatedUserManagementPLP })))
+const JourNalPPJSPage = lazy(() => import('@/pages/modules/LPPM/publication-hki/journal/ppjs').then(m => ({ default: m.JourNalPPJSPage })))
+const UserManagementPPJS = lazy(() => import('@/pages/modules/LPPM/publication-hki/journal/ppjs/management').then(m => ({ default: m.UserManagementPPJS })))
+const CreatedUserManagementPPJS = lazy(() => import('@/pages/modules/LPPM/publication-hki/journal/ppjs/management/component/created.tsx').then(m => ({ default: m.CreatedUserManagementPPJS })))
+const UpdatedUserManagementPPJS = lazy(() => import('@/pages/modules/LPPM/publication-hki/journal/ppjs/management/component/Updated.tsx').then(m => ({ default: m.UpdatedUserManagementPPJS })))
+const PPIDInformationPage = lazy(() => import('@/pages/modules/LPPM/PPID').then(m => ({ default: m.PPIDInformationPage })))
+const ServicesListPage = lazy(() => import('@/pages/modules/LPPM/services').then(m => ({ default: m.ServicesListPage })))
+const LPPMLandingPageView = lazy(() => import('@/pages/modules/LPPM/settings/landing-page/LandingPageView'))
+const ColorSettingService = lazy(() => import('@/pages/modules/LPPM/settings/warna/ColorSettingService'))
+const SettingTemplateServiceView = lazy(() => import('@/pages/modules/LPPM/settings/template/SettingTemplateServiceView'))
+const NewsLppmPublicContentPage = lazy(() => import('@/pages/modules/LPPM/public-content/news').then(m => ({ default: m.NewsLppmPublicContentPage })))
+const NewsLppmCreated = lazy(() => import('@/pages/modules/LPPM/public-content/news/created').then(m => ({ default: m.NewsLppmCreated })))
+const NewsLppmUpdated = lazy(() => import('@/pages/modules/LPPM/public-content/news/updated').then(m => ({ default: m.NewsLppmUpdated })))
+const DetailNewsLppmPage = lazy(() => import('@/pages/modules/LPPM/public-content/news/detail').then(m => ({ default: m.DetailNewsLppmPage })))
+const LogActivityNewsLppmPage = lazy(() => import('@/pages/modules/LPPM/public-content/news/log-data').then(m => ({ default: m.LogActivityNewsLppmPage })))
+const AnnouncementLppmPublicContent = lazy(() => import('@/pages/modules/LPPM/public-content/announcement').then(m => ({ default: m.AnnouncementLppmPublicContent })))
+const CreatedAnnouncementLppm = lazy(() => import('@/pages/modules/LPPM/public-content/announcement/created').then(m => ({ default: m.CreatedAnnouncementLppm })))
+const UpdatedAnnouncementLppm = lazy(() => import('@/pages/modules/LPPM/public-content/announcement/updated').then(m => ({ default: m.UpdatedAnnouncementLppm })))
+const AnnouncementLppmDetailPage = lazy(() => import('@/pages/modules/LPPM/public-content/announcement/detail').then(m => ({ default: m.AnnouncementLppmDetailPage })))
+const LogActivityAnnouncementProdiPage = lazy(() => import('@/pages/modules/website-prodi/public-content/announcement/log').then(m => ({ default: m.LogActivityAnnouncementProdiPage })))
+const AgendaLppmPublicContent = lazy(() => import('@/pages/modules/LPPM/public-content/agenda').then(m => ({ default: m.AgendaLppmPublicContent })))
+const CreateAgendaLppmPage = lazy(() => import('@/pages/modules/LPPM/public-content/agenda/created').then(m => ({ default: m.CreateAgendaLppmPage })))
+const UpdatedAgendaLppmPage = lazy(() => import('@/pages/modules/LPPM/public-content/agenda/updated').then(m => ({ default: m.UpdatedAgendaLppmPage })))
+const AgendaLppmDetailPage = lazy(() => import('@/pages/modules/LPPM/public-content/agenda/detail').then(m => ({ default: m.AgendaLppmDetailPage })))
+const LogActivityAgendaLppmPage = lazy(() => import('@/pages/modules/LPPM/public-content/agenda/log').then(m => ({ default: m.LogActivityAgendaLppmPage })))
+const ArticleLppmPage = lazy(() => import('@/pages/modules/LPPM/public-content/article').then(m => ({ default: m.ArticleLppmPage })))
+const CreatedArticleLppm = lazy(() => import('@/pages/modules/LPPM/public-content/article/created').then(m => ({ default: m.CreatedArticleLppm })))
+const UpdatedArticleLppm = lazy(() => import('@/pages/modules/LPPM/public-content/article/updated').then(m => ({ default: m.UpdatedArticleLppm })))
+const DetailArticlePage = lazy(() => import('@/pages/modules/LPPM/public-content/article/detail').then(m => ({ default: m.DetailArticlePage })))
+const LogActivityArticleLppmPage = lazy(() => import('@/pages/modules/LPPM/public-content/article/log').then(m => ({ default: m.LogActivityArticleLppmPage })))
+const DownloadFileLppmPage = lazy(() => import('@/pages/modules/LPPM/public-content/Download'))
+const CategoryDownloadLppmPage = lazy(() => import('@/pages/modules/LPPM/public-content/Download/category').then(m => ({ default: m.CategoryDownloadLppmPage })))
+const AddDownloadLppmPage = lazy(() => import('@/pages/modules/LPPM/public-content/Download/created').then(m => ({ default: m.AddDownloadLppmPage })))
+const UpdatedDownloadLppmPage = lazy(() => import('@/pages/modules/LPPM/public-content/Download/updated').then(m => ({ default: m.UpdatedDownloadLppmPage })))
+const ListInformationPPID = lazy(() => import('@/pages/modules/LPPM/PPID/information').then(m => ({ default: m.ListInformationPPID })))
+const DashboardLPPM = lazy(() => import('@/pages/modules/LPPM/dashboard'))
+const ActivityProgramPage = lazy(() => import('@/pages/modules/LPPM/research/schema/internal/activity').then(m => ({ default: m.ActivityProgramPage })))
+const CreatedFormActivity = lazy(() => import('@/pages/modules/LPPM/research/schema/internal/activity/component/created.tsx').then(m => ({ default: m.CreatedFormActivity })))
+const UpdatedFormActivity = lazy(() => import('@/pages/modules/LPPM/research/schema/internal/activity/component/updated.tsx').then(m => ({ default: m.UpdatedFormActivity })))
+const DetailActivityProgramInternal = lazy(() => import('@/pages/modules/LPPM/research/schema/internal/activity/component/detail.tsx').then(m => ({ default: m.DetailActivityProgramInternal })))
+const ListJournalPage = lazy(() => import('@/pages/modules/LPPM/publication-hki/journal/list').then(m => ({ default: m.ListJournalPage })))
+const ThemaChangeColorInstitutionLppm = lazy(() => import('@/pages/modules/LPPM/settings/template/color').then(m => ({ default: m.ThemaChangeColorInstitutionLppm })))
+const GuideListView = lazy(() => import('@/pages/modules/website-utama/panduan/GuideListView'))
 
 export const routesLPPM = [
   {

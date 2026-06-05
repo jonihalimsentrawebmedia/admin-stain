@@ -1,57 +1,58 @@
-import AdmissionInformationPublicView from '@/pages/modules/ppid/admission-application/information-public/AdmissionInformationPublicView'
-import AdmissionInformationPublicDetailView from '@/pages/modules/ppid/admission-application/information-public/detail/AdmissionInformationPublicDetailView'
-import AdmissionInformationPublicLogView from '@/pages/modules/ppid/admission-application/information-public/log/AdmissionInformationPublicLogView'
-import ObjectionsPublicDetailView from '@/pages/modules/ppid/admission-application/objections-public/detail/ObjectionsPublicDetailView'
-import ObjectionInformationLogView from '@/pages/modules/ppid/admission-application/objections-public/log/ObjectionInformationLogView'
-import ObjectionInformationPublicView from '@/pages/modules/ppid/admission-application/objections-public/ObjectionInformationPublicView'
-import DashboardPPID from '@/pages/modules/ppid/dashboard'
-import InformationAvailableDetailView from '@/pages/modules/ppid/information-public/Information-available/detail/InformationAvailableDetailView'
-import InformationAvailableView from '@/pages/modules/ppid/information-public/Information-available/InformationAvailableView'
-import InformationImmediatelyAddView from '@/pages/modules/ppid/information-public/information-immediately/add/InformationImmediatelyAddView'
-import InformationImmediatelyEditView from '@/pages/modules/ppid/information-public/information-immediately/edit/InformationImmediatelyEditView'
-import InformationImmediatelyView from '@/pages/modules/ppid/information-public/information-immediately/InformationImmediatelyView'
-import InformationPublicRegisterAddView from '@/pages/modules/ppid/information-public/information-public-register/add/InformationPublicRegisterAddView'
-import InformationPublicRegisterEditView from '@/pages/modules/ppid/information-public/information-public-register/edit/InformationPublicRegisterEditView'
-import InformationPublicRegisterView from '@/pages/modules/ppid/information-public/information-public-register/InformationPublicRegisterView'
-import InformationRegularDetailView from '@/pages/modules/ppid/information-public/information-regular/detail/InformationRegularDetailView'
-import InformationRegularView from '@/pages/modules/ppid/information-public/information-regular/InformationRegularView'
-import StandartServiceView from '@/pages/modules/ppid/information-public/standart-service/StandartServiceView'
+import { lazy } from 'react'
+const AdmissionInformationPublicView = lazy(() => import('@/pages/modules/ppid/admission-application/information-public/AdmissionInformationPublicView'))
+const AdmissionInformationPublicDetailView = lazy(() => import('@/pages/modules/ppid/admission-application/information-public/detail/AdmissionInformationPublicDetailView'))
+const AdmissionInformationPublicLogView = lazy(() => import('@/pages/modules/ppid/admission-application/information-public/log/AdmissionInformationPublicLogView'))
+const ObjectionsPublicDetailView = lazy(() => import('@/pages/modules/ppid/admission-application/objections-public/detail/ObjectionsPublicDetailView'))
+const ObjectionInformationLogView = lazy(() => import('@/pages/modules/ppid/admission-application/objections-public/log/ObjectionInformationLogView'))
+const ObjectionInformationPublicView = lazy(() => import('@/pages/modules/ppid/admission-application/objections-public/ObjectionInformationPublicView'))
+const DashboardPPID = lazy(() => import('@/pages/modules/ppid/dashboard'))
+const InformationAvailableDetailView = lazy(() => import('@/pages/modules/ppid/information-public/Information-available/detail/InformationAvailableDetailView'))
+const InformationAvailableView = lazy(() => import('@/pages/modules/ppid/information-public/Information-available/InformationAvailableView'))
+const InformationImmediatelyAddView = lazy(() => import('@/pages/modules/ppid/information-public/information-immediately/add/InformationImmediatelyAddView'))
+const InformationImmediatelyEditView = lazy(() => import('@/pages/modules/ppid/information-public/information-immediately/edit/InformationImmediatelyEditView'))
+const InformationImmediatelyView = lazy(() => import('@/pages/modules/ppid/information-public/information-immediately/InformationImmediatelyView'))
+const InformationPublicRegisterAddView = lazy(() => import('@/pages/modules/ppid/information-public/information-public-register/add/InformationPublicRegisterAddView'))
+const InformationPublicRegisterEditView = lazy(() => import('@/pages/modules/ppid/information-public/information-public-register/edit/InformationPublicRegisterEditView'))
+const InformationPublicRegisterView = lazy(() => import('@/pages/modules/ppid/information-public/information-public-register/InformationPublicRegisterView'))
+const InformationRegularDetailView = lazy(() => import('@/pages/modules/ppid/information-public/information-regular/detail/InformationRegularDetailView'))
+const InformationRegularView = lazy(() => import('@/pages/modules/ppid/information-public/information-regular/InformationRegularView'))
+const StandartServiceView = lazy(() => import('@/pages/modules/ppid/information-public/standart-service/StandartServiceView'))
 
-import ServiceCommitmentAddView from '@/pages/modules/ppid/profile/service-commitment/add/ServiceCommitmentAddView'
-import ServiceCommitmentEditView from '@/pages/modules/ppid/profile/service-commitment/edit/ServiceCommitmentEditView'
-import ServiceCommitmentView from '@/pages/modules/ppid/profile/service-commitment/ServiceCommitmentView'
-import ShortDescriptionView from '@/pages/modules/ppid/profile/short-description/ShortDescriptionView'
-import StructureOrganitationPPIDView from '@/pages/modules/ppid/profile/structure-organization/StructureOrganitationPPIDView'
-import VisiMisiUnitAddView from '@/pages/modules/ppid/profile/visi-misi/add/VisiMisiUnitAddView'
-import VisiMisiUnitEditView from '@/pages/modules/ppid/profile/visi-misi/edit/VisiMisiUnitEditView'
-import VisiMisiPPIDView from '@/pages/modules/ppid/profile/visi-misi/VisiMisiView'
-import WorkResponsibilitiesAddView from '@/pages/modules/ppid/profile/work-responsibilities/add/WorkResponsibilitiesAddView'
-import WorkResponsibilitiesEditView from '@/pages/modules/ppid/profile/work-responsibilities/edit/WorkResponsibilitiesEditView'
-import WorkResponsibilitiesView from '@/pages/modules/ppid/profile/work-responsibilities/WorkResponsibilitiesView'
-import ApplicationProceduresView from '@/pages/modules/ppid/public-content/application-procedures/ApplicationProceduresView'
-import InfographicsView from '@/pages/modules/ppid/public-content/Infographics/InfographicsView'
-import PPIDNewsPublicContentPage from '@/pages/modules/ppid/public-content/news'
-import { CreatedNewsPage } from '@/pages/modules/ppid/public-content/news/created'
-import { DetailNewsPage } from '@/pages/modules/ppid/public-content/news/detail/page'
-import { LogActivityNewsPage } from '@/pages/modules/ppid/public-content/news/log'
-import { UpdatedNewsPage } from '@/pages/modules/ppid/public-content/news/updated'
-import ShortcutView from '@/pages/modules/ppid/public-content/shortcut/ShortcutView'
-import RegulationEnviromentView from '@/pages/modules/ppid/regulation/enviroment/RegulationEnviromentView'
-import RegulationPublicView from '@/pages/modules/ppid/regulation/public/RegulationPublicView'
-import ReportsAccessView from '@/pages/modules/ppid/reports/access/ReportsAccessView'
-import ReportsServiceView from '@/pages/modules/ppid/reports/services/ReportsServiceView'
-import ReportsSurveyView from '@/pages/modules/ppid/reports/survey/ReportsSurveyView'
-import PPIDLandingPageView from '@/pages/modules/ppid/settings/landing-page/LandingPageView'
-import SettingTemplateServiceView from '@/pages/modules/ppid/settings/template/SettingTemplateServiceView'
-import PPIDSettingsVideosView from '@/pages/modules/ppid/settings/videos/PPIDSettingsVideosView'
-import ColorSettingService from '@/pages/modules/ppid/settings/warna/ColorSettingService'
-import UnitEditPPIDView from '@/pages/modules/ppid/unit/edit/UnitEditPPIDView'
-import UnitView from '@/pages/modules/ppid/unit/UnitView'
-import { ChangePassword } from '@/pages/modules/website-utama/change-password'
-import { UserProfilePage } from '@/pages/modules/website-utama/user-profile'
-import { SettingsBackground } from '@/pages/modules/ppid/settings/background'
-import { ThemaChangeColorPPID } from '@/pages/modules/ppid/settings/template/color'
-import GuideListView from '@/pages/modules/website-utama/panduan/GuideListView'
+const ServiceCommitmentAddView = lazy(() => import('@/pages/modules/ppid/profile/service-commitment/add/ServiceCommitmentAddView'))
+const ServiceCommitmentEditView = lazy(() => import('@/pages/modules/ppid/profile/service-commitment/edit/ServiceCommitmentEditView'))
+const ServiceCommitmentView = lazy(() => import('@/pages/modules/ppid/profile/service-commitment/ServiceCommitmentView'))
+const ShortDescriptionView = lazy(() => import('@/pages/modules/ppid/profile/short-description/ShortDescriptionView'))
+const StructureOrganitationPPIDView = lazy(() => import('@/pages/modules/ppid/profile/structure-organization/StructureOrganitationPPIDView'))
+const VisiMisiUnitAddView = lazy(() => import('@/pages/modules/ppid/profile/visi-misi/add/VisiMisiUnitAddView'))
+const VisiMisiUnitEditView = lazy(() => import('@/pages/modules/ppid/profile/visi-misi/edit/VisiMisiUnitEditView'))
+const VisiMisiPPIDView = lazy(() => import('@/pages/modules/ppid/profile/visi-misi/VisiMisiView'))
+const WorkResponsibilitiesAddView = lazy(() => import('@/pages/modules/ppid/profile/work-responsibilities/add/WorkResponsibilitiesAddView'))
+const WorkResponsibilitiesEditView = lazy(() => import('@/pages/modules/ppid/profile/work-responsibilities/edit/WorkResponsibilitiesEditView'))
+const WorkResponsibilitiesView = lazy(() => import('@/pages/modules/ppid/profile/work-responsibilities/WorkResponsibilitiesView'))
+const ApplicationProceduresView = lazy(() => import('@/pages/modules/ppid/public-content/application-procedures/ApplicationProceduresView'))
+const InfographicsView = lazy(() => import('@/pages/modules/ppid/public-content/Infographics/InfographicsView'))
+const PPIDNewsPublicContentPage = lazy(() => import('@/pages/modules/ppid/public-content/news'))
+const CreatedNewsPage = lazy(() => import('@/pages/modules/ppid/public-content/news/created').then(m => ({ default: m.CreatedNewsPage })))
+const DetailNewsPage = lazy(() => import('@/pages/modules/ppid/public-content/news/detail/page').then(m => ({ default: m.DetailNewsPage })))
+const LogActivityNewsPage = lazy(() => import('@/pages/modules/ppid/public-content/news/log').then(m => ({ default: m.LogActivityNewsPage })))
+const UpdatedNewsPage = lazy(() => import('@/pages/modules/ppid/public-content/news/updated').then(m => ({ default: m.UpdatedNewsPage })))
+const ShortcutView = lazy(() => import('@/pages/modules/ppid/public-content/shortcut/ShortcutView'))
+const RegulationEnviromentView = lazy(() => import('@/pages/modules/ppid/regulation/enviroment/RegulationEnviromentView'))
+const RegulationPublicView = lazy(() => import('@/pages/modules/ppid/regulation/public/RegulationPublicView'))
+const ReportsAccessView = lazy(() => import('@/pages/modules/ppid/reports/access/ReportsAccessView'))
+const ReportsServiceView = lazy(() => import('@/pages/modules/ppid/reports/services/ReportsServiceView'))
+const ReportsSurveyView = lazy(() => import('@/pages/modules/ppid/reports/survey/ReportsSurveyView'))
+const PPIDLandingPageView = lazy(() => import('@/pages/modules/ppid/settings/landing-page/LandingPageView'))
+const SettingTemplateServiceView = lazy(() => import('@/pages/modules/ppid/settings/template/SettingTemplateServiceView'))
+const PPIDSettingsVideosView = lazy(() => import('@/pages/modules/ppid/settings/videos/PPIDSettingsVideosView'))
+const ColorSettingService = lazy(() => import('@/pages/modules/ppid/settings/warna/ColorSettingService'))
+const UnitEditPPIDView = lazy(() => import('@/pages/modules/ppid/unit/edit/UnitEditPPIDView'))
+const UnitView = lazy(() => import('@/pages/modules/ppid/unit/UnitView'))
+const ChangePassword = lazy(() => import('@/pages/modules/website-utama/change-password').then(m => ({ default: m.ChangePassword })))
+const UserProfilePage = lazy(() => import('@/pages/modules/website-utama/user-profile').then(m => ({ default: m.UserProfilePage })))
+const SettingsBackground = lazy(() => import('@/pages/modules/ppid/settings/background').then(m => ({ default: m.SettingsBackground })))
+const ThemaChangeColorPPID = lazy(() => import('@/pages/modules/ppid/settings/template/color').then(m => ({ default: m.ThemaChangeColorPPID })))
+const GuideListView = lazy(() => import('@/pages/modules/website-utama/panduan/GuideListView'))
 
 export const routesPPID = [
   {
