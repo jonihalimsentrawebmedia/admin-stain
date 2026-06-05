@@ -54,7 +54,7 @@ const UpdateTemplateSurat = () => {
   // ── Isi form dari data detail ──
   useEffect(() => {
     if (templateSurat) {
-      const mainData = templateSurat.templateSurat
+      const mainData = templateSurat.template_surat
       const sections = (templateSurat.sections ?? []).map((item) => ({
         judul_section: item.judul_section,
         konten_section: item.konten_section,
@@ -77,9 +77,8 @@ const UpdateTemplateSurat = () => {
           urutan: f.urutan ?? 0,
         }
         // options hanya disertakan jika tipe DROPDOWN dan ada isinya
-        const rawOptions = (f as any).options
-        if (f.tipe_input === 'DROPDOWN' && rawOptions?.length) {
-          base.options = rawOptions
+        if (f.tipe_input === 'DROPDOWN' && f.options?.length) {
+          base.options = f.options
         }
         return base
       })

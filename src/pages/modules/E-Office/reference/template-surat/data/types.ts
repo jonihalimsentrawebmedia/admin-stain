@@ -7,6 +7,11 @@ export interface ISection {
   urutan?: number
 }
 
+export interface IFieldOption {
+  label: string
+  value: string
+}
+
 export interface IField {
   id_section_field?: string
   id_template_surat?: string
@@ -15,6 +20,7 @@ export interface IField {
   tipe_input: string
   is_required: boolean
   urutan?: number
+  options?: IFieldOption[]
 }
 
 export interface ITemplateSurat {
@@ -30,7 +36,7 @@ export interface ITemplateSurat {
 }
 
 export interface ITemplateSuratDetail {
-  templateSurat: {
+  template_surat: {
     id_template_surat: string
     id_satuan_organisasi: string
     nama_template: string

@@ -184,7 +184,7 @@ const GenerateSuratView = () => {
     )
   }
 
-  const mainData = templateSurat.templateSurat
+  const mainData = templateSurat.template_surat
   const sections = templateSurat.sections ?? []
   const fields = templateSurat.fields ?? []
 
