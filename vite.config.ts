@@ -12,4 +12,18 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  build: {
+    sourcemap: false,
+    chunkSizeWarningLimit: 2000,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ['react', 'react-dom'],
+          tiptap: ['@tiptap/react', '@tiptap/core', '@tiptap/starter-kit'],
+          pdf: ['pdfmake', 'html-to-pdfmake'],
+          firebase: ['firebase/app', 'firebase/messaging'],
+        },
+      },
+    },
+  },
 })
