@@ -43,10 +43,10 @@ const DashboardEOfficePage = () => {
     },
   ]
   const countsList = [
-    { image: '/public/Frame26.png', text: 'Total Surat Masuk', counts: counts?.suratMasuk },
-    { image: '/public/Frame25.png', text: 'Total Surat Keluar', counts: counts?.suratKeluar },
-    { image: '/public/Frame24.png', text: 'Total Tamu', counts: counts?.acaraDaftarHadir },
-    { image: '/public/Frame27.png', text: 'Total Acara', counts: counts?.acara },
+    { image: '/Frame26.png', text: 'Total Surat Masuk', counts: counts?.suratMasuk },
+    { image: '/Frame25.png', text: 'Total Surat Keluar', counts: counts?.suratKeluar },
+    { image: '/Frame24.png', text: 'Total Tamu', counts: counts?.acaraDaftarHadir },
+    { image: '/Frame27.png', text: 'Total Acara', counts: counts?.acara },
   ]
 
   return (
