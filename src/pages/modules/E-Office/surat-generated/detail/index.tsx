@@ -3,15 +3,30 @@ import { UseGetDetailSuratGenerated } from '../hooks'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card.tsx'
 import { Button } from '@/components/ui/button.tsx'
+import { useState, useEffect } from 'react'
 import { format } from 'date-fns'
 import { id as localeId } from 'date-fns/locale'
 import { FaFilePdf } from 'react-icons/fa'
-import { generatePdfSurat } from '../utils/pdf'
+import { IoMdEye } from 'react-icons/io'
+import { generatePdfSurat, generatePdfBlobUrl } from '../utils/pdf'
 import { toast } from 'react-toastify'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 const DetailSuratGenerated = () => {
   const { id } = useParams<{ id: string }>()
   const { detail, loading } = UseGetDetailSuratGenerated(id as string)
+
+  const [open, setOpen] = useState(false)
+  const [urlPDF, setUrlPDF] = useState<string>()
+  const [loadingPdf, setLoadingPdf] = useState<'preview' | 'download' | null>(null)
+
+  // Revoke blob URL when dialog closes to avoid memory leaks
+  useEffect(() => {
+    if (!open && urlPDF) {
+      URL.revokeObjectURL(urlPDF)
+      setUrlPDF(undefined)
+    }
+  }, [open, urlPDF])
 
   if (loading) {
     return (
@@ -35,35 +50,75 @@ const DetailSuratGenerated = () => {
   const sectionValues = detail.section_values ?? []
 
   return (
-    <div className="space-y-5">
-      <ButtonTitleGroup
-        isBack
-        label={'Detail Surat'}
-        buttonGroup={[
-          {
-            type: 'custom',
-            element: (
-              <Button
-                key="btn-pdf"
-                onClick={async () => {
-                  if (detail) {
+    <>
+      <div className="space-y-5">
+        <ButtonTitleGroup
+          isBack
+          label={'Detail Surat'}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <Button
+                  key="btn-preview"
+                  className="text-white"
+                  disabled={loadingPdf !== null}
+                  onClick={async () => {
+                    if (!detail) return
+                    setLoadingPdf('preview')
+                    try {
+                      const url = await generatePdfBlobUrl(detail)
+                      setUrlPDF(url)
+                      setOpen(true)
+                    } catch (err) {
+                      console.error('[Preview] Gagal generate PDF:', err)
+                      toast.error('Gagal preview PDF')
+                    } finally {
+                      setLoadingPdf(null)
+                    }
+                  }}
+                >
+                  {loadingPdf === 'preview' ? (
+                    <span className="mr-2 size-4 animate-spin inline-block border-2 border-white border-t-transparent rounded-full" />
+                  ) : (
+                    <IoMdEye className="mr-1" />
+                  )}
+                  {loadingPdf === 'preview' ? 'Memproses...' : 'Preview'}
+                </Button>
+              ),
+            },
+            {
+              type: 'custom',
+              element: (
+                <Button
+                  key="btn-pdf"
+                  disabled={loadingPdf !== null}
+                  onClick={async () => {
+                    if (!detail) return
+                    setLoadingPdf('download')
                     try {
                       await generatePdfSurat(detail)
-                    } catch {
-                      toast.error('Gagal generate PDF')
+                    } catch (err) {
+                      console.error('[Download] Gagal generate PDF:', err)
+                      toast.error('Gagal download PDF')
+                    } finally {
+                      setLoadingPdf(null)
                     }
-                  }
-                }}
-                variant="outline"
-                className="bg-white text-red-600 border-red-400 hover:bg-red-50 hover:text-red-700"
-              >
-                <FaFilePdf className="mr-2 size-4" />
-                Download PDF
-              </Button>
-            ),
-          },
-        ]}
-      />
+                  }}
+                  variant="outline"
+                  className="bg-white text-red-600 border-red-400 hover:bg-red-50 hover:text-red-700"
+                >
+                  {loadingPdf === 'download' ? (
+                    <span className="mr-2 size-4 animate-spin inline-block border-2 border-red-400 border-t-transparent rounded-full" />
+                  ) : (
+                    <FaFilePdf className="mr-2 size-4" />
+                  )}
+                  {loadingPdf === 'download' ? 'Memproses...' : 'Download PDF'}
+                </Button>
+              ),
+            },
+          ]}
+        />
 
       <Card>
         <CardHeader>
@@ -160,6 +215,16 @@ const DetailSuratGenerated = () => {
         </CardContent>
       </Card>
     </div>
+
+      <DialogBasic
+        title={'Preview Surat'}
+        open={open}
+        setOpen={setOpen}
+        className={'min-w-5xl'}
+      >
+        <iframe src={urlPDF} width={'100%'} height={'600'} />
+      </DialogBasic>
+    </>
   )
 }
 

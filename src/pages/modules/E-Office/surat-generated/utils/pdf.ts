@@ -92,16 +92,42 @@ async function extractContentBlocks(html: string): Promise<ContentBlock[]> {
 
 /**
  * Konversi HTML ke pdfmake content (text only, tanpa gambar).
+ * Jika htmlToPdfmake gagal, fallback ke plain text.
  */
 function htmlToTextContent(html: string): any {
-  const parser = new DOMParser()
-  const doc = parser.parseFromString(html, 'text/html')
-  return htmlToPdfmake(doc.body.innerHTML, {
-    defaultStyles: {
-      p: { margin: [0, 0, 0, 8] },
-      div: { margin: [0, 0, 0, 8] },
-    },
-  })
+  try {
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(html, 'text/html')
+    return htmlToPdfmake(doc.body.innerHTML, {
+      defaultStyles: {
+        p: { margin: [0, 0, 0, 8] },
+        div: { margin: [0, 0, 0, 8] },
+      },
+    })
+  } catch (err) {
+    console.warn('[htmlToTextContent] htmlToPdfmake gagal, fallback ke text biasa:', err)
+    // Fallback: plain text sederhana
+    const temp = document.createElement('div')
+    temp.innerHTML = html
+    return { text: temp.textContent || temp.innerText || '', margin: [0, 0, 0, 8] }
+  }
+}
+
+/**
+ * Tambahkan prefix data URI jika belum ada.
+ * pdfmake memerlukan format `data:image/...;base64,...` untuk inline image.
+ */
+function ensureDataUri(base64: string): string {
+  if (base64.startsWith('data:')) return base64
+
+  // Deteksi tipe image dari magic bytes base64
+  if (base64.startsWith('/9j/')) return `data:image/jpeg;base64,${base64}`
+  if (base64.startsWith('iVBOR')) return `data:image/png;base64,${base64}`
+  if (base64.startsWith('R0lG')) return `data:image/gif;base64,${base64}`
+  if (base64.startsWith('UklGR')) return `data:image/webp;base64,${base64}`
+
+  // Default fallback ke PNG
+  return `data:image/png;base64,${base64}`
 }
 
 /**
@@ -117,7 +143,7 @@ async function buildSectionContent(html: string): Promise<any[]> {
       result.push(parsed)
     } else if (block.type === 'image') {
       result.push({
-        image: block.base64,
+        image: ensureDataUri(block.base64),
         width: 500,
         alignment: 'center' as const,
         margin: [0, 8, 0, 8],
@@ -170,18 +196,35 @@ export async function generatePdfSurat(detail: ISuratGeneratedDetail): Promise<v
 /**
  * Generate PDF dan return blob URL untuk preview di iframe.
  * Caller wajib revoke URL setelah tidak dipakai: URL.revokeObjectURL(url)
+ *
+ * NOTE: pdfmake 0.2+ supports Promise-based getBlob().
+ * Jika terjadi error "pdfDoc.getBlob is not a function", fallback ke blob dari output.
  */
 export async function generatePdfBlobUrl(detail: ISuratGeneratedDetail): Promise<string> {
   const docDefinition = await buildDocDefinition(detail)
-  return new Promise((resolve, reject) => {
-    try {
-      const pdfDoc = pdfMake.createPdf(docDefinition) as any
-      pdfDoc.getBlob((blob: Blob) => {
-        const url = URL.createObjectURL(blob)
-        resolve(url)
-      })
-    } catch (err) {
-      reject(err)
-    }
-  })
+  try {
+    // Ikuti pola yang sama persis dengan letter-header yang sudah berfungsi
+    const blob: any = await pdfMake.createPdf(docDefinition as any).getBlob()
+    return URL.createObjectURL(blob)
+  } catch (err) {
+    console.error('[generatePdfBlobUrl] Error detail:', err)
+    throw err
+  }
+}
+
+/**
+ * Generate PDF blob URL dengan timeout.
+ * Jika melebihi timeout, throw error.
+ */
+export async function generatePdfBlobUrlWithTimeout(
+  detail: ISuratGeneratedDetail,
+  timeoutMs = 30000
+): Promise<string> {
+  const result = await Promise.race([
+    generatePdfBlobUrl(detail),
+    new Promise<string>((_, reject) =>
+      setTimeout(() => reject(new Error('PDF generation timeout')), timeoutMs)
+    ),
+  ])
+  return result
 }
