@@ -1,54 +1,55 @@
-import DashboardLPMI from '@/pages/modules/website-lembaga/dashboard'
-import AuditInternalView from '@/pages/modules/website-lembaga/jaminan-mutu/audit-internal/AuditInternalView'
-import ManagementRiskView from '@/pages/modules/website-lembaga/jaminan-mutu/manajemen-resiko/ManagementRiskView'
-import SystemDocumentationView from '@/pages/modules/website-lembaga/jaminan-mutu/sistem-dokumentasi/SystemDocumentationView'
-import ManagementReviewView from '@/pages/modules/website-lembaga/jaminan-mutu/tinjauan-manajemen/ManagementReviewView'
-import TemplateAimDetailView from '@/pages/modules/website-lembaga/layanan/aim/template/detail/TemplateAimDetailView'
-import TemplateAimView from '@/pages/modules/website-lembaga/layanan/aim/template/TemplateAimView'
-import ServiceAccreditationView from '@/pages/modules/website-lembaga/layanan/akreditasi/ServiceAccreditationView'
-import PublicServiceView from '@/pages/modules/website-lembaga/layanan/pelayanan-public/PublicServiceView'
-import SpmiAsesorView from '@/pages/modules/website-lembaga/layanan/spmi/asesor/SpmiAsesorView'
-import SpmiAuditorInternalView from '@/pages/modules/website-lembaga/layanan/spmi/auditor-internal/SpmiAuditorInternalView'
-import DocumentSupportDetailView from '@/pages/modules/website-lembaga/layanan/spmi/dokumen-pendukung/detail/DocumentSupportDetailView'
-import DocumentSupportView from '@/pages/modules/website-lembaga/layanan/spmi/dokumen-pendukung/DocumentSupportView'
-import BenchmarkingReportView from '@/pages/modules/website-lembaga/layanan/spmi/laporan-benchmarking/BenchmarkingReportView'
-import SpmiReviewerView from '@/pages/modules/website-lembaga/layanan/spmi/reviewer/SpmiReviewerView'
-import LandingPageView from '@/pages/modules/website-lembaga/pengaturan/landing-page/LandingPageView'
-import SettingTemplateServiceView from '@/pages/modules/website-lembaga/pengaturan/template/SettingTemplateServiceView'
-import ColorSettingService from '@/pages/modules/website-lembaga/pengaturan/warna/ColorSettingService'
-import { AgendaPage } from '@/pages/modules/website-lembaga/public-content/agenda'
-import { CreateAgendaPage } from '@/pages/modules/website-lembaga/public-content/agenda/created'
-import { DetailAgendaPage } from '@/pages/modules/website-lembaga/public-content/agenda/detail'
-import { AgendaLanguagePage } from '@/pages/modules/website-lembaga/public-content/agenda/language'
-import { LogActivityAgendaPage } from '@/pages/modules/website-lembaga/public-content/agenda/log'
-import { UpdatedAgendaPage } from '@/pages/modules/website-lembaga/public-content/agenda/updated'
-import { AnnouncementPage } from '@/pages/modules/website-lembaga/public-content/announcement'
-import { CreateAnnouncementPage } from '@/pages/modules/website-lembaga/public-content/announcement/created'
-import { AnnouncementDetailPage } from '@/pages/modules/website-lembaga/public-content/announcement/detail'
-import { AnnouncementLanguage } from '@/pages/modules/website-lembaga/public-content/announcement/language'
-import { LogActivityAnnouncementPage } from '@/pages/modules/website-lembaga/public-content/announcement/log'
-import { UpdatedAnnouncementPage } from '@/pages/modules/website-lembaga/public-content/announcement/updated'
-import NewsPublicContentPage from '@/pages/modules/website-lembaga/public-content/news'
-import { CreatedNewsPage } from '@/pages/modules/website-lembaga/public-content/news/created'
-import { DetailNewsPage } from '@/pages/modules/website-lembaga/public-content/news/detail/page'
-import { NewsWithLanguage } from '@/pages/modules/website-lembaga/public-content/news/language'
-import { LogActivityNewsPage } from '@/pages/modules/website-lembaga/public-content/news/log'
-import { UpdatedNewsPage } from '@/pages/modules/website-lembaga/public-content/news/updated'
-import ComplaintService from '@/pages/modules/website-lembaga/keluhan/ComplaintService.tsx'
-import { UserProfilePage } from '@/pages/modules/website-utama/user-profile'
-import { ChangePassword } from '@/pages/modules/website-utama/change-password'
-import VisiMisiView from '@/pages/modules/website-lembaga/profile/visi-misi/VisiMisiView'
-import VisiMisiLembagaAdd from '@/pages/modules/website-lembaga/profile/visi-misi/add/VisiMisiLembagaAdd'
-import VisiMisiLembagaEdit from '@/pages/modules/website-lembaga/profile/visi-misi/edit/VisiMisiLembagaEdit'
-import PerformanceInstitutaionView from '@/pages/modules/website-lembaga/profile/prestasi/PerformanceInstitutaionView'
-import SelayangPandangView from '@/pages/modules/website-lembaga/profile/selayang-pandang/SelayangPandangView'
-import WorkProgramInstitutaionView from '@/pages/modules/website-lembaga/profile/program-kerja/WorkProgramInstitutaionView'
-import StructureOrganitationInstitutionView from '@/pages/modules/website-lembaga/profile/struktur-organisasi/StructureOrganitationInstitutionView'
-import HummanResourceInstitutaionView from '@/pages/modules/website-lembaga/profile/sumber-daya-manusia/HummanResourceInstitutaionView'
-import LembagaView from '@/pages/modules/website-lembaga/lembaga/LembagaView'
-import LembagaEditView from '@/pages/modules/website-lembaga/lembaga/edit/LembagaEditView'
-import { ThemaChangeColorInstitution } from '@/pages/modules/website-lembaga/pengaturan/template/color'
-import GuideListView from '@/pages/modules/website-utama/panduan/GuideListView'
+import { lazy } from 'react'
+const DashboardLPMI = lazy(() => import('@/pages/modules/website-lembaga/dashboard'))
+const AuditInternalView = lazy(() => import('@/pages/modules/website-lembaga/jaminan-mutu/audit-internal/AuditInternalView'))
+const ManagementRiskView = lazy(() => import('@/pages/modules/website-lembaga/jaminan-mutu/manajemen-resiko/ManagementRiskView'))
+const SystemDocumentationView = lazy(() => import('@/pages/modules/website-lembaga/jaminan-mutu/sistem-dokumentasi/SystemDocumentationView'))
+const ManagementReviewView = lazy(() => import('@/pages/modules/website-lembaga/jaminan-mutu/tinjauan-manajemen/ManagementReviewView'))
+const TemplateAimDetailView = lazy(() => import('@/pages/modules/website-lembaga/layanan/aim/template/detail/TemplateAimDetailView'))
+const TemplateAimView = lazy(() => import('@/pages/modules/website-lembaga/layanan/aim/template/TemplateAimView'))
+const ServiceAccreditationView = lazy(() => import('@/pages/modules/website-lembaga/layanan/akreditasi/ServiceAccreditationView'))
+const PublicServiceView = lazy(() => import('@/pages/modules/website-lembaga/layanan/pelayanan-public/PublicServiceView'))
+const SpmiAsesorView = lazy(() => import('@/pages/modules/website-lembaga/layanan/spmi/asesor/SpmiAsesorView'))
+const SpmiAuditorInternalView = lazy(() => import('@/pages/modules/website-lembaga/layanan/spmi/auditor-internal/SpmiAuditorInternalView'))
+const DocumentSupportDetailView = lazy(() => import('@/pages/modules/website-lembaga/layanan/spmi/dokumen-pendukung/detail/DocumentSupportDetailView'))
+const DocumentSupportView = lazy(() => import('@/pages/modules/website-lembaga/layanan/spmi/dokumen-pendukung/DocumentSupportView'))
+const BenchmarkingReportView = lazy(() => import('@/pages/modules/website-lembaga/layanan/spmi/laporan-benchmarking/BenchmarkingReportView'))
+const SpmiReviewerView = lazy(() => import('@/pages/modules/website-lembaga/layanan/spmi/reviewer/SpmiReviewerView'))
+const LandingPageView = lazy(() => import('@/pages/modules/website-lembaga/pengaturan/landing-page/LandingPageView'))
+const SettingTemplateServiceView = lazy(() => import('@/pages/modules/website-lembaga/pengaturan/template/SettingTemplateServiceView'))
+const ColorSettingService = lazy(() => import('@/pages/modules/website-lembaga/pengaturan/warna/ColorSettingService'))
+const AgendaPage = lazy(() => import('@/pages/modules/website-lembaga/public-content/agenda').then(m => ({ default: m.AgendaPage })))
+const CreateAgendaPage = lazy(() => import('@/pages/modules/website-lembaga/public-content/agenda/created').then(m => ({ default: m.CreateAgendaPage })))
+const DetailAgendaPage = lazy(() => import('@/pages/modules/website-lembaga/public-content/agenda/detail').then(m => ({ default: m.DetailAgendaPage })))
+const AgendaLanguagePage = lazy(() => import('@/pages/modules/website-lembaga/public-content/agenda/language').then(m => ({ default: m.AgendaLanguagePage })))
+const LogActivityAgendaPage = lazy(() => import('@/pages/modules/website-lembaga/public-content/agenda/log').then(m => ({ default: m.LogActivityAgendaPage })))
+const UpdatedAgendaPage = lazy(() => import('@/pages/modules/website-lembaga/public-content/agenda/updated').then(m => ({ default: m.UpdatedAgendaPage })))
+const AnnouncementPage = lazy(() => import('@/pages/modules/website-lembaga/public-content/announcement').then(m => ({ default: m.AnnouncementPage })))
+const CreateAnnouncementPage = lazy(() => import('@/pages/modules/website-lembaga/public-content/announcement/created').then(m => ({ default: m.CreateAnnouncementPage })))
+const AnnouncementDetailPage = lazy(() => import('@/pages/modules/website-lembaga/public-content/announcement/detail').then(m => ({ default: m.AnnouncementDetailPage })))
+const AnnouncementLanguage = lazy(() => import('@/pages/modules/website-lembaga/public-content/announcement/language').then(m => ({ default: m.AnnouncementLanguage })))
+const LogActivityAnnouncementPage = lazy(() => import('@/pages/modules/website-lembaga/public-content/announcement/log').then(m => ({ default: m.LogActivityAnnouncementPage })))
+const UpdatedAnnouncementPage = lazy(() => import('@/pages/modules/website-lembaga/public-content/announcement/updated').then(m => ({ default: m.UpdatedAnnouncementPage })))
+const NewsPublicContentPage = lazy(() => import('@/pages/modules/website-lembaga/public-content/news'))
+const CreatedNewsPage = lazy(() => import('@/pages/modules/website-lembaga/public-content/news/created').then(m => ({ default: m.CreatedNewsPage })))
+const DetailNewsPage = lazy(() => import('@/pages/modules/website-lembaga/public-content/news/detail/page').then(m => ({ default: m.DetailNewsPage })))
+const NewsWithLanguage = lazy(() => import('@/pages/modules/website-lembaga/public-content/news/language').then(m => ({ default: m.NewsWithLanguage })))
+const LogActivityNewsPage = lazy(() => import('@/pages/modules/website-lembaga/public-content/news/log').then(m => ({ default: m.LogActivityNewsPage })))
+const UpdatedNewsPage = lazy(() => import('@/pages/modules/website-lembaga/public-content/news/updated').then(m => ({ default: m.UpdatedNewsPage })))
+const ComplaintService = lazy(() => import('@/pages/modules/website-lembaga/keluhan/ComplaintService.tsx'))
+const UserProfilePage = lazy(() => import('@/pages/modules/website-utama/user-profile').then(m => ({ default: m.UserProfilePage })))
+const ChangePassword = lazy(() => import('@/pages/modules/website-utama/change-password').then(m => ({ default: m.ChangePassword })))
+const VisiMisiView = lazy(() => import('@/pages/modules/website-lembaga/profile/visi-misi/VisiMisiView'))
+const VisiMisiLembagaAdd = lazy(() => import('@/pages/modules/website-lembaga/profile/visi-misi/add/VisiMisiLembagaAdd'))
+const VisiMisiLembagaEdit = lazy(() => import('@/pages/modules/website-lembaga/profile/visi-misi/edit/VisiMisiLembagaEdit'))
+const PerformanceInstitutaionView = lazy(() => import('@/pages/modules/website-lembaga/profile/prestasi/PerformanceInstitutaionView'))
+const SelayangPandangView = lazy(() => import('@/pages/modules/website-lembaga/profile/selayang-pandang/SelayangPandangView'))
+const WorkProgramInstitutaionView = lazy(() => import('@/pages/modules/website-lembaga/profile/program-kerja/WorkProgramInstitutaionView'))
+const StructureOrganitationInstitutionView = lazy(() => import('@/pages/modules/website-lembaga/profile/struktur-organisasi/StructureOrganitationInstitutionView'))
+const HummanResourceInstitutaionView = lazy(() => import('@/pages/modules/website-lembaga/profile/sumber-daya-manusia/HummanResourceInstitutaionView'))
+const LembagaView = lazy(() => import('@/pages/modules/website-lembaga/lembaga/LembagaView'))
+const LembagaEditView = lazy(() => import('@/pages/modules/website-lembaga/lembaga/edit/LembagaEditView'))
+const ThemaChangeColorInstitution = lazy(() => import('@/pages/modules/website-lembaga/pengaturan/template/color').then(m => ({ default: m.ThemaChangeColorInstitution })))
+const GuideListView = lazy(() => import('@/pages/modules/website-utama/panduan/GuideListView'))
 
 export const WebsiteInstitutionRouter = [
   {

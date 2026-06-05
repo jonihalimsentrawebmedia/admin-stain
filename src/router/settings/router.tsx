@@ -1,60 +1,62 @@
-import DashboardView from '@/pages/modules/settings/dashboard/DashboardView'
-import DomainView from '@/pages/modules/settings/domain/DomainView'
-import FacultyCreateView from '@/pages/modules/settings/faculty/create/FacultyCreateView'
-import FacultyDetailView from '@/pages/modules/settings/faculty/detail/FacultyDetailView'
-import FacultyEditView from '@/pages/modules/settings/faculty/edit/FacultyEditView'
-import FacultyView from '@/pages/modules/settings/faculty/FacultyView'
-import InstitutionCreateView from '@/pages/modules/settings/institution/create/InstitutionCreateView'
-import InstitutionDetailView from '@/pages/modules/settings/institution/detail/InstitutionDetailView'
-import InstitutionEditView from '@/pages/modules/settings/institution/edit/InstitutionEditView'
-import InstitutionView from '@/pages/modules/settings/institution/InstitutionView'
-import UniversityCreateView from '@/pages/modules/settings/main-data-university/create/UniversityCreateView'
-import UniversityDetailView from '@/pages/modules/settings/main-data-university/detail/UniversityDetailView'
-import UniversityEditView from '@/pages/modules/settings/main-data-university/edit/UniversityEditView'
-import MainDataUniversityView from '@/pages/modules/settings/main-data-university/MainDataUniversityView'
-import HistoryLoginDetailView from '@/pages/modules/settings/management-users/history-login/detail/HistoryLoginDetailView'
-import HistoryLoginView from '@/pages/modules/settings/management-users/history-login/HistoryLoginView'
-import LevelCreateView from '@/pages/modules/settings/management-users/level/create/LevelCreateView'
-import LevelEditView from '@/pages/modules/settings/management-users/level/edit/LevelEditView'
-import LevelView from '@/pages/modules/settings/management-users/level/LevelView'
-import UsersCreateView from '@/pages/modules/settings/management-users/users/create/UsersCreateView'
-import UsersDetailView from '@/pages/modules/settings/management-users/users/detail/UsersDetailView'
-import UsersEditView from '@/pages/modules/settings/management-users/users/edit/UsersEditView'
-import UsersView from '@/pages/modules/settings/management-users/users/UsersView'
-import ModuleView from '@/pages/modules/settings/module/ModuleView'
-import ProdiCreateView from '@/pages/modules/settings/prodi/create/ProdiCreateView'
-import ProdiDetailView from '@/pages/modules/settings/prodi/detail/ProdiDetailView'
-import ProdiEditView from '@/pages/modules/settings/prodi/edit/ProdiEditView'
-import ProdiView from '@/pages/modules/settings/prodi/ProdiView'
-import AcademicRankView from '@/pages/modules/settings/reference/academic-rank/AcademicRankView'
-import GroupRankView from '@/pages/modules/settings/reference/group-rank/GroupRankView'
-import NewsCategoryView from '@/pages/modules/settings/reference/news-category/NewsCategoryView'
-import UnitCreateView from '@/pages/modules/settings/unit/create/UnitCreateView'
-import UnitDetailView from '@/pages/modules/settings/unit/detail/UnitDetailView'
-import UnitEditView from '@/pages/modules/settings/unit/edit/UnitEditView'
-import UnitView from '@/pages/modules/settings/unit/UnitView'
-import EducationalLevelView from '@/pages/modules/settings/reference/educational-level/EducationalLevelView'
-import ImpactInnovationView from '@/pages/modules/settings/reference/impact-innovation/ImpactInnovationView'
-import ProfileView from '@/pages/modules/settings/dashboard/profile/ProfileView'
-import EditProfileView from '@/pages/modules/settings/dashboard/profile/edit/EditProfileView'
-import ChangePasswordProfileView from '@/pages/modules/settings/dashboard/change-password/ChangePasswordView'
-import CountryView from '@/pages/modules/settings/reference/country/CountryView'
-import ProvinceView from '@/pages/modules/settings/reference/province/ProvinceView'
-import RegencyView from '@/pages/modules/settings/reference/regency/RegencyView'
-import { NewsCategoryLanguagePage } from '@/pages/modules/settings/reference/news-category/language'
-import { CategoryImpactInnovationLanguagePage } from '@/pages/modules/settings/reference/impact-innovation/language'
-import { RankedGroupCategoryLanguagePage } from '@/pages/modules/settings/reference/group-rank/language'
-import { RankedAcademicLanguagePage } from '@/pages/modules/settings/reference/academic-rank/language'
-import IdentityView from '@/pages/modules/settings/identity/IdentityView'
-import BackupDataView from '@/pages/modules/settings/backup-data/BackupDataView'
-import { EducationLevelLanguagePage } from '@/pages/modules/settings/reference/educational-level/language'
-import MainDataUniversityLanguageView from '@/pages/modules/settings/main-data-university/language/MainDataUniversityLanguageView'
-import FacultyLanguageView from '@/pages/modules/settings/faculty/language/FacultyLanguageView'
-import ProdiLanguageView from '@/pages/modules/settings/prodi/language/ProdiLanguageView'
-import UnitLanguageView from '@/pages/modules/settings/unit/language/UnitLanguageView'
-import InstitutionLanguageView from '@/pages/modules/settings/institution/language/InstitutionLanguageView'
-import StructuralOfficialPage from '@/pages/modules/settings/reference/structural-official'
-import { StructuralOfficialLanguagePage } from '@/pages/modules/settings/reference/structural-official/language'
+import { lazy } from 'react'
+
+const DashboardView = lazy(() => import('@/pages/modules/settings/dashboard/DashboardView'))
+const DomainView = lazy(() => import('@/pages/modules/settings/domain/DomainView'))
+const FacultyCreateView = lazy(() => import('@/pages/modules/settings/faculty/create/FacultyCreateView'))
+const FacultyDetailView = lazy(() => import('@/pages/modules/settings/faculty/detail/FacultyDetailView'))
+const FacultyEditView = lazy(() => import('@/pages/modules/settings/faculty/edit/FacultyEditView'))
+const FacultyView = lazy(() => import('@/pages/modules/settings/faculty/FacultyView'))
+const InstitutionCreateView = lazy(() => import('@/pages/modules/settings/institution/create/InstitutionCreateView'))
+const InstitutionDetailView = lazy(() => import('@/pages/modules/settings/institution/detail/InstitutionDetailView'))
+const InstitutionEditView = lazy(() => import('@/pages/modules/settings/institution/edit/InstitutionEditView'))
+const InstitutionView = lazy(() => import('@/pages/modules/settings/institution/InstitutionView'))
+const UniversityCreateView = lazy(() => import('@/pages/modules/settings/main-data-university/create/UniversityCreateView'))
+const UniversityDetailView = lazy(() => import('@/pages/modules/settings/main-data-university/detail/UniversityDetailView'))
+const UniversityEditView = lazy(() => import('@/pages/modules/settings/main-data-university/edit/UniversityEditView'))
+const MainDataUniversityView = lazy(() => import('@/pages/modules/settings/main-data-university/MainDataUniversityView'))
+const HistoryLoginDetailView = lazy(() => import('@/pages/modules/settings/management-users/history-login/detail/HistoryLoginDetailView'))
+const HistoryLoginView = lazy(() => import('@/pages/modules/settings/management-users/history-login/HistoryLoginView'))
+const LevelCreateView = lazy(() => import('@/pages/modules/settings/management-users/level/create/LevelCreateView'))
+const LevelEditView = lazy(() => import('@/pages/modules/settings/management-users/level/edit/LevelEditView'))
+const LevelView = lazy(() => import('@/pages/modules/settings/management-users/level/LevelView'))
+const UsersCreateView = lazy(() => import('@/pages/modules/settings/management-users/users/create/UsersCreateView'))
+const UsersDetailView = lazy(() => import('@/pages/modules/settings/management-users/users/detail/UsersDetailView'))
+const UsersEditView = lazy(() => import('@/pages/modules/settings/management-users/users/edit/UsersEditView'))
+const UsersView = lazy(() => import('@/pages/modules/settings/management-users/users/UsersView'))
+const ModuleView = lazy(() => import('@/pages/modules/settings/module/ModuleView'))
+const ProdiCreateView = lazy(() => import('@/pages/modules/settings/prodi/create/ProdiCreateView'))
+const ProdiDetailView = lazy(() => import('@/pages/modules/settings/prodi/detail/ProdiDetailView'))
+const ProdiEditView = lazy(() => import('@/pages/modules/settings/prodi/edit/ProdiEditView'))
+const ProdiView = lazy(() => import('@/pages/modules/settings/prodi/ProdiView'))
+const AcademicRankView = lazy(() => import('@/pages/modules/settings/reference/academic-rank/AcademicRankView'))
+const GroupRankView = lazy(() => import('@/pages/modules/settings/reference/group-rank/GroupRankView'))
+const NewsCategoryView = lazy(() => import('@/pages/modules/settings/reference/news-category/NewsCategoryView'))
+const UnitCreateView = lazy(() => import('@/pages/modules/settings/unit/create/UnitCreateView'))
+const UnitDetailView = lazy(() => import('@/pages/modules/settings/unit/detail/UnitDetailView'))
+const UnitEditView = lazy(() => import('@/pages/modules/settings/unit/edit/UnitEditView'))
+const UnitView = lazy(() => import('@/pages/modules/settings/unit/UnitView'))
+const EducationalLevelView = lazy(() => import('@/pages/modules/settings/reference/educational-level/EducationalLevelView'))
+const ImpactInnovationView = lazy(() => import('@/pages/modules/settings/reference/impact-innovation/ImpactInnovationView'))
+const ProfileView = lazy(() => import('@/pages/modules/settings/dashboard/profile/ProfileView'))
+const EditProfileView = lazy(() => import('@/pages/modules/settings/dashboard/profile/edit/EditProfileView'))
+const ChangePasswordProfileView = lazy(() => import('@/pages/modules/settings/dashboard/change-password/ChangePasswordView'))
+const CountryView = lazy(() => import('@/pages/modules/settings/reference/country/CountryView'))
+const ProvinceView = lazy(() => import('@/pages/modules/settings/reference/province/ProvinceView'))
+const RegencyView = lazy(() => import('@/pages/modules/settings/reference/regency/RegencyView'))
+const NewsCategoryLanguagePage = lazy(() => import('@/pages/modules/settings/reference/news-category/language').then(m => ({ default: m.NewsCategoryLanguagePage })))
+const CategoryImpactInnovationLanguagePage = lazy(() => import('@/pages/modules/settings/reference/impact-innovation/language').then(m => ({ default: m.CategoryImpactInnovationLanguagePage })))
+const RankedGroupCategoryLanguagePage = lazy(() => import('@/pages/modules/settings/reference/group-rank/language').then(m => ({ default: m.RankedGroupCategoryLanguagePage })))
+const RankedAcademicLanguagePage = lazy(() => import('@/pages/modules/settings/reference/academic-rank/language').then(m => ({ default: m.RankedAcademicLanguagePage })))
+const IdentityView = lazy(() => import('@/pages/modules/settings/identity/IdentityView'))
+const BackupDataView = lazy(() => import('@/pages/modules/settings/backup-data/BackupDataView'))
+const EducationLevelLanguagePage = lazy(() => import('@/pages/modules/settings/reference/educational-level/language').then(m => ({ default: m.EducationLevelLanguagePage })))
+const MainDataUniversityLanguageView = lazy(() => import('@/pages/modules/settings/main-data-university/language/MainDataUniversityLanguageView'))
+const FacultyLanguageView = lazy(() => import('@/pages/modules/settings/faculty/language/FacultyLanguageView'))
+const ProdiLanguageView = lazy(() => import('@/pages/modules/settings/prodi/language/ProdiLanguageView'))
+const UnitLanguageView = lazy(() => import('@/pages/modules/settings/unit/language/UnitLanguageView'))
+const InstitutionLanguageView = lazy(() => import('@/pages/modules/settings/institution/language/InstitutionLanguageView'))
+const StructuralOfficialPage = lazy(() => import('@/pages/modules/settings/reference/structural-official'))
+const StructuralOfficialLanguagePage = lazy(() => import('@/pages/modules/settings/reference/structural-official/language').then(m => ({ default: m.StructuralOfficialLanguagePage })))
 
 export const SettingRouter = [
   {

@@ -61,6 +61,7 @@
     "embla-carousel-autoplay": "^8.6.0",
     "embla-carousel-react": "^8.6.0",
     "firebase": "^12.10.0",
+    "html-to-pdfmake": "^2.5.33",
     "input-otp": "^1.4.2",
     "js-cookie": "^3.0.5",
     "lodash.throttle": "^4.1.1",

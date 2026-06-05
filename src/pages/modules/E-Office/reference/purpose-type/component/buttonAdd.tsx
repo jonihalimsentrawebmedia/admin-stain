@@ -68,7 +68,7 @@ const ButtonAddPurposeType = () => {
               isRequired
               isRow
             />
-            <ButtonForm loading={loading} onCancel={() => setLoading(!open)} />
+            <ButtonForm loading={loading} onCancel={() => setOpen(false)} />
           </form>
         </Form>
       </DialogBasic>

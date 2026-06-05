@@ -1,3 +1,5 @@
+import { lazy } from 'react'
+
 // import FaculityDetailHistoryView from '@/pages/modules/manajeman-editor/faculty/detail-history/FaculityDetailHistoryView'
 // import FacultyDetailView from '@/pages/modules/manajeman-editor/faculty/detail/FacultyDetailView'
 // import FacultyEditView from '@/pages/modules/manajeman-editor/faculty/edit/FacultyEditView'
@@ -57,62 +59,62 @@
 // import UnitEditView from '@/pages/modules/manajeman-editor/unit/edit/UnitEditView'
 // import UnitView from '@/pages/modules/manajeman-editor/unit/UnitView'
 
-import { ChangePassword } from '@/pages/modules/website-utama/change-password'
-import { UserProfilePage } from '@/pages/modules/website-utama/user-profile'
-import DashboardAdminEditor from '@/pages/modules/manajeman-editor/beranda'
-import { UpdatedTopSliderPage } from '@/pages/modules/manajeman-editor/publict-content/top-slider/updated'
-import { LogActivityPage } from '@/pages/modules/manajeman-editor/publict-content/top-slider/log'
-import { UseGetTopSliderDetail } from '@/pages/modules/manajeman-editor/publict-content/top-slider/detail'
-import { UseGetBottomSliderDetail } from '@/pages/modules/manajeman-editor/publict-content/bottom-slider/detail'
-import { UpdatedBottomSlider } from '@/pages/modules/manajeman-editor/publict-content/bottom-slider/updated'
-import { LogBottomActivityPage } from '@/pages/modules/manajeman-editor/publict-content/bottom-slider/log'
-import { DetailNewsManagementEditorPage } from '@/pages/modules/manajeman-editor/publict-content/news/detail'
-import { NewsManagementEditorUpdated } from '@/pages/modules/manajeman-editor/publict-content/news/updated'
-import { LogActivityNewsManagementEditorPage } from '@/pages/modules/manajeman-editor/publict-content/news/log-data'
-import { DetailImpactInnovationPage } from '@/pages/modules/manajeman-editor/publict-content/impact-innovation/detail'
-import { UpdatedImpactInnovationPage } from '@/pages/modules/manajeman-editor/publict-content/impact-innovation/updated'
-import { LogActivityImpactInnovationPage } from '@/pages/modules/manajeman-editor/publict-content/impact-innovation/log'
-import { AnnouncementManagementEditorDetailPage } from '@/pages/modules/manajeman-editor/publict-content/announcement/detail'
-import { LogActivityAnnouncementManagementEditorPage } from '@/pages/modules/manajeman-editor/publict-content/announcement/log'
-import { UpdatedAnnouncementManagementEditor } from '@/pages/modules/manajeman-editor/publict-content/announcement/updated'
-import { AgendaManagementEditorDetailPage } from '@/pages/modules/manajeman-editor/publict-content/agenda/detail'
-import { UpdatedAgendaManagementEditorPage } from '@/pages/modules/manajeman-editor/publict-content/agenda/updated'
-import { LogActivityAgendaManagementEditorPage } from '@/pages/modules/manajeman-editor/publict-content/agenda/log'
-import { DetailFacilitiesPage } from '@/pages/modules/manajeman-editor/publict-content/facilities/detail'
-import { UpdatedFacilitiesPage } from '@/pages/modules/manajeman-editor/publict-content/facilities/updated'
-import { LogActivityFacilitiesPage } from '@/pages/modules/manajeman-editor/publict-content/facilities/log'
-import { UpdatedAchievementPage } from '@/pages/modules/manajeman-editor/publict-content/achievement/updated'
-import { DetailAchievementPage } from '@/pages/modules/manajeman-editor/publict-content/achievement/detail'
-import { LogActivityAchievement } from '@/pages/modules/manajeman-editor/publict-content/achievement/log'
-import { DetailPromotionPage } from '@/pages/modules/manajeman-editor/publict-content/promotion/detail'
-import { LogActivityPromotionManagementEditorPage } from '@/pages/modules/manajeman-editor/publict-content/promotion/log'
-import { UpdatedPromotionManagementEditor } from '@/pages/modules/manajeman-editor/publict-content/promotion/updated'
-import { UpdatedFacilitiesUnit } from '@/pages/modules/manajeman-editor/publict-content/facilities-unit/updated'
-import { DetailFacilitiesUnitPage } from '@/pages/modules/manajeman-editor/publict-content/facilities-unit/detail'
-import { LogActivityFacilitiesUnitPage } from '@/pages/modules/manajeman-editor/publict-content/facilities-unit/log'
-import UniversityEditView from '@/pages/modules/manajeman-editor/main-data-university/edit/UniversityEditView.tsx'
-import UniversityDetailView from '@/pages/modules/manajeman-editor/main-data-university/detail/UniversityDetailView.tsx'
-import MainDataUniversityDetailHistoryView from '@/pages/modules/manajeman-editor/main-data-university/detail-history/MainDataUniversityDetailHistoryView.tsx'
-import ProdiEditView from '@/pages/modules/manajeman-editor/prodi/edit/ProdiEditView'
-import ProdiDetailView from '@/pages/modules/manajeman-editor/prodi/detail/ProdiDetailView'
-import ProdiDetailHistoryView from '@/pages/modules/manajeman-editor/prodi/detail-history/ProdiDetailHistoryView'
-import UnitEditView from '@/pages/modules/manajeman-editor/unit/edit/UnitEditView'
-import UnitDetailView from '@/pages/modules/manajeman-editor/unit/detail/UnitDetailView'
-import UnitDetailHistoryView from '@/pages/modules/manajeman-editor/unit/detail-history/UnitDetailHistoryView'
-import InstitutionEditView from '@/pages/modules/manajeman-editor/institution/edit/InstitutionEditView'
-import InstitutionDetailView from '@/pages/modules/manajeman-editor/institution/detail/InstitutionDetailView'
-import InstitutionDetailHistoryView from '@/pages/modules/manajeman-editor/institution/detail-history/InstitutionDetailHistoryView'
-import FacultyEditView from '@/pages/modules/manajeman-editor/faculty/edit/FacultyEditView'
-import FacultyDetailView from '@/pages/modules/manajeman-editor/faculty/detail/FacultyDetailView'
-import FaculityDetailHistoryView from '@/pages/modules/manajeman-editor/faculty/detail-history/FaculityDetailHistoryView'
-import LembagaDetailView from '@/pages/modules/manajeman-editor/lembaga/detail/LembagaDetailView.tsx'
-import LembagaEditView from '@/pages/modules/manajeman-editor/lembaga/edit/LembagaEditView.tsx'
-import { UpdatedArticleManagementEditor } from '@/pages/modules/manajeman-editor/publict-content/article/updated'
-import { DetailArticlePage } from '@/pages/modules/manajeman-editor/publict-content/article/detail'
-import { LogActivityArticleManagementEditorPage } from '@/pages/modules/manajeman-editor/publict-content/article/log'
-import { DetailEditorArticleCarrier } from '@/pages/modules/manajeman-editor/publict-content/article-carier/detail'
-import { LogEditorArticleCarrierPage } from '@/pages/modules/manajeman-editor/publict-content/article-carier/log'
-import GuideListView from '@/pages/modules/website-utama/panduan/GuideListView'
+const ChangePassword = lazy(() => import('@/pages/modules/website-utama/change-password').then(m => ({ default: m.ChangePassword })))
+const UserProfilePage = lazy(() => import('@/pages/modules/website-utama/user-profile').then(m => ({ default: m.UserProfilePage })))
+const DashboardAdminEditor = lazy(() => import('@/pages/modules/manajeman-editor/beranda'))
+const UpdatedTopSliderPage = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/top-slider/updated').then(m => ({ default: m.UpdatedTopSliderPage })))
+const LogActivityPage = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/top-slider/log').then(m => ({ default: m.LogActivityPage })))
+const UseGetTopSliderDetail = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/top-slider/detail').then(m => ({ default: m.UseGetTopSliderDetail })))
+const UseGetBottomSliderDetail = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/bottom-slider/detail').then(m => ({ default: m.UseGetBottomSliderDetail })))
+const UpdatedBottomSlider = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/bottom-slider/updated').then(m => ({ default: m.UpdatedBottomSlider })))
+const LogBottomActivityPage = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/bottom-slider/log').then(m => ({ default: m.LogBottomActivityPage })))
+const DetailNewsManagementEditorPage = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/news/detail').then(m => ({ default: m.DetailNewsManagementEditorPage })))
+const NewsManagementEditorUpdated = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/news/updated').then(m => ({ default: m.NewsManagementEditorUpdated })))
+const LogActivityNewsManagementEditorPage = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/news/log-data').then(m => ({ default: m.LogActivityNewsManagementEditorPage })))
+const DetailImpactInnovationPage = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/impact-innovation/detail').then(m => ({ default: m.DetailImpactInnovationPage })))
+const UpdatedImpactInnovationPage = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/impact-innovation/updated').then(m => ({ default: m.UpdatedImpactInnovationPage })))
+const LogActivityImpactInnovationPage = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/impact-innovation/log').then(m => ({ default: m.LogActivityImpactInnovationPage })))
+const AnnouncementManagementEditorDetailPage = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/announcement/detail').then(m => ({ default: m.AnnouncementManagementEditorDetailPage })))
+const LogActivityAnnouncementManagementEditorPage = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/announcement/log').then(m => ({ default: m.LogActivityAnnouncementManagementEditorPage })))
+const UpdatedAnnouncementManagementEditor = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/announcement/updated').then(m => ({ default: m.UpdatedAnnouncementManagementEditor })))
+const AgendaManagementEditorDetailPage = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/agenda/detail').then(m => ({ default: m.AgendaManagementEditorDetailPage })))
+const UpdatedAgendaManagementEditorPage = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/agenda/updated').then(m => ({ default: m.UpdatedAgendaManagementEditorPage })))
+const LogActivityAgendaManagementEditorPage = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/agenda/log').then(m => ({ default: m.LogActivityAgendaManagementEditorPage })))
+const DetailFacilitiesPage = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/facilities/detail').then(m => ({ default: m.DetailFacilitiesPage })))
+const UpdatedFacilitiesPage = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/facilities/updated').then(m => ({ default: m.UpdatedFacilitiesPage })))
+const LogActivityFacilitiesPage = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/facilities/log').then(m => ({ default: m.LogActivityFacilitiesPage })))
+const UpdatedAchievementPage = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/achievement/updated').then(m => ({ default: m.UpdatedAchievementPage })))
+const DetailAchievementPage = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/achievement/detail').then(m => ({ default: m.DetailAchievementPage })))
+const LogActivityAchievement = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/achievement/log').then(m => ({ default: m.LogActivityAchievement })))
+const DetailPromotionPage = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/promotion/detail').then(m => ({ default: m.DetailPromotionPage })))
+const LogActivityPromotionManagementEditorPage = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/promotion/log').then(m => ({ default: m.LogActivityPromotionManagementEditorPage })))
+const UpdatedPromotionManagementEditor = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/promotion/updated').then(m => ({ default: m.UpdatedPromotionManagementEditor })))
+const UpdatedFacilitiesUnit = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/facilities-unit/updated').then(m => ({ default: m.UpdatedFacilitiesUnit })))
+const DetailFacilitiesUnitPage = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/facilities-unit/detail').then(m => ({ default: m.DetailFacilitiesUnitPage })))
+const LogActivityFacilitiesUnitPage = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/facilities-unit/log').then(m => ({ default: m.LogActivityFacilitiesUnitPage })))
+const UniversityEditView = lazy(() => import('@/pages/modules/manajeman-editor/main-data-university/edit/UniversityEditView.tsx'))
+const UniversityDetailView = lazy(() => import('@/pages/modules/manajeman-editor/main-data-university/detail/UniversityDetailView.tsx'))
+const MainDataUniversityDetailHistoryView = lazy(() => import('@/pages/modules/manajeman-editor/main-data-university/detail-history/MainDataUniversityDetailHistoryView.tsx'))
+const ProdiEditView = lazy(() => import('@/pages/modules/manajeman-editor/prodi/edit/ProdiEditView'))
+const ProdiDetailView = lazy(() => import('@/pages/modules/manajeman-editor/prodi/detail/ProdiDetailView'))
+const ProdiDetailHistoryView = lazy(() => import('@/pages/modules/manajeman-editor/prodi/detail-history/ProdiDetailHistoryView'))
+const UnitEditView = lazy(() => import('@/pages/modules/manajeman-editor/unit/edit/UnitEditView'))
+const UnitDetailView = lazy(() => import('@/pages/modules/manajeman-editor/unit/detail/UnitDetailView'))
+const UnitDetailHistoryView = lazy(() => import('@/pages/modules/manajeman-editor/unit/detail-history/UnitDetailHistoryView'))
+const InstitutionEditView = lazy(() => import('@/pages/modules/manajeman-editor/institution/edit/InstitutionEditView'))
+const InstitutionDetailView = lazy(() => import('@/pages/modules/manajeman-editor/institution/detail/InstitutionDetailView'))
+const InstitutionDetailHistoryView = lazy(() => import('@/pages/modules/manajeman-editor/institution/detail-history/InstitutionDetailHistoryView'))
+const FacultyEditView = lazy(() => import('@/pages/modules/manajeman-editor/faculty/edit/FacultyEditView'))
+const FacultyDetailView = lazy(() => import('@/pages/modules/manajeman-editor/faculty/detail/FacultyDetailView'))
+const FaculityDetailHistoryView = lazy(() => import('@/pages/modules/manajeman-editor/faculty/detail-history/FaculityDetailHistoryView'))
+const LembagaDetailView = lazy(() => import('@/pages/modules/manajeman-editor/lembaga/detail/LembagaDetailView.tsx'))
+const LembagaEditView = lazy(() => import('@/pages/modules/manajeman-editor/lembaga/edit/LembagaEditView.tsx'))
+const UpdatedArticleManagementEditor = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/article/updated').then(m => ({ default: m.UpdatedArticleManagementEditor })))
+const DetailArticlePage = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/article/detail').then(m => ({ default: m.DetailArticlePage })))
+const LogActivityArticleManagementEditorPage = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/article/log').then(m => ({ default: m.LogActivityArticleManagementEditorPage })))
+const DetailEditorArticleCarrier = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/article-carier/detail').then(m => ({ default: m.DetailEditorArticleCarrier })))
+const LogEditorArticleCarrierPage = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/article-carier/log').then(m => ({ default: m.LogEditorArticleCarrierPage })))
+const GuideListView = lazy(() => import('@/pages/modules/website-utama/panduan/GuideListView'))
 
 export const EditorRouter = [
   {

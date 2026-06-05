@@ -1,66 +1,76 @@
-import ChangePasswordView from '@/pages/forget-password/change-password/ChangePasswordView'
+import { lazy, Suspense } from 'react'
+import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom'
+
+import { PageLoader } from '@/utils/lazyImport'
+
+// ── Eager: halaman login & forget-password (critical path) ──
+import LoginView from '@/pages/login/LoginView'
 import ForgetPasswordView from '@/pages/forget-password/ForgetPasswordView'
 import OtpView from '@/pages/forget-password/otp/OtpView'
+import ChangePasswordView from '@/pages/forget-password/change-password/ChangePasswordView'
 import SuccessView from '@/pages/forget-password/success/SuccessView'
-import LoginView from '@/pages/login/LoginView'
-import ModulesView from '@/pages/modules/ModulesView'
-import LayoutSetting from '@/pages/modules/settings/components/layout/LayoutSetting'
-import { createBrowserRouter, Navigate } from 'react-router-dom'
-import { SelectUniversity } from '@/pages/modules/website-utama/select-university'
-import MainLayout from '@/pages/modules/website-utama/component/layout'
-import ModuleProfileView from '@/pages/modules/profile/ModuleProfileView'
-import { MainWebsiteRouter } from '@/router/main-website/router.tsx'
-import { SettingRouter } from './settings/router'
-import MainLayoutProdi from '@/pages/modules/website-prodi/components/layout'
-import { WebsiteProdiRouter } from '@/router/website-prodi/router.tsx'
-import { SelectProdi } from '@/pages/modules/website-prodi/select-prodi'
-import ProdiWebTheme from '@/pages/modules/website-prodi/components/layout/theme.tsx'
-import DefaultTheme from '@/components/common/theme/default.tsx'
-import MainLayoutEditor from '@/pages/modules/manajeman-editor/components/layout'
-import { EditorRouter } from './editor/router'
-import { SelectUnitUniversity } from '@/pages/modules/website-unit/select-unit'
-import { WebsiteUnitRouter } from '@/router/website-unit/router.tsx'
-import MainLayoutUnit from '@/pages/modules/website-unit/components/layout'
-import { SelectUniversityEditor } from '@/pages/modules/manajeman-editor/select-university'
-import UnitWebTheme from '@/pages/modules/website-unit/components/layout/theme.tsx'
-import { SelectInstitutionUniversity } from '@/pages/modules/website-lembaga/select-institution'
-import { LayoutWebsiteInstitution } from '@/pages/modules/website-lembaga/component/Layout'
+
+// ── Lazy: semua komponen modules ──
+const ModulesView = lazy(() => import('@/pages/modules/ModulesView'))
+const LayoutSetting = lazy(() => import('@/pages/modules/settings/components/layout/LayoutSetting'))
+const SelectUniversity = lazy(() => import('@/pages/modules/website-utama/select-university').then(m => ({ default: m.SelectUniversity })))
+const MainLayout = lazy(() => import('@/pages/modules/website-utama/component/layout'))
+const ModuleProfileView = lazy(() => import('@/pages/modules/profile/ModuleProfileView'))
+const MainLayoutProdi = lazy(() => import('@/pages/modules/website-prodi/components/layout'))
+const SelectProdi = lazy(() => import('@/pages/modules/website-prodi/select-prodi').then(m => ({ default: m.SelectProdi })))
+const ProdiWebTheme = lazy(() => import('@/pages/modules/website-prodi/components/layout/theme'))
+const DefaultTheme = lazy(() => import('@/components/common/theme/default'))
+const MainLayoutEditor = lazy(() => import('@/pages/modules/manajeman-editor/components/layout'))
+const SelectUnitUniversity = lazy(() => import('@/pages/modules/website-unit/select-unit').then(m => ({ default: m.SelectUnitUniversity })))
+const MainLayoutUnit = lazy(() => import('@/pages/modules/website-unit/components/layout'))
+const SelectUniversityEditor = lazy(() => import('@/pages/modules/manajeman-editor/select-university').then(m => ({ default: m.SelectUniversityEditor })))
+const UnitWebTheme = lazy(() => import('@/pages/modules/website-unit/components/layout/theme'))
+const SelectInstitutionUniversity = lazy(() => import('@/pages/modules/website-lembaga/select-institution').then(m => ({ default: m.SelectInstitutionUniversity })))
+const LayoutWebsiteInstitution = lazy(() => import('@/pages/modules/website-lembaga/component/Layout').then(m => ({ default: m.LayoutWebsiteInstitution })))
+const InstitutionWebTheme = lazy(() => import('@/pages/modules/website-lembaga/component/Layout/theme'))
+const PPIDWebTheme = lazy(() => import('@/pages/modules/ppid/component/Layout/theme'))
+const LayoutWebsitePPID = lazy(() => import('@/pages/modules/ppid/component/Layout').then(m => ({ default: m.LayoutWebsitePPID })))
+const SelectPPID = lazy(() => import('@/pages/modules/ppid/select-ppid').then(m => ({ default: m.SelectPPID })))
+const SelectSessionLPPM = lazy(() => import('@/pages/modules/LPPM/select-lppm').then(m => ({ default: m.SelectSessionLPPM })))
+const LPPMWebTheme = lazy(() => import('@/pages/modules/LPPM/components/layout/theme'))
+const MainLayoutLPPM = lazy(() => import('@/pages/modules/LPPM/components/layout'))
+const ThemeSettings = lazy(() => import('@/pages/modules/settings/components/layout/thema'))
+const ProviderLPPM = lazy(() => import('@/pages/modules/LPPM/components/context').then(m => ({ default: m.ProviderLPPM })))
+const MainLayoutCarrierCenter = lazy(() => import('@/pages/modules/pusat-karir/component/layout'))
+const SelectSessionCarrierCenter = lazy(() => import('@/pages/modules/pusat-karir/component/select-session').then(m => ({ default: m.SelectSessionCarrierCenter })))
+const CarrierWebTheme = lazy(() => import('@/pages/modules/pusat-karir/component/layout/theme'))
+const FacultyWebTheme = lazy(() => import('@/pages/modules/website-fakultas/component/layout/theme'))
+const MainLayoutFaculty = lazy(() => import('@/pages/modules/website-fakultas/component/layout'))
+const SelectSessionFaculty = lazy(() => import('@/pages/modules/website-fakultas/component/select-session').then(m => ({ default: m.SelectSessionFaculty })))
+const MainLayoutPulsikom = lazy(() => import('@/pages/modules/Pulsikom/component/layout'))
+const SelectSessionPusilkom = lazy(() => import('@/pages/modules/Pulsikom/component/select-session').then(m => ({ default: m.SelectSessionPusilkom })))
+const PulsikomThema = lazy(() => import('@/pages/modules/Pulsikom/component/layout/theme'))
+const SelectSessionSPI = lazy(() => import('@/pages/modules/SPI/component/select-session').then(m => ({ default: m.SelectSessionSPI })))
+const MainLayoutSPI = lazy(() => import('@/pages/modules/SPI/layout'))
+const SPIThema = lazy(() => import('@/pages/modules/SPI/layout/theme'))
+const MainLayoutPMB = lazy(() => import('@/pages/modules/PMB/component/layout'))
+const SelectSessionPMB = lazy(() => import('@/pages/modules/PMB/session').then(m => ({ default: m.SelectSessionPMB })))
+const PMBThema = lazy(() => import('@/pages/modules/PMB/component/layout/thema'))
+const SelectSessionEOffice = lazy(() => import('@/pages/modules/E-Office/session').then(m => ({ default: m.SelectSessionEOffice })))
+const MainLayoutEOffice = lazy(() => import('@/pages/modules/E-Office/component/layout'))
+const EOfficeThema = lazy(() => import('@/pages/modules/E-Office/component/layout/theme'))
+
+// ── Eager: router arrays (ringan, hanya config objects) ──
+// Komponen VIEW di dalamnya akan di-lazy loading di masing-masing file router
+import { MainWebsiteRouter } from '@/router/main-website/router'
+import { SettingRouter } from '@/router/settings/router'
+import { WebsiteProdiRouter } from '@/router/website-prodi/router'
+import { EditorRouter } from '@/router/editor/router'
+import { WebsiteUnitRouter } from '@/router/website-unit/router'
 import { WebsiteInstitutionRouter } from '@/router/website-lembaga'
-import InstitutionWebTheme from '@/pages/modules/website-lembaga/component/Layout/theme'
-import PPIDWebTheme from '@/pages/modules/ppid/component/Layout/theme'
-import { LayoutWebsitePPID } from '@/pages/modules/ppid/component/Layout'
-import { routesPPID } from './ppid/router'
-import { SelectPPID } from '@/pages/modules/ppid/select-ppid'
-import { SelectSessionLPPM } from '@/pages/modules/LPPM/select-lppm'
-import LPPMWebTheme from '@/pages/modules/LPPM/components/layout/theme.tsx'
-import MainLayoutLPPM from '@/pages/modules/LPPM/components/layout'
-import { routesLPPM } from '@/router/lppm/router.tsx'
-import ThemeSettings from '@/pages/modules/settings/components/layout/thema.tsx'
-import { ProviderLPPM } from '@/pages/modules/LPPM/components/context'
+import { routesPPID } from '@/router/ppid/router'
+import { routesLPPM } from '@/router/lppm/router'
 import { CarrierCenterRoute } from '@/router/pusat-karir'
-import MainLayoutCarrierCenter from '@/pages/modules/pusat-karir/component/layout'
-import { SelectSessionCarrierCenter } from '@/pages/modules/pusat-karir/component/select-session'
-import CarrierWebTheme from '@/pages/modules/pusat-karir/component/layout/theme.tsx'
-import FacultyWebTheme from '@/pages/modules/website-fakultas/component/layout/theme.tsx'
-import MainLayoutFaculty from '@/pages/modules/website-fakultas/component/layout'
-import { SelectSessionFaculty } from '@/pages/modules/website-fakultas/component/select-session'
 import { RouterFaculty } from '@/router/website-fakultas'
 import { PusilkomRoutes } from '@/router/pusilkom'
-import MainLayoutPulsikom from '@/pages/modules/Pulsikom/component/layout'
-import { SelectSessionPusilkom } from '@/pages/modules/Pulsikom/component/select-session'
-import PulsikomThema from '@/pages/modules/Pulsikom/component/layout/theme.tsx'
 import { SPI_ROUTES } from '@/router/SPI'
-import { SelectSessionSPI } from '@/pages/modules/SPI/component/select-session'
-import MainLayoutSPI from '@/pages/modules/SPI/layout'
-import SPIThema from '@/pages/modules/SPI/layout/theme.tsx'
-import MainLayoutPMB from '@/pages/modules/PMB/component/layout'
 import { PMB_ROUTES } from '@/router/pmb'
-import { SelectSessionPMB } from '@/pages/modules/PMB/session'
-import PMBThema from '@/pages/modules/PMB/component/layout/thema.tsx'
-import { SelectSessionEOffice } from '@/pages/modules/E-Office/session'
-import MainLayoutEOffice from '@/pages/modules/E-Office/component/layout'
-import { E_OFFICE_ROUTE } from '@/router/E-Office/router.tsx'
-import EOfficeThema from '@/pages/modules/E-Office/component/layout/theme.tsx'
+import { E_OFFICE_ROUTE } from '@/router/E-Office'
 
 export const Router = createBrowserRouter([
   {
@@ -74,27 +84,21 @@ export const Router = createBrowserRouter([
   {
     path: 'forget-password',
     children: [
-      {
-        index: true,
-        element: <ForgetPasswordView />,
-      },
-      {
-        path: 'otp',
-        element: <OtpView />,
-      },
-      {
-        path: 'change-password',
-        element: <ChangePasswordView />,
-      },
-      {
-        path: 'success',
-        element: <SuccessView />,
-      },
+      { index: true, element: <ForgetPasswordView /> },
+      { path: 'otp', element: <OtpView /> },
+      { path: 'change-password', element: <ChangePasswordView /> },
+      { path: 'success', element: <SuccessView /> },
     ],
   },
 
+  // ── Modules dengan Suspense ──
   {
     path: 'modules',
+    element: (
+      <Suspense fallback={<PageLoader />}>
+        <Outlet />
+      </Suspense>
+    ),
     children: [
       {
         index: true,
@@ -108,58 +112,22 @@ export const Router = createBrowserRouter([
         path: 'profile',
         element: <ModuleProfileView />,
       },
-      {
-        path: 'select-university',
-        element: <SelectUniversity />,
-      },
-      {
-        path: 'select-Prodi',
-        element: <SelectProdi />,
-      },
-      {
-        path: 'editor-university',
-        element: <SelectUniversityEditor />,
-      },
-      {
-        path: 'select-unit',
-        element: <SelectUnitUniversity />,
-      },
-      {
-        path: 'select-lembaga',
-        element: <SelectInstitutionUniversity />,
-      },
-      {
-        path: 'select-ppid',
-        element: <SelectPPID />,
-      },
-      {
-        path: 'select-lppm',
-        element: <SelectSessionLPPM />,
-      },
-      {
-        path: 'session-carrier',
-        element: <SelectSessionCarrierCenter />,
-      },
-      {
-        path: 'select-fakultas',
-        element: <SelectSessionFaculty />,
-      },
-      {
-        path: 'session-pulsikom',
-        element: <SelectSessionPusilkom />,
-      },
-      {
-        path: 'session-spi',
-        element: <SelectSessionSPI />,
-      },
-      {
-        path: 'session-pmb',
-        element: <SelectSessionPMB />,
-      },
-      {
-        path: 'session-e-office',
-        element: <SelectSessionEOffice />,
-      },
+      // ── Select/Redirect Pages ──
+      { path: 'select-university', element: <SelectUniversity /> },
+      { path: 'select-Prodi', element: <SelectProdi /> },
+      { path: 'editor-university', element: <SelectUniversityEditor /> },
+      { path: 'select-unit', element: <SelectUnitUniversity /> },
+      { path: 'select-lembaga', element: <SelectInstitutionUniversity /> },
+      { path: 'select-ppid', element: <SelectPPID /> },
+      { path: 'select-lppm', element: <SelectSessionLPPM /> },
+      { path: 'session-carrier', element: <SelectSessionCarrierCenter /> },
+      { path: 'select-fakultas', element: <SelectSessionFaculty /> },
+      { path: 'session-pulsikom', element: <SelectSessionPusilkom /> },
+      { path: 'session-spi', element: <SelectSessionSPI /> },
+      { path: 'session-pmb', element: <SelectSessionPMB /> },
+      { path: 'session-e-office', element: <SelectSessionEOffice /> },
+
+      // ── Settings ──
       {
         path: 'settings',
         element: (
@@ -169,6 +137,8 @@ export const Router = createBrowserRouter([
         ),
         children: [...SettingRouter],
       },
+
+      // ── Module: Website Utama ──
       {
         path: 'website-utama',
         element: (
@@ -178,6 +148,8 @@ export const Router = createBrowserRouter([
         ),
         children: [...MainWebsiteRouter],
       },
+
+      // ── Module: Website Prodi ──
       {
         path: 'website-prodi',
         element: (
@@ -187,17 +159,19 @@ export const Router = createBrowserRouter([
         ),
         children: [...WebsiteProdiRouter],
       },
+
+      // ── Module: Website Unit ──
       {
         path: 'website-unit',
         element: (
-          <>
-            <UnitWebTheme>
-              <MainLayoutUnit />
-            </UnitWebTheme>
-          </>
+          <UnitWebTheme>
+            <MainLayoutUnit />
+          </UnitWebTheme>
         ),
         children: [...WebsiteUnitRouter],
       },
+
+      // ── Module: Website Lembaga ──
       {
         path: 'website-lembaga',
         element: (
@@ -207,6 +181,8 @@ export const Router = createBrowserRouter([
         ),
         children: [...WebsiteInstitutionRouter],
       },
+
+      // ── Module: PPID ──
       {
         path: 'ppid',
         element: (
@@ -216,6 +192,8 @@ export const Router = createBrowserRouter([
         ),
         children: [...routesPPID],
       },
+
+      // ── Module: Editor ──
       {
         path: 'editor',
         element: (
@@ -225,6 +203,8 @@ export const Router = createBrowserRouter([
         ),
         children: [...EditorRouter],
       },
+
+      // ── Module: LPPM ──
       {
         path: 'lppm',
         element: (
@@ -236,6 +216,8 @@ export const Router = createBrowserRouter([
         ),
         children: [...routesLPPM],
       },
+
+      // ── Module: Pusat Karir ──
       {
         path: 'pusat-karir',
         element: (
@@ -245,17 +227,19 @@ export const Router = createBrowserRouter([
         ),
         children: [...CarrierCenterRoute],
       },
+
+      // ── Module: Website Fakultas ──
       {
         path: 'website-fakultas',
         element: (
-          <>
-            <FacultyWebTheme>
-              <MainLayoutFaculty />
-            </FacultyWebTheme>
-          </>
+          <FacultyWebTheme>
+            <MainLayoutFaculty />
+          </FacultyWebTheme>
         ),
         children: [...RouterFaculty],
       },
+
+      // ── Module: Pulsikom ──
       {
         path: 'pulsikom',
         element: (
@@ -265,6 +249,8 @@ export const Router = createBrowserRouter([
         ),
         children: [...PusilkomRoutes],
       },
+
+      // ── Module: SPI ──
       {
         path: 'spi',
         element: (
@@ -274,6 +260,8 @@ export const Router = createBrowserRouter([
         ),
         children: [...SPI_ROUTES],
       },
+
+      // ── Module: PMB ──
       {
         path: 'pmb',
         element: (
@@ -283,11 +271,13 @@ export const Router = createBrowserRouter([
         ),
         children: [...PMB_ROUTES],
       },
+
+      // ── Module: E-Office ──
       {
         path: 'e-office',
         element: (
           <EOfficeThema>
-            <MainLayoutEOffice />,
+            <MainLayoutEOffice />
           </EOfficeThema>
         ),
         children: [...E_OFFICE_ROUTE],

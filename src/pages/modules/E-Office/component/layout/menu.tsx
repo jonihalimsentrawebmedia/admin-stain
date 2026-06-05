@@ -73,6 +73,12 @@ export const GenerateMenu = () => {
       ],
     },
     {
+      id: 100,
+      name: 'Surat Generated',
+      path: `${baseDomain}/surat-generated`,
+      icon: <IoMailUnread className={'size-5'} />,
+    },
+    {
       id: 5,
       name: 'Agenda',
       path: `${baseDomain}/agenda`,
@@ -130,6 +136,11 @@ export const GenerateMenu = () => {
           id: 67,
           name: 'Tujuan Bertamu',
           path: `${baseDomain}/reference/purpose-guest`,
+        },
+        {
+          id: 68,
+          name: 'Template Surat',
+          path: `${baseDomain}/reference/template-surat`,
         },
       ],
     },

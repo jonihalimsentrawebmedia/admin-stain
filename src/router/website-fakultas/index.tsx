@@ -1,114 +1,115 @@
-import { DetailProfileFaculty } from '@/pages/modules/website-fakultas/data-fakultas'
-import { UpdatedDataFaculty } from '@/pages/modules/website-fakultas/data-fakultas/updated'
-import { NewsCarrierPublicContentPage } from '@/pages/modules/website-fakultas/public-content/news'
-import { NewsFacultyCreated } from '@/pages/modules/website-fakultas/public-content/news/created'
-import { DetailNewsFacultyPage } from '@/pages/modules/website-fakultas/public-content/news/detail'
-import { NewsFacultyUpdated } from '@/pages/modules/website-fakultas/public-content/news/updated'
-import { LogActivityNewsFacultyPage } from '@/pages/modules/website-fakultas/public-content/news/log-data'
-import { AgendaFacultyPublicContent } from '@/pages/modules/website-fakultas/public-content/agenda'
-import { CreateAgendaFacultyPage } from '@/pages/modules/website-fakultas/public-content/agenda/created'
-import { UpdatedAgendaFacultyPage } from '@/pages/modules/website-fakultas/public-content/agenda/updated'
-import { AgendaFacultyDetailPage } from '@/pages/modules/website-fakultas/public-content/agenda/detail'
-import { LogActivityAgendaFacultyPage } from '@/pages/modules/website-fakultas/public-content/agenda/log'
-import { AnnouncementFacultyPublicContent } from '@/pages/modules/website-fakultas/public-content/announcement'
-import { CreatedAnnouncementFaculty } from '@/pages/modules/website-fakultas/public-content/announcement/created'
-import { UpdatedAnnouncementFaculty } from '@/pages/modules/website-fakultas/public-content/announcement/updated'
-import { AnnouncementFacultyDetailPage } from '@/pages/modules/website-fakultas/public-content/announcement/detail'
-import { LogActivityAnnouncementFaculty } from '@/pages/modules/website-fakultas/public-content/announcement/log'
-import DownloadFileFacultyPage from '@/pages/modules/website-fakultas/public-content/Download'
-import { CategoryDownloadFacultyPage } from '@/pages/modules/website-fakultas/public-content/Download/category'
-import { AddDownloadCarrierPage } from '@/pages/modules/website-fakultas/public-content/Download/created'
-import { UpdatedDownloadFacultyPage } from '@/pages/modules/website-fakultas/public-content/Download/updated'
-import ColorSettingFaculty from '@/pages/modules/website-fakultas/settings/color/ColorSettingService.tsx'
-import { TemplateWebFacultySettings } from '@/pages/modules/website-fakultas/settings/template-web'
-import LayoutFaculty from '@/pages/modules/website-fakultas/about-faculty/component/layout'
-import AboutFacultyView from '@/pages/modules/website-fakultas/about-faculty'
-import UserFacultyView from '@/pages/modules/website-fakultas/about-faculty/unit-pengelola'
-import VisionMissionFaculty from '@/pages/modules/website-fakultas/about-faculty/vision-mission'
-import OrganizationalStructureView from '@/pages/modules/website-fakultas/about-faculty/organization'
-import ContactUsView from '@/pages/modules/website-fakultas/about-faculty/contact-us'
-import ProgramStudyView from '@/pages/modules/website-fakultas/academic/program-studi'
-import LayoutStudyProgram from '@/pages/modules/website-fakultas/academic/program-studi/component/layout'
-import AboutProdiView from '@/pages/modules/website-fakultas/academic/program-studi/detail/about'
-import UserProdiView from '@/pages/modules/website-fakultas/academic/program-studi/unit-pengelola'
-import VisionMissionProdi from '@/pages/modules/website-fakultas/academic/program-studi/detail/vision-mission'
-import ProdiOrganizationalStructureView from '@/pages/modules/website-fakultas/academic/program-studi/detail/organization'
-import ProdiContactUsView from '@/pages/modules/website-fakultas/academic/program-studi/detail/contact-us'
-import ProdiCurriculumView from '@/pages/modules/website-fakultas/academic/curriculum'
-import { AcademicPPSMPage } from '@/pages/modules/website-fakultas/academic/ppsm'
-import DashboardFaculty from '@/pages/modules/website-fakultas/dashboard'
-import { AlumniStoriesPPSM } from '@/pages/modules/website-fakultas/academic/ppsm/story'
-import { CreatedStoryAlumni } from '@/pages/modules/website-fakultas/academic/ppsm/story/create'
-import { ProdiGallery } from '@/pages/modules/website-fakultas/academic/program-studi/detail/gallery'
-import { StaffDetailProdi } from '@/pages/modules/website-fakultas/academic/program-studi/detail/staff'
-import { LecturerDetailProfile } from '@/pages/modules/website-fakultas/academic/program-studi/detail/lecturer'
-import { CurriculumPerProdi } from '@/pages/modules/website-fakultas/academic/curriculum/per-prodi'
-import { UpdateStoryPPSM } from '@/pages/modules/website-fakultas/academic/ppsm/story/update'
-import { AcademicInternationalMobility } from '@/pages/modules/website-fakultas/academic/international-mobility'
-import { AlumniStoriesMobility } from '@/pages/modules/website-fakultas/academic/international-mobility/story'
-import { CreatedStoryAlumniMobility } from '@/pages/modules/website-fakultas/academic/international-mobility/story/create'
-import { UpdateStoryMobility } from '@/pages/modules/website-fakultas/academic/international-mobility/story/update'
-import { AcademicInternationalUnderGraduated } from '@/pages/modules/website-fakultas/academic/undergraduate-program'
-import { AlumniStoriesUnderGraduated } from '@/pages/modules/website-fakultas/academic/undergraduate-program/story'
-import { CreatedStoryUnderGraduated } from '@/pages/modules/website-fakultas/academic/undergraduate-program/story/create'
-import { UnderGraduatedProgram } from '@/pages/modules/website-fakultas/academic/undergraduate-program/program'
-import { DetailProgram } from '@/pages/modules/website-fakultas/academic/undergraduate-program/program/detail'
-import { ResearchGroupPage } from '@/pages/modules/website-fakultas/research/research-group'
-import { GroupSkillResearch } from '@/pages/modules/website-fakultas/research/research-group/group-skill'
-import { CreatedGroupSkill } from '@/pages/modules/website-fakultas/research/research-group/group-skill/created'
-import { OurPartnerPage } from '@/pages/modules/website-fakultas/research/collaboration'
-import { MitraOurPartners } from '@/pages/modules/website-fakultas/research/collaboration/mitra'
-import { TypeOurPartners } from '@/pages/modules/website-fakultas/research/collaboration/type'
-import { CommunityCollegeSystem } from '@/pages/modules/website-fakultas/community/study-faculty/college-system'
-import { CommunityStudyProgram } from '@/pages/modules/website-fakultas/community/study-faculty/college-system/study-program'
-import { AccreditationFacultyCommunity } from '@/pages/modules/website-fakultas/community/study-faculty/college-system/accreditation'
-import { CarrierProspectCommunity } from '@/pages/modules/website-fakultas/community/study-faculty/college-system/carrier-prospect'
-import { AccommodationStudentLife } from '@/pages/modules/website-fakultas/community/student-life/accommodation'
-import { StudentOrganizationCommunity } from '@/pages/modules/website-fakultas/community/student-life/student-organization'
-import { ListOrganizationStudentLife } from '@/pages/modules/website-fakultas/community/student-life/student-organization/list-Organization'
-import { CreatedStudentOrganization } from '@/pages/modules/website-fakultas/community/student-life/student-organization/list-Organization/created'
-import { EntertainmentCommunity } from '@/pages/modules/website-fakultas/community/student-life/entertainment'
-import { ListPlaceStudentOrganization } from '@/pages/modules/website-fakultas/community/student-life/entertainment/list-place'
-import { CreatedStudentListOrganization } from '@/pages/modules/website-fakultas/community/student-life/entertainment/list-place/created'
-import { CommunityAlumniStory } from '@/pages/modules/website-fakultas/community/alumni/story'
-import { CreatedStoryAlumniCommunity } from '@/pages/modules/website-fakultas/community/alumni/story/create'
-import { FacilitiesPage } from '@/pages/modules/website-fakultas/facilities'
-import { CreatedFacilities } from '@/pages/modules/website-fakultas/facilities/created'
-import { DescriptionPMBText } from '@/pages/modules/website-fakultas/pmb'
-import { ZoneIntegrityPage } from '@/pages/modules/website-fakultas/zone-integrity'
-import { CreatedSubCategory } from '@/pages/modules/website-fakultas/zone-integrity/detail/created'
-import { StaffProfileFaculty } from '@/pages/modules/website-fakultas/about-faculty/staff'
-import { LecturerProfileFaculty } from '@/pages/modules/website-fakultas/about-faculty/lecturer'
-import { NewsFaculty } from '@/pages/modules/website-fakultas/about-faculty/news'
-import { CurriculumSubjectDetail } from '@/pages/modules/website-fakultas/academic/curriculum/subject'
-import { NewsProdiFaculty } from '@/pages/modules/website-fakultas/academic/program-studi/detail/news'
-import { UpdateStoryUnderGraduated } from '@/pages/modules/website-fakultas/academic/undergraduate-program/story/update'
-import { UpdatedGroupSkill } from '@/pages/modules/website-fakultas/research/research-group/group-skill/updated'
-import DetailGroupSkillPage from '@/pages/modules/website-fakultas/research/research-group/group-skill/detail'
-import ProdiSectorCarrier from '@/pages/modules/website-fakultas/community/study-faculty/college-system/carrier-prospect/prodi'
-import { SectorCarrierProspect } from '@/pages/modules/website-fakultas/community/study-faculty/college-system/carrier-prospect/sector'
-import { UpdatedStudentOrganization } from '@/pages/modules/website-fakultas/community/student-life/student-organization/list-Organization/updated'
-import { DetailStudentOrganization } from '@/pages/modules/website-fakultas/community/student-life/student-organization/list-Organization/detail'
-import { UpdatedStudentListOrganization } from '@/pages/modules/website-fakultas/community/student-life/entertainment/list-place/updated'
-import { DetailStudentEntertainment } from '@/pages/modules/website-fakultas/community/student-life/entertainment/list-place/detail'
-import { UpdateStoryAlumni } from '@/pages/modules/website-fakultas/community/alumni/story/update'
-import { UpdatedFacilities } from '@/pages/modules/website-fakultas/facilities/updated'
-import { DetailFacilitiesPage } from '@/pages/modules/website-fakultas/facilities/detail'
-import { DetailZoneIntegrity } from '@/pages/modules/website-fakultas/zone-integrity/detail'
-import { UpdatedSubCategory } from '@/pages/modules/website-fakultas/zone-integrity/detail/updated'
-import { ServiceListPage } from '@/pages/modules/website-fakultas/service'
-import { ListAlbumVideo } from '@/pages/modules/website-fakultas/gallery/video'
-import { ListGalleryAlbum } from '@/pages/modules/website-fakultas/gallery/album'
-import { ListGalleryPhoto } from '@/pages/modules/website-fakultas/gallery/photo'
-import { StudyResearchPage } from '@/pages/modules/website-fakultas/research/study-research'
-import { InboxStoryPage } from '@/pages/modules/website-fakultas/community/alumni/inbox'
-import { AlumniMessageInbox } from '@/pages/modules/website-fakultas/community/alumni/inbox/message'
-import { UserProfilePage } from '@/pages/modules/website-utama/user-profile'
-import { ChangePassword } from '@/pages/modules/website-utama/change-password'
-import { FacultyGalleryProfile } from '@/pages/modules/website-fakultas/about-faculty/gallery'
-import { ThemaChangeColorFaculty } from '@/pages/modules/website-fakultas/settings/template-web/color'
-import GuideListView from '@/pages/modules/website-utama/panduan/GuideListView'
-import { LandingPageFaculty } from '@/pages/modules/website-fakultas/settings/Slider-landing'
+import { lazy } from 'react'
+const DetailProfileFaculty = lazy(() => import('@/pages/modules/website-fakultas/data-fakultas').then(m => ({ default: m.DetailProfileFaculty })))
+const UpdatedDataFaculty = lazy(() => import('@/pages/modules/website-fakultas/data-fakultas/updated').then(m => ({ default: m.UpdatedDataFaculty })))
+const NewsCarrierPublicContentPage = lazy(() => import('@/pages/modules/website-fakultas/public-content/news').then(m => ({ default: m.NewsCarrierPublicContentPage })))
+const NewsFacultyCreated = lazy(() => import('@/pages/modules/website-fakultas/public-content/news/created').then(m => ({ default: m.NewsFacultyCreated })))
+const DetailNewsFacultyPage = lazy(() => import('@/pages/modules/website-fakultas/public-content/news/detail').then(m => ({ default: m.DetailNewsFacultyPage })))
+const NewsFacultyUpdated = lazy(() => import('@/pages/modules/website-fakultas/public-content/news/updated').then(m => ({ default: m.NewsFacultyUpdated })))
+const LogActivityNewsFacultyPage = lazy(() => import('@/pages/modules/website-fakultas/public-content/news/log-data').then(m => ({ default: m.LogActivityNewsFacultyPage })))
+const AgendaFacultyPublicContent = lazy(() => import('@/pages/modules/website-fakultas/public-content/agenda').then(m => ({ default: m.AgendaFacultyPublicContent })))
+const CreateAgendaFacultyPage = lazy(() => import('@/pages/modules/website-fakultas/public-content/agenda/created').then(m => ({ default: m.CreateAgendaFacultyPage })))
+const UpdatedAgendaFacultyPage = lazy(() => import('@/pages/modules/website-fakultas/public-content/agenda/updated').then(m => ({ default: m.UpdatedAgendaFacultyPage })))
+const AgendaFacultyDetailPage = lazy(() => import('@/pages/modules/website-fakultas/public-content/agenda/detail').then(m => ({ default: m.AgendaFacultyDetailPage })))
+const LogActivityAgendaFacultyPage = lazy(() => import('@/pages/modules/website-fakultas/public-content/agenda/log').then(m => ({ default: m.LogActivityAgendaFacultyPage })))
+const AnnouncementFacultyPublicContent = lazy(() => import('@/pages/modules/website-fakultas/public-content/announcement').then(m => ({ default: m.AnnouncementFacultyPublicContent })))
+const CreatedAnnouncementFaculty = lazy(() => import('@/pages/modules/website-fakultas/public-content/announcement/created').then(m => ({ default: m.CreatedAnnouncementFaculty })))
+const UpdatedAnnouncementFaculty = lazy(() => import('@/pages/modules/website-fakultas/public-content/announcement/updated').then(m => ({ default: m.UpdatedAnnouncementFaculty })))
+const AnnouncementFacultyDetailPage = lazy(() => import('@/pages/modules/website-fakultas/public-content/announcement/detail').then(m => ({ default: m.AnnouncementFacultyDetailPage })))
+const LogActivityAnnouncementFaculty = lazy(() => import('@/pages/modules/website-fakultas/public-content/announcement/log').then(m => ({ default: m.LogActivityAnnouncementFaculty })))
+const DownloadFileFacultyPage = lazy(() => import('@/pages/modules/website-fakultas/public-content/Download'))
+const CategoryDownloadFacultyPage = lazy(() => import('@/pages/modules/website-fakultas/public-content/Download/category').then(m => ({ default: m.CategoryDownloadFacultyPage })))
+const AddDownloadCarrierPage = lazy(() => import('@/pages/modules/website-fakultas/public-content/Download/created').then(m => ({ default: m.AddDownloadCarrierPage })))
+const UpdatedDownloadFacultyPage = lazy(() => import('@/pages/modules/website-fakultas/public-content/Download/updated').then(m => ({ default: m.UpdatedDownloadFacultyPage })))
+const ColorSettingFaculty = lazy(() => import('@/pages/modules/website-fakultas/settings/color/ColorSettingService.tsx'))
+const TemplateWebFacultySettings = lazy(() => import('@/pages/modules/website-fakultas/settings/template-web').then(m => ({ default: m.TemplateWebFacultySettings })))
+const LayoutFaculty = lazy(() => import('@/pages/modules/website-fakultas/about-faculty/component/layout'))
+const AboutFacultyView = lazy(() => import('@/pages/modules/website-fakultas/about-faculty'))
+const UserFacultyView = lazy(() => import('@/pages/modules/website-fakultas/about-faculty/unit-pengelola'))
+const VisionMissionFaculty = lazy(() => import('@/pages/modules/website-fakultas/about-faculty/vision-mission'))
+const OrganizationalStructureView = lazy(() => import('@/pages/modules/website-fakultas/about-faculty/organization'))
+const ContactUsView = lazy(() => import('@/pages/modules/website-fakultas/about-faculty/contact-us'))
+const ProgramStudyView = lazy(() => import('@/pages/modules/website-fakultas/academic/program-studi'))
+const LayoutStudyProgram = lazy(() => import('@/pages/modules/website-fakultas/academic/program-studi/component/layout'))
+const AboutProdiView = lazy(() => import('@/pages/modules/website-fakultas/academic/program-studi/detail/about'))
+const UserProdiView = lazy(() => import('@/pages/modules/website-fakultas/academic/program-studi/unit-pengelola'))
+const VisionMissionProdi = lazy(() => import('@/pages/modules/website-fakultas/academic/program-studi/detail/vision-mission'))
+const ProdiOrganizationalStructureView = lazy(() => import('@/pages/modules/website-fakultas/academic/program-studi/detail/organization'))
+const ProdiContactUsView = lazy(() => import('@/pages/modules/website-fakultas/academic/program-studi/detail/contact-us'))
+const ProdiCurriculumView = lazy(() => import('@/pages/modules/website-fakultas/academic/curriculum'))
+const AcademicPPSMPage = lazy(() => import('@/pages/modules/website-fakultas/academic/ppsm').then(m => ({ default: m.AcademicPPSMPage })))
+const DashboardFaculty = lazy(() => import('@/pages/modules/website-fakultas/dashboard'))
+const AlumniStoriesPPSM = lazy(() => import('@/pages/modules/website-fakultas/academic/ppsm/story').then(m => ({ default: m.AlumniStoriesPPSM })))
+const CreatedStoryAlumni = lazy(() => import('@/pages/modules/website-fakultas/academic/ppsm/story/create').then(m => ({ default: m.CreatedStoryAlumni })))
+const ProdiGallery = lazy(() => import('@/pages/modules/website-fakultas/academic/program-studi/detail/gallery').then(m => ({ default: m.ProdiGallery })))
+const StaffDetailProdi = lazy(() => import('@/pages/modules/website-fakultas/academic/program-studi/detail/staff').then(m => ({ default: m.StaffDetailProdi })))
+const LecturerDetailProfile = lazy(() => import('@/pages/modules/website-fakultas/academic/program-studi/detail/lecturer').then(m => ({ default: m.LecturerDetailProfile })))
+const CurriculumPerProdi = lazy(() => import('@/pages/modules/website-fakultas/academic/curriculum/per-prodi').then(m => ({ default: m.CurriculumPerProdi })))
+const UpdateStoryPPSM = lazy(() => import('@/pages/modules/website-fakultas/academic/ppsm/story/update').then(m => ({ default: m.UpdateStoryPPSM })))
+const AcademicInternationalMobility = lazy(() => import('@/pages/modules/website-fakultas/academic/international-mobility').then(m => ({ default: m.AcademicInternationalMobility })))
+const AlumniStoriesMobility = lazy(() => import('@/pages/modules/website-fakultas/academic/international-mobility/story').then(m => ({ default: m.AlumniStoriesMobility })))
+const CreatedStoryAlumniMobility = lazy(() => import('@/pages/modules/website-fakultas/academic/international-mobility/story/create').then(m => ({ default: m.CreatedStoryAlumniMobility })))
+const UpdateStoryMobility = lazy(() => import('@/pages/modules/website-fakultas/academic/international-mobility/story/update').then(m => ({ default: m.UpdateStoryMobility })))
+const AcademicInternationalUnderGraduated = lazy(() => import('@/pages/modules/website-fakultas/academic/undergraduate-program').then(m => ({ default: m.AcademicInternationalUnderGraduated })))
+const AlumniStoriesUnderGraduated = lazy(() => import('@/pages/modules/website-fakultas/academic/undergraduate-program/story').then(m => ({ default: m.AlumniStoriesUnderGraduated })))
+const CreatedStoryUnderGraduated = lazy(() => import('@/pages/modules/website-fakultas/academic/undergraduate-program/story/create').then(m => ({ default: m.CreatedStoryUnderGraduated })))
+const UnderGraduatedProgram = lazy(() => import('@/pages/modules/website-fakultas/academic/undergraduate-program/program').then(m => ({ default: m.UnderGraduatedProgram })))
+const DetailProgram = lazy(() => import('@/pages/modules/website-fakultas/academic/undergraduate-program/program/detail').then(m => ({ default: m.DetailProgram })))
+const ResearchGroupPage = lazy(() => import('@/pages/modules/website-fakultas/research/research-group').then(m => ({ default: m.ResearchGroupPage })))
+const GroupSkillResearch = lazy(() => import('@/pages/modules/website-fakultas/research/research-group/group-skill').then(m => ({ default: m.GroupSkillResearch })))
+const CreatedGroupSkill = lazy(() => import('@/pages/modules/website-fakultas/research/research-group/group-skill/created').then(m => ({ default: m.CreatedGroupSkill })))
+const OurPartnerPage = lazy(() => import('@/pages/modules/website-fakultas/research/collaboration').then(m => ({ default: m.OurPartnerPage })))
+const MitraOurPartners = lazy(() => import('@/pages/modules/website-fakultas/research/collaboration/mitra').then(m => ({ default: m.MitraOurPartners })))
+const TypeOurPartners = lazy(() => import('@/pages/modules/website-fakultas/research/collaboration/type').then(m => ({ default: m.TypeOurPartners })))
+const CommunityCollegeSystem = lazy(() => import('@/pages/modules/website-fakultas/community/study-faculty/college-system').then(m => ({ default: m.CommunityCollegeSystem })))
+const CommunityStudyProgram = lazy(() => import('@/pages/modules/website-fakultas/community/study-faculty/college-system/study-program').then(m => ({ default: m.CommunityStudyProgram })))
+const AccreditationFacultyCommunity = lazy(() => import('@/pages/modules/website-fakultas/community/study-faculty/college-system/accreditation').then(m => ({ default: m.AccreditationFacultyCommunity })))
+const CarrierProspectCommunity = lazy(() => import('@/pages/modules/website-fakultas/community/study-faculty/college-system/carrier-prospect').then(m => ({ default: m.CarrierProspectCommunity })))
+const AccommodationStudentLife = lazy(() => import('@/pages/modules/website-fakultas/community/student-life/accommodation').then(m => ({ default: m.AccommodationStudentLife })))
+const StudentOrganizationCommunity = lazy(() => import('@/pages/modules/website-fakultas/community/student-life/student-organization').then(m => ({ default: m.StudentOrganizationCommunity })))
+const ListOrganizationStudentLife = lazy(() => import('@/pages/modules/website-fakultas/community/student-life/student-organization/list-Organization').then(m => ({ default: m.ListOrganizationStudentLife })))
+const CreatedStudentOrganization = lazy(() => import('@/pages/modules/website-fakultas/community/student-life/student-organization/list-Organization/created').then(m => ({ default: m.CreatedStudentOrganization })))
+const EntertainmentCommunity = lazy(() => import('@/pages/modules/website-fakultas/community/student-life/entertainment').then(m => ({ default: m.EntertainmentCommunity })))
+const ListPlaceStudentOrganization = lazy(() => import('@/pages/modules/website-fakultas/community/student-life/entertainment/list-place').then(m => ({ default: m.ListPlaceStudentOrganization })))
+const CreatedStudentListOrganization = lazy(() => import('@/pages/modules/website-fakultas/community/student-life/entertainment/list-place/created').then(m => ({ default: m.CreatedStudentListOrganization })))
+const CommunityAlumniStory = lazy(() => import('@/pages/modules/website-fakultas/community/alumni/story').then(m => ({ default: m.CommunityAlumniStory })))
+const CreatedStoryAlumniCommunity = lazy(() => import('@/pages/modules/website-fakultas/community/alumni/story/create').then(m => ({ default: m.CreatedStoryAlumniCommunity })))
+const FacilitiesPage = lazy(() => import('@/pages/modules/website-fakultas/facilities').then(m => ({ default: m.FacilitiesPage })))
+const CreatedFacilities = lazy(() => import('@/pages/modules/website-fakultas/facilities/created').then(m => ({ default: m.CreatedFacilities })))
+const DescriptionPMBText = lazy(() => import('@/pages/modules/website-fakultas/pmb').then(m => ({ default: m.DescriptionPMBText })))
+const ZoneIntegrityPage = lazy(() => import('@/pages/modules/website-fakultas/zone-integrity').then(m => ({ default: m.ZoneIntegrityPage })))
+const CreatedSubCategory = lazy(() => import('@/pages/modules/website-fakultas/zone-integrity/detail/created').then(m => ({ default: m.CreatedSubCategory })))
+const StaffProfileFaculty = lazy(() => import('@/pages/modules/website-fakultas/about-faculty/staff').then(m => ({ default: m.StaffProfileFaculty })))
+const LecturerProfileFaculty = lazy(() => import('@/pages/modules/website-fakultas/about-faculty/lecturer').then(m => ({ default: m.LecturerProfileFaculty })))
+const NewsFaculty = lazy(() => import('@/pages/modules/website-fakultas/about-faculty/news').then(m => ({ default: m.NewsFaculty })))
+const CurriculumSubjectDetail = lazy(() => import('@/pages/modules/website-fakultas/academic/curriculum/subject').then(m => ({ default: m.CurriculumSubjectDetail })))
+const NewsProdiFaculty = lazy(() => import('@/pages/modules/website-fakultas/academic/program-studi/detail/news').then(m => ({ default: m.NewsProdiFaculty })))
+const UpdateStoryUnderGraduated = lazy(() => import('@/pages/modules/website-fakultas/academic/undergraduate-program/story/update').then(m => ({ default: m.UpdateStoryUnderGraduated })))
+const UpdatedGroupSkill = lazy(() => import('@/pages/modules/website-fakultas/research/research-group/group-skill/updated').then(m => ({ default: m.UpdatedGroupSkill })))
+const DetailGroupSkillPage = lazy(() => import('@/pages/modules/website-fakultas/research/research-group/group-skill/detail'))
+const ProdiSectorCarrier = lazy(() => import('@/pages/modules/website-fakultas/community/study-faculty/college-system/carrier-prospect/prodi'))
+const SectorCarrierProspect = lazy(() => import('@/pages/modules/website-fakultas/community/study-faculty/college-system/carrier-prospect/sector').then(m => ({ default: m.SectorCarrierProspect })))
+const UpdatedStudentOrganization = lazy(() => import('@/pages/modules/website-fakultas/community/student-life/student-organization/list-Organization/updated').then(m => ({ default: m.UpdatedStudentOrganization })))
+const DetailStudentOrganization = lazy(() => import('@/pages/modules/website-fakultas/community/student-life/student-organization/list-Organization/detail').then(m => ({ default: m.DetailStudentOrganization })))
+const UpdatedStudentListOrganization = lazy(() => import('@/pages/modules/website-fakultas/community/student-life/entertainment/list-place/updated').then(m => ({ default: m.UpdatedStudentListOrganization })))
+const DetailStudentEntertainment = lazy(() => import('@/pages/modules/website-fakultas/community/student-life/entertainment/list-place/detail').then(m => ({ default: m.DetailStudentEntertainment })))
+const UpdateStoryAlumni = lazy(() => import('@/pages/modules/website-fakultas/community/alumni/story/update').then(m => ({ default: m.UpdateStoryAlumni })))
+const UpdatedFacilities = lazy(() => import('@/pages/modules/website-fakultas/facilities/updated').then(m => ({ default: m.UpdatedFacilities })))
+const DetailFacilitiesPage = lazy(() => import('@/pages/modules/website-fakultas/facilities/detail').then(m => ({ default: m.DetailFacilitiesPage })))
+const DetailZoneIntegrity = lazy(() => import('@/pages/modules/website-fakultas/zone-integrity/detail').then(m => ({ default: m.DetailZoneIntegrity })))
+const UpdatedSubCategory = lazy(() => import('@/pages/modules/website-fakultas/zone-integrity/detail/updated').then(m => ({ default: m.UpdatedSubCategory })))
+const ServiceListPage = lazy(() => import('@/pages/modules/website-fakultas/service').then(m => ({ default: m.ServiceListPage })))
+const ListAlbumVideo = lazy(() => import('@/pages/modules/website-fakultas/gallery/video').then(m => ({ default: m.ListAlbumVideo })))
+const ListGalleryAlbum = lazy(() => import('@/pages/modules/website-fakultas/gallery/album').then(m => ({ default: m.ListGalleryAlbum })))
+const ListGalleryPhoto = lazy(() => import('@/pages/modules/website-fakultas/gallery/photo').then(m => ({ default: m.ListGalleryPhoto })))
+const StudyResearchPage = lazy(() => import('@/pages/modules/website-fakultas/research/study-research').then(m => ({ default: m.StudyResearchPage })))
+const InboxStoryPage = lazy(() => import('@/pages/modules/website-fakultas/community/alumni/inbox').then(m => ({ default: m.InboxStoryPage })))
+const AlumniMessageInbox = lazy(() => import('@/pages/modules/website-fakultas/community/alumni/inbox/message').then(m => ({ default: m.AlumniMessageInbox })))
+const UserProfilePage = lazy(() => import('@/pages/modules/website-utama/user-profile').then(m => ({ default: m.UserProfilePage })))
+const ChangePassword = lazy(() => import('@/pages/modules/website-utama/change-password').then(m => ({ default: m.ChangePassword })))
+const FacultyGalleryProfile = lazy(() => import('@/pages/modules/website-fakultas/about-faculty/gallery').then(m => ({ default: m.FacultyGalleryProfile })))
+const ThemaChangeColorFaculty = lazy(() => import('@/pages/modules/website-fakultas/settings/template-web/color').then(m => ({ default: m.ThemaChangeColorFaculty })))
+const GuideListView = lazy(() => import('@/pages/modules/website-utama/panduan/GuideListView'))
+const LandingPageFaculty = lazy(() => import('@/pages/modules/website-fakultas/settings/Slider-landing').then(m => ({ default: m.LandingPageFaculty })))
 
 export const RouterFaculty = [
   {
