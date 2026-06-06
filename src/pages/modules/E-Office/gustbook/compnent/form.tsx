@@ -151,13 +151,6 @@ const FormGustBook = (props: props) => {
             />
 
             <div className="flex flex-col gap-2">
-              {form.watch('url_foto') && (
-                <img
-                  src={form?.watch('url_foto')}
-                  alt="capture"
-                  className="w-[250px] h-[250px] object-contain"
-                />
-              )}
               <CaptureWebCam form={form} name={'url_foto'} />
             </div>
           </div>
