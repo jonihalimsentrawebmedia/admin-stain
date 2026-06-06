@@ -83,15 +83,13 @@ export const LetterHeader = () => {
       })
   }
 
-  console.log(pdfMake.fonts)
-
   return (
     <>
       <div className="space-y-5">
         <ButtonTitleGroup label={'Kop Surat'} buttonGroup={[]} />
 
         <div className="flex items-start gap-4 w-full">
-          <ul className={'flex flex-col gap-2 max-w-80 border p-4 rounded'}>
+          <ul className={'flex flex-col gap-2 max-w-80 border p-4 rounded bg-white shadow'}>
             {institution?.map((row, k) => (
               <li
                 onClick={() => setIdSelected(row.id_satuan_organisasi)}

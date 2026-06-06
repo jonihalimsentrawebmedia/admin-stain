@@ -1,6 +1,6 @@
 import { useQuery, useMutation } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
-import type { ISumberDetail, IGenerateSuratBody } from './types'
+import type { ISumberDetail, IGenerateSuratBody, ISumberParamOption } from './types'
 
 export const UseGetSumberList = () => {
   return useQuery({
@@ -19,6 +19,19 @@ export const UseGetSumberDetail = (sumber: string | null) => {
     queryFn: () =>
       AxiosClient.get(`/eoffice/ref/sumber/${sumber}`).then(
         (res) => res.data.data as ISumberDetail
+      ),
+  })
+}
+
+export const UseGetSumberParams = (key: string | null) => {
+  return useQuery({
+    queryKey: ['sumber-params', key],
+    refetchOnWindowFocus: false,
+    enabled: !!key,
+    queryFn: () =>
+      AxiosClient.get(`/eoffice/ref/sumber-params/${key}?page=0&limit=0`).then(
+        (res) =>
+          (res.data.data ?? []) as ISumberParamOption[]
       ),
   })
 }

@@ -44,7 +44,7 @@ export const FormRegistrationOutbox = (props: IProps) => {
   const navigate = useNavigate()
 
   const { institution } = UseGetUnitInstitution()
-  const { humanResource } = UseGetHumanResource()
+  const { humanResource } = UseGetHumanResource({ page: '0', limit: '0' })
   const { letterNature } = USeGetLetterNature({ page: '0', limit: '0' })
   const { letterType } = USeGetLetterType({ page: '0', limit: '0' })
   const { letterClassification } = USeGetLetterClassification({ page: '0', limit: '0' })

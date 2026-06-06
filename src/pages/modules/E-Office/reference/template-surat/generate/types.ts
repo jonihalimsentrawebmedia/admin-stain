@@ -1,12 +1,17 @@
 export interface ISumberParameter {
   key_parameter: string
   required: boolean
-  type: string
+  type: 'ENDPOINT' | 'TEXT' | 'NUMBER' | 'DATE'
 }
 
 export interface ISumberDetail {
   parameter: ISumberParameter[]
   data_map: string[]
+}
+
+export interface ISumberParamOption {
+  id: string
+  nama: string
 }
 
 export interface IParameterValue {
