@@ -67,21 +67,23 @@ const UpdateTemplateSurat = () => {
       })
 
       // Isi section fields dari response detail
-      const fields = (templateSurat.fields ?? []).map((f) => {
-        const base: Record<string, any> = {
-          id_section_field: f.id_section_field ?? '',
-          key_placeholder: f.key_placeholder,
-          label: f.label,
-          tipe_input: f.tipe_input,
-          is_required: f.is_required,
-          urutan: f.urutan ?? 0,
+      const fields: TSectionFieldsUpdateForm['section_fields'] = (templateSurat.fields ?? []).map(
+        (f) => {
+          const base = {
+            id_section_field: f.id_section_field ?? '',
+            key_placeholder: f.key_placeholder,
+            label: f.label,
+            tipe_input: f.tipe_input,
+            is_required: f.is_required,
+            urutan: f.urutan ?? 0,
+          } as TSectionFieldsUpdateForm['section_fields'][number]
+          // options hanya disertakan jika tipe DROPDOWN dan ada isinya
+          if (f.tipe_input === 'DROPDOWN' && f.options?.length) {
+            base.options = f.options
+          }
+          return base
         }
-        // options hanya disertakan jika tipe DROPDOWN dan ada isinya
-        if (f.tipe_input === 'DROPDOWN' && f.options?.length) {
-          base.options = f.options
-        }
-        return base
-      })
+      )
       replaceSectionFields(fields)
     }
   }, [templateSurat, id, form, replaceSectionFields])
