@@ -6,6 +6,7 @@ import { z } from 'zod'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
+import TextAreaInput from '@/components/common/form/textAreaInput.tsx'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card.tsx'
 import { Form } from '@/components/ui/form.tsx'
@@ -13,7 +14,12 @@ import { Button } from '@/components/ui/button.tsx'
 import { BiPlus, BiTrash } from 'react-icons/bi'
 import { FaFilePdf } from 'react-icons/fa'
 import { UseGetDetailTemplateSurat } from '@/pages/modules/E-Office/reference/template-surat/hooks'
-import { UseGetSumberList, UseGetSumberDetail, UseGenerateSurat } from './hooks'
+import {
+  UseGetSumberList,
+  UseGetSumberDetail,
+  UseGetSumberParams,
+  UseGenerateSurat,
+} from './hooks'
 import { generatePdfBlobUrl } from '@/pages/modules/E-Office/surat-generated/utils/pdf'
 import { toast } from 'react-toastify'
 
@@ -37,13 +43,85 @@ const GenerateSuratSchema = z.object({
 
 type TGenerateSuratForm = z.infer<typeof GenerateSuratSchema>
 
+// ─── Sub-component for rendering a single parameter field based on its type ───
+const ParameterFieldInput = ({
+  paramIndex,
+  parameterInfo,
+  form,
+}: {
+  paramIndex: number
+  parameterInfo: { key_parameter: string; required: boolean; type: string }
+  form: ReturnType<typeof useForm<TGenerateSuratForm>>
+}) => {
+  const { key_parameter, required, type } = parameterInfo
+  const label = `${key_parameter.replace(/_/g, ' ')}${required ? ' *' : ''}`
+
+  // ENDPOINT type → fetch options from API
+  if (type === 'ENDPOINT') {
+    const { data: options = [], isLoading } = UseGetSumberParams(key_parameter)
+    const selectData = options.map((o) => ({ value: o.id, label: o.nama }))
+
+    return (
+      <SelectBasicInput
+        name={`parameter.${paramIndex}.value`}
+        form={form}
+        label={label}
+        placeholder={`Pilih ${key_parameter.replace(/_/g, ' ').toLowerCase()}`}
+        data={selectData}
+        isLoading={isLoading}
+        isRequired={required}
+        usePortal
+      />
+    )
+  }
+
+  // NUMBER type
+  if (type === 'NUMBER') {
+    return (
+      <TextInput
+        name={`parameter.${paramIndex}.value`}
+        form={form}
+        label={label}
+        placeholder={`Masukkan ${key_parameter.replace(/_/g, ' ').toLowerCase()}`}
+        type="number"
+        isRequired={required}
+      />
+    )
+  }
+
+  // DATE type
+  if (type === 'DATE') {
+    return (
+      <TextInput
+        name={`parameter.${paramIndex}.value`}
+        form={form}
+        label={label}
+        placeholder={'Pilih tanggal'}
+        type="date"
+        isRequired={required}
+      />
+    )
+  }
+
+  // TEXT / default
+  return (
+    <TextInput
+      name={`parameter.${paramIndex}.value`}
+      form={form}
+      label={label}
+      placeholder={`Masukkan ${key_parameter.replace(/_/g, ' ').toLowerCase()}`}
+      isRequired={required}
+    />
+  )
+}
+
 const GenerateSuratView = () => {
   const { id } = useParams<{ id: string }>()
 
   // --- ViewModel state ---
   const { templateSurat, loading: loadingDetail } = UseGetDetailTemplateSurat(id as string)
   const { data: sumberList = [], isLoading: loadingSumber } = UseGetSumberList()
-  const [selectedSumber, setSelectedSumber] = useState<string | null>(null)
+  const [selectedSumber, setSelectedSumber] = useState<string | null>('MANUAL')
   const { data: sumberDetail, isLoading: loadingSumberDetail } = UseGetSumberDetail(selectedSumber)
   const { mutateAsync: generateSurat, isPending: loadingGenerate } = UseGenerateSurat()
 
@@ -66,7 +144,7 @@ const GenerateSuratView = () => {
   const form = useForm<TGenerateSuratForm>({
     resolver: zodResolver(GenerateSuratSchema),
     defaultValues: {
-      sumber: '',
+      sumber: 'MANUAL',
       parameter: [],
       value_map: [],
     },
@@ -122,6 +200,80 @@ const GenerateSuratView = () => {
       value: d,
       label: d,
     }))
+  }
+
+  // Cari field template berdasarkan key_placeholder
+  const getFieldInfo = (keyPlaceholder: string) => {
+    return fields.find((f) => f.key_placeholder === keyPlaceholder)
+  }
+
+  // Render input untuk value manual berdasarkan tipe_input field
+  const renderManualValueInput = (vmField: (typeof valueMapFields)[number], index: number) => {
+    const fieldInfo = getFieldInfo(vmField.field)
+    const tipeInput = fieldInfo?.tipe_input ?? 'TEXT'
+    const inputName = `value_map.${index}.value` as const
+
+    switch (tipeInput) {
+      case 'NUMBER':
+        return (
+          <TextInput
+            name={inputName}
+            form={form}
+            label={'Value (Angka)'}
+            placeholder={'Masukkan angka'}
+            type="number"
+            isRequired
+          />
+        )
+      case 'DATE':
+        return (
+          <TextInput
+            name={inputName}
+            form={form}
+            label={'Value (Tanggal)'}
+            placeholder={'Pilih tanggal'}
+            type="date"
+            isRequired
+          />
+        )
+      case 'TEXTAREA':
+        return (
+          <TextAreaInput
+            name={inputName}
+            form={form}
+            label={'Value (Teks Panjang)'}
+            placeholder={'Masukkan teks'}
+            isRequired
+          />
+        )
+      case 'DROPDOWN': {
+        const options = (fieldInfo?.options ?? []).map((o) => ({
+          value: o.value,
+          label: o.label,
+        }))
+        return (
+          <SelectBasicInput
+            name={inputName}
+            form={form}
+            label={'Pilih Opsi'}
+            placeholder={'Pilih opsi'}
+            data={options}
+            isRequired
+          />
+        )
+      }
+      default:
+        // TEXT & lainnya
+        return (
+          <TextInput
+            name={inputName}
+            form={form}
+            label={'Value Manual'}
+            placeholder={'Masukkan nilai manual'}
+            isRequired
+          />
+        )
+    }
   }
 
   const HandleGenerate = async (value: TGenerateSuratForm) => {
@@ -184,7 +336,7 @@ const GenerateSuratView = () => {
     )
   }
 
-  const mainData = templateSurat.templateSurat
+  const mainData = templateSurat.template_surat
   const sections = templateSurat.sections ?? []
   const fields = templateSurat.fields ?? []
 
@@ -248,34 +400,47 @@ const GenerateSuratView = () => {
                     <p className="text-sm text-gray-400">Memuat parameter...</p>
                   ) : (
                     <>
-                      {parameterFields.map((field, index) => (
-                        <div key={field.id} className="flex items-end gap-3">
-                          <div className="flex-1">
-                            <TextInput
-                              name={`parameter.${index}.key_parameter`}
-                              form={form}
-                              label={'Key Parameter'}
-                              placeholder={'Contoh: ID_STATUS_AKTIF'}
-                              isRequired
-                            />
+                      {parameterFields.map((field, index) => {
+                        // Cari info parameter dari sumberDetail
+                        const paramInfo = sumberDetail?.parameter?.find(
+                          (p) => p.key_parameter === field.key_parameter
+                        ) ?? {
+                          key_parameter: field.key_parameter,
+                          required: false,
+                          type: 'TEXT',
+                        }
+
+                        return (
+                          <div key={field.id} className="flex items-end gap-3">
+                            {/* Key parameter — ditampilkan sebagai label disabled */}
+                            <div className="flex-1">
+                              <TextInput
+                                name={`parameter.${index}.key_parameter`}
+                                form={form}
+                                label={'Key Parameter'}
+                                placeholder={'Contoh: ID_STATUS_AKTIF'}
+                                isRequired
+                                isDisabled
+                              />
+                            </div>
+                            {/* Value — menyesuaikan tipe (ENDPOINT/TEXT/NUMBER/DATE) */}
+                            <div className="flex-[2]">
+                              <ParameterFieldInput
+                                paramIndex={index}
+                                parameterInfo={paramInfo}
+                                form={form}
+                              />
+                            </div>
+                            <button
+                              type="button"
+                              className="p-2 bg-red-500 text-white rounded hover:bg-red-600 mb-1"
+                              onClick={() => removeParameter(index)}
+                            >
+                              <BiTrash />
+                            </button>
                           </div>
-                          <div className="flex-1">
-                            <TextInput
-                              name={`parameter.${index}.value`}
-                              form={form}
-                              label={'Value'}
-                              placeholder={'Nilai parameter'}
-                            />
-                          </div>
-                          <button
-                            type="button"
-                            className="p-2 bg-red-500 text-white rounded hover:bg-red-600 mb-1"
-                            onClick={() => removeParameter(index)}
-                          >
-                            <BiTrash />
-                          </button>
-                        </div>
-                      ))}
+                        )
+                      })}
 
                       {parameterFields.length === 0 && (
                         <p className="text-sm text-gray-400">
@@ -314,6 +479,14 @@ const GenerateSuratView = () => {
                             {field.field}
                             {'}}'}
                           </code>
+                          {(() => {
+                            const fi = getFieldInfo(field.field)
+                            return fi?.tipe_input ? (
+                              <span className="text-[10px] uppercase tracking-wider text-gray-400 border border-gray-300 rounded px-1.5 py-0.5">
+                                {fi.tipe_input}
+                              </span>
+                            ) : null
+                          })()}
                         </div>
                         {!isManual && (
                           <label className="flex items-center gap-2 text-sm text-gray-600">
@@ -343,13 +516,7 @@ const GenerateSuratView = () => {
                       </div>
 
                       {isManual || !field.is_sumber ? (
-                        <TextInput
-                          name={`value_map.${index}.value`}
-                          form={form}
-                          label={'Value Manual'}
-                          placeholder={'Masukkan nilai manual'}
-                          isRequired
-                        />
+                        renderManualValueInput(field, index)
                       ) : (
                         <SelectBasicInput
                           name={`value_map.${index}.value`}
@@ -358,6 +525,7 @@ const GenerateSuratView = () => {
                           placeholder={'Pilih field dari sumber'}
                           data={getDataMapOptions()}
                           isRequired
+                          usePortal
                         />
                       )}
                     </div>
