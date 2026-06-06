@@ -1,7 +1,4 @@
-import {
-  UseGetDetailEventActivity,
-  UseGetListAttendance,
-} from '@/pages/modules/E-Office/event-activity/event-data/hooks'
+import { UseGetDetailEventActivity } from '@/pages/modules/E-Office/event-activity/event-data/hooks'
 import { useParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Card, CardContent, CardDescription, CardTitle } from '@/components/ui/card.tsx'
@@ -11,7 +8,7 @@ import { useForm } from 'react-hook-form'
 import { Form } from '@/components/ui/form.tsx'
 import { InputRadio } from '@/components/common/form/InputRadio.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Button } from '@/components/ui/button.tsx'
 import { MdPrint } from 'react-icons/md'
 import { generatePreviewAttendancePdf } from '@/pages/modules/E-Office/utils/generateAttendancePdf.ts'
@@ -22,7 +19,6 @@ import { FaEye } from 'react-icons/fa'
 const PrintAttendanceList = () => {
   const { id: slug } = useParams()
   const { event } = UseGetDetailEventActivity(slug as string)
-  const { attendance } = UseGetListAttendance(slug as string)
   const [open, setOpen] = useState(false)
   const [url, setUrl] = useState<string>()
 
@@ -36,7 +32,7 @@ const PrintAttendanceList = () => {
       jabatan: true,
       tanda_tangan: true,
       hasil_cetak: 'portrait',
-      jumlah_row: 0,
+      jumlah_row: 10,
       diketahui_jabatan: '',
       diketahui_nama: '',
       mengetahui_jabatan: '',
@@ -44,15 +40,8 @@ const PrintAttendanceList = () => {
     },
   })
 
-  useEffect(() => {
-    if (attendance) {
-      form.setValue('jumlah_row', attendance.daftar_tamu.length)
-    }
-  }, [attendance])
-
   const HandlePreview = async (values: any) => {
     const { docDefinition } = generatePreviewAttendancePdf({
-      attendance,
       values,
       event,
     })
@@ -65,7 +54,6 @@ const PrintAttendanceList = () => {
 
   const HandlePrint = (values: any) => {
     const { docDefinition } = generatePreviewAttendancePdf({
-      attendance,
       values,
       event,
     })
@@ -146,7 +134,7 @@ const PrintAttendanceList = () => {
                     <InputRadio
                       form={form}
                       name={'email'}
-                      label={'Emamil'}
+                      label={'Email'}
                       isRow
                       data={[
                         { label: 'Ya', value: true },
@@ -192,7 +180,6 @@ const PrintAttendanceList = () => {
                       label={'Jumlah Row Peserta'}
                       type={'number'}
                       isNumber
-                      isDisabled
                       isRow
                     />
                     <div className="flex items-center gap-2">
