@@ -188,7 +188,7 @@ export const generatePreviewAttendancePdf = ({ event, values }: GenerateAttendan
       style: 'tableHeader',
       fontSize: 10,
     })
-    widths.push(20)
+    widths.push('auto')
   }
 
   if (values.Nama_peserta) {

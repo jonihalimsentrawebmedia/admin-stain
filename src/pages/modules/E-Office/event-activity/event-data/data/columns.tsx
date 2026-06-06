@@ -7,6 +7,7 @@ import { MdInfo, MdPrint } from 'react-icons/md'
 import ButtonEditEvent from '@/pages/modules/E-Office/event-activity/event-data/component/buttonEdit.tsx'
 import ButtonDeleteEvent from '@/pages/modules/E-Office/event-activity/event-data/component/buttonDelete.tsx'
 import { Button } from '@/components/ui/button.tsx'
+import { cn } from '@/lib/utils.ts'
 
 export const ColumnsEvent = () => {
   const [searchParams] = useSearchParams()
@@ -29,13 +30,21 @@ export const ColumnsEvent = () => {
       accessorKey: 'tanggal_mulai',
       header: 'Hari, Tanggal',
       cell: ({ row }) => {
-        const start_date = row.original.tanggal_mulai
-        const end_date = row.original.tanggal_selesai
+        const startDate = new Date(row.original.tanggal_mulai)
+        const endDate = new Date(row.original.tanggal_selesai)
+
+        const isSameDate = format(startDate, 'yyyy-MM-dd') === format(endDate, 'yyyy-MM-dd')
+
         return (
-          <div className={'text-center'}>
-            <p>{format(start_date, 'EEEE, dd-MM-yyyy', { locale: id })}</p>
-            <p>s.d</p>
-            <p>{format(end_date, 'EEEE, dd-MM-yyyy', { locale: id })}</p>
+          <div className={cn(isSameDate ? 'text-start' : 'text-center')}>
+            <p>{format(startDate, 'EEEE, dd-MM-yyyy', { locale: id })}</p>
+
+            {!isSameDate && (
+              <>
+                <p>s.d</p>
+                <p>{format(endDate, 'EEEE, dd-MM-yyyy', { locale: id })}</p>
+              </>
+            )}
           </div>
         )
       },

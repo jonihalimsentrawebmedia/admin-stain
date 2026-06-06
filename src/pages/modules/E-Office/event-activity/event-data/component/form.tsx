@@ -47,7 +47,7 @@ export const FormEvent = (props: props) => {
             name={'waktu'}
             form={form}
             label={'Watu'}
-            placeholder={'Nama Kegiatan'}
+            placeholder={'Waktu Kegiatan cth: 08.00 - 10.00 WIB'}
             htmlFor={'nama_kegiatan'}
             isRequired
           />
