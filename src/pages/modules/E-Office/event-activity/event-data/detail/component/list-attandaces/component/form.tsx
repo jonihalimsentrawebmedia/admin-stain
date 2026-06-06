@@ -10,7 +10,9 @@ import TextInput from '@/components/common/form/TextInput.tsx'
 import { ColumnsHumanResource } from '@/pages/modules/E-Office/event-activity/event-data/detail/component/list-attandaces/component/columns.tsx'
 import { TableBasicState } from '@/components/common/table/tableUsestate.tsx'
 import { useEffect, useState } from 'react'
-import TablePagination from '@/components/common/table/TablePagination.tsx'
+import TablePaginate from '@/components/common/table/TablePagination.tsx'
+import Search from '@/components/common/table/Search.tsx'
+import { SelectBasic } from '@/components/common/select/basic.tsx'
 
 interface props {
   form: UseFormReturn<TResolverAttendance>
@@ -36,7 +38,10 @@ const FormAttendance = (props: props) => {
     limit: filter.limit,
     search: filter.search,
   })
-  const columns = ColumnsHumanResource()
+  const columns = ColumnsHumanResource({
+    page: filter.page,
+    limit: filter.limit,
+  })
 
   useEffect(() => {
     form.setValue('id_sdm', collected)
@@ -117,15 +122,50 @@ const FormAttendance = (props: props) => {
           ) : (
             form.watch('sumber_data') === 'INTERNAL' && (
               <>
-                <TableBasicState
-                  columns={columns}
-                  data={humanResource}
-                  rowIdKey={'id_sdm'}
-                  selected={collected}
-                  onSelectedRowsChange={setCollected}
-                />
+                <div className="w-full max-h-[450px] overflow-y-scroll">
+                  <div className="flex items-center justify-between bg-white p-1">
+                    <SelectBasic
+                      value={filter.limit}
+                      onChange={(e) => {
+                        setFilter({
+                          ...filter,
+                          limit: e,
+                          page: '1',
+                        })
+                      }}
+                      placeholder={'Limit'}
+                      data={[
+                        { label: 'Semua', value: '0' },
+                        { label: '10', value: '10' },
+                        { label: '25', value: '25' },
+                        { label: '50', value: '50' },
+                        { label: '100', value: '100' },
+                      ]}
+                    />
+                    <Search
+                      className={'bg-white mb-1.5 '}
+                      innerClassName={'p-1 text-sm w-full bg-white focus:outline-none'}
+                      position={'end'}
+                      onSearch={(e) => {
+                        setFilter({
+                          ...filter,
+                          search: e,
+                          page: '1',
+                        })
+                      }}
+                    />
+                  </div>
+                  <TableBasicState
+                    columns={columns}
+                    data={humanResource}
+                    rowIdKey={'id_sdm'}
+                    selected={collected}
+                    onSelectedRowsChange={setCollected}
+                    thClassName={'bg-primary text-white'}
+                  />
+                </div>
                 {meta && (
-                  <TablePagination
+                  <TablePaginate
                     length={meta?.total}
                     meta={meta}
                     setPage={(e) => {

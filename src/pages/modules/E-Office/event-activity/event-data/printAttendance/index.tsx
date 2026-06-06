@@ -15,28 +15,40 @@ import { generatePreviewAttendancePdf } from '@/pages/modules/E-Office/utils/gen
 import pdfMake from 'pdfmake/build/pdfmake'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import { FaEye } from 'react-icons/fa'
+import { AttendanceSettingResolver, type AttendanceSettingType } from './data/resolver.tsx'
+import FormMoreSignature from '@/pages/modules/E-Office/event-activity/event-data/printAttendance/component/form.tsx'
+import ButtonForm from '@/components/common/button/ButtonForm.tsx'
+import AxiosClient from '@/provider/axios.tsx'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { toast } from 'react-toastify'
 
 const PrintAttendanceList = () => {
   const { id: slug } = useParams()
   const { event } = UseGetDetailEventActivity(slug as string)
   const [open, setOpen] = useState(false)
   const [url, setUrl] = useState<string>()
+  const [loading, setLoading] = useState(false)
 
-  const form = useForm<any>({
+  const form = useForm<AttendanceSettingType>({
+    resolver: zodResolver(AttendanceSettingResolver),
     defaultValues: {
       nomor: true,
-      Nama_peserta: true,
+      nama_peserta: true,
       instansi: true,
       hp: true,
-      email: true,
+      email: false,
       jabatan: true,
       tanda_tangan: true,
+      keterangan: false,
       hasil_cetak: 'portrait',
-      jumlah_row: 10,
-      diketahui_jabatan: '',
-      diketahui_nama: '',
-      mengetahui_jabatan: '',
-      mengetahui_nama: '',
+      jumlah_peserta: 10,
+      label_diketahui: '',
+      jabatan_diketahui: '',
+      nama_diketahui: '',
+      label_mengetahui: '',
+      jabatan_mengetahui: '',
+      nama_mengetahui: '',
+      saksi_pendatang: [],
     },
   })
 
@@ -61,6 +73,22 @@ const PrintAttendanceList = () => {
     pdfMake.createPdf(docDefinition).print()
   }
 
+  const HandleSave = async (values: AttendanceSettingType) => {
+    await AxiosClient.post(`eoffice/cetak-daftar-hadir/${slug}`, values)
+      .then((res) => {
+        if (res.data.status) {
+          setLoading(false)
+          setOpen(false)
+          form.reset()
+          toast.success(res.data.message || 'Success')
+        }
+      })
+      .catch((err) => {
+        setLoading(false)
+        toast.error(err?.response?.data?.message || 'Error')
+      })
+  }
+
   return (
     <>
       <div className="space-y-5">
@@ -69,23 +97,33 @@ const PrintAttendanceList = () => {
           <CardContent className={'space-y-2.5'}>
             <p className="text-gray-500">Nama Kegiatan</p>
             <p className="text-xl">{event?.nama_kegiatan}</p>
-            <p className="text-gray-500">Hari Tanggal</p>
-            <p>
-              {event?.tanggal_mulai
-                ? format(event?.tanggal_mulai, 'EEEE, dd-MM-yyyy', { locale: id })
-                : ''}
-            </p>
-            <p className="text-gray-500">Waktu</p>
-            <p>{event?.waktu}</p>
-            <p className="text-gray-500">Tempat</p>
-            <p>{event?.tempat}</p>
-            <p className="text-gray-500">Penyelenggara</p>
-            <p>{event?.penyelenggara}</p>
+            <div className="grid grid-cols-2 gap-5 max-w-[800px]">
+              <div>
+                <p className="text-gray-500">Hari Tanggal</p>
+                <p>
+                  {event?.tanggal_mulai
+                    ? format(event?.tanggal_mulai, 'EEEE, dd-MM-yyyy', { locale: id })
+                    : ''}
+                </p>
+              </div>
+              <div>
+                <p className="text-gray-500">Waktu</p>
+                <p>{event?.waktu}</p>
+              </div>
+              <div>
+                <p className="text-gray-500">Tempat</p>
+                <p>{event?.tempat}</p>
+              </div>
+              <div>
+                <p className="text-gray-500">Penyelenggara</p>
+                <p>{event?.penyelenggara}</p>
+              </div>
+            </div>
           </CardContent>
         </Card>
 
         <Form {...form}>
-          <form className={'space-y-5'} onSubmit={form.handleSubmit(HandlePreview)}>
+          <form className={'space-y-5'} onSubmit={form.handleSubmit(HandleSave)}>
             <Card>
               <CardContent className={'space-y-1.5'}>
                 <CardTitle>Kolom Daftar Hadir</CardTitle>
@@ -161,6 +199,16 @@ const PrintAttendanceList = () => {
                         { label: 'Tidak', value: false },
                       ]}
                     />
+                    <InputRadio
+                      form={form}
+                      name={'keterangan'}
+                      label={'Keterangan'}
+                      isRow
+                      data={[
+                        { label: 'Ya', value: true },
+                        { label: 'Tidak', value: false },
+                      ]}
+                    />
                   </div>
                   <div className="w-1/2 flex flex-col gap-4 mt-2">
                     <InputRadio
@@ -175,7 +223,7 @@ const PrintAttendanceList = () => {
                     />
                     <TextInput
                       form={form}
-                      name={'jumlah_row'}
+                      name={'jumlah_peserta'}
                       placeholder={'Jumlah'}
                       label={'Jumlah Row Peserta'}
                       type={'number'}
@@ -183,7 +231,13 @@ const PrintAttendanceList = () => {
                       isRow
                     />
                     <div className="flex items-center gap-2">
-                      <Button className={'rounded-full text-white w-fit'}>
+                      <Button
+                        className={'rounded-full text-white w-fit'}
+                        onClick={async (e) => {
+                          e.preventDefault()
+                          await HandlePreview(form.getValues() as any)
+                        }}
+                      >
                         <FaEye />
                         Preview
                       </Button>
@@ -210,44 +264,64 @@ const PrintAttendanceList = () => {
                   <div className={'w-1/2 flex flex-col gap-4 mt-2'}>
                     <p className="text-blue-500 text-lg">Diketahui Oleh</p>
                     <TextInput
-                      name={'diketahui_jabatan'}
+                      name={'label_diketahui'}
                       form={form}
-                      label={'Jabatan'}
-                      placeholder={'Jabatan'}
-                      htmlFor={'diketahui_jabatan'}
+                      label={'Label Diketahui'}
+                      placeholder={'Label Diketahui'}
+                      htmlFor={'label_diketahui'}
                       isRequired
                     />
                     <TextInput
-                      name={'diketahui_nama'}
+                      name={'nama_diketahui'}
                       form={form}
                       label={'Nama'}
                       placeholder={'Nama'}
                       htmlFor={'diketahui_nama'}
                       isRequired
                     />
+                    <TextInput
+                      name={'jabatan_diketahui'}
+                      form={form}
+                      label={'Jabatan'}
+                      placeholder={'Jabatan'}
+                      htmlFor={'diketahui_jabatan'}
+                      isRequired
+                    />
                   </div>
                   <div className={'w-1/2 flex flex-col gap-4 mt-2'}>
                     <p className="text-blue-500 text-lg">Yang Mengetahui</p>
                     <TextInput
-                      name={'mengetahui_jabatan'}
+                      name={'label_mengetahui'}
                       form={form}
-                      label={'Jabatan'}
-                      placeholder={'Jabatan'}
-                      htmlFor={'mengetahui_jabatan'}
+                      label={'Label Mengetahui'}
+                      placeholder={'Label Mengetahui'}
+                      htmlFor={'label_mengetahui'}
                       isRequired
                     />
                     <TextInput
-                      name={'mengetahui_nama'}
+                      name={'nama_mengetahui'}
                       form={form}
                       label={'Nama'}
                       placeholder={'Nama'}
                       htmlFor={'mengetahui_nama'}
                       isRequired
                     />
+                    <TextInput
+                      name={'jabatan_mengetahui'}
+                      form={form}
+                      label={'Jabatan'}
+                      placeholder={'Jabatan'}
+                      htmlFor={'mengetahui_jabatan'}
+                      isRequired
+                    />
                   </div>
                 </div>
               </CardContent>
             </Card>
+
+            <FormMoreSignature name={'saksi_pendatang'} form={form} />
+
+            <ButtonForm loading={loading} onCancel={() => setOpen(!open)} />
           </form>
         </Form>
       </div>
