@@ -40,7 +40,7 @@ const MenuEvent = () => {
       >
         <TabsList
           className={
-            'w-1/6 h-full flex flex-col gap-2 justify-start items-start bg-white shadow border p-5'
+            'w-full max-w-[230px] h-full flex flex-col gap-2 justify-start items-start bg-white shadow border p-5'
           }
         >
           <p key={'asd'} className="text-2xl font-semibold">
@@ -55,7 +55,7 @@ const MenuEvent = () => {
                 'data-[state=active]:bg-yellow-600 data-[state=active]:text-primary'
               )}
             >
-              <p className="w-full text-start flex items-center gap-2">
+              <p className="w-full text-start flex items-center gap-2 whitespace-pre-line">
                 {tabs === row?.value && <Check />}
                 {row?.label}
               </p>
