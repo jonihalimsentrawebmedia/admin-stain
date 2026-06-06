@@ -20,11 +20,11 @@ export const TipeInputField = {
 export type TTipeInputField = (typeof TipeInputField)[keyof typeof TipeInputField]
 
 export const TIPE_INPUT_OPTIONS: { value: TTipeInputField; label: string }[] = [
-  { value: TipeInputField.TEXT, label: 'Text' },
-  { value: TipeInputField.NUMBER, label: 'Number' },
-  { value: TipeInputField.DATE, label: 'Date' },
+  { value: TipeInputField.TEXT, label: 'Teks' },
+  { value: TipeInputField.NUMBER, label: 'Angka' },
+  { value: TipeInputField.DATE, label: 'Tanggal' },
   { value: TipeInputField.DROPDOWN, label: 'Dropdown' },
-  { value: TipeInputField.TEXTAREA, label: 'Textarea' },
+  { value: TipeInputField.TEXTAREA, label: 'Area Teks' },
 ]
 
 /** Satu opsi untuk tipe input DROPDOWN */
