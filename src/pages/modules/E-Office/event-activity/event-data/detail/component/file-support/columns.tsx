@@ -32,6 +32,7 @@ export const ColumnsFileSupport = () => {
             {data?.jenis_file === 'DOKUMEN' ? (
               <Link
                 to={data?.dokumen}
+                target={'_blank'}
                 className={
                   'flex items-center gap-1.5 border border-primary text-primary p-1.5 w-fit rounded'
                 }
@@ -42,6 +43,7 @@ export const ColumnsFileSupport = () => {
             ) : (
               <Link
                 to={data?.url_file}
+                target={'_blank'}
                 className={
                   'flex items-center gap-1.5 border border-primary text-primary p-1.5 w-fit rounded'
                 }

@@ -34,7 +34,7 @@ export const FormRegistrationInbox = (props: IProps) => {
   const form = useForm<SuratFormType>({
     resolver: zodResolver(SuratSchema),
     defaultValues: {
-      is_otomatis: false,
+      is_otomatis: true,
       is_agenda: false,
       is_penting: false,
       is_disposisi: false,
@@ -227,7 +227,7 @@ export const FormRegistrationInbox = (props: IProps) => {
             <TextInput
               name={'nomor_agenda'}
               form={form}
-              label={'Nonota Agenda'}
+              label={'Nomor Agenda'}
               placeholder={'Nomor agenda'}
               className={'col-span-1'}
               htmlFor={'nomor_agenda'}

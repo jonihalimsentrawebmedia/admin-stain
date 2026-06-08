@@ -30,12 +30,14 @@ export const FormEvent = (props: props) => {
           <TextInput
             name={'tanggal_mulai'}
             form={form}
+            min={new Date().toISOString().split('T')[0]}
             label={'Tanggal Mulai'}
             htmlFor={'Tanggal Mulai'}
             type={'date'}
             isRequired
           />
           <TextInput
+            min={form.watch('tanggal_mulai')}
             name={'tanggal_selesai'}
             form={form}
             label={'Tanggal Selesai'}

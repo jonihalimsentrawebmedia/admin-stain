@@ -78,26 +78,28 @@ const ReportActivity = () => {
           <Tabs
             value={tabsSelected}
             onValueChange={setTabsSelected}
-            className="w-full h-full flex-row! gap-x-2"
+            className="w-full h-full flex-col! gap-x-2"
           >
             <TabsList
               className={
-                'flex flex-col rounded gap-2 h-full min-w-[200px] w-[200px] items-start p-2.5 border bg-white'
+                'flex flex-col! rounded gap-2 h-full w-full items-start p-2.5 border bg-white'
               }
             >
-              <p className={'font-semibold text-sm border p-2 w-full rounded'}>Daftar Isi</p>
-              {context?.map((row, k) => (
-                <TabsTrigger
-                  key={k}
-                  value={row?.context}
-                  className={cn(
-                    'w-full shadow-none rounded-none drop-shadow-none border-none',
-                    'data-[state=active]:bg-blue-200 data-[state=active]:text-primary'
-                  )}
-                >
-                  <p className={'whitespace-pre-line text-start w-full'}>{row?.nama}</p>
-                </TabsTrigger>
-              ))}
+              <p className={'font-semibold text-sm border p-2 w-fit rounded'}>Daftar Isi</p>
+              <div className={'flex items-center gap-2 overflow-x-auto w-full whitespace-nowrap'}>
+                {context?.map((row, k) => (
+                  <TabsTrigger
+                    key={k}
+                    value={row?.context}
+                    className={cn(
+                      'w-full shadow-none rounded-none drop-shadow-none border-none',
+                      'data-[state=active]:bg-blue-200 data-[state=active]:text-primary'
+                    )}
+                  >
+                    <p className={'whitespace-nowrap text-start w-full'}>{row?.nama}</p>
+                  </TabsTrigger>
+                ))}
+              </div>
             </TabsList>
             {context?.map((row, l) => (
               <TabsContent value={row?.context} key={l} className={'w-full'}>

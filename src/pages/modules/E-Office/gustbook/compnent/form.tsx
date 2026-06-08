@@ -38,8 +38,8 @@ const FormGustBook = (props: props) => {
             <SelectBasicInput
               form={form}
               name={'id_unit'}
-              placeholder={'Pilih Asal/ Institusi'}
-              label={'Asal / Institusi'}
+              placeholder={'Satuan Kerja/ Organisasi Penerima Tamu'}
+              label={'Satuan Kerja/ Organisasi Penerima Tamu'}
               isRequired
               data={
                 institution?.map((row) => ({
@@ -115,7 +115,7 @@ const FormGustBook = (props: props) => {
             <SelectBasicInput
               name={'id_jenis_keperluan'}
               form={form}
-              placeholder={'Jenis Keperluar'}
+              placeholder={'Jenis Keperluan'}
               label={'Jenis Keperluan'}
               isRequired
               className={'col-span-1 bg-white'}

@@ -47,7 +47,7 @@ export const ColumnsExpenditure = () => {
       cell: ({ row }) => {
         const data = row?.original
         return (
-          <p>
+          <p className={'text-end'}>
             {new Intl.NumberFormat('id-ID', {
               style: 'currency',
               currency: 'IDR',

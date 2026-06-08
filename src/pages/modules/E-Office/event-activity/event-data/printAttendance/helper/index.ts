@@ -379,13 +379,14 @@ const buildSignatureBlock = (signatories: Signatory[], isPortrait: boolean) => {
               stack: [
                 {
                   text: sig.label,
-                  bold: true,
+                  bold: false,
                   alignment: 'left',
                 },
                 {
                   text: sig.jabatan ? sig.jabatan + ',' : '',
                   margin: [0, 0, 0, sigSpace],
                   alignment: 'left',
+                  bold: true,
                 },
                 {
                   text: sig.nama,
@@ -408,13 +409,14 @@ const buildSignatureBlock = (signatories: Signatory[], isPortrait: boolean) => {
             stack: [
               {
                 text: sig.label,
-                bold: true,
+                bold: false,
                 alignment: 'center',
               },
               {
                 text: sig.jabatan ? sig.jabatan + ',' : '',
                 margin: [0, 0, 0, sigSpace],
                 alignment: 'center',
+                bold: true,
               },
               {
                 text: sig.nama,
@@ -434,9 +436,10 @@ const buildSignatureBlock = (signatories: Signatory[], isPortrait: boolean) => {
       width: '*',
       alignment: 'center' as const,
       stack: [
-        { text: sig.label, bold: true, alignment: 'center' as const },
+        { text: sig.label, bold: false, alignment: 'center' as const },
         {
           text: sig.jabatan ? sig.jabatan + ',' : '',
+          bold: true,
           margin: [0, 5, 0, sigSpace] as [number, number, number, number],
           alignment: 'center' as const,
         },
