@@ -34,7 +34,7 @@ const DetailEventActivity = () => {
         </Card>
 
         <div className="flex items-center gap-4">
-          <MenuEvent />
+          <MenuEvent detail={event} />
         </div>
       </div>
     </>

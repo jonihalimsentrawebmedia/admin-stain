@@ -40,7 +40,7 @@ export const UseGetDocumentation = (props: props) => {
     queryKey: ['documentation', Params.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get(`/eoffice/acara/${id_acara}/dokumentasi`).then((res) => res.data),
+      AxiosClient.get(`/eoffice/acara/${id_acara}/dokumentasi?${Params}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching

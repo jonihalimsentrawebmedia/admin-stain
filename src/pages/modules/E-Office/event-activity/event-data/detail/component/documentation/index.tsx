@@ -1,25 +1,84 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Card, CardContent } from '@/components/ui/card.tsx'
-import ButtonAddDocumentation from './buttonAdd.tsx'
 import { UseGetDocumentation } from './hooks.tsx'
-import { Link, useParams, useSearchParams } from 'react-router-dom'
-import { IoMdLink } from 'react-icons/io'
+import { useParams, useSearchParams } from 'react-router-dom'
 import ButtonEditDocumentation from '@/pages/modules/E-Office/event-activity/event-data/detail/component/documentation/buttonEdit.tsx'
 import { ButtonDeleteDocumentation } from '@/pages/modules/E-Office/event-activity/event-data/detail/component/documentation/buttonDelete.tsx'
-import TablePaginate from '@/components/common/table/TablePagination.tsx'
+import { Check } from 'lucide-react'
+import { cn } from '@/lib/utils.ts'
+import { useState } from 'react'
+import { Button } from '@/components/ui/button.tsx'
+import type { IEvent } from '@/pages/modules/E-Office/event-activity/event-data/data/types.ts'
+import ButtonUploadMultiple from '@/pages/modules/E-Office/event-activity/event-data/detail/component/documentation/UploadMultiple'
+import AxiosClient from '@/provider/axios.tsx'
+import { toast } from 'react-toastify'
+import { FaTrash } from 'react-icons/fa'
+import { useQueryClient } from '@tanstack/react-query'
+import { MdPrint } from 'react-icons/md'
+import { generateDocumentationPdf } from '@/pages/modules/E-Office/event-activity/event-data/detail/component/documentation/printImage'
+import pdfMake from '@/utils/pdfmake.ts'
 
-const DocumentationEventActivity = () => {
+interface props {
+  detail?: IEvent
+}
+
+const DocumentationEventActivity = (props: props) => {
+  const { detail } = props
   const { id } = useParams()
-  const [searchParams, setSearchParams] = useSearchParams()
-  const page = searchParams.get('page') ?? '1'
-  const limit = searchParams.get('limit') ?? '10'
+  const [searchParams] = useSearchParams()
   const search = searchParams.get('search') ?? ''
-  const { file, meta } = UseGetDocumentation({
+  const { file } = UseGetDocumentation({
     id_acara: id as string,
-    page,
+    page: '0',
+    limit: '0',
     search,
-    limit,
   })
+  const [idSelected, setIdSelected] = useState<string[]>([])
+
+  const allIds = file.map((row) => row.id_acara_dokumentasi)
+
+  const isAllSelected = file.length > 0 && allIds.every((id) => idSelected.includes(id))
+  const selectedCount = idSelected.length
+
+  const HandleSelectAll = () => {
+    if (isAllSelected) {
+      setIdSelected([])
+      return
+    }
+    setIdSelected([...new Set(allIds)])
+  }
+  const HandleToggleSelect = (id: string) => {
+    setIdSelected((prev) => {
+      if (prev.includes(id)) {
+        return prev.filter((item) => item !== id)
+      }
+
+      return [...new Set([...prev, id])]
+    })
+  }
+
+  const queryClient = useQueryClient()
+  const HandleDeleteList = async () => {
+    if (idSelected.length > 0) {
+      await AxiosClient.delete(`/eoffice/acara/${id}/dokumentasi`, {
+        data: {
+          ids: [...idSelected],
+        },
+      })
+        .then((res) => {
+          if (res.data.status) {
+            toast.success(res.data.message || 'Success')
+            setIdSelected([])
+            queryClient.invalidateQueries({
+              queryKey: ['documentation'],
+            })
+          }
+        })
+        .catch((err) => {
+          toast.error(err?.response?.data?.message || 'Error')
+        })
+    }
+  }
 
   return (
     <>
@@ -27,58 +86,112 @@ const DocumentationEventActivity = () => {
         <CardContent className={'p-3 flex flex-col gap-3'}>
           <ButtonTitleGroup
             label={'Dokumentasi'}
-            buttonGroup={[{ type: 'custom', element: <ButtonAddDocumentation /> }]}
+            buttonGroup={[
+              {
+                type: 'custom',
+                element: (
+                  <>
+                    <Button
+                      variant={isAllSelected ? 'outline' : 'default'}
+                      className={cn(
+                        isAllSelected ? 'text-primary border-primary' : 'text-white',
+                        'rounded-full'
+                      )}
+                      onClick={HandleSelectAll}
+                    >
+                      {isAllSelected ? 'Batalkan Pilihan' : `Pilih Semua (${selectedCount})`}
+                    </Button>
+                  </>
+                ),
+              },
+              {
+                type: 'custom',
+                element: (
+                  <>
+                    {idSelected.length > 0 && (
+                      <Button
+                        onClick={HandleDeleteList}
+                        variant={'destructive'}
+                        className={'rounded-full'}
+                      >
+                        <FaTrash />
+                        Hapus Gambar ({idSelected.length})
+                      </Button>
+                    )}
+                  </>
+                ),
+              },
+              { type: 'custom', element: <ButtonUploadMultiple /> },
+              {
+                type: 'custom',
+                element: (
+                  <>
+                    {idSelected.length > 0 && (
+                      <Button
+                        className={'text-white'}
+                        onClick={async () => {
+                          const temp: any = file.filter((row) =>
+                            idSelected.includes(row.id_acara_dokumentasi)
+                          )
+                          const { docDefinition } = await generateDocumentationPdf({
+                            documentation: temp,
+                            detail: detail,
+                          })
+
+                          const pdf = pdfMake.createPdf(docDefinition)
+                          pdf.open()
+                        }}
+                      >
+                        <MdPrint />
+                        Cetak
+                      </Button>
+                    )}
+                  </>
+                ),
+              },
+            ]}
           />
 
-          <div className="grid grid-cols-3 gap-4">
-            {file
-              ?.filter((row) => row?.jenis_file === 'UPLOAD')
-              .map((row, k) => (
-                <div key={k} className={'relative'}>
-                  <div className="top-1 right-1 absolute flex gap-1.5">
-                    <ButtonEditDocumentation data={row} />
-                    <ButtonDeleteDocumentation data={row} />
-                  </div>
-                  <img
-                    src={row?.dokumen}
-                    alt="gambar"
-                    className="w-full h-[170px] object-contain bg-gray-100 shadow rounded-lg"
-                  />
-                  <p>{row?.keterangan}</p>
-                </div>
-              ))}
-            {file
-              ?.filter((row) => row?.jenis_file === 'URL')
-              ?.map((row, k) => (
-                <div
-                  key={k}
-                  className={
-                    'relative flex items-center  justify-between gap-1.5 border border-primary p-2.5 rounded-lg'
-                  }
-                >
-                  <Link to={row?.url_file} target="_blank" className="flex items-center gap-1.5">
-                    <IoMdLink className={'size-10'} />
-                    <p className="font-semibold text-primary">URL Dokumentasi</p>
-                  </Link>
-                  <div className={'flex gap-1.5'}>
-                    <ButtonEditDocumentation data={row} />
-                    <ButtonDeleteDocumentation data={row} />
+          <div className="grid grid-cols-4 gap-4">
+            {file.map((row, k) => (
+              <div
+                key={k}
+                className={
+                  'relative border rounded-lg shadow overflow-hidden w-full cursor-pointer'
+                }
+                onClick={() => HandleToggleSelect(row.id_acara_dokumentasi)}
+              >
+                <div className="top-0 right-0 absolute flex gap-1.5 w-full">
+                  <div className="flex items-center justify-between w-full p-2">
+                    <div
+                      className={cn(
+                        'w-5 h-5 size-5 rounded-full bg-gray-100',
+                        'flex items-center justify-center',
+                        idSelected.includes(row?.id_acara_dokumentasi) && 'bg-blue-500'
+                      )}
+                    >
+                      {idSelected.includes(row?.id_acara_dokumentasi) && (
+                        <Check className={'size-3.5 text-white'} />
+                      )}
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <ButtonEditDocumentation data={row} />
+                      <ButtonDeleteDocumentation data={row} />
+                    </div>
                   </div>
                 </div>
-              ))}
+                <img
+                  src={row?.url_file}
+                  alt="gambar"
+                  className="w-full h-[200px] object-cover bg-gray-100 shadow"
+                />
+                <div className={'bg-white p-2'}>
+                  <p className={'text-sm'}>{row?.key_file}</p>
+                  <p className={'text-gray-500 text-xs'}>Dokumentassi #{k + 1}</p>
+                </div>
+              </div>
+            ))}
           </div>
-
-          {meta && (
-            <TablePaginate
-              length={meta?.total}
-              meta={meta}
-              setPage={(e) => {
-                const params = new URLSearchParams()
-                params.append('page', e)
-                setSearchParams(params?.toString())
-              }}
-            />
-          )}
         </CardContent>
       </Card>
     </>

@@ -49,7 +49,7 @@ export function InputRadio({
         >
           {label && (
             <FormLabel
-              className={clsx('text-wrap text-[#464646] font-normal', {
+              className={clsx('text-wrap text-[#464646] font-normal capitalize!', {
                 'w-full max-w-[200px]': isRow && label && !isMobile,
                 hidden: isRow && !label,
                 'w-full': isMobile,
@@ -68,7 +68,7 @@ export function InputRadio({
             <div className={`flex w-full flex-wrap items-center gap-6 `}>
               {data?.map((item, idx) => (
                 <Fragment key={idx}>
-                  <label className={`flex items-center gap-3 ${heightInput ?? ''}`}>
+                  <label className={`flex items-center gap-3 capitalize ${heightInput ?? ''}`}>
                     <Input
                       type="radio"
                       value={item?.value}

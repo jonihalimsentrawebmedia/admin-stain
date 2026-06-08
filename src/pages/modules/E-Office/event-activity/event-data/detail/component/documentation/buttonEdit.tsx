@@ -7,7 +7,6 @@ import { Form } from '@/components/ui/form.tsx'
 import { InputRadio } from '@/components/common/form/InputRadio.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import AxiosClient from '@/provider/axios.tsx'
-import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { UploadImageRatio } from '@/pages/modules/website-utama/public-content/facilities/components/uploadImageRatio.tsx'
@@ -21,8 +20,6 @@ interface Props {
 
 const ButtonEditDocumentation = (props: Props) => {
   const { data } = props
-  const { id } = useParams()
-
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -36,7 +33,6 @@ const ButtonEditDocumentation = (props: Props) => {
         dokumen: data?.dokumen,
         url_file: data?.url_file ?? '',
         jenis_file: data?.jenis_file as 'UPLOAD',
-        keterangan: data?.keterangan,
       })
     }
   }, [data])
@@ -44,7 +40,10 @@ const ButtonEditDocumentation = (props: Props) => {
   const queryClient = useQueryClient()
   const HandleSave = async (value: TResolverDocumentation) => {
     setLoading(true)
-    await AxiosClient.put(`/eoffice/acara/${id}/dokumentasi`, value)
+    await AxiosClient.put(
+      `/eoffice/acara/${data?.id_acara}/dokumentasi/${data?.id_acara_dokumentasi}`,
+      value
+    )
       .then((res) => {
         if (res.data.status) {
           setLoading(false)
@@ -94,7 +93,7 @@ const ButtonEditDocumentation = (props: Props) => {
             {form.watch('jenis_file') === 'UPLOAD' ? (
               <>
                 <UploadImageRatio
-                  name={'dokumen'}
+                  name={'url_file'}
                   form={form}
                   label={'Upload Dokumentasi'}
                   aspectRatioWidth={1}
@@ -102,14 +101,6 @@ const ButtonEditDocumentation = (props: Props) => {
                   placeholder={'Cari Gambar'}
                   maxWidthClassName={'max-w-[200px]'}
                   required
-                />
-                <TextInput
-                  form={form}
-                  name={'keterangan'}
-                  label={'Keterangan'}
-                  placeholder={'Keterangan'}
-                  htmlFor={'keterangan'}
-                  isRequired
                 />
               </>
             ) : (

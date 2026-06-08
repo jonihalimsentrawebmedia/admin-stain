@@ -6,10 +6,13 @@ import type { IAttendance } from './hooks.tsx'
 import { ButtonDeleteAttendance } from '@/pages/modules/E-Office/event-activity/event-data/detail/component/list-attandaces/component/buttonDelete.tsx'
 import ButtonEditAttendance from '@/pages/modules/E-Office/event-activity/event-data/detail/component/list-attandaces/component/buttonEdit.tsx'
 
-export const ColumnsHumanResource = () => {
-  const [searchParams] = useSearchParams()
-  const page = Number(searchParams.get('page') ?? '1')
-  const limit = Number(searchParams.get('limit') ?? '10')
+interface Props {
+  page: string
+  limit: string
+}
+
+export const ColumnsHumanResource = (props: Props) => {
+  const { page, limit } = props
 
   const columns: ColumnDef<IHumanResource>[] = [
     {
@@ -42,7 +45,11 @@ export const ColumnsHumanResource = () => {
       accessorKey: 'order',
       header: '#',
       cell: ({ row }) => {
-        return <p className="text-sm font-medium">{row.index + 1 + (page - 1) * limit}</p>
+        return (
+          <p className="text-sm font-medium">
+            {row.index + 1 + (Number(page) - 1) * Number(limit)}
+          </p>
+        )
       },
     },
     {

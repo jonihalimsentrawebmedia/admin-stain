@@ -32,7 +32,7 @@ export const SelectBasic = (props: Props) => {
           <SelectTrigger className={`${innerClassName} lg:min-w-[12rem]`}>
             <SelectValue placeholder={placeholder} />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent position={'item-aligned'}>
             {data.map((item, k) => (
               <SelectItem key={k} value={item?.value}>
                 {item?.label}
