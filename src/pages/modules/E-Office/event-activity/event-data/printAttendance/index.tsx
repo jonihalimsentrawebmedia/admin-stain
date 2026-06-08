@@ -23,6 +23,11 @@ import { toast } from 'react-toastify'
 import { UseGetPrintAttendance } from '@/pages/modules/E-Office/event-activity/event-data/printAttendance/hooks'
 import { useQueryClient } from '@tanstack/react-query'
 import { generatePreviewAttendancePdf2 } from '@/pages/modules/E-Office/event-activity/event-data/printAttendance/helper'
+import {
+  ConvertUrlToBase64,
+  UseGetLetterHeaderRef,
+} from '@/pages/modules/E-Office/settings/letter-header/hooks'
+import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 
 const PrintAttendanceList = () => {
   const { id: slug } = useParams()
@@ -31,6 +36,11 @@ const PrintAttendanceList = () => {
   const [url, setUrl] = useState<string>()
   const [loading, setLoading] = useState(false)
   const { attendance } = UseGetPrintAttendance(slug as string)
+  const { letterHeader: listHeader } = UseGetLetterHeaderRef({
+    page: '0',
+    limit: '0',
+  })
+  console.log(listHeader)
 
   const form = useForm<AttendanceSettingType>({
     resolver: zodResolver(AttendanceSettingResolver),
@@ -43,7 +53,7 @@ const PrintAttendanceList = () => {
       jabatan: true,
       tanda_tangan: true,
       keterangan: false,
-      hasil_cetak: 'portrait',
+      hasil_cetak: 'PORTRAIT',
       jumlah_peserta: 10,
       label_diketahui: '',
       jabatan_diketahui: '',
@@ -59,14 +69,21 @@ const PrintAttendanceList = () => {
     if (attendance) {
       form.reset({
         ...attendance,
+        hasil_cetak: attendance.hasil_cetak.toUpperCase() as 'PORTRAIT' | 'LANDSCAPE',
       })
     }
   }, [attendance])
+
+  const FindHeader =
+    listHeader?.find((row) => row?.id_unit === form.getValues('id_kop_surat')) ?? undefined
+  const { base64 } = ConvertUrlToBase64(FindHeader?.url_logo as string)
 
   const HandlePreview = async (values: any) => {
     const { docDefinition } = generatePreviewAttendancePdf2({
       values,
       event,
+      header: FindHeader,
+      imageUrl: `data:image/png;base64,${base64}`,
     })
 
     const blob = await pdfMake.createPdf(docDefinition).getBlob()
@@ -74,16 +91,16 @@ const PrintAttendanceList = () => {
     setUrl(url)
     setOpen(true)
   }
-
   const HandlePrint = (values: any) => {
     const { docDefinition } = generatePreviewAttendancePdf2({
       values,
       event,
+      header: FindHeader,
+      imageUrl: `data:image/png;base64,${base64}`,
     })
 
     pdfMake.createPdf(docDefinition).print()
   }
-
   const queryClient = useQueryClient()
   const HandleSave = async (values: AttendanceSettingType) => {
     await AxiosClient.post(`eoffice/cetak-daftar-hadir/${slug}`, values)
@@ -226,14 +243,25 @@ const PrintAttendanceList = () => {
                     />
                   </div>
                   <div className="w-1/2 flex flex-col gap-4 mt-2">
+                    <SelectBasicInput
+                      name={'id_kop_surat'}
+                      form={form}
+                      placeholder={'Pilih Satuan Kerja'}
+                      data={
+                        listHeader?.map((row) => ({
+                          label: row?.nama_unit ?? '',
+                          value: row?.id_unit,
+                        })) ?? []
+                      }
+                    />
                     <InputRadio
                       form={form}
                       name={'hasil_cetak'}
                       label={'Hasil Cetak'}
                       isRow
                       data={[
-                        { label: 'Portrait', value: 'portrait' },
-                        { label: 'Landscape', value: 'landscape' },
+                        { label: 'Portrait', value: 'PORTRAIT' },
+                        { label: 'Landscape', value: 'LANDSCAPE' },
                       ]}
                     />
                     <TextInput
@@ -277,12 +305,11 @@ const PrintAttendanceList = () => {
                 <CardTitle>Penandatangan Daftar Hadir</CardTitle>
                 <div className={'flex items-start gap-5'}>
                   <div className={'w-1/2 flex flex-col gap-4 mt-2'}>
-                    <p className="text-blue-500 text-lg">Diketahui Oleh</p>
                     <TextInput
                       name={'label_diketahui'}
                       form={form}
                       label={'Label Diketahui'}
-                      placeholder={'Label Diketahui'}
+                      placeholder={'Contoh: Diketahui oleh :'}
                       htmlFor={'label_diketahui'}
                       isRequired
                     />
@@ -290,7 +317,7 @@ const PrintAttendanceList = () => {
                       name={'nama_diketahui'}
                       form={form}
                       label={'Nama'}
-                      placeholder={'Nama'}
+                      placeholder={'Nama Penandatangan'}
                       htmlFor={'diketahui_nama'}
                       isRequired
                     />
@@ -298,36 +325,32 @@ const PrintAttendanceList = () => {
                       name={'jabatan_diketahui'}
                       form={form}
                       label={'Jabatan'}
-                      placeholder={'Jabatan'}
+                      placeholder={'Jabatan Penandatangan Cth: Direktur'}
                       htmlFor={'diketahui_jabatan'}
                       isRequired
                     />
                   </div>
                   <div className={'w-1/2 flex flex-col gap-4 mt-2'}>
-                    <p className="text-blue-500 text-lg">Yang Mengetahui</p>
                     <TextInput
                       name={'label_mengetahui'}
                       form={form}
-                      label={'Label Mengetahui'}
-                      placeholder={'Label Mengetahui'}
+                      label={'Label Mengetahui (Opsional)'}
+                      placeholder={'Contoh: Yang Mengetahui:'}
                       htmlFor={'label_mengetahui'}
-                      isRequired
                     />
                     <TextInput
                       name={'nama_mengetahui'}
                       form={form}
-                      label={'Nama'}
-                      placeholder={'Nama'}
+                      label={'Nama (Opsional)'}
+                      placeholder={'Nama Penandatangan'}
                       htmlFor={'mengetahui_nama'}
-                      isRequired
                     />
                     <TextInput
                       name={'jabatan_mengetahui'}
                       form={form}
-                      label={'Jabatan'}
-                      placeholder={'Jabatan'}
+                      label={'Jabatan (Opsional)'}
+                      placeholder={'Jabatan Yang Mengetahui Cth: Sekretaris'}
                       htmlFor={'mengetahui_jabatan'}
-                      isRequired
                     />
                   </div>
                 </div>

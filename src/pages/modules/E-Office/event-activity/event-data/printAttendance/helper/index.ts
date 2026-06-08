@@ -2,13 +2,150 @@ import pdfMake from 'pdfmake/build/pdfmake'
 import pdfFonts from 'pdfmake/build/vfs_fonts'
 import { format } from 'date-fns'
 import { id } from 'date-fns/locale'
+import type { Content } from 'pdfmake/interfaces'
 import type { AttendanceSettingType } from '@/pages/modules/E-Office/event-activity/event-data/printAttendance/data/resolver.tsx'
+import type {
+  ILetterHeader,
+  ISettingLetterHeader,
+} from '@/pages/modules/E-Office/settings/letter-header/data/types.ts'
 
 ;(pdfMake as any).vfs = (pdfFonts as any).vfs
 
 interface GenerateAttendancePdfProps {
   event: any
   values: AttendanceSettingType
+  header?: ILetterHeader
+  imageUrl?: string
+}
+
+const LOGO_SIZE = 72
+const LOGO_COLUMN_WIDTH = 90
+
+const getValidFont = (jenis_font?: string): string => {
+  if (!jenis_font) return 'Roboto'
+
+  switch (jenis_font.trim().toLowerCase()) {
+    case 'times new roman':
+      return 'TimesNewRoman'
+
+    case 'roboto':
+      return 'Roboto'
+
+    default:
+      return 'Roboto'
+  }
+}
+
+const buildLetterHeaderContent = (header?: ILetterHeader, imageUrl?: string): Content[] => {
+  if (!header) return []
+
+  const settings = header?.pengaturan || []
+
+  return [
+    {
+      columns: [
+        {
+          width: imageUrl ? LOGO_COLUMN_WIDTH : 0,
+          stack: imageUrl
+            ? [
+                {
+                  image: imageUrl,
+                  fit: [LOGO_SIZE, LOGO_SIZE],
+                  alignment: 'center',
+                  margin: [0, 0, 0, 0],
+                },
+              ]
+            : [],
+        },
+        {
+          width: '*',
+          stack: settings.map((setting: ISettingLetterHeader, index: number) => ({
+            text: setting.isi,
+            alignment: 'center',
+            font: getValidFont(setting.jenis_font),
+            fontSize: Number(setting.ukuran_font) || 12,
+            margin: [0, index === 0 ? 0 : 1, 0, 0] as [number, number, number, number],
+          })),
+          margin: [0, 2, 0, 0],
+        },
+      ],
+
+      columnGap: 5,
+      margin: [20, 10, 20, 10],
+    },
+
+    {
+      table: {
+        widths: ['*'],
+        body: [['']],
+      },
+      layout: {
+        hLineWidth: (i: number) => {
+          if (i === 0) return 1.5
+          return 0
+        },
+        hLineColor: () => '#000000',
+        vLineWidth: () => 0,
+        paddingLeft: () => 0,
+        paddingRight: () => 0,
+        paddingTop: () => 0,
+        paddingBottom: () => 2,
+      },
+      margin: [0, 0, 0, 8],
+    },
+  ]
+}
+
+// ─── Page dimension constants for height estimation ──────────────────────────
+const PAGE_DIM = {
+  PORTRAIT: { width: 595.28, height: 841.89 },
+  LANDSCAPE: { width: 841.89, height: 595.28 },
+}
+
+const MARGIN_PAGE = { top: 30, bottom: 50, left: 30, right: 30 }
+
+const ESTIMATED = {
+  title: 25,
+  eventInfo: 74,
+  tableHeader: 34,
+  tableRow: 14,
+  tablePadding: 4,
+  bottomSpacing: 10,
+}
+
+/**
+ * Estimate letter header height (points).
+ * Sum of text lines height, logo height, container padding, and horizontal line.
+ *
+ * Margins (matching buildLetterHeaderContent):
+ *   - Columns container: margin [0,0,0,5]
+ *   - Separator line:    margin [0,0,0,8]
+ */
+const estimateHeaderHeight = (header?: ILetterHeader, imageUrl?: string): number => {
+  if (!header) return 0
+  const settings = header.pengaturan || []
+  // Each text line: font ~12pt + 2pt gap = ~14pt
+  const textHeight = settings.length * 14
+  // Logo area: 72px logo + container vertical padding ~10pt
+  const logoHeight = imageUrl ? 72 + 10 : 0
+  // Column area height = max(text, logo) + container margin bottom [0,0,0,5]
+  const columnArea = Math.max(textHeight, logoHeight) + 5
+  // Horizontal line: ~13pt (border 1.5 + paddingBottom 2 + margin [0,0,0,8])
+  return columnArea + 13
+}
+
+/**
+ * Estimate signature block height (points).
+ */
+const estimateSignatureHeight = (signatories: Signatory[], isPortrait: boolean): number => {
+  if (signatories.length === 0) return 0
+  const sigSpace = isPortrait ? 60 : 40
+  const rowMargin = isPortrait ? 45 : 20
+  const topMargin = isPortrait ? 60 : 40
+  const pairs = Math.ceil(signatories.length / 2)
+  // Per column (signatory): label ~18pt + jabatan ~16pt + sigSpace gap + nama ~18pt
+  const perSignatoryTotal = 18 + 16 + sigSpace + 18
+  return topMargin + pairs * perSignatoryTotal + (pairs - 1) * rowMargin
 }
 
 interface Signatory {
@@ -38,23 +175,23 @@ const buildTableColumns = (values: AttendanceSettingType) => {
   }
   if (values.hp) {
     columns.push({ text: 'HP', style: 'tableHeader', fontSize: 10 })
-    widths.push(values.hasil_cetak === 'portrait' ? 50 : 100)
+    widths.push(values.hasil_cetak === 'PORTRAIT' ? 50 : 100)
   }
   if (values.email) {
     columns.push({ text: 'Email', style: 'tableHeader', fontSize: 10 })
-    widths.push(values.hasil_cetak === 'portrait' ? 50 : 100)
+    widths.push(values.hasil_cetak === 'PORTRAIT' ? 50 : 100)
   }
   if (values.jabatan) {
     columns.push({ text: 'Jabatan', style: 'tableHeader', fontSize: 10 })
-    widths.push(values.hasil_cetak === 'portrait' ? 50 : 100)
+    widths.push(values.hasil_cetak === 'PORTRAIT' ? 50 : 100)
   }
   if (values.tanda_tangan) {
     columns.push({ text: 'TTD', style: 'tableHeader', fontSize: 10 })
-    widths.push(values.hasil_cetak === 'portrait' ? 50 : 100)
+    widths.push(values.hasil_cetak === 'PORTRAIT' ? 50 : 100)
   }
   if (values.keterangan) {
     columns.push({ text: 'Keterangan', style: 'tableHeader', fontSize: 10 })
-    widths.push(values.hasil_cetak === 'portrait' ? 60 : 100)
+    widths.push(values.hasil_cetak === 'PORTRAIT' ? 60 : 100)
   }
 
   return { columns, widths }
@@ -91,26 +228,32 @@ const collectSignatories = (values: AttendanceSettingType): Signatory[] => {
 
   // Diketahui (always required)
   list.push({
-    label: values.label_diketahui || 'Yang Diketahui',
+    label: values.label_diketahui || '',
     jabatan: values.jabatan_diketahui || '',
     nama: values.nama_diketahui || '',
   })
+  // Mengetahui (always pushed, even if empty — matches original behaviour)
+  if (values.label_mengetahui || values.jabatan_mengetahui || values.nama_mengetahui) {
+    list.push({
+      label: values.label_mengetahui || '',
+      jabatan: values.jabatan_mengetahui || '',
+      nama: values.nama_mengetahui || '',
+    })
+  }
 
-  // Mengetahui (always shown, even if empty — matches original behaviour)
-  list.push({
-    label: values.label_mengetahui || 'Diketahui Oleh',
-    jabatan: values.jabatan_mengetahui || '',
-    nama: values.nama_mengetahui || '',
-  })
-
-  // Saksi pendatang
   if (values.saksi_pendatang && Array.isArray(values.saksi_pendatang)) {
-    values.saksi_pendatang.forEach((s: any) => {
-      list.push({
-        label: s.label || '',
-        jabatan: s.jabatan || '',
-        nama: s.nama || '',
-      })
+    values.saksi_pendatang.forEach((s) => {
+      const label = s.label?.trim()
+      const jabatan = s.jabatan?.trim()
+      const nama = s.nama?.trim()
+
+      if (label || jabatan || nama) {
+        list.push({
+          label: label || '',
+          jabatan: jabatan || '',
+          nama: nama || '',
+        })
+      }
     })
   }
 
@@ -130,34 +273,66 @@ const chunkArray = <T>(arr: T[], size: number): T[][] => {
 
 /**
  * Build the event info section (common to all modes).
+ *
+ * Uses a borderless TABLE with custom layout that matches the participant
+ * table's padding (paddingLeft: 4) so the event detail labels start at
+ * the exact same x-coordinate as the table — achieving flush alignment.
  */
 const buildEventInfo = (event: any) => ({
-  margin: [0, 15, 0, 15] as [number, number, number, number],
-  columns: [
-    {
-      width: 150,
-      text: ['Nama Kegiatan\n', 'Hari / Tanggal\n', 'Waktu\n', 'Tempat\n', 'Penyelenggara'],
-    },
-    {
-      text: [
-        `: ${event?.nama_kegiatan}\n`,
-        `: ${
-          event?.tanggal_mulai
-            ? format(new Date(event.tanggal_mulai), 'EEEE, dd MMMM yyyy', { locale: id })
-            : ''
-        }\n`,
-        `: ${event?.waktu}\n`,
-        `: ${event?.tempat}\n`,
-        `: ${event?.penyelenggara}`,
+  margin: [30, 10, 30, 10] as [number, number, number, number],
+  table: {
+    widths: ['auto', '*'],
+    body: [
+      [
+        { text: 'Nama Kegiatan', alignment: 'left' as const, noWrap: true },
+        { text: `: ${event?.nama_kegiatan || ''}`, alignment: 'left' as const },
       ],
-    },
-  ],
+      [
+        { text: 'Hari / Tanggal', alignment: 'left' as const, noWrap: true },
+        {
+          text: `: ${
+            event?.tanggal_mulai
+              ? format(new Date(event.tanggal_mulai), 'EEEE, dd MMMM yyyy', { locale: id })
+              : ''
+          }`,
+          alignment: 'left' as const,
+        },
+      ],
+      [
+        { text: 'Waktu', alignment: 'left' as const, noWrap: true },
+        { text: `: ${event?.waktu || ''}`, alignment: 'left' as const },
+      ],
+      [
+        { text: 'Tempat', alignment: 'left' as const, noWrap: true },
+        { text: `: ${event?.tempat || ''}`, alignment: 'left' as const },
+      ],
+      [
+        { text: 'Penyelenggara', alignment: 'left' as const, noWrap: true },
+        { text: `: ${event?.penyelenggara || ''}`, alignment: 'left' as const },
+      ],
+    ],
+  },
+  layout: {
+    hLineWidth: () => 0,
+    vLineWidth: () => 0,
+    hLineColor: () => 'transparent',
+    vLineColor: () => 'transparent',
+    paddingLeft: () => 4,
+    paddingRight: () => 4,
+    paddingTop: () => 2,
+    paddingBottom: () => 2,
+  },
 })
 
 /**
  * Build a table element for a single page of participants.
  */
-const buildParticipantTable = (headerColumns: any[], widths: any[], rows: any[], layout: any) => ({
+const buildParticipantTable = (
+  headerColumns: any[],
+  widths: any[],
+  rows: any[],
+  layout: any
+): any => ({
   table: {
     headerRows: 1,
     dontBreakRows: true,
@@ -176,8 +351,8 @@ const buildParticipantTable = (headerColumns: any[], widths: any[], rows: any[],
 const buildSignatureBlock = (signatories: Signatory[], isPortrait: boolean) => {
   if (signatories.length === 0) return { text: '' }
 
-  const sigSpace = isPortrait ? 60 : 40
-  const rowMargin = isPortrait ? 30 : 20
+  const sigSpace = isPortrait ? 40 : 40
+  const rowMargin = isPortrait ? 40 : 20
   const topMargin = isPortrait ? 60 : 40
 
   // Group into pairs (max 2 per row)
@@ -187,6 +362,74 @@ const buildSignatureBlock = (signatories: Signatory[], isPortrait: boolean) => {
   }
 
   const items = pairs.map((pair, idx) => {
+    console.log(pair)
+    // Single signatory on a row → center across full width using 3 columns
+    const isOnlyOneSignatory = signatories.length === 1
+    if (pair.length === 1) {
+      const sig = pair[0]
+      // hanya 1 penandatangan total
+      if (isOnlyOneSignatory) {
+        return {
+          columns: [
+            { width: '*', text: '' },
+            {
+              width: '*',
+              alignment: 'center',
+              margin: [0, 0, 0, 0],
+              stack: [
+                {
+                  text: sig.label,
+                  bold: true,
+                  alignment: 'left',
+                },
+                {
+                  text: sig.jabatan ? sig.jabatan + ',' : '',
+                  margin: [0, 0, 0, sigSpace],
+                  alignment: 'left',
+                },
+                {
+                  text: sig.nama,
+                  bold: true,
+                  alignment: 'left',
+                },
+              ],
+            },
+          ],
+          margin: [-70, idx > 0 ? 0 : 0, 0, 0],
+        }
+      }
+      // sisa ganjil (3,5,7,dst)
+      return {
+        columns: [
+          { width: '*', text: '' },
+          {
+            width: '*',
+            alignment: 'center',
+            stack: [
+              {
+                text: sig.label,
+                bold: true,
+                alignment: 'center',
+              },
+              {
+                text: sig.jabatan ? sig.jabatan + ',' : '',
+                margin: [0, 0, 0, sigSpace],
+                alignment: 'center',
+              },
+              {
+                text: sig.nama,
+                bold: true,
+                alignment: 'center',
+              },
+            ],
+          },
+          { width: '*', text: '' },
+        ],
+        margin: [0, idx > 0 ? rowMargin : 0, 0, 0],
+      }
+    }
+
+    // Two signatories on a row → equally split
     const cols = pair.map((sig) => ({
       width: '*',
       alignment: 'center' as const,
@@ -205,11 +448,6 @@ const buildSignatureBlock = (signatories: Signatory[], isPortrait: boolean) => {
       ],
     }))
 
-    if (pair.length === 1) {
-      // @ts-ignore
-      cols.push({ width: '*', text: '' })
-    }
-
     return {
       columns: cols,
       margin: [0, idx > 0 ? rowMargin : 0, 0, 0] as [number, number, number, number],
@@ -223,130 +461,256 @@ const buildSignatureBlock = (signatories: Signatory[], isPortrait: boolean) => {
   }
 }
 
-export const generatePreviewAttendancePdf2 = ({ event, values }: GenerateAttendancePdfProps) => {
-  // ─── 1. Table definition ────────────────────────────────────────────────────
+export const generatePreviewAttendancePdf2 = ({
+  event,
+  values,
+  header,
+  imageUrl,
+}: GenerateAttendancePdfProps) => {
+  // ─── 1. Resolve imageUrl from header.url_logo if not explicitly passed ──────
+  const resolvedImageUrl =
+    imageUrl || (header?.url_logo?.startsWith('data:') ? header.url_logo : undefined)
+
+  // ─── 2. Build letter header content once ────────────────────────────────────
+  const letterHeaderContent = buildLetterHeaderContent(header, resolvedImageUrl)
+
+  // ─── 3. Orientation & page constants ────────────────────────────────────────
+  const isPortrait = values.hasil_cetak === 'PORTRAIT'
+  const pageHeight = isPortrait ? PAGE_DIM.PORTRAIT.height : PAGE_DIM.LANDSCAPE.height
+
+  // ─── 4. Estimate the height of the repeating header zone ────────────────────
+  //  The header zone (letter header + title + event info) is rendered by
+  //  pdfmake's built-in `header` property on EVERY page.  We set
+  //  `pageMargins.top` to the estimated height so that the content area
+  //  starts right below it — preventing overlap.
+  const headerHeightVal = estimateHeaderHeight(header, resolvedImageUrl)
+  const headerZoneHeight = headerHeightVal + ESTIMATED.title + ESTIMATED.eventInfo
+  const topMargin = headerZoneHeight + 15 // 15pt buffer
+
+  // ─── 5. Dynamic row padding & content area dimensions ───────────────────────
+  //  • jumlah_peserta <= 13 → padding kecil (4pt)   agar tabel compact
+  //  • jumlah_peserta >  13 → padding besar (15pt)  agar baris lebih lega
+  const jumlahPeserta = Number(values.jumlah_peserta || 0)
+  const rowPadding = jumlahPeserta <= 13 ? 4 : 15
+
+  const contentAreaHeight = pageHeight - topMargin - MARGIN_PAGE.bottom
+  const availableForContent = contentAreaHeight - ESTIMATED.tableHeader
+  // Setiap baris punya paddingTop + paddingBottom → kalikan rowPadding × 2
+  const rowUnitCost = ESTIMATED.tableRow + rowPadding * 2
+
+  // ─── 6. Max rows per page ───────────────────────────────────────────────────
+  const maxRowsPerPage = Math.max(1, Math.floor(availableForContent / rowUnitCost))
+
+  // ─── 7. Table definition ────────────────────────────────────────────────────
   const { columns: headerColumns, widths } = buildTableColumns(values)
 
-  // ─── 2. All participant rows (empty placeholder rows) ────────────────────────
+  // ─── 8. All participant rows (empty placeholder rows) ────────────────────────
   const participantRows = generateParticipantRows(values)
   const totalParticipants = participantRows.length
 
-  // ─── 3. Signatories ──────────────────────────────────────────────────────────
+  // ─── 9. Signatories ──────────────────────────────────────────────────────────
   const signatories = collectSignatories(values)
   const totalSignatories = signatories.length
+  const signatureBlock: any = buildSignatureBlock(signatories, isPortrait)
+  const signatureHeightVal = estimateSignatureHeight(signatories, isPortrait)
 
-  // ─── 4. Capacity logic ───────────────────────────────────────────────────────
-  const isPortrait = values.hasil_cetak === 'portrait'
-  const normalCapacity = isPortrait ? 20 : 10
-  const reducedCapacity = isPortrait ? 16 : 10
+  // ─── 10. Pagination algorithm ────────────────────────────────────────────────
+  //
+  //  STRATEGY:
+  //    • Pages 1 … (n-1) → FULL  (maxRowsPerPage baris per halaman)
+  //    • Page n (terakhir) → LEBIH SEDIKIT baris + blok tanda tangan
+  //    • Jika baris sisa di halaman terakhir melebihi kapasitas + tanda tangan,
+  //      tanda tangan dipindah ke halaman khusus tersendiri.
+  //
+  //  maxRowsPerPage  = jumlah baris yang muat di halaman penuh (tanpa tanda tangan)
+  //  maxRowsWithSig  = jumlah baris yang muat di halaman BERSAMAAN tanda tangan
 
-  // Determine pagination strategy
-  const signatoriesNeedSeparatePage = totalSignatories > 2
-  const reduceCapacity = totalSignatories <= 2 && totalParticipants > normalCapacity
-  const capacityPerPage = reduceCapacity ? reducedCapacity : normalCapacity
+  let participantPages: any[][] = []
+  let signatureOnLastDataPage = false
+  let needsDedicatedSigPage = false
 
-  // ─── 5. Split participants into pages ────────────────────────────────────────
-  const participantPages = chunkArray(participantRows, capacityPerPage)
+  if (totalParticipants === 0 && totalSignatories === 0) {
+    // ── Kasus 1: Kosong total ──
+    participantPages = [[]]
+  } else if (totalSignatories === 0) {
+    // ── Kasus 2: Tidak ada tanda tangan → isi penuh semua halaman ──
+    participantPages = chunkArray(participantRows, maxRowsPerPage)
+  } else {
+    // ── Kasus 3: Ada tanda tangan ──
+    const maxRowsWithSig = Math.max(
+      0,
+      Math.floor((availableForContent - ESTIMATED.tableHeader - signatureHeightVal) / rowUnitCost)
+    )
 
-  // If no participants, still need at least one slot before signature
-  if (participantPages.length === 0) {
-    participantPages.push([])
+    if (totalParticipants === 0) {
+      // Tidak ada data peserta, hanya tanda tangan
+      participantPages = [[]]
+      signatureOnLastDataPage = true
+    } else if (totalParticipants <= maxRowsWithSig) {
+      // Semua muat di satu halaman bersama tanda tangan
+      participantPages = [participantRows]
+      signatureOnLastDataPage = true
+    } else {
+      // ── Perlu beberapa halaman ──
+      //  Isi halaman 1..(n-1) penuh dengan maxRowsPerPage baris.
+      //  Sisa baris → halaman terakhir bersama tanda tangan.
+      //  Jika sisa > maxRowsWithSig → kurangi jumlah halaman penuh
+      //  sampai sisa muat untuk tanda tangan, atau fallback ke halaman khusus.
+
+      let numFullPages = Math.floor(totalParticipants / maxRowsPerPage)
+      let lastPageRows = totalParticipants - numFullPages * maxRowsPerPage
+
+      // Kurangi halaman penuh sampai halaman terakhir muat tanda tangan
+      while (lastPageRows > maxRowsWithSig && numFullPages > 0) {
+        numFullPages--
+        lastPageRows = totalParticipants - numFullPages * maxRowsPerPage
+      }
+
+      if (lastPageRows > maxRowsWithSig) {
+        // ── Fallback: bahkan satu halaman pun tidak cukup untuk semua baris + tanda tangan
+        //    → isi semua halaman penuh, tanda tangan di halaman khusus.
+        //    → ambil 3 baris terakhir dari halaman terakhir → gabung di halaman tanda tangan
+        //      agar halaman tanda tangan tidak kosong.
+        participantPages = chunkArray(participantRows, maxRowsPerPage)
+        needsDedicatedSigPage = true
+      } else {
+        // ── Normal: halaman 1..(n-1) penuh, halaman terakhir sisa + tanda tangan ──
+        participantPages = []
+        for (let i = 0; i < numFullPages; i++) {
+          participantPages.push(participantRows.slice(i * maxRowsPerPage, (i + 1) * maxRowsPerPage))
+        }
+        // Halaman terakhir: sisa baris (<= maxRowsWithSig)
+        participantPages.push(participantRows.slice(numFullPages * maxRowsPerPage))
+        signatureOnLastDataPage = true
+      }
+    }
   }
 
-  // ─── 6. Table layout config ──────────────────────────────────────────────────
+  // ─── 11. Table layout config ──────────────────────────────────────────────────
   const tableLayout = {
-    paddingTop: (index: any) =>
-      index === 0
-        ? 10
-        : values?.jumlah_peserta > 20 && values?.hasil_cetak === 'portrait'
-          ? 12
-          : values?.jumlah_peserta <= 20 && values?.hasil_cetak
-            ? 4
-            : 10,
-    paddingBottom: (index: any) =>
-      index === 0
-        ? 10
-        : values?.jumlah_peserta > 20 && values?.hasil_cetak === 'portrait'
-          ? 12
-          : values?.jumlah_peserta <= 20 && values?.hasil_cetak
-            ? 4
-            : 10,
+    paddingTop: (index: any) => (index === 0 ? 10 : rowPadding),
+    paddingBottom: (index: any) => (index === 0 ? 10 : rowPadding),
     paddingLeft: () => 4,
     paddingRight: () => 4,
   }
 
-  // ─── 7. Build content ────────────────────────────────────────────────────────
-  const content: any[] = [
-    // Title (first page only)
-    { text: 'DAFTAR HADIR', style: 'title' },
-    // Event info (first page only)
-    buildEventInfo(event),
-  ]
+  // ─── 12. Build content — tables + signature only ────────────────────────────
+  //
+  //  The repeating elements (letter header, title, event info) are handled by
+  //  the `header` property of docDefinition — pdfmake renders them on EVERY
+  //  page automatically.  This is the most reliable approach because the
+  //  `header` zone is separate from the content flow and is never affected by
+  //  page breaks or pagination.
+  //
+  //  The content array only contains participant tables and the signature block.
+  //  Each table gets `pageBreak: 'before'` (except the first) so pdfmake
+  //  places each table on its own page.
 
-  // Signature block (built early so we can detect if it shares the last page)
-  const signatureBlock: any = buildSignatureBlock(signatories, isPortrait)
-  const signatureSharesLastPage =
-    !signatoriesNeedSeparatePage && totalSignatories > 0 && totalParticipants > 0
+  const content: any[] = []
 
-  if (signatoriesNeedSeparatePage && totalParticipants > 0) {
-    // Case C / D : signatories > 2 → dedicated page after all participants
-    signatureBlock.pageBreak = 'before'
-  }
-  // else (Case A / B) : signatories (1–2) stay on the last participant page
-
-  // Participant tables — each page gets its own fresh copy of header + widths
   participantPages.forEach((pageRows, pageIdx) => {
     const freshHeaders = headerColumns.map((col) => ({ ...col }))
     const freshWidths = [...widths]
+    const table = buildParticipantTable(freshHeaders, freshWidths, pageRows, tableLayout)
 
-    // When signature block shares the last page, apply reduced table padding
-    // to free up vertical space so the entire unbreakable signature fits
-    const isLastPage = pageIdx === participantPages.length - 1
-    const layout =
-      isLastPage && signatureSharesLastPage
-        ? {
-          paddingTop: (index: any) =>
-            index === 0
-              ? 10
-              : values?.jumlah_peserta > 20 && values?.hasil_cetak === 'portrait'
-                ? 12
-                : values?.jumlah_peserta <= 20 && values?.hasil_cetak
-                  ? 4
-                  : 10,
-          paddingBottom: (index: any) =>
-            index === 0
-              ? 10
-              : values?.jumlah_peserta > 20 && values?.hasil_cetak === 'portrait'
-                ? 12
-                : values?.jumlah_peserta <= 20 && values?.hasil_cetak
-                  ? 4
-                  : 10,
-            paddingLeft: () => 4,
-            paddingRight: () => 4,
-          }
-        : tableLayout
-
-    const table: any = buildParticipantTable(freshHeaders, freshWidths, pageRows, layout)
-
+    // Page break for all pages after the first
     if (pageIdx > 0) {
       table.pageBreak = 'before'
     }
 
-    content.push(table)
+    // Participant table (every page)
+    if (pageRows.length > 0 || totalParticipants === 0) {
+      content.push(table)
+    }
+
+    // Signature block on the last data page
+    const isLastPage = pageIdx === participantPages.length - 1
+    if (isLastPage && signatureOnLastDataPage && totalSignatories > 0) {
+      content.push(signatureBlock)
+    }
   })
 
-  content.push(signatureBlock)
+  // ── Dedicated signature page (if needed) ──
+  //  Ambil 3 baris terakhir dari halaman data terakhir → pindahkan ke halaman
+  //  tanda tangan agar tidak kosong.  Tampilkan sebagai tabel mini + tanda tangan.
+  if (needsDedicatedSigPage && totalSignatories > 0) {
+    const LAST_ROWS_MOVE_COUNT = 3
+    const lastPageIndex = participantPages.length - 1
+    const lastPage = participantPages[lastPageIndex]
 
-  // ─── 8. Assemble document definition ─────────────────────────────────────────
+    // Ambil 3 baris terakhir (atau lebih sedikit jika kurang dari 3)
+    const moveCount = Math.min(LAST_ROWS_MOVE_COUNT, lastPage.length)
+    const movedRows = lastPage.splice(lastPage.length - moveCount, moveCount)
+
+    // Hapus halaman terakhir jika kosong setelah dipindah
+    if (lastPage.length === 0) {
+      participantPages.pop()
+    }
+
+    // Render ulang content: semua halaman data (yang sudah dikurangi)
+    // ────────────────────────── re-render tables ──────────────────────────
+    content.length = 0
+
+    participantPages.forEach((pageRows, pageIdx) => {
+      const freshHeaders = headerColumns.map((col) => ({ ...col }))
+      const freshWidths = [...widths]
+      const table = buildParticipantTable(freshHeaders, freshWidths, pageRows, tableLayout)
+
+      if (pageIdx > 0) {
+        table.pageBreak = 'before'
+      }
+
+      if (pageRows.length > 0 || totalParticipants === 0) {
+        content.push(table)
+      }
+    })
+
+    // ── Halaman khusus tanda tangan: 3 baris data + tanda tangan ──
+    if (movedRows.length > 0) {
+      // Buat tabel mini dari baris yang dipindah + header kolom
+      const freshHeaders = headerColumns.map((col) => ({ ...col }))
+      const freshWidths = [...widths]
+      const miniTable = buildParticipantTable(freshHeaders, freshWidths, movedRows, tableLayout)
+      miniTable.pageBreak = 'before'
+      content.push(miniTable)
+    } else {
+      // Tidak ada baris yang bisa dipindah (semua peserta = 0 tapi ada tanda tangan)
+      content.push({ text: '', pageBreak: 'before' })
+    }
+
+    // Tanda tangan di bawah tabel mini
+    content.push(signatureBlock)
+  }
+
+  // ─── 13. Assemble document definition ────────────────────────────────────────
+  const now = new Date()
+  const formattedDate = format(now, 'EEEE, dd MMMM yyyy HH:mm', { locale: id })
+
   const docDefinition: any = {
     pageOrientation: values.hasil_cetak,
-    pageMargins: [30, 30, 30, 30],
+    pageMargins: [MARGIN_PAGE.left, topMargin, MARGIN_PAGE.right, MARGIN_PAGE.bottom],
 
+    // ── Repeating header on EVERY page ────────────────────────────────────────
+    //  pdfmake calls this function for each page.  The returned elements are
+    //  rendered at the top of the page in the header zone (above content area).
+    //  This guarantees the letter header, title, and event info appear on ALL
+    //  pages — regardless of page breaks, content overflow, or pagination.
+    header: (_currentPage: number) => {
+      const headerItems: any[] = []
+      if (letterHeaderContent.length > 0) {
+        headerItems.push(...letterHeaderContent)
+      }
+      headerItems.push({ text: 'DAFTAR HADIR', style: 'title', margin: [0, 0, 0, 5] })
+      headerItems.push(buildEventInfo(event))
+      return headerItems
+    },
+
+    // ── Footer ────────────────────────────────────────────────────────────────
     footer: (currentPage: number, pageCount: number) => ({
-      margin: [40, 40, 40, 0] as [number, number, number, number],
+      margin: [30, 0, 30, 0] as [number, number, number, number],
       columns: [
         {
-          text: 'Dicetak melalui aplikasi E-Office',
+          text: `Dicetak Pada : , ${formattedDate}`,
           fontSize: 9,
           color: '#666',
         },

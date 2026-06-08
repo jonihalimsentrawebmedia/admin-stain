@@ -38,23 +38,23 @@ const buildTableColumns = (values: AttendanceSettingType) => {
   }
   if (values.hp) {
     columns.push({ text: 'HP', style: 'tableHeader', fontSize: 10 })
-    widths.push(values.hasil_cetak === 'portrait' ? 50 : 100)
+    widths.push(values.hasil_cetak === 'PORTRAIT' ? 50 : 100)
   }
   if (values.email) {
     columns.push({ text: 'Email', style: 'tableHeader', fontSize: 10 })
-    widths.push(values.hasil_cetak === 'portrait' ? 50 : 100)
+    widths.push(values.hasil_cetak === 'PORTRAIT' ? 50 : 100)
   }
   if (values.jabatan) {
     columns.push({ text: 'Jabatan', style: 'tableHeader', fontSize: 10 })
-    widths.push(values.hasil_cetak === 'portrait' ? 50 : 100)
+    widths.push(values.hasil_cetak === 'PORTRAIT' ? 50 : 100)
   }
   if (values.tanda_tangan) {
     columns.push({ text: 'TTD', style: 'tableHeader', fontSize: 10 })
-    widths.push(values.hasil_cetak === 'portrait' ? 50 : 100)
+    widths.push(values.hasil_cetak === 'PORTRAIT' ? 50 : 100)
   }
   if (values.keterangan) {
     columns.push({ text: 'Keterangan', style: 'tableHeader', fontSize: 10 })
-    widths.push(values.hasil_cetak === 'portrait' ? 60 : 100)
+    widths.push(values.hasil_cetak === 'PORTRAIT' ? 60 : 100)
   }
 
   return { columns, widths }
@@ -236,7 +236,7 @@ export const generatePreviewAttendancePdf = ({ event, values }: GenerateAttendan
   const totalSignatories = signatories.length
 
   // ─── 4. Capacity logic ───────────────────────────────────────────────────────
-  const isPortrait = values.hasil_cetak === 'portrait'
+  const isPortrait = values.hasil_cetak === 'PORTRAIT'
   const normalCapacity = isPortrait ? 20 : 10
   const reducedCapacity = isPortrait ? 16 : 8
 

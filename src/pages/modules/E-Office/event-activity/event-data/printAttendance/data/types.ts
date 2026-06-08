@@ -10,7 +10,7 @@ export interface PrintAttendance {
   jabatan: boolean
   tanda_tangan: boolean
   keterangan: boolean
-  hasil_cetak: 'portrait' | 'landscape'
+  hasil_cetak: 'PORTRAIT' | 'LANDSCAPE'
   jumlah_peserta: number
   label_diketahui: string
   jabatan_diketahui: string

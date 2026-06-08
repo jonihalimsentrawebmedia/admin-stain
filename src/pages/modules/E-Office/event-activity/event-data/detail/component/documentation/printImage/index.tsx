@@ -1,6 +1,7 @@
 import { format } from 'date-fns'
 import { id } from 'date-fns/locale'
 import { GetBase64FromUrl } from '@/pages/modules/E-Office/settings/letter-header/hooks'
+import type { IEvent } from '@/pages/modules/E-Office/event-activity/event-data/data/types.ts'
 
 const createImageGrid = (images: string[]) => {
   const rows: any[] = []
@@ -77,17 +78,50 @@ const createDocumentationContent = (images: string[]) => {
   return content
 }
 
-export const generateDocumentationPdf = async (
+interface props {
   documentation: {
     url_file: string
     key_file?: string
   }[]
-) => {
+  detail?: IEvent
+}
+
+export const generateDocumentationPdf = async (props: props) => {
+  const { documentation, detail } = props
   const images = await Promise.all(
     documentation.map(async (item) => {
       return await GetBase64FromUrl(item.url_file)
     })
   )
+
+  const buildEventInfo = (event?: IEvent) => {
+    if (!event) return { text: '' }
+
+    return {
+      margin: [0, 0, 0, 20] as [number, number, number, number],
+
+      table: {
+        widths: [140, '*'],
+
+        body: [
+          ['Nama Kegiatan', `: ${event.nama_kegiatan}`],
+          [
+            'Hari / Tanggal',
+            `: ${
+              event.tanggal_mulai
+                ? format(new Date(event.tanggal_mulai), 'EEEE, dd MMMM yyyy', { locale: id })
+                : '-'
+            }`,
+          ],
+          ['Waktu', `: ${event.waktu ?? '-'}`],
+          ['Tempat', `: ${event.tempat ?? '-'}`],
+          ['Penyelenggara', `: ${event.penyelenggara ?? '-'}`],
+        ],
+      },
+
+      layout: 'noBorders',
+    }
+  }
 
   const docDefinition: any = {
     pageSize: 'A4',
@@ -114,6 +148,7 @@ export const generateDocumentationPdf = async (
     }),
 
     content: [
+      buildEventInfo(detail),
       {
         text: 'DOKUMENTASI KEGIATAN',
         fontSize: 16,

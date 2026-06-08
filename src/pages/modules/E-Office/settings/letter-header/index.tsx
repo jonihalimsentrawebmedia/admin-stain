@@ -33,6 +33,7 @@ export const LetterHeader = () => {
   const [urlPDf, setUrlPDf] = useState<string>()
 
   const { institution } = UseGetUnitActive()
+
   const { letterHeader } = UseGetLetterHeader(idSelected)
   const { base64 } = ConvertUrlToBase64(letterHeader?.url_logo as string)
 
@@ -123,8 +124,7 @@ export const LetterHeader = () => {
                             content: generateContent(),
                           }
                           const pdf = pdfMake.createPdf(docDefinition)
-                          pdf.download()
-                          // pdfMake.createPdf(docDefinition).download('Kop Surat')
+                          pdf.download('Kop Surat')
                         }}
                       >
                         <MdDownload />

@@ -23,7 +23,7 @@ interface props {
 }
 
 const DocumentationEventActivity = (props: props) => {
-  const {} = props
+  const { detail } = props
   const { id } = useParams()
   const [searchParams] = useSearchParams()
   const search = searchParams.get('search') ?? ''
@@ -126,21 +126,26 @@ const DocumentationEventActivity = (props: props) => {
                 type: 'custom',
                 element: (
                   <>
-                    <Button
-                      className={'text-white'}
-                      onClick={async () => {
-                        const temp: any = file.filter((row) =>
-                          idSelected.includes(row.id_acara_dokumentasi)
-                        )
-                        const { docDefinition } = await generateDocumentationPdf(temp)
+                    {idSelected.length > 0 && (
+                      <Button
+                        className={'text-white'}
+                        onClick={async () => {
+                          const temp: any = file.filter((row) =>
+                            idSelected.includes(row.id_acara_dokumentasi)
+                          )
+                          const { docDefinition } = await generateDocumentationPdf({
+                            documentation: temp,
+                            detail: detail,
+                          })
 
-                        const pdf = pdfMake.createPdf(docDefinition)
-                        pdf.open()
-                      }}
-                    >
-                      <MdPrint />
-                      Cetak
-                    </Button>
+                          const pdf = pdfMake.createPdf(docDefinition)
+                          pdf.open()
+                        }}
+                      >
+                        <MdPrint />
+                        Cetak
+                      </Button>
+                    )}
                   </>
                 ),
               },

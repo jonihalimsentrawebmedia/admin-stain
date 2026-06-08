@@ -15,7 +15,7 @@ export const AttendanceSettingResolver = z.object({
   jabatan: z.boolean(),
   tanda_tangan: z.boolean(),
   keterangan: z.boolean(),
-  hasil_cetak: z.enum(['portrait', 'landscape']),
+  hasil_cetak: z.enum(['PORTRAIT', 'LANDSCAPE']),
 
   jumlah_peserta: z.number().min(0),
 
@@ -26,8 +26,8 @@ export const AttendanceSettingResolver = z.object({
   label_mengetahui: z.string().nullable().optional(),
   jabatan_mengetahui: z.string().nullable().optional(),
   nama_mengetahui: z.string().nullable().optional(),
-
-  saksi_pendatang: z.array(SignatureResolver),
+  saksi_pendatang: z.array(SignatureResolver).optional().nullable(),
+  id_kop_surat: z.string().nullable().optional(),
 })
 
 export type SignatureType = z.infer<typeof SignatureResolver>
