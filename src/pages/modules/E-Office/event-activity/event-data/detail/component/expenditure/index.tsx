@@ -5,6 +5,7 @@ import { UseGetExpenditure } from './hooks.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsExpenditure } from './columns.tsx'
 import { Card, CardContent } from '@/components/ui/card.tsx'
+import { TableCell, TableFooter, TableRow } from '@/components/ui/table.tsx'
 
 const ExpenditureSection = () => {
   const [searchParams] = useSearchParams()
@@ -20,6 +21,7 @@ const ExpenditureSection = () => {
     limit,
   })
   const columns = ColumnsExpenditure()
+  const Total = expenditure.reduce((total, item) => total + Number(item.jumlah_pengeluaran ?? 0), 0)
 
   return (
     <>
@@ -29,7 +31,33 @@ const ExpenditureSection = () => {
             label={'Pengeluaran Keuangan'}
             buttonGroup={[{ type: 'custom', element: <ButtonAddExpenditure /> }]}
           />
-          <TableCustom data={expenditure} columns={columns} loading={loading} meta={meta} />
+          <TableCustom
+            data={expenditure}
+            columns={columns}
+            loading={loading}
+            meta={meta}
+            isShowFooterTable={true}
+            footerContent={
+              <TableFooter>
+                <TableRow>
+                  <TableCell colSpan={5} className="text-center font-bold">
+                    Jumlah Pengeluaran
+                  </TableCell>
+
+                  <TableCell className="text-right font-bold">
+                    {new Intl.NumberFormat('id-ID', {
+                      style: 'currency',
+                      currency: 'IDR',
+                      minimumFractionDigits: 0,
+                    }).format(Total)}
+                  </TableCell>
+
+                  <TableCell />
+                  <TableCell />
+                </TableRow>
+              </TableFooter>
+            }
+          />
         </CardContent>
       </Card>
     </>

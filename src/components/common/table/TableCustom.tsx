@@ -31,6 +31,7 @@ interface Props {
   isShowPagination?: boolean
   tdFooterClassName?: string
   isShowFooterTable?: boolean
+  footerContent?: ReactNode
   addFilter?: ReactNode
   addRowColumn?: ReactNode
   classNameSearch?: string
@@ -63,6 +64,7 @@ const TableCustom = (props: Props) => {
     meta,
     isShowLimit = true,
     isShowChoiceColumn,
+    footerContent,
     setLimit,
     setPage,
     setSearch,
@@ -209,7 +211,7 @@ const TableCustom = (props: Props) => {
 
           {addRowColumn && addRowColumn}
         </TableBody>
-        {isShowFooterTable && (
+        {isShowFooterTable && !footerContent ? (
           <TableFooter>
             {table?.getFooterGroups()?.map((footerGroup) => (
               <TableRow key={footerGroup.id}>
@@ -227,6 +229,8 @@ const TableCustom = (props: Props) => {
               </TableRow>
             ))}
           </TableFooter>
+        ) : (
+          isShowFooterTable && footerContent && <>{footerContent}</>
         )}
       </Table>
       {isShowPagination && (
@@ -236,12 +240,12 @@ const TableCustom = (props: Props) => {
               <SetLimitList
                 setLimit={setLimit}
                 text={`${limitData > totalData ? totalData : limitData} Data dari
-                ${meta?.total??0} `}
+                ${meta?.total ?? 0} `}
               />
             ) : (
               <div>
                 Menampilkan 1 - {limitData > totalData ? totalData : limitData} Data dari{' '}
-                {meta?.total??0} Data
+                {meta?.total ?? 0} Data
               </div>
             )}
           </div>

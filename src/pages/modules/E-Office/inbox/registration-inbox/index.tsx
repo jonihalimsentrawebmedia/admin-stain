@@ -5,7 +5,7 @@ export const RegistrationInbox = () => {
   return (
     <>
       <div className={'space-y-5 bg-white'}>
-        <ButtonTitleGroup label={'Tulis Surat'} buttonGroup={[]} />
+        <ButtonTitleGroup label={'Form Registrasi Surat Masuk'} buttonGroup={[]} />
         <FormRegistrationInbox />
       </div>
     </>
