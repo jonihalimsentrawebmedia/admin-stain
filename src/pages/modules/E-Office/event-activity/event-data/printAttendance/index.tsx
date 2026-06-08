@@ -8,10 +8,9 @@ import { useForm } from 'react-hook-form'
 import { Form } from '@/components/ui/form.tsx'
 import { InputRadio } from '@/components/common/form/InputRadio.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button.tsx'
 import { MdPrint } from 'react-icons/md'
-import { generatePreviewAttendancePdf } from '@/pages/modules/E-Office/utils/generateAttendancePdf.ts'
 import pdfMake from 'pdfmake/build/pdfmake'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import { FaEye } from 'react-icons/fa'
@@ -21,6 +20,9 @@ import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'react-toastify'
+import { UseGetPrintAttendance } from '@/pages/modules/E-Office/event-activity/event-data/printAttendance/hooks'
+import { useQueryClient } from '@tanstack/react-query'
+import { generatePreviewAttendancePdf2 } from '@/pages/modules/E-Office/event-activity/event-data/printAttendance/helper'
 
 const PrintAttendanceList = () => {
   const { id: slug } = useParams()
@@ -28,6 +30,7 @@ const PrintAttendanceList = () => {
   const [open, setOpen] = useState(false)
   const [url, setUrl] = useState<string>()
   const [loading, setLoading] = useState(false)
+  const { attendance } = UseGetPrintAttendance(slug as string)
 
   const form = useForm<AttendanceSettingType>({
     resolver: zodResolver(AttendanceSettingResolver),
@@ -52,8 +55,16 @@ const PrintAttendanceList = () => {
     },
   })
 
+  useEffect(() => {
+    if (attendance) {
+      form.reset({
+        ...attendance,
+      })
+    }
+  }, [attendance])
+
   const HandlePreview = async (values: any) => {
-    const { docDefinition } = generatePreviewAttendancePdf({
+    const { docDefinition } = generatePreviewAttendancePdf2({
       values,
       event,
     })
@@ -65,7 +76,7 @@ const PrintAttendanceList = () => {
   }
 
   const HandlePrint = (values: any) => {
-    const { docDefinition } = generatePreviewAttendancePdf({
+    const { docDefinition } = generatePreviewAttendancePdf2({
       values,
       event,
     })
@@ -73,6 +84,7 @@ const PrintAttendanceList = () => {
     pdfMake.createPdf(docDefinition).print()
   }
 
+  const queryClient = useQueryClient()
   const HandleSave = async (values: AttendanceSettingType) => {
     await AxiosClient.post(`eoffice/cetak-daftar-hadir/${slug}`, values)
       .then((res) => {
@@ -80,6 +92,9 @@ const PrintAttendanceList = () => {
           setLoading(false)
           setOpen(false)
           form.reset()
+          queryClient.invalidateQueries({
+            queryKey: ['attendance'],
+          })
           toast.success(res.data.message || 'Success')
         }
       })
@@ -141,7 +156,7 @@ const PrintAttendanceList = () => {
                     />
                     <InputRadio
                       form={form}
-                      name={'Nama_peserta'}
+                      name={'nama_peserta'}
                       label={'Nama Peserta'}
                       isRow
                       data={[

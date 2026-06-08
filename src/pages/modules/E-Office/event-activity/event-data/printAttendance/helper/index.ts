@@ -205,7 +205,6 @@ const buildSignatureBlock = (signatories: Signatory[], isPortrait: boolean) => {
       ],
     }))
 
-    // Odd number — add empty column to keep layout balanced
     if (pair.length === 1) {
       // @ts-ignore
       cols.push({ width: '*', text: '' })
@@ -220,10 +219,11 @@ const buildSignatureBlock = (signatories: Signatory[], isPortrait: boolean) => {
   return {
     margin: [0, topMargin, 0, 0] as [number, number, number, number],
     stack: items,
+    unbreakable: true,
   }
 }
 
-export const generatePreviewAttendancePdf = ({ event, values }: GenerateAttendancePdfProps) => {
+export const generatePreviewAttendancePdf2 = ({ event, values }: GenerateAttendancePdfProps) => {
   // ─── 1. Table definition ────────────────────────────────────────────────────
   const { columns: headerColumns, widths } = buildTableColumns(values)
 
@@ -238,7 +238,7 @@ export const generatePreviewAttendancePdf = ({ event, values }: GenerateAttendan
   // ─── 4. Capacity logic ───────────────────────────────────────────────────────
   const isPortrait = values.hasil_cetak === 'portrait'
   const normalCapacity = isPortrait ? 20 : 10
-  const reducedCapacity = isPortrait ? 16 : 8
+  const reducedCapacity = isPortrait ? 16 : 10
 
   // Determine pagination strategy
   const signatoriesNeedSeparatePage = totalSignatories > 2
@@ -255,8 +255,22 @@ export const generatePreviewAttendancePdf = ({ event, values }: GenerateAttendan
 
   // ─── 6. Table layout config ──────────────────────────────────────────────────
   const tableLayout = {
-    paddingTop: (index: any) => (index === 0 ? 10 : 2),
-    paddingBottom: (index: any) => (index === 0 ? 10 : 2),
+    paddingTop: (index: any) =>
+      index === 0
+        ? 10
+        : values?.jumlah_peserta > 20 && values?.hasil_cetak === 'portrait'
+          ? 12
+          : values?.jumlah_peserta <= 20 && values?.hasil_cetak
+            ? 4
+            : 10,
+    paddingBottom: (index: any) =>
+      index === 0
+        ? 10
+        : values?.jumlah_peserta > 20 && values?.hasil_cetak === 'portrait'
+          ? 12
+          : values?.jumlah_peserta <= 20 && values?.hasil_cetak
+            ? 4
+            : 10,
     paddingLeft: () => 4,
     paddingRight: () => 4,
   }
@@ -269,11 +283,50 @@ export const generatePreviewAttendancePdf = ({ event, values }: GenerateAttendan
     buildEventInfo(event),
   ]
 
+  // Signature block (built early so we can detect if it shares the last page)
+  const signatureBlock: any = buildSignatureBlock(signatories, isPortrait)
+  const signatureSharesLastPage =
+    !signatoriesNeedSeparatePage && totalSignatories > 0 && totalParticipants > 0
+
+  if (signatoriesNeedSeparatePage && totalParticipants > 0) {
+    // Case C / D : signatories > 2 → dedicated page after all participants
+    signatureBlock.pageBreak = 'before'
+  }
+  // else (Case A / B) : signatories (1–2) stay on the last participant page
+
   // Participant tables — each page gets its own fresh copy of header + widths
   participantPages.forEach((pageRows, pageIdx) => {
     const freshHeaders = headerColumns.map((col) => ({ ...col }))
     const freshWidths = [...widths]
-    const table: any = buildParticipantTable(freshHeaders, freshWidths, pageRows, tableLayout)
+
+    // When signature block shares the last page, apply reduced table padding
+    // to free up vertical space so the entire unbreakable signature fits
+    const isLastPage = pageIdx === participantPages.length - 1
+    const layout =
+      isLastPage && signatureSharesLastPage
+        ? {
+          paddingTop: (index: any) =>
+            index === 0
+              ? 10
+              : values?.jumlah_peserta > 20 && values?.hasil_cetak === 'portrait'
+                ? 12
+                : values?.jumlah_peserta <= 20 && values?.hasil_cetak
+                  ? 4
+                  : 10,
+          paddingBottom: (index: any) =>
+            index === 0
+              ? 10
+              : values?.jumlah_peserta > 20 && values?.hasil_cetak === 'portrait'
+                ? 12
+                : values?.jumlah_peserta <= 20 && values?.hasil_cetak
+                  ? 4
+                  : 10,
+            paddingLeft: () => 4,
+            paddingRight: () => 4,
+          }
+        : tableLayout
+
+    const table: any = buildParticipantTable(freshHeaders, freshWidths, pageRows, layout)
 
     if (pageIdx > 0) {
       table.pageBreak = 'before'
@@ -281,16 +334,6 @@ export const generatePreviewAttendancePdf = ({ event, values }: GenerateAttendan
 
     content.push(table)
   })
-
-  // Signature block
-  const signatureBlock: any = buildSignatureBlock(signatories, isPortrait)
-
-  if (signatoriesNeedSeparatePage && totalParticipants > 0) {
-    // Case C / D : signatories > 2 → dedicated page after all participants
-    signatureBlock.pageBreak = 'before'
-  }
-  // else (Case A / B) : signatories stay on the last participant page
-  //   reduced capacity ensures enough room
 
   content.push(signatureBlock)
 

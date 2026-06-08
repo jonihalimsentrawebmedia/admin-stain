@@ -8,8 +8,14 @@ import { Check } from 'lucide-react'
 import ReportActivity from '@/pages/modules/E-Office/event-activity/event-data/detail/component/report-activity'
 import ListAttendance from '@/pages/modules/E-Office/event-activity/event-data/detail/component/list-attandaces'
 import { useSearchParams } from 'react-router-dom'
+import type { IEvent } from '@/pages/modules/E-Office/event-activity/event-data/data/types.ts'
 
-const MenuEvent = () => {
+interface Props {
+  detail?: IEvent
+}
+
+const MenuEvent = (props: Props) => {
+  const { detail } = props
   const TabsData = [
     { id: 1, value: 'file', label: 'File Pendukung', element: <SectionFile /> },
     { id: 2, value: 'attendance', label: 'Daftar Hadir', element: <ListAttendance /> },
@@ -17,7 +23,7 @@ const MenuEvent = () => {
       id: 3,
       value: 'documentation',
       label: 'Dokumentasi',
-      element: <DocumentationEventActivity />,
+      element: <DocumentationEventActivity detail={detail} />,
     },
     { id: 4, value: 'notulen', label: 'Notulen', element: <MeetingMinutes /> },
     { id: 5, value: 'cost', label: 'Pengeluaran Keuangan', element: <ExpenditureSection /> },

@@ -53,7 +53,7 @@ export const ButtonDeleteDocumentation = (props: Props) => {
         <div className={'grid grid-cols-[10rem_1fr] gap-4'}>
           <p className={'text-gray-500'}>File</p>
           {data?.jenis_file === 'UPLOAD' ? (
-            <img className={'w-fit h-[170px] object-contain'} src={data?.dokumen} alt={'File'} />
+            <img className={'w-fit h-[170px] object-contain'} src={data?.url_file} alt={'File'} />
           ) : (
             <Link
               to={data?.url_file}
@@ -65,8 +65,6 @@ export const ButtonDeleteDocumentation = (props: Props) => {
               Buka URL
             </Link>
           )}
-          <p className="text-gray-500">Keterangan</p>
-          <p>{data?.keterangan}</p>
         </div>
         <div className="flex gap-1.5 items-center justify-end">
           <Button

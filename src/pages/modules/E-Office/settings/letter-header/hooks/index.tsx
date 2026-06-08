@@ -47,3 +47,13 @@ export const ConvertUrlToBase64 = (url: string) => {
 
   return { base64, loading }
 }
+
+export const GetBase64FromUrl = async (url: string) => {
+  const params = new URLSearchParams()
+  params.append('url', url)
+
+  const res = await AxiosClient.get(`/url-to-base64?${params}`)
+
+  // return res.data
+  return `data:image/png;base64,${res.data}`
+}
