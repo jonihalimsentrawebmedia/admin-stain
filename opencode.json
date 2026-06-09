@@ -6,6 +6,9 @@
     }
   },
   "$schema": "https://opencode.ai/config.json",
+  "plugin": [
+    "opencode-agent-memory"
+  ],
   "agent": {
     "build": {
       "mode": "primary",
@@ -15,14 +18,22 @@
     "plan": {
       "mode": "primary",
       "model": "opencode/nemotron-3-super-free",
-      "tools": { "write": false, "edit": false, "bash": false },
+      "tools": {
+        "write": false,
+        "edit": false,
+        "bash": false
+      },
       "prompt": "Planner for STAIN Madina React frontend.\nWhen planning tasks, always:\n1. Check existing files in the relevant module directory first (pages/modules/, components/, router/)\n2. Follow MVVM pattern (View + ViewModel) for page-level features\n3. Use TanStack Query for data fetching mutations\n4. Use React Hook Form + Zod for forms\n5. Use shadcn/ui components from components/ui/ where possible\n6. Register new routes in the appropriate router file\n7. Consider the module's existing structure before adding new features\n8. Suggest using dedicated subagents for complex multi-file generation"
     },
     "code-explorer": {
       "description": "Cepat jelajahi codebase (search, grep, analisis struktur)",
       "mode": "subagent",
       "model": "opencode/mimo-v2.5-free",
-      "tools": { "write": false, "edit": false, "bash": false }
+      "tools": {
+        "write": false,
+        "edit": false,
+        "bash": false
+      }
     },
     "frontend-gen": {
       "description": "Generate React/TypeScript components, pages, and hooks following project patterns",
@@ -34,7 +45,10 @@
       "description": "Review React/TypeScript: best practices, project conventions, code quality",
       "mode": "subagent",
       "model": "opencode/nemotron-3-super-free",
-      "tools": { "write": false, "edit": false },
+      "tools": {
+        "write": false,
+        "edit": false
+      },
       "prompt": "React/TypeScript code reviewer for STAIN Madina project.\n\n## Checklist\n- [ ] MVVM pattern followed (View + ViewModel separation)\n- [ ] TanStack Query for all API calls (not raw fetch/axios in components)\n- [ ] React Hook Form + Zod for form validation (not raw useState)\n- [ ] shadcn/ui components used from components/ui/ (not custom HTML elements)\n- [ ] Proper TypeScript types/interfaces (not 'any')\n- [ ] File naming: PascalCase for components, camelCase for hooks/utils\n- [ ] TailwindCSS for styling (no CSS modules, no styled-components)\n- [ ] API error handling (toast notifications for errors)\n- [ ] Route registered in correct router file\n- [ ] Axios provider used (not direct axios.create)\n- [ ] No hardcoded API URLs (use VITE_API_URL)\n- [ ] Proper React 19 patterns (no legacy lifecycle, use hooks)\n- [ ] Query invalidation on mutations (cache consistency)\n- [ ] Loading states handled (skeleton/shimmer while fetching)\n\nProvide feedback with exact file paths and line numbers."
     },
     "api-tester": {

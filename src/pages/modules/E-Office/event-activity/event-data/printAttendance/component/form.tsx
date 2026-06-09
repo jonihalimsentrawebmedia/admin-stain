@@ -9,13 +9,15 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import TextInput from '@/components/common/form/TextInput'
+import { toast } from 'react-toastify'
 
 interface Props<T extends FieldValues> {
   form: UseFormReturn<T>
   name: ArrayPath<T>
+  fieldBlock?: boolean
 }
 
-const FormMoreSignature = <T extends FieldValues>({ form, name }: Props<T>) => {
+const FormMoreSignature = <T extends FieldValues>({ form, name, fieldBlock }: Props<T>) => {
   const { fields, append, remove } = useFieldArray({
     control: form.control,
     name,
@@ -38,7 +40,13 @@ const FormMoreSignature = <T extends FieldValues>({ form, name }: Props<T>) => {
           type="button"
           variant="outline"
           className="mt-2 rounded-full border-primary text-primary"
-          onClick={handleAdd}
+          onClick={() => {
+            fieldBlock
+              ? handleAdd()
+              : toast.error(
+                  'Tidak bisa menambahkan penandatangan Ke 3 Jika Penanda tangan 2 Blum diisi'
+                )
+          }}
         >
           Tambah Penandatangan
         </Button>
