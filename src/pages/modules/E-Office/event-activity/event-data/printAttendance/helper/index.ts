@@ -63,7 +63,7 @@ const COLUMN_MAP: ColumnDef[] = [
   { key: 'nomor', label: 'No', width: 'auto' },
   { key: 'nama_peserta', label: 'Nama Peserta', width: '*' },
   { key: 'instansi', label: 'Instansi/Alamat', width: '*' },
-  { key: 'hp', label: 'HP', width: 50 },
+  { key: 'hp', label: 'HP', width: 75 },
   { key: 'email', label: 'Email', width: 50 },
   { key: 'jabatan', label: 'Jabatan', width: 50 },
   { key: 'tanda_tangan', label: 'TTD', width: 40 },
@@ -250,7 +250,7 @@ const buildAcaraInfoSection = (nama_kegiatan: string, event: any) => ({
       style: 'title' as const,
       alignment: 'center' as const,
       fontSize: 14,
-      margin: [0, 0, 0, 10] as [number, number, number, number],
+      margin: [40, 0, 40, 5] as [number, number, number, number],
     },
     {
       table: {
@@ -654,7 +654,7 @@ export const generatePreviewAttendancePdf2 = ({
         style: 'title',
         fontSize: 12,
         alignment: 'center' as const,
-        margin: [40, 0, 0, 5],
+        margin: [40, 0, 40, 5],
       })
 
       // Portrait: event info di header (muncul di setiap halaman)
