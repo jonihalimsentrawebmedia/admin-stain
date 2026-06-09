@@ -40,7 +40,6 @@ const PrintAttendanceList = () => {
     page: '0',
     limit: '0',
   })
-  console.log(listHeader)
 
   const form = useForm<AttendanceSettingType>({
     resolver: zodResolver(AttendanceSettingResolver),
@@ -75,7 +74,7 @@ const PrintAttendanceList = () => {
   }, [attendance])
 
   const FindHeader =
-    listHeader?.find((row) => row?.id_unit === form.getValues('id_kop_surat')) ?? undefined
+    listHeader?.find((row) => row?.id_kop_surat === form.getValues('id_kop_surat')) ?? undefined
   const { base64 } = ConvertUrlToBase64(FindHeader?.url_logo as string)
 
   const HandlePreview = async (values: any) => {
@@ -250,7 +249,7 @@ const PrintAttendanceList = () => {
                       data={
                         listHeader?.map((row) => ({
                           label: row?.nama_unit ?? '',
-                          value: row?.id_unit,
+                          value: row?.id_kop_surat,
                         })) ?? []
                       }
                     />
@@ -357,7 +356,18 @@ const PrintAttendanceList = () => {
               </CardContent>
             </Card>
 
-            <FormMoreSignature name={'saksi_pendatang'} form={form} />
+            <FormMoreSignature
+              fieldBlock={
+                !!form.watch('label_diketahui') &&
+                !!form.watch('nama_diketahui') &&
+                !!form.watch('jabatan_diketahui') &&
+                !!form.watch('label_mengetahui') &&
+                !!form.watch('nama_mengetahui') &&
+                !!form.watch('jabatan_mengetahui')
+              }
+              name={'saksi_pendatang'}
+              form={form}
+            />
 
             <ButtonForm loading={loading} onCancel={() => setOpen(!open)} />
           </form>
