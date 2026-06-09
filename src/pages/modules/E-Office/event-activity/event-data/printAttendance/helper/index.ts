@@ -267,7 +267,7 @@ const buildKopSuratHeader = (header?: ILetterHeader, imageUrl?: string) => {
 }
 
 // ─── Build event info section ────────────────────────────────────────────────
-const buildAcaraInfoSection = (nama_kegiatan: string, event: any) => ({
+const buildAcaraInfoSection = (nama_kegiatan: string, event: any, isPortrait: boolean) => ({
   margin: [0, 0, 0, 10] as [number, number, number, number],
   stack: [
     {
@@ -316,7 +316,7 @@ const buildAcaraInfoSection = (nama_kegiatan: string, event: any) => ({
       layout: {
         hLineWidth: () => 0,
         vLineWidth: () => 0,
-        paddingLeft: () => 40,
+        paddingLeft: () => (isPortrait ? 40 : 0),
         paddingRight: () => 4,
         paddingTop: () => 2,
         paddingBottom: () => 2,
@@ -510,34 +510,46 @@ const buildMainPenandatangan = (
           text: item.label || '',
           bold: true,
           alignment: activePenandatangan.length === 1 ? 'left' : ('center' as const),
-          margin: [activePenandatangan.length === 1 ? 220 : 0, 0, 0, 0] as [
-            number,
-            number,
-            number,
-            number,
-          ],
+          margin: [
+            activePenandatangan.length === 1 && orientation === 'portrait'
+              ? 220
+              : activePenandatangan.length === 1 && orientation === 'landscape'
+                ? 330
+                : 0,
+            0,
+            0,
+            0,
+          ] as [number, number, number, number],
         },
         {
           text: item.jabatan ? `${item.jabatan},` : '',
           alignment: activePenandatangan.length === 1 ? 'left' : ('center' as const),
           bold: true,
-          margin: [activePenandatangan.length === 1 ? 220 : 0, 0, 0, 48] as [
-            number,
-            number,
-            number,
-            number,
-          ],
+          margin: [
+            activePenandatangan.length === 1 && orientation === 'portrait'
+              ? 220
+              : activePenandatangan.length === 1 && orientation === 'landscape'
+                ? 330
+                : 0,
+            0,
+            0,
+            48,
+          ] as [number, number, number, number],
         },
         {
           text: item.nama || '',
           bold: true,
           alignment: activePenandatangan.length === 1 ? 'left' : ('center' as const),
-          margin: [activePenandatangan.length === 1 ? 220 : 0, 0, 0, 0] as [
-            number,
-            number,
-            number,
-            number,
-          ],
+          margin: [
+            activePenandatangan.length === 1 && orientation === 'portrait'
+              ? 220
+              : activePenandatangan.length === 1 && orientation === 'landscape'
+                ? 330
+                : 0,
+            0,
+            0,
+            0,
+          ] as [number, number, number, number],
         },
       ],
     })),
@@ -599,12 +611,38 @@ export const generatePreviewAttendancePdf2 = ({
   // ─── 7. Build content (tables + signatures) ──────────────────────────────────
   const tableAndSignatureContent: any[] = []
 
-  // Landscape: event info goes in content area (not header)
-  if (!isPortrait) {
-    tableAndSignatureContent.push(
-      buildAcaraInfoSection(event?.nama_kegiatan || 'DAFTAR HADIR', event)
+  // Helper: build items for one page, optionally prepending event info (landscape)
+  const buildPageItems = (
+    chunkRowCount: number,
+    chunkStartIndex: number,
+    chunkTargetRowCount: number,
+    includeSignature: boolean
+  ) => {
+    const items: any[] = []
+
+    // Landscape: event info di setiap halaman via content (bukan header)
+    if (!isPortrait) {
+      items.push(buildAcaraInfoSection(event?.nama_kegiatan || 'DAFTAR HADIR', event, isPortrait))
+    }
+
+    items.push(
+      buildTable(values, {
+        startIndex: chunkStartIndex,
+        rowCount: chunkRowCount,
+        showHeader: true,
+        targetRowCount: chunkTargetRowCount,
+        verticalPadding: uniformVerticalPadding,
+      })
     )
+
+    if (includeSignature) {
+      items.push(buildMainPenandatangan(values, orientation, !!additionalPenandatanganSection))
+      items.push(additionalPenandatanganSection)
+    }
+
+    return items.filter(Boolean)
   }
+
   if (rowChunks.length) {
     let startIndex = 0
 
@@ -613,27 +651,16 @@ export const generatePreviewAttendancePdf2 = ({
 
       if (isLastChunk) {
         tableAndSignatureContent.push(
-          ...[
-            buildTable(values, {
-              startIndex,
-              rowCount: currentChunk.rowCount,
-              showHeader: true,
-              targetRowCount: currentChunk.targetRowCount,
-              verticalPadding: uniformVerticalPadding,
-            }),
-            buildMainPenandatangan(values, orientation, !!additionalPenandatanganSection),
-            additionalPenandatanganSection,
-          ].filter(Boolean)
+          ...buildPageItems(currentChunk.rowCount, startIndex, currentChunk.targetRowCount, true)
         )
       } else {
         tableAndSignatureContent.push({
-          ...buildTable(values, {
+          stack: buildPageItems(
+            currentChunk.rowCount,
             startIndex,
-            rowCount: currentChunk.rowCount,
-            showHeader: true,
-            targetRowCount: currentChunk.targetRowCount,
-            verticalPadding: uniformVerticalPadding,
-          }),
+            currentChunk.targetRowCount,
+            false
+          ),
           pageBreak: 'after',
         })
       }
@@ -641,17 +668,7 @@ export const generatePreviewAttendancePdf2 = ({
       startIndex += currentChunk.rowCount
     })
   } else {
-    tableAndSignatureContent.push(
-      ...[
-        buildTable(values, {
-          rowCount: 0,
-          showHeader: true,
-          verticalPadding: uniformVerticalPadding,
-        }),
-        buildMainPenandatangan(values, orientation, !!additionalPenandatanganSection),
-        additionalPenandatanganSection,
-      ].filter(Boolean)
-    )
+    tableAndSignatureContent.push(...buildPageItems(0, 0, 0, true))
   }
 
   // ─── 8. Assemble document definition ────────────────────────────────────────
@@ -681,9 +698,11 @@ export const generatePreviewAttendancePdf2 = ({
         margin: [40, 0, 40, 5],
       })
 
-      // Portrait: event info di header (muncul di setiap halaman)
+      // Portrait: event info di header (cukup ruang dgn 300pt margin)
       if (isPortrait) {
-        headerItems.push(buildAcaraInfoSection(event?.nama_kegiatan || 'DAFTAR HADIR', event))
+        headerItems.push(
+          buildAcaraInfoSection(event?.nama_kegiatan || 'DAFTAR HADIR', event, isPortrait)
+        )
       }
 
       return headerItems
