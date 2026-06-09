@@ -23,6 +23,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import type { IInbox } from '@/pages/modules/E-Office/inbox/registration-inbox/data/types.ts'
+import DialogSender from '@/pages/modules/E-Office/inbox/registration-inbox/component/DialogSender.tsx'
 
 interface IProps {
   data?: IInbox
@@ -178,20 +179,29 @@ export const FormRegistrationInbox = (props: IProps) => {
                 })) ?? []
               }
             />
-            <SelectBasicInput
-              form={form}
-              label={'Pengirim / Asal Surat'}
-              placeholder={'Pengirim / Asal surat'}
-              name={'id_asal_surat'}
-              isRequired
-              className={'col-span-2'}
-              data={
-                letterOrigin?.map((row) => ({
-                  label: row?.instansi,
-                  value: row?.id_asal_surat,
-                })) ?? []
-              }
+
+            <DialogSender
+              letterOrigin={letterOrigin}
+              value={form.watch('id_asal_surat')}
+              HandlerSave={(e) => {
+                form.setValue('id_asal_surat', e)
+              }}
             />
+
+            {/*<SelectBasicInput*/}
+            {/*  form={form}*/}
+            {/*  label={'Pengirim / Asal Surat'}*/}
+            {/*  placeholder={'Pengirim / Asal surat'}*/}
+            {/*  name={'id_asal_surat'}*/}
+            {/*  isRequired*/}
+            {/*  className={'col-span-2'}*/}
+            {/*  data={*/}
+            {/*    letterOrigin?.map((row) => ({*/}
+            {/*      label: row?.instansi,*/}
+            {/*      value: row?.id_asal_surat,*/}
+            {/*    })) ?? []*/}
+            {/*  }*/}
+            {/*/>*/}
 
             <TextInput
               name={'penerima_surat'}
