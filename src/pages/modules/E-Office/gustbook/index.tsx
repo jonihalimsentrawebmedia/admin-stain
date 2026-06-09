@@ -6,6 +6,8 @@ import { BiPlus } from 'react-icons/bi'
 import { UseGetGuestBooks } from '@/pages/modules/E-Office/gustbook/hooks'
 import { ColumnsGuestBooks } from '@/pages/modules/E-Office/gustbook/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import { generateGuestBookPdf } from '@/pages/modules/E-Office/gustbook/compnent/pdfmakeGuest.tsx'
+import pdfmake from '@/utils/pdfmake.ts'
 
 const GustBookList = () => {
   const [searchParams] = useSearchParams()
@@ -30,7 +32,14 @@ const GustBookList = () => {
             {
               type: 'custom',
               element: (
-                <Button className={'border border-primary rounded-full'} variant={'outline'}>
+                <Button
+                  className={'border border-primary rounded-full'}
+                  variant={'outline'}
+                  onClick={() => {
+                    const docDefinition = generateGuestBookPdf(guestBook)
+                    pdfmake.createPdf(docDefinition).print()
+                  }}
+                >
                   <MdPrint />
                   Cetak Buku Tamu
                 </Button>

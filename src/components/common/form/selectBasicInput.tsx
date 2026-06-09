@@ -11,7 +11,7 @@ interface Props<T extends FieldValues> {
   placeholder: string
   data: {
     value: string
-    label: string | ReactNode | any
+    label: string | ReactNode
   }[]
   selectItemClassName?: string
   className?: string
@@ -19,12 +19,13 @@ interface Props<T extends FieldValues> {
   isRow?: boolean
   isDisabled?: boolean
   label?: string | ReactNode
-  apiValue?: any
   isLoading?: boolean
   isRequired?: boolean
+  apiValue?: any
   fx?: (e: any) => void
   usePortal?: boolean
   showNull?: boolean
+  zIndex?: number
 }
 
 export const SelectBasicInput = <T extends FieldValues>({
@@ -36,12 +37,13 @@ export const SelectBasicInput = <T extends FieldValues>({
   selectClassName = '',
   isDisabled = false,
   isRow = false,
-  apiValue,
   usePortal = false,
+  showNull,
   isRequired,
   label,
+  apiValue,
   isLoading,
-  showNull,
+  zIndex = 9999,
   fx,
 }: Props<T>) => {
   useEffect(() => {
@@ -77,7 +79,8 @@ export const SelectBasicInput = <T extends FieldValues>({
               <div className={'flex items-center gap-1.5 w-full'}>
                 <Select
                   styles={{
-                    menuPortal: (base) => (usePortal ? { ...base, zIndex: 9999 } : base),
+                    menuPortal: (base) =>
+                      usePortal ? { ...base, zIndex: zIndex, pointerEvents: 'auto' } : base,
                   }}
                   menuPosition={usePortal ? 'fixed' : 'absolute'}
                   menuPortalTarget={usePortal ? document.body : undefined}
@@ -92,7 +95,7 @@ export const SelectBasicInput = <T extends FieldValues>({
                     }
                   }}
                   classNamePrefix="react-select"
-                  className={`min-h-10 w-full z-20 ${selectClassName}`}
+                  className={`min-h-10 z-20 w-full ${selectClassName}`}
                 />
                 {showNull && (
                   <BiX
