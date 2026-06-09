@@ -1,4 +1,4 @@
-import { MdDashboard, MdRoomPreferences } from 'react-icons/md'
+import { MdDashboard, MdOutgoingMail, MdRoomPreferences } from 'react-icons/md'
 import { FaArchive, FaListUl, FaRegCalendarAlt } from 'react-icons/fa'
 import { IoMailUnread } from 'react-icons/io5'
 import { FaGear, FaUsers } from 'react-icons/fa6'
@@ -58,7 +58,7 @@ export const GenerateMenu = () => {
       id: 4,
       name: 'Surat Keluar',
       path: `${baseDomain}/outbox`,
-      icon: <IoMailUnread className={'size-5'} />,
+      icon: <MdOutgoingMail className={'size-5'} />,
       child: [
         {
           id: 41,
@@ -72,12 +72,40 @@ export const GenerateMenu = () => {
         },
       ],
     },
-    {
-      id: 100,
-      name: 'Surat Generated',
-      path: `${baseDomain}/surat-generated`,
-      icon: <IoMailUnread className={'size-5'} />,
-    },
+    // {
+    //   id: 10,
+    //   name: 'Buat Surat',
+    //   path: `${baseDomain}/letter-generation`,
+    //   icon: <RiMailAiFill className={'size-5'} />,
+    //   child: [
+    //     {
+    //       id: 101,
+    //       name: 'Kode Nomor Surat',
+    //       path: `${baseDomain}/letter-generation/code-letter`,
+    //     },
+    //     {
+    //       id: 102,
+    //       name: 'Jenis Surat',
+    //       path: `${baseDomain}/letter-generation/letter-type`,
+    //     },
+    //     {
+    //       id: 103,
+    //       name: 'Buat Surat',
+    //       path: `${baseDomain}/letter-generation/create-letter`,
+    //     },
+    //     {
+    //       id: 104,
+    //       name: 'Daftar Surat',
+    //       path: `${baseDomain}/letter-generation/letter-list`,
+    //     },
+    //   ],
+    // },
+    // {
+    //   id: 100,
+    //   name: 'Surat Generated',
+    //   path: `${baseDomain}/surat-generated`,
+    //   icon: <IoMailUnread className={'size-5'} />,
+    // },
     {
       id: 5,
       name: 'Agenda',
@@ -137,11 +165,11 @@ export const GenerateMenu = () => {
           name: 'Tujuan Bertamu',
           path: `${baseDomain}/reference/purpose-guest`,
         },
-        {
-          id: 68,
-          name: 'Template Surat',
-          path: `${baseDomain}/reference/template-surat`,
-        },
+        // {
+        //   id: 68,
+        //   name: 'Template Surat',
+        //   path: `${baseDomain}/reference/template-surat`,
+        // },
       ],
     },
     {

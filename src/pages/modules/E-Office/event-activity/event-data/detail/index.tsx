@@ -18,18 +18,28 @@ const DetailEventActivity = () => {
           <CardContent className={'space-y-2.5'}>
             <p className="text-gray-500">Nama Kegiatan</p>
             <p className="text-xl">{event?.nama_kegiatan}</p>
-            <p className="text-gray-500">Hari Tanggal</p>
-            <p>
-              {event?.tanggal_mulai
-                ? format(event?.tanggal_mulai, 'EEEE, dd-MM-yyyy', { locale: id })
-                : ''}
-            </p>
-            <p className="text-gray-500">Waktu</p>
-            <p>{event?.waktu}</p>
-            <p className="text-gray-500">Tempat</p>
-            <p>{event?.tempat}</p>
-            <p className="text-gray-500">Penyelenggara</p>
-            <p>{event?.penyelenggara}</p>
+            <div className="grid grid-cols-2 gap-5 max-w-[800px]">
+              <div>
+                <p className="text-gray-500">Hari Tanggal</p>
+                <p>
+                  {event?.tanggal_mulai
+                    ? format(event?.tanggal_mulai, 'EEEE, dd-MM-yyyy', { locale: id })
+                    : ''}
+                </p>
+              </div>
+              <div>
+                <p className="text-gray-500">Waktu</p>
+                <p>{event?.waktu}</p>
+              </div>
+              <div>
+                <p className="text-gray-500">Tempat</p>
+                <p>{event?.tempat}</p>
+              </div>
+              <div>
+                <p className="text-gray-500">Penyelenggara</p>
+                <p>{event?.penyelenggara}</p>
+              </div>
+            </div>
           </CardContent>
         </Card>
 
