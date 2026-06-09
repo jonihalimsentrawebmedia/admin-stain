@@ -64,10 +64,10 @@ const COLUMN_MAP: ColumnDef[] = [
   { key: 'nama_peserta', label: 'Nama Peserta', width: '*' },
   { key: 'instansi', label: 'Instansi/Alamat', width: '*' },
   { key: 'hp', label: 'HP', width: 75 },
-  { key: 'email', label: 'Email', width: 50 },
-  { key: 'jabatan', label: 'Jabatan', width: 50 },
+  { key: 'email', label: 'Email', width: 75 },
+  { key: 'jabatan', label: 'Jabatan', width: 60 },
   { key: 'tanda_tangan', label: 'TTD', width: 40 },
-  { key: 'keterangan', label: 'Keterangan', width: 60 },
+  { key: 'keterangan', label: 'Keterangan', width: 55 },
 ]
 
 const LOGO_SIZE = 72
@@ -192,51 +192,76 @@ const buildKopSuratHeader = (header?: ILetterHeader, imageUrl?: string) => {
 
   if (contentTexts.length === 0 && !imageUrl) return null
 
+  // Shared separator line
+  const separatorLine = {
+    table: {
+      widths: ['*'],
+      body: [
+        [
+          {
+            text: '',
+            border: [false, false, false, true] as [boolean, boolean, boolean, boolean],
+          },
+        ],
+      ],
+    },
+    layout: {
+      hLineWidth: () => 1.5,
+      vLineWidth: () => 0,
+    },
+    margin: [0, 0, 0, 20] as [number, number, number, number],
+  }
+
+  // ── No image: just text centered ──
+  if (!imageUrl) {
+    return {
+      margin: [40, 30, 40, 0] as [number, number, number, number],
+      stack: [
+        {
+          width: '*',
+          alignment: 'center' as const,
+          stack: contentTexts,
+        },
+        separatorLine,
+      ],
+    }
+  }
+
+  // ── With image: table with verticalAlignment to center logo + text ──
   return {
     margin: [40, 30, 40, 0] as [number, number, number, number],
     stack: [
       {
-        columns: imageUrl
-          ? [
+        table: {
+          widths: [LOGO_SIZE, '*'],
+          body: [
+            [
               {
                 image: imageUrl,
                 width: LOGO_SIZE,
                 height: LOGO_SIZE,
-              },
-              {
-                width: '*',
                 alignment: 'center' as const,
-                stack: contentTexts,
+                verticalAlignment: 'middle' as const,
               },
-            ]
-          : [
               {
-                width: '*',
+                stack: contentTexts,
                 alignment: 'center' as const,
-                stack: contentTexts,
-              },
-            ],
-        columnGap: 10,
-        margin: [0, 0, 0, 0] as [number, number, number, number],
-      },
-      {
-        table: {
-          widths: ['*'],
-          body: [
-            [
-              {
-                text: '',
-                border: [false, false, false, true] as [boolean, boolean, boolean, boolean],
+                verticalAlignment: 'middle' as const,
               },
             ],
           ],
         },
         layout: {
-          hLineWidth: () => 1.5,
+          hLineWidth: () => 0,
           vLineWidth: () => 0,
+          paddingLeft: () => 0,
+          paddingRight: () => 0,
+          paddingTop: () => 0,
+          paddingBottom: () => 0,
         },
-        margin: [0, 0, 0, 20] as [number, number, number, number],
+        margin: [0, 0, 0, 0] as [number, number, number, number],
       },
+      separatorLine,
     ],
   }
 }
@@ -580,7 +605,6 @@ export const generatePreviewAttendancePdf2 = ({
       buildAcaraInfoSection(event?.nama_kegiatan || 'DAFTAR HADIR', event)
     )
   }
-
   if (rowChunks.length) {
     let startIndex = 0
 
