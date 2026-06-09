@@ -21,8 +21,6 @@ const ButtonAddAttendance = () => {
     resolver: zodResolver(ResolverAttendance),
   })
 
-  console.log(form.formState.errors, 'errors')
-
   useEffect(() => {
     if (session) {
       form.setValue('id_unit', session?.id_satuan_organisasi)

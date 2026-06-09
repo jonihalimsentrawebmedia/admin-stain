@@ -14,7 +14,7 @@ const NumberOfCodeLetterPage = () => {
             {
               type: 'custom',
               element: (
-                <Button className={'text-white'} onClick={() => navigate('add')}>
+                <Button className={'rounded-full text-white'} onClick={() => navigate('add')}>
                   <FaCirclePlus className={'text-yellow-500'} />
                   Tambah Kode Nomor
                 </Button>

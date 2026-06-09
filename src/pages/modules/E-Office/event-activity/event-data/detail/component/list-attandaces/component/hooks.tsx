@@ -3,6 +3,7 @@ import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { BasicProps } from '@/utils/globalType.ts'
+import type { IPrintSettings } from '../printData/types.ts'
 
 interface Props extends BasicProps {
   id_acara: string
@@ -54,4 +55,25 @@ export const UseGetAttendance = (props: Props) => {
   }, [data])
 
   return { meta, loading, attendance }
+}
+
+export const UseGetAttendancePrint = (id_acara: string) => {
+  const [attendance, setAttendance] = useState<IPrintSettings>()
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['attendance-print'],
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get(`/eoffice/acara/${id_acara}/daftar-hadir/print`).then((res) => res.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setAttendance(data?.data ?? [])
+    }
+  }, [data])
+
+  return { attendance, loading }
 }

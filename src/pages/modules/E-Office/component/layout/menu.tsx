@@ -2,6 +2,7 @@ import { MdDashboard, MdOutgoingMail, MdRoomPreferences } from 'react-icons/md'
 import { FaArchive, FaListUl, FaRegCalendarAlt } from 'react-icons/fa'
 import { IoMailUnread } from 'react-icons/io5'
 import { FaGear, FaUsers } from 'react-icons/fa6'
+import { RiMailAiFill } from 'react-icons/ri'
 
 const baseDomain = '/modules/e-office'
 
@@ -72,34 +73,34 @@ export const GenerateMenu = () => {
         },
       ],
     },
-    // {
-    //   id: 10,
-    //   name: 'Buat Surat',
-    //   path: `${baseDomain}/letter-generation`,
-    //   icon: <RiMailAiFill className={'size-5'} />,
-    //   child: [
-    //     {
-    //       id: 101,
-    //       name: 'Kode Nomor Surat',
-    //       path: `${baseDomain}/letter-generation/code-letter`,
-    //     },
-    //     {
-    //       id: 102,
-    //       name: 'Jenis Surat',
-    //       path: `${baseDomain}/letter-generation/letter-type`,
-    //     },
-    //     {
-    //       id: 103,
-    //       name: 'Buat Surat',
-    //       path: `${baseDomain}/letter-generation/create-letter`,
-    //     },
-    //     {
-    //       id: 104,
-    //       name: 'Daftar Surat',
-    //       path: `${baseDomain}/letter-generation/letter-list`,
-    //     },
-    //   ],
-    // },
+    {
+      id: 10,
+      name: 'Buat Surat',
+      path: `${baseDomain}/letter-generation`,
+      icon: <RiMailAiFill className={'size-5'} />,
+      child: [
+        {
+          id: 101,
+          name: 'Kode Nomor Surat',
+          path: `${baseDomain}/letter-generation/code-letter`,
+        },
+        {
+          id: 102,
+          name: 'Jenis Surat',
+          path: `${baseDomain}/letter-generation/letter-type`,
+        },
+        {
+          id: 103,
+          name: 'Buat Surat',
+          path: `${baseDomain}/letter-generation/create-letter`,
+        },
+        {
+          id: 104,
+          name: 'Daftar Surat',
+          path: `${baseDomain}/letter-generation/letter-list`,
+        },
+      ],
+    },
     // {
     //   id: 100,
     //   name: 'Surat Generated',

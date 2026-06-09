@@ -70,3 +70,24 @@ export const UseGetReportActivityContext = (props: Props) => {
 
   return { report, loading }
 }
+
+export const UseGetReportActivityPrint = (id_acara: string) => {
+  const [report, setReport] = useState<IReportActivity>()
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['report-activity-print'],
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get(`/eoffice/acara/${id_acara}/laporan-kegiatan/print`).then((res) => res.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setReport(data?.data)
+    }
+  }, [data])
+
+  return { report, loading }
+}

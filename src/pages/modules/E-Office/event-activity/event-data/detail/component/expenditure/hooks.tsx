@@ -3,6 +3,7 @@ import type { BasicProps } from '@/utils/globalType.ts'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
+import type { PrintExpenditure } from '@/pages/modules/E-Office/event-activity/event-data/detail/component/expenditure/printExpenditure/types.ts'
 
 interface props extends BasicProps {
   id_acara: string
@@ -54,4 +55,24 @@ export const UseGetExpenditure = (props: props) => {
   }, [data])
 
   return { expenditure, loading, meta }
+}
+
+export const UseGetTotalExpenditure = (id_acara: string) => {
+  const [printData, setPrintData] = useState<PrintExpenditure>()
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['total-expenditure-print', id_acara],
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get(`/eoffice/acara/${id_acara}/pengeluaran/print`).then((res) => res.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setPrintData(data?.data)
+    }
+  }, [data])
+
+  return { printData, loading }
 }

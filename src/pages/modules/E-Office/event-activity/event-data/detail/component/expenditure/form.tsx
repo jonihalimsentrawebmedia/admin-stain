@@ -32,7 +32,7 @@ export const FormExpenditure = (props: props) => {
           <TextInput
             form={form}
             name={'tanggal_pengeluaran'}
-            label={'Tanggal'}
+            label={'Tanggal Di Bayar'}
             htmlFor={'Tanggal'}
             type={'date'}
             isRequired
@@ -49,7 +49,7 @@ export const FormExpenditure = (props: props) => {
           <TextInput
             form={form}
             name={'tempat_pembelian'}
-            label={'Tempat Pembelian / Toko'}
+            label={'Tempat Pembelian / Toko / Penerima'}
             placeholder={'Nama Tempat Pembelian / Toko'}
             htmlFor={'tempat_pembelian'}
             isRequired

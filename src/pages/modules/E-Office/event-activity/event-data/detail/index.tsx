@@ -13,7 +13,12 @@ const DetailEventActivity = () => {
   return (
     <>
       <div className="space-y-5">
-        <ButtonTitleGroup label={'Detail Acara'} isBack buttonGroup={[]} />
+        <ButtonTitleGroup
+          link={'/modules/e-office/event-activity/event-data'}
+          label={'Detail Acara'}
+          isBack
+          buttonGroup={[]}
+        />
         <Card>
           <CardContent className={'space-y-2.5'}>
             <p className="text-gray-500">Nama Kegiatan</p>
