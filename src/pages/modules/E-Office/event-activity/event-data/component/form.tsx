@@ -11,11 +11,10 @@ interface props {
   setOpen: Dispatch<SetStateAction<boolean>>
   loading: boolean
   HandleSave: (e: TResolverEvent) => void
-  isEdit?: boolean
 }
 
 export const FormEvent = (props: props) => {
-  const { form, open, setOpen, loading, HandleSave, isEdit } = props
+  const { form, open, setOpen, loading, HandleSave } = props
   return (
     <>
       <Form {...form}>
@@ -31,7 +30,6 @@ export const FormEvent = (props: props) => {
           <TextInput
             name={'tanggal_mulai'}
             form={form}
-            min={isEdit ? '' : new Date().toISOString().split('T')[0]}
             label={'Tanggal Mulai'}
             htmlFor={'Tanggal Mulai'}
             type={'date'}

@@ -82,120 +82,126 @@ export const DetailOutboxRegistration = () => {
           </CardContent>
         </Card>
 
-        <Card className={'rounded'}>
-          <CardContent className={'space-y-5'}>
-            <TitleLine title={'Data Agenda'} />
-            <div className="grid grid-cols-4 w-fit gap-5 gap-y-4">
-              <div className="flex flex-col gap-1.5 col-span-4">
-                <p className="text-gray-500">Nama Kegiatan: </p>
-                <p>{detailInbox?.nama_kegiatan}</p>
+        {detailInbox?.is_agenda && (
+          <Card className={'rounded'}>
+            <CardContent className={'space-y-5'}>
+              <TitleLine title={'Data Agenda'} />
+              <div className="grid grid-cols-4 w-fit gap-5 gap-y-4">
+                <div className="flex flex-col gap-1.5 col-span-4">
+                  <p className="text-gray-500">Nama Kegiatan: </p>
+                  <p>{detailInbox?.nama_kegiatan}</p>
+                </div>
+                <div className="flex flex-col gap-1.5 col-span-4">
+                  <p className="text-gray-500">Keterangan: </p>
+                  <p>{detailInbox?.keterangan_agenda}</p>
+                </div>
+
+                <div className="flex flex-col gap-1.5 col-span-1">
+                  <p className="text-gray-500">Tanggal Mulai: </p>
+                  <p>
+                    {detailInbox?.tanggal_mulai
+                      ? format(detailInbox?.tanggal_mulai, 'dd/MM/yyyy')
+                      : ''}
+                  </p>
+                </div>
+                <div className="flex flex-col gap-1.5 col-span-1">
+                  <p className="text-gray-500">Jam Mulai: </p>
+                  <p>
+                    {detailInbox?.tanggal_mulai ? format(detailInbox?.tanggal_mulai, 'HH:mm') : ''}
+                  </p>
+                </div>
+                <div className="flex flex-col gap-1.5 col-span-1">
+                  <p className="text-gray-500">Tanggal Selesai: </p>
+                  <p>
+                    {detailInbox?.tanggal_selesai
+                      ? format(detailInbox?.tanggal_selesai, 'dd/MM/yyyy')
+                      : ''}
+                  </p>
+                </div>
+                <div className="flex flex-col gap-1.5 col-span-1">
+                  <p className="text-gray-500">Jam Mulai: </p>
+                  <p>
+                    {detailInbox?.tanggal_selesai
+                      ? format(detailInbox?.tanggal_selesai, 'HH:mm')
+                      : ''}
+                  </p>
+                </div>
+                <div className="flex flex-col gap-1.5 col-span-4">
+                  <p className="text-gray-500">Tempat / Lokasi: </p>
+                  <p>{detailInbox?.tempat}</p>
+                </div>
+                <div className="flex flex-col gap-1.5 col-span-4">
+                  <p className="text-gray-500">Pengingat: </p>
+                  <p>{detailInbox?.nama_waktu_pengingat_agenda}</p>
+                </div>
               </div>
-              <div className="flex flex-col gap-1.5 col-span-4">
-                <p className="text-gray-500">Keterangan: </p>
-                <p>{detailInbox?.keterangan_agenda}</p>
+            </CardContent>
+          </Card>
+        )}
+
+        {detailInbox?.is_lampiran && (
+          <Card className={'rounded'}>
+            <CardContent className={'space-y-5'}>
+              <TitleLine title={'Lampiran'} />
+              <div className="grid grid-cols-3 gap-5">
+                {detailInbox?.lampiran?.map((item, index) => (
+                  <Link
+                    to={item?.lampiran_url}
+                    key={index}
+                    className="flex items-center gap-1.5 border p-1.5 rounded"
+                  >
+                    <FaFile />
+                    Lampiran FIle {index + 1}
+                  </Link>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {detailInbox?.is_disposisi && (
+          <Card className={'rounded'}>
+            <CardContent className={'space-y-5'}>
+              <TitleLine title={'Disposisi'} />
+              <div className="flex flex-col gap-1.5">
+                <p className="text-gray-500">Jenis Disposisi: </p>
+                <p className={'capitalize'}>{detailInbox?.jenis_disposisi}</p>
               </div>
 
-              <div className="flex flex-col gap-1.5 col-span-1">
-                <p className="text-gray-500">Tanggal Mulai: </p>
-                <p>
-                  {detailInbox?.tanggal_mulai
-                    ? format(detailInbox?.tanggal_mulai, 'dd/MM/yyyy')
-                    : ''}
-                </p>
-              </div>
-              <div className="flex flex-col gap-1.5 col-span-1">
-                <p className="text-gray-500">Jam Mulai: </p>
-                <p>
-                  {detailInbox?.tanggal_mulai ? format(detailInbox?.tanggal_mulai, 'HH:mm') : ''}
-                </p>
-              </div>
-              <div className="flex flex-col gap-1.5 col-span-1">
-                <p className="text-gray-500">Tanggal Selesai: </p>
-                <p>
-                  {detailInbox?.tanggal_selesai
-                    ? format(detailInbox?.tanggal_selesai, 'dd/MM/yyyy')
-                    : ''}
-                </p>
-              </div>
-              <div className="flex flex-col gap-1.5 col-span-1">
-                <p className="text-gray-500">Jam Mulai: </p>
-                <p>
-                  {detailInbox?.tanggal_selesai
-                    ? format(detailInbox?.tanggal_selesai, 'HH:mm')
-                    : ''}
-                </p>
-              </div>
-              <div className="flex flex-col gap-1.5 col-span-4">
-                <p className="text-gray-500">Tempat / Lokasi: </p>
-                <p>{detailInbox?.tempat}</p>
-              </div>
-              <div className="flex flex-col gap-1.5 col-span-4">
-                <p className="text-gray-500">Pengingat: </p>
-                <p>{detailInbox?.nama_waktu_pengingat_agenda}</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className={'rounded'}>
-          <CardContent className={'space-y-5'}>
-            <TitleLine title={'Lampiran'} />
-            <div className="grid grid-cols-3 gap-5">
-              {detailInbox?.lampiran?.map((item, index) => (
-                <Link
-                  to={item?.lampiran_url}
-                  key={index}
-                  className="flex items-center gap-1.5 border p-1.5 rounded"
-                >
-                  <FaFile />
-                  Lampiran FIle {index + 1}
-                </Link>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className={'rounded'}>
-          <CardContent className={'space-y-5'}>
-            <TitleLine title={'Disposisi'} />
-            <div className="flex flex-col gap-1.5">
-              <p className="text-gray-500">Jenis Disposisi: </p>
-              <p className={'capitalize'}>{detailInbox?.jenis_disposisi}</p>
-            </div>
-
-            <div className={'flex flex-col gap-1.5'}>
-              {detailInbox?.pejabat?.map((row, index) => (
-                <div key={index} className={'flex items-center gap-5 w-full'}>
-                  <div className={`flex flex-col gap-1`}>
-                    <p className="text-sm">{row?.status?.split('_').join(' ')}</p>
-                    <div className={'bg-blue-50 flex items-center gap-2 p-2 rounded w-[350px]'}>
-                      <img
-                        src={row?.gambar_sdm ?? '/img/noimg.png'}
-                        alt={row?.nama_sdm}
-                        className={'w-12 h-12 rounded-full object-cover'}
-                      />
-                      <div>
-                        <p className={'text-primary text-lg font-semibold'}>{row?.nama_sdm}</p>
+              <div className={'flex flex-col gap-1.5'}>
+                {detailInbox?.pejabat?.map((row, index) => (
+                  <div key={index} className={'flex items-center gap-5 w-full'}>
+                    <div className={`flex flex-col gap-1`}>
+                      <p className="text-sm">{row?.status?.split('_').join(' ')}</p>
+                      <div className={'bg-blue-50 flex items-center gap-2 p-2 rounded w-[350px]'}>
+                        <img
+                          src={row?.gambar_sdm ?? '/img/noimg.png'}
+                          alt={row?.nama_sdm}
+                          className={'w-12 h-12 rounded-full object-cover'}
+                        />
+                        <div>
+                          <p className={'text-primary text-lg font-semibold'}>{row?.nama_sdm}</p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className={`flex flex-col gap-1 w-full`}>
-                    <div className="flex items-center gap-4">
-                      <p className="text-sm">Dibaca:</p>
-                      <p className="text-sm">Direspon:</p>
+                    <div className={`flex flex-col gap-1 w-full`}>
+                      <div className="flex items-center gap-4">
+                        <p className="text-sm">Dibaca:</p>
+                        <p className="text-sm">Direspon:</p>
+                      </div>
+                      <div className={'bg-blue-50 flex items-center gap-2 p-2 rounded w-full'}>
+                        <p className={'text-lg text-primary font-semibold h-12'}>
+                          {row?.komentar ?? '-'}
+                        </p>
+                      </div>
                     </div>
-                    <div className={'bg-blue-50 flex items-center gap-2 p-2 rounded w-full'}>
-                      <p className={'text-lg text-primary font-semibold h-12'}>
-                        {row?.komentar ?? '-'}
-                      </p>
-                    </div>
+                    {/*<ButtonComment id={row?.id_pejabat_surat_masuk} />*/}
                   </div>
-                  {/*<ButtonComment id={row?.id_pejabat_surat_masuk} />*/}
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
       </div>
     </>
   )

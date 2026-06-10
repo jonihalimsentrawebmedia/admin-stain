@@ -7,14 +7,20 @@ import type {
   ILetterHeader,
   ISettingLetterHeader,
 } from '@/pages/modules/E-Office/settings/letter-header/data/types.ts'
+import type { IEvent } from '@/pages/modules/E-Office/event-activity/event-data/data/types.ts'
+import type {
+  ICetakConfig,
+  IDaftarHadir,
+} from '@/pages/modules/E-Office/event-activity/event-data/detail/component/list-attandaces/printData/types.ts'
 
 ;(pdfMake as any).vfs = (pdfFonts as any).vfs
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 interface GenerateAttendancePdfProps {
-  event: any
-  values: AttendanceSettingType
+  event: IEvent
+  values: ICetakConfig
   header?: ILetterHeader
+  attendance: IDaftarHadir[]
   imageUrl?: string
 }
 
@@ -63,7 +69,7 @@ const COLUMN_MAP: ColumnDef[] = [
   { key: 'nomor', label: 'No', width: 'auto' },
   { key: 'nama_peserta', label: 'Nama Peserta', width: '*' },
   { key: 'instansi', label: 'Instansi/Alamat', width: '*' },
-  { key: 'hp', label: 'HP', width: 75 },
+  { key: 'hp', label: 'HP', width: 'auto' },
   { key: 'email', label: 'Email', width: 75 },
   { key: 'jabatan', label: 'Jabatan', width: 60 },
   { key: 'tanda_tangan', label: 'TTD', width: 40 },
@@ -120,6 +126,7 @@ const getDynamicTablePadding = (rowCount: number, targetRowCount?: number): numb
 // ─── Build table element from column map + row count ─────────────────────────
 const buildTable = (
   values: AttendanceSettingType,
+  attendance: IDaftarHadir[],
   options: {
     startIndex?: number
     rowCount?: number
@@ -132,7 +139,7 @@ const buildTable = (
     return Boolean(values[col.key])
   })
 
-  const totalRows = Math.max(Number(values.jumlah_peserta) || 0, 0)
+  const totalRows = Math.max(attendance.length || 0, 0)
   const startIndex = Math.max(options.startIndex || 0, 0)
   const showHeader = options.showHeader ?? true
   const availableRows = Math.max(totalRows - startIndex, 0)
@@ -146,19 +153,60 @@ const buildTable = (
     alignment: 'center' as const,
   }))
 
-  const bodyRows = Array.from({ length: rowCount }).map((_, idx) =>
-    activeColumns.map((col) => {
-      if (col.key === 'nomor') {
-        return {
-          text: String(startIndex + idx + 1),
-          alignment: 'center' as const,
-          style: 'tableCell' as const,
-        }
-      }
+  // Slice attendance data for this page
+  const dataForPage = attendance.slice(startIndex, startIndex + rowCount)
 
-      return { text: ' ', style: 'tableCell' as const }
+  const bodyRows = dataForPage.map((item, idx) =>
+    activeColumns.map((col) => {
+      const displayIdx = startIndex + idx
+
+      switch (col.key) {
+        case 'nomor':
+          return {
+            text: String(displayIdx + 1),
+            alignment: 'center' as const,
+            style: 'tableCell' as const,
+          }
+        case 'nama_peserta':
+          return { text: item.nama_lengkap || ' ', style: 'tableCell' as const }
+        case 'instansi':
+          return {
+            text: item.nama_unit_kerja || item.nama_unit || ' ',
+            style: 'tableCell' as const,
+          }
+        case 'hp':
+          return { text: item.no_hp || ' ', style: 'tableCell' as const }
+        case 'email':
+          return { text: ' ', style: 'tableCell' as const }
+        case 'jabatan':
+          return { text: item.jabatan || ' ', style: 'tableCell' as const }
+        case 'tanda_tangan':
+          return { text: ' ', style: 'tableCell' as const }
+        case 'keterangan':
+          return { text: ' ', style: 'tableCell' as const }
+        default:
+          return { text: ' ', style: 'tableCell' as const }
+      }
     })
   )
+
+  // Fill remaining rows (padding) if less data than rowCount
+  const remainingRows = Math.max(rowCount - dataForPage.length, 0)
+  for (let i = 0; i < remainingRows; i++) {
+    const emptyIdx = startIndex + dataForPage.length + i
+    bodyRows.push(
+      activeColumns.map((col) => {
+        if (col.key === 'nomor') {
+          return {
+            text: String(emptyIdx + 1),
+            alignment: 'center' as const,
+            style: 'tableCell' as const,
+          }
+        }
+        return { text: ' ', style: 'tableCell' as const }
+      })
+    )
+  }
 
   return {
     table: {
@@ -368,33 +416,24 @@ const getPaginationMetrics = (
   }
 }
 
-// ─── Distribute rows across pages ────────────────────────────────────────────
+// ─── Distribute rows evenly across pages, last page only gets signature rows ──
 const buildRowChunks = (totalRows: number, metrics: PaginationMetrics): RowChunk[] => {
   if (totalRows <= 0) return []
 
-  // Everything fits on first page with signature
+  // Everything fits on the first page with signature
   if (totalRows <= metrics.firstPageWithSignature) {
-    return [
-      {
-        rowCount: totalRows,
-        targetRowCount: metrics.firstPageWithSignature,
-      },
-    ]
+    return [{ rowCount: totalRows, targetRowCount: metrics.firstPageWithSignature }]
   }
 
-  // Reserve MIN_SIGNATURE_PAGE_ROWS for final page, distribute the rest
   const finalPageRows = MIN_SIGNATURE_PAGE_ROWS
   const remainingRowsBeforeFinalPage = Math.max(totalRows - finalPageRows, 0)
   const regularPageCapacity = metrics.firstPageWithoutSignature
-  const regularPageCount = Math.max(
-    1,
-    Math.ceil(remainingRowsBeforeFinalPage / regularPageCapacity)
-  )
+  const regularPageCount = Math.max(1, Math.ceil(remainingRowsBeforeFinalPage / regularPageCapacity))
   const baseRowsPerPage = Math.floor(remainingRowsBeforeFinalPage / regularPageCount)
   const extraRows = remainingRowsBeforeFinalPage % regularPageCount
 
-  const distributedRows = Array.from({ length: regularPageCount }).map(
-    (_, index) => baseRowsPerPage + (index < extraRows ? 1 : 0)
+  const distributedRows: number[] = Array.from({ length: regularPageCount }).map(
+    (_, index) => baseRowsPerPage + (index < extraRows ? 1 : 0),
   )
 
   return [
@@ -558,11 +597,12 @@ const buildMainPenandatangan = (
   }
 }
 
-export const generatePreviewAttendancePdf2 = ({
+export const GenerateListAttendance = ({
   event,
   values,
   header,
   imageUrl,
+  attendance,
 }: GenerateAttendancePdfProps) => {
   // ─── 1. Resolve imageUrl ─────────────────────────────────────────────────────
   const resolvedImageUrl =
@@ -596,16 +636,20 @@ export const generatePreviewAttendancePdf2 = ({
   )
 
   // ─── 6. Row chunks ───────────────────────────────────────────────────────────
-  const totalRows = Math.max(Number(values.jumlah_peserta) || 0, 0)
+  const totalRows = Math.max(attendance?.length || 0, 0)
   const rowChunks = buildRowChunks(totalRows, paginationMetrics)
-  const regularRowChunks = rowChunks.slice(0, -1)
 
+  // ─── Uniform vertical padding for consistent row heights across pages ────
+  const regularRowChunks = rowChunks.slice(0, -1)
   const uniformVerticalPadding =
     rowChunks.length <= 1
-      ? getDynamicTablePadding(rowChunks[0]?.rowCount || 0, rowChunks[0]?.targetRowCount || 0)
+      ? getDynamicTablePadding(
+          rowChunks[0]?.rowCount || 0,
+          rowChunks[0]?.targetRowCount || 0,
+        )
       : getDynamicTablePadding(
           Math.max(...regularRowChunks.map((chunk) => chunk.rowCount), 0),
-          paginationMetrics.firstPageWithoutSignature
+          paginationMetrics.firstPageWithoutSignature,
         )
 
   // ─── 7. Build content (tables + signatures) ──────────────────────────────────
@@ -616,7 +660,8 @@ export const generatePreviewAttendancePdf2 = ({
     chunkRowCount: number,
     chunkStartIndex: number,
     chunkTargetRowCount: number,
-    includeSignature: boolean
+    includeSignature: boolean,
+    verticalPaddingOverride?: number,
   ) => {
     const items: any[] = []
 
@@ -626,12 +671,12 @@ export const generatePreviewAttendancePdf2 = ({
     }
 
     items.push(
-      buildTable(values, {
+      buildTable(values, attendance, {
         startIndex: chunkStartIndex,
         rowCount: chunkRowCount,
         showHeader: true,
         targetRowCount: chunkTargetRowCount,
-        verticalPadding: uniformVerticalPadding,
+        verticalPadding: verticalPaddingOverride,
       })
     )
 
@@ -651,7 +696,7 @@ export const generatePreviewAttendancePdf2 = ({
 
       if (isLastChunk) {
         tableAndSignatureContent.push(
-          ...buildPageItems(currentChunk.rowCount, startIndex, currentChunk.targetRowCount, true)
+          ...buildPageItems(currentChunk.rowCount, startIndex, currentChunk.targetRowCount, true, uniformVerticalPadding)
         )
       } else {
         tableAndSignatureContent.push({
@@ -659,7 +704,8 @@ export const generatePreviewAttendancePdf2 = ({
             currentChunk.rowCount,
             startIndex,
             currentChunk.targetRowCount,
-            false
+            false,
+            uniformVerticalPadding,
           ),
           pageBreak: 'after',
         })
@@ -668,7 +714,7 @@ export const generatePreviewAttendancePdf2 = ({
       startIndex += currentChunk.rowCount
     })
   } else {
-    tableAndSignatureContent.push(...buildPageItems(0, 0, 0, true))
+    tableAndSignatureContent.push(...buildPageItems(0, 0, 0, true, uniformVerticalPadding))
   }
 
   // ─── 8. Assemble document definition ────────────────────────────────────────

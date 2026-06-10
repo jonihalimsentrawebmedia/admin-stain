@@ -5,8 +5,14 @@ import AxiosClient from '@/provider/axios.tsx'
 import type { BasicProps } from '@/utils/globalType.ts'
 import type { IInboxList } from '@/pages/modules/E-Office/inbox/list-inbox/data/types.ts'
 
-export const UseGetInbox = (props?: BasicProps) => {
-  const { page, limit, search } = props ?? {}
+interface props extends BasicProps {
+  year?: string
+  start_month: string
+  end_month: string
+}
+
+export const UseGetInbox = (props?: props) => {
+  const { page, limit, search, year, start_month, end_month } = props ?? {}
   const [listInbox, setListInbox] = useState<IInboxList[]>([])
   const [meta, setMeta] = useState<Meta>()
 
@@ -14,6 +20,9 @@ export const UseGetInbox = (props?: BasicProps) => {
   if (page) Params.append('page', page ?? '1')
   if (limit) Params.append('limit', limit ?? '10')
   if (search) Params.append('search', search ?? '')
+  if (year) Params.append('tahun', year ?? '')
+  if (start_month) Params.append('bulan_mulai', start_month ?? '')
+  if (end_month) Params.append('bulan_selesai', end_month ?? '')
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['inbox', Params.toString()],
@@ -31,4 +40,36 @@ export const UseGetInbox = (props?: BasicProps) => {
   }, [data])
 
   return { loading, listInbox, meta }
+}
+
+export const ListMonth = [
+  'Januari',
+  'Februari',
+  'Maret',
+  'April',
+  'Mei',
+  'Juni',
+  'Juli',
+  'Agustus',
+  'September',
+]
+
+export const UseGetInboxYear = () => {
+  const [yearInbox, setYearInbox] = useState<string[]>([])
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['inbox-year'],
+    refetchOnWindowFocus: false,
+    queryFn: () => AxiosClient.get(`/eoffice/surat-masuk/tahun-surat`).then((res) => res.data.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setYearInbox(data)
+    }
+  }, [data])
+
+  return { loading, yearInbox }
 }

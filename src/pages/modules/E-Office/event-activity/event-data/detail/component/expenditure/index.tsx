@@ -1,19 +1,31 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { ButtonAddExpenditure } from './buttonAdd.tsx'
 import { useParams, useSearchParams } from 'react-router-dom'
-import { UseGetExpenditure } from './hooks.tsx'
+import { UseGetExpenditure, UseGetTotalExpenditure } from './hooks.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsExpenditure } from './columns.tsx'
 import { Card, CardContent } from '@/components/ui/card.tsx'
 import { TableCell, TableFooter, TableRow } from '@/components/ui/table.tsx'
+import pdfmake from '@/utils/pdfmake.ts'
+import { GenerateExpenditurePdf } from '@/pages/modules/E-Office/event-activity/event-data/detail/component/expenditure/printExpenditure'
+import type { IEvent } from '@/pages/modules/E-Office/event-activity/event-data/data/types.ts'
+import { ConvertUrlToBase64 } from '@/pages/modules/E-Office/settings/letter-header/hooks'
+import { Button } from '@/components/ui/button.tsx'
+import { IoPrintSharp } from 'react-icons/io5'
 
-const ExpenditureSection = () => {
+interface props {
+  detail?: IEvent
+}
+
+const ExpenditureSection = (props: props) => {
+  const { detail } = props
   const [searchParams] = useSearchParams()
   const { id } = useParams()
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
   const search = searchParams.get('search') ?? ''
 
+  const { printData } = UseGetTotalExpenditure(id as string)
   const { loading, meta, expenditure } = UseGetExpenditure({
     id_acara: id as string,
     page,
@@ -22,6 +34,18 @@ const ExpenditureSection = () => {
   })
   const columns = ColumnsExpenditure()
   const Total = expenditure.reduce((total, item) => total + Number(item.jumlah_pengeluaran ?? 0), 0)
+  const { base64 } = ConvertUrlToBase64(printData?.cetak_config?.kop_surat?.url_logo ?? '')
+
+  const HandlePrint = () => {
+    if (printData && detail) {
+      const docDefinition = GenerateExpenditurePdf({
+        data: printData,
+        event: detail,
+        logoBase64: `data:image/png;base64,${base64}`,
+      })
+      pdfmake.createPdf(docDefinition).open()
+    }
+  }
 
   return (
     <>
@@ -29,7 +53,23 @@ const ExpenditureSection = () => {
         <CardContent className="space-y-5">
           <ButtonTitleGroup
             label={'Pengeluaran Keuangan'}
-            buttonGroup={[{ type: 'custom', element: <ButtonAddExpenditure /> }]}
+            buttonGroup={[
+              {
+                type: 'custom',
+                element: (
+                  <Button
+                    onClick={() => {
+                      HandlePrint()
+                    }}
+                    className={'text-white'}
+                  >
+                    <IoPrintSharp />
+                    Cetak
+                  </Button>
+                ),
+              },
+              { type: 'custom', element: <ButtonAddExpenditure /> },
+            ]}
           />
           <TableCustom
             data={expenditure}

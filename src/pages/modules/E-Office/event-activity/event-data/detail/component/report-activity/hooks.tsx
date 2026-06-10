@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
+import type { PrintAllActivity } from '@/pages/modules/E-Office/event-activity/event-data/detail/component/report-activity/data/types.ts'
 
 interface Context {
   context: string
@@ -58,6 +59,27 @@ export const UseGetReportActivityContext = (props: Props) => {
       AxiosClient.get(`/eoffice/acara/${id_acara}/laporan-kegiatan/context/${context}`).then(
         (res) => res.data
       ),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setReport(data?.data)
+    }
+  }, [data])
+
+  return { report, loading }
+}
+
+export const UseGetReportActivityPrint = (id_acara: string) => {
+  const [report, setReport] = useState<PrintAllActivity>()
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['report-activity-print'],
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get(`/eoffice/acara/${id_acara}/laporan-kegiatan/print`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching

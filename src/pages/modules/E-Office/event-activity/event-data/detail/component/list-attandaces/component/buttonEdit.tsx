@@ -30,8 +30,6 @@ const ButtonEditAttendance = (props: props) => {
     resolver: zodResolver(ResolverAttendance),
   })
 
-  console.log(form.formState.errors, 'errors')
-
   useEffect(() => {
     if (data) {
       form.reset({

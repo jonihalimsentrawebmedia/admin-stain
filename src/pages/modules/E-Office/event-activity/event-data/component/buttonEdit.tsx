@@ -79,7 +79,6 @@ const ButtonEditEvent = (props: props) => {
           HandleSave={HandleSave}
           setOpen={setOpen}
           open={open}
-          isEdit={true}
         />
       </DialogBasic>
     </>

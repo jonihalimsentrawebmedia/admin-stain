@@ -32,6 +32,9 @@ export const ButtonDeleteEventFile = (props: props) => {
           queryClient.invalidateQueries({
             queryKey: ['expenditure'],
           })
+          queryClient.invalidateQueries({
+            queryKey: ['total-expenditure-print'],
+          })
           toast.success(res.data.message || 'Success')
         }
       })
@@ -72,7 +75,11 @@ export const ButtonDeleteEventFile = (props: props) => {
               : '0'}
           </p>
           <p className={'text-gray-500'}>Bukti Bayar</p>
-          <Link to={data?.url_file_pengeluaran ?? '#'} target={'_blank'} className={'border border-primary text-primary p-1.5 w-fit rounded'}>
+          <Link
+            to={data?.url_file_pengeluaran ?? '#'}
+            target={'_blank'}
+            className={'border border-primary text-primary p-1.5 w-fit rounded'}
+          >
             Bukti Bayar
           </Link>
         </div>

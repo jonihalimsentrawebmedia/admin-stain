@@ -18,7 +18,12 @@ const MenuEvent = (props: Props) => {
   const { detail } = props
   const TabsData = [
     { id: 1, value: 'file', label: 'File Pendukung', element: <SectionFile /> },
-    { id: 2, value: 'attendance', label: 'Daftar Hadir', element: <ListAttendance /> },
+    {
+      id: 2,
+      value: 'attendance',
+      label: 'Daftar Hadir',
+      element: <ListAttendance detail={detail} />,
+    },
     {
       id: 3,
       value: 'documentation',
@@ -26,8 +31,13 @@ const MenuEvent = (props: Props) => {
       element: <DocumentationEventActivity detail={detail} />,
     },
     { id: 4, value: 'notulen', label: 'Notulen', element: <MeetingMinutes /> },
-    { id: 5, value: 'cost', label: 'Pengeluaran Keuangan', element: <ExpenditureSection /> },
-    { id: 6, value: 'report', label: 'Laporan Kegiatan', element: <ReportActivity /> },
+    {
+      id: 5,
+      value: 'cost',
+      label: 'Pengeluaran Keuangan',
+      element: <ExpenditureSection detail={detail} />,
+    },
+    { id: 6, value: 'report', label: 'Laporan Kegiatan', element: <ReportActivity detail={detail} /> },
   ]
 
   const [searchParams, setSearchParams] = useSearchParams()
