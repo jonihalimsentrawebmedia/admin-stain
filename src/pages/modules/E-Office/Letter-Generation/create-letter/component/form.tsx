@@ -11,6 +11,7 @@ import TextInput from '@/components/common/form/TextInput.tsx'
 import { ReturnOrderData } from '@/pages/modules/E-Office/Letter-Generation/create-letter/component/formLetterNumber.tsx'
 import TextAreaInput from '@/components/common/form/textAreaInput.tsx'
 import { RichText } from '@/components/common/richtext'
+import { InputRadio } from '@/components/common/form/InputRadio.tsx'
 
 interface props {
   form: UseFormReturn<TLetterInvitationSchema>
@@ -118,9 +119,11 @@ const FormCreateLetterCustomize = (props: props) => {
                 <>
                   {Array.from({ length: form.watch('lampiran') }).map((_, index) => (
                     <RichText
+                      key={index}
                       form={form}
                       name={`detail_lampiran.${index}`}
                       label={`Detail Lampiran ${index + 1}`}
+                      placeholder={`Isi Lampiran ${index + 1}`}
                       isRow
                       showLabel
                       required
@@ -138,6 +141,63 @@ const FormCreateLetterCustomize = (props: props) => {
                 inputClassName={'rounded'}
                 isRow
                 isRequired
+              />
+
+              <InputRadio
+                form={form}
+                label={'Yth lebih dari 1?'}
+                name={'is_yth_lebih_dari_satu'}
+                data={[
+                  { value: true, label: 'Ya' },
+                  { value: false, label: 'Tidak' },
+                ]}
+                isRow
+                isRequired
+              />
+
+              {form?.watch('is_yth_lebih_dari_satu') && !!form.watch('is_yth_lebih_dari_satu') ? (
+                <>
+                  <RichText
+                    form={form}
+                    name={'yang_terhormat'}
+                    label={'Yang Terhormat'}
+                    placeholder={
+                      'Contoh:\n' +
+                      'Rektor STAIN MADINA\n' +
+                      'WAREK I STAIN MADINA\n' +
+                      'WAREK II STAIN MADINA\n' +
+                      'DST...'
+                    }
+                    required
+                    isRow
+                  />
+                </>
+              ) : (
+                <>
+                  <SelectBasicInput
+                    name={'yang_terhormat'}
+                    form={form}
+                    placeholder={'Yang Terhormat'}
+                    label={'Yang Terhormat'}
+                    className={'w-1/2'}
+                    isRequired
+                    isRow
+                    data={[
+                      { label: 'Bapak', value: 'Bapak' },
+                      { label: 'Ibu', value: 'Ibu' },
+                      { label: 'Bapak/Ibu', value: 'Bapak/Ibu' },
+                    ]}
+                  />
+                </>
+              )}
+              <TextInput
+                name={'di'}
+                form={form}
+                label={'Di'}
+                placeholder={'Cth: Ditempat'}
+                htmlFor={'di'}
+                isRequired
+                isRow
               />
             </CardContent>
           </Card>

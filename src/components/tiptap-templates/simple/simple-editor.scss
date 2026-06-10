@@ -76,3 +76,18 @@ body,
     //padding: 1rem 1.5rem 30vh;
   }
 }
+
+/* ── Placeholder styling ── */
+.simple-editor-content .tiptap.ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: #adb5bd;
+  pointer-events: none;
+  height: 0;
+  font-weight: 400;
+}
+
+/* Dark mode placeholder */
+.dark .simple-editor-content .tiptap.ProseMirror p.is-editor-empty:first-child::before {
+  color: #6b7280;
+}
