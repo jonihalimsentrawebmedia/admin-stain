@@ -1,50 +1,58 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { ResolverTypeLetter, type TResolverTypeLetter } from '../data/resolver.tsx'
+import { ResolverTypeTemplateLetter, type TResolverTypeTemplateLetter } from '../data/resolver.tsx'
 import { zodResolver } from '@hookform/resolvers/zod'
 import AxiosClient from '@/provider/axios.tsx'
 import { useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
-import FormLetterTpeCode from '@/pages/modules/E-Office/Letter-Generation/Letter-type/component/form.tsx'
-import type { IMailTypeLetter } from '../data/types.ts'
+import FormTypeTemplate from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail/component/form.tsx'
+import { useParams } from 'react-router-dom'
+import type { ITypeTemplateLetter } from '../data/types.ts'
 import { HiPencil } from 'react-icons/hi'
 
 interface props {
-  data: IMailTypeLetter
+  data: ITypeTemplateLetter
 }
 
-const ButtonEditLetterType = (props: props) => {
+const ButtonEditTypeTemplate = (props: props) => {
+  const { id } = useParams()
   const { data } = props
 
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const form = useForm<TResolverTypeLetter>({
-    resolver: zodResolver(ResolverTypeLetter),
+  const form = useForm<TResolverTypeTemplateLetter>({
+    resolver: zodResolver(ResolverTypeTemplateLetter),
   })
 
   useEffect(() => {
     if (data) {
       form.reset({
-        nama_jenis_surat: data.nama_jenis_surat,
-        kode_surat: data.kode_surat,
-        kategori_jenis_surat: data.kategori_jenis_surat,
+        id_jenis_surat: data.id_jenis_surat,
+        urutan: data.urutan,
+        nama_jenis_template: data?.nama_jenis_template,
       })
     }
   }, [data])
 
   const queryClient = useQueryClient()
-  const HandleSave = async (value: TResolverTypeLetter) => {
+  const HandleSave = async (value: TResolverTypeTemplateLetter) => {
     setLoading(true)
-    await AxiosClient.put(`/eoffice/mail-jenis-surat/${data?.id_mail_jenis_surat}`, value)
+    await AxiosClient.put(
+      `/eoffice/mail-jenis-template-surat/${data?.id_mail_jenis_template_surat}`,
+      {
+        ...value,
+        id_jenis_surat: id as string,
+      }
+    )
       .then((res) => {
         if (res.data.status) {
           setLoading(false)
           setOpen(false)
           form.reset()
           queryClient.invalidateQueries({
-            queryKey: ['code-letter-type'],
+            queryKey: ['type-template'],
           })
           toast.success(res.data.message || 'Success')
         }
@@ -58,14 +66,14 @@ const ButtonEditLetterType = (props: props) => {
   return (
     <>
       <button
-        className={'rounded bg-yellow-500 p-1.5 text-white hover:bg-yellow-600'}
+        className={'rounded bg-yellow-500 p-1.5 hover:bg-yellow-600 text-white'}
         onClick={() => setOpen(!open)}
       >
         <HiPencil />
       </button>
 
-      <DialogBasic title={'Tambah Jenis Surat'} open={open} setOpen={setOpen}>
-        <FormLetterTpeCode
+      <DialogBasic title={'Tambah Jenis Template'} open={open} setOpen={setOpen}>
+        <FormTypeTemplate
           form={form}
           loading={loading}
           HandleSave={HandleSave}
@@ -77,4 +85,4 @@ const ButtonEditLetterType = (props: props) => {
   )
 }
 
-export default ButtonEditLetterType
+export default ButtonEditTypeTemplate

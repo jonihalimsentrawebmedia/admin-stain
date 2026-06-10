@@ -32,3 +32,23 @@ export const UseGetTypeLetters = (props?: BasicProps) => {
 
   return { loading, meta, letterType }
 }
+
+export const UseGetDetailTypeLetter = (id: string) => {
+  const [letter, setLetter] = useState<IMailTypeLetter>()
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['code-letter-type-detail', id],
+    refetchOnWindowFocus: false,
+    queryFn: () => AxiosClient.get(`/eoffice/mail-jenis-surat/${id}`).then((res) => res.data.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setLetter(data)
+    }
+  }, [data])
+
+  return { letter, loading }
+}

@@ -13,7 +13,7 @@ interface IFormatNomorSurat {
   is_tahun: boolean
 }
 
-function toRoman(num: number): string {
+export function toRoman(num: number): string {
   const romanMap: [number, string][] = [
     [1000, 'M'],
     [900, 'CM'],

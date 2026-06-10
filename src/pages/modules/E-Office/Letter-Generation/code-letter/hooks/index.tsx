@@ -41,6 +41,7 @@ export const UseGetDetailLetterNumberAutomatic = (id: string) => {
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['letter-number-automatic-detail', id],
+    enabled: !!id,
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient(`/eoffice/nomor-surat-otomatis/${id}`).then((res) => res.data.data),
   })

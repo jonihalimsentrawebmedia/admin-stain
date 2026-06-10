@@ -6,13 +6,13 @@ import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { FaTrash } from 'react-icons/fa'
-import type { IMailTypeLetter } from '../data/types.ts'
+import type { IMailTypeLetterTemplate } from '../data/types.ts'
 
 interface props {
-  data: IMailTypeLetter
+  data: IMailTypeLetterTemplate
 }
 
-const ButtonDeleteLetterType = (props: props) => {
+const ButtonDeleteTemplateLetterType = (props: props) => {
   const { data } = props
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -20,13 +20,13 @@ const ButtonDeleteLetterType = (props: props) => {
   const queryClient = useQueryClient()
   const HandleSave = async () => {
     setLoading(true)
-    await AxiosClient.delete(`/eoffice/mail-jenis-surat/${data?.id_mail_jenis_surat}`)
+    await AxiosClient.delete(`/eoffice/mail-template-surat/${data?.id_mail_template_surat}`)
       .then((res) => {
         if (res.data.status) {
           setLoading(false)
           setOpen(false)
           queryClient.invalidateQueries({
-            queryKey: ['code-letter-type'],
+            queryKey: ['type-template-letter'],
           })
           setLoading(false)
           toast.success(res.data.message || 'Success')
@@ -50,11 +50,9 @@ const ButtonDeleteLetterType = (props: props) => {
       <DialogBasic title={'Hapus Klasifikasi Suret'} open={open} setOpen={setOpen}>
         <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
           <p className="text-gray-500">Nama Jenis Surat</p>
-          <p>{data?.nama_jenis_surat}</p>
-          <p className="text-gray-500">Kategori Jenis Surat</p>
-          <p>{data?.kategori_jenis_surat}</p>
-          <p className="text-gray-500">Kode Surat</p>
-          <p>{data?.kode_surat}</p>
+          <div dangerouslySetInnerHTML={{ __html: data?.uraian ?? '' }} />
+          <p className="text-gray-500">Urutan</p>
+          <p>{data?.urutan}</p>
         </div>
         <ButtonTitleGroup
           label={''}
@@ -78,4 +76,4 @@ const ButtonDeleteLetterType = (props: props) => {
   )
 }
 
-export default ButtonDeleteLetterType
+export default ButtonDeleteTemplateLetterType
