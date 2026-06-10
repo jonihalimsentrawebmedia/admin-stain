@@ -84,6 +84,12 @@ const ReportActivity = (props: Props) => {
           queryClient.invalidateQueries({
             queryKey: ['report-activity-context'],
           })
+          queryClient.invalidateQueries({
+            queryKey: ['report-activity-print'],
+          })
+          queryClient.invalidateQueries({
+            queryKey: ['context'],
+          })
           toast.success(res.data.message || 'Success')
         }
       })
