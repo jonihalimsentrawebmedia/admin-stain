@@ -1,10 +1,25 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { FaCirclePlus } from 'react-icons/fa6'
+import { UseGetLetterNumberAutomatic } from '@/pages/modules/E-Office/Letter-Generation/code-letter/hooks'
+import { ColumnsCodeNumber } from '@/pages/modules/E-Office/Letter-Generation/code-letter/data/columns.tsx'
+import TableCustom from '@/components/common/table/TableCustom.tsx'
 
 const NumberOfCodeLetterPage = () => {
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { letterNumber, meta, loading } = UseGetLetterNumberAutomatic({
+    page,
+    limit,
+    search,
+  })
+  const { columns } = ColumnsCodeNumber()
+
   return (
     <>
       <div className={'space-y-5'}>
@@ -22,6 +37,8 @@ const NumberOfCodeLetterPage = () => {
             },
           ]}
         />
+
+        <TableCustom data={letterNumber} columns={columns} loading={loading} meta={meta} />
       </div>
     </>
   )

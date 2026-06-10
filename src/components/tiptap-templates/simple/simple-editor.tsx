@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { EditorContent, EditorContext, useEditor } from '@tiptap/react'
 
 // --- Tiptap Core Extensions ---
@@ -17,6 +17,7 @@ import { Table } from '@tiptap/extension-table'
 import TableRow from '@tiptap/extension-table-row'
 import TableCell from '@tiptap/extension-table-cell'
 import TableHeader from '@tiptap/extension-table-header'
+import Placeholder from '@tiptap/extension-placeholder'
 
 // --- UI Primitives ---
 import { Button } from '@/components/tiptap-ui-primitive/button'
@@ -176,29 +177,23 @@ interface props {
   value: string
   onchange: (value: string) => void
   name?: string
+  placeholder?: string
 }
 
 export function SimpleEditor(props: props) {
-  const { value, onchange, name } = props
+  const { value, onchange, name, placeholder } = props
 
   const isMobile = useIsBreakpoint()
   const { height } = useWindowSize()
   const [mobileView, setMobileView] = useState<'main' | 'highlighter' | 'link'>('main')
   const toolbarRef = useRef<HTMLDivElement>(null)
 
-  const editor = useEditor({
-    content: value || '', // initial value
-    immediatelyRender: false,
-    editorProps: {
-      attributes: {
-        autocomplete: 'off',
-        autocorrect: 'off',
-        autocapitalize: 'off',
-        'aria-label': 'Main content area, start typing to enter text.',
-        class: 'simple-editor',
-      },
-    },
-    extensions: [
+  // Flag to break circular update: programmatic setContent → onUpdate → setValue → re-render → setContent
+  const isProgrammaticUpdate = useRef(false)
+
+  // Memoize extensions array so it doesn't recreate on every render
+  const extensions = useMemo(
+    () => [
       StarterKit.configure({
         dropcursor: false,
         horizontalRule: false,
@@ -210,7 +205,7 @@ export function SimpleEditor(props: props) {
       TextStyle,
       Color,
       Table.configure({
-        resizable: true, // ⬅️ INI KUNCINYA
+        resizable: true,
         handleWidth: 5,
         lastColumnResizable: true,
         allowTableNodeSelection: true,
@@ -244,21 +239,67 @@ export function SimpleEditor(props: props) {
         upload: handleImageUpload,
         onError: (error: any) => console.error('Upload failed:', error),
       }),
+      Placeholder.configure({
+        placeholder: placeholder || '',
+      }),
     ],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  )
 
-    /** 🔥 Trigger onchange ke parent */
+  const editor = useEditor({
+    content: value || '', // initial value
+    immediatelyRender: false,
+    editorProps: {
+      attributes: {
+        autocomplete: 'off',
+        autocorrect: 'off',
+        autocapitalize: 'off',
+        'aria-label': 'Main content area, start typing to enter text.',
+        class: 'simple-editor',
+      },
+    },
+    extensions,
+
+    /** 🔥 Trigger onchange ke parent — skip if programmatic update to break cycle */
     onUpdate({ editor }) {
+      if (isProgrammaticUpdate.current) {
+        isProgrammaticUpdate.current = false
+        return
+      }
       const html = editor.getHTML()
       onchange?.(html)
     },
   })
 
-  /** 🔥 Sync value dari parent ke editor */
+  /** 🔥 Sync value dari parent ke editor — with cycle-breaking guard */
   useEffect(() => {
-    if (editor && value !== editor.getHTML()) {
-      editor.commands.setContent(value || '')
+    if (!editor) return
+
+    // Normalize: treat empty-paragraph the same as truly empty
+    const currentHtml = editor.getHTML()
+    const normalizedCurrent = !currentHtml || currentHtml === '<p></p>' ? '' : currentHtml
+    const normalizedValue = value || ''
+
+    if (normalizedValue !== normalizedCurrent) {
+      isProgrammaticUpdate.current = true
+      editor.commands.setContent(normalizedValue)
     }
   }, [value, editor])
+
+  /** 🔥 Update placeholder dynamically when prop changes */
+  useEffect(() => {
+    if (!editor) return
+
+    const placeholderExt = editor.extensionManager.extensions.find(
+      (ext: any) => ext.name === 'placeholder',
+    )
+    if (placeholderExt) {
+      placeholderExt.options['placeholder'] = placeholder || ''
+      // Force editor to re-render to reflect placeholder change
+      editor.view.dispatch(editor.state.tr)
+    }
+  }, [placeholder, editor])
 
   const rect = useCursorVisibility({
     editor,
@@ -295,6 +336,7 @@ export function SimpleEditor(props: props) {
         </Toolbar>
         <TableFloatingToolbar />
         <EditorContent
+          placeholder={props.placeholder}
           name={name}
           editor={editor}
           role="presentation"

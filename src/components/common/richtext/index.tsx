@@ -1,5 +1,7 @@
+import { useCallback } from 'react'
 import { SimpleEditor } from '@/components/tiptap-templates/simple/simple-editor.tsx'
-import type { FieldValues, UseFormReturn, Path, PathValue } from 'react-hook-form'
+import type { FieldValues, Path, PathValue, UseFormReturn } from 'react-hook-form'
+import { useWatch } from 'react-hook-form'
 
 interface Props<T extends FieldValues> {
   form: UseFormReturn<T>
@@ -10,6 +12,7 @@ interface Props<T extends FieldValues> {
   labelClassName?: string
   isRow?: boolean
   showLabel?: boolean
+  placeholder?: string
 }
 
 export const RichText = <T extends FieldValues>(props: Props<T>) => {
@@ -20,15 +23,29 @@ export const RichText = <T extends FieldValues>(props: Props<T>) => {
     required,
     className,
     isRow = true,
-    labelClassName,
     showLabel = true,
+    labelClassName,
+    placeholder,
   } = props
+
+  const fieldValue = useWatch({ control: form.control, name })
+
+  const handleChange = useCallback(
+    (value: string) => {
+      form.setValue(name, value as PathValue<T, Path<T>>)
+    },
+    [form, name]
+  )
+
+  const error = form.formState.errors[name]
+  const errorMessage = error?.message as string | undefined
+
   return (
     <div
       className={`${isRow ? 'grid grid-cols-[12rem_1fr]' : 'flex flex-col w-full'} w-full gap-5 items-start ${className}`}
     >
       {showLabel && (
-        <label className={`${form.formState.errors[name] ? 'text-red-500' : ''} ${labelClassName}`}>
+        <label className={`${error ? 'text-red-500' : ''} ${labelClassName}`}>
           {label ?? 'Keterangan (Optional)'}
           {required && <span className="text-red-500"> *</span>}
         </label>
@@ -37,14 +54,11 @@ export const RichText = <T extends FieldValues>(props: Props<T>) => {
       <div className={'w-full'}>
         <SimpleEditor
           name={name}
-          value={form.watch(name) ?? ''}
-          onchange={(e) => {
-            form.setValue(name, e as PathValue<T, Path<T>>)
-          }}
+          value={fieldValue ?? ''}
+          onchange={handleChange}
+          placeholder={placeholder}
         />
-        {form.formState.errors[name] && (
-          <span className={'text-red-500'}>{form?.formState.errors[name].message as any}</span>
-        )}
+        {error && <span className={'text-red-500'}>{errorMessage}</span>}
       </div>
     </div>
   )
