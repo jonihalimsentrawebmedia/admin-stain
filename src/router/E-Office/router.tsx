@@ -1,5 +1,6 @@
 import { lazy } from 'react'
 import NumberOfCodeLetterPage from '@/pages/modules/E-Office/Letter-Generation/code-letter'
+import CreatedCodeLetterGenerated from '@/pages/modules/E-Office/Letter-Generation/code-letter/created'
 
 const UserProfilePage = lazy(() =>
   import('@/pages/modules/website-utama/user-profile').then((m) => ({ default: m.UserProfilePage }))
@@ -244,6 +245,10 @@ export const E_OFFICE_ROUTE = [
           {
             index: true,
             element: <NumberOfCodeLetterPage />,
+          },
+          {
+            path: 'add',
+            element: <CreatedCodeLetterGenerated />,
           },
         ],
       },
