@@ -8,6 +8,8 @@ import TextInput from '@/components/common/form/TextInput.tsx'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import { InputRadio } from '@/components/common/form/InputRadio.tsx'
 import { UseGetUnitActive } from '@/pages/modules/E-Office/reference/satuan-unit/hooks.tsx'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card.tsx'
+import { GenerateLetterCodeNumber } from '@/pages/modules/E-Office/Letter-Generation/code-letter/component/exampleView.tsx'
 
 interface props {
   form: UseFormReturn<TResolverCodeLetter>
@@ -19,6 +21,20 @@ const FormCodeLetterGenerated = (props: props) => {
   const { form, loading, HandleSave } = props
   const navigate = useNavigate()
   const { institution } = UseGetUnitActive()
+
+  const result = GenerateLetterCodeNumber({
+    kode_depan: form.watch('kode_depan'),
+    urutan_kode_depan: form.watch('urutan_kode_depan'),
+    kode_belakang: form.watch('kode_belakang'),
+    urutan_kode_belakang: form.watch('urutan_kode_belakang'),
+    is_bulan: form.watch('is_bulan'),
+    is_bulan_romawi: form.watch('is_bulan_romawi'),
+    is_tahun: form.watch('is_tahun'),
+    urutan_bulan: form.watch('urutan_bulan'),
+    urutan_nomor_surat: form.watch('urutan_nomor_surat'),
+    urutan_tahun: form.watch('urutan_tahun'),
+  })
+
   return (
     <>
       <Form {...form}>
@@ -26,7 +42,20 @@ const FormCodeLetterGenerated = (props: props) => {
           className={'mt-8 w-full flex flex-col gap-4'}
           onSubmit={form.handleSubmit(HandleSave)}
         >
-          <CheckboxInputBasic name={'is_otomatis'} form={form} label={'Isi Urutan otomatis'} />
+          <CheckboxInputBasic
+            name={'is_otomatis'}
+            form={form}
+            label={'Isi Urutan otomatis'}
+            fx={(e) => {
+              if (e) {
+                form.setValue('urutan_kode_depan', 1)
+                form.setValue('urutan_nomor_surat', 2)
+                form.setValue('urutan_kode_belakang', 3)
+                form.setValue('urutan_bulan', 4)
+                form.setValue('urutan_tahun', 5)
+              }
+            }}
+          />
           <div className="grid grid-cols-2 gap-5">
             <TextInput
               className={'col-span-2'}
@@ -70,6 +99,7 @@ const FormCodeLetterGenerated = (props: props) => {
               htmlFor={'urutankode_depan'}
               placeholder={'Urutan Kode Depan'}
               type={'number'}
+              isDisabled={!!form.watch('is_otomatis')}
               isNumber
               isRequired
             />
@@ -91,6 +121,7 @@ const FormCodeLetterGenerated = (props: props) => {
               htmlFor={'urutan_nomor_surat'}
               placeholder={'Posisi Urutan No. Surat'}
               type={'number'}
+              isDisabled={!!form.watch('is_otomatis')}
               isNumber
               isRequired
             />
@@ -108,6 +139,7 @@ const FormCodeLetterGenerated = (props: props) => {
               label={'Urutan Kode Belakang'}
               htmlFor={'urutan_kode_belakang'}
               placeholder={'Urutan Kode Belakang'}
+              isDisabled={!!form.watch('is_otomatis')}
               type={'number'}
               isNumber
               isRequired
@@ -129,6 +161,7 @@ const FormCodeLetterGenerated = (props: props) => {
               htmlFor={'urutan_bulan'}
               placeholder={'Urutan Bulan'}
               type={'number'}
+              isDisabled={!!form.watch('is_otomatis')}
               isNumber
               isRequired
             />
@@ -160,10 +193,22 @@ const FormCodeLetterGenerated = (props: props) => {
               htmlFor={'urutan_tahun'}
               placeholder={'Urutan Tahun'}
               type={'number'}
+              isDisabled={!!form.watch('is_otomatis')}
               isNumber
               isRequired
             />
           </div>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Contoh Nomor Surat</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {/*{result ?? 'Belum Ada Nomor Surat'}*/}
+              <div dangerouslySetInnerHTML={{ __html: result ?? 'Belum Ada Nomor Surat' }} />
+            </CardContent>
+          </Card>
+
           <ButtonForm loading={loading} onCancel={() => navigate(-1)} />
         </form>
       </Form>
