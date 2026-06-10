@@ -17,9 +17,9 @@ import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { IoPrintSharp } from 'react-icons/io5'
 import { ConvertUrlToBase64 } from '@/pages/modules/E-Office/settings/letter-header/hooks'
-import pdfMake from 'pdfmake/build/pdfmake'
 import { generatePdfLaporanKegiatan } from '@/pages/modules/E-Office/event-activity/event-data/detail/component/report-activity/printData'
 import type { IEvent } from '@/pages/modules/E-Office/event-activity/event-data/data/types.ts'
+import pdfmake from '@/utils/pdfmake.ts'
 
 interface Props {
   detail?: IEvent
@@ -48,7 +48,7 @@ const ReportActivity = (props: Props) => {
         printData: listReport,
         imageUrl: `data:image/png;base64,${base64}`,
       })
-      pdfMake.createPdf(docDefinition).open()
+      pdfmake.createPdf(docDefinition).open()
     }
   }
 
