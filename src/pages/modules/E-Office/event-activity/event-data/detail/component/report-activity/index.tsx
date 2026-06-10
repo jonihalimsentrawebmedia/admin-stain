@@ -3,7 +3,7 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs.tsx'
 import { cn } from '@/lib/utils.ts'
 import { useEffect, useState } from 'react'
-import { UseGetContext, UseGetReportActivityContext } from './hooks.tsx'
+import { UseGetContext, UseGetReportActivityContext, UseGetReportActivityPrint } from './hooks.tsx'
 import { useParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { Form } from '@/components/ui/form.tsx'
@@ -15,18 +15,42 @@ import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
+import { IoPrintSharp } from 'react-icons/io5'
+import { ConvertUrlToBase64 } from '@/pages/modules/E-Office/settings/letter-header/hooks'
+import pdfMake from 'pdfmake/build/pdfmake'
+import { generatePdfLaporanKegiatan } from '@/pages/modules/E-Office/event-activity/event-data/detail/component/report-activity/printData'
+import type { IEvent } from '@/pages/modules/E-Office/event-activity/event-data/data/types.ts'
 
-const ReportActivity = () => {
+interface Props {
+  detail?: IEvent
+}
+
+const ReportActivity = (props: Props) => {
+  const { detail } = props
   const { id } = useParams()
   const [tabsSelected, setTabsSelected] = useState<string>()
   const [isEdit, setIsEdit] = useState(true)
   const [loading, setLoading] = useState(false)
 
   const { context } = UseGetContext(id as string)
+  const { report: listReport } = UseGetReportActivityPrint(id as string)
   const { report } = UseGetReportActivityContext({
     context: tabsSelected as string,
     id_acara: id as string,
   })
+
+  const { base64 } = ConvertUrlToBase64(listReport?.cetak_config?.kop_surat?.url_logo ?? '')
+
+  const HandlePrint = async () => {
+    if (detail && listReport) {
+      const docDefinition = await generatePdfLaporanKegiatan({
+        event: detail,
+        printData: listReport,
+        imageUrl: `data:image/png;base64,${base64}`,
+      })
+      pdfMake.createPdf(docDefinition).open()
+    }
+  }
 
   useEffect(() => {
     if (!tabsSelected && context) {
@@ -73,7 +97,20 @@ const ReportActivity = () => {
     <>
       <Card>
         <CardContent className={'space-y-2.5 p-3 shadow-none'}>
-          <ButtonTitleGroup label={'Laporan Kegiatan'} buttonGroup={[]} />
+          <ButtonTitleGroup
+            label={'Laporan Kegiatan'}
+            buttonGroup={[
+              {
+                type: 'custom',
+                element: (
+                  <Button onClick={() => HandlePrint()} className={'text-white'}>
+                    <IoPrintSharp />
+                    Cetak
+                  </Button>
+                ),
+              },
+            ]}
+          />
 
           <Tabs
             value={tabsSelected}

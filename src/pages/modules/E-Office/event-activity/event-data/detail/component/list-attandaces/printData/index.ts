@@ -416,8 +416,7 @@ const getPaginationMetrics = (
   }
 }
 
-// ─── Distribute rows across pages using actual page capacities ───────────────
-// Non-last pages always fill to max capacity; last page gets the remainder + signatures.
+// ─── Distribute rows evenly across pages, last page only gets signature rows ──
 const buildRowChunks = (totalRows: number, metrics: PaginationMetrics): RowChunk[] => {
   if (totalRows <= 0) return []
 
@@ -426,31 +425,27 @@ const buildRowChunks = (totalRows: number, metrics: PaginationMetrics): RowChunk
     return [{ rowCount: totalRows, targetRowCount: metrics.firstPageWithSignature }]
   }
 
-  const chunks: RowChunk[] = []
-  let remaining = totalRows
+  const finalPageRows = MIN_SIGNATURE_PAGE_ROWS
+  const remainingRowsBeforeFinalPage = Math.max(totalRows - finalPageRows, 0)
+  const regularPageCapacity = metrics.firstPageWithoutSignature
+  const regularPageCount = Math.max(1, Math.ceil(remainingRowsBeforeFinalPage / regularPageCapacity))
+  const baseRowsPerPage = Math.floor(remainingRowsBeforeFinalPage / regularPageCount)
+  const extraRows = remainingRowsBeforeFinalPage % regularPageCount
 
-  // First page: fill to firstPageWithoutSignature capacity
-  const firstPageRows = Math.min(remaining, metrics.firstPageWithoutSignature)
-  chunks.push({ rowCount: firstPageRows, targetRowCount: metrics.firstPageWithoutSignature })
-  remaining -= firstPageRows
+  const distributedRows: number[] = Array.from({ length: regularPageCount }).map(
+    (_, index) => baseRowsPerPage + (index < extraRows ? 1 : 0),
+  )
 
-  // Intermediate pages (no signature): fill to capacity, leave at least 1 row for final page
-  while (remaining > metrics.finalPageWithSignature) {
-    const maxRowsThisPage = Math.min(
-      remaining - 1, // reserve minimum 1 row for final page
-      metrics.nextPageWithoutSignature
-    )
-    chunks.push({ rowCount: maxRowsThisPage, targetRowCount: metrics.nextPageWithoutSignature })
-    remaining -= maxRowsThisPage
-  }
-
-  // Final page (with signature): remaining rows (1 to finalPageWithSignature)
-  // Use finalPageWithSignature as target — it's calculated to leave room for TTD on same page
-  if (remaining > 0) {
-    chunks.push({ rowCount: remaining, targetRowCount: metrics.finalPageWithSignature })
-  }
-
-  return chunks
+  return [
+    ...distributedRows.map((rowCount) => ({
+      rowCount,
+      targetRowCount: regularPageCapacity,
+    })),
+    {
+      rowCount: finalPageRows,
+      targetRowCount: metrics.finalPageWithSignature,
+    },
+  ].filter((chunk) => chunk.rowCount > 0)
 }
 
 // ─── Build additional penandatangan (saksi) section ──────────────────────────
@@ -644,6 +639,19 @@ export const GenerateListAttendance = ({
   const totalRows = Math.max(attendance?.length || 0, 0)
   const rowChunks = buildRowChunks(totalRows, paginationMetrics)
 
+  // ─── Uniform vertical padding for consistent row heights across pages ────
+  const regularRowChunks = rowChunks.slice(0, -1)
+  const uniformVerticalPadding =
+    rowChunks.length <= 1
+      ? getDynamicTablePadding(
+          rowChunks[0]?.rowCount || 0,
+          rowChunks[0]?.targetRowCount || 0,
+        )
+      : getDynamicTablePadding(
+          Math.max(...regularRowChunks.map((chunk) => chunk.rowCount), 0),
+          paginationMetrics.firstPageWithoutSignature,
+        )
+
   // ─── 7. Build content (tables + signatures) ──────────────────────────────────
   const tableAndSignatureContent: any[] = []
 
@@ -652,7 +660,8 @@ export const GenerateListAttendance = ({
     chunkRowCount: number,
     chunkStartIndex: number,
     chunkTargetRowCount: number,
-    includeSignature: boolean
+    includeSignature: boolean,
+    verticalPaddingOverride?: number,
   ) => {
     const items: any[] = []
 
@@ -667,6 +676,7 @@ export const GenerateListAttendance = ({
         rowCount: chunkRowCount,
         showHeader: true,
         targetRowCount: chunkTargetRowCount,
+        verticalPadding: verticalPaddingOverride,
       })
     )
 
@@ -686,7 +696,7 @@ export const GenerateListAttendance = ({
 
       if (isLastChunk) {
         tableAndSignatureContent.push(
-          ...buildPageItems(currentChunk.rowCount, startIndex, currentChunk.targetRowCount, true)
+          ...buildPageItems(currentChunk.rowCount, startIndex, currentChunk.targetRowCount, true, uniformVerticalPadding)
         )
       } else {
         tableAndSignatureContent.push({
@@ -694,7 +704,8 @@ export const GenerateListAttendance = ({
             currentChunk.rowCount,
             startIndex,
             currentChunk.targetRowCount,
-            false
+            false,
+            uniformVerticalPadding,
           ),
           pageBreak: 'after',
         })
@@ -703,7 +714,7 @@ export const GenerateListAttendance = ({
       startIndex += currentChunk.rowCount
     })
   } else {
-    tableAndSignatureContent.push(...buildPageItems(0, 0, 0, true))
+    tableAndSignatureContent.push(...buildPageItems(0, 0, 0, true, uniformVerticalPadding))
   }
 
   // ─── 8. Assemble document definition ────────────────────────────────────────

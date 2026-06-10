@@ -57,6 +57,9 @@ export const ButtonEditExpenditure = (props: props) => {
           queryClient.invalidateQueries({
             queryKey: ['expenditure'],
           })
+          queryClient.invalidateQueries({
+            queryKey: ['total-expenditure-print'],
+          })
           toast.success(res.data.message || 'Success')
           form.reset()
         }

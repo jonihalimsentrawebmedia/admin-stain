@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
+import type { PrintAllActivity } from '@/pages/modules/E-Office/event-activity/event-data/detail/component/report-activity/data/types.ts'
 
 interface Context {
   context: string
@@ -72,7 +73,7 @@ export const UseGetReportActivityContext = (props: Props) => {
 }
 
 export const UseGetReportActivityPrint = (id_acara: string) => {
-  const [report, setReport] = useState<IReportActivity>()
+  const [report, setReport] = useState<PrintAllActivity>()
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['report-activity-print'],

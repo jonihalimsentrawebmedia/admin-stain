@@ -37,7 +37,7 @@ const MenuEvent = (props: Props) => {
       label: 'Pengeluaran Keuangan',
       element: <ExpenditureSection detail={detail} />,
     },
-    { id: 6, value: 'report', label: 'Laporan Kegiatan', element: <ReportActivity /> },
+    { id: 6, value: 'report', label: 'Laporan Kegiatan', element: <ReportActivity detail={detail} /> },
   ]
 
   const [searchParams, setSearchParams] = useSearchParams()
