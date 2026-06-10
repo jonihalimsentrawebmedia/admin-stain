@@ -27,11 +27,11 @@ const FormCodeLetterGenerated = (props: props) => {
     urutan_kode_depan: form.watch('urutan_kode_depan'),
     kode_belakang: form.watch('kode_belakang'),
     urutan_kode_belakang: form.watch('urutan_kode_belakang'),
-    is_bulan: form.watch('is_bulan'),
+    is_bulan: form.watch('is_perlu_bulan'),
     is_bulan_romawi: form.watch('is_bulan_romawi'),
-    is_tahun: form.watch('is_tahun'),
+    is_tahun: form.watch('is_perlu_tahun'),
     urutan_bulan: form.watch('urutan_bulan'),
-    urutan_nomor_surat: form.watch('urutan_nomor_surat'),
+    urutan_nomor_surat: form.watch('urutan_posisi_utama_no_surat'),
     urutan_tahun: form.watch('urutan_tahun'),
   })
 
@@ -43,13 +43,13 @@ const FormCodeLetterGenerated = (props: props) => {
           onSubmit={form.handleSubmit(HandleSave)}
         >
           <CheckboxInputBasic
-            name={'is_otomatis'}
+            name={'isi_surat_otomatis'}
             form={form}
             label={'Isi Urutan otomatis'}
             fx={(e) => {
               if (e) {
                 form.setValue('urutan_kode_depan', 1)
-                form.setValue('urutan_nomor_surat', 2)
+                form.setValue('urutan_posisi_utama_no_surat', 2)
                 form.setValue('urutan_kode_belakang', 3)
                 form.setValue('urutan_bulan', 4)
                 form.setValue('urutan_tahun', 5)
@@ -60,7 +60,7 @@ const FormCodeLetterGenerated = (props: props) => {
             <TextInput
               className={'col-span-2'}
               form={form}
-              name={'nama_kode_nomor_surat'}
+              name={'nama_nomor_surat'}
               label={'Nama Kode Nomor Surat'}
               placeholder={'Masukan Nama Kode Nomor Surat'}
               htmlFor={'nama_kode_nomor_surat'}
@@ -70,7 +70,7 @@ const FormCodeLetterGenerated = (props: props) => {
             <SelectBasicInput
               form={form}
               className={'col-span-2'}
-              name={'id_satuan_organisasi'}
+              name={'id_unit'}
               label={'Satuan Kerja'}
               placeholder={'Pilih Satuan Kerja / Tidak Dipilih / NULL'}
               data={
@@ -99,7 +99,7 @@ const FormCodeLetterGenerated = (props: props) => {
               htmlFor={'urutankode_depan'}
               placeholder={'Urutan Kode Depan'}
               type={'number'}
-              isDisabled={!!form.watch('is_otomatis')}
+              isDisabled={!!form.watch('isi_surat_otomatis')}
               isNumber
               isRequired
             />
@@ -107,7 +107,7 @@ const FormCodeLetterGenerated = (props: props) => {
               className={'flex flex-col gap-3'}
               form={form}
               label={'Pengisian No. Surat'}
-              name={'nomor_surat'}
+              name={'pengisian_no_surat'}
               isRequired
               data={['OTOMATIS', 'MANUAL']?.map((row) => ({
                 label: row?.toLowerCase(),
@@ -116,12 +116,12 @@ const FormCodeLetterGenerated = (props: props) => {
             />
             <TextInput
               form={form}
-              name={'urutan_nomor_surat'}
+              name={'urutan_posisi_utama_no_surat'}
               label={'Posisi Urutan No. Surat'}
               htmlFor={'urutan_nomor_surat'}
               placeholder={'Posisi Urutan No. Surat'}
               type={'number'}
-              isDisabled={!!form.watch('is_otomatis')}
+              isDisabled={!!form.watch('isi_surat_otomatis')}
               isNumber
               isRequired
             />
@@ -139,14 +139,14 @@ const FormCodeLetterGenerated = (props: props) => {
               label={'Urutan Kode Belakang'}
               htmlFor={'urutan_kode_belakang'}
               placeholder={'Urutan Kode Belakang'}
-              isDisabled={!!form.watch('is_otomatis')}
+              isDisabled={!!form.watch('isi_surat_otomatis')}
               type={'number'}
               isNumber
               isRequired
             />
             <InputRadio
               form={form}
-              name={'is_bulan'}
+              name={'is_perlu_bulan'}
               label={'Apakah Perlu Bulan ?'}
               isRequired
               data={[
@@ -161,7 +161,7 @@ const FormCodeLetterGenerated = (props: props) => {
               htmlFor={'urutan_bulan'}
               placeholder={'Urutan Bulan'}
               type={'number'}
-              isDisabled={!!form.watch('is_otomatis')}
+              isDisabled={!!form.watch('isi_surat_otomatis')}
               isNumber
               isRequired
             />
@@ -178,7 +178,7 @@ const FormCodeLetterGenerated = (props: props) => {
             />
             <InputRadio
               form={form}
-              name={'is_tahun'}
+              name={'is_perlu_tahun'}
               label={'Apakah Perlu Tahun ?'}
               isRequired
               data={[
@@ -193,7 +193,7 @@ const FormCodeLetterGenerated = (props: props) => {
               htmlFor={'urutan_tahun'}
               placeholder={'Urutan Tahun'}
               type={'number'}
-              isDisabled={!!form.watch('is_otomatis')}
+              isDisabled={!!form.watch('isi_surat_otomatis')}
               isNumber
               isRequired
             />

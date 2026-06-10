@@ -1,24 +1,35 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import FormCodeLetterGenerated from '@/pages/modules/E-Office/Letter-Generation/code-letter/component/form.tsx'
 import { useForm } from 'react-hook-form'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ResolverCodeLetter, type TResolverCodeLetter } from '../data/resolver.tsx'
 import { zodResolver } from '@hookform/resolvers/zod'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { UseGetDetailLetterNumberAutomatic } from '@/pages/modules/E-Office/Letter-Generation/code-letter/hooks'
 
-const CreatedCodeLetterGenerated = () => {
+const UpdatedCodeLetterGenerated = () => {
+  const { id } = useParams()
   const [loading, setLoading] = useState(false)
+  const { letterNumber } = UseGetDetailLetterNumberAutomatic(id as string)
 
   const navigate = useNavigate()
   const form = useForm<TResolverCodeLetter>({
     resolver: zodResolver(ResolverCodeLetter),
   })
 
+  useEffect(() => {
+    if (letterNumber) {
+      form.reset({
+        ...letterNumber,
+      })
+    }
+  }, [letterNumber])
+
   const HandleSave = async (value: TResolverCodeLetter) => {
     setLoading(true)
-    await AxiosClient.post('/eoffice/nomor-surat-otomatis', value)
+    await AxiosClient.put(`/eoffice/nomor-surat-otomatis/${id}`, value)
       .then((res) => {
         if (res.data.status) {
           setLoading(false)
@@ -43,4 +54,4 @@ const CreatedCodeLetterGenerated = () => {
   )
 }
 
-export default CreatedCodeLetterGenerated
+export default UpdatedCodeLetterGenerated

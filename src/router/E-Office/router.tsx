@@ -1,6 +1,8 @@
 import { lazy } from 'react'
 import NumberOfCodeLetterPage from '@/pages/modules/E-Office/Letter-Generation/code-letter'
 import CreatedCodeLetterGenerated from '@/pages/modules/E-Office/Letter-Generation/code-letter/created'
+import LetterTypePage from '@/pages/modules/E-Office/Letter-Generation/Letter-type'
+import UpdatedCodeLetterGenerated from '@/pages/modules/E-Office/Letter-Generation/code-letter/updated'
 
 const UserProfilePage = lazy(() =>
   import('@/pages/modules/website-utama/user-profile').then((m) => ({ default: m.UserProfilePage }))
@@ -249,6 +251,19 @@ export const E_OFFICE_ROUTE = [
           {
             path: 'add',
             element: <CreatedCodeLetterGenerated />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedCodeLetterGenerated />,
+          },
+        ],
+      },
+      {
+        path: 'letter-type',
+        children: [
+          {
+            index: true,
+            element: <LetterTypePage />,
           },
         ],
       },
