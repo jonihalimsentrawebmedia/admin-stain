@@ -13,7 +13,7 @@ interface Props {
   title: string | ReactNode
   description?: string
   open: boolean
-  setOpen: Dispatch<SetStateAction<boolean>>
+  setOpen: Dispatch<SetStateAction<boolean>> | any
   className?: string
   disableOutsideDialog?: boolean
 }
