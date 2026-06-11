@@ -7,6 +7,9 @@ import DetailLetterType from '@/pages/modules/E-Office/Letter-Generation/Letter-
 import ListTemplateLetterType from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail-template'
 import CreateLetterByTypePage from '@/pages/modules/E-Office/Letter-Generation/create-letter'
 import CreateLetterByTemplate from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate'
+import ListLetterGeneratePage from '@/pages/modules/E-Office/Letter-Generation/letter-list'
+import UpdatedLetterByTemplate from '@/pages/modules/E-Office/Letter-Generation/letter-list/update'
+import DetailLetterTemplate from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail'
 
 const UserProfilePage = lazy(() =>
   import('@/pages/modules/website-utama/user-profile').then((m) => ({ default: m.UserProfilePage }))
@@ -294,6 +297,23 @@ export const E_OFFICE_ROUTE = [
           {
             path: 'create/:id',
             element: <CreateLetterByTemplate />,
+          },
+        ],
+      },
+      {
+        path: 'letter-list',
+        children: [
+          {
+            index: true,
+            element: <ListLetterGeneratePage />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailLetterTemplate />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedLetterByTemplate />,
           },
         ],
       },

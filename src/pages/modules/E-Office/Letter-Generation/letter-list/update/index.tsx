@@ -1,7 +1,6 @@
 import FormCreateLetterCustomize from '@/pages/modules/E-Office/Letter-Generation/create-letter/component/form.tsx'
 import { useForm } from 'react-hook-form'
 import { useEffect, useRef, useState } from 'react'
-import { LetterInvitationSchema, type TLetterInvitationSchema } from '../data/resolver.tsx'
 import { zodResolver } from '@hookform/resolvers/zod'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
@@ -11,15 +10,21 @@ import type { IMailInvitationLetter } from '@/pages/modules/E-Office/Letter-Gene
 import { GetBase64FromUrl } from '@/pages/modules/E-Office/settings/letter-header/hooks'
 import pdfmake from '@/utils/pdfmake.ts'
 import { Link, useParams } from 'react-router-dom'
+import {
+  LetterInvitationSchema,
+  type TLetterInvitationSchema,
+} from '@/pages/modules/E-Office/Letter-Generation/create-letter/data/resolver.tsx'
+import { UseGetDetailLetterGenerate } from '@/pages/modules/E-Office/Letter-Generation/letter-list/hooks'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import { Button } from '@/components/ui/button.tsx'
 
-const CreateLetterByTemplate = () => {
+const UpdatedLetterByTemplate = () => {
   const { id } = useParams()
+  const { letter } = UseGetDetailLetterGenerate(id as string)
+
   const [loading, setLoading] = useState(false)
   const [openPdfDialog, setOpenPdfDialog] = useState(false)
   const [pdfUrl, setPdfUrl] = useState<string | null>(null)
-  const [createdId, setCreatedId] = useState<string | null>(null)
   const pdfUrlRef = useRef<string | null>(null)
 
   const form = useForm<TLetterInvitationSchema>({
@@ -29,6 +34,14 @@ const CreateLetterByTemplate = () => {
       is_lebih_dari_satu_hari: false,
     },
   })
+
+  useEffect(() => {
+    if (letter) {
+      form.reset({
+        ...letter,
+      })
+    }
+  }, [letter])
 
   // Cleanup blob URL saat dialog ditutup atau component unmount
   const cleanupPdfUrl = () => {
@@ -48,7 +61,7 @@ const CreateLetterByTemplate = () => {
   const HandleSave = async (value: TLetterInvitationSchema) => {
     setLoading(true)
     try {
-      const res = await AxiosClient.post('/eoffice/mail-surat-undangan', {
+      const res = await AxiosClient.put(`/eoffice/mail-surat-undangan/${id}`, {
         ...value,
         id_jenis_surat: id,
         tanggal_surat: new Date(value.tanggal_surat).toISOString(),
@@ -58,15 +71,11 @@ const CreateLetterByTemplate = () => {
 
       if (res.data.status) {
         const data: IMailInvitationLetter = res.data.data
-        setCreatedId(data.id_mail_surat_undangan)
-
-        // Fetch kopsurat header via API langsung (bukan hook)
         if (data?.id_satuan_organisasi) {
           const headerRes = await AxiosClient.get(`/eoffice/kop-surat/${data.id_satuan_organisasi}`)
           const letterHeader: ILetterHeader = headerRes.data?.data
 
           if (letterHeader) {
-            // Konversi URL logo ke base64 agar pdfmake bisa render
             let logoBase64 = ''
             try {
               if (letterHeader.url_logo) {
@@ -128,14 +137,12 @@ const CreateLetterByTemplate = () => {
         </div>
         <Link
           className={'w-full flex items-center justify-end'}
-          to={`/modules/e-office/letter-generation/letter-list/detail/${createdId}`}
+          to={`/modules/e-office/letter-generation/letter-list/detail/${id}`}
         >
-          <Button type={'button'} className={'text-white'}>
-            Lanjutkan
-          </Button>
+          <Button className={'text-white'}>Lanjutkan</Button>
         </Link>
       </DialogBasic>
     </>
   )
 }
-export default CreateLetterByTemplate
+export default UpdatedLetterByTemplate
