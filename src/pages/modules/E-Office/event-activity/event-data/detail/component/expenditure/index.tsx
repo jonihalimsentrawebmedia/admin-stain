@@ -41,7 +41,7 @@ const ExpenditureSection = (props: props) => {
       const docDefinition = GenerateExpenditurePdf({
         data: printData,
         event: detail,
-        logoBase64: `data:image/png;base64,${base64}`,
+        logoBase64: base64?.startsWith('data:') ? base64 : `data:image/png;base64,${base64}`,
       })
       pdfmake.createPdf(docDefinition).open()
     }

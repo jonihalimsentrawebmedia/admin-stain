@@ -82,7 +82,7 @@ const PrintAttendanceList = () => {
       values,
       event,
       header: FindHeader,
-      imageUrl: `data:image/png;base64,${base64}`,
+      imageUrl: base64?.startsWith('data:') ? base64 : `data:image/png;base64,${base64}`,
     })
 
     const blob = await pdfMake.createPdf(docDefinition).getBlob()
@@ -95,7 +95,7 @@ const PrintAttendanceList = () => {
       values,
       event,
       header: FindHeader,
-      imageUrl: `data:image/png;base64,${base64}`,
+      imageUrl: base64?.startsWith('data:') ? base64 : `data:image/png;base64,${base64}`,
     })
 
     pdfMake.createPdf(docDefinition).print()

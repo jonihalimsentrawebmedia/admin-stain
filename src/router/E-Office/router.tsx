@@ -11,6 +11,8 @@ import ListLetterGeneratePage from '@/pages/modules/E-Office/Letter-Generation/l
 import UpdatedLetterByTemplate from '@/pages/modules/E-Office/Letter-Generation/letter-list/update'
 import DetailLetterTemplate from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail'
 import BudgetOfficialTravel from '@/pages/modules/E-Office/official-travel/budget'
+import LetterOfAssigment from '@/pages/modules/E-Office/official-travel/Letter-Assigment'
+import CreatedLetterAssigment from '@/pages/modules/E-Office/official-travel/Letter-Assigment/created'
 
 const UserProfilePage = lazy(() =>
   import('@/pages/modules/website-utama/user-profile').then((m) => ({ default: m.UserProfilePage }))
@@ -508,6 +510,19 @@ export const E_OFFICE_ROUTE = [
       {
         path: 'budget',
         element: <BudgetOfficialTravel />,
+      },
+      {
+        path: 'letter-assignment',
+        children: [
+          {
+            index: true,
+            element: <LetterOfAssigment />,
+          },
+          {
+            path: 'add',
+            element: <CreatedLetterAssigment />,
+          },
+        ],
       },
     ],
   },

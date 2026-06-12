@@ -4,7 +4,7 @@ export const LetterInvitationSchema = z.object({
   id_kop_surat: z.string().min(1, 'Kop surat wajib dipilih'),
   id_nomor_surat_otomatis: z.string().optional().default(''),
   id_jenis_surat: z.string().optional().default(''),
-  nomor_urut_manual: z.string().optional().default(''),
+  nomor_urut_manual: z.string().optional().nullable(),
   tempat_surat: z.string().min(1, 'Tempat surat wajib diisi'),
   tanggal_surat: z.string().min(1, 'Tanggal surat wajib diisi'),
   lampiran: z.number().min(0),

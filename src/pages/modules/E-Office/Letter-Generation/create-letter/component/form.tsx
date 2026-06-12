@@ -80,7 +80,7 @@ const FormCreateLetterCustomize = (props: props) => {
           </Card>
 
           <Card className={'p-2'}>
-            <CardContent className={'p-2 space-y-4'}>
+            <CardContent className={'p-2 space-y-4 w-full'}>
               <CardTitle className={'text-xl'}>Penomoran Surat</CardTitle>
               <div className="grid grid-cols-3 gap-4">
                 <SelectBasicInput
@@ -90,6 +90,9 @@ const FormCreateLetterCustomize = (props: props) => {
                   label={'Pilih Kode Nomor Surat'}
                   usePortal
                   isRequired
+                  fx={() => {
+                    form.setValue('nomor_urut_manual', null)
+                  }}
                   data={
                     letterNumber?.map((row) => ({
                       label: row?.nama_nomor_surat,
@@ -114,6 +117,7 @@ const FormCreateLetterCustomize = (props: props) => {
                   isRequired
                 />
               </div>
+
               <ReturnOrderData
                 form={form}
                 name={'nomor_urut_manual'}

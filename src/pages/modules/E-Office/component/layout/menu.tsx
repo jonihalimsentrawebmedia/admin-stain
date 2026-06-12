@@ -111,7 +111,7 @@ export const GenerateMenu = () => {
         {
           id: 111,
           name: 'Surat Tugas / SPD',
-          path: `${baseDomain}/official-travel/letter-task`,
+          path: `${baseDomain}/official-travel/letter-assignment`,
         },
         {
           id: 112,

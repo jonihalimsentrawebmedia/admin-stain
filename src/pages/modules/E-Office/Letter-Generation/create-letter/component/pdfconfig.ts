@@ -96,40 +96,70 @@ export const GenerateLetterPdfDefinition = (
   const isYthOption = YTH_OPTIONS.includes(letterData.yang_terhormat || '')
 
   // 1 =================================================================
-  // KOP SURAT
+  // KOP SURAT  (mengikuti pola buildKopSuratContent + buildKopDivider dari printData.ts)
   // ==================================================================
 
-  const headerSettings = headerData?.pengaturan || []
-  const hasLogo = !!logoBase64
+  const buildKopSuratContent = () => {
+    const headerSettings = headerData?.pengaturan || []
+    const contentTexts = headerSettings.map((s: ISettingLetterHeader) => ({
+      text: s.isi,
+      alignment: 'center' as const,
+      ...mapStyle(s),
+    }))
 
-  const contentTexts = headerSettings.map((s: ISettingLetterHeader) => ({
-    text: s.isi,
-    alignment: 'center' as const,
-    ...mapStyle(s),
-    margin: [0, 0, 0, 0] as [number, number, number, number],
-  }))
+    // Validasi: hanya pakai logo jika benar² berupa data URL base64
+    const isValidDataUrl =
+      !!logoBase64 &&
+      typeof logoBase64 === 'string' &&
+      logoBase64.startsWith('data:image/')
 
-  const kopSuratHeader = {
-    columns: hasLogo
-      ? [
-          { image: logoBase64, width: 80, height: 80 },
-          { width: '*', alignment: 'center' as const, stack: contentTexts },
-        ]
-      : [{ width: '*', alignment: 'center' as const, stack: contentTexts }],
-    columnGap: 10,
-    margin: [0, 0, 0, 5] as [number, number, number, number],
+    // Jika tidak ada teks dan tidak ada logo → null (tidak render apa‑apa)
+    if (contentTexts.length === 0 && !isValidDataUrl) return null
+
+    // Tanpa logo → stack saja (tanpa columns/table)
+    if (!isValidDataUrl) {
+      return {
+        width: '*',
+        alignment: 'center' as const,
+        stack: contentTexts,
+      }
+    }
+
+    // Dengan logo → columns (tidak pakai table krn pdfmake bermasalah dgn image di table)
+    return {
+      columns: [
+        {
+          image: logoBase64 as string,
+          width: 80,
+          height: 80,
+        },
+        { width: '*', alignment: 'center' as const, stack: contentTexts },
+      ],
+      columnGap: 10,
+    }
   }
 
-  const kopDivider = {
-    canvas: [
-      {
-        type: 'line' as const,
-        x1: 0, y1: 0, x2: 515, y2: 0,
-        lineWidth: 1.5, lineColor: '#000',
-      },
-    ],
-    margin: [0, 0, 0, 20] as [number, number, number, number],
-  }
+  const buildKopDivider = () => ({
+    table: {
+      widths: ['*'],
+      body: [
+        [
+          {
+            text: '',
+            border: [false, false, false, true] as [boolean, boolean, boolean, boolean],
+          },
+        ],
+      ],
+    },
+    layout: {
+      hLineWidth: () => 1.5,
+      vLineWidth: () => 0,
+    },
+    margin: [0, 0, 0, 12] as [number, number, number, number],
+  })
+
+  const kopSuratHeader = buildKopSuratContent()
+  const kopDivider = buildKopDivider()
 
   // 2 =================================================================
   // METADATA — Nomor / Lampiran / Perihal (label | : | nilai)
@@ -444,8 +474,8 @@ export const GenerateLetterPdfDefinition = (
     pageMargins: [50, 50, 50, 50] as [number, number, number, number],
 
     content: [
-      kopSuratHeader,
-      kopDivider,
+      // Kop surat bisa null jika tidak ada teks & tidak ada logo → filter
+      ...[kopSuratHeader, kopDivider].filter(Boolean),
 
       metadataSection,
 

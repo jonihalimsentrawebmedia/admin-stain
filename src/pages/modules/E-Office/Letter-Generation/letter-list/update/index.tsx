@@ -16,7 +16,7 @@ import {
 } from '@/pages/modules/E-Office/Letter-Generation/create-letter/data/resolver.tsx'
 import { UseGetDetailLetterGenerate } from '@/pages/modules/E-Office/Letter-Generation/letter-list/hooks'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
-import { Button } from '@/components/ui/button.tsx'
+import { format } from 'date-fns'
 
 const UpdatedLetterByTemplate = () => {
   const { id } = useParams()
@@ -39,6 +39,10 @@ const UpdatedLetterByTemplate = () => {
     if (letter) {
       form.reset({
         ...letter,
+        id_jenis_surat: letter?.id_jenis_surat,
+        tanggal_surat: format(letter?.tanggal_surat, 'yyyy-MM-dd'),
+        hari_mulai: format(letter.hari_mulai, 'yyyy-MM-dd'),
+        hari_akhir: letter?.hari_akhir ? format(letter.hari_akhir, 'yyyy-MM-dd') : '',
       })
     }
   }, [letter])
@@ -63,7 +67,6 @@ const UpdatedLetterByTemplate = () => {
     try {
       const res = await AxiosClient.put(`/eoffice/mail-surat-undangan/${id}`, {
         ...value,
-        id_jenis_surat: id,
         tanggal_surat: new Date(value.tanggal_surat).toISOString(),
         hari_mulai: new Date(value.hari_mulai).toISOString(),
         hari_akhir: value?.hari_akhir ? new Date(value.hari_akhir).toISOString() : null,
@@ -72,7 +75,7 @@ const UpdatedLetterByTemplate = () => {
       if (res.data.status) {
         const data: IMailInvitationLetter = res.data.data
         if (data?.id_satuan_organisasi) {
-          const headerRes = await AxiosClient.get(`/eoffice/kop-surat/${data.id_satuan_organisasi}`)
+          const headerRes = await AxiosClient.get(`/eoffice/kop-surat/detail/${data.id_kop_surat}`)
           const letterHeader: ILetterHeader = headerRes.data?.data
 
           if (letterHeader) {
@@ -139,7 +142,7 @@ const UpdatedLetterByTemplate = () => {
           className={'w-full flex items-center justify-end'}
           to={`/modules/e-office/letter-generation/letter-list/detail/${id}`}
         >
-          <Button className={'text-white'}>Lanjutkan</Button>
+          <div className={'text-white rounded p-1.5 bg-primary'}>Lanjutkan</div>
         </Link>
       </DialogBasic>
     </>

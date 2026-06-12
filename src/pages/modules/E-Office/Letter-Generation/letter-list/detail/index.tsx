@@ -13,8 +13,10 @@ import { Button } from '@/components/ui/button.tsx'
 import { Skeleton } from '@/components/ui/skeleton.tsx'
 import { format } from 'date-fns'
 import { id as localeId } from 'date-fns/locale'
-import { FaFilePdf, FaDownload, FaPrint } from 'react-icons/fa'
+import { FaDownload, FaFilePdf, FaPrint } from 'react-icons/fa'
 import { toast } from 'react-toastify'
+import ButtonStatusOnce from '@/pages/modules/E-Office/Letter-Generation/letter-list/component/buttonStatus.tsx'
+import ButtonCancelStatus from '@/pages/modules/E-Office/Letter-Generation/letter-list/component/buttonCancel.tsx'
 
 const DetailLetterTemplate = () => {
   const { id } = useParams<{ id: string }>()
@@ -67,9 +69,9 @@ const DetailLetterTemplate = () => {
           console.warn('[Detail] Gagal konversi logo ke base64:', e)
         }
 
-        // Cleanup URL sebelumnya
         cleanupPdfUrl()
 
+        // logoBase64 dari GetBase64FromUrl sudah berupa data URL lengkap → pakai langsung
         const pdfDefinition = GenerateLetterPdfDefinition(data, headerData, logoBase64)
         // @ts-ignore
         const blob = await pdfmake.createPdf(pdfDefinition).getBlob()
@@ -338,40 +340,52 @@ const DetailLetterTemplate = () => {
       </Card>
 
       {/* Preview Surat */}
-      <Card className="rounded w-1/2">
-        <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle>Preview Surat</CardTitle>
-          {pdfLoading && (
-            <span className="text-sm text-blue-600 flex items-center gap-1.5">
-              <span className="size-3 animate-spin inline-block border-2 border-blue-600 border-t-transparent rounded-full" />
-              Menggenerate PDF...
-            </span>
-          )}
-        </CardHeader>
-        <CardContent>
-          {pdfLoading && !pdfUrl ? (
-            <div className="flex flex-col items-center justify-center py-20 text-gray-400">
-              <FaFilePdf className="size-16 mb-4 text-gray-300" />
-              <p className="text-lg">Sedang memproses PDF...</p>
-              <p className="text-sm mt-1">Mohon tunggu beberapa saat</p>
-            </div>
-          ) : pdfUrl ? (
-            <div className="w-full border rounded-lg overflow-hidden">
-              <iframe
-                src={pdfUrl}
-                className="w-full h-[600px] border-0"
-                title="Preview Surat PDF"
-              />
-            </div>
-          ) : (
-            <div className="flex flex-col items-center justify-center py-20 text-gray-400">
-              <FaFilePdf className="size-16 mb-4 text-gray-300" />
-              <p className="text-lg">PDF belum tersedia</p>
-              <p className="text-sm mt-1">Data header surat tidak ditemukan</p>
-            </div>
-          )}
-        </CardContent>
-      </Card>
+      <div className="flex items-start gap-4">
+        <Card className="rounded w-1/2">
+          <CardHeader className="flex flex-row items-center justify-between">
+            <CardTitle>Preview Surat</CardTitle>
+            {pdfLoading && (
+              <span className="text-sm text-blue-600 flex items-center gap-1.5">
+                <span className="size-3 animate-spin inline-block border-2 border-blue-600 border-t-transparent rounded-full" />
+                Menggenerate PDF...
+              </span>
+            )}
+          </CardHeader>
+          <CardContent>
+            {pdfLoading && !pdfUrl ? (
+              <div className="flex flex-col items-center justify-center py-20 text-gray-400">
+                <FaFilePdf className="size-16 mb-4 text-gray-300" />
+                <p className="text-lg">Sedang memproses PDF...</p>
+                <p className="text-sm mt-1">Mohon tunggu beberapa saat</p>
+              </div>
+            ) : pdfUrl ? (
+              <div className="w-full border rounded-lg overflow-hidden">
+                <iframe
+                  src={pdfUrl}
+                  className="w-full h-[600px] border-0"
+                  title="Preview Surat PDF"
+                />
+              </div>
+            ) : (
+              <div className="flex flex-col items-center justify-center py-20 text-gray-400">
+                <FaFilePdf className="size-16 mb-4 text-gray-300" />
+                <p className="text-lg">PDF belum tersedia</p>
+                <p className="text-sm mt-1">Data header surat tidak ditemukan</p>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+        <div>
+          <p>
+            Surat Undangan akan ditulis berdasarkan data yang Anda masukkan. Harap periksa kembali
+            untuk menghindari kesalahan penulisan surat.
+          </p>
+          <div className="flex items-center gap-2 mt-2">
+            <ButtonStatusOnce data={letter as any} />
+            <ButtonCancelStatus data={letter as any} />
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

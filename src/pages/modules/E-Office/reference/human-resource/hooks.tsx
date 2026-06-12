@@ -10,6 +10,9 @@ export interface IHumanResource {
   jabatan: string[]
   nama_unit_kerja: string
   no_hp: string
+  nip: string
+  nik: string
+  alamat: string
 }
 
 export const UseGetHumanResource = (props?: BasicProps) => {

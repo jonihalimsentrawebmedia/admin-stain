@@ -10,4 +10,4 @@ export interface IMailInvitationLetterList {
   nama_user_created: string
 }
 
-export type TMailStatus = 'MENUNGGU' | 'DISETUJUI' | 'DITOLAK'
+export type TMailStatus = 'MENUNGGU' | 'DIPROSES' | 'SELESAI' | 'DIBATALKAN' | 'DIHAPUS'

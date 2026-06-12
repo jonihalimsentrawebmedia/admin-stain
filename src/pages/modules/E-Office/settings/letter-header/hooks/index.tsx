@@ -27,7 +27,7 @@ export const UseGetLetterHeader = (id_unit: string) => {
 }
 
 export const ConvertUrlToBase64 = (url: string) => {
-  const [base64, setBase64] = useState<any>()
+  const [base64, setBase64] = useState<string>('')
 
   const Params = new URLSearchParams()
   Params.append('url', url)
@@ -36,13 +36,18 @@ export const ConvertUrlToBase64 = (url: string) => {
     refetchOnWindowFocus: false,
     queryKey: ['letter-header-image', Params.toString()],
     enabled: !!url,
-    queryFn: () => AxiosClient.get(`/url-to-base64?${Params}`).then((res) => res.data),
+    queryFn: () =>
+      AxiosClient.get(`/url-to-base64?${Params}`).then((res) => {
+        // Response API: { status: boolean, data: "base64string..." }
+        const raw = res.data?.data ?? res.data
+        return raw ?? ''
+      }),
   })
 
   const loading = isLoading || isFetching
 
   useEffect(() => {
-    if (data) {
+    if (data && typeof data === 'string') {
       setBase64(data)
     }
   }, [data])
@@ -56,8 +61,30 @@ export const GetBase64FromUrl = async (url: string) => {
 
   const res = await AxiosClient.get(`/url-to-base64?${params}`)
 
-  // return res.data
-  return `data:image/png;base64,${res.data}`
+  // Response API: { status: boolean, data: "base64string..." }
+  const raw = res.data?.data ?? res.data
+
+  if (!raw || typeof raw !== 'string') {
+    console.warn('[GetBase64FromUrl] Invalid response:', res.data)
+    return ''
+  }
+
+  // Jika response sudah berupa data URL lengkap → pakai langsung
+  if (raw.startsWith('data:')) return raw
+
+  // Jika bukan data URL, bungkus dengan MIME yang sesuai
+  const ext = url.split('.').pop()?.toLowerCase() || ''
+  const mimeMap: Record<string, string> = {
+    jpg: 'image/jpeg',
+    jpeg: 'image/jpeg',
+    png: 'image/png',
+    webp: 'image/webp',
+    gif: 'image/gif',
+    svg: 'image/svg+xml',
+  }
+  const mime = mimeMap[ext] || 'image/png'
+
+  return `data:${mime};base64,${raw}`
 }
 
 export const UseGetLetterHeaderRef = (props?: BasicProps) => {
