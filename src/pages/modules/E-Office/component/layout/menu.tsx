@@ -3,6 +3,7 @@ import { FaArchive, FaListUl, FaRegCalendarAlt } from 'react-icons/fa'
 import { IoMailUnread } from 'react-icons/io5'
 import { FaGear, FaUsers } from 'react-icons/fa6'
 import { RiMailAiFill } from 'react-icons/ri'
+import { BiSolidPlaneAlt } from 'react-icons/bi'
 
 const baseDomain = '/modules/e-office'
 
@@ -101,12 +102,24 @@ export const GenerateMenu = () => {
         },
       ],
     },
-    // {
-    //   id: 100,
-    //   name: 'Surat Generated',
-    //   path: `${baseDomain}/surat-generated`,
-    //   icon: <IoMailUnread className={'size-5'} />,
-    // },
+    {
+      id: 11,
+      name: 'Perjalanan Dinas',
+      path: `${baseDomain}/official-travel`,
+      icon: <BiSolidPlaneAlt className={'size-5'} />,
+      child: [
+        {
+          id: 111,
+          name: 'Surat Tugas / SPD',
+          path: `${baseDomain}/official-travel/letter-task`,
+        },
+        {
+          id: 112,
+          name: 'Anggaran',
+          path: `${baseDomain}/official-travel/budget`,
+        },
+      ],
+    },
     {
       id: 5,
       name: 'Agenda',

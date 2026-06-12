@@ -64,7 +64,6 @@ const FormCodeLetterGenerated = (props: props) => {
               label={'Nama Kode Nomor Surat'}
               placeholder={'Masukan Nama Kode Nomor Surat'}
               htmlFor={'nama_kode_nomor_surat'}
-              isRow
               isRequired
             />
             <SelectBasicInput
@@ -80,7 +79,6 @@ const FormCodeLetterGenerated = (props: props) => {
                 })) ?? []
               }
               showNull
-              isRow
               isRequired
             />
 
