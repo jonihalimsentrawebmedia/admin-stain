@@ -12,7 +12,6 @@ import { GetBase64FromUrl } from '@/pages/modules/E-Office/settings/letter-heade
 import pdfmake from '@/utils/pdfmake.ts'
 import { Link, useParams } from 'react-router-dom'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
-import { Button } from '@/components/ui/button.tsx'
 
 const CreateLetterByTemplate = () => {
   const { id } = useParams()
@@ -62,7 +61,7 @@ const CreateLetterByTemplate = () => {
 
         // Fetch kopsurat header via API langsung (bukan hook)
         if (data?.id_satuan_organisasi) {
-          const headerRes = await AxiosClient.get(`/eoffice/kop-surat/${data.id_satuan_organisasi}`)
+          const headerRes = await AxiosClient.get(`/eoffice/kop-surat/detail/${data.id_kop_surat}`)
           const letterHeader: ILetterHeader = headerRes.data?.data
 
           if (letterHeader) {
@@ -130,9 +129,7 @@ const CreateLetterByTemplate = () => {
           className={'w-full flex items-center justify-end'}
           to={`/modules/e-office/letter-generation/letter-list/detail/${createdId}`}
         >
-          <Button type={'button'} className={'text-white'}>
-            Lanjutkan
-          </Button>
+          <div className={'text-white rounded p-1.5 bg-primary'}>Lanjutkan</div>
         </Link>
       </DialogBasic>
     </>

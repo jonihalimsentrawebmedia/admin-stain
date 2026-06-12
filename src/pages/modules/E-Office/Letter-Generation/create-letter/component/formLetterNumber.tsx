@@ -4,7 +4,10 @@ import { type UseFormReturn } from 'react-hook-form'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import { UseGetDetailLetterNumberAutomatic } from '@/pages/modules/E-Office/Letter-Generation/code-letter/hooks'
 import type { INUmberLetterAutomatic } from '@/pages/modules/E-Office/Letter-Generation/code-letter/data/types.ts'
-import { toRoman } from '@/pages/modules/E-Office/Letter-Generation/code-letter/component/exampleView.tsx'
+import {
+  GenerateLetterCodeNumber,
+  toRoman,
+} from '@/pages/modules/E-Office/Letter-Generation/code-letter/component/exampleView.tsx'
 
 interface Props {
   form: UseFormReturn<any>
@@ -45,6 +48,7 @@ const ListComponent = ({ form, data, name }: ListComponentProps) => {
         <TextInput
           name="kode_depan"
           form={form}
+          inputClassName={'bg-white'}
           label="Kode Depan"
           htmlFor="kode_depan"
           placeholder="Kode Depan"
@@ -59,9 +63,10 @@ const ListComponent = ({ form, data, name }: ListComponentProps) => {
         <TextInput
           name={name}
           form={form}
+          inputClassName={'bg-white'}
           label="Nomor Surat"
           htmlFor={name}
-          placeholder="[Nomor Surat]"
+          placeholder={data?.pengisian_no_surat === 'OTOMATIS' ? 'OTOMATIS' : '[Nomor Surat]'}
           isDisabled={isAutoNumber}
           type={'number'}
         />
@@ -76,6 +81,7 @@ const ListComponent = ({ form, data, name }: ListComponentProps) => {
           form={form}
           label="Kode Belakang"
           htmlFor="kode_belakang"
+          inputClassName={'bg-white'}
           placeholder="Kode Belakang"
           isDisabled
         />
@@ -91,6 +97,7 @@ const ListComponent = ({ form, data, name }: ListComponentProps) => {
                 name="bulan"
                 form={form}
                 label="Bulan"
+                inputClassName={'bg-white'}
                 htmlFor="bulan"
                 placeholder={data.is_bulan_romawi ? 'Bulan (Romawi)' : 'Bulan'}
                 isDisabled
@@ -108,6 +115,7 @@ const ListComponent = ({ form, data, name }: ListComponentProps) => {
               <TextInput
                 name="tahun"
                 form={form}
+                inputClassName={'bg-white'}
                 label="Tahun"
                 htmlFor="tahun"
                 placeholder="Tahun"
@@ -130,10 +138,29 @@ const ListComponent = ({ form, data, name }: ListComponentProps) => {
 
 export const ReturnOrderData = ({ form, name, id }: Props) => {
   const { letterNumber } = UseGetDetailLetterNumberAutomatic(id)
+  const result = GenerateLetterCodeNumber(
+    {
+      kode_depan: letterNumber?.kode_depan ?? '',
+      kode_belakang: letterNumber?.kode_belakang ?? '',
+      urutan_tahun: letterNumber?.urutan_tahun ?? 5,
+      urutan_bulan: letterNumber?.urutan_bulan ?? 4,
+      urutan_kode_depan: letterNumber?.urutan_kode_depan ?? 1,
+      urutan_kode_belakang: letterNumber?.urutan_kode_belakang ?? 2,
+      urutan_nomor_surat: letterNumber?.urutan_posisi_utama_no_surat ?? 3,
+      is_bulan: letterNumber?.is_perlu_bulan ?? false,
+      is_bulan_romawi: letterNumber?.is_bulan_romawi ?? false,
+      is_tahun: letterNumber?.is_perlu_tahun ?? false,
+    },
+    form.watch(name) ?? '0001'
+  )
 
   return (
     <div className="grid grid-cols-5 gap-4">
       <ListComponent form={form} data={letterNumber} name={name} />
+      <div className="col-span-5 flex items-center gap-2">
+        <p className="text-lg">Contoh : </p>
+        <div dangerouslySetInnerHTML={{ __html: result ?? '' }} />
+      </div>
     </div>
   )
 }

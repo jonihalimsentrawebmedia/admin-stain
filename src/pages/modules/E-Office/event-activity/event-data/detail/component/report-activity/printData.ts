@@ -148,9 +148,15 @@ const buildKopSuratContent = (kopSurat: IKopSurat, imageUrl?: string) => {
     })
   )
 
-  if (contentTexts.length === 0 && !imageUrl) return null
+  // Validasi: hanya pakai imageUrl jika benar² data URL base64
+  const isValidDataUrl =
+    !!imageUrl &&
+    typeof imageUrl === 'string' &&
+    imageUrl.startsWith('data:image/')
 
-  if (!imageUrl) {
+  if (contentTexts.length === 0 && !isValidDataUrl) return null
+
+  if (!isValidDataUrl) {
     return {
       width: '*',
       alignment: 'center' as const,
@@ -158,10 +164,11 @@ const buildKopSuratContent = (kopSurat: IKopSurat, imageUrl?: string) => {
     }
   }
 
+  // Dengan logo → columns (lebih stabil daripada table untuk image di pdfmake)
   return {
     columns: [
       {
-        image: imageUrl,
+        image: imageUrl as string,
         width: 80,
         height: 80,
       },
@@ -799,11 +806,15 @@ export const generatePdfLaporanKegiatan = async ({
     pageOrientation: 'portrait',
     pageMargins: [40, 210, 40, 30] as [number, number, number, number],
 
-    // ── Repeating header on EVERY page ────────────────────────────────────
-    header: () => ({
-      margin: [40, 30, 40, 12] as [number, number, number, number],
-      stack: [buildKopSuratContent(kop_surat, resolvedImageUrl), buildKopDivider()].filter(Boolean),
-    }),
+    // ── Repeating header (skip halaman 1 = cover) ─────────────────────────
+    header: (currentPage: number) => {
+      if (currentPage === 1) return null
+
+      return {
+        margin: [40, 30, 40, 12] as [number, number, number, number],
+        stack: [buildKopSuratContent(kop_surat, resolvedImageUrl), buildKopDivider()].filter(Boolean),
+      }
+    },
 
     // ── Content ───────────────────────────────────────────────────────────
     content: [

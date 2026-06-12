@@ -2,7 +2,7 @@ import { Card, CardContent } from '@/components/ui/card.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs.tsx'
 import { cn } from '@/lib/utils.ts'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { UseGetContext, UseGetReportActivityContext, UseGetReportActivityPrint } from './hooks.tsx'
 import { useParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
@@ -31,6 +31,7 @@ const ReportActivity = (props: Props) => {
   const [tabsSelected, setTabsSelected] = useState<string>()
   const [isEdit, setIsEdit] = useState(true)
   const [loading, setLoading] = useState(false)
+  const [isPrinting, setIsPrinting] = useState(false)
 
   const { context } = UseGetContext(id as string)
   const { report: listReport } = UseGetReportActivityPrint(id as string)
@@ -41,16 +42,26 @@ const ReportActivity = (props: Props) => {
 
   const { base64 } = ConvertUrlToBase64(listReport?.cetak_config?.kop_surat?.url_logo ?? '')
 
-  const HandlePrint = async () => {
-    if (detail && listReport) {
+  const HandlePrint = useCallback(async () => {
+    if (!detail || !listReport) return
+
+    setIsPrinting(true)
+
+    try {
       const docDefinition = await generatePdfLaporanKegiatan({
         event: detail,
         printData: listReport,
-        imageUrl: `data:image/png;base64,${base64}`,
+        imageUrl: base64?.startsWith('data:') ? base64 : `data:image/png;base64,${base64}`,
       })
-      pdfmake.createPdf(docDefinition).open()
+
+      // Gunakan .print() agar tidak kena popup blocker
+      pdfmake.createPdf(docDefinition).print()
+    } catch (err) {
+      console.error('Print gagal:', err)
+    } finally {
+      setIsPrinting(false)
     }
-  }
+  }, [detail, listReport, base64])
 
   useEffect(() => {
     if (!tabsSelected && context) {
@@ -109,9 +120,13 @@ const ReportActivity = (props: Props) => {
               {
                 type: 'custom',
                 element: (
-                  <Button onClick={() => HandlePrint()} className={'text-white'}>
-                    <IoPrintSharp />
-                    Cetak
+                  <Button
+                    onClick={() => HandlePrint()}
+                    className={'text-white'}
+                    disabled={isPrinting}
+                  >
+                    <IoPrintSharp className={isPrinting ? 'animate-spin' : ''} />
+                    {isPrinting ? 'Menyiapkan...' : 'Cetak'}
                   </Button>
                 ),
               },

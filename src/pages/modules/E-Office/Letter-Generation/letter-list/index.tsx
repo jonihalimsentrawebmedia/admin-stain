@@ -136,7 +136,7 @@ const ListLetterGeneratePage = () => {
             </div>
 
             <div className="flex items-center justify-end mb-4 gap-2">
-              {status === 'DIPROSES' && (
+              {status === 'DIPROSES' && selected.length > 0 && (
                 <Button
                   className={'rounded-full text-white'}
                   onClick={async () => {
@@ -146,7 +146,7 @@ const ListLetterGeneratePage = () => {
                   Selesaikan ({selected.length})
                 </Button>
               )}
-              {status === 'MENUNGGU' && (
+              {status === 'MENUNGGU' && selected.length > 0 && (
                 <Button
                   className={'rounded-full text-white'}
                   onClick={async () => {
@@ -156,15 +156,17 @@ const ListLetterGeneratePage = () => {
                   Proses ({selected.length})
                 </Button>
               )}
-              <Button
-                variant={'destructive'}
-                className={'rounded-full text-white'}
-                onClick={async () => {
-                  await HandleStatusBulks('DIBATALKAN')
-                }}
-              >
-                Dibatalkan ({selected.length})
-              </Button>
+              {status !== 'DIBATALKAN' && status !== 'DIHAPUS' && selected.length > 0 && (
+                <Button
+                  variant={'destructive'}
+                  className={'rounded-full text-white'}
+                  onClick={async () => {
+                    await HandleStatusBulks('DIBATALKAN')
+                  }}
+                >
+                  Dibatalkan ({selected.length})
+                </Button>
+              )}
             </div>
 
             {/* Table */}

@@ -117,7 +117,7 @@ export const LetterHeader = () => {
                         onClick={() => {
                           const { generateContent } = LetterHeaderPDF({
                             header: letterHeader as any,
-                            imageUrl: `data:image/png;base64,${base64}`,
+                            imageUrl: base64?.startsWith('data:') ? base64 : `data:image/png;base64,${base64}`,
                           })
                           const docDefinition: any = {
                             pageMargins: [40, 40, 40, 60],
@@ -140,7 +140,7 @@ export const LetterHeader = () => {
                         onClick={async () => {
                           const { generateContent } = LetterHeaderPDF({
                             header: letterHeader as any,
-                            imageUrl: `data:image/png;base64,${base64}`,
+                            imageUrl: base64?.startsWith('data:') ? base64 : `data:image/png;base64,${base64}`,
                           })
 
                           const docDefinition: any = {

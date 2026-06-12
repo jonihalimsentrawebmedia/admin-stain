@@ -14,7 +14,12 @@ const CreatedCodeLetterGenerated = () => {
   const navigate = useNavigate()
   const form = useForm<TResolverCodeLetter>({
     resolver: zodResolver(ResolverCodeLetter),
+    defaultValues: {
+      pengisian_no_surat: 'OTOMATIS',
+    },
   })
+
+  console.log(form.formState.errors)
 
   const HandleSave = async (value: TResolverCodeLetter) => {
     setLoading(true)

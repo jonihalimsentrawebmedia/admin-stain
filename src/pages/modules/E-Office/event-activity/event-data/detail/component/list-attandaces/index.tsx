@@ -40,7 +40,7 @@ const ListAttendance = (props: props) => {
         attendance: PrintData?.daftar_hadir,
         event: detail,
         header: PrintData?.cetak_config.kop_surat,
-        imageUrl: `data:image/png;base64,${base64}`,
+        imageUrl: base64?.startsWith('data:') ? base64 : `data:image/png;base64,${base64}`,
       })
       pdfMake.createPdf(docDefinition).open()
     }

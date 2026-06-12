@@ -10,18 +10,28 @@ import { Label } from '@/components/ui/label.tsx'
 import ButtonDeleteLetterGenerate from '@/pages/modules/E-Office/Letter-Generation/letter-list/component/buttonDelete.tsx'
 import { HiPencil } from 'react-icons/hi'
 import { MdInfo } from 'react-icons/md'
+import ButtonStatusOnce from '@/pages/modules/E-Office/Letter-Generation/letter-list/component/buttonStatus.tsx'
+import ButtonCancelStatus from '@/pages/modules/E-Office/Letter-Generation/letter-list/component/buttonCancel.tsx'
 
 const statusConfig: Record<TMailStatus, { label: string; className: string }> = {
   MENUNGGU: {
     label: 'Menunggu',
     className: 'bg-yellow-100 text-yellow-800 border-yellow-300',
   },
-  DISETUJUI: {
+  SELESAI: {
     label: 'Disetujui',
     className: 'bg-green-100 text-green-800 border-green-300',
   },
-  DITOLAK: {
+  DIBATALKAN: {
     label: 'Ditolak',
+    className: 'bg-orange-100 text-orange-800 border-orange-300',
+  },
+  DIPROSES: {
+    label: 'Diproses',
+    className: 'bg-blue-100 text-blue-800 border-blue-300',
+  },
+  DIHAPUS: {
+    label: 'Dihapus',
     className: 'bg-red-100 text-red-800 border-red-300',
   },
 }
@@ -162,8 +172,27 @@ export const ColumnsLetterGenerate = () => {
             >
               <HiPencil />
             </Link>
-            <ButtonDeleteLetterGenerate data={data} />
+            {data?.status !== 'DIHAPUS' && <ButtonDeleteLetterGenerate data={data} />}
           </div>
+        )
+      },
+    },
+    {
+      accessorKey: 'action_all',
+      header: '',
+      cell: ({ row }) => {
+        const data = row.original
+        return (
+          <>
+            <div className="flex flex-col gap-1.5">
+              {data?.status !== 'DIBATALKAN' && data.status !== 'DIHAPUS' && (
+                <>
+                  <ButtonStatusOnce data={data} />
+                  <ButtonCancelStatus data={data} />
+                </>
+              )}
+            </div>
+          </>
         )
       },
     },

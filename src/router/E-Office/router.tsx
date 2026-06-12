@@ -10,6 +10,9 @@ import CreateLetterByTemplate from '@/pages/modules/E-Office/Letter-Generation/c
 import ListLetterGeneratePage from '@/pages/modules/E-Office/Letter-Generation/letter-list'
 import UpdatedLetterByTemplate from '@/pages/modules/E-Office/Letter-Generation/letter-list/update'
 import DetailLetterTemplate from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail'
+import BudgetOfficialTravel from '@/pages/modules/E-Office/official-travel/budget'
+import LetterOfAssigment from '@/pages/modules/E-Office/official-travel/Letter-Assigment'
+import CreatedLetterAssigment from '@/pages/modules/E-Office/official-travel/Letter-Assigment/created'
 
 const UserProfilePage = lazy(() =>
   import('@/pages/modules/website-utama/user-profile').then((m) => ({ default: m.UserProfilePage }))
@@ -136,8 +139,6 @@ const LetterHeader = lazy(() =>
   }))
 )
 const DashboardEOfficePage = lazy(() => import('@/pages/modules/E-Office/dashboard'))
-// const ListSuratGenerated = lazy(() => import('@/pages/modules/E-Office/surat-generated'))
-// const DetailSuratGenerated = lazy(() => import('@/pages/modules/E-Office/surat-generated/detail'))
 
 export const E_OFFICE_ROUTE = [
   {
@@ -319,19 +320,6 @@ export const E_OFFICE_ROUTE = [
       },
     ],
   },
-  // {
-  //   path: 'surat-generated',
-  //   children: [
-  //     {
-  //       index: true,
-  //       element: <ListSuratGenerated />,
-  //     },
-  //     {
-  //       path: 'detail/:id',
-  //       element: <DetailSuratGenerated />,
-  //     },
-  //   ],
-  // },
   {
     path: 'service',
     children: [
@@ -513,6 +501,28 @@ export const E_OFFICE_ROUTE = [
       {
         path: 'report',
         element: <ReportEventActivity />,
+      },
+    ],
+  },
+  {
+    path: 'official-travel',
+    children: [
+      {
+        path: 'budget',
+        element: <BudgetOfficialTravel />,
+      },
+      {
+        path: 'letter-assignment',
+        children: [
+          {
+            index: true,
+            element: <LetterOfAssigment />,
+          },
+          {
+            path: 'add',
+            element: <CreatedLetterAssigment />,
+          },
+        ],
       },
     ],
   },
