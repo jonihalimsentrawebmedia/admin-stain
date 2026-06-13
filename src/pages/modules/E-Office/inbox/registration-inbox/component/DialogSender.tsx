@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { type ReactNode, useEffect, useState } from 'react'
 import { Search } from 'lucide-react'
 import { cn } from '@/lib/utils.ts'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
@@ -18,10 +18,11 @@ interface props {
   letterOrigin?: ILetterOrigin[]
   HandlerSave?: (value: any) => void
   value?: string
+  icon?: ReactNode
 }
 
 const DialogSender = (props: props) => {
-  const { letterOrigin, HandlerSave, value } = props
+  const { letterOrigin, HandlerSave, value, icon } = props
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const [isAdded, setIsAdded] = useState(false)
@@ -67,15 +68,18 @@ const DialogSender = (props: props) => {
         <div
           onClick={() => setOpen(!open)}
           className={cn(
-            'w-full border p-1.5 cursor-pointer rounded',
+            'w-full border cursor-pointer rounded',
             'flex items-center gap-2 justify-between'
           )}
         >
-          <p className={'text-gray-500'}>
-            {value
-              ? letterOrigin?.find((row) => row.id_asal_surat === value)?.instansi
-              : 'Pilih Pengirim / Asal Surat'}
-          </p>
+          <div className="flex gap-x-2 items-center w-full p-1.5">
+            <div className={'bg-primary/20 h-full p-1.5'}>{icon}</div>
+            <p className={'text-gray-500'}>
+              {value
+                ? letterOrigin?.find((row) => row.id_asal_surat === value)?.instansi
+                : 'Pilih Pengirim / Asal Surat'}
+            </p>
+          </div>
           <Search className={'size-4'} />
         </div>
       </div>

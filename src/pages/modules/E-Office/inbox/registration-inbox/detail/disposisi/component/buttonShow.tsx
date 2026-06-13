@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import type { IInbox } from '@/pages/modules/E-Office/inbox/registration-inbox/data/types.ts'
 import { format } from 'date-fns'
+import { RiOrganizationChart } from 'react-icons/ri'
 
 interface props {
   data?: IInbox
@@ -17,8 +18,9 @@ export const ButtonShowDisposition = (props: props) => {
       <Button
         onClick={() => setOpen(!open)}
         variant={'outline'}
-        className={'rounded-full border-primary text-primary hover:text-primary'}
+        className={'rounded border-primary text-primary hover:text-primary'}
       >
+        <RiOrganizationChart />
         Alur Disposisi
       </Button>
 
