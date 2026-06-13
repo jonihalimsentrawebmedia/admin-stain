@@ -1,3 +1,5 @@
+import type { IListSPPD } from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/data/types.ts'
+
 export interface ILetterAssignment {
   id_mail_surat_tugas: string
   id_satuan_organisasi: string
@@ -26,10 +28,13 @@ export interface ILetterAssignment {
   url_file_undangan: string | null
   key_file_undangan: string | null
 
+  nama_user_created: string
+  nama_unit_kerja: string
+
   kop_surat: KopSurat
+  sppd: IListSPPD[]
   pegawai: ILetterAssignmentEmployee[]
 
-  // Optional audit fields (jika ada di response lengkap)
   created_at?: string
   created_user?: string
   updated_at?: string
@@ -104,6 +109,8 @@ export interface ListLetterAssignment {
   tanggal_surat: string
   tanggal_mulai: string
   tanggal_akhir: string
+  kegiatan: string[]
+  jumlah_pegawai: number
   nama_penandatangan: string
   nama_user_created: string
   created_at: string

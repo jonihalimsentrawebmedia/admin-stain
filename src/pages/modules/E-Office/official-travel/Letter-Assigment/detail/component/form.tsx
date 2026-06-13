@@ -1,0 +1,222 @@
+import type { UseFormReturn } from 'react-hook-form'
+import type { Dispatch, SetStateAction } from 'react'
+import ButtonForm from '@/components/common/button/ButtonForm.tsx'
+import { Card, CardContent, CardTitle } from '@/components/ui/card.tsx'
+import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
+import { UseGetLetterHeaderRef } from '@/pages/modules/E-Office/settings/letter-header/hooks'
+import { Form } from '@/components/ui/form.tsx'
+import type { TResolverSPPD } from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/data/resolver.tsx'
+import { UseGetLetterNumberAutomatic } from '@/pages/modules/E-Office/Letter-Generation/code-letter/hooks'
+import TextInput from '@/components/common/form/TextInput.tsx'
+import { ReturnOrderData } from '@/pages/modules/E-Office/Letter-Generation/create-letter/component/formLetterNumber.tsx'
+import { UseGetHumanResource } from '@/pages/modules/E-Office/reference/human-resource/hooks.tsx'
+import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan-unit/hooks.tsx'
+import { USeGetTransportType } from '@/pages/modules/E-Office/reference/transport-type/hooks'
+import TextAreaInput from '@/components/common/form/textAreaInput.tsx'
+
+interface props {
+  form: UseFormReturn<TResolverSPPD>
+  loading: boolean
+  isEdit: boolean
+  setIsEdit: Dispatch<SetStateAction<boolean>>
+  HandleSave: (e: TResolverSPPD) => void
+}
+
+const FormSPPDLetterAssigment = (props: props) => {
+  const { form, loading, isEdit, setIsEdit, HandleSave } = props
+  const { letterHeader } = UseGetLetterHeaderRef()
+  const { institution } = UseGetUnitInstitution()
+  const { letterNumber } = UseGetLetterNumberAutomatic({
+    page: '0',
+    limit: '0',
+  })
+  const { humanResource } = UseGetHumanResource({
+    page: '0',
+    limit: '0',
+  })
+  const { transportType } = USeGetTransportType({
+    page: '0',
+    limit: '0',
+  })
+
+  return (
+    <>
+      <Form {...form}>
+        <form className={'space-y-4'} onSubmit={form.handleSubmit(HandleSave)}>
+          <Card className={'rounded shadow-none border'}>
+            <CardContent className={'space-y-4'}>
+              <CardTitle>Informasi SPPD</CardTitle>
+              <Card className={'bg-blue-100 rounded shadow-none'}>
+                <CardContent className={'space-y-4'}>
+                  <CardTitle>Kop Surat</CardTitle>
+                  <SelectBasicInput
+                    form={form}
+                    name={'id_kop_surat'}
+                    label={'Pilih Kop Surat'}
+                    placeholder={'Pilih Kop Surat'}
+                    className={'w-1/3'}
+                    usePortal
+                    data={
+                      letterHeader?.map((row) => ({
+                        label: row?.nama_unit,
+                        value: row?.id_kop_surat,
+                      })) ?? []
+                    }
+                    isRequired
+                  />
+                </CardContent>
+              </Card>
+              <Card className={'bg-blue-100 rounded shadow-none'}>
+                <CardContent className={'space-y-4'}>
+                  <CardTitle>Penomoran Surat</CardTitle>
+                  <div className="flex gap-4 items-center max-w-2/3">
+                    <SelectBasicInput
+                      form={form}
+                      name={'id_nomor_surat_otomatis'}
+                      label={'Pilih Kode Nomor Surat*'}
+                      placeholder={'Pilih Kode Nomor Surat*'}
+                      className={'w-full'}
+                      usePortal
+                      data={
+                        letterNumber?.map((row) => ({
+                          label: row?.nama_nomor_surat,
+                          value: row?.id_nomor_surat_otomatis,
+                        })) ?? []
+                      }
+                      isRequired
+                    />
+                    <TextInput
+                      name={'tanggal_surat'}
+                      form={form}
+                      label={'Tanggal Surat'}
+                      type={'date'}
+                      className={'w-full'}
+                      inputClassName={'bg-white'}
+                      htmlFor={'tanggal_surat'}
+                      isRequired
+                    />
+                  </div>
+                  <ReturnOrderData
+                    form={form}
+                    name={'nomor_urut_manual'}
+                    id={form.watch('id_nomor_surat_otomatis')}
+                  />
+                </CardContent>
+              </Card>
+              <div className={'space-y-4'}>
+                <SelectBasicInput
+                  form={form}
+                  name={'id_unit'}
+                  label={'Instansi / Satuan Kerja'}
+                  placeholder={'Pilih Unit'}
+                  usePortal
+                  isRow
+                  isRequired
+                  data={
+                    institution?.map((row) => ({
+                      label: row?.nama,
+                      value: row?.id_satuan_organisasi,
+                    })) ?? []
+                  }
+                />
+                <TextInput
+                  form={form}
+                  name={'akun'}
+                  label={'Akun'}
+                  placeholder={'Masukkan Nama Akun'}
+                  htmlFor={'akun'}
+                  inputClassName={'bg-white'}
+                  isRow
+                  isRequired
+                />
+                <TextInput
+                  form={form}
+                  name={'lain_lain'}
+                  label={'Lain-Lain'}
+                  placeholder={'Masukkan lain-lain '}
+                  htmlFor={'other'}
+                  inputClassName={'bg-white'}
+                  isRow
+                  isRequired
+                />
+                <SelectBasicInput
+                  form={form}
+                  name={'disahkan_oleh'}
+                  label={'Penandatangan'}
+                  placeholder={'Pilih Penandatangan'}
+                  isRow
+                  usePortal
+                  isRequired
+                  data={
+                    humanResource?.map((row) => ({
+                      label: row?.nama,
+                      value: row?.id_sdm,
+                    })) ?? []
+                  }
+                />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className={'rounded shadow-none'}>
+            <CardContent className={'space-y-4'}>
+              <CardTitle>Informasi Keberangkatan Pegawai</CardTitle>
+              <SelectBasicInput
+                form={form}
+                name={'id_jenis_transportasi'}
+                label={'Jenis Transportasi'}
+                placeholder={'Pilih Jenis Transportasi'}
+                isRequired
+                isRow
+                data={
+                  transportType?.map((row) => ({
+                    label: row?.nama,
+                    value: row?.id_jenis_transportasi,
+                  })) ?? []
+                }
+              />
+              <div className="flex items-center gap-4">
+                <TextInput
+                  name={'tempat_asal'}
+                  form={form}
+                  label={'Tempat Asal'}
+                  placeholder={'Masukkan Tempat Asal'}
+                  htmlFor={'tempat_asal'}
+                  inputClassName={'bg-white w-full'}
+                  className={'w-full'}
+                  isRow
+                  isRequired
+                />
+                <TextInput
+                  name={'tempat_tujuan'}
+                  form={form}
+                  label={'Tempat Tujuan'}
+                  placeholder={'Masukkan Tempat Tujuan'}
+                  htmlFor={'tempat_tujuan'}
+                  inputClassName={'bg-white w-full'}
+                  className={'w-full'}
+                  isRow
+                  isRequired
+                />
+              </div>
+              <TextAreaInput
+                name={'maksud_kegiatan'}
+                form={form}
+                label={'Maksud Kegiatan'}
+                placeholder={'Masukkan Maksud Kegiatan'}
+                htmlFor={'maksud_kegiatan'}
+                inputClassName={'bg-white w-full'}
+                className={'w-full'}
+                isRow
+                isRequired
+              />
+            </CardContent>
+          </Card>
+
+          <ButtonForm loading={loading} onCancel={() => setIsEdit(!isEdit)} />
+        </form>
+      </Form>
+    </>
+  )
+}
+export default FormSPPDLetterAssigment

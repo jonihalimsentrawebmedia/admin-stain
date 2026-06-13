@@ -11,7 +11,7 @@ interface Props<T extends FieldValues> {
 
   currency?: string // 🔥 NEW (IDR, USD, dll)
   locale?: string // 🔥 NEW (id-ID, en-US)
-
+  fx?: (e: any) => void
   placeholder?: string
   className?: string
   inputClassName?: string
@@ -44,6 +44,7 @@ function CurrencyInput<T extends FieldValues>({
   className,
   inputClassName,
   isDisabled,
+  fx,
   isRequired,
   isRow = false,
 }: Props<T>) {
@@ -87,6 +88,9 @@ function CurrencyInput<T extends FieldValues>({
                   const raw = e.target.value
                   const numberValue = parseNumber(raw)
                   field.onChange(numberValue)
+                  if (fx) {
+                    fx(numberValue)
+                  }
                 }}
               />
             </FormControl>
