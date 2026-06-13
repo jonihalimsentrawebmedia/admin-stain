@@ -2,7 +2,10 @@ import { Link, useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
 import type { ListLetterAssignment } from '@/pages/modules/E-Office/official-travel/Letter-Assigment/data/types.ts'
 import { format } from 'date-fns'
+import ButtonInfoAssignment from '@/pages/modules/E-Office/official-travel/Letter-Assigment/component/buttonInfo.tsx'
 import { MdInfo } from 'react-icons/md'
+import { HiPencil } from 'react-icons/hi'
+import ButtonDeleteLetterAssigment from '@/pages/modules/E-Office/official-travel/Letter-Assigment/component/buttonDelete.tsx'
 
 export const ColumnsLetterAssigment = () => {
   const [searchParams] = useSearchParams()
@@ -37,19 +40,12 @@ export const ColumnsLetterAssigment = () => {
     },
     {
       accessorKey: 'info',
-      header: '',
+      header: 'Info',
       cell: ({ row }) => {
         const data = row?.original
         return (
           <>
-            <Link
-              to={`info/${data?.id_mail_surat_tugas}`}
-              className={
-                'bg-blue-500 text-white p-1.5 hover:bg-blue-600 rounded flex items-center justify-center w-fit'
-              }
-            >
-              <MdInfo />
-            </Link>
+            <ButtonInfoAssignment id={data?.id_mail_surat_tugas} />
           </>
         )
       },
@@ -62,6 +58,32 @@ export const ColumnsLetterAssigment = () => {
     {
       accessorKey: 'kegiatan',
       header: 'Kegiatan',
+    },
+    {
+      accessorKey: 'action',
+      header: '',
+      cell: ({ row }) => {
+        const data = row.original
+        return (
+          <>
+            <div className="flex items-center gap-2">
+              <Link
+                to={`detail/${data?.id_mail_surat_tugas}`}
+                className={'bg-blue-500 p-1.5 text-white hover:bg-blue-600 rounded'}
+              >
+                <MdInfo />
+              </Link>
+              <Link
+                to={`edit/${data?.id_mail_surat_tugas}`}
+                className={'bg-yellow-500 p-1.5 text-white hover:bg-yellow-600 rounded'}
+              >
+                <HiPencil />
+              </Link>
+              <ButtonDeleteLetterAssigment data={data} />
+            </div>
+          </>
+        )
+      },
     },
   ]
 

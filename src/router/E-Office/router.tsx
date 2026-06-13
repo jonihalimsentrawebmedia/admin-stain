@@ -13,6 +13,11 @@ import DetailLetterTemplate from '@/pages/modules/E-Office/Letter-Generation/let
 import BudgetOfficialTravel from '@/pages/modules/E-Office/official-travel/budget'
 import LetterOfAssigment from '@/pages/modules/E-Office/official-travel/Letter-Assigment'
 import CreatedLetterAssigment from '@/pages/modules/E-Office/official-travel/Letter-Assigment/created'
+import UpdatedLetterAssigment from '@/pages/modules/E-Office/official-travel/Letter-Assigment/updated'
+import DetailLetterAssigment from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail'
+import LupSumAssignmentLetter from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/lupsum'
+import LupSumUpdated from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/lupsum/updated'
+import ListPejabat from '@/pages/modules/E-Office/official-travel/pejabat'
 
 const UserProfilePage = lazy(() =>
   import('@/pages/modules/website-utama/user-profile').then((m) => ({ default: m.UserProfilePage }))
@@ -24,6 +29,8 @@ const ChangePassword = lazy(() =>
 )
 const ListLetterNature = lazy(() => import('@/pages/modules/E-Office/reference/letter-nature'))
 const ListLetterType = lazy(() => import('@/pages/modules/E-Office/reference/letter-type'))
+const ListTransportType = lazy(() => import('@/pages/modules/E-Office/reference/transport-type'))
+const ListBiayaType = lazy(() => import('@/pages/modules/E-Office/reference/costing-type'))
 const ListLetterOrigin = lazy(() => import('@/pages/modules/E-Office/reference/letter-origin'))
 const ListLetterClassification = lazy(
   () => import('@/pages/modules/E-Office/reference/letter-classification')
@@ -341,6 +348,14 @@ export const E_OFFICE_ROUTE = [
         element: <ListLetterType />,
       },
       {
+        path: 'transport-type',
+        element: <ListTransportType />,
+      },
+      {
+        path: 'costing-type',
+        element: <ListBiayaType />,
+      },
+      {
         path: 'letter-origin',
         element: <ListLetterOrigin />,
       },
@@ -508,6 +523,10 @@ export const E_OFFICE_ROUTE = [
     path: 'official-travel',
     children: [
       {
+        path: 'pejabat',
+        element: <ListPejabat />,
+      },
+      {
         path: 'budget',
         element: <BudgetOfficialTravel />,
       },
@@ -521,6 +540,28 @@ export const E_OFFICE_ROUTE = [
           {
             path: 'add',
             element: <CreatedLetterAssigment />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedLetterAssigment />,
+          },
+          {
+            path: 'detail/:id',
+            // element: <DetailLetterAssigment />,
+            children: [
+              {
+                index: true,
+                element: <DetailLetterAssigment />,
+              },
+              {
+                path: 'lupsum',
+                element: <LupSumAssignmentLetter />,
+              },
+              {
+                path: 'lupsum/:id_employee',
+                element: <LupSumUpdated />,
+              },
+            ],
           },
         ],
       },

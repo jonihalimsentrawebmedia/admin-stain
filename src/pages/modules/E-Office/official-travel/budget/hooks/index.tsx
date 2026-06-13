@@ -6,7 +6,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import type { IBudgetOfficialTravel } from '@/pages/modules/E-Office/official-travel/budget/data/types.ts'
 
 interface props extends BasicProps {
-  tahun: string
+  tahun?: string
 }
 
 export const UseGetBudgetOfficialTravel = (props: props) => {

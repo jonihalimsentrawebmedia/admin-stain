@@ -115,6 +115,11 @@ export const GenerateMenu = () => {
         },
         {
           id: 112,
+          name: 'Pejabat',
+          path: `${baseDomain}/official-travel/pejabat`,
+        },
+        {
+          id: 113,
           name: 'Anggaran',
           path: `${baseDomain}/official-travel/budget`,
         },
@@ -179,11 +184,16 @@ export const GenerateMenu = () => {
           name: 'Tujuan Bertamu',
           path: `${baseDomain}/reference/purpose-guest`,
         },
-        // {
-        //   id: 68,
-        //   name: 'Template Surat',
-        //   path: `${baseDomain}/reference/template-surat`,
-        // },
+        {
+          id: 68,
+          name: 'Jenis Transportasi',
+          path: `${baseDomain}/reference/transport-type`,
+        },
+        {
+          id: 69,
+          name: 'Jenis Biaya',
+          path: `${baseDomain}/reference/costing-type`,
+        },
       ],
     },
     {
