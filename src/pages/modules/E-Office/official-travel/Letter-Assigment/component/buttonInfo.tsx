@@ -22,7 +22,7 @@ export const ButtonInfoAssignment = (props: props) => {
       accessorKey: 'order',
       header: '#',
       cell: ({ row }) => {
-        return <p>{row?.index}</p>
+        return <p>{row?.index + 1}</p>
       },
     },
     {
