@@ -19,8 +19,6 @@ const ButtonUserAssignment = (props: props) => {
   const { form, name } = props
   const data = form.watch(name)
 
-  console.log(data)
-
   const [open, setOpen] = useState(false)
   const [filter, setFilter] = useState<BasicProps>({
     search: '',

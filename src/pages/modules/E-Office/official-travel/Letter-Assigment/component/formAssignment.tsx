@@ -23,6 +23,9 @@ const FormAssignmentManual = (props: props) => {
 
   const form = useForm<TEmployeeSchema>({
     resolver: zodResolver(EmployeeSchema),
+    defaultValues: {
+      metode_tambah: 'MANUAL',
+    },
   })
   const [listUser, setListUser] = useState<TEmployeeSchema[]>([])
 
@@ -33,6 +36,7 @@ const FormAssignmentManual = (props: props) => {
         ...value,
         id_sdm: null,
         metode_tambah: 'MANUAL',
+        nik: value?.nik === '' ? null : value?.nik,
       }
       const tempUser = [...listUser]
       if (temp) {
@@ -117,43 +121,44 @@ const FormAssignmentManual = (props: props) => {
           />
 
           <Button
-            className={'text-white w-fit'}
             onClick={(e) => {
               e.preventDefault()
-              HandleSaveData(form.getValues())
+              const data: any = form.getValues()
+              HandleSaveData(data)
             }}
+            className={'text-white w-fit'}
           >
             Simpan Data
           </Button>
-
-          <TitleLine title={'Daftar Peserta Manual'} />
-          {listUser.map((row, index) => (
-            <div
-              className={
-                'flex items-center justify-between gap-4 border border-primary p-1.5 bg-gray-100'
-              }
-              key={index}
-            >
-              <p className="text-primary">{row?.nama_lengkap}</p>
-              <button onClick={() => setListUser(listUser.filter((item) => item !== row))}>
-                <FaTrash />
-              </button>
-            </div>
-          ))}
-
-          <div className="flex justify-end items-center">
-            <Button
-              onClick={(e) => {
-                e.preventDefault()
-                HandleSave(listUser)
-              }}
-              className={'bg-primary text-white'}
-            >
-              Tambah Pegawai ({listUser.length})
-            </Button>
-          </div>
         </form>
       </Form>
+      <div className="mt-4" />
+      <TitleLine title={'Daftar Peserta Manual'} />
+      {listUser.map((row, index) => (
+        <div
+          className={
+            'flex items-center justify-between gap-4 border border-primary p-1.5 bg-gray-100'
+          }
+          key={index}
+        >
+          <p className="text-primary">{row?.nama_lengkap}</p>
+          <button onClick={() => setListUser(listUser.filter((item) => item !== row))}>
+            <FaTrash />
+          </button>
+        </div>
+      ))}
+
+      <div className="flex justify-end items-center">
+        <Button
+          onClick={(e) => {
+            e.preventDefault()
+            HandleSave(listUser)
+          }}
+          className={'bg-primary text-white'}
+        >
+          Tambah Pegawai ({listUser.length})
+        </Button>
+      </div>
     </>
   )
 }

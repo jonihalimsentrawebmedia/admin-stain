@@ -13,6 +13,9 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  optimizeDeps: {
+    exclude: ['react-day-picker'],
+  },
   build: {
     sourcemap: false,
     chunkSizeWarningLimit: 2000,

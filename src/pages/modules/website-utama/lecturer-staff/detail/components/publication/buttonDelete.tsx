@@ -4,7 +4,6 @@ import { toast } from 'react-toastify'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import { useQueryClient } from '@tanstack/react-query'
 import type { IPublication } from '@/pages/modules/website-utama/lecturer-staff/detail/data/types.ts'
-import { format } from 'date-fns'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
@@ -61,7 +60,8 @@ export const ButtonDeletePublication = (props: Props) => {
           <p className="text-gray-500">Jenis Publiaksi</p>
           <p>{data?.jenis_publikasi}</p>
           <p className="text-gray-500">Tanggal Terbit</p>
-          <p>{data?.tanggal_terbit ? format(data?.tanggal_terbit, 'dd-MM-yyyy') : ''}</p>
+          <p>{data?.tanggal_terbit}</p>
+          {/*<p>{data?.tanggal_terbit ? format(data?.tanggal_terbit, 'dd-MM-yyyy') : ''}</p>*/}
           <p className="text-gray-500">URL</p>
           <Link to={data?.url_jurnal}>
             <Button variant={'outline'} className="text-primary hover:text-primary border-primary">

@@ -92,7 +92,7 @@ export const ColumnsLupSum = () => {
       accessorKey: 'jumlah_lumpsum',
       header: 'Jumlah Rill',
       cell: ({ row }) => {
-        const data = row?.original.jumlah_lumpsum
+        const data = row?.original.jumlah_lumpsum_biaya_rill
         return (
           <>
             <p className={'text-end'}>
@@ -120,8 +120,41 @@ export const ColumnsLupSumCost = () => {
       cell: ({ row }) => row?.index + 1,
     },
     {
-      accessorKey: '',
+      accessorKey: 'id_jenis_biaya',
       header: 'Jenis biaya',
+      cell: ({ row }) => {
+        const data = row?.original
+        return (
+          <>
+            <p>
+              {data?.nama_biaya}-{data?.nama_jenis_transportasi} ({data?.redaksi})
+            </p>
+          </>
+        )
+      },
+    },
+    {
+      accessorKey: 'nama_unit_kerja',
+      header: 'Satuan Kerja',
+    },
+    {
+      accessorKey: 'harga',
+      header: 'Harga',
+      cell: ({ row }) => {
+        const data = row?.original
+        return (
+          <>
+            <div className="text-end">
+              {new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
+              }).format(Number(data.harga))}
+            </div>
+          </>
+        )
+      },
     },
   ]
 
