@@ -30,22 +30,6 @@ export const GeneratePDFSPD = (data: any, logoBase64: string): TDocumentDefiniti
     },
 
     content: [
-      /**
-       * HEADER
-       */
-      {
-        canvas: [
-          {
-            type: 'line',
-            x1: 0,
-            y1: 0,
-            x2: 545,
-            y2: 0,
-            lineWidth: 1,
-          },
-        ],
-      },
-
       {
         margin: [0, 8, 0, 5],
 
