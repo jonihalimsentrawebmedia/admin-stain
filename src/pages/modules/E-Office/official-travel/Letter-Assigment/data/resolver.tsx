@@ -1,7 +1,7 @@
 import { z } from 'zod'
 
 export const EmployeeSchema = z.object({
-  id_sdm: z.string().nullable(),
+  id_sdm: z.string().nullable().optional(),
   metode_tambah: z.enum(['MANUAL', 'DOSEN_STAFF'], { error: 'Metode tambah wajib dipilih' }),
   nama_lengkap: z.string().min(1, 'Nama lengkap wajib diisi'),
   satuan_kerja: z.string().optional().nullable(),

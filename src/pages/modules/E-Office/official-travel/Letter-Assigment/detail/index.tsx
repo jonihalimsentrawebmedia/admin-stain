@@ -302,10 +302,20 @@ const DetailLetterAssigment = () => {
                               >
                                 Lupsum <FaForward />
                               </Button>
-                              <Button className={'text-white'}>
+                              <Button
+                                className={'text-white'}
+                                onClick={() => {
+                                  navigate('report')
+                                }}
+                              >
                                 Laporan <FaForward />
                               </Button>
-                              <Button className={'text-white bg-green-600 hover:bg-green-700'}>
+                              <Button
+                                onClick={() => {
+                                  navigate('documentation')
+                                }}
+                                className={'text-white bg-green-600 hover:bg-green-700'}
+                              >
                                 Dokumentasi <FaForward />
                               </Button>
                             </div>

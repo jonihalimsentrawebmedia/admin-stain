@@ -14,6 +14,7 @@ export interface ILupSumAssignment {
   nama_sdm: string
   jumlah_lumpsum: number
   jumlah_lumpsum_biaya: number
+  jumlah_lumpsum_biaya_rill: number
   is_sudah_diisi: boolean
 }
 
@@ -50,6 +51,9 @@ export interface ICostLumpSum {
   biaya_perhari: string | null
   harga: string
   redaksi: string
+  nama_unit_kerja: string
   is_rill: boolean
+  nama_biaya: string
+  nama_jenis_transportasi: string
   nama_penandatangan: string
 }

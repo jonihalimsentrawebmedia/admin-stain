@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type {
-  IChartLetterNature,
-  IDashboardCount,
+  IDashboardAgenda,
+  IDashboardStatistic,
+  IDashboardSummary,
 } from '@/pages/modules/E-Office/dashboard/data/types.ts'
 import type { IInboxList } from '@/pages/modules/E-Office/inbox/list-inbox/data/types.ts'
 
@@ -29,12 +30,13 @@ export const UseGetDashboardInboxList = () => {
 }
 
 export const UseGetDashboardCounts = () => {
-  const [counts, setCounts] = useState<IDashboardCount>()
+  const [counts, setCounts] = useState<IDashboardSummary>()
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['dashboard-counts'],
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get('/eoffice/dashboard/counts').then((res) => res.data.data),
+    queryFn: () =>
+      AxiosClient.get('/eoffice/dashboard/jumlah-bulanan').then((res) => res.data.data),
   })
 
   const loading = isLoading || isFetching
@@ -48,37 +50,35 @@ export const UseGetDashboardCounts = () => {
   return { counts, loading }
 }
 
-export const UseGetStatisticInbox = () => {
-  const [statisticInbox, setStatisticInbox] = useState<IChartLetterNature[]>([])
+export const UseGerUrgentInformation = () => {
+  const [urgentInformation, setUrgentInformation] = useState<IDashboardSummary>()
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['dashboard-statistic-inbox'],
+    queryKey: ['urgent-information'],
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get('/eoffice/dashboard/statistik/sifat/surat-masuk').then(
-        (res) => res.data.data
-      ),
+      AxiosClient.get('/eoffice/dashboard/informasi-penting').then((res) => res.data.data),
   })
 
   const loading = isLoading || isFetching
 
   useEffect(() => {
     if (data) {
-      setStatisticInbox(data)
+      setUrgentInformation(data)
     }
   }, [data])
 
-  return { statisticInbox, loading }
+  return { urgentInformation, loading }
 }
 
-export const UseGetStatisticOutbox = () => {
-  const [statisticOutbox, setStatisticOutbox] = useState<IChartLetterNature[]>([])
+export const UseGetDashboardAgenda = ({ tanggal_mulai }: { tanggal_mulai: string }) => {
+  const [todayAgenda, setTodayAgenda] = useState<IDashboardAgenda[]>([])
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['dashboard-statistic-outbox'],
+    queryKey: ['dashboard-statistic-outbox', tanggal_mulai],
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get('/eoffice/dashboard/statistik/sifat/surat-keluar').then(
+      AxiosClient.get(`/eoffice/dashboard/agenda?tanggal_mulai=${tanggal_mulai}`).then(
         (res) => res.data.data
       ),
   })
@@ -87,9 +87,37 @@ export const UseGetStatisticOutbox = () => {
 
   useEffect(() => {
     if (data) {
-      setStatisticOutbox(data)
+      setTodayAgenda(data)
     }
   }, [data])
 
-  return { statisticOutbox, loading }
+  return { todayAgenda, loading }
+}
+
+interface Props {
+  periode?: 'minggu_ini' | 'bulan_ini' | 'enam_bulan' | 'satu_tahun'
+}
+
+export const UseGetStatisticLetterByTime = (props?: Props) => {
+  const { periode } = props ?? {}
+  const [statisticTime, setStatisticTime] = useState<IDashboardStatistic>()
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['statistic-time', periode],
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get(`/eoffice/dashboard/statistik/waktu?periode=${periode}`).then(
+        (res) => res.data.data
+      ),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setStatisticTime(data)
+    }
+  }, [data])
+
+  return { statisticTime, loading }
 }

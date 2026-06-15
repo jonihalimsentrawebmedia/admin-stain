@@ -3,17 +3,13 @@ import { useForm } from 'react-hook-form'
 import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan-unit/hooks.tsx'
 import { type SuratFormType, SuratSchema } from '../data/resolver.tsx'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import { UseGetSessionEOffice } from '@/pages/modules/E-Office/session/hooks.tsx'
 import { USeGetLetterNature } from '@/pages/modules/E-Office/reference/letter-nature/hooks'
 import { USeGetLetterType } from '@/pages/modules/E-Office/reference/letter-type/hooks'
 import { USeGetLetterClassification } from '@/pages/modules/E-Office/reference/letter-classification/hooks'
-import TextInput from '@/components/common/form/TextInput.tsx'
 import TextAreaInput from '@/components/common/form/textAreaInput.tsx'
 import CheckboxInputBasic from '@/components/common/form/checkbox.tsx'
-import { TitleLine } from '@/pages/modules/pusat-karir/component/common/titleLine.tsx'
 import { USeGetReminderAgenda } from '@/pages/modules/E-Office/reference/reminder-agenda/hooks'
-import { UploadDocument } from '@/pages/modules/website-utama/public-content/announcement/components/uploadDocument.tsx'
 import { UseGetHumanResource } from '@/pages/modules/E-Office/reference/human-resource/hooks.tsx'
 import SelectUseRoleData from '@/pages/modules/E-Office/component/common/selectUser.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
@@ -22,6 +18,23 @@ import { useNavigate } from 'react-router-dom'
 import type { IOutbox } from '../data/types.ts'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
+import { IoMdMailOpen } from 'react-icons/io'
+import { RiBuildingLine } from 'react-icons/ri'
+import { IoChatboxOutline, IoShieldCheckmarkSharp } from 'react-icons/io5'
+import {
+  FaFileSignature,
+  FaHashtag,
+  FaRegCalendarAlt,
+  FaRegFileAlt,
+  FaRegFileArchive,
+  FaRegUser,
+} from 'react-icons/fa'
+import { SelectIconInput } from '@/pages/modules/E-Office/component/common/formIcon/selectIcon.tsx'
+import { GoLaw } from 'react-icons/go'
+import TextInputIcon from '@/pages/modules/E-Office/component/common/formIcon/TextInputIcon.tsx'
+import { BsBell, BsTag } from 'react-icons/bs'
+import { GrLocation } from 'react-icons/gr'
+import { UploadDocWithDescription } from '@/pages/modules/E-Office/component/common/formIcon/uploadWithDesc.tsx'
 
 interface IProps {
   data?: IOutbox
@@ -52,7 +65,6 @@ export const FormRegistrationOutbox = (props: IProps) => {
   const {} = UseGetSessionEOffice()
 
   const [loading, setLoading] = useState(false)
-  console.log(form.formState.errors)
 
   const HandleSave = async (value: SuratFormType) => {
     setLoading(true)
@@ -115,11 +127,18 @@ export const FormRegistrationOutbox = (props: IProps) => {
       <Form {...form}>
         <form className={'space-y-5'} onSubmit={form.handleSubmit(HandleSave)}>
           <div className={'grid grid-cols-2 gap-5 bg-white p-5 rounded border'}>
-            <div className="col-span-2">
-              <TitleLine title={'Data Surat'} />
+            <div className="flex items-center gap-2 col-span-2">
+              <div className="bg-primary w-fit text-white rounded-lg p-2">
+                <IoMdMailOpen className={'size-5'} />
+              </div>
+              <div className="flex flex-col">
+                <p className="text-lg font-semibold">Data Surat Keluar</p>
+                <p className="text-gray-500 text-sm">Informasi Lengkap Mengenai Surat Keluar</p>
+              </div>
             </div>
 
-            <SelectBasicInput
+            <SelectIconInput
+              icon={<RiBuildingLine className={'size-5 text-primary'} />}
               form={form}
               label={'Satuan Kerja'}
               placeholder={'Satuan kerja'}
@@ -133,7 +152,8 @@ export const FormRegistrationOutbox = (props: IProps) => {
                 })) ?? []
               }
             />
-            <SelectBasicInput
+            <SelectIconInput
+              icon={<IoShieldCheckmarkSharp className={'size-5 text-primary'} />}
               form={form}
               label={'Sifat Surat'}
               placeholder={'Sifat surat'}
@@ -147,7 +167,8 @@ export const FormRegistrationOutbox = (props: IProps) => {
                 })) ?? []
               }
             />
-            <SelectBasicInput
+            <SelectIconInput
+              icon={<FaRegFileAlt className={'size-5 text-primary'} />}
               form={form}
               label={'Jenis Surat'}
               placeholder={'Jenis surat'}
@@ -161,7 +182,8 @@ export const FormRegistrationOutbox = (props: IProps) => {
                 })) ?? []
               }
             />
-            <SelectBasicInput
+            <SelectIconInput
+              icon={<GoLaw className={'size-5 text-primary'} />}
               form={form}
               label={'Klasifikasi Surat'}
               placeholder={'klasifikasi surat'}
@@ -176,7 +198,8 @@ export const FormRegistrationOutbox = (props: IProps) => {
               }
             />
 
-            <SelectBasicInput
+            <SelectIconInput
+              icon={<FaFileSignature className={'text-primary size-5'} />}
               form={form}
               label={'Penandatangan Surat'}
               placeholder={'Pilih Pegawai Penandatangan Surat'}
@@ -191,7 +214,8 @@ export const FormRegistrationOutbox = (props: IProps) => {
               }
             />
 
-            <TextInput
+            <TextInputIcon
+              icon={<FaRegUser className={'size-5 text-primary'} />}
               name={'surat_kepada'}
               form={form}
               label={'Penerima Surat'}
@@ -201,7 +225,8 @@ export const FormRegistrationOutbox = (props: IProps) => {
               isRequired
             />
 
-            <TextInput
+            <TextInputIcon
+              icon={<FaHashtag className={'size-5 text-primary'} />}
               name={'nomor_surat'}
               form={form}
               label={'Nomor Surat'}
@@ -211,7 +236,8 @@ export const FormRegistrationOutbox = (props: IProps) => {
               isRequired
             />
 
-            <TextInput
+            <TextInputIcon
+              icon={<FaRegCalendarAlt className={'size-5 text-primary'} />}
               name={'tanggal_surat'}
               form={form}
               label={'Tanggal Surat'}
@@ -222,7 +248,8 @@ export const FormRegistrationOutbox = (props: IProps) => {
               isRequired
             />
 
-            <TextInput
+            <TextInputIcon
+              icon={<BsTag className={'size-5 text-primary'} />}
               name={'perihal'}
               form={form}
               label={'Perihal'}
@@ -245,8 +272,18 @@ export const FormRegistrationOutbox = (props: IProps) => {
 
           <div className="border p-5 rounded grid grid-cols-2 gap-5 bg-white">
             <div className="col-span-2">
-              <TitleLine title={'Data Agenda'} />
+              <div className="flex items-center gap-2 col-span-2">
+                <div className="bg-primary w-fit text-white rounded-lg p-2">
+                  <FaRegCalendarAlt className={'size-5'} />
+                </div>
+                <div className="flex flex-col">
+                  <p className="text-lg font-semibold">Data Agenda</p>
+                  <p className="text-gray-500 text-sm">Informasi Lengkap Mengenai Agenda</p>
+                </div>
+              </div>
+              <hr className={'my-2 border-green-400'} />
             </div>
+
             <div className="col-span-2">
               <CheckboxInputBasic
                 name={'is_agenda'}
@@ -257,7 +294,8 @@ export const FormRegistrationOutbox = (props: IProps) => {
             </div>
             {form.watch('is_agenda') === true && (
               <>
-                <TextInput
+                <TextInputIcon
+                  icon={<FaRegFileAlt className={'size-5 text-primary'} />}
                   name={'nama_kegiatan'}
                   form={form}
                   label={'Nama Kegiatan'}
@@ -270,6 +308,7 @@ export const FormRegistrationOutbox = (props: IProps) => {
                   name={'is_samakan_dengan_surat'}
                   form={form}
                   label={'Samakan dengan perihal surat'}
+                  className={'whitespace-nowrap mt-4'}
                   fx={(e) => {
                     if (e) {
                       const same = form.getValues('perihal')
@@ -278,7 +317,8 @@ export const FormRegistrationOutbox = (props: IProps) => {
                   }}
                 />
 
-                <TextInput
+                <TextInputIcon
+                  icon={<IoChatboxOutline className={'size-5 text-primary'} />}
                   name={'keterangan_agenda'}
                   form={form}
                   label={'Keterangan Agenda (opsional)'}
@@ -287,7 +327,8 @@ export const FormRegistrationOutbox = (props: IProps) => {
                   placeholder={'Keterangan agenda'}
                 />
 
-                <TextInput
+                <TextInputIcon
+                  icon={<FaRegCalendarAlt className={'size-5 text-primary'} />}
                   name={'tanggal_mulai'}
                   form={form}
                   label={'Mulai Dari'}
@@ -296,7 +337,8 @@ export const FormRegistrationOutbox = (props: IProps) => {
                   className={'col-span-1'}
                   isRequired
                 />
-                <TextInput
+                <TextInputIcon
+                  icon={<FaRegCalendarAlt className={'size-5 text-primary'} />}
                   name={'tanggal_selesai'}
                   form={form}
                   label={'Sampai Dengan'}
@@ -305,7 +347,8 @@ export const FormRegistrationOutbox = (props: IProps) => {
                   className={'col-span-1'}
                   isRequired
                 />
-                <TextInput
+                <TextInputIcon
+                  icon={<GrLocation className={'size-5 text-primary'} />}
                   name={'tempat'}
                   label={'Tempat / Lokasi'}
                   htmlFor={'address'}
@@ -315,7 +358,8 @@ export const FormRegistrationOutbox = (props: IProps) => {
                   isRequired
                 />
 
-                <SelectBasicInput
+                <SelectIconInput
+                  icon={<BsBell className={'size-5 text-primary'} />}
                   name={'id_waktu_pengingat_agenda'}
                   form={form}
                   placeholder={'Pilih waktu pengingat agenda'}
@@ -342,8 +386,18 @@ export const FormRegistrationOutbox = (props: IProps) => {
 
           <div className="border p-5 rounded grid grid-cols-2 gap-5 bg-white">
             <div className="col-span-2">
-              <TitleLine title={'Lampiran'} />
+              <div className="flex items-center gap-2 col-span-2">
+                <div className="bg-primary w-fit text-white rounded-lg p-2">
+                  <FaRegFileArchive className={'size-5'} />
+                </div>
+                <div className="flex flex-col">
+                  <p className="text-lg font-semibold">Data Lampiran</p>
+                  <p className="text-gray-500 text-sm">Informasi Lengkap Mengenai Data Lampiran</p>
+                </div>
+              </div>
+              <hr className={'my-2 border-green-400'} />
             </div>
+
             <div className="col-span-2">
               <CheckboxInputBasic
                 name={'is_lampiran'}
@@ -354,7 +408,7 @@ export const FormRegistrationOutbox = (props: IProps) => {
             </div>
 
             {form?.watch('is_lampiran') === true && (
-              <UploadDocument
+              <UploadDocWithDescription
                 form={form}
                 label={'Upload Lampiran'}
                 name={'list_lampiran'}
@@ -365,8 +419,20 @@ export const FormRegistrationOutbox = (props: IProps) => {
 
           <div className="border p-5 rounded grid grid-cols-2 gap-5 bg-white">
             <div className="col-span-2">
-              <TitleLine title={'Tembusan'} />
+              <div className="flex items-center gap-2 col-span-2">
+                <div className="bg-primary w-fit text-white rounded-lg p-2">
+                  <FaRegFileArchive className={'size-5'} />
+                </div>
+                <div className="flex flex-col">
+                  <p className="text-lg font-semibold">Tembusan</p>
+                  <p className="text-gray-500 text-sm">
+                    Atur Tembusan Dan Pihak Lain Yang Akan Menerima Surat
+                  </p>
+                </div>
+              </div>
+              <hr className={'my-2 border-green-400'} />
             </div>
+
             <div className="col-span-2">
               <CheckboxInputBasic
                 name={'is_disposisi'}

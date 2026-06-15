@@ -139,7 +139,7 @@ export const FormRegistrationInbox = (props: IProps) => {
                 <IoMdMailOpen className={'size-5'} />
               </div>
               <div className="flex flex-col">
-                <p className="text-lg font-semibold">Data Surat</p>
+                <p className="text-lg font-semibold">Data Surat Masuk</p>
                 <p className="text-gray-500 text-sm">Informasi Lengkap Mengenai Surat Masuk</p>
               </div>
             </div>

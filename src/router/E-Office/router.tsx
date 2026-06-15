@@ -18,6 +18,8 @@ import DetailLetterAssigment from '@/pages/modules/E-Office/official-travel/Lett
 import LupSumAssignmentLetter from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/lupsum'
 import LupSumUpdated from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/lupsum/updated'
 import ListPejabat from '@/pages/modules/E-Office/official-travel/pejabat'
+import ReportLetterSPPDAssignment from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/report'
+import DocumentationLetterAssigment from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/documentation'
 
 const UserProfilePage = lazy(() =>
   import('@/pages/modules/website-utama/user-profile').then((m) => ({ default: m.UserProfilePage }))
@@ -560,6 +562,14 @@ export const E_OFFICE_ROUTE = [
               {
                 path: 'lupsum/:id_employee',
                 element: <LupSumUpdated />,
+              },
+              {
+                path: 'report',
+                element: <ReportLetterSPPDAssignment />,
+              },
+              {
+                path: 'documentation',
+                element: <DocumentationLetterAssigment />,
               },
             ],
           },

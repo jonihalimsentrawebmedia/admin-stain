@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import { useParams } from 'react-router-dom'
-import type { IDokumentasi } from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/documentation/hooks.tsx'
 import { toast } from 'react-toastify'
 import { FaTrash } from 'react-icons/fa'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
@@ -10,12 +9,11 @@ import { BiX } from 'react-icons/bi'
 import { Button } from '@/components/ui/button.tsx'
 
 interface Props {
-  data: IDokumentasi
-  id_mail_surat_tugas?: string
+  data: any
 }
 
 export const ButtonDeleteDocumentation = (props: Props) => {
-  const { data, id_mail_surat_tugas } = props
+  const { data } = props
   const { id } = useParams()
 
   const [open, setOpen] = useState(false)
@@ -24,9 +22,8 @@ export const ButtonDeleteDocumentation = (props: Props) => {
   const queryClient = useQueryClient()
   const HandleDelete = async () => {
     setLoading(true)
-    const idTugas = id_mail_surat_tugas ?? id
     await AxiosClient.delete(
-      `/eoffice/mail-surat-tugas/${idTugas}/dokumentasi/${data?.id_dokumentasi}`
+      `/eoffice/mail-surat-tugas/${id}/dokumentasi/${data?.id_mail_surat_tugas_dokumentasi}`
     )
       .then((res) => {
         if (res.data.status) {

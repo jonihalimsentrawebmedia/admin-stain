@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
+import type { ILetterHeader } from '@/pages/modules/E-Office/settings/letter-header/data/types.ts'
 
 interface props {
   id_mail_surat_tugas: string
@@ -11,7 +12,7 @@ interface props {
 }
 
 export interface IDokumentasi {
-  id_dokumentasi: string
+  id_mail_surat_tugas_dokumentasi: string
   id_mail_surat_tugas: string
   url_file: string
   key_file: string | null
@@ -27,7 +28,10 @@ export interface IDokumentasi {
 export const UseGetDocumentation = (props: props) => {
   const { search, limit, page, id_mail_surat_tugas } = props
 
-  const [file, setFile] = useState<IDokumentasi[]>([])
+  const [file, setFile] = useState<{
+    dokumentasi: IDokumentasi[]
+    kop_surat: ILetterHeader
+  }>()
   const [meta, setMeta] = useState<Meta>()
 
   const Params = new URLSearchParams()
@@ -39,9 +43,9 @@ export const UseGetDocumentation = (props: props) => {
     queryKey: ['documentation-tugas', Params.toString(), id_mail_surat_tugas],
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get(`/eoffice/mail-surat-tugas/${id_mail_surat_tugas}/dokumentasi?${Params}`).then(
-        (res) => res.data
-      ),
+      AxiosClient.get(
+        `/eoffice/mail-surat-tugas/${id_mail_surat_tugas}/dokumentasi/print?${Params}`
+      ).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching
