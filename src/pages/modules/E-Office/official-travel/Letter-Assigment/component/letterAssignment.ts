@@ -4,6 +4,7 @@ import type { TDocumentDefinitions } from 'pdfmake/interfaces'
 
 import type { ILetterAssignment } from '../data/types'
 import type { ILetterHeader } from '@/pages/modules/E-Office/settings/letter-header/data/types'
+import { FONT_MAP } from '@/pages/modules/E-Office/utils/fontConfig'
 
 interface Props {
   data: ILetterAssignment
@@ -24,10 +25,19 @@ function mapStyle({
   style?: string
   size?: number
 }) {
+  // Resolve font name against FONT_MAP, fallback to 'Times New Roman'
+  let resolvedFont = 'Times New Roman'
+  if (font && font.trim() !== '') {
+    const matchedKey = Object.keys(FONT_MAP).find(
+      (key) => key.toLowerCase() === font.trim().toLowerCase()
+    )
+    resolvedFont = matchedKey || 'Times New Roman'
+  }
+
   const safeStyle = style?.toLowerCase()
 
   return {
-    font: (font && font.trim() !== '' ? font : 'TimesNewRoman') as any,
+    font: resolvedFont,
     bold: safeStyle === 'bold' || safeStyle === 'bold italic',
     italics: safeStyle === 'italic' || safeStyle === 'bold italic',
     fontSize: size || 10,

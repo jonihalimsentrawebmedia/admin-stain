@@ -12,6 +12,7 @@ import type {
   ICetakConfig,
   IDaftarHadir,
 } from '@/pages/modules/E-Office/event-activity/event-data/detail/component/list-attandaces/printData/types.ts'
+import { FONT_MAP } from '@/pages/modules/E-Office/utils/fontConfig'
 
 ;(pdfMake as any).vfs = (pdfFonts as any).vfs
 
@@ -94,16 +95,12 @@ const LOGO_SIZE = 72
 const getValidFont = (jenis_font?: string): string => {
   if (!jenis_font) return 'Roboto'
 
-  switch (jenis_font.trim().toLowerCase()) {
-    case 'times new roman':
-      return 'TimesNewRoman'
+  // Find matching font key in FONT_MAP (case-insensitive)
+  const matchedKey = Object.keys(FONT_MAP).find(
+    (key) => key.toLowerCase() === jenis_font.trim().toLowerCase()
+  )
 
-    case 'roboto':
-      return 'Roboto'
-
-    default:
-      return 'Roboto'
-  }
+  return matchedKey || 'Roboto'
 }
 
 // ─── Dynamic table padding based on row count ────────────────────────────────

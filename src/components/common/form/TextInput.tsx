@@ -20,7 +20,7 @@ interface Props<T extends FieldValues> {
     | 'datetime-local'
     | 'color'
   htmlFor?: string
-  name: Path<T> // ✅ FIX DISINI, pakai Path<T> bukan string biasa
+  name: Path<T>
   placeholder?: string
   form: UseFormReturn<T>
   className?: string
@@ -32,6 +32,15 @@ interface Props<T extends FieldValues> {
   isNumber?: boolean
   min?: number | string
   max?: number | string
+
+  /**
+   * Alpha HEXA
+   * FF = 100%
+   * CC = 80%
+   * 80 = 50%
+   * 40 = 25%
+   */
+  alphaColor?: string
 }
 
 function TextInput<T extends FieldValues>({
@@ -50,10 +59,38 @@ function TextInput<T extends FieldValues>({
   isNumber,
   isDisabled,
   isRow = false,
+  alphaColor = 'FF',
 }: Props<T>) {
   const [showPassword, setShowPassword] = useState(false)
+
   const isPassword = type === 'password'
+
   const { isMobile } = useMobile()
+
+  /**
+   * HEX -> HEXA
+   * #2563EB => #2563EBFF
+   */
+  const hexToHexa = (hex: string) => {
+    const cleanHex = hex.slice(0, 7).toUpperCase()
+    return `${cleanHex}${alphaColor}`
+  }
+
+  /**
+   * HEXA -> HEX
+   * #2563EBFF => #2563EB
+   */
+  const hexaToHex = (hexa?: string) => {
+    if (!hexa) return '#000000'
+
+    const value = String(hexa)
+
+    if (value.length >= 7) {
+      return value.slice(0, 7)
+    }
+
+    return '#000000'
+  }
 
   return (
     <FormField
@@ -61,49 +98,72 @@ function TextInput<T extends FieldValues>({
       name={name}
       render={({ field }) => (
         <FormItem
-          className={`whitespace-nowrap 
-          ${isRow ? `${isMobile ? 'flex flex-col gap-4' : 'grid grid-cols-[12rem_1fr] flex-row items-center gap-5'} ` : 'flex flex-col gap-2'} 
-          ${className}`}
+          className={`whitespace-nowrap
+          ${
+            isRow
+              ? `${isMobile ? 'flex flex-col gap-4' : 'grid grid-cols-[12rem_1fr] items-center gap-5'}`
+              : 'flex flex-col gap-2'
+          }
+          ${className ?? ''}`}
         >
-          <FormLabel className={'text-gray-600 whitespace-pre-line'} htmlFor={htmlFor}>
-            {label} {isRequired && <span className={'text-red-500'}>*</span>}
+          <FormLabel htmlFor={htmlFor} className="text-gray-600 whitespace-pre-line">
+            {label}
+            {isRequired && <span className="text-red-500">*</span>}
           </FormLabel>
+
           <FormControl>
             <div className="relative w-full">
               <Input
                 id={htmlFor}
                 min={min}
-                onWheel={(e) => (e.target as HTMLElement).blur()}
                 max={max}
                 accept={accept}
                 disabled={isDisabled}
-                type={isPassword ? (showPassword ? 'text' : 'password') : type}
                 placeholder={placeholder}
-                className={`w-full focus-visible:ring-0 rounded ${inputClassName}`}
-                value={field.value !== undefined && field.value !== null ? String(field.value) : ''}
+                onWheel={(e) => (e.target as HTMLElement).blur()}
+                type={isPassword ? (showPassword ? 'text' : 'password') : type}
+                className={`w-full rounded focus-visible:ring-0 ${inputClassName ?? ''}`}
+                value={
+                  type === 'color'
+                    ? hexaToHex(field.value as string)
+                    : field.value !== undefined && field.value !== null
+                      ? String(field.value)
+                      : ''
+                }
                 onChange={(e) => {
                   let value: any = e.target.value
-                  if (isNumber) {
-                    value = e.target.value === '' ? '' : Number(e.target.value)
+
+                  /**
+                   * Color => HEXA
+                   */
+                  if (type === 'color') {
+                    field.onChange(hexToHexa(value))
+                    return
                   }
+                  if (isNumber) {
+                    value = value === '' ? '' : Number(value)
+                  }
+
                   field.onChange(value)
                 }}
               />
+
               {isPassword && (
                 <button
                   type="button"
                   onClick={() => setShowPassword((prev) => !prev)}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 z-10"
+                  className="absolute right-2 top-1/2 z-10 -translate-y-1/2 text-gray-500"
                 >
                   {showPassword ? (
-                    <LucideEye className="w-5 h-5" />
+                    <LucideEye className="h-5 w-5" />
                   ) : (
-                    <LucideEyeClosed className="w-5 h-5" />
+                    <LucideEyeClosed className="h-5 w-5" />
                   )}
                 </button>
               )}
             </div>
           </FormControl>
+
           <FormMessage />
         </FormItem>
       )}

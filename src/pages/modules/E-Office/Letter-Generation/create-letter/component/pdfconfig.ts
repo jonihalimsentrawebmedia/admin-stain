@@ -7,21 +7,21 @@ import { format } from 'date-fns'
 import { id } from 'date-fns/locale'
 import htmlToPdfmake from 'html-to-pdfmake'
 import DOMPurify from 'dompurify'
+import { FONT_MAP } from '@/pages/modules/E-Office/utils/fontConfig'
 
 // ═════════════════════════════════════════════════════════════════════════════
 //  HELPER
 // ═════════════════════════════════════════════════════════════════════════════
 
 const getValidFont = (jenis_font?: string): string => {
-  if (!jenis_font) return 'TimesNewRoman'
-  switch (jenis_font.trim().toLowerCase()) {
-    case 'times new roman':
-      return 'TimesNewRoman'
-    case 'roboto':
-      return 'Roboto'
-    default:
-      return 'TimesNewRoman'
-  }
+  if (!jenis_font) return 'Times New Roman'
+
+  // Find matching font key in FONT_MAP (case-insensitive)
+  const matchedKey = Object.keys(FONT_MAP).find(
+    (key) => key.toLowerCase() === jenis_font.trim().toLowerCase()
+  )
+
+  return matchedKey || 'Times New Roman'
 }
 
 const mapStyle = (setting: ISettingLetterHeader) => ({

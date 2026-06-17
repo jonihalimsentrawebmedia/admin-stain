@@ -69,6 +69,7 @@ export interface IKopSuratPengaturan {
   jenis_font: string
   gaya_font: 'normal' | 'bold' | 'italic'
   ukuran_font: number
+  warna: string
 }
 
 export interface IDaftarHadir {

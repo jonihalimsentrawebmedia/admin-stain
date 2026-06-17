@@ -11,7 +11,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
-import { FONT_MAP } from '@/pages/modules/E-Office/utils/fontConfig.ts'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import {
@@ -32,8 +31,19 @@ export const LetterHeader = () => {
   const [open, setOpen] = useState(false)
   const [urlPDf, setUrlPDf] = useState<string>()
 
+  const PDF_FONT_FAMILIES = [
+    'Arial',
+    'Bookman Old Style',
+    'Courier New',
+    'Georgia',
+    'Impact',
+    'Roboto',
+    'Tahoma',
+    'Times New Roman',
+    'Trebuchet MS',
+    'Verdana',
+  ]
   const { institution } = UseGetUnitActive()
-
   const { letterHeader } = UseGetLetterHeader(idSelected)
   const { base64 } = ConvertUrlToBase64(letterHeader?.url_logo as string)
 
@@ -59,11 +69,24 @@ export const LetterHeader = () => {
   const queryClient = useQueryClient()
   const HandleSave = async (value: TSettingLetterHeadForm) => {
     setLoading(true)
-    const filtered = value.pengaturan.filter(
-      (item) =>
-        Object.keys(item).length > 0 &&
-        Object.values(item).every((value) => value !== null && value !== undefined && value !== '')
-    )
+    const normalizeColor = (warna?: string): string | undefined => {
+      if (!warna || warna.trim() === '') return undefined
+      let color = warna.trim().replace(/^#/, '')
+      if (color.length === 8) color = color.slice(0, 6)
+      if (!/^[0-9A-Fa-f]{6}$/.test(color)) return undefined
+      return `#${color.toUpperCase()}`
+    }
+
+    const filtered = value.pengaturan
+      .map((item: any) => {
+        const normalized = normalizeColor(item.warna)
+        if (normalized) {
+          return { ...item, warna: normalized }
+        }
+        const { warna, ...rest } = item
+        return rest
+      })
+      .filter((item: any) => item.isi && item.isi.trim() !== '')
     await AxiosClient.post(`/eoffice/kop-surat/${idSelected}`, {
       url_logo: value.url_logo,
       key_logo: `logo-${idSelected}`,
@@ -83,6 +106,8 @@ export const LetterHeader = () => {
         toast.error(err.response.data.message || 'Error')
       })
   }
+
+  console.log(form.watch('pengaturan'))
 
   return (
     <>
@@ -117,7 +142,9 @@ export const LetterHeader = () => {
                         onClick={() => {
                           const { generateContent } = LetterHeaderPDF({
                             header: letterHeader as any,
-                            imageUrl: base64?.startsWith('data:') ? base64 : `data:image/png;base64,${base64}`,
+                            imageUrl: base64?.startsWith('data:')
+                              ? base64
+                              : `data:image/png;base64,${base64}`,
                           })
                           const docDefinition: any = {
                             pageMargins: [40, 40, 40, 60],
@@ -140,7 +167,9 @@ export const LetterHeader = () => {
                         onClick={async () => {
                           const { generateContent } = LetterHeaderPDF({
                             header: letterHeader as any,
-                            imageUrl: base64?.startsWith('data:') ? base64 : `data:image/png;base64,${base64}`,
+                            imageUrl: base64?.startsWith('data:')
+                              ? base64
+                              : `data:image/png;base64,${base64}`,
                           })
 
                           const docDefinition: any = {
@@ -189,12 +218,10 @@ export const LetterHeader = () => {
                           placeholder={'Jenis Font'}
                           usePortal
                           className={'w-full'}
-                          data={Object.keys(FONT_MAP)?.map((item) => {
-                            return {
-                              label: item,
-                              value: item,
-                            }
-                          })}
+                          data={PDF_FONT_FAMILIES?.map((row) => ({
+                            value: row,
+                            label: row,
+                          }))}
                         />
                         <SelectBasicInput
                           name={`pengaturan.${i}.gaya_font`}
@@ -215,6 +242,13 @@ export const LetterHeader = () => {
                           className={'[&>label]:hidden! w-full'}
                           type={'number'}
                           isNumber
+                        />
+                        <TextInput
+                          name={`pengaturan.${i}.warna`}
+                          form={form}
+                          placeholder={'warna'}
+                          className={'[&>label]:hidden! w-full'}
+                          type={'color'}
                         />
                       </div>
                     </div>

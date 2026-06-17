@@ -3,6 +3,7 @@ import { id } from 'date-fns/locale'
 import type { TDocumentDefinitions } from 'pdfmake/interfaces'
 import type { ILetterAssignment } from '@/pages/modules/E-Office/official-travel/Letter-Assigment/data/types'
 import type { IDetailSPPD } from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/data/types'
+import { FONT_MAP } from '@/pages/modules/E-Office/utils/fontConfig'
 
 // ──────────────────────────────────────────
 // Helper: format tanggal ke "dd MMMM yyyy"
@@ -24,11 +25,19 @@ function mapStyle({
   style?: string
   size?: number
 }) {
-  const safeFont = font && font.trim() !== '' ? font : 'TimesNewRoman'
+  // Resolve font name against FONT_MAP, fallback to 'Times New Roman'
+  let resolvedFont = 'Times New Roman'
+  if (font && font.trim() !== '') {
+    const matchedKey = Object.keys(FONT_MAP).find(
+      (key) => key.toLowerCase() === font.trim().toLowerCase()
+    )
+    resolvedFont = matchedKey || 'Times New Roman'
+  }
+
   const safeStyle = style?.toLowerCase()
 
   return {
-    font: safeFont,
+    font: resolvedFont,
     bold: safeStyle === 'bold' || safeStyle === 'bold italic',
     italics: safeStyle === 'italic' || safeStyle === 'bold italic',
     fontSize: Math.max(Math.round((size || 10) * 0.85 * 10) / 10, 8),
