@@ -9,12 +9,12 @@ import { Card, CardContent, CardTitle } from '@/components/ui/card.tsx'
 import { format } from 'date-fns'
 import { id } from 'date-fns/locale'
 import { Button } from '@/components/ui/button.tsx'
-import { MdPrint, MdUpload } from 'react-icons/md'
-import { useEffect, useRef, useState } from 'react'
+import { MdUpload } from 'react-icons/md'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
-import { FaFile, FaForward, FaTrash } from 'react-icons/fa'
+import { FaDownload, FaEye, FaFile, FaForward, FaPrint, FaTrash } from 'react-icons/fa'
 import { FaCirclePlus } from 'react-icons/fa6'
 import FormSPPDLetterAssigment from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/component/form.tsx'
 import { useForm } from 'react-hook-form'
@@ -24,10 +24,11 @@ import { ColumnSPPD } from '@/pages/modules/E-Office/official-travel/Letter-Assi
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { HiPencil } from 'react-icons/hi'
 import { TableCell, TableFooter, TableRow } from '@/components/ui/table.tsx'
-import { GeneratePDFSPD } from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/component/pdfGenerate.ts'
-import type { ILetterHeader } from '@/pages/modules/E-Office/settings/letter-header/data/types.ts'
+import { GenerateAssignmentLetter } from '@/pages/modules/E-Office/official-travel/Letter-Assigment/component/letterAssignment.ts'
 import { GetBase64FromUrl } from '@/pages/modules/E-Office/settings/letter-header/hooks'
 import pdfmake from '@/utils/pdfmake.ts'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
+import { UseGetButtonPrintV1LetterAssignment } from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/component/buttonPrintV1'
 
 const DetailLetterAssigment = () => {
   const { id: id_letter } = useParams()
@@ -41,6 +42,66 @@ const DetailLetterAssigment = () => {
   const refUpload = useRef<any>(null)
   const [loading, setLoading] = useState(false)
   const [isEdit, setIsEdit] = useState(false)
+
+  // ─── Preview Surat Tugas PDF ───
+  const [previewLoading, setPreviewLoading] = useState(false)
+  const [previewOpen, setPreviewOpen] = useState(false)
+  const [previewUrl, setPreviewUrl] = useState<string>('')
+  const previewUrlRef = useRef<string>('')
+
+  const cleanupPreviewUrl = useCallback(() => {
+    if (previewUrlRef.current) {
+      URL.revokeObjectURL(previewUrlRef.current)
+      previewUrlRef.current = ''
+    }
+    setPreviewUrl('')
+  }, [])
+
+  useEffect(() => {
+    return () => cleanupPreviewUrl()
+  }, [cleanupPreviewUrl])
+
+  const handlePreviewSuratTugas = async () => {
+    if (!detail) return
+    setPreviewLoading(true)
+    try {
+      const kopSurat = detail.kop_surat ?? (detail as any)?.kop_surat
+      const logoBase64 = await GetBase64FromUrl(kopSurat?.url_logo)
+      const config = GenerateAssignmentLetter({
+        data: detail as any,
+        base64Logo: logoBase64,
+        kop_surat: kopSurat as any,
+      })
+      const blob = await (pdfmake.createPdf(config) as any).getBlob()
+      const url = URL.createObjectURL(blob)
+      cleanupPreviewUrl()
+      previewUrlRef.current = url
+      setPreviewUrl(url)
+      setPreviewOpen(true)
+    } catch (err: any) {
+      toast.error(err?.message || 'Gagal membuat preview PDF')
+    } finally {
+      setPreviewLoading(false)
+    }
+  }
+
+  const handlePreviewDownload = () => {
+    if (!previewUrl) return
+    const link = document.createElement('a')
+    link.href = previewUrl
+    link.download = 'Surat_Tugas_SPD.pdf'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
+  const handlePreviewPrint = () => {
+    if (!previewUrl) return
+    const win = window.open(previewUrl, '_blank')
+    if (win) {
+      win.onload = () => win.print()
+    }
+  }
 
   const form = useForm<TResolverSPPD>({
     resolver: zodResolver(ResolverSPPD),
@@ -168,6 +229,20 @@ const DetailLetterAssigment = () => {
               onClick: () =>
                 navigate(`/modules/e-office/official-travel/letter-assignment/edit/${id_letter}`),
             },
+            {
+              type: 'custom',
+              element: (
+                <Button
+                  variant="outline"
+                  className="border-blue-500 text-blue-600 hover:bg-blue-50 hover:text-blue-700"
+                  disabled={!detail || previewLoading}
+                  onClick={handlePreviewSuratTugas}
+                >
+                  <FaEye className="mr-2 size-3" />
+                  {previewLoading ? 'Memproses...' : 'Preview Surat Tugas'}
+                </Button>
+              ),
+            },
           ]}
         />
 
@@ -285,22 +360,8 @@ const DetailLetterAssigment = () => {
               {sppd?.length > 0 ? (
                 <>
                   <div className="flex items-center justify-end gap-2">
-                    <Button
-                      size={'sm'}
-                      className={'text-white'}
-                      onClick={async () => {
-                        const headerRes = await AxiosClient.get(
-                          `/eoffice/kop-surat/detail/${DetailSPPD?.id_kop_surat}`
-                        )
-                        const letterHeader: ILetterHeader = headerRes.data?.data
-                        const logoBase64 = await GetBase64FromUrl(letterHeader.url_logo)
-                        const pdfDefination = GeneratePDFSPD(detail, logoBase64)
-                        pdfmake.createPdf(pdfDefination).print()
-                      }}
-                    >
-                      <MdPrint />
-                      Cetak
-                    </Button>
+                    <UseGetButtonPrintV1LetterAssignment detailSppd={DetailSPPD} detail={detail} />
+
                     <Button
                       onClick={() => setIsEdit(!isEdit)}
                       className={'bg-yellow-500 text-white hover:bg-yellow-600 rounded'}
@@ -371,6 +432,53 @@ const DetailLetterAssigment = () => {
           </Card>
         )}
       </div>
+
+      {/* ═══════════ Dialog Preview Surat Tugas ═══════════ */}
+      <DialogBasic
+        open={previewOpen}
+        setOpen={setPreviewOpen}
+        title="Preview Surat Tugas / SPD"
+        className="min-w-4xl w-full"
+      >
+        <div className="space-y-4">
+          {previewLoading && (
+            <div className="flex items-center justify-center py-20 text-gray-400">
+              <p>Sedang memproses PDF...</p>
+            </div>
+          )}
+
+          {previewUrl && !previewLoading && (
+            <iframe
+              src={previewUrl}
+              className="w-full h-[500px] border rounded-lg"
+              title="Preview Surat Tugas"
+            />
+          )}
+
+          <div className="flex items-center justify-between gap-2 pt-2">
+            <div />
+            <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                className="text-green-600 border-green-400 hover:bg-green-50"
+                disabled={!previewUrl || previewLoading}
+                onClick={handlePreviewDownload}
+              >
+                <FaDownload className="mr-2 size-3" />
+                Download
+              </Button>
+              <Button
+                className="text-white"
+                disabled={!previewUrl || previewLoading}
+                onClick={handlePreviewPrint}
+              >
+                <FaPrint className="mr-2 size-3" />
+                Print
+              </Button>
+            </div>
+          </div>
+        </div>
+      </DialogBasic>
     </>
   )
 }

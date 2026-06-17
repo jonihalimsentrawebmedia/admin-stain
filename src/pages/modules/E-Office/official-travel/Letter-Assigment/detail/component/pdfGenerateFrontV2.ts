@@ -4,26 +4,14 @@ import type { TDocumentDefinitions } from 'pdfmake/interfaces'
 import type { ILetterAssignment } from '@/pages/modules/E-Office/official-travel/Letter-Assigment/data/types'
 import type { IDetailSPPD } from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/data/types'
 
-// ──────────────────────────────────────────
-// Helper: format tanggal ke "dd MMMM yyyy"
-// ──────────────────────────────────────────
-function fmtTanggal(date?: string): string {
+// ───────── Helper format tanggal ─────────
+function fmt(date?: string): string {
   if (!date) return '-'
   return format(new Date(date), 'dd MMMM yyyy', { locale: id })
 }
 
-// ──────────────────────────────────────────
-// Helper: map style kop surat ke pdfmake
-// ──────────────────────────────────────────
-function mapStyle({
-  font,
-  style,
-  size,
-}: {
-  font?: string
-  style?: string
-  size?: number
-}) {
+// ───────── Map style kop surat ─────────
+function mapStyle({ font, style, size }: { font?: string; style?: string; size?: number }) {
   const safeFont = font && font.trim() !== '' ? font : 'TimesNewRoman'
   const safeStyle = style?.toLowerCase()
 
@@ -35,25 +23,36 @@ function mapStyle({
   }
 }
 
-// ─────────────────────────────────────────────────────
-// Generate PDF SPPD — 1 halaman per pegawai (peserta)
-// ─────────────────────────────────────────────────────
-export const GeneratePDFSPD = (
+// ─────────────────────────────────────────────────────────
+// PDF SPPD — Halaman Depan V2 (1 halaman, pengikut di row 8)
+// ─────────────────────────────────────────────────────────
+export const GeneratePDFFrontV2 = (
   detail: ILetterAssignment,
   logoBase64: string,
-  detailSppd?: IDetailSPPD,
+  detailSppd?: IDetailSPPD
 ): TDocumentDefinitions => {
-  // ─── Data induk ───
   const pegawaiList = detail.pegawai ?? []
   const sppdData = detailSppd ?? detail.sppd?.[0] ?? ({} as any)
+  const pegawaiUtama = pegawaiList[0]
+
+  // ─── Data mapping ───
+  const tempatAsal = (sppdData as any)?.tempat_asal || detail.tempat_kegiatan || '-'
+  const tempatTujuan = (sppdData as any)?.tempat_tujuan || '-'
+  const jenisTransportasi = (sppdData as any)?.nama_jenis_transportasi || '-'
+  const maksudKegiatan = detail.kegiatan?.join(', ') || '-'
+  const akun = (sppdData as any)?.akun || '-'
+  const lainLain = (sppdData as any)?.lain_lain || ''
+  const namaPenandatangan = detail.nama_disahkan_oleh || '-'
+  const nipPenandatangan = detail.nip || ''
+  const namaJabatanUtama = detail.nama_jabatan_struktural || ''
+  const satuanKerja = detail.nama_unit_kerja || '-'
+  const namaKabupaten = tempatAsal
 
   // ─── Kop Surat: content texts dari pengaturan ───
   const contentTexts =
     detail.kop_surat?.pengaturan?.map((item) => ({
       text: item.isi,
       alignment: 'center' as const,
-      margin: [0, 2, 0, 0] as [number, number, number, number],
-      lineHeight: 1.25,
       ...mapStyle({
         font: item.jenis_font,
         style: item.gaya_font,
@@ -62,28 +61,22 @@ export const GeneratePDFSPD = (
     })) ?? []
 
   // ─── Estimasi tinggi teks untuk middle logo vertikal ───
-  // A4 width = 595.28pt, header margin [40, 20, 40, 20] → left 40, right 40
-  // Logo width = 80, columnGap = 10
-  // Available text column width = 595.28 - 40 - 40 - 80 - 10 = 425.28
   const logoSize = 80
   const textColWidth = 595.28 - 40 - 40 - logoSize - 10
   const avgCharWidth = (fs: number) => fs * 0.55
 
   const estimatedTextHeight = contentTexts.reduce((total, item) => {
-    const t = item as { text?: string; fontSize?: number; margin?: [number, number, number, number] }
+    const t = item as { text?: string; fontSize?: number }
     const text = t.text ?? ''
     const fontSize = t.fontSize ?? 12
-    const topMargin = t.margin?.[1] ?? 0
-    const bottomMargin = t.margin?.[3] ?? 0
-    // Hitung explicit newlines + wrapped lines
     const explicitLines = text.split('\n').length
     const charsPerLine = Math.max(1, Math.floor(textColWidth / avgCharWidth(fontSize)))
     const wrappedLines = Math.max(explicitLines, Math.ceil(text.length / charsPerLine))
-    return total + topMargin + fontSize * 1.25 * wrappedLines + bottomMargin
+    return total + fontSize * 1.25 * wrappedLines
   }, 0)
   const logoTopMargin = Math.max((estimatedTextHeight - logoSize) / 2, 0)
 
-  // ─── HEADER: KOP SURAT (muncul di setiap halaman) ───
+  // ─── HEADER: KOP SURAT ───
   const header = {
     margin: [40, 20, 40, 20] as [number, number, number, number],
     stack: [
@@ -108,43 +101,52 @@ export const GeneratePDFSPD = (
         columnGap: 10,
       },
       {
-        canvas: [
-          { type: 'line' as const, x1: 0, y1: 0, x2: 515, y2: 0, lineWidth: 1.5 },
-        ],
+        canvas: [{ type: 'line' as const, x1: 0, y1: 0, x2: 515, y2: 0, lineWidth: 1.5 }],
         margin: [0, 5, 0, 0] as [number, number, number, number],
       },
     ],
   }
 
-  // ─── CONTENT: 1 halaman per pegawai ───
-  const pages: any[] = pegawaiList.map((peg, index) => {
-    const page: any = {
-      stack: [
-        // ═══════ Nomor (kanan atas) ═══════
-        {
-          columns: [
-            { width: '*', text: '' },
-            {
-              width: '50%',
-              table: {
-                widths: ['30%', '70%'],
-                body: [
-                  ['Lembar Ke', ':'],
-                  ['Kode Nomor', ':'],
-                  ['Nomor', `: ${detail.nomor_surat ?? '-'}`],
-                ],
-              },
-              layout: 'noBorders' as const,
-              fontSize: 8.5,
-              margin: [0, 0, 0, 10] as [number, number, number, number],
-            },
-          ],
-          columnGap: 0,
-        },
+  // ─── Pengikut rows (row 8) ───
+  const pengikutRows = pegawaiList
+    .slice(1)
+    .map((peg, i) => [
+      '',
+      `${String.fromCharCode(97 + i)}. ${peg.nama_lengkap}`,
+      '-',
+      peg.jabatan_pegawai || '',
+    ])
 
-      // ═══════ JUDUL ═══════
+  const hasPengikut = pengikutRows.length > 0
+
+  // ─── Single page content ───
+  const page: any = {
+    stack: [
+      // ════ Nomor (kanan atas) ════
       {
-        text: 'SURAT PERINTAH PERJALANAN DINAS (SPPD)',
+        columns: [
+          { width: '*', text: '' },
+          {
+            width: '50%',
+            table: {
+              widths: ['30%', '70%'],
+              body: [
+                ['Lembar Ke', ':'],
+                ['Kode Nomor', ':'],
+                ['Nomor', `: ${detail.nomor_surat ?? '-'}`],
+              ],
+            },
+            layout: 'noBorders' as const,
+            fontSize: 8.5,
+            margin: [0, 0, 0, 10] as [number, number, number, number],
+          },
+        ],
+        columnGap: 0,
+      },
+
+      // ════ JUDUL ════
+      {
+        text: 'SURAT PERJALANAN DINAS (SPD)',
         alignment: 'center' as const,
         bold: true,
         fontSize: 13,
@@ -152,7 +154,7 @@ export const GeneratePDFSPD = (
         margin: [0, 0, 0, 10] as [number, number, number, number],
       },
 
-      // ═══════ TABEL UTAMA (field 1–7) ═══════
+      // ════ TABEL UTAMA (field 1–7) ════
       {
         table: {
           widths: ['48%', '52%'],
@@ -166,7 +168,7 @@ export const GeneratePDFSPD = (
                 },
                 layout: 'noBorders' as const,
               },
-              detail.nama_disahkan_oleh ?? '-',
+              namaPenandatangan,
             ],
 
             // 2. Nama / NIP Pegawai
@@ -180,9 +182,9 @@ export const GeneratePDFSPD = (
               },
               {
                 text: [
-                  { text: `${peg.nama_lengkap}\n`, bold: true },
-                  peg.nip?.trim()
-                    ? { text: `NIP. ${peg.nip}`, alignment: 'left' as const }
+                  { text: `${pegawaiUtama?.nama_lengkap ?? '-'}\n`, bold: true },
+                  pegawaiUtama?.nip?.trim()
+                    ? { text: `NIP. ${pegawaiUtama.nip}`, alignment: 'left' as const }
                     : {},
                 ],
               },
@@ -206,7 +208,7 @@ export const GeneratePDFSPD = (
                   widths: ['*'],
                   body: [
                     ['a.'],
-                    [`b. ${peg.jabatan_pegawai || '-'} / ${detail.nama_unit_kerja || '-'}`],
+                    [`b. ${pegawaiUtama?.jabatan_pegawai || '-'} / ${satuanKerja}`],
                     ['c.'],
                   ],
                 },
@@ -223,7 +225,7 @@ export const GeneratePDFSPD = (
                 },
                 layout: 'noBorders' as const,
               },
-              (detail.kegiatan?.join(', ') || '-') as any,
+              maksudKegiatan as any,
             ],
 
             // 5. Alat angkut
@@ -235,7 +237,7 @@ export const GeneratePDFSPD = (
                 },
                 layout: 'noBorders' as const,
               },
-              (sppdData as any)?.nama_jenis_transportasi ?? '-',
+              jenisTransportasi,
             ],
 
             // 6. Tempat Berangkat / Tujuan
@@ -253,10 +255,7 @@ export const GeneratePDFSPD = (
               {
                 table: {
                   widths: ['*'],
-                  body: [
-                    [`a. ${(sppdData as any)?.tempat_asal || '-'}`],
-                    [`b. ${(sppdData as any)?.tempat_tujuan || '-'}`],
-                  ],
+                  body: [[`a. ${tempatAsal}`], [`b. ${tempatTujuan}`]],
                 },
                 layout: 'noBorders' as const,
               },
@@ -281,16 +280,20 @@ export const GeneratePDFSPD = (
                   body: [
                     [
                       `a. ${
-                        peg.tanggal_berangkat && peg.tanggal_pulang
+                        pegawaiUtama?.tanggal_berangkat && pegawaiUtama?.tanggal_pulang
                           ? differenceInDays(
-                              new Date(peg.tanggal_pulang),
-                              new Date(peg.tanggal_berangkat),
+                              new Date(pegawaiUtama.tanggal_pulang),
+                              new Date(pegawaiUtama.tanggal_berangkat)
                             ) + 1
-                          : 0
+                          : '-'
                       } hari`,
                     ],
-                    [`b. ${peg.tanggal_berangkat ? fmtTanggal(peg.tanggal_berangkat) : '-'}`],
-                    [`c. ${peg.tanggal_pulang ? fmtTanggal(peg.tanggal_pulang) : '-'}`],
+                    [
+                      `b. ${
+                        pegawaiUtama?.tanggal_berangkat ? fmt(pegawaiUtama.tanggal_berangkat) : '-'
+                      }`,
+                    ],
+                    [`c. ${pegawaiUtama?.tanggal_pulang ? fmt(pegawaiUtama.tanggal_pulang) : '-'}`],
                   ],
                 },
                 layout: 'noBorders' as const,
@@ -298,59 +301,39 @@ export const GeneratePDFSPD = (
             ],
           ],
         },
-        layout: {
-          hLineWidth: () => 0.5,
-          vLineWidth: () => 0.5,
-        },
+        layout: { hLineWidth: () => 0.5, vLineWidth: () => 0.5 },
         fontSize: 8.5,
         margin: [0, 0, 0, 0] as [number, number, number, number],
       },
 
-      // ═══════ TABLE 2: row 8 — Pengikut (3 kolom) ═══════
+      // ════ Row 8 — Pengikut (dinamis berdasarkan pegawaiList) ════
       {
         table: {
-          widths: ['33%', '33%', '34%'],
+          widths: ['6%', '*', '*', '*'],
           body: [
             [
               {
-                table: {
-                  widths: ['15%', '85%'],
-                  body: [
-                    [{ text: '8.', rowSpan: 5 }, 'Pengikut: Nama'],
-                    ['', 'a.'],
-                    ['', 'b.'],
-                    ['', 'c.'],
-                    ['', 'd.'],
-                  ],
-                },
-                layout: 'noBorders' as const,
+                text: '8.',
+                rowSpan: hasPengikut ? pengikutRows.length + 1 : 1,
               },
-              {
-                table: {
-                  widths: ['*'],
-                  body: [['Tanggal Lahir'], [''], [''], [''], ['']],
-                },
-                layout: 'noBorders' as const,
-              },
-              {
-                table: {
-                  widths: ['*'],
-                  body: [['Keterangan'], [''], [''], [''], ['']],
-                },
-                layout: 'noBorders' as const,
-              },
+              { text: 'Pengikut Nama', bold: true },
+              { text: 'Tanggal Lahir', bold: true },
+              { text: 'Keterangan', bold: true },
             ],
+            ...(hasPengikut ? pengikutRows : [['', '', '', '']]),
           ],
         },
         layout: {
-          hLineWidth: () => 0.5,
-          vLineWidth: () => 0.5,
+          hLineWidth: () => 0,
+          vLineWidth: (i: number) => (i === 1 ? 0 : 0.5),
+          hLineColor: () => 'black',
+          vLineColor: () => 'black',
         },
         fontSize: 8.5,
         margin: [0, 0, 0, 0] as [number, number, number, number],
       },
 
-      // ═══════ TABLE: row 9 — Pembebanan Anggaran ═══════
+      // ════ Row 9 — Pembebanan Anggaran ════
       {
         table: {
           widths: ['48%', '52%'],
@@ -370,26 +353,19 @@ export const GeneratePDFSPD = (
               {
                 table: {
                   widths: ['*'],
-                  body: [
-                    [''],
-                    [`\na. ${detail.nama_unit_kerja || '-'}`],
-                    [`b. ${(sppdData as any)?.akun || '-'}`],
-                  ],
+                  body: [[''], [`\na. ${satuanKerja}`], [`b. ${akun}`]],
                 },
                 layout: 'noBorders' as const,
               },
             ],
           ],
         },
-        layout: {
-          hLineWidth: () => 0.5,
-          vLineWidth: () => 0.5,
-        },
+        layout: { hLineWidth: () => 0.5, vLineWidth: () => 0.5 },
         fontSize: 8.5,
         margin: [0, 0, 0, 0] as [number, number, number, number],
       },
 
-      // ═══════ TABLE: row 10 — Keterangan Lain-lain ═══════
+      // ════ Row 10 — Keterangan Lain-lain ════
       {
         table: {
           widths: ['48%', '52%'],
@@ -405,7 +381,7 @@ export const GeneratePDFSPD = (
               {
                 table: {
                   widths: ['*'],
-                  body: [[(sppdData as any)?.lain_lain || '']],
+                  body: [[lainLain]],
                 },
                 layout: 'noBorders' as const,
               },
@@ -420,54 +396,48 @@ export const GeneratePDFSPD = (
         margin: [0, 0, 0, 0] as [number, number, number, number],
       },
 
-      // ═══════ Catatan kaki ═══════
+      // ════ Catatan kaki ════
       {
         text: '*) Coret yang tidak perlu',
         fontSize: 8.5,
         margin: [0, 0, 0, 20] as [number, number, number, number],
       },
 
-      // ═══════ TTD ═══════
+      // ════ TTD ════
       {
         columns: [
           { width: '*', text: '' },
           {
             width: '50%',
             stack: [
-              // Dikeluarkan di / Pada Tanggal
               {
                 table: {
                   widths: ['40%', '60%'],
                   body: [
-                    [
-                      'Dikeluarkan di',
-                      `: ${(sppdData as any)?.tempat_asal || detail.tempat_kegiatan || '-'}`,
-                    ],
-                    ['Pada Tanggal', `: ${fmtTanggal(detail.tanggal_surat)}`],
+                    ['Dikeluarkan di', `: ${namaKabupaten}`],
+                    ['Pada Tanggal', `: ${fmt(detail.tanggal_surat)}`],
                   ],
                 },
                 layout: 'noBorders' as const,
                 fontSize: 8.5,
                 margin: [0, 0, 0, 0] as [number, number, number, number],
               },
-              // an. Kepala ...
-              detail.nama_jabatan_struktural && {
-                text: `an. ${detail.nama_jabatan_struktural}`,
-                bold: true,
-                fontSize: 8.5,
-                margin: [0, 0, 0, 0] as [number, number, number, number],
-              },
-              // Jabatan penandatangan
+              namaJabatanUtama
+                ? {
+                    text: `an. ${namaJabatanUtama}`,
+                    bold: true,
+                    fontSize: 8.5,
+                    margin: [0, 0, 0, 0] as [number, number, number, number],
+                  }
+                : {},
               {
-                text: `${detail.nama_jabatan_struktural || 'Pejabat Pembuat Komitmen'},`,
+                text: `${namaJabatanUtama || 'Pejabat Pembuat Komitmen'},`,
                 bold: true,
                 margin: [0, 0, 0, 50] as [number, number, number, number],
               },
-              // Nama
-              { text: `${detail.nama_disahkan_oleh}`, bold: true },
-              // NIP (jika ada)
-              detail.nip?.trim()
-                ? { text: `NIP. ${detail.nip}`, alignment: 'left' as const }
+              { text: namaPenandatangan, bold: true },
+              nipPenandatangan.trim()
+                ? { text: `NIP. ${nipPenandatangan}`, alignment: 'left' as const }
                 : {},
             ],
             fontSize: 8.5,
@@ -475,21 +445,13 @@ export const GeneratePDFSPD = (
         ],
         columnGap: 0,
       },
-    ]
-    }
+    ],
+  }
 
-    if (index > 0) {
-      page.pageBreak = 'before'
-    }
-
-    return page
-  })
-
-  // ─── Return document definition ───
   return {
     pageSize: 'A4',
-    header: header,
-    content: pages,
+    header,
+    content: [page],
     pageMargins: [40, 120, 40, 40],
     defaultStyle: {
       fontSize: 9,

@@ -25,7 +25,11 @@ const ListLetterClassification = () => {
   // Callback invoked after a child is successfully added
   const handleChildAdded = useCallback((parentId: string | undefined) => {
     if (parentId) {
-      setExpanded((prev) => ({ ...prev, [parentId]: true }))
+      setExpanded((prev) => {
+        // ExpandedState bisa berbentuk `true` (expand all) atau Record<string, boolean>
+        const base = typeof prev === 'object' && prev !== null ? prev : {}
+        return { ...base, [parentId]: true }
+      })
     }
   }, [])
 

@@ -15,7 +15,7 @@ export const ButtonInfoAssignment = (props: props) => {
   const { id } = props
 
   const [open, setOpen] = useState(false)
-  const { detail } = UseGetLetterAssigmentDetail(id)
+  const { detail } = UseGetLetterAssigmentDetail(open ? id : '')
 
   const columns: ColumnDef<ILetterAssignmentEmployee>[] = [
     {
