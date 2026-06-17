@@ -16,9 +16,10 @@ import { InputRadio } from '@/components/common/form/InputRadio.tsx'
 import SelectTemplateText from '@/pages/modules/E-Office/Letter-Generation/create-letter/component/selectTemplate.tsx'
 import CheckboxInputBasic from '@/components/common/form/checkbox.tsx'
 import { Label } from '@/components/ui/label.tsx'
-import { FaTrash } from 'react-icons/fa'
+import { FaRegFileAlt, FaTrash } from 'react-icons/fa'
 import { Button } from '@/components/ui/button.tsx'
 import { UseGetHumanResource } from '@/pages/modules/E-Office/reference/human-resource/hooks.tsx'
+import { FiHash } from 'react-icons/fi'
 
 interface props {
   form: UseFormReturn<TLetterInvitationSchema>
@@ -60,7 +61,12 @@ const FormCreateLetterCustomize = (props: props) => {
         <form className={'space-y-5'} onSubmit={form.handleSubmit(HandleSave)}>
           <Card className={'p-2'}>
             <CardContent className={'p-2 space-y-4'}>
-              <CardTitle className={'text-xl'}>Kop Surat</CardTitle>
+              <CardTitle className={'text-xl flex items-center gap-1.5'}>
+                <div className="p-1.5 bg-primary text-white rounded">
+                  <FaRegFileAlt className={'size-5'} />
+                </div>
+                Kop Surat
+              </CardTitle>
               <SelectBasicInput
                 form={form}
                 name={'id_kop_surat'}
@@ -81,7 +87,12 @@ const FormCreateLetterCustomize = (props: props) => {
 
           <Card className={'p-2'}>
             <CardContent className={'p-2 space-y-4 w-full'}>
-              <CardTitle className={'text-xl'}>Penomoran Surat</CardTitle>
+              <CardTitle className={'text-xl flex items-center gap-1.5'}>
+                <div className="p-1.5 rounded bg-primary text-white">
+                  <FiHash className={'size-5'} />
+                </div>
+                Penomoran Surat
+              </CardTitle>
               <div className="grid grid-cols-3 gap-4">
                 <SelectBasicInput
                   form={form}

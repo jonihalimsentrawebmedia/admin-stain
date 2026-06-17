@@ -148,6 +148,18 @@ const LetterHeader = lazy(() =>
   }))
 )
 const DashboardEOfficePage = lazy(() => import('@/pages/modules/E-Office/dashboard'))
+const ListAdmissionProcess = lazy(
+  () => import('@/pages/modules/E-Office/students/admission-process')
+)
+const ListStudentStatus = lazy(
+  () => import('@/pages/modules/E-Office/students/student-status')
+)
+const ListReligion = lazy(
+  () => import('@/pages/modules/E-Office/students/religion')
+)
+const ListStudyProgram = lazy(
+  () => import('@/pages/modules/E-Office/students/study-program')
+)
 
 export const E_OFFICE_ROUTE = [
   {
@@ -377,31 +389,6 @@ export const E_OFFICE_ROUTE = [
         path: 'purpose-guest',
         element: <PurposeGuestPage />,
       },
-      // {
-      //   path: 'template-surat',
-      //   children: [
-      //     {
-      //       index: true,
-      //       element: <ListTemplateSurat />,
-      //     },
-      //     {
-      //       path: 'create',
-      //       element: <CreateTemplateSurat />,
-      //     },
-      //     {
-      //       path: 'update/:id',
-      //       element: <UpdateTemplateSurat />,
-      //     },
-      //     {
-      //       path: 'detail/:id',
-      //       element: <DetailTemplateSurat />,
-      //     },
-      //     {
-      //       path: 'generate/:id',
-      //       element: <GenerateSuratView />,
-      //     },
-      //   ],
-      // },
     ],
   },
   {
@@ -574,6 +561,27 @@ export const E_OFFICE_ROUTE = [
             ],
           },
         ],
+      },
+    ],
+  },
+  {
+    path: 'student',
+    children: [
+      {
+        path: 'admission-process',
+        element: <ListAdmissionProcess />,
+      },
+      {
+        path: 'student-status',
+        element: <ListStudentStatus />,
+      },
+      {
+        path: 'religion',
+        element: <ListReligion />,
+      },
+      {
+        path: 'study-program',
+        element: <ListStudyProgram />,
       },
     ],
   },
