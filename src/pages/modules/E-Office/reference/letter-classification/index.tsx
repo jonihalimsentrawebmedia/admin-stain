@@ -1,3 +1,5 @@
+import { useState, useCallback } from 'react'
+import type { ExpandedState } from '@tanstack/react-table'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import ButtonAddLetterClassification from './component/buttonAdd.tsx'
 import { USeGetLetterClassification } from './hooks'
@@ -16,7 +18,18 @@ const ListLetterClassification = () => {
     limit,
     search,
   })
-  const columns = ColumnsLetterClassification()
+
+  // Controlled expanded state so we can programmatically expand rows
+  const [expanded, setExpanded] = useState<ExpandedState>({})
+
+  // Callback invoked after a child is successfully added
+  const handleChildAdded = useCallback((parentId: string | undefined) => {
+    if (parentId) {
+      setExpanded((prev) => ({ ...prev, [parentId]: true }))
+    }
+  }, [])
+
+  const columns = ColumnsLetterClassification({ onChildAdded: handleChildAdded })
 
   return (
     <>
@@ -31,7 +44,12 @@ const ListLetterClassification = () => {
           ]}
         />
 
-        <DataTableRecursive data={letterClassification} columns={columns} />
+        <DataTableRecursive
+          data={letterClassification}
+          columns={columns}
+          expanded={expanded}
+          setExpanded={setExpanded}
+        />
       </div>
     </>
   )

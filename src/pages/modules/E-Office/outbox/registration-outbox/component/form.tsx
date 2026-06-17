@@ -377,7 +377,7 @@ export const FormRegistrationOutbox = (props: IProps) => {
                   isRequired
                   data={
                     reminderAgenda?.map((row) => ({
-                      label: row?.waktu,
+                      label: `${row?.waktu} Menit`,
                       value: row?.id_waktu_pengigat_agenda,
                     })) ?? []
                   }

@@ -9,8 +9,14 @@ import ButtonEditLetterClassification from '../component/buttonEdit.tsx'
 
 const INDENT = 15
 
-export const ColumnsLetterClassification = () => {
+interface ColumnsLetterClassificationOptions {
+  /** Called after a child is successfully added, with the parent's id_klasifikasi_surat */
+  onChildAdded?: (parentId: string | undefined) => void
+}
+
+export const ColumnsLetterClassification = (options?: ColumnsLetterClassificationOptions) => {
   const [searchParams] = useSearchParams()
+  const { onChildAdded } = options ?? {}
 
   const page = Number(searchParams.get('page') ?? '1')
   const limit = Number(searchParams.get('limit') ?? '10')
@@ -97,7 +103,7 @@ export const ColumnsLetterClassification = () => {
         id: 'tambah_children',
         header: 'Tambah Children',
         cell: ({ row }) => {
-          return <ButtonAddLetterClassification data={row.original} />
+          return <ButtonAddLetterClassification data={row.original} onChildAdded={onChildAdded} />
         },
       },
 
@@ -134,6 +140,6 @@ export const ColumnsLetterClassification = () => {
         },
       },
     ],
-    [page, limit]
+    [page, limit, onChildAdded]
   )
 }

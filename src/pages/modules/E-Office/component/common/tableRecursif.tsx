@@ -23,19 +23,36 @@ import { useState } from 'react'
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  /** Controlled expanded state (optional — uses internal state if omitted) */
+  expanded?: ExpandedState
+  /** Controlled expanded state setter (required when expanded is provided) */
+  setExpanded?: React.Dispatch<React.SetStateAction<ExpandedState>>
+  /** Optional custom row ID accessor. Defaults to row index (position based). */
+  getRowId?: (row: TData) => string
 }
 
 export function DataTableRecursive<
   TData extends {
     children?: TData[]
+    id_klasifikasi_surat?: string
   },
   TValue,
->({ columns, data }: DataTableProps<TData, TValue>) {
-  const [expanded, setExpanded] = useState<ExpandedState>({})
+>({
+  columns,
+  data,
+  expanded: controlledExpanded,
+  setExpanded: controlledSetExpanded,
+  getRowId: customGetRowId,
+}: DataTableProps<TData, TValue>) {
+  const isControlled = controlledExpanded !== undefined && controlledSetExpanded !== undefined
+  const [internalExpanded, internalSetExpanded] = useState<ExpandedState>({})
+  const expanded = isControlled ? controlledExpanded : internalExpanded
+  const setExpanded = isControlled ? controlledSetExpanded : internalSetExpanded
 
   const table = useReactTable({
     data,
     columns,
+    getRowId: customGetRowId ?? ((row, index) => row.id_klasifikasi_surat ?? String(index)),
 
     state: {
       expanded,
@@ -51,7 +68,7 @@ export function DataTableRecursive<
     // recursive children
     getSubRows: (row) => row.children,
 
-    // optional
+    // optional — prevents losing expanded state on data changes
     autoResetExpanded: false,
   })
 

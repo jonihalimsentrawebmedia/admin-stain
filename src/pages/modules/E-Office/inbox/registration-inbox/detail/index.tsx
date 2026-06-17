@@ -297,7 +297,7 @@ export const DetailInboxRegistration = () => {
                   </div>
                   <div className="flex flex-col col-span-4">
                     <p className="text-gray-500">Pengingat: </p>
-                    <p>{detailInbox?.nama_waktu_pengingat_agenda}</p>
+                    <p>{detailInbox?.nama_waktu_pengingat_agenda} Menit</p>
                   </div>
                 </div>
               </div>

@@ -24,6 +24,14 @@ export const ColumnsReminderAgenda = () => {
     {
       accessorKey: 'waktu',
       header: 'Waktu',
+      cell: ({ row }) => {
+        const data = row?.original
+        return (
+          <>
+            <p>{data?.waktu} Menit</p>
+          </>
+        )
+      },
     },
     {
       accessorKey: 'action',
