@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import {
   LetterAssignmentSPPD,
   UseGetLetterAssigmentDetail,
@@ -209,13 +209,15 @@ const DetailLetterAssigment = () => {
               {detail?.url_file_undangan ? (
                 <>
                   <div className="flex items-center gap-1.5">
-                    <Button
-                      variant={'outline'}
-                      className={'border-primary text-primary hover:text-primary w-fit'}
-                    >
-                      <FaFile />
-                      Lihat Undangan
-                    </Button>
+                    <Link to={detail?.url_file_undangan} target="_blank">
+                      <Button
+                        variant={'outline'}
+                        className={'border-primary text-primary hover:text-primary w-fit'}
+                      >
+                        <FaFile />
+                        Lihat Undangan
+                      </Button>
+                    </Link>
                     <Button
                       className={'w-fit text-white'}
                       onClick={() => refUpload.current.click()}
