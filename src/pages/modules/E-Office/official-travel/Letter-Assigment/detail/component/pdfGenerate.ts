@@ -3,7 +3,7 @@ import { id } from 'date-fns/locale'
 import type { TDocumentDefinitions } from 'pdfmake/interfaces'
 import type { ILetterAssignment } from '@/pages/modules/E-Office/official-travel/Letter-Assigment/data/types'
 import type { IDetailSPPD } from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/data/types'
-import { FONT_MAP } from '@/pages/modules/E-Office/utils/fontConfig'
+import { buildKopSuratContent } from '@/pages/modules/E-Office/settings/letter-header/data/pdfContentConfig'
 
 // ──────────────────────────────────────────
 // Helper: format tanggal ke "dd MMMM yyyy"
@@ -11,37 +11,6 @@ import { FONT_MAP } from '@/pages/modules/E-Office/utils/fontConfig'
 function fmtTanggal(date?: string): string {
   if (!date) return '-'
   return format(new Date(date), 'dd MMMM yyyy', { locale: id })
-}
-
-// ──────────────────────────────────────────
-// Helper: map style kop surat ke pdfmake
-// ──────────────────────────────────────────
-function mapStyle({
-  font,
-  style,
-  size,
-}: {
-  font?: string
-  style?: string
-  size?: number
-}) {
-  // Resolve font name against FONT_MAP, fallback to 'Times New Roman'
-  let resolvedFont = 'Times New Roman'
-  if (font && font.trim() !== '') {
-    const matchedKey = Object.keys(FONT_MAP).find(
-      (key) => key.toLowerCase() === font.trim().toLowerCase()
-    )
-    resolvedFont = matchedKey || 'Times New Roman'
-  }
-
-  const safeStyle = style?.toLowerCase()
-
-  return {
-    font: resolvedFont,
-    bold: safeStyle === 'bold' || safeStyle === 'bold italic',
-    italics: safeStyle === 'italic' || safeStyle === 'bold italic',
-    fontSize: Math.max(Math.round((size || 10) * 0.85 * 10) / 10, 8),
-  }
 }
 
 // ─────────────────────────────────────────────────────
@@ -56,74 +25,11 @@ export const GeneratePDFSPD = (
   const pegawaiList = detail.pegawai ?? []
   const sppdData = detailSppd ?? detail.sppd?.[0] ?? ({} as any)
 
-  // ─── Kop Surat: content texts dari pengaturan ───
-  const contentTexts =
-    detail.kop_surat?.pengaturan?.map((item) => ({
-      text: item.isi,
-      alignment: 'center' as const,
-      margin: [0, 2, 0, 0] as [number, number, number, number],
-      lineHeight: 1.25,
-      ...mapStyle({
-        font: item.jenis_font,
-        style: item.gaya_font,
-        size: item.ukuran_font,
-      }),
-    })) ?? []
-
-  // ─── Estimasi tinggi teks untuk middle logo vertikal ───
-  // A4 width = 595.28pt, header margin [40, 20, 40, 20] → left 40, right 40
-  // Logo width = 80, columnGap = 10
-  // Available text column width = 595.28 - 40 - 40 - 80 - 10 = 425.28
-  const logoSize = 80
-  const textColWidth = 595.28 - 40 - 40 - logoSize - 10
-  const avgCharWidth = (fs: number) => fs * 0.55
-
-  const estimatedTextHeight = contentTexts.reduce((total, item) => {
-    const t = item as { text?: string; fontSize?: number; margin?: [number, number, number, number] }
-    const text = t.text ?? ''
-    const fontSize = t.fontSize ?? 12
-    const topMargin = t.margin?.[1] ?? 0
-    const bottomMargin = t.margin?.[3] ?? 0
-    // Hitung explicit newlines + wrapped lines
-    const explicitLines = text.split('\n').length
-    const charsPerLine = Math.max(1, Math.floor(textColWidth / avgCharWidth(fontSize)))
-    const wrappedLines = Math.max(explicitLines, Math.ceil(text.length / charsPerLine))
-    return total + topMargin + fontSize * 1.25 * wrappedLines + bottomMargin
-  }, 0)
-  const logoTopMargin = Math.max((estimatedTextHeight - logoSize) / 2, 0)
-
-  // ─── HEADER: KOP SURAT (muncul di setiap halaman) ───
-  const header = {
-    margin: [40, 20, 40, 20] as [number, number, number, number],
-    stack: [
-      {
-        columns: logoBase64
-          ? [
-              {
-                width: logoSize,
-                stack: [
-                  {
-                    image: logoBase64,
-                    width: logoSize,
-                    height: logoSize,
-                    alignment: 'center' as const,
-                    margin: [0, logoTopMargin, 0, 0] as [number, number, number, number],
-                  },
-                ],
-              },
-              { width: '*', alignment: 'center' as const, stack: contentTexts },
-            ]
-          : [{ width: '*', alignment: 'center' as const, stack: contentTexts }],
-        columnGap: 10,
-      },
-      {
-        canvas: [
-          { type: 'line' as const, x1: 0, y1: 0, x2: 515, y2: 0, lineWidth: 1.5 },
-        ],
-        margin: [0, 5, 0, 0] as [number, number, number, number],
-      },
-    ],
-  }
+  // ─── HEADER: KOP SURAT (shared helper) ───
+  const kopContent = buildKopSuratContent(detail.kop_surat as any, logoBase64)
+  const header = kopContent
+    ? { margin: [40, 20, 40, 20] as [number, number, number, number], stack: kopContent }
+    : undefined
 
   // ─── CONTENT: 1 halaman per pegawai ───
   const pages: any[] = pegawaiList.map((peg, index) => {

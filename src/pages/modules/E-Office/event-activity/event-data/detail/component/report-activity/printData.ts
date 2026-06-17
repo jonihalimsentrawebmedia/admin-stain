@@ -11,10 +11,9 @@ import type {
   IDocument,
   IExpenditure,
   INotulen,
-  IKopSurat,
   PrintAllActivity,
 } from '@/pages/modules/E-Office/event-activity/event-data/detail/component/report-activity/data/types.ts'
-import { FONT_MAP } from '@/pages/modules/E-Office/utils/fontConfig'
+import { buildKopSuratContent } from '@/pages/modules/E-Office/settings/letter-header/data/pdfContentConfig'
 
 ;(pdfMake as any).vfs = (pdfFonts as any).vfs
 
@@ -24,19 +23,6 @@ interface GenerateReportPdfProps {
   event: IEvent
   printData: PrintAllActivity
   imageUrl?: string
-}
-
-// ─── Utility: get valid pdfmake font name ────────────────────────────────────
-
-const getValidFont = (jenis_font?: string): string => {
-  if (!jenis_font) return 'Roboto'
-
-  // Find matching font key in FONT_MAP (case-insensitive)
-  const matchedKey = Object.keys(FONT_MAP).find(
-    (key) => key.toLowerCase() === jenis_font.trim().toLowerCase()
-  )
-
-  return matchedKey || 'Roboto'
 }
 
 // ─── Format currency (IDR) ───────────────────────────────────────────────────
@@ -132,69 +118,6 @@ const htmlContentToPdfmake = (html: string | undefined): any => {
     return { text: div.trim(), fontSize: 10, lineHeight: 1.4 }
   }
 }
-
-// ─── Build kop surat header (letterhead with logo + text lines) ──────────────
-
-const buildKopSuratContent = (kopSurat: IKopSurat, imageUrl?: string) => {
-  const contentTexts = (kopSurat.pengaturan || []).map(
-    (setting: { isi: string; jenis_font?: string; ukuran_font?: number }) => ({
-      text: setting.isi,
-      alignment: 'center' as const,
-      font: getValidFont(setting.jenis_font),
-      fontSize: Number(setting.ukuran_font) || 12,
-    })
-  )
-
-  // Validasi: hanya pakai imageUrl jika benar² data URL base64
-  const isValidDataUrl =
-    !!imageUrl &&
-    typeof imageUrl === 'string' &&
-    imageUrl.startsWith('data:image/')
-
-  if (contentTexts.length === 0 && !isValidDataUrl) return null
-
-  if (!isValidDataUrl) {
-    return {
-      width: '*',
-      alignment: 'center' as const,
-      stack: contentTexts,
-    }
-  }
-
-  // Dengan logo → columns (lebih stabil daripada table untuk image di pdfmake)
-  return {
-    columns: [
-      {
-        image: imageUrl as string,
-        width: 80,
-        height: 80,
-      },
-      { width: '*', alignment: 'center' as const, stack: contentTexts },
-    ],
-    columnGap: 10,
-  }
-}
-
-// ─── Kop separator line ──────────────────────────────────────────────────────
-
-const buildKopDivider = () => ({
-  table: {
-    widths: ['*'],
-    body: [
-      [
-        {
-          text: '',
-          border: [false, false, false, true] as [boolean, boolean, boolean, boolean],
-        },
-      ],
-    ],
-  },
-  layout: {
-    hLineWidth: () => 1.5,
-    vLineWidth: () => 0,
-  },
-  margin: [0, 0, 0, 12] as [number, number, number, number],
-})
 
 // ─── Ringkasan Kegiatan ──────────────────────────────────────────────────────
 
@@ -807,9 +730,11 @@ export const generatePdfLaporanKegiatan = async ({
     header: (currentPage: number) => {
       if (currentPage === 1) return null
 
+      const kopContent = buildKopSuratContent(kop_surat as any, resolvedImageUrl)
+
       return {
         margin: [40, 30, 40, 12] as [number, number, number, number],
-        stack: [buildKopSuratContent(kop_surat, resolvedImageUrl), buildKopDivider()].filter(Boolean),
+        stack: kopContent ?? [],
       }
     },
 

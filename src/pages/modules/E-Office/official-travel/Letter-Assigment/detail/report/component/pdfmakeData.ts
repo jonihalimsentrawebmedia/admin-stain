@@ -2,6 +2,7 @@ import { format } from 'date-fns'
 import { id } from 'date-fns/locale'
 import type { TDocumentDefinitions } from 'pdfmake/interfaces'
 import type { ILetterHeader, IResponseReportLetter } from '../data/types'
+import { buildKopSuratContent } from '@/pages/modules/E-Office/settings/letter-header/data/pdfContentConfig'
 
 interface Props {
   data: IResponseReportLetter
@@ -58,16 +59,6 @@ export const ReportLetterPdf = ({ data, logoBase64, kop_surat }: Props): TDocume
     `${index + 1}.`,
   ])
 
-  const kopSuratContent: any[] =
-    kop_surat?.pengaturan?.map((item, index) => ({
-      text: item.isi,
-      fontSize: index === 0 ? Math.max(item.ukuran_font ?? 12, 16) : item.ukuran_font,
-      bold: ['bold', 'bolditalic'].includes(item.gaya_font),
-      italics: ['italic', 'bolditalic'].includes(item.gaya_font),
-      alignment: 'center' as const,
-      margin: [0, 1, 0, 1],
-    })) ?? []
-
   return {
     pageSize: 'A4',
     pageMargins: [32, 24, 32, 32],
@@ -78,53 +69,9 @@ export const ReportLetterPdf = ({ data, logoBase64, kop_surat }: Props): TDocume
 
     content: [
       // ==========================
-      // KOP SURAT
+      // KOP SURAT (shared helper)
       // ==========================
-      {
-        table: {
-          widths: [75, '*'],
-          body: [
-            [
-              {
-                border: [false, false, false, false],
-                alignment: 'center',
-                verticalAlignment: 'middle',
-                margin: [0, 0, 0, 0],
-                stack: logoBase64
-                  ? [
-                      {
-                        image: logoBase64,
-                        width: 65,
-                        alignment: 'center',
-                      },
-                    ]
-                  : [],
-              },
-
-              {
-                border: [false, false, false, false],
-                stack: kopSuratContent,
-              },
-            ],
-          ],
-        },
-        layout: 'noBorders',
-      },
-
-      // GARIS KOP SURAT
-      {
-        canvas: [
-          {
-            type: 'line',
-            x1: 0,
-            y1: 0,
-            x2: 530,
-            y2: 0,
-            lineWidth: 1.5,
-          },
-        ],
-        margin: [0, 8, 0, 18],
-      },
+      ...(buildKopSuratContent(kop_surat as any, logoBase64) ?? []),
 
       // ==========================
       // TUJUAN SURAT

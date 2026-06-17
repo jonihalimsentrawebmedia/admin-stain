@@ -3,11 +3,8 @@ import pdfFonts from 'pdfmake/build/vfs_fonts'
 import { format } from 'date-fns'
 import { id } from 'date-fns/locale'
 import type { AttendanceSettingType } from '@/pages/modules/E-Office/event-activity/event-data/printAttendance/data/resolver.tsx'
-import type {
-  ILetterHeader,
-  ISettingLetterHeader,
-} from '@/pages/modules/E-Office/settings/letter-header/data/types.ts'
-import { FONT_MAP } from '@/pages/modules/E-Office/utils/fontConfig'
+import type { ILetterHeader } from '@/pages/modules/E-Office/settings/letter-header/data/types.ts'
+import { buildKopSuratContent } from '@/pages/modules/E-Office/settings/letter-header/data/pdfContentConfig'
 
 ;(pdfMake as any).vfs = (pdfFonts as any).vfs
 
@@ -71,7 +68,6 @@ const COLUMN_MAP: ColumnDef[] = [
   { key: 'keterangan', label: 'Keterangan', width: 55 },
 ]
 
-const LOGO_SIZE = 72
 // const LOGO_COLUMN_WIDTH = 90
 //
 // const mapStyle = ({ font, style, size }: { font: string; style: string; size: string }) => {
@@ -84,18 +80,6 @@ const LOGO_SIZE = 72
 //     fontSize: parseInt(size) || 10,
 //   }
 // }
-
-// ─── Utility: get valid pdfmake font name ────────────────────────────────────
-const getValidFont = (jenis_font?: string): string => {
-  if (!jenis_font) return 'Roboto'
-
-  // Find matching font key in FONT_MAP (case-insensitive)
-  const matchedKey = Object.keys(FONT_MAP).find(
-    (key) => key.toLowerCase() === jenis_font.trim().toLowerCase()
-  )
-
-  return matchedKey || 'Roboto'
-}
 
 // ─── Dynamic table padding based on row count ────────────────────────────────
 const getDynamicTablePadding = (rowCount: number, targetRowCount?: number): number => {
@@ -178,88 +162,12 @@ const buildTable = (
 
 // ─── Build kop surat header (letterhead with logo + text lines) ──────────────
 const buildKopSuratHeader = (header?: ILetterHeader, imageUrl?: string) => {
-  if (!header) return null
+  const kopContent = buildKopSuratContent(header ?? null, imageUrl)
+  if (!kopContent) return null
 
-  const contentTexts = (header.pengaturan || []).map((setting: ISettingLetterHeader) => ({
-    text: setting.isi,
-    alignment: 'center' as const,
-    font: getValidFont(setting.jenis_font),
-    fontSize: Number(setting.ukuran_font) || 12,
-  }))
-
-  if (contentTexts.length === 0 && !imageUrl) return null
-
-  // Shared separator line
-  const separatorLine = {
-    table: {
-      widths: ['*'],
-      body: [
-        [
-          {
-            text: '',
-            border: [false, false, false, true] as [boolean, boolean, boolean, boolean],
-          },
-        ],
-      ],
-    },
-    layout: {
-      hLineWidth: () => 1.5,
-      vLineWidth: () => 0,
-    },
-    margin: [0, 0, 0, 20] as [number, number, number, number],
-  }
-
-  // ── No image: just text centered ──
-  if (!imageUrl) {
-    return {
-      margin: [40, 30, 40, 0] as [number, number, number, number],
-      stack: [
-        {
-          width: '*',
-          alignment: 'center' as const,
-          stack: contentTexts,
-        },
-        separatorLine,
-      ],
-    }
-  }
-
-  // ── With image: table with verticalAlignment to center logo + text ──
   return {
     margin: [40, 30, 40, 0] as [number, number, number, number],
-    stack: [
-      {
-        table: {
-          widths: [LOGO_SIZE, '*'],
-          body: [
-            [
-              {
-                image: imageUrl,
-                width: LOGO_SIZE,
-                height: LOGO_SIZE,
-                alignment: 'center' as const,
-                verticalAlignment: 'middle' as const,
-              },
-              {
-                stack: contentTexts,
-                alignment: 'center' as const,
-                verticalAlignment: 'middle' as const,
-              },
-            ],
-          ],
-        },
-        layout: {
-          hLineWidth: () => 0,
-          vLineWidth: () => 0,
-          paddingLeft: () => 0,
-          paddingRight: () => 0,
-          paddingTop: () => 0,
-          paddingBottom: () => 0,
-        },
-        margin: [0, 0, 0, 0] as [number, number, number, number],
-      },
-      separatorLine,
-    ],
+    stack: kopContent,
   }
 }
 

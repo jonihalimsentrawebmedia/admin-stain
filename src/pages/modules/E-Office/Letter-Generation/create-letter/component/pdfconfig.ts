@@ -1,35 +1,14 @@
 import type { IMailInvitationLetter } from '@/pages/modules/E-Office/Letter-Generation/create-letter/data/types.ts'
-import type {
-  ILetterHeader,
-  ISettingLetterHeader,
-} from '@/pages/modules/E-Office/settings/letter-header/data/types.ts'
+import type { ILetterHeader } from '@/pages/modules/E-Office/settings/letter-header/data/types.ts'
 import { format } from 'date-fns'
 import { id } from 'date-fns/locale'
 import htmlToPdfmake from 'html-to-pdfmake'
 import DOMPurify from 'dompurify'
-import { FONT_MAP } from '@/pages/modules/E-Office/utils/fontConfig'
+import { buildKopSuratContent } from '@/pages/modules/E-Office/settings/letter-header/data/pdfContentConfig'
 
 // ═════════════════════════════════════════════════════════════════════════════
 //  HELPER
 // ═════════════════════════════════════════════════════════════════════════════
-
-const getValidFont = (jenis_font?: string): string => {
-  if (!jenis_font) return 'Times New Roman'
-
-  // Find matching font key in FONT_MAP (case-insensitive)
-  const matchedKey = Object.keys(FONT_MAP).find(
-    (key) => key.toLowerCase() === jenis_font.trim().toLowerCase()
-  )
-
-  return matchedKey || 'Times New Roman'
-}
-
-const mapStyle = (setting: ISettingLetterHeader) => ({
-  font: getValidFont(setting.jenis_font),
-  fontSize: Number(setting.ukuran_font) || 12,
-  bold: setting.gaya_font?.toLowerCase().includes('bold'),
-  italics: setting.gaya_font?.toLowerCase().includes('italic'),
-})
 
 const formatDate = (dateStr: string): string => {
   if (!dateStr) return ''
@@ -96,70 +75,10 @@ export const GenerateLetterPdfDefinition = (
   const isYthOption = YTH_OPTIONS.includes(letterData.yang_terhormat || '')
 
   // 1 =================================================================
-  // KOP SURAT  (mengikuti pola buildKopSuratContent + buildKopDivider dari printData.ts)
+  // KOP SURAT  (menggunakan shared helper)
   // ==================================================================
 
-  const buildKopSuratContent = () => {
-    const headerSettings = headerData?.pengaturan || []
-    const contentTexts = headerSettings.map((s: ISettingLetterHeader) => ({
-      text: s.isi,
-      alignment: 'center' as const,
-      ...mapStyle(s),
-    }))
-
-    // Validasi: hanya pakai logo jika benar² berupa data URL base64
-    const isValidDataUrl =
-      !!logoBase64 &&
-      typeof logoBase64 === 'string' &&
-      logoBase64.startsWith('data:image/')
-
-    // Jika tidak ada teks dan tidak ada logo → null (tidak render apa‑apa)
-    if (contentTexts.length === 0 && !isValidDataUrl) return null
-
-    // Tanpa logo → stack saja (tanpa columns/table)
-    if (!isValidDataUrl) {
-      return {
-        width: '*',
-        alignment: 'center' as const,
-        stack: contentTexts,
-      }
-    }
-
-    // Dengan logo → columns (tidak pakai table krn pdfmake bermasalah dgn image di table)
-    return {
-      columns: [
-        {
-          image: logoBase64 as string,
-          width: 80,
-          height: 80,
-        },
-        { width: '*', alignment: 'center' as const, stack: contentTexts },
-      ],
-      columnGap: 10,
-    }
-  }
-
-  const buildKopDivider = () => ({
-    table: {
-      widths: ['*'],
-      body: [
-        [
-          {
-            text: '',
-            border: [false, false, false, true] as [boolean, boolean, boolean, boolean],
-          },
-        ],
-      ],
-    },
-    layout: {
-      hLineWidth: () => 1.5,
-      vLineWidth: () => 0,
-    },
-    margin: [0, 0, 0, 12] as [number, number, number, number],
-  })
-
-  const kopSuratHeader = buildKopSuratContent()
-  const kopDivider = buildKopDivider()
+  const kopContent = buildKopSuratContent(headerData, logoBase64)
 
   // 2 =================================================================
   // METADATA — Nomor / Lampiran / Perihal (label | : | nilai)
@@ -474,8 +393,8 @@ export const GenerateLetterPdfDefinition = (
     pageMargins: [50, 50, 50, 50] as [number, number, number, number],
 
     content: [
-      // Kop surat bisa null jika tidak ada teks & tidak ada logo → filter
-      ...[kopSuratHeader, kopDivider].filter(Boolean),
+      // Kop surat (shared helper)
+      ...(kopContent ?? []),
 
       metadataSection,
 
@@ -527,7 +446,7 @@ export const GenerateLetterPdfDefinition = (
     },
 
     defaultStyle: {
-      font: 'TimesNewRoman',
+      font: 'Times New Roman',
       fontSize: 10,
       alignment: 'justify' as const,
       lineHeight: 1.4,

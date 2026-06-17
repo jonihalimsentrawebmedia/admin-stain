@@ -123,18 +123,23 @@ import type {
 } from '@/pages/modules/E-Office/settings/letter-header/data/types'
 import { FONT_MAP } from '@/pages/modules/E-Office/utils/fontConfig'
 
-interface LetterHeaderProps {
-  header: ILetterHeader
-  imageUrl?: string
+// ─── Constants ──────────────────────────────────────────────────────────────
+const DEFAULT_LOGO_SIZE = 72
+const DEFAULT_LOGO_COL_WIDTH = 90
+
+// ─── Public interface untuk caller yang ingin override parameter ─────────────
+export interface KopSuratOptions {
+  logoSize?: number
+  logoColumnWidth?: number
+  columnGap?: number
+  pageMarginLeft?: number
+  pageMarginRight?: number
 }
 
-const LOGO_SIZE = 72
-const LOGO_COLUMN_WIDTH = 90
-
-const getValidFont = (jenis_font?: string): string => {
+// ─── Helper: get font ───────────────────────────────────────────────────────
+export const getValidFont = (jenis_font?: string): string => {
   if (!jenis_font) return 'Roboto'
 
-  // Find the matching font key in FONT_MAP (case-insensitive)
   const matchedKey = Object.keys(FONT_MAP).find(
     (key) => key.toLowerCase() === jenis_font.trim().toLowerCase()
   )
@@ -142,120 +147,167 @@ const getValidFont = (jenis_font?: string): string => {
   return matchedKey || 'Roboto'
 }
 
-/**
- * Normalisasi format warna agar kompatibel dengan pdfmake.
- * - Menambahkan prefix # jika tidak ada
- * - Memotong alpha channel (8 digit → 6 digit) jika ada
- * Contoh: "18279AFF" → "#18279A", "#18279A" → "#18279A"
- */
-const normalizeColor = (warna?: string): string | undefined => {
+// ─── Helper: normalize color ────────────────────────────────────────────────
+export const normalizeColor = (warna?: string): string | undefined => {
   if (!warna || warna.trim() === '') return undefined
 
   let color = warna.trim()
-
-  // Hapus prefix # jika ada, untuk normalisasi
   color = color.replace(/^#/, '')
-
-  // Jika 8 digit (RRGGBBAA), buang alpha channel (AA)
   if (color.length === 8) {
     color = color.slice(0, 6)
   }
-
-  // Valid: harus 6 digit hex
   if (!/^[0-9A-Fa-f]{6}$/.test(color)) return undefined
-
   return `#${color.toUpperCase()}`
 }
 
-export default function LetterHeaderPDF({ header, imageUrl }: LetterHeaderProps) {
-  const generateContent = (): Content[] => {
-    const settings = header?.pengaturan || []
+// ─── Shared: map ISettingLetterHeader ke pdfmake text style ─────────────────
+export const mapSettingToTextStyle = (
+  setting: ISettingLetterHeader,
+  index: number,
+): any => {
+  const style: any = {
+    text: setting.isi,
+    alignment: 'center',
+    font: getValidFont(setting.jenis_font),
+    fontSize: Number(setting.ukuran_font) || 12,
+    bold: setting.gaya_font?.toLowerCase().includes('bold'),
+    italics: setting.gaya_font?.toLowerCase().includes('italic'),
+    margin: [0, index === 0 ? 0 : 1, 0, 0] as [number, number, number, number],
+  }
 
-    const textItems = settings.map((setting: ISettingLetterHeader, index: number) => {
-      const textStyle: any = {
-        text: setting.isi,
-        alignment: 'center',
-        font: getValidFont(setting.jenis_font),
-        fontSize: Number(setting.ukuran_font) || 12,
-        bold: setting.gaya_font?.toLowerCase().includes('bold'),
-        italics: setting.gaya_font?.toLowerCase().includes('italic'),
-        margin: [0, index === 0 ? 0 : 1, 0, 0] as [number, number, number, number],
-      }
+  const normalizedColor = normalizeColor(setting.warna)
+  if (normalizedColor) {
+    style.color = normalizedColor
+  }
 
-      // Terapkan warna jika user menentukan warna khusus
-      const normalizedColor = normalizeColor(setting.warna)
-      if (normalizedColor) {
-        textStyle.color = normalizedColor
-      }
+  return style
+}
 
-      return textStyle
-    })
+/**
+ * ── Shared: build kop surat content ─────────────────────────────────────────
+ * Mengembalikan array Content yang terdiri dari:
+ *   [0] — columns (logo + text) dengan middle center vertikal
+ *   [1] — separator line (garis bawah kop surat)
+ *
+ * Semua file PDF yang membutuhkan kop surat WAJIB menggunakan fungsi ini
+ * agar konsisten dalam hal:
+ *   - Layout logo + text (columns, middle center)
+ *   - Font (FONT_MAP, case-insensitive lookup)
+ *   - Warna teks (normalizeColor dari setting.warna)
+ *   - Separator line (double-line style)
+ */
+export const buildKopSuratContent = (
+  header: ILetterHeader | null | undefined,
+  imageUrl?: string,
+  options?: KopSuratOptions,
+): Content[] | null => {
+  const settings = header?.pengaturan || []
+  if (settings.length === 0 && !imageUrl) return null
 
-    // ── Estimasi tinggi text untuk middle center logo ──
-    // Available width untuk text column = total halaman - margins - logo width - gap
-    // A4 width = 595.28pt, pageMargins: [40, 40, 40, 60] (dari index.tsx)
-    // textColWidth ≈ 595.28 - 40 - 40 - LOGO_COLUMN_WIDTH - 0 (columnGap = 0) ≈ 425
-    const TEXT_COL_WIDTH = 515 - LOGO_COLUMN_WIDTH
-    const avgCharWidth = (fs: number) => fs * 0.55
+  const logoSize = options?.logoSize ?? DEFAULT_LOGO_SIZE
+  const logoColumnWidth = options?.logoColumnWidth ?? DEFAULT_LOGO_COL_WIDTH
+  const colGap = options?.columnGap ?? 0
+  const pgMarginL = options?.pageMarginLeft ?? 40
+  const pgMarginR = options?.pageMarginRight ?? 40
 
-    const estimatedTextHeight = textItems.reduce((total: number, item: any) => {
+  // Build text items
+  const textItems = settings.map((s: ISettingLetterHeader, i: number) =>
+    mapSettingToTextStyle(s, i),
+  )
+
+  // Estimasi tinggi text untuk middle center logo
+  const TEXT_COL_WIDTH =
+    515 - pgMarginL - pgMarginR - logoColumnWidth - colGap
+  const avgCharWidth = (fs: number) => fs * 0.55
+
+  const estimatedTextHeight = textItems.reduce(
+    (total: number, item: any) => {
       const text = item.text ?? ''
       const fontSize = item.fontSize || 12
       const topMargin = item.margin?.[1] || 0
       const explicitLines = text.split('\n').length
-      const charsPerLine = Math.max(1, Math.floor(TEXT_COL_WIDTH / avgCharWidth(fontSize)))
-      const wrappedLines = Math.max(explicitLines, Math.ceil(text.length / charsPerLine))
+      const charsPerLine = Math.max(
+        1,
+        Math.floor(TEXT_COL_WIDTH / avgCharWidth(fontSize)),
+      )
+      const wrappedLines = Math.max(
+        explicitLines,
+        Math.ceil(text.length / charsPerLine),
+      )
       return total + topMargin + fontSize * 1.25 * wrappedLines
-    }, 0)
+    },
+    0,
+  )
 
-    const logoTopMargin = Math.max((estimatedTextHeight - LOGO_SIZE) / 2, 0)
+  const logoTopMargin = Math.max(
+    (estimatedTextHeight - logoSize) / 2,
+    0,
+  )
 
-    return [
+  // Columns: logo + text
+  const headerColumns: Content = {
+    columns: [
       {
-        columns: [
-          {
-            width: imageUrl ? LOGO_COLUMN_WIDTH : 0,
-            stack: imageUrl
-              ? [
-                  {
-                    image: imageUrl,
-                    fit: [LOGO_SIZE, LOGO_SIZE],
-                    alignment: 'center',
-                    margin: [0, logoTopMargin, 0, 0],
-                  },
-                ]
-              : [],
-          },
-          {
-            width: '*',
-            stack: textItems,
-            alignment: 'center',
-          },
-        ],
-        columnGap: 0,
-        margin: [0, 0, 0, 10],
+        width: imageUrl ? logoColumnWidth : 0,
+        stack: imageUrl
+          ? [
+              {
+                image: imageUrl,
+                fit: [logoSize, logoSize] as [number, number],
+                alignment: 'center',
+                margin: [0, logoTopMargin, 0, 0],
+              },
+            ]
+          : [],
       },
-
       {
-        table: {
-          widths: ['*'],
-          body: [['']],
-        },
-        layout: {
-          hLineWidth: (i: number) => {
-            if (i === 0) return 1.5
-            return 0
-          },
-          hLineColor: () => '#000000',
-          vLineWidth: () => 0,
-          paddingLeft: () => 0,
-          paddingRight: () => 0,
-          paddingTop: () => 0,
-          paddingBottom: () => 2,
-        },
-        margin: [0, 0, 0, 15],
+        width: '*',
+        stack: textItems,
+        alignment: 'center',
       },
-    ]
+    ],
+    columnGap: colGap,
+    margin: [0, 0, 0, 10],
+  }
+
+  // Separator: double-line (garis tebal + tipis)
+  const separatorLine: Content = {
+    canvas: [
+      {
+        type: 'line',
+        x1: 0,
+        y1: 0,
+        x2: 515,
+        y2: 0,
+        lineWidth: 1.5,
+        lineColor: '#000000',
+      },
+      {
+        type: 'line',
+        x1: 0,
+        y1: 3,
+        x2: 515,
+        y2: 3,
+        lineWidth: 0.5,
+        lineColor: '#000000',
+      },
+    ],
+    margin: [0, 0, 0, 15],
+  }
+
+  return [headerColumns, separatorLine]
+}
+
+// ─── Backward-compatible wrapper untuk index.tsx ────────────────────────────
+interface LetterHeaderProps {
+  header: ILetterHeader
+  imageUrl?: string
+}
+
+export default function LetterHeaderPDF({ header, imageUrl }: LetterHeaderProps) {
+  const generateContent = (): Content[] => {
+    const result = buildKopSuratContent(header, imageUrl)
+    return result ?? []
   }
 
   return {

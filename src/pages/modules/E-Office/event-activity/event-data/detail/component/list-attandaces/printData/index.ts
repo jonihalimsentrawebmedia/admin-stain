@@ -3,16 +3,13 @@ import pdfFonts from 'pdfmake/build/vfs_fonts'
 import { format } from 'date-fns'
 import { id } from 'date-fns/locale'
 import type { AttendanceSettingType } from '@/pages/modules/E-Office/event-activity/event-data/printAttendance/data/resolver.tsx'
-import type {
-  ILetterHeader,
-  ISettingLetterHeader,
-} from '@/pages/modules/E-Office/settings/letter-header/data/types.ts'
+import type { ILetterHeader } from '@/pages/modules/E-Office/settings/letter-header/data/types.ts'
 import type { IEvent } from '@/pages/modules/E-Office/event-activity/event-data/data/types.ts'
 import type {
   ICetakConfig,
   IDaftarHadir,
 } from '@/pages/modules/E-Office/event-activity/event-data/detail/component/list-attandaces/printData/types.ts'
-import { FONT_MAP } from '@/pages/modules/E-Office/utils/fontConfig'
+import { buildKopSuratContent } from '@/pages/modules/E-Office/settings/letter-header/data/pdfContentConfig'
 
 ;(pdfMake as any).vfs = (pdfFonts as any).vfs
 
@@ -76,32 +73,6 @@ const COLUMN_MAP: ColumnDef[] = [
   { key: 'tanda_tangan', label: 'TTD', width: 40 },
   { key: 'keterangan', label: 'Keterangan', width: 55 },
 ]
-
-const LOGO_SIZE = 72
-// const LOGO_COLUMN_WIDTH = 90
-//
-// const mapStyle = ({ font, style, size }: { font: string; style: string; size: string }) => {
-//   const safeFont = font && font.trim() !== '' ? font : 'Roboto'
-//
-//   return {
-//     font: safeFont,
-//     bold: style?.toLowerCase() === 'bold',
-//     italics: style?.toLowerCase() === 'italic',
-//     fontSize: parseInt(size) || 10,
-//   }
-// }
-
-// ─── Utility: get valid pdfmake font name ────────────────────────────────────
-const getValidFont = (jenis_font?: string): string => {
-  if (!jenis_font) return 'Roboto'
-
-  // Find matching font key in FONT_MAP (case-insensitive)
-  const matchedKey = Object.keys(FONT_MAP).find(
-    (key) => key.toLowerCase() === jenis_font.trim().toLowerCase()
-  )
-
-  return matchedKey || 'Roboto'
-}
 
 // ─── Dynamic table padding based on row count ────────────────────────────────
 const getDynamicTablePadding = (rowCount: number, targetRowCount?: number): number => {
@@ -221,93 +192,6 @@ const buildTable = (
       paddingTop: () => verticalPadding,
       paddingBottom: () => verticalPadding,
     },
-  }
-}
-
-// ─── Build kop surat header (letterhead with logo + text lines) ──────────────
-const buildKopSuratHeader = (header?: ILetterHeader, imageUrl?: string) => {
-  if (!header) return null
-
-  const contentTexts = (header.pengaturan || []).map((setting: ISettingLetterHeader) => ({
-    text: setting.isi,
-    alignment: 'center' as const,
-    font: getValidFont(setting.jenis_font),
-    fontSize: Number(setting.ukuran_font) || 12,
-  }))
-
-  if (contentTexts.length === 0 && !imageUrl) return null
-
-  // Shared separator line
-  const separatorLine = {
-    table: {
-      widths: ['*'],
-      body: [
-        [
-          {
-            text: '',
-            border: [false, false, false, true] as [boolean, boolean, boolean, boolean],
-          },
-        ],
-      ],
-    },
-    layout: {
-      hLineWidth: () => 1.5,
-      vLineWidth: () => 0,
-    },
-    margin: [0, 0, 0, 20] as [number, number, number, number],
-  }
-
-  // ── No image: just text centered ──
-  if (!imageUrl) {
-    return {
-      margin: [40, 30, 40, 0] as [number, number, number, number],
-      stack: [
-        {
-          width: '*',
-          alignment: 'center' as const,
-          stack: contentTexts,
-        },
-        separatorLine,
-      ],
-    }
-  }
-
-  // ── With image: table with verticalAlignment to center logo + text ──
-  return {
-    margin: [40, 30, 40, 0] as [number, number, number, number],
-    stack: [
-      {
-        table: {
-          widths: [LOGO_SIZE, '*'],
-          body: [
-            [
-              {
-                image: imageUrl,
-                width: LOGO_SIZE,
-                height: LOGO_SIZE,
-                alignment: 'center' as const,
-                verticalAlignment: 'middle' as const,
-              },
-              {
-                stack: contentTexts,
-                alignment: 'center' as const,
-                verticalAlignment: 'middle' as const,
-              },
-            ],
-          ],
-        },
-        layout: {
-          hLineWidth: () => 0,
-          vLineWidth: () => 0,
-          paddingLeft: () => 0,
-          paddingRight: () => 0,
-          paddingTop: () => 0,
-          paddingBottom: () => 0,
-        },
-        margin: [0, 0, 0, 0] as [number, number, number, number],
-      },
-      separatorLine,
-    ],
   }
 }
 
@@ -609,8 +493,11 @@ export const GenerateListAttendance = ({
   const isPortrait = values.hasil_cetak === 'PORTRAIT'
   const orientation: PdfOrientation = isPortrait ? 'portrait' : 'landscape'
 
-  // ─── 3. Letter header ─────────────────────────────────────────────────────────
-  const kopSuratHeader = buildKopSuratHeader(header, resolvedImageUrl)
+  // ─── 3. Letter header (shared helper) ─────────────────────────────────────────
+  const kopContent = buildKopSuratContent(header as any, resolvedImageUrl)
+  const kopSuratHeader = kopContent
+    ? { margin: [40, 30, 40, 0] as [number, number, number, number], stack: kopContent }
+    : null
 
   // ─── 4. Additional penandatangan (saksi) ─────────────────────────────────────
   const additionalPenandatangan: SignatoryItem[] = (values.saksi_pendatang || []).map((s) => ({

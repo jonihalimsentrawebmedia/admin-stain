@@ -1,4 +1,12 @@
-import type { Alignment, ContentImage, ContentText, Margins, TableCell, TDocumentDefinitions } from 'pdfmake/interfaces'
+import type {
+  Alignment,
+  ContentImage,
+  ContentText,
+  Margins,
+  TableCell,
+  TDocumentDefinitions,
+} from 'pdfmake/interfaces'
+import { buildKopSuratContent } from '@/pages/modules/E-Office/settings/letter-header/data/pdfContentConfig'
 
 interface IDocumentationResponse {
   kop_surat: {
@@ -27,16 +35,6 @@ export const DocumentationPdf = ({
   logoBase64,
   documentationImages,
 }: Props): TDocumentDefinitions => {
-  const headerTexts: ContentText[] =
-    data.kop_surat?.pengaturan?.map((item) => ({
-      text: item.isi,
-      fontSize: item.ukuran_font,
-      bold: item.gaya_font === 'bold',
-      italics: item.gaya_font === 'italic',
-      alignment: 'center' as Alignment,
-      margin: [0, 2, 0, 2] as Margins,
-    })) || []
-
   const imageRows: TableCell[][] = []
 
   for (let i = 0; i < data.dokumentasi.length; i += 2) {
@@ -74,43 +72,8 @@ export const DocumentationPdf = ({
     },
 
     content: [
-      // KOP SURAT
-      {
-        table: {
-          widths: [80, '*'],
-          body: [
-            [
-              {
-                image: logoBase64,
-                fit: [70, 70] as [number, number],
-                alignment: 'center' as Alignment,
-                margin: [0, 5, 10, 5] as Margins,
-                verticalAlignment: 'middle' as const,
-              },
-              {
-                stack: headerTexts,
-                margin: [0, 10, 0, 10] as Margins,
-                verticalAlignment: 'middle' as const,
-              },
-            ],
-          ],
-        },
-        layout: 'noBorders',
-      },
-
-      {
-        canvas: [
-          {
-            type: 'line',
-            x1: 0,
-            y1: 5,
-            x2: 515,
-            y2: 5,
-            lineWidth: 2,
-          },
-        ],
-        margin: [0, 8, 0, 15],
-      },
+      // KOP SURAT (shared helper)
+      ...(buildKopSuratContent(data.kop_surat as any, logoBase64) ?? []),
 
       {
         text: 'DOKUMENTASI KEGIATAN',
