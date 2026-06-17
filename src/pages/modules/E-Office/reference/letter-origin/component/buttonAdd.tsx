@@ -47,7 +47,7 @@ const ButtonAddLetterOrigin = () => {
         Tambah Asal Surat
       </Button>
 
-      <DialogBasic title={'Tambah Asal Suret'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Tambah Asal Surat'} open={open} setOpen={setOpen}>
         <FormLetterOrigin
           loading={loading}
           open={open}

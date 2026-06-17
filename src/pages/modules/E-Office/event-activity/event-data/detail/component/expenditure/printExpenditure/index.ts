@@ -1,8 +1,9 @@
-import type { Content, TDocumentDefinitions } from 'pdfmake/interfaces'
+import type { TDocumentDefinitions } from 'pdfmake/interfaces'
 import { format } from 'date-fns'
 import { id } from 'date-fns/locale'
 import type { PrintExpenditure } from '@/pages/modules/E-Office/event-activity/event-data/detail/component/expenditure/printExpenditure/types.ts'
 import type { IEvent } from '@/pages/modules/E-Office/event-activity/event-data/data/types.ts'
+import { buildKopSuratContent } from '@/pages/modules/E-Office/settings/letter-header/data/pdfContentConfig'
 
 export const formatCurrency = (value: string | number) => {
   return Number(value || 0).toLocaleString('id-ID')
@@ -23,15 +24,6 @@ export const GenerateExpenditurePdf = (props: props): TDocumentDefinitions => {
     (total, item) => total + Number(item.jumlah_pengeluaran || 0),
     0
   )
-
-  const kopContent: Content[] = kop.pengaturan.map((item) => ({
-    text: item.isi,
-    bold: item.gaya_font === 'bold',
-    italics: item.gaya_font === 'italic',
-    fontSize: item.ukuran_font,
-    alignment: 'center',
-    margin: [0, 2, 0, 2],
-  }))
 
   const body: any[] = [
     [
@@ -119,47 +111,8 @@ export const GenerateExpenditurePdf = (props: props): TDocumentDefinitions => {
     }),
 
     content: [
-      // KOP SURAT
-      {
-        table: {
-          widths: [logoBase64 ? 90 : 0, '*'],
-          body: [
-            [
-              logoBase64
-                ? {
-                    image: logoBase64,
-                    fit: [80, 80],
-                    alignment: 'center',
-                    border: [false, false, false, false],
-                  }
-                : {
-                    text: '',
-                    border: [false, false, false, false],
-                  },
-
-              {
-                stack: kopContent,
-                border: [false, false, false, false],
-              },
-            ],
-          ],
-        },
-        layout: 'noBorders',
-      },
-
-      {
-        canvas: [
-          {
-            type: 'line',
-            x1: 0,
-            y1: 0,
-            x2: 520,
-            y2: 0,
-            lineWidth: 1.5,
-          },
-        ],
-        margin: [0, 10, 0, 15],
-      },
+      // KOP SURAT (shared helper)
+      ...(buildKopSuratContent(kop as any, logoBase64) ?? []),
 
       // JUDUL
       {

@@ -58,6 +58,7 @@ export const FormRegistrationInbox = (props: IProps) => {
       is_samakan_dengan_surat: false,
     },
   })
+  console.log(form.formState.errors)
 
   const navigate = useNavigate()
 
@@ -77,7 +78,10 @@ export const FormRegistrationInbox = (props: IProps) => {
     if (data) {
       await AxiosClient.put(`/eoffice/surat-masuk/${data?.id_surat_masuk ?? ''}`, {
         ...value,
-        list_lampiran: value?.list_lampiran?.map((row) => row?.url_dokumen),
+        list_lampiran: value?.list_lampiran?.map((row) => ({
+          url: row?.url,
+          nama_lampiran: row?.nama_lampiran,
+        })),
       })
         .then((res) => {
           if (res.data.status) {
@@ -97,7 +101,10 @@ export const FormRegistrationInbox = (props: IProps) => {
     } else {
       await AxiosClient.post('/eoffice/surat-masuk', {
         ...value,
-        list_lampiran: value?.list_lampiran?.map((row) => row?.url_dokumen),
+        list_lampiran: value?.list_lampiran?.map((row) => ({
+          url: row?.url,
+          nama_lampiran: row?.nama_lampiran,
+        })),
       })
         .then((res) => {
           if (res.data.status) {
@@ -123,7 +130,8 @@ export const FormRegistrationInbox = (props: IProps) => {
         ...(data as unknown as SuratFormType),
         list_id_sdm: data?.pejabat?.map((row) => row?.id_sdm),
         list_lampiran: data?.lampiran.map((row) => ({
-          url_dokumen: row?.lampiran_url,
+          url: row?.lampiran_url,
+          nama_lampiran: row?.nama_lampiran,
         })),
       })
     }
@@ -413,7 +421,7 @@ export const FormRegistrationInbox = (props: IProps) => {
                   isRequired
                   data={
                     reminderAgenda?.map((row) => ({
-                      label: row?.waktu,
+                      label: `${row?.waktu} Menit`,
                       value: row?.id_waktu_pengigat_agenda,
                     })) ?? []
                   }

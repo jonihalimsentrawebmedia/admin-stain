@@ -3,6 +3,7 @@ export interface ISettingLetterHeader {
   jenis_font: string
   gaya_font: string
   ukuran_font: number
+  warna: string
 }
 
 export interface ILetterHeader {

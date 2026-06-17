@@ -52,6 +52,7 @@ export const UseGetLetterAssigmentDetail = (id: string) => {
   const [detail, setDetail] = useState<ILetterAssignment>()
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['letter-assignment-detail', id],
+    enabled: !!id,
     queryFn: () => AxiosClient.get(`/eoffice/mail-surat-tugas/${id}`).then((res) => res.data.data),
     refetchOnWindowFocus: false,
   })

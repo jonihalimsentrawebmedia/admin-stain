@@ -29,7 +29,7 @@ const FormLetterTpeCode = (props: props) => {
           />
           <SelectBasicInput
             form={form}
-            label={'Kategori Jenins Surat'}
+            label={'Kategori Jenis Surat'}
             placeholder={'Kategori Jenis Surat'}
             name={'kategori_jenis_surat'}
             data={['DOSEN', 'PEGAWAI', 'MAHASISWA', 'UMUM', 'LAINNYA']?.map((row) => ({

@@ -6,6 +6,7 @@ import ButtonInfoAssignment from '@/pages/modules/E-Office/official-travel/Lette
 import { MdInfo } from 'react-icons/md'
 import { HiPencil } from 'react-icons/hi'
 import ButtonDeleteLetterAssigment from '@/pages/modules/E-Office/official-travel/Letter-Assigment/component/buttonDelete.tsx'
+import DropdownPrint from '@/pages/modules/E-Office/official-travel/Letter-Assigment/component/dropdownPrint.tsx'
 
 export const ColumnsLetterAssigment = () => {
   const [searchParams] = useSearchParams()
@@ -22,17 +23,29 @@ export const ColumnsLetterAssigment = () => {
     },
     {
       accessorKey: 'tanggal_surat',
-      header: 'Tanggal Surat',
+      header: 'Tgl. Surat',
       cell: ({ row }) => {
         const value = row.original.tanggal_surat
         return (
           <>
-            <p>{value ? format(value, 'dd MMMM yyyy') : ''}</p>
+            <p>{value ? format(value, 'dd-MM-yyyy') : ''}</p>
           </>
         )
       },
     },
-
+    {
+      accessorKey: 'created_at',
+      header: 'Tgl. Dibuat',
+      cell: ({ row }) => {
+        const data = row?.original
+        return (
+          <>
+            <p>{format(data?.created_at, 'dd-MM-yyyy')}</p>
+            <p>{data?.nama_user_created}</p>
+          </>
+        )
+      },
+    },
     {
       accessorKey: 'nomor_surat',
       header: 'Nomor Surat',
@@ -81,6 +94,18 @@ export const ColumnsLetterAssigment = () => {
               </Link>
               <ButtonDeleteLetterAssigment data={data} />
             </div>
+          </>
+        )
+      },
+    },
+    {
+      accessorKey: 'print',
+      header: '',
+      cell: ({ row }) => {
+        const data = row?.original
+        return (
+          <>
+            <DropdownPrint data={data} />
           </>
         )
       },

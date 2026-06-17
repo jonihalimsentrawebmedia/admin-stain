@@ -4,13 +4,12 @@ interface IFormatNomorSurat {
   urutan_kode_depan: number
   urutan_nomor_surat: number
   urutan_tahun: number
-
   kode_belakang: string
   kode_depan: string
-
   is_bulan: boolean
   is_bulan_romawi: boolean
   is_tahun: boolean
+  date?: string
 }
 
 export function toRoman(num: number): string {
@@ -46,7 +45,7 @@ export function GenerateLetterCodeNumber(
   config: IFormatNomorSurat,
   nomorSurat = '[Nomor Surat]'
 ): string {
-  const now = new Date()
+  const now = config?.date ? new Date(config?.date) : new Date()
 
   const bulan = now.getMonth() + 1
   const tahun = now.getFullYear()

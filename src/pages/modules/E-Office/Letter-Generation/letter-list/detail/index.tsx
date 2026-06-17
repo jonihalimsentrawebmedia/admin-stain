@@ -277,7 +277,7 @@ const DetailLetterTemplate = () => {
           <CardTitle>Informasi Surat</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-[14rem_1fr] gap-x-6 gap-y-3">
+          <div className="grid grid-cols-[12rem_1fr_12rem_1fr] gap-x-6 gap-y-3">
             <p className="text-gray-500">Nomor Surat</p>
             <p className="font-medium">{letter.nomor_surat || '-'}</p>
 

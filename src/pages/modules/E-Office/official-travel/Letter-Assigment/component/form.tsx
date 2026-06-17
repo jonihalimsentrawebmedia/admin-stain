@@ -14,6 +14,7 @@ import { useEffect } from 'react'
 import { FaTrash } from 'react-icons/fa'
 import ButtonUserAssignment from '@/pages/modules/E-Office/official-travel/Letter-Assigment/component/ButtonAssignment.tsx'
 import EmployeeTable from '@/pages/modules/E-Office/official-travel/Letter-Assigment/component/tableData.tsx'
+import PreviewButton from '@/pages/modules/E-Office/official-travel/Letter-Assigment/component/previewButton.tsx'
 
 interface Props {
   form: UseFormReturn<TResolverLetterTask>
@@ -109,6 +110,7 @@ const FormLetterTask = (props: Props) => {
                 />
               </div>
               <ReturnOrderData
+                date={form.watch('tanggal_surat')}
                 form={form}
                 name={'nomor_urut_manual'}
                 id={form.watch('id_nomor_surat_otomatis')}
@@ -271,7 +273,14 @@ const FormLetterTask = (props: Props) => {
             }))}
           />
 
-          <ButtonForm loading={loading} />
+          <div className="flex items-center justify-end gap-3">
+            <PreviewButton
+              form={form}
+              humanResource={humanResource ?? []}
+              letterHeader={letterHeader ?? []}
+            />
+            <ButtonForm loading={loading} />
+          </div>
         </form>
       </Form>
     </>

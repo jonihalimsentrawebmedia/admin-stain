@@ -19,14 +19,21 @@ export const FormReminderAgenda = (props: props) => {
     <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(HandleSave)} className="flex flex-col gap-4">
-          <TextInput
-            name={'waktu'}
-            form={form}
-            label={'Keterangan'}
-            placeholder={'Keterangan'}
-            htmlFor={'nama'}
-            isRequired
-          />
+          <div className="flex items-center gap-1.5">
+            <TextInput
+              name={'waktu'}
+              form={form}
+              label={'Waktu'}
+              placeholder={'Waktu (dalam menit)'}
+              htmlFor={'nama'}
+              type={'number'}
+              className={'flex!'}
+              isRow
+              isNumber
+              isRequired
+            />
+            <p className="text-primary text-sm">Menit Sebelum Dimulai</p>
+          </div>
           <ButtonForm loading={loading} onCancel={() => setOpen(!open)} />
         </form>
       </Form>

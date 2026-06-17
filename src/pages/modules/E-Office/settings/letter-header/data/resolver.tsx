@@ -5,6 +5,7 @@ export const SettingLetterHeadItemSchema = z.object({
   jenis_font: z.string().optional().nullable(),
   gaya_font: z.string().optional().nullable(),
   ukuran_font: z.number().optional().nullable(),
+  warna: z.string().optional().nullable(),
 })
 
 export const SettingLetterHeadSchema = z.object({

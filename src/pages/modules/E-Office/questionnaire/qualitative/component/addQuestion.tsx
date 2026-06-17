@@ -40,11 +40,11 @@ const ButtonAddQuestion = (props: props) => {
         }}
       >
         <FaCirclePlus />
-        Tambah Pertayaan
+        Tambah Pertanyaan
       </Button>
 
       <DialogBasic
-        title={'Tambah Pertayaan'}
+        title={'Tambah Pertanyaan'}
         open={open}
         setOpen={setOpen}
         className={'min-w-2xl rounded'}
@@ -54,9 +54,9 @@ const ButtonAddQuestion = (props: props) => {
             <TextInput
               name={'pertanyaan'}
               form={form}
-              label={'Pertayaan'}
-              htmlFor={'pertayaan'}
-              placeholder={'Pertayaan'}
+              label={'Pertanyaan'}
+              htmlFor={'Pertanyaan'}
+              placeholder={'Pertanyaan'}
               isRequired
             />
 

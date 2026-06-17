@@ -29,8 +29,8 @@ const ButtonEditLetterOrigin = (props: props) => {
       form.reset({
         instansi: data?.instansi,
         alamat: data?.alamat,
-        telepon: data?.telepon,
-        email: data?.email ?? '',
+        telepon: data?.telepon ?? null,
+        email: data?.email ?? null,
       })
     }
   }, [data])
@@ -65,7 +65,7 @@ const ButtonEditLetterOrigin = (props: props) => {
         <HiPencil />
       </button>
 
-      <DialogBasic title={'Edit Asal Suret'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Edit Asal Surat'} open={open} setOpen={setOpen}>
         <FormLetterOrigin
           loading={loading}
           open={open}

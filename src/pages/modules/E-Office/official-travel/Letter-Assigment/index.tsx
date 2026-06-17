@@ -44,7 +44,15 @@ const LetterOfAssigment = () => {
           ]}
         />
 
-        <TableCustom data={letterAssignment} columns={columns} loading={loading} meta={meta} />
+        <TableCustom
+          className={'border'}
+          thClassName={'border-none! bg-primary text-white'}
+          tdClassName={'border-none!'}
+          data={letterAssignment}
+          columns={columns}
+          loading={loading}
+          meta={meta}
+        />
       </div>
     </>
   )

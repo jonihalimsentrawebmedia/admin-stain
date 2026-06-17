@@ -49,7 +49,7 @@ const ButtonDeleteLetterClassification = (props: props) => {
         <FaTrash />
       </button>
 
-      <DialogBasic title={'Hapus Klasifikasi Suret'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Hapus Klasifikasi Surat'} open={open} setOpen={setOpen}>
         <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
           <p className="text-gray-500">Kode Klasifikasi</p>
           <p>{data?.kode_klasifikasi}</p>

@@ -295,7 +295,7 @@ export const DetailOutboxRegistration = () => {
                   </div>
                   <div className="flex flex-col col-span-4">
                     <p className="text-gray-500">Pengingat: </p>
-                    <p>{detailInbox?.nama_waktu_pengingat_agenda}</p>
+                    <p>{detailInbox?.nama_waktu_pengingat_agenda} Menit</p>
                   </div>
                 </div>
               </div>
@@ -321,12 +321,13 @@ export const DetailOutboxRegistration = () => {
               <div className="grid grid-cols-3 gap-5 mt-4">
                 {detailInbox?.lampiran?.map((item, index) => (
                   <Link
+                    target={'_blank'}
                     to={item?.lampiran_url}
                     key={index}
                     className="flex items-center gap-1.5 border p-2 rounded-md bg-blue-200 hover:bg-primary hover:text-white"
                   >
                     <FaFile />
-                    Lampiran FIle {index + 1}
+                    {item?.nama_lampiran}
                   </Link>
                 ))}
               </div>

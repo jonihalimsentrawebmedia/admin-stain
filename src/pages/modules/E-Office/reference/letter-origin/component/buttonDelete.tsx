@@ -48,7 +48,7 @@ const ButtonDeleteLetterOrigin = (props: props) => {
         <FaTrash />
       </button>
 
-      <DialogBasic title={'Hapus Asal Suret'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Hapus Asal Surat'} open={open} setOpen={setOpen}>
         <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
           <p className="text-gray-500">Instansi</p>
           <p>{data?.instansi}</p>

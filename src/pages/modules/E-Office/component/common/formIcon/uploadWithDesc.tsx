@@ -15,12 +15,12 @@ interface Props<T extends FieldValues> {
 }
 
 interface documents {
-  url_dokumen: string
+  url: string
+  nama_lampiran: string
 }
 
 export const UploadDocWithDescription = <T extends FieldValues>(props: Props<T>) => {
   const { label, required, name, form } = props
-
   const uploadRef = useRef<any | null>(null)
   const [documents, setDocuments] = useState<documents[]>([])
 
@@ -37,7 +37,7 @@ export const UploadDocWithDescription = <T extends FieldValues>(props: Props<T>)
     await AxiosClient.post('/upload', formData).then((res) => {
       if (res.data.status) {
         const temp = [...documents]
-        temp.push({ url_dokumen: res.data.url })
+        temp.push({ url: res.data.url, nama_lampiran: file[0].name })
         form.setValue(name, temp as any)
         setDocuments(temp)
 
@@ -100,7 +100,9 @@ export const UploadDocWithDescription = <T extends FieldValues>(props: Props<T>)
                     'p-2 border border-primary flex justify-between items-center rounded text-sm w-full max-w-xs text-primary'
                   }
                 >
-                  <Link to={doc?.url_dokumen ?? '#'}>{index + 1}. File Dokumen.pdf</Link>
+                  <Link to={doc?.url ?? '#'} target="_blank">
+                    {index + 1}. {doc?.nama_lampiran}
+                  </Link>
                   <button
                     onClick={(e) => {
                       e.preventDefault()
