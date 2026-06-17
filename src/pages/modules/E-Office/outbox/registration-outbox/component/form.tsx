@@ -71,7 +71,11 @@ export const FormRegistrationOutbox = (props: IProps) => {
     if (data) {
       await AxiosClient.put(`/eoffice/surat-keluar/${data?.id_surat_keluar ?? ''}`, {
         ...value,
-        list_lampiran: value?.list_lampiran?.map((row) => row?.url_dokumen) ?? null,
+        list_lampiran:
+          value?.list_lampiran?.map((row) => ({
+            url: row?.url,
+            nama_lampiran: row?.nama_lampiran,
+          })) ?? null,
       })
         .then((res) => {
           if (res.data.status) {
@@ -90,7 +94,11 @@ export const FormRegistrationOutbox = (props: IProps) => {
     } else {
       await AxiosClient.post('/eoffice/surat-keluar', {
         ...value,
-        list_lampiran: value?.list_lampiran?.map((row) => row?.url_dokumen) ?? null,
+        list_lampiran:
+          value?.list_lampiran?.map((row) => ({
+            url: row?.url,
+            nama_lampiran: row?.nama_lampiran,
+          })) ?? null,
       })
         .then((res) => {
           if (res.data.status) {
@@ -116,7 +124,8 @@ export const FormRegistrationOutbox = (props: IProps) => {
         ...(data as unknown as SuratFormType),
         list_id_sdm: data?.pejabat?.map((row) => row?.id_sdm),
         list_lampiran: data?.lampiran.map((row) => ({
-          url_dokumen: row?.lampiran_url,
+          url: row?.lampiran_url,
+          nama_lampiran: row?.nama_lampiran,
         })),
       })
     }

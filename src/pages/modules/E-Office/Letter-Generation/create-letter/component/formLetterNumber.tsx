@@ -13,19 +13,20 @@ interface Props {
   form: UseFormReturn<any>
   name: string
   id: string
+  date?: string
 }
 
 interface ListComponentProps {
   form: UseFormReturn<any>
   data?: INUmberLetterAutomatic
   name: string
+  date?: string
 }
 
-const ListComponent = ({ form, data, name }: ListComponentProps) => {
+const ListComponent = ({ form, data, name, date }: ListComponentProps) => {
   useEffect(() => {
     if (!data) return
-
-    const dateNow = new Date()
+    const dateNow = date ? new Date(date) : new Date()
     const bulan = dateNow.getMonth() + 1
 
     form.setValue('kode_depan', data.kode_depan ?? '')
@@ -33,14 +34,13 @@ const ListComponent = ({ form, data, name }: ListComponentProps) => {
     form.setValue('bulan', data.is_bulan_romawi ? toRoman(bulan) : String(bulan))
     form.setValue('tahun', String(dateNow.getFullYear()))
     form.setValue('pengisian_no_surat', data.pengisian_no_surat === 'OTOMATIS' ? 'OTOMATIS' : '')
-  }, [data, form])
+  }, [data, form, date])
 
   if (!data) {
     return null
   }
 
   const isAutoNumber = form.watch('pengisian_no_surat') === 'OTOMATIS'
-
   const items = [
     {
       order: data.urutan_kode_depan,
@@ -136,7 +136,7 @@ const ListComponent = ({ form, data, name }: ListComponentProps) => {
   )
 }
 
-export const ReturnOrderData = ({ form, name, id }: Props) => {
+export const ReturnOrderData = ({ form, name, id, date }: Props) => {
   const { letterNumber } = UseGetDetailLetterNumberAutomatic(id)
   const result = GenerateLetterCodeNumber(
     {
@@ -150,13 +150,14 @@ export const ReturnOrderData = ({ form, name, id }: Props) => {
       is_bulan: letterNumber?.is_perlu_bulan ?? false,
       is_bulan_romawi: letterNumber?.is_bulan_romawi ?? false,
       is_tahun: letterNumber?.is_perlu_tahun ?? false,
+      date: date,
     },
     form.watch(name) ?? '0001'
   )
 
   return (
     <div className="grid grid-cols-5 gap-4">
-      <ListComponent form={form} data={letterNumber} name={name} />
+      <ListComponent form={form} data={letterNumber} name={name} date={date} />
       <div className="col-span-5 flex items-center gap-2">
         <p className="text-lg">Contoh : </p>
         <div dangerouslySetInnerHTML={{ __html: result ?? '' }} />

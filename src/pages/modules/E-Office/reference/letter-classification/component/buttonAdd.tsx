@@ -83,7 +83,7 @@ const ButtonAddLetterClassification = (props?: props) => {
         </Button>
       )}
 
-      <DialogBasic title={'Tambah klasifikasi Suret'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Tambah klasifikasi Surat'} open={open} setOpen={setOpen}>
         <FormLetterClassification
           loading={loading}
           open={open}

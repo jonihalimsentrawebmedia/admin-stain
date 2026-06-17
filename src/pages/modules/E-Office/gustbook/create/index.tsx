@@ -38,7 +38,7 @@ const CreateGustBook = () => {
   return (
     <>
       <div>
-        <ButtonTitleGroup isBack label={'Tambah Buku Tami'} buttonGroup={[]} />
+        <ButtonTitleGroup isBack label={'Tambah Buku Tamu'} buttonGroup={[]} />
         <FormGustBook loading={loading} form={form} HandleSave={HandleSave} />
       </div>
     </>

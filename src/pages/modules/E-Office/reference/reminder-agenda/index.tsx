@@ -22,7 +22,7 @@ const ListReminderAgenda = () => {
     <>
       <div className="space-y-5">
         <ButtonTitleGroup
-          label={'Jenis Surat'}
+          label={'Waktu Pengingat Agenda'}
           buttonGroup={[
             {
               type: 'custom',

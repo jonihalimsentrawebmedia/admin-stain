@@ -87,7 +87,7 @@ const ListLetterGeneratePage = () => {
           {
             type: 'add',
             label: 'Buat Surat',
-            onClick: () => navigate('/E-Office/letter-generation/create-letter'),
+            onClick: () => navigate('/modules/e-office/letter-generation/create-letter'),
           },
         ]}
       />

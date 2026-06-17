@@ -14,7 +14,7 @@ import { useEffect, useRef, useState } from 'react'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
-import { FaFile, FaForward } from 'react-icons/fa'
+import { FaFile, FaForward, FaTrash } from 'react-icons/fa'
 import { FaCirclePlus } from 'react-icons/fa6'
 import FormSPPDLetterAssigment from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/component/form.tsx'
 import { useForm } from 'react-hook-form'
@@ -139,6 +139,23 @@ const DetailLetterAssigment = () => {
     }
   }
 
+  const HandleRemoveGuestLetter = async () => {
+    await AxiosClient.delete(
+      `/eoffice/mail-surat-tugas/${detail?.id_mail_surat_tugas}/surat-undangan`
+    )
+      .then((res) => {
+        if (res.data.status) {
+          toast.success(res?.data?.message || 'Success')
+          queryClient.invalidateQueries({
+            queryKey: ['letter-assignment-detail'],
+          })
+        }
+      })
+      .catch((err) => {
+        toast.error(err?.response?.data?.message || 'Error')
+      })
+  }
+
   return (
     <>
       <div className="space-y-5">
@@ -219,11 +236,20 @@ const DetailLetterAssigment = () => {
                       </Button>
                     </Link>
                     <Button
+                      size={'sm'}
                       className={'w-fit text-white'}
                       onClick={() => refUpload.current.click()}
                     >
                       <MdUpload />
                     </Button>
+                    <button
+                      onClick={HandleRemoveGuestLetter}
+                      className={
+                        'p-1.5 border-red-500 text-red-500 hover:text-red-600 border rounded'
+                      }
+                    >
+                      <FaTrash />
+                    </button>
                   </div>
                 </>
               ) : (

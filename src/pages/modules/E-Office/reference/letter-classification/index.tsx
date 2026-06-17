@@ -22,7 +22,7 @@ const ListLetterClassification = () => {
     <>
       <div className="space-y-5">
         <ButtonTitleGroup
-          label={'Sifat Surat'}
+          label={'Klasifikasi Surat'}
           buttonGroup={[
             {
               type: 'custom',

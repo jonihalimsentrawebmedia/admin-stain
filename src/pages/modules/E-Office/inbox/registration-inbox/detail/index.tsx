@@ -323,12 +323,13 @@ export const DetailInboxRegistration = () => {
               <div className="grid grid-cols-3 gap-5 mt-4">
                 {detailInbox?.lampiran?.map((item, index) => (
                   <Link
+                    target="_blank"
                     to={item?.lampiran_url}
                     key={index}
                     className="flex items-center gap-1.5 border p-2 rounded-md bg-blue-200 hover:bg-primary hover:text-white"
                   >
                     <FaFile />
-                    Lampiran FIle {index + 1}
+                    {item?.nama_lampiran}
                   </Link>
                 ))}
               </div>

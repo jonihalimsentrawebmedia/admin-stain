@@ -42,13 +42,13 @@ const ButtonEditLetterClassification = (props?: props) => {
   const queryClient = useQueryClient()
   const HandleSave = async (value: TResolverLetterClassification) => {
     setLoading(true)
-    await AxiosClient.put(`/eoffice/sifat-surat/${data?.id_klasifikasi_surat}`, value)
+    await AxiosClient.put(`/eoffice/klasifikasi-surat/${data?.id_klasifikasi_surat}`, value)
       .then((res) => {
         if (res.data.status) {
           setLoading(false)
           setOpen(false)
           queryClient.invalidateQueries({
-            queryKey: ['letter-nature'],
+            queryKey: ['letter-classification'],
           })
           setLoading(false)
           toast.success(res.data.message || 'Success')
@@ -69,7 +69,7 @@ const ButtonEditLetterClassification = (props?: props) => {
         <HiPencil />
       </button>
 
-      <DialogBasic title={'Edit Sifat Suret'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Edit Klasifikasi Surat'} open={open} setOpen={setOpen}>
         <FormLetterClassification
           loading={loading}
           open={open}

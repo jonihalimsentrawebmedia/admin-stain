@@ -29,6 +29,7 @@ export interface IFileInbox {
   created_user: string
   updated_at: string
   updated_user: string
+  nama_lampiran: string
 }
 
 export interface IOutbox {

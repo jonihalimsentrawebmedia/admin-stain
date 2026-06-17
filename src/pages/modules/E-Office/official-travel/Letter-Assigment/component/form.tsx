@@ -109,6 +109,7 @@ const FormLetterTask = (props: Props) => {
                 />
               </div>
               <ReturnOrderData
+                date={form.watch('tanggal_surat')}
                 form={form}
                 name={'nomor_urut_manual'}
                 id={form.watch('id_nomor_surat_otomatis')}

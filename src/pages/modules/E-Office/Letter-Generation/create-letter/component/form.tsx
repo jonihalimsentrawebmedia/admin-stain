@@ -120,6 +120,7 @@ const FormCreateLetterCustomize = (props: props) => {
 
               <ReturnOrderData
                 form={form}
+                date={form.watch('tanggal_surat')}
                 name={'nomor_urut_manual'}
                 id={form.watch('id_nomor_surat_otomatis')}
               />

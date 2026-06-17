@@ -39,7 +39,7 @@ const FormQuantitativeQuestionnaire = (props: props) => {
 
           <div className={'p-5 bg-white shadow rounded-lg space-y-4'}>
             <div className="flex items-center justify-between">
-              <p className="text-2xl font-semibold">Daftar Pertayaan</p>
+              <p className="text-2xl font-semibold">Daftar Pertanyaan</p>
               <ButtonAddQuestion
                 HandleAddQuestion={(e) => {
                   const valueFOrm = form.getValues('pertanyaan')

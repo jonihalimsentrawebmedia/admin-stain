@@ -23,7 +23,7 @@ export const ColumnsPurposeGuest = () => {
     },
     {
       accessorKey: 'tujuan_bertamu',
-      header: 'Jenis Keperluan',
+      header: 'Tujuan Bertamu',
     },
     {
       accessorKey: 'action',

@@ -29,7 +29,8 @@ export const SuratSchema = z.object({
   list_lampiran: z
     .array(
       z.object({
-        url_dokumen: z.string(),
+        url: z.string().optional().nullable(),
+        nama_lampiran: z.string().optional().nullable(),
       })
     )
     .optional()
