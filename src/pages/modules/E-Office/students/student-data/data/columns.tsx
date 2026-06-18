@@ -2,6 +2,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
 import type { IStudentData } from '../data/types.ts'
 import { HiPencil } from 'react-icons/hi'
+import { FiEye } from 'react-icons/fi'
 import ButtonDeleteStudentData from '../component/buttonDelete.tsx'
 
 export const ColumnsStudentData = () => {
@@ -48,6 +49,12 @@ export const ColumnsStudentData = () => {
         const data = row?.original
         return (
           <div className={'flex items-center gap-2'}>
+            <Link
+              to={`detail/${data.id_mahasiswa}`}
+              className={'p-1.5 text-white bg-blue-500 hover:bg-blue-600 rounded'}
+            >
+              <FiEye />
+            </Link>
             <Link
               to={`edit/${data.id_mahasiswa}`}
               className={'p-1.5 text-white bg-yellow-500 hover:bg-yellow-600 rounded'}

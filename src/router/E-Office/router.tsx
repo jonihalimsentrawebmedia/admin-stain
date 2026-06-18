@@ -169,6 +169,9 @@ const CreateStudentData = lazy(
 const UpdatedStudentData = lazy(
   () => import('@/pages/modules/E-Office/students/student-data/Updated')
 )
+const DetailStudentData = lazy(
+  () => import('@/pages/modules/E-Office/students/student-data/detail')
+)
 
 export const E_OFFICE_ROUTE = [
   {
@@ -602,6 +605,10 @@ export const E_OFFICE_ROUTE = [
           {
             path: 'add',
             element: <CreateStudentData />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailStudentData />,
           },
           {
             path: 'edit/:id',
