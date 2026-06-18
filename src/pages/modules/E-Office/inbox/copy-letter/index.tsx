@@ -20,7 +20,14 @@ export const CopyLetterPage = () => {
     <>
       <div className="space-y-5">
         <ButtonTitleGroup label={'Tembusan Surat'} buttonGroup={[]} />
-        <TableCustom data={copyLetter} columns={columns} meta={meta} loading={loading} />
+        <TableCustom
+          tdClassName={'bg-white'}
+          thClassName={'bg-primary text-white'}
+          data={copyLetter}
+          columns={columns}
+          meta={meta}
+          loading={loading}
+        />
       </div>
     </>
   )

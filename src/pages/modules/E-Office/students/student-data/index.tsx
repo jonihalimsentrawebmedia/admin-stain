@@ -38,7 +38,14 @@ const ListStudentData = () => {
           ]}
         />
 
-        <TableCustom data={studentData} columns={columns} loading={loading} meta={meta} />
+        <TableCustom
+          tdClassName={'bg-white'}
+          thClassName={'bg-primary text-white'}
+          data={studentData}
+          columns={columns}
+          loading={loading}
+          meta={meta}
+        />
       </div>
     </>
   )

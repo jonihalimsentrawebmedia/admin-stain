@@ -31,7 +31,14 @@ const ListReminderAgenda = () => {
           ]}
         />
 
-        <TableCustom data={reminderAgenda} columns={columns} meta={meta} loading={loading} />
+        <TableCustom
+          tdClassName={'bg-white'}
+          thClassName={'bg-primary text-white'}
+          data={reminderAgenda}
+          columns={columns}
+          meta={meta}
+          loading={loading}
+        />
       </div>
     </>
   )

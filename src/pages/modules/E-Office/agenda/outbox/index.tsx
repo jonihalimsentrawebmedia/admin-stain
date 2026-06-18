@@ -81,7 +81,14 @@ export const ListAgendaOutboxPage = () => {
           </div>
         </div>
 
-        <TableCustom data={agendaOutbox} columns={columns} meta={meta} loading={loading} />
+        <TableCustom
+          tdClassName={'bg-white'}
+          thClassName={'bg-primary text-white'}
+          data={agendaOutbox}
+          columns={columns}
+          meta={meta}
+          loading={loading}
+        />
       </div>
     </>
   )

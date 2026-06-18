@@ -77,7 +77,14 @@ export const ListInbox = () => {
           />
         </div>
 
-        <TableCustom data={listInbox} columns={columns} meta={meta} loading={loading} />
+        <TableCustom
+          tdClassName={'bg-white'}
+          thClassName={'bg-primary text-white'}
+          data={listInbox}
+          columns={columns}
+          meta={meta}
+          loading={loading}
+        />
       </div>
     </>
   )

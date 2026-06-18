@@ -24,7 +24,14 @@ const LetterTypePage = () => {
           label={'Jenis Surat'}
           buttonGroup={[{ type: 'custom', element: <ButtonAddLetterType /> }]}
         />
-        <TableCustom data={letterType} columns={columns} loading={loading} meta={meta} />
+        <TableCustom
+          tdClassName={'bg-white'}
+          thClassName={'bg-primary text-white'}
+          data={letterType}
+          columns={columns}
+          loading={loading}
+          meta={meta}
+        />
       </div>
     </>
   )

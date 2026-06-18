@@ -29,7 +29,14 @@ const TypeServiceListPage = () => {
             },
           ]}
         />
-        <TableCustom data={typeService} columns={columns} meta={meta} loading={loading} />
+        <TableCustom
+          tdClassName={'bg-white'}
+          thClassName={'bg-primary text-white'}
+          data={typeService}
+          columns={columns}
+          meta={meta}
+          loading={loading}
+        />
       </div>
     </>
   )

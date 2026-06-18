@@ -31,7 +31,14 @@ const ListLetterType = () => {
           ]}
         />
 
-        <TableCustom data={letterType} columns={columns} meta={meta} loading={loading} />
+        <TableCustom
+          tdClassName={'bg-white'}
+          thClassName={'bg-primary text-white'}
+          data={letterType}
+          columns={columns}
+          meta={meta}
+          loading={loading}
+        />
       </div>
     </>
   )
