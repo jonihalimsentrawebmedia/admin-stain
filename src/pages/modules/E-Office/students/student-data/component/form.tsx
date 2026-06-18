@@ -144,9 +144,13 @@ const FormStudentData = (props: props) => {
             <SelectBasicInput
               name={'semester_masuk'}
               form={form}
+              isDisabled={!form.watch('angkatan')}
               label={'Semester Masuk'}
               placeholder={'Pilih Semester Masuk'}
-              data={semesterData}
+              data={semesterData?.map((row) => ({
+                label: `${row?.label} ${Number(form.watch('angkatan'))} / ${Number(form.watch('angkatan')) + 1}`,
+                value: row?.value,
+              }))}
               className={'col-span-1'}
               usePortal
               isRequired
@@ -320,7 +324,6 @@ const FormStudentData = (props: props) => {
               htmlFor={'nama_wali'}
               className={'col-span-2'}
               inputClassName={'bg-white'}
-              isRequired
               isRow
             />
           </div>

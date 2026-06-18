@@ -7,7 +7,6 @@ import { UseGetHumanResource } from '@/pages/modules/E-Office/reference/human-re
 import TableSelectSdm from '@/pages/modules/E-Office/official-travel/Letter-Assigment/component/tableSelectSdm.tsx'
 import type { BasicProps } from '@/utils/globalType.ts'
 import type { UseFormReturn } from 'react-hook-form'
-import type { TEmployeeSchema } from '@/pages/modules/E-Office/official-travel/Letter-Assigment/data/resolver.tsx'
 import FormAssignmentManual from '@/pages/modules/E-Office/official-travel/Letter-Assigment/component/formAssignment.tsx'
 
 interface props {
@@ -25,7 +24,6 @@ const ButtonUserAssignment = (props: props) => {
     page: '1',
     limit: '10',
   })
-  const [listUser, setListUser] = useState<TEmployeeSchema[]>([])
 
   const { humanResource, meta } = UseGetHumanResource({
     page: filter.page,
@@ -43,8 +41,6 @@ const ButtonUserAssignment = (props: props) => {
           meta={meta}
           filter={filter}
           setFilter={setFilter}
-          listUser={listUser}
-          setListUser={setListUser}
           form={form}
           name={name}
           open={open}

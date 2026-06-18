@@ -110,10 +110,32 @@ const DetailLetterAssigment = () => {
   useEffect(() => {
     if (DetailSPPD) {
       form.reset({
-        ...DetailSPPD,
-        tanggal_surat: DetailSPPD?.tanggal_surat
+        id_kop_surat: DetailSPPD.id_kop_surat,
+        id_nomor_surat_otomatis: DetailSPPD.id_nomor_surat_otomatis,
+        nomor_urut_manual: DetailSPPD.nomor_urut_manual,
+        tanggal_surat: DetailSPPD.tanggal_surat
           ? format(DetailSPPD.tanggal_surat, 'yyyy-MM-dd')
           : '',
+        id_unit: DetailSPPD.id_unit,
+        akun: DetailSPPD.akun,
+        lain_lain: DetailSPPD.lain_lain,
+        disahkan_oleh: DetailSPPD.disahkan_oleh,
+        id_jenis_transportasi: DetailSPPD.id_jenis_transportasi,
+        tempat_asal: DetailSPPD.tempat_asal,
+        tempat_tujuan: DetailSPPD.tempat_tujuan,
+        maksud_kegiatan: DetailSPPD.maksud_kegiatan,
+        sppd_pegawai: DetailSPPD?.sppd_pegawai
+          ? DetailSPPD.sppd_pegawai?.map((peg) => ({
+              id_mail_surat_tugas_pegawai: peg.id_mail_surat_tugas_pegawai,
+              tanggal_berangkat: peg.tanggal_berangkat
+                ? new Date(peg.tanggal_berangkat).toISOString().split('T')[0]
+                : '',
+              tanggal_pulang: peg.tanggal_pulang
+                ? new Date(peg.tanggal_pulang).toISOString().split('T')[0]
+                : '',
+              no_spd: peg.no_spd ?? '',
+            }))
+          : null,
       })
     }
   }, [DetailSPPD])
@@ -125,6 +147,13 @@ const DetailLetterAssigment = () => {
       await AxiosClient.post(`/eoffice/mail-surat-tugas/${id_letter}/sppd`, {
         ...value,
         tanggal_surat: new Date(value.tanggal_surat).toISOString(),
+        sppd_pegawai: value?.sppd_pegawai?.map((peg) => ({
+          ...peg,
+          tanggal_berangkat: peg?.tanggal_berangkat
+            ? new Date(peg?.tanggal_berangkat).toISOString()
+            : null,
+          tanggal_pulang: peg?.tanggal_pulang ? new Date(peg?.tanggal_pulang).toISOString() : null,
+        })),
       })
         .then((res) => {
           if (res.data.status) {
@@ -136,6 +165,9 @@ const DetailLetterAssigment = () => {
             })
             queryClient.invalidateQueries({
               queryKey: ['letter-assignment-detail'],
+            })
+            queryClient.invalidateQueries({
+              queryKey: ['letter-assignment-detail-sppd'],
             })
           }
         })
@@ -149,6 +181,16 @@ const DetailLetterAssigment = () => {
         {
           ...value,
           tanggal_surat: new Date(value.tanggal_surat).toISOString(),
+          sppd_pegawai: value?.sppd_pegawai?.map((peg) => ({
+            id_mail_surat_tugas_pegawai: peg?.id_mail_surat_tugas_pegawai,
+            tanggal_berangkat: peg?.tanggal_berangkat
+              ? new Date(peg?.tanggal_berangkat).toISOString()
+              : null,
+            tanggal_pulang: peg?.tanggal_pulang
+              ? new Date(peg?.tanggal_pulang).toISOString()
+              : null,
+            no_spd: peg?.no_spd ?? '',
+          })),
         }
       )
         .then((res) => {
@@ -161,6 +203,9 @@ const DetailLetterAssigment = () => {
             })
             queryClient.invalidateQueries({
               queryKey: ['letter-assignment-detail'],
+            })
+            queryClient.invalidateQueries({
+              queryKey: ['letter-assignment-detail-sppd'],
             })
           }
         })
@@ -227,7 +272,9 @@ const DetailLetterAssigment = () => {
               type: 'edit',
               label: 'Edit Surat Tugas',
               onClick: () =>
-                navigate(`/modules/e-office/official-travel/letter-assignment/edit/${id_letter}`),
+                navigate(
+                  `/modules/e-office/official-travel/letter-assignment/edit/${id_letter}?from=detail`
+                ),
             },
             {
               type: 'custom',
@@ -330,7 +377,7 @@ const DetailLetterAssigment = () => {
               ) : (
                 <Button className={'text-white w-fit'} onClick={() => refUpload.current.click()}>
                   <MdUpload />
-                  Uplaod Undangan
+                  Upload Undangan
                 </Button>
               )}
               <input
@@ -352,6 +399,7 @@ const DetailLetterAssigment = () => {
             setIsEdit={setIsEdit}
             loading={loading}
             HandleSave={HandleSubmit}
+            data={DetailSPPD}
           />
         ) : (
           <Card className={'rounded shadow-none border'}>

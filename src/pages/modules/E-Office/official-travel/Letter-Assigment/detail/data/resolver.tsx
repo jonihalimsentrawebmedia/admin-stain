@@ -13,6 +13,26 @@ export const ResolverSPPD = z.object({
   tempat_asal: z.string({ error: 'Tempat asal wajib diisi' }),
   tempat_tujuan: z.string({ error: 'Tempat tujuan wajib diisi' }),
   maksud_kegiatan: z.string({ error: 'Maksud kegiatan wajib diisi' }),
+  sppd_pegawai: z
+    .array(
+      z
+        .object({
+          id_mail_surat_tugas_pegawai: z
+            .string({ error: 'Pegawai wajib dipilih' })
+            .optional()
+            .nullable(),
+          tanggal_berangkat: z
+            .string({ error: 'Tanggal berangkat wajib diisi' })
+            .optional()
+            .nullable(),
+          tanggal_pulang: z.string({ error: 'Tanggal pulang wajib diisi' }).optional().nullable(),
+          no_spd: z.string({ error: 'No SPD wajib diisi' }).optional().nullable(),
+        })
+        .optional()
+        .nullable()
+    )
+    .optional()
+    .nullable(),
 })
 
 export type TResolverSPPD = z.infer<typeof ResolverSPPD>
