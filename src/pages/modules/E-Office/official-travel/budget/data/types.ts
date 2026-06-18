@@ -4,6 +4,8 @@ export interface IBudgetOfficialTravel {
   tahun_anggaran: number
   sumber_data: string
   jumlah_anggaran: string | number
+  sisa_anggaran: string | number
+  realisasi: string | number
   created_at: string
   created_user: string
   updated_at: string

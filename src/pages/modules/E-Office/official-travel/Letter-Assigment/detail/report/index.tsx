@@ -17,6 +17,8 @@ import { Button } from '@/components/ui/button.tsx'
 import { ReportLetterPdf } from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/report/component/pdfmakeData.ts'
 import pdfmake from '@/utils/pdfmake.ts'
 import { GetBase64FromUrl } from '@/pages/modules/E-Office/settings/letter-header/hooks'
+import { MdPrint } from 'react-icons/md'
+import { HiPencil } from 'react-icons/hi'
 
 const ReportLetterSPPDAssignment = () => {
   const { id: id_letter } = useParams()
@@ -33,6 +35,7 @@ const ReportLetterSPPDAssignment = () => {
     if (letterAssignment?.laporan) {
       form.reset({
         ...(letterAssignment?.laporan as any),
+        tanggal: new Date(letterAssignment.tanggal_surat),
       })
     }
   }, [letterAssignment])
@@ -62,11 +65,22 @@ const ReportLetterSPPDAssignment = () => {
     <>
       <div className="space-y-5">
         <ButtonTitleGroup label={'Laporan'} buttonGroup={[]} isBack />
+
         {letterAssignment && <DetailSuratTugasTable data={letterAssignment} />}
         {isEdit || !letterAssignment?.laporan ? (
           <FormReportOfficialTravel form={form} loading={loading} HandleSave={HandleSave} />
         ) : (
           <>
+            <div className="flex items-center justify-end">
+              <Button
+                className={'text-white bg-yellow-600 hover:bg-yellow-500'}
+                onClick={() => setIsEdit(!isEdit)}
+                disabled={isEdit}
+              >
+                <HiPencil />
+                Edit Data Laporan
+              </Button>
+            </div>
             <div className="flex flex-col gap-2 w-full max-w-[1024px] bg-white p-4 rounded-lg shadow-md">
               <RowDetail label="Tempat">{dataReport?.tempat}</RowDetail>
               <RowDetail label="Tanggal">
@@ -99,9 +113,9 @@ const ReportLetterSPPDAssignment = () => {
 
               <RowDetail label="Saran">{dataReport?.saran}</RowDetail>
             </div>
-
             <div className="flex items-center">
               <Button
+                className={'text-white'}
                 onClick={async () => {
                   const logoBase64 = await GetBase64FromUrl(letterAssignment?.kop_surat?.url_logo)
                   const pdfConfig = ReportLetterPdf({
@@ -112,6 +126,7 @@ const ReportLetterSPPDAssignment = () => {
                   pdfmake.createPdf(pdfConfig).open()
                 }}
               >
+                <MdPrint className={'size-4'} />
                 Cetak
               </Button>
             </div>
