@@ -148,6 +148,27 @@ const LetterHeader = lazy(() =>
   }))
 )
 const DashboardEOfficePage = lazy(() => import('@/pages/modules/E-Office/dashboard'))
+const ListAdmissionProcess = lazy(
+  () => import('@/pages/modules/E-Office/students/admission-process')
+)
+const ListStudentStatus = lazy(
+  () => import('@/pages/modules/E-Office/students/student-status')
+)
+const ListReligion = lazy(
+  () => import('@/pages/modules/E-Office/students/religion')
+)
+const ListStudyProgram = lazy(
+  () => import('@/pages/modules/E-Office/students/study-program')
+)
+const ListStudentData = lazy(
+  () => import('@/pages/modules/E-Office/students/student-data')
+)
+const CreateStudentData = lazy(
+  () => import('@/pages/modules/E-Office/students/student-data/create')
+)
+const UpdatedStudentData = lazy(
+  () => import('@/pages/modules/E-Office/students/student-data/Updated')
+)
 
 export const E_OFFICE_ROUTE = [
   {
@@ -377,31 +398,6 @@ export const E_OFFICE_ROUTE = [
         path: 'purpose-guest',
         element: <PurposeGuestPage />,
       },
-      // {
-      //   path: 'template-surat',
-      //   children: [
-      //     {
-      //       index: true,
-      //       element: <ListTemplateSurat />,
-      //     },
-      //     {
-      //       path: 'create',
-      //       element: <CreateTemplateSurat />,
-      //     },
-      //     {
-      //       path: 'update/:id',
-      //       element: <UpdateTemplateSurat />,
-      //     },
-      //     {
-      //       path: 'detail/:id',
-      //       element: <DetailTemplateSurat />,
-      //     },
-      //     {
-      //       path: 'generate/:id',
-      //       element: <GenerateSuratView />,
-      //     },
-      //   ],
-      // },
     ],
   },
   {
@@ -572,6 +568,44 @@ export const E_OFFICE_ROUTE = [
                 element: <DocumentationLetterAssigment />,
               },
             ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    path: 'student',
+    children: [
+      {
+        path: 'admission-process',
+        element: <ListAdmissionProcess />,
+      },
+      {
+        path: 'student-status',
+        element: <ListStudentStatus />,
+      },
+      {
+        path: 'religion',
+        element: <ListReligion />,
+      },
+      {
+        path: 'study-program',
+        element: <ListStudyProgram />,
+      },
+      {
+        path: 'student-data',
+        children: [
+          {
+            index: true,
+            element: <ListStudentData />,
+          },
+          {
+            path: 'add',
+            element: <CreateStudentData />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedStudentData />,
           },
         ],
       },

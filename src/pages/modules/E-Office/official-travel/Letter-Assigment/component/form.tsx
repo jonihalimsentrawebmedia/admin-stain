@@ -11,10 +11,14 @@ import TextInput from '@/components/common/form/TextInput.tsx'
 import { ReturnOrderData } from '@/pages/modules/E-Office/Letter-Generation/create-letter/component/formLetterNumber.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { useEffect } from 'react'
-import { FaTrash } from 'react-icons/fa'
+import { FaRegFileAlt, FaTrash, FaUserFriends } from 'react-icons/fa'
 import ButtonUserAssignment from '@/pages/modules/E-Office/official-travel/Letter-Assigment/component/ButtonAssignment.tsx'
 import EmployeeTable from '@/pages/modules/E-Office/official-travel/Letter-Assigment/component/tableData.tsx'
 import PreviewButton from '@/pages/modules/E-Office/official-travel/Letter-Assigment/component/previewButton.tsx'
+import { FiHash } from 'react-icons/fi'
+import { IoMdList } from 'react-icons/io'
+import { MdWork } from 'react-icons/md'
+import { AiFillSignature } from 'react-icons/ai'
 
 interface Props {
   form: UseFormReturn<TResolverLetterTask>
@@ -61,7 +65,12 @@ const FormLetterTask = (props: Props) => {
         <form className={'space-y-5'} onSubmit={form.handleSubmit(HandleSave)}>
           <Card className={'bg-blue-100 rounded'}>
             <CardContent className={'space-y-4'}>
-              <CardTitle>Kop Surat</CardTitle>
+              <CardTitle className={'text-xl flex items-center gap-1.5'}>
+                <div className="p-1.5 bg-primary text-white rounded">
+                  <FaRegFileAlt className={'size-5'} />
+                </div>
+                Kop Surat
+              </CardTitle>
               <SelectBasicInput
                 form={form}
                 name={'id_kop_surat'}
@@ -79,9 +88,15 @@ const FormLetterTask = (props: Props) => {
               />
             </CardContent>
           </Card>
+
           <Card className={'bg-blue-100 rounded'}>
             <CardContent className={'space-y-4'}>
-              <CardTitle>Penomoran Surat</CardTitle>
+              <CardTitle className={'flex items-center gap-1.5 text-xl'}>
+                <div className={'p-1.5 bg-primary text-white rounded'}>
+                  <FiHash className={'size-5'} />
+                </div>
+                Penomoran Surat
+              </CardTitle>
               <div className="flex gap-4 items-center max-w-2/3">
                 <SelectBasicInput
                   form={form}
@@ -120,7 +135,12 @@ const FormLetterTask = (props: Props) => {
 
           <Card className={'bg-blue-100 rounded'}>
             <CardContent className={'space-y-4'}>
-              <CardTitle>Dasar Surat Tugas</CardTitle>
+              <CardTitle className={'flex items-center gap-1.5 text-xl'}>
+                <div className="p-1.5 bg-primary text-white rounded">
+                  <IoMdList className={'size-5'} />
+                </div>
+                Dasar Surat Tugas
+              </CardTitle>
               {SuratTugas.fields.map((field, index) => (
                 <div key={field.id} className={'flex items-center gap-1.5 w-full'}>
                   <TextInput
@@ -198,7 +218,10 @@ const FormLetterTask = (props: Props) => {
 
           <Card className={'bg-blue-100 rounded'}>
             <CardContent className={'space-y-4'}>
-              <CardTitle>Memberikan Tugas Kepada Pegawai Berikut Ini.</CardTitle>
+              <CardTitle className={'flex items-center gap-1.5 text-xl'}>
+                <FaUserFriends className={'size-5'} />
+                Memberikan Tugas Kepada Pegawai Berikut Ini.
+              </CardTitle>
               <ButtonUserAssignment form={form} name={'pegawai'} />
               {!!form?.watch('pegawai') && (
                 <EmployeeTable
@@ -224,7 +247,10 @@ const FormLetterTask = (props: Props) => {
 
           <Card className={'bg-blue-100 rounded'}>
             <CardContent className={'space-y-4'}>
-              <CardTitle>Untuk Kegiatan Sebagai Berikut</CardTitle>
+              <CardTitle className={'flex items-center gap-1.5 text-xl'}>
+                <MdWork className={'size-5'} />
+                Untuk Kegiatan Sebagai Berikut
+              </CardTitle>
               {FormActivty.fields.map((field, index) => (
                 <div key={field.id} className={'flex items-center gap-1.5 w-full'}>
                   <TextInput
@@ -259,19 +285,27 @@ const FormLetterTask = (props: Props) => {
             </CardContent>
           </Card>
 
-          <SelectBasicInput
-            form={form}
-            name={'disahkan_oleh'}
-            label={'Penandatangan'}
-            placeholder={'Pilih Penandatangan'}
-            isRequired
-            isRow
-            usePortal
-            data={humanResource?.map((row) => ({
-              value: row?.id_sdm,
-              label: row?.nama,
-            }))}
-          />
+          <Card className={'bg-blue-100 rounded'}>
+            <CardContent className={'space-y-4'}>
+              <CardTitle className={'flex items-center gap-1.5 text-xl'}>
+                <AiFillSignature className={'size-5'} />
+                Penandatanganan Surat Tugas
+              </CardTitle>
+              <SelectBasicInput
+                form={form}
+                name={'disahkan_oleh'}
+                label={'Penandatangan'}
+                placeholder={'Pilih Penandatangan'}
+                isRequired
+                isRow
+                usePortal
+                data={humanResource?.map((row) => ({
+                  value: row?.id_sdm,
+                  label: row?.nama,
+                }))}
+              />
+            </CardContent>
+          </Card>
 
           <div className="flex items-center justify-end gap-3">
             <PreviewButton

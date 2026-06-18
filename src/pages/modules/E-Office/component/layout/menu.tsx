@@ -4,6 +4,7 @@ import { IoMailUnread } from 'react-icons/io5'
 import { FaGear, FaUsers } from 'react-icons/fa6'
 import { RiMailAiFill } from 'react-icons/ri'
 import { BiSolidPlaneAlt } from 'react-icons/bi'
+import { PiStudentFill } from 'react-icons/pi'
 
 const baseDomain = '/modules/e-office'
 
@@ -247,6 +248,39 @@ export const GenerateMenu = () => {
           id: 92,
           name: 'Kop Surat',
           path: `${baseDomain}/settings/letter-header`,
+        },
+      ],
+    },
+    {
+      id: 12,
+      name: 'Mahasiswa',
+      path: `${baseDomain}/student`,
+      icon: <PiStudentFill className={'size-5'} />,
+      child: [
+        {
+          id: 121,
+          name: 'Program Studi',
+          path: `${baseDomain}/student/study-program`,
+        },
+        {
+          id: 122,
+          name: 'Jalur Masuk',
+          path: `${baseDomain}/student/admission-process`,
+        },
+        {
+          id: 123,
+          name: 'Status Mahasiswa',
+          path: `${baseDomain}/student/student-status`,
+        },
+        {
+          id: 124,
+          name: 'Agama',
+          path: `${baseDomain}/student/religion`,
+        },
+        {
+          id: 125,
+          name: 'Data Mahasiswa',
+          path: `${baseDomain}/student/student-data`,
         },
       ],
     },
