@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { UseGetDetailStudentData } from '../hooks'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Card, CardContent } from '@/components/ui/card.tsx'
@@ -9,10 +9,14 @@ import { Badge } from '@/components/ui/badge.tsx'
 const DetailStudentData = () => {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { studentData, loading } = UseGetDetailStudentData(id as string)
+  const { studentData } = UseGetDetailStudentData(id as string)
 
   const jenisKelaminLabel =
-    studentData?.jenis_kelamin === 'LAKI_LAKI' ? 'Laki-laki' : studentData?.jenis_kelamin === 'PEREMPUAN' ? 'Perempuan' : studentData?.jenis_kelamin
+    studentData?.jenis_kelamin === 'LAKI_LAKI'
+      ? 'Laki-laki'
+      : studentData?.jenis_kelamin === 'PEREMPUAN'
+        ? 'Perempuan'
+        : studentData?.jenis_kelamin
 
   return (
     <>
@@ -34,10 +38,7 @@ const DetailStudentData = () => {
             {/* Foto */}
             <div className="grid grid-cols-2 gap-4">
               <div className="col-span-2">
-                <TitleLine
-                  className={'text-2xl font-semibold text-primary'}
-                  title={'Foto'}
-                />
+                <TitleLine className={'text-2xl font-semibold text-primary'} title={'Foto'} />
               </div>
               <div className="col-span-2">
                 {studentData?.url_foto_mahasiswa ? (
@@ -83,7 +84,9 @@ const DetailStudentData = () => {
                   <span className="font-medium">{studentData?.angkatan ?? '-'}</span>
 
                   <span className="text-gray-500">Semester Masuk</span>
-                  <span className="font-medium">{studentData?.semester_masuk_label ?? studentData?.semester_masuk ?? '-'}</span>
+                  <span className="font-medium">
+                    {studentData?.semester_masuk_label ?? studentData?.semester_masuk ?? '-'}
+                  </span>
 
                   <span className="text-gray-500">Jalur Masuk</span>
                   <span className="font-medium">{studentData?.nama_jalur_masuk ?? '-'}</span>
