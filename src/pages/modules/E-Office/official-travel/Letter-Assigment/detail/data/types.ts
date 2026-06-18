@@ -67,4 +67,6 @@ export interface IEmployeeSPPD {
   tanggal_berangkat: string
   tanggal_pulang: string
   no_spd: string | null
+  nama_lengkap: string
+  nip: string
 }

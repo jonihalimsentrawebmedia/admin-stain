@@ -2,7 +2,7 @@ import { TableBasicState } from '@/components/common/table/tableUsestate.tsx'
 import type { IHumanResource } from '@/pages/modules/E-Office/reference/human-resource/hooks.tsx'
 import type { ColumnDef } from '@tanstack/react-table'
 import type { BasicProps } from '@/utils/globalType.ts'
-import { type Dispatch, type SetStateAction, useEffect, useRef, useState } from 'react'
+import { type Dispatch, type SetStateAction, useEffect, useState } from 'react'
 import Search from '@/components/common/table/Search.tsx'
 import { SelectBasic } from '@/components/common/select/basic.tsx'
 import TablePaginate, { type Meta } from '@/components/common/table/TablePagination.tsx'
@@ -17,8 +17,6 @@ interface props {
   filter: BasicProps
   setFilter: Dispatch<SetStateAction<BasicProps>>
   meta?: Meta
-  listUser: TEmployeeSchema[]
-  setListUser: Dispatch<SetStateAction<TEmployeeSchema[]>>
   form: UseFormReturn<any>
   name: string
   open: boolean
@@ -77,38 +75,58 @@ const columns: ColumnDef<IHumanResource>[] = [
 ]
 
 const TableSelectSdm = (props: props) => {
-  const { data, setFilter, filter, meta, setListUser, form, name, listUser, open, setOpen } = props
+  const { data, setFilter, filter, meta, form, name, open, setOpen } = props
   const [selected, setSelected] = useState<string[]>([])
-  const initialized = useRef(false)
 
-  // ── 1. Inisialisasi: sync selected dari form (hanya sekali / saat form data berubah) ──
+  // Sync selected dari form setiap kali dialog terbuka
+  // (selected digunakan untuk ceklis checkbox di tabel)
   useEffect(() => {
+    if (!open) return
     const dataInput = form.getValues(name)
     if (dataInput?.length) {
-      const ids = dataInput.map((item: any) => item.id_sdm)
-      setSelected(ids)
+      setSelected(dataInput.map((item: any) => item.id_sdm))
+    } else {
+      setSelected([])
     }
-    initialized.current = true
-  }, [])
+  }, [open])
 
-  // ── 2. Saat selected berubah (dari checkbox), update listUser ──
-  useEffect(() => {
-    // skip render pertama agar tidak timpa inisialisasi
-    if (!initialized.current) return
+  // ── Simpan: merge data existing (dari form/BE) + item baru dari tabel HR ──
+  const HandleSave = () => {
+    // Ambil data existing dari form (yg sudah disimpan dari API/BE)
+    const existingData: TEmployeeSchema[] = form.getValues(name) ?? []
+    const existingIds = existingData
+      .map((item) => item.id_sdm)
+      .filter((id): id is string => id != null)
 
-    const temp: IHumanResource[] = data.filter((item) => selected.includes(item.id_sdm))
-    const TempForm: any[] = temp.map((row: IHumanResource) => ({
-      id_sdm: row?.id_sdm,
-      metode_tambah: 'DOSEN_STAFF',
-      nama_lengkap: row?.nama ?? '',
-      satuan_kerja: row?.nama_unit_kerja ?? '',
-      nip: row?.nip ?? '',
-      nik: row?.nik ?? '',
-      jabatan_pegawai: row?.jabatan?.[0] ?? '',
-      alamat: row?.alamat ?? '',
-    }))
-    setListUser(TempForm)
-  }, [selected, data])
+    // Item baru dari tabel HR yang di-check dan belum ada di form
+    const newItems = data
+      .filter(
+        (item) =>
+          item.id_sdm != null &&
+          selected.includes(item.id_sdm) &&
+          !existingIds.includes(item.id_sdm)
+      )
+      .map((row: IHumanResource) => ({
+        id_sdm: row?.id_sdm,
+        metode_tambah: 'DOSEN_STAFF' as const,
+        nama_lengkap: row?.nama ?? '',
+        satuan_kerja: row?.nama_unit_kerja ?? '',
+        nip: row?.nip ?? '',
+        nik: row?.nik ?? '',
+        jabatan_pegawai: row?.jabatan?.[0] ?? '',
+        alamat: row?.alamat ?? '',
+      }))
+
+    // Hapus item existing yang di-uncheck
+    const updatedExisting = existingData.filter(
+      (item) => item.id_sdm == null || selected.includes(item.id_sdm)
+    )
+
+    // Gabung: existing + baru → set ke form
+    const result = [...updatedExisting, ...newItems]
+    form.setValue(name, result)
+    setOpen(false)
+  }
 
   return (
     <>
@@ -173,13 +191,7 @@ const TableSelectSdm = (props: props) => {
         </div>
 
         <div className="flex items-center justify-end">
-          <Button
-            className={'text-white rounded-full'}
-            onClick={() => {
-              form.setValue(name, listUser)
-              setOpen(!open)
-            }}
-          >
+          <Button className={'text-white rounded-full'} onClick={HandleSave}>
             <FaSave className={'text-yellow-500'} />
             Simpan
           </Button>

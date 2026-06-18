@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import FormLetterTask from '../component/form.tsx'
 import { ResolverLetterTask, type TResolverLetterTask } from '../data/resolver.tsx'
@@ -13,6 +13,8 @@ import { format } from 'date-fns'
 const UpdatedLetterAssigment = () => {
   const { id } = useParams()
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const from = searchParams.get('from')
 
   const [loading, setLoading] = useState(false)
   const { detail } = UseGetLetterAssigmentDetail(id as string)
@@ -51,7 +53,11 @@ const UpdatedLetterAssigment = () => {
       if (res.data.status) {
         setLoading(false)
         toast.success(res.data.message || 'Surat Tugas / SPD berhasil diperbarui')
-        navigate('/modules/e-office/official-travel/letter-assignment')
+        if (from === 'detail') {
+          navigate(`/modules/e-office/official-travel/letter-assignment/detail/${id}`)
+        } else {
+          navigate('/modules/e-office/official-travel/letter-assignment')
+        }
       }
     } catch (err: any) {
       setLoading(false)

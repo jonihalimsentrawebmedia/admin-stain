@@ -1,5 +1,5 @@
 import type { UseFormReturn } from 'react-hook-form'
-import type { Dispatch, SetStateAction } from 'react'
+import { type Dispatch, type SetStateAction } from 'react'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import { Card, CardContent, CardTitle } from '@/components/ui/card.tsx'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
@@ -13,6 +13,15 @@ import { UseGetHumanResource } from '@/pages/modules/E-Office/reference/human-re
 import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan-unit/hooks.tsx'
 import { USeGetTransportType } from '@/pages/modules/E-Office/reference/transport-type/hooks'
 import TextAreaInput from '@/components/common/form/textAreaInput.tsx'
+import type { IDetailSPPD } from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/data/types.ts'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table.tsx'
 
 interface props {
   form: UseFormReturn<TResolverSPPD>
@@ -20,10 +29,11 @@ interface props {
   isEdit: boolean
   setIsEdit: Dispatch<SetStateAction<boolean>>
   HandleSave: (e: TResolverSPPD) => void
+  data?: IDetailSPPD
 }
 
 const FormSPPDLetterAssigment = (props: props) => {
-  const { form, loading, isEdit, setIsEdit, HandleSave } = props
+  const { form, loading, isEdit, setIsEdit, HandleSave, data } = props
   const { letterHeader } = UseGetLetterHeaderRef()
   const { institution } = UseGetUnitInstitution()
   const { letterNumber } = UseGetLetterNumberAutomatic({
@@ -212,6 +222,75 @@ const FormSPPDLetterAssigment = (props: props) => {
               />
             </CardContent>
           </Card>
+
+          {data?.sppd_pegawai && (
+            <Card className={'rounded shadow-none'}>
+              <CardContent className={'space-y-4'}>
+                <CardTitle>Informasi Keberangkatan Pegawai</CardTitle>
+
+                <Table className={'w-full'}>
+                  <TableHeader className={'bg-primary text-white w-full'}>
+                    <TableRow className={'hover:bg-primary w-full'}>
+                      <TableHead className={'w-[5%] text-white  text-center'}>No</TableHead>
+                      <TableHead className={'text-white text-start w-full'}>Pegawai</TableHead>
+                      <TableHead className={'text-white text-center w-full'}>
+                        Tanggal Berangkat
+                      </TableHead>
+                      <TableHead className={'text-white text-center w-full'}>
+                        Tanggal Pulang
+                      </TableHead>
+                      <TableHead className={'text-white text-center w-full'}>No SPPD</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {data?.sppd_pegawai?.map((row, index) => (
+                      <TableRow key={row.id_mail_surat_tugas_pegawai} className={'w-full'}>
+                        <TableCell className={'w-[5%] text-center'}>{index + 1}</TableCell>
+                        <TableCell className={'text-start w-full'}>
+                          <p>{row?.nama_lengkap}</p>
+                          <p>{row?.nip}</p>
+                          <p></p>
+                        </TableCell>
+                        <TableCell className={'text-center w-full'}>
+                          <TextInput
+                            type={'date'}
+                            isRow
+                            className="[&>label]:hidden w-full"
+                            inputClassName={'w-full'}
+                            name={`sppd_pegawai.${index}.tanggal_berangkat`}
+                            form={form}
+                          />
+                        </TableCell>
+                        <TableCell className={'text-center w-full'}>
+                          <TextInput
+                            type={'date'}
+                            isRow
+                            className="[&_label]:hidden text-center flex! flex-row items-center"
+                            inputClassName={'w-full'}
+                            name={`sppd_pegawai.${index}.tanggal_pulang`}
+                            form={form}
+                          />
+                        </TableCell>
+                        <TableCell className={'text-center w-full'}>
+                          <div className="w-full">
+                            <TextInput
+                              isRow
+                              label={'babi'}
+                              placeholder={'No. SPD'}
+                              className="[&_label]:hidden text-center flex! flex-row items-center w-full"
+                              inputClassName={'w-full min-w-[300px]'}
+                              name={`sppd_pegawai.${index}.no_spd`}
+                              form={form}
+                            />
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
+          )}
 
           <ButtonForm loading={loading} onCancel={() => setIsEdit(!isEdit)} />
         </form>

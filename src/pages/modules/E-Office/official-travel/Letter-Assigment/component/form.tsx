@@ -56,9 +56,6 @@ const FormLetterTask = (props: Props) => {
     }
   }, [SuratTugas, FormActivty])
 
-  console.log(form.formState.errors)
-  console.log(form.watch('pegawai'))
-
   return (
     <>
       <Form {...form}>
