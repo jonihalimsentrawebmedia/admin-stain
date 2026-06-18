@@ -26,7 +26,14 @@ const BudgetOfficialTravel = () => {
           label={'Anggaran'}
           buttonGroup={[{ type: 'custom', element: <ButtonAddBudget /> }]}
         />
-        <TableCustom data={budget} columns={columns} meta={meta} loading={loading} />
+        <TableCustom
+          tdClassName={'bg-white'}
+          thClassName={'bg-primary text-white'}
+          data={budget}
+          columns={columns}
+          meta={meta}
+          loading={loading}
+        />
       </div>
     </>
   )

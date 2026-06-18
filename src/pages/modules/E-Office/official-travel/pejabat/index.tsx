@@ -31,7 +31,14 @@ const ListPejabat = () => {
           ]}
         />
 
-        <TableCustom data={pejabat} columns={columns} meta={meta} loading={loading} />
+        <TableCustom
+          tdClassName={'bg-white'}
+          thClassName={'bg-primary text-white'}
+          data={pejabat}
+          columns={columns}
+          meta={meta}
+          loading={loading}
+        />
       </div>
     </>
   )

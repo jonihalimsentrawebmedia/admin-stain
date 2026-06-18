@@ -20,12 +20,34 @@ export const ColumnsStudyProgram = () => {
       },
     },
     {
-      accessorKey: 'kode',
+      accessorKey: 'kode_prodi',
       header: 'Kode',
     },
     {
-      accessorKey: 'nama',
-      header: 'Nama Program Studi',
+      accessorKey: 'id_sumber',
+      header: 'ID Sumber',
+    },
+    {
+      accessorKey: 'nama_prodi',
+      header: 'Nama Prodi',
+    },
+    {
+      accessorKey: 'nama_jenjang_pendidikan',
+      header: 'Jenjang',
+      cell: ({ row }) => {
+        const data = row.original
+        return (
+          <>
+            <p>
+              {data?.kode_jenjang_pendidikan} - {data?.nama_jenjang_pendidikan}
+            </p>
+          </>
+        )
+      },
+    },
+    {
+      accessorKey: 'nama_fakultas',
+      header: 'Nama Fakultas',
     },
   ]
 

@@ -29,7 +29,14 @@ const PurposeTypePage = () => {
             },
           ]}
         />
-        <TableCustom data={purposeType} columns={columns} loading={loading} meta={meta} />
+        <TableCustom
+          tdClassName={'bg-white'}
+          thClassName={'bg-primary text-white'}
+          data={purposeType}
+          columns={columns}
+          loading={loading}
+          meta={meta}
+        />
       </div>
     </>
   )

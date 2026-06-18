@@ -31,7 +31,14 @@ const ListLetterOrigin = () => {
           ]}
         />
 
-        <TableCustom data={letterOrigin} columns={columns} meta={meta} loading={loading} />
+        <TableCustom
+          tdClassName={'bg-white'}
+          thClassName={'bg-primary text-white'}
+          data={letterOrigin}
+          columns={columns}
+          meta={meta}
+          loading={loading}
+        />
       </div>
     </>
   )

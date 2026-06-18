@@ -51,7 +51,14 @@ const QuestionnairePage = () => {
             },
           ]}
         />
-        <TableCustom data={questionnaire} columns={columns} loading={loading} meta={meta} />
+        <TableCustom
+          tdClassName={'bg-white'}
+          thClassName={'bg-primary text-white'}
+          data={questionnaire}
+          columns={columns}
+          loading={loading}
+          meta={meta}
+        />
       </div>
     </>
   )

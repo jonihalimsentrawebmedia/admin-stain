@@ -22,7 +22,14 @@ const ListStudyProgram = () => {
       <div className="space-y-5">
         <ButtonTitleGroup label={'Program Studi'} buttonGroup={[]} />
 
-        <TableCustom data={studyProgram} columns={columns} meta={meta} loading={loading} />
+        <TableCustom
+          tdClassName={'bg-white'}
+          thClassName={'bg-primary text-white'}
+          data={studyProgram}
+          columns={columns}
+          meta={meta}
+          loading={loading}
+        />
       </div>
     </>
   )

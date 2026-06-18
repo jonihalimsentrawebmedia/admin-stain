@@ -34,7 +34,14 @@ const ReportEventActivity = () => {
           name={'year'}
         />
 
-        <TableCustom data={report} columns={columns} meta={meta} loading={loading} />
+        <TableCustom
+          tdClassName={'bg-white'}
+          thClassName={'bg-primary text-white'}
+          data={report}
+          columns={columns}
+          meta={meta}
+          loading={loading}
+        />
       </div>
     </>
   )

@@ -19,11 +19,16 @@ const ListTransportType = () => {
       <div className="space-y-5">
         <ButtonTitleGroup
           label={'Jenis Transportasi'}
-          buttonGroup={[
-            { type: 'custom', element: <ButtonAddTransportType /> },
-          ]}
+          buttonGroup={[{ type: 'custom', element: <ButtonAddTransportType /> }]}
         />
-        <TableCustom data={transportType} columns={columns} meta={meta} loading={loading} />
+        <TableCustom
+          tdClassName={'bg-white'}
+          thClassName={'bg-primary text-white'}
+          data={transportType}
+          columns={columns}
+          meta={meta}
+          loading={loading}
+        />
       </div>
     </>
   )

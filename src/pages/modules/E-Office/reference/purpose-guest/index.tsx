@@ -31,7 +31,14 @@ const PurposeGuestPage = () => {
             },
           ]}
         />
-        <TableCustom data={purposeGuest} columns={columns} loading={loading} meta={meta} />
+        <TableCustom
+          tdClassName={'bg-white'}
+          thClassName={'bg-primary text-white'}
+          data={purposeGuest}
+          columns={columns}
+          loading={loading}
+          meta={meta}
+        />
       </div>
     </>
   )

@@ -31,7 +31,14 @@ export const AcceptNotificationPage = () => {
           ]}
         />
 
-        <TableCustom data={notification} columns={columns} meta={meta} loading={loading} />
+        <TableCustom
+          tdClassName={'bg-white'}
+          thClassName={'bg-primary text-white'}
+          data={notification}
+          columns={columns}
+          meta={meta}
+          loading={loading}
+        />
       </div>
     </>
   )
