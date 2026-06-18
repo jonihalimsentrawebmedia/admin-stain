@@ -160,6 +160,15 @@ const ListReligion = lazy(
 const ListStudyProgram = lazy(
   () => import('@/pages/modules/E-Office/students/study-program')
 )
+const ListStudentData = lazy(
+  () => import('@/pages/modules/E-Office/students/student-data')
+)
+const CreateStudentData = lazy(
+  () => import('@/pages/modules/E-Office/students/student-data/create')
+)
+const UpdatedStudentData = lazy(
+  () => import('@/pages/modules/E-Office/students/student-data/Updated')
+)
 
 export const E_OFFICE_ROUTE = [
   {
@@ -582,6 +591,23 @@ export const E_OFFICE_ROUTE = [
       {
         path: 'study-program',
         element: <ListStudyProgram />,
+      },
+      {
+        path: 'student-data',
+        children: [
+          {
+            index: true,
+            element: <ListStudentData />,
+          },
+          {
+            path: 'add',
+            element: <CreateStudentData />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedStudentData />,
+          },
+        ],
       },
     ],
   },
