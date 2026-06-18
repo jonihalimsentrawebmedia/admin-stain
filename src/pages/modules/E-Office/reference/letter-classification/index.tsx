@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import type { ExpandedState } from '@tanstack/react-table'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import ButtonAddLetterClassification from './component/buttonAdd.tsx'
@@ -6,6 +6,8 @@ import { USeGetLetterClassification } from './hooks'
 import { useSearchParams } from 'react-router-dom'
 import { ColumnsLetterClassification } from './data/columns.tsx'
 import { DataTableRecursive } from '@/pages/modules/E-Office/component/common/tableRecursif.tsx'
+import TablePagination from '@/components/common/table/TablePagination.tsx'
+import SetLimitList from '@/components/common/table/SetLimitList.tsx'
 
 const ListLetterClassification = () => {
   const [searchParams] = useSearchParams()
@@ -13,7 +15,7 @@ const ListLetterClassification = () => {
   const limit = searchParams.get('limit') ?? '10'
   const search = searchParams.get('search') ?? ''
 
-  const { letterClassification } = USeGetLetterClassification({
+  const { letterClassification, meta } = USeGetLetterClassification({
     page,
     limit,
     search,
@@ -54,6 +56,15 @@ const ListLetterClassification = () => {
           expanded={expanded}
           setExpanded={setExpanded}
         />
+
+        {meta && (
+          <>
+            <div className="flex items-end gap-4 w-full justify-between">
+              <SetLimitList />
+              <TablePagination length={meta?.total} meta={meta} />
+            </div>
+          </>
+        )}
       </div>
     </>
   )

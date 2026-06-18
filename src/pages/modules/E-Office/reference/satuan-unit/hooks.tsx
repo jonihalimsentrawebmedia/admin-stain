@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
+import type { BasicProps } from '@/utils/globalType.ts'
 
 export interface IInstitution {
   id_satuan_organisasi: string
@@ -10,15 +11,26 @@ export interface IInstitution {
   logo: string | null
 }
 
-export const UseGetUnitInstitution = () => {
+interface props extends BasicProps {
+  kelompok?: string
+  parent_id?: string
+}
+
+export const UseGetUnitInstitution = (props?: props) => {
+  const { kelompok, parent_id, page, limit, search } = props ?? {}
   const [institution, setInstitution] = useState<IInstitution[]>([])
 
+  const Params = new URLSearchParams()
+  if (kelompok) Params.append('kelompok', kelompok ?? '')
+  if (page) Params.append('page', page ?? '0')
+  if (limit) Params.append('limit', limit ?? '0')
+  if (search) Params.append('search', search ?? '')
+  if (parent_id) Params.append('parent_id', parent_id ?? '')
+
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['institution'],
+    queryKey: ['institution', Params.toString()],
     queryFn: () =>
-      AxiosClient.get('/eoffice/ref/satuan-organisasi-children?page=0&limit=0').then(
-        (res) => res.data
-      ),
+      AxiosClient.get(`/eoffice/ref/satuan-organisasi-children?${Params}`).then((res) => res.data),
     refetchOnWindowFocus: false,
   })
 
