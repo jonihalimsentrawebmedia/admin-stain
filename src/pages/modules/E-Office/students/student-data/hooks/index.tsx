@@ -5,8 +5,13 @@ import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { IStudentData } from '../data/types.ts'
 
-export const UseGetStudentData = (props?: BasicProps) => {
-  const { search, limit, page } = props ?? {}
+interface props extends BasicProps {
+  angkatan?: string
+  id_jalur_masuk?: string
+}
+
+export const UseGetStudentData = (props?: props) => {
+  const { search, limit, page, angkatan, id_jalur_masuk } = props ?? {}
   const [studentData, setStudentData] = useState<IStudentData[]>([])
   const [meta, setMeta] = useState<Meta>()
 
@@ -14,6 +19,8 @@ export const UseGetStudentData = (props?: BasicProps) => {
   if (page) Params.append('page', page ?? '1')
   if (limit) Params.append('limit', limit ?? '10')
   if (search) Params.append('search', search ?? '')
+  if (angkatan) Params.append('angkatan', angkatan ?? '')
+  if (id_jalur_masuk) Params.append('id_jalur_masuk', id_jalur_masuk ?? '')
 
   const { data, isLoading, isFetching } = useQuery({
     refetchOnWindowFocus: false,
@@ -51,4 +58,24 @@ export const UseGetDetailStudentData = (id: string) => {
   }, [data])
 
   return { studentData, loading }
+}
+
+export const UseGetYearLevel = () => {
+  const [yearLevel, setYearLevel] = useState<number[]>([])
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['year-level'],
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get('/eoffice/mahasiswa/filter-tahun-angkatan').then((res) => res.data.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setYearLevel(data)
+    }
+  }, [data])
+
+  return { yearLevel, loading }
 }

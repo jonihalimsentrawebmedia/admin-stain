@@ -33,6 +33,9 @@ const ButtonStatusOnce = (props: props) => {
           queryClient.invalidateQueries({
             queryKey: ['letter-generate'],
           })
+          queryClient.invalidateQueries({
+            queryKey: ['letter-generate-detail'],
+          })
         }
       })
       .catch((err) => {
@@ -135,7 +138,7 @@ const ButtonStatusOnce = (props: props) => {
                   <>
                     <Button
                       className={'bg-green-500 text-white hover:bg-green-600'}
-                      onClick={() => HandleSave('DIPROSES')}
+                      onClick={() => HandleSave('SELESAI')}
                       disabled={loading}
                     >
                       <IoIosCheckbox className={'size-4'} />
