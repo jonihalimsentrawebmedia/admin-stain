@@ -7,6 +7,7 @@ import { MdInfo, MdOutlineHistory } from 'react-icons/md'
 import { TimeAgo } from '@/utils/helper.tsx'
 import { ButtonPublishAgendaUnit } from '../buttonPublish.tsx'
 import { HiPencil } from 'react-icons/hi'
+import { ButtonDeleteAgendaUnit } from '../buttonDelete.tsx'
 
 export const UnPublishedStatusColumns = () => {
   const [searchParams] = useSearchParams()
@@ -135,6 +136,7 @@ export const UnPublishedStatusColumns = () => {
                 <MdInfo />
               </button>
             </Link>
+            <ButtonDeleteAgendaUnit {...row?.original} />
           </>
         )
       },

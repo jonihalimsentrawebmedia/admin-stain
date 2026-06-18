@@ -99,8 +99,8 @@ export const FormJobVacancy = (props: Props) => {
           <TextInput
             form={form}
             name={'kouta_pekerjaan'}
-            label={'Kouta Pekerjaan'}
-            placeholder={'Kouta Pekerjaan'}
+            label={'Kuota Pekerjaan'}
+            placeholder={'Kuota Pekerjaan'}
             className={'bg-white w-1/2'}
             type={'number'}
             isNumber
@@ -178,8 +178,8 @@ export const FormJobVacancy = (props: Props) => {
           <TextInput
             form={form}
             name={'tgl_buka_pekerjaan'}
-            label={'Tanggal Buka Pekerjaan'}
-            placeholder={'Tanggal Buka Pekerjaan'}
+            label={'Tanggal Buka Pendaftaran'}
+            placeholder={'Tanggal Buka Pendaftaran'}
             className={'bg-white w-1/2'}
             type={'date'}
             isRequired
@@ -189,8 +189,8 @@ export const FormJobVacancy = (props: Props) => {
           <TextInput
             form={form}
             name={'tgl_tutup_pekerjaan'}
-            label={'Tanggal Tutup Pekerjaan'}
-            placeholder={'Tanggal Tutup Pekerjaan'}
+            label={'Tanggal Tutup Pendaftaran'}
+            placeholder={'Tanggal Tutup Pendaftaran'}
             className={'bg-white w-1/2'}
             type={'date'}
             isRequired

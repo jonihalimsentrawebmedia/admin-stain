@@ -120,8 +120,8 @@ export const FormCompanyInformation = (props: Props) => {
             label={'Lokasi'}
             fx={() => {
               if (form.watch('lokasi') === 'DALAM_NEGERI') {
-                const Indo = country.find(
-                  (row) => row?.nama_negara.toLowerCase() === 'indonesia'
+                const Indo = country.find((row) =>
+                  row?.nama_negara.toLowerCase().includes('indonesia')
                 )?.id_negara
                 form.setValue('id_negara', Indo)
                 form.setValue('negara', '')

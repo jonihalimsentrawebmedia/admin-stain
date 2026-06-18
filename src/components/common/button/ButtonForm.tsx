@@ -42,7 +42,7 @@ const ButtonForm = ({ loading, onCancel, position = 'justify-end', label, classN
         {label ?? (
           <>
             <Save />
-            Save
+            Simpan
           </>
         )}
       </Button>

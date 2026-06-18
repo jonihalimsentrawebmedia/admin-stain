@@ -34,7 +34,7 @@ export const ButtonPublishArticle = (data: IArticleCarrier) => {
           queryClient.invalidateQueries({
             queryKey: ['carrier-article-status'],
           })
-          toast.success(res.data.message || 'Success Mengajukan data berita')
+          toast.success(res.data.message || 'Success Mengajukan data Artikel')
           setOpen(false)
           setLoading(false)
         }
@@ -63,7 +63,7 @@ export const ButtonPublishArticle = (data: IArticleCarrier) => {
         className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
         title={'Ajukan Ke Editor'}
-        description={'Apakah anda yakin untuk mengajukan berita yang dipilih ke editor?'}
+        description={'Apakah anda yakin untuk mengajukan Artikel yang dipilih ke editor?'}
       >
         <div className={'flex flex-col gap-2.5'}>
           {data?.artikel_gambar_tambahan.length > 0 ? (

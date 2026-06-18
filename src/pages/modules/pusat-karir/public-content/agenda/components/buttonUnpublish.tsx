@@ -56,8 +56,8 @@ export const ButtonUnpublishAgendaUnit = (data: IAgendaDetail) => {
         setOpen={setOpen}
         isAuto
         className={'rounded lg:max-w-xl'}
-        title={'Publish Agenda'}
-        description={'Apakah anda yakin untuk mempublish Agenda yang dipilih?'}
+        title={'Unpublish Agenda'}
+        description={'Apakah anda yakin untuk mengUnpublish Agenda yang dipilih?'}
       >
         <div className={'flex flex-col gap-2.5'}>
           <div className={'text-center flex justify-center'}>

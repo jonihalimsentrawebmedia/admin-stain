@@ -34,7 +34,7 @@ export const ButtonUnpublishArticle = (data: IArticleCarrier) => {
           queryClient.invalidateQueries({
             queryKey: ['carrier-article-status'],
           })
-          toast.success(res.data.message || 'Success Mengajukan data berita')
+          toast.success(res.data.message || 'Success Mengajukan data Artikel')
           setOpen(false)
           setLoading(false)
         }
@@ -54,7 +54,7 @@ export const ButtonUnpublishArticle = (data: IArticleCarrier) => {
         className={'border-red-500 text-red-500 hover:text-red-600'}
       >
         <MdCancel />
-        Unpublish Berita
+        Unpublish Artikel
       </Button>
 
       <DialogCustom
@@ -62,8 +62,8 @@ export const ButtonUnpublishArticle = (data: IArticleCarrier) => {
         isAuto
         className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
-        title={'Unpublish Berita'}
-        description={'Apakah anda yakin untuk mempublish berita yang dipilih?'}
+        title={'Unpublish Artikel'}
+        description={'Apakah anda yakin untuk mempublish Artikel yang dipilih?'}
       >
         <div className={'flex flex-col gap-2.5'}>
           {data?.artikel_gambar_tambahan.length > 0 ? (
@@ -107,7 +107,7 @@ export const ButtonUnpublishArticle = (data: IArticleCarrier) => {
                       onClick={HandleApprove}
                     >
                       <MdCancel />
-                      Unpublish Berita
+                      Unpublish Artikel
                     </Button>
                   ),
                   onClick: () => {},
