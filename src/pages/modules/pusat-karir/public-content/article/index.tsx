@@ -127,7 +127,7 @@ export const ArticleCarrierPublicContentPage = () => {
                 />
               ),
             },
-            { type: 'add', label: 'Tulis Berita', onClick: () => navigate('add') },
+            { type: 'add', label: 'Tulis Artikel', onClick: () => navigate('add') },
           ]}
         />
 

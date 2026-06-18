@@ -49,6 +49,44 @@ export const ColumnsBudget = () => {
       },
     },
     {
+      accessorKey: 'realisasi',
+      header: 'Realisasi',
+      cell: ({ row }) => {
+        const data = row?.original
+        return (
+          <>
+            <p className={'text-end'}>
+              {new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                maximumFractionDigits: 0,
+                minimumFractionDigits: 0,
+              }).format(Number(data?.realisasi))}
+            </p>
+          </>
+        )
+      },
+    },
+    {
+      accessorKey: 'sisa_anggaran',
+      header: 'Sisa Anggaran',
+      cell: ({ row }) => {
+        const data = row?.original
+        return (
+          <>
+            <p className={'text-end'}>
+              {new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+                maximumFractionDigits: 0,
+                minimumFractionDigits: 0,
+              }).format(Number(data?.sisa_anggaran))}
+            </p>
+          </>
+        )
+      },
+    },
+    {
       accessorKey: 'action',
       header: '',
       cell: ({ row }) => {

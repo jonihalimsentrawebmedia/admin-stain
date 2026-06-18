@@ -10,6 +10,7 @@ import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { UseGetUrlPortalCV } from '@/pages/modules/pusat-karir/service/portal-cv/hooks'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
+import { Link } from 'react-router-dom'
 
 export const PortalCVATS = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -123,7 +124,12 @@ export const PortalCVATS = () => {
 
             <div className="grid grid-cols-[12rem_1fr]">
               <p className="text-gray-500">URL/Link</p>
-              <p>{urlPortal?.url}</p>
+              <Link
+                to={urlPortal?.url ?? '#'}
+                className={'text-blue-500 underline underline-offset-4'}
+              >
+                {urlPortal?.url}
+              </Link>
             </div>
           </>
         )}

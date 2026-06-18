@@ -19,18 +19,18 @@ export const ColumnsSpecialization = () => {
     },
     {
       accessorKey: 'nama_spesialisasi',
-      header: 'Nama Specialisasi',
+      header: 'Nama Spesialisasi',
     },
     {
       accessorKey: 'id_spesialisasi',
-      header: 'Sub Specialisasi',
+      header: 'Sub Spesialisasi',
       cell: ({ row }) => {
         return (
           <Link
             to={`${row?.original?.id_spesialisasi}/sub-specialization`}
             className={'border border-primary text-primary p-1.5 w-fit rounded'}
           >
-            Lihat Sub Specialisasi
+            Lihat Sub Spesialisasi
           </Link>
         )
       },

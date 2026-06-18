@@ -71,10 +71,6 @@ export const UnPublishColumnsUnit = () => {
       },
     },
     {
-      accessorKey: 'nama_kategori_berita',
-      header: 'Kategori Berita',
-    },
-    {
       accessorKey: 'penulis',
       header: 'Penulis',
     },

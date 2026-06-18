@@ -30,7 +30,7 @@ export const ButtonDraftArticle = (data: IArticleCarrier) => {
         if (res?.data?.status) {
           setOpen(false)
           setLoading(false)
-          toast.success(res.data.message || 'Success Mengajukan data berita')
+          toast.success(res.data.message || 'Success Mengajukan data Artikel')
           queryClient.invalidateQueries({
             queryKey: ['carrier-article'],
           })
@@ -63,7 +63,7 @@ export const ButtonDraftArticle = (data: IArticleCarrier) => {
         className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
         title={'Kembali Ke Draft'}
-        description={'Apakah anda yakin untuk mengembalikan berita yang diajukan ke draft?'}
+        description={'Apakah anda yakin untuk mengembalikan Artikel yang diajukan ke draft?'}
       >
         <div className={'flex flex-col gap-2.5'}>
           {data?.artikel_gambar_tambahan.length > 0 ? (
