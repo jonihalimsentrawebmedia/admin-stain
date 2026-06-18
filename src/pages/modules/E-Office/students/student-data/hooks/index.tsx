@@ -8,10 +8,12 @@ import type { IStudentData } from '../data/types.ts'
 interface props extends BasicProps {
   angkatan?: string
   id_jalur_masuk?: string
+  id_fakultas: string
+  id_prodi: string
 }
 
 export const UseGetStudentData = (props?: props) => {
-  const { search, limit, page, angkatan, id_jalur_masuk } = props ?? {}
+  const { search, limit, page, angkatan, id_jalur_masuk, id_fakultas, id_prodi } = props ?? {}
   const [studentData, setStudentData] = useState<IStudentData[]>([])
   const [meta, setMeta] = useState<Meta>()
 
@@ -21,6 +23,8 @@ export const UseGetStudentData = (props?: props) => {
   if (search) Params.append('search', search ?? '')
   if (angkatan) Params.append('angkatan', angkatan ?? '')
   if (id_jalur_masuk) Params.append('id_jalur_masuk', id_jalur_masuk ?? '')
+  if (id_fakultas) Params.append('id_fakultas', id_fakultas ?? '')
+  if (id_prodi) Params.append('id_prodi', id_prodi ?? '')
 
   const { data, isLoading, isFetching } = useQuery({
     refetchOnWindowFocus: false,
