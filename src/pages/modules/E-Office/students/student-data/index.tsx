@@ -8,6 +8,7 @@ import TableCustom from '@/components/common/table/TableCustom.tsx'
 import FilterSelect from '@/components/common/filter/filterBasic.tsx'
 import { UseGetAdmissionProcess } from '@/pages/modules/E-Office/students/admission-process/hooks'
 import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan-unit/hooks.tsx'
+import ButtonImport from '@/pages/modules/E-Office/students/student-data/component/buttonImport.tsx'
 
 const ListStudentData = () => {
   const [searchParams] = useSearchParams()
@@ -46,6 +47,10 @@ const ListStudentData = () => {
         <ButtonTitleGroup
           label={'Data Mahasiswa'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonImport />,
+            },
             {
               type: 'custom',
               element: (
