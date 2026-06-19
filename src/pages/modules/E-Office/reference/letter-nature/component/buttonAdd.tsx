@@ -50,7 +50,7 @@ const ButtonAddLetterNature = () => {
         Tambah Sifat Surat
       </Button>
 
-      <DialogBasic title={'Tambah Sifat Suret'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Tambah Sifat Surat'} open={open} setOpen={setOpen}>
         <FormLetterNature
           loading={loading}
           open={open}

@@ -55,12 +55,10 @@ export const FormLupSum = (props: Props) => {
                 isRow
                 usePortal
                 data={
-                  pejabat
-                    ?.filter((row) => row.jabatan.toLowerCase() === 'pejabat')
-                    .map((row) => ({
-                      label: row?.nama_lengkap,
-                      value: row?.id_pejabat,
-                    })) ?? []
+                  pejabat.map((row) => ({
+                    label: `${row?.nama_lengkap} (${row?.jabatan})`,
+                    value: row?.id_pejabat,
+                  })) ?? []
                 }
               />
               <SelectBasicInput
@@ -72,12 +70,10 @@ export const FormLupSum = (props: Props) => {
                 isRow
                 usePortal
                 data={
-                  pejabat
-                    ?.filter((row) => row.jabatan.toLowerCase() === 'bendahara')
-                    .map((row) => ({
-                      label: row?.nama_lengkap,
-                      value: row?.id_pejabat,
-                    })) ?? []
+                  pejabat.map((row) => ({
+                    label: `${row?.nama_lengkap} (${row?.jabatan})`,
+                    value: row?.id_pejabat,
+                  })) ?? []
                 }
               />
               <SelectBasicInput

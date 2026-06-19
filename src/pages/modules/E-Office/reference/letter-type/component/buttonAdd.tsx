@@ -44,10 +44,10 @@ const ButtonAddLetterType = () => {
     <>
       <Button className={'rounded-full text-white hover:text-white'} onClick={() => setOpen(!open)}>
         <BiPlus />
-        Tambah Jeni Surat
+        Tambah Jenis Surat
       </Button>
 
-      <DialogBasic title={'Jenis Jeni Suret'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Tambah Jenis Surat'} open={open} setOpen={setOpen}>
         <FormLetterType
           loading={loading}
           open={open}

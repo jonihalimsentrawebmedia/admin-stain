@@ -63,7 +63,7 @@ const ButtonEditLetterType = (props: props) => {
         <HiPencil />
       </button>
 
-      <DialogBasic title={'Edit Jenis Suret'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Edit Jenis Surat'} open={open} setOpen={setOpen}>
         <FormLetterType
           loading={loading}
           open={open}

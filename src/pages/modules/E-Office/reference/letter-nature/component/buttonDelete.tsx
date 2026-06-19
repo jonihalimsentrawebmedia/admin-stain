@@ -48,7 +48,7 @@ const ButtonDeleteLetterNature = (props: props) => {
         <FaTrash />
       </button>
 
-      <DialogBasic title={'Edit Sifat Suret'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Hapus Sifat Surat'} open={open} setOpen={setOpen}>
         <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
           <p className="text-gray-500">Kode</p>
           <p>{data?.kode}</p>
