@@ -1,10 +1,10 @@
 import { Link, useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
 import type { IServiceFooter } from '@/pages/modules/pusat-karir/service/Footer/data/types.tsx'
-import { Switch } from '@/components/ui/switch.tsx'
 import { FaExternalLinkAlt } from 'react-icons/fa'
 import { ButtonEditFooterService } from '@/pages/modules/pusat-karir/service/Footer/component/buttonEdit.tsx'
 import { ButtonDeleteFooterService } from '@/pages/modules/pusat-karir/service/Footer/component/buttonDelete.tsx'
+import { SwitchStatus } from '@/pages/modules/pusat-karir/component/common/switchStatus.tsx'
 
 export const ColumnsService = () => {
   const [searchParams] = useSearchParams()
@@ -44,7 +44,17 @@ export const ColumnsService = () => {
     {
       accessorKey: 'is_active',
       header: 'Posisi Footer',
-      cell: ({ row }) => <Switch checked={row?.original?.is_footer} />,
+      cell: ({ row }) => {
+        return (
+          <>
+            <SwitchStatus
+              status={row?.original.is_footer}
+              url={`/pusat-karir/layanan/${row.original.id_layanan}/toggle-footer`}
+              name={'footer-service'}
+            />
+          </>
+        )
+      },
     },
     {
       accessorKey: 'action',
