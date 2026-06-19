@@ -115,6 +115,7 @@ export const FormMemberStaff = (props: FormProps) => {
                 form.setValue('url_gambar', employeeFind?.gambar_url ?? '')
                 form.setValue('nama_anggota', employeeFind?.nama ?? '')
                 form.setValue('jabatan', employeeFind?.nama_jabatan_struktural ?? '')
+                form.setValue('nip', employeeFind?.nip ?? '')
               }}
               name={'id_sdm'}
               form={form}
@@ -136,7 +137,7 @@ export const FormMemberStaff = (props: FormProps) => {
             <div />
             <UploadPasPhoto
               label={'Foto Profil (4x6)'}
-              name={'gambar_url'}
+              name={'url_gambar'}
               form={form}
               required
               placeholder={'Uplaod Foto'}

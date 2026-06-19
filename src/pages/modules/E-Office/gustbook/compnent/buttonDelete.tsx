@@ -50,7 +50,7 @@ const ButtonDeleteGuestBooks = (props: props) => {
 
       <DialogBasic
         title={'Hapus Buku Tamu'}
-        description={'Jenis surat ini akan dihapus. Apakah Anda Yakin?'}
+        description={'Buku Tamu ini akan dihapus. Apakah Anda Yakin?'}
         open={open}
         setOpen={setOpen}
       >
