@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
 export const UseGetTracerStudy = () => {
-  const [tracerStudy, setTracerStudy] = useState<{ url: string }>()
+  const [tracerStudy, setTracerStudy] = useState<{ link_url: string }>()
 
   const { data, isFetching, isLoading } = useQuery({
     queryKey: ['tracer-study'],

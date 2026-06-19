@@ -34,7 +34,7 @@ export const ColumnsJobVacancy = () => {
     },
     {
       accessorKey: 'jenis_pekerjaan',
-      header: 'jenis Pekerjaan',
+      header: 'Jenis Pekerjaan',
     },
     {
       accessorKey: 'jenis_lokasi_kerja',
@@ -50,7 +50,7 @@ export const ColumnsJobVacancy = () => {
     },
     {
       accessorKey: 'kouta_pekerjaan',
-      header: 'Kouta',
+      header: 'Kuota Perkerjaan',
     },
     {
       accessorKey: 'tgl_buka_pekerjaan',

@@ -19,7 +19,7 @@ export const ColumnsSubSpecialization = () => {
     },
     {
       accessorKey: 'nama_spesialisasi',
-      header: 'Nama Specialisasi',
+      header: 'Nama Spesialisasi',
     },
     {
       accessorKey: 'urutan',

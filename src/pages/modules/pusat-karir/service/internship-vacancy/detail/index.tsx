@@ -51,7 +51,7 @@ export const DetailInternshipVacancy = () => {
               <li key={k}>{item?.nama_spesialisasi}</li>
             ))}
           </ul>
-          <p className="text-gray-500">Kouta</p>
+          <p className="text-gray-500">Kuota</p>
           <p>{internshipVacancy?.kouta_pekerjaan}</p>
           <p className="text-gray-500">Jenis Lokasi Kerja</p>
           <p>{internshipVacancy?.jenis_lokasi_kerja}</p>

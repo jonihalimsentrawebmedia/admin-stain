@@ -114,7 +114,6 @@ export const FormSocialMedia = (props: Props) => {
               label={'LinkedIn'}
               placeholder={'Masukkan URL LinkedIn'}
               type={'url'}
-              isRequired
             />
             <TextInput
               form={form}
@@ -122,7 +121,6 @@ export const FormSocialMedia = (props: Props) => {
               placeholder={'Masukkan URL Instagram'}
               label={'Instagram'}
               type={'url'}
-              isRequired
             />
 
             <TextInput
@@ -140,7 +138,6 @@ export const FormSocialMedia = (props: Props) => {
               label={'Website Karir'}
               placeholder={'Website Karir'}
               type={'url'}
-              isRequired
             />
           </div>
 
