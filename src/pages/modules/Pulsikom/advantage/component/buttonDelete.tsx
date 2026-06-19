@@ -48,12 +48,12 @@ export const ButtonDeleteAdvantage = (props: Props) => {
       </button>
 
       <DialogBasic
-        title={'Hapus Cerita Alumni'}
+        title={'Hapus Keunggulan'}
         description={'Apakah anda yakin untuk menghapus data dibawah ini?'}
         open={open}
         setOpen={setOpen}
       >
-        <div className="grid grid-cols-[12rem_1fr]">
+        <div className="grid grid-cols-[12rem_1fr] gap-4">
           <img
             src={data?.url_gambar}
             alt={data?.key_gambar}
