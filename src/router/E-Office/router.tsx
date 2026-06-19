@@ -172,6 +172,9 @@ const UpdatedStudentData = lazy(
 const DetailStudentData = lazy(
   () => import('@/pages/modules/E-Office/students/student-data/detail')
 )
+const ImportStudentData = lazy(
+  () => import('@/pages/modules/E-Office/students/student-data/import')
+)
 
 export const E_OFFICE_ROUTE = [
   {
@@ -613,6 +616,10 @@ export const E_OFFICE_ROUTE = [
           {
             path: 'edit/:id',
             element: <UpdatedStudentData />,
+          },
+          {
+            path: 'import',
+            element: <ImportStudentData />,
           },
         ],
       },
