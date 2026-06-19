@@ -12,6 +12,7 @@ export const JobSeekersResolver = z.object({
   url_ktm: z.string(),
   key_url_ktm: z.string().optional().nullable(),
   status_mahasiswa: z.enum(['AKTIF', 'ALUMNI']),
+  universitas_asal_luar_universitas: z.string().optional().nullable(),
   no_handphone: z.string(),
   email: z.email(),
   password: z.string().optional().nullable(),

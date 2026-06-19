@@ -167,6 +167,15 @@ export const FormJobSeekers = () => {
           ) : (
             <>
               <TextInput
+                name={'universitas_asal_luar_universitas'}
+                form={form}
+                label={'Nama Universitas'}
+                placeholder={'Nama Universitas'}
+                isRequired
+                isRow
+              />
+
+              <TextInput
                 name={'fakultas'}
                 form={form}
                 label={'Fakultas'}
