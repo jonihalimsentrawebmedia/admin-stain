@@ -31,7 +31,7 @@ export const ColumnsEventReport = () => {
             <p>{data?.waktu}</p>
             <p>{data?.tempat}</p>
             <p>
-              Penyelengarah :{' '}
+              Penyelenggara :{' '}
               <span className={'font-semibold text-primary'}>{data?.penyelenggara}</span>
             </p>
           </>
