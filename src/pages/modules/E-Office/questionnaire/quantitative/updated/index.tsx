@@ -33,7 +33,7 @@ const UpdatedQuantitativeQuestionnaire = () => {
 
   const HandleSave = async (value: TQuestionnaireQuantitative) => {
     setLoading(true)
-    await AxiosClient.post(`/eoffice/survei`, value)
+    await AxiosClient.put(`/eoffice/survei/${id}`, value)
       .then((res) => {
         if (res?.data?.status) {
           setLoading(false)

@@ -57,7 +57,7 @@ export const ButtonDeletePlanning = (props: props) => {
         className={'rounded max-w-2xl'}
       >
         <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
-          <p className="text-gray-500">Nama Kelompok</p>
+          <p className="text-gray-500">Nama Kategori</p>
           <p>{data?.nama_kategori}</p>
           <p className="text-gray-500">Urutan</p>
           <p>{data?.urutan}</p>
