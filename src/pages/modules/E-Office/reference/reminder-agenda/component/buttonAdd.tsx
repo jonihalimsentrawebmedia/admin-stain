@@ -44,7 +44,7 @@ const ButtonAddReminderAgenda = () => {
     <>
       <Button className={'rounded-full text-white hover:text-white'} onClick={() => setOpen(!open)}>
         <BiPlus />
-        Tambah Jeni Surat
+        Tambah Waktu Pengingat Agenda
       </Button>
 
       <DialogBasic title={'Tambah Waktu Pengingat Agenda'} open={open} setOpen={setOpen}>

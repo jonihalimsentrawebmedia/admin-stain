@@ -51,7 +51,7 @@ const ButtonDeleteReminderAgenda = (props: props) => {
       <DialogBasic title={'Hapus Waktu Pengingat Agenda'} open={open} setOpen={setOpen}>
         <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
           <p className="text-gray-500">Waktu</p>
-          <p>{data?.waktu}</p>
+          <p>{data?.waktu} Menit</p>
         </div>
         <ButtonTitleGroup
           label={''}

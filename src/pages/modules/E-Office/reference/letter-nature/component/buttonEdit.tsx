@@ -68,7 +68,7 @@ const ButtonEditLetterNature = (props: props) => {
         <HiPencil />
       </button>
 
-      <DialogBasic title={'Edit Sifat Suret'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Edit Sifat Surat'} open={open} setOpen={setOpen}>
         <FormLetterNature
           loading={loading}
           open={open}

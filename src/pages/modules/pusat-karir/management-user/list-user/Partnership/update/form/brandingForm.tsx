@@ -127,7 +127,7 @@ export const FormBranding = (props: Props) => {
             form={form}
             name={'tentang_perusahaan'}
             placeholder={'Tentang Perusahaan'}
-            label={'Tentang Perusahaan*'}
+            label={'Tentang Perusahaan'}
             isRequired
             isRow
           />
