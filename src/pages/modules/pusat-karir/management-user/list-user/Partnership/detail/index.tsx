@@ -63,7 +63,9 @@ export const DetailProfilePartnership = () => {
                   </div>
                   <Button
                     onClick={() =>
-                      navigate(`/modules/pusat-karir/management-user/user/mitra-kerja/edit/${id}`)
+                      navigate(
+                        `/modules/pusat-karir/management-user/user/mitra-kerja/edit/${id}?from=detail`
+                      )
                     }
                   >
                     <HiPencil />
@@ -81,8 +83,7 @@ export const DetailProfilePartnership = () => {
           }
         >
           <MdInfo className={'text-primary-500  size-4'} />
-          Silahkan lakukan perubahan informasi User. Perubahan akan disimpan setelah tombol{' '}
-          {`"Simpan Perubahan"`} Diklik.
+          Periksa kembali informasi pengguna. Klik "Edit Data User" untuk memperbarui data yang diperlukan.
         </div>
 
         <Tabs

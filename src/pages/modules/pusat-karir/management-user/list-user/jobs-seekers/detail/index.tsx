@@ -35,7 +35,9 @@ export const DetailUserJobsSeekers = () => {
                   <Button
                     variant={'outline'}
                     onClick={() =>
-                      navigate(`/modules/pusat-karir/management-user/user/pencari-kerja/edit/${id}`)
+                      navigate(
+                        `/modules/pusat-karir/management-user/user/pencari-kerja/edit/${id}?from=detail`
+                      )
                     }
                     className={'border-primary text-primary hover:text-primary'}
                   >

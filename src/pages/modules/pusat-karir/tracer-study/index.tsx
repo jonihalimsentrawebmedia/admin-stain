@@ -23,7 +23,7 @@ export const TracerStudyPage = () => {
   useEffect(() => {
     if (tracerStudy) {
       form.reset({
-        url: tracerStudy?.url,
+        link_url: tracerStudy?.link_url,
       })
     }
   }, [tracerStudy])
@@ -125,8 +125,11 @@ export const TracerStudyPage = () => {
 
             <div className="grid grid-cols-[12rem_1fr]">
               <p className="text-gray-500">URL/Link</p>
-              <Link to={tracerStudy?.url ?? '#'} className={'text-blue-500 underline underline-offset-4'}>
-                {tracerStudy?.url}
+              <Link
+                to={tracerStudy?.link_url ?? '#'}
+                className={'text-blue-500 underline underline-offset-4'}
+              >
+                {tracerStudy?.link_url}
               </Link>
             </div>
           </>

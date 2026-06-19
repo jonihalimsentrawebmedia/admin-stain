@@ -6,7 +6,7 @@ import AxiosClient from '@/provider/axios'
 import { useQueryClient } from '@tanstack/react-query'
 import { ResolverCompanyInformation, type TypeCompanyInformation } from './resolver.tsx'
 import { UseGetCompanyInformation } from '@/pages/modules/pusat-karir/management-user/list-user/Partnership/hooks'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import UseGetCountry from '@/pages/modules/settings/reference/country/controller/useGetCountry.tsx'
 import UseGetProvince from '@/pages/modules/settings/reference/province/controller/useGetProvince.tsx'
 import UseGetRegency from '@/pages/modules/settings/reference/regency/controller/useGetRegency.tsx'
@@ -28,6 +28,8 @@ interface Props {
 export const FormCompanyInformation = (prop: Props) => {
   const { setValue } = prop
   const { id } = useParams()
+  const [searchParams] = useSearchParams()
+  const from = searchParams.get('from')
   const navigate = useNavigate()
 
   const [loading, setLoading] = useState(false)
@@ -95,11 +97,17 @@ export const FormCompanyInformation = (prop: Props) => {
                   <Button
                     variant={'outline'}
                     className={'border-primary text-primary hover:text-primary'}
-                    onClick={(e) => {
+                    onClick={async (e) => {
                       e.preventDefault()
                       const data = form.getValues()
-                      HandleSave(data, false)
-                      navigate('/modules/pusat-karir/management-user/user')
+                      await HandleSave(data, false)
+                      if (from && from === 'detail') {
+                        navigate(
+                          `/modules/pusat-karir/management-user/user/mitra-kerja/detail/${id}`
+                        )
+                      } else {
+                        navigate('/modules/pusat-karir/management-user/user')
+                      }
                     }}
                   >
                     Simpan & Keluar

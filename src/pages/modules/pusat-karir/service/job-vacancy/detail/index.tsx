@@ -46,12 +46,10 @@ export const DetailJobVacancy = () => {
           <p className="text-gray-500">Jabatan</p>
           <p>{jobVacancy?.nama_pekerjaan}</p>
           <p className="text-gray-500">Spesialisasi</p>
-          <ul className={'flex gap-2 items-center'}>
-            {jobVacancy?.list_data_spesialisasi?.map((item, k) => (
-              <li key={k}>{item?.nama_spesialisasi}</li>
-            ))}
-          </ul>
-          <p className="text-gray-500">Kouta</p>
+          <p className={'text-primary'}>
+            {jobVacancy?.list_data_spesialisasi?.map((row) => row.nama_spesialisasi).join(' | ')}
+          </p>
+          <p className="text-gray-500">Kuota</p>
           <p>{jobVacancy?.kouta_pekerjaan}</p>
           <p className="text-gray-500">Jenis Lokasi Kerja</p>
           <p>{jobVacancy?.jenis_lokasi_kerja}</p>
