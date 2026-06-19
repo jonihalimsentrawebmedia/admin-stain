@@ -10,6 +10,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
+import { Link } from 'react-router-dom'
 
 export const TracerStudyPage = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -124,7 +125,9 @@ export const TracerStudyPage = () => {
 
             <div className="grid grid-cols-[12rem_1fr]">
               <p className="text-gray-500">URL/Link</p>
-              <p>{tracerStudy?.url}</p>
+              <Link to={tracerStudy?.url ?? '#'} className={'text-blue-500 underline underline-offset-4'}>
+                {tracerStudy?.url}
+              </Link>
             </div>
           </>
         )}
