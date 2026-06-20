@@ -27,6 +27,7 @@ export const DetailZoneIntegrity = () => {
     <>
       <div className="space-y-5">
         <ButtonTitleGroup
+          isBack
           label={`Sub Kategori - ${detail?.nama_kategori}`}
           buttonGroup={[
             {
