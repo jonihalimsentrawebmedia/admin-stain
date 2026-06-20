@@ -21,7 +21,7 @@ export const ButtonDeleteLandingFaculty = (props: props) => {
 
   const HandleSave = async () => {
     setLoading(true)
-    await AxiosClient.delete(`/fakultas/landing/${data?.id_pusat_karir_landing}`)
+    await AxiosClient.delete(`/fakultas/landing/${data?.id_fakultas_landing}`)
       .then((res) => {
         if (res.data.status) {
           setOpen(false)
