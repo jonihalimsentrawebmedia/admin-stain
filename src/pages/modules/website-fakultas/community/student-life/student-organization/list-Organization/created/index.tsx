@@ -10,6 +10,7 @@ import { type IStudentOrganization, StudentOrganizationResolver } from '../data/
 import { zodResolver } from '@hookform/resolvers/zod'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 
 export const CreatedStudentOrganization = () => {
   const form = useForm<IStudentOrganization>({
@@ -40,6 +41,20 @@ export const CreatedStudentOrganization = () => {
     <>
       <Form {...form}>
         <form className={'space-y-5'} onSubmit={form.handleSubmit(handleSave)}>
+          <ButtonTitleGroup
+            label={'Tambah Organisasi Mahasiswa'}
+            buttonGroup={[
+              {
+                type: 'cancel',
+                label: 'Batal',
+                onClick: () => navigate(-1),
+              },
+              {
+                type: 'save',
+                label: 'Simpan',
+              },
+            ]}
+          />
           <UploadPhotoImage name={'url_gambar'} form={form} />
           <TextInput
             name={'nama'}

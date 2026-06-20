@@ -37,7 +37,7 @@ const ColumStudentOrganization = () => {
     },
     {
       accessorKey: 'nama',
-      header: 'Nama Organizacion',
+      header: 'Nama Organisasi',
     },
     {
       accessorKey: 'action',

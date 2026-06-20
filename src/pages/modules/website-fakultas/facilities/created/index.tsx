@@ -8,6 +8,7 @@ import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import { useNavigate } from 'react-router-dom'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 
 export const CreatedFacilities = () => {
   const [loading, setLoading] = useState(false)
@@ -35,7 +36,21 @@ export const CreatedFacilities = () => {
     <>
       <Form {...form}>
         <form className={'space-y-5'} onSubmit={form.handleSubmit(HandelSubmit)}>
-          <UploadPhotoImage name={'url_gambar'} form={form} />
+          <ButtonTitleGroup
+            label={'Tambah Fasilitas'}
+            buttonGroup={[
+              {
+                type: 'cancel',
+                label: 'Batal',
+                onClick: () => navigate(-1),
+              },
+              {
+                type: 'save',
+                label: 'Simpan',
+              },
+            ]}
+          />
+          <UploadPhotoImage name={'url_gambar'} form={form} label={'Foto Fasilitas'} />
           <TextInput
             name={'nama'}
             form={form}

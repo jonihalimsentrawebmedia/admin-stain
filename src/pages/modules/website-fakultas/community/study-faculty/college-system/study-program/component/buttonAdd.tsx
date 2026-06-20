@@ -29,6 +29,7 @@ export const ButtonAddStudyProgram = () => {
             queryKey: ['list-study-program'],
           })
           toast.success(res.data.message || 'Successfully added.')
+          form.reset()
         }
       })
       .catch((err) => {

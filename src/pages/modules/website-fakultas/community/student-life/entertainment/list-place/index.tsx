@@ -23,6 +23,7 @@ export const ListPlaceStudentOrganization = () => {
     <>
       <div className={'space-y-5'}>
         <ButtonTitleGroup
+          isBack
           label={'Daftar Hiburan Mahasiswa'}
           buttonGroup={[
             {

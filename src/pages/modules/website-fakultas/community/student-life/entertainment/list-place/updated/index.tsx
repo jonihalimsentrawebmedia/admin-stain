@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { UseGetDetailPlace } from '../hook/index'
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 
 export const UpdatedStudentListOrganization = () => {
   const form = useForm()
@@ -51,10 +52,21 @@ export const UpdatedStudentListOrganization = () => {
     <>
       <Form {...form}>
         <form className={'space-y-5'} onSubmit={form.handleSubmit(handleSave)}>
-          <UploadPhotoImage
-            name={'url_gambar'}
-            form={form}
+          <ButtonTitleGroup
+            label={'Edit Hiburan Mahasiswa'}
+            buttonGroup={[
+              {
+                type: 'cancel',
+                label: 'Batal',
+                onClick: () => navigate(-1),
+              },
+              {
+                type: 'save',
+                label: 'Simpan',
+              },
+            ]}
           />
+          <UploadPhotoImage name={'url_gambar'} form={form} />
           <TextInput
             name={'nama'}
             form={form}
@@ -65,7 +77,6 @@ export const UpdatedStudentListOrganization = () => {
             isRow
           />
           <RichText form={form} name={'deskripsi'} label={'Deskripsi'} required isRow />
-
           <ButtonForm loading={loading} onCancel={() => navigate(-1)} />
         </form>
       </Form>

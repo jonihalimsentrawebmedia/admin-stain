@@ -46,7 +46,7 @@ const ColumnsSectorCarrierProspect = () => {
                 className={'text-primary border-primary hover:text-primary'}
               >
                 <FaForward />
-                Liha Detail
+                Lihat Detail
               </Button>
             </Link>
           </div>
