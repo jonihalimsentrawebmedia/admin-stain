@@ -14,6 +14,7 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 
 export const CreatedSubCategory = () => {
   const [loading, setLoading] = useState(false)
@@ -52,6 +53,13 @@ export const CreatedSubCategory = () => {
     <>
       <Form {...form}>
         <form className={'space-y-5'} onSubmit={form.handleSubmit(HandelSubmit)}>
+          <ButtonTitleGroup
+            label={'Tambah Sub Kategori'}
+            buttonGroup={[
+              { type: 'cancel', label: 'Batal', onClick: () => navigate(-1) },
+              { type: 'save', label: 'Simpan' },
+            ]}
+          />
           <SelectBasicInput
             name={'id_zona_integritas_kategori'}
             form={form}

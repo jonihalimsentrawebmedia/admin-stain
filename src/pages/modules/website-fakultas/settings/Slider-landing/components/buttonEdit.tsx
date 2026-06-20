@@ -33,7 +33,7 @@ export const ButtonEditLandingFaculty = (props: props) => {
 
   const HandleSave = async (value: any) => {
     setLoading(true)
-    await AxiosClient.put(`/fakultas/landing/${data?.id_pusat_karir_landing}`, value)
+    await AxiosClient.put(`/fakultas/landing/${data?.id_fakultas_landing}`, value)
       .then((res) => {
         if (res.data.status) {
           setOpen(false)

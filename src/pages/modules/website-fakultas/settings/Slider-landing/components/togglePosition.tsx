@@ -24,7 +24,7 @@ export const TogglePosition = (props: IProps) => {
   const queryClient = useQueryClient()
 
   const handleCheckedChange = async () => {
-    await AxiosClient.patch(`/fakultas/landing/${data?.id_pusat_karir_landing}/toggle-status`)
+    await AxiosClient.patch(`/fakultas/landing/${data?.id_fakultas_landing}/toggle-status`)
       .then((res) => {
         if (res?.data?.status) {
           queryClient.invalidateQueries({ queryKey: ['landing-faculty'] })
