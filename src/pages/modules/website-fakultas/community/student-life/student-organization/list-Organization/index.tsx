@@ -23,6 +23,7 @@ export const ListOrganizationStudentLife = () => {
     <>
       <div className={'space-y-5'}>
         <ButtonTitleGroup
+          isBack
           label={'Daftar Organisasi Mahasiswa'}
           buttonGroup={[
             {

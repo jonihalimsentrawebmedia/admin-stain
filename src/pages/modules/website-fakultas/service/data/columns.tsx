@@ -3,9 +3,9 @@ import type { ColumnDef } from '@tanstack/react-table'
 import type { IServices } from '../data/types'
 import { Button } from '@/components/ui/button.tsx'
 import { BiLinkExternal } from 'react-icons/bi'
-import { Switch } from '@/components/ui/switch.tsx'
 import { ButtonEditService } from '@/pages/modules/website-fakultas/service/component/buttonEdit.tsx'
 import { ButtonDeleteService } from '@/pages/modules/website-fakultas/service/component/buttonDelete.tsx'
+import { SwitchStatus } from '@/pages/modules/pusat-karir/component/common/switchStatus.tsx'
 
 export const ColumnsService = () => {
   const [searchParams] = useSearchParams()
@@ -50,7 +50,11 @@ export const ColumnsService = () => {
         const data = row?.original
         return (
           <>
-            <Switch checked={data?.is_footer} />
+            <SwitchStatus
+              status={data?.is_footer}
+              url={`fakultas/layanan/${data?.id_layanan}/toggle-footer`}
+              name={'service-faculty'}
+            />
           </>
         )
       },

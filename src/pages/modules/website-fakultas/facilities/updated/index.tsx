@@ -9,6 +9,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { UseGetDetailFacilities } from '@/pages/modules/website-fakultas/facilities/hooks'
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 
 export const UpdatedFacilities = () => {
   const [loading, setLoading] = useState(false)
@@ -49,6 +50,20 @@ export const UpdatedFacilities = () => {
     <>
       <Form {...form}>
         <form className={'space-y-5'} onSubmit={form.handleSubmit(HandelSubmit)}>
+          <ButtonTitleGroup
+            label={'Ubah Data Fasilitas'}
+            buttonGroup={[
+              {
+                type: 'cancel',
+                label: 'Batal',
+                onClick: () => navigate(-1),
+              },
+              {
+                type: 'save',
+                label: 'Simpan',
+              },
+            ]}
+          />
           <UploadPhotoImage name={'url_gambar'} form={form} />
           <TextInput
             name={'nama'}

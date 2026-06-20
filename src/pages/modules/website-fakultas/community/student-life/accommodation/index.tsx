@@ -51,13 +51,13 @@ export const AccommodationStudentLife = () => {
           <Form {...form}>
             <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(handleSave)}>
               <ButtonTitleGroup
-                label={'Sistem Perkuliahan'}
+                label={'Akomodasi'}
                 buttonGroup={[
                   {
                     type: 'custom',
                     element: (
                       <ButtonGoToGuide
-                        titleGuide={'Sistem Perkuliahan'}
+                        titleGuide={'Akomodasi'}
                         valueGuide="FAKULTAS_KEHIDUPAN_AKOMODASI"
                       />
                     ),
@@ -83,13 +83,13 @@ export const AccommodationStudentLife = () => {
         <>
           <div className={'mt-5'}>
             <ButtonTitleGroup
-              label={'Sistem Perkuliahan'}
+              label={'Akomodasi'}
               buttonGroup={[
                 {
                   type: 'custom',
                   element: (
                     <ButtonGoToGuide
-                      titleGuide={'Sistem Perkuliahan'}
+                      titleGuide={'Akomodasi'}
                       valueGuide="FAKULTAS_KEHIDUPAN_AKOMODASI"
                     />
                   ),

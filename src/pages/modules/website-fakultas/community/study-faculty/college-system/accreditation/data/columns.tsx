@@ -7,6 +7,8 @@ import { useState } from 'react'
 import { History } from 'lucide-react'
 import RenderHTMLContent from '@/components/common/richtext/RenderHTMLContent.tsx'
 import { clsx } from 'clsx'
+import ButtonEditAccreditationFaculty from '@/pages/modules/website-fakultas/community/study-faculty/college-system/accreditation/component/buttonEdit.tsx'
+import ButtonDeleteAccreditationFaculty from '@/pages/modules/website-fakultas/community/study-faculty/college-system/accreditation/component/buttonDelete.tsx'
 
 export const AccreditationColumns = () => {
   const [searchParams] = useSearchParams()
@@ -127,6 +129,17 @@ export const AccreditationColumns = () => {
     {
       accessorKey: 'action',
       header: '',
+      cell: ({ row }) => {
+        const data = row?.original
+        return (
+          <>
+            <div className={'flex items-center gap-1.5'}>
+              <ButtonEditAccreditationFaculty data={data} />
+              <ButtonDeleteAccreditationFaculty data={data} />
+            </div>
+          </>
+        )
+      },
     },
   ]
 

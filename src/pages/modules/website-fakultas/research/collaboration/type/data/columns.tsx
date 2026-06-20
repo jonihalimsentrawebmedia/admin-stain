@@ -21,7 +21,7 @@ export const ColumnsTypeCollaboration = () => {
     },
     {
       accessorKey: 'nama',
-      header: 'Program Pendidikan',
+      header: 'Bidang Kolaborasi',
     },
     {
       accessorKey: 'deskripsi_program_pendidikan',

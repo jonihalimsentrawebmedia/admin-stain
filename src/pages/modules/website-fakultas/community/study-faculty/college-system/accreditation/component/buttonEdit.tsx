@@ -4,8 +4,6 @@ import { useEffect, useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
-import { Button } from '@/components/ui/button'
-import { Plus } from 'lucide-react'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import AccreditationFormFaculty from '@/pages/modules/website-fakultas/community/study-faculty/college-system/accreditation/component/forms.tsx'
 import {
@@ -13,12 +11,13 @@ import {
   type IAccreditationForm,
 } from '@/pages/modules/website-fakultas/community/study-faculty/college-system/accreditation/data/resolver.tsx'
 import type { IAccreditation } from '@/pages/modules/website-fakultas/community/study-faculty/college-system/accreditation/data/types.ts'
+import { HiPencil } from 'react-icons/hi'
 
 interface Props {
   data?: IAccreditation
 }
 
-const ButtonAddAccreditationFaculty = (props: Props) => {
+const ButtonEditAccreditationFaculty = (props: Props) => {
   const { data } = props
 
   const form = useForm<IAccreditationForm>({
@@ -43,7 +42,7 @@ const ButtonAddAccreditationFaculty = (props: Props) => {
 
   const handleSave = async (e: IAccreditationForm) => {
     setLoading(true)
-    await AxiosClient.post('/fakultas/akreditas', {
+    await AxiosClient.put(`/fakultas/akreditas/${data?.id_akreditas}`, {
       ...e,
       akhir_berlaku: new Date(e.akhir_berlaku).toISOString(),
       mulai_berlaku: new Date(e.mulai_berlaku).toISOString(),
@@ -67,16 +66,14 @@ const ButtonAddAccreditationFaculty = (props: Props) => {
 
   return (
     <>
-      <Button
-        variant={'outline'}
+      <button
+        className={'bg-yellow-500 p-1.5 text-white hover:bg-yellow-600 rounded'}
         onClick={() => {
           setOpen(true)
         }}
-        className="border border-primary hover:text-primay text-primary rounded"
       >
-        <Plus />
-        Tambah Akreditasi
-      </Button>
+        <HiPencil />
+      </button>
 
       <DialogBasic
         open={open}
@@ -97,4 +94,4 @@ const ButtonAddAccreditationFaculty = (props: Props) => {
   )
 }
 
-export default ButtonAddAccreditationFaculty
+export default ButtonEditAccreditationFaculty

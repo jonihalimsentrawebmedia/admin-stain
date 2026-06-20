@@ -120,8 +120,8 @@ export const UseGetTotalVisitorEditor = () => {
 
 export const UseGetApprovedListEditor = (props?: PropsMeta) => {
   const { status, page, limit } = props ?? {}
-  const [approvedList, setApprovedList] = useState<IContent[]>([])
-  const [meta, setMeta] = useState<Meta>()
+  // const [approvedList, setApprovedList] = useState<IContent[]>([])
+  // const [meta, setMeta] = useState<Meta>()
 
   const ParamsSearch = new URLSearchParams()
   if (status) ParamsSearch.set('status-publish', status)
@@ -139,16 +139,16 @@ export const UseGetApprovedListEditor = (props?: PropsMeta) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setApprovedList(data?.data)
-      setMeta(data?.meta)
-    } else {
-      setApprovedList([])
-    }
-  }, [data])
+  // useEffect(() => {
+  //   if (data) {
+  //     setApprovedList(data?.data)
+  //     setMeta(data?.meta)
+  //   } else {
+  //     setApprovedList([])
+  //   }
+  // }, [data])
 
-  return { approvedList, loading, meta }
+  return { approvedList: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export const UseGetApprovedListEditorStatus = () => {
