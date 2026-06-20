@@ -13,7 +13,8 @@ export const DetailFacilitiesPage = () => {
     <>
       <div className={'space-y-4 py-5'}>
         <ButtonTitleGroup
-          label={'Detail Organisasi Mahasiswa'}
+          isBack
+          label={'Detail Fasilitas'}
           buttonGroup={[
             {
               type: 'edit',

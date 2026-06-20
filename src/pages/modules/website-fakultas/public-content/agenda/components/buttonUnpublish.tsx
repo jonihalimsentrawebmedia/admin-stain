@@ -17,7 +17,7 @@ export const ButtonUnpublishAgendaFaculty = (data: IAgendaDetail) => {
 
   const HandleSubmission = async () => {
     setLoading(true)
-    await AxiosClient.patch(`/pusat-karir/agenda/${data?.id_agenda}/status-publish`, {
+    await AxiosClient.patch(`/fakultas/agenda/${data?.id_agenda}/status-publish`, {
       status_publish: 'UNPUBLISH',
     })
       .then((res) => {
@@ -56,7 +56,7 @@ export const ButtonUnpublishAgendaFaculty = (data: IAgendaDetail) => {
         setOpen={setOpen}
         isAuto
         className={'rounded lg:max-w-xl'}
-        title={'Publish Agenda'}
+        title={'Unpublish Agenda'}
         description={'Apakah anda yakin untuk mempublish Agenda yang dipilih?'}
       >
         <div className={'flex flex-col gap-2.5'}>
@@ -103,7 +103,7 @@ export const ButtonUnpublishAgendaFaculty = (data: IAgendaDetail) => {
                       onClick={HandleSubmission}
                     >
                       <MdCancel />
-                      Unpublish Pengumuman
+                      Unpublish Agenda
                     </Button>
                   ),
                   onClick: () => setOpen(!open),
