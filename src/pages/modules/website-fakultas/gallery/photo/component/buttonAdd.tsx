@@ -59,7 +59,7 @@ export const ButtonAddPhoto = () => {
       </Button>
 
       <DialogBasic
-        title={'Tambah Galery Foto'}
+        title={'Tambah Galeri Foto'}
         open={open}
         setOpen={setOpen}
         className={'lg:min-w-4xl'}
