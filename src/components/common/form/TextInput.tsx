@@ -40,7 +40,7 @@ interface Props<T extends FieldValues> {
    * 80 = 50%
    * 40 = 25%
    */
-  alphaColor?: string
+  // alphaColor?: string
 }
 
 function TextInput<T extends FieldValues>({
@@ -59,7 +59,7 @@ function TextInput<T extends FieldValues>({
   isNumber,
   isDisabled,
   isRow = false,
-  alphaColor = 'FF',
+  // alphaColor = 'FF',
 }: Props<T>) {
   const [showPassword, setShowPassword] = useState(false)
 
@@ -71,10 +71,10 @@ function TextInput<T extends FieldValues>({
    * HEX -> HEXA
    * #2563EB => #2563EBFF
    */
-  const hexToHexa = (hex: string) => {
-    const cleanHex = hex.slice(0, 7).toUpperCase()
-    return `${cleanHex}${alphaColor}`
-  }
+  // const hexToHexa = (hex: string) => {
+  //   const cleanHex = hex.slice(0, 7).toUpperCase()
+  //   return `${cleanHex}${alphaColor}`
+  // }
 
   /**
    * HEXA -> HEX
@@ -137,7 +137,7 @@ function TextInput<T extends FieldValues>({
                    * Color => HEXA
                    */
                   if (type === 'color') {
-                    field.onChange(hexToHexa(value))
+                    field.onChange(hexaToHex(value))
                     return
                   }
                   if (isNumber) {

@@ -15,9 +15,14 @@ export interface IManagementUnit {
   updated_user: string
   nama_user_created: string
   nama_user_updated: string
+  id_sdm: string
+  is_dosen: boolean
 }
 
 export const ManagementUnitResolver = z.object({
+  is_local_data: z.boolean().optional().nullable(),
+  is_dosen: z.boolean().optional().nullable(),
+  id_sdm: z.string().optional().nullable(),
   nama: z.string({ message: 'Nama wajib diisi.' }).min(1, { message: 'Nama wajib diisi.' }),
   gambar_url: z
     .string({ message: 'Gambar wajib diisi.' })

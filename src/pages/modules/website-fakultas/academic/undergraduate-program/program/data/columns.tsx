@@ -3,6 +3,7 @@ import type { ColumnDef } from '@tanstack/react-table'
 import type { IProgramUndergraduate } from '@/pages/modules/website-fakultas/academic/undergraduate-program/program/data/types.ts'
 import { FaForward } from 'react-icons/fa'
 import { ButtonEditProgram } from '@/pages/modules/website-fakultas/academic/undergraduate-program/program/component/buttonEdit.tsx'
+import { ButtonDeleteProgram } from '@/pages/modules/website-fakultas/academic/undergraduate-program/program/component/buttonDelete.tsx'
 
 export const ColumnsProgramUndergraduate = () => {
   const [searchParams] = useSearchParams()
@@ -65,6 +66,7 @@ export const ColumnsProgramUndergraduate = () => {
           <>
             <div className={'flex items-center gap-1.5'}>
               <ButtonEditProgram data={data} />
+              <ButtonDeleteProgram data={data} />
             </div>
           </>
         )

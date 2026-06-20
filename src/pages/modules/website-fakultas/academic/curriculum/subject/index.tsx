@@ -5,7 +5,7 @@ import { SidenavSubjectCurriculum } from './component/sidenav.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 export const CurriculumSubjectDetail = () => {
-  const { id_subject } = useParams()
+  const { id_subject, id } = useParams()
   const { curriculumDetail } = UseGetCurriculumDetail(id_subject ?? '')
 
   return (
@@ -24,6 +24,7 @@ export const CurriculumSubjectDetail = () => {
               ),
             },
           ]}
+          link={`/modules/website-fakultas/academic/curriculum/${id}`}
           isBack
         />
 
