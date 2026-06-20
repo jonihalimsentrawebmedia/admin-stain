@@ -13,6 +13,7 @@ export const DetailUktByEntrance = () => {
   const navigate = useNavigate()
 
   const temp_id_jalur_masuk = listPriceUkt?.data?.map((row) => row?.id_jalur_masuk)
+  console.log(listPriceUkt)
 
   return (
     <>
@@ -32,7 +33,7 @@ export const DetailUktByEntrance = () => {
         />
         {listPriceUkt?.data ? (
           <>
-            {listPriceUkt?.data.map((row, k) => (
+            {listPriceUkt?.data?.map((row, k) => (
               <div key={k}>
                 <div className={'flex items-center justify-between gap-4'}>
                   <div className={'w-full'}>
@@ -75,7 +76,7 @@ export const DetailUktByEntrance = () => {
                 </div>
                 <TableBasic
                   columns={ProdiUktColumns}
-                  data={row?.biaya_tingkatan}
+                  data={row?.biaya_tingkatan ?? []}
                   className={'mt-5'}
                 />
               </div>

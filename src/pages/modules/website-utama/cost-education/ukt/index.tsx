@@ -12,6 +12,7 @@ import { UseGetEntrance } from '@/pages/modules/website-utama/cost-education/ukt
 import { SwitchStatus } from '@/pages/modules/website-utama/cost-education/ukt/component/switchStatus.tsx'
 import { IoMdImage } from 'react-icons/io'
 import ButtonGoToGuide from '../../panduan/components/ButtonGoToGuide'
+import { UseGetSession } from '@/pages/modules/website-utama/session'
 
 export const UKTCostEducationPage = () => {
   const navigate = useNavigate()
@@ -23,10 +24,12 @@ export const UKTCostEducationPage = () => {
   const prodi = searchParams.get('prodi') ?? ''
   const level = searchParams.get('level') ?? ''
   const entrance = searchParams.get('entrance') ?? ''
+  const { session } = UseGetSession()
 
   const { satuanOrganisasi: facultyList } = UseGetSatuanOrganisasi({
     isGetAll: true,
     kelompok: 'FAKULTAS',
+    idParent: session?.id_satuan_organisasi,
   })
   const { satuanOrganisasi: prodiList } = UseGetSatuanOrganisasi({
     isGetAll: true,

@@ -30,7 +30,9 @@ export const ChangePrimaryAndFooterColor = () => {
   const queryClient = useQueryClient()
 
   const HandleSave = async (e: any) => {
-    await AxiosClient.post('/website-utama/pengaturan-warna-halaman', e)
+    await AxiosClient.post('/website-utama/pengaturan-warna-halaman', {
+      warna_admin: e?.warna_admin.slice(0, 7),
+    })
       .then((res) => {
         if (res.data.status) {
           setIsEdit(false)
@@ -59,7 +61,12 @@ export const ChangePrimaryAndFooterColor = () => {
               buttonGroup={[
                 {
                   type: 'custom',
-                  element: <ButtonGoToGuide titleGuide='Pengaturan Warna Halaman' valueGuide="WEBSITE_UTAMA_PENGATURAN_WARNA_HALAMAN" />,
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide="Pengaturan Warna Halaman"
+                      valueGuide="WEBSITE_UTAMA_PENGATURAN_WARNA_HALAMAN"
+                    />
+                  ),
                 },
                 {
                   type: 'edit',
