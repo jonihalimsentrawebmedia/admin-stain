@@ -35,7 +35,6 @@ const ButtonDeleteUserProdi = ({ data }: Props) => {
   ]
 
   const queryClient = useQueryClient()
-
   const handleDelete = async () => {
     setLoading(true)
     await AxiosClient.delete(
@@ -48,6 +47,9 @@ const ButtonDeleteUserProdi = ({ data }: Props) => {
           toast.success(res.data.message || 'Success menghapus data')
           queryClient.invalidateQueries({
             queryKey: ['prodi-unit'],
+          })
+          queryClient.invalidateQueries({
+            queryKey: ['faculty-unit'],
           })
         }
       })

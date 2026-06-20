@@ -79,7 +79,7 @@ export const FormCurriculumProdi = (props: Props) => {
           <TextInput
             form={form}
             name={'lama_kuliah'}
-            label={'Lama Kuliah'}
+            label={'Lama Kuliah (Tahun)'}
             placeholder={'Lama Kuliah'}
             type={'number'}
             isNumber

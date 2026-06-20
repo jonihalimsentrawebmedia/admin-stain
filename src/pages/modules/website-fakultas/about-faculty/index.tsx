@@ -12,6 +12,7 @@ import { UseGetFacultyAbout } from '@/pages/modules/website-fakultas/about-facul
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import ButtonGoToGuide from '../../website-utama/panduan/components/ButtonGoToGuide'
+import { useQueryClient } from '@tanstack/react-query'
 
 const AboutFacultyView = () => {
   const { facultyAbout } = UseGetFacultyAbout()
@@ -22,6 +23,7 @@ const AboutFacultyView = () => {
 
   const form = useForm()
 
+  const queryClient = useQueryClient()
   const HandlerSave = async (data: any) => {
     setLoading(true)
     await AxiosClient.post('/fakultas/profil/tentang', data)
@@ -30,6 +32,9 @@ const AboutFacultyView = () => {
           setLoading(false)
           setIsEditContent(false)
           toast.success(res.data.message || 'Success menyimpan data')
+          queryClient.invalidateQueries({
+            queryKey: ['faculty-about'],
+          })
         }
       })
       .catch((err) => {
