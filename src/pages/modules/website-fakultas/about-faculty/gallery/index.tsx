@@ -7,15 +7,24 @@ import { ColumnsGalleryAlbum } from '@/pages/modules/website-fakultas/gallery/al
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import { ColumnsGalleryVideo } from '@/pages/modules/website-fakultas/gallery/video/data/columns.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
+import { useEffect } from 'react'
 
 export const FacultyGalleryProfile = () => {
-  const [searchParams] = useSearchParams()
-  const type = searchParams.get('type') ?? 'PHOTO'
+  const [searchParams, setSearchParams] = useSearchParams()
+  const type = searchParams.get('type')
 
   const { album, loading: load1, meta: meta1 } = UseGetGalleryAlbum()
   const columns = ColumnsGalleryAlbum()
   const { video, loading: load2, meta: meta2 } = UseGetGalleryVideo()
   const columns2 = ColumnsGalleryVideo()
+
+  useEffect(() => {
+    if (!type) {
+      const params = new URLSearchParams(searchParams)
+      params.set('type', 'PHOTO')
+      setSearchParams(params)
+    }
+  }, [type])
 
   return (
     <>
@@ -26,10 +35,7 @@ export const FacultyGalleryProfile = () => {
             {
               type: 'custom',
               element: (
-                <ButtonGoToGuide
-                  titleGuide={'Galeri'}
-                  valueGuide="FAKULTAS_PROFIL_GALERI"
-                />
+                <ButtonGoToGuide titleGuide={'Galeri'} valueGuide="FAKULTAS_PROFIL_GALERI" />
               ),
             },
           ]}
@@ -48,10 +54,10 @@ export const FacultyGalleryProfile = () => {
                 ]}
               />
             }
-            data={album}
-            columns={columns}
-            loading={load1}
-            meta={meta1}
+            data={video}
+            columns={columns2}
+            loading={load2}
+            meta={meta2}
           />
         ) : (
           <TableCustom
@@ -66,10 +72,10 @@ export const FacultyGalleryProfile = () => {
                 ]}
               />
             }
-            data={video}
-            columns={columns2}
-            loading={load2}
-            meta={meta2}
+            data={album}
+            columns={columns}
+            loading={load1}
+            meta={meta1}
           />
         )}
       </div>
