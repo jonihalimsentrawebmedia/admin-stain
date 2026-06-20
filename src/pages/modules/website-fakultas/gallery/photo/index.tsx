@@ -5,26 +5,26 @@ import { useParams } from 'react-router-dom'
 import { ButtonEditPhoto } from '@/pages/modules/website-fakultas/gallery/photo/component/buttonEdit.tsx'
 import { ButtonDeletePhoto } from '@/pages/modules/website-fakultas/gallery/photo/component/buttonDelete.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
+import { UseGetGalleryAlbumDetail } from '@/pages/modules/website-fakultas/gallery/album/hooks'
 
 export const ListGalleryPhoto = () => {
   const { id } = useParams()
   const { photo } = UseGetGalleryPhoto({
     id_album: (id as string) ?? '',
   })
+  const { albumDetail } = UseGetGalleryAlbumDetail(id as string)
 
   return (
     <>
       <div className="space-y-5">
         <ButtonTitleGroup
-          label="Galeri Foto"
+          isBack
+          label={`Galeri Foto -${albumDetail?.judul}`}
           buttonGroup={[
-             {
+            {
               type: 'custom',
               element: (
-                <ButtonGoToGuide
-                  titleGuide={'Galeri Foto'}
-                  valueGuide="FAKULTAS_GALERI_FOTO"
-                />
+                <ButtonGoToGuide titleGuide={'Galeri Foto'} valueGuide="FAKULTAS_GALERI_FOTO" />
               ),
             },
             {

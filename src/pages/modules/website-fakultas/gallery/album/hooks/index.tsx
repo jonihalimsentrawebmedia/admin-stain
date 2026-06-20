@@ -3,11 +3,12 @@ import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { BasicProps } from '@/utils/globalType.ts'
+import type { IGaleriAlbum } from '../data/types.ts'
 
 export const UseGetGalleryAlbum = (props?: BasicProps) => {
   const { search, limit, page } = props ?? {}
 
-  const [album, setAlbum] = useState<[]>([])
+  const [album, setAlbum] = useState<IGaleriAlbum[]>([])
   const [meta, setMeta] = useState<Meta>()
 
   const Params = new URLSearchParams()
@@ -31,4 +32,24 @@ export const UseGetGalleryAlbum = (props?: BasicProps) => {
   }, [data])
 
   return { album, loading, meta }
+}
+
+export const UseGetGalleryAlbumDetail = (id_album: string) => {
+  const [albumDetail, setAlbumDetail] = useState<IGaleriAlbum>()
+
+  const { data, isLoading, isFetching } = useQuery({
+    queryKey: ['gallery-album-detail', id_album],
+    refetchOnWindowFocus: false,
+    queryFn: () => AxiosClient.get(`/fakultas/galeri-album/${id_album}`).then((res) => res.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  useEffect(() => {
+    if (data) {
+      setAlbumDetail(data?.data)
+    }
+  }, [data])
+
+  return { albumDetail, loading }
 }

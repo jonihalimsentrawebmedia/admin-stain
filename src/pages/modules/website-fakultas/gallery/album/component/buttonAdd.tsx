@@ -54,7 +54,7 @@ export const ButtonAddAlbum = () => {
       </Button>
 
       <DialogBasic
-        title={'Tambah Galery Album'}
+        title={'Tambah Galeri Album'}
         open={open}
         setOpen={setOpen}
         className={'lg:min-w-4xl'}
@@ -63,7 +63,7 @@ export const ButtonAddAlbum = () => {
           <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
             <UploadImageBasic
               name={'thumbnail'}
-              label={'Thumnail Video'}
+              label={'Thumnail Album'}
               form={form}
               uploadUrl={'/upload'}
             />
@@ -71,7 +71,7 @@ export const ButtonAddAlbum = () => {
             <TextInput
               name={'judul'}
               form={form}
-              label={'Judul Video'}
+              label={'Judul Album'}
               placeholder={'Masukkan Judul'}
               isRequired
               isRow

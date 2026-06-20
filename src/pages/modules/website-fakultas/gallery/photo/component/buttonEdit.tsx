@@ -67,7 +67,7 @@ export const ButtonEditPhoto = (props: Props) => {
       </button>
 
       <DialogBasic
-        title={'Edit Galery Foto'}
+        title={'Edit Galeri Foto'}
         open={open}
         setOpen={setOpen}
         className={'lg:min-w-4xl'}
@@ -76,7 +76,7 @@ export const ButtonEditPhoto = (props: Props) => {
           <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
             <UploadImageBasic
               name={'link_foto'}
-              label={'Thumnail Video'}
+              label={'Thumnail Foto'}
               form={form}
               uploadUrl={'/upload'}
             />

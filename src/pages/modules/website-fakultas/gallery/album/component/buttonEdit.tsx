@@ -66,7 +66,7 @@ export const ButtonEditAlbum = (props: Props) => {
       </button>
 
       <DialogBasic
-        title={'Tambah Galery Video'}
+        title={'Edit Galeri Album'}
         open={open}
         setOpen={setOpen}
         className={'lg:min-w-4xl'}
@@ -75,7 +75,7 @@ export const ButtonEditAlbum = (props: Props) => {
           <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
             <UploadImageBasic
               name={'thumbnail'}
-              label={'Thumnail Video'}
+              label={'Thumbnail Album'}
               form={form}
               uploadUrl={'/upload'}
             />
@@ -83,7 +83,7 @@ export const ButtonEditAlbum = (props: Props) => {
             <TextInput
               name={'judul'}
               form={form}
-              label={'Judul Video'}
+              label={'Judul Album'}
               placeholder={'Masukkan Judul'}
               isRequired
               isRow
