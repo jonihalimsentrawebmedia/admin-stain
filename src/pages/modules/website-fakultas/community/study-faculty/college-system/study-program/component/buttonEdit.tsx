@@ -62,7 +62,7 @@ export const ButtonEditStudyProgram = (props: Props) => {
       </button>
 
       <DialogBasic
-        title={'Tambah Program Pendidikan'}
+        title={'Edit Program Pendidikan'}
         open={open}
         setOpen={setOpen}
         className={'lg:min-w-5xl rounded'}

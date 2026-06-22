@@ -12,6 +12,7 @@ import {
 } from '@/pages/modules/website-fakultas/community/study-faculty/college-system/accreditation/data/resolver.tsx'
 import type { IAccreditation } from '@/pages/modules/website-fakultas/community/study-faculty/college-system/accreditation/data/types.ts'
 import { HiPencil } from 'react-icons/hi'
+import { format } from 'date-fns'
 
 interface Props {
   data?: IAccreditation
@@ -30,10 +31,10 @@ const ButtonEditAccreditationFaculty = (props: Props) => {
   useEffect(() => {
     if (data) {
       form.reset({
+        ...data,
         id_unit: data?.id_satuan_organisasi_akreditas,
-        gambar: data?.gambar,
-        uraian: data?.uraian,
-        nilai_akreditas: data?.nilai_akreditas,
+        mulai_berlaku: format(data.mulai_berlaku, 'yyyy-MM-dd'),
+        akhir_berlaku: format(data.akhir_berlaku, 'yyyy-MM-dd'),
       })
     }
   }, [data])

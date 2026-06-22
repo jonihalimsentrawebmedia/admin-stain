@@ -45,13 +45,14 @@ export const ButtonDeleteSectorCarrier = (props: Props) => {
       <button
         className={'bg-red-500 p-1.5 rounded text-white hover:bg-red-600'}
         onClick={() => setOpen(true)}
-      >
+      >+
         <FaTrash />
       </button>
 
       <DialogBasic
-        title={'Hapus Cerita Alumni'}
+        title={'Hapus Sektor Pekerjaan'}
         description={'Apakah anda yakin untuk menghapus data dibawah ini?'}
+        className={'min-w-2xl'}
         open={open}
         setOpen={setOpen}
       >

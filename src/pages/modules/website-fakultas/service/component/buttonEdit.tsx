@@ -66,7 +66,7 @@ export const ButtonEditService = (props: props) => {
         <HiPencil />
       </button>
 
-      <DialogBasic title={'Tambah Layanan'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Edit Layanan'} open={open} setOpen={setOpen}>
         <Form {...form}>
           <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(handleSave)}>
             <TextInput

@@ -22,6 +22,9 @@ const AccreditationFormFaculty = ({ form, handleCancel, handleSave, loading }: P
   const { satuanOrganisasi: satuanOrganisasiProdi } = useGetSatuanOrganisasi({
     kelompok: 'FAKULTAS',
   })
+  const { satuanOrganisasi: Prodi } = useGetSatuanOrganisasi({
+    kelompok: 'PRODI',
+  })
   const optionsSatuanOrganisasi = [
     ...satuanOrganisasi.map((item) => {
       return {
@@ -30,6 +33,12 @@ const AccreditationFormFaculty = ({ form, handleCancel, handleSave, loading }: P
       }
     }),
     ...satuanOrganisasiProdi.map((item) => {
+      return {
+        value: item.id_satuan_organisasi,
+        label: item.nama,
+      }
+    }),
+    ...Prodi.map((item) => {
       return {
         value: item.id_satuan_organisasi,
         label: item.nama,

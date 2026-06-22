@@ -60,7 +60,7 @@ export const ButtonEditType = (props: Props) => {
       </button>
 
       <DialogBasic
-        title={'Tambah Bidang Kolaborasi'}
+        title={'Edit Bidang Kolaborasi'}
         open={open}
         setOpen={setOpen}
         className={'lg:min-w-5xl rounded'}

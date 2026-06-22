@@ -63,7 +63,7 @@ export const ButtonEditProgram = (props: Props) => {
       </button>
 
       <DialogBasic
-        title={'Tambah Program'}
+        title={'Edit Program'}
         open={open}
         setOpen={setOpen}
         className={'lg:min-w-2xl rounded'}
