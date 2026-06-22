@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button'
 import { Trash2, X } from 'lucide-react'
 import DetailField from '@/components/common/field/DetailField'
 import type { InformationImmediatelyList } from '../model'
+
 interface Props {
   data: InformationImmediatelyList
 }
@@ -69,7 +70,7 @@ const ButtonDelete = ({ data }: Props) => {
         className="max-w-2xl! w-full!"
         open={open}
         setOpen={setOpen}
-        title={<p className="text-2xl text-red-500">Hapus Maklumat Layanan</p>}
+        title={<p className="text-2xl text-red-500">Hapus Informasi Serta Merta</p>}
         description="Apakah anda yakin untuk menghapus konten berikut?"
       >
         <img

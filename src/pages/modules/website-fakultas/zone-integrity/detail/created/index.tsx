@@ -54,6 +54,7 @@ export const CreatedSubCategory = () => {
       <Form {...form}>
         <form className={'space-y-5'} onSubmit={form.handleSubmit(HandelSubmit)}>
           <ButtonTitleGroup
+            isBack
             label={'Tambah Sub Kategori'}
             buttonGroup={[
               { type: 'cancel', label: 'Batal', onClick: () => navigate(-1) },

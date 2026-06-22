@@ -47,8 +47,8 @@ export const ButtonDeleteService = (props: Props) => {
       </button>
 
       <DialogBasic
-        title={'Hapus Cerita Alumni'}
         description={'Apakah anda yakin untuk menghapus data dibawah ini?'}
+        title={'Hapus Layanan'}
         open={open}
         setOpen={setOpen}
       >

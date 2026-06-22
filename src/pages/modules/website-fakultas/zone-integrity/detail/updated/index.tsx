@@ -12,6 +12,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { UseGetDetailSubZoneIntegrity } from '../hooks/index.tsx'
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 
 export const UpdatedSubCategory = () => {
   const [loading, setLoading] = useState(false)
@@ -59,6 +60,14 @@ export const UpdatedSubCategory = () => {
     <>
       <Form {...form}>
         <form className={'space-y-5'} onSubmit={form.handleSubmit(HandelSubmit)}>
+          <ButtonTitleGroup
+            isBack
+            label={'Edit Sub Kategori'}
+            buttonGroup={[
+              { type: 'cancel', label: 'Batal', onClick: () => navigate(-1) },
+              { type: 'save', label: 'Simpan' },
+            ]}
+          />
           <SelectBasicInput
             name={'id_zona_integritas_kategori'}
             form={form}

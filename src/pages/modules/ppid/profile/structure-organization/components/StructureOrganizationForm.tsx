@@ -18,9 +18,9 @@ const StructureOrganizationForm = ({ form }: Props) => {
       </div>
       <div className="flex flex-col gap-2">
         <div className="text-primary text-xl font-medium">Atasan Pejabat Pengelola Informasi & Dokumentasi</div>
-        <div className="flex flex-col lg:flex-row gap-4">
+        <div className="flex flex-col lg:flex-row gap-4 w-full">
           <ImageUpload form={form} name="atasan.url_gambar" />
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 w-full">
             <TextInput inputClassName='w-full' form={form} name="atasan.nama" label="Nama" isRow={false} />
             <TextAreaInput inputClassName='w-full' form={form} name="atasan.deskripsi" label="Deskripsi" isRow={false} />
           </div>
@@ -28,9 +28,9 @@ const StructureOrganizationForm = ({ form }: Props) => {
       </div>
       <div className="flex flex-col gap-2">
         <div className="text-primary text-xl font-medium">Pejabat Pengelola Informasi & Dokumentasi Utama</div>
-        <div className="flex flex-col lg:flex-row gap-4">
+        <div className="flex flex-col lg:flex-row gap-4 w-full">
           <ImageUpload form={form} name="pejabat.url_gambar" />
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 w-full">
             <TextInput inputClassName='w-full' form={form} name="pejabat.nama" label="Nama" isRow={false} />
             <TextAreaInput inputClassName='w-full' form={form} name="pejabat.deskripsi" label="Deskripsi" isRow={false} />
           </div>

@@ -77,7 +77,7 @@ const InformationPublicRegisterEditView = () => {
               element: <ButtonForm loading={loading} />,
             },
           ]}
-          label="Tambah Informasi Publik"
+          label="Edit Informasi Publik"
         />
         <InformationPublicRegisterForm form={form} />
         <ButtonForm loading={loading} />

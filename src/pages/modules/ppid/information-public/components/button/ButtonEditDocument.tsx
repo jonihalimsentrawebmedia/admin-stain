@@ -128,12 +128,12 @@ const ButtonEditDocument = ({
         className="max-w-4xl! w-[90wdv] md:w-full! "
         open={open}
         setOpen={setOpen}
-        title={<p className="text-2xl ">Edit{title}</p>}
+        title={<p className="text-2xl ">Edit {title}</p>}
       >
         <div className="flex flex-col gap-4">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
-              <InformationPublicFormDocument showTitle={idCategory ? true : false} form={form} />
+              <InformationPublicFormDocument showTitle={!!idCategory} form={form} />
               <ButtonForm
                 loading={loading}
                 onCancel={() => {
