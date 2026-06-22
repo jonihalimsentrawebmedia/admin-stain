@@ -53,7 +53,7 @@ const ButtonDelete = ({ data }: Props) => {
         className="max-w-2xl! w-full!"
         open={open}
         setOpen={setOpen}
-        title={<p className="text-2xl text-red-500">Hapus Gambar Landing Page</p>}
+        title={<p className="text-2xl text-red-500">Hapus Infografis</p>}
       >
         <div className="my-4 mx-auto text-center">
           <img src={data.url_gambar} className="h-[400px] object-cover" alt="" />

@@ -2,7 +2,7 @@ import { UseGetNews, UseGetNewsYear } from '../../hooks/index.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import useGetNewsCategory from '@/pages/modules/settings/reference/news-category/controller/useGetNewsCategory.tsx'
-import { SubmissionColumns } from '@/pages/modules/website-lembaga/public-content/news/components/table/SubmissionColumns.tsx'
+import { SubmissionColumns } from './SubmissionColumns.tsx'
 
 export const SubmissionSection = () => {
   const columns = SubmissionColumns()

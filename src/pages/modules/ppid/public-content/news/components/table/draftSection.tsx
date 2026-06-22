@@ -1,4 +1,4 @@
-import { DraftNewsColumns } from '@/pages/modules/website-lembaga/public-content/news/components/table/draftColumns.tsx'
+import { DraftNewsColumns } from './draftColumns.tsx'
 import { UseGetNews, UseGetNewsYear } from '../../hooks/index.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'

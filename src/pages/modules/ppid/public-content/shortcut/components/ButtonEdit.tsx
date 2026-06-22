@@ -65,7 +65,7 @@ const ButtonEdit = ({ data: dataProps }: Props) => {
         className="max-w-2xl! w-full!"
         open={open}
         setOpen={setOpen}
-        title={<p className="text-2xl ">Edit Infografis</p>}
+        title={<p className="text-2xl ">Edit Pintasan</p>}
       >
         <div className="flex flex-col gap-4">
           <Form {...form}>

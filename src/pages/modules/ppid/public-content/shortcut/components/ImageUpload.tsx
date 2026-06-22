@@ -132,7 +132,7 @@ export default function ImageUpload<T extends FieldValues>({
                     </Button>
                   </div>
                 ) : (
-                  <div className="flex w-full flex-col gap-4">
+                  <div className="flex flex-row gap-2 w-fit">
                     <div
                       onClick={(e) => {
                         handleClick(e)
