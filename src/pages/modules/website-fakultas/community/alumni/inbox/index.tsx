@@ -33,7 +33,7 @@ export const InboxStoryPage = () => {
               ),
             },
           ]}
-          label="Cerita Alumni"
+          label="Kontak Masuk"
         />
 
         <TableCustom data={storyInbox} columns={columns} loading={loading} meta={meta} />

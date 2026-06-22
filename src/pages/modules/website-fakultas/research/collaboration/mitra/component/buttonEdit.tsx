@@ -62,7 +62,13 @@ export const ButtonEditMitra = (props: props) => {
       <DialogBasic title={'Tambah Mitra'} open={open} setOpen={setOpen}>
         <Form {...form}>
           <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
-            <UploadPhotoImage name={'url_gambar'} form={form} />
+            <UploadPhotoImage
+              name={'url_gambar'}
+              form={form}
+              label={'LOGO'}
+              ratio_width={1}
+              ratio_height={1}
+            />
             <ButtonForm loading={loading} onCancel={() => setOpen(!open)} />
           </form>
         </Form>

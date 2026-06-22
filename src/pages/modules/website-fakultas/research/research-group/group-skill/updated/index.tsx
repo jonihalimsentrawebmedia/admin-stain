@@ -54,7 +54,8 @@ export const UpdatedGroupSkill = () => {
       <Form {...form}>
         <form className={'space-y-4'} onSubmit={form.handleSubmit(handleSave)}>
           <ButtonTitleGroup
-            label={'Tambah Kelompok Keahlian'}
+            isBack
+            label={'Edit Kelompok Keahlian'}
             buttonGroup={[
               {
                 type: 'cancel',
@@ -69,7 +70,7 @@ export const UpdatedGroupSkill = () => {
             ]}
           />
 
-          <UploadPhotoImage form={form} name={'url_gambar'} />
+          <UploadPhotoImage form={form} name={'url_gambar'} label={'LOGO'} />
           <TextInput
             name={'nama_kelompok'}
             form={form}
