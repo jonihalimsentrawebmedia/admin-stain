@@ -27,7 +27,12 @@ export const DetailNewsPage = () => {
     })
   }, [api])
 
-  const images = detailNews?.berita_gambar_tambahan ?? []
+  // const images = detailNews?.berita_gambar_tambahan ?? []
+  const temp = []
+  temp.push(detailNews?.gambar)
+  detailNews?.berita_gambar_tambahan.map((row) => {
+    temp.push(row.gambar)
+  })
 
   return (
     <>
@@ -115,11 +120,11 @@ export const DetailNewsPage = () => {
               {/* CAROUSEL */}
               <Carousel setApi={setApi} className="w-[484px]">
                 <CarouselContent className="pr-0">
-                  {images.map((item, index) => (
+                  {temp?.map((item, index) => (
                     <CarouselItem key={index} className="pr-0">
                       <img
-                        src={item.gambar}
-                        alt={item.keterangan}
+                        src={item}
+                        alt={item}
                         className="h-[345px] w-full object-cover rounded-lg"
                       />
                     </CarouselItem>
@@ -129,7 +134,7 @@ export const DetailNewsPage = () => {
 
               {/* DOTS */}
               <div className="flex justify-center mt-4 gap-2">
-                {images.map((_, index) => (
+                {temp.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => api?.scrollTo(index)}
