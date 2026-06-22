@@ -16,7 +16,7 @@ const ReportsSurveyView = () => {
             type: 'custom',
             element: (
               <ButtonGoToGuide
-                titleGuide={'Laporan Layanan Informasi Publik'}
+                titleGuide={'Laporan Survei Layanan Informasi Publik'}
                 valueGuide="PPID_LAPORAN_SURVEI_LAYANAN_INFORMASI_PUBLIK"
               />
             ),
@@ -28,7 +28,7 @@ const ReportsSurveyView = () => {
             element: <ButtonAdd />,
           },
         ]}
-        label="Laporan Layanan Informasi Publik"
+        label="Laporan Survei Layanan Informasi Publik"
       />
       <TableCustom
         isShowFilter={false}
