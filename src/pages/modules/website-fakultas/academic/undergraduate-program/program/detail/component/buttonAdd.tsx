@@ -64,7 +64,13 @@ export const ButtonAddPartner = () => {
       >
         <Form {...form}>
           <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
-            <UploadPhotoImage form={form} name={'url_gambar'} />
+            <UploadPhotoImage
+              form={form}
+              name={'url_gambar'}
+              label={'LOGO'}
+              ratio_width={1}
+              ratio_height={1}
+            />
             <TextInput
               name={'nama_universitas'}
               label={'Nama Universitas'}

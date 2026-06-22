@@ -55,7 +55,7 @@ export const ButtonDeleteProgram = (props: Props) => {
         setOpen={setOpen}
       >
         <div className="grid grid-cols-[10rem_1fr] gap-1 items-center">
-          <p className="text-gray-500">Gambar</p>
+          <p className="text-gray-500">LOGO</p>
           <img
             src={data?.url_gambar}
             alt={data?.nama_program}

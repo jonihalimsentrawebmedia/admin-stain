@@ -41,6 +41,7 @@ export const CreatedGroupSkill = () => {
       <Form {...form}>
         <form className={'space-y-4'} onSubmit={form.handleSubmit(handleSave)}>
           <ButtonTitleGroup
+            isBack
             label={'Tambah Kelompok Keahlian'}
             buttonGroup={[
               {

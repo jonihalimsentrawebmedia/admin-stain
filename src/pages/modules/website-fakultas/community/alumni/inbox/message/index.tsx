@@ -51,7 +51,7 @@ export const AlumniMessageInbox = () => {
   return (
     <>
       <FormStoryAlumni
-        label={'Cerita Alumni'}
+        label={'Kontak Masuk'}
         form={form}
         HandleSave={HandleSave}
         loading={loading}

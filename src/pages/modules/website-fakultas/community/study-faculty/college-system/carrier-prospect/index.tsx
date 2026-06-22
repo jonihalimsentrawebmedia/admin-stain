@@ -1,5 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Form } from '@/components/ui/form.tsx'
 import { useForm } from 'react-hook-form'
 import { RichText } from '@/components/common/richtext'
@@ -21,6 +21,14 @@ export const CarrierProspectCommunity = () => {
 
   const form = useForm()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (description) {
+      form.reset({
+        ...description,
+      })
+    }
+  }, [description])
 
   const queryClient = useQueryClient()
 

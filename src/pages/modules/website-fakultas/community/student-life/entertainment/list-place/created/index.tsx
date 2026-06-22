@@ -37,6 +37,7 @@ export const CreatedStudentListOrganization = () => {
       <Form {...form}>
         <form className={'space-y-5'} onSubmit={form.handleSubmit(handleSave)}>
           <ButtonTitleGroup
+            isBack
             label={'Tambah Hiburan Mahasiswa'}
             buttonGroup={[
               {

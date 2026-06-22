@@ -58,7 +58,13 @@ export const ButtonAddProgram = () => {
       >
         <Form {...form}>
           <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(handleSave)}>
-            <UploadPhotoImage form={form} name={'url_gambar'} ratio_width={1} ratio_height={1} />
+            <UploadPhotoImage
+              form={form}
+              name={'url_gambar'}
+              ratio_width={1}
+              ratio_height={1}
+              label={'LOGO'}
+            />
             <TextInput
               name={'nama_program'}
               form={form}

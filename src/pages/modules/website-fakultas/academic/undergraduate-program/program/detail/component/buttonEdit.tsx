@@ -78,7 +78,13 @@ export const ButtonEditPartner = (props: Props) => {
       >
         <Form {...form}>
           <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
-            <UploadPhotoImage form={form} name={'url_gambar'} />
+            <UploadPhotoImage
+              form={form}
+              name={'url_gambar'}
+              ratio_width={1}
+              ratio_height={1}
+              label={'LOGO'}
+            />
             <TextInput
               name={'nama_universitas'}
               label={'Nama Universitas'}

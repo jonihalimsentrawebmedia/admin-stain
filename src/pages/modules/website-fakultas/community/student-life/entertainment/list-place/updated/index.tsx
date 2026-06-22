@@ -53,6 +53,7 @@ export const UpdatedStudentListOrganization = () => {
       <Form {...form}>
         <form className={'space-y-5'} onSubmit={form.handleSubmit(handleSave)}>
           <ButtonTitleGroup
+            isBack
             label={'Edit Hiburan Mahasiswa'}
             buttonGroup={[
               {
@@ -66,7 +67,7 @@ export const UpdatedStudentListOrganization = () => {
               },
             ]}
           />
-          <UploadPhotoImage name={'url_gambar'} form={form} />
+          <UploadPhotoImage name={'url_gambar'} form={form} label={'Foto Hiburan Mahasiswa'} />
           <TextInput
             name={'nama'}
             form={form}
