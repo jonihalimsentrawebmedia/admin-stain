@@ -45,7 +45,7 @@ const InformationAvailableViewModel = () => {
               idName="id_kategori"
               keyLinkPost="information-available-ppip"
               linkPost="/unit-ppid/informasi-tersedia-dokumen"
-              title="Informasi Tersedia Setiap Saat"
+              title="Dokumen"
               labelDokumen="Tambah Dokumen"
             />
           </div>
@@ -66,7 +66,6 @@ const InformationAvailableViewModel = () => {
               keyLinkPost={'information-available-ppip'}
               linkPost={`/unit-ppid/informasi-tersedia-kategori/${values.id_kategori}`}
               title="Informasi Tersedia Setiap Saat"
-              
             />
             <ButtonDeleteInformationPublic
               data={values}

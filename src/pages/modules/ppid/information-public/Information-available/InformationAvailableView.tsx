@@ -15,12 +15,12 @@ const InformationAvailableView = () => {
         linkPostData="/unit-ppid/informasi-tersedia"
         queryKeyGetData="/unit-ppid/informasi-tersedia"
         queryKeyPostData="/unit-ppid/informasi-tersedia"
-        title="Informasi Informasi Tersedia Setiap Saat"
+        title="Informasi Tersedia Setiap Saat"
       />
       <ButtonAddInformationPublic
         keyLinkPost="information-available-ppip"
         linkPost="/unit-ppid/informasi-tersedia-kategori"
-        title="Informasi Informasi Tersedia Setiap Saat"
+        title="Informasi Tersedia Setiap Saat"
         valueGuide="PPID_INFORMASI_PUBLIK_TERSEDIA"
       />
       <TableCustom
