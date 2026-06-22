@@ -4,7 +4,7 @@ import { HeaderMenu } from './header/HeaderMenu'
 
 export const LayoutWebsitePPID = () => {
   return (
-    <div className="w-full max-w-[1920px] mx-auto h-full overflow-y-auto relative">
+    <div className="w-full max-w-full mx-auto h-full overflow-y-auto relative">
       <div className="fixed w-full z-50">
         <HeaderLayoutPPID />
         <HeaderMenu />

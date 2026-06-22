@@ -22,7 +22,7 @@ const InformationAvailableViewModel = () => {
     },
 
     // ✅ Nama Pangkat Golongan
-    { accessorKey: 'judul', header: 'Judul Informasi Berkala' },
+    { accessorKey: 'judul', header: 'Informasi Tersedia Setiap Saat' },
     {
       accessorKey: 'slug',
       header: 'Dokumen',
