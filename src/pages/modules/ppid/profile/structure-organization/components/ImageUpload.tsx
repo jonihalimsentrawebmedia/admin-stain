@@ -138,16 +138,16 @@ export default function ImageUpload<T extends FieldValues>({
                       onClick={(e) => {
                         handleClick(e)
                       }}
-                      className="flex min-w-[360px] min-h-[360px] flex-wrap  gap-2 items-center"
+                      className="flex min-w-[270px] min-h-[360px] flex-wrap  gap-2 items-center"
                     >
-                      <div className="border flex flex-col w-[360px] min-w-[360px] min-h-[360px]  gap-2 h-[360px] items-center justify-center text-primary  px-4 py-2  aspect-square  rounded border-[#DFDFDF]   bg-[#DFDFDF]">
+                      <div className="border flex flex-col w-[270px] min-w-[270px] min-h-[360px]  gap-2 h-[360px] items-center justify-center text-primary  px-4 py-2  aspect-square  rounded border-[#DFDFDF]   bg-[#DFDFDF]">
                         <MdAddPhotoAlternate size={32} />
                         Gambar Maklumat Pelayanan
                         <br />
                         <ul className="text-center list-disc space-y-2 text-[#2769CD]">
                           <li>Jenis File: .jpg/.png/.jpeg</li>
                           <li>Maks: {maxSizeMB}MB</li>
-                          <li>Ukuran 1:1</li>
+                          <li>Ukuran 3:4</li>
                         </ul>
                       </div>
                     </div>
