@@ -45,7 +45,7 @@ const InformationRegularViewModel = () => {
               idName="id_kategori"
               keyLinkPost="information-regular-ppip"
               linkPost="/unit-ppid/informasi-berkala-dokumen"
-              title="Tambah Dokument"
+              title="Dokumen"
               labelDokumen="Tambah Dokumen"
             />
           </div>
