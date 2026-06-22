@@ -48,7 +48,7 @@ export const ButtonDeleteTypeCollaboration = (props: Props) => {
       </button>
 
       <DialogBasic
-        title={'Hapus Cerita Alumni'}
+        title={'Hapus Bidang Kolaborasi'}
         description={'Apakah anda yakin untuk menghapus data dibawah ini?'}
         open={open}
         setOpen={setOpen}

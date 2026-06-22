@@ -56,7 +56,7 @@ export const CreatedGroupSkill = () => {
             ]}
           />
 
-          <UploadPhotoImage form={form} name={'url_gambar'} />
+          <UploadPhotoImage form={form} name={'url_gambar'} label={'LOGO'} />
           <TextInput
             name={'nama_kelompok'}
             form={form}

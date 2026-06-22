@@ -15,8 +15,10 @@ const ModulesView = () => {
   const { publicIdentity } = UseGetIdentityPublic()
 
   useEffect(() => {
-    requestNotificationPermission().then((res) => {
-      window.localStorage.setItem('token_fcm', res as string)
+    requestNotificationPermission().then((token) => {
+      if (token) {
+        window.localStorage.setItem('token_fcm', token)
+      }
     })
   }, [])
 

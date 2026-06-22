@@ -48,7 +48,7 @@ export const ButtonDeleteGroupSkill = (props: Props) => {
       </button>
 
       <DialogBasic
-        title={'Hapus Cerita Alumni'}
+        title={'Hapus Kelompok Keahlian'}
         description={'Apakah anda yakin untuk menghapus data dibawah ini?'}
         open={open}
         setOpen={setOpen}
@@ -59,7 +59,7 @@ export const ButtonDeleteGroupSkill = (props: Props) => {
             alt="gamar"
             className={'object-contain w-[200px] col-span-2'}
           />
-          <p className="text-gray-500">Nama Program Studi</p>
+          <p className="text-gray-500">Kelompok Keahlian</p>
           <p>{data?.nama_kelompok}</p>
           <p className="text-gray-500">Deskripsi</p>
           <RenderHTMLContent className={'line-clamp-5'} content={data?.deskripsi} />
