@@ -12,6 +12,7 @@ export const DetailServiceSPI = () => {
     <>
       <div className={'space-y-5'}>
         <ButtonTitleGroup
+          isBack
           label={`Detail Layanan - ${detail?.nama}`}
           buttonGroup={[
             {

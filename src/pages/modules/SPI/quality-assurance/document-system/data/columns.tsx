@@ -24,7 +24,7 @@ export const ColumnsSystemDocument = () => {
       header: 'Nama Berkas',
     },
     {
-      accessorKey: 'id_kategori_sistem_dokumen',
+      accessorKey: 'nama_kategori',
       header: 'Kategori Berkas',
     },
     {

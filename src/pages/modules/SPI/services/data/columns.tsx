@@ -21,6 +21,19 @@ export const ColumnsService = () => {
       },
     },
     {
+      accessorKey: 'url_gambar',
+      header: 'URL Gambar',
+      cell: ({ row }) => {
+        return (
+          <img
+            src={row?.original?.url_gambar}
+            alt="gambar"
+            className="w-[120px] h-[100px] object-cover"
+          />
+        )
+      },
+    },
+    {
       accessorKey: 'nama',
       header: 'Nama Layanan',
     },
@@ -28,7 +41,12 @@ export const ColumnsService = () => {
       accessorKey: 'deskripsi',
       header: 'Deskripsi',
       cell: ({ row }) => {
-        return <RenderHTMLContent content={row?.original?.deskripsi} />
+        return (
+          <RenderHTMLContent
+            className={'max-h-[150px]! overflow-scroll'}
+            content={row?.original?.deskripsi}
+          />
+        )
       },
     },
     {
