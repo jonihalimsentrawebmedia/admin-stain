@@ -4,7 +4,7 @@ import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import { UseGetTypeLetters } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/hooks'
 import { SelectBasic } from '@/components/common/select/basic.tsx'
 import Search from '@/components/common/table/Search.tsx'
-import { UseGetTypeTemplateLatter } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail/hooks'
+import { UseGetTypeTemplateLetter } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail/hooks'
 import ColumnsTypeTemplate from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail/data/columns.tsx'
 import { useParams } from 'react-router-dom'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
@@ -35,7 +35,7 @@ const SelectTemplateText = (props: Props) => {
     limit: '0',
   })
   const finding = letterType?.find((row) => row?.id_mail_jenis_surat === filter.id_selected)
-  const { typeTemplate, loading } = UseGetTypeTemplateLatter({
+  const { typeTemplate, loading } = UseGetTypeTemplateLetter({
     page: filter.page,
     limit: '10',
     id_jenis_surat: filter.id_selected,

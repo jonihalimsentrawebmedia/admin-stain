@@ -1,5 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { UseGetAgendaOutboxPage, USeGetStatisticsAgendaOutbox } from './hooks/index'
+import { UseGetAgendaOutboxPage, UseGetStatisticsAgendaOutbox } from './hooks/index'
 import { useSearchParams } from 'react-router-dom'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan-unit/hooks.tsx'
@@ -18,7 +18,7 @@ export const ListAgendaOutboxPage = () => {
   const tahun = searchParams.get('tahun') ?? ''
 
   const { institution } = UseGetUnitInstitution()
-  const { statistics } = USeGetStatisticsAgendaOutbox()
+  const { statistics } = UseGetStatisticsAgendaOutbox()
   const { agendaOutbox, meta, loading } = UseGetAgendaOutboxPage({
     page,
     limit,

@@ -11,7 +11,7 @@ import TextInput from '@/components/common/form/TextInput.tsx'
 import { ReturnOrderData } from '@/pages/modules/E-Office/Letter-Generation/create-letter/component/formLetterNumber.tsx'
 import { UseGetHumanResource } from '@/pages/modules/E-Office/reference/human-resource/hooks.tsx'
 import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan-unit/hooks.tsx'
-import { USeGetTransportType } from '@/pages/modules/E-Office/reference/transport-type/hooks'
+import { UseGetTransportType } from '@/pages/modules/E-Office/reference/transport-type/hooks'
 import TextAreaInput from '@/components/common/form/textAreaInput.tsx'
 import type { IDetailSPPD } from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/data/types.ts'
 import {
@@ -44,7 +44,7 @@ const FormSPPDLetterAssigment = (props: props) => {
     page: '0',
     limit: '0',
   })
-  const { transportType } = USeGetTransportType({
+  const { transportType } = UseGetTransportType({
     page: '0',
     limit: '0',
   })

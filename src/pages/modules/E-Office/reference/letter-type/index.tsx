@@ -1,6 +1,6 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import ButtonAddLetterType from './component/buttonAdd.tsx'
-import { USeGetLetterType } from './hooks'
+import { UseGetLetterType } from './hooks'
 import { useSearchParams } from 'react-router-dom'
 import { ColumnsLetterType } from './data/columns'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
@@ -11,7 +11,7 @@ const ListLetterType = () => {
   const limit = searchParams.get('limit') ?? '10'
   const search = searchParams.get('search') ?? ''
 
-  const { letterType, meta, loading } = USeGetLetterType({
+  const { letterType, meta, loading } = UseGetLetterType({
     page,
     limit,
     search,

@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
@@ -10,13 +9,12 @@ interface Props {
 
 export const UseGetListSettings = (props?: Props) => {
   const { page, limit, id_module } = props ?? {}
-  const [listSettings, setListSettings] = useState([])
 
   const ParamsSearch = new URLSearchParams()
   if (page) ParamsSearch.append('page', page)
   if (limit) ParamsSearch.append('limit', limit)
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<any[]>({
     queryKey: ['list-settings', ParamsSearch.toString(), id_module],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -27,11 +25,5 @@ export const UseGetListSettings = (props?: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setListSettings(data)
-    }
-  }, [data])
-
-  return { listSettings, loading }
+  return { listSettings: data, loading }
 }

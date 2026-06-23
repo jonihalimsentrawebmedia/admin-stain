@@ -1,17 +1,14 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import AxiosClient from '@/provider/axios.tsx'
 import type { GroupRankList } from '../../model/index'
+import AxiosClient from '@/provider/axios.tsx'
 
 export const UseRankedGroupLanguage = (id?: string) => {
-  const [language, setLanguage] = useState<{
+  const { data, isLoading, isFetching } = useQuery<{
     id: GroupRankList
     en: GroupRankList
     zh: GroupRankList
     ar: GroupRankList
-  }>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  }>({
     queryKey: ['rank-category-language', id],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -22,11 +19,5 @@ export const UseRankedGroupLanguage = (id?: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLanguage(data)
-    }
-  }, [data])
-
-  return { loading, language }
+  return { loading, language: data }
 }

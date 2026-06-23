@@ -9,10 +9,10 @@ import CheckboxInputBasic from '@/components/common/form/checkbox.tsx'
 import { FaTrash } from 'react-icons/fa'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import { Form } from '@/components/ui/form.tsx'
-import { USeGetPejabat } from '@/pages/modules/E-Office/official-travel/pejabat/hooks'
+import { UseGetPejabat } from '@/pages/modules/E-Office/official-travel/pejabat/hooks'
 import { UseGetBudgetOfficialTravel } from '@/pages/modules/E-Office/official-travel/budget/hooks'
-import { USeGetBiayaType } from '@/pages/modules/E-Office/reference/costing-type/hooks'
-import { USeGetTransportType } from '@/pages/modules/E-Office/reference/transport-type/hooks'
+import { UseGetBiayaType } from '@/pages/modules/E-Office/reference/costing-type/hooks'
+import { UseGetTransportType } from '@/pages/modules/E-Office/reference/transport-type/hooks'
 import type { UseFieldArrayReturn } from 'react-hook-form'
 
 interface Props {
@@ -24,7 +24,7 @@ interface Props {
 
 export const FormLupSum = (props: Props) => {
   const { form, HandleSave, Costing, loading } = props
-  const { pejabat } = USeGetPejabat({
+  const { pejabat } = UseGetPejabat({
     page: '0',
     limit: '0',
   })
@@ -32,11 +32,11 @@ export const FormLupSum = (props: Props) => {
     page: '0',
     limit: '0',
   })
-  const { biayaType } = USeGetBiayaType({
+  const { biayaType } = UseGetBiayaType({
     page: '0',
     limit: '0',
   })
-  const { transportType } = USeGetTransportType({
+  const { transportType } = UseGetTransportType({
     page: '0',
     limit: '0',
   })

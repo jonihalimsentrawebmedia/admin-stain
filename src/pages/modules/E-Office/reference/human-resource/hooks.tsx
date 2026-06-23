@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { BasicProps } from '@/utils/globalType.ts'
@@ -17,15 +16,13 @@ export interface IHumanResource {
 
 export const UseGetHumanResource = (props?: BasicProps) => {
   const { page, limit, search } = props ?? {}
-  const [humanResource, setHumanResource] = useState<IHumanResource[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const Params = new URLSearchParams()
-  if (page) Params.append('page', page ?? '0')
-  if (limit) Params.append('limit', limit ?? '0')
+  if (page) Params.append('page', page ?? '1')
+  if (limit) Params.append('limit', limit ?? '10')
   if (search) Params.append('search', search ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: IHumanResource[]; meta: Meta }>({
     refetchOnWindowFocus: false,
     queryKey: ['human-resource', Params.toString()],
     queryFn: () => AxiosClient.get(`/eoffice/ref/sdm?${Params}`).then((res) => res?.data),
@@ -33,12 +30,5 @@ export const UseGetHumanResource = (props?: BasicProps) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setHumanResource(data?.data ?? [])
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { loading, humanResource, meta }
+  return { loading, humanResource: data?.data ?? [], meta: data?.meta }
 }

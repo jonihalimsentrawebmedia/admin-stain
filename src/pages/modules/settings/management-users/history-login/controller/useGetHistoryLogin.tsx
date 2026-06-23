@@ -1,21 +1,21 @@
-import { useEffect, useState } from 'react'
 import type { UserHistories } from '../model'
 import { useQuery } from '@tanstack/react-query'
-import AxiosClient from '@/provider/axios'
 import type { Meta } from '@/components/common/table/TablePagination'
+import AxiosClient from '@/provider/axios'
 import { useSearchParams } from 'react-router-dom'
 
 const useGetHistoryLogin = () => {
   const [searchParams] = useSearchParams()
 
-  const [histories, setHistories] = useState<UserHistories[]>([])
-  const [meta, setMeta] = useState<Meta>()
   const page = searchParams.get('page') || '1'
   const limit = searchParams.get('limit') || '10'
   const search = searchParams.get('search') || ''
   const level = searchParams.get('level') || ''
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{
+    data: UserHistories[]
+    meta: Meta
+  }>({
     refetchOnWindowFocus: false,
     queryKey: ['users-list-histories', { page, limit, search, level }],
     queryFn: () =>
@@ -26,17 +26,10 @@ const useGetHistoryLogin = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setHistories(data.data??[])
-      setMeta(data.meta)
-    }
-  }, [data])
-
   return {
-    histories,
+    histories: data?.data ?? [],
     loading,
-    meta,
+    meta: data?.meta,
   }
 }
 

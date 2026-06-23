@@ -1,14 +1,13 @@
-
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import AxiosClient from '@/provider/axios.tsx'
 import type { SatuanOrganisasiList } from '@/pages/modules/settings/model'
+import type { Meta } from '@/components/common/table/TablePagination'
+import AxiosClient from '@/provider/axios.tsx'
 
 export const UseGetDomainNotExists = ({ group, id }: { group: string; id: string }) => {
-  const [organizationUnit, setOrganizationUnit] = useState<SatuanOrganisasiList[]>([])
-  const [meta, setMeta] = useState()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{
+    data: SatuanOrganisasiList[]
+    meta: Meta
+  }>({
     queryKey: ['satuan-organisasi-domain-not-exists', group, id],
     enabled: !!group,
     refetchOnWindowFocus: false,
@@ -20,12 +19,5 @@ export const UseGetDomainNotExists = ({ group, id }: { group: string; id: string
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setOrganizationUnit(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { loading, organizationUnit, meta }
+  return { loading, organizationUnit: data?.data ?? [], meta: data?.meta }
 }

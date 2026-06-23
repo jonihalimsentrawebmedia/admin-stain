@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { BasicProps } from '@/utils/globalType.ts'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
@@ -24,28 +23,20 @@ export interface MinutesEvent {
 
 export const UseGetMeetingMinutes = (props: props) => {
   const { search, limit, page, id_acara } = props
-  const [minutes, setMinutes] = useState<MinutesEvent[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const Params = new URLSearchParams()
   if (page) Params.append('page', page ?? '1')
   if (limit) Params.append('limit', limit ?? '10')
   if (search) Params.append('search', search ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['meeting-minutes', Params.toString()],
+  const { data, isLoading, isFetching } = useQuery<{ data: MinutesEvent[]; meta: Meta }>({
+    queryKey: ['meeting-minutes', Params.toString(), id_acara],
     refetchOnWindowFocus: false,
+    enabled: !!id_acara,
     queryFn: () => AxiosClient.get(`/eoffice/acara/${id_acara}/notulen`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setMinutes(data?.data ?? [])
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { meta, loading, minutes }
+  return { meta: data?.meta, loading, minutes: data?.data ?? [] }
 }

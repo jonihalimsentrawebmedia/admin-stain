@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
@@ -10,19 +9,11 @@ export interface SessionEOffice {
 }
 
 export const UseGetSessionEOffice = () => {
-  const [session, setSession] = useState<SessionEOffice>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<SessionEOffice>({
     queryKey: ['session'],
     queryFn: () => AxiosClient.get('/eoffice/user-session').then((res) => res.data.data),
   })
 
   const loading = isLoading || isFetching
-  useEffect(() => {
-    if (data) {
-      setSession(data)
-    }
-  }, [data])
-
-  return { session, loading }
+  return { session: data, loading }
 }

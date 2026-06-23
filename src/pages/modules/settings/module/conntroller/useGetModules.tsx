@@ -1,15 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
 import type { ModuleList } from '../model'
 import AxiosClient from '@/provider/axios'
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination'
 import type { BasicProps } from '@/utils/globalType.ts'
 
 const useGetModules = (props?: BasicProps) => {
   const { search, page, limit } = props ?? {}
-
-  const [meta, setMeta] = useState<Meta>()
-  const [modules, setModules] = useState<ModuleList[]>([])
 
   const Params = new URLSearchParams()
   if (search) Params.append('search', search ?? '')
@@ -27,17 +23,10 @@ const useGetModules = (props?: BasicProps) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setModules(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
   return {
-    modules,
+    modules: data?.data ?? [],
     loading,
-    meta,
+    meta: data?.meta,
   }
 }
 

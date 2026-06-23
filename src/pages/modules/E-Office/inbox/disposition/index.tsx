@@ -4,7 +4,7 @@ import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan
 import {
   UseGetCountDisposition,
   UseGetDisposition,
-  USeGetDispositionByNature,
+  UseGetDispositionByNature,
 } from '@/pages/modules/E-Office/inbox/disposition/hooks'
 import ChartNature from '@/pages/modules/E-Office/inbox/disposition/compnent/chartNature.tsx'
 import { ColumnsDisposition } from '@/pages/modules/E-Office/inbox/disposition/data/columns.tsx'
@@ -20,7 +20,7 @@ const DispositionListPage = () => {
 
   const { institution } = UseGetUnitInstitution()
   const { count } = UseGetCountDisposition()
-  const { nature } = USeGetDispositionByNature()
+  const { nature } = UseGetDispositionByNature()
 
   const { disposition, loading, meta } = UseGetDisposition({
     page,

@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import type { Meta } from '@/components/common/table/TablePagination'
 import AxiosClient from '@/provider/axios'
@@ -26,9 +25,6 @@ const useGetRegency = (props?: Props) => {
     ParamsSearch = new URLSearchParams({ page, limit, search })
   }
 
-  const [regency, setRegency] = useState<RegencyList[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const { data, isLoading, isFetching } = useQuery<{
     data: RegencyList[]
     meta: Meta
@@ -41,17 +37,10 @@ const useGetRegency = (props?: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setRegency(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
   return {
-   regency,
+    regency: data?.data ?? [],
     loading,
-    meta,
+    meta: data?.meta,
   }
 }
 

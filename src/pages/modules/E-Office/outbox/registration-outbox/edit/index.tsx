@@ -5,12 +5,12 @@ import { FormRegistrationOutbox } from '@/pages/modules/E-Office/outbox/registra
 
 export const RegistrationOutboxEdit = () => {
   const { id } = useParams()
-  const { detailInbox } = UseGetDetailOutbox(id as string)
+  const { detailOutbox } = UseGetDetailOutbox(id as string)
   return (
     <>
       <div className={'space-y-5 bg-white'}>
         <ButtonTitleGroup label={'Ubah Surat'} isBack buttonGroup={[]} />
-        <FormRegistrationOutbox data={detailInbox} />
+        <FormRegistrationOutbox data={detailOutbox} />
       </div>
     </>
   )

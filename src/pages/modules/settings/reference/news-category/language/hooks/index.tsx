@@ -1,17 +1,14 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import AxiosClient from '@/provider/axios.tsx'
 import type { NewsCategoryList } from '../../model/index'
+import AxiosClient from '@/provider/axios.tsx'
 
 export const UseGetNewsCategoryLanguage = (id?: string) => {
-  const [language, setLanguage] = useState<{
+  const { data, isLoading, isFetching } = useQuery<{
     id: NewsCategoryList
     en: NewsCategoryList
     zh: NewsCategoryList
     ar: NewsCategoryList
-  }>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  }>({
     queryKey: ['news-category-language', id],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -22,11 +19,5 @@ export const UseGetNewsCategoryLanguage = (id?: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLanguage(data)
-    }
-  }, [data])
-
-  return { loading, language }
+  return { loading, language: data }
 }

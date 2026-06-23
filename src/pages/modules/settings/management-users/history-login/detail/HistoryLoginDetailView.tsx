@@ -1,12 +1,12 @@
-import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup";
-import HistoryLoginDetailViewModel from "./HistoryLoginDetailViewModel";
-import TableCustom from "@/components/common/table/TableCustom";
-import DetailField from "@/components/common/field/DetailField";
-import useGetLogHistory from "../controller/useGetLogHistory";
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
+import HistoryLoginDetailViewModel from './HistoryLoginDetailViewModel'
+import TableCustom from '@/components/common/table/TableCustom'
+import DetailField from '@/components/common/field/DetailField'
+import useGetLogHistory from '../controller/useGetLogHistory'
 
 const HistoryLoginDetailView = () => {
-  const {histories}=useGetLogHistory()
-  const { columns, fieldsConfig, form } = HistoryLoginDetailViewModel();
+  const { histories, meta, loading } = useGetLogHistory()
+  const { columns, fieldsConfig, form } = HistoryLoginDetailViewModel()
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup label="Lihat Log Aktivitas" buttonGroup={[]} />
@@ -15,13 +15,14 @@ const HistoryLoginDetailView = () => {
       </div>
 
       <TableCustom
+        loading={loading}
+        meta={meta}
         columns={columns}
-        data={histories??[]}
-        isShowPagination={false}
+        data={histories ?? []}
         isShowFilter={false}
       />
     </div>
-  );
-};
+  )
+}
 
-export default HistoryLoginDetailView;
+export default HistoryLoginDetailView

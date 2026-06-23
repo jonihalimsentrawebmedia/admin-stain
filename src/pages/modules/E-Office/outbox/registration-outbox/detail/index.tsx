@@ -28,7 +28,7 @@ import { MdMailOutline } from 'react-icons/md'
 export const DetailOutboxRegistration = () => {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { detailInbox } = UseGetDetailOutbox(id as string)
+  const { detailOutbox } = UseGetDetailOutbox(id as string)
 
   return (
     <>
@@ -66,7 +66,7 @@ export const DetailOutboxRegistration = () => {
                 </div>
                 <div className="flex flex-col col-span-2">
                   <p className="text-gray-500">Satuan Kerja: </p>
-                  <p>{detailInbox?.nama_unit}</p>
+                  <p>{detailOutbox?.nama_unit}</p>
                 </div>
               </div>
 
@@ -76,7 +76,7 @@ export const DetailOutboxRegistration = () => {
                 </div>
                 <div className="flex flex-col">
                   <p className="text-gray-500">Sifat Surat: </p>
-                  <p>{detailInbox?.nama_sifat_surat}</p>
+                  <p>{detailOutbox?.nama_sifat_surat}</p>
                 </div>
               </div>
 
@@ -86,7 +86,7 @@ export const DetailOutboxRegistration = () => {
                 </div>
                 <div className="flex flex-col">
                   <p className="text-gray-500">Jenis Surat: </p>
-                  <p>{detailInbox?.nama_jenis_surat}</p>
+                  <p>{detailOutbox?.nama_jenis_surat}</p>
                 </div>
               </div>
 
@@ -96,7 +96,7 @@ export const DetailOutboxRegistration = () => {
                 </div>
                 <div className="flex flex-col">
                   <p className="text-gray-500">Klasifikasi Surat: </p>
-                  <p>{detailInbox?.nama_klasifikasi_surat}</p>
+                  <p>{detailOutbox?.nama_klasifikasi_surat}</p>
                 </div>
               </div>
 
@@ -106,7 +106,7 @@ export const DetailOutboxRegistration = () => {
                 </div>
                 <div className="flex flex-col">
                   <p className="text-gray-500">Penandatangan Surat: </p>
-                  <p>{detailInbox?.nama_penandatangan}</p>
+                  <p>{detailOutbox?.nama_penandatangan}</p>
                 </div>
               </div>
 
@@ -116,7 +116,7 @@ export const DetailOutboxRegistration = () => {
                 </div>
                 <div className="flex flex-col">
                   <p className="text-gray-500">Kepada: </p>
-                  <p>{detailInbox?.surat_kepada}</p>
+                  <p>{detailOutbox?.surat_kepada}</p>
                 </div>
               </div>
 
@@ -126,7 +126,7 @@ export const DetailOutboxRegistration = () => {
                 </div>
                 <div className="flex flex-col">
                   <p className="text-gray-500">Nomor Surat: </p>
-                  <p>{detailInbox?.nomor_surat}</p>
+                  <p>{detailOutbox?.nomor_surat}</p>
                 </div>
               </div>
 
@@ -137,8 +137,8 @@ export const DetailOutboxRegistration = () => {
                 <div className="flex flex-col">
                   <p className="text-gray-500">Tanggal: </p>
                   <p>
-                    {detailInbox?.tanggal_surat
-                      ? format(detailInbox?.tanggal_surat, 'dd/MM/yyyy')
+                    {detailOutbox?.tanggal_surat
+                      ? format(detailOutbox?.tanggal_surat, 'dd/MM/yyyy')
                       : ''}
                   </p>
                 </div>
@@ -150,7 +150,7 @@ export const DetailOutboxRegistration = () => {
                 </div>
                 <div className="flex flex-col">
                   <p className="text-gray-500">Nomor Agenda: </p>
-                  <p>{detailInbox?.nomor_agenda ?? '-'}</p>
+                  <p>{detailOutbox?.nomor_agenda ?? '-'}</p>
                 </div>
               </div>
 
@@ -160,7 +160,7 @@ export const DetailOutboxRegistration = () => {
                 </div>
                 <div className="flex flex-col col-span-2">
                   <p className="text-gray-500">Perihal: </p>
-                  <p>{detailInbox?.perihal ?? '-'}</p>
+                  <p>{detailOutbox?.perihal ?? '-'}</p>
                 </div>
               </div>
 
@@ -170,7 +170,7 @@ export const DetailOutboxRegistration = () => {
                 </div>
                 <div className="flex flex-col gap-1.5 col-span-2">
                   <p className="text-gray-500">Tebusan: </p>
-                  <p>{detailInbox?.tembusan ?? '-'}</p>
+                  <p>{detailOutbox?.tembusan ?? '-'}</p>
                 </div>
               </div>
 
@@ -180,14 +180,14 @@ export const DetailOutboxRegistration = () => {
                 </div>
                 <div className="flex flex-col gap-1.5 col-span-2">
                   <p className="text-gray-500">Ringkasan Surat: </p>
-                  <p>{detailInbox?.ringkasan ?? '-'}</p>
+                  <p>{detailOutbox?.ringkasan ?? '-'}</p>
                 </div>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        {detailInbox?.is_agenda && (
+        {detailOutbox?.is_agenda && (
           <Card className={'rounded-lg border-y-0 border-r-0 border-l-6 border-primary'}>
             <CardContent className={'space-y-5'}>
               <div className="flex items-center gap-2">
@@ -209,7 +209,7 @@ export const DetailOutboxRegistration = () => {
                   </div>
                   <div className="flex flex-col col-span-4">
                     <p className="text-gray-500">Nama Kegiatan: </p>
-                    <p>{detailInbox?.nama_kegiatan}</p>
+                    <p>{detailOutbox?.nama_kegiatan}</p>
                   </div>
                 </div>
 
@@ -219,7 +219,7 @@ export const DetailOutboxRegistration = () => {
                   </div>
                   <div className="flex flex-col col-span-4">
                     <p className="text-gray-500">Keterangan: </p>
-                    <p>{detailInbox?.keterangan_agenda ?? '-'}</p>
+                    <p>{detailOutbox?.keterangan_agenda ?? '-'}</p>
                   </div>
                 </div>
 
@@ -230,8 +230,8 @@ export const DetailOutboxRegistration = () => {
                   <div className="flex flex-col col-span-1">
                     <p className="text-gray-500">Tanggal Mulai: </p>
                     <p>
-                      {detailInbox?.tanggal_mulai
-                        ? format(detailInbox?.tanggal_mulai, 'dd/MM/yyyy')
+                      {detailOutbox?.tanggal_mulai
+                        ? format(detailOutbox?.tanggal_mulai, 'dd/MM/yyyy')
                         : ''}
                     </p>
                   </div>
@@ -244,8 +244,8 @@ export const DetailOutboxRegistration = () => {
                   <div className="flex flex-col col-span-1">
                     <p className="text-gray-500">Jam Mulai: </p>
                     <p>
-                      {detailInbox?.tanggal_mulai
-                        ? format(detailInbox?.tanggal_mulai, 'HH:mm')
+                      {detailOutbox?.tanggal_mulai
+                        ? format(detailOutbox?.tanggal_mulai, 'HH:mm')
                         : ''}
                     </p>
                   </div>
@@ -258,8 +258,8 @@ export const DetailOutboxRegistration = () => {
                   <div className="flex flex-col col-span-1">
                     <p className="text-gray-500">Tanggal Selesai: </p>
                     <p>
-                      {detailInbox?.tanggal_selesai
-                        ? format(detailInbox?.tanggal_selesai, 'dd/MM/yyyy')
+                      {detailOutbox?.tanggal_selesai
+                        ? format(detailOutbox?.tanggal_selesai, 'dd/MM/yyyy')
                         : ''}
                     </p>
                   </div>
@@ -272,8 +272,8 @@ export const DetailOutboxRegistration = () => {
                   <div className="flex flex-col col-span-1">
                     <p className="text-gray-500">Jam Selesai: </p>
                     <p>
-                      {detailInbox?.tanggal_selesai
-                        ? format(detailInbox?.tanggal_selesai, 'HH:mm')
+                      {detailOutbox?.tanggal_selesai
+                        ? format(detailOutbox?.tanggal_selesai, 'HH:mm')
                         : ''}
                     </p>
                   </div>
@@ -285,7 +285,7 @@ export const DetailOutboxRegistration = () => {
                   </div>
                   <div className="flex flex-col">
                     <p className="text-gray-500">Tempat / Lokasi: </p>
-                    <p>{detailInbox?.tempat}</p>
+                    <p>{detailOutbox?.tempat}</p>
                   </div>
                 </div>
 
@@ -295,7 +295,7 @@ export const DetailOutboxRegistration = () => {
                   </div>
                   <div className="flex flex-col col-span-4">
                     <p className="text-gray-500">Pengingat: </p>
-                    <p>{detailInbox?.nama_waktu_pengingat_agenda} Menit</p>
+                    <p>{detailOutbox?.nama_waktu_pengingat_agenda} Menit</p>
                   </div>
                 </div>
               </div>
@@ -303,7 +303,7 @@ export const DetailOutboxRegistration = () => {
           </Card>
         )}
 
-        {detailInbox?.is_lampiran && (
+        {detailOutbox?.is_lampiran && (
           <Card className={'rounded-lg border-y-0 border-r-0 border-l-6 border-primary'}>
             <CardContent className={'space-y-5'}>
               <div className="flex items-center gap-2">
@@ -319,7 +319,7 @@ export const DetailOutboxRegistration = () => {
               <hr className={'my-2 border-green-400'} />
 
               <div className="grid grid-cols-3 gap-5 mt-4">
-                {detailInbox?.lampiran?.map((item, index) => (
+                {detailOutbox?.lampiran?.map((item, index) => (
                   <Link
                     target={'_blank'}
                     to={item?.lampiran_url}
@@ -335,7 +335,7 @@ export const DetailOutboxRegistration = () => {
           </Card>
         )}
 
-        {detailInbox?.is_disposisi && (
+        {detailOutbox?.is_disposisi && (
           <Card className={'rounded-lg border-y-0 border-r-0 border-l-6 border-primary'}>
             <CardContent className={'space-y-5'}>
               <div className="flex items-center gap-2">
@@ -356,12 +356,12 @@ export const DetailOutboxRegistration = () => {
                 </div>
                 <div className="flex flex-col gap-1.5">
                   <p className="text-gray-500">Jenis Disposisi: </p>
-                  <p className={'capitalize'}>{detailInbox?.jenis_disposisi}</p>
+                  <p className={'capitalize'}>{detailOutbox?.jenis_disposisi}</p>
                 </div>
               </div>
 
               <div className={'flex flex-col gap-1.5'}>
-                {detailInbox?.pejabat?.map((row, index) => (
+                {detailOutbox?.pejabat?.map((row, index) => (
                   <Fragment key={index}>
                     <div className="flex items-start gap-4">
                       <div className={'flex flex-col p-4 border w-full rounded-lg'}>

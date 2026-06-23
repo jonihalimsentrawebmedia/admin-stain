@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import type { BasicProps } from '@/utils/globalType.ts'
 import { useQuery } from '@tanstack/react-query'
@@ -11,15 +10,12 @@ import type {
 export const UseGetEventActivity = (props: BasicProps) => {
   const { search, limit, page } = props
 
-  const [event, setEvent] = useState([])
-  const [meta, setMeta] = useState<Meta>()
-
   const Params = new URLSearchParams()
   if (page) Params.append('page', page ?? '1')
   if (limit) Params.append('limit', limit ?? '10')
   if (search) Params.append('search', search ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: IEvent[]; meta: Meta }>({
     queryKey: ['event-activity', Params.toString()],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/eoffice/acara?${Params}`).then((res) => res.data),
@@ -27,52 +23,31 @@ export const UseGetEventActivity = (props: BasicProps) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setEvent(data?.data ?? [])
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { meta, loading, event }
+  return { meta: data?.meta, loading, event: data?.data ?? [] }
 }
 
 export const UseGetDetailEventActivity = (id: string) => {
-  const [event, setEvent] = useState<IEvent>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IEvent>({
     queryKey: ['event-activity-detail', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () => AxiosClient.get(`/eoffice/acara/${id}`).then((res) => res.data.data),
   })
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setEvent(data)
-    }
-  }, [data])
-
-  return { event, loading }
+  return { event: data, loading }
 }
 
 export const UseGetListAttendance = (id: string) => {
-  const [attendance, setAttendance] = useState<IDetailEventPrint>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: IDetailEventPrint }>({
     queryKey: ['attendance-event', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () => AxiosClient.get(`/eoffice/acara/${id}/daftar-tamu`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setAttendance(data?.data ?? [])
-    }
-  }, [data])
-
-  return { attendance, loading }
+  return { attendance: data?.data, loading }
 }

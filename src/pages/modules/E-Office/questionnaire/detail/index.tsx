@@ -2,7 +2,7 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
   UseGetDetailQuestionnaire,
-  USeGetSurveyResult,
+  UseGetSurveyResult,
 } from '@/pages/modules/E-Office/questionnaire/hooks'
 import { Card, CardContent } from '@/components/ui/card.tsx'
 import {
@@ -15,7 +15,7 @@ const DetailQuestionnaire = () => {
   const { id } = useParams()
   const navigate = useNavigate()
   const { questionnaire: detail } = UseGetDetailQuestionnaire(id as string)
-  const { surveyResult: result } = USeGetSurveyResult(id as string)
+  const { surveyResult: result } = UseGetSurveyResult(id as string)
   const type = detail?.jenis_survei === 'KUALITATIF' ? 'qualitative' : 'quantitative'
   const columns =
     detail?.jenis_survei === 'KUALITATIF' ? ColumnsResultQualitative() : ColumnsResultQuantitative()

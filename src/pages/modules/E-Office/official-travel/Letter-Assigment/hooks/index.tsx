@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import type { BasicProps } from '@/utils/globalType.ts'
 import { useQuery } from '@tanstack/react-query'
@@ -20,9 +19,6 @@ interface props extends BasicProps {
 export const UseGetLetterAssigment = (props: props) => {
   const { search, page, limit, tahun, bulan } = props
 
-  const [letterAssignment, setLetterAssignment] = useState<ListLetterAssignment[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const Params = new URLSearchParams()
   if (search) Params.append('search', search ?? '')
   if (page) Params.append('page', page ?? '1')
@@ -30,7 +26,7 @@ export const UseGetLetterAssigment = (props: props) => {
   if (tahun) Params.append('tahun', tahun ?? '')
   if (bulan) Params.append('bulan', bulan ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: ListLetterAssignment[]; meta: Meta }>({
     queryKey: ['letter-assignment', Params.toString()],
     queryFn: () => AxiosClient.get(`/eoffice/mail-surat-tugas?${Params}`).then((res) => res.data),
     refetchOnWindowFocus: false,
@@ -38,19 +34,11 @@ export const UseGetLetterAssigment = (props: props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLetterAssignment(data?.data ?? [])
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { meta, loading, letterAssignment }
+  return { meta: data?.meta, loading, letterAssignment: data?.data ?? [] }
 }
 
 export const UseGetLetterAssigmentDetail = (id: string) => {
-  const [detail, setDetail] = useState<ILetterAssignment>()
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<ILetterAssignment>({
     queryKey: ['letter-assignment-detail', id],
     enabled: !!id,
     queryFn: () => AxiosClient.get(`/eoffice/mail-surat-tugas/${id}`).then((res) => res.data.data),
@@ -59,13 +47,7 @@ export const UseGetLetterAssigmentDetail = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDetail(data)
-    }
-  }, [data])
-
-  return { detail, loading }
+  return { detail: data, loading }
 }
 
 interface propsSPPD extends BasicProps {
@@ -74,10 +56,10 @@ interface propsSPPD extends BasicProps {
 
 export const LetterAssignmentSPPD = (props: propsSPPD) => {
   const { id_surat_tugas } = props
-  const [sppd, setSppd] = useState<IListSPPD[]>([])
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IListSPPD[]>({
     queryKey: ['letter-assignment-sppd', id_surat_tugas],
+    enabled: !!id_surat_tugas,
     queryFn: () =>
       AxiosClient.get(`/eoffice/mail-surat-tugas/${id_surat_tugas}/sppd`).then(
         (res) => res.data.data
@@ -87,20 +69,13 @@ export const LetterAssignmentSPPD = (props: propsSPPD) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setSppd(data)
-    }
-  }, [data])
-
-  return { sppd, loading }
+  return { sppd: data ?? [], loading }
 }
 
 export const UseGetLetterAssigmentDetailSPPD = (id: string, id_sppd: string) => {
-  const [detail, setDetail] = useState<IDetailSPPD>()
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IDetailSPPD>({
     queryKey: ['letter-assignment-detail-sppd', id, id_sppd],
-    enabled: !!id_sppd,
+    enabled: !!id && !!id_sppd,
     queryFn: () =>
       AxiosClient.get(`/eoffice/mail-surat-tugas/${id}/sppd/${id_sppd}`).then(
         (res) => res.data.data
@@ -109,11 +84,6 @@ export const UseGetLetterAssigmentDetailSPPD = (id: string, id_sppd: string) => 
   })
 
   const loading = isLoading || isFetching
-  useEffect(() => {
-    if (data) {
-      setDetail(data)
-    }
-  }, [data])
 
-  return { detail, loading }
+  return { detail: data, loading }
 }

@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import type { AcademicRankList } from '../model'
 import { useQuery } from '@tanstack/react-query'
@@ -11,8 +10,6 @@ interface props {
 
 const useGetAcademicRank = (props?: props) => {
   const { isGetAll } = props ?? {}
-  const [academicRank, setAcademicRank] = useState<AcademicRankList[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') || '1'
@@ -40,17 +37,10 @@ const useGetAcademicRank = (props?: props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setAcademicRank(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
   return {
-    academicRank,
+    academicRank: data?.data ?? [],
     loading,
-    meta,
+    meta: data?.meta,
   }
 }
 

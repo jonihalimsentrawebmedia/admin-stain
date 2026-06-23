@@ -1,17 +1,14 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
+import type { EducationLevelLanguage } from '../../model/index'
 import AxiosClient from '@/provider/axios.tsx'
-import type {  EducationLevelLanguage } from '../../model/index'
 
 export const UseEducatioinLevelLanguage = (id?: string) => {
-  const [language, setLanguage] = useState<{
+  const { data, isLoading, isFetching } = useQuery<{
     id: EducationLevelLanguage
     en: EducationLevelLanguage
     zh: EducationLevelLanguage
     ar: EducationLevelLanguage
-  }>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  }>({
     queryKey: ['education-level-language', id],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -22,11 +19,5 @@ export const UseEducatioinLevelLanguage = (id?: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLanguage(data)
-    }
-  }, [data])
-
-  return { loading, language }
+  return { loading, language: data }
 }

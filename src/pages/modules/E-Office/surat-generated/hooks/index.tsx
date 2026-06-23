@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { BasicProps } from '@/utils/globalType.ts'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
@@ -8,15 +7,15 @@ import type { ISuratGenerated, ISuratGeneratedDetail } from '../data/types'
 export const UseGetSuratGenerated = (props?: BasicProps) => {
   const { page, limit, search } = props ?? {}
 
-  const [suratList, setSuratList] = useState<ISuratGenerated[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const Params = new URLSearchParams()
   if (page) Params.append('page', page ?? '1')
   if (limit) Params.append('limit', limit ?? '10')
   if (search) Params.append('search', search ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data: queryData, isLoading, isFetching } = useQuery<{
+    data: ISuratGenerated[]
+    meta: Meta
+  }>({
     refetchOnWindowFocus: false,
     queryKey: ['surat-generated', Params.toString()],
     queryFn: () =>
@@ -25,20 +24,13 @@ export const UseGetSuratGenerated = (props?: BasicProps) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setSuratList(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { loading, suratList, meta }
+  return { loading, suratList: queryData?.data ?? [], meta: queryData?.meta }
 }
 
 export const UseGetDetailSuratGenerated = (id: string) => {
-  const [detail, setDetail] = useState<ISuratGeneratedDetail>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data: queryData, isLoading, isFetching } = useQuery<{
+    data: ISuratGeneratedDetail
+  }>({
     refetchOnWindowFocus: false,
     queryKey: ['surat-generated-detail', id],
     enabled: !!id,
@@ -48,11 +40,5 @@ export const UseGetDetailSuratGenerated = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDetail(data.data)
-    }
-  }, [data])
-
-  return { detail, loading }
+  return { detail: queryData?.data, loading }
 }

@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import type { CountryList } from "../model"
 import type { Meta } from "@/components/common/table/TablePagination"
@@ -23,9 +22,6 @@ const useGetCountry = (props?: Props) => {
     ParamsSearch = new URLSearchParams({ page, limit, search })
   }
 
-  const [country, setCountry] = useState<CountryList[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const { data, isLoading, isFetching } = useQuery<{
     data: CountryList[]
     meta: Meta
@@ -40,17 +36,10 @@ const useGetCountry = (props?: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setCountry(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
   return {
-    country,
+    country: data?.data ?? [],
     loading,
-    meta,
+    meta: data?.meta,
   }
 }
 

@@ -1,5 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { UseGetDetailTypeTemplateLatter } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail/hooks'
+import { UseGetDetailTypeTemplateLetter } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail/hooks'
 import { useParams, useSearchParams } from 'react-router-dom'
 import ButtonAddTemplateLetterType from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail-template/component/buttonAdd.tsx'
 import { UseGetTypeTemplateLetter } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail-template/hooks'
@@ -13,7 +13,7 @@ const ListTemplateLetterType = () => {
   const limit = searchParams.get('limit') ?? '10'
   const search = searchParams.get('search') ?? ''
 
-  const { typeTemplate } = UseGetDetailTypeTemplateLatter(id_template as string)
+  const { typeTemplate } = UseGetDetailTypeTemplateLetter(id_template as string)
   const { templateLetter, loading, meta } = UseGetTypeTemplateLetter({
     page,
     limit,

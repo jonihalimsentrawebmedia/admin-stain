@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
@@ -28,20 +27,18 @@ export interface IDokumentasi {
 export const UseGetDocumentation = (props: props) => {
   const { search, limit, page, id_mail_surat_tugas } = props
 
-  const [file, setFile] = useState<{
-    dokumentasi: IDokumentasi[]
-    kop_surat: ILetterHeader
-  }>()
-  const [meta, setMeta] = useState<Meta>()
-
   const Params = new URLSearchParams()
   if (page) Params.append('page', page ?? '1')
   if (limit) Params.append('limit', limit ?? '10')
   if (search) Params.append('search', search ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{
+    data: { dokumentasi: IDokumentasi[]; kop_surat: ILetterHeader }
+    meta: Meta
+  }>({
     queryKey: ['documentation-tugas', Params.toString(), id_mail_surat_tugas],
     refetchOnWindowFocus: false,
+    enabled: !!id_mail_surat_tugas,
     queryFn: () =>
       AxiosClient.get(
         `/eoffice/mail-surat-tugas/${id_mail_surat_tugas}/dokumentasi/print?${Params}`
@@ -50,12 +47,5 @@ export const UseGetDocumentation = (props: props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setFile(data?.data ?? [])
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { meta, loading, file }
+  return { meta: data?.meta, loading, file: data?.data }
 }

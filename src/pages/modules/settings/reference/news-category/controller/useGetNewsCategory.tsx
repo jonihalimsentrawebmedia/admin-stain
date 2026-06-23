@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { NewsCategoryList } from '../model'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
@@ -15,7 +14,7 @@ const useGetNewsCategory = (props?: Props) => {
   const page = searchParams.get('page') || '1'
   const limit = searchParams.get('limit') || '10'
   const search = searchParams.get('search') || ''
-const [meta,setMeta]=useState<Meta>()
+
   let ParamsSearch: URLSearchParams
   if (isGetAll) {
     ParamsSearch = new URLSearchParams({ page: '1', limit: '10000' })
@@ -23,8 +22,6 @@ const [meta,setMeta]=useState<Meta>()
   } else {
     ParamsSearch = new URLSearchParams({ page, limit, search })
   }
-
-  const [newsCategory, setNewsCategory] = useState<NewsCategoryList[]>([])
 
   const { data, isLoading, isFetching } = useQuery<{
     data: NewsCategoryList[]
@@ -40,16 +37,10 @@ const [meta,setMeta]=useState<Meta>()
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setNewsCategory(data.data??[])
-      setMeta(data.meta)
-    }
-  }, [data])
-
   return {
-    newsCategory,
-    loading,meta
+    newsCategory: data?.data ?? [],
+    loading,
+    meta: data?.meta,
   }
 }
 

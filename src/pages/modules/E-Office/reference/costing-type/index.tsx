@@ -1,6 +1,6 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import ButtonAddBiayaType from '@/pages/modules/E-Office/reference/costing-type/component/buttonAdd.tsx'
-import { USeGetBiayaType } from '@/pages/modules/E-Office/reference/costing-type/hooks'
+import { UseGetBiayaType } from '@/pages/modules/E-Office/reference/costing-type/hooks'
 import { useSearchParams } from 'react-router-dom'
 import { ColumnsBiayaType } from '@/pages/modules/E-Office/reference/costing-type/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
@@ -11,7 +11,7 @@ const ListBiayaType = () => {
   const limit = searchParams.get('limit') ?? '10'
   const search = searchParams.get('search') ?? ''
 
-  const { biayaType, meta, loading } = USeGetBiayaType({
+  const { biayaType, meta, loading } = UseGetBiayaType({
     page,
     limit,
     search,

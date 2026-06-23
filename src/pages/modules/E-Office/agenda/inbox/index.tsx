@@ -1,7 +1,7 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import {
   UseGetAgendaInboxPage,
-  USeGetStatisticsAgendaInbox,
+  UseGetStatisticsAgendaInbox,
 } from '@/pages/modules/E-Office/agenda/inbox/hooks'
 import { useSearchParams } from 'react-router-dom'
 import ColumnsInboxAgenda from '@/pages/modules/E-Office/agenda/inbox/data/columns.tsx'
@@ -21,7 +21,7 @@ export const ListAgendaInboxPage = () => {
   const tahun = searchParams.get('tahun') ?? ''
 
   const { institution } = UseGetUnitInstitution()
-  const { statistics } = USeGetStatisticsAgendaInbox()
+  const { statistics } = UseGetStatisticsAgendaInbox()
   const { agendaInbox, meta, loading } = UseGetAgendaInboxPage({
     page,
     limit,

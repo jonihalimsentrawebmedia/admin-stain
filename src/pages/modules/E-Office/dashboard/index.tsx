@@ -2,7 +2,7 @@ import { IoMailUnread } from 'react-icons/io5'
 import { FaUsers } from 'react-icons/fa6'
 import { FaRegCalendarAlt } from 'react-icons/fa'
 import {
-  UseGerUrgentInformation,
+  UseGetUrgentInformation,
   UseGetDashboardAgenda,
   UseGetDashboardCounts,
   UseGetDashboardInboxList,
@@ -35,7 +35,7 @@ const DashboardEOfficePage = () => {
   const { todayAgenda } = UseGetDashboardAgenda({
     tanggal_mulai: '2026-05-23',
   })
-  const { urgentInformation } = UseGerUrgentInformation()
+  const { urgentInformation } = UseGetUrgentInformation()
 
   const columns = ColumnsInboxDashboard()
   const fastAccess = [

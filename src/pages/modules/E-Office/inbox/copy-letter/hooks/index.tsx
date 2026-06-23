@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
@@ -8,15 +7,13 @@ import type { BasicProps } from '@/utils/globalType.ts'
 
 export const UseGetCopyLetter = (props?: BasicProps) => {
   const { page, limit, search } = props ?? {}
-  const [copyLetter, setCopyLetter] = useState<ICopyLetter[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const Params = new URLSearchParams()
   if (page) Params.append('page', page ?? '1')
   if (limit) Params.append('limit', limit ?? '10')
   if (search) Params.append('search', search ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: ICopyLetter[]; meta: Meta }>({
     queryKey: ['copy-letter', Params.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -25,21 +22,13 @@ export const UseGetCopyLetter = (props?: BasicProps) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setCopyLetter(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { loading, copyLetter, meta }
+  return { loading, copyLetter: data?.data ?? [], meta: data?.meta }
 }
 
 export const UseGetCopyLetterDetail = (id: string) => {
-  const [copyLetterDetail, setCopyLetterDetail] = useState<IDispositionInbox>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IDispositionInbox>({
     queryKey: ['copy-letter-detail', id],
+    enabled: !!id,
     refetchOnWindowFocus: false,
     queryFn: () =>
       AxiosClient.get(`/eoffice/surat-masuk/tembusan/${id}`).then((res) => res.data.data),
@@ -47,11 +36,5 @@ export const UseGetCopyLetterDetail = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setCopyLetterDetail(data)
-    }
-  }, [data])
-
-  return { loading, copyLetterDetail }
+  return { loading, copyLetterDetail: data }
 }

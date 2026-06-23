@@ -1,17 +1,14 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import AxiosClient from '@/provider/axios.tsx'
 import type { AcademicRankList } from '../../model/index'
+import AxiosClient from '@/provider/axios.tsx'
 
 export const UseRankedAcademicLanguage = (id?: string) => {
-  const [language, setLanguage] = useState<{
+  const { data, isLoading, isFetching } = useQuery<{
     id: AcademicRankList
     en: AcademicRankList
     zh: AcademicRankList
     ar: AcademicRankList
-  }>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  }>({
     queryKey: ['rank-academic-language', id],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -22,11 +19,5 @@ export const UseRankedAcademicLanguage = (id?: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLanguage(data)
-    }
-  }, [data])
-
-  return { loading, language }
+  return { loading, language: data }
 }
