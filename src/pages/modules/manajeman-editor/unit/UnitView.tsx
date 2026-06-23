@@ -2,7 +2,7 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
 import UnitViewModel from './UnitViewModel'
 import TableCustom from '@/components/common/table/TableCustom'
 import useGetSatuanOrganisasi from '../controller/useGetSatuanOrganisasi'
-import SubmissionButton from '../components/buttonSumission/SubmissionButton'
+import SubmissionButton from '../components/buttonSubmission/SubmissionButton'
 
 const UnitView = () => {
   const { columns, } = UnitViewModel()

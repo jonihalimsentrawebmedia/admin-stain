@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useEffect, useState } from 'react'
-import { useQueryClient } from '@tanstack/react-query'
+import { useEffect } from 'react'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -23,20 +23,16 @@ const useUpdateSatuanOrganisasi = ({ kelompok }: Props) => {
     defaultValues: {},
   })
 
-  const [loading, setLoading] = useState(false)
-
   const queryClient = useQueryClient()
-  async function handleSave(data: SatuanOrganisasiType) {
-    setLoading(true)
-    try {
-      const res = await AxiosClient.post(`/editor/profil/${id}`, {
-        ...data,
-      })
 
+  const { isPending, mutate } = useMutation({
+    mutationFn: (data: SatuanOrganisasiType) =>
+      AxiosClient.post(`/editor/profil/${id}`, data),
+    onSuccess: (res) => {
       if (res.data.status) {
         toast.success(res.data.message)
         goToBack()
-        await queryClient.invalidateQueries({
+        queryClient.invalidateQueries({
           queryKey: [
             'editor-satuan-organisasi-list',
             'editor-satuan-organisasi-list-detail',
@@ -44,12 +40,16 @@ const useUpdateSatuanOrganisasi = ({ kelompok }: Props) => {
           ],
         })
       }
-    } catch (err: any) {
+    },
+    onError: (err: any) => {
       toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
-    } finally {
-      setLoading(false)
-    }
+    },
+  })
+
+  function handleSave(data: SatuanOrganisasiType) {
+    mutate(data)
   }
+
   function goToBack() {
     if (kelompok == 'PRODI') {
       navigate('/modules/editor/dashboard')
@@ -69,7 +69,7 @@ const useUpdateSatuanOrganisasi = ({ kelompok }: Props) => {
     }
   }, [satuanOrganisasi])
   return {
-    loading,
+    loading: isPending,
     handleSave,
     form,
     goToBack,

@@ -3,7 +3,7 @@ import useGetSatuanOrganisasiDetailHistory from '../../controller/useGetSatuanOr
 import { useEffect } from 'react'
 import { cekSelisihHari, formatDateTime } from '@/utils/date'
 
-const FaculityDetailHistoryViewModel = () => {
+const FacultyDetailHistoryViewModel = () => {
   const { satuanOrganisasi } = useGetSatuanOrganisasiDetailHistory()
   const form = useForm()
   const fieldDetail = [
@@ -146,4 +146,4 @@ const FaculityDetailHistoryViewModel = () => {
   }
 }
 
-export default FaculityDetailHistoryViewModel
+export default FacultyDetailHistoryViewModel

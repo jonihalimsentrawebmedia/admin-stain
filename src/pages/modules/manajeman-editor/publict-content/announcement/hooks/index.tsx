@@ -1,13 +1,9 @@
-import { useEffect, useState } from 'react'
 import type { IAnnouncement } from '@/pages/modules/website-utama/public-content/announcement/data'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
 export const UseGetManagementEditorAnnouncementDetail = (id: string) => {
-  const [managementEditorAnnouncementDetail, setManagementEditorAnnouncementDetail] =
-    useState<IAnnouncement>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IAnnouncement>({
     queryKey: ['management-editor-announcement-detail', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/editor/pengumuman/${id}`).then((res) => res.data?.data),
@@ -15,19 +11,11 @@ export const UseGetManagementEditorAnnouncementDetail = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setManagementEditorAnnouncementDetail(data)
-    }
-  }, [data])
-
-  return { managementEditorAnnouncementDetail, loading }
+  return { managementEditorAnnouncementDetail: data, loading }
 }
 
 export const UseGetLogAnnouncementManagementEditor = (id: string) => {
-  const [logData, setLogData] = useState<any[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<any[]>({
     queryKey: ['log-pengumuman-editor', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/editor/pengumuman-log/${id}`).then((res) => res.data.data),
@@ -35,11 +23,5 @@ export const UseGetLogAnnouncementManagementEditor = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLogData(data)
-    }
-  }, [data])
-
-  return { logData, loading }
+  return { logData: data ?? [], loading }
 }

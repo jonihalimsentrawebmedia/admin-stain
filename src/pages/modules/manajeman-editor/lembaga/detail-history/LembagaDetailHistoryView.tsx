@@ -1,13 +1,13 @@
-import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
-import FaculityDetailHistoryViewModel from './FaculityDetailHistoryViewModel'
-import DetailField from '@/components/common/field/DetailField'
-import CardInput from '@/components/common/card/CardInput'
-import ButtonAccept from '../../components/buttonSumission/ButtonAccept'
-import ButtonCancelDraft from '../../components/buttonSumission/ButtonCancelDraft'
-import { colostStatusPublish } from '../../components/buttonSumission/SubmissionDetailButton'
+import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup"
+import { colostStatusPublish } from "../../components/buttonSubmission/SubmissionDetailButton"
+import ButtonAccept from "../../components/buttonSubmission/ButtonAccept"
+import ButtonCancelDraft from "../../components/buttonSubmission/ButtonCancelDraft"
+import DetailField from "@/components/common/field/DetailField"
+import CardInput from "@/components/common/card/CardInput"
+import LembagaDetailHistoryViewModel from "./LembagaDetailHistoryViewModel"
 
-const FaculityDetailHistoryView = () => {
-  const {
+const LembagaDetailHistoryView = () => {
+const {
     fieldAddress,
     fieldContact,
     fieldImage,
@@ -16,7 +16,7 @@ const FaculityDetailHistoryView = () => {
     form,
     fieldDetail,
     satuanOrganisasi,
-  } = FaculityDetailHistoryViewModel()
+  } = LembagaDetailHistoryViewModel()
 
   return (
     <div className="flex flex-col gap-4">
@@ -59,7 +59,7 @@ const FaculityDetailHistoryView = () => {
         <div>
           <DetailField data={fieldImage} form={form} isRowParent isRow={false} />
         </div>
-        <CardInput title="Identitas Fakultas">
+        <CardInput title="Identitas Lembaga">
           <DetailField data={fieldUniversity} form={form} />
         </CardInput>
         <CardInput title="Alamat Lengkap">
@@ -76,4 +76,4 @@ const FaculityDetailHistoryView = () => {
   )
 }
 
-export default FaculityDetailHistoryView
+export default LembagaDetailHistoryView

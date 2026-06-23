@@ -1,6 +1,6 @@
 import { lazy } from 'react'
 
-// import FaculityDetailHistoryView from '@/pages/modules/manajeman-editor/faculty/detail-history/FaculityDetailHistoryView'
+// import FacultyDetailHistoryView from '@/pages/modules/manajeman-editor/faculty/detail-history/FacultyDetailHistoryView'
 // import FacultyDetailView from '@/pages/modules/manajeman-editor/faculty/detail/FacultyDetailView'
 // import FacultyEditView from '@/pages/modules/manajeman-editor/faculty/edit/FacultyEditView'
 // import FacultyView from '@/pages/modules/manajeman-editor/faculty/FacultyView'
@@ -106,7 +106,7 @@ const InstitutionDetailView = lazy(() => import('@/pages/modules/manajeman-edito
 const InstitutionDetailHistoryView = lazy(() => import('@/pages/modules/manajeman-editor/institution/detail-history/InstitutionDetailHistoryView'))
 const FacultyEditView = lazy(() => import('@/pages/modules/manajeman-editor/faculty/edit/FacultyEditView'))
 const FacultyDetailView = lazy(() => import('@/pages/modules/manajeman-editor/faculty/detail/FacultyDetailView'))
-const FaculityDetailHistoryView = lazy(() => import('@/pages/modules/manajeman-editor/faculty/detail-history/FaculityDetailHistoryView'))
+const FacultyDetailHistoryView = lazy(() => import('@/pages/modules/manajeman-editor/faculty/detail-history/FacultyDetailHistoryView'))
 const LembagaDetailView = lazy(() => import('@/pages/modules/manajeman-editor/lembaga/detail/LembagaDetailView.tsx'))
 const LembagaEditView = lazy(() => import('@/pages/modules/manajeman-editor/lembaga/edit/LembagaEditView.tsx'))
 const UpdatedArticleManagementEditor = lazy(() => import('@/pages/modules/manajeman-editor/publict-content/article/updated').then(m => ({ default: m.UpdatedArticleManagementEditor })))
@@ -379,7 +379,7 @@ export const EditorRouter = [
       },
       {
         path: ':id/detail/:idHistory',
-        element: <FaculityDetailHistoryView />,
+        element: <FacultyDetailHistoryView />,
       },
     ],
   },

@@ -223,7 +223,7 @@ const InstitutionDetailViewModel = () => {
   ]
 
   function goToEdit() {
-    navigate(`/modules/settings/institution/edit/${id}`)
+    navigate(`/modules/editor/institution/edit/${id}`)
   }
   useEffect(() => {
     if (profileChangeData) {

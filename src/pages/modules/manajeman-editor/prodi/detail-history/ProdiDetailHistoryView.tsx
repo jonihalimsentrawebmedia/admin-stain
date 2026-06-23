@@ -1,8 +1,8 @@
 import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup"
 import ProdiDetailHistoryViewModel from "./ProdiDetailHistoryViewModel"
-import { colostStatusPublish } from "../../components/buttonSumission/SubmissionDetailButton"
-import ButtonAccept from "../../components/buttonSumission/ButtonAccept"
-import ButtonCancelDraft from "../../components/buttonSumission/ButtonCancelDraft"
+import { colostStatusPublish } from "../../components/buttonSubmission/SubmissionDetailButton"
+import ButtonAccept from "../../components/buttonSubmission/ButtonAccept"
+import ButtonCancelDraft from "../../components/buttonSubmission/ButtonCancelDraft"
 import DetailField from "@/components/common/field/DetailField"
 import CardInput from "@/components/common/card/CardInput"
 

@@ -1,13 +1,13 @@
-import ButtonTitleGroup from "@/components/common/button/ButtonTitleGroup"
-import { colostStatusPublish } from "../../components/buttonSumission/SubmissionDetailButton"
-import ButtonAccept from "../../components/buttonSumission/ButtonAccept"
-import ButtonCancelDraft from "../../components/buttonSumission/ButtonCancelDraft"
-import DetailField from "@/components/common/field/DetailField"
-import CardInput from "@/components/common/card/CardInput"
-import UnitDetailHistoryViewModel from "./UnitDetailHistoryViewModel"
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
+import FacultyDetailHistoryViewModel from './FacultyDetailHistoryViewModel'
+import DetailField from '@/components/common/field/DetailField'
+import CardInput from '@/components/common/card/CardInput'
+import ButtonAccept from '../../components/buttonSubmission/ButtonAccept'
+import ButtonCancelDraft from '../../components/buttonSubmission/ButtonCancelDraft'
+import { colostStatusPublish } from '../../components/buttonSubmission/SubmissionDetailButton'
 
-const UnitDetailHistoryView = () => {
-const {
+const FacultyDetailHistoryView = () => {
+  const {
     fieldAddress,
     fieldContact,
     fieldImage,
@@ -16,7 +16,7 @@ const {
     form,
     fieldDetail,
     satuanOrganisasi,
-  } = UnitDetailHistoryViewModel()
+  } = FacultyDetailHistoryViewModel()
 
   return (
     <div className="flex flex-col gap-4">
@@ -76,4 +76,4 @@ const {
   )
 }
 
-export default UnitDetailHistoryView
+export default FacultyDetailHistoryView
