@@ -49,11 +49,12 @@ export const ButtonDeleteServices = (props: Props) => {
 
       <DialogBasic
         title={'Hapus Layanan'}
+        className={'lg:min-w-2xl'}
         description={'Apakah anda yakin untuk menghapus data dibawah ini?'}
         open={open}
         setOpen={setOpen}
       >
-        <div className="grid grid-cols-[12rem_1fr] gap-5">
+        <div className="grid grid-cols-[12rem_1fr] gap-5 max-h-[450px] overflow-y-auto">
           <p className="text-gray-500">Nama Layanan</p>
           <p>{data?.nama}</p>
           <p className="text-gray-500">Urutan</p>

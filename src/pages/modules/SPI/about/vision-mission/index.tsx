@@ -51,7 +51,7 @@ export const VisionMissionSPIPage = () => {
           <Form {...form}>
             <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(handleSave)}>
               <ButtonTitleGroup
-                label={'Visi & Misi'}
+                label={'Update Visi & Misi'}
                 buttonGroup={[
                   {
                     type: 'custom',
@@ -84,7 +84,7 @@ export const VisionMissionSPIPage = () => {
         <>
           <div className={'mt-5 space-y-4'}>
             <ButtonTitleGroup
-              label={'Profil Pusat Karir'}
+              label={'Visi & Misi'}
               buttonGroup={[
                 {
                   type: 'custom',

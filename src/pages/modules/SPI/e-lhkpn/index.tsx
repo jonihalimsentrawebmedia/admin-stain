@@ -56,13 +56,11 @@ export const ELHKPNDetailPage = () => {
           <Form {...form}>
             <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
               <ButtonTitleGroup
-                label={'Edit Profil Singkat'}
+                label={'Edit E-LHKPN'}
                 buttonGroup={[
                   {
                     type: 'custom',
-                    element: (
-                      <ButtonGoToGuide titleGuide={'Profil Singkat'} valueGuide="SPI_E_LHKPN" />
-                    ),
+                    element: <ButtonGoToGuide titleGuide={'E-LHKPN'} valueGuide="E_LHKPN" />,
                   },
                   {
                     type: 'cancel',
@@ -85,13 +83,11 @@ export const ELHKPNDetailPage = () => {
         ) : (
           <>
             <ButtonTitleGroup
-              label={'Profil Singkat'}
+              label={'E-LHKPN'}
               buttonGroup={[
                 {
                   type: 'custom',
-                  element: (
-                    <ButtonGoToGuide titleGuide={'Profil Singkat'} valueGuide="SPI_E_LHKPN" />
-                  ),
+                  element: <ButtonGoToGuide titleGuide={'E-LHKPN'} valueGuide="E_LHKPN" />,
                 },
                 {
                   type: 'custom',
@@ -107,7 +103,7 @@ export const ELHKPNDetailPage = () => {
 
             <div className="flex items-start gap-x-5 bg-white">
               <img
-                src={ELHKPN?.url_gambar}
+                src={ELHKPN?.url_gambar ?? '#'}
                 className={'w-[480px] h-[360px] object-cover'}
                 width={480}
                 height={360}

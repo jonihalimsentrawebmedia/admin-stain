@@ -58,7 +58,7 @@ export const ButtonEditChiefOfficer = (prop: IProps) => {
         <HiPencil />
       </button>
 
-      <DialogBasic title={'Tambah Kelompok'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Edit Kelompok'} open={open} setOpen={setOpen}>
         <Form {...form}>
           <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
             <TextInput

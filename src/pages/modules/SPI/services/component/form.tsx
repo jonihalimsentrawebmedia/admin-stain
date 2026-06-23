@@ -12,10 +12,11 @@ interface Props {
   form: UseFormReturn<TResolverService>
   loading: boolean
   HandleSave: (e: TResolverService) => void
+  title?: string
 }
 
 export const FormServiceSPI = (props: Props) => {
-  const { form, loading, HandleSave } = props
+  const { form, loading, HandleSave, title } = props
   const navigate = useNavigate()
   return (
     <>
@@ -26,7 +27,7 @@ export const FormServiceSPI = (props: Props) => {
               { type: 'cancel', onClick: () => navigate(-1) },
               { type: 'save', onClick: () => {} },
             ]}
-            label={'Tambah Layanan'}
+            label={title || 'Tambah Layanan'}
           />
 
           <UploadPhotoImage
@@ -58,13 +59,7 @@ export const FormServiceSPI = (props: Props) => {
             isRequired
           />
           <div className="flex flex-col gap-1">
-            <RichText
-              form={form}
-              name={'deskripsi'}
-              label={'Deskripsi Lengkap'}
-              isRow
-              required
-            />
+            <RichText form={form} name={'deskripsi'} label={'Deskripsi Lengkap'} isRow required />
             <p className="text-sm text-blue-500 pl-[212px]">
               Jelaskan layanan secara mendalam, termasuk prosedur, fitur, dan informasi teknis.
               Gunakan heading untuk kerapian.

@@ -62,7 +62,7 @@ export const ButtonEditAward = (props: Props) => {
       </button>
 
       <DialogBasic
-        title={'Upload Penghargaan'}
+        title={'Edit Penghargaan'}
         open={open}
         setOpen={setOpen}
         className={'lg:min-w-2xl'}

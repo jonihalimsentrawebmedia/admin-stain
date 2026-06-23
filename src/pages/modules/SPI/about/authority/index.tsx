@@ -51,7 +51,7 @@ export const AuthoritySPIPage = () => {
           <Form {...form}>
             <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(handleSave)}>
               <ButtonTitleGroup
-                label={'Tugas & Wewenang'}
+                label={'Ubah Data Tugas & Wewenang'}
                 buttonGroup={[
                   {
                     type: 'custom',
@@ -84,7 +84,7 @@ export const AuthoritySPIPage = () => {
         <>
           <div className={'mt-5 space-y-4'}>
             <ButtonTitleGroup
-              label={'Ubah Data Tugas & Wewenang'}
+              label={'Tugas & Wewenang'}
               buttonGroup={[
                 {
                   type: 'custom',

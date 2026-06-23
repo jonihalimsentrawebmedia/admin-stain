@@ -50,7 +50,7 @@ export const ProfileCodeEthicsPage = () => {
           <Form {...form}>
             <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(handleSave)}>
               <ButtonTitleGroup
-                label={'Kode Etik'}
+                label={'Update Data Kode Etik'}
                 buttonGroup={[
                   {
                   type: 'custom',
@@ -82,7 +82,7 @@ export const ProfileCodeEthicsPage = () => {
         <>
           <div className={'mt-5'}>
             <ButtonTitleGroup
-              label={'Update Data Kode Etik'}
+              label={'Kode Etik'}
               buttonGroup={[
                 {
                   type: 'custom',
