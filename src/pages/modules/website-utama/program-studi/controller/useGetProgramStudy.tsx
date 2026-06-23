@@ -1,5 +1,4 @@
 import { useSearchParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
@@ -24,9 +23,6 @@ const useGetProgramStudy = (props?: Props) => {
     ParamsSearch = new URLSearchParams({ page, limit, search,id_fakultas_asal })
   }
 
-  const [programStudy, setProgramStudy] = useState<SatuanOrganisasiList[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const { data, isLoading, isFetching } = useQuery<{
     data: SatuanOrganisasiList[]
     meta: Meta
@@ -39,17 +35,10 @@ const useGetProgramStudy = (props?: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setProgramStudy(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
   return {
-    programStudy,
+    programStudy: data?.data ?? [],
     loading,
-    meta,
+    meta: data?.meta,
   }
 }
 

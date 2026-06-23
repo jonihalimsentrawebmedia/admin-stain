@@ -14,6 +14,7 @@ export const UseGetCorporationSubCategoryLanguage = (id: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['corporation-language', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () =>
       AxiosClient.get(`/website-utama/sub-kategori-kerjasama-translate/${id}`).then(
         (res) => res.data.data

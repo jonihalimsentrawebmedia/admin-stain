@@ -63,7 +63,7 @@ export const ButtonEditRegulation = (props: Props) => {
         <HiPencil />
       </button>
 
-      <DialogBasic title={'Tambah Peraturan'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Edit Peraturan'} open={open} setOpen={setOpen}>
         <FormServiceSPI form={form} loading={loading} HandleSave={HandleAdd} />
       </DialogBasic>
     </>

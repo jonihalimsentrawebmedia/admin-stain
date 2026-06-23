@@ -75,6 +75,7 @@ export const UseGetDetailCostNonUkt = (id: string) => {
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['detail_cost_non_ukt', id],
+    enabled: !!id,
     queryFn: () =>
       AxiosClient.get(`/website-utama/biaya-pendidikan-non-ukt/jalur-masuk/${id}`).then(
         (res) => res.data?.data

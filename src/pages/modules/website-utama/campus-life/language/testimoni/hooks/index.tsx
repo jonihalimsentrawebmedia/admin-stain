@@ -14,6 +14,7 @@ export const UseGetTestimonyLanguage = (id: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['language-performance', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () =>
       AxiosClient(`/website-utama/kehidupan-kampus-testimoni-translate/${id}`).then(
         (res) => res.data.data

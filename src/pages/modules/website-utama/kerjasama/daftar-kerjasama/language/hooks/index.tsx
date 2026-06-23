@@ -14,6 +14,7 @@ export const UseGetCollaborationLanguage = (id: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['list-colab-language', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () =>
       AxiosClient.get(`/website-utama/kerjasama-translate/${id}`).then((res) => res.data.data),
   })

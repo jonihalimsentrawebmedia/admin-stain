@@ -14,6 +14,7 @@ export const UseGetAcademicResourceLanguage = (id?: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['academic-resource-language', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () =>
       AxiosClient.get(`/website-utama/academic-resources-translate/${id}`).then(
         (res) => res.data.data

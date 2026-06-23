@@ -16,6 +16,7 @@ export const UseGetAnnouncementLanguage = (id?: string) => {
     refetchOnWindowFocus: false,
     queryFn: () =>
       AxiosClient.get(`/website-utama/pengumuman-translate/${id}`).then((res) => res.data.data),
+    enabled: !!id,
   })
 
   const loading = isLoading || isFetching

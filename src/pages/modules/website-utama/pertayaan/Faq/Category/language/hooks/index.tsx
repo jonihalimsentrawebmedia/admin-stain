@@ -14,6 +14,7 @@ export const UseGetCategoryFAQLanguage = (id?: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['category-faq-language', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () =>
       AxiosClient.get(`/website-utama/kategori-faq-translate/${id}`).then((res) => res.data.data),
   })

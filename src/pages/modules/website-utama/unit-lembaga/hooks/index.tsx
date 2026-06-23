@@ -1,14 +1,9 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
-import type { Meta } from '@/components/common/table/TablePagination.tsx'
-import type { IUnitInstitution } from '@/pages/modules/website-utama/unit-lembaga/data/types.ts'
 import type { BasicProps } from '@/utils/globalType.ts'
 
 export const UseGetUnitInstitution = (props: BasicProps) => {
   const { search, limit, page } = props
-  const [unitInstitution, setUnitInstitution] = useState<IUnitInstitution[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const Params = new URLSearchParams()
   if (page) Params.set('page', page ?? '1')
@@ -26,42 +21,26 @@ export const UseGetUnitInstitution = (props: BasicProps) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setUnitInstitution(data?.data ?? [])
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { unitInstitution, loading, meta }
+  return { unitInstitution: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export const UseGetUnitInstitutionDetail = (id: string) => {
-  const [unitInstitutionDetail, setUnitInstitutionDetail] = useState<IUnitInstitution>()
-
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['unit-institution-detail', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () =>
       AxiosClient.get(`/website-utama/satuan-organisasi/unit-lembaga/${id}`).then(
         (res) => res.data.data
       ),
   })
 
-  useEffect(() => {
-    if (data) {
-      setUnitInstitutionDetail(data)
-    }
-  }, [data])
-
   const loading = isLoading || isFetching
 
-  return { unitInstitutionDetail, loading }
+  return { unitInstitutionDetail: data, loading }
 }
 
 export const UseGetUnitInstitutionBackground = () => {
-  const [background, setBackground] = useState<[]>([])
-
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['unit-institution-background'],
     refetchOnWindowFocus: false,
@@ -73,11 +52,5 @@ export const UseGetUnitInstitutionBackground = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setBackground(data)
-    }
-  }, [data])
-
-  return { background, loading }
+  return { background: data, loading }
 }

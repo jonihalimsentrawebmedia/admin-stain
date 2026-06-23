@@ -1,13 +1,8 @@
-import { useEffect, useState } from "react"
-import type { StaffProfile } from "../model/staff"
 import { useParams, useSearchParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
-import type { Meta } from "@/components/common/table/TablePagination"
 import AxiosClient from "@/provider/axios"
 
 const useGetStaff = () => {
- const [staff, setStaff] = useState<StaffProfile[]>([])
-  const [meta, setMeta] = useState<Meta>()
   const { id } = useParams()
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
@@ -26,14 +21,7 @@ const useGetStaff = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setStaff(data?.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { staff, loading, meta }
+  return { staff: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export default useGetStaff

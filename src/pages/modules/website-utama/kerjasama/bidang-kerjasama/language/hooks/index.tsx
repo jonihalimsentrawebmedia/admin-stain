@@ -14,6 +14,7 @@ export const UseGetFieldCollaborationLanguage = (id: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['field-language', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () =>
       AxiosClient.get(`/website-utama/bidang-kerjasama-translate/${id}`).then(
         (res) => res.data.data

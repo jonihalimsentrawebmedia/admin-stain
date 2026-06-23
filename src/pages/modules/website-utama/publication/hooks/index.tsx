@@ -1,9 +1,6 @@
-import { useEffect, useState } from 'react'
-import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { BasicProps } from '@/utils/globalType.ts'
-import type { IPublication } from '@/pages/modules/website-utama/publication/data/types.ts'
 
 interface props extends BasicProps {
   year: string
@@ -11,9 +8,6 @@ interface props extends BasicProps {
 
 export const UseGetPublicationLecturer = (props?: props) => {
   const { page, search, limit, year } = props ?? {}
-
-  const [publication, setPublication] = useState<IPublication[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const Params = new URLSearchParams()
   if (page) Params.append('page', page ?? '1')
@@ -30,19 +24,10 @@ export const UseGetPublicationLecturer = (props?: props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setPublication(data?.data)
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { meta, loading, publication }
+  return { meta: data?.meta, loading, publication: data?.data }
 }
 
 export const UseGetYearPublication = () => {
-  const [year, setYear] = useState<number[]>([])
-
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['year-publication'],
     refetchOnWindowFocus: false,
@@ -52,11 +37,5 @@ export const UseGetYearPublication = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setYear(data)
-    }
-  }, [data])
-
-  return { year, loading }
+  return { year: data, loading }
 }

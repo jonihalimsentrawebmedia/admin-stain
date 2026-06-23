@@ -14,6 +14,7 @@ export const UseGetGalleryAlbumLanguage = (id?: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['album-language', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () =>
       AxiosClient.get(`/website-utama/galeri-album-translate/${id}`).then((res) => res.data.data),
   })

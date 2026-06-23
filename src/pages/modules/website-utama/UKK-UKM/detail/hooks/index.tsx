@@ -9,6 +9,7 @@ export const UseGetAboutUkkUkm = (id_unit: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['about-ukk-ukm', id_unit],
     refetchOnWindowFocus: false,
+    enabled: !!id_unit,
     queryFn: () =>
       AxiosClient.get(`/website-utama/ukk-ukm-tentang/${id_unit}`).then((res) => res.data.data),
   })
@@ -34,6 +35,7 @@ export const UseGetVisionMissionUkkUkm = (id_unit: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['vision-ukk-ukm', id_unit],
     refetchOnWindowFocus: false,
+    enabled: !!id_unit,
     queryFn: () =>
       AxiosClient.get(`/website-utama/ukk-ukm-visi-misi/${id_unit}`).then((res) => res.data.data),
   })
@@ -55,6 +57,7 @@ export const UseGetStructureUkkUkm = (id_unit: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['structure-ukk-ukm', id_unit],
     refetchOnWindowFocus: false,
+    enabled: !!id_unit,
     queryFn: () =>
       AxiosClient.get(`/website-utama/ukk-ukm-struktur-organisasi//${id_unit}`).then(
         (res) => res.data.data
@@ -78,6 +81,7 @@ export const UseGetContactUkkUkm = (id_unit: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['contact-ukk-ukm', id_unit],
     refetchOnWindowFocus: false,
+    enabled: !!id_unit,
     queryFn: () =>
       AxiosClient.get(`/website-utama/ukk-ukm-hubungi-kami/${id_unit}`).then(
         (res) => res.data.data

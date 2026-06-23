@@ -11,7 +11,7 @@ export const PhotoSection = () => {
       <p className="text-blue-500">Pilih 3 konten yang akan ditampilkan</p>
 
       <div className={'grid grid-cols-3 gap-8 mt-5'}>
-        {photoSelected.map((item, k) => (
+        {photoSelected.map((item: any, k: number) => (
           <div key={k} className="">
             <img
               src={item?.link_foto}

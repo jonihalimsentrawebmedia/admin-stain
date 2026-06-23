@@ -1,14 +1,8 @@
-import{ useEffect, useState } from 'react'
-import type { LogActivity } from '../../calendar-academic/model'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
-import type { Meta } from '@/components/common/table/TablePagination'
 import { useSearchParams } from 'react-router-dom'
 
 const useGetLogStatistic = () => {
- const [log, setLog] = useState<LogActivity[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
    const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
@@ -27,14 +21,7 @@ const useGetLogStatistic = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLog(data?.data??[])
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { log, loading, meta }
+  return { log: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export default useGetLogStatistic

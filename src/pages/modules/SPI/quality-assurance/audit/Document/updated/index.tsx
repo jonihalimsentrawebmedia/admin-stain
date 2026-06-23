@@ -57,7 +57,8 @@ export const UpdatedDocumentAudit = () => {
       <Form {...form}>
         <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(HandleSubmit)}>
           <ButtonTitleGroup
-            label={'Tambah Dokumen Tinjauan Manajemen'}
+            isBack
+            label={'Edit Dokumen Tinjauan Manajemen'}
             buttonGroup={[
               {
                 label: 'Batal',

@@ -50,17 +50,17 @@ export const ProfileStructurePage = () => {
           <Form {...form}>
             <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(handleSave)}>
               <ButtonTitleGroup
-                label={'Struktur Organisasi'}
+                label={'Update Data Struktur Organisasi'}
                 buttonGroup={[
-                   {
-                  type: 'custom',
-                  element: (
-                    <ButtonGoToGuide
-                      titleGuide={'Struktur Organisasi'}
-                      valueGuide="SPI_TENTANG_STRUKTUR_ORGANISASI"
-                    />
-                  ),
-                },
+                  {
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={'Struktur Organisasi'}
+                        valueGuide="SPI_TENTANG_STRUKTUR_ORGANISASI"
+                      />
+                    ),
+                  },
                   {
                     type: 'cancel',
                     label: 'Batal',
@@ -82,9 +82,9 @@ export const ProfileStructurePage = () => {
         <>
           <div className={'mt-5'}>
             <ButtonTitleGroup
-              label={'Update Data Struktur Organisasi'}
+              label={'Struktur Organisasi'}
               buttonGroup={[
-                  {
+                {
                   type: 'custom',
                   element: (
                     <ButtonGoToGuide

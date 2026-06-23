@@ -14,6 +14,7 @@ export const UseGetTypeCollaborationLanguage = (id: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['collaboration-language', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () =>
       AxiosClient.get(`/website-utama/jenis-kerjasama-translate/${id}`).then(
         (res) => res.data.data

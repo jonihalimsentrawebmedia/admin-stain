@@ -37,6 +37,7 @@ export const UseGetTemplateDetail = (slug: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['template-detail', slug],
     refetchOnWindowFocus: false,
+    enabled: !!slug,
     queryFn: () =>
       AxiosClient.get(`/website-utama/thema/${slug}/color`).then((res) => res.data.data),
   })

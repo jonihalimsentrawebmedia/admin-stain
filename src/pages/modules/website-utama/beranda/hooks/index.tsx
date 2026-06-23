@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { IContent, ITotalVisitor, Mode } from '@/pages/modules/website-utama/beranda/types'
@@ -12,9 +11,6 @@ import {
 import { RiBarChart2Fill } from 'react-icons/ri'
 
 export const UseGetTotalVisitor = () => {
-  const [totalVisitor, setTotalVisitor] = useState<ITotalVisitor>()
-  const [status, setStatus] = useState<{ label: string; value: number; icon: any }[]>([])
-
   const { data, isFetching, isLoading } = useQuery<ITotalVisitor>({
     queryKey: ['total-visitor'],
     refetchOnWindowFocus: false,
@@ -24,11 +20,8 @@ export const UseGetTotalVisitor = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setTotalVisitor(data)
-
-      const temp: any = [
+  const status = data
+    ? [
         {
           label: 'Total Pengunjung',
           value: data?.total_pengunjung,
@@ -96,16 +89,12 @@ export const UseGetTotalVisitor = () => {
           ),
         },
       ]
-      setStatus(temp)
-    }
-  }, [data])
+    : []
 
-  return { totalVisitor, loading, status }
+  return { totalVisitor: data, loading, status }
 }
 
 export const UseGetApprovedList = (status: string) => {
-  const [approvedList, setApprovedList] = useState<IContent[]>([])
-
   const ParamsSearch = new URLSearchParams()
   if (status) ParamsSearch.set('status-publish', status)
 
@@ -120,22 +109,10 @@ export const UseGetApprovedList = (status: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setApprovedList(data)
-    } else {
-      setApprovedList([])
-    }
-  }, [data])
-
-  return { approvedList, loading }
+  return { approvedList: data ?? [], loading }
 }
 
 export const UseGetTrentVisitor = (mode: Mode) => {
-  const [trentVisitor, setTrentVisitor] = useState<any>()
-  const [visitor, setVisitor] = useState<{ baru: number; kembali: number }>()
-  const [device, setDevice] = useState<{ desktop: number; mobile: number }>()
-
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['trent-visitor', mode],
     refetchOnWindowFocus: false,
@@ -147,13 +124,9 @@ export const UseGetTrentVisitor = (mode: Mode) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setTrentVisitor(data?.tren_kunjungan)
-      setVisitor(data?.jenis_pengunjung)
-      setDevice(data?.perangkat)
-    }
-  }, [data])
+  const trentVisitor = data?.tren_kunjungan
+  const visitor = data ? { baru: data.baru?.length, kembali: data.kembali?.length } : undefined
+  const device = data ? { desktop: data.desktop?.length, mobile: data.mobile?.length } : undefined
 
   return { trentVisitor, loading, visitor, device }
 }

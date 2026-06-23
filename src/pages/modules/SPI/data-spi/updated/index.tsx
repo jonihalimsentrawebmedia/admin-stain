@@ -32,12 +32,16 @@ export const UpdatedDataSPI = () => {
   const handleSave = async (e: SatuanOrganisasiType) => {
     await AxiosClient.post('/spi/profil/draft', {
       ...e,
-    }).then((res) => {
-      if (res.data.status) {
-        toast.success(res.data.message || 'Success Pengajuan update data universitas')
-        navigate('/modules/spi/data-spi')
-      }
     })
+      .then((res) => {
+        if (res.data.status) {
+          toast.success(res.data.message || 'Success Pengajuan update data universitas')
+          navigate('/modules/spi/data-spi')
+        }
+      })
+      .catch((err) => {
+        toast.error(err?.response?.data?.message || 'Gagal mengirim data')
+      })
   }
 
   return (

@@ -16,6 +16,7 @@ export const UseGetDownloadCategoryLanguage = (id?: string) => {
     refetchOnWindowFocus: false,
     queryFn: () =>
       AxiosClient.get(`/website-utama/kategori-berkas-translate/${id}`).then((res) => res.data.data),
+    enabled: !!id,
   })
 
   const loading = isLoading || isFetching

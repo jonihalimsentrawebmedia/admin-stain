@@ -14,6 +14,7 @@ export const UseGetGalleryVideoLanguage = (id?: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['news-language', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () =>
       AxiosClient.get(`/website-utama/galeri-video-translate/${id}`).then((res) => res.data.data),
   })

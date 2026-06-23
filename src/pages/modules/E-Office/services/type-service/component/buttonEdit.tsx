@@ -62,7 +62,7 @@ const ButtonEditServiceType = (props: props) => {
         <HiPencil />
       </button>
 
-      <DialogBasic title={'Edit Waktu Pengingat Agenda'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Edit Jenis Layanan'} open={open} setOpen={setOpen}>
         <FormTypeServices
           loading={loading}
           open={open}

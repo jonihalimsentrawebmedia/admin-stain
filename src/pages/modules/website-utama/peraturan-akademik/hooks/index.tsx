@@ -1,12 +1,7 @@
-import { useEffect, useState } from 'react'
-import type { IAcademicRules } from '@/pages/modules/website-utama/peraturan-akademik/types'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
-import type { IBGThumbnail } from '@/pages/modules/website-utama/public-content/announcement/data'
 
 export const UseGetDetailAcademicRules = () => {
-  const [academicRules, setAcademicRules] = useState<IAcademicRules>()
-
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['academic-rules'],
     refetchOnWindowFocus: false,
@@ -16,18 +11,10 @@ export const UseGetDetailAcademicRules = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setAcademicRules(data)
-    }
-  }, [data])
-
-  return { academicRules, loading }
+  return { academicRules: data, loading }
 }
 
 export const UseGetAcademicRulesBackground = () => {
-  const [background, setBackground] = useState<IBGThumbnail[]>([])
-
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['background-academic-rules'],
     refetchOnWindowFocus: false,
@@ -37,11 +24,5 @@ export const UseGetAcademicRulesBackground = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setBackground(data)
-    }
-  }, [data])
-
-  return { background, loading }
+  return { background: data ?? [], loading }
 }

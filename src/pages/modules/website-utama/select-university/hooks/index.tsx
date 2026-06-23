@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
-import type { SatuanOrganisasiDetail } from '@/pages/modules/settings/model'
 
 interface props {
   kelompok: 'UNIVERSITAS' | 'FAKULTAS' | 'PRODI' | 'UNIT' | 'LEMBAGA'
@@ -10,8 +8,6 @@ interface props {
 
 export const UseGetUniversityDomainExist = (group?: props) => {
   const { kelompok, id_parent } = group ?? {}
-
-  const [satuanOrganisasi, setSatuanOrganisasi] = useState<SatuanOrganisasiDetail[]>([])
 
   const ParamsSearch = new URLSearchParams()
   if (id_parent) ParamsSearch.set('id_parent', id_parent)
@@ -27,11 +23,5 @@ export const UseGetUniversityDomainExist = (group?: props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setSatuanOrganisasi(data)
-    }
-  }, [data])
-
-  return { satuanOrganisasi, loading }
+  return { satuanOrganisasi: data, loading }
 }

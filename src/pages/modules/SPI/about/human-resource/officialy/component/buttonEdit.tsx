@@ -67,7 +67,7 @@ export const ButtonEditOfficially = (props: Props) => {
           setLoading(false)
           setOpen(!open)
           queryClient.invalidateQueries({
-            queryKey: ['chief-officially'],
+            queryKey: ['chief-officially-spi'],
           })
           toast.success(res.data.message || 'Success')
         }

@@ -46,6 +46,7 @@ export const UseGetAchievementDetail = (id: string) => {
     queryKey: ['detail-achievement', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/website-utama/prestasi/${id}`).then((res) => res.data.data),
+    enabled: !!id,
   })
 
   const loading = isLoading || isFetching

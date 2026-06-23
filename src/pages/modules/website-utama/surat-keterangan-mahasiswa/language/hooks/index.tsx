@@ -14,6 +14,7 @@ export const UseGetSKM = (id?: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['skm-language', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () =>
       AxiosClient.get(`/website-utama/surat-keterangan-mahasiswa-translate/${id}`).then(
         (res) => res.data.data

@@ -89,6 +89,7 @@ export const UseGetDownloadDetail = (id: string) => {
     queryKey: ['detail-download', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/website-utama/downloads/${id}`).then((res) => res.data.data),
+    enabled: !!id,
   })
 
   const loading = isLoading || isFetching

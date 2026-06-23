@@ -66,7 +66,7 @@ export const ButtonEditPortal = (props: Props) => {
       </button>
 
       <DialogBasic
-        title={'Tambah Portal Eksternal'}
+        title={'Edit Portal Eksternal'}
         open={open}
         setOpen={setOpen}
         className={'lg:min-w-3xl'}

@@ -62,7 +62,7 @@ const UpdatedGustBook = () => {
   return (
     <>
       <div>
-        <ButtonTitleGroup isBack label={'Tambah Buku Tami'} buttonGroup={[]} />
+        <ButtonTitleGroup isBack label={'Edit Buku Tamu'} buttonGroup={[]} />
         <FormGustBook loading={loading} form={form} HandleSave={HandleSave} />
       </div>
     </>

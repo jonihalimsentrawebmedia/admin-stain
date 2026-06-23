@@ -1,15 +1,8 @@
-import { useEffect, useState } from "react"
-import type { LogActivity } from "../../../calendar-academic/model"
-import type { Meta } from "@/components/common/table/TablePagination"
 import { useParams, useSearchParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
 import AxiosClient from "@/provider/axios"
 
-
 const useGetLogCalloborationCategory = () => {
-  const [log, setLog] = useState<LogActivity[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const { idCalloborationCategory } = useParams()
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
@@ -28,14 +21,7 @@ const useGetLogCalloborationCategory = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLog(data?.data??[])
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { log, loading, meta }
+  return { log: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export default useGetLogCalloborationCategory

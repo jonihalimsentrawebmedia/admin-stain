@@ -49,6 +49,7 @@ export const UseGetImpactInnovationDetail = (id: string) => {
     refetchOnWindowFocus: false,
     queryFn: () =>
       AxiosClient.get(`/website-utama/inovasi-berdampak/${id}`).then((res) => res.data.data),
+    enabled: !!id,
   })
 
   const loading = isLoading || isFetching

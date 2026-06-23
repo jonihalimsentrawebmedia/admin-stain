@@ -1,13 +1,8 @@
-import { useEffect, useState } from 'react'
-import type { Dosen } from '../model/dosen'
-import type { Meta } from '@/components/common/table/TablePagination'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 
 const useGetDosen = () => {
-  const [dosen, setDosen] = useState<Dosen[]>([])
-  const [meta, setMeta] = useState<Meta>()
   const { id } = useParams()
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
@@ -26,14 +21,7 @@ const useGetDosen = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDosen(data?.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { dosen, loading, meta }
+  return { dosen: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export default useGetDosen

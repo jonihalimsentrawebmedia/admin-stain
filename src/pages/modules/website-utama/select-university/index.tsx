@@ -11,6 +11,7 @@ import {toast} from 'react-toastify'
 import Cookies from 'js-cookie'
 import {UseGetUniversityDomainExist} from '@/pages/modules/website-utama/select-university/hooks'
 import {UseGetIdentityPublic} from "@/pages/login/hooks";
+import type { SatuanOrganisasiList } from '@/pages/modules/settings/model'
 
 export const SelectUniversity = () => {
   const form = useForm()
@@ -55,7 +56,7 @@ export const SelectUniversity = () => {
                     name={'id_university'}
                     placeholder={'Pilih Universitas digunakan'}
                     data={
-                      satuanOrganisasi?.map((row) => ({
+                      satuanOrganisasi?.map((row: SatuanOrganisasiList) => ({
                         label: row?.nama,
                         value: row?.id_satuan_organisasi,
                       })) ?? []

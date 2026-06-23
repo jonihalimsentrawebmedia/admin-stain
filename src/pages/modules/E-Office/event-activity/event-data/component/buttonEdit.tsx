@@ -72,7 +72,7 @@ const ButtonEditEvent = (props: props) => {
         <HiPencil className={'size-5 text-yellow-500'} />
       </button>
 
-      <DialogBasic title={'Tambah Acara'} open={open} setOpen={setOpen} className={'min-w-2xl'}>
+      <DialogBasic title={'Edit Acara'} open={open} setOpen={setOpen} className={'min-w-2xl'}>
         <FormEvent
           form={form}
           loading={loading}

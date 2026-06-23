@@ -41,6 +41,7 @@ export const UseGetAcademicResourceDetail = (id?: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['academic-resource-detail', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () =>
       AxiosClient.get(`/website-utama/academic-resources/${id}`).then((res) => res.data.data),
   })

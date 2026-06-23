@@ -1,10 +1,6 @@
-import { useEffect, useState } from 'react'
 import type { BasicProps } from '@/utils/globalType.ts'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
-import type { Meta } from '@/components/common/table/TablePagination.tsx'
-import type { IListCostEducation } from '@/pages/modules/website-utama/cost-education/ukt/data/types.ts'
-import type { IBGThumbnail } from '@/pages/modules/website-utama/public-content/announcement/data'
 
 interface props extends BasicProps {
   id_fakultas: string
@@ -23,9 +19,6 @@ export const UseGetCostEducation = (props: props) => {
     limit = '10',
     search = '',
   } = props
-
-  const [costEducation, setCostEducation] = useState<IListCostEducation[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: [
@@ -58,21 +51,10 @@ export const UseGetCostEducation = (props: props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setCostEducation(data.data || [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { costEducation, meta, loading }
+  return { costEducation: data?.data ?? [], meta: data?.meta, loading }
 }
 
 export const UseGetStatusPublish = () => {
-  const [publish, setPublish] = useState<{
-    tipe: 'NON_UKT' | 'UKT'
-  }>()
-
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['status_publish'],
     queryFn: () =>
@@ -82,19 +64,11 @@ export const UseGetStatusPublish = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setPublish(data)
-    }
-  }, [data])
-
-  return { publish, loading }
+  return { publish: data, loading }
 }
 
 
 export const UseGetUKTBackground = () => {
-  const [background, setBackground] = useState<IBGThumbnail[]>([])
-
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['background-ukt'],
     refetchOnWindowFocus: false,
@@ -104,11 +78,5 @@ export const UseGetUKTBackground = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setBackground(data)
-    }
-  }, [data])
-
-  return { background, loading }
+  return { background: data ?? [], loading }
 }

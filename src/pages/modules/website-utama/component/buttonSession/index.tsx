@@ -10,6 +10,7 @@ import { toast } from 'react-toastify'
 import { UseGetSession } from '@/pages/modules/website-utama/session'
 import { UseGetUniversityDomainExist } from '@/pages/modules/website-utama/select-university/hooks'
 import { useMobile } from '@/utils/useMobile.tsx'
+import type { SatuanOrganisasiList } from '@/pages/modules/settings/model'
 
 export const ButtonSession = () => {
   const [open, setOpen] = useState(false)
@@ -64,7 +65,7 @@ export const ButtonSession = () => {
                 name={'id_university'}
                 placeholder={'Pilih Universitas digunakan'}
                 data={
-                  satuanOrganisasi?.map((row) => ({
+                  satuanOrganisasi?.map((row: SatuanOrganisasiList) => ({
                     label: row?.nama,
                     value: row?.id_satuan_organisasi,
                   })) ?? []

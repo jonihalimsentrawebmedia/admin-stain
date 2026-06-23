@@ -58,6 +58,7 @@ export const UseGetNewsDetail = (id: string) => {
     queryKey: ['detail-news', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/website-utama/berita/${id}`).then((res) => res.data.data),
+    enabled: !!id,
   })
 
   const loading = isLoading || isFetching

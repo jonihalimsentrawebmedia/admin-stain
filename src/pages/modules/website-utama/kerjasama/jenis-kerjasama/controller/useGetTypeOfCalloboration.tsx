@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import type { TypeOfCalloborationList } from "../model"
 import type { Meta } from "@/components/common/table/TablePagination"
@@ -23,9 +22,6 @@ const useGetTypeOfCalloboration = (props?:Props) => {
     ParamsSearch = new URLSearchParams({ page, limit, search })
   }
 
-  const [typeOfCalloboration, setTypeOfCalloboration] = useState<TypeOfCalloborationList[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const { data, isLoading, isFetching } = useQuery<{
     data: TypeOfCalloborationList[]
     meta: Meta
@@ -38,17 +34,10 @@ const useGetTypeOfCalloboration = (props?:Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setTypeOfCalloboration(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
   return {
-    typeOfCalloboration,
+    typeOfCalloboration: data?.data ?? [],
     loading,
-    meta,
+    meta: data?.meta,
   }
 }
 

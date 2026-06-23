@@ -14,6 +14,7 @@ export const UseGetTopSliderLanguage = (id?: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['top-slider-language', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () =>
       AxiosClient.get(`/website-utama/slider-atas-translate/${id}`).then((res) => res.data.data),
   })

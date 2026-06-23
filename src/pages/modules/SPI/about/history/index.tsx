@@ -50,7 +50,7 @@ export const ProfileHistoryPage = () => {
           <Form {...form}>
             <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(handleSave)}>
               <ButtonTitleGroup
-                label={'Sejarah'}
+                label={'Update Data Sejarah'}
                 buttonGroup={[
                    {
                   type: 'custom',
@@ -82,7 +82,7 @@ export const ProfileHistoryPage = () => {
         <>
           <div className={'mt-5'}>
             <ButtonTitleGroup
-              label={'Update Data Sejarah'}
+              label={'Sejarah'}
               buttonGroup={[
                  {
                   type: 'custom',

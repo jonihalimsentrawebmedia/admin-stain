@@ -9,6 +9,7 @@ import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import type { ISessionProdi } from '@/pages/modules/website-prodi/hooks'
 import { UseGetUniversityDomainExist } from '@/pages/modules/website-utama/select-university/hooks'
+import type { SatuanOrganisasiList } from '@/pages/modules/settings/model'
 
 export const ButtonSessionProdi = ({ session }: { session?: ISessionProdi }) => {
   const [open, setOpen] = useState(false)
@@ -88,7 +89,7 @@ export const ButtonSessionProdi = ({ session }: { session?: ISessionProdi }) => 
                 placeholder={'Pilih Universitas digunakan'}
                 selectClassName={'z-40'}
                 data={
-                  university?.map((row) => ({
+                  university?.map((row: SatuanOrganisasiList) => ({
                     label: row?.nama,
                     value: row?.id_satuan_organisasi,
                   })) ?? []
@@ -111,7 +112,7 @@ export const ButtonSessionProdi = ({ session }: { session?: ISessionProdi }) => 
                 placeholder={'Pilih Fakultas'}
                 selectClassName={'z-30'}
                 data={
-                  faculty?.map((row) => ({
+                  faculty?.map((row: SatuanOrganisasiList) => ({
                     label: row?.nama,
                     value: row?.id_satuan_organisasi,
                   })) ?? []
@@ -134,7 +135,7 @@ export const ButtonSessionProdi = ({ session }: { session?: ISessionProdi }) => 
                 placeholder={'Pilih Program Studi'}
                 selectClassName={'z-20'}
                 data={
-                  prodi?.map((row) => ({
+                  prodi?.map((row: SatuanOrganisasiList) => ({
                     label: row?.nama,
                     value: row?.id_satuan_organisasi,
                   })) ?? []

@@ -14,6 +14,7 @@ export const UseGetYearActivityDetailLanguage = (id?: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['detail-academic-language', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () =>
       AxiosClient.get(`/website-utama/tahun-akademik-uraian-kegiatan-translate/${id}`).then(
         (res) => res.data.data

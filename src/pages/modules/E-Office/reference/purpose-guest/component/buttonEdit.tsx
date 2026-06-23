@@ -67,7 +67,7 @@ const ButtonEditPurposeGuest = (props: props) => {
         <HiPencil />
       </button>
 
-      <DialogBasic title={'Tambah Jenis Keperluan'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Edit Tujuan Bertamu'} open={open} setOpen={setOpen}>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(HandleSave)} className="space-y-5">
             <TextInput

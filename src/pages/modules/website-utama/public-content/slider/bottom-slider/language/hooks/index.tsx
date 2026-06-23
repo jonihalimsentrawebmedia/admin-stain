@@ -14,6 +14,7 @@ export const UseGetBottomSliderLanguage = (id?: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['bottom-slider-language', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () =>
       AxiosClient.get(`/website-utama/slider-bawah-translate/${id}`).then((res) => res.data.data),
   })

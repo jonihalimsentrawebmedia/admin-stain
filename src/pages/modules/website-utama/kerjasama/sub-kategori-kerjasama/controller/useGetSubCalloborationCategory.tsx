@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import type { SubCalloborationCategory } from '../model'
 import type { Meta } from '@/components/common/table/TablePagination'
@@ -24,11 +23,6 @@ const useGetSubCalloborationCategory = (props?: Props) => {
     ParamsSearch = new URLSearchParams({ page, limit, search })
   }
 
-  const [subCalloborationCategory, setSubCaloborationCategory] = useState<
-    SubCalloborationCategory[]
-  >([])
-  const [meta, setMeta] = useState<Meta>()
-
   const { data, isLoading, isFetching } = useQuery<{
     data: SubCalloborationCategory[]
     meta: Meta
@@ -43,17 +37,10 @@ const useGetSubCalloborationCategory = (props?: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setSubCaloborationCategory(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
   return {
-    subCalloborationCategory,
+    subCalloborationCategory: data?.data ?? [],
     loading,
-    meta,
+    meta: data?.meta,
   }
 }
 

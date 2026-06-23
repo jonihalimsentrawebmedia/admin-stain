@@ -52,6 +52,7 @@ export const UseGetEmployeeById = (id: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['employee-by-id', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () => AxiosClient.get(`/website-utama/sdm/${id}`).then((res) => res.data.data),
   })
 

@@ -56,6 +56,7 @@ export const UseGetBottomSliderDetail = (id: string) => {
     refetchOnWindowFocus: false,
     queryFn: () =>
       AxiosClient.get(`/website-utama/slider-bawah/${id}`).then((res) => res.data.data),
+    enabled: !!id,
   })
 
   const loading = isLoading || isFetching

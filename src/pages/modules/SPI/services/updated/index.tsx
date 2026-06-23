@@ -48,7 +48,12 @@ export const UpdatedService = () => {
 
   return (
     <>
-      <FormServiceSPI form={form} loading={loading} HandleSave={HandleSave} />
+      <FormServiceSPI
+        title={'Edit Layanan'}
+        form={form}
+        loading={loading}
+        HandleSave={HandleSave}
+      />
     </>
   )
 }

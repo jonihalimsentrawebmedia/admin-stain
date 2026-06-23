@@ -1,14 +1,9 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
-import type { Meta } from '@/components/common/table/TablePagination.tsx'
-import type { IUkkUkm } from '@/pages/modules/website-utama/UKK-UKM/data/types.ts'
 import type { BasicProps } from '@/utils/globalType.ts'
 
 export const USeGetUkkUkm = (props: BasicProps) => {
   const { search, limit, page } = props
-  const [ukkUkm, setUkkUkm] = useState<[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const params = new URLSearchParams()
   if (page) params.append('page', page ?? '1')
@@ -23,39 +18,23 @@ export const USeGetUkkUkm = (props: BasicProps) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setUkkUkm(data?.data)
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { meta, loading, ukkUkm }
+  return { meta: data?.meta, loading, ukkUkm: data?.data }
 }
 
 export const UseGetUkkUkmDetail = (id: string) => {
-  const [ukkUkm, setUkkUkm] = useState<IUkkUkm>()
-
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['ukk_ukm', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () => AxiosClient.get(`/website-utama/ukk-ukm/${id}`).then((res) => res.data.data),
   })
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setUkkUkm(data)
-    }
-  }, [data])
-
-  return { ukkUkm, loading }
+  return { ukkUkm: data, loading }
 }
 
 export const UseGetUkkUkmBackground = () => {
-  const [background, setBackground] = useState<[]>([])
-
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['ukk-ukm-background'],
     refetchOnWindowFocus: false,
@@ -65,11 +44,5 @@ export const UseGetUkkUkmBackground = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setBackground(data)
-    }
-  }, [data])
-
-  return { background, loading }
+  return { background: data, loading }
 }

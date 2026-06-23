@@ -62,7 +62,7 @@ export const ButtonEditCategory = (props: Props) => {
       </button>
 
       <DialogBasic
-        title={'Tambah Kategori Dokumen'}
+        title={'Edit Kategori Dokumen'}
         open={open}
         setOpen={setOpen}
         className={'lg:min-w-2xl'}

@@ -11,6 +11,7 @@ import { UseGetSessionSPI } from './get-seeion.tsx'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import { Form } from '@/components/ui/form.tsx'
+import type { SatuanOrganisasiList } from '@/pages/modules/settings/model'
 
 export const DialogSessionSPI = () => {
   const [open, setOpen] = useState(false)
@@ -85,7 +86,7 @@ export const DialogSessionSPI = () => {
               placeholder={'Pilih Universitas digunakan'}
               selectClassName={'z-50'}
               data={
-                university?.map((row) => ({
+                university?.map((row: SatuanOrganisasiList) => ({
                   label: row?.nama,
                   value: row?.id_satuan_organisasi,
                 })) ?? []

@@ -1,11 +1,8 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import { UseGetSession } from '@/pages/modules/website-utama/session'
 
 export const UseGetTreeData = () => {
-  const [treeNodes, setTreeNodes] = useState<any[]>([])
-
   const { session } = UseGetSession()
 
   const { data, isLoading, isFetching } = useQuery({
@@ -20,13 +17,7 @@ export const UseGetTreeData = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setTreeNodes(data)
-    }
-  }, [data])
-
-  return { loading, treeNodes }
+  return { loading, treeNodes: data ?? [] }
 }
 
 export interface list_unit_terkait {
