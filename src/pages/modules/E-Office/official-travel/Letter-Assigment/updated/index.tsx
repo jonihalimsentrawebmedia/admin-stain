@@ -67,7 +67,7 @@ const UpdatedLetterAssigment = () => {
 
   return (
     <div className="space-y-5">
-      <ButtonTitleGroup label={'Buat Surat Tugas / SPD'} buttonGroup={[]} />
+      <ButtonTitleGroup label={'Edit Surat Tugas / SPD'} buttonGroup={[]} />
       <FormLetterTask form={form} loading={loading} HandleSave={HandleSave} />
     </div>
   )

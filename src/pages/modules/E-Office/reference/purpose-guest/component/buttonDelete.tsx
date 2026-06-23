@@ -48,7 +48,7 @@ const ButtonDeletePurposeGuest = (props: props) => {
         <FaTrash />
       </button>
 
-      <DialogBasic title={'Hapus Jenis Keperluan'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Hapus Tujuan Bertamu'} open={open} setOpen={setOpen}>
         <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
           <p className="text-gray-500">Tujuan Bertamu</p>
           <p>{data?.tujuan_bertamu}</p>

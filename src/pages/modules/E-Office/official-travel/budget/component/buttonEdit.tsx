@@ -70,7 +70,7 @@ const ButtonEditBudget = (props: props) => {
         <HiPencil />
       </button>
 
-      <DialogBasic title={'Tambah Anggaran'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Edit Anggaran'} open={open} setOpen={setOpen}>
         <FormBudget
           form={form}
           setOpen={setOpen}
