@@ -1,16 +1,12 @@
-import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import AxiosClient from "@/provider/axios";
 import type { UserMultiLevelList } from "../model/leveluser";
+import AxiosClient from "@/provider/axios";
+
 interface Props{
     id:string
 }
 const useGetUsersLevel = ({id}:Props) => {
-const [userMulti, setUserMulti] = useState<UserMultiLevelList[]>([]);
-
-
-
-  const {data, isLoading, isFetching} = useQuery({
+  const {data, isLoading, isFetching} = useQuery<UserMultiLevelList[]>({
     refetchOnWindowFocus: false,
     queryKey: ['users-list-multi'+id],
     queryFn: () => AxiosClient.get(`/pengaturan/manajemen-user/users/multi-level/by-user/${id}`).then(res => res.data.data)
@@ -18,16 +14,9 @@ const [userMulti, setUserMulti] = useState<UserMultiLevelList[]>([]);
 
   const loading = isLoading || isFetching;
 
-  useEffect(() => {
-    if (data) {
-      setUserMulti(data)
-    }
-  }, [data]);
-
   return {
-    userMulti,
+    userMulti: data,
     loading,
-   
   };
 }
 

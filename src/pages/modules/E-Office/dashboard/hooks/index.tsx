@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type {
@@ -9,9 +8,7 @@ import type {
 import type { IInboxList } from '@/pages/modules/E-Office/inbox/list-inbox/data/types.ts'
 
 export const UseGetDashboardInboxList = () => {
-  const [inboxDashboard, setInboxDashboard] = useState<IInboxList[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IInboxList[]>({
     queryKey: ['dashboard-inbox'],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -20,19 +17,11 @@ export const UseGetDashboardInboxList = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setInboxDashboard(data)
-    }
-  }, [data])
-
-  return { inboxDashboard, loading }
+  return { inboxDashboard: data ?? [], loading }
 }
 
 export const UseGetDashboardCounts = () => {
-  const [counts, setCounts] = useState<IDashboardSummary>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IDashboardSummary>({
     queryKey: ['dashboard-counts'],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -41,19 +30,11 @@ export const UseGetDashboardCounts = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setCounts(data)
-    }
-  }, [data])
-
-  return { counts, loading }
+  return { counts: data, loading }
 }
 
-export const UseGerUrgentInformation = () => {
-  const [urgentInformation, setUrgentInformation] = useState<IDashboardSummary>()
-
-  const { data, isLoading, isFetching } = useQuery({
+export const UseGetUrgentInformation = () => {
+  const { data, isLoading, isFetching } = useQuery<IDashboardSummary>({
     queryKey: ['urgent-information'],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -62,19 +43,11 @@ export const UseGerUrgentInformation = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setUrgentInformation(data)
-    }
-  }, [data])
-
-  return { urgentInformation, loading }
+  return { urgentInformation: data, loading }
 }
 
 export const UseGetDashboardAgenda = ({ tanggal_mulai }: { tanggal_mulai: string }) => {
-  const [todayAgenda, setTodayAgenda] = useState<IDashboardAgenda[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IDashboardAgenda[]>({
     queryKey: ['dashboard-statistic-outbox', tanggal_mulai],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -85,13 +58,7 @@ export const UseGetDashboardAgenda = ({ tanggal_mulai }: { tanggal_mulai: string
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setTodayAgenda(data)
-    }
-  }, [data])
-
-  return { todayAgenda, loading }
+  return { todayAgenda: data ?? [], loading }
 }
 
 interface Props {
@@ -100,9 +67,7 @@ interface Props {
 
 export const UseGetStatisticLetterByTime = (props?: Props) => {
   const { periode } = props ?? {}
-  const [statisticTime, setStatisticTime] = useState<IDashboardStatistic>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IDashboardStatistic>({
     queryKey: ['statistic-time', periode],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -113,11 +78,5 @@ export const UseGetStatisticLetterByTime = (props?: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setStatisticTime(data)
-    }
-  }, [data])
-
-  return { statisticTime, loading }
+  return { statisticTime: data, loading }
 }

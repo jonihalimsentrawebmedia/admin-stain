@@ -1,12 +1,9 @@
-import { useEffect, useState } from "react"
-import type { IBackupData } from "../model"
 import AxiosClient from "@/provider/axios"
 import { useQuery } from "@tanstack/react-query"
+import type { IBackupData } from "../model"
 
 export const useGetStatusBackupData = () => {
-  const [session, setSession] = useState<IBackupData>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IBackupData>({
     queryKey: ['backup-data'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/pengaturan/backup/status').then((res) => res.data?.data),
@@ -14,11 +11,5 @@ export const useGetStatusBackupData = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setSession(data)
-    }
-  }, [data])
-
-  return { session, loading }
+  return { session: data, loading }
 }

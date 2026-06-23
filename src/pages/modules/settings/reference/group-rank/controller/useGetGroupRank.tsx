@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import type { GroupRankList } from '../model'
 import { useQuery } from '@tanstack/react-query'
@@ -11,8 +10,6 @@ interface props {
 
 const useGetGroupRank = (props?: props) => {
   const { isGetAll = false } = props ?? {}
-  const [groupRank, setGroupRank] = useState<GroupRankList[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') || '1'
@@ -41,17 +38,10 @@ const useGetGroupRank = (props?: props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setGroupRank(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
   return {
-    groupRank,
+    groupRank: data?.data ?? [],
     loading,
-    meta,
+    meta: data?.meta,
   }
 }
 

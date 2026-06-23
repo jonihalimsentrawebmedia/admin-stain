@@ -1,13 +1,11 @@
-import  { useEffect, useState } from "react";
-import type { LevelUserList } from "../model";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
+import type { LevelUserList } from "../model";
 import AxiosClient from "@/provider/axios";
 
 const useGetLevelUserId = () => {
   const param = useParams();
   const { id } = param;
-  const [levelUser, setLeveluser] = useState<LevelUserList>();
 
   const { data, isLoading, isFetching } = useQuery<{
     data: LevelUserList;
@@ -22,15 +20,9 @@ const useGetLevelUserId = () => {
 
   const loading = isLoading || isFetching;
 
-  useEffect(() => {
-    if (data) {
-      setLeveluser(data?.data);
-    }
-  }, [data]);
-
   return {
     loading,
-    levelUser,
+    levelUser: data?.data,
   };
 };
 

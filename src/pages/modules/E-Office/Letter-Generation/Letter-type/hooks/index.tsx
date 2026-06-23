@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { BasicProps } from '@/utils/globalType.ts'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
@@ -7,48 +6,30 @@ import type { IMailTypeLetter } from '@/pages/modules/E-Office/Letter-Generation
 
 export const UseGetTypeLetters = (props?: BasicProps) => {
   const { page, search, limit } = props ?? {}
-  const [letterType, setLetterType] = useState<IMailTypeLetter[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const params = new URLSearchParams()
   if (page) params.append('page', page ?? '1')
   if (limit) params.append('limit', limit ?? '10')
   if (search) params.append('search', search ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['code-letter-type'],
+  const { data: queryData, isLoading, isFetching } = useQuery<{ data: IMailTypeLetter[]; meta: Meta }>({
+    queryKey: ['code-letter-type', params.toString()],
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get('/eoffice/mail-jenis-surat').then((res) => res.data),
+    queryFn: () => AxiosClient.get('/eoffice/mail-jenis-surat?' + params).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching
-
-  useEffect(() => {
-    if (data) {
-      setMeta(data?.meta)
-      setLetterType(data?.data)
-    }
-  }, [data])
-
-  return { loading, meta, letterType }
+  return { loading, letterType: queryData?.data ?? [], meta: queryData?.meta }
 }
 
 export const UseGetDetailTypeLetter = (id: string) => {
-  const [letter, setLetter] = useState<IMailTypeLetter>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IMailTypeLetter>({
     queryKey: ['code-letter-type-detail', id],
+    enabled: !!id,
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/eoffice/mail-jenis-surat/${id}`).then((res) => res.data.data),
   })
 
   const loading = isLoading || isFetching
-
-  useEffect(() => {
-    if (data) {
-      setLetter(data)
-    }
-  }, [data])
-
-  return { letter, loading }
+  return { letter: data, loading }
 }

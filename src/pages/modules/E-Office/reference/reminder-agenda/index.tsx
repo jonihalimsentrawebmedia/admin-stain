@@ -1,6 +1,6 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import ButtonAddReminderAgenda from './component/buttonAdd.tsx'
-import { USeGetReminderAgenda } from './hooks'
+import { UseGetReminderAgenda } from './hooks'
 import { useSearchParams } from 'react-router-dom'
 import { ColumnsReminderAgenda } from './data/columns'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
@@ -11,7 +11,7 @@ const ListReminderAgenda = () => {
   const limit = searchParams.get('limit') ?? '10'
   const search = searchParams.get('search') ?? ''
 
-  const { reminderAgenda, meta, loading } = USeGetReminderAgenda({
+  const { reminderAgenda, meta, loading } = UseGetReminderAgenda({
     page,
     limit,
     search,

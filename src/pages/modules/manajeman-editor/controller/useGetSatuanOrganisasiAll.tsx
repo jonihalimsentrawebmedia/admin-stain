@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import AxiosClient from "@/provider/axios";
 import type { SatuanOrganisasiList } from "../../settings/model";
@@ -7,11 +6,8 @@ import type { SatuanOrganisasiList } from "../../settings/model";
 
 const useGetSatuanOrganisasiAll = () => {
  
-  const [satuanOrganisasi, setSatuanOrganisasi] = useState<
-    SatuanOrganisasiList[]
-  >([]);
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: SatuanOrganisasiList[] }>({
     refetchOnWindowFocus: false,
     queryKey: ["satuan-organisasi-list",],
     queryFn: () =>
@@ -22,14 +18,8 @@ const useGetSatuanOrganisasiAll = () => {
 
   const loading = isLoading || isFetching;
 
-  useEffect(() => {
-    if (data) {
-      setSatuanOrganisasi(data.data??[]);
-    }
-  }, [data]);
-
   return {
-    satuanOrganisasi,
+    satuanOrganisasi: data?.data ?? [],
     loading,
   };
 };

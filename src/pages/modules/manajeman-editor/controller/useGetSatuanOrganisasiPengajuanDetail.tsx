@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import type { ISatuanOrganisasi } from './useGetSatuanOrganisasiPengajuan'
 import type { Meta } from '@/components/common/table/TablePagination'
@@ -12,9 +12,8 @@ const useGetSatuanOrganisasiPengajuanDetail = () => {
   const [search, setSearch] = useState('')
   const { id } = useParams()
   const ParamsSearch = new URLSearchParams({ page, limit, search })
-  const [satuanOrganisasiHistory, setSatuanOrganisasiHistory] = useState<ISatuanOrganisasi[]>([])
-  const [meta, setMeta] = useState<Meta>()
-  const { data, isLoading, isFetching } = useQuery({
+
+  const { data, isLoading, isFetching } = useQuery<{ data: ISatuanOrganisasi[]; meta: Meta }>({
     refetchOnWindowFocus: false,
     queryKey: ['editor-profile-satuan-organisasi-list-detail-history', { search, page, limit }],
     queryFn: () =>
@@ -23,17 +22,10 @@ const useGetSatuanOrganisasiPengajuanDetail = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setSatuanOrganisasiHistory(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
   return {
-    satuanOrganisasiHistory,
+    satuanOrganisasiHistory: data?.data ?? [],
     loading,
-    meta,
+    meta: data?.meta,
     setLimit,
     setPage,
     setSearch,

@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import type { BasicProps } from '@/utils/globalType.ts'
 import { useQuery } from '@tanstack/react-query'
@@ -12,15 +11,12 @@ import type {
 export const UseGetQuestionnaire = (props: BasicProps) => {
   const { search, limit, page } = props
 
-  const [questionnaire, setQuestionnaire] = useState<ISurvey[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const Params = new URLSearchParams()
   if (page) Params.append('page', page ?? '1')
   if (limit) Params.append('limit', limit ?? '10')
   if (search) Params.append('search', search ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: ISurvey[]; meta: Meta }>({
     queryKey: ['questionnaire', Params.toString()],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/eoffice/survei?${Params}`).then((res) => res.data),
@@ -28,20 +24,11 @@ export const UseGetQuestionnaire = (props: BasicProps) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setQuestionnaire(data?.data ?? [])
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { meta, loading, questionnaire }
+  return { meta: data?.meta, loading, questionnaire: data?.data ?? [] }
 }
 
 export const UseGetDetailQuestionnaire = (id: string) => {
-  const [questionnaire, setQuestionnaire] = useState<IDetailSurvey>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IDetailSurvey>({
     queryKey: ['questionnaire-detail', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/eoffice/survei/${id}`).then((res) => res.data.data),
@@ -49,31 +36,18 @@ export const UseGetDetailQuestionnaire = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setQuestionnaire(data ?? [])
-    }
-  }, [data])
-
-  return { questionnaire, loading }
+  return { questionnaire: data, loading }
 }
 
-export const USeGetSurveyResult = (id: string) => {
-  const [surveyResult, setSurveyResult] = useState<ISurveyDetailResult>()
-
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['survey-result'],
+export const UseGetSurveyResult = (id: string) => {
+  const { data, isLoading, isFetching } = useQuery<ISurveyDetailResult>({
+    queryKey: ['survey-result', id],
+    enabled: !!id,
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/eoffice/survei/${id}/hasil`).then((res) => res.data?.data),
   })
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setSurveyResult(data)
-    }
-  }, [data])
-
-  return { surveyResult, loading }
+  return { surveyResult: data, loading }
 }

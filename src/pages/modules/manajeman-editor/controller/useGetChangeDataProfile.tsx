@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
@@ -63,10 +62,9 @@ export interface IProfileData {
 }
 
 export const UseGetChangeDataProfile = (id?: string) => {
-  const [profileChangeData, setProfileChangeData] = useState<IhangeData>()
 
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['editor-change-data-profile'],
+  const { data, isLoading, isFetching } = useQuery<IhangeData>({
+    queryKey: ['editor-change-data-profile', id],
     refetchOnWindowFocus: false,
     enabled: !!id,
     queryFn: () =>
@@ -75,11 +73,5 @@ export const UseGetChangeDataProfile = (id?: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setProfileChangeData(data)
-    }
-  }, [data])
-
-  return { profileChangeData, loading }
+  return { profileChangeData: data, loading }
 }

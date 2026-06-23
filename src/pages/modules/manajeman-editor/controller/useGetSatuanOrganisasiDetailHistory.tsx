@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import type { ISatuanOrganisasi } from "./useGetSatuanOrganisasiPengajuan";
 import { useQuery } from "@tanstack/react-query";
@@ -7,12 +6,11 @@ import AxiosClient from "@/provider/axios";
 const useGetSatuanOrganisasiDetailHistory = () => {
  const params = useParams();
   const { id ,idHistory} = params;
-  const [satuanOrganisasi, setSatuanOrganisasi] =
-    useState<ISatuanOrganisasi>();
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<ISatuanOrganisasi>({
     refetchOnWindowFocus: false,
-    queryKey: ["editor-satuan-organisasi-list-detail-history",  ],
+    queryKey: ["editor-satuan-organisasi-list-detail-history", id, idHistory],
+    enabled: !!id && !!idHistory,
     queryFn: () =>
       AxiosClient.get(
         `/editor/profil-history/${id}/${idHistory}`
@@ -21,14 +19,8 @@ const useGetSatuanOrganisasiDetailHistory = () => {
 
   const loading = isLoading || isFetching;
 
-  useEffect(() => {
-    if (data) {
-      setSatuanOrganisasi(data);
-    }
-  }, [data]);
-
   return {
-    satuanOrganisasi,
+    satuanOrganisasi: data,
     loading,
   };
 }

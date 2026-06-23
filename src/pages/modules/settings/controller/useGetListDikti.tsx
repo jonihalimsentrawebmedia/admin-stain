@@ -1,6 +1,5 @@
 import AxiosClient from '@/provider/axios'
 import { useQuery } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
 
 interface Dikti {
   id: string
@@ -9,9 +8,9 @@ interface Dikti {
 }
 
 const useGetListDikti = (id: string) => {
-  const [dikti, setDikti] = useState<Dikti[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{
+    data: Dikti[]
+  }>({
     refetchOnWindowFocus: false,
     enabled: !!id,
     queryKey: ['satuan-organisasi-list-dikti', id],
@@ -20,14 +19,8 @@ const useGetListDikti = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDikti(data.data ?? [])
-    }
-  }, [data])
-
   return {
-    dikti,
+    dikti: data?.data ?? [],
     loading,
   }
 }

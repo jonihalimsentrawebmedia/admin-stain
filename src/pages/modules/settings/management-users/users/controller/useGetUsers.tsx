@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { UserList } from '../model'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
@@ -7,12 +6,10 @@ import { useSearchParams } from 'react-router-dom'
 
 const useGetUsers = () => {
   const [searchParams] = useSearchParams()
-  const [meta, setMeta] = useState<Meta>()
   const page = searchParams.get('page') || '1'
   const limit = searchParams.get('limit') || '10'
   const search = searchParams.get('search') || ''
   const level = searchParams.get('level') || ''
-  const [users, setUsers] = useState<UserList[]>([])
 
   const { data, isLoading, isFetching } = useQuery<{
     data: UserList[]
@@ -28,17 +25,10 @@ const useGetUsers = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setUsers(data.data??[])
-      setMeta(data.meta)
-    }
-  }, [data])
-
   return {
-    users,
+    users: data?.data ?? [],
     loading,
-    meta,
+    meta: data?.meta,
   }
 }
 

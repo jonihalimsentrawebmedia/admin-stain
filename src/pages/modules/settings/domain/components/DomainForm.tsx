@@ -51,11 +51,6 @@ const DomainForm = ({ form, id }: Props) => {
     id: (id as string) ?? '',
   })
 
-  // const { satuanOrganisasi } = useGetSatuanOrganisasi({
-  //   kelompok: form.watch('kelompok'),
-  //   isGetAll: true,
-  // })
-
   return (
     <>
       <SelectCustom
@@ -69,7 +64,7 @@ const DomainForm = ({ form, id }: Props) => {
       />
       <SelectCustom
         isDisabled={!form.watch('kelompok')}
-        data={organizationUnit.map((item) => {
+        data={organizationUnit?.map((item) => {
           return {
             label: item.nama,
             value: item.id_satuan_organisasi,

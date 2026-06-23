@@ -17,7 +17,7 @@ export const ListOutbox = () => {
   const end_month = searchParams.get('bulan_selesai') ?? ''
 
   const { yearOutbox } = UseGetOutboxYear()
-  const { listInbox, meta, loading } = UseGetOutbox({
+  const { listOutbox, meta, loading } = UseGetOutbox({
     page,
     limit,
     search,
@@ -77,7 +77,7 @@ export const ListOutbox = () => {
         <TableCustom
           tdClassName={'bg-white'}
           thClassName={'bg-primary text-white'}
-          data={listInbox}
+          data={listOutbox}
           columns={columns}
           meta={meta}
           loading={loading}

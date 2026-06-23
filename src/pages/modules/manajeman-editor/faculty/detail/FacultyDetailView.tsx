@@ -4,7 +4,7 @@ import DetailField from '@/components/common/field/DetailField'
 import CardInput from '@/components/common/card/CardInput'
 import CardLog from '../../components/card/CardLog'
 import CardPengajuan from '../../components/card/CardPengajuan'
-import ButtonNewEditor from '../../components/buttonSumission/ButtonNewEditor'
+import ButtonNewEditor from '../../components/buttonSubmission/ButtonNewEditor'
 import CardReject from '../../components/card/CardReject'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 

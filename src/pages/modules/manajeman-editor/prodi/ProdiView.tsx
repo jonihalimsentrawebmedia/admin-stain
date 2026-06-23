@@ -2,7 +2,7 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
 import TableCustom from '@/components/common/table/TableCustom'
 import ProdiViewModel from './ProdiViewModel'
 import SelectFilter from '@/components/common/filter/SelectFilter'
-import SubmissionButton from '../components/buttonSumission/SubmissionButton'
+import SubmissionButton from '../components/buttonSubmission/SubmissionButton'
 import useGetSatuanOrganisasi from '../controller/useGetSatuanOrganisasi'
 
 const ProdiView = () => {

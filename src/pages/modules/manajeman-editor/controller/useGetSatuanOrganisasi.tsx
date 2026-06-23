@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react'
-
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import { useSearchParams } from 'react-router-dom'
@@ -26,9 +24,7 @@ const useGetSatuanOrganisasi = (props: Props) => {
   const ParamsSearch = new URLSearchParams({ page, limit, search, id_parent, kelompok })
   const ParamsSearchParent = new URLSearchParams({ id_parent, kelompok })
 
-  const [satuanOrganisasi, setSatuanOrganisasi] = useState<SatuanOrganisasiList[]>([])
-  const [meta, setMeta] = useState<Meta>()
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: SatuanOrganisasiList[]; meta: Meta }>({
     refetchOnWindowFocus: false,
     queryKey: ['editor-satuan-organisasi-list', kelompok, { search, page, limit, id_parent }],
     queryFn: () =>
@@ -39,17 +35,10 @@ const useGetSatuanOrganisasi = (props: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setSatuanOrganisasi(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
   return {
-    satuanOrganisasi,
+    satuanOrganisasi: data?.data ?? [],
     loading,
-    meta,
+    meta: data?.meta,
   }
 }
 

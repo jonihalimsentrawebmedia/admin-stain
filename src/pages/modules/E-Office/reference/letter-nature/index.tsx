@@ -1,6 +1,6 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import ButtonAddLetterNature from '@/pages/modules/E-Office/reference/letter-nature/component/buttonAdd.tsx'
-import { USeGetLetterNature } from '@/pages/modules/E-Office/reference/letter-nature/hooks'
+import { UseGetLetterNature } from '@/pages/modules/E-Office/reference/letter-nature/hooks'
 import { useSearchParams } from 'react-router-dom'
 import { ColumnsLetterNature } from '@/pages/modules/E-Office/reference/letter-nature/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
@@ -11,7 +11,7 @@ const ListLetterNature = () => {
   const limit = searchParams.get('limit') ?? '10'
   const search = searchParams.get('search') ?? ''
 
-  const { letterNature, meta, loading } = USeGetLetterNature({
+  const { letterNature, meta, loading } = UseGetLetterNature({
     page,
     limit,
     search,

@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
@@ -10,8 +9,6 @@ interface props extends BasicProps {
 
 export const UseGetReportEventActivity = (props: props) => {
   const { year, page, limit, search } = props
-  const [report, setReport] = useState<[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const Params = new URLSearchParams()
   if (page) Params.append('page', page ?? '1')
@@ -19,7 +16,7 @@ export const UseGetReportEventActivity = (props: props) => {
   if (search) Params.append('search', search ?? '')
   if (year) Params.append('tahun', year ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: any[]; meta: Meta }>({
     queryKey: ['report-activity', Params.toString()],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/eoffice/acara/laporan?${Params}`).then((res) => res.data),
@@ -27,20 +24,11 @@ export const UseGetReportEventActivity = (props: props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setReport(data?.data ?? [])
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { meta, loading, report }
+  return { meta: data?.meta, loading, report: data?.data ?? [] }
 }
 
 export const UseGetEventYear = () => {
-  const [years, setYears] = useState<number[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: number[] }>({
     queryKey: ['year-activity'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/eoffice/acara/list-tahun').then((res) => res.data),
@@ -48,11 +36,5 @@ export const UseGetEventYear = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setYears(data?.data ?? [])
-    }
-  }, [data])
-
-  return { years, loading }
+  return { years: data?.data ?? [], loading }
 }

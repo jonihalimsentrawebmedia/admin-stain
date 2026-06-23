@@ -1,8 +1,8 @@
 import AxiosClient from "@/provider/axios";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import type { UserDetail,  } from "../model";
+import type { UserDetail } from "../model";
+
 interface Props{
   idUser?:string
 }
@@ -10,9 +10,8 @@ const useGetUsersDetail = ({idUser}:Props) => {
   
   const params = useParams();
   const { id } = params;
-  const [user, setUser] = useState<UserDetail>();
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<UserDetail>({
     refetchOnWindowFocus: false,
     queryKey: ["users-detail"],
     queryFn: () =>
@@ -23,14 +22,8 @@ const useGetUsersDetail = ({idUser}:Props) => {
 
   const loading = isLoading || isFetching;
 
-  useEffect(() => {
-    if (data) {
-      setUser(data);
-    }
-  }, [data]);
-
   return {
-    user,
+    user: data,
     loading,
   };
 };

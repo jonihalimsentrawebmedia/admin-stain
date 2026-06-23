@@ -38,7 +38,7 @@ export const SuratSchema = z.object({
     .optional()
     .nullable(),
   is_disposisi: z.boolean(),
-  jenis_disposisi: z.enum(['diketahui', 'disposisi', 'tindak_lanjut']).optional().nullable(),
+  jenis_disposisi: z.enum(['diketahui', 'dipelajari', 'dilaksanakan']).optional().nullable(),
   list_id_sdm: z.array(z.string()).optional().nullable(),
 })
 

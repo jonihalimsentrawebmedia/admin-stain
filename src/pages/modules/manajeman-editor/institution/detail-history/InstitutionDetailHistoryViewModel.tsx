@@ -125,7 +125,7 @@ const InstitutionDetailHistoryViewModel = () => {
   useEffect(() => {
     form.reset({
       ...satuanOrganisasi?.draft,
-      kelompok: 'Unit',
+      kelompok: 'LEMBAGA',
       alasan_tolak: satuanOrganisasi?.alasan_tolak,
       status_publish: satuanOrganisasi?.status_publish,
       tanggal: ` ${dateAt.date}, ${dateAt.time}                

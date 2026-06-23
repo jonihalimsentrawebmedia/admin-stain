@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react'
-import type { SatuanOrganisasiList } from '../model'
 import { useQuery } from '@tanstack/react-query'
+import type { SatuanOrganisasiList } from '../model'
+import type { Meta } from '@/components/common/table/TablePagination'
 import AxiosClient from '@/provider/axios'
 import { useSearchParams } from 'react-router-dom'
-import type { Meta } from '@/components/common/table/TablePagination'
 
 interface Props {
   kelompok?: string
@@ -28,9 +27,10 @@ const useGetSatuanOrganisasi = (props: Props) => {
     ParamsSearchParent.append('page', '0')
   }
 
-  const [satuanOrganisasi, setSatuanOrganisasi] = useState<SatuanOrganisasiList[]>([])
-  const [meta, setMeta] = useState<Meta>()
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{
+    data: SatuanOrganisasiList[]
+    meta: Meta
+  }>({
     refetchOnWindowFocus: false,
     queryKey: ['satuan-organisasi-list', kelompok, { search, page, limit, id_parent }],
     enabled: !!kelompok,
@@ -42,17 +42,10 @@ const useGetSatuanOrganisasi = (props: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setSatuanOrganisasi(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
   return {
-    satuanOrganisasi,
+    satuanOrganisasi: data?.data ?? [],
     loading,
-    meta,
+    meta: data?.meta,
   }
 }
 

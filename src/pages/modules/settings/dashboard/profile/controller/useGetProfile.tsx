@@ -1,12 +1,9 @@
-import { useEffect, useState } from "react";
-import type { UserProfile } from "../model";
 import { useQuery } from "@tanstack/react-query";
+import type { UserProfile } from "../model";
 import AxiosClient from "@/provider/axios";
 
 
 const useGetProfile = () => {
-    const [profile, setProfile] = useState<UserProfile>();
-
     const { data, isLoading, isFetching } = useQuery<{
         data: UserProfile;
 
@@ -22,14 +19,8 @@ const useGetProfile = () => {
 
     const loading = isLoading || isFetching;
 
-    useEffect(() => {
-        if (data) {
-            setProfile(data.data);
-        }
-    }, [data]);
-
     return {
-        profile,
+        profile: data?.data,
         loading,
     };
 }

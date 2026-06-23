@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
@@ -13,8 +12,6 @@ interface props extends BasicProps {
 
 export const UseGetInbox = (props?: props) => {
   const { page, limit, search, year, start_month, end_month } = props ?? {}
-  const [listInbox, setListInbox] = useState<IInboxList[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const Params = new URLSearchParams()
   if (page) Params.append('page', page ?? '1')
@@ -24,7 +21,7 @@ export const UseGetInbox = (props?: props) => {
   if (start_month) Params.append('bulan_mulai', start_month ?? '')
   if (end_month) Params.append('bulan_selesai', end_month ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: IInboxList[]; meta: Meta }>({
     queryKey: ['inbox', Params.toString()],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/eoffice/surat-masuk?${Params}`).then((res) => res.data),
@@ -32,14 +29,7 @@ export const UseGetInbox = (props?: props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setListInbox(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { loading, listInbox, meta }
+  return { loading, listInbox: data?.data ?? [], meta: data?.meta }
 }
 
 export const ListMonth = [
@@ -58,9 +48,7 @@ export const ListMonth = [
 ]
 
 export const UseGetInboxYear = () => {
-  const [yearInbox, setYearInbox] = useState<string[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<string[]>({
     queryKey: ['inbox-year'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/eoffice/surat-masuk/tahun-surat`).then((res) => res.data.data),
@@ -68,11 +56,5 @@ export const UseGetInboxYear = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setYearInbox(data)
-    }
-  }, [data])
-
-  return { loading, yearInbox }
+  return { loading, yearInbox: data ?? [] }
 }

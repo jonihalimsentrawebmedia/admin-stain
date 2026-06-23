@@ -4,12 +4,12 @@ import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan
 import { type SuratFormType, SuratSchema } from '../data/resolver.tsx'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UseGetSessionEOffice } from '@/pages/modules/E-Office/session/hooks.tsx'
-import { USeGetLetterNature } from '@/pages/modules/E-Office/reference/letter-nature/hooks'
-import { USeGetLetterType } from '@/pages/modules/E-Office/reference/letter-type/hooks'
-import { USeGetLetterClassification } from '@/pages/modules/E-Office/reference/letter-classification/hooks'
+import { UseGetLetterNature } from '@/pages/modules/E-Office/reference/letter-nature/hooks'
+import { UseGetLetterType } from '@/pages/modules/E-Office/reference/letter-type/hooks'
+import { UseGetLetterClassification } from '@/pages/modules/E-Office/reference/letter-classification/hooks'
 import TextAreaInput from '@/components/common/form/textAreaInput.tsx'
 import CheckboxInputBasic from '@/components/common/form/checkbox.tsx'
-import { USeGetReminderAgenda } from '@/pages/modules/E-Office/reference/reminder-agenda/hooks'
+import { UseGetReminderAgenda } from '@/pages/modules/E-Office/reference/reminder-agenda/hooks'
 import { UseGetHumanResource } from '@/pages/modules/E-Office/reference/human-resource/hooks.tsx'
 import SelectUseRoleData from '@/pages/modules/E-Office/component/common/selectUser.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
@@ -58,10 +58,10 @@ export const FormRegistrationOutbox = (props: IProps) => {
 
   const { institution } = UseGetUnitInstitution()
   const { humanResource } = UseGetHumanResource({ page: '0', limit: '0' })
-  const { letterNature } = USeGetLetterNature({ page: '0', limit: '0' })
-  const { letterType } = USeGetLetterType({ page: '0', limit: '0' })
-  const { letterClassification } = USeGetLetterClassification({ page: '0', limit: '0' })
-  const { reminderAgenda } = USeGetReminderAgenda({ page: '0', limit: '0' })
+  const { letterNature } = UseGetLetterNature({ page: '0', limit: '0' })
+  const { letterType } = UseGetLetterType({ page: '0', limit: '0' })
+  const { letterClassification } = UseGetLetterClassification({ page: '0', limit: '0' })
+  const { reminderAgenda } = UseGetReminderAgenda({ page: '0', limit: '0' })
   const {} = UseGetSessionEOffice()
 
   const [loading, setLoading] = useState(false)

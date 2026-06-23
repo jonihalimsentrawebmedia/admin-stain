@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type {
@@ -15,16 +14,13 @@ interface props extends BasicProps {
 export const UseGetDisposition = (props?: props) => {
   const { id_unit, page, limit, search } = props ?? {}
 
-  const [disposition, setDisposition] = useState<IDisposition[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const Params = new URLSearchParams()
   if (page) Params.append('page', page ?? '1')
   if (limit) Params.append('limit', limit ?? '10')
   if (search) Params.append('search', search ?? '')
   if (id_unit) Params.append('id_unit', id_unit ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: IDisposition[]; meta: Meta }>({
     queryKey: ['disposition', Params.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -33,21 +29,13 @@ export const UseGetDisposition = (props?: props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDisposition(data?.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { loading, disposition, meta }
+  return { loading, disposition: data?.data ?? [], meta: data?.meta }
 }
 
 export const UseGetDispositionDetail = (id_pejabatInbox: string) => {
-  const [dispositionDetail, setDispositionDetail] = useState<IDispositionInbox>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IDispositionInbox>({
     queryKey: ['disposition-detail', id_pejabatInbox],
+    enabled: !!id_pejabatInbox,
     refetchOnWindowFocus: false,
     queryFn: () =>
       AxiosClient.get(`/eoffice/surat-masuk/disposisi/${id_pejabatInbox}`).then(
@@ -57,23 +45,15 @@ export const UseGetDispositionDetail = (id_pejabatInbox: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDispositionDetail(data)
-    }
-  }, [data])
-
-  return { loading, dispositionDetail }
+  return { loading, dispositionDetail: data }
 }
 
 export const UseGetCountDisposition = () => {
-  const [count, setCount] = useState<{
+  const { data, isLoading, isFetching } = useQuery<{
     belum_dibaca: number
     belum_direspon: number
     sudah_direspon: number
-  }>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  }>({
     queryKey: ['count-disposition'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/eoffice/surat-masuk/count').then((res) => res.data.data),
@@ -81,13 +61,7 @@ export const UseGetCountDisposition = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setCount(data)
-    }
-  }, [data])
-
-  return { loading, count }
+  return { loading, count: data }
 }
 
 export interface IChartNature {
@@ -98,10 +72,8 @@ export interface IChartNature {
   updated_at?: string
 }
 
-export const USeGetDispositionByNature = () => {
-  const [nature, setNature] = useState<IChartNature[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+export const UseGetDispositionByNature = () => {
+  const { data, isLoading, isFetching } = useQuery<IChartNature[]>({
     queryKey: ['nature-disposition'],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -110,11 +82,5 @@ export const USeGetDispositionByNature = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setNature(data ?? [])
-    }
-  }, [data])
-
-  return { loading, nature }
+  return { loading, nature: data ?? [] }
 }

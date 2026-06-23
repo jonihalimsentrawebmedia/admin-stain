@@ -1,12 +1,9 @@
-import { useEffect, useState } from 'react'
 import type { IImpactInnovationList } from '@/pages/modules/manajeman-editor/publict-content/impact-innovation/data'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
 export const UseGetImpactInnovationDetail = (id: string) => {
-  const [detailImpactInnovation, setDetailImpactInnovation] = useState<IImpactInnovationList>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IImpactInnovationList>({
     queryKey: ['detail-impact-innovation-editor', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/editor/inovasi-berdampak/${id}`).then((res) => res.data.data),
@@ -14,19 +11,11 @@ export const UseGetImpactInnovationDetail = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDetailImpactInnovation(data)
-    }
-  }, [data])
-
-  return { detailImpactInnovation, loading }
+  return { detailImpactInnovation: data, loading }
 }
 
 export const UseGetLogImpactInnovation = (id: string) => {
-  const [logData, setLogData] = useState<any[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<any[]>({
     queryKey: ['log-inovasi-berdampak-editor', id],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -35,11 +24,5 @@ export const UseGetLogImpactInnovation = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLogData(data)
-    }
-  }, [data])
-
-  return { logData, loading }
+  return { logData: data ?? [], loading }
 }

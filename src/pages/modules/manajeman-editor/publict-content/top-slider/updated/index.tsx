@@ -7,6 +7,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useEffect } from 'react'
 import { UseGetSliderDetailEditor } from '../hooks/index.tsx'
+import { format } from 'date-fns'
 
 export const UpdatedTopSliderPage = () => {
   const form = useForm<TopSliderType>({
@@ -18,10 +19,14 @@ export const UpdatedTopSliderPage = () => {
 
   useEffect(() => {
     if (detailSlider) {
+      const temp = detailSlider?.list_unit_terkait?.map((row) => row?.id_unit)
       form.reset({
         url: detailSlider.url,
         keterangan: detailSlider.keterangan,
         gambar: detailSlider.gambar,
+        is_aktif_sampai_at: detailSlider?.is_aktif_sampai_at,
+        aktif_sampai_at: detailSlider?.aktif_sampai_at ? format(detailSlider.aktif_sampai_at, 'yyyy-MM-dd') : '',
+        list_unit: temp,
       })
     }
   }, [detailSlider])

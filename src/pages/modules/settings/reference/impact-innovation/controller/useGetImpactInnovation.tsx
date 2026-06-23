@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import type { InovationList } from '../model'
 import { useQuery } from '@tanstack/react-query'
@@ -24,9 +23,6 @@ const useGetImpactInnovation = (props?: Props) => {
     ParamsSearch = new URLSearchParams({ page, limit, search })
   }
 
-  const [impactInnovation, setImpactInnovation] = useState<InovationList[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const { data, isLoading, isFetching } = useQuery<{
     data: InovationList[]
     meta: Meta
@@ -41,17 +37,10 @@ const useGetImpactInnovation = (props?: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setImpactInnovation(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
   return {
-    impactInnovation,
+    impactInnovation: data?.data ?? [],
     loading,
-    meta,
+    meta: data?.meta,
   }
 }
 

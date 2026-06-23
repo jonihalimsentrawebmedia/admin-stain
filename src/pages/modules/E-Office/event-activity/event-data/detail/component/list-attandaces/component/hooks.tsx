@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
@@ -30,15 +29,13 @@ export interface IAttendance {
 
 export const UseGetAttendance = (props: Props) => {
   const { id_acara, page, limit, search } = props
-  const [attendance, setAttendance] = useState<IAttendance[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const Params = new URLSearchParams()
   if (page) Params.append('page', page ?? '1')
   if (limit) Params.append('limit', limit ?? '10')
   if (search) Params.append('search', search ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: IAttendance[]; meta: Meta }>({
     queryKey: ['attendance', Params.toString(), id_acara],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -47,33 +44,19 @@ export const UseGetAttendance = (props: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setAttendance(data?.data ?? [])
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { meta, loading, attendance }
+  return { meta: data?.meta, loading, attendance: data?.data ?? [] }
 }
 
 export const UseGetAttendancePrint = (id_acara: string) => {
-  const [attendance, setAttendance] = useState<IPrintSettings>()
-
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['attendance-print'],
+  const { data, isLoading, isFetching } = useQuery<{ data: IPrintSettings }>({
+    queryKey: ['attendance-print', id_acara],
     refetchOnWindowFocus: false,
+    enabled: !!id_acara,
     queryFn: () =>
       AxiosClient.get(`/eoffice/acara/${id_acara}/daftar-hadir/print`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setAttendance(data?.data ?? [])
-    }
-  }, [data])
-
-  return { attendance, loading }
+  return { attendance: data?.data, loading }
 }

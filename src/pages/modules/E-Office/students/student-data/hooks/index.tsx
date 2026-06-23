@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import type { BasicProps } from '@/utils/globalType.ts'
 import { useQuery } from '@tanstack/react-query'
@@ -13,9 +12,15 @@ interface props extends BasicProps {
 }
 
 export const UseGetStudentData = (props?: props) => {
-  const { search, limit, page, angkatan, id_jalur_masuk, id_fakultas, id_prodi } = props ?? {}
-  const [studentData, setStudentData] = useState<IStudentData[]>([])
-  const [meta, setMeta] = useState<Meta>()
+  const {
+    search,
+    limit,
+    page,
+    angkatan,
+    id_jalur_masuk,
+    id_fakultas,
+    id_prodi,
+  } = props ?? {}
 
   const Params = new URLSearchParams()
   if (page) Params.append('page', page ?? '1')
@@ -26,7 +31,10 @@ export const UseGetStudentData = (props?: props) => {
   if (id_fakultas) Params.append('id_fakultas', id_fakultas ?? '')
   if (id_prodi) Params.append('id_prodi', id_prodi ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data: queryData, isLoading, isFetching } = useQuery<{
+    data: IStudentData[]
+    meta: Meta
+  }>({
     refetchOnWindowFocus: false,
     queryKey: ['student-data', Params.toString()],
     queryFn: () => AxiosClient.get(`/eoffice/mahasiswa?${Params}`).then((res) => res.data),
@@ -34,52 +42,34 @@ export const UseGetStudentData = (props?: props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setStudentData(data?.data ?? [])
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { meta, loading, studentData }
+  return { meta: queryData?.meta, loading, studentData: queryData?.data ?? [] }
 }
 
 export const UseGetDetailStudentData = (id: string) => {
-  const [studentData, setStudentData] = useState<IStudentData>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data: queryData, isLoading, isFetching } = useQuery<IStudentData>({
     queryKey: ['student-data-detail', id],
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get(`/eoffice/mahasiswa/${id}`).then((res) => res.data.data),
+    enabled: !!id,
+    queryFn: () =>
+      AxiosClient.get(`/eoffice/mahasiswa/${id}`).then((res) => res.data.data),
   })
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setStudentData(data)
-    }
-  }, [data])
-
-  return { studentData, loading }
+  return { studentData: queryData, loading }
 }
 
 export const UseGetYearLevel = () => {
-  const [yearLevel, setYearLevel] = useState<number[]>([])
-  const { data, isLoading, isFetching } = useQuery({
+  const { data: queryData, isLoading, isFetching } = useQuery<number[]>({
     queryKey: ['year-level'],
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get('/eoffice/mahasiswa/filter-tahun-angkatan').then((res) => res.data.data),
+      AxiosClient.get('/eoffice/mahasiswa/filter-tahun-angkatan').then(
+        (res) => res.data.data,
+      ),
   })
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setYearLevel(data)
-    }
-  }, [data])
-
-  return { yearLevel, loading }
+  return { yearLevel: queryData ?? [], loading }
 }

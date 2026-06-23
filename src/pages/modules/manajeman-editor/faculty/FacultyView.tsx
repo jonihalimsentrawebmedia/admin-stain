@@ -3,7 +3,7 @@ import FacultyViewModel from './FacultyViewModel'
 
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
 import useGetSatuanOrganisasi from '../controller/useGetSatuanOrganisasi'
-import SubmissionButton from '../components/buttonSumission/SubmissionButton'
+import SubmissionButton from '../components/buttonSubmission/SubmissionButton'
 
 const FacultyView = () => {
   const { columns } = FacultyViewModel()

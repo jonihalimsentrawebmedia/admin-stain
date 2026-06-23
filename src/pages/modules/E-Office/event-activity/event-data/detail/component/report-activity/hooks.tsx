@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { PrintAllActivity } from '@/pages/modules/E-Office/event-activity/event-data/detail/component/report-activity/data/types.ts'
@@ -9,24 +8,17 @@ interface Context {
 }
 
 export const UseGetContext = (id: string) => {
-  const [context, setContext] = useState<Context[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['context'],
+  const { data, isLoading, isFetching } = useQuery<{ data: Context[] }>({
+    queryKey: ['context', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () =>
       AxiosClient.get(`/eoffice/acara/${id}/laporan-kegiatan/contexts`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setContext(data?.data ?? [])
-    }
-  }, [data])
-
-  return { context, loading }
+  return { context: data?.data ?? [], loading }
 }
 
 interface Props {
@@ -50,9 +42,7 @@ export interface IReportActivity {
 
 export const UseGetReportActivityContext = (props: Props) => {
   const { context, id_acara } = props
-  const [report, setReport] = useState<IReportActivity>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: IReportActivity }>({
     queryKey: ['report-activity-context', context, id_acara],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -63,32 +53,19 @@ export const UseGetReportActivityContext = (props: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setReport(data?.data)
-    }
-  }, [data])
-
-  return { report, loading }
+  return { report: data?.data, loading }
 }
 
 export const UseGetReportActivityPrint = (id_acara: string) => {
-  const [report, setReport] = useState<PrintAllActivity>()
-
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['report-activity-print'],
+  const { data, isLoading, isFetching } = useQuery<{ data: PrintAllActivity }>({
+    queryKey: ['report-activity-print', id_acara],
     refetchOnWindowFocus: false,
+    enabled: !!id_acara,
     queryFn: () =>
       AxiosClient.get(`/eoffice/acara/${id_acara}/laporan-kegiatan/print`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setReport(data?.data)
-    }
-  }, [data])
-
-  return { report, loading }
+  return { report: data?.data, loading }
 }

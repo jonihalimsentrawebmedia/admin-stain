@@ -2,7 +2,7 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
 import InstitutionViewModel from './InstitutionViewModel'
 import TableCustom from '@/components/common/table/TableCustom'
 import useGetSatuanOrganisasi from '../controller/useGetSatuanOrganisasi'
-import SubmissionButton from '../components/buttonSumission/SubmissionButton'
+import SubmissionButton from '../components/buttonSubmission/SubmissionButton'
 
 const InstitutionView = () => {
   const { columns } = InstitutionViewModel()

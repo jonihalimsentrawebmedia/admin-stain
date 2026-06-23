@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { EducationalLevelList } from '../model'
 import type { Meta } from '@/components/common/table/TablePagination'
 import { useSearchParams } from 'react-router-dom'
@@ -9,8 +8,6 @@ interface Props {
 }
 const useGetEducationalLevel = (props: Props) => {
   const { isGetAll=false } = props
-  const [educationalLevel, setEducationalLevel] = useState<EducationalLevelList[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') || '1'
@@ -33,17 +30,10 @@ const useGetEducationalLevel = (props: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setEducationalLevel(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
   return {
-    educationalLevel,
+    educationalLevel: data?.data ?? [],
     loading,
-    meta,
+    meta: data?.meta,
   }
 }
 

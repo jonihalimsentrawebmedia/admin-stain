@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
@@ -9,9 +8,7 @@ interface session {
 }
 
 export const UseGetSessionEditor = () => {
-  const [session, setSession] = useState<session>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<session>({
     queryKey: ['session-editor'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/editor/user-session').then((res) => res.data.data),
@@ -19,11 +16,5 @@ export const UseGetSessionEditor = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setSession(data)
-    }
-  }, [data])
-
-  return { session, loading }
+  return { session: data, loading }
 }

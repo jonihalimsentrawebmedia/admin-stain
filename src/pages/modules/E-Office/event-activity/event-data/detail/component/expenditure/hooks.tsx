@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { BasicProps } from '@/utils/globalType.ts'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
@@ -30,36 +29,27 @@ export interface IExpenditureEvent {
 
 export const UseGetExpenditure = (props: props) => {
   const { search, limit, page, id_acara } = props
-  const [expenditure, setExpenditure] = useState<IExpenditureEvent[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const Params = new URLSearchParams()
   if (page) Params.append('page', page ?? '1')
   if (limit) Params.append('limit', limit ?? '10')
   if (search) Params.append('search', search ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['expenditure', Params.toString()],
+  const { data, isLoading, isFetching } = useQuery<{ data: IExpenditureEvent[]; meta: Meta }>({
+    queryKey: ['expenditure', Params.toString(), id_acara],
     refetchOnWindowFocus: false,
+    enabled: !!id_acara,
     queryFn: () =>
       AxiosClient.get(`/eoffice/acara/${id_acara}/pengeluaran`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setExpenditure(data?.data ?? [])
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { expenditure, loading, meta }
+  return { expenditure: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export const UseGetTotalExpenditure = (id_acara: string) => {
-  const [printData, setPrintData] = useState<PrintExpenditure>()
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: PrintExpenditure }>({
     queryKey: ['total-expenditure-print', id_acara],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -68,11 +58,5 @@ export const UseGetTotalExpenditure = (id_acara: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setPrintData(data?.data)
-    }
-  }, [data])
-
-  return { printData, loading }
+  return { printData: data?.data, loading }
 }

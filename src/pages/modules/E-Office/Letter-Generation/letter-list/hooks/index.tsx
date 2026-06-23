@@ -1,7 +1,6 @@
 // eoffice/mail-surat-undangan
 
 import type { BasicProps } from '@/utils/globalType.ts'
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
@@ -15,16 +14,13 @@ interface Props extends BasicProps {
 export const UseGetListLetterGenerate = (props: Props) => {
   const { status, page, limit, search } = props
 
-  const [letterTypeGenerate, setLetterTypeGenerate] = useState<IMailInvitationLetterList[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const params = new URLSearchParams()
   if (page) params.append('page', page ?? '1')
   if (limit) params.append('limit', limit ?? '10')
   if (search) params.append('search', search ?? '')
   if (status) params.append('status', status ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data: queryData, isLoading, isFetching } = useQuery<{ data: IMailInvitationLetterList[]; meta: Meta }>({
     queryKey: ['letter-generate', params.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -32,34 +28,18 @@ export const UseGetListLetterGenerate = (props: Props) => {
   })
 
   const loading = isLoading || isFetching
-
-  useEffect(() => {
-    if (data) {
-      setLetterTypeGenerate(data?.data)
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { letterTypeGenerate, meta, loading }
+  return { letterTypeGenerate: queryData?.data ?? [], meta: queryData?.meta, loading }
 }
 
 export const UseGetDetailLetterGenerate = (id: string) => {
-  const [letter, setLetter] = useState<IMailInvitationLetter>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IMailInvitationLetter>({
     queryKey: ['letter-generate-detail', id],
+    enabled: !!id,
     refetchOnWindowFocus: false,
     queryFn: () =>
       AxiosClient.get(`/eoffice/mail-surat-undangan/${id}`).then((res) => res.data.data),
   })
 
   const loading = isLoading || isFetching
-
-  useEffect(() => {
-    if (data) {
-      setLetter(data)
-    }
-  }, [data])
-
-  return { letter, loading }
+  return { letter: data, loading }
 }
