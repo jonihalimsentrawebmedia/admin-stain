@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import type { FieldOfCooperationList } from '../model'
 import type { Meta } from '@/components/common/table/TablePagination'
@@ -21,9 +20,6 @@ const useGetFieldOfCooperation = (props?: Props) => {
     ParamsSearch = new URLSearchParams({ page, limit, search })
   }
 
-  const [fieldOfCooperation, setFieldOfCooperation] = useState<FieldOfCooperationList[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const { data, isLoading, isFetching } = useQuery<{
     data: FieldOfCooperationList[]
     meta: Meta
@@ -36,17 +32,10 @@ const useGetFieldOfCooperation = (props?: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setFieldOfCooperation(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
   return {
-    fieldOfCooperation,
+    fieldOfCooperation: data?.data ?? [],
     loading,
-    meta,
+    meta: data?.meta,
   }
 }
 

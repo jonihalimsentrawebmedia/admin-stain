@@ -1,7 +1,5 @@
-import type { Meta } from '@/components/common/table/TablePagination'
 import AxiosClient from '@/provider/axios'
 import { useQuery } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
 
 interface GaleriFoto {
@@ -20,9 +18,18 @@ interface GaleriFoto {
   nama_user_created: string
   nama_user_updated: string
 }
+
+interface GaleriFotoResponse {
+  data: GaleriFoto[]
+  meta: {
+    page: number
+    limit: number
+    total: number
+    totalPages: number
+  }
+}
+
 const useGetPhoto = () => {
-  const [galleryPhoto, setGalleryPhoto] = useState<GaleriFoto[]>([])
-  const [meta, setMeta] = useState<Meta>()
   const { id, idGallery } = useParams()
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
@@ -34,7 +41,7 @@ const useGetPhoto = () => {
   const id_album = searchParams.get('id_album') ?? ''
 
   const ParamsSearch = new URLSearchParams({ page, limit, search, id_album })
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<GaleriFotoResponse>({
     queryKey: ['program-studi-gallery-photo', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -45,14 +52,7 @@ const useGetPhoto = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setGalleryPhoto(data?.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { galleryPhoto, loading, meta }
+  return { galleryPhoto: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export default useGetPhoto

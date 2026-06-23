@@ -9,6 +9,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import {toast} from 'react-toastify'
 import {UseGetSessionEditor} from '../../session/index'
 import {UseGetUniversityDomainExist} from '@/pages/modules/website-utama/select-university/hooks'
+import type { SatuanOrganisasiList } from '@/pages/modules/settings/model'
 
 export const ButtonSessionEditor = () => {
   const [open, setOpen] = useState(false)
@@ -62,7 +63,7 @@ export const ButtonSessionEditor = () => {
                 name={'id_university'}
                 placeholder={'Pilih Universitas digunakan'}
                 data={
-                  satuanOrganisasi?.map((row) => ({
+                  satuanOrganisasi?.map((row: SatuanOrganisasiList) => ({
                     label: row?.nama,
                     value: row?.id_satuan_organisasi,
                   })) ?? []

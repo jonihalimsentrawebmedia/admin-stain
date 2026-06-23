@@ -45,6 +45,7 @@ export const UseGetGroupOrganizationDetail = (id: string) => {
     refetchOnWindowFocus: false,
     queryFn: () =>
       AxiosClient.get(`/website-utama/kelompok-organisasi/${id}`).then((res) => res.data.data),
+    enabled: !!id,
   })
 
   const loading = isLoading || isFetching

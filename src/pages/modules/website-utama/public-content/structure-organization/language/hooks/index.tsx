@@ -14,6 +14,7 @@ export const UseGetStructureOrganizationLanguage = (id?: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['group-language', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () =>
       AxiosClient.get(`/website-utama/kelompok-organisasi-translate/${id}`).then(
         (res) => res.data.data

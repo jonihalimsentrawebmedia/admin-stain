@@ -14,6 +14,7 @@ export const UseGetAchievementLanguage = (id?: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['achievement-language', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () =>
       AxiosClient.get(`/website-utama/prestasi-translate/${id}`).then((res) => res.data.data),
   })

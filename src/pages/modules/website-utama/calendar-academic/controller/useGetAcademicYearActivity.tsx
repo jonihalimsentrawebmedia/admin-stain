@@ -1,13 +1,8 @@
-import type { Meta } from '@/components/common/table/TablePagination'
 import AxiosClient from '@/provider/axios'
 import { useQuery } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
-import type { AcademicActivity } from '../model/academicActivity'
 
 const useGetAcademicYearActivity = () => {
-  const [academicActivityList, setAcademicActivityList] = useState<AcademicActivity[]>([])
-  const [meta, setMeta] = useState<Meta>()
   const { idAcademicYear } = useParams()
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
@@ -31,14 +26,7 @@ const useGetAcademicYearActivity = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setAcademicActivityList(data?.data ?? [])
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { academicActivityList, loading, meta }
+  return { academicActivityList: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export default useGetAcademicYearActivity

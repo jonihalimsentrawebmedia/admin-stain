@@ -14,6 +14,7 @@ export const UseGetHeaderMenuContentLanguage = (id: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['header-menu-language', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () =>
       AxiosClient.get(`/website-utama/konten-translate/${id}`).then((res) => res.data.data),
   })

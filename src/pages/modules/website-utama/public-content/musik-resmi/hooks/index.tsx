@@ -43,6 +43,7 @@ export const UseGetOfficialMusicDetail = (id: string) => {
     queryKey: ['official-music-detail', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/website-utama/mars-musik/${id}`).then((res) => res.data.data),
+    enabled: !!id,
   })
 
   const loading = isLoading || isFetching

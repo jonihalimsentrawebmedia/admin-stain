@@ -51,6 +51,7 @@ export const UseGetAnnouncementDetail = (id: string) => {
     queryKey: ['detail-announcement', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/website-utama/pengumuman/${id}`).then((res) => res.data.data),
+    enabled: !!id,
   })
 
   const loading = isLoading || isFetching

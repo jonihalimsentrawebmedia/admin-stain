@@ -10,6 +10,7 @@ import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import type { ISessionUnit } from '@/pages/modules/website-unit/hooks'
 import { UseGetUniversityDomainExist } from '@/pages/modules/website-utama/select-university/hooks'
 import { UseGetUnitList } from '../../select-unit/hook'
+import type { SatuanOrganisasiList } from '@/pages/modules/settings/model'
 
 export const ButtonSessionUnit = ({ session }: { session?: ISessionUnit }) => {
   const [open, setOpen] = useState(false)
@@ -93,7 +94,7 @@ export const ButtonSessionUnit = ({ session }: { session?: ISessionUnit }) => {
                 placeholder={'Pilih Universitas digunakan'}
                 selectClassName={'z-50'}
                 data={
-                  university?.map((row) => ({
+                  university?.map((row: SatuanOrganisasiList) => ({
                     label: row?.nama,
                     value: row?.id_satuan_organisasi,
                   })) ?? []

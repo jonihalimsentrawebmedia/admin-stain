@@ -45,16 +45,17 @@ export const UseGetGalleryPhotoDetail = (id: string) => {
     refetchOnWindowFocus: false,
     queryFn: () =>
       AxiosClient.get(`/website-utama/galeri-foto/${id}`).then((res) => res.data.data),
+    enabled: !!id,
   })
-  
+
   const loading = isLoading || isFetching
-  
+
   useEffect(() => {
     if (data) {
       setDetailGalleryPhoto(data)
     }
   },[data])
-  
+
   return { detailGalleryPhoto, loading }
   
 }

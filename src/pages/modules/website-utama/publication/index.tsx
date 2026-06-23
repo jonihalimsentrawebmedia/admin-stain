@@ -32,7 +32,7 @@ export const PublicationLecturerPage = () => {
           label={'Tahun Publikasi'}
           className={'max-w-sm'}
           data={
-            year?.map((row) => ({
+            year?.map((row: string | number) => ({
               label: row.toString(),
               value: row?.toString(),
             })) ?? []

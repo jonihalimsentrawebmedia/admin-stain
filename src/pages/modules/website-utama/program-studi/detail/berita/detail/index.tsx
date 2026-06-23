@@ -117,7 +117,7 @@ export const DetailNewsProdiPage = () => {
               {/* CAROUSEL */}
               <Carousel setApi={setApi} className="w-[484px]">
                 <CarouselContent className="pr-0">
-                  {images.map((item, index) => (
+                  {images.map((item: any, index: number) => (
                     <CarouselItem key={index} className="pr-0">
                       <img
                         src={item.gambar}
@@ -131,7 +131,7 @@ export const DetailNewsProdiPage = () => {
 
               {/* DOTS */}
               <div className="flex justify-center mt-4 gap-2">
-                {images.map((_, index) => (
+                {images.map((_: any, index: number) => (
                   <button
                     key={index}
                     onClick={() => api?.scrollTo(index)}

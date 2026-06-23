@@ -44,6 +44,7 @@ export const UseGetDetailHistoryStatusActive = (id: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['detail-history-status-active', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () =>
       AxiosClient.get(`/website-utama/sdm-status-aktif-history/${id}`).then(
         (res) => res?.data?.data

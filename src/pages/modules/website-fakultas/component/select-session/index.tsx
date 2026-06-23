@@ -11,6 +11,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { UseGetUniversityDomainExist } from '@/pages/modules/website-utama/select-university/hooks'
 import { UseGetUnitList } from '@/pages/modules/website-unit/select-unit/hook'
+import type { SatuanOrganisasiList } from '@/pages/modules/settings/model'
 
 export const SelectSessionFaculty = () => {
   const [parentId, setParentId] = useState({
@@ -79,7 +80,7 @@ export const SelectSessionFaculty = () => {
                       placeholder={'Pilih Universitas digunakan'}
                       selectClassName={'z-50'}
                       data={
-                        university?.map((row) => ({
+                        university?.map((row: SatuanOrganisasiList) => ({
                           label: row?.nama,
                           value: row?.id_satuan_organisasi,
                         })) ?? []

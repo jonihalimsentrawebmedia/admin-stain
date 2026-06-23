@@ -55,6 +55,7 @@ export const UseGetSliderDetail = (id: string) => {
     queryKey: ['detail-slider', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/website-utama/slider-atas/${id}`).then((res) => res.data.data),
+    enabled: !!id,
   })
 
   const loading = isLoading || isFetching

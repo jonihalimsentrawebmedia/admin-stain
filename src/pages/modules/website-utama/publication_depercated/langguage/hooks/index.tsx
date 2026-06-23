@@ -14,6 +14,7 @@ export const UseGetPublicationLanguage = (id?: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['publication-language', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () =>
       AxiosClient.get(`/website-utama/publikasi-translate/${id}`).then((res) => res.data.data),
   })

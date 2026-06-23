@@ -18,6 +18,7 @@ import ButtonActiveMenu from './ButtonActiveMenu'
 import Cookies from 'js-cookie'
 import React from 'react'
 import { IoLanguage } from 'react-icons/io5'
+import type { Menu } from '../model'
 
 const TableSettingMenuHeader = () => {
   const { loading, menuList } = useGetSettingsMenu()
@@ -67,7 +68,7 @@ const TableSettingMenuHeader = () => {
                   </TableCell>
                 </TableRow>
               ))
-          : menuList.map((item, index) => (
+          : menuList.map((item: Menu, index: number) => (
               <React.Fragment key={'parent' + index}>
                 <TableRow className="py-0!">
                   <TableCell className="border-b  left-0 relative">
@@ -114,7 +115,7 @@ const TableSettingMenuHeader = () => {
                     </div>
                   </TableCell>
                 </TableRow>
-                {item.children.map((subItem, indexSub) => (
+                {item.children.map((subItem: Menu, indexSub: number) => (
                   <React.Fragment key={'subParent' + index + indexSub}>
                     <TableRow className="py-0!">
                       <TableCell className="border-b relative">
@@ -176,7 +177,7 @@ const TableSettingMenuHeader = () => {
                       </TableCell>
                     </TableRow>
 
-                    {subItem.children.map((subSubItem, indexSubSub) => (
+                    {subItem.children.map((subSubItem: Menu, indexSubSub: number) => (
                       <TableRow
                         key={'subSubparent' + index + indexSub + indexSubSub}
                         className="py-0!"

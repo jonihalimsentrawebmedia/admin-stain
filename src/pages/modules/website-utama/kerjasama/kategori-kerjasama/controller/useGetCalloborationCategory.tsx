@@ -1,6 +1,5 @@
 import { useSearchParams } from 'react-router-dom'
 import type { CalloborationCategoryList } from '../model'
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
@@ -23,9 +22,6 @@ const useGetCalloborationCategory = (props?: Props) => {
     ParamsSearch = new URLSearchParams({ page, limit, search })
   }
 
-  const [calloborationCategory, setCaloborationCategory] = useState<CalloborationCategoryList[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const { data, isLoading, isFetching } = useQuery<{
     data: CalloborationCategoryList[]
     meta: Meta
@@ -38,17 +34,10 @@ const useGetCalloborationCategory = (props?: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setCaloborationCategory(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
   return {
-    calloborationCategory,
+    calloborationCategory: data?.data ?? [],
     loading,
-    meta,
+    meta: data?.meta,
   }
 }
 

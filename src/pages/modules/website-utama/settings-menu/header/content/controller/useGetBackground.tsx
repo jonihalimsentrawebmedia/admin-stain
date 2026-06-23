@@ -1,11 +1,8 @@
-import  { useEffect, useState } from 'react'
-import type { MenuBackgroundItem } from '../model/menu-background'
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'react-router-dom'
 import AxiosClient from '@/provider/axios'
 
 const useGetBackground = () => {
-  const [backgroundList, setBackgroundList] = useState<MenuBackgroundItem[]>([])
   const params = useParams()
   const { id } = params
 
@@ -18,13 +15,7 @@ const useGetBackground = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setBackgroundList(data?.data ?? [])
-    }
-  }, [data])
-
-  return { backgroundList, loading }
+  return { backgroundList: data?.data ?? [], loading }
 }
 
 export default useGetBackground

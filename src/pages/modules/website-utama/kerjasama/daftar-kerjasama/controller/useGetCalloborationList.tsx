@@ -1,6 +1,5 @@
 import { useSearchParams } from 'react-router-dom'
 import type { CalloborationList } from '../model'
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
@@ -27,9 +26,6 @@ const useGetCalloborationList = () => {
     id_sub_kategori_kerjasama,
   })
 
-  const [calloborationList, setCaloborationList] = useState<CalloborationList[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const { data, isLoading, isFetching } = useQuery<{
     data: CalloborationList[]
     meta: Meta
@@ -42,17 +38,10 @@ const useGetCalloborationList = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setCaloborationList(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
   return {
-    calloborationList,
+    calloborationList: data?.data ?? [],
     loading,
-    meta,
+    meta: data?.meta,
   }
 }
 

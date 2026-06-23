@@ -14,6 +14,7 @@ export const UseGetPlacemanLanguage = (id?: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['placeman-language', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () =>
       AxiosClient.get(`/website-utama/pejabat-translate/${id}`).then((res) => res.data.data),
   })

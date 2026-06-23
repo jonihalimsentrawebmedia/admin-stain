@@ -2,13 +2,10 @@ import type { Meta } from "@/components/common/table/TablePagination"
 import type { SatuanOrganisasiList } from "@/pages/modules/settings/model"
 import AxiosClient from "@/provider/axios"
 import { useQuery } from "@tanstack/react-query"
-import { useEffect, useState } from "react"
+
 
 
 const useGetListFakultas = () => {
-   const [programStudy, setProgramStudy] = useState<SatuanOrganisasiList[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const { data, isLoading, isFetching } = useQuery<{
     data: SatuanOrganisasiList[]
     meta: Meta
@@ -21,17 +18,10 @@ const useGetListFakultas = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setProgramStudy(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
   return {
-    programStudy,
+    programStudy: data?.data ?? [],
     loading,
-    meta,
+    meta: data?.meta,
   }
 }
 

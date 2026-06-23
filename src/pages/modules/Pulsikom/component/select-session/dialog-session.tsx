@@ -11,6 +11,7 @@ import { UseGetSessionFaculty } from '@/pages/modules/website-fakultas/component
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import { Form } from '@/components/ui/form.tsx'
+import type { SatuanOrganisasiList } from '@/pages/modules/settings/model'
 
 export const DialogSessionFaculty = () => {
   const [open, setOpen] = useState(false)
@@ -85,7 +86,7 @@ export const DialogSessionFaculty = () => {
               placeholder={'Pilih Universitas digunakan'}
               selectClassName={'z-50'}
               data={
-                university?.map((row) => ({
+                university?.map((row: SatuanOrganisasiList) => ({
                   label: row?.nama,
                   value: row?.id_satuan_organisasi,
                 })) ?? []

@@ -1,13 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
-import type { ActivityDetail } from '../model/academicActivityDetail'
-import { useEffect, useState } from 'react'
-import type { Meta } from '@/components/common/table/TablePagination'
 import { useParams, useSearchParams } from 'react-router-dom'
 import AxiosClient from '@/provider/axios'
 
 const useGetActivityDetailList = () => {
-  const [academicActivityDetailList, setAcademicActivityDetailList] = useState<ActivityDetail[]>([])
-  const [meta, setMeta] = useState<Meta>()
   const { idActivity } = useParams()
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
@@ -30,14 +25,7 @@ const useGetActivityDetailList = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setAcademicActivityDetailList(data?.data ?? [])
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { academicActivityDetailList, loading, meta }
+  return { academicActivityDetailList: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export default useGetActivityDetailList

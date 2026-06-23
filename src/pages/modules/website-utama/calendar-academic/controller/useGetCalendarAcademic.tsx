@@ -1,14 +1,8 @@
-import { useEffect, useState } from "react"
-import type { AcademicYearList } from "../model"
-import type { Meta } from "@/components/common/table/TablePagination"
 import { useSearchParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
 import AxiosClient from "@/provider/axios"
 
 const useGetCalendarAcademic = () => {
-  const [academicYearList, setAcademicYearList] = useState<AcademicYearList[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
@@ -25,14 +19,7 @@ const useGetCalendarAcademic = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setAcademicYearList(data?.data ?? [])
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { academicYearList, loading, meta }
+  return { academicYearList: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export default useGetCalendarAcademic

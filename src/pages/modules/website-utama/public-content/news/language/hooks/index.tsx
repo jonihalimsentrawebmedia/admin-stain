@@ -14,6 +14,7 @@ export const UseGetNewsLanguage = (id?: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['news-language', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () =>
       AxiosClient.get(`/website-utama/berita-translate/${id}`).then((res) => res.data.data),
   })

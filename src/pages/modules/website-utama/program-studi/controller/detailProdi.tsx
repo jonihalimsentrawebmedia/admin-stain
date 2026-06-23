@@ -18,6 +18,7 @@ export const UseGetDetailProdi = (id: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['detail-prodi', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () =>
       AxiosClient.get(`/website-utama/program-studi/satuan-organisasi/program-studi/${id}`).then(
         (res) => res?.data?.data

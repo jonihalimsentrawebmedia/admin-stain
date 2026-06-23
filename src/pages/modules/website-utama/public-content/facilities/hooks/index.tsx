@@ -46,6 +46,7 @@ export const UseGetFacilitiesDetail = (id: string) => {
     queryKey: ['detail-facilities', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/website-utama/fasilitas/${id}`).then((res) => res.data.data),
+    enabled: !!id,
   })
 
   const loading = isLoading || isFetching

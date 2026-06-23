@@ -1,13 +1,8 @@
-import { useEffect, useState } from 'react'
-import type { GaleriVideo } from '../model/video'
-import type { Meta } from '@/components/common/table/TablePagination'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 
 const useGetVideo = () => {
-  const [galleryVideo, setGalleryVideo] = useState<GaleriVideo[]>([])
-  const [meta, setMeta] = useState<Meta>()
   const { id } = useParams()
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
@@ -26,14 +21,7 @@ const useGetVideo = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setGalleryVideo(data?.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { galleryVideo, loading, meta }
+  return { galleryVideo: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export default useGetVideo

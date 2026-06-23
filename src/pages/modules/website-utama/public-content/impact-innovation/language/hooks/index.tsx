@@ -14,6 +14,7 @@ export const UseGetImpactInnovationLanguage = (id?: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['news-language', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () =>
       AxiosClient.get(`/website-utama/inovasi-berdampak-translate/${id}`).then(
         (res) => res.data.data

@@ -14,6 +14,7 @@ export const UseGetGalleryPhotoLanguage = (id?: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['photo-language', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () =>
       AxiosClient.get(`/website-utama/galeri-foto-translate/${id}`).then((res) => res.data.data),
   })

@@ -47,6 +47,7 @@ export const UseGetAgendaDetail = (id: string) => {
     queryKey: ['detail-agenda', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/website-utama/agenda/${id}`).then((res) => res.data.data),
+    enabled: !!id,
   })
 
   const loading = isLoading || isFetching

@@ -1,6 +1,5 @@
 import AxiosClient from '@/provider/axios'
 import { useQuery } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
 
 interface Props {
   id_universitas?: string
@@ -8,7 +7,6 @@ interface Props {
 const useGetGroup = (props?: Props) => {
   const { id_universitas } = props ?? {}
   const params = new URLSearchParams()
-  const [groups, setGroups] = useState<string[]>([])
   if (id_universitas) params.set(`id_universitas`, id_universitas)
 
   const { data, isLoading, isFetching } = useQuery<{
@@ -22,14 +20,8 @@ const useGetGroup = (props?: Props) => {
   })
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setGroups(data.data ?? [])
-    }
-  }, [data])
-
   return {
-    groups,
+    groups: data?.data ?? [],
     loading,
   }
 }

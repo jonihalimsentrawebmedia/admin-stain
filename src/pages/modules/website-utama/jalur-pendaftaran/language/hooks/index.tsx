@@ -14,6 +14,7 @@ export const UseGetLanguageLineRegistered = (id?: string) => {
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['registered-language', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () =>
       AxiosClient.get(`/website-utama/jalur-pendaftaran-translate/${id}`).then(
         (res) => res.data.data

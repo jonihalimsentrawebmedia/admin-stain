@@ -10,6 +10,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { UseGetUniversityDomainExist } from '@/pages/modules/website-utama/select-university/hooks'
 import { useQueryClient } from '@tanstack/react-query'
+import type { SatuanOrganisasiList } from '@/pages/modules/settings/model'
 
 export const SelectSessionEOffice = () => {
   const [searchParams] = useSearchParams()
@@ -73,7 +74,7 @@ export const SelectSessionEOffice = () => {
                       placeholder={'Pilih Universitas digunakan'}
                       selectClassName={'z-50'}
                       data={
-                        university?.map((row) => ({
+                        university?.map((row: SatuanOrganisasiList) => ({
                           label: row?.nama,
                           value: row?.id_satuan_organisasi,
                         })) ?? []

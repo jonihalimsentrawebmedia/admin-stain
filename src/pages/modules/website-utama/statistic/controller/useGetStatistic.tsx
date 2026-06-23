@@ -1,18 +1,7 @@
-import { useEffect, useState } from "react"
-import type { StatisticUniversity } from "../model"
 import { useQuery } from "@tanstack/react-query"
 import AxiosClient from "@/provider/axios"
 
 const useGetStatistic = () => {
- const [statistic, setStatistic] = useState<StatisticUniversity>()
-  
-
-
-
-
-
- 
-
   const { data, isLoading, isFetching ,refetch} = useQuery({
     queryKey: ['statistic',],
     refetchOnWindowFocus: false,
@@ -22,14 +11,7 @@ const useGetStatistic = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setStatistic(data?.data )
- 
-    }
-  }, [data])
-
-  return { statistic, loading, refetch }
+  return { statistic: data?.data, loading, refetch }
 }
 
 export default useGetStatistic

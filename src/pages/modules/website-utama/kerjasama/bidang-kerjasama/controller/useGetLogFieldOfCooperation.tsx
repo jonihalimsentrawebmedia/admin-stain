@@ -1,14 +1,8 @@
 import { useParams, useSearchParams } from 'react-router-dom'
-import type { LogActivity } from '../../../calendar-academic/model'
-import { useEffect, useState } from 'react'
-import type { Meta } from '@/components/common/table/TablePagination'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 
 const useGetLogFieldOfCooperation = () => {
-  const [log, setLog] = useState<LogActivity[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const { idFieldOfCooperation } = useParams()
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
@@ -27,14 +21,7 @@ const useGetLogFieldOfCooperation = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLog(data?.data ?? [])
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { log, loading, meta }
+  return { log: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export default useGetLogFieldOfCooperation
