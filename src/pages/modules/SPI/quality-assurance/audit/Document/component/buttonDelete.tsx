@@ -55,8 +55,8 @@ export const ButtonDeleteDocumentAudit = (props: props) => {
       <DialogCustom
         open={open}
         setOpen={setOpen}
-        title={<p className={'text-red-500 text-2xl'}>Hapus Download</p>}
-        description={'Apakah anda yakin untuk menghapus download ini?'}
+        title={<p className={'text-red-500 text-2xl'}>Hapus Dokumen Tinjauan Manajemen</p>}
+        description={'Apakah anda yakin untuk menghapus Dokumen Tinjauan Manajemen ini?'}
         className={'lg:max-w-2xl'}
       >
         <div className={'grid grid-cols-[12rem_1fr] gap-4'}>

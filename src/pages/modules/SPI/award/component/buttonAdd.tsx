@@ -45,7 +45,7 @@ export const ButtonAddAward = () => {
         onClick={() => setOpen(!open)}
       >
         <MdUpload />
-        Uplaod Penghargaan
+        Upload Penghargaan
       </Button>
 
       <DialogBasic

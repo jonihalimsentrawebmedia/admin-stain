@@ -26,13 +26,14 @@ export const FormServiceSPI = (props: Props) => {
             isBack
             buttonGroup={[
               { type: 'cancel', onClick: () => navigate(-1) },
-              { type: 'save', onClick: () => {} },
+              { type: 'save', label: 'Simpan', onClick: () => {} },
             ]}
             label={title || 'Tambah Layanan'}
           />
 
           <UploadPhotoImage
             className={'w-[420px]'}
+            label={'Upload Gambar'}
             ratio_width={4}
             ratio_height={2}
             name={'url_gambar'}
