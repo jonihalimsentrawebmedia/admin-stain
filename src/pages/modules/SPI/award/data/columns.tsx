@@ -20,7 +20,7 @@ export const ColumnsAward = () => {
     },
     {
       accessorKey: 'url',
-      header: 'URL',
+      header: 'Gambar',
       cell: ({ row }) => {
         return (
           <img

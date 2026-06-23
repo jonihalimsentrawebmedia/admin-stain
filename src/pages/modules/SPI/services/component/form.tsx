@@ -26,7 +26,7 @@ export const FormServiceSPI = (props: Props) => {
             isBack
             buttonGroup={[
               { type: 'cancel', onClick: () => navigate(-1) },
-              { type: 'save', onClick: () => {} },
+              { type: 'save', label: 'Simpan', onClick: () => {} },
             ]}
             label={title || 'Tambah Layanan'}
           />

@@ -95,7 +95,7 @@ export const ELHKPNDetailPage = () => {
                 },
                 {
                   type: 'edit',
-                  label: 'Edit Sejarah',
+                  label: 'Edit Konten',
                   onClick: () => setIsEdit(!isEdit),
                 },
               ]}
@@ -103,6 +103,7 @@ export const ELHKPNDetailPage = () => {
 
             <div className="flex items-start gap-x-5 bg-white">
               <img
+                alt={'E-LHKPN'}
                 src={ELHKPN?.url_gambar ?? '#'}
                 className={'w-[480px] h-[360px] object-cover'}
                 width={480}
