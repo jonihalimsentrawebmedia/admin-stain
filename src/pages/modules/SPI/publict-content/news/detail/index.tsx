@@ -28,6 +28,9 @@ export const DetailNewsSPI = () => {
   }, [api])
 
   const images = detail?.berita_gambar_tambahan ?? []
+  const temp = []
+  temp.push(detail?.gambar)
+  temp.push(...images.map((item) => item.gambar))
 
   return (
     <>
@@ -113,11 +116,11 @@ export const DetailNewsSPI = () => {
               {/* CAROUSEL */}
               <Carousel setApi={setApi} className="w-full">
                 <CarouselContent className="pr-0">
-                  {images.map((item, index) => (
+                  {temp.map((item, index) => (
                     <CarouselItem key={index} className="pr-0">
                       <img
-                        src={item.gambar}
-                        alt={item.keterangan}
+                        src={item}
+                        alt={item}
                         className="h-[345px] w-full object-cover rounded-lg"
                       />
                     </CarouselItem>
