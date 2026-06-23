@@ -55,9 +55,9 @@ export const ButtonUnpublishAgendaUnit = (data: IAgendaDetail) => {
         open={open}
         setOpen={setOpen}
         isAuto
-        className={'rounded lg:max-w-xl'}
-        title={'Publish Agenda'}
-        description={'Apakah anda yakin untuk mempublish Agenda yang dipilih?'}
+        className={'rounded lg:min-w-2xl'}
+        title={'Unpublish Agenda'}
+        description={'Apakah anda yakin untuk MengUnpublish Agenda yang dipilih?'}
       >
         <div className={'flex flex-col gap-2.5'}>
           <div className={'text-center flex justify-center'}>
@@ -103,7 +103,7 @@ export const ButtonUnpublishAgendaUnit = (data: IAgendaDetail) => {
                       onClick={HandleSubmission}
                     >
                       <MdCancel />
-                      Unpublish Pengumuman
+                      Unpublish Agenda
                     </Button>
                   ),
                   onClick: () => setOpen(!open),
