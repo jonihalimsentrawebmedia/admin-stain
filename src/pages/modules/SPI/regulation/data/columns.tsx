@@ -34,6 +34,20 @@ export const ColumnsRegulation = () => {
       },
     },
     {
+      accessorKey: 'link',
+      header: 'Link',
+      cell: ({ row }) => {
+        const data = row.original
+        return (
+          <>
+            <Link to={data?.url} target={'_blank'} className={'text-white bg-primary p-2 rounded'}>
+              Kunjungi Link
+            </Link>
+          </>
+        )
+      },
+    },
+    {
       accessorKey: 'urutan',
       header: 'Urutan',
     },
