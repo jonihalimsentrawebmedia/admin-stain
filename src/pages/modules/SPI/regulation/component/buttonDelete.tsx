@@ -46,7 +46,7 @@ export const ButtonDeleteRegulation = (props: Props) => {
         <FaTrash />
       </button>
 
-      <DialogBasic title={'Tambah Peraturan'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Hapus Peraturan'} open={open} setOpen={setOpen}>
         <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
           <p className="text-gray-500">Nama Peraturan</p>
           <p>{data?.nama_peraturan}</p>

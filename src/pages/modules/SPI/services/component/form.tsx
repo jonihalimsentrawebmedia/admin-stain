@@ -23,6 +23,7 @@ export const FormServiceSPI = (props: Props) => {
       <Form {...form}>
         <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
           <ButtonTitleGroup
+            isBack
             buttonGroup={[
               { type: 'cancel', onClick: () => navigate(-1) },
               { type: 'save', onClick: () => {} },
