@@ -33,6 +33,7 @@ export const FormServiceSPI = (props: Props) => {
 
           <UploadPhotoImage
             className={'w-[420px]'}
+            label={'Upload Gambar'}
             ratio_width={4}
             ratio_height={2}
             name={'url_gambar'}
