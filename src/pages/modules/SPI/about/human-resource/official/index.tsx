@@ -1,13 +1,13 @@
 import { UseGetChiefOfficerDetail } from './../hooks/index'
 import { useParams, useSearchParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { UseGetOfficially } from './hooks/index'
+import { UseGetOfficial } from './hooks/index'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
-import { ButtonAddOfficially } from './component/buttonadd.tsx'
-import { ColumnsOfficially } from './data/columns.tsx'
+import { ButtonAddOfficial } from './component/buttonAdd.tsx'
+import { ColumnsOfficial } from './data/columns.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
-export const OfficiallyDataSPI = () => {
+export const OfficialDataSPI = () => {
   const { id } = useParams()
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
@@ -15,13 +15,13 @@ export const OfficiallyDataSPI = () => {
   const search = searchParams.get('search') ?? ''
 
   const { detail } = UseGetChiefOfficerDetail((id as string) ?? '')
-  const { officially, loading, meta } = UseGetOfficially({
+  const { official, loading, meta } = UseGetOfficial({
     id_group: (id as string) ?? '',
     page,
     limit,
     search,
   })
-  const columns = ColumnsOfficially()
+  const columns = ColumnsOfficial()
 
   return (
     <>
@@ -41,12 +41,12 @@ export const OfficiallyDataSPI = () => {
             },
             {
               type: 'custom',
-              element: <ButtonAddOfficially />,
+              element: <ButtonAddOfficial />,
             },
           ]}
         />
 
-        <TableCustom data={officially} columns={columns} loading={loading} meta={meta} />
+        <TableCustom data={official} columns={columns} loading={loading} meta={meta} />
       </div>
     </>
   )

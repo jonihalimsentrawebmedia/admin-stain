@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const OfficiallyResolver = z.object({
+export const OfficialResolver = z.object({
   url_gambar: z.string(),
   nama_penjabat: z.string(),
   nip: z.string(),
@@ -11,4 +11,4 @@ export const OfficiallyResolver = z.object({
   is_local_data: z.boolean().optional().nullable(),
 })
 
-export type OfficiallyType = z.infer<typeof OfficiallyResolver>
+export type OfficialType = z.infer<typeof OfficialResolver>

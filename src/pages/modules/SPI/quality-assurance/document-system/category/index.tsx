@@ -12,7 +12,7 @@ export const CategoryDocumentSystemPage = () => {
   const limit = searchParams.get('limit') ?? '10'
   const search = searchParams.get('search') ?? ''
 
-  const { meta, loading, cateegory } = UseGetCategoryDocument({
+  const { meta, loading, category } = UseGetCategoryDocument({
     page,
     limit,
     search,
@@ -40,7 +40,7 @@ export const CategoryDocumentSystemPage = () => {
             },
           ]}
         />
-        <TableCustom data={cateegory} columns={columns} loading={loading} meta={meta} />
+        <TableCustom data={category} columns={columns} loading={loading} meta={meta} />
       </div>
     </>
   )

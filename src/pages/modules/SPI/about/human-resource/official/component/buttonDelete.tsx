@@ -6,13 +6,13 @@ import { toast } from 'react-toastify'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Button } from '@/components/ui/button.tsx'
-import type { IOfficially } from '../data/types'
+import type { IOfficial } from '../data/types'
 
 interface Props {
-  data: IOfficially
+  data: IOfficial
 }
 
-export const ButtonDeleteOfficially = (props: Props) => {
+export const ButtonDeleteOfficial = (props: Props) => {
   const { data } = props
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -26,7 +26,7 @@ export const ButtonDeleteOfficially = (props: Props) => {
           setOpen(false)
           setLoading(false)
           queryClient.invalidateQueries({
-            queryKey: ['chief-officially-spi'],
+            queryKey: ['chief-official-spi'],
           })
           toast.success(res.data.message || 'Success menghapus data')
         }

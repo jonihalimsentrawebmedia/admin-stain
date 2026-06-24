@@ -1,15 +1,15 @@
-import type { IOfficially } from './types'
+import type { IOfficial } from './types'
 import { useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
-import { ButtonEditOfficially } from '../component/buttonEdit.tsx'
-import { ButtonDeleteOfficially } from '../component/buttonDelete.tsx'
+import { ButtonEditOfficial } from '../component/buttonEdit.tsx'
+import { ButtonDeleteOfficial } from '../component/buttonDelete.tsx'
 
-export const ColumnsOfficially = () => {
+export const ColumnsOfficial = () => {
   const [searchParam] = useSearchParams()
   const page = Number(searchParam?.get('page') ?? '1')
   const limit = Number(searchParam?.get('limit') ?? '10')
 
-  const columns: ColumnDef<IOfficially>[] = [
+  const columns: ColumnDef<IOfficial>[] = [
     {
       accessorKey: 'no',
       header: 'No',
@@ -52,8 +52,8 @@ export const ColumnsOfficially = () => {
         return (
           <>
             <div className={'flex items-center gap-1.5'}>
-              <ButtonEditOfficially data={data} />
-              <ButtonDeleteOfficially data={data} />
+              <ButtonEditOfficial data={data} />
+              <ButtonDeleteOfficial data={data} />
             </div>
           </>
         )

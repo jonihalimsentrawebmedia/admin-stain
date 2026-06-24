@@ -1,34 +1,38 @@
-import { Button } from '@/components/ui/button.tsx'
-import { BiPlus } from 'react-icons/bi'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
-import { useForm } from 'react-hook-form'
 import { Form } from '@/components/ui/form.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import { useParams } from 'react-router-dom'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { OfficiallyResolver, type OfficiallyType } from '../data/resolver'
-import { UseGetChiefOfficerGroup } from '../../hooks/index.tsx'
+import { UseGetChiefOfficerGroup } from '../../hooks/index'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
+import { HiPencil } from 'react-icons/hi'
+import type { IOfficial } from '../data/types'
 import { UseGetEmployee } from '@/pages/modules/website-utama/lecturer-staff/hooks'
 import { InputRadio } from '@/components/common/form/InputRadio.tsx'
 import { UploadPasPhoto } from '@/pages/modules/website-utama/public-content/structure-organization/Placeman-user/components/uploadPasphoto.tsx'
+import { useForm } from 'react-hook-form'
+import { OfficialResolver, type OfficialType } from '../data/resolver'
+import { zodResolver } from '@hookform/resolvers/zod'
 
-export const ButtonAddOfficially = () => {
+interface Props {
+  data: IOfficial
+}
+
+export const ButtonEditOfficial = (props: Props) => {
   const { id } = useParams()
+  const { data } = props
+
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const form = useForm<OfficiallyType>({
-    resolver: zodResolver(OfficiallyResolver),
-    defaultValues: {
-      id_kelompok: id,
-    },
+  const form = useForm<OfficialType>({
+    resolver: zodResolver(OfficialResolver),
   })
+
   const { chiefOfficer } = UseGetChiefOfficerGroup({
     page: '0',
     limit: '0',
@@ -39,16 +43,31 @@ export const ButtonAddOfficially = () => {
     filter: form?.watch('is_dosen') === true ? 'DOSEN' : 'STAFF',
   })
 
+  useEffect(() => {
+    if (data) {
+      form.reset({
+        url_gambar: data.url_gambar,
+        id_kelompok: data?.id_kelompok_pimpinan,
+        nama_penjabat: data?.nama_penjabat,
+        jabatan: data?.jabatan,
+        nip: data?.nip,
+        is_local_data: !!data?.id_sdm,
+        is_dosen: !!data?.is_dosen,
+        id_sdm: data?.id_sdm,
+      })
+    }
+  }, [data])
+
   const queryClient = useQueryClient()
   const HandleSave = async (value: any) => {
     setLoading(true)
-    await AxiosClient.post(`/spi/pimpinan/${id}`, { ...value })
+    await AxiosClient.put(`/spi/pimpinan/${id}/${data?.id_pimpinan}`, value)
       .then((res) => {
         if (res.data.status) {
           setLoading(false)
           setOpen(!open)
           queryClient.invalidateQueries({
-            queryKey: ['chief-officially-spi'],
+            queryKey: ['chief-official-spi'],
           })
           toast.success(res.data.message || 'Success')
         }
@@ -61,17 +80,15 @@ export const ButtonAddOfficially = () => {
 
   return (
     <>
-      <Button
-        variant={'outline'}
-        className={'border-primary text-primary hover:text-primary'}
+      <button
+        className={'bg-yellow-500 p-1.5 text-white hover:bg-yellow-600 rounded'}
         onClick={() => setOpen(!open)}
       >
-        <BiPlus />
-        Tambah Pejabat
-      </Button>
+        <HiPencil />
+      </button>
 
       <DialogBasic
-        title={'Tambah Pejabat'}
+        title={'Edit Data Pejabat'}
         open={open}
         setOpen={setOpen}
         className={'lg:min-w-2xl'}
@@ -167,8 +184,8 @@ export const ButtonAddOfficially = () => {
               label={'Kelompok'}
               form={form}
               placeholder={'Kelompok'}
-              isRow
               isDisabled
+              isRow
               data={
                 chiefOfficer?.map((row) => ({
                   label: row?.nama_kelompok,

@@ -28,6 +28,7 @@ export const ButtonAddRegulation = () => {
           queryClient.invalidateQueries({
             queryKey: ['regulation'],
           })
+          toast.success(res.data.message || 'Success')
           form.reset()
         }
       })

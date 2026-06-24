@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { Plus } from 'lucide-react'
-import { UseGetApprovedList, UseGetTotalVisitor, UseGetTrentVisitor } from './hooks/index.tsx'
+import { UseGetApprovedList, UseGetTotalVisitor, UseGetTrendVisitor } from './hooks/index.tsx'
 import { TabsListCustom } from '@/pages/modules/website-utama/public-content/slider/components/tabsList.tsx'
 import { useState } from 'react'
 import { ApprovedSection } from './components/Approved/section'
@@ -10,7 +10,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { SelectBasic } from '@/components/common/select/basic.tsx'
 import type { Mode } from './types/index'
 import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/hooks/getProfile.tsx'
-import { UseGetSessionSPI } from '@/pages/modules/SPI/component/select-session/get-seeion.tsx'
+import { UseGetSessionSPI } from '@/pages/modules/SPI/component/select-session/get-session.tsx'
 import { FiExternalLink } from 'react-icons/fi'
 
 export default function DashboardSPI() {
@@ -19,11 +19,11 @@ export default function DashboardSPI() {
   const location = useLocation()
   const path = location.pathname
   const isEditor = path.includes('editor')
-  const { trentVisitor } = UseGetTrentVisitor(mode)
+  const { trendVisitor } = UseGetTrendVisitor(mode)
 
   const chartData =
-    (trentVisitor &&
-      Object?.entries(trentVisitor).map(([key, value]) => ({
+    (trendVisitor &&
+      Object?.entries(trendVisitor).map(([key, value]) => ({
         name: key,
         value: value,
       }))) ??
@@ -62,10 +62,10 @@ export default function DashboardSPI() {
   ]
 
   const actions = [
-    { label: 'Tulis Berita', url: '/modules/website-fakultas/public-content/news/add' },
-    { label: 'Tulis Agenda', url: '/modules/website-fakultas/public-content/agenda/add' },
-    { label: 'Tulis Artikel', url: '/modules/website-fakultas/public-content/article/add' },
-    { label: 'Verifkasi Pendaftaran', url: '/modules/pulsikom/training/verify-registration' },
+    { label: 'Tulis Berita', url: '/modules/spi/public-content/news/add' },
+    { label: 'Tulis Agenda', url: '/modules/spi/public-content/agenda/add' },
+    { label: 'Buat Pengumuman', url: '/modules/spi/public-content/announcement/add' },
+    { label: 'Tambah Layanan', url: '/modules/spi/services/add' },
   ]
 
   const listMode = [
@@ -144,7 +144,7 @@ export default function DashboardSPI() {
           <CardContent className="h-80">
             <SelectBasic
               className={'mb-2'}
-              label={'Data Bersadarkan'}
+              label={'Data Berdasarkan'}
               data={listMode}
               value={mode}
               onChange={setMode}

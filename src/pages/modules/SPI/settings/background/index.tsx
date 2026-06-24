@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom'
-import { SPIMENU } from './data/constanta'
+import { SPIMENU } from './data/constants'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import ButtonAddBackground from './component/buttonAdd'

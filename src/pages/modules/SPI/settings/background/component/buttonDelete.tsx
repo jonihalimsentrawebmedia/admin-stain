@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button.tsx'
 import { FaTrash } from 'react-icons/fa'
 import type { IBackground } from '../data/types'
 import { useSearchParams } from 'react-router-dom'
-import { SPIMENU } from '../data/constanta'
+import { SPIMENU } from '../data/constants'
 
 interface props {
   data: IBackground

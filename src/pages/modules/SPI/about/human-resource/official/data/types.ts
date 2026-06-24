@@ -1,4 +1,4 @@
-export interface IOfficially {
+export interface IOfficial {
   id_pimpinan: string
   id_satuan_organisasi: string
   id_kelompok_pimpinan: string

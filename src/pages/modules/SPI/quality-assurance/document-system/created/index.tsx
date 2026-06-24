@@ -17,7 +17,7 @@ import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 export const AddDocumentSystem = () => {
   const [loading, setLoading] = useState(false)
 
-  const { cateegory, loading: load1 } = UseGetCategoryDocument({ page: '0', limit: '0' })
+  const { category, loading: load1 } = UseGetCategoryDocument({ page: '0', limit: '0' })
 
   const navigate = useNavigate()
   const form = useForm<DownloadType>({
@@ -78,7 +78,7 @@ export const AddDocumentSystem = () => {
             placeholder={'Kategori Berkas'}
             isLoading={load1}
             data={
-              cateegory?.map((row) => ({
+              category?.map((row) => ({
                 label: row?.nama_sistem_dokumen,
                 value: row?.id_kategori_sistem_dokumen,
               })) ?? []
