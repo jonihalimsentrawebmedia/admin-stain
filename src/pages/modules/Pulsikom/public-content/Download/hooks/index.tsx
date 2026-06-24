@@ -1,12 +1,11 @@
-import { useEffect, useState } from 'react'
 import type {
   ICategoryDownload,
   IDownload,
 } from '@/pages/modules/website-utama/public-content/download/types'
-import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useSearchParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
+import type { IApiResponse } from '@/utils/globalType.ts'
 
 interface Props {
   isGetAll?: boolean
@@ -14,8 +13,6 @@ interface Props {
 
 export const UseGetCategoryDownloadPulsikom = (props?: Props) => {
   const { isGetAll } = props || {}
-  const [categoryDownload, setCategoryDownload] = useState<ICategoryDownload[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
@@ -32,7 +29,7 @@ export const UseGetCategoryDownloadPulsikom = (props?: Props) => {
     if (search) ParamsSearch.append('search', search)
   }
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IApiResponse<ICategoryDownload[]>>({
     queryKey: ['category-download-pusilkom', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -41,20 +38,10 @@ export const UseGetCategoryDownloadPulsikom = (props?: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setCategoryDownload(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { categoryDownload, loading, meta }
+  return { categoryDownload: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export const UseGetDownloadPulsikom = () => {
-  const [downloadUnit, setDownloadUnit] = useState<IDownload[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
@@ -65,7 +52,7 @@ export const UseGetDownloadPulsikom = () => {
   if (search) ParamsSearch.append('search', search)
   if (category) ParamsSearch.append('id_kategori_berkas', category)
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IApiResponse<IDownload[]>>({
     queryKey: ['download-pusilkom', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/pusilkom/downloads?${ParamsSearch}`).then((res) => res.data),
@@ -73,20 +60,11 @@ export const UseGetDownloadPulsikom = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDownloadUnit(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { downloadUnit, loading, meta }
+  return { downloadUnit: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export const UseGetDownloadPulsikomDetail = (id: string) => {
-  const [download, setDownload] = useState<IDownload>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IDownload>({
     queryKey: ['download-pusilkom-detail', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/pusilkom/downloads/${id}`).then((res) => res.data?.data),
@@ -94,11 +72,5 @@ export const UseGetDownloadPulsikomDetail = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDownload(data)
-    }
-  }, [data])
-
-  return { download, loading }
+  return { download: data, loading }
 }

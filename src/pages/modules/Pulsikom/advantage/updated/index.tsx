@@ -36,7 +36,7 @@ export const UpdatedAdvantage = () => {
 
   const HandleSave = async (value: TResolverAdvantage) => {
     setLoading(true)
-    await AxiosClient.post('/pusilkom/keunggulan', value)
+    await AxiosClient.put('/pusilkom/keunggulan/' + id, value)
       .then((res) => {
         if (res.data.status) {
           setLoading(false)
@@ -52,7 +52,7 @@ export const UpdatedAdvantage = () => {
 
   return (
     <>
-      <FormAdvantage form={form} loading={loading} HandleSave={HandleSave} />
+      <FormAdvantage title={'Edit Keunggulan'} form={form} loading={loading} HandleSave={HandleSave} />
     </>
   )
 }

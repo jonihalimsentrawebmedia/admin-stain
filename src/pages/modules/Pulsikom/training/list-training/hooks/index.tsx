@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
+import type { BasicProps, IApiResponse } from '@/utils/globalType.ts'
+import type { TrainingDetailData } from '@/pages/modules/Pulsikom/training/list-training/data/fullDetail.ts'
 import type {
   IContactTraining,
   IInformationTraining,
@@ -8,10 +9,7 @@ import type {
   ITopicSchedule,
   ITrainingList,
 } from '../data/types'
-import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import type { IBankAccount } from '@/pages/modules/Pulsikom/reference/bank-account/data/types.ts'
-import type { TrainingDetailData } from '@/pages/modules/Pulsikom/training/list-training/data/fullDetail.ts'
-import type { BasicProps } from '@/utils/globalType.ts'
 
 export interface IstatusTraining {
   is_informasi_pendaftaran: boolean
@@ -29,16 +27,13 @@ interface Props extends BasicProps {
 export const UseGetListTraining = (props: Props) => {
   const { status, search, page, limit } = props
 
-  const [listTraining, setListTraining] = useState<ITrainingList[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const ParamsSearch = new URLSearchParams()
   if (status) ParamsSearch.append('status', status)
   if (page) ParamsSearch.append('page', page ?? '1')
   if (limit) ParamsSearch.append('limit', limit ?? '10')
   if (search) ParamsSearch.append('search', search ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IApiResponse<ITrainingList>>({
     queryKey: ['list-training', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/pusilkom/training?${ParamsSearch}`).then((res) => res.data),
@@ -46,23 +41,14 @@ export const UseGetListTraining = (props: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setMeta(data.meta)
-      setListTraining(data?.data)
-    }
-  }, [data])
-
-  return { listTraining, meta, loading }
+  return { listTraining: data?.data ?? [], meta: data?.meta, loading }
 }
 
 export const UseGetStatusTraining = (id?: string | null) => {
-  const [detail, setDetail] = useState<{
+  const { data, isLoading, isFetching } = useQuery<{
     status_pengisian: IstatusTraining
     status: 'DRAFT' | 'DITERBITKAN' | 'DITUTUP'
-  }>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  }>({
     queryKey: ['status-training', id],
     enabled: !!id,
     refetchOnWindowFocus: false,
@@ -71,19 +57,11 @@ export const UseGetStatusTraining = (id?: string | null) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDetail(data)
-    }
-  }, [data])
-
-  return { detail, loading }
+  return { detail: data, loading }
 }
 
 export const UseGetDetailInformation = (id?: string | null) => {
-  const [detail, setDetail] = useState<IInformationTraining>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IInformationTraining>({
     queryKey: ['detail-information', id],
     enabled: !!id,
     refetchOnWindowFocus: false,
@@ -93,20 +71,11 @@ export const UseGetDetailInformation = (id?: string | null) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDetail(data)
-    }
-  }, [data])
-
-  return { detail, loading }
+  return { detail: data, loading }
 }
 
 export const UseGetTopicAndSchedule = (id?: string | null) => {
-  const [topic, setTopic] = useState<ITopicSchedule[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IApiResponse<ITopicSchedule[]>>({
     queryKey: ['topic-schedule', id],
     enabled: !!id,
     refetchOnWindowFocus: false,
@@ -116,19 +85,10 @@ export const UseGetTopicAndSchedule = (id?: string | null) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setMeta(data.meta)
-      setTopic(data?.data)
-    }
-  }, [data])
-
-  return { topic, meta, loading }
+  return { topic: data?.data ?? [], meta: data?.meta, loading }
 }
 
 export const UseGetConditionTraining = (id?: string | null) => {
-  const [condition, setCondition] = useState<{ isi: string }>()
-
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['condition-training', id],
     enabled: !!id,
@@ -139,19 +99,11 @@ export const UseGetConditionTraining = (id?: string | null) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setCondition(data)
-    }
-  }, [data])
-
-  return { condition, loading }
+  return { condition: data, loading }
 }
 
 export const UseGetRegisterPricing = (id?: string | null) => {
-  const [registerPricing, setRegisterPricing] = useState<IRegisterPricing[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IRegisterPricing[]>({
     queryKey: ['register-pricing', id],
     enabled: !!id,
     refetchOnWindowFocus: false,
@@ -161,19 +113,11 @@ export const UseGetRegisterPricing = (id?: string | null) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setRegisterPricing(data)
-    }
-  }, [data])
-
-  return { registerPricing, loading }
+  return { registerPricing: data ?? [], loading }
 }
 
 export const UseGetBankAccount = (id?: string | null) => {
-  const [bankAccount, setBankAccount] = useState<IBankAccount[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IBankAccount[]>({
     queryKey: ['bank-account', id],
     enabled: !!id,
     refetchOnWindowFocus: false,
@@ -183,19 +127,11 @@ export const UseGetBankAccount = (id?: string | null) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setBankAccount(data)
-    }
-  }, [data])
-
-  return { bankAccount, loading }
+  return { bankAccount: data ?? [], loading }
 }
 
 export const UseGetContactAndMoreNote = (id?: string | null) => {
-  const [contact, setContact] = useState<IContactTraining>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IContactTraining>({
     queryKey: ['contact-and-more-note', id],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -206,19 +142,11 @@ export const UseGetContactAndMoreNote = (id?: string | null) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setContact(data)
-    }
-  }, [data])
-
-  return { loading, contact }
+  return { loading, contact: data }
 }
 
 export const UseGetDetailTraining = (id?: string | null) => {
-  const [detail, setDetail] = useState<TrainingDetailData>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<TrainingDetailData>({
     queryKey: ['detail-training', id],
     enabled: !!id,
     refetchOnWindowFocus: false,
@@ -227,11 +155,5 @@ export const UseGetDetailTraining = (id?: string | null) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDetail(data)
-    }
-  }, [data])
-
-  return { detail, loading }
+  return { detail: data, loading }
 }

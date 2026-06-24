@@ -58,14 +58,14 @@ export const HistoryAboutPulsikom = () => {
                 label={'Edit Sejarah'}
                 buttonGroup={[
                   {
-                      type: 'custom',
-                      element: (
-                        <ButtonGoToGuide
-                          titleGuide={'Sejarah'}
-                          valueGuide="PUSILKOM_TENTANG_SEJARAH"
-                        />
-                      ),
-                    },
+                    type: 'custom',
+                    element: (
+                      <ButtonGoToGuide
+                        titleGuide={'Sejarah'}
+                        valueGuide="PUSILKOM_TENTANG_SEJARAH"
+                      />
+                    ),
+                  },
                   {
                     type: 'cancel',
                     label: 'Batal',
@@ -78,7 +78,13 @@ export const HistoryAboutPulsikom = () => {
                 ]}
               />
 
-              <UploadPhotoImage ratio_width={1} ratio_height={1} name={'url_gambar'} form={form} />
+              <UploadPhotoImage
+                label={'Upload Gambar'}
+                ratio_width={1}
+                ratio_height={1}
+                name={'url_gambar'}
+                form={form}
+              />
               <RichText form={form} name={'deskripsi'} label={'Deskripsi'} isRow={false} />
 
               <ButtonForm loading={loading} onCancel={() => setIsEdit(false)} />
@@ -87,20 +93,17 @@ export const HistoryAboutPulsikom = () => {
         ) : (
           <>
             <ButtonTitleGroup
-              label={'Edit Sejarah'}
+              label={'Sejarah'}
               buttonGroup={[
-                 {
-                      type: 'custom',
-                      element: (
-                        <ButtonGoToGuide
-                          titleGuide={'Sejarah'}
-                          valueGuide="PUSILKOM_TENTANG_SEJARAH"
-                        />
-                      ),
-                    },
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide titleGuide={'Sejarah'} valueGuide="PUSILKOM_TENTANG_SEJARAH" />
+                  ),
+                },
                 {
                   type: 'edit',
-                  label: 'Edit Sejarah',
+                  label: 'Edit Konten',
                   onClick: () => setIsEdit(!isEdit),
                 },
               ]}

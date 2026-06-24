@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
@@ -8,9 +7,7 @@ interface IHistoryAbout {
 }
 
 export const UseGetHistoryAbout = () => {
-  const [history, setHistory] = useState<IHistoryAbout>()
-
-  const { data, isFetching, isLoading } = useQuery({
+  const { data, isFetching, isLoading } = useQuery<IHistoryAbout>({
     queryKey: ['history-about'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/pusilkom/sejarah').then((res) => res.data.data),
@@ -18,11 +15,5 @@ export const UseGetHistoryAbout = () => {
 
   const loading = isFetching || isLoading
 
-  useEffect(() => {
-    if (data) {
-      setHistory(data)
-    }
-  }, [data])
-
-  return { loading, history }
+  return { loading, history: data }
 }

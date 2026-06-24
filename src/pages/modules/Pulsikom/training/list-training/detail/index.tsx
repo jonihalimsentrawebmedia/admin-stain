@@ -9,6 +9,7 @@ import RenderHTMLContent from '@/components/common/richtext/RenderHTMLContent.ts
 import { format } from 'date-fns'
 import { FaLocationPin, FaPhone } from 'react-icons/fa6'
 import { MdEmail } from 'react-icons/md'
+import { toast } from 'react-toastify'
 
 export const DetailTraining = () => {
   const { id } = useParams()
@@ -109,11 +110,14 @@ export const DetailTraining = () => {
           {detail?.bahasan_dan_topik?.map((row, k) => (
             <li key={k} className={'flex border p-2 border-primary rounded flex-col gap-1.5'}>
               <p className="text-primary font-semibold text-xl">
-                {k + 1}. {row?.judul_topik_bahasan}{' '}
-                {row?.tanggal_mulai_bahasan ? format(row?.tanggal_mulai_bahasan, 'dd MMM') : ''} -{' '}
+                <span className={'text-black'}>
+                  {k + 1}. {row?.judul_topik_bahasan}
+                </span>{' '}
+                ({row?.tanggal_mulai_bahasan ? format(row?.tanggal_mulai_bahasan, 'dd MMM') : ''} -{' '}
                 {row?.tanggal_selesai_bahasan
                   ? format(row?.tanggal_selesai_bahasan, 'dd MMM-yyyy')
                   : ''}
+                )
               </p>
               <p>{row?.deskripsi}</p>
             </li>
@@ -150,7 +154,13 @@ export const DetailTraining = () => {
               <p className="text-gray-500">{row?.nama_rekening}</p>
               <div className="flex items-center justify-between">
                 <p className="text-lg font-semibold text-primary">{row?.no_rekening}</p>
-                <button>
+                <button
+                  onClick={async () => {
+                    await navigator.clipboard.writeText(row?.no_rekening ?? '')
+                    toast.success('Berhasil menyalin no rekening')
+                  }}
+                  className="text-primary"
+                >
                   <FaRegCopy />
                 </button>
               </div>

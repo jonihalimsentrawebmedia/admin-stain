@@ -12,24 +12,27 @@ interface Props {
   form: UseFormReturn<TResolverProduct>
   loading: boolean
   HandleSave: (e: TResolverProduct) => void
+  title?: string
 }
 
 export const FormProduct = (props: Props) => {
-  const { form, loading, HandleSave } = props
+  const { form, loading, HandleSave, title } = props
   const navigate = useNavigate()
   return (
     <>
       <Form {...form}>
         <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
           <ButtonTitleGroup
+            isBack
             buttonGroup={[
               { type: 'cancel', onClick: () => navigate(-1) },
-              { type: 'save', onClick: () => {} },
+              { type: 'save', label: 'Simpan' },
             ]}
-            label={'Tambah Produk'}
+            label={title ?? 'Tambah Produk'}
           />
 
           <UploadPhotoImage
+            label={'Upload Gambar'}
             className={'w-[420px]'}
             ratio_width={4}
             ratio_height={2}

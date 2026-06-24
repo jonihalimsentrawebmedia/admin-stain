@@ -12,24 +12,33 @@ interface Props {
   form: UseFormReturn<TResolverService>
   loading: boolean
   HandleSave: (e: TResolverService) => void
+  title?: string
 }
 
 export const FormServicePulsikom = (props: Props) => {
-  const { form, loading, HandleSave } = props
+  const { form, loading, HandleSave, title } = props
   const navigate = useNavigate()
   return (
     <>
       <Form {...form}>
         <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
           <ButtonTitleGroup
+            isBack
             buttonGroup={[
               { type: 'cancel', onClick: () => navigate(-1) },
-              { type: 'save', onClick: () => {} },
+              { type: 'save', label: 'Simpan' },
             ]}
-            label={'Tambah Layanan'}
+            label={title ?? 'Tambah Layanan'}
           />
 
-          <UploadPhotoImage className={'w-[420px]'} ratio_width={4} ratio_height={2} name={'url_gambar'} form={form} />
+          <UploadPhotoImage
+            className={'w-[420px]'}
+            label={'Upload Gambar'}
+            ratio_width={4}
+            ratio_height={2}
+            name={'url_gambar'}
+            form={form}
+          />
           <TextInput
             form={form}
             name={'nama_layanan'}

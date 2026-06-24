@@ -3,11 +3,12 @@ export interface ISystemDocument {
   id_kategori_sistem_dokumen: string
   id_satuan_organisasi: string
   is_google_link: boolean
-  jumlah_diunduh:number
+  jumlah_diunduh: number
   url_dokumen: string
   key_dokumen: string
   link_google: string
   nama_dokumen: string
+  nama_kategori: string
   publish_at: string
   created_at: string
   created_user: string

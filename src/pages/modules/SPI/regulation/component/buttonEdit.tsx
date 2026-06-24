@@ -45,6 +45,7 @@ export const ButtonEditRegulation = (props: Props) => {
           queryClient.invalidateQueries({
             queryKey: ['regulation'],
           })
+          toast.success(res.data.message || 'Success')
           form.reset()
         }
       })

@@ -63,7 +63,7 @@ export const ButtonDeleteSystemDocument = (props: props) => {
           <p>Nama Berkas</p>
           <p>{data?.nama_dokumen}</p>
           <p>Kategori</p>
-          <p>{data?.id_kategori_sistem_dokumen}</p>
+          <p>{data?.nama_kategori}</p>
           <p>Buka Berkas</p>
           <Link to={data?.is_google_link ? data?.link_google || '#' : data?.url_dokumen || '#'}>
             <Button

@@ -26,6 +26,7 @@ export const ButtonDeleteRegulation = (props: Props) => {
         if (res.data.status) {
           setLoading(false)
           setOpen(false)
+          toast.success(res.data.message || 'Success')
           queryClient.invalidateQueries({
             queryKey: ['regulation'],
           })

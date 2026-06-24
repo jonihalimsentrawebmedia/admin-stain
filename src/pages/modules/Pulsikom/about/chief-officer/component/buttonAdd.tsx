@@ -47,7 +47,7 @@ export const ButtonAddChiefOfficer = () => {
         Tambah Kelompok
       </Button>
 
-      <DialogBasic title={'Tambah Kelompok'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Tambah Kelompok Jabatan'} open={open} setOpen={setOpen}>
         <Form {...form}>
           <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
             <TextInput

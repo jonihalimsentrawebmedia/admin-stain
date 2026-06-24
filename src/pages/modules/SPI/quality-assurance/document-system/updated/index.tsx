@@ -20,7 +20,7 @@ export const EditDocumentSystem = () => {
 
   const { id } = useParams()
 
-  const { cateegory, loading: load1 } = UseGetCategoryDocument({ page: '0', limit: '0' })
+  const { category, loading: load1 } = UseGetCategoryDocument({ page: '0', limit: '0' })
   const { detail } = UseGetDocumentSystemDetail(id as string)
 
   useEffect(() => {
@@ -95,7 +95,7 @@ export const EditDocumentSystem = () => {
             placeholder={'Kategori Berkas'}
             isLoading={load1}
             data={
-              cateegory?.map((row) => ({
+              category?.map((row) => ({
                 label: row?.nama_sistem_dokumen,
                 value: row?.id_kategori_sistem_dokumen,
               })) ?? []

@@ -7,13 +7,13 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { Button } from '@/components/ui/button.tsx'
 import { FaGear } from 'react-icons/fa6'
-import { UseGetSessionFaculty } from '@/pages/modules/website-fakultas/component/select-session/get-seeion.tsx'
+import { UseGetSessionPusilkom } from './get-session'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import { Form } from '@/components/ui/form.tsx'
 import type { SatuanOrganisasiList } from '@/pages/modules/settings/model'
 
-export const DialogSessionFaculty = () => {
+export const DialogSessionPusilkom = () => {
   const [open, setOpen] = useState(false)
 
   const [parentId, setParentId] = useState({
@@ -31,13 +31,13 @@ export const DialogSessionFaculty = () => {
     id_parent: parentId?.id_university,
     id_module: id_module ?? '',
   })
-  const { session } = UseGetSessionFaculty()
+  const { session } = UseGetSessionPusilkom()
 
   useEffect(() => {
     if (session) {
       form.reset({
         id_university: session?.id_universitas,
-        id_fakultas: session?.id_fakultas,
+        id_unit: session?.id_unit,
       })
     }
   }, [session])
@@ -46,9 +46,9 @@ export const DialogSessionFaculty = () => {
   const form = useForm()
 
   const HandleSaveSession = async (value: any) => {
-    await AxiosClient.post('/fakultas/user-session', {
+    await AxiosClient.post('/pusilkom/user-session', {
       id_universitas: value?.id_university,
-      id_fakultas: value?.id_fakultas,
+      id_unit: value?.id_unit,
     })
       .then((res) => {
         if (res.data.status) {
@@ -70,10 +70,10 @@ export const DialogSessionFaculty = () => {
         disabled={loading}
       >
         <FaGear />
-        {session?.singkatan_universitas} / {session?.singkatan_fakultas}
+        {session?.singkatan_universitas} / {session?.nama_unit}
       </Button>
 
-      <DialogBasic title={'Ganti Session Fakultas'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Ganti Session Pulsikom'} open={open} setOpen={setOpen}>
         <Form {...form}>
           <form
             className={'flex flex-col gap-4 mt-2'}
@@ -98,13 +98,13 @@ export const DialogSessionFaculty = () => {
                     id_university: form.watch('id_university'),
                   })
                 }
-                form.setValue('id_fakultas', '')
+                form.setValue('id_unit', '')
               }}
             />
             <SelectBasicInput
               form={form}
-              name={'id_fakultas'}
-              placeholder={'Pilih Fakultas'}
+              name={'id_unit'}
+              placeholder={'Pilih Unit'}
               selectClassName={'z-40'}
               isDisabled={loading}
               data={

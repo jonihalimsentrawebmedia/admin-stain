@@ -13,10 +13,11 @@ import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/Bu
 interface Props {
   prev_value: string
   next_value: string
+  title: string
 }
 
 export const TopicScheduleSection = (props: Props) => {
-  const { prev_value, next_value } = props
+  const { prev_value, next_value, title } = props
   const [_, setSearchParams] = useSearchParams()
 
   const id = window.localStorage.getItem('id_training')
@@ -43,13 +44,33 @@ export const TopicScheduleSection = (props: Props) => {
   return (
     <>
       <div className={'space-y-5'}>
-        <div className="flex gap-4 justify-between items-center">
-          <p className="text-xl font-semibold">2. Topik Bahasan & Jadwal</p>
-          <ButtonGoToGuide
-            titleGuide={`Topik Bahasan & Jadwal`}
-            valueGuide="PUSILKOM_TRAINING_DAFTAR_TRAINING_FORM_TOPIK_BAHASAN_JADWAL"
-          />
-        </div>
+        <ButtonTitleGroup
+          label={title}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={`Topik Bahasan & Jadwal`}
+                  valueGuide="PUSILKOM_TRAINING_DAFTAR_TRAINING_FORM_TOPIK_BAHASAN_JADWAL"
+                />
+              ),
+            },
+            {
+              type: 'cancel',
+              label: 'Batal',
+            },
+            {
+              type: 'custom',
+              element: (
+                <Button onClick={HandleNext} className={'text-white'}>
+                  Lanjutkan <ChevronRight className={'size-4'} />
+                </Button>
+              ),
+            },
+          ]}
+        />
+        <p className="text-xl font-semibold text-primary">2. Topik Bahasan & Jadwal</p>
 
         {topic?.length === 0 ? (
           <p className={'text-red-500'}>Belum ada topik bahasan & jadwal</p>
@@ -59,12 +80,16 @@ export const TopicScheduleSection = (props: Props) => {
               {topic?.map((row, k) => (
                 <li key={k} className={'flex border p-2 border-primary rounded flex-col gap-1.5'}>
                   <p className="text-primary font-semibold text-xl">
-                    {k + 1}. {row?.judul_topik_bahasan}{' '}
+                    <span className={'text-black'}>
+                      {k + 1}. {row?.judul_topik_bahasan}
+                    </span>{' '}
+                    (
                     {row?.tanggal_mulai_bahasan ? format(row?.tanggal_mulai_bahasan, 'dd MMM') : ''}{' '}
                     -{' '}
                     {row?.tanggal_selesai_bahasan
                       ? format(row?.tanggal_selesai_bahasan, 'dd MMM-yyyy')
                       : ''}
+                    )
                   </p>
                   <p>{row?.deskripsi}</p>
                   <div className="flex items-center gap-2 w-fit">
@@ -98,7 +123,7 @@ export const TopicScheduleSection = (props: Props) => {
               {
                 type: 'custom',
                 element: (
-                  <Button onClick={HandleNext}>
+                  <Button onClick={HandleNext} className={'text-white'}>
                     Lanjutkan <ChevronRight className={'size-4'} />
                   </Button>
                 ),

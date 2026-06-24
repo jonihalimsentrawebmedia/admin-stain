@@ -11,14 +11,14 @@ import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/Bu
 interface Props {
   prev_value: string
   next_value: string
+  title?: string
 }
 
 export const RegisterPricing = (props: Props) => {
-  const { prev_value, next_value } = props
+  const { prev_value, next_value, title } = props
 
   const id = window.localStorage.getItem('id_training')
   const { registerPricing } = UseGetRegisterPricing(id as string)
-
   const [_, setSearchParams] = useSearchParams()
 
   const HandlePrev = () => {
@@ -38,14 +38,34 @@ export const RegisterPricing = (props: Props) => {
   return (
     <>
       <div className={'space-y-5'}>
-         <div className="flex gap-4 justify-between items-center">
-            <p className="text-xl font-semibold">4. Biaya Pendaftaran</p>
-            <ButtonGoToGuide
-              titleGuide={`4. Biaya Pendaftaran`}
-              valueGuide="PUSILKOM_TRAINING_DAFTAR_TRAINING_FORM_BIAYA_PENDAFTARAN"
-            />
-          </div>
-     
+        <ButtonTitleGroup
+          label={title ?? ''}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide={`4. Biaya Pendaftaran`}
+                  valueGuide="PUSILKOM_TRAINING_DAFTAR_TRAINING_FORM_BIAYA_PENDAFTARAN"
+                />
+              ),
+            },
+            {
+              type: 'cancel',
+              label: 'Batal',
+            },
+            {
+              type: 'custom',
+              element: (
+                <Button onClick={HandleNext} className={'text-white'}>
+                  Lanjutkan <ChevronRight className={'size-4'} />
+                </Button>
+              ),
+            },
+          ]}
+        />
+        <p className="text-xl font-semibold text-primary">4. Biaya Pendaftaran</p>
+
         {registerPricing?.length === 0 ? (
           <p className={'text-red-500'}>Belum ada Biaya Pendaftaran</p>
         ) : (
@@ -93,7 +113,7 @@ export const RegisterPricing = (props: Props) => {
               {
                 type: 'custom',
                 element: (
-                  <Button onClick={HandleNext}>
+                  <Button onClick={HandleNext} className={'text-white'}>
                     Lanjutkan <ChevronRight className={'size-4'} />
                   </Button>
                 ),

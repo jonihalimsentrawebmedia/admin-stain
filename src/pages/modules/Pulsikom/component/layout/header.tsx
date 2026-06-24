@@ -4,7 +4,7 @@ import React from 'react'
 import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/hooks/getProfile.tsx'
 import ButtonProfile from '@/pages/modules/settings/components/button/ButtonProfile.tsx'
 import { Link } from 'react-router-dom'
-import { UseGetSessionPusilkom } from '@/pages/modules/Pulsikom/component/select-session/get-seeion.tsx'
+import { UseGetSessionPusilkom } from '@/pages/modules/Pulsikom/component/select-session/get-session.tsx'
 import { NotificationList } from '@/pages/modules/Pulsikom/component/layout/notification'
 
 interface Props {

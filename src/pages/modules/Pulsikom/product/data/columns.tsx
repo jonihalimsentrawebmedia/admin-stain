@@ -20,6 +20,22 @@ export const ColumnsProduct = () => {
       },
     },
     {
+      accessorKey: 'Gambar',
+      header: 'Gambar',
+      cell: ({ row }) => {
+        const data = row.original
+        return (
+          <>
+            <img
+              src={data?.url_gambar}
+              alt={'gambar'}
+              className={'w-[150px] h-[100px] objective-cover'}
+            />
+          </>
+        )
+      },
+    },
+    {
       accessorKey: 'nama_produk',
       header: 'Nama Produk',
     },

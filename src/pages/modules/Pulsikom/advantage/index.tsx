@@ -23,17 +23,17 @@ export const AdvantagePage = () => {
     <>
       <div className={'space-y-5 w-full'}>
         <ButtonTitleGroup
-          label={'Keuntungan'}
+          label={'Keunggulan'}
           buttonGroup={[
             {
               type: 'custom',
               element: (
-                <ButtonGoToGuide titleGuide={'Keuntungan'} valueGuide="PUSILKOM_KEUNGULAN" />
+                <ButtonGoToGuide titleGuide={'Keunggulan'} valueGuide="PUSILKOM_KEUNGULAN" />
               ),
             },
             {
               type: 'add',
-              label: 'Tambah Keuntungan',
+              label: 'Tambah Keunggulan',
               onClick: () => navigate('add'),
             },
           ]}

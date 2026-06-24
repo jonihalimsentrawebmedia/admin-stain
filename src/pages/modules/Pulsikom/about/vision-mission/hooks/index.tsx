@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
@@ -8,9 +7,7 @@ interface IVisionMission {
 }
 
 export const UseGetHistoryVisionMission = () => {
-  const [visionMission, setVisionMission] = useState<IVisionMission>()
-
-  const { data, isFetching, isLoading } = useQuery({
+  const { data, isFetching, isLoading } = useQuery<IVisionMission>({
     queryKey: ['vision-mission'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/pusilkom/visi-misi').then((res) => res.data.data),
@@ -18,11 +15,5 @@ export const UseGetHistoryVisionMission = () => {
 
   const loading = isFetching || isLoading
 
-  useEffect(() => {
-    if (data) {
-      setVisionMission(data)
-    }
-  }, [data])
-
-  return { loading, visionMission }
+  return { loading, visionMission: data }
 }

@@ -1,10 +1,10 @@
 import { type ReactNode, useEffect } from 'react'
 import { useThemeColor } from '@/hooks/custom/themeColor.tsx'
-import { UseGetAdminThemePulsikom } from '../../settings/color/hooks/index'
+import { UseGetColorAdminPulsikom } from '../../settings/color/hooks/index'
 
 const PulsikomThema = ({ children }: { children: ReactNode }) => {
   const { setTheme } = useThemeColor()
-  const { color } = UseGetAdminThemePulsikom()
+  const { color } = UseGetColorAdminPulsikom('admin')
 
   useEffect(() => {
     setTheme({

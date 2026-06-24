@@ -18,7 +18,7 @@ export const DetailServiceSPI = () => {
             {
               type: 'edit',
               label: 'Edit Layanan',
-              onClick: () => navigate('/modules/spi/services/edit/' + id),
+              onClick: () => navigate(`/modules/spi/services/edit/${id}?from=detail`),
             },
           ]}
         />

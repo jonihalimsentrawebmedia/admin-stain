@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
-import type { BasicProps } from '@/utils/globalType.ts'
+import type { BasicProps, IApiResponse } from '@/utils/globalType.ts'
+import type { IUnitLandingPage } from '../data/types.tsx'
 
 export const UseGetUnitLandingPage = (props?: BasicProps) => {
   const { page, limit, search } = props ?? {}
@@ -10,7 +11,7 @@ export const UseGetUnitLandingPage = (props?: BasicProps) => {
   if (limit) ParamsSearch.append('limit', limit ?? '10')
   if (search) ParamsSearch.append('search', search ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IApiResponse<IUnitLandingPage[]>>({
     queryKey: ['landing-spi', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/spi/landing?${ParamsSearch}`).then((res) => res.data),

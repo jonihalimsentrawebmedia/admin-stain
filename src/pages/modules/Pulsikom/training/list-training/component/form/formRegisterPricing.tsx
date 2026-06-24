@@ -23,7 +23,7 @@ export const FormRegisterPricing = (props: props) => {
           <TextInput
             name={'nama_biaya'}
             form={form}
-            label={'Judul Topik'}
+            label={'Nama Biaya'}
             placeholder={'Judul Topik Bahasan'}
             isRequired
             isRow

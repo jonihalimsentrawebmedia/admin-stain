@@ -37,7 +37,7 @@ export const ColumnsAdvantage = () => {
     },
     {
       accessorKey: 'deskripsi_singkat',
-      header: 'Deskripsi Keunggulan',
+      header: 'Deskripsi Singkat',
     },
     {
       accessorKey: 'urutan',

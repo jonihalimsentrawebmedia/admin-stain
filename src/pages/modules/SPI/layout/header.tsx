@@ -4,7 +4,7 @@ import React from 'react'
 import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/hooks/getProfile.tsx'
 import ButtonProfile from '@/pages/modules/settings/components/button/ButtonProfile.tsx'
 import { Link } from 'react-router-dom'
-import { UseGetSessionSPI } from '../component/select-session/get-seeion'
+import { UseGetSessionSPI } from '../component/select-session/get-session'
 
 interface Props {
   collapsed: boolean
