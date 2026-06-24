@@ -6,7 +6,7 @@ import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carouse
 import { format } from 'date-fns'
 import { TimeAgo } from '@/utils/helper.tsx'
 import type { INewsDetail } from '@/pages/modules/website-utama/public-content/news/data'
-import { ButtonUnpublishNewsUnit } from '../buttonUpublish'
+import { ButtonUnpublishNewsUnit } from '../buttonUnpublish'
 import Autoplay from 'embla-carousel-autoplay'
 
 export const PublishedColumnsUnit = () => {

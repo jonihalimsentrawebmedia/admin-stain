@@ -1,9 +1,7 @@
-import { useEffect, useState } from 'react'
-import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { useQuery } from '@tanstack/react-query'
 import type { IBackground } from '../data/types.tsx'
-import type { BasicProps } from '@/utils/globalType.ts'
+import type { BasicProps, IApiResponse } from '@/utils/globalType.ts'
 
 export type Context =
   | 'TENTANG_KAMI'
@@ -20,15 +18,12 @@ interface props extends BasicProps {
 export const UseGetListBackground = (props: props) => {
   const { context, search, page, limit } = props
 
-  const [background, setBackground] = useState<IBackground[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const ParamsSearch = new URLSearchParams()
   if (search) ParamsSearch.append('search', search ?? '')
   if (page) ParamsSearch.append('page', page ?? '1')
   if (limit) ParamsSearch.append('limit', limit ?? '10')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IApiResponse<IBackground[]>>({
     refetchOnWindowFocus: false,
     queryKey: ['background-pusilkom', context, ParamsSearch.toString()],
     queryFn: () =>
@@ -37,12 +32,5 @@ export const UseGetListBackground = (props: props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setBackground(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { background, loading, meta }
+  return { background: data?.data ?? [], loading, meta: data?.meta }
 }

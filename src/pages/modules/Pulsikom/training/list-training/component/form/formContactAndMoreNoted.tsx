@@ -15,13 +15,15 @@ import { ArrowLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button.tsx'
 import { UseGetContactAndMoreNote } from '@/pages/modules/Pulsikom/training/list-training/hooks'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 
 interface IProps {
   prev_value: string
+  title?: string
 }
 
 export const FormContactAndMoreNoted = (props: IProps) => {
-  const { prev_value } = props
+  const { prev_value, title } = props
   const [loading, setLoading] = useState(false)
 
   const id = window.localStorage.getItem('id_training')
@@ -86,13 +88,29 @@ export const FormContactAndMoreNoted = (props: IProps) => {
     <>
       <Form {...form}>
         <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
-          <div className="flex gap-4 justify-between items-center">
-                  <p className="text-xl font-semibold text-primary">6. Kontak & Catatan Tambahan </p>
-            <ButtonGoToGuide
-              titleGuide={`6. Kontak & Catatan Tambahan`}
-              valueGuide="PUSILKOM_TRAINING_DAFTAR_TRAINING_FORM_KONTAK_CATATAN_TAMBAHAN"
-            />
-          </div>
+          <ButtonTitleGroup
+            label={title ?? ''}
+            buttonGroup={[
+              {
+                type: 'custom',
+                element: (
+                  <ButtonGoToGuide
+                    titleGuide={`6. Kontak & Catatan Tambahan`}
+                    valueGuide="PUSILKOM_TRAINING_DAFTAR_TRAINING_FORM_KONTAK_CATATAN_TAMBAHAN"
+                  />
+                ),
+              },
+              {
+                type: 'cancel',
+                label: 'Batal',
+              },
+              {
+                type: 'save',
+                label: 'Simpan',
+              },
+            ]}
+          />
+          <p className="text-xl text-primary font-semibold">6. Kontak & Catatan Tambahan</p>
 
           <CheckboxInputBasic
             name={'is_kontak_unit'}

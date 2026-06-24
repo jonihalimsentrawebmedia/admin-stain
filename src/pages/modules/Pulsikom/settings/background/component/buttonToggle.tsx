@@ -5,7 +5,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { useSearchParams } from 'react-router-dom'
-import { PULSIKOMMENU } from '../data/constanta'
+import { PULSIKOMMENU } from '../data/constants'
 
 interface IProps {
   data: IBackground

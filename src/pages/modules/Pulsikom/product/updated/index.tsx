@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import AxiosClient from '@/provider/axios.tsx'
 import { ResolverProduct, type TResolverProduct } from '../data/resolver'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -10,6 +10,8 @@ import { UseGetProductDetail } from '@/pages/modules/Pulsikom/product/hooks'
 
 export const UpdatedProduct = () => {
   const [loading, setLoading] = useState(false)
+  const [searchParams] = useSearchParams()
+  const from = searchParams.get('from')
 
   const form = useForm<TResolverProduct>({
     resolver: zodResolver(ResolverProduct),
@@ -17,7 +19,6 @@ export const UpdatedProduct = () => {
 
   const { id } = useParams()
   const navigate = useNavigate()
-
   const { detail } = UseGetProductDetail((id as string) ?? '')
 
   useEffect(() => {
@@ -38,7 +39,11 @@ export const UpdatedProduct = () => {
         if (res.data.status) {
           setLoading(false)
           toast.success(res.data.message || 'Success')
-          navigate('/modules/pulsikom/products')
+          if (from === 'detail') {
+            navigate('/modules/pulsikom/products/detail/' + id)
+          } else {
+            navigate('/modules/pulsikom/products')
+          }
         }
       })
       .catch((err) => {
@@ -49,7 +54,7 @@ export const UpdatedProduct = () => {
 
   return (
     <>
-      <FormProduct form={form} loading={loading} HandleSave={HandleSave} />
+      <FormProduct title={'Edit Produk'} form={form} loading={loading} HandleSave={HandleSave} />
     </>
   )
 }

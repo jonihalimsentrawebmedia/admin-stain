@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
@@ -14,8 +13,6 @@ export interface ISessionPusilkom {
 }
 
 export const UseGetSessionPusilkom = () => {
-  const [session, setSession] = useState<ISessionPusilkom>()
-
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['session-pulsikom'],
     refetchOnWindowFocus: false,
@@ -24,11 +21,5 @@ export const UseGetSessionPusilkom = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setSession(data)
-    }
-  }, [data])
-
-  return { session, loading }
+  return { session: data, loading }
 }

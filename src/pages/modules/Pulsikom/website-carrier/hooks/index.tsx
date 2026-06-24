@@ -1,10 +1,7 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
 export const UseGetCarrierWebsite = () => {
-  const [website, setWebsite] = useState<{ url: string }>()
-
   const { data, isFetching, isLoading } = useQuery({
     queryKey: ['website-carrier'],
     refetchOnWindowFocus: false,
@@ -13,11 +10,5 @@ export const UseGetCarrierWebsite = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setWebsite(data)
-    }
-  }, [data])
-
-  return { website, loading }
+  return { website: data, loading }
 }

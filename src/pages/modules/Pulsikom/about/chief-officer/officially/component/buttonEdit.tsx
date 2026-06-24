@@ -1,6 +1,4 @@
-import { Button } from '@/components/ui/button.tsx'
-import { BiPlus } from 'react-icons/bi'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
@@ -14,33 +12,51 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { OfficiallyResolver, type OfficiallyType } from '../data/resolver'
 import { UseGetChiefOfficerGroup } from '@/pages/modules/Pulsikom/about/chief-officer/hooks'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
-import { UseGetEmployee } from '@/pages/modules/website-utama/lecturer-staff/hooks'
+import { HiPencil } from 'react-icons/hi'
+import type { IOfficially } from '../data/types'
 import { InputRadio } from '@/components/common/form/InputRadio.tsx'
 import { UploadPasPhoto } from '@/pages/modules/website-utama/public-content/structure-organization/Placeman-user/components/uploadPasphoto.tsx'
+import { UseGetEmployee } from '@/pages/modules/website-utama/lecturer-staff/hooks'
 
-export const ButtonAddOfficially = () => {
+interface Props {
+  data: IOfficially
+}
+
+export const ButtonEditOfficially = (props: Props) => {
+  const { data } = props
+  const form = useForm<OfficiallyType>({
+    resolver: zodResolver(OfficiallyResolver),
+  })
+
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
   const { id } = useParams()
   const { chiefOfficer } = UseGetChiefOfficerGroup()
-  const form = useForm<OfficiallyType>({
-    resolver: zodResolver(OfficiallyResolver),
-    defaultValues: {
-      id_kelompok: id,
-    },
-  })
-
   const { employee } = UseGetEmployee({
     page: '0',
     limit: '0',
     filter: form?.watch('is_dosen') === true ? 'DOSEN' : 'STAFF',
   })
 
+  useEffect(() => {
+    if (data) {
+      form.reset({
+        url_gambar: data.url_gambar,
+        id_kelompok: data?.id_kelompok_pimpinan,
+        nama_penjabat: data?.nama_penjabat,
+        jabatan: data?.jabatan,
+        is_local_data: !!data?.id_sdm,
+        is_dosen: data?.is_dosen,
+        id_sdm: data?.id_sdm,
+      })
+    }
+  }, [data])
+
   const queryClient = useQueryClient()
   const HandleSave = async (value: any) => {
     setLoading(true)
-    await AxiosClient.post(`/pusilkom/pimpinan/${id}`, value)
+    await AxiosClient.put(`/pusilkom/pimpinan/${id}/${data?.id_pimpinan}`, value)
       .then((res) => {
         if (res.data.status) {
           setLoading(false)
@@ -59,17 +75,15 @@ export const ButtonAddOfficially = () => {
 
   return (
     <>
-      <Button
-        variant={'outline'}
-        className={'border-primary text-primary hover:text-primary'}
+      <button
+        className={'bg-yellow-500 p-1.5 text-white hover:bg-yellow-600 rounded'}
         onClick={() => setOpen(!open)}
       >
-        <BiPlus />
-        Tambah Pejabat
-      </Button>
+        <HiPencil />
+      </button>
 
       <DialogBasic
-        title={'Tambah Pejabat'}
+        title={'Edit Data Pejabat'}
         open={open}
         setOpen={setOpen}
         className={'lg:min-w-2xl'}
@@ -146,7 +160,7 @@ export const ButtonAddOfficially = () => {
                 name={'url_gambar'}
                 form={form}
                 required
-                placeholder={'Uplaod Foto'}
+                placeholder={'Upload Foto'}
                 canUpload={!form.watch('is_local_data')}
               />
             </div>
@@ -174,14 +188,6 @@ export const ButtonAddOfficially = () => {
                 })) ?? []
               }
             />
-            {/*<TextInput*/}
-            {/*  name={'nama_penjabat'}*/}
-            {/*  form={form}*/}
-            {/*  label={'Nama Pejabat'}*/}
-            {/*  placeholder={'Nama Pejabat'}*/}
-            {/*  isRow*/}
-            {/*  isRequired*/}
-            {/*/>*/}
 
             <TextInput
               name={'jabatan'}

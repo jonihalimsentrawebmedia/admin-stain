@@ -68,7 +68,12 @@ export const UploadPasPhoto = (props: Props) => {
             />
             {canUpload && (
               <div className="flex items-center gap-1.5">
-                <Button onClick={() => canUpload && refButton.current.click()}>Ganti foto</Button>
+                <Button
+                  className={'text-white'}
+                  onClick={() => canUpload && refButton.current.click()}
+                >
+                  Ganti foto
+                </Button>
                 <Button
                   variant={'destructive'}
                   onClick={() => {

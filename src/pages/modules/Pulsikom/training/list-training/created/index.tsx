@@ -4,7 +4,12 @@ import { clsx } from 'clsx'
 import { GenerateTabsData } from '@/pages/modules/Pulsikom/training/list-training/data'
 import { useSearchParams } from 'react-router-dom'
 
-export const CreatedTraining = () => {
+interface Propss {
+  title: string
+}
+
+export const CreatedTraining = (props: Propss) => {
+  const { title } = props
   const [searchParams, setSearchParams] = useSearchParams()
   const step = searchParams.get('step')
 
@@ -22,7 +27,7 @@ export const CreatedTraining = () => {
     setSearchParams(Params)
   }
 
-  const TabsData = GenerateTabsData()
+  const TabsData = GenerateTabsData(title)
 
   const canAccess = (index: number) => {
     if (index === 0) return false

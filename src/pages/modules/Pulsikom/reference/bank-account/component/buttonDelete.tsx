@@ -47,20 +47,20 @@ export const ButtonDeleteBankAccount = (props: Props) => {
       </button>
 
       <DialogBasic
-        title={'Hapus Kelompok Jabatan'}
+        title={'Hapus Rekening Bank'}
         description={'Apakah anda yakin untuk menghapus data dibawah ini?'}
         open={open}
         setOpen={setOpen}
       >
         <div className="grid grid-cols-[12rem_1fr] gap-5">
-          <p className="text-gray-500">Nama Kelompok</p>
+          <p className="text-gray-500">Nama Rekening</p>
           <p>{data?.nama_rekening}</p>
           <p className="text-gray-500">Nomor Rekening</p>
           <p>{data?.no_rekening}</p>
           <p className="text-gray-500">Atas Nama</p>
           <p>{data?.atas_nama}</p>
           <p className="text-gray-500">Utama</p>
-          <p>{data?.is_utama ? 'Utama' : 'Buka Utama'}</p>
+          <p>{data?.is_utama ? 'Utama' : 'Bukan Utama'}</p>
         </div>
 
         <ButtonTitleGroup

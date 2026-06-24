@@ -8,7 +8,7 @@ import { Form } from '@/components/ui/form.tsx'
 import { UploadImageRatio } from '@/pages/modules/website-utama/public-content/facilities/components/uploadImageRatio.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import { useSearchParams } from 'react-router-dom'
-import { PULSIKOMMENU } from '../data/constanta'
+import { PULSIKOMMENU } from '../data/constants'
 import { HiPencil } from 'react-icons/hi'
 import type { IBackground } from '../data/types'
 

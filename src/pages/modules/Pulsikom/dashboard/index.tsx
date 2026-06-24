@@ -10,7 +10,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { SelectBasic } from '@/components/common/select/basic.tsx'
 import type { Mode } from './types/index'
 import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/hooks/getProfile.tsx'
-import { UseGetSessionPusilkom } from '@/pages/modules/Pulsikom/component/select-session/get-seeion.tsx'
+import { UseGetSessionPusilkom } from '@/pages/modules/Pulsikom/component/select-session/get-session.tsx'
 import { FiExternalLink } from 'react-icons/fi'
 
 export default function DashboardPulsikom() {
@@ -62,10 +62,9 @@ export default function DashboardPulsikom() {
   ]
 
   const actions = [
-    { label: 'Tulis Berita', url: '/modules/website-fakultas/public-content/news/add' },
-    { label: 'Tulis Agenda', url: '/modules/website-fakultas/public-content/agenda/add' },
-    { label: 'Tulis Artikel', url: '/modules/website-fakultas/public-content/article/add' },
-    { label: 'Verifkasi Pendaftaran', url: '/modules/pulsikom/training/verify-registration' },
+    { label: 'Tulis Berita', url: '/modules/pulsikom/public-content/news/add' },
+    { label: 'Tulis Agenda', url: '/modules/pulsikom/public-content/agenda/add' },
+    { label: 'Verifikasi Pendaftaran', url: '/modules/pulsikom/training/verify-registration' },
   ]
 
   const listMode = [
@@ -98,11 +97,11 @@ export default function DashboardPulsikom() {
         {status?.map((item, i) => (
           <Card
             key={i}
-            className="bg-primary-foreground hover:bg-primary hover:text-white text-primary border-primary"
+            className="bg-primary/70 hover:bg-primary hover:text-white text-primary border-primary"
           >
             <CardContent className="p-4 relative">
-              <p className="text-sm">{item.label}</p>
-              <p className="text-xl font-bold">
+              <p className="text-sm text-gray-200">{item.label}</p>
+              <p className="text-xl font-bold text-gray-200">
                 {new Intl.NumberFormat('id-ID').format(item.value)}
               </p>
               {item?.icon}
@@ -144,7 +143,7 @@ export default function DashboardPulsikom() {
           <CardContent className="h-80">
             <SelectBasic
               className={'mb-2'}
-              label={'Data Bersadarkan'}
+              label={'Data Berdasarkan'}
               data={listMode}
               value={mode}
               onChange={setMode}

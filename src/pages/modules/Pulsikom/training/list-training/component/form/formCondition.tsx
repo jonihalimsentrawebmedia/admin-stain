@@ -15,10 +15,11 @@ import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/Bu
 interface IProps {
   prev_value: string
   next_value: string
+  title?: string
 }
 
 export const FormCondition = (props: IProps) => {
-  const { prev_value, next_value } = props
+  const { prev_value, title, next_value } = props
   const id = window.localStorage.getItem('id_training')
   const { condition } = UseGetConditionTraining(id as string)
   const [loading, setLoading] = useState(false)
@@ -71,14 +72,34 @@ export const FormCondition = (props: IProps) => {
     <>
       <Form {...form}>
         <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
-           <div className="flex gap-4 justify-between items-center">
-          <p className="text-xl font-semibold">3. Persyaratan</p>
-            <ButtonGoToGuide
-              titleGuide={`3. Persyaratan`}
-              valueGuide="PUSILKOM_TRAINING_DAFTAR_TRAINING_FORM_PERSYARATAN"
-            />
-          </div>
-         
+          <ButtonTitleGroup
+            label={title ?? ''}
+            buttonGroup={[
+              {
+                type: 'custom',
+                element: (
+                  <ButtonGoToGuide
+                    titleGuide={`3. Persyaratan`}
+                    valueGuide="PUSILKOM_TRAINING_DAFTAR_TRAINING_FORM_PERSYARATAN"
+                  />
+                ),
+              },
+              {
+                type: 'cancel',
+                label: 'Batal',
+              },
+              {
+                type: 'custom',
+                element: (
+                  <Button disabled={loading} className={'text-white'}>
+                    Lanjutkan <ChevronRight className={'size-4'} />
+                  </Button>
+                ),
+              },
+            ]}
+          />
+          <p className="text-xl font-semibold text-primary">3. Persyaratan</p>
+
           <RichText form={form} name={'isi'} label={'Persyaratan'} isRow={false} />
           <div className="flex items-center justify-between">
             <Button
@@ -102,7 +123,7 @@ export const FormCondition = (props: IProps) => {
                 {
                   type: 'custom',
                   element: (
-                    <Button disabled={loading}>
+                    <Button disabled={loading} className={'text-white'}>
                       Lanjutkan <ChevronRight className={'size-4'} />
                     </Button>
                   ),

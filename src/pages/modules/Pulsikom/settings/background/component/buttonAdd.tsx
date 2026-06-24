@@ -10,7 +10,7 @@ import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { Form } from '@/components/ui/form.tsx'
 import { UploadImageRatio } from '@/pages/modules/website-utama/public-content/facilities/components/uploadImageRatio.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
-import { PULSIKOMMENU } from '../data/constanta.tsx'
+import { PULSIKOMMENU } from '../data/constants'
 
 const ButtonAddBackground = () => {
   const [open, setOpen] = useState(false)

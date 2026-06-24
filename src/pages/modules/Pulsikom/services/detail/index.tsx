@@ -12,12 +12,14 @@ export const DetailServicePulsikom = () => {
     <>
       <div className={'space-y-5'}>
         <ButtonTitleGroup
+          isBack
+          link={'/modules/pulsikom/services'}
           label={`Detail Layanan - ${detail?.nama_layanan}`}
           buttonGroup={[
             {
               type: 'edit',
               label: 'Edit Layanan',
-              onClick: () => navigate('/modules/pulsikom/services/edit/' + id),
+              onClick: () => navigate(`/modules/pulsikom/services/edit/${id}?from=detail`),
             },
           ]}
         />

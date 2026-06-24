@@ -1,8 +1,8 @@
-import type { IOfficially } from '@/pages/modules/Pulsikom/about/chief-officer/officialy/data/types.ts'
+import type { IOfficially } from '@/pages/modules/Pulsikom/about/chief-officer/officially/data/types.ts'
 import { useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
-import { ButtonEditOfficially } from '@/pages/modules/Pulsikom/about/chief-officer/officialy/component/buttonEdit.tsx'
-import { ButtonDeleteOfficially } from '@/pages/modules/Pulsikom/about/chief-officer/officialy/component/buttonDelete.tsx'
+import { ButtonEditOfficially } from '@/pages/modules/Pulsikom/about/chief-officer/officially/component/buttonEdit.tsx'
+import { ButtonDeleteOfficially } from '@/pages/modules/Pulsikom/about/chief-officer/officially/component/buttonDelete.tsx'
 
 export const ColumnsOfficially = () => {
   const [searchParam] = useSearchParams()

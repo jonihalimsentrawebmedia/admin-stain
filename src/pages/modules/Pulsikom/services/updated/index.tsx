@@ -1,7 +1,7 @@
 import { FormServicePulsikom } from '@/pages/modules/Pulsikom/services/component/form.tsx'
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import AxiosClient from '@/provider/axios.tsx'
 import { ResolverService, type TResolverService } from '../data/resolver'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -14,6 +14,8 @@ export const UpdatedService = () => {
   const navigate = useNavigate()
   const { id } = useParams()
   const { detail } = UseGetServiceDetail((id as string) ?? '')
+  const [searchParams] = useSearchParams()
+  const from = searchParams.get('from')
 
   const form = useForm<TResolverService>({
     resolver: zodResolver(ResolverService),
@@ -38,7 +40,11 @@ export const UpdatedService = () => {
         if (res.data.status) {
           setLoading(false)
           toast.success(res.data.message || 'Success')
-          navigate('/modules/pulsikom/services')
+          if (from === 'detail') {
+            navigate('/modules/pulsikom/services/detail/' + id)
+          } else {
+            navigate('/modules/pulsikom/services')
+          }
         }
       })
       .catch((err) => {
@@ -49,7 +55,12 @@ export const UpdatedService = () => {
 
   return (
     <>
-      <FormServicePulsikom form={form} loading={loading} HandleSave={HandleSave} />
+      <FormServicePulsikom
+        title={'Edit Layanan'}
+        form={form}
+        loading={loading}
+        HandleSave={HandleSave}
+      />
     </>
   )
 }
