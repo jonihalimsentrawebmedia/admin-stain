@@ -1,7 +1,7 @@
 import { FormServiceSPI } from '../component/form.tsx'
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import AxiosClient from '@/provider/axios.tsx'
 import { ResolverService, type TResolverService } from '../data/resolver'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -10,6 +10,8 @@ import { UseGetServiceDetail } from '../hooks/index'
 
 export const UpdatedService = () => {
   const [loading, setLoading] = useState(false)
+  const [searchParams] = useSearchParams()
+  const from = searchParams.get('from')
 
   const navigate = useNavigate()
   const { id } = useParams()
@@ -37,7 +39,11 @@ export const UpdatedService = () => {
         if (res.data.status) {
           setLoading(false)
           toast.success(res.data.message || 'Success')
-          navigate('/modules/spi/services')
+          if (from === 'detail') {
+            navigate(`/modules/spi/services/detail/${id}`)
+          } else {
+            navigate('/modules/spi/services')
+          }
         }
       })
       .catch((err) => {
