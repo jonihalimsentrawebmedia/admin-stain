@@ -2,7 +2,6 @@ import type { AdmissionINformationPublic, AdmissionLog } from '../model'
 import { useQuery } from '@tanstack/react-query'
 import type { Meta } from '@/components/common/table/TablePagination'
 import { useSearchParams } from 'react-router-dom'
-import { useState, useEffect } from 'react'
 import AxiosClient from '@/provider/axios'
 interface Props {
   isGetAll?: boolean
@@ -44,8 +43,6 @@ export const useGetAdmissionInformationPublicDetail = (id: string) => {
   return { admissionPublic: data?.data ?? undefined, loading }
 }
 export const useGetAdmissionInformationPublicLog = (id: string) => {
-  const [admissionPublicLog, setAdmissionPublicLog] = useState<AdmissionLog>()
-
   const { data, isLoading, isFetching } = useQuery<{
     data: AdmissionLog
   }>({
@@ -56,11 +53,5 @@ export const useGetAdmissionInformationPublicLog = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setAdmissionPublicLog(data.data ?? [])
-    }
-  }, [data])
-
-  return { admissionPublicLog, loading }
+  return { admissionPublicLog: data?.data, loading }
 }
