@@ -99,11 +99,11 @@ export const ButtonUnpublishAgendaUnit = (data: IAgendaDetail) => {
                   element: (
                     <Button
                       disabled={loading}
-                      className={'bg-red-500 hover:bg-red-600'}
+                      className={'bg-red-500 hover:bg-red-600 text-white'}
                       onClick={HandleSubmission}
                     >
                       <MdCancel />
-                      Unpublish Pengumuman
+                      Unpublish Agenda
                     </Button>
                   ),
                   onClick: () => setOpen(!open),
