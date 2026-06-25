@@ -1,10 +1,8 @@
-import { useEffect, useState } from 'react'
 import type { PPIDSetingsVideo } from '../model'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 
 const useGetPPIDVideos = () => {
-  const [video, setVideo] = useState<PPIDSetingsVideo>()
 
   const { data, isLoading, isFetching } = useQuery<{
     data: PPIDSetingsVideo
@@ -16,14 +14,8 @@ const useGetPPIDVideos = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setVideo(data.data ?? null)
-    }
-  }, [data])
-
   return {
-    video,
+    video: data?.data ?? null,
     loading,
   }
 }

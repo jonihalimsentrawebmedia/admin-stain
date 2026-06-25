@@ -1,11 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
-import type { IStrukturOrganisasi } from '../model'
-import { useEffect, useState } from 'react'
 import AxiosClient from '@/provider/axios'
 
 const useGetStructureOrganization = () => {
-  const [structureOrganization, setStructureOrganization] = useState<IStrukturOrganisasi>()
-
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['ppip-struktur-organisasi'],
     refetchOnWindowFocus: false,
@@ -14,13 +10,7 @@ const useGetStructureOrganization = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setStructureOrganization(data)
-    }
-  }, [data])
-
-  return { structureOrganization, loading }
+  return { structureOrganization: data, loading }
 }
 
 export default useGetStructureOrganization

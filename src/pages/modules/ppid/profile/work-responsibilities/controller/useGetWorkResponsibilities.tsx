@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination'
 import { useSearchParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
@@ -9,8 +8,6 @@ interface Props {
 }
 const useGetWorkResponsibilities = (props: Props) => {
   const { isGetAll=false } = props
-  const [workResponsibilities, setWorkResponsibilities] = useState<WorkResponsibilitiesList[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') || '1'
@@ -33,17 +30,10 @@ const useGetWorkResponsibilities = (props: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setWorkResponsibilities(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
   return {
-    workResponsibilities,
+    workResponsibilities: data?.data ?? [],
     loading,
-    meta,
+    meta: data?.meta,
   }
 }
 

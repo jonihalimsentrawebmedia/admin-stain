@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { ObjectionsPublic, ObjectionLog } from '../model'
 import { useQuery } from '@tanstack/react-query'
 import type { Meta } from '@/components/common/table/TablePagination'
@@ -9,9 +8,6 @@ interface Props {
 }
 export const useGetObjectionsPublic = (props: Props) => {
   const { isGetAll = false } = props
-  const [objecionsPublic, setObjectionsPublic] = useState<ObjectionsPublic[]>([])
-
-  const [meta, setMeta] = useState<Meta>()
 
   const [searchParams] = useSearchParams()
   const page = isGetAll ? '0' : searchParams.get('page') || '1'
@@ -32,18 +28,9 @@ export const useGetObjectionsPublic = (props: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setObjectionsPublic(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { objecionsPublic, meta, loading }
+  return { objecionsPublic: data?.data ?? [], meta: data?.meta, loading }
 }
 export const useGetObjectionsPublicDetail = (id: string) => {
-  const [objectionPublic, setObjectionPublic] = useState<ObjectionsPublic>()
-
   const { data, isLoading, isFetching } = useQuery<{
     data: ObjectionsPublic
   }>({
@@ -54,17 +41,9 @@ export const useGetObjectionsPublicDetail = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setObjectionPublic(data.data ?? undefined)
-    }
-  }, [data])
-
-  return { objectionPublic, loading }
+  return { objectionPublic: data?.data ?? undefined, loading }
 }
 export const useGetObjectionsPublicLog = (id: string) => {
-  const [objectionPublicLog, setObjectionPublicLog] = useState<ObjectionLog>()
-
   const { data, isLoading, isFetching } = useQuery<{
     data: ObjectionLog
   }>({
@@ -75,11 +54,5 @@ export const useGetObjectionsPublicLog = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setObjectionPublicLog(data.data ?? undefined)
-    }
-  }, [data])
-
-  return { objectionPublicLog, loading }
+  return { objectionPublicLog: data?.data ?? undefined, loading }
 }

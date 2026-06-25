@@ -1,14 +1,8 @@
-import { useEffect, useState } from 'react'
-import type { OfficialProfile, OrganizationGroup, PublicInformationRegistry } from '../model'
-import type { Meta } from '@/components/common/table/TablePagination'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 
 export const useGetInformationPublicRegister = () => {
-  const [information, setInformation] = useState<PublicInformationRegistry[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
@@ -26,18 +20,9 @@ export const useGetInformationPublicRegister = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setInformation(data?.data ?? [])
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { information, loading, meta }
+  return { information: data?.data ?? [], loading, meta: data?.meta }
 }
 export const useGetInformationPublicRegisterDetail = () => {
-  const [information, setInformation] = useState<PublicInformationRegistry>()
-
   const { id } = useParams()
 
   const { data, isLoading, isFetching } = useQuery({
@@ -49,17 +34,9 @@ export const useGetInformationPublicRegisterDetail = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setInformation(data?.data)
-    }
-  }, [data])
-
-  return { information, loading, id }
+  return { information: data?.data, loading, id }
 }
 export const useGetPejabat = () => {
-  const [pejabat, setPejabat] = useState<OfficialProfile[]>()
-
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['unit-ppid-pejabat'],
     refetchOnWindowFocus: false,
@@ -68,17 +45,9 @@ export const useGetPejabat = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setPejabat(data?.data??[])
-    }
-  }, [data])
-
-  return { pejabat, loading }
+  return { pejabat: data?.data ?? [], loading }
 }
 export const useGetOrganizationGroup = () => {
-  const [organizationGroup, setOrganizationGroup] = useState<OrganizationGroup[]>()
-
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['unit-ppid-kelompok-organisasi'],
     refetchOnWindowFocus: false,
@@ -87,11 +56,5 @@ export const useGetOrganizationGroup = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setOrganizationGroup(data?.data??[])
-    }
-  }, [data])
-
-  return { organizationGroup, loading }
+  return { organizationGroup: data?.data ?? [], loading }
 }

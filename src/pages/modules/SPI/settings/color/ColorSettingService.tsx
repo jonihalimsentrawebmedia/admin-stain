@@ -1,7 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { IoInformationCircle } from 'react-icons/io5'
-import AdminTabs from './components/AdminTabs'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
+import AdminTabs from '@/pages/modules/ppid/settings/warna/components/Admintabs.tsx'
 
 const ColorSettingSPI = () => {
   return (

@@ -1,10 +1,7 @@
 // unit-ppid/background/:context
 
-import { useEffect, useState } from 'react'
-import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { useQuery } from '@tanstack/react-query'
-import type { IBackgroundPPID } from '@/pages/modules/ppid/settings/background/data/types.tsx'
 import type { BasicProps } from '@/utils/globalType.ts'
 
 export type Context =
@@ -21,8 +18,7 @@ interface Props extends BasicProps {
 
 export const UseGetListBackground = (props?: Props) => {
   const { context, search, page, limit } = props ?? {}
-  const [background, setBackground] = useState<IBackgroundPPID[]>([])
-  const [meta, setMeta] = useState<Meta>()
+
 
   const ParamsSearch = new URLSearchParams()
   if (search) ParamsSearch.set('search', search ?? '')
@@ -40,12 +36,5 @@ export const UseGetListBackground = (props?: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setBackground(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { background, loading, meta }
+  return { background: data?.data ?? [], loading, meta: data?.meta }
 }
