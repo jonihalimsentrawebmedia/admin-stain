@@ -120,7 +120,7 @@ export const WebsiteCarrierPage = () => {
               }
             >
               <MdInfo className={'size-5'} />
-              Masukkan URL atau link tracer study perguruan tinggi anda.
+              Masukkan URL atau link Webiste Karir perguruan tinggi anda.
             </div>
 
             <div className="grid grid-cols-[12rem_1fr]">

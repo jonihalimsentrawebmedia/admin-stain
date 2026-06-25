@@ -11,8 +11,9 @@ const useGetLogFieldOfCooperation = () => {
 
   const ParamsSearch = new URLSearchParams({ page, limit, search })
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['log-field-of-cooperation', ParamsSearch.toString()],
+    queryKey: ['log-field-of-cooperation', idFieldOfCooperation, ParamsSearch.toString()],
     refetchOnWindowFocus: false,
+    enabled: !!idFieldOfCooperation,
     queryFn: () =>
       AxiosClient.get(
         `/website-utama/bidang-kerjasama-log/${idFieldOfCooperation}?${ParamsSearch}`

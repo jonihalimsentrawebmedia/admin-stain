@@ -24,7 +24,7 @@ const InformationPublicRegisterForm = (props: Props) => {
       <SelectBasicInput
         isLoading={loadingOrganizationGroup}
         data={
-          organizationGroup?.map((item) => ({
+          organizationGroup?.map((item: any) => ({
             label: item.nama_kelompok,
             value: item.id_kelompok_organisasi,
           })) ?? []
@@ -39,7 +39,7 @@ const InformationPublicRegisterForm = (props: Props) => {
       <SelectBasicInput
         isLoading={loadingPejabat}
         data={
-          pejabat?.map((item) => ({
+          pejabat?.map((item: any) => ({
             label: item.nama_lengkap,
             value: item.id_pejabat,
           })) ?? []

@@ -51,7 +51,7 @@ export const ButtonAddCategoryDownload = () => {
         width={'450px'}
         open={open}
         setOpen={setOpen}
-        title={''}
+        title={'Tambahkan Kategori Berkas'}
       >
         <div className={'mt-5'}>
           <Form {...form}>

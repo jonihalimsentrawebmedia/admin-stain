@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
@@ -13,9 +12,7 @@ export interface ISessionPPID {
 }
 
 export const UseGetPPIDSession = () => {
-  const [session, setSession] = useState<ISessionPPID>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<ISessionPPID>({
     queryKey: ['session-ppid'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/unit-ppid/user-session').then((res) => res.data?.data),
@@ -23,13 +20,7 @@ export const UseGetPPIDSession = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setSession(data)
-    }
-  }, [data])
-
-  return { session, loading }
+  return { session: data, loading }
 }
 export interface ISatuanOrganisasiProfil {
   id_satuan_organisasi: string // UUID
@@ -50,9 +41,7 @@ interface Props {
   queryKey: string
 }
 export const UseGetWebsitePPIDGlobal = ({ link, queryKey }: Props) => {
-  const [dataGlobal, setDataGlobal] = useState<ISatuanOrganisasiProfil>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<ISatuanOrganisasiProfil>({
     queryKey: [queryKey],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(link).then((res) => res.data?.data),
@@ -60,11 +49,5 @@ export const UseGetWebsitePPIDGlobal = ({ link, queryKey }: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDataGlobal(data)
-    }
-  }, [data])
-
-  return { dataGlobal, loading }
+  return { dataGlobal: data, loading }
 }

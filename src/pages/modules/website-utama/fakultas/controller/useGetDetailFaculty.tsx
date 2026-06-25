@@ -10,7 +10,7 @@ interface DetailFaculty {
 const useGetDetailFaculty = () => {
 const {id}=useParams()
   const { data, isLoading, isFetching } = useQuery<DetailFaculty>({
-    queryKey: ['detail-faculty'],
+    queryKey: ['detail-faculty', id],
     refetchOnWindowFocus: false,
     enabled: !!id,
     queryFn: () =>

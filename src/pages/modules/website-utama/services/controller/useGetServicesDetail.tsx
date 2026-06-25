@@ -7,7 +7,7 @@ const useGetServicesDetail = () => {
   const { id } = params
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['list-services'],
+    queryKey: ['list-services-detail', id],
     refetchOnWindowFocus: false,
     enabled: !!id,
     queryFn: () => AxiosClient.get(`/website-utama/layanan/${id}`).then((res) => res.data),

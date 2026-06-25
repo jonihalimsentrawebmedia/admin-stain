@@ -1,17 +1,14 @@
-import { useEffect, useState } from 'react'
 import type { IUrlDirectionCampusLife } from '../../../types/index'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
 export const UseGetTextDirectURLLanguage = () => {
-  const [language, setLanguage] = useState<{
+  const { data, isLoading, isFetching } = useQuery<{
     id: IUrlDirectionCampusLife
     en: IUrlDirectionCampusLife
     zh: IUrlDirectionCampusLife
     ar: IUrlDirectionCampusLife
-  }>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  }>({
     queryKey: ['language-direct-url'],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -22,11 +19,5 @@ export const UseGetTextDirectURLLanguage = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLanguage(data)
-    }
-  }, [data])
-
-  return { language, loading }
+  return { data, loading }
 }

@@ -6,8 +6,9 @@ const useGetLogAcreditation = () => {
   const { idAcreditation } = useParams()
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['log-list-acreditation'],
+    queryKey: ['log-list-acreditation', idAcreditation],
     refetchOnWindowFocus: false,
+    enabled: !!idAcreditation,
     queryFn: () =>
       AxiosClient.get(`/website-utama/akreditas-log/${idAcreditation}`).then(
         (res) => res.data

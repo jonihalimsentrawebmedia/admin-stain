@@ -7,6 +7,7 @@ import { useSearchParams } from 'react-router-dom'
 export const CreatedProgram = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const step = searchParams.get('step')
+  const from = searchParams.get('from')
 
   useEffect(() => {
     if (!step) {
@@ -19,6 +20,7 @@ export const CreatedProgram = () => {
   const HandleStep = (e: string) => {
     const Params = new URLSearchParams()
     Params.append('step', e)
+    Params.append('from', from ?? '')
     setSearchParams(Params)
   }
 

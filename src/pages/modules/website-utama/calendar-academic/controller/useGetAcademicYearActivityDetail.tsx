@@ -6,7 +6,7 @@ const useGetAcademicYearActivityDetail = () => {
   const { idActivity } = useParams()
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['list-acedemic-year-activity'],
+    queryKey: ['list-acedemic-year-activity', idActivity],
     refetchOnWindowFocus: false,
     enabled: !!idActivity,
     queryFn: () =>

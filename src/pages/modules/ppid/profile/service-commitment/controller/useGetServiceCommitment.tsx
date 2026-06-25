@@ -1,15 +1,11 @@
-import { useEffect, useState } from "react"
 import type { ServiceCommitmentList } from "../model"
 import type { Meta } from "@/components/common/table/TablePagination"
-import { useSearchParams } from "react-router-dom"
-import { useQuery } from "@tanstack/react-query"
-import AxiosClient from "@/provider/axios"
+import { useSearchParams } from 'react-router-dom'
+import { useQuery } from '@tanstack/react-query'
+import AxiosClient from '@/provider/axios'
 
 
 const useGetServiceCommitment = () => {
-
-  const [serviceCommitment, setServiceCommitment] = useState<ServiceCommitmentList[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') || '1'
@@ -32,17 +28,10 @@ const useGetServiceCommitment = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setServiceCommitment(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
   return {
-    serviceCommitment,
+    serviceCommitment: data?.data ?? [],
     loading,
-    meta,
+    meta: data?.meta,
   }
 }
 

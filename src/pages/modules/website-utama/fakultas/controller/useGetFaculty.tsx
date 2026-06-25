@@ -28,7 +28,7 @@ const useGetFaculty = (props?: Props) => {
     meta: Meta
   }>({
     refetchOnWindowFocus: false,
-    queryKey: ['list-faculty', ParamsSearch.toString()],
+    queryKey: ['list-faculty', isGetAll, ParamsSearch.toString()],
     queryFn: () =>
       AxiosClient.get(
         `/website-utama/program-studi/satuan-organisasi/fakultas?${ParamsSearch}`

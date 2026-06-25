@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
@@ -11,9 +10,6 @@ interface props {
 
 export const UseGetFaqCategory = (props?: props) => {
   const { isGetAll } = props ?? {}
-
-  const [categoryFaq, setCategoryFaq] = useState<ICategoryFAQ[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
@@ -30,8 +26,11 @@ export const UseGetFaqCategory = (props?: props) => {
     ParamsSearch.append('search', search)
   }
 
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['list-category-faq', ParamsSearch.toString()],
+  const { data, isLoading, isFetching } = useQuery<{
+    data: ICategoryFAQ[]
+    meta: Meta
+  }>({
+    queryKey: ['list-category-faq', isGetAll, ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
       AxiosClient.get(`/website-utama/kategori-faq?${ParamsSearch}`).then((res) => res.data),
@@ -39,12 +38,5 @@ export const UseGetFaqCategory = (props?: props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setCategoryFaq(data?.data ?? [])
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { categoryFaq, loading, meta }
+  return { categoryFaq: data?.data ?? [], loading, meta: data?.meta }
 }

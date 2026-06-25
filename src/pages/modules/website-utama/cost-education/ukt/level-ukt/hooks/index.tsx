@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import type { BasicProps } from '@/utils/globalType.ts'
 import { useQuery } from '@tanstack/react-query'
@@ -11,8 +10,6 @@ interface props extends BasicProps {
 
 export const UseGetLevelUkt = (props: props) => {
   const { search, limit, page, id_jenjang } = props
-  const [levelUkt, setLevelUkt] = useState<ILevelUkt[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const params = new URLSearchParams()
   if (page) params.append('page', page ?? '1')
@@ -20,7 +17,10 @@ export const UseGetLevelUkt = (props: props) => {
   if (search) params.append('search', search ?? '')
   if (id_jenjang) params.append('id_jenjang_pendidikan', id_jenjang ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{
+    data: ILevelUkt[]
+    meta: Meta
+  }>({
     queryKey: ['level_ukt', params.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -29,12 +29,5 @@ export const UseGetLevelUkt = (props: props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLevelUkt(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { levelUkt, meta, loading }
+  return { levelUkt: data?.data ?? [], meta: data?.meta, loading }
 }

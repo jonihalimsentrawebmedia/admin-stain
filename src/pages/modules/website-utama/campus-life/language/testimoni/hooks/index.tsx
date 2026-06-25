@@ -1,18 +1,15 @@
-import { useEffect, useState } from 'react'
 import type { ITestimonialCampusLife } from '../../../types/index'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
 export const UseGetTestimonyLanguage = (id: string) => {
-  const [language, setLanguage] = useState<{
+  const { data, isLoading, isFetching } = useQuery<{
     id: ITestimonialCampusLife
     en: ITestimonialCampusLife
     zh: ITestimonialCampusLife
     ar: ITestimonialCampusLife
-  }>()
-
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['language-performance', id],
+  }>({
+    queryKey: ['language-testimoni', id],
     refetchOnWindowFocus: false,
     enabled: !!id,
     queryFn: () =>
@@ -23,11 +20,5 @@ export const UseGetTestimonyLanguage = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLanguage(data)
-    }
-  }, [data])
-
-  return { language, loading }
+  return { data, loading }
 }

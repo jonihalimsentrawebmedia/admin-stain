@@ -45,7 +45,7 @@ export const DetailProgramEarning = () => {
                     variant={'outline'}
                     onClick={() =>
                       navigate(
-                        `/modules/pulsikom/training/credit-earning/program/edit/${detail?.program.id_program}`
+                        `/modules/pulsikom/training/credit-earning/program/edit/${detail?.program.id_program}?step=is_informasi_pendaftaran&from=detail`
                       )
                     }
                   >
@@ -74,7 +74,7 @@ export const DetailProgramEarning = () => {
         <div className="grid grid-cols-[12rem_1fr] gap-4">
           <p className="text-gray-500">Peserta Terkonfirmasi</p>
           <p className={'text-xl font-semibold text-primary'}>
-            {`${detail?.program?.terkonfirmasi}  Peserta` || '0 Peserta'}
+            {`${detail?.program?.terkonfirmasi ?? 0}  Peserta` || '0 Peserta'}
           </p>
           <p className="text-gray-500">Maks Peserta</p>
           <p className={'text-xl font-semibold text-primary'}>

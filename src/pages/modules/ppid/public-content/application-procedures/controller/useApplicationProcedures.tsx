@@ -1,5 +1,4 @@
 import type { Meta } from '@/components/common/table/TablePagination'
-import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
@@ -10,8 +9,6 @@ interface Props {
 }
 const useGetApplicationProcedures = (props: Props) => {
   const { isGetAll = false } = props
-  const [applicationProcedures, setApplicationProcedures] = useState<IApplicationProcedures[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const [searchParams] = useSearchParams()
   const page = isGetAll ? '0' : searchParams.get('page') || '1'
@@ -31,17 +28,10 @@ const useGetApplicationProcedures = (props: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setApplicationProcedures(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
   return {
-    applicationProcedures,
+    applicationProcedures: data?.data ?? [],
     loading,
-    meta,
+    meta: data?.meta,
   }
 }
 

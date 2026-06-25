@@ -6,7 +6,7 @@ const useGetCalendarAcademicDetail = () => {
   const { idAcademicYear } = useParams()
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['list-acedemic-year-detail'],
+    queryKey: ['list-acedemic-year-detail', idAcademicYear],
     refetchOnWindowFocus: false,
     enabled: !!idAcademicYear,
     queryFn: () =>

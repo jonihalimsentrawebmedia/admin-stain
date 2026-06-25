@@ -1,5 +1,4 @@
 import type { Meta } from '@/components/common/table/TablePagination'
-import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
@@ -10,8 +9,6 @@ interface Props {
 }
 const useGetInfoGraphics = (props: Props) => {
   const { isGetAll = false } = props
-  const [infographics, setInfographics] = useState<IInfografis[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const [searchParams] = useSearchParams()
   const page = isGetAll ? '0' : searchParams.get('page') || '1'
@@ -31,17 +28,10 @@ const useGetInfoGraphics = (props: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setInfographics(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
   return {
-    infographics,
+    infographics: data?.data ?? [],
     loading,
-    meta,
+    meta: data?.meta,
   }
 }
 

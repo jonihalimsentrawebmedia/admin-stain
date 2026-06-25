@@ -8,10 +8,7 @@ const useGetAcademicYearActivity = () => {
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
   const search = searchParams.get('search') ?? ''
-  if (idAcademicYear) {
-    searchParams.set('id_tahun_akademik', idAcademicYear)
-  }
-  const id_tahun_akademik = searchParams.get('id_tahun_akademik') ?? ''
+  const id_tahun_akademik = idAcademicYear ?? searchParams.get('id_tahun_akademik') ?? ''
 
   const ParamsSearch = new URLSearchParams({ page, limit, search, id_tahun_akademik })
 

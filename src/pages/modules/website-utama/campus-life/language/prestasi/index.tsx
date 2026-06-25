@@ -9,7 +9,7 @@ import { FormLanguageTextPerformance } from './component/form'
 
 export const TextPerformanceLanguagePage = () => {
   const navigate = useNavigate()
-  const { language: detail } = UseGetTextPerformanceLanguage()
+  const { data: detail } = UseGetTextPerformanceLanguage()
 
   const [language, setLanguage] = useState('id')
   const [loading, setLoading] = useState(false)

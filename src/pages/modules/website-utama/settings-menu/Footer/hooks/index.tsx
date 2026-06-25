@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
@@ -24,9 +23,7 @@ export interface IFooterLog {
 }
 
 export const UseGetFooter = () => {
-  const [textFooter, setTextFooter] = useState<FooterSetting>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data: queryData, isLoading, isFetching } = useQuery<FooterSetting>({
     queryKey: ['footer'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/website-utama/footer').then((res) => res.data.data),
@@ -34,19 +31,11 @@ export const UseGetFooter = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setTextFooter(data)
-    }
-  }, [data])
-
-  return { textFooter, loading }
+  return { textFooter: queryData, loading }
 }
 
 export const UseGetFooterLog = () => {
-  const [footerLog, setFooterLog] = useState<IFooterLog[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data: queryData, isLoading, isFetching } = useQuery<IFooterLog[]>({
     queryKey: ['footer-log'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/website-utama/footer-log').then((res) => res.data.data),
@@ -54,11 +43,5 @@ export const UseGetFooterLog = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setFooterLog(data)
-    }
-  }, [data])
-
-  return { footerLog, loading }
+  return { footerLog: queryData ?? [], loading }
 }

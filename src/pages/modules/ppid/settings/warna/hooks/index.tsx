@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
@@ -8,7 +7,6 @@ interface IColor {
 }
 
 export const UseGetColorAdmin = (context: 'admin' | 'public') => {
-  const [color, setColor] = useState<IColor>()
 
   const { data, isLoading, isFetching } = useQuery({
     queryKey: [`color-${context}`],
@@ -19,19 +17,12 @@ export const UseGetColorAdmin = (context: 'admin' | 'public') => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setColor(data)
-    }
-  }, [data])
-
-  return { color, loading }
+  return { color: data, loading }
 }
 
 export const UseGetAdminThemeUUID = () => {
-  const [color, setColor] = useState<IColor>()
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IColor>({
     queryKey: [`color-theme-unit-ppid`],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient(`/unit-ppid/pengaturan-warna/admin`).then((res) => res.data?.data),
@@ -39,11 +30,5 @@ export const UseGetAdminThemeUUID = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setColor(data)
-    }
-  }, [data])
-
-  return { color, loading }
+  return { color: data, loading }
 }

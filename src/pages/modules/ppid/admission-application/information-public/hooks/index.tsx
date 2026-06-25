@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { AdmissionINformationPublic, AdmissionLog } from '../model'
 import { useQuery } from '@tanstack/react-query'
 import type { Meta } from '@/components/common/table/TablePagination'
@@ -9,9 +8,6 @@ interface Props {
 }
 export const useGetAdmissionInformationPublic = (props: Props) => {
   const { isGetAll = false } = props
-  const [admissionPublic, setAdmissionPublic] = useState<AdmissionINformationPublic[]>([])
-
-  const [meta, setMeta] = useState<Meta>()
 
   const [searchParams] = useSearchParams()
   const page = isGetAll ? '0' : searchParams.get('page') || '1'
@@ -31,18 +27,9 @@ export const useGetAdmissionInformationPublic = (props: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setAdmissionPublic(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { admissionPublic, meta, loading }
+  return { admissionPublic: data?.data ?? [], meta: data?.meta, loading }
 }
 export const useGetAdmissionInformationPublicDetail = (id: string) => {
-  const [admissionPublic, setAdmissionPublic] = useState<AdmissionINformationPublic>()
-
   const { data, isLoading, isFetching } = useQuery<{
     data: AdmissionINformationPublic
   }>({
@@ -53,17 +40,9 @@ export const useGetAdmissionInformationPublicDetail = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setAdmissionPublic(data.data ?? [])
-    }
-  }, [data])
-
-  return { admissionPublic, loading }
+  return { admissionPublic: data?.data ?? undefined, loading }
 }
 export const useGetAdmissionInformationPublicLog = (id: string) => {
-  const [admissionPublicLog, setAdmissionPublicLog] = useState<AdmissionLog>()
-
   const { data, isLoading, isFetching } = useQuery<{
     data: AdmissionLog
   }>({
@@ -74,11 +53,5 @@ export const useGetAdmissionInformationPublicLog = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setAdmissionPublicLog(data.data ?? [])
-    }
-  }, [data])
-
-  return { admissionPublicLog, loading }
+  return { admissionPublicLog: data?.data, loading }
 }

@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
@@ -9,9 +8,7 @@ interface colorPrimary {
 }
 
 export const UseGetColorPrimary = () => {
-  const [colorPrimary, setColorPrimary] = useState<colorPrimary>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data: queryData, isLoading, isFetching } = useQuery<colorPrimary>({
     queryKey: ['color-primary'],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -20,11 +17,5 @@ export const UseGetColorPrimary = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setColorPrimary(data)
-    }
-  }, [data])
-
-  return { colorPrimary, loading }
+  return { colorPrimary: queryData, loading }
 }

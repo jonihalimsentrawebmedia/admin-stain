@@ -1,17 +1,14 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { IRegistrationPath } from '../../data/types'
 
 export const UseGetLanguageLineRegistered = (id?: string) => {
-  const [language, setLanguage] = useState<{
+  const { data, isLoading, isFetching } = useQuery<{
     id: IRegistrationPath
     en: IRegistrationPath
     zh: IRegistrationPath
     ar: IRegistrationPath
-  }>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  }>({
     queryKey: ['registered-language', id],
     refetchOnWindowFocus: false,
     enabled: !!id,
@@ -23,11 +20,5 @@ export const UseGetLanguageLineRegistered = (id?: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLanguage(data)
-    }
-  }, [data])
-
-  return { loading, language }
+  return { loading, language: data }
 }

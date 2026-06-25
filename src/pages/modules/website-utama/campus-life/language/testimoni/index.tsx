@@ -10,7 +10,7 @@ import { FormLanguageTextTestimony } from './component/form'
 export const TextTestimonyLanguagePage = () => {
   const navigate = useNavigate()
   const { id } = useParams()
-  const { language: detail } = UseGetTestimonyLanguage(id ?? '')
+  const { data: detail } = UseGetTestimonyLanguage(id ?? '')
 
   const [language, setLanguage] = useState('id')
   const [loading, setLoading] = useState(false)

@@ -1,14 +1,9 @@
-import { useEffect, useState } from 'react'
-import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { IBGThumbnail } from '@/pages/modules/website-utama/public-content/announcement/data'
 import { useSearchParams } from 'react-router-dom'
 
 export const UseGetInboxMessage = () => {
-  const [listMessage, setListMessage] = useState<[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
@@ -25,20 +20,11 @@ export const UseGetInboxMessage = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setListMessage(data?.data ?? [])
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { listMessage, loading, meta }
+  return { listMessage: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export const UseGetBackgroundInboxMessage = () => {
-  const [background, setBackground] = useState<IBGThumbnail[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IBGThumbnail[]>({
     queryKey: ['background-question'],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -47,11 +33,5 @@ export const UseGetBackgroundInboxMessage = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setBackground(data)
-    }
-  }, [data])
-
-  return { background, loading }
+  return { background: data ?? [], loading }
 }

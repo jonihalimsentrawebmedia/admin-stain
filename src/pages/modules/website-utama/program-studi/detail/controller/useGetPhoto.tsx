@@ -35,14 +35,12 @@ const useGetPhoto = () => {
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
   const search = searchParams.get('search') ?? ''
-  if (idGallery) {
-    searchParams.set('id_album', idGallery)
-  }
-  const id_album = searchParams.get('id_album') ?? ''
+  const id_album = idGallery ?? searchParams.get('id_album') ?? ''
 
   const ParamsSearch = new URLSearchParams({ page, limit, search, id_album })
   const { data, isLoading, isFetching } = useQuery<GaleriFotoResponse>({
-    queryKey: ['program-studi-gallery-photo', ParamsSearch.toString()],
+    queryKey: ['program-studi-gallery-photo', id, id_album, ParamsSearch.toString()],
+    enabled: !!id,
     refetchOnWindowFocus: false,
     queryFn: () =>
       AxiosClient.get(`/website-utama/satuan-organisasi/${id}/galeri-foto?${ParamsSearch}`).then(

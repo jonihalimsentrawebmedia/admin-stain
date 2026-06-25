@@ -11,8 +11,9 @@ const useGetLogTypeOfCalloboration = () => {
 
   const ParamsSearch = new URLSearchParams({ page, limit, search })
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['log-type-of-calloboration-log',ParamsSearch.toString()],
+    queryKey: ['log-type-of-calloboration-log', idTypeOfCalloboration, ParamsSearch.toString()],
     refetchOnWindowFocus: false,
+    enabled: !!idTypeOfCalloboration,
     queryFn: () =>
       AxiosClient.get(`/website-utama/jenis-kerjasama-log/${idTypeOfCalloboration}?${ParamsSearch}`).then(
         (res) => res.data

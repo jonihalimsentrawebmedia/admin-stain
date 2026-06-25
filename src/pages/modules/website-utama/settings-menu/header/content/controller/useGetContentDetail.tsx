@@ -7,7 +7,7 @@ const useGetContentDetail = () => {
   const { idContent} = params
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['list-contents-detail'],
+    queryKey: ['list-contents-detail', idContent],
     refetchOnWindowFocus: false,
     enabled: !!idContent,
     queryFn: () => AxiosClient.get(`/website-utama/konten/${idContent}`).then((res) => res.data),

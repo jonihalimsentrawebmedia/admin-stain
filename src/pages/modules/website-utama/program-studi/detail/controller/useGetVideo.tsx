@@ -11,7 +11,8 @@ const useGetVideo = () => {
   const type = searchParams.get('type') ?? ''
   const ParamsSearch = new URLSearchParams({ page, limit, search, type })
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['program-studi-gallery-video', ParamsSearch.toString()],
+    queryKey: ['program-studi-gallery-video', id, ParamsSearch.toString()],
+    enabled: !!id,
     refetchOnWindowFocus: false,
     queryFn: () =>
       AxiosClient.get(`/website-utama/satuan-organisasi/${id}/galeri-video?${ParamsSearch}`).then(

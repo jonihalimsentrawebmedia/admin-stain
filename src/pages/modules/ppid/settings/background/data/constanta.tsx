@@ -27,6 +27,6 @@ export const PPID_MENU = [
   {
     id: 6,
     value: 'HUBUNGI_KAMI',
-    name: 'hubungin Kami',
+    name: 'Hubungi Kami',
   },
 ]

@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
@@ -7,16 +6,17 @@ import type { IUktEntrance } from '@/pages/modules/website-utama/cost-education/
 
 export const UseGetEntrance = (props: BasicProps) => {
   const { search, limit, page } = props
-  const [entrance, setEntrance] = useState<IUktEntrance[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const params = new URLSearchParams()
   if (page) params.append('page', page ?? '1')
   if (limit) params.append('limit', limit ?? '10')
   if (search) params.append('search', search ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['entrance_ukt', params],
+  const { data, isLoading, isFetching } = useQuery<{
+    data: IUktEntrance[]
+    meta: Meta
+  }>({
+    queryKey: ['entrance_ukt', params.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
       AxiosClient.get(`/website-utama/jalur-masuk?${params.toString()}`).then((res) => res.data),
@@ -24,12 +24,5 @@ export const UseGetEntrance = (props: BasicProps) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setEntrance(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { entrance, meta, loading }
+  return { entrance: data?.data ?? [], meta: data?.meta, loading }
 }

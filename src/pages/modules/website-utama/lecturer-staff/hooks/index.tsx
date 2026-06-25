@@ -1,12 +1,10 @@
-import { useEffect, useState } from 'react'
-import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type {
   IEmployee,
   ISDMNavigation,
 } from '@/pages/modules/website-utama/lecturer-staff/data/types.ts'
-import type { BasicProps } from '@/utils/globalType.ts'
+import type { BasicProps, IApiResponse } from '@/utils/globalType.ts'
 
 interface props extends BasicProps {
   id_unit_kerja?: string
@@ -17,9 +15,6 @@ interface props extends BasicProps {
 export const UseGetEmployee = (props?: props) => {
   const { page, limit, search, id_unit_kerja, id_status, filter } = props ?? {}
 
-  const [employee, setEmployee] = useState<IEmployee[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const Params = new URLSearchParams()
   if (page) Params.append('page', page ?? '1')
   if (limit) Params.append('limit', limit ?? '10')
@@ -28,7 +23,7 @@ export const UseGetEmployee = (props?: props) => {
   if (id_status) Params.append('id_status', id_status ?? '')
   if (filter) Params.append('filter', props?.filter ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IApiResponse<IEmployee[]>>({
     queryKey: ['employee', Params.toString()],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/website-utama/sdm?${Params}`).then((res) => res.data),
@@ -36,20 +31,11 @@ export const UseGetEmployee = (props?: props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setEmployee(data?.data)
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { meta, loading, employee }
+  return { meta: data?.meta, loading, employee: data?.data ?? [] }
 }
 
 export const UseGetEmployeeById = (id: string) => {
-  const [employee, setEmployee] = useState<IEmployee>()
-  const [nextPrevId, setNextPrevId] = useState<ISDMNavigation>()
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: IEmployee; step: ISDMNavigation }>({
     queryKey: ['employee-by-id', id],
     refetchOnWindowFocus: false,
     enabled: !!id,
@@ -58,22 +44,13 @@ export const UseGetEmployeeById = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setEmployee(data?.data)
-      setNextPrevId(data?.step)
-    }
-  }, [data])
-
-  return { employee, loading, nextPrevId }
+  return { employee: data?.data, loading, nextPrevId: data?.step }
 }
 
 export const UseGetReFUnit = () => {
-  const [workUnit, setWorkUnit] = useState<
+  const { data, isLoading, isFetching } = useQuery<
     { id_satuan_organisasi: string; nama_satuan_organisasi: string }[]
-  >([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  >({
     queryKey: ['work-unit'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/website-utama/ref/unit').then((res) => res.data.data),
@@ -81,11 +58,5 @@ export const UseGetReFUnit = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setWorkUnit(data)
-    }
-  }, [data])
-
-  return { workUnit, loading }
+  return { workUnit: data ?? [], loading }
 }

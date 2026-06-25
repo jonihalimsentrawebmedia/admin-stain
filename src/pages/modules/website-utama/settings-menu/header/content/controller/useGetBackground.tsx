@@ -7,8 +7,9 @@ const useGetBackground = () => {
   const { id } = params
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['list-backgrounds'],
+    queryKey: ['list-backgrounds', id],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () =>
       AxiosClient.get(`/website-utama/menu-background?id_menu=${id}`).then((res) => res.data),
   })

@@ -1,6 +1,6 @@
 import AxiosClient from '@/provider/axios'
 import { useQuery } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
+import type { IApiResponse } from '@/utils/globalType'
 import type {
   IDevotion,
   IFormalEducation,
@@ -22,9 +22,7 @@ interface SyncProps {
 export const UseGetFormalEducation = (props?: Props) => {
   const { id_sdm } = props ?? {}
 
-  const [formalEducation, setFormalEducation] = useState<IFormalEducation[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IApiResponse<IFormalEducation[]>>({
     queryKey: ['formal-education'],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -33,20 +31,12 @@ export const UseGetFormalEducation = (props?: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setFormalEducation(data?.data)
-    }
-  }, [data])
-
-  return { loading, formalEducation }
+  return { loading, formalEducation: data?.data ?? [] }
 }
 export const UseGetRank = (props?: Props) => {
   const { id_sdm } = props ?? {}
 
-  const [rank, setRank] = useState<IRank[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IApiResponse<IRank[]>>({
     queryKey: ['rank'],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -55,20 +45,12 @@ export const UseGetRank = (props?: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setRank(data?.data)
-    }
-  }, [data])
-
-  return { loading, rank }
+  return { loading, rank: data?.data ?? [] }
 }
 export const UseGetFunctionalPosition = (props?: Props) => {
   const { id_sdm } = props ?? {}
 
-  const [functionalPosition, setFunctionalPosition] = useState<IFunctionalPosition[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IApiResponse<IFunctionalPosition[]>>({
     queryKey: ['function-position'],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -77,20 +59,12 @@ export const UseGetFunctionalPosition = (props?: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setFunctionalPosition(data?.data)
-    }
-  }, [data])
-
-  return { loading, functionalPosition }
+  return { loading, functionalPosition: data?.data ?? [] }
 }
 export const UseGetHKI = (props?: Props) => {
   const { id_sdm } = props ?? {}
 
-  const [HKI, setHKI] = useState<IHKI[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IApiResponse<IHKI[]>>({
     queryKey: ['hki-paten'],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -99,20 +73,12 @@ export const UseGetHKI = (props?: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setHKI(data?.data)
-    }
-  }, [data])
-
-  return { loading, HKI }
+  return { loading, HKI: data?.data ?? [] }
 }
 export const UseGetReseacrh = (props?: Props) => {
   const { id_sdm } = props ?? {}
 
-  const [research, setResearch] = useState<IResearch[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IApiResponse<IResearch[]>>({
     queryKey: ['research'],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -121,20 +87,12 @@ export const UseGetReseacrh = (props?: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setResearch(data?.data)
-    }
-  }, [data])
-
-  return { loading, research }
+  return { loading, research: data?.data ?? [] }
 }
 export const UseGetPublication = (props?: Props) => {
   const { id_sdm } = props ?? {}
 
-  const [publication, setPublication] = useState<IPublication[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IApiResponse<IPublication[]>>({
     queryKey: ['publication'],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -143,20 +101,12 @@ export const UseGetPublication = (props?: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setPublication(data?.data)
-    }
-  }, [data])
-
-  return { loading, publication }
+  return { loading, publication: data?.data ?? [] }
 }
 export const UseGetDevotion = (props?: Props) => {
   const { id_sdm } = props ?? {}
 
-  const [devotion, setDevotion] = useState<IDevotion[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IApiResponse<IDevotion[]>>({
     queryKey: [`devotion`],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -165,20 +115,12 @@ export const UseGetDevotion = (props?: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDevotion(data?.data)
-    }
-  }, [data])
-
-  return { loading, devotion }
+  return { loading, devotion: data?.data ?? [] }
 }
 export const UseGetSyncStatus = (props?: SyncProps) => {
   const { link } = props ?? {}
 
-  const [status, setStatus] = useState<ISyncStatus[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IApiResponse<ISyncStatus[]>>({
     queryKey: [`sync-status`],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(link ?? '').then((res) => res.data),
@@ -186,11 +128,5 @@ export const UseGetSyncStatus = (props?: SyncProps) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setStatus(data?.data)
-    }
-  }, [data])
-
-  return { loading, status }
+  return { loading, status: data?.data ?? [] }
 }

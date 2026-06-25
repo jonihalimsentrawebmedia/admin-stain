@@ -63,7 +63,7 @@ const AdmissionInformationPublicLogView = () => {
         <p className="bg-white whitespace-nowrap">Riwayat Email</p>
         <Separator className="w-full" />
       </div>
-      {admissionPublicLog?.riwayat.map((item, index) => {
+      {admissionPublicLog?.riwayat.map((item: any, index: number) => {
         const field = [
           {
             name: `riwayat.${index}.nama_pengirim_user`,
@@ -82,10 +82,10 @@ const AdmissionInformationPublicLogView = () => {
             label: 'Lampiran',
             component: (
               <ul className="list-decimal list-inside text-primary">
-                {item.file_lampiran.map((file, index) => (
-                  <li key={index}>
+                {item.file_lampiran.map((file: string, fileIndex: number) => (
+                  <li key={fileIndex}>
                     <a href={file} target="_blank" rel="noopener noreferrer" className="">
-                      Dokumen {index + 1} {file.split('.')[file.split('.').length - 1]}
+                      Dokumen {fileIndex + 1} {file.split('.')[file.split('.').length - 1]}
                     </a>
                   </li>
                 ))}

@@ -7,7 +7,7 @@ import { RenderUrl } from '../hooks/renderUrl'
 import type { IContent } from '.'
 
 export const ColumnsApproval = () => {
-  const culumns: ColumnDef<IContent>[] = [
+  const columns: ColumnDef<IContent>[] = [
     {
       accessorKey: 'no',
       header: 'No',
@@ -60,5 +60,5 @@ export const ColumnsApproval = () => {
     },
   ]
 
-  return culumns
+  return columns
 }

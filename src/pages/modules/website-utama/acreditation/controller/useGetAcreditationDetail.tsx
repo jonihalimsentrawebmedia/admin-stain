@@ -6,7 +6,7 @@ const useGetAcreditationDetail = () => {
   const { idAcreditation } = useParams()
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['acreditation-detail'],
+    queryKey: ['acreditation-detail', idAcreditation],
     refetchOnWindowFocus: false,
     enabled: !!idAcreditation,
     queryFn: () =>

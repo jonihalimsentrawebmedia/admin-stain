@@ -1,75 +1,19 @@
 {
-  "mcp": {
-    "context7": {
-      "type": "remote",
-      "url": "https://mcp.context7.com/mcp"
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": ["AGENTS.md"],
+  "agent": {
+    "build": {
+      "model": "deepseek/deepseek-chat"
+    },
+    "plan": {
+      "model": "opencode/mimo-v2.5-free"
     }
   },
-  "$schema": "https://opencode.ai/config.json",
   "plugin": [
     "opencode-agent-memory"
   ],
-  "agent": {
-    "build": {
-      "mode": "primary",
-      "model": "opencode/deepseek-v4-flash-free",
-      "prompt": "React 19 + TypeScript + Vite 7 frontend dev for STAIN Madina admin panel.\n\n## Tech Stack\n- React 19, TypeScript, Vite 7\n- TailwindCSS 4 + shadcn/ui (new-york style, Radix UI primitives)\n- TanStack React Query 5 (data fetching), TanStack React Table 8\n- React Hook Form 7 + Zod 4 (form validation)\n- React Router DOM 7 (createBrowserRouter)\n- TipTap 3 (rich text editor with extensions, nodes, UI)\n- Axios (HTTP client, configured in provider/axios.tsx)\n- Firebase 12 (FCM push notifications)\n- Recharts 3 (charts)\n- pdfmake (PDF generation)\n- date-fns, js-cookie, react-toastify, react-webcam, uuid\n\n## Project Structure\nsrc/\n  components/\n    ui/              # shadcn/ui components (button, dialog, form, table, tabs, etc.)\n    common/          # theme/default.tsx\n    Meta/            # Meta tags\n    tiptap-extension/# TipTap editor extensions\n    tiptap-icons/    # TipTap icons\n    tiptap-node/     # TipTap nodes\n    tiptap-templates/# TipTap templates\n    tiptap-ui/       # TipTap UI components\n    tiptap-ui-primitive/ # TipTap primitives\n  hooks/\n    custom/          # themeColor.tsx\n    (utility hooks)  # use-mobile, use-tiptap-editor, use-is-breakpoint, etc.\n  lib/\n    utils.ts         # cn() = clsx + twMerge\n    tiptap-utils.ts\n  pages/\n    login/           # LoginView.tsx + LoginViewModel.tsx\n    forget-password/ # OTP flow (forget -> otp -> change -> success)\n    modules/         # All feature modules (see below)\n  provider/\n    index.tsx        # Combined providers\n    axios.tsx        # AxiosClient (baseURL = VITE_API_URL, Bearer from cookie)\n    firebase.tsx     # Firebase config\n  router/\n    index.tsx        # Main router (createBrowserRouter)\n    E-Office/router.tsx\n    editor/router.tsx\n    lppm/router.tsx\n    main-website/router.tsx\n    pmb/index.tsx\n    ppid/router.tsx\n    pusat-karir/index.tsx\n    pusilkom/index.tsx\n    settings/router.tsx\n    SPI/index.tsx\n    website-fakultas/index.tsx\n    website-lembaga/index.tsx\n    website-prodi/router.tsx\n    website-unit/router.tsx\n  styles/            # SCSS (_keyframe-animations.scss, _variables.scss)\n  utils/             # date.tsx, globalType.ts, helper.tsx, pdfmake.ts, useMobile.tsx\n\n## Module Structure (pages/modules/)\nEach module directory follows:\n  module-name/\n    feature-name/\n      components/  (sub-components)\n      hooks/       (feature-specific hooks)\n      data/        (API calls, constants)\n    component/     (shared module components)\n    utils/         (module utilities)\n\n## Conventions\n- MVVM pattern: {Feature}View.tsx + {Feature}ViewModel.tsx in feature folder\n- camelCase for file names, folders, variables, functions\n- PascalCase for React components, types, interfaces\n- shadcn/ui components go in components/ui/ (use the CLI: npx shadcn@latest add)\n- API calls use TanStack Query hooks (useQuery, useMutation)\n- Axios client from provider/axios.tsx for all HTTP calls\n- Form validation with React Hook Form + Zod schemas\n- Route modules registered in router/index.tsx\n- TailwindCSS for styling (minimal custom CSS)\n- react-toastify for notifications (already wired in App.tsx)\n- Environment via import.meta.env.VITE_*\n\n## Build Commands\n- dev: pnpm dev (Vite dev server)\n- build: pnpm build (tsc -b && vite build)\n- lint: pnpm lint (ESLint)\n- preview: pnpm preview\n\n## API Backend\n- Base URL: import.meta.env.VITE_API_URL (default http://localhost:8087/api/v1)\n- Go backend with Gin, GORM, PostgreSQL\n- Response format: { status: boolean, message: string, data: T | T[], meta?: { page, limit, total, totalPages } }\n- Auth: Bearer token from cookie (managed in provider/axios.tsx)"
-    },
-    "plan": {
-      "mode": "primary",
-      "model": "opencode/nemotron-3-super-free",
-      "tools": {
-        "write": false,
-        "edit": false,
-        "bash": false
-      },
-      "prompt": "Planner for STAIN Madina React frontend.\nWhen planning tasks, always:\n1. Check existing files in the relevant module directory first (pages/modules/, components/, router/)\n2. Follow MVVM pattern (View + ViewModel) for page-level features\n3. Use TanStack Query for data fetching mutations\n4. Use React Hook Form + Zod for forms\n5. Use shadcn/ui components from components/ui/ where possible\n6. Register new routes in the appropriate router file\n7. Consider the module's existing structure before adding new features\n8. Suggest using dedicated subagents for complex multi-file generation"
-    },
-    "code-explorer": {
-      "description": "Cepat jelajahi codebase (search, grep, analisis struktur)",
-      "mode": "subagent",
-      "model": "opencode/mimo-v2.5-free",
-      "tools": {
-        "write": false,
-        "edit": false,
-        "bash": false
-      }
-    },
-    "frontend-gen": {
-      "description": "Generate React/TypeScript components, pages, and hooks following project patterns",
-      "mode": "subagent",
-      "model": "opencode/deepseek-v4-flash-free",
-      "prompt": "React 19 + TypeScript frontend code generator for STAIN Madina admin panel.\n\n## CRITICAL: Check Existing Files BEFORE Creating\nScan directories in src/ for existing files before creating new ones. Never create duplicates.\n\n## Project Patterns\n\n### Page Module (MVVM)\nEach page module typically has:\n- {Feature}View.tsx — JSX/UI layout using shadcn/ui components\n- {Feature}ViewModel.tsx — State management, API calls via TanStack Query, form handling\n\nExample ViewModel pattern:\n```typescript\nimport { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'\nimport { apiGet, apiPost, apiPut, apiDelete } from '@/provider/axios'\n\nexport function useFeatureViewModel() {\n  const queryClient = useQueryClient()\n\n  const { data, isLoading } = useQuery({\n    queryKey: ['feature-key'],\n    queryFn: () => apiGet('/api/endpoint')\n  })\n\n  const mutation = useMutation({\n    mutationFn: (payload) => apiPost('/api/endpoint', payload),\n    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['feature-key'] })\n  })\n\n  return { data, isLoading, mutation }\n}\n```\n\n### shadcn/ui Components\nUse from components/ui/:\n- Button, Input, Textarea, Label\n- Dialog, Popover, DropdownMenu\n- Form (with react-hook-form + zod)\n- Table, Tabs, Select, Checkbox, RadioGroup, Switch\n- Card, Badge, Avatar, Separator\n- Toast/Sonner for notifications\n\nImport pattern: import { Button } from '@/components/ui/button'\n\n### API Calls\nUse Axios client from provider/axios.tsx:\n- apiGet, apiPost, apiPut, apiDelete functions\n- All prepend import.meta.env.VITE_API_URL\n- Bearer token handled automatically\n- Response type: { status: boolean, message: string, data: T, meta?: PaginationMeta }\n\n### Form Pattern (React Hook Form + Zod)\n```typescript\nimport { useForm } from 'react-hook-form'\nimport { z } from 'zod'\nimport { zodResolver } from '@hookform/resolvers/zod'\n\nconst schema = z.object({ name: z.string().min(1) })\ntype FormData = z.infer<typeof schema>\n\nconst form = useForm<FormData>({ resolver: zodResolver(schema) })\n```\n\n### Routing\n- Main router: src/router/index.tsx (createBrowserRouter)\n- Module routers: e.g., src/router/E-Office/router.tsx\n- Use createBrowserRouter with layout routes\n\n### Styling\n- TailwindCSS utility classes (NO CSS modules, NO styled-components)\n- Custom SCSS only in src/styles/ for animations/variables\n\n## File Naming\n- Components/Pages: PascalCase (LoginView.tsx, UserTable.tsx)\n- Hooks: camelCase with 'use' prefix (useUsers.ts, useLoginViewModel.ts)\n- Utils: camelCase (date.tsx, helper.tsx)\n- Constants: camelCase (index.tsx)\n- Interfaces: camelCase (index.tsx with exported types)"
-    },
-    "code-reviewer": {
-      "description": "Review React/TypeScript: best practices, project conventions, code quality",
-      "mode": "subagent",
-      "model": "opencode/nemotron-3-super-free",
-      "tools": {
-        "write": false,
-        "edit": false
-      },
-      "prompt": "React/TypeScript code reviewer for STAIN Madina project.\n\n## Checklist\n- [ ] MVVM pattern followed (View + ViewModel separation)\n- [ ] TanStack Query for all API calls (not raw fetch/axios in components)\n- [ ] React Hook Form + Zod for form validation (not raw useState)\n- [ ] shadcn/ui components used from components/ui/ (not custom HTML elements)\n- [ ] Proper TypeScript types/interfaces (not 'any')\n- [ ] File naming: PascalCase for components, camelCase for hooks/utils\n- [ ] TailwindCSS for styling (no CSS modules, no styled-components)\n- [ ] API error handling (toast notifications for errors)\n- [ ] Route registered in correct router file\n- [ ] Axios provider used (not direct axios.create)\n- [ ] No hardcoded API URLs (use VITE_API_URL)\n- [ ] Proper React 19 patterns (no legacy lifecycle, use hooks)\n- [ ] Query invalidation on mutations (cache consistency)\n- [ ] Loading states handled (skeleton/shimmer while fetching)\n\nProvide feedback with exact file paths and line numbers."
-    },
-    "api-tester": {
-      "description": "Test API endpoints, verify responses match frontend expectations",
-      "mode": "subagent",
-      "model": "opencode/minimax-m3-free",
-      "prompt": "API tester for STAIN Madina frontend project.\n\n## Context\nThis is a React frontend that connects to a Go backend (Gin + GORM) at VITE_API_URL.\n\n## Backend Response Format\nSuccess: { status: true, message: string, data: T | T[] }\nError:   { status: false, message: string }\nPaginated: { status: true, message: string, data: T[], meta: { page, limit, total, totalPages } }\n\n## Testing Checklist\n1. Include: method, full URL with params, headers (Content-Type, Authorization/Bearer), request body\n2. Verify: HTTP status code, response structure (status, message, data), field types and values\n3. Test edge cases: empty body, invalid IDs, missing required fields\n4. For paginated endpoints: verify page, limit, total, totalPages in response meta\n5. For file upload: use multipart/form-data\n\n## Common Endpoints\n- Auth: POST /auth/login, GET /auth/me\n- Eoffice: GET/POST /eoffice/ref/{entity}, /eoffice/surat-masuk, /eoffice/surat-keluar\n- Public: GET /api/publik/{entity} (no auth)\n- Upload: POST /api/upload (multipart/form-data)\n- CRUD: GET/POST/PUT/DELETE /api/{module}/{entity}[/:id]\n\n## Tools Available\n- curl for direct HTTP testing\n- Postman MCP tools for collection management"
-    },
-    "component-gen": {
-      "description": "Generate shadcn/ui components or new reusable components",
-      "mode": "subagent",
-      "model": "opencode/deepseek-v4-flash-free",
-      "prompt": "Component generator for STAIN Madina admin panel.\n\n## shadcn/ui Components\nTo add shadcn/ui components:\n1. Check if already exists in src/components/ui/\n2. If not, use: npx shadcn@latest add {component-name}\n3. Components go in src/components/ui/\n4. Import from '@/components/ui/{component}'\n\n## Custom Components\nFor new reusable components in src/components/:\n1. Create feature-based subdirectory (e.g., components/feature-name/)\n2. Use PascalCase for component files\n3. Use TailwindCSS for styling\n4. Use Radix UI primitives if complex behavior needed\n5. Export TypeScript interfaces for props\n6. Follow existing patterns from components/ directory\n\n## Organization\n- components/ui/ — shadcn/ui generated components (do NOT manually edit)\n- components/common/ — shared app components (theme)\n- components/feature-name/ — feature-specific reusable components\n- components/tiptap-*/ — TipTap editor related components"
-    }
-  },
-  "permission": {
-    "read": "allow",
-    "bash": {
-      "*": "ask",
-      "git *": "ask",
-      "rm *": "ask"
-    }
+  "compaction": {
+    "auto": true,
+    "tail_turns": 15
   }
 }

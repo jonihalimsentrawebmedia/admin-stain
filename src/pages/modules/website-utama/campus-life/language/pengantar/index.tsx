@@ -9,7 +9,7 @@ import { FormLanguageTextIntroduce } from './component/form'
 
 export const TextIntroduceLanguagePage = () => {
   const navigate = useNavigate()
-  const { language: detail } = UseGetTextIntroduceLanguage()
+  const { data: detail } = UseGetTextIntroduceLanguage()
 
   const [language, setLanguage] = useState('id')
   const [loading, setLoading] = useState(false)

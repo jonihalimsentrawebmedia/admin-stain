@@ -10,12 +10,11 @@ const useGetActivityDetailList = () => {
   const search = searchParams.get('search') ?? ''
   const id_tahun_akademik_kegiatan = searchParams.get('id_tahun_akademik_kegiatan') ?? ''
 
-  const ParamsSearch = new URLSearchParams({ page, limit, search, id_tahun_akademik_kegiatan })
-  if (idActivity) {
-    searchParams.set('id_tahun_akademik_kegiatan', idActivity)
-  }
+  const effectiveId = idActivity ?? searchParams.get('id_tahun_akademik_kegiatan') ?? id_tahun_akademik_kegiatan
+  const ParamsSearch = new URLSearchParams({ page, limit, search, id_tahun_akademik_kegiatan: effectiveId })
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['list-acedemic-year-activity-detail', ParamsSearch.toString()],
+    queryKey: ['list-acedemic-year-activity-detail', effectiveId, ParamsSearch.toString()],
+    enabled: !!effectiveId,
     refetchOnWindowFocus: false,
     queryFn: () =>
       AxiosClient.get(`/website-utama/tahun-akademik-uraian-kegiatan?${ParamsSearch}`).then(
