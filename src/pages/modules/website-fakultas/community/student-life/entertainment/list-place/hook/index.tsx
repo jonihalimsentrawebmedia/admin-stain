@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
@@ -8,15 +7,15 @@ import type { IStudentEntertainment } from '@/pages/modules/website-fakultas/com
 export const UseGetListPlace = (props?: BasicProps) => {
   const { page, limit, search } = props ?? {}
 
-  const [listPlace, setListPlace] = useState<IStudentEntertainment[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const Params = new URLSearchParams()
   if (page) Params.set('page', page ?? '0')
   if (limit) Params.set('limit', limit ?? '0')
   if (search) Params.set('search', search ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{
+    data: IStudentEntertainment[]
+    meta: Meta
+  }>({
     queryKey: ['student-entertainment', Params.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -25,20 +24,15 @@ export const UseGetListPlace = (props?: BasicProps) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setMeta(data?.meta)
-      setListPlace(data?.data)
-    }
-  }, [data])
-
-  return { listPlace, meta, loading }
+  return {
+    listPlace: data?.data ?? [],
+    meta: data?.meta,
+    loading,
+  }
 }
 
 export const UseGetDetailPlace = (id: string) => {
-  const [placeDetail, setPlaceDetail] = useState<IStudentEntertainment>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IStudentEntertainment>({
     queryKey: ['student-entertainment', id],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -47,11 +41,5 @@ export const UseGetDetailPlace = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setPlaceDetail(data)
-    }
-  }, [data])
-
-  return { placeDetail, loading }
+  return { placeDetail: data, loading }
 }

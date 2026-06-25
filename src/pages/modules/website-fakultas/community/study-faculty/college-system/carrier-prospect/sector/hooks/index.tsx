@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { ISectorStudy } from '../data/types.tsx'
@@ -7,9 +6,6 @@ import type { BasicProps } from '@/utils/globalType.ts'
 
 export const UseGetListSectorStudy = (props?: BasicProps) => {
   const { search, page, limit } = props ?? {}
-
-  const [sectorStudy, setSectorStudy] = useState<ISectorStudy[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const Params = new URLSearchParams()
   if (search) Params.set('search', search ?? '')
@@ -25,12 +21,9 @@ export const UseGetListSectorStudy = (props?: BasicProps) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setSectorStudy(data?.data)
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { sectorStudy, loading, meta }
+  return {
+    sectorStudy: data?.data as ISectorStudy[] ?? [],
+    loading,
+    meta: data?.meta as Meta | undefined,
+  }
 }

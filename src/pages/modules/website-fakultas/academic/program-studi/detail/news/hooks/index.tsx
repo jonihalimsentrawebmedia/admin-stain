@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
@@ -60,9 +59,6 @@ interface NewsProps extends BasicProps {
 export const UseGetNewsProdiFaculty = (props?: NewsProps) => {
   const { id_unit, limit, search, page } = props ?? {}
 
-  const [news, setNews] = useState<INewsFaculty[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const Params = new URLSearchParams()
   if (page) Params.set('page', page ?? '1')
   if (limit) Params.set('limit', limit ?? '10')
@@ -79,12 +75,9 @@ export const UseGetNewsProdiFaculty = (props?: NewsProps) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setNews(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { news, loading, meta }
+  return {
+    news: data?.data ?? [] as INewsFaculty[],
+    loading,
+    meta: data?.meta as Meta | undefined,
+  }
 }

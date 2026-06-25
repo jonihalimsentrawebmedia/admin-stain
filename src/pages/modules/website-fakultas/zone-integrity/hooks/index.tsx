@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
@@ -7,15 +6,16 @@ import type { IZoneIntegrity } from '@/pages/modules/website-fakultas/zone-integ
 
 export const UseGetZoneIntegrity = (props?: BasicProps) => {
   const { page, limit, search } = props ?? {}
-  const [zoneIntegrity, setZoneIntegrity] = useState<IZoneIntegrity[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const ParamsSearch = new URLSearchParams()
   if (page) ParamsSearch.append('page', page.toString())
   if (limit) ParamsSearch.append('limit', limit.toString())
   if (search) ParamsSearch.append('search', search)
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{
+    data: IZoneIntegrity[]
+    meta: Meta
+  }>({
     queryKey: ['zone-integrity', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -24,20 +24,15 @@ export const UseGetZoneIntegrity = (props?: BasicProps) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setZoneIntegrity(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { zoneIntegrity, loading, meta }
+  return {
+    zoneIntegrity: data?.data ?? [],
+    loading,
+    meta: data?.meta,
+  }
 }
 
 export const UseGetDetailZoneIntegrity = (id: string) => {
-  const [detail, setDetail] = useState<IZoneIntegrity>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IZoneIntegrity>({
     queryKey: ['detail-zone-integrity', id],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -46,11 +41,5 @@ export const UseGetDetailZoneIntegrity = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDetail(data)
-    }
-  }, [data])
-
-  return { detail, loading }
+  return { detail: data, loading }
 }

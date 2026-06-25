@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import type { BasicProps } from '@/utils/globalType.ts'
 import { useQuery } from '@tanstack/react-query'
@@ -7,9 +6,6 @@ import type { IListStudentOrganization } from '@/pages/modules/website-fakultas/
 
 export const UseGetStudentOrganizations = (props?: BasicProps) => {
   const { page, limit, search } = props ?? {}
-
-  const [listOrganization, setListOrganization] = useState<IListStudentOrganization[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const Params = new URLSearchParams()
   if (page) Params.append('page', page ?? '0')
@@ -25,19 +21,14 @@ export const UseGetStudentOrganizations = (props?: BasicProps) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setListOrganization(data?.data)
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { listOrganization, loading, meta }
+  return {
+    listOrganization: data?.data as IListStudentOrganization[] ?? [],
+    loading,
+    meta: data?.meta as Meta | undefined,
+  }
 }
 
 export const UseGetDetailStudentOrganization = (id: string) => {
-  const [detail, setDetail] = useState<IListStudentOrganization>()
-
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['student-organization', id],
     refetchOnWindowFocus: false,
@@ -47,11 +38,8 @@ export const UseGetDetailStudentOrganization = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDetail(data)
-    }
-  }, [data])
-
-  return { detail, loading }
+  return {
+    detail: data as IListStudentOrganization | undefined,
+    loading,
+  }
 }

@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
@@ -8,9 +7,7 @@ interface IColor {
 }
 
 export const UseGetColorAdminFaculty = (context: 'admin' | 'public') => {
-  const [color, setColor] = useState<IColor>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IColor>({
     queryKey: [`color-${context}-faculty`],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -19,19 +16,11 @@ export const UseGetColorAdminFaculty = (context: 'admin' | 'public') => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setColor(data)
-    }
-  }, [data])
-
-  return { color, loading }
+  return { color: data, loading }
 }
 
 export const UseGetAdminThemeFaculty = () => {
-  const [color, setColor] = useState<IColor>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IColor>({
     queryKey: [`faculty-pengaturan-warna-admin`],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient(`/fakultas/pengaturan-warna/admin`).then((res) => res.data?.data),
@@ -39,11 +28,5 @@ export const UseGetAdminThemeFaculty = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setColor(data)
-    }
-  }, [data])
-
-  return { color, loading }
+  return { color: data, loading }
 }

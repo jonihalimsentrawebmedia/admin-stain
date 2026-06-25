@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
@@ -11,8 +10,6 @@ interface props extends BasicProps {
 
 export const UseGetSubZoneIntegrity = (props?: props) => {
   const { page, limit, search, id } = props ?? {}
-  const [subZoneIntegrity, setSubZoneIntegrity] = useState<ISbuZoneIntegrity[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const ParamsSearch = new URLSearchParams()
   if (page) ParamsSearch.append('page', page.toString())
@@ -20,7 +17,10 @@ export const UseGetSubZoneIntegrity = (props?: props) => {
   if (search) ParamsSearch.append('search', search)
   if (id) ParamsSearch.append('id-kategori', id)
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{
+    data: ISbuZoneIntegrity[]
+    meta: Meta
+  }>({
     queryKey: ['zone-integrity', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -31,20 +31,15 @@ export const UseGetSubZoneIntegrity = (props?: props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setSubZoneIntegrity(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { subZoneIntegrity, loading, meta }
+  return {
+    subZoneIntegrity: data?.data ?? [],
+    loading,
+    meta: data?.meta,
+  }
 }
 
 export const UseGetDetailSubZoneIntegrity = (id: string) => {
-  const [detail, setDetail] = useState<ISbuZoneIntegrity>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<ISbuZoneIntegrity>({
     queryKey: ['detail-zone-integrity', id],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -53,11 +48,5 @@ export const UseGetDetailSubZoneIntegrity = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDetail(data)
-    }
-  }, [data])
-
-  return { detail, loading }
+  return { detail: data, loading }
 }

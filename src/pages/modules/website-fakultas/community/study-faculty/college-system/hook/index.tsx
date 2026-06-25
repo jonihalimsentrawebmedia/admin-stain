@@ -1,11 +1,8 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { IDescriptionCollegeSystem } from './types.tsx'
 
 export const UseGetDetailCollegeSystem = () => {
-  const [description, setDescription] = useState<IDescriptionCollegeSystem>()
-
   const { data, isFetching, isLoading } = useQuery({
     queryKey: ['college-system'],
     refetchOnWindowFocus: false,
@@ -14,11 +11,8 @@ export const UseGetDetailCollegeSystem = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDescription(data)
-    }
-  }, [data])
-
-  return { description, loading }
+  return {
+    description: data as IDescriptionCollegeSystem | undefined,
+    loading,
+  }
 }

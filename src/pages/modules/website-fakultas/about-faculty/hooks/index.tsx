@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { IFacultyAbout } from '../data/type'
@@ -7,9 +6,7 @@ import type { IOrganization } from '@/pages/modules/website-fakultas/about-facul
 import type { IContactUs } from '@/pages/modules/website-fakultas/about-faculty/contact-us/resolver.tsx'
 
 export const UseGetFacultyAbout = () => {
-  const [facultyAbout, setFacultyAbout] = useState<IFacultyAbout>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IFacultyAbout>({
     queryKey: ['faculty-about'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/fakultas/profil/tentang').then((res) => res.data?.data),
@@ -17,19 +14,11 @@ export const UseGetFacultyAbout = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setFacultyAbout(data)
-    }
-  }, [data])
-
-  return { facultyAbout, loading }
+  return { facultyAbout: data, loading }
 }
 
 export const UseGetVisionMission = () => {
-  const [visionMission, setVisionMission] = useState<IVisionMission>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IVisionMission>({
     queryKey: ['vision-mission'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/fakultas/profil/visi-misi').then((res) => res.data?.data),
@@ -37,19 +26,11 @@ export const UseGetVisionMission = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setVisionMission(data)
-    }
-  }, [data])
-
-  return { visionMission, loading }
+  return { visionMission: data, loading }
 }
 
 export const UseGetFacultyOrganization = () => {
-  const [organization, setOrganization] = useState<IOrganization>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IOrganization>({
     queryKey: ['organization'],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -58,19 +39,11 @@ export const UseGetFacultyOrganization = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setOrganization(data)
-    }
-  }, [data])
-
-  return { organization, loading }
+  return { organization: data, loading }
 }
 
 export const UseGetContactUs = () => {
-  const [contactUs, setContactUs] = useState<IContactUs>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IContactUs>({
     queryKey: ['contact-us'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/fakultas/profil/hubungi-kami').then((res) => res.data?.data),
@@ -78,11 +51,5 @@ export const UseGetContactUs = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setContactUs(data)
-    }
-  }, [data])
-
-  return { contactUs, loading }
+  return { contactUs: data, loading }
 }

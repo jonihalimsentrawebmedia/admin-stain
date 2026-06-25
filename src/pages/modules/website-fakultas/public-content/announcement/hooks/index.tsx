@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
@@ -8,15 +7,13 @@ import type { IPropsData } from '@/pages/modules/website-prodi/public-content/ne
 
 export const UseGetFacultyAnnouncement = (props?: IPropsData) => {
   const { page, limit, status_publish, year, search } = props ?? {}
-  const [announcement, setAnnouncement] = useState<IAnnouncement[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const ParamsSearch = new URLSearchParams({ page: page ?? '1', limit: limit ?? '10' })
   if (status_publish) ParamsSearch.append('status-publish', status_publish)
   if (year) ParamsSearch.append('tahun', year)
   if (search) ParamsSearch.append('search', search)
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: IAnnouncement[]; meta: Meta }>({
     queryKey: ['faculty-announcement', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/fakultas/pengumuman?${ParamsSearch}`).then((res) => res.data),
@@ -24,20 +21,14 @@ export const UseGetFacultyAnnouncement = (props?: IPropsData) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setAnnouncement(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
+  const announcement = data?.data ?? []
+  const meta = data?.meta
 
   return { announcement, loading, meta }
 }
 
 export const UseGetFacultyAnnouncementDetail = (id: string) => {
-  const [detail, setDetail] = useState<IAnnouncement>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IAnnouncement>({
     queryKey: ['faculty-announcement-detail', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/fakultas/pengumuman/${id}`).then((res) => res.data?.data),
@@ -45,19 +36,11 @@ export const UseGetFacultyAnnouncementDetail = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDetail(data)
-    }
-  }, [data])
-
-  return { detail, loading }
+  return { detail: data, loading }
 }
 
 export const UseGetFacultyAnnouncementStatus = () => {
-  const [status, setStatus] = useState<INewsStatus>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<INewsStatus>({
     queryKey: ['faculty-announcement-status'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/fakultas/pengumuman/status').then((res) => res.data?.data),
@@ -65,18 +48,10 @@ export const UseGetFacultyAnnouncementStatus = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setStatus(data)
-    }
-  }, [data])
-
-  return { status, loading }
+  return { status: data, loading }
 }
 
 export const UseGetLogAnnouncementFaculty = (id: string) => {
-  const [logData, setLogData] = useState<any[]>([])
-
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['log-faculty', id],
     refetchOnWindowFocus: false,
@@ -85,19 +60,11 @@ export const UseGetLogAnnouncementFaculty = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLogData(data)
-    }
-  }, [data])
-
-  return { logData, loading }
+  return { logData: data ?? [], loading }
 }
 
 export const UseGetAnnouncementYear = () => {
-  const [year, setYear] = useState<number[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<number[]>({
     queryKey: ['announcement-year'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/fakultas/pengumuman/tahun').then((res) => res.data.data),
@@ -105,11 +72,5 @@ export const UseGetAnnouncementYear = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setYear(data)
-    }
-  }, [data])
-
-  return { year, loading }
+  return { year: data ?? [], loading }
 }

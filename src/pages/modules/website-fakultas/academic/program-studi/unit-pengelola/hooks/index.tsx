@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { IManagementUnit } from '@/pages/modules/website-fakultas/about-faculty/unit-pengelola/data/resolver.tsx'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
@@ -11,9 +10,6 @@ interface Props extends BasicProps {
 
 export const UseGetProdiUnit = (props?: Props) => {
   const { id_unit, search, page, limit } = props ?? {}
-
-  const [prodiUser, setProdiUser] = useState<IManagementUnit[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const Params = new URLSearchParams()
   if (page) Params.append('page', page ?? '1')
@@ -31,12 +27,9 @@ export const UseGetProdiUnit = (props?: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setProdiUser(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { prodiUser, loading, meta }
+  return {
+    prodiUser: data?.data ?? [] as IManagementUnit[],
+    loading,
+    meta: data?.meta as Meta | undefined,
+  }
 }
