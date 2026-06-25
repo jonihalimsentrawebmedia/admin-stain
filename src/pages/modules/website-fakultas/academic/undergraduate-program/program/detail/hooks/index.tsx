@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
@@ -6,8 +5,6 @@ import type { BasicProps } from '@/utils/globalType.ts'
 import type { IProgramUndergraduatePartner } from '../data/types'
 
 export const UseGetDetailProgram = (id: string) => {
-  const [detail, setDetail] = useState<{ isi: string }>()
-
   const { data, isFetching, isLoading } = useQuery({
     queryKey: ['detail-program', id],
     refetchOnWindowFocus: false,
@@ -19,18 +16,10 @@ export const UseGetDetailProgram = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDetail(data)
-    }
-  }, [data])
-
-  return { detail, loading }
+  return { detail: data as { isi: string } | undefined, loading }
 }
 
 export const useGetDetailPricingDetail = (id: string) => {
-  const [pricing, setPricing] = useState<{ isi: string }>()
-
   const { data, isFetching, isLoading } = useQuery({
     queryKey: ['detail-pricing', id],
     refetchOnWindowFocus: false,
@@ -42,13 +31,7 @@ export const useGetDetailPricingDetail = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setPricing(data)
-    }
-  }, [data])
-
-  return { pricing, loading }
+  return { pricing: data as { isi: string } | undefined, loading }
 }
 
 interface Props extends BasicProps {
@@ -57,9 +40,6 @@ interface Props extends BasicProps {
 
 export const UseGetUniversityPartner = (props: Props) => {
   const { id, search, limit, page } = props
-
-  const [partner, setPartner] = useState<IProgramUndergraduatePartner[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const Params = new URLSearchParams()
   if (search) Params.append('search', search ?? '')
@@ -77,12 +57,9 @@ export const UseGetUniversityPartner = (props: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setPartner(data?.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { partner, loading, meta }
+  return {
+    partner: data?.data ?? [] as IProgramUndergraduatePartner[],
+    loading,
+    meta: data?.meta as Meta | undefined,
+  }
 }

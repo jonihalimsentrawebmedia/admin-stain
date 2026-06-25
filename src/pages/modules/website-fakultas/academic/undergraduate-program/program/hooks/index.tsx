@@ -1,6 +1,5 @@
 // public-fakultas/international-ungreaduate-program
 
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
@@ -9,9 +8,6 @@ import type { IProgramUndergraduate } from '../data/types.ts'
 
 export const UseGetListProgram = (props?: BasicProps) => {
   const { search, page, limit } = props ?? {}
-
-  const [program, setProgram] = useState<IProgramUndergraduate[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const Params = new URLSearchParams()
   if (search) Params.append('search', search ?? '')
@@ -29,12 +25,9 @@ export const UseGetListProgram = (props?: BasicProps) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setProgram(data?.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { program, loading, meta }
+  return {
+    program: data?.data ?? [] as IProgramUndergraduate[],
+    loading,
+    meta: data?.meta as Meta | undefined,
+  }
 }

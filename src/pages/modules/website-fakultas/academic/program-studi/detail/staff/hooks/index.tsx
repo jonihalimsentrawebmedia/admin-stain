@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import type { BasicProps } from '@/utils/globalType.ts'
 import { useQuery } from '@tanstack/react-query'
@@ -11,9 +10,6 @@ interface StaffProps extends BasicProps {
 
 export const UseGetStaff = (props: StaffProps) => {
   const { search, limit, page, id_unit } = props
-
-  const [staff, setStaff] = useState<IStaff[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const Params = new URLSearchParams()
   if (page) Params.append('page', page ?? '1')
@@ -31,12 +27,9 @@ export const UseGetStaff = (props: StaffProps) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setStaff(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { staff, loading, meta }
+  return {
+    staff: data?.data ?? [] as IStaff[],
+    loading,
+    meta: data?.meta as Meta | undefined,
+  }
 }

@@ -6,7 +6,7 @@ import { RegisterPricing } from '../component/register-pricing/index.tsx'
 import ListBankAccount from '../component/bankAccount/index.tsx'
 import { FormContactAndMoreNoted } from '../component/form/formContactAndMoreNoted.tsx'
 
-export const GenerateTabsData = () => {
+export const GenerateTabsData = (title: string) => {
   const id = window.localStorage.getItem('id_program')
   const { detail } = UseGetStatusProgram(id as string)
   const status = detail?.status_pengisian
@@ -16,7 +16,13 @@ export const GenerateTabsData = () => {
       value: 'is_informasi_pendaftaran',
       status: status?.is_informasi_pendaftaran ?? false,
       label: 'Informasi Program',
-      element: <FormInformation status={detail?.status} next_value={'is_topik_bahasan_jadwal'} />,
+      element: (
+        <FormInformation
+          title={title}
+          status={detail?.status}
+          next_value={'is_topik_bahasan_jadwal'}
+        />
+      ),
     },
     {
       value: 'is_topik_bahasan_jadwal',
@@ -24,6 +30,7 @@ export const GenerateTabsData = () => {
       label: 'Topik Bahasan & Jadwal',
       element: (
         <TopicScheduleSection
+          title={title}
           prev_value={'is_informasi_pendaftaran'}
           next_value={'is_persyaratan'}
         />
@@ -34,7 +41,11 @@ export const GenerateTabsData = () => {
       status: status?.is_persyaratan ?? false,
       label: 'Persyaratan',
       element: (
-        <FormCondition next_value={'is_biaya_pendaftaran'} prev_value={'is_topik_bahasan_jadwal'} />
+        <FormCondition
+          title={title}
+          next_value={'is_biaya_pendaftaran'}
+          prev_value={'is_topik_bahasan_jadwal'}
+        />
       ),
     },
     {
@@ -42,7 +53,11 @@ export const GenerateTabsData = () => {
       status: status?.is_biaya_pendaftaran ?? false,
       label: 'Biaya Pendaftaran',
       element: (
-        <RegisterPricing prev_value={'is_persyaratan'} next_value={'is_rekening_penerimaan'} />
+        <RegisterPricing
+          title={title}
+          prev_value={'is_persyaratan'}
+          next_value={'is_rekening_penerimaan'}
+        />
       ),
     },
     {
@@ -51,6 +66,7 @@ export const GenerateTabsData = () => {
       label: 'Rekening Penerimaan',
       element: (
         <ListBankAccount
+          title={title}
           prev_value={'is_biaya_pendaftaran'}
           next_value={'is_kontak_catatan_tambahan'}
         />
@@ -60,7 +76,7 @@ export const GenerateTabsData = () => {
       value: 'is_kontak_catatan_tambahan',
       status: status?.is_kontak_catatan_tambahan ?? false,
       label: 'Kontak & Catatan Tambahan',
-      element: <FormContactAndMoreNoted prev_value={'is_rekening_penerimaan'} />,
+      element: <FormContactAndMoreNoted title={title} prev_value={'is_rekening_penerimaan'} />,
     },
   ]
 }

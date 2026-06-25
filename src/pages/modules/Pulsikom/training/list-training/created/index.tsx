@@ -4,11 +4,11 @@ import { clsx } from 'clsx'
 import { GenerateTabsData } from '@/pages/modules/Pulsikom/training/list-training/data'
 import { useSearchParams } from 'react-router-dom'
 
-interface Propss {
+interface Props {
   title: string
 }
 
-export const CreatedTraining = (props: Propss) => {
+export const CreatedTraining = (props: Props) => {
   const { title } = props
   const [searchParams, setSearchParams] = useSearchParams()
   const step = searchParams.get('step')
@@ -39,7 +39,7 @@ export const CreatedTraining = (props: Propss) => {
 
   return (
     <>
-      <div className="py-5 bg-white">
+      <div className="py-5 bg-white relative">
         <Tabs
           value={step ?? 'is_informasi_pendaftaran'}
           onValueChange={(e) => HandleStep(e)}
@@ -47,7 +47,7 @@ export const CreatedTraining = (props: Propss) => {
         >
           <TabsList
             className={
-              'flex flex-col gap-2 h-full items-start min-w-[220px]! bg-white border p-3 rounded-none'
+              'flex flex-col gap-2 mt-[55px] h-full items-start min-w-[180px]! bg-white border p-3 rounded-none'
             }
           >
             {TabsData?.map((item, k) => (
@@ -57,14 +57,14 @@ export const CreatedTraining = (props: Propss) => {
                 value={item?.value}
                 className={clsx(
                   'rounded-none bg-white shadow-none! whitespace-pre-wrap text-start',
-                  'p-0 w-full'
+                  'p-0 w-full text-xs'
                 )}
               >
                 <div className={'flex items-center gap-1.5 text-sm w-full'}>
                   <div
                     className={clsx(
                       'flex items-center justify-center',
-                      'size-8 min-w-8 h-8 rounded text-white',
+                      'size-6 min-w-6 h-6 rounded text-white text-xs',
                       item?.value === step
                         ? 'bg-primary'
                         : item?.status
@@ -74,7 +74,7 @@ export const CreatedTraining = (props: Propss) => {
                   >
                     {k + 1}
                   </div>
-                  <p className={clsx(item?.value === step ? 'text-gray-800' : 'text-gray-400')}>
+                  <p className={clsx(item?.value === step ? 'text-gray-800' : 'text-gray-400','text-xs')}>
                     {item?.label}
                   </p>
                 </div>
@@ -82,7 +82,7 @@ export const CreatedTraining = (props: Propss) => {
             ))}
           </TabsList>
           {TabsData?.map((row, k) => (
-            <TabsContent key={k} value={row?.value}>
+            <TabsContent key={k} value={row?.value} className={'w-full'}>
               {row?.element}
             </TabsContent>
           ))}

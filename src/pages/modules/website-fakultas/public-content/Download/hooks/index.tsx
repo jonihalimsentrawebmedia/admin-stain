@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type {
   ICategoryDownload,
   IDownload,
@@ -14,8 +13,6 @@ interface Props {
 
 export const UseGetCategoryDownloadFaculty = (props?: Props) => {
   const { isGetAll } = props || {}
-  const [categoryDownload, setCategoryDownload] = useState<ICategoryDownload[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
@@ -32,7 +29,7 @@ export const UseGetCategoryDownloadFaculty = (props?: Props) => {
     if (search) ParamsSearch.append('search', search)
   }
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: ICategoryDownload[]; meta: Meta }>({
     queryKey: ['category-download-faculty', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -41,20 +38,13 @@ export const UseGetCategoryDownloadFaculty = (props?: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setCategoryDownload(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
+  const categoryDownload = data?.data ?? []
+  const meta = data?.meta
 
   return { categoryDownload, loading, meta }
 }
 
 export const UseGetDownloadFaculty = () => {
-  const [downloadUnit, setDownloadUnit] = useState<IDownload[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
@@ -65,7 +55,7 @@ export const UseGetDownloadFaculty = () => {
   if (search) ParamsSearch.append('search', search)
   if (category) ParamsSearch.append('id_kategori_berkas', category)
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: IDownload[]; meta: Meta }>({
     queryKey: ['download-faculty', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/fakultas/downloads?${ParamsSearch}`).then((res) => res.data),
@@ -73,20 +63,14 @@ export const UseGetDownloadFaculty = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDownloadUnit(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
+  const downloadUnit = data?.data ?? []
+  const meta = data?.meta
 
   return { downloadUnit, loading, meta }
 }
 
 export const UseGetDownloadFacultyDetail = (id: string) => {
-  const [downloadProdiDetail, setDownloadProdiDetail] = useState<IDownload>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IDownload>({
     queryKey: ['download-faculty-detail', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/fakultas/downloads/${id}`).then((res) => res.data?.data),
@@ -94,11 +78,5 @@ export const UseGetDownloadFacultyDetail = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDownloadProdiDetail(data)
-    }
-  }, [data])
-
-  return { downloadProdiDetail, loading }
+  return { downloadProdiDetail: data, loading }
 }

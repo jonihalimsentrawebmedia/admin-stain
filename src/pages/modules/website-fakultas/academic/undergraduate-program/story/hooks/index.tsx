@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
@@ -7,9 +6,6 @@ import type { BasicProps } from '@/utils/globalType.ts'
 
 export const UseGetStoryUnderGraduated = (props: BasicProps) => {
   const { search, page, limit } = props
-
-  const [story, setStory] = useState<IStoryMobility[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const Params = new URLSearchParams()
   if (search) Params.append('search', search ?? '')
@@ -27,19 +23,14 @@ export const UseGetStoryUnderGraduated = (props: BasicProps) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setStory(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { story, loading, meta }
+  return {
+    story: data?.data ?? [] as IStoryMobility[],
+    loading,
+    meta: data?.meta as Meta | undefined,
+  }
 }
 
 export const UseGetStoryDetailUnderGraduated = (id: string) => {
-  const [storyDetail, setStoryDetail] = useState<IStoryMobility>()
-
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['story-mobility', id],
     refetchOnWindowFocus: false,
@@ -51,11 +42,5 @@ export const UseGetStoryDetailUnderGraduated = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setStoryDetail(data)
-    }
-  }, [data])
-
-  return { storyDetail, loading }
+  return { storyDetail: data as IStoryMobility | undefined, loading }
 }

@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react'
-import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { BasicProps } from '@/utils/globalType.ts'
 import type { IGaleriAlbum } from '../data/types'
+import type { Meta } from '@/components/common/table/TablePagination.tsx'
 
 interface AlbumProps extends BasicProps {
   id_unit: string
@@ -12,15 +11,12 @@ interface AlbumProps extends BasicProps {
 export const UseGetGalleryAlbum = (props: AlbumProps) => {
   const { id_unit, page, limit, search } = props
 
-  const [album, setAlbum] = useState<IGaleriAlbum[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const Params = new URLSearchParams()
   if (page) Params.append('page', page ?? '1')
   if (limit) Params.append('limit', limit ?? '10')
   if (search) Params.append('search', search ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: IGaleriAlbum[]; meta: Meta }>({
     queryKey: ['gallery-album', id_unit, Params.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -31,14 +27,7 @@ export const UseGetGalleryAlbum = (props: AlbumProps) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setAlbum(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { album, loading, meta }
+  return { album: data?.data ?? [], loading, meta: data?.meta }
 }
 
 interface PhotoProps extends BasicProps {
@@ -48,16 +37,13 @@ interface PhotoProps extends BasicProps {
 export const UseGetGalleryPhoto = (props: PhotoProps) => {
   const { id_unit, page, limit, search, id_album } = props
 
-  const [photo, setPhoto] = useState<[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const Params = new URLSearchParams()
   if (page) Params.append('page', page ?? '1')
   if (limit) Params.append('limit', limit ?? '10')
   if (search) Params.append('search', search ?? '')
   if (id_album) Params.append('id_album', id_album ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: IGaleriAlbum[]; meta: Meta }>({
     queryKey: ['gallery-photo', id_unit, Params.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -68,28 +54,18 @@ export const UseGetGalleryPhoto = (props: PhotoProps) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setPhoto(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { photo, loading, meta }
+  return { photo: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export const UseGetGalleryVideo = (props: AlbumProps) => {
   const { id_unit, page, limit, search } = props
-
-  const [video, setVideo] = useState<[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const Params = new URLSearchParams()
   if (page) Params.append('page', page ?? '1')
   if (limit) Params.append('limit', limit ?? '10')
   if (search) Params.append('search', search ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: IGaleriAlbum[]; meta: Meta }>({
     queryKey: ['gallery-video', id_unit, Params.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -100,12 +76,5 @@ export const UseGetGalleryVideo = (props: AlbumProps) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setVideo(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { video, loading, meta }
+  return { video: data?.data ?? [], loading, meta: data?.meta }
 }

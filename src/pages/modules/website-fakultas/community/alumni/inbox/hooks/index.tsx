@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
@@ -8,15 +7,12 @@ import type { BasicProps } from '@/utils/globalType.ts'
 export const UseGetStoryInbox = (props: BasicProps) => {
   const { page, limit, search } = props
 
-  const [storyInbox, setStoryInbox] = useState<IInboxStory[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const Params = new URLSearchParams()
   if (search) Params.append('search', search ?? '')
   if (page) Params.append('page', page ?? '1')
   if (limit) Params.append('limit', limit ?? '10')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: IInboxStory[]; meta: Meta }>({
     queryKey: ['inbox-story', Params.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -25,20 +21,15 @@ export const UseGetStoryInbox = (props: BasicProps) => {
 
   const loading = isFetching || isLoading
 
-  useEffect(() => {
-    if (data) {
-      setMeta(data?.meta)
-      setStoryInbox(data?.data)
-    }
-  }, [data])
-
-  return { storyInbox, loading, meta }
+  return {
+    storyInbox: data?.data ?? [],
+    loading,
+    meta: data?.meta,
+  }
 }
 
 export const UseGetDetailStoryInbox = (id: string) => {
-  const [detail, setDetail] = useState<IInboxStory>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IInboxStory>({
     queryKey: ['inbox-story', id],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -47,11 +38,5 @@ export const UseGetDetailStoryInbox = (id: string) => {
 
   const loading = isFetching || isLoading
 
-  useEffect(() => {
-    if (data) {
-      setDetail(data)
-    }
-  }, [data])
-
-  return { loading, detail }
+  return { loading, detail: data }
 }

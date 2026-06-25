@@ -1,15 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { BasicProps } from '@/utils/globalType.ts'
-import { useEffect, useState } from 'react'
 import type { IAccreditation } from '@/pages/modules/website-fakultas/community/study-faculty/college-system/accreditation/data/types.ts'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 
 export const UseGetAccreditation = (props?: BasicProps) => {
   const { search, page, limit } = props ?? {}
-
-  const [accreditation, setAccreditation] = useState<IAccreditation[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const Params = new URLSearchParams()
   if (search) Params.set('search', search ?? '')
@@ -24,12 +20,9 @@ export const UseGetAccreditation = (props?: BasicProps) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setAccreditation(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { accreditation, loading, meta }
+  return {
+    accreditation: data?.data as IAccreditation[] ?? [],
+    loading,
+    meta: data?.meta as Meta | undefined,
+  }
 }

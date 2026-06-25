@@ -1,12 +1,9 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { IDescriptionCollaboration } from './types.tsx'
 
 export const UseGetDetailCollaboration = () => {
-  const [description, setDescription] = useState<IDescriptionCollaboration>()
-
-  const { data, isFetching, isLoading } = useQuery({
+  const { data, isFetching, isLoading } = useQuery<IDescriptionCollaboration>({
     queryKey: ['research-group'],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -15,11 +12,5 @@ export const UseGetDetailCollaboration = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDescription(data)
-    }
-  }, [data])
-
-  return { description, loading }
+  return { description: data ?? undefined, loading }
 }

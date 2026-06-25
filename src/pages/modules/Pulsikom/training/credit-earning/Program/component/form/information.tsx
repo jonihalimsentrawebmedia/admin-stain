@@ -14,17 +14,19 @@ import { Button } from '@/components/ui/button.tsx'
 import { ChevronRight } from 'lucide-react'
 import { v4 as uuidv4 } from 'uuid'
 import { useQueryClient } from '@tanstack/react-query'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { format } from 'date-fns'
 import { UseGetDetailInformationProgram } from '../../hooks/index'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 interface IProps {
   next_value: string
   status?: 'DRAFT' | 'DITERBITKAN' | 'DITUTUP'
+  title?: string
 }
 
 const FormInformation = (props: IProps) => {
-  const { next_value, status } = props
+  const { next_value, status, title } = props
   const [_, setSearchParams] = useSearchParams()
 
   const [loading, setLoading] = useState(false)
@@ -37,6 +39,7 @@ const FormInformation = (props: IProps) => {
   const uuid = uuidv4()
   const id = localStorage.getItem('id_program')
   const { detail } = UseGetDetailInformationProgram(id)
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (detail) {
@@ -58,7 +61,7 @@ const FormInformation = (props: IProps) => {
   }, [detail])
 
   const queryClient = useQueryClient()
-  const HandleSave = async (value: TResolverInformationProgram) => {
+  const HandleSave = async (value: TResolverInformationProgram | any) => {
     setLoading(true)
     const myUUid = id ?? uuid
     await AxiosClient.post(`/pusilkom/program/${myUUid}/informasi`, {
@@ -93,13 +96,48 @@ const FormInformation = (props: IProps) => {
   return (
     <>
       <Form {...form}>
-        <form className={'flex flex-col gap-4 w-full'} onSubmit={form.handleSubmit(HandleSave)}>
+        <form
+          className={'flex flex-col gap-4 w-full mt-[55px]'}
+          onSubmit={form.handleSubmit(HandleSave)}
+        >
+          <div className="absolute w-full top-0 left-0 py-2 z-20">
+            <ButtonTitleGroup
+              label={title ?? ''}
+              buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={`1. Informasi Training`}
+                      valueGuide="PUSILKOM_TRAINING_DAFTAR_TRAINING_FORM_INFORMASI"
+                    />
+                  ),
+                },
+                {
+                  type: 'cancel',
+                  label: 'Batal',
+                  onClick: () => navigate('/modules/pulsikom/training/credit-earning/program'),
+                },
+                {
+                  type: 'custom',
+                  element: (
+                    <Button disabled={loading} className={'text-white'}>
+                      Lanjutkan <ChevronRight className={'size-4'} />
+                    </Button>
+                  ),
+                },
+              ]}
+            />
+          </div>
+          <p className="text-lg font-semibold text-primary">1. Informasi Training</p>
+
           <UploadPhotoImage
             form={form}
             name={'url_gambar'}
             ratio_width={4}
             ratio_height={3}
             className={'w-[320px]'}
+            label={'Upload Gambar'}
           />
           <TextInput
             name={'nama_program'}
@@ -184,11 +222,12 @@ const FormInformation = (props: IProps) => {
               {
                 type: 'cancel',
                 label: 'Batal',
+                onClick: () => navigate('/modules/pulsikom/training/credit-earning/program'),
               },
               {
                 type: 'custom',
                 element: (
-                  <Button disabled={loading}>
+                  <Button disabled={loading} className={'text-white'}>
                     Lanjutkan <ChevronRight className={'size-4'} />
                   </Button>
                 ),

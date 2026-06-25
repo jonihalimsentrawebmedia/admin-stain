@@ -14,13 +14,16 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button.tsx'
 import { UseGetContactAndMoreNoteProgram } from '../../hooks/index.tsx'
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 interface IProps {
   prev_value: string
+  title?: string
 }
 
 export const FormContactAndMoreNoted = (props: IProps) => {
-  const { prev_value } = props
+  const { prev_value, title } = props
   const [loading, setLoading] = useState(false)
   const [searchParams] = useSearchParams()
   const from = searchParams.get('from')
@@ -90,8 +93,33 @@ export const FormContactAndMoreNoted = (props: IProps) => {
   return (
     <>
       <Form {...form}>
-        <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
-          <p className="text-xl font-semibold text-primary">6. Kontak & Catatan Tambahan </p>
+        <form className={'flex flex-col gap-4 mt-[55px]'} onSubmit={form.handleSubmit(HandleSave)}>
+          <div className="absolute w-full top-0 left-0 py-2 z-20">
+            <ButtonTitleGroup
+              label={title ?? ''}
+              buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={`6. Kontak & Catatan Tambahan`}
+                      valueGuide="PUSILKOM_TRAINING_DAFTAR_TRAINING_FORM_KONTAK_CATATAN_TAMBAHAN"
+                    />
+                  ),
+                },
+                {
+                  type: 'cancel',
+                  label: 'Batal',
+                  onClick: () => navigate('/modules/pulsikom/training/credit-earning/program'),
+                },
+                {
+                  type: 'save',
+                  label: 'Simpan',
+                },
+              ]}
+            />
+          </div>
+          <p className="text-xl text-primary font-semibold">6. Kontak & Catatan Tambahan</p>
           <CheckboxInputBasic
             name={'is_kontak_unit'}
             form={form}
@@ -148,7 +176,12 @@ export const FormContactAndMoreNoted = (props: IProps) => {
               <ArrowLeft className={'size-4'} />
               Rekening Penerimaan
             </Button>
-            <ButtonForm loading={loading} />
+            <ButtonForm
+              loading={loading}
+              onCancel={() => {
+                navigate('/modules/pulsikom/training/credit-earning/program')
+              }}
+            />
           </div>
         </form>
       </Form>

@@ -102,7 +102,7 @@ export default function DashboardFaculty() {
             <CardContent className="p-4 relative">
               <p className="text-sm">{item.label}</p>
               <p className="text-xl font-bold">
-                {new Intl.NumberFormat('id-ID').format(item.value)}
+                {new Intl.NumberFormat('id-ID').format(item.value ?? 0)}
               </p>
               {item?.icon}
             </CardContent>

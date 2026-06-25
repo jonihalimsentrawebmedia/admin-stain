@@ -59,13 +59,13 @@ export const CreditEarningPage = () => {
           <Form {...form}>
             <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
               <ButtonTitleGroup
-                label={'Visi Misi'}
+                label={'Edit Program Credit Earning'}
                 buttonGroup={[
                   {
                     type: 'custom',
                     element: (
                       <ButtonGoToGuide
-                        titleGuide={`Visi Misi`}
+                        titleGuide={`Program Credit Earning`}
                         valueGuide="PUSILKOM_TRAINING_PROGRAM_CREDIT_EARNING"
                       />
                     ),
@@ -104,7 +104,7 @@ export const CreditEarningPage = () => {
         ) : (
           <>
             <ButtonTitleGroup
-              label={'Visi Misi'}
+              label={'Program Credit Earning'}
               buttonGroup={[
                 {
                   type: 'custom',
@@ -121,7 +121,7 @@ export const CreditEarningPage = () => {
                 },
                 {
                   type: 'edit',
-                  label: 'Edit Visi Misi',
+                  label: 'Edit Konten',
                   onClick: () => setIsEdit(!isEdit),
                 },
               ]}

@@ -18,7 +18,7 @@ import { Button } from '@/components/ui/button.tsx'
 import { ChevronRight } from 'lucide-react'
 import { v4 as uuidv4 } from 'uuid'
 import { useQueryClient } from '@tanstack/react-query'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { format } from 'date-fns'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
@@ -31,6 +31,7 @@ interface IProps {
 const FormInformation = (props: IProps) => {
   const { next_value, status, title } = props
   const [_, setSearchParams] = useSearchParams()
+  const navigate = useNavigate()
 
   const [loading, setLoading] = useState(false)
   const form = useForm<TResolverInformationTraining>({
@@ -64,7 +65,7 @@ const FormInformation = (props: IProps) => {
   }, [detail])
 
   const queryClient = useQueryClient()
-  const HandleSave = async (value: TResolverInformationTraining) => {
+  const HandleSave = async (value: TResolverInformationTraining | any) => {
     setLoading(true)
     const myUUid = id ?? uuid
     await AxiosClient.post(`/pusilkom/training/${myUUid}/informasi`, {
@@ -85,9 +86,13 @@ const FormInformation = (props: IProps) => {
           queryClient.invalidateQueries({
             queryKey: ['status-training'],
           })
-          const Params = new URLSearchParams()
-          Params.append('step', next_value)
-          setSearchParams(Params)
+          if (value.draft) {
+            navigate('/modules/pulsikom/training/list-training')
+          } else {
+            const Params = new URLSearchParams()
+            Params.append('step', next_value)
+            setSearchParams(Params)
+          }
         }
       })
       .catch((err) => {
@@ -99,38 +104,44 @@ const FormInformation = (props: IProps) => {
   return (
     <>
       <Form {...form}>
-        <form className={'flex flex-col gap-4 w-full'} onSubmit={form.handleSubmit(HandleSave)}>
-          <ButtonTitleGroup
-            label={title ?? ''}
-            buttonGroup={[
-              {
-                type: 'custom',
-                element: (
-                  <ButtonGoToGuide
-                    titleGuide={`1. Informasi Training`}
-                    valueGuide="PUSILKOM_TRAINING_DAFTAR_TRAINING_FORM_INFORMASI"
-                  />
-                ),
-              },
-              {
-                type: 'cancel',
-                label: 'Batal',
-              },
-              {
-                type: 'custom',
-                element: (
-                  <Button disabled={loading} className={'text-white'}>
-                    Lanjutkan <ChevronRight className={'size-4'} />
-                  </Button>
-                ),
-              },
-            ]}
-          />
-
+        <form
+          className={'flex flex-col gap-4 w-full mt-[55px]'}
+          onSubmit={form.handleSubmit(HandleSave)}
+        >
+          <div className="absolute w-full top-0 left-0 py-2 z-20">
+            <ButtonTitleGroup
+              label={title ?? ''}
+              buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={`1. Informasi Training`}
+                      valueGuide="PUSILKOM_TRAINING_DAFTAR_TRAINING_FORM_INFORMASI"
+                    />
+                  ),
+                },
+                {
+                  type: 'cancel',
+                  label: 'Batal',
+                  onClick: () => navigate('/modules/pulsikom/training/list-training'),
+                },
+                {
+                  type: 'custom',
+                  element: (
+                    <Button disabled={loading} className={'text-white'}>
+                      Lanjutkan <ChevronRight className={'size-4'} />
+                    </Button>
+                  ),
+                },
+              ]}
+            />
+          </div>
           <p className="text-lg font-semibold text-primary">1. Informasi Training</p>
 
           <UploadPhotoImage
             form={form}
+            label={'Upload Gambar'}
             name={'url_gambar'}
             ratio_width={4}
             ratio_height={3}
@@ -219,6 +230,7 @@ const FormInformation = (props: IProps) => {
               {
                 type: 'cancel',
                 label: 'Batal',
+                onClick: () => navigate('/modules/pulsikom/training/list-training'),
               },
               {
                 type: 'custom',

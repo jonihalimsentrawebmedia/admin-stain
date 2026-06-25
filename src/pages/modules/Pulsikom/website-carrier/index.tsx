@@ -126,6 +126,7 @@ export const WebsiteCarrierPage = () => {
             <div className="grid grid-cols-[12rem_1fr]">
               <p className="text-gray-500">URL/Link</p>
               <Link
+                target={'_blank'}
                 className={'text-blue-500 underline underline-offset-4'}
                 to={website?.url ?? '#'}
               >

@@ -7,7 +7,6 @@ import TextInput from '@/components/common/form/TextInput.tsx'
 import { RichText } from '@/components/common/richtext'
 import { UseGetDetailDataPulsikom } from '@/pages/modules/Pulsikom/data-pulsikom/hooks'
 import { useEffect, useState } from 'react'
-import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useNavigate, useSearchParams } from 'react-router-dom'
@@ -93,29 +92,33 @@ export const FormContactAndMoreNoted = (props: IProps) => {
   return (
     <>
       <Form {...form}>
-        <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
-          <ButtonTitleGroup
-            label={title ?? ''}
-            buttonGroup={[
-              {
-                type: 'custom',
-                element: (
-                  <ButtonGoToGuide
-                    titleGuide={`6. Kontak & Catatan Tambahan`}
-                    valueGuide="PUSILKOM_TRAINING_DAFTAR_TRAINING_FORM_KONTAK_CATATAN_TAMBAHAN"
-                  />
-                ),
-              },
-              {
-                type: 'cancel',
-                label: 'Batal',
-              },
-              {
-                type: 'save',
-                label: 'Simpan',
-              },
-            ]}
-          />
+        <form className={'flex flex-col gap-4 mt-[55px]'} onSubmit={form.handleSubmit(HandleSave)}>
+          <div className="absolute w-full top-0 left-0 py-2 z-20">
+            <ButtonTitleGroup
+              label={title ?? ''}
+              buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={`6. Kontak & Catatan Tambahan`}
+                      valueGuide="PUSILKOM_TRAINING_DAFTAR_TRAINING_FORM_KONTAK_CATATAN_TAMBAHAN"
+                    />
+                  ),
+                },
+                {
+                  type: 'cancel',
+                  label: 'Batal',
+                  onClick: () => navigate('/modules/pulsikom/training/list-training'),
+                },
+                {
+                  type: 'save',
+                  label: 'Simpan',
+                  isDisabled: loading,
+                },
+              ]}
+            />
+          </div>
           <p className="text-xl text-primary font-semibold">6. Kontak & Catatan Tambahan</p>
 
           <CheckboxInputBasic
@@ -131,7 +134,6 @@ export const FormContactAndMoreNoted = (props: IProps) => {
             label={'Nomor Telepon'}
             placeholder={'Nomor Telepon'}
             type={'number'}
-            isRow
             isRequired
           />
           <TextInput
@@ -141,7 +143,6 @@ export const FormContactAndMoreNoted = (props: IProps) => {
             label={'Email'}
             placeholder={'Email'}
             type={'email'}
-            isRow
             isRequired
           />
           <TextInput
@@ -150,7 +151,6 @@ export const FormContactAndMoreNoted = (props: IProps) => {
             form={form}
             label={'Alamat'}
             placeholder={'Alamat'}
-            isRow
             isRequired
           />
 
@@ -158,8 +158,8 @@ export const FormContactAndMoreNoted = (props: IProps) => {
             form={form}
             name={'catatan_tambahan'}
             label={'Catatan Tambahan'}
-            isRow
             required
+            isRow={false}
           />
 
           <div className="flex items-center justify-between">
@@ -174,7 +174,21 @@ export const FormContactAndMoreNoted = (props: IProps) => {
               <ArrowLeft className={'size-4'} />
               Rekening Penerimaan
             </Button>
-            <ButtonForm loading={loading} />
+            <ButtonTitleGroup
+              label={''}
+              buttonGroup={[
+                {
+                  type: 'cancel',
+                  label: 'Batal',
+                  onClick: () => navigate('/modules/pulsikom/training/list-training'),
+                },
+                {
+                  type: 'save',
+                  label: 'Simpan',
+                  isDisabled: loading,
+                },
+              ]}
+            />
           </div>
         </form>
       </Form>
