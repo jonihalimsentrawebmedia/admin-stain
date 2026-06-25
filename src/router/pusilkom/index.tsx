@@ -605,11 +605,11 @@ export const PusilkomRoutes = [
               },
               {
                 path: 'add',
-                element: <CreatedProgram />,
+                element: <CreatedProgram title={'Tambah Program Credit Earning'} />,
               },
               {
                 path: 'edit/:id',
-                element: <CreatedProgram />,
+                element: <CreatedProgram title={'Edit Program Credit Earning'} />,
               },
               {
                 path: 'detail/:id',

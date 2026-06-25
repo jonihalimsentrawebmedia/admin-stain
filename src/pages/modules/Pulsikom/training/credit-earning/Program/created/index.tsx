@@ -4,7 +4,12 @@ import { clsx } from 'clsx'
 import { GenerateTabsData } from '../data/GenerateTabs'
 import { useSearchParams } from 'react-router-dom'
 
-export const CreatedProgram = () => {
+interface Props {
+  title: string
+}
+
+export const CreatedProgram = (props:Props) => {
+  const { title } = props
   const [searchParams, setSearchParams] = useSearchParams()
   const step = searchParams.get('step')
   const from = searchParams.get('from')
@@ -24,7 +29,7 @@ export const CreatedProgram = () => {
     setSearchParams(Params)
   }
 
-  const TabsData = GenerateTabsData()
+  const TabsData = GenerateTabsData(title)
 
   const canAccess = (index: number) => {
     if (index === 0) return false
@@ -34,7 +39,7 @@ export const CreatedProgram = () => {
 
   return (
     <>
-      <div className="py-5 bg-white">
+      <div className="py-5 bg-white relative">
         <Tabs
           value={step ?? 'is_informasi_pendaftaran'}
           onValueChange={(e) => HandleStep(e)}
@@ -42,7 +47,7 @@ export const CreatedProgram = () => {
         >
           <TabsList
             className={
-              'flex flex-col gap-2 h-full items-start max-w-[220px]! bg-white border p-3 rounded-none'
+              'flex flex-col gap-2 mt-[55px] h-full items-start min-w-[220px]! bg-white border p-3 rounded-none'
             }
           >
             {TabsData?.map((item, k) => (

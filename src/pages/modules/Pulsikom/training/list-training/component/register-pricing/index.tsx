@@ -2,7 +2,7 @@ import { UseGetRegisterPricing } from '@/pages/modules/Pulsikom/training/list-tr
 import { ButtonAddRegisterPricing } from './buttonAdd.tsx'
 import { ButtonEditRegisterPricing } from '@/pages/modules/Pulsikom/training/list-training/component/register-pricing/buttonEdit.tsx'
 import { ButtonDeleteRegisterPricing } from '@/pages/modules/Pulsikom/training/list-training/component/register-pricing/buttonDelete.tsx'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button.tsx'
 import { ArrowLeft, ChevronRight } from 'lucide-react'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
@@ -16,10 +16,10 @@ interface Props {
 
 export const RegisterPricing = (props: Props) => {
   const { prev_value, next_value, title } = props
-
   const id = window.localStorage.getItem('id_training')
   const { registerPricing } = UseGetRegisterPricing(id as string)
   const [_, setSearchParams] = useSearchParams()
+  const navigate = useNavigate()
 
   const HandlePrev = () => {
     const Params = new URLSearchParams()
@@ -37,33 +37,36 @@ export const RegisterPricing = (props: Props) => {
 
   return (
     <>
-      <div className={'space-y-5'}>
-        <ButtonTitleGroup
-          label={title ?? ''}
-          buttonGroup={[
-            {
-              type: 'custom',
-              element: (
-                <ButtonGoToGuide
-                  titleGuide={`4. Biaya Pendaftaran`}
-                  valueGuide="PUSILKOM_TRAINING_DAFTAR_TRAINING_FORM_BIAYA_PENDAFTARAN"
-                />
-              ),
-            },
-            {
-              type: 'cancel',
-              label: 'Batal',
-            },
-            {
-              type: 'custom',
-              element: (
-                <Button onClick={HandleNext} className={'text-white'}>
-                  Lanjutkan <ChevronRight className={'size-4'} />
-                </Button>
-              ),
-            },
-          ]}
-        />
+      <div className={'space-y-5 mt-[55px]'}>
+        <div className="absolute w-full top-0 left-0 py-2 z-20">
+          <ButtonTitleGroup
+            label={title ?? ''}
+            buttonGroup={[
+              {
+                type: 'custom',
+                element: (
+                  <ButtonGoToGuide
+                    titleGuide={`4. Biaya Pendaftaran`}
+                    valueGuide="PUSILKOM_TRAINING_DAFTAR_TRAINING_FORM_BIAYA_PENDAFTARAN"
+                  />
+                ),
+              },
+              {
+                type: 'cancel',
+                label: 'Batal',
+                onClick: () => navigate('/modules/pulsikom/training/list-training'),
+              },
+              {
+                type: 'custom',
+                element: (
+                  <Button onClick={HandleNext} className={'text-white'}>
+                    Lanjutkan <ChevronRight className={'size-4'} />
+                  </Button>
+                ),
+              },
+            ]}
+          />
+        </div>
         <p className="text-xl font-semibold text-primary">4. Biaya Pendaftaran</p>
 
         {registerPricing?.length === 0 ? (
@@ -109,6 +112,7 @@ export const RegisterPricing = (props: Props) => {
               {
                 type: 'cancel',
                 label: 'Batal',
+                onClick: () => navigate('/modules/pulsikom/training/list-training'),
               },
               {
                 type: 'custom',

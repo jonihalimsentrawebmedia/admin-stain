@@ -7,28 +7,32 @@ import { ArrowLeft, ChevronRight } from 'lucide-react'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { TableBasicBank } from '@/components/common/table/tableRekening.tsx'
 import { useQueryClient } from '@tanstack/react-query'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 interface Props {
   prev_value: string
   next_value: string
+  title?: string
 }
 
 const ListBankAccount = (props: Props) => {
-  const { prev_value, next_value } = props
+  const { title, prev_value, next_value } = props
 
   const id = window.localStorage.getItem('id_program')
   const { bankAccount } = UseGetBankAccountProgram(id as string)
-
   const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({})
+  const navigate = useNavigate()
 
   useEffect(() => {
-    const result: Record<string, boolean> = Object.fromEntries(
-      bankAccount.map((item) => [item.id_rekening, true])
-    )
-    setRowSelection(result)
+    if (bankAccount.length > 0) {
+      const result: Record<string, boolean> = Object.fromEntries(
+        bankAccount?.map((item) => [item.id_rekening, true])
+      )
+      setRowSelection(result)
+    }
   }, [bankAccount])
 
   const { bankAccount: list, loading } = LinkBank({
@@ -76,43 +80,75 @@ const ListBankAccount = (props: Props) => {
 
   return (
     <>
-      <p className="text-xl font-semibold text-primary pb-2.5">5. Rekening Penerimaan</p>
-      <TableBasicBank
-        className={'pb-2.5'}
-        columns={columns as any}
-        data={list as any}
-        loading={loading}
-        rowIdKey="id_rekening"
-        rowSelection={rowSelection}
-        onRowSelectionChange={setRowSelection}
-      />
-
-      <div className="flex items-center justify-between mt-4">
-        <Button
-          variant={'outline'}
-          className={'border-primary text-primary hover:text-primary'}
-          onClick={HandlePrev}
-        >
-          <ArrowLeft className={'size-4'} />
-          Persyaratan
-        </Button>
-        <ButtonTitleGroup
-          label={''}
-          buttonGroup={[
-            {
-              type: 'cancel',
-              label: 'Batal',
-            },
-            {
-              type: 'custom',
-              element: (
-                <Button disabled={loading} onClick={HandleSave}>
-                  Lanjutkan <ChevronRight className={'size-4'} />
-                </Button>
-              ),
-            },
-          ]}
+      <div className="flex flex-col gap-5 mt-[55px]">
+        <div className="absolute w-full top-0 left-0 py-2 z-20">
+          <ButtonTitleGroup
+            label={title ?? ''}
+            buttonGroup={[
+              {
+                type: 'custom',
+                element: (
+                  <ButtonGoToGuide
+                    titleGuide={`5. Rekening Penerimaan`}
+                    valueGuide="PUSILKOM_TRAINING_DAFTAR_TRAINING_FORM_REKENING_PENDAFTARAN"
+                  />
+                ),
+              },
+              {
+                type: 'cancel',
+                label: 'Batal',
+                onClick: () => navigate('/modules/pulsikom/training/credit-earning/program'),
+              },
+              {
+                type: 'custom',
+                element: (
+                  <Button disabled={loading} onClick={HandleSave} className={'text-white'}>
+                    Lanjutkan <ChevronRight className={'size-4'} />
+                  </Button>
+                ),
+              },
+            ]}
+          />
+        </div>
+        <p className="text-xl font-semibold text-primary">5. Rekening Penerimaan</p>
+        <TableBasicBank
+          className={'pb-2.5'}
+          columns={columns as any}
+          data={list as any}
+          loading={loading}
+          rowIdKey="id_rekening"
+          rowSelection={rowSelection}
+          onRowSelectionChange={setRowSelection}
         />
+
+        <div className="flex items-center justify-between mt-4">
+          <Button
+            variant={'outline'}
+            className={'border-primary text-primary hover:text-primary'}
+            onClick={HandlePrev}
+          >
+            <ArrowLeft className={'size-4'} />
+            Persyaratan
+          </Button>
+          <ButtonTitleGroup
+            label={''}
+            buttonGroup={[
+              {
+                type: 'cancel',
+                label: 'Batal',
+                onClick: () => navigate('/modules/pulsikom/training/credit-earning/program'),
+              },
+              {
+                type: 'custom',
+                element: (
+                  <Button disabled={loading} onClick={HandleSave} className={'text-white'}>
+                    Lanjutkan <ChevronRight className={'size-4'} />
+                  </Button>
+                ),
+              },
+            ]}
+          />
+        </div>
       </div>
     </>
   )

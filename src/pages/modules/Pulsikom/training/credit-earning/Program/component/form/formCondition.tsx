@@ -9,20 +9,23 @@ import { Button } from '@/components/ui/button.tsx'
 import { ArrowLeft, ChevronRight } from 'lucide-react'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { useQueryClient } from '@tanstack/react-query'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide.tsx'
 
 interface IProps {
   prev_value: string
   next_value: string
+  title?: string
 }
 
 export const FormCondition = (props: IProps) => {
-  const { prev_value, next_value } = props
+  const { title, prev_value, next_value } = props
   const id = window.localStorage.getItem('id_program')
   const { condition } = UseGetConditionProgram(id as string)
   const [loading, setLoading] = useState(false)
   const form = useForm()
   const [_, setSearchParams] = useSearchParams()
+  const navigate = useNavigate()
 
   const HandlePrev = () => {
     const Params = new URLSearchParams()
@@ -69,7 +72,38 @@ export const FormCondition = (props: IProps) => {
   return (
     <>
       <Form {...form}>
-        <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
+        <form className={'flex flex-col gap-4 mt-[55px]'} onSubmit={form.handleSubmit(HandleSave)}>
+          <div className="absolute w-full top-0 left-0 py-2 z-20">
+            <ButtonTitleGroup
+              label={title ?? ''}
+              buttonGroup={[
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide={`3. Persyaratan`}
+                      valueGuide="PUSILKOM_TRAINING_DAFTAR_TRAINING_FORM_PERSYARATAN"
+                    />
+                  ),
+                },
+                {
+                  type: 'cancel',
+                  label: 'Batal',
+                  onClick: () => navigate('/modules/pulsikom/training/credit-earning/program'),
+                },
+                {
+                  type: 'custom',
+                  element: (
+                    <Button disabled={loading} className={'text-white'}>
+                      Lanjutkan <ChevronRight className={'size-4'} />
+                    </Button>
+                  ),
+                },
+              ]}
+            />
+          </div>
+          <p className="text-xl font-semibold text-primary">3. Persyaratan</p>
+
           <RichText form={form} name={'isi'} label={'Persyaratan'} isRow={false} />
 
           <div className="flex items-center justify-between">
@@ -90,11 +124,12 @@ export const FormCondition = (props: IProps) => {
                 {
                   type: 'cancel',
                   label: 'Batal',
+                  onClick: () => navigate('/modules/pulsikom/training/credit-earning/program'),
                 },
                 {
                   type: 'custom',
                   element: (
-                    <Button disabled={loading}>
+                    <Button disabled={loading} className={'text-white'}>
                       Lanjutkan <ChevronRight className={'size-4'} />
                     </Button>
                   ),

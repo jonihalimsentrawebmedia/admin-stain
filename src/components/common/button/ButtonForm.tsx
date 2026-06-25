@@ -36,7 +36,7 @@ const ButtonForm = ({ loading, onCancel, position = 'justify-end', label, classN
         disabled={loading}
         className={clsx(
           className,
-          'border-primary text-white bg-primary hover:text-white hover:bg-primary/80'
+          'border-primary text-white! bg-primary hover:text-white hover:bg-primary/80'
         )}
       >
         {label ?? (

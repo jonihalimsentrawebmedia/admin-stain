@@ -5,7 +5,7 @@ import { ButtonEditTopicSchedule } from '@/pages/modules/Pulsikom/training/list-
 import { ButtonDeleteTopicSchedule } from '@/pages/modules/Pulsikom/training/list-training/component/topic-schedule/buttonDelete.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { ArrowLeft, ChevronRight } from 'lucide-react'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { useQueryClient } from '@tanstack/react-query'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
@@ -19,9 +19,9 @@ interface Props {
 export const TopicScheduleSection = (props: Props) => {
   const { prev_value, next_value, title } = props
   const [_, setSearchParams] = useSearchParams()
-
   const id = window.localStorage.getItem('id_training')
   const { topic } = UseGetTopicAndSchedule(id as string)
+  const navigate = useNavigate()
 
   const HandlePrev = () => {
     const Params = new URLSearchParams()
@@ -43,33 +43,36 @@ export const TopicScheduleSection = (props: Props) => {
 
   return (
     <>
-      <div className={'space-y-5'}>
-        <ButtonTitleGroup
-          label={title}
-          buttonGroup={[
-            {
-              type: 'custom',
-              element: (
-                <ButtonGoToGuide
-                  titleGuide={`Topik Bahasan & Jadwal`}
-                  valueGuide="PUSILKOM_TRAINING_DAFTAR_TRAINING_FORM_TOPIK_BAHASAN_JADWAL"
-                />
-              ),
-            },
-            {
-              type: 'cancel',
-              label: 'Batal',
-            },
-            {
-              type: 'custom',
-              element: (
-                <Button onClick={HandleNext} className={'text-white'}>
-                  Lanjutkan <ChevronRight className={'size-4'} />
-                </Button>
-              ),
-            },
-          ]}
-        />
+      <div className={'space-y-5 mt-[55px]'}>
+        <div className="absolute w-full top-0 left-0 py-2 z-20">
+          <ButtonTitleGroup
+            label={title}
+            buttonGroup={[
+              {
+                type: 'custom',
+                element: (
+                  <ButtonGoToGuide
+                    titleGuide={`Topik Bahasan & Jadwal`}
+                    valueGuide="PUSILKOM_TRAINING_DAFTAR_TRAINING_FORM_TOPIK_BAHASAN_JADWAL"
+                  />
+                ),
+              },
+              {
+                type: 'cancel',
+                label: 'Batal',
+                onClick: () => navigate('/modules/pulsikom/training/list-training'),
+              },
+              {
+                type: 'custom',
+                element: (
+                  <Button onClick={HandleNext} className={'text-white'}>
+                    Lanjutkan <ChevronRight className={'size-4'} />
+                  </Button>
+                ),
+              },
+            ]}
+          />
+        </div>
         <p className="text-xl font-semibold text-primary">2. Topik Bahasan & Jadwal</p>
 
         {topic?.length === 0 ? (
@@ -119,6 +122,7 @@ export const TopicScheduleSection = (props: Props) => {
               {
                 type: 'cancel',
                 label: 'Batal',
+                onClick: () => navigate('/modules/pulsikom/training/list-training'),
               },
               {
                 type: 'custom',
