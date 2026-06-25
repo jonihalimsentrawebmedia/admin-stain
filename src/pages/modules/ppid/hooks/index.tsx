@@ -12,7 +12,7 @@ export interface ISessionPPID {
 }
 
 export const UseGetPPIDSession = () => {
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<ISessionPPID>({
     queryKey: ['session-ppid'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/unit-ppid/user-session').then((res) => res.data?.data),
@@ -41,7 +41,7 @@ interface Props {
   queryKey: string
 }
 export const UseGetWebsitePPIDGlobal = ({ link, queryKey }: Props) => {
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<ISatuanOrganisasiProfil>({
     queryKey: [queryKey],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(link).then((res) => res.data?.data),
