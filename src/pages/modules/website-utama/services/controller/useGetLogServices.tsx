@@ -12,8 +12,9 @@ const [searchParams] = useSearchParams()
 
   const ParamsSearch = new URLSearchParams({ page, limit, search })
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['log-services',{ page, limit, search }],
+    queryKey: ['log-services', id, { page, limit, search }],
     refetchOnWindowFocus: false,
+    enabled: !!id,
     queryFn: () =>
       AxiosClient.get(`/website-utama/layanan-log/${id}?${ParamsSearch}`).then(
         (res) => res.data

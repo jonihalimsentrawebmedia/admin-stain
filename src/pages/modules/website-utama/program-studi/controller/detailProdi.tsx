@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
@@ -13,9 +12,7 @@ export interface DetailProdi {
 }
 
 export const UseGetDetailProdi = (id: string) => {
-  const [detailProdi, setDetailProdi] = useState<DetailProdi>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<DetailProdi>({
     queryKey: ['detail-prodi', id],
     refetchOnWindowFocus: false,
     enabled: !!id,
@@ -27,11 +24,5 @@ export const UseGetDetailProdi = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDetailProdi(data)
-    }
-  }, [data])
-
-  return { detailProdi, loading }
+  return { detailProdi: data, loading }
 }

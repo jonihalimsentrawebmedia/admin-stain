@@ -9,10 +9,7 @@ const useGetContent = () => {
   const limit = searchParams.get('limit') ?? '10'
   const search= searchParams.get('search') ?? ''
 
-  if (id) {
-    searchParams.set('id_menu', id)
-  }
-  const id_menu = searchParams.get('id_menu') ?? ''
+  const id_menu = id ?? searchParams.get('id_menu') ?? ''
   const ParamsSearch = new URLSearchParams({ page, limit, id_menu,search })
 
   const { data, isLoading, isFetching } = useQuery({

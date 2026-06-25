@@ -1,17 +1,14 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { AcademicYearList } from '../../model/index'
 
 export const UseGetYearAcademicLanguage = (id?: string) => {
-  const [language, setLanguage] = useState<{
+  const { data, isLoading, isFetching } = useQuery<{
     id: AcademicYearList
     en: AcademicYearList
     zh: AcademicYearList
     ar: AcademicYearList
-  }>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  }>({
     queryKey: ['year-academic-language', id],
     refetchOnWindowFocus: false,
     enabled: !!id,
@@ -21,11 +18,5 @@ export const UseGetYearAcademicLanguage = (id?: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLanguage(data)
-    }
-  }, [data])
-
-  return { loading, language }
+  return { loading, language: data }
 }

@@ -11,7 +11,8 @@ const useGetGallery = () => {
   const type = searchParams.get('type') ?? ''
 const ParamsSearch = new URLSearchParams({ page, limit, search,type })
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['program-studi-gallery',ParamsSearch.toString()],
+    queryKey: ['program-studi-gallery', id, ParamsSearch.toString()],
+    enabled: !!id,
     refetchOnWindowFocus: false,
     queryFn: () =>
       AxiosClient.get(`/website-utama/satuan-organisasi/${id}/galeri-album?${ParamsSearch}`).then(

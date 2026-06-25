@@ -11,7 +11,8 @@ const useGetStaff = () => {
 
   const ParamsSearch = new URLSearchParams({ page, limit, search })
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['program-studi-staff',ParamsSearch.toString()],
+    queryKey: ['program-studi-staff', id, ParamsSearch.toString()],
+    enabled: !!id,
     refetchOnWindowFocus: false,
     queryFn: () =>
       AxiosClient.get(`/website-utama/satuan-organisasi/${id}/staff?${ParamsSearch}`).then(

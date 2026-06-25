@@ -6,7 +6,7 @@ const useGetActivityDetail = () => {
   const { idActivityDetail } = useParams()
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['list-acedemic-year-activity-detail'],
+    queryKey: ['list-acedemic-year-activity-detail', idActivityDetail],
     refetchOnWindowFocus: false,
     enabled: !!idActivityDetail,
     queryFn: () =>

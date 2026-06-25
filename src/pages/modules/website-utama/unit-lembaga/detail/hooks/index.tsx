@@ -1,12 +1,9 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { IAboutUnitInstitution, IContactUnitInstitution } from './types.ts'
 
 export const UseGetAboutUnitInstitution = (id_unit: string) => {
-  const [about, setAbout] = useState<IAboutUnitInstitution>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IAboutUnitInstitution>({
     queryKey: ['about-unit-institution', id_unit],
     refetchOnWindowFocus: false,
     enabled: !!id_unit,
@@ -18,23 +15,15 @@ export const UseGetAboutUnitInstitution = (id_unit: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setAbout(data)
-    }
-  }, [data])
-
-  return { about, loading }
+  return { about: data, loading }
 }
 
 export const UseGetVisionMissionUnitInstitution = (id_unit: string) => {
-  const [visionMission, setVisionMission] = useState<{
+  const { data, isLoading, isFetching } = useQuery<{
     visi: string
     misi: string
     tujuan: string
-  }>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  }>({
     queryKey: ['vision-mission-unit-institution', id_unit],
     refetchOnWindowFocus: false,
     enabled: !!id_unit,
@@ -46,19 +35,11 @@ export const UseGetVisionMissionUnitInstitution = (id_unit: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setVisionMission(data)
-    }
-  }, [data])
-
-  return { visionMission, loading }
+  return { visionMission: data, loading }
 }
 
 export const UseGetStructureUnitInstitution = (id_unit: string) => {
-  const [structure, setStructure] = useState<{ url_gambar: string }>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ url_gambar: string }>({
     queryKey: ['structure-unit-institution', id_unit],
     refetchOnWindowFocus: false,
     enabled: !!id_unit,
@@ -70,19 +51,11 @@ export const UseGetStructureUnitInstitution = (id_unit: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setStructure(data)
-    }
-  }, [data])
-
-  return { structure, loading }
+  return { structure: data, loading }
 }
 
 export const UseGetContactUnitInstitution = (id_unit: string) => {
-  const [contact, setContact] = useState<IContactUnitInstitution>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IContactUnitInstitution>({
     queryKey: ['contact-unit-institution', id_unit],
     refetchOnWindowFocus: false,
     enabled: !!id_unit,
@@ -94,11 +67,5 @@ export const UseGetContactUnitInstitution = (id_unit: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setContact(data)
-    }
-  }, [data])
-
-  return { contact, loading }
+  return { contact: data, loading }
 }

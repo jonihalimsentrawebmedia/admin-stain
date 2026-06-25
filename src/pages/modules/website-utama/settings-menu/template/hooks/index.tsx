@@ -1,19 +1,17 @@
-import { useEffect, useState } from 'react'
-import type { IThemeUnit, ThemeColor } from '../data/types.ts'
 import { useQuery } from '@tanstack/react-query'
+import type { IThemeUnit, ThemeColor } from '../data/types.ts'
 import AxiosClient from '@/provider/axios.tsx'
 import type { BasicProps } from '@/utils/globalType.ts'
 
 export const UseGetTemplateMainWeb = (props?: BasicProps) => {
   const { search, limit, page } = props ?? {}
-  const [template, setTemplate] = useState<IThemeUnit[]>([])
 
   const ParamsSearch = new URLSearchParams()
   if (page) ParamsSearch.append('page', page ?? '1')
   if (limit) ParamsSearch.append('limit', limit ?? '10')
   if (search) ParamsSearch.append('search', search ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data: queryData, isLoading, isFetching } = useQuery<IThemeUnit[]>({
     queryKey: ['template-main', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -22,19 +20,11 @@ export const UseGetTemplateMainWeb = (props?: BasicProps) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setTemplate(data)
-    }
-  }, [data])
-
-  return { template, loading }
+  return { template: queryData ?? [], loading }
 }
 
 export const UseGetTemplateDetail = (slug: string) => {
-  const [detail, setDetail] = useState<ThemeColor>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data: queryData, isLoading, isFetching } = useQuery<ThemeColor>({
     queryKey: ['template-detail', slug],
     refetchOnWindowFocus: false,
     enabled: !!slug,
@@ -44,11 +34,5 @@ export const UseGetTemplateDetail = (slug: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDetail(data)
-    }
-  }, [data])
-
-  return { detail, loading }
+  return { detail: queryData, loading }
 }

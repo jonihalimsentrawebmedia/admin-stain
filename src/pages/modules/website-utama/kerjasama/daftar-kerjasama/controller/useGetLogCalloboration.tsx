@@ -11,8 +11,9 @@ const useGetLogCalloboration = () => {
 
   const ParamsSearch = new URLSearchParams({ page, limit, search })
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['log-calloboration-list', ParamsSearch.toString()],
+    queryKey: ['log-calloboration-list', idCalloboration, ParamsSearch.toString()],
     refetchOnWindowFocus: false,
+    enabled: !!idCalloboration,
     queryFn: () =>
       AxiosClient.get(`/website-utama/kerjasama-log/${idCalloboration}?${ParamsSearch}`).then(
         (res) => res.data

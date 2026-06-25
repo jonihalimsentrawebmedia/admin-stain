@@ -10,8 +10,9 @@ const useGetLogAcademicActivity = () => {
   const search = searchParams.get('search') ?? ''
     const ParamsSearch = new URLSearchParams({ page, limit, search })
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['log-list-acedemic-year-activity',ParamsSearch.toString()],
+    queryKey: ['log-list-acedemic-year-activity', idActivity, ParamsSearch.toString()],
     refetchOnWindowFocus: false,
+    enabled: !!idActivity,
     queryFn: () =>
       AxiosClient.get(`/website-utama/tahun-akademik-kegiatan-log/${idActivity}?${ParamsSearch}`).then(
         (res) => res.data

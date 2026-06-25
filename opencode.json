@@ -17,7 +17,7 @@
     },
     "plan": {
       "mode": "primary",
-      "model": "opencode/nemotron-3-super-free",
+      "model": "opencode/deepseek-v4-flash-free",
       "tools": {
         "write": false,
         "edit": false,

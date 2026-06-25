@@ -11,8 +11,9 @@ const useGetLogAcademicYear = () => {
 
   const ParamsSearch = new URLSearchParams({ page, limit, search })
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['log-list-acedemic-year',ParamsSearch.toString()],
+    queryKey: ['log-list-acedemic-year', idAcademicYear, ParamsSearch.toString()],
     refetchOnWindowFocus: false,
+    enabled: !!idAcademicYear,
     queryFn: () =>
       AxiosClient.get(`/website-utama/tahun-akademik-log/${idAcademicYear}?${ParamsSearch}`).then(
         (res) => res.data

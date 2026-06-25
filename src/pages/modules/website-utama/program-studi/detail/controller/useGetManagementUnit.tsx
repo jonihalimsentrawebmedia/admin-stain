@@ -14,7 +14,8 @@ const useGetManagementUnit = (props?: BasicProps) => {
   if (search) Params.set('search', search ?? '')
 
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['program-studi-management-unit', Params.toString()],
+    queryKey: ['program-studi-management-unit', id, Params.toString()],
+    enabled: !!id,
     refetchOnWindowFocus: false,
     queryFn: () =>
       AxiosClient.get(`/website-utama/satuan-organisasi/${id}/unit-pengelola?${Params}`).then(

@@ -1,18 +1,15 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { AcreditationList } from '../../model/index'
 
 export const UseGetAccreditationLanguage = (id?: string) => {
-  const [language, setLanguage] = useState<{
+  const { data, isLoading, isFetching } = useQuery<{
     id: AcreditationList
     en: AcreditationList
     zh: AcreditationList
     ar: AcreditationList
-  }>()
-
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['year-academic-language', id],
+  }>({
+    queryKey: ['accreditation-language', id],
     refetchOnWindowFocus: false,
     enabled: !!id,
     queryFn: () =>
@@ -21,11 +18,5 @@ export const UseGetAccreditationLanguage = (id?: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLanguage(data)
-    }
-  }, [data])
-
-  return { loading, language }
+  return { loading, language: data }
 }

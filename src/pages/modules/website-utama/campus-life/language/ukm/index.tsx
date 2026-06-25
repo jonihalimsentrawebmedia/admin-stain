@@ -9,7 +9,7 @@ import { FormLanguageTextUnitActivity } from './component/form'
 
 export const TextUnitActivityLanguagePage = () => {
   const navigate = useNavigate()
-  const { language: detail } = UseGetTextUnitActivityLanguage()
+  const { data: detail } = UseGetTextUnitActivityLanguage()
 
   const [language, setLanguage] = useState('id')
   const [loading, setLoading] = useState(false)

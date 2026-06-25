@@ -1,17 +1,14 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { ContentList } from '../../model/index.tsx'
 
 export const UseGetHeaderMenuContentLanguage = (id: string) => {
-  const [language, setLanguage] = useState<{
+  const { data: queryData, isLoading, isFetching } = useQuery<{
     id: ContentList
     en: ContentList
     zh: ContentList
     ar: ContentList
-  }>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  }>({
     queryKey: ['header-menu-language', id],
     refetchOnWindowFocus: false,
     enabled: !!id,
@@ -21,11 +18,5 @@ export const UseGetHeaderMenuContentLanguage = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLanguage(data)
-    }
-  }, [data])
-
-  return { language, loading }
+  return { language: queryData, loading }
 }

@@ -11,8 +11,9 @@ const useGetLogCalloborationCategory = () => {
 
   const ParamsSearch = new URLSearchParams({ page, limit, search })
   const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['log-list-calloboration-log',ParamsSearch.toString()],
+    queryKey: ['log-list-calloboration-log', idCalloborationCategory, ParamsSearch.toString()],
     refetchOnWindowFocus: false,
+    enabled: !!idCalloborationCategory,
     queryFn: () =>
       AxiosClient.get(`/website-utama/kategori-kerjasama-log/${idCalloborationCategory}?${ParamsSearch}`).then(
         (res) => res.data

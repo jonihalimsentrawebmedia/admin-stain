@@ -9,7 +9,7 @@ import { FormLanguageDirectURL } from './component/form'
 
 export const TextDirectUrlLanguagePage = () => {
   const navigate = useNavigate()
-  const { language: detail } = UseGetTextDirectURLLanguage()
+  const { data: detail } = UseGetTextDirectURLLanguage()
 
   const [language, setLanguage] = useState('id')
   const [loading, setLoading] = useState(false)
