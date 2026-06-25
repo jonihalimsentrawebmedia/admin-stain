@@ -61,7 +61,7 @@ export const FormsMessage = (props: Props) => {
             Batal
           </Button>
 
-          <Button disabled={loading}>
+          <Button disabled={loading} className={'text-white'}>
             <IoSendSharp />
             Kirim
           </Button>
