@@ -3,7 +3,7 @@ import { useParams, useSearchParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { UseGetOfficially } from '@/pages/modules/Pulsikom/about/chief-officer/officially/hooks'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
-import { ButtonAddOfficially } from './component/buttonadd.tsx'
+import { ButtonAddOfficially } from './component/buttonAdd.tsx'
 import { ColumnsOfficially } from '@/pages/modules/Pulsikom/about/chief-officer/officially/data/columns.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
