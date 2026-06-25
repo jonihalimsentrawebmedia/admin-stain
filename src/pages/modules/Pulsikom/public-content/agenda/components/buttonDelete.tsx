@@ -45,7 +45,7 @@ export const ButtonDeleteAgendaUnit = (data: IAgendaDetail) => {
     <>
       <button
         onClick={() => setOpen(!open)}
-        className={'bg-red-500 p-1.5 rounded text-white hover:bg-red-600'}
+        className={'bg-red-500 w-fit p-1.5 rounded text-white hover:bg-red-600'}
       >
         <FaTrash />
       </button>

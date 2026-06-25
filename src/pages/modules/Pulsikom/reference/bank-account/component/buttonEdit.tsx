@@ -72,7 +72,7 @@ export const ButtonEditBankAccount = (props: Props) => {
       </button>
 
       <DialogBasic
-        title={'Tambah Rekening'}
+        title={'Edit Rekening'}
         open={open}
         setOpen={setOpen}
         className={'lg:min-w-2xl'}

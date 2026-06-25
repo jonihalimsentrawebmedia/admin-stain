@@ -36,11 +36,11 @@ export const DownloadFileCarrierColumns = () => {
             <div>
               {data?.is_link_drive ? (
                 <Link to={data?.link_drive ?? '#'} target={'_blank'}>
-                  <Button>Buka File</Button>
+                  <Button className={'text-white'}>Buka File</Button>
                 </Link>
               ) : (
                 <Link to={data?.file_url ?? '#'} target={'_blank'}>
-                  <Button>Buka File</Button>
+                  <Button className={'text-white'}>Buka File</Button>
                 </Link>
               )}
             </div>
