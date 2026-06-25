@@ -121,7 +121,7 @@ export const CreditEarningPage = () => {
                 },
                 {
                   type: 'edit',
-                  label: 'Edit Visi Misi',
+                  label: 'Edit Konten',
                   onClick: () => setIsEdit(!isEdit),
                 },
               ]}
