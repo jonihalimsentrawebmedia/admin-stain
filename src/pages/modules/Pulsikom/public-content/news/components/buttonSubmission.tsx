@@ -37,6 +37,9 @@ export const ButtonSubmissionNewsUnit = (data?: INewsDetail) => {
           queryClient.invalidateQueries({
             queryKey: ['pusilkom-news-status'],
           })
+          queryClient.invalidateQueries({
+            queryKey: ['pusilkom-news-detail'],
+          })
         }
       })
       .catch((err) => {
@@ -104,7 +107,7 @@ export const ButtonSubmissionNewsUnit = (data?: INewsDetail) => {
                   element: (
                     <Button
                       disabled={loading}
-                      className={'bg-blue-500 hover:bg-blue-600'}
+                      className={'bg-blue-500 hover:bg-blue-600 text-white'}
                       onClick={HandleSubmission}
                     >
                       <MdSend />

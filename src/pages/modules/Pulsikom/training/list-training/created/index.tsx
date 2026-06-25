@@ -12,6 +12,7 @@ export const CreatedTraining = (props: Propss) => {
   const { title } = props
   const [searchParams, setSearchParams] = useSearchParams()
   const step = searchParams.get('step')
+  const from = searchParams.get('from')
 
   useEffect(() => {
     if (!step) {
@@ -24,6 +25,7 @@ export const CreatedTraining = (props: Propss) => {
   const HandleStep = (e: string) => {
     const Params = new URLSearchParams()
     Params.append('step', e)
+    Params.append('from', from ?? '')
     setSearchParams(Params)
   }
 
@@ -45,7 +47,7 @@ export const CreatedTraining = (props: Propss) => {
         >
           <TabsList
             className={
-              'flex flex-col gap-2 h-full items-start max-w-[220px]! bg-white border p-3 rounded-none'
+              'flex flex-col gap-2 h-full items-start min-w-[220px]! bg-white border p-3 rounded-none'
             }
           >
             {TabsData?.map((item, k) => (

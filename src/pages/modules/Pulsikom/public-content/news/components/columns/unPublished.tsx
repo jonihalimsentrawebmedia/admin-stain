@@ -9,7 +9,7 @@ import { HiPencil } from 'react-icons/hi'
 import type { INewsDetail } from '@/pages/modules/website-utama/public-content/news/data'
 import { ButtonPublishNewsUnit } from '../buttonPublish'
 import Autoplay from 'embla-carousel-autoplay'
-import { ButtonDeleteNewsUnit } from '@/pages/modules/website-unit/public-content/news/components/buttonDelete.tsx'
+import { ButtonDeleteNewsUnit } from '../buttonDelete.tsx'
 
 export const UnPublishColumnsUnit = () => {
   const [searchParams] = useSearchParams()

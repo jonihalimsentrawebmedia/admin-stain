@@ -25,6 +25,8 @@ interface IProps {
 export const FormContactAndMoreNoted = (props: IProps) => {
   const { prev_value, title } = props
   const [loading, setLoading] = useState(false)
+  const [searchParams] = useSearchParams()
+  const from = searchParams.get('from')
 
   const id = window.localStorage.getItem('id_training')
   const { contact } = UseGetContactAndMoreNote(id)
@@ -67,7 +69,11 @@ export const FormContactAndMoreNoted = (props: IProps) => {
         if (res.data.status) {
           setLoading(false)
           toast.success(res.data.message || 'Success')
-          navigate('/modules/pulsikom/training/list-training')
+          if (from === 'detail') {
+            navigate(`/modules/pulsikom/training/list-training/detail/${id}`)
+          } else {
+            navigate('/modules/pulsikom/training/list-training')
+          }
         }
       })
       .catch((err) => {
