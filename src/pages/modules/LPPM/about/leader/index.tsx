@@ -74,7 +74,7 @@ export const ProfileLeaderPage = () => {
             <ButtonTitleGroup
               label={'Profil Ketua LPPM'}
               buttonGroup={[
-                   {
+                {
                   type: 'custom',
                   element: (
                     <ButtonGoToGuide
@@ -100,7 +100,7 @@ export const ProfileLeaderPage = () => {
             )}
 
             <div className="grid grid-cols-[12rem_1fr] gap-4">
-              <p className="text-gray-500">Nama *</p>
+              <p className="text-gray-500">Nama Ketua *</p>
               <p>{profileLeader?.nama_ketua}</p>
               <p className="text-gray-500">Deskripsi *</p>
               <RenderHTMLContent content={profileLeader?.deskripsi ?? ''} />

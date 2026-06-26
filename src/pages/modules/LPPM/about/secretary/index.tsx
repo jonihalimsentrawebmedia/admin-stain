@@ -66,6 +66,7 @@ export const ProfileSecretaryPage = () => {
             loading={loading}
             handleSubmit={HandleSave}
             label={'Profil Sekretaris LPPM'}
+            content={'Sekertaris'}
           />
         </>
       ) : (
@@ -74,15 +75,15 @@ export const ProfileSecretaryPage = () => {
             <ButtonTitleGroup
               label={'Profil Sekretaris LPPM'}
               buttonGroup={[
-                 {
-                type: 'custom',
-                element: (
-                  <ButtonGoToGuide
-                    titleGuide="Profil Sekretaris LPPM"
-                    valueGuide="LPPM_TENTANG_PROFIL_SEKRETARIS"
-                  />
-                ),
-              },
+                {
+                  type: 'custom',
+                  element: (
+                    <ButtonGoToGuide
+                      titleGuide="Profil Sekretaris LPPM"
+                      valueGuide="LPPM_TENTANG_PROFIL_SEKRETARIS"
+                    />
+                  ),
+                },
                 {
                   type: 'edit',
                   label: 'Edit Konten',
@@ -100,7 +101,7 @@ export const ProfileSecretaryPage = () => {
             )}
 
             <div className="grid grid-cols-[12rem_1fr] gap-4">
-              <p className="text-gray-500">Nama *</p>
+              <p className="text-gray-500">Nama Sekertaris *</p>
               <p>{detailSecretary?.nama_sekretaris}</p>
               <p className="text-gray-500">Deskripsi *</p>
               <RenderHTMLContent content={detailSecretary?.deskripsi ?? ''} />
