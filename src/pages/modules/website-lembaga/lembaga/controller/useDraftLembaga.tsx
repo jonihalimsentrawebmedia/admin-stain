@@ -35,8 +35,9 @@ const useDraftLembaga = () => {
           queryKey: ['lembaga'],
         })
       }
-    } catch (err: any) {
-      toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
+    } catch (err: unknown) {
+      const error = err as { response?: { data?: { message?: string } } }
+      toast.error(error?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
     } finally {
       setLoading(false)
     }
@@ -47,9 +48,8 @@ const useDraftLembaga = () => {
 
   useEffect(() => {
     if (lembaga) {
-      const temp: any = { ...lembaga }
       form.reset({
-        ...temp,
+        ...lembaga,
       })
     }
   }, [lembaga])

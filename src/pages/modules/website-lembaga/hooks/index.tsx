@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
@@ -12,9 +11,7 @@ export interface ISessionInstitution {
 }
 
 export const UseGetInstitutionSession = () => {
-  const [session, setSession] = useState<ISessionInstitution>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<ISessionInstitution>({
     queryKey: ['session-institution'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/lembaga/user-session').then((res) => res.data?.data),
@@ -22,20 +19,14 @@ export const UseGetInstitutionSession = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setSession(data)
-    }
-  }, [data])
-
-  return { session, loading }
+  return { session: data, loading }
 }
 export interface ISatuanOrganisasiProfil {
   id_satuan_organisasi: string; // UUID
   id_lembaga: string;           // UUID
-  /** * Field 'isi' menampung konten dalam format HTML string 
+  /** * Field 'isi' menampung konten dalam format HTML string
    */
-  isi: string;                  
+  isi: string;
   created_at: string;           // ISO Date String
   created_user: string;
   updated_at: string;           // ISO Date String
@@ -49,9 +40,7 @@ interface Props{
   queryKey:string
 }
 export const UseGetWebsiteLembagaGlobal = ({link,queryKey}:Props) => {
-  const [dataGlobal, setDataGlobal] = useState<ISatuanOrganisasiProfil>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<ISatuanOrganisasiProfil>({
     queryKey: [queryKey],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(link).then((res) => res.data?.data),
@@ -59,11 +48,5 @@ export const UseGetWebsiteLembagaGlobal = ({link,queryKey}:Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDataGlobal(data)
-    }
-  }, [data])
-
-  return { dataGlobal, loading }
+  return { dataGlobal: data, loading }
 }

@@ -8,13 +8,13 @@ import { RichText } from '@/components/common/richtext'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import { UploadDocument } from '@/pages/modules/website-utama/public-content/announcement/components/uploadDocument.tsx'
 
-interface props {
+interface Props {
   form: UseFormReturn<AnnouncementType>
   HandleSave: (e: AnnouncementType) => void
   loading: boolean
 }
 
-export const AnnouncementForm = (props: props) => {
+export const AnnouncementForm = (props: Props) => {
   const { form, HandleSave } = props
   const navigate = useNavigate()
   return (

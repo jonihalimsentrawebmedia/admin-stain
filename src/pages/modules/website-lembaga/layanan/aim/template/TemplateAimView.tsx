@@ -4,7 +4,7 @@ import ButtonAdd from './components/ButtonAdd'
 import TableCustom from '@/components/common/table/TableCustom'
 import SelectFilter from '@/components/common/filter/SelectFilter'
 import TemplateAimViewModel from './TemplateAimViewModel'
-import useGetTemplateAim from './comtroller/useGetTemplateAim'
+import useGetTemplateAim from './controller/useGetTemplateAim'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const TemplateAimView = () => {

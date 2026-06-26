@@ -2,12 +2,12 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
 import SettingTemplateServiceViewModel from './SettingTemplateServiceViewModel'
 import { IoInformationCircle } from 'react-icons/io5'
 import TableCustom from '@/components/common/table/TableCustom'
-import useGetTemplateInstitutation from './controller/useGetTemplateInstitutaion'
+import useGetTemplateInstitution from './controller/useGetTemplateInstitution'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const SettingTemplateServiceView = () => {
   const { columns } = SettingTemplateServiceViewModel()
-  const { loading, template } = useGetTemplateInstitutation({})
+  const { loading, template } = useGetTemplateInstitution({})
   return (
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup

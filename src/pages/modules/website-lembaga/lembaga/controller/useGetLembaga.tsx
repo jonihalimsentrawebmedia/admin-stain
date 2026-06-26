@@ -1,15 +1,13 @@
 import type { Meta } from '@/components/common/table/TablePagination'
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import type { SatuanOrganisasiList } from '@/pages/modules/settings/model'
-interface props {
+interface Props {
   real_data?: boolean
 }
-const useGetLembaga = (props?: props) => {
+const useGetLembaga = (props?: Props) => {
     const { real_data } = props ?? {}
-  const [lembaga, setLembaga] = useState<SatuanOrganisasiList>()
-const ParamsSearch = new URLSearchParams()
+  const ParamsSearch = new URLSearchParams()
   if (real_data) ParamsSearch.append('is_real_data', real_data.toString() ?? 'false')
   const { data, isLoading, isFetching } = useQuery<{
     data: SatuanOrganisasiList
@@ -22,14 +20,8 @@ const ParamsSearch = new URLSearchParams()
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLembaga(data.data)
-    }
-  }, [data])
-
   return {
-    lembaga,
+    lembaga: data?.data,
     loading,
   }
 }

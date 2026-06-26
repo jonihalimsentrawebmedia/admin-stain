@@ -1,17 +1,16 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { INewsDetail } from '@/pages/modules/website-utama/public-content/news/data'
 
-export const UseGetNewsLanguage = (id?: string) => {
-  const [newsLanguage, setNewsLanguage] = useState<{
-    id: INewsDetail
-    en: INewsDetail
-    zh: INewsDetail
-    ar: INewsDetail
-  }>()
+interface INewsLanguage {
+  id: INewsDetail
+  en: INewsDetail
+  zh: INewsDetail
+  ar: INewsDetail
+}
 
-  const { data, isLoading, isFetching } = useQuery({
+export const UseGetNewsLanguage = (id?: string) => {
+  const { data, isLoading, isFetching } = useQuery<INewsLanguage>({
     queryKey: ['news-language', id],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -20,11 +19,5 @@ export const UseGetNewsLanguage = (id?: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setNewsLanguage(data)
-    }
-  }, [data])
-
-  return { loading, newsLanguage }
+  return { loading, newsLanguage: data }
 }

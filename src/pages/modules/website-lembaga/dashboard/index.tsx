@@ -22,7 +22,7 @@ export default function DashboardLPMI() {
 
   const chartData =
     (trentVisitor &&
-      Object?.entries(trentVisitor).map(([key, value]) => ({
+      Object.entries(trentVisitor).map(([key, value]) => ({
         name: key,
         value: value,
       }))) ??
