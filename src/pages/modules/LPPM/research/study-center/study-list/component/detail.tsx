@@ -20,7 +20,7 @@ export const DetailStudyCenter = () => {
               label: 'Edit Data',
               onClick: () =>
                 navigate(
-                  `/modules/lppm/research/study-center/study-list/edit${detail?.id_pusat_studi}`
+                  `/modules/lppm/research/study-center/study-list/edit/${detail?.id_pusat_studi}`
                 ),
             },
           ]}

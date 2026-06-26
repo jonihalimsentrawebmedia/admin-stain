@@ -66,7 +66,12 @@ export const UpdatedUserManagementContext = () => {
 
   return (
     <>
-      <FormManagement form={form} HandleSave={HandleSave} loading={loading} />
+      <FormManagement
+        label={'Edit Pengelolah'}
+        form={form}
+        HandleSave={HandleSave}
+        loading={loading}
+      />
     </>
   )
 }

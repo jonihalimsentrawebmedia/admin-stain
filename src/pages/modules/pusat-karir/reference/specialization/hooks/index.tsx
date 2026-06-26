@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { BasicProps } from '@/utils/globalType.ts'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
@@ -8,15 +7,12 @@ import type { ISpecialization } from '../data/types'
 export const UseGetSpecialization = (props?: BasicProps) => {
   const { page, search, limit } = props ?? {}
 
-  const [specialization, setSpecialization] = useState<ISpecialization[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const ParamsSearch = new URLSearchParams()
   if (page) ParamsSearch.append('page', page ?? '0')
   if (search) ParamsSearch.append('search', search ?? '')
   if (limit) ParamsSearch.append('limit', limit ?? '0')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: ISpecialization[]; meta: Meta }>({
     queryKey: ['specialization', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient(`/pusat-karir/spesialisasi?${ParamsSearch}`).then((res) => res.data),
@@ -24,20 +20,11 @@ export const UseGetSpecialization = (props?: BasicProps) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setSpecialization(data?.data)
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { specialization, meta, loading }
+  return { specialization: data?.data ?? [], meta: data?.meta, loading }
 }
 
 export const USeGetDetailSpecialization = (id: string) => {
-  const [detail, setDetail] = useState<ISpecialization>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<ISpecialization>({
     queryKey: ['detail-specialization', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient(`/pusat-karir/spesialisasi/${id}`).then((res) => res.data?.data),
@@ -45,11 +32,5 @@ export const USeGetDetailSpecialization = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDetail(data)
-    }
-  }, [data])
-
-  return { detail, loading }
+  return { detail: data, loading }
 }

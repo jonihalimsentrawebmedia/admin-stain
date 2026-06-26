@@ -1,11 +1,8 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
 export const UseGetListJournal = () => {
-  const [linkJournal, setLinkJournal] = useState<{ url: string }>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ url: string }>({
     queryKey: ['journal-link'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/lppm/daftar-jurnal').then((res) => res.data.data),
@@ -13,11 +10,5 @@ export const UseGetListJournal = () => {
 
   const loading = isFetching || isLoading
 
-  useEffect(() => {
-    if (data) {
-      setLinkJournal(data)
-    }
-  }, [data])
-
-  return { linkJournal, loading }
+  return { linkJournal: data, loading }
 }

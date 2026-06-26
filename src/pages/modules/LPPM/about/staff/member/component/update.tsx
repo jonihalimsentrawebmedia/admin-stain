@@ -59,7 +59,7 @@ export const UpdateStaffMember = () => {
 
   return (
     <>
-      <FormMemberStaff form={form} loading={loading} handleSave={handleSave} />
+      <FormMemberStaff label={'Edit Anggota'} form={form} loading={loading} handleSave={handleSave} />
     </>
   )
 }

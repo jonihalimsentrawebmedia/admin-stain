@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type {
   ICategoryDownload,
   IDownload,
@@ -12,10 +11,18 @@ interface Props {
   isGetAll?: boolean
 }
 
+interface ICategoryDownloadResponse {
+  data: ICategoryDownload[]
+  meta: Meta
+}
+
+interface IDownloadResponse {
+  data: IDownload[]
+  meta: Meta
+}
+
 export const UseGetCategoryDownloadLppm = (props?: Props) => {
   const { isGetAll } = props || {}
-  const [categoryDownload, setCategoryDownload] = useState<ICategoryDownload[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
@@ -32,7 +39,7 @@ export const UseGetCategoryDownloadLppm = (props?: Props) => {
     if (search) ParamsSearch.append('search', search)
   }
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<ICategoryDownloadResponse>({
     queryKey: ['category-download-lppm', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -41,20 +48,10 @@ export const UseGetCategoryDownloadLppm = (props?: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setCategoryDownload(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { categoryDownload, loading, meta }
+  return { categoryDownload: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export const UseGetDownloadLppm = () => {
-  const [downloadLppm, setDownloadLppm] = useState<IDownload[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
@@ -65,7 +62,7 @@ export const UseGetDownloadLppm = () => {
   if (search) ParamsSearch.append('search', search)
   if (category) ParamsSearch.append('id_kategori_berkas', category)
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IDownloadResponse>({
     queryKey: ['download-lppm', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/lppm/downloads?${ParamsSearch}`).then((res) => res.data),
@@ -73,20 +70,11 @@ export const UseGetDownloadLppm = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDownloadLppm(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { downloadLppm, loading, meta }
+  return { downloadLppm: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export const UseGetDownloadLppmDetail = (id: string) => {
-  const [downloadLppmDetail, setDownloadLppmDetail] = useState<IDownload>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IDownload>({
     queryKey: ['download-lppm-detail', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/lppm/downloads/${id}`).then((res) => res.data?.data),
@@ -94,11 +82,5 @@ export const UseGetDownloadLppmDetail = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDownloadLppmDetail(data)
-    }
-  }, [data])
-
-  return { downloadLppmDetail, loading }
+  return { downloadLppmDetail: data, loading }
 }

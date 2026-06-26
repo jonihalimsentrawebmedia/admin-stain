@@ -1,12 +1,9 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { IMainDevotion } from './types'
 
 export const UseGetSchemaDevotion = () => {
-  const [responseData, setResponseData] = useState<IMainDevotion>()
-
-  const { data, isFetching, isLoading } = useQuery({
+  const { data, isFetching, isLoading } = useQuery<IMainDevotion>({
     queryKey: ['schema-devotion'],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -15,11 +12,5 @@ export const UseGetSchemaDevotion = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setResponseData(data)
-    }
-  }, [data])
-
-  return { responseData, loading }
+  return { responseData: data, loading }
 }

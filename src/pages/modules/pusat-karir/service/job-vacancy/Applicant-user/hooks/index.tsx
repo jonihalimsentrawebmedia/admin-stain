@@ -4,7 +4,6 @@ import type { StatusApplicant } from '@/pages/modules/pusat-karir/service/job-va
 import type { BasicProps } from '@/utils/globalType.ts'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 
 interface Props extends BasicProps {
@@ -15,16 +14,13 @@ interface Props extends BasicProps {
 export const UseGetApplicant = (props?: Props) => {
   const { id_lowongan, status, search, page, limit } = props ?? {}
 
-  const [applicant, setApplicant] = useState<[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const ParamsSearch = new URLSearchParams()
   ParamsSearch.append('status_lowongan', status ?? 'MASUK')
   ParamsSearch.append('search', search ?? '')
   ParamsSearch.append('page', page ?? '1')
   ParamsSearch.append('limit', limit ?? '10')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: []; meta: Meta }>({
     queryKey: ['applicant-user', id_lowongan, ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -35,12 +31,5 @@ export const UseGetApplicant = (props?: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setApplicant(data?.data ?? [])
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { applicant, loading, meta }
+  return { applicant: data?.data ?? [], loading, meta: data?.meta }
 }

@@ -70,7 +70,7 @@ export const ButtonEditInformation = (props: Props) => {
         className={'rounded max-w-4xl'}
         open={open}
         setOpen={setOpen}
-        title={'Tambah Informasi'}
+        title={'Edit Informasi'}
         description={'Jika Informasi Memiliki Sub Informasi, maka URL Dikosongkan Saja'}
       >
         <FormInformation
