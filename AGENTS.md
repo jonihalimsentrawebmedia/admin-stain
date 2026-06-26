@@ -103,3 +103,57 @@ Removed `useState` + `useEffect` that merely copied `useQuery` data into local s
 | `website-fakultas/academic/ppsm/story/hooks/index.tsx` | `UseGetStoryPPSM` (list+meta), `UseGetStoryPPSMDetail` |
 | `website-fakultas/academic/program-studi/detail/gallery/hooks/index.tsx` | `UseGetGalleryAlbum`, `UseGetGalleryPhoto`, `UseGetGalleryVideo` (all list+meta) |
 | `website-fakultas/academic/program-studi/detail/hooks/index.tsx` | `UseGetProdiAbout`, `UseGetProdiVisionMission`, `UseGetProdiOrganization`, `UseGetProdiContactUs` |
+
+### 9. Redundant State / Derived State Anti-Pattern Fix — Pusat Karir Module (28 files, 56 hooks)
+
+Removed `useState` + `useEffect` that merely copied `useQuery` data into local state. Added type parameters to `useQuery<T>` (no `any`). Converted `UseGetTotalVisitor` status to `useMemo`, `UseGetTrentVisitor` to direct return with interface.
+
+| File | Hooks Fixed |
+|---|---|
+| `tracer-study/hooks/index.tsx` | `UseGetTracerStudy` |
+| `survey/hooks/index.tsx` | `UseGetUUID`, `UseGetSurvey`, `UseGetDetailSurvey`, `UseGetSurveyResult` |
+| `settings/warna/hooks/index.tsx` | `UseGetColorAdminCarrier`, `UseGetAdminThemeCarrier` |
+| `settings/template-web/hooks/index.tsx` | `UseGetTemplateUnit`, `UseGetTemplateDetail` |
+| `dashboard/hooks/index.tsx` | `UseGetTotalVisitor` (useState+useEffect→useMemo), `UseGetApprovedList`, `UseGetTrentVisitor` (added interface, direct return) |
+| `management-user/user-verification/partnership/hooks/index.tsx` | `UseGetVerificationPartnership`, `UseGetDetailVerificationPartnership` |
+| `about/vision-mission/hooks/index.tsx` | `UseGetVisionMissionCarrier` |
+| `about/profile/hooks/index.tsx` | `UseGetAboutProfileCarrier` |
+| `about/structure/hooks/index.tsx` | `UseGetStructureOrganization` |
+| `about/greeting-leader/hooks/index.tsx` | `UseGetGreetingLeader` |
+| `management-user/user-verification/job-seeker/hooks/index.tsx` | `UseGetVerificationJobSeeker`, `UseGetDetailVerificationJobSeeker` |
+| `service/portal-cv/hooks/index.tsx` | `UseGetUrlPortalCV` |
+| `data-unit/hooks/index.tsx` | `UseGetDetailDataCarrierCenter` |
+| `management-user/list-user/Partnership/hooks/index.tsx` | `UseGetDetailStatusForm`, `UseGetPartnership`, `UseGetPartnershipDetail`, `UseGetCompanyInformation`, `UseGetCompanyContact`, `UseGetCompanyBranding`, `UseGetCompanyLegality`, `UseGetCompanyMediaSocial`, `UseGetStatusStep` |
+| `management-user/procedure/partnership/hooks/index.tsx` | `UseGetProcedurePartnership` |
+| `management-user/procedure/job-seeker/hooks/index.tsx` | `UseGetProcedureJobseeker` |
+| `service/main/hooks/index.tsx` | `UseGetMainService` |
+| `service/carrier-consultation/hooks/index.tsx` | `UseGetConsultationCarrier` |
+| `management-user/list-user/jobs-seekers/hooks/index.tsx` | `UseGetJobsSeekers`, `UseGetDetailJobsSeekers` |
+| `service/Footer/hooks/index.tsx` | `UseGetFooterService` |
+| `public-content/news/hooks/index.tsx` | `UseGetCarrierNews`, `UseGetCarrierNewsDetail`, `UseGetCarrierNewsStatus`, `UseGetLogNewsCarrier`, `UseGetNewsYear` |
+| `reference/specialization/hooks/index.tsx` | `UseGetSpecialization`, `USeGetDetailSpecialization` |
+| `reference/specialization/sub-specialization/hooks/index.tsx` | `UseGetSubSpecialization` |
+| `reference/industry-category/hooks/index.tsx` | `UseGetIndustryCategory` |
+| `reference/company-size/hooks/index.tsx` | `UseGetCompanySize`, `USeGetDetailCompanySize` |
+| `service/job-vacancy/Applicant-user/hooks/index.tsx` | `UseGetApplicant` |
+| `public-content/article/hooks/index.tsx` | `UseGetCarrierArticle`, `UseGetCarrierArticleDetail`, `UseGetCarrierArticleStatus`, `UseGetLogArticleCarrier` |
+| `public-content/agenda/hooks/index.tsx` | `UseGetAgendaCarrier`, `UseGetAgendaCarrierDetail`, `UseGetAgendaCarrierStatus`, `UseGetLogAgendaCarrier`, `UseGetAgendaYear` |
+| `public-content/Download/hooks/index.tsx` | `UseGetCategoryDownloadCarrier`, `UseGetDownloadCarrier`, `UseGetDownloadCarrierDetail` |
+| `service/internship-vacancy/hooks/index.tsx` | `UseGetListInternshipVacancy`, `UseGetDetailInternshipVacancy` |
+
+### 10. Redundant State / Derived State Anti-Pattern Fix — PMB Module (10 files, 19 hooks)
+
+Removed `useState` + `useEffect` that merely copied `useQuery` data into local state. Added type parameters to `useQuery<T>` (no `any`). Converted `UseGetTotalVisitor` status to `useMemo`, `UseGetTrentVisitor` to interface + direct return.
+
+| File | Hooks Fixed |
+|---|---|
+| `settings/template-web/hooks/index.tsx` | `UseGetTemplatePMB`, `UseGetTemplateDetail` |
+| `settings/landing/hooks/index.tsx` | `UseGetUnitLandingPage` |
+| `settings/color/hooks/index.tsx` | `UseGetColorAdminPMB`, `UseGetAdminThemePMB` |
+| `session/hooks/index.tsx` | `UseGetSessionPMB` |
+| `public-content/announcement/hooks/index.tsx` | `UseGetAnnouncement`, `UseGetAnnouncementDetail`, `UseGetAnnouncementStatus`, `UseGetLogAnnouncement`, `UseGetAnnouncementYear` |
+| `FAQ/hooks/index.tsx` | `UseGetListFAQUnit` |
+| `FAQ/category/hooks/index.tsx` | `UseGetFaqCategoryPMB` |
+| `entrance/hooks/index.tsx` | `UseGetEntrance`, `UseGetEntranceDetail` |
+| `data-pmb/hooks/index.tsx` | `UseGetDetailDataPMB` |
+| `dashboard/hooks/index.tsx` | `UseGetTotalVisitor` (useState+useEffect→useMemo), `UseGetApprovedList`, `UseGetTrentVisitor` (added interface, direct return) |

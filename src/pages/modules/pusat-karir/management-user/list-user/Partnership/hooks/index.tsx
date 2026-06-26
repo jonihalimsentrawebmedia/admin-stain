@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
@@ -16,10 +15,7 @@ import type {
 import type { BasicProps } from '@/utils/globalType.ts'
 
 export const UseGetDetailStatusForm = (id_temp?: string) => {
-  const [detail, setDetail] = useState<ICompanyProfile>()
-  const [status, setStatus] = useState<IWorkPartnerStep>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: ICompanyProfile; step: IWorkPartnerStep }>({
     queryKey: ['detail-status-form', id_temp],
     enabled: !!id_temp,
     refetchOnWindowFocus: false,
@@ -31,28 +27,18 @@ export const UseGetDetailStatusForm = (id_temp?: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDetail(data?.data)
-      setStatus(data?.step)
-    }
-  }, [data])
-
-  return { detail, loading, status }
+  return { detail: data?.data, loading, status: data?.step }
 }
 
 export const UseGetPartnership = (props?: BasicProps) => {
   const { page, limit, search } = props ?? {}
-
-  const [partnership, setPartnership] = useState<IPartnership[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const ParamsSearch = new URLSearchParams()
   if (page) ParamsSearch.append('page', page ?? '1')
   if (limit) ParamsSearch.append('limit', limit ?? '10')
   if (search) ParamsSearch.append('search', search ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: IPartnership[]; meta: Meta }>({
     queryKey: ['partnership', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -61,19 +47,10 @@ export const UseGetPartnership = (props?: BasicProps) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setPartnership(data?.data)
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { partnership, meta, loading }
+  return { partnership: data?.data ?? [], meta: data?.meta, loading }
 }
 
 export const UseGetPartnershipDetail = (id: string) => {
-  const [detail, setDetail] = useState()
-
   const { data, isLoading, isFetching } = useQuery({
     queryKey: ['detail-partnership', id],
     refetchOnWindowFocus: false,
@@ -82,19 +59,11 @@ export const UseGetPartnershipDetail = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDetail(data)
-    }
-  }, [data])
-
-  return { detail, loading }
+  return { detail: data, loading }
 }
 
 export const UseGetCompanyInformation = (id: string) => {
-  const [information, setInformation] = useState<ICompanyInformation>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<ICompanyInformation>({
     queryKey: ['company-information', id],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -105,19 +74,11 @@ export const UseGetCompanyInformation = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setInformation(data)
-    }
-  }, [data])
-
-  return { information, loading }
+  return { information: data, loading }
 }
 
 export const UseGetCompanyContact = (id: string) => {
-  const [contact, setContact] = useState<ICompanyContact>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<ICompanyContact>({
     queryKey: ['company-contact', id],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -128,19 +89,11 @@ export const UseGetCompanyContact = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setContact(data)
-    }
-  }, [data])
-
-  return { contact, loading }
+  return { contact: data, loading }
 }
 
 export const UseGetCompanyBranding = (id: string) => {
-  const [branding, setBranding] = useState<ICompanyBranding>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<ICompanyBranding>({
     queryKey: ['company-branding', id],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -151,19 +104,11 @@ export const UseGetCompanyBranding = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setBranding(data)
-    }
-  }, [data])
-
-  return { branding, loading }
+  return { branding: data, loading }
 }
 
 export const UseGetCompanyLegality = (id: string) => {
-  const [legality, setLegality] = useState<ICompanyLegality>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<ICompanyLegality>({
     queryKey: ['company-legality', id],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -174,19 +119,11 @@ export const UseGetCompanyLegality = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLegality(data)
-    }
-  }, [data])
-
-  return { legality, loading }
+  return { legality: data, loading }
 }
 
 export const UseGetCompanyMediaSocial = (id: string) => {
-  const [mediaSocial, setMediaSocial] = useState<ICompanySocialMedia>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<ICompanySocialMedia>({
     queryKey: ['company-media-social', id],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -197,19 +134,11 @@ export const UseGetCompanyMediaSocial = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setMediaSocial(data)
-    }
-  }, [data])
-
-  return { mediaSocial, loading }
+  return { mediaSocial: data, loading }
 }
 
 export const UseGetStatusStep = (id: string) => {
-  const [status, setStatus] = useState<StepStatus>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<StepStatus>({
     queryKey: ['status-step', id],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -218,11 +147,5 @@ export const UseGetStatusStep = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setStatus(data)
-    }
-  }, [data])
-
-  return { status, loading }
+  return { status: data, loading }
 }

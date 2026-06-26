@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
@@ -8,9 +7,7 @@ interface IColor {
 }
 
 export const UseGetColorAdminPMB = (context: 'admin' | 'public') => {
-  const [color, setColor] = useState<IColor>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IColor>({
     queryKey: [`color-${context}-pmb`],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient(`/pmb/pengaturan-warna/${context}`).then((res) => res.data?.data),
@@ -18,19 +15,11 @@ export const UseGetColorAdminPMB = (context: 'admin' | 'public') => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setColor(data)
-    }
-  }, [data])
-
-  return { color, loading }
+  return { color: data, loading }
 }
 
 export const UseGetAdminThemePMB = () => {
-  const [color, setColor] = useState<IColor>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IColor>({
     queryKey: [`pmb-pengaturan-warna-admin`],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient(`/pmb/pengaturan-warna/admin`).then((res) => res.data?.data),
@@ -38,11 +27,5 @@ export const UseGetAdminThemePMB = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setColor(data)
-    }
-  }, [data])
-
-  return { color, loading }
+  return { color: data, loading }
 }

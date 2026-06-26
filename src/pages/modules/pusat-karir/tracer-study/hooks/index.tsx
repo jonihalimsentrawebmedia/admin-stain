@@ -1,11 +1,8 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
 export const UseGetTracerStudy = () => {
-  const [tracerStudy, setTracerStudy] = useState<{ link_url: string }>()
-
-  const { data, isFetching, isLoading } = useQuery({
+  const { data, isFetching, isLoading } = useQuery<{ link_url: string }>({
     queryKey: ['tracer-study'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/pusat-karir/studytracer').then((res) => res.data?.data),
@@ -13,11 +10,5 @@ export const UseGetTracerStudy = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setTracerStudy(data)
-    }
-  }, [data])
-
-  return { tracerStudy, loading }
+  return { tracerStudy: data, loading }
 }

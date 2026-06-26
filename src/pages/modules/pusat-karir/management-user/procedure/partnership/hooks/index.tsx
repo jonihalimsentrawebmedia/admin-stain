@@ -1,12 +1,9 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { IProcedureText } from './types.tsx'
 
 export const UseGetProcedurePartnership = () => {
-  const [procedure, setProcedure] = useState<IProcedureText>()
-
-  const { data, isFetching, isLoading } = useQuery({
+  const { data, isFetching, isLoading } = useQuery<IProcedureText>({
     queryKey: ['procedure-partnership'],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -17,11 +14,5 @@ export const UseGetProcedurePartnership = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setProcedure(data)
-    }
-  }, [data])
-
-  return { procedure, loading }
+  return { procedure: data, loading }
 }

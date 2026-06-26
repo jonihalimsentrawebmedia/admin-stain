@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { BasicProps } from '@/utils/globalType.ts'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
@@ -12,16 +11,13 @@ interface Props extends BasicProps {
 export const UseGetSubSpecialization = (props?: Props) => {
   const { page, search, limit, id } = props ?? {}
 
-  const [subSpecialization, setSubSpecialization] = useState<ISubSpecialization[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const ParamsSearch = new URLSearchParams()
   if (page) ParamsSearch.append('page', page ?? '0')
   if (search) ParamsSearch.append('search', search ?? '')
   if (limit) ParamsSearch.append('limit', limit ?? '0')
   if (id) ParamsSearch.append('id-spesialisasi', id ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: ISubSpecialization[]; meta: Meta }>({
     queryKey: ['sub-specialization', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -30,12 +26,5 @@ export const UseGetSubSpecialization = (props?: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setSubSpecialization(data?.data)
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { subSpecialization, meta, loading }
+  return { subSpecialization: data?.data ?? [], meta: data?.meta, loading }
 }
