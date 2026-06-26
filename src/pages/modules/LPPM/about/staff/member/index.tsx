@@ -34,6 +34,7 @@ export const StaffMemberList = () => {
   return (
     <>
       <ButtonTitleGroup
+        isBack
         label={`Daftar Staff - ${detail?.nama_kelompok}`}
         buttonGroup={[
           {

@@ -15,10 +15,11 @@ interface FormProps {
   setIsEdit: (isEdit: boolean) => void
   loading: boolean
   label?: string
+  content?: string
 }
 
 export const FormProfileInformation = (props: FormProps) => {
-  const { form, handleSubmit, isEdit, setIsEdit, loading, label } = props
+  const { form, handleSubmit, isEdit, setIsEdit, loading, label, content } = props
 
   return (
     <>
@@ -30,21 +31,22 @@ export const FormProfileInformation = (props: FormProps) => {
               {
                 type: 'custom',
                 element: (
-                  <ButtonGoToGuide
-                    titleGuide="Profil Sekretaris LPPM"
-                    valueGuide="LPPM_TENTANG_PROFIL_SEKRETARIS"
-                  />
+                  <>
+                    {content === 'Sekertaris' ? (
+                      <ButtonGoToGuide
+                        titleGuide="Profil Sekretaris LPPM"
+                        valueGuide="LPPM_TENTANG_PROFIL_SEKRETARIS"
+                      />
+                    ) : (
+                      <ButtonGoToGuide
+                        titleGuide="Profil Ketua LPPM"
+                        valueGuide="LPPM_TENTANG_PROFIL_KETUA"
+                      />
+                    )}
+                  </>
                 ),
               },
-              {
-                type: 'custom',
-                element: (
-                  <ButtonGoToGuide
-                    titleGuide="Profil Ketua LPPM"
-                    valueGuide="LPPM_TENTANG_PROFIL_KETUA"
-                  />
-                ),
-              },
+
               {
                 type: 'cancel',
                 label: 'Batal',
@@ -67,8 +69,8 @@ export const FormProfileInformation = (props: FormProps) => {
           <TextInput
             name={'nama'}
             form={form}
-            label={'Nama Ketua LPPM'}
-            placeholder={'Nama Ketua LPPM'}
+            label={`Nama ${content ?? 'Ketua'} LPPM`}
+            placeholder={`Nama ${content ?? 'Ketua'} LPPM`}
             inputClassName={'bg-white'}
             isRequired
             isRow

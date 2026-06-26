@@ -30,7 +30,7 @@ export const FormDocumentGuideBook = (props: FormProps) => {
       <Form {...form}>
         <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(handleSubmit)}>
           <div className="w-fit">
-            <FormUploadPhotoImage form={form} name={'url_gambar'} />
+            <FormUploadPhotoImage form={form} name={'url_gambar'} label={'Thumbnail'} />
           </div>
 
           <SelectBasicInput
