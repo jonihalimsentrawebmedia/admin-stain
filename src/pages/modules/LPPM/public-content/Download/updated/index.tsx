@@ -60,7 +60,8 @@ export const UpdatedDownloadLppmPage = () => {
       <Form {...form}>
         <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(HandleSubmit)}>
           <ButtonTitleGroup
-            label={'Tambah Download'}
+            isBack
+            label={'Edit Download'}
             buttonGroup={[
               {
                 label: 'Batal',
