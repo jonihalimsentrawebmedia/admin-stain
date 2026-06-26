@@ -67,7 +67,7 @@ export const UpdatedUserManagementPLP = () => {
   return (
     <>
       <FormManagement
-        label={'Edit Pengelolah'}
+        label={'Edit Pengelola'}
         form={form}
         HandleSave={HandleSave}
         loading={loading}
