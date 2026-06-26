@@ -85,7 +85,7 @@ export const ButtonDeleteStandardOperational = (data: IStandardOperational) => {
               type: 'custom',
               label: 'Hapus',
               element: (
-                <Button disabled={loading} onClick={HandleAddDocument}>
+                <Button variant={'destructive'} disabled={loading} onClick={HandleAddDocument}>
                   <FaTrash /> Hapus
                 </Button>
               ),
