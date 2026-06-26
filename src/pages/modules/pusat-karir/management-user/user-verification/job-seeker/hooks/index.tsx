@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import type { BasicProps } from '@/utils/globalType.ts'
 import { useQuery } from '@tanstack/react-query'
@@ -14,16 +13,13 @@ interface Props extends BasicProps {
 export const UseGetVerificationJobSeeker = (props?: Props) => {
   const { status, page, limit, search } = props ?? {}
 
-  const [verification, setVerification] = useState<IJobSeekerRegistered[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const ParamsSearch = new URLSearchParams()
   if (page) ParamsSearch.append('page', page ?? '0')
   if (limit) ParamsSearch.append('limit', limit ?? '10')
   if (search) ParamsSearch.append('search', search ?? '')
   if (status) ParamsSearch.append('status_pendaftaran', status)
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: IJobSeekerRegistered[]; meta: Meta }>({
     queryKey: ['verification-job-seeker', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -34,20 +30,11 @@ export const UseGetVerificationJobSeeker = (props?: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setVerification(data?.data)
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { loading, meta, verification }
+  return { loading, meta: data?.meta, verification: data?.data ?? [] }
 }
 
 export const UseGetDetailVerificationJobSeeker = (id: string) => {
-  const [detail, setDetail] = useState<IJobSeekerRegistered>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IJobSeekerRegistered>({
     queryKey: ['detail-verification-job-seeker', id],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -56,11 +43,5 @@ export const UseGetDetailVerificationJobSeeker = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDetail(data)
-    }
-  }, [data])
-
-  return { detail, loading }
+  return { detail: data, loading }
 }

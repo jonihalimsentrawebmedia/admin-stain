@@ -68,7 +68,7 @@ export const ButtonEditPlanning = (props: props) => {
       <DialogCustom
         open={open}
         setOpen={setOpen}
-        title={'Tambah Kategori'}
+        title={'Edit Kategori'}
         className={'rounded max-w-2xl'}
       >
         <FormResearchPlan

@@ -15,10 +15,11 @@ interface FormProps {
   form: UseFormReturn<MemberSchema>
   handleSave: (e: MemberSchema) => void
   loading: boolean
+  label?: string
 }
 
 export const FormMemberStaff = (props: FormProps) => {
-  const { form, loading, handleSave } = props
+  const { form, loading, handleSave, label } = props
   const navigate = useNavigate()
 
   const { staff } = UseGetStaff({
@@ -36,7 +37,7 @@ export const FormMemberStaff = (props: FormProps) => {
       <Form {...form}>
         <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(handleSave)}>
           <ButtonTitleGroup
-            label={'Tambah Anggota'}
+            label={label ?? 'Tambah Anggota'}
             isBack
             buttonGroup={[
               {

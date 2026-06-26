@@ -53,7 +53,7 @@ export const ButtonDeleteInformation = (props: Props) => {
         className={'rounded max-w-4xl'}
         open={open}
         setOpen={setOpen}
-        title={'Tambah Informasi'}
+        title={'Hapus Informasi'}
         description={'Jika Informasi Memiliki Sub Informasi, maka URL Dikosongkan Saja'}
       >
         <div className={'grid grid-cols-[12rem_1fr] gap-3'}>

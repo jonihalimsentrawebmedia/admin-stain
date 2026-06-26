@@ -47,7 +47,12 @@ export const UpdatedFormActivity = () => {
 
   return (
     <>
-      <FormActivity form={form} loading={loading} HandleSave={HandleSave} />
+      <FormActivity
+        label={'Edit Program Kegiatan'}
+        form={form}
+        loading={loading}
+        HandleSave={HandleSave}
+      />
     </>
   )
 }

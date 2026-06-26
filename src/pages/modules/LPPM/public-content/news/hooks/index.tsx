@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { INewsDetail } from '@/pages/modules/website-utama/public-content/news/data'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
@@ -6,11 +5,13 @@ import AxiosClient from '@/provider/axios.tsx'
 import type { IPropsData } from '@/pages/modules/website-prodi/public-content/news/data/types.ts'
 import type { INewsStatus } from '@/pages/modules/website-utama/public-content/news/hooks'
 
+interface ILppmNewsResponse {
+  data: INewsDetail[]
+  meta: Meta
+}
+
 export const UseGetLPPMNews = (props?: IPropsData) => {
   const { page, limit, status_publish, search, year } = props ?? {}
-
-  const [lppmNews, setLppmNews] = useState<INewsDetail[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const ParamsSearch = new URLSearchParams()
   if (page) ParamsSearch.append('page', page ?? '1')
@@ -19,7 +20,7 @@ export const UseGetLPPMNews = (props?: IPropsData) => {
   if (search) ParamsSearch.append('search', search ?? '')
   if (year) ParamsSearch.append('tahun', year ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<ILppmNewsResponse>({
     queryKey: ['lppm-news', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/lppm/berita?${ParamsSearch}`).then((res) => res.data),
@@ -27,20 +28,11 @@ export const UseGetLPPMNews = (props?: IPropsData) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLppmNews(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { lppmNews, loading, meta }
+  return { lppmNews: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export const UseGetLppmNewsDetail = (id: string) => {
-  const [lppmNewsDetail, setLppmNewsDetail] = useState<INewsDetail>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<INewsDetail>({
     queryKey: ['lppm-news-detail', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/lppm/berita/${id}`).then((res) => res.data?.data),
@@ -48,19 +40,11 @@ export const UseGetLppmNewsDetail = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLppmNewsDetail(data)
-    }
-  }, [data])
-
-  return { lppmNewsDetail, loading }
+  return { lppmNewsDetail: data, loading }
 }
 
 export const UseGetLppmNewsStatus = () => {
-  const [status, setStatus] = useState<INewsStatus>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<INewsStatus>({
     queryKey: ['lppm-news-status'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/lppm/berita/status').then((res) => res.data?.data),
@@ -68,19 +52,11 @@ export const UseGetLppmNewsStatus = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setStatus(data)
-    }
-  }, [data])
-
-  return { status, loading }
+  return { status: data, loading }
 }
 
 export const UseGetLogNewsLppm = (id: string) => {
-  const [logData, setLogData] = useState<any[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<any[]>({
     queryKey: ['log-berita', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/lppm/berita-log/${id}`).then((res) => res.data.data),
@@ -88,19 +64,11 @@ export const UseGetLogNewsLppm = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLogData(data)
-    }
-  }, [data])
-
-  return { logData, loading }
+  return { logData: data ?? [], loading }
 }
 
 export const UseGetNewsYear = () => {
-  const [year, setYear] = useState<number[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<number[]>({
     queryKey: ['news-year'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/lppm/berita/tahun').then((res) => res.data?.data),
@@ -108,11 +76,5 @@ export const UseGetNewsYear = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setYear(data)
-    }
-  }, [data])
-
-  return { year, loading }
+  return { year: data ?? [], loading }
 }

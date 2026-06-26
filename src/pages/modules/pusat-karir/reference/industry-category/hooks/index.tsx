@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
@@ -8,15 +7,12 @@ import type { ICategoryIndustry } from '@/pages/modules/pusat-karir/reference/in
 export const UseGetIndustryCategory = (props?: BasicProps) => {
   const { page, search, limit } = props ?? {}
 
-  const [categoryIndustry, setCategoryIndustry] = useState<ICategoryIndustry[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const ParamsSearch = new URLSearchParams()
   if (page) ParamsSearch.append('page', page ?? '0')
   if (search) ParamsSearch.append('search', search ?? '')
   if (limit) ParamsSearch.append('limit', limit ?? '0')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: ICategoryIndustry[]; meta: Meta }>({
     queryKey: ['industry-category', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -25,12 +21,5 @@ export const UseGetIndustryCategory = (props?: BasicProps) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setCategoryIndustry(data?.data)
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { categoryIndustry, meta, loading }
+  return { categoryIndustry: data?.data ?? [], meta: data?.meta, loading }
 }

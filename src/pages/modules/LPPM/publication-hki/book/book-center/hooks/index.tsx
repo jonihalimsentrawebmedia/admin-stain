@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { IBookCenter } from './types'
@@ -11,9 +10,8 @@ interface Props {
 
 export const UseGetPublicationCenter = (props: Props) => {
   const { context } = props
-  const [responseData, setResponseData] = useState<IBookCenter>()
 
-  const { data, isFetching, isLoading } = useQuery({
+  const { data, isFetching, isLoading } = useQuery<IBookCenter>({
     queryKey: ['center-publication', context],
     enabled: !!context,
     refetchOnWindowFocus: false,
@@ -23,11 +21,5 @@ export const UseGetPublicationCenter = (props: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setResponseData(data)
-    }
-  }, [data])
-
-  return { responseData, loading }
+  return { responseData: data, loading }
 }
