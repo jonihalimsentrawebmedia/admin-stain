@@ -11,10 +11,11 @@ interface FormProps {
   form: UseFormReturn<SchemaActivity>
   HandleSave: (data: SchemaActivity) => void
   loading: boolean
+  label?: string
 }
 
 export const FormActivity = (props: FormProps) => {
-  const { form, HandleSave, loading } = props
+  const { label, form, HandleSave, loading } = props
   const navigate = useNavigate()
 
   return (
@@ -22,7 +23,8 @@ export const FormActivity = (props: FormProps) => {
       <Form {...form}>
         <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(HandleSave)}>
           <ButtonTitleGroup
-            label={'Tambah Program Kegiatan'}
+            isBack
+            label={label ?? 'Tambah Program Kegiatan'}
             buttonGroup={[
               {
                 type: 'cancel',

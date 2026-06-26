@@ -22,7 +22,7 @@ export const DetailActivityProgramInternal = () => {
                   className={
                     'text-primary border-primary border p-1.5 rounded flex items-center gap-1.5 px-4 text-sm'
                   }
-                  to={`/modules/lppm/research/schema/internal/activity/edit/${detail?.id_daftar_program_kegiatan}`}
+                  to={`/modules/lppm/research/schema/internal/activity/edit/${detail?.id_daftar_program_kegiatan}?from=detail`}
                 >
                   <HiPencil className={'size-4'} />
                   Edit Data
@@ -33,9 +33,7 @@ export const DetailActivityProgramInternal = () => {
         />
 
         <p className="text-primary font-semibold">Urutan {detail?.urutan}</p>
-
         <p className={'text-2xl font-semibold'}>{detail?.judul}</p>
-        
         <RenderHTMLContent content={detail?.deskripsi ?? ''} />
       </div>
     </>

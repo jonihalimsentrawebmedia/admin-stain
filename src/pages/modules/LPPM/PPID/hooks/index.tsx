@@ -1,12 +1,9 @@
-import {useEffect, useState} from 'react'
-import {useQuery} from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
-import type {IInformationPPID} from './types'
+import type { IInformationPPID } from './types'
 
 export const UseGetInformationPPID = () => {
-  const [responseData, setResponseData] = useState<IInformationPPID>()
-
-  const {data, isFetching, isLoading} = useQuery({
+  const { data, isFetching, isLoading } = useQuery<IInformationPPID>({
     queryKey: ['ppid-information'],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -15,11 +12,5 @@ export const UseGetInformationPPID = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setResponseData(data)
-    }
-  }, [data])
-
-  return {responseData, loading}
+  return { responseData: data, loading }
 }

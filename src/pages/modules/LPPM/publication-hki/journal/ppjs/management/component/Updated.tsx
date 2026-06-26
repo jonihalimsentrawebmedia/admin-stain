@@ -1,23 +1,23 @@
-import {FormManagement} from '@/pages/modules/LPPM/publication-hki/component/form.tsx'
-import {useForm} from 'react-hook-form'
+import { FormManagement } from '@/pages/modules/LPPM/publication-hki/component/form.tsx'
+import { useForm } from 'react-hook-form'
 import {
   type SchemaUserManagement,
   UserManagementResolver,
 } from '@/pages/modules/LPPM/publication-hki/component/resolver.tsx'
-import {zodResolver} from '@hookform/resolvers/zod'
+import { zodResolver } from '@hookform/resolvers/zod'
 import AxiosClient from '@/provider/axios.tsx'
-import {toast} from 'react-toastify'
-import {useEffect, useState} from 'react'
-import {useNavigate, useParams} from 'react-router-dom'
-import {UseGetDetailUserManagement} from '@/pages/modules/LPPM/publication-hki/book/hooks'
+import { toast } from 'react-toastify'
+import { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import { UseGetDetailUserManagement } from '@/pages/modules/LPPM/publication-hki/book/hooks'
 
 export const UpdatedUserManagementPPJS = () => {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
-  const {id} = useParams()
+  const { id } = useParams()
 
-  const {userManagement} = UseGetDetailUserManagement({
+  const { userManagement } = UseGetDetailUserManagement({
     context: 'pusat-ppjs',
     id: id ?? '',
   })
@@ -66,7 +66,12 @@ export const UpdatedUserManagementPPJS = () => {
 
   return (
     <>
-      <FormManagement form={form} HandleSave={HandleSave} loading={loading}/>
+      <FormManagement
+        label={'Edit Pengelolah'}
+        form={form}
+        HandleSave={HandleSave}
+        loading={loading}
+      />
     </>
   )
 }

@@ -1,5 +1,4 @@
 import type { Meta } from '@/components/common/table/TablePagination'
-import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
@@ -10,8 +9,6 @@ interface Props {
 }
 const useGetTemplateLPPM = (props: Props) => {
   const { isGetAll = false } = props
-  const [template, setTemplate] = useState<ThemaLPPM[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const [searchParams] = useSearchParams()
   const page = isGetAll ? '0' : searchParams.get('page') || '1'
@@ -32,17 +29,10 @@ const useGetTemplateLPPM = (props: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setTemplate(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
   return {
-    template,
+    template: data?.data ?? [],
     loading,
-    meta,
+    meta: data?.meta,
   }
 }
 

@@ -157,3 +157,56 @@ Removed `useState` + `useEffect` that merely copied `useQuery` data into local s
 | `entrance/hooks/index.tsx` | `UseGetEntrance`, `UseGetEntranceDetail` |
 | `data-pmb/hooks/index.tsx` | `UseGetDetailDataPMB` |
 | `dashboard/hooks/index.tsx` | `UseGetTotalVisitor` (useState+useEffect→useMemo), `UseGetApprovedList`, `UseGetTrentVisitor` (added interface, direct return) |
+
+### 11. Redundant State / Derived State Anti-Pattern Fix — LPPM Module (28 files, 39 hooks)
+
+Removed `useState` + `useEffect` that merely copied `useQuery` data into local state. Added type parameters to `useQuery<T>` (no `any`). List hooks return `data?.data ?? []` and `data?.meta`. Detail/single hooks return `data` directly. `UseGetTotalVisitor` status → `useMemo`, `UseGetTrentVisitor` → interface + direct return.
+
+| File | Hooks Fixed |
+|---|---|
+| `settings/warna/hooks/index.tsx` | `UseGetColorAdmin`, `UseGetAdminThemeUUID` |
+| `settings/template/hooks/index.tsx` | `UseGetTemplateDetail` |
+| `settings/template/controller/useGetTemplateLPPM.tsx` | `useGetTemplateLPPM` |
+| `settings/landing-page/controller/useGetLandingPage.tsx` | `useGetLandingPage` |
+| `services/hooks/index.tsx` | `UseGetServices` |
+| `hooks/index.tsx` | `UseGetSessionLPPM` |
+| `data-lppm/hooks/index.tsx` | `UseGetDetailDataLPPM` |
+| `about/vision-mission/hooks/index.tsx` | `UseGetProfileVisionMission` |
+| `about/structure/hooks/index.tsx` | `UseGetStructureOrganization` |
+| `about/staff/hooks/index.tsx` | `UseGetStaff`, `UseGetStaffDetail` |
+| `about/staff/member/hooks/index.tsx` | `UseGetMemberStaff`, `UseGetMemberDetail` |
+| `about/secretary/hooks/index.tsx` | `UseGetSecretary` |
+| `about/profile/hooks/index.tsx` | `UseGetAboutProfile` |
+| `about/leader/hooks/index.tsx` | `UseGetProfileLeader` |
+| `public-content/news/hooks/index.tsx` | `UseGetLPPMNews`, `UseGetLppmNewsDetail`, `UseGetLppmNewsStatus`, `UseGetLogNewsLppm`, `UseGetNewsYear` |
+| `public-content/Download/hooks/index.tsx` | `UseGetCategoryDownloadLppm`, `UseGetDownloadLppm`, `UseGetDownloadLppmDetail` |
+| `public-content/article/hooks/index.tsx` | `UseGetArticleLppm`, `UseGetArticleLppmDetail`, `UseGetArticleLppmStatus`, `UseGetLogArticleLppm` |
+| `public-content/announcement/hooks/index.tsx` | `UseGetLppmAnnouncement`, `UseGetLppmAnnouncementDetail`, `UseGetLppmAnnouncementStatus`, `UseGetLogAnnouncementLppm`, `UseGetAnnouncementYear` |
+| `public-content/agenda/hooks/index.tsx` | `UseGetAgendaLppm`, `UseGetAgendaLppmDetail`, `UseGetAgendaLppmStatus`, `UseGetLogAgendaLppm`, `UseGetAgendaYear` |
+| `dashboard/hooks/index.tsx` | `UseGetTotalVisitor` (useState+useEffect→useMemo), `UseGetApprovedList`, `UseGetTrentVisitor` (added interface, direct return) |
+| `components/notification/hooks/index.tsx` | `UseGetNotificationLPPM` |
+| `PPID/hooks/index.tsx` | `UseGetInformationPPID` |
+| `PPID/information/hooks/index.tsx` | `UseGetInformationTree` |
+| `research/study-center/operational-standard/hooks/index.tsx` | `UseGetDocumentStandardOperational` |
+| `research/schema/internal/hooks/index.tsx` | `UseGetSchemaInternalResearch` |
+| `research/schema/internal/activity/hooks/index.tsx` | `UseGetActivityProgram`, `UseGetActivityProgramDetail` |
+| `research/schema/doctoral/hooks/index.tsx` | `UseGetSchemaDoctoralResearch` |
+| `research/plan/hooks/index.tsx` | `UseGetResearchPlan`, `UseGetResearchPlanDetail` |
+| `research/plan/document/hooks/index.tsx` | `UseGetPlanResearchDocument` |
+| `research/main/hooks/index.tsx` | `UseGetMainResearch` |
+| `research/guide/hooks/index.tsx` | `UseGetGuideCategory`, `UseGetGuideCategoryDetail` |
+| `research/guide/document/hooks/index.tsx` | `UseGetDocumentGuideCategory` |
+| `devotion/stain-hub/hooks/index.tsx` | `UseGetMainDevotion` |
+| `devotion/schema/other/hooks/index.tsx` | `UseGetOtherFunding`, `UseGetDetailOtherFunding` |
+| `devotion/schema/internal/hooks/index.tsx` | `UseGetSchemaDevotion` |
+| `devotion/schema/internal/activity-program/hooks/index.tsx` | `UseGetActivityProgram`, `UseGetActivityProgramDetail` |
+| `devotion/schema/drtpm/hooks/index.tsx` | `UseGetListDRTPM`, `UseGetDetailDRTPM` |
+| `devotion/schema/brin/hooks/index.tsx` | `UseGetListBRIN`, `UseGetDetailBRIN` |
+| `devotion/main/hooks/index.tsx` | `UseGetMainDevotion` |
+| `publication-hki/journal/list/hooks/index.tsx` | `UseGetListJournal` |
+| `publication-hki/hki/registration/hooks/index.tsx` | `UseGetBookPublisher` |
+| `publication-hki/hki/description/hooks/index.tsx` | `UseGetBookPublisher` |
+| `publication-hki/book/hooks/index.tsx` | `UseGetUserManagementContext`, `UseGetDetailUserManagement` |
+| `publication-hki/book/publisher/hooks/index.tsx` | `UseGetBookPublisher` |
+| `publication-hki/book/media/hooks/index.tsx` | `UseGetBookPublisher` |
+| `publication-hki/book/book-center/hooks/index.tsx` | `UseGetPublicationCenter` |

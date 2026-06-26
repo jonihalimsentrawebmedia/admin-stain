@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
@@ -16,18 +15,20 @@ interface propsDetail {
   context: Context
 }
 
+interface UserManagementResponse {
+  data: IUserManagement[]
+  meta: Meta
+}
+
 export const UseGetUserManagementContext = (props?: Props) => {
   const { context, page, limit, search } = props ?? {}
-
-  const [userManagement, setUserManagement] = useState<IUserManagement[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const ParamsSearch = new URLSearchParams()
   ParamsSearch.append('page', page ?? '0')
   ParamsSearch.append('limit', limit ?? '0')
   ParamsSearch.append('search', search ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<UserManagementResponse>({
     queryKey: ['user-management', ParamsSearch.toString(), context],
     enabled: !!context,
     refetchOnWindowFocus: false,
@@ -39,21 +40,13 @@ export const UseGetUserManagementContext = (props?: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setUserManagement(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { userManagement, meta, loading }
+  return { userManagement: data?.data ?? [], meta: data?.meta, loading }
 }
 
 export const UseGetDetailUserManagement = (props: propsDetail) => {
   const { id, context } = props
-  const [userManagement, setUserManagement] = useState<IUserManagement>()
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IUserManagement>({
     queryKey: ['user-management-detail', id, context],
     enabled: !!context,
     refetchOnWindowFocus: false,
@@ -65,11 +58,5 @@ export const UseGetDetailUserManagement = (props: propsDetail) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setUserManagement(data)
-    }
-  }, [data])
-
-  return { userManagement, loading }
+  return { userManagement: data, loading }
 }

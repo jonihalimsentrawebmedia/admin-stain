@@ -37,7 +37,7 @@ export const CreatedStudyCenter = () => {
         form={form}
         loading={loading}
         HandleSave={HandleAddStudyCenter}
-        label={'Tambah Data'}
+        label={'Tambah Pusat Studi'}
       />
     </>
   )

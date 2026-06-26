@@ -12,17 +12,19 @@ interface FormProps {
   form: UseFormReturn<SchemaUserManagement>
   HandleSave: (data: SchemaUserManagement) => void
   loading: boolean
+  label?: string
 }
 
 export const FormManagement = (props: FormProps) => {
-  const { form, HandleSave, loading } = props
+  const { form, HandleSave, loading, label } = props
   const navigate = useNavigate()
   return (
     <>
       <Form {...form}>
         <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(HandleSave)}>
           <ButtonTitleGroup
-            label={'Tambah Pengelola'}
+            isBack
+            label={label ?? 'Tambah Pengelola'}
             buttonGroup={[
               {
                 type: 'cancel',

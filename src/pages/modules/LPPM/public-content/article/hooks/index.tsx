@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
@@ -7,17 +6,24 @@ import type { IPropsData } from '@/pages/modules/website-prodi/public-content/ne
 import { useSearchParams } from 'react-router-dom'
 import type { IArtikel } from '../data/types'
 
+interface IArticleResponse {
+  data: IArtikel[]
+  meta: Meta
+}
+
+interface ILogArticleResponse {
+  data: any[]
+  meta: Meta
+}
+
 export const UseGetArticleLppm = (props?: IPropsData) => {
   const { page, limit, status_publish, search } = props ?? {}
-
-  const [article, setArticle] = useState<IArtikel[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const ParamsSearch = new URLSearchParams({ page: page ?? '1', limit: limit ?? '10' })
   if (status_publish) ParamsSearch.append('status-publish', status_publish)
   if (search) ParamsSearch.append('search', search)
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IArticleResponse>({
     queryKey: ['article-lppm', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/lppm/artikel?${ParamsSearch}`).then((res) => res.data),
@@ -25,20 +31,11 @@ export const UseGetArticleLppm = (props?: IPropsData) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setArticle(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { article, loading, meta }
+  return { article: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export const UseGetArticleLppmDetail = (id: string) => {
-  const [articleDetail, setArticleDetail] = useState<IArtikel>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IArtikel>({
     queryKey: ['article-lppm-detail', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/lppm/artikel/${id}`).then((res) => res.data?.data),
@@ -46,19 +43,11 @@ export const UseGetArticleLppmDetail = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setArticleDetail(data)
-    }
-  }, [data])
-
-  return { articleDetail, loading }
+  return { articleDetail: data, loading }
 }
 
 export const UseGetArticleLppmStatus = () => {
-  const [status, setStatus] = useState<INewsStatus>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<INewsStatus>({
     queryKey: ['article-lppm-status'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/lppm/artikel/status').then((res) => res.data?.data),
@@ -66,19 +55,10 @@ export const UseGetArticleLppmStatus = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setStatus(data)
-    }
-  }, [data])
-
-  return { status, loading }
+  return { status: data, loading }
 }
 
 export const UseGetLogArticleLppm = (id: string) => {
-  const [logData, setLogData] = useState<any[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
@@ -87,7 +67,7 @@ export const UseGetLogArticleLppm = (id: string) => {
   const ParamsSearch = new URLSearchParams({ page, limit })
   if (search) ParamsSearch.append('search', search)
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<ILogArticleResponse>({
     queryKey: ['log-promosi', id, ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -96,12 +76,5 @@ export const UseGetLogArticleLppm = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLogData(data?.data)
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { logData, loading, meta }
+  return { logData: data?.data ?? [], loading, meta: data?.meta }
 }

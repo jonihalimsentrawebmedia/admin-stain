@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
@@ -13,9 +12,7 @@ export interface ISessionLPPM {
 }
 
 export const UseGetSessionLPPM = () => {
-  const [session, setSession] = useState<ISessionLPPM>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<ISessionLPPM>({
     queryKey: ['session-lppm'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/lppm/user-session').then((res) => res.data?.data),
@@ -23,11 +20,5 @@ export const UseGetSessionLPPM = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setSession(data)
-    }
-  }, [data])
-
-  return { session, loading }
+  return { session: data, loading }
 }
