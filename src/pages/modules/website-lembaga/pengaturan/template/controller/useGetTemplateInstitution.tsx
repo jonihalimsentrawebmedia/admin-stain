@@ -1,5 +1,4 @@
 import type { Meta } from "@/components/common/table/TablePagination"
-import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
 import AxiosClient from "@/provider/axios"
@@ -8,15 +7,12 @@ import type { ThemaLembaga } from "../model"
 interface Props {
   isGetAll?: boolean
 }
-const useGetTemplateInstitutation = (props: Props) => {
-
- const { isGetAll=false } = props
-  const [template, setTemplate] = useState<ThemaLembaga[]>([])
-  const [meta, setMeta] = useState<Meta>()
+const useGetTemplateInstitution = (props: Props) => {
+  const { isGetAll=false } = props
 
   const [searchParams] = useSearchParams()
-  const page =isGetAll?"0": searchParams.get('page') || '1'
-  const limit =isGetAll?"0": searchParams.get('limit') || '1000'
+  const page = isGetAll?"0": searchParams.get('page') || '1'
+  const limit = isGetAll?"0": searchParams.get('limit') || '1000'
   const search = searchParams.get('search') || ''
 
   const ParamsSearch = new URLSearchParams({ page, limit, search })
@@ -35,18 +31,11 @@ const useGetTemplateInstitutation = (props: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setTemplate(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
   return {
-    template,
+    template: data?.data ?? [],
     loading,
-    meta,
+    meta: data?.meta,
   }
 }
 
-export default useGetTemplateInstitutation
+export default useGetTemplateInstitution

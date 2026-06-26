@@ -1,18 +1,17 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { IAnnouncement } from '../../data/index'
 
-export const UseGetAnnouncementLanguage = (id?: string) => {
-  const [language, setLanguage] = useState<{
-    id: IAnnouncement
-    en: IAnnouncement
-    zh: IAnnouncement
-    ar: IAnnouncement
-  }>()
+interface IAnnouncementLanguage {
+  id: IAnnouncement
+  en: IAnnouncement
+  zh: IAnnouncement
+  ar: IAnnouncement
+}
 
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['news-language', id],
+export const UseGetAnnouncementLanguage = (id?: string) => {
+  const { data, isLoading, isFetching } = useQuery<IAnnouncementLanguage>({
+    queryKey: ['announcement-language', id],
     refetchOnWindowFocus: false,
     queryFn: () =>
       AxiosClient.get(`/lembaga/pengumuman-translate/${id}`).then((res) => res.data.data),
@@ -20,11 +19,5 @@ export const UseGetAnnouncementLanguage = (id?: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLanguage(data)
-    }
-  }, [data])
-
-  return { loading, language }
+  return { loading, language: data }
 }

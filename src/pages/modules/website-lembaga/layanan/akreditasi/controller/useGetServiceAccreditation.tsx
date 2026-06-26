@@ -1,5 +1,4 @@
 import type { Meta } from '@/components/common/table/TablePagination'
-import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
@@ -10,8 +9,6 @@ interface Props {
 }
 const useGetServiceAccreditation = (props: Props) => {
   const { isGetAll = false } = props
-  const [accreditation, setAccreditation] = useState<ServiceAccreditation[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const [searchParams] = useSearchParams()
   const page = isGetAll ? '0' : searchParams.get('page') || '1'
@@ -26,23 +23,16 @@ const useGetServiceAccreditation = (props: Props) => {
     meta: Meta
   }>({
     refetchOnWindowFocus: false,
-    queryKey: ['sesrvice-accreditation', ParamsSearch.toString()],
+    queryKey: ['service-accreditation', ParamsSearch.toString()],
     queryFn: () => AxiosClient.get(`/lembaga/akreditas?${ParamsSearch}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setAccreditation(data.data ?? [])
-      setMeta(data.meta)
-    }
-  }, [data])
-
   return {
-    accreditation,
+    accreditation: data?.data ?? [],
     loading,
-    meta,
+    meta: data?.meta,
   }
 }
 

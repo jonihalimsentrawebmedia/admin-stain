@@ -8,13 +8,13 @@ import TextAreaInput from '@/components/common/form/textAreaInput.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import { RichText } from '@/components/common/richtext'
 
-interface props {
+interface Props {
   loading: boolean
   form: UseFormReturn<AgendaType>
   HandleSave: (e: AgendaType) => void
 }
 
-export const AgendaForm = (props: props) => {
+export const AgendaForm = (props: Props) => {
   const { form, HandleSave, loading } = props
   const navigate = useNavigate()
   return (

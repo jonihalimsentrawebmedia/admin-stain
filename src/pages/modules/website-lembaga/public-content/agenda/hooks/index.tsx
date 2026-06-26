@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import type { IAgendaDetail, IStatusAgenda } from '../data/index'
 import { useSearchParams } from 'react-router-dom'
 
-export const UseGetAgendaList = () => {
-  const [listAgenda, setListAgenda] = useState<any>([])
-  const [meta, setMeta] = useState<Meta>()
+interface IAgendaListResponse {
+  data: IAgendaDetail[]
+  meta: Meta
+}
 
+export const UseGetAgendaList = () => {
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
@@ -21,7 +22,7 @@ export const UseGetAgendaList = () => {
   if (status) ParamsSearch.append('status-publish', status)
   if (year) ParamsSearch.append('tahun', year)
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IAgendaListResponse>({
     queryKey: ['list-agenda-lembaga', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/lembaga/agenda?${ParamsSearch}`).then((res) => res.data),
@@ -29,20 +30,11 @@ export const UseGetAgendaList = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setListAgenda(data?.data ?? [])
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { listAgenda, loading, meta }
+  return { listAgenda: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export const UseGetAgendaDetail = (id: string) => {
-  const [detailAgenda, setDetailAgenda] = useState<IAgendaDetail>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IAgendaDetail>({
     queryKey: ['detail-agenda-lembaga', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/lembaga/agenda/${id}`).then((res) => res.data.data),
@@ -50,19 +42,11 @@ export const UseGetAgendaDetail = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDetailAgenda(data)
-    }
-  }, [data])
-
-  return { detailAgenda, loading }
+  return { detailAgenda: data, loading }
 }
 
 export const UseGetAgendaStatus = () => {
-  const [status, setStatus] = useState<IStatusAgenda>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IStatusAgenda>({
     queryKey: ['status-agenda-lembaga'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/lembaga/agenda/status').then((res) => res.data.data),
@@ -70,39 +54,31 @@ export const UseGetAgendaStatus = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setStatus(data)
-    }
-  }, [data])
+  return { status: data, loading }
+}
 
-  return { status, loading }
+export interface ILogAgenda {
+  id: string
+  aktivitas: string
+  created_at: string
+  created_user: string
+  nama_user: string
 }
 
 export const UseGetLogAgenda = (id: string) => {
-  const [logData, setLogData] = useState<any[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['log-inovasi-berdampak-lembaga', id],
+  const { data, isLoading, isFetching } = useQuery<ILogAgenda[]>({
+    queryKey: ['log-agenda-lembaga', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/lembaga/agenda-log/${id}`).then((res) => res.data.data),
   })
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLogData(data)
-    }
-  }, [data])
-
-  return { logData, loading }
+  return { logData: data ?? [], loading }
 }
 
 export const UseGetAgendaYear = () => {
-  const [year, setYear] = useState<number[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<number[]>({
     queryKey: ['list-agenda-lembaga-year'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/lembaga/agenda/tahun`).then((res) => res.data.data),
@@ -110,11 +86,5 @@ export const UseGetAgendaYear = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setYear(data)
-    }
-  }, [data])
-
-  return { year, loading }
+  return { year: data ?? [], loading }
 }

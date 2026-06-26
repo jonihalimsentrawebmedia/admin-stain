@@ -1,12 +1,9 @@
 import type { Meta } from '@/components/common/table/TablePagination'
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import type { SatuanOrganisasiList } from '@/pages/modules/settings/model'
 
 const useGetLembagaCurrent = () => {
-  const [lembagaCurrent, setLembagaCurrent] = useState<SatuanOrganisasiList>()
-
   const { data, isLoading, isFetching } = useQuery<{
     data: SatuanOrganisasiList
     meta: Meta
@@ -18,14 +15,8 @@ const useGetLembagaCurrent = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLembagaCurrent(data.data)
-    }
-  }, [data])
-
   return {
-    lembagaCurrent,
+    lembagaCurrent: data?.data,
     loading,
   }
 }

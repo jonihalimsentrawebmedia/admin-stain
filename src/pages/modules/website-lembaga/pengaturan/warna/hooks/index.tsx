@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
@@ -8,9 +7,7 @@ interface IColor {
 }
 
 export const UseGetColorAdmin = (context: 'admin' | 'public') => {
-  const [color, setColor] = useState<IColor>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IColor>({
     queryKey: [`color-${context}`],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -19,19 +16,11 @@ export const UseGetColorAdmin = (context: 'admin' | 'public') => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setColor(data)
-    }
-  }, [data])
-
-  return { color, loading }
+  return { color: data, loading }
 }
 
 export const UseGetAdminTheme = () => {
-  const [color, setColor] = useState<IColor>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IColor>({
     queryKey: [`color-theme`],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient(`/lembaga/pengaturan-warna/admin`).then((res) => res.data?.data),
@@ -39,11 +28,5 @@ export const UseGetAdminTheme = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setColor(data)
-    }
-  }, [data])
-
-  return { color, loading }
+  return { color: data, loading }
 }

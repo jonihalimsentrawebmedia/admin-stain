@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type {
   IAnnouncement,
   IstatusAnnouncement,
@@ -8,10 +7,12 @@ import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import { useSearchParams } from 'react-router-dom'
 
-export const UseGetAnnouncement = () => {
-  const [announcement, setAnnouncement] = useState<IAnnouncement[]>([])
-  const [meta, setMeta] = useState<Meta>()
+interface IAnnouncementListResponse {
+  data: IAnnouncement[]
+  meta: Meta
+}
 
+export const UseGetAnnouncement = () => {
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
@@ -24,7 +25,7 @@ export const UseGetAnnouncement = () => {
   if (status) ParamsSearch.append('status-publish', status)
   if (year) ParamsSearch.append('tahun', year)
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IAnnouncementListResponse>({
     queryKey: ['list-announcement-lembaga', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/lembaga/pengumuman?${ParamsSearch}`).then((res) => res.data),
@@ -32,20 +33,11 @@ export const UseGetAnnouncement = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setAnnouncement(data?.data ?? [])
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { announcement, loading, meta }
+  return { announcement: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export const UseGetAnnouncementDetail = (id: string) => {
-  const [detailAnnouncement, setDetailAnnouncement] = useState<IAnnouncement>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IAnnouncement>({
     queryKey: ['detail-announcement-lembaga', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/lembaga/pengumuman/${id}`).then((res) => res.data.data),
@@ -53,19 +45,11 @@ export const UseGetAnnouncementDetail = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDetailAnnouncement(data)
-    }
-  }, [data])
-
-  return { detailAnnouncement, loading }
+  return { detailAnnouncement: data, loading }
 }
 
 export const UseGetAnnouncementStatus = () => {
-  const [status, setStatus] = useState<IstatusAnnouncement>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IstatusAnnouncement>({
     queryKey: ['status-announcement-lembaga'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/lembaga/pengumuman/status').then((res) => res.data.data),
@@ -73,39 +57,31 @@ export const UseGetAnnouncementStatus = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setStatus(data)
-    }
-  }, [data])
+  return { status: data, loading }
+}
 
-  return { status, loading }
+export interface ILogAnnouncement {
+  id: string
+  aktivitas: string
+  created_at: string
+  created_user: string
+  nama_user: string
 }
 
 export const UseGetLogAnnouncement = (id: string) => {
-  const [logData, setLogData] = useState<any[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['log-inovasi-berdampak-lembaga', id],
+  const { data, isLoading, isFetching } = useQuery<ILogAnnouncement[]>({
+    queryKey: ['log-announcement-lembaga', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/lembaga/pengumuman-log/${id}`).then((res) => res.data.data),
   })
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLogData(data)
-    }
-  }, [data])
-
-  return { logData, loading }
+  return { logData: data ?? [], loading }
 }
 
 export const UseGetAnnouncementYear = () => {
-  const [year, setYear] = useState<number[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<number[]>({
     queryKey: ['list-announcement-lembaga-year'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/lembaga/pengumuman/tahun`).then((res) => res.data.data),
@@ -113,11 +89,5 @@ export const UseGetAnnouncementYear = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setYear(data)
-    }
-  }, [data])
-
-  return { year, loading }
+  return { year: data ?? [], loading }
 }

@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { INewsDetail } from '@/pages/modules/website-lembaga/public-content/news/data'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
@@ -15,10 +14,12 @@ export interface INewsStatus {
   UNPUBLISH: number
 }
 
-export const UseGetNews = () => {
-  const [newsList, setNewsList] = useState<INewsDetail[]>([])
-  const [meta, setMeta] = useState<Meta>()
+interface INewsListResponse {
+  data: INewsDetail[]
+  meta: Meta
+}
 
+export const UseGetNews = () => {
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
@@ -33,7 +34,7 @@ export const UseGetNews = () => {
   if (search) ParamsSearch.append('search', search)
   if (year) ParamsSearch.append('tahun', year)
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<INewsListResponse>({
     queryKey: ['list-news-lembaga', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/lembaga/berita?${ParamsSearch}`).then((res) => res.data),
@@ -41,20 +42,11 @@ export const UseGetNews = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setNewsList(data?.data ?? [])
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { newsList, loading, meta }
+  return { newsList: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export const UseGetNewsDetail = (id: string) => {
-  const [detailNews, setDetailNews] = useState<INewsDetail>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<INewsDetail>({
     queryKey: ['detail-news-lembaga', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/lembaga/berita/${id}`).then((res) => res.data.data),
@@ -62,19 +54,11 @@ export const UseGetNewsDetail = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDetailNews(data)
-    }
-  }, [data])
-
-  return { detailNews, loading }
+  return { detailNews: data, loading }
 }
 
 export const UseGetNewsStatus = () => {
-  const [status, setStatus] = useState<INewsStatus>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<INewsStatus>({
     queryKey: ['status-news-lembaga'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/lembaga/berita/status').then((res) => res.data.data),
@@ -82,19 +66,19 @@ export const UseGetNewsStatus = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setStatus(data)
-    }
-  }, [data])
+  return { status: data, loading }
+}
 
-  return { status, loading }
+export interface ILogNews {
+  id: string
+  aktivitas: string
+  created_at: string
+  created_user: string
+  nama_user: string
 }
 
 export const UseGetLogNews = (id: string) => {
-  const [logData, setLogData] = useState<any[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<ILogNews[]>({
     queryKey: ['log-berita-lembaga', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/lembaga/berita-log/${id}`).then((res) => res.data.data),
@@ -102,19 +86,11 @@ export const UseGetLogNews = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLogData(data)
-    }
-  }, [data])
-
-  return { logData, loading }
+  return { logData: data ?? [], loading }
 }
 
 export const UseGetNewsYear = () => {
-  const [year, setYear] = useState<number[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<number[]>({
     queryKey: ['list-news-lembaga-year'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/lembaga/berita/tahun`).then((res) => res.data.data),
@@ -122,11 +98,5 @@ export const UseGetNewsYear = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setYear(data)
-    }
-  }, [data])
-
-  return { year, loading }
+  return { year: data ?? [], loading }
 }
