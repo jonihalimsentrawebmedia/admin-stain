@@ -85,7 +85,7 @@ export const ButtonDeleteDocumentResearchPlan = (data: IPlanResearchDocument) =>
               type: 'custom',
               label: 'Hapus',
               element: (
-                <Button disabled={loading} onClick={HandleAddDocument}>
+                <Button disabled={loading} onClick={HandleAddDocument} variant={'destructive'}>
                   <FaTrash /> Hapus
                 </Button>
               ),
