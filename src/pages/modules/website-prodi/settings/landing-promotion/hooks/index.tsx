@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react'
 import type { ILandingPromotion } from '@/pages/modules/website-prodi/settings/landing-promotion/data'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
-export const UseLandingPromotion = () => {
-  const [landingPromotion, setLandingPromotion] = useState<ILandingPromotion[]>([])
-  const [meta, setMeta] = useState<Meta>()
+interface ILandingPromotionResponse {
+  data: ILandingPromotion[]
+  meta: Meta
+}
 
-  const { data, isLoading, isFetching } = useQuery({
+export const UseLandingPromotion = () => {
+  const { data, isLoading, isFetching } = useQuery<ILandingPromotionResponse>({
     queryKey: ['landing-promotion'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/prodi/landing-page-promosi').then((res) => res.data),
@@ -16,12 +17,5 @@ export const UseLandingPromotion = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLandingPromotion(data?.data)
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { landingPromotion, loading, meta }
+  return { landingPromotion: data?.data ?? [], loading, meta: data?.meta }
 }

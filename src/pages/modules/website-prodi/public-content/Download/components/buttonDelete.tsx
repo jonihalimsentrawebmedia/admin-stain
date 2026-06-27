@@ -13,11 +13,11 @@ import { useForm } from 'react-hook-form'
 import { Form } from '@/components/ui/form.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
 
-interface props {
+interface Props {
   data: IDownload
 }
 
-export const ButtonDeleteFileDownloadProdi = (props: props) => {
+export const ButtonDeleteFileDownloadProdi = (props: Props) => {
   const { data } = props
 
   const [open, setOpen] = useState(false)

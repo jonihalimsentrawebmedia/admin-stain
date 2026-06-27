@@ -8,11 +8,11 @@ import { Button } from '@/components/ui/button.tsx'
 import { FaTrash } from 'react-icons/fa'
 import type { IProdiBackground } from '@/pages/modules/website-prodi/settings/background/data'
 
-interface props {
+interface Props {
   data: IProdiBackground
 }
 
-export const ButtonDeleteBackgroundProdi = (props: props) => {
+export const ButtonDeleteBackgroundProdi = (props: Props) => {
   const { data } = props
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)

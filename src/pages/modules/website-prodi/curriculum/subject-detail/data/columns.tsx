@@ -1,7 +1,7 @@
 import type { ColumnDef } from '@tanstack/react-table'
-import type { ISubjectDetail } from '@/pages/modules/website-prodi/curriculum/suject-detail/data/types.ts'
-import { ButtonEditSubject } from '@/pages/modules/website-prodi/curriculum/suject-detail/component/buttonEdit.tsx'
-import { ButtonDeleteSubject } from '@/pages/modules/website-prodi/curriculum/suject-detail/component/buttonDelete.tsx'
+import type { ISubjectDetail } from '@/pages/modules/website-prodi/curriculum/subject-detail/data/types.ts'
+import { ButtonEditSubject } from '@/pages/modules/website-prodi/curriculum/subject-detail/component/buttonEdit.tsx'
+import { ButtonDeleteSubject } from '@/pages/modules/website-prodi/curriculum/subject-detail/component/buttonDelete.tsx'
 
 export const ColumnsSubject = () => {
   const columns: ColumnDef<ISubjectDetail>[] = [

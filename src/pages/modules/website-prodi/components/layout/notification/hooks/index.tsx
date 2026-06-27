@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
-interface notification {
+export interface INotification {
   id: string
   judul: string
   content: string
@@ -11,11 +10,9 @@ interface notification {
 }
 
 export const UseGetNotificationProdi = () => {
-  const [notification, setNotification] = useState<notification[]>([])
-
   const ParamsSearch = new URLSearchParams({ page: '0', limit: '0' })
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<INotification[]>({
     queryKey: ['notification', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -24,11 +21,5 @@ export const UseGetNotificationProdi = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setNotification(data)
-    }
-  }, [data])
-
-  return { notification, loading }
+  return { notification: data ?? [], loading }
 }

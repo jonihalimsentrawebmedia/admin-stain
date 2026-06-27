@@ -3,7 +3,7 @@ import { IconTitleText } from '@/components/common/icon'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs.tsx'
 import { type JSX, useEffect, useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { SubjectPerSemester } from '@/pages/modules/website-prodi/curriculum/suject-detail/component/SubjectPerSemester.tsx'
+import { SubjectPerSemester } from '@/pages/modules/website-prodi/curriculum/subject-detail/component/SubjectPerSemester.tsx'
 
 interface Props {
   detail?: ICurriculum
@@ -43,14 +43,14 @@ export const SidenavSubjectCurriculum = (props: Props) => {
   }, [detail?.lama_kuliah])
 
   useEffect(() => {
-    if (elements.length > 0 && !tabValue) {
+    if (detail && elements.length > 0 && !tabValue) {
       setSearchParams((prev) => {
         const params = new URLSearchParams(prev)
         params.set('tahun', elements[0].value)
         return params
       })
     }
-  }, [elements, tabValue, setSearchParams])
+  }, [detail, elements, tabValue, setSearchParams])
 
   return (
     <div>

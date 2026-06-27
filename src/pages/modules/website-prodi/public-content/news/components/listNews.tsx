@@ -8,11 +8,11 @@ import { ColumnsReturnByStatus } from './columns/index'
 import { useSearchParams } from 'react-router-dom'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 
-interface props {
+interface Props {
   status: StatusPublish
 }
 
-export const TableDataListNews = (props: props) => {
+export const TableDataListNews = (props: Props) => {
   const { status } = props
 
   const [searchParams] = useSearchParams()

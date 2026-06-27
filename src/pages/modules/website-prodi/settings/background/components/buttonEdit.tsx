@@ -12,11 +12,11 @@ import { TAB_LIST } from '@/pages/modules/website-prodi/settings/background/data
 import { HiPencil } from 'react-icons/hi'
 import type { IProdiBackground } from '@/pages/modules/website-prodi/settings/background/data'
 
-interface props {
+interface Props {
   data: IProdiBackground
 }
 
-export const ButtonEditBackgroundProdi = (props: props) => {
+export const ButtonEditBackgroundProdi = (props: Props) => {
   const { data } = props
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)

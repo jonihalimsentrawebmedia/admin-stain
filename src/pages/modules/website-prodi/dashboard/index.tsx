@@ -23,13 +23,9 @@ export default function DashboardAdminProdi() {
 
   const { trentVisitor, visitor, device } = UseGetTrentVisitorProdi(mode)
 
-  const chartData =
-    (trentVisitor &&
-      Object?.entries(trentVisitor).map(([key, value]) => ({
-        name: key,
-        value: value,
-      }))) ??
-    []
+  const chartData: { name: string; value: unknown }[] = trentVisitor
+    ? Object.entries(trentVisitor).map(([key, value]) => ({ name: key, value }))
+    : []
 
   const { status } = UseGetTotalVisitorProdi()
   const { profileUser } = UseGetUserProfile()

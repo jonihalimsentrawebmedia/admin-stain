@@ -2,20 +2,22 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs.t
 import { useParams, useSearchParams } from 'react-router-dom'
 import { useEffect, useMemo } from 'react'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { ButtonAddSubject } from '@/pages/modules/website-prodi/curriculum/suject-detail/component/buttonAdd.tsx'
-import { UseGetSubjectDetail } from '@/pages/modules/website-prodi/curriculum/suject-detail/hooks'
-import { ColumnsSubject } from '@/pages/modules/website-prodi/curriculum/suject-detail/data/columns.tsx'
+import { ButtonAddSubject } from '@/pages/modules/website-prodi/curriculum/subject-detail/component/buttonAdd.tsx'
+import { UseGetSubjectDetail } from '@/pages/modules/website-prodi/curriculum/subject-detail/hooks'
+import { ColumnsSubject } from '@/pages/modules/website-prodi/curriculum/subject-detail/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 
 export const SubjectPerSemester = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const tahun = searchParams.get('tahun') ?? ''
   const semesterParam = searchParams.get('semester') ?? ''
+  const search = searchParams.get('search') ?? ''
 
   const { id } = useParams()
 
   const { subjectList, loading } = UseGetSubjectDetail({
     id: id ?? '',
+    search: search,
     tahun: tahun !== 'other' ? tahun : '',
     semester:
       tahun !== 'other'

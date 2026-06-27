@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { IGalleryPhoto } from '@/pages/modules/website-utama/public-content/gallery/Foto/data-album/data'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
@@ -11,11 +10,13 @@ interface Props {
   search?: string
 }
 
+interface IPhotoResponse {
+  data: IGalleryPhoto[]
+  meta: Meta
+}
+
 export const UseGetPhotoAlbumProdi = (props?: Props) => {
   const { id_album, page, limit, search } = props ?? {}
-
-  const [photoAlbumProdi, setPhotoAlbumProdi] = useState<IGalleryPhoto[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const ParamsSearch = new URLSearchParams({
     page: page ?? '1',
@@ -24,7 +25,7 @@ export const UseGetPhotoAlbumProdi = (props?: Props) => {
   })
   if (id_album) ParamsSearch.append('id_album', id_album)
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IPhotoResponse>({
     queryKey: ['photo-prodi', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/prodi/galeri-foto?${ParamsSearch}`).then((res) => res.data),
@@ -32,12 +33,5 @@ export const UseGetPhotoAlbumProdi = (props?: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setPhotoAlbumProdi(data?.data ?? [])
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { photoAlbumProdi, loading, meta }
+  return { photoAlbumProdi: data?.data ?? [], loading, meta: data?.meta }
 }

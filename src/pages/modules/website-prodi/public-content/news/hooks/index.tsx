@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { INewsDetail } from '@/pages/modules/website-utama/public-content/news/data'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
@@ -6,11 +5,18 @@ import AxiosClient from '@/provider/axios.tsx'
 import type { IPropsData } from '@/pages/modules/website-prodi/public-content/news/data/types.ts'
 import type { INewsStatus } from '@/pages/modules/website-utama/public-content/news/hooks'
 
+interface INewsResponse {
+  data: INewsDetail[]
+  meta: Meta
+}
+
+interface ILogNews {
+  id: string
+  [key: string]: unknown
+}
+
 export const UseGetProdiNews = (props?: IPropsData) => {
   const { page, limit, status_publish, year } = props ?? {}
-
-  const [prodiNews, setProdiNews] = useState<INewsDetail[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const ParamsSearch = new URLSearchParams()
   if (page) ParamsSearch.append('page', page ?? '1')
@@ -18,7 +24,7 @@ export const UseGetProdiNews = (props?: IPropsData) => {
   if (status_publish) ParamsSearch.append('status-publish', status_publish)
   if (year) ParamsSearch.append('tahun', year)
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<INewsResponse>({
     queryKey: ['prodi-news', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/prodi/berita?${ParamsSearch}`).then((res) => res.data),
@@ -26,20 +32,11 @@ export const UseGetProdiNews = (props?: IPropsData) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setProdiNews(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { prodiNews, loading, meta }
+  return { prodiNews: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export const UseGetProdiNewsDetail = (id: string) => {
-  const [prodiNewsDetail, setProdiNewsDetail] = useState<INewsDetail>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<INewsDetail>({
     queryKey: ['prodi-news-detail', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/prodi/berita/${id}`).then((res) => res.data?.data),
@@ -47,19 +44,11 @@ export const UseGetProdiNewsDetail = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setProdiNewsDetail(data)
-    }
-  }, [data])
-
-  return { prodiNewsDetail, loading }
+  return { prodiNewsDetail: data, loading }
 }
 
 export const UseGetProdiNewsStatus = () => {
-  const [status, setStatus] = useState<INewsStatus>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<INewsStatus>({
     queryKey: ['prodi-news-status'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/prodi/berita/status').then((res) => res.data?.data),
@@ -67,19 +56,11 @@ export const UseGetProdiNewsStatus = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setStatus(data)
-    }
-  }, [data])
-
-  return { status, loading }
+  return { status: data, loading }
 }
 
 export const UseGetLogNewsProdi = (id: string) => {
-  const [logData, setLogData] = useState<any[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<ILogNews[]>({
     queryKey: ['log-berita', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/prodi/berita-log/${id}`).then((res) => res.data.data),
@@ -87,19 +68,11 @@ export const UseGetLogNewsProdi = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLogData(data)
-    }
-  }, [data])
-
-  return { logData, loading }
+  return { logData: data ?? [], loading }
 }
 
 export const UseGetNewsYear = () => {
-  const [year, setYear] = useState<number[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<number[]>({
     queryKey: ['news-year'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/prodi/berita/tahun').then((res) => res.data?.data),
@@ -107,11 +80,5 @@ export const UseGetNewsYear = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setYear(data)
-    }
-  }, [data])
-
-  return { year, loading }
+  return { year: data ?? [], loading }
 }

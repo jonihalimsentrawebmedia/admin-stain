@@ -11,7 +11,7 @@ import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/Bu
 
 export const QuestionFAQProdiPage = () => {
   const navigate = useNavigate()
-  const { listFaq, loading, metta } = UseGetListFAQProdi()
+  const { listFaq, loading, meta } = UseGetListFAQProdi()
   const columns = ColumnsFAQProdi()
 
   return (
@@ -51,7 +51,7 @@ export const QuestionFAQProdiPage = () => {
           ]}
         />
 
-        <TableCustom data={listFaq} loading={loading} meta={metta} columns={columns} />
+        <TableCustom data={listFaq} loading={loading} meta={meta} columns={columns} />
       </div>
     </>
   )

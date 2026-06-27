@@ -8,11 +8,11 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { FaTrash } from 'react-icons/fa'
 
-interface props {
+interface Props {
   data: IProdiLandingPage
 }
 
-export const ButtonDeleteLandingProdi = (props: props) => {
+export const ButtonDeleteLandingProdi = (props: Props) => {
   const { data } = props
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)

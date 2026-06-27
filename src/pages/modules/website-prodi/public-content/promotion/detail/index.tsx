@@ -38,6 +38,10 @@ export const DetailPromotionPage = () => {
     })
   }, [api])
 
+  const tempImages = []
+  tempImages.push(detail?.gambar)
+  images?.forEach((item) => tempImages.push(item.gambar))
+
   return (
     <>
       <div className={'flex flex-col gap-y-4'}>
@@ -134,11 +138,11 @@ export const DetailPromotionPage = () => {
                   <>
                     <Carousel setApi={setApi} className="w-full">
                       <CarouselContent className="pr-0">
-                        {images?.map((item, index) => (
+                        {tempImages?.map((item, index) => (
                           <CarouselItem key={index} className="pr-0">
                             <img
-                              src={item.gambar}
-                              alt={item.keterangan}
+                              src={item}
+                              alt={item}
                               className="h-[320px] w-full object-cover rounded-lg"
                             />
                           </CarouselItem>
@@ -148,7 +152,7 @@ export const DetailPromotionPage = () => {
 
                     {/* DOTS */}
                     <div className="flex justify-center mt-4 gap-2">
-                      {images?.map((_, index) => (
+                      {tempImages?.map((_, index) => (
                         <button
                           key={index}
                           onClick={() => api?.scrollTo(index)}

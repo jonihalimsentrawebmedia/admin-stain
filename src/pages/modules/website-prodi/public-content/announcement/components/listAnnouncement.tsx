@@ -8,11 +8,11 @@ import {
 } from '@/pages/modules/website-prodi/public-content/announcement/hooks'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 
-interface props {
+interface Props {
   status: StatusPublish
 }
 
-export const TableDataListAnnouncement = (props: props) => {
+export const TableDataListAnnouncement = (props: Props) => {
   const { status } = props
 
   const [searchParams] = useSearchParams()

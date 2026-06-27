@@ -6,12 +6,15 @@ export const ResolverPromotion = z.object({
   judul: z.string(),
   isi_promosi: z.string(),
   penulis: z.string(),
-  promosi_gambar_tambahan: z.array(
-    z.object({
-      gambar: z.string(),
-      keterangan: z.string().optional().nullable(),
-    })
-  ),
+  promosi_gambar_tambahan: z
+    .array(
+      z.object({
+        gambar: z.string(),
+        keterangan: z.string().optional().nullable(),
+      })
+    )
+    .optional()
+    .nullable(),
 })
 
 export type IResolverPromotionType = z.infer<typeof ResolverPromotion>

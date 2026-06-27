@@ -38,19 +38,22 @@ const LogActivityPromotionProdiPage = lazy(() => import('@/pages/modules/website
 const DetailPromotionPage = lazy(() => import('@/pages/modules/website-prodi/public-content/promotion/detail').then(m => ({ default: m.DetailPromotionPage })))
 const QuestionFAQProdiPage = lazy(() => import('@/pages/modules/website-prodi/question/FAQ').then(m => ({ default: m.QuestionFAQProdiPage })))
 const CategoryFAQProdiPage = lazy(() => import('@/pages/modules/website-prodi/question/FAQ/category').then(m => ({ default: m.CategoryFAQProdiPage })))
+const FAQBackground = lazy(() => import('@/pages/modules/website-prodi/question/FAQ/background').then(m => ({ default: m.FAQBackground })))
 const InboxMessage = lazy(() => import('@/pages/modules/website-prodi/question/inbox-message').then(m => ({ default: m.InboxMessage })))
+const InboxBackground = lazy(() => import('@/pages/modules/website-prodi/question/inbox-message/background').then(m => ({ default: m.InboxBackground })))
 const CurriculumProdiPage = lazy(() => import('@/pages/modules/website-prodi/curriculum').then(m => ({ default: m.CurriculumProdiPage })))
 const DataProdiProfile = lazy(() => import('@/pages/modules/website-prodi/data-prodi').then(m => ({ default: m.DataProdiProfile })))
 const UpdatedDataProdi = lazy(() => import('@/pages/modules/website-prodi/data-prodi/updated').then(m => ({ default: m.UpdatedDataProdi })))
 const AccreditationProdiPage = lazy(() => import('@/pages/modules/website-prodi/accreditation').then(m => ({ default: m.AccreditationProdiPage })))
 const GalleryVideoProdiPage = lazy(() => import('@/pages/modules/website-prodi/gallery/video').then(m => ({ default: m.GalleryVideoProdiPage })))
+const LogActivityVideoProdi = lazy(() => import('@/pages/modules/website-prodi/gallery/video/log').then(m => ({ default: m.LogActivityVideoProdi })))
 const AccreditationProdiLog = lazy(() => import('@/pages/modules/website-prodi/accreditation/log'))
 const GalleryAlbumProdiPage = lazy(() => import('@/pages/modules/website-prodi/gallery/album').then(m => ({ default: m.GalleryAlbumProdiPage })))
 const GalleryPhotoProdiPage = lazy(() => import('@/pages/modules/website-prodi/gallery/photo').then(m => ({ default: m.GalleryPhotoProdiPage })))
 const LogActivityGalleryAlbum = lazy(() => import('@/pages/modules/website-prodi/gallery/album/log').then(m => ({ default: m.LogActivityGalleryAlbum })))
 const GalleryProfileDetail = lazy(() => import('@/pages/modules/website-prodi/profile/gallery').then(m => ({ default: m.GalleryProfileDetail })))
 const DashboardAdminProdi = lazy(() => import('@/pages/modules/website-prodi/dashboard'))
-const CurriculumSubjectDetail = lazy(() => import('@/pages/modules/website-prodi/curriculum/suject-detail').then(m => ({ default: m.CurriculumSubjectDetail })))
+const CurriculumSubjectDetail = lazy(() => import('@/pages/modules/website-prodi/curriculum/subject-detail').then(m => ({ default: m.CurriculumSubjectDetail })))
 const RegistrationQuestionPage = lazy(() => import('@/pages/modules/website-prodi/question/registration').then(m => ({ default: m.RegistrationQuestionPage })))
 const LandingPageProdi = lazy(() => import('@/pages/modules/website-prodi/settings/landing-page').then(m => ({ default: m.LandingPageProdi })))
 const LandingPromotion = lazy(() => import('@/pages/modules/website-prodi/settings/landing-promotion').then(m => ({ default: m.LandingPromotion })))
@@ -317,7 +320,16 @@ export const WebsiteProdiRouter = [
     children: [
       {
         path: 'video',
-        element: <GalleryVideoProdiPage />,
+        children: [
+          {
+            index: true,
+            element: <GalleryVideoProdiPage />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogActivityVideoProdi />,
+          },
+        ],
       },
       {
         path: 'photo',
@@ -352,11 +364,24 @@ export const WebsiteProdiRouter = [
             path: 'category',
             element: <CategoryFAQProdiPage />,
           },
+          {
+            path: 'background',
+            element: <FAQBackground />,
+          },
         ],
       },
       {
         path: 'inbox',
-        element: <InboxMessage />,
+        children: [
+          {
+            index: true,
+            element: <InboxMessage />,
+          },
+          {
+            path: 'background',
+            element: <InboxBackground />,
+          },
+        ],
       },
       {
         path: 'registration',

@@ -10,11 +10,11 @@ import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import type { ILandingPromotion } from '@/pages/modules/website-prodi/settings/landing-promotion/data'
 import { HiPencil } from 'react-icons/hi'
 
-interface props {
+interface Props {
   data: ILandingPromotion
 }
 
-export const ButtonEditPromotionLanding = (props: props) => {
+export const ButtonEditPromotionLanding = (props: Props) => {
   const { data } = props
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)

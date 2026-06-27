@@ -15,7 +15,7 @@ interface Props {
   queryName: string
 }
 
-export const UploadImgBackground = ({ background, context, max = 4, queryName }: Props) => {
+export const UploadImgBackgroundProdi = ({ background, context, max = 4, queryName }: Props) => {
   const fileRef = useRef<HTMLInputElement | null>(null)
   const queryClient = useQueryClient()
   const [isDragging, setIsDragging] = useState(false)
@@ -44,7 +44,7 @@ export const UploadImgBackground = ({ background, context, max = 4, queryName }:
           status: background.length === 0 ? 'Y' : 'N',
         },
       ]
-      await AxiosClient.post(`/website-utama/${context}`, payload)
+      await AxiosClient.post(`/prodi/${context}`, payload)
 
       await queryClient.invalidateQueries({
         queryKey: [queryName],

@@ -86,7 +86,7 @@ const ButtonEditAccreditationProdi = (props: Props) => {
         open={open}
         className={'rounded min-w-xs lg:min-w-2xl'}
         setOpen={setOpen}
-        title={'Tambah Akreditasi'}
+        title={'Edit Akreditasi'}
         width="50%"
       >
         <AccreditationFormProdi

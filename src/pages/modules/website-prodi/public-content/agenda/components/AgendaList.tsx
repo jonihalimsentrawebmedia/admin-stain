@@ -8,11 +8,11 @@ import {
 } from '@/pages/modules/website-prodi/public-content/agenda/hooks'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 
-interface props {
+interface Props {
   status: StatusPublish
 }
 
-export const TableDataListAgenda = (props: props) => {
+export const TableDataListAgenda = (props: Props) => {
   const { status } = props
 
   const [searchParams] = useSearchParams()

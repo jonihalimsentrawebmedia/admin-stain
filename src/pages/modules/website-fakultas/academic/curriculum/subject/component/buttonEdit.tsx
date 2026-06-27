@@ -2,17 +2,17 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
-import { FormSubjectCurriculum } from '@/pages/modules/website-prodi/curriculum/suject-detail/component/form.tsx'
+import { FormSubjectCurriculum } from '@/pages/modules/website-prodi/curriculum/subject-detail/component/form.tsx'
 import { useParams, useSearchParams } from 'react-router-dom'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
-import type { ISubjectDetail } from '@/pages/modules/website-prodi/curriculum/suject-detail/data/types.ts'
+import type { ISubjectDetail } from '@/pages/modules/website-prodi/curriculum/subject-detail/data/types.ts'
 import { HiPencil } from 'react-icons/hi'
 import {
   SubjectResolver,
   type SubjectResolverType,
-} from '@/pages/modules/website-prodi/curriculum/suject-detail/data/resolver.tsx'
+} from '@/pages/modules/website-prodi/curriculum/subject-detail/data/resolver.tsx'
 import { UseGetSessionFaculty } from '@/pages/modules/website-fakultas/component/select-session/get-seeion.tsx'
 
 interface Props {

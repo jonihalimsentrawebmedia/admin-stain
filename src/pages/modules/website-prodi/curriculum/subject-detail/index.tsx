@@ -1,7 +1,7 @@
 import { UseGetCurriculumDetail } from '@/pages/modules/website-prodi/curriculum/hook'
 import { useParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { SidenavSubjectCurriculum } from '@/pages/modules/website-prodi/curriculum/suject-detail/component/sidenav.tsx'
+import { SidenavSubjectCurriculum } from '@/pages/modules/website-prodi/curriculum/subject-detail/component/sidenav.tsx'
 
 export const CurriculumSubjectDetail = () => {
   const { id } = useParams()
@@ -10,7 +10,12 @@ export const CurriculumSubjectDetail = () => {
   return (
     <>
       <div className="flex flex-col gap-5">
-        <ButtonTitleGroup label={'Detail Kurikulum Program Studi'} buttonGroup={[]} isBack />
+        <ButtonTitleGroup
+          link={'/modules/website-prodi/curriculum'}
+          label={'Detail Kurikulum Program Studi'}
+          buttonGroup={[]}
+          isBack
+        />
 
         <div className="grid grid-cols-2 gap-5">
           <div className="flex flex-col gap-1.5 col-span-2">

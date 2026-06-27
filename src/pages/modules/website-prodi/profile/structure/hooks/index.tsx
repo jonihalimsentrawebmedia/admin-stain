@@ -1,12 +1,9 @@
-import { useEffect, useState } from 'react'
-import type { OrganizationalStructure } from '@/pages/modules/website-utama/program-studi/detail/model/organizational-structure.ts'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
+import type { OrganizationalStructure } from '@/pages/modules/website-utama/program-studi/detail/model/organizational-structure.ts'
 
 export const UseGetStructureOrganization = () => {
-  const [structure, setStructure] = useState<OrganizationalStructure>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<OrganizationalStructure>({
     queryKey: ['structure-organization'],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -15,11 +12,5 @@ export const UseGetStructureOrganization = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setStructure(data)
-    }
-  }, [data])
-
-  return { structure, loading }
+  return { structure: data, loading }
 }

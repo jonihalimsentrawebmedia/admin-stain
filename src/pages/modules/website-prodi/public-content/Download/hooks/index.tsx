@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type {
   ICategoryDownload,
   IDownload,
@@ -12,10 +11,18 @@ interface Props {
   isGetAll?: boolean
 }
 
+interface ICategoryDownloadResponse {
+  data: ICategoryDownload[]
+  meta: Meta
+}
+
+interface IDownloadResponse {
+  data: IDownload[]
+  meta: Meta
+}
+
 export const UseGetCategoryDownloadProdi = (props?: Props) => {
   const { isGetAll } = props || {}
-  const [categoryDownload, setCategoryDownload] = useState<ICategoryDownload[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
@@ -32,7 +39,7 @@ export const UseGetCategoryDownloadProdi = (props?: Props) => {
     if (search) ParamsSearch.append('search', search)
   }
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<ICategoryDownloadResponse>({
     queryKey: ['category-download-prodi', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -41,20 +48,10 @@ export const UseGetCategoryDownloadProdi = (props?: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setCategoryDownload(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { categoryDownload, loading, meta }
+  return { categoryDownload: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export const UseGetDownloadProdi = () => {
-  const [downloadProdi, setDownloadProdi] = useState<IDownload[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
@@ -65,7 +62,7 @@ export const UseGetDownloadProdi = () => {
   if (search) ParamsSearch.append('search', search)
   if (category) ParamsSearch.append('id_kategori_berkas', category)
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IDownloadResponse>({
     queryKey: ['download-prodi', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/prodi/downloads?${ParamsSearch}`).then((res) => res.data),
@@ -73,20 +70,11 @@ export const UseGetDownloadProdi = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDownloadProdi(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { downloadProdi, loading, meta }
+  return { downloadProdi: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export const UseGetDownloadProdiDetail = (id: string) => {
-  const [downloadProdiDetail, setDownloadProdiDetail] = useState<IDownload>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IDownload>({
     queryKey: ['download-prodi-detail', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/prodi/downloads/${id}`).then((res) => res.data?.data),
@@ -94,11 +82,5 @@ export const UseGetDownloadProdiDetail = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDownloadProdiDetail(data)
-    }
-  }, [data])
-
-  return { downloadProdiDetail, loading }
+  return { downloadProdiDetail: data, loading }
 }

@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react'
 import type { IProdiLandingPage } from '@/pages/modules/website-prodi/settings/landing-page/data/types.tsx'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
-export const UseGetProdiLandingPage = () => {
-  const [prodiLanding, setProdiLanding] = useState<IProdiLandingPage[]>([])
-  const [meta, setMeta] = useState<Meta>()
+interface ILandingPageResponse {
+  data: IProdiLandingPage[]
+  meta: Meta
+}
 
-  const { data, isLoading, isFetching } = useQuery({
+export const UseGetProdiLandingPage = () => {
+  const { data, isLoading, isFetching } = useQuery<ILandingPageResponse>({
     queryKey: ['landing-page'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/prodi/landing-page').then((res) => res.data),
@@ -16,12 +17,5 @@ export const UseGetProdiLandingPage = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setProdiLanding(data?.data)
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { prodiLanding, loading, meta }
+  return { prodiLanding: data?.data ?? [], loading, meta: data?.meta }
 }
