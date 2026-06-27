@@ -1,6 +1,6 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Button } from '@/components/ui/button.tsx'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { BiPlus } from 'react-icons/bi'
 import { UseGetStudentData, UseGetYearLevel } from './hooks'
 import { ColumnsStudentData } from './data/columns'
@@ -8,7 +8,6 @@ import TableCustom from '@/components/common/table/TableCustom.tsx'
 import FilterSelect from '@/components/common/filter/filterBasic.tsx'
 import { UseGetAdmissionProcess } from '@/pages/modules/E-Office/students/admission-process/hooks'
 import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan-unit/hooks.tsx'
-import ButtonImport from '@/pages/modules/E-Office/students/student-data/component/buttonImport.tsx'
 
 const ListStudentData = () => {
   const [searchParams] = useSearchParams()
@@ -49,7 +48,14 @@ const ListStudentData = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonImport />,
+              element: (
+                <Link to={'import'}>
+                  <Button className="rounded-full text-primary border-primary" variant="outline">
+                    <BiPlus />
+                    Import Data Mahasiswa
+                  </Button>
+                </Link>
+              ),
             },
             {
               type: 'custom',
