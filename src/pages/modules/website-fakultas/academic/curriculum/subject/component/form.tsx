@@ -6,7 +6,7 @@ import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import { Form } from '@/components/ui/form.tsx'
 import { UseGetGroupOrganizationFlexible } from '@/pages/modules/website-prodi/select-prodi/hooks'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
-import type { SubjectResolverType } from '@/pages/modules/website-prodi/curriculum/suject-detail/data/resolver.tsx'
+import type { SubjectResolverType } from '@/pages/modules/website-prodi/curriculum/subject-detail/data/resolver.tsx'
 
 interface Props {
   form: UseFormReturn<SubjectResolverType>

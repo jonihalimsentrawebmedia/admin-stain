@@ -23,5 +23,5 @@ export const UseGetIdentityBackground = () => {
 
   const loading = isLoading || isFetching
 
-  return { background: data, loading }
+  return { background: data ?? [], loading }
 }

@@ -10,11 +10,11 @@ import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import type { IProdiLandingPage } from '@/pages/modules/website-prodi/settings/landing-page/data/types.tsx'
 import { HiPencil } from 'react-icons/hi'
 
-interface props {
+interface Props {
   data: IProdiLandingPage
 }
 
-export const ButtonEditLandingProdi = (props: props) => {
+export const ButtonEditLandingProdi = (props: Props) => {
   const { data } = props
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)

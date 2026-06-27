@@ -2,17 +2,22 @@ import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { SubjectResolver, type SubjectResolverType } from '../data/resolver'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Button } from '@/components/ui/button.tsx'
-import { BiPlus } from 'react-icons/bi'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
-import { FormSubjectCurriculum } from '@/pages/modules/website-prodi/curriculum/suject-detail/component/form.tsx'
+import { FormSubjectCurriculum } from '@/pages/modules/website-prodi/curriculum/subject-detail/component/form.tsx'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { UseGetProdiSession } from '@/pages/modules/website-prodi/hooks'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
+import type { ISubjectDetail } from '@/pages/modules/website-prodi/curriculum/subject-detail/data/types.ts'
+import { HiPencil } from 'react-icons/hi'
 
-export const ButtonAddSubject = () => {
+interface Props {
+  data: ISubjectDetail
+}
+
+export const ButtonEditSubject = (props: Props) => {
+  const { data } = props
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -24,7 +29,7 @@ export const ButtonAddSubject = () => {
   const semester = searchParams.get('semester')
 
   useEffect(() => {
-    if (tahun && semester) {
+    if (tahun && semester && data) {
       form.reset({
         id_universitas: session?.id_universitas,
         id_fakultas: session?.id_fakultas,
@@ -32,9 +37,12 @@ export const ButtonAddSubject = () => {
         id_kurikulum: id,
         tahun: Number(tahun),
         semester: Number(semester) % 2 === 0 ? 'GENAP' : 'GANJIL',
+        nama_mata_kuliah: data.nama_mata_kuliah,
+        sks: data.sks,
+        jenis_mata_kuliah: data.jenis_mata_kuliah,
       })
     }
-  }, [tahun, semester, session])
+  }, [tahun, semester, session, data])
 
   const form = useForm<SubjectResolverType>({
     resolver: zodResolver(SubjectResolver),
@@ -44,7 +52,7 @@ export const ButtonAddSubject = () => {
 
   const HandleSave = async (value: SubjectResolverType) => {
     setLoading(true)
-    await AxiosClient.post('/prodi/mata-kuliah', {
+    await AxiosClient.put(`/prodi/mata-kuliah/${data?.id_mata_kuliah}`, {
       id_kurikulum: value?.id_kurikulum,
       nama_mata_kuliah: value?.nama_mata_kuliah,
       tahun: value?.tahun,
@@ -60,7 +68,6 @@ export const ButtonAddSubject = () => {
           queryClient.invalidateQueries({
             queryKey: ['subject-detail'],
           })
-          form.reset()
         }
       })
       .catch((err) => {
@@ -71,20 +78,18 @@ export const ButtonAddSubject = () => {
 
   return (
     <>
-      <Button
-        variant={'outline'}
+      <button
         onClick={() => setOpen(!open)}
-        className="text-primary border-primary hover:text-primary"
+        className="bg-yellow-500 hover:bg-yellow-600 text-white p-1.5 rounded"
       >
-        <BiPlus />
-        Tambah
-      </Button>
+        <HiPencil />
+      </button>
 
       <DialogCustom
         className={'lg:max-w-4xl rounded'}
         open={open}
         setOpen={setOpen}
-        title={'Tambah Mata Kuliah'}
+        title={'Edit Mata Kuliah'}
       >
         <FormSubjectCurriculum
           form={form}

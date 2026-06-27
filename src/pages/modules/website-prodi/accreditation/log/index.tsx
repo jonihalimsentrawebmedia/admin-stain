@@ -83,14 +83,13 @@ const AccreditationProdiLog = () => {
     },
   ]
 
-
   if (loading) {
     return <Skeleton className="height-[400px] w-full" />
   }
   return (
     <div className="flex  flex-col gap-4">
       <ButtonTitleGroup
-        link="/modules/website-utama/acreditation"
+        link="/modules/website-prodi/accreditation"
         buttonGroup={[]}
         label="Log Data "
         isBack

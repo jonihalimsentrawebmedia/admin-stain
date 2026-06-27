@@ -14,11 +14,17 @@ export const CategoryDownloadProdiPage = () => {
     <>
       <div className="flex flex-col gap-4">
         <ButtonTitleGroup
+          link={'/modules/website-prodi/public-content/download'}
           label={'Kategori Berkas'}
           buttonGroup={[
-              {
+            {
               type: 'custom',
-              element: <ButtonGoToGuide titleGuide='Kategori Berkas' valueGuide="PRODI_KONTEN_PUBLIK_KATEGORI_BERKAS" />,
+              element: (
+                <ButtonGoToGuide
+                  titleGuide="Kategori Berkas"
+                  valueGuide="PRODI_KONTEN_PUBLIK_KATEGORI_BERKAS"
+                />
+              ),
             },
             {
               type: 'custom',

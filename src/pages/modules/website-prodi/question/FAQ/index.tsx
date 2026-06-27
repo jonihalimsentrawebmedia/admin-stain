@@ -2,7 +2,7 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { IoMdImage } from 'react-icons/io'
 import { FaListUl } from 'react-icons/fa'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { ButtonAddFAQProdi } from '@/pages/modules/website-prodi/question/FAQ/components/buttonAdd.tsx'
 import { UseGetListFAQProdi } from '@/pages/modules/website-prodi/question/FAQ/hooks'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
@@ -11,7 +11,16 @@ import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/Bu
 
 export const QuestionFAQProdiPage = () => {
   const navigate = useNavigate()
-  const { listFaq, loading, metta } = UseGetListFAQProdi()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { listFaq, loading, meta } = UseGetListFAQProdi({
+    limit: limit,
+    page: page,
+    search: search,
+  })
   const columns = ColumnsFAQProdi()
 
   return (
@@ -20,9 +29,9 @@ export const QuestionFAQProdiPage = () => {
         <ButtonTitleGroup
           label={'F.A.Q'}
           buttonGroup={[
-             {
+            {
               type: 'custom',
-              element: <ButtonGoToGuide titleGuide='F.A.Q' valueGuide="PRODI_FAQ" />,
+              element: <ButtonGoToGuide titleGuide="F.A.Q" valueGuide="PRODI_FAQ" />,
             },
             {
               type: 'custom',
@@ -51,7 +60,7 @@ export const QuestionFAQProdiPage = () => {
           ]}
         />
 
-        <TableCustom data={listFaq} loading={loading} meta={metta} columns={columns} />
+        <TableCustom data={listFaq} loading={loading} meta={meta} columns={columns} />
       </div>
     </>
   )

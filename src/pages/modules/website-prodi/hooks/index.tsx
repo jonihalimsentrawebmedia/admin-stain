@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
@@ -16,9 +15,7 @@ export interface ISessionProdi {
 }
 
 export const UseGetProdiSession = () => {
-  const [session, setSession] = useState<ISessionProdi>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<ISessionProdi>({
     queryKey: ['session-prodi'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/prodi/user-session').then((res) => res.data?.data),
@@ -26,11 +23,5 @@ export const UseGetProdiSession = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setSession(data)
-    }
-  }, [data])
-
-  return { session, loading }
+  return { session: data, loading }
 }

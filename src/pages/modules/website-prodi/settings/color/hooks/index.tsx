@@ -1,17 +1,14 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
-interface colorPrimary {
+export interface IColorPrimary {
   warna_halaman_utama: string
   warna_background_footer: string
   warna_admin: string
 }
 
 export const UseGetProdiPrimary = () => {
-  const [colorPrimary, setColorPrimary] = useState<colorPrimary>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IColorPrimary>({
     queryKey: ['prodi-primary'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/prodi/pengaturan-warna-halaman').then((res) => res.data.data),
@@ -19,11 +16,5 @@ export const UseGetProdiPrimary = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setColorPrimary(data)
-    }
-  }, [data])
-
-  return { colorPrimary, loading }
+  return { colorPrimary: data, loading }
 }

@@ -174,7 +174,7 @@ const MainDataUniversityForm = ({ form, handleSave, loading }: Props) => {
           />
           <InputText
             form={form}
-            name="Youtube"
+            name="youtube"
             isRow
             label="Youtube"
             placeholder="Masukkan link disini"

@@ -1,33 +1,35 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import { useSearchParams } from 'react-router-dom'
 import type { ICategoryFAQ } from '@/pages/modules/website-utama/pertayaan/Faq/Category/data/type.ts'
 
-interface props {
+interface Props {
   isGetAll?: boolean
 }
 
-export const UseGetFaqCategoryProdi = (props?: props) => {
-  const { isGetAll } = props ?? {}
+interface ICategoryFAQResponse {
+  data: ICategoryFAQ[]
+  meta: Meta
+}
 
-  const [categoryFaq, setCategoryFaq] = useState<ICategoryFAQ[]>([])
-  const [meta, setMeta] = useState<Meta>()
+export const UseGetFaqCategoryProdi = (props?: Props) => {
+  const { isGetAll } = props ?? {}
 
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
 
   let ParamsSearch: URLSearchParams
 
   if (isGetAll) {
-    ParamsSearch = new URLSearchParams({ page: '1', limit: '99999' })
+    ParamsSearch = new URLSearchParams({ page: '1', limit: '99999', search: search })
   } else {
-    ParamsSearch = new URLSearchParams({ page, limit })
+    ParamsSearch = new URLSearchParams({ page, limit, search })
   }
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<ICategoryFAQResponse>({
     queryKey: ['prodi-category-faq', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/prodi/kategori-faq?${ParamsSearch}`).then((res) => res.data),
@@ -35,12 +37,5 @@ export const UseGetFaqCategoryProdi = (props?: props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setCategoryFaq(data?.data ?? [])
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { categoryFaq, loading, meta }
+  return { categoryFaq: data?.data ?? [], loading, meta: data?.meta }
 }

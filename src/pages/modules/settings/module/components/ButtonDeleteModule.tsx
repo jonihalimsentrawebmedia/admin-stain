@@ -1,82 +1,83 @@
-import { DialogCustom } from "@/components/common/dialog/DialogCustom";
-import { IconDelete } from "@/components/common/table/icon";
-import { Button } from "@/components/ui/button";
-import { Trash2, X } from "lucide-react";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import DetailField from "@/components/common/field/DetailField";
-import { useQueryClient } from "@tanstack/react-query";
-import type { ModuleList } from "../model";
-import AxiosClient from "@/provider/axios";
-import { toast } from "react-toastify";
+import { DialogCustom } from '@/components/common/dialog/DialogCustom'
+import { IconDelete } from '@/components/common/table/icon'
+import { Button } from '@/components/ui/button'
+import { Trash2, X } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import DetailField from '@/components/common/field/DetailField'
+import { useQueryClient } from '@tanstack/react-query'
+import type { ModuleList } from '../model'
+import AxiosClient from '@/provider/axios'
+import { toast } from 'react-toastify'
+
 interface Props {
-  data: ModuleList;
+  data: ModuleList
 }
+
 const ButtonDeleteModule = ({ data }: Props) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
+
   async function handleDelete() {
-    setLoading(true);
+    setLoading(true)
     try {
-      const res = await AxiosClient.delete(
-        `/pengaturan/modules/${data.id_module}`
-      );
+      const res = await AxiosClient.delete(`/pengaturan/modules/${data.id_module}`)
 
       if (res.data.status) {
-        toast.success(res.data.message);
+        toast.success(res.data.message)
 
         await queryClient.invalidateQueries({
-          queryKey: ["modules-list"],
-        });
-        setOpen(false);
+          queryKey: ['modules-list'],
+        })
+        setOpen(false)
       }
     } catch (err: any) {
-      toast.error(
-        err?.response?.data?.message || "Terjadi kesalahan, silakan coba lagi."
-      );
+      toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
     } finally {
-      setLoading(false);
-      setOpen(false);
+      setLoading(false)
+      setOpen(false)
     }
   }
-  const form = useForm();
+
+  const form = useForm()
   const fieldsConfig = [
     {
-      name: "nama_modul",
-      label: "Nama Modul",
+      name: 'nama_modul',
+      label: 'Nama Modul',
     },
     {
-      name: "controller",
-      label: "Controller",
+      name: 'controller',
+      label: 'Controller',
     },
     {
-      name: "kategori",
-      label: "Kategori",
+      name: 'kategori',
+      label: 'Kategori',
     },
     {
-      name: "urutan",
-      label: "Urutan",
+      name: 'urutan',
+      label: 'Urutan',
     },
-  ];
+  ]
+
   useEffect(() => {
     form.reset({
       nama_modul: data.nama_module,
       controller: data.controller,
       kategori: data.kategori,
       urutan: data.urutan.toString(),
-    });
-  }, []);
+    })
+  }, [])
   return (
     <>
       <button
         onClick={() => {
-          setOpen(true);
+          setOpen(true)
         }}
       >
-        {" "}
+        {' '}
         <IconDelete />
       </button>
       <DialogCustom
@@ -86,11 +87,11 @@ const ButtonDeleteModule = ({ data }: Props) => {
         title={<p className="text-2xl text-red-500">Hapus Modul?</p>}
       >
         <p>Apakah anda yakin untuk menghapus modul yang dipilih?</p>
-        <div className="my-4 ">
+        <div className="my-4 grid grid-cols-1 gap-4">
           <div className="mx-auto max-w-[200px] mb-4 bg-[#F5FFFA] border border-primary rounded-xl p-4 flex justify-center items-center">
             <img src={data.gambar} alt="" />
           </div>
-          <DetailField data={fieldsConfig} form={form} isRow={false} />
+          <DetailField data={fieldsConfig} form={form} isRow />
         </div>
 
         <div className="flex gap-4 items-center justify-end">
@@ -112,7 +113,7 @@ const ButtonDeleteModule = ({ data }: Props) => {
         </div>
       </DialogCustom>
     </>
-  );
-};
+  )
+}
 
-export default ButtonDeleteModule;
+export default ButtonDeleteModule

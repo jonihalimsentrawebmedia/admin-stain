@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from '@/components/ui/button.tsx'
 import { BiPlus } from 'react-icons/bi'
 import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
-import { FormSubjectCurriculum } from '@/pages/modules/website-prodi/curriculum/suject-detail/component/form.tsx'
+import { FormSubjectCurriculum } from '@/pages/modules/website-prodi/curriculum/subject-detail/component/form.tsx'
 import { useParams, useSearchParams } from 'react-router-dom'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
@@ -12,7 +12,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import {
   SubjectResolver,
   type SubjectResolverType,
-} from '@/pages/modules/website-prodi/curriculum/suject-detail/data/resolver.tsx'
+} from '@/pages/modules/website-prodi/curriculum/subject-detail/data/resolver.tsx'
 import { UseGetSessionFaculty } from '@/pages/modules/website-fakultas/component/select-session/get-seeion.tsx'
 
 export const ButtonAddSubject = () => {

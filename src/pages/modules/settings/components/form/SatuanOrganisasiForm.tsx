@@ -181,11 +181,6 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
             type="number"
           />
           <CheckboxInputBasic name={'show_title'} form={form} label={'Tampilkan'} />
-          {/*<InputCheckbox*/}
-          {/*  form={form}*/}
-          {/*  name={'show_title'}*/}
-          {/*  data={[{ label: 'Tampilkan', value: true }]}*/}
-          {/*/>*/}
         </div>
         {kelompok == 'PRODI' && (
           <SelectCustom
@@ -263,8 +258,12 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
                 }
               }}
             />
-            <Label htmlFor="isSome" className="text-neutral font-normal">
-              Gunakan alamat universitas sebagai alamat fakultas
+            <Label htmlFor="isSome" className="text-neutral font-normal capitalize">
+              {kelompok === 'UNIVERSITAS'
+                ? 'Gunakan alamat universitas sebagai alamat fakultas'
+                : kelompok === 'PRODI'
+                  ? 'Gunakan alamat Fakultas sebagai alamat Program Studi'
+                  : `Gunakan alamat universitas sebagai alamat ${kelompok.toLowerCase()}`}
             </Label>
           </div>
         )}

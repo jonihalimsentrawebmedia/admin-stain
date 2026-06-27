@@ -1,22 +1,30 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { IGaleriAlbum } from '@/pages/modules/website-utama/public-content/gallery/Foto/data'
 import type { BasicProps } from '@/utils/globalType.ts'
+import { useSearchParams } from 'react-router-dom'
+
+interface IAlbumResponse {
+  data: IGaleriAlbum[]
+  meta: Meta
+}
+
+interface IAlbumLog {
+  id: string
+  [key: string]: unknown
+}
 
 export const UseGetGalleryAlbumProdi = (props?: BasicProps) => {
-  const { page, limit, search } = props ?? {}
+  const [searchParams] = useSearchParams()
+  const { page: p, limit: l, search: s } = props ?? {}
+  const page = p ?? searchParams.get('page') ?? '1'
+  const limit = l ?? searchParams.get('limit') ?? '10'
+  const search = s ?? searchParams.get('search') ?? ''
 
-  const [albumProdi, setAlbumProdi] = useState<IGaleriAlbum[]>([])
-  const [meta, setMeta] = useState<Meta>()
+  const Params = new URLSearchParams({ page, limit, search })
 
-  const Params = new URLSearchParams()
-  if (page) Params.append('page', page ?? '1')
-  if (limit) Params.append('limit', limit ?? '10')
-  if (search) Params.append('search', search ?? '')
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IAlbumResponse>({
     queryKey: ['album-prodi', Params.toString()],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/prodi/galeri-album?${Params}`).then((res) => res.data),
@@ -24,20 +32,11 @@ export const UseGetGalleryAlbumProdi = (props?: BasicProps) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setAlbumProdi(data?.data ?? [])
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { albumProdi, loading, meta }
+  return { albumProdi: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export const UseGetGalleryAlbumProdiById = (id: string) => {
-  const [albumProdi, setAlbumProdi] = useState<IGaleriAlbum>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IGaleriAlbum>({
     queryKey: ['album-prodi-detail', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/prodi/galeri-album/${id}`).then((res) => res.data?.data),
@@ -45,20 +44,11 @@ export const UseGetGalleryAlbumProdiById = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setAlbumProdi(data)
-    }
-  }, [data])
-
-  return { albumProdi, loading }
+  return { albumProdi: data, loading }
 }
 
 export const UseGetGalleryAlbumProdiLog = (id: string) => {
-  const [albumProdiLog, setAlbumProdiLog] = useState<any>()
-  const [meta, setMeta] = useState<Meta>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: IAlbumLog[]; meta: Meta }>({
     queryKey: ['album-prodi-log', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/prodi/galeri-album-log/${id}`).then((res) => res.data),
@@ -66,12 +56,5 @@ export const UseGetGalleryAlbumProdiLog = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setAlbumProdiLog(data?.data ?? [])
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { albumProdiLog, loading, meta }
+  return { albumProdiLog: data?.data ?? [], loading, meta: data?.meta }
 }

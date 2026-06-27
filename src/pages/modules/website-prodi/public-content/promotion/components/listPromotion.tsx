@@ -4,11 +4,11 @@ import { ColumnsReturnByStatus } from './columns/index'
 import { useSearchParams } from 'react-router-dom'
 import { UseGetPromotionProdi } from '@/pages/modules/website-prodi/public-content/promotion/hooks'
 
-interface props {
+interface Props {
   status: StatusPublish
 }
 
-export const TableDataListPromotion = (props: props) => {
+export const TableDataListPromotion = (props: Props) => {
   const { status } = props
 
   const [searchParams] = useSearchParams()

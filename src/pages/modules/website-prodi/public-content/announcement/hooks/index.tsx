@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
@@ -6,16 +5,24 @@ import type { IAnnouncement } from '@/pages/modules/website-utama/public-content
 import type { INewsStatus } from '@/pages/modules/website-utama/public-content/news/hooks'
 import type { IPropsData } from '@/pages/modules/website-prodi/public-content/news/data/types.ts'
 
+interface IAnnouncementResponse {
+  data: IAnnouncement[]
+  meta: Meta
+}
+
+interface ILogAnnouncement {
+  id: string
+  [key: string]: unknown
+}
+
 export const UseGetProdiAnnouncement = (props?: IPropsData) => {
   const { page, limit, status_publish, year } = props ?? {}
-  const [prodiAnnouncement, setProdiAnnouncement] = useState<IAnnouncement[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const ParamsSearch = new URLSearchParams({ page: page ?? '1', limit: limit ?? '10' })
   if (status_publish) ParamsSearch.append('status-publish', status_publish)
   if (year) ParamsSearch.append('tahun', year)
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IAnnouncementResponse>({
     queryKey: ['prodi-announcement', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/prodi/pengumuman?${ParamsSearch}`).then((res) => res.data),
@@ -23,20 +30,11 @@ export const UseGetProdiAnnouncement = (props?: IPropsData) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setProdiAnnouncement(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { prodiAnnouncement, loading, meta }
+  return { prodiAnnouncement: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export const UseGetProdiAnnouncementDetail = (id: string) => {
-  const [prodiAnnouncementDetail, setProdiAnnouncementDetail] = useState<IAnnouncement>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IAnnouncement>({
     queryKey: ['prodi-announcement-detail', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/prodi/pengumuman/${id}`).then((res) => res.data?.data),
@@ -44,19 +42,11 @@ export const UseGetProdiAnnouncementDetail = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setProdiAnnouncementDetail(data)
-    }
-  }, [data])
-
-  return { prodiAnnouncementDetail, loading }
+  return { prodiAnnouncementDetail: data, loading }
 }
 
 export const UseGetProdiAnnouncementStatus = () => {
-  const [status, setStatus] = useState<INewsStatus>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<INewsStatus>({
     queryKey: ['prodi-announcement-status'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/prodi/pengumuman/status').then((res) => res.data?.data),
@@ -64,19 +54,11 @@ export const UseGetProdiAnnouncementStatus = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setStatus(data)
-    }
-  }, [data])
-
-  return { status, loading }
+  return { status: data, loading }
 }
 
 export const UseGetLogAnnouncementProdi = (id: string) => {
-  const [logData, setLogData] = useState<any[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<ILogAnnouncement[]>({
     queryKey: ['log-pengumuman', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/prodi/pengumuman-log/${id}`).then((res) => res.data.data),
@@ -84,19 +66,11 @@ export const UseGetLogAnnouncementProdi = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLogData(data)
-    }
-  }, [data])
-
-  return { logData, loading }
+  return { logData: data ?? [], loading }
 }
 
 export const UseGetAnnouncementYear = () => {
-  const [year, setYear] = useState<number[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<number[]>({
     queryKey: ['announcement-year'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/prodi/pengumuman/tahun').then((res) => res.data?.data),
@@ -104,11 +78,5 @@ export const UseGetAnnouncementYear = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setYear(data)
-    }
-  }, [data])
-
-  return { year, loading }
+  return { year: data ?? [], loading }
 }

@@ -1,5 +1,5 @@
 import type { ColumnDef } from '@tanstack/react-table'
-import type { ISubjectDetail } from '@/pages/modules/website-prodi/curriculum/suject-detail/data/types.ts'
+import type { ISubjectDetail } from '@/pages/modules/website-prodi/curriculum/subject-detail/data/types.ts'
 import { ButtonEditSubject } from '../component/buttonEdit.tsx'
 import { ButtonDeleteSubject } from '../component/buttonDelete.tsx'
 

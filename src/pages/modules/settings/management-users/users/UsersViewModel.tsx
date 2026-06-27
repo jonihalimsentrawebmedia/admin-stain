@@ -11,18 +11,18 @@ import ButtonDeleteUser from './components/ButtonDeleteUsers'
 import useGetSatuanOrganisasiAll from '../../controller/useGetSatuanOrganisasiAll'
 import useGetLevelUser from '../level/controller/useGetLevelUser'
 import ButtonSwitch from './components/ButtonSwitch'
+
 const UsersViewModel = () => {
   const { satuanOrganisasi } = useGetSatuanOrganisasiAll()
   const { levelUser } = useGetLevelUser({
-    page:'0',
-    limit:'0',
+    page: '0',
+    limit: '0',
   })
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') || 1)
   const limit = Number(searchParams.get('limit') || 10)
   const columns: ColumnDef<UserList>[] = [
-    // Kolom # (Nomor Urut)
     {
       accessorKey: 'no',
       header: '#',
@@ -32,32 +32,38 @@ const UsersViewModel = () => {
       },
     },
 
-    // Kolom Nama User
     { accessorKey: 'nama_lengkap', header: 'Nama User' },
 
-    // Kolom Level (Memiliki penanda bullet/dot untuk level kedua)
     {
       accessorKey: 'level_users',
       header: 'Level',
       cell: (row) => {
         const { level_users } = row.row.original
+        const values = row.row.original
+
         return (
-          <div className="flex flex-col">
-            {level_users.length == 1 ? (
-              <div>{level_users[0]}</div>
-            ) : (
-              <ul className="pl-4 list-outside list-disc">
-                {level_users.map((item, index) => (
-                  <li key={item + index}>{item}</li>
-                ))}
-              </ul>
-            )}
+          <div className={'flex items-center gap-5 justify-between'}>
+            <div className="flex flex-col">
+              {level_users.length == 1 ? (
+                <div>{level_users[0]}</div>
+              ) : (
+                <ul className="pl-4 list-outside list-disc">
+                  {level_users.map((item, index) => (
+                    <li key={item + index}>{item}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+            <ButtonSettingLevelUser
+              data={values}
+              levelUser={levelUser}
+              satuanOrganisasi={satuanOrganisasi}
+            />
           </div>
         )
       },
     },
 
-    // Kolom No. Handphone (Memiliki ikon telepon)
     {
       accessorKey: 'no_handphone',
       header: 'No. Handphone',
@@ -65,12 +71,6 @@ const UsersViewModel = () => {
         const values = row.row.original
         return (
           <div className="flex items-center gap-2">
-            <ButtonSettingLevelUser
-              data={values}
-              levelUser={levelUser}
-              satuanOrganisasi={satuanOrganisasi}
-            />
-            {/* <IconGear className="text-green-600" /> */}
             <span>{values.telepon}</span>
           </div>
         )

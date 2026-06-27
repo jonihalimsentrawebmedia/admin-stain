@@ -31,6 +31,8 @@ export const CreatedPromotionProdi = () => {
       })
   }
 
+  console.log(form.formState.errors)
+
   return (
     <>
       <FormPromotionProdi form={form} HandleSave={HandleSave} loading={loading} />

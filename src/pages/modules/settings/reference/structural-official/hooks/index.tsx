@@ -16,10 +16,10 @@ export const UseStructuralOfficial = (props?: BasicProps) => {
     data: IStructuralPosition[]
     meta: Meta
   }>({
-    queryKey: ['structural-official'],
+    queryKey: ['structural-official', Params.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get('/pengaturan/referensi/jabatan-struktural').then((res) => res.data),
+      AxiosClient.get(`/pengaturan/referensi/jabatan-struktural?${Params}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching
