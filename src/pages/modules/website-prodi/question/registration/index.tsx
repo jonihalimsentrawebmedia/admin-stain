@@ -3,9 +3,19 @@ import { ColumnsRegistrationProdi } from '@/pages/modules/website-prodi/question
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
+import { useSearchParams } from 'react-router-dom'
 
 export const RegistrationQuestionPage = () => {
-  const { registrationProdi, meta, loading } = UseGetRegistrationProdi()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { registrationProdi, meta, loading } = UseGetRegistrationProdi({
+    limit: limit,
+    page: page,
+    search: search,
+  })
   const columns = ColumnsRegistrationProdi()
 
   return (
@@ -15,7 +25,9 @@ export const RegistrationQuestionPage = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonGoToGuide titleGuide='Pendaftaran' valueGuide="PRODI_JALUR_PENDAFTARAN" />,
+              element: (
+                <ButtonGoToGuide titleGuide="Pendaftaran" valueGuide="PRODI_JALUR_PENDAFTARAN" />
+              ),
             },
           ]}
           label="Pendaftaran"

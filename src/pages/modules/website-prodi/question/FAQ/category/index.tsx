@@ -16,6 +16,7 @@ export const CategoryFAQProdiPage = () => {
         <ButtonTitleGroup
           label={'Kategori F.A.Q'}
           isBack
+          link={'/modules/website-prodi/question/faq'}
           buttonGroup={[
             {
               type: 'custom',

@@ -3,9 +3,19 @@ import ButtonCreateStructural from '@/pages/modules/settings/reference/structura
 import { UseStructuralOfficial } from '@/pages/modules/settings/reference/structural-official/hooks'
 import { ColumnsStructuralOfficial } from '@/pages/modules/settings/reference/structural-official/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import { useSearchParams } from 'react-router-dom'
 
 const StructuralOfficialPage = () => {
-  const { structural } = UseStructuralOfficial()
+  const [searchParams] = useSearchParams()
+  const page = searchParams.get('page') ?? '1'
+  const limit = searchParams.get('limit') ?? '10'
+  const search = searchParams.get('search') ?? ''
+
+  const { structural } = UseStructuralOfficial({
+    page: page,
+    limit: limit,
+    search: search,
+  })
   const columns = ColumnsStructuralOfficial()
   return (
     <>
