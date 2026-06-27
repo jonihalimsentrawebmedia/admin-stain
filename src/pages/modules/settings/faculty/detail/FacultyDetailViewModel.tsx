@@ -37,7 +37,7 @@ const FacultyDetailViewModel = () => {
       name: 'kelompok',
     },
     {
-      label: 'Nama Universitas / Perguruan Tinggi',
+      label: `${satuanOrganisasi?.kelompok === 'UNIVERSITAS' ? 'Nama Universitas' : 'Satuan Organisasi'}`,
       name: 'nama',
     },
     {
@@ -122,12 +122,24 @@ const FacultyDetailViewModel = () => {
     })
   }, [satuanOrganisasi])
 
+  const temp =
+    satuanOrganisasi?.kelompok === 'UNIVERSITAS'
+      ? [...fieldUniversity]
+      : [
+          ...fieldUniversity.slice(0, 1),
+          {
+            label: 'Nama Universitas',
+            name: 'nama_parent_satuan_organisasi',
+          },
+          ...fieldUniversity.slice(1),
+        ]
+
   return {
     fieldAddress,
     fieldContact,
     fieldImage,
     fieldMediaSocial,
-    fieldUniversity,
+    fieldUniversity: temp,
     form,
     goToEdit,
   }

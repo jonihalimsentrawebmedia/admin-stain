@@ -37,7 +37,7 @@ const UniversityDetailViewModel = () => {
     },
 
     {
-      label: 'Nama Program Studi',
+      label: 'Nama Universitas',
       name: 'nama',
     },
     {

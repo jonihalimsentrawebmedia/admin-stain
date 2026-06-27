@@ -40,7 +40,10 @@ const ButtonCreateStructural = (props: props) => {
   const queryClient = useQueryClient()
   const HandleSave = async (value: { nama_jabatan_struktural: string }) => {
     setLoading(true)
-    await AxiosClient.put('/pengaturan/referensi/jabatan-struktural', value)
+    await AxiosClient.put(
+      `/pengaturan/referensi/jabatan-struktural/${data?.id_jabatan_struktural}`,
+      value
+    )
       .then((res) => {
         if (res.data.status) {
           setLoading(false)
@@ -72,7 +75,7 @@ const ButtonCreateStructural = (props: props) => {
       <DialogCustom
         open={open}
         setOpen={setOpen}
-        title={'Tambah Jabatan Struktural'}
+        title={'Edit Jabatan Struktural'}
         className={'max-w-2xl! w-full! rounded'}
       >
         <Form {...form}>
