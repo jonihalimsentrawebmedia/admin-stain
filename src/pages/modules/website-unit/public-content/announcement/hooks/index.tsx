@@ -1,22 +1,27 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { IAnnouncement } from '@/pages/modules/website-utama/public-content/announcement/data'
 import type { INewsStatus } from '@/pages/modules/website-utama/public-content/news/hooks'
 import type { IPropsData } from '@/pages/modules/website-unit/public-content/news/data/types.ts'
+interface ILogAnnouncement {
+  created_at: string
+  created_user: string
+  updated_at: string
+  updated_user: string
+  nama_user_created: string
+  nama_user_updated: string
+}
 
 export const UseGetUnitAnnouncement = (props?: IPropsData) => {
   const { page, limit, status_publish, search, year } = props ?? {}
-  const [unitAnnouncement, setUnitAnnouncement] = useState<IAnnouncement[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const ParamsSearch = new URLSearchParams({ page: page ?? '1', limit: limit ?? '10' })
   if (status_publish) ParamsSearch.append('status-publish', status_publish)
   if (search) ParamsSearch.append('search', search ?? '')
   if (year) ParamsSearch.append('tahun', year)
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: IAnnouncement[]; meta: Meta }>({
     queryKey: ['unit-announcement', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/unit/pengumuman?${ParamsSearch}`).then((res) => res.data),
@@ -24,20 +29,11 @@ export const UseGetUnitAnnouncement = (props?: IPropsData) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setUnitAnnouncement(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { unitAnnouncement, loading, meta }
+  return { unitAnnouncement: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export const UseGetUnitAnnouncementDetail = (id: string) => {
-  const [unitAnnouncementDetail, setUnitAnnouncementDetail] = useState<IAnnouncement>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IAnnouncement>({
     queryKey: ['unit-announcement-detail', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/unit/pengumuman/${id}`).then((res) => res.data?.data),
@@ -45,19 +41,11 @@ export const UseGetUnitAnnouncementDetail = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setUnitAnnouncementDetail(data)
-    }
-  }, [data])
-
-  return { unitAnnouncementDetail, loading }
+  return { unitAnnouncementDetail: data, loading }
 }
 
 export const UseGetUnitAnnouncementStatus = () => {
-  const [status, setStatus] = useState<INewsStatus>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<INewsStatus>({
     queryKey: ['unit-announcement-status'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/unit/pengumuman/status').then((res) => res.data?.data),
@@ -65,19 +53,11 @@ export const UseGetUnitAnnouncementStatus = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setStatus(data)
-    }
-  }, [data])
-
-  return { status, loading }
+  return { status: data, loading }
 }
 
 export const UseGetLogAnnouncementUnit = (id: string) => {
-  const [logData, setLogData] = useState<any[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<ILogAnnouncement[]>({
     queryKey: ['log-unit-pengumuman', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/unit/pengumuman-log/${id}`).then((res) => res.data.data),
@@ -85,19 +65,11 @@ export const UseGetLogAnnouncementUnit = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLogData(data)
-    }
-  }, [data])
-
-  return { logData, loading }
+  return { logData: data ?? [], loading }
 }
 
 export const UseGetAnnouncementYear = () => {
-  const [year, setYear] = useState<number[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<number[]>({
     queryKey: ['announcement-year'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/unit/pengumuman/tahun').then((res) => res.data?.data),
@@ -105,11 +77,5 @@ export const UseGetAnnouncementYear = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setYear(data)
-    }
-  }, [data])
-
-  return { year, loading }
+  return { year: data ?? [], loading }
 }

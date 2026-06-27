@@ -60,13 +60,14 @@ export const UpdatedDownloadUnitPage = () => {
       <Form {...form}>
         <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(HandleSubmit)}>
           <ButtonTitleGroup
-            label={'Tambah Download'}
+            isBack
+            label={'Edit Download'}
             buttonGroup={[
               {
                 label: 'Batal',
                 type: 'cancel',
                 onClick: () => {
-                  navigate('/modules/website-utama/public-content/download')
+                  navigate('/modules/website-unit/public-content/download')
                 },
               },
               {
@@ -145,7 +146,7 @@ export const UpdatedDownloadUnitPage = () => {
                 label: 'Batal',
                 type: 'cancel',
                 onClick: () => {
-                  navigate('/modules/website-utama/public-content/download')
+                  navigate('/modules/website-unit/public-content/download')
                 },
               },
               {

@@ -14,7 +14,7 @@ export const QuestionFAQUnitPage = () => {
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
   const search = searchParams.get('search') ?? ''
-  const { listFaq, loading, metta } = UseGetListFAQUnit({
+  const { listFaq, loading, meta } = UseGetListFAQUnit({
     page,
     limit,
     search,
@@ -52,7 +52,7 @@ export const QuestionFAQUnitPage = () => {
           ]}
         />
 
-        <TableCustom data={listFaq} loading={loading} meta={metta} columns={columns} />
+        <TableCustom data={listFaq} loading={loading} meta={meta} columns={columns} />
       </div>
     </>
   )

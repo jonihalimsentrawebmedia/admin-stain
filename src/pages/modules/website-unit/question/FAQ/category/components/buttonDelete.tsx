@@ -21,7 +21,7 @@ export const ButtonDeleteCategoryFaqUnit = (props: Props) => {
   const queryClient = useQueryClient()
 
   const HandleSave = async () => {
-    setLoading(!loading)
+    setLoading(true)
     await AxiosClient.delete(`/unit/kategori-faq/${data?.id_kategori_faq}`)
       .then((res) => {
         if (res.data.status) {
@@ -50,7 +50,7 @@ export const ButtonDeleteCategoryFaqUnit = (props: Props) => {
       <DialogCustom
         open={open}
         setOpen={setOpen}
-        title={'Edit Kategori'}
+        title={'Hapus Kategori'}
         className={'max-w-2xl rounded'}
       >
         <div className={'grid grid-cols-[12rem_1fr]'}>

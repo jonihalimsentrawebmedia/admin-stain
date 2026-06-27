@@ -1,42 +1,38 @@
-import { useEffect, useState } from 'react'
 import type { IPropsData } from '@/pages/modules/website-prodi/public-content/news/data/types.ts'
 import { useQuery } from '@tanstack/react-query'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import type { INewsStatus } from '@/pages/modules/website-utama/public-content/news/hooks'
 import type { IUnitFacilities } from '@/pages/modules/website-unit/public-content/Facilities/data/types.tsx'
+interface ILogFacilities {
+  created_at: string
+  created_user: string
+  updated_at: string
+  updated_user: string
+  nama_user_created: string
+  nama_user_updated: string
+}
 
 export const UseGetFacilitiesUnit = (props: IPropsData) => {
   const { page, limit, status_publish, search } = props
-  const [facilitiesUnit, setFacilitiesUnit] = useState<IUnitFacilities[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const ParamsSearch = new URLSearchParams({ page: page ?? '1', limit: limit ?? '10' })
   if (status_publish) ParamsSearch.append('status-publish', status_publish)
   if (search) ParamsSearch.append('search', search ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: IUnitFacilities[]; meta: Meta }>({
     queryKey: ['facilities-unit', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/unit/unit-fasilitas?${ParamsSearch}`).then((res) => res.data),
   })
 
-  useEffect(() => {
-    if (data) {
-      setFacilitiesUnit(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
   const loading = isLoading || isFetching
 
-  return { facilitiesUnit, loading, meta }
+  return { facilitiesUnit: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export const UseGetFacilitiesUnitDetail = (id: string) => {
-  const [facilitiesUnitDetail, setFacilitiesUnitDetail] = useState<IUnitFacilities>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IUnitFacilities>({
     queryKey: ['facilities-unit-detail', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/unit/unit-fasilitas/${id}`).then((res) => res.data?.data),
@@ -44,19 +40,11 @@ export const UseGetFacilitiesUnitDetail = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setFacilitiesUnitDetail(data)
-    }
-  }, [data])
-
-  return { facilitiesUnitDetail, loading }
+  return { facilitiesUnitDetail: data, loading }
 }
 
 export const UseGetFacilitiesUnitStatus = () => {
-  const [status, setStatus] = useState<INewsStatus>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<INewsStatus>({
     queryKey: ['facilities-unit-status'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/unit/unit-fasilitas/status').then((res) => res.data?.data),
@@ -64,19 +52,11 @@ export const UseGetFacilitiesUnitStatus = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setStatus(data)
-    }
-  }, [data])
-
-  return { status, loading }
+  return { status: data, loading }
 }
 
 export const UseGetLogFacilitiesUnit = (id: string) => {
-  const [logData, setLogData] = useState<any[]>([])
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<ILogFacilities[]>({
     queryKey: ['log-unit-facilities', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/unit/unit-fasilitas-log/${id}`).then((res) => res.data.data),
@@ -84,11 +64,5 @@ export const UseGetLogFacilitiesUnit = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setLogData(data)
-    }
-  }, [data])
-
-  return { logData, loading }
+  return { logData: data ?? [], loading }
 }

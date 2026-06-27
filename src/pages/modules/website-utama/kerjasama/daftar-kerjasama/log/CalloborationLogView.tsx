@@ -70,7 +70,7 @@ const CalloborationLogView = () => {
   return (
     <div className="flex  flex-col gap-4">
       <ButtonTitleGroup
-        link="/modules/website-utama/kerjasama/daftar-kerjasama"
+        // link="/modules/website-utama/kerjasama/daftar-kerjasama"
         buttonGroup={[]}
         label="Log Data "
         isBack

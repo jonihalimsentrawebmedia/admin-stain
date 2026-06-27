@@ -286,14 +286,14 @@ const CollaborationFormUnit = ({ form }: Props) => {
           name="manfaat_untuk_mitra"
           isRow
           placeholder="Manfaat Untuk Mitra*"
-          label="Manfaat Untuk Mitra**"
+          label="Manfaat Untuk Mitra*"
         />
         <TextAreaInput
           form={form}
           name="manfaat_untuk_univ"
           isRow
           placeholder="Manfaat Untuk [Nama Universitas]*"
-          label="Manfaat Untuk [Nama Universitas]**"
+          label="Manfaat Untuk [Nama Universitas]*"
         />
       </CardInput>
     </div>

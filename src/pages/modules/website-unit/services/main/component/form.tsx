@@ -18,7 +18,9 @@ interface Props {
 export const FormMainService = (pros: Props) => {
   const { form, loading, open, setOpen, HandleSave } = pros
   const { listServices } = UseGetListServices()
-  const { listService } = UseGetListService(form.watch('id_category') ?? '')
+  const { listService } = UseGetListService({
+    id: form.watch('id_category') ?? '',
+  })
   return (
     <>
       <Form {...form}>

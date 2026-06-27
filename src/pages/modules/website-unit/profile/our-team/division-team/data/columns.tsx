@@ -1,10 +1,10 @@
 import { useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
 import type { IDivisionTeam } from '@/pages/modules/website-unit/profile/our-team/division-team/data/types.tsx'
-import { Switch } from '@/components/ui/switch.tsx'
 import { ButtonEditDivisionTeam } from '../component/buttonEdit.tsx'
 import type { IUnitTeamGroup } from '@/pages/modules/website-unit/profile/our-team/data/types.ts'
 import { ButtonDeleteDivisionTeam } from '../component/buttonDelete.tsx'
+import { SwitchStatus } from '@/pages/modules/pusat-karir/component/common/switchStatus.tsx'
 
 export const ColumnsDivisionTeam = (rootData: IUnitTeamGroup) => {
   const [searchParams] = useSearchParams()
@@ -45,7 +45,16 @@ export const ColumnsDivisionTeam = (rootData: IUnitTeamGroup) => {
       accessorKey: 'is_email_verified',
       header: 'Kepala Unit?',
       cell: ({ row }) => {
-        return <Switch checked={row?.original?.is_kepala_unit ?? false} />
+        const data = row?.original
+        return (
+          <>
+            <SwitchStatus
+              status={data.is_kepala_unit}
+              url={`/unit/profil/tim-pejabat/${data?.id_unit_tim}/pejabat/${data?.id_unit_tim_pejabat}/status-kepala`}
+              name={'division-team'}
+            />
+          </>
+        )
       },
     },
     {

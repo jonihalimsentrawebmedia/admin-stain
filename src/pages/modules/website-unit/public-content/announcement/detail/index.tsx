@@ -51,7 +51,7 @@ export const AnnouncementProdiDetailUnit = () => {
                       size={'sm'}
                       onClick={() =>
                         navigate(
-                          `/modules/website-prodi/public-content/announcement/edit/${detail?.id_pengumuman}`
+                          `/modules/website-unit/public-content/announcement/edit/${detail?.id_pengumuman}`
                         )
                       }
                       className={'border-primary text-primary hover:text-primary'}

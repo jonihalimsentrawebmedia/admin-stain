@@ -1,12 +1,9 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { About } from '@/pages/modules/website-utama/program-studi/detail/model/about.tsx'
 
 export const UseGetAboutUnit = () => {
-  const [aboutProfile, setAboutProfile] = useState<About>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<About>({
     queryKey: ['about-unit'],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/unit/profil/tentang').then((res) => res.data?.data),
@@ -14,11 +11,5 @@ export const UseGetAboutUnit = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setAboutProfile(data)
-    }
-  }, [data])
-
-  return { aboutProfile, loading }
+  return { aboutProfile: data, loading }
 }

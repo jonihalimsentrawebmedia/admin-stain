@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { SatuanOrganisasiDetail } from '@/pages/modules/settings/model'
@@ -11,14 +10,13 @@ interface Props {
 
 export const UseGetUnitList = (props: Props) => {
   const { kelompok, id_parent, id_module } = props
-  const [unitList, setUnitList] = useState<SatuanOrganisasiDetail[]>([])
 
   const ParamsSearch = new URLSearchParams()
   if (kelompok) ParamsSearch.set('kelompok', kelompok)
   if (id_parent) ParamsSearch.set('id_parent', id_parent)
   if (id_module) ParamsSearch.set('id_module', id_module)
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<SatuanOrganisasiDetail[]>({
     queryKey: ['unit-list', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -27,11 +25,5 @@ export const UseGetUnitList = (props: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setUnitList(data)
-    }
-  }, [data])
-
-  return { unitList, loading }
+  return { unitList: data ?? [], loading }
 }

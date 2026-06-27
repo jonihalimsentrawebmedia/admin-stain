@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { IUnitBackground } from '../data/index'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
@@ -13,14 +12,11 @@ interface Props {
 export const UseGetUnitBackground = (props?: Props) => {
   const { page, limit, context } = props ?? {}
 
-  const [unitBackground, setUnitBackground] = useState<IUnitBackground[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const ParamsSearch = new URLSearchParams()
   if (page) ParamsSearch.append('page', page ?? '1')
   if (limit) ParamsSearch.append('limit', limit ?? '10')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: IUnitBackground[]; meta: Meta }>({
     queryKey: ['unit-background', ParamsSearch.toString(), context],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -29,12 +25,5 @@ export const UseGetUnitBackground = (props?: Props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setUnitBackground(data?.data)
-      setMeta(data?.meta)
-    }
-  }, [data])
-
-  return { unitBackground, loading, meta }
+  return { unitBackground: data?.data ?? [], loading, meta: data?.meta }
 }

@@ -26,7 +26,13 @@ export const ColumnsHistory = () => {
       accessorKey: 'gambar_url',
       header: 'Gambar',
       cell: ({ row }) => {
-        return <img src={row?.original?.gambar_url} alt="Gambar" className={'w-full h-[80px]'} />
+        return (
+          <img
+            src={row?.original?.gambar_url}
+            alt="Gambar"
+            className={'w-full object-cover h-[80px]'}
+          />
+        )
       },
     },
     {
