@@ -258,12 +258,12 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
                 }
               }}
             />
-            <Label htmlFor="isSome" className="text-neutral font-normal">
+            <Label htmlFor="isSome" className="text-neutral font-normal capitalize">
               {kelompok === 'UNIVERSITAS'
                 ? 'Gunakan alamat universitas sebagai alamat fakultas'
                 : kelompok === 'PRODI'
                   ? 'Gunakan alamat Fakultas sebagai alamat Program Studi'
-                  : 'Gunakan alamat universitas sebagai alamat'}
+                  : `Gunakan alamat universitas sebagai alamat ${kelompok.toLowerCase()}`}
             </Label>
           </div>
         )}
