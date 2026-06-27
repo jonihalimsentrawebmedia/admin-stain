@@ -81,7 +81,7 @@ const ButtonEditEntrancePMB = (props: props) => {
       )}
 
       <DialogBasic
-        title={'Tambah Jalur Masuk'}
+        title={'Edit Jalur Masuk'}
         open={open}
         setOpen={setOpen}
         className={'min-w-3xl'}
