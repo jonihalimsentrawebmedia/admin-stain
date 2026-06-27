@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 
@@ -15,9 +14,7 @@ export interface IOrganizationStructure {
 }
 
 export const UseGetOrganizationStructure = () => {
-  const [organization, setOrganization] = useState<IOrganizationStructure>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IOrganizationStructure>({
     queryKey: ['organization-structure'],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -26,11 +23,5 @@ export const UseGetOrganizationStructure = () => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setOrganization(data)
-    }
-  }, [data])
-
-  return { organization, loading }
+  return { organization: data, loading }
 }

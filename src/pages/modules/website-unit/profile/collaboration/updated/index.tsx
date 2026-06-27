@@ -12,8 +12,8 @@ import CollaborationFormUnit from '@/pages/modules/website-unit/profile/collabor
 import { Form } from '@/components/ui/form.tsx'
 
 export const UpdatedCollaborationUnit = () => {
-  const { id } = useParams()
-  const { unitCollaboration: detail } = UseGetUnitCollaborationDetail(id ?? '')
+  const { idCalloboration } = useParams()
+  const { unitCollaboration: detail } = UseGetUnitCollaborationDetail(idCalloboration ?? '')
 
   const form = useForm()
   const { session } = UseGetSessionUnit()
@@ -65,6 +65,7 @@ export const UpdatedCollaborationUnit = () => {
       <Form {...form}>
         <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(HandleSave)}>
           <ButtonTitleGroup
+            isBack
             label={'Ubah Data Daftar Kerjasama'}
             buttonGroup={[
               { type: 'cancel', label: 'Batal', onClick: () => navigate(-1) },

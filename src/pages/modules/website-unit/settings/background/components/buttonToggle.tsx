@@ -1,5 +1,4 @@
 import { Switch } from '@/components/ui/switch.tsx'
-import { useEffect, useState } from 'react'
 import type { IUnitBackground } from '../data/index'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
@@ -14,15 +13,8 @@ interface IProps {
 export const ToggleStatus = (props: IProps) => {
   const { data } = props
 
-  const [status, setStatus] = useState(false)
   const [searchParams] = useSearchParams()
   const context = searchParams.get('context') ?? TAB_LIST?.[0]?.value
-
-  useEffect(() => {
-    if (data) {
-      setStatus(data?.status)
-    }
-  }, [data])
 
   const queryClient = useQueryClient()
 
@@ -41,7 +33,7 @@ export const ToggleStatus = (props: IProps) => {
 
   return (
     <>
-      <Switch checked={status} onCheckedChange={handleCheckedChange} />
+      <Switch checked={data?.status} onCheckedChange={handleCheckedChange} />
     </>
   )
 }

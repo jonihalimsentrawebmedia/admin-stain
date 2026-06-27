@@ -10,26 +10,28 @@ import { useQueryClient } from '@tanstack/react-query'
 import { Input } from '@/components/ui/input.tsx'
 import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
+interface IColorForm {
+  warna_admin: string
+}
+
 export const PrimaryAndFooterColorUnit = () => {
   const [isEdit, setIsEdit] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const form = useForm()
+  const form = useForm<IColorForm>()
   const { colorPrimary } = UseGetUnitPrimary()
 
   useEffect(() => {
     if (colorPrimary) {
       form.reset({
         warna_admin: colorPrimary?.warna_admin,
-        // warna_halaman_utama: colorPrimary?.warna_halaman_utama,
-        // warna_background_footer: colorPrimary?.warna_background_footer,
       })
     }
   }, [colorPrimary])
 
   const queryClient = useQueryClient()
 
-  const HandleSave = async (e: any) => {
+  const HandleSave = async (e: IColorForm) => {
     await AxiosClient.post('/unit/pengaturan-warna-halaman', e)
       .then((res) => {
         if (res.data.status) {
@@ -86,27 +88,6 @@ export const PrimaryAndFooterColorUnit = () => {
               />
               <p>{colorPrimary?.warna_admin}</p>
             </div>
-            {/*<p className="text-gray-500">Warna Halaman Utama</p>*/}
-            {/*<div className="flex items-center gap-2.5">*/}
-            {/*  <Input*/}
-            {/*    type={'color'}*/}
-            {/*    value={colorPrimary?.warna_halaman_utama}*/}
-            {/*    readOnly*/}
-            {/*    className={'w-[50px]'}*/}
-            {/*  />*/}
-            {/*  <p>{colorPrimary?.warna_halaman_utama}</p>*/}
-            {/*</div>*/}
-
-            {/*<p className="text-gray-500">Warna background Footer</p>*/}
-            {/*<div className="flex items-center gap-2.5">*/}
-            {/*  <Input*/}
-            {/*    type={'color'}*/}
-            {/*    value={colorPrimary?.warna_background_footer}*/}
-            {/*    readOnly*/}
-            {/*    className={'w-[50px]'}*/}
-            {/*  />*/}
-            {/*  <p>{colorPrimary?.warna_background_footer}</p>*/}
-            {/*</div>*/}
           </>
         ) : (
           <>
@@ -150,30 +131,6 @@ export const PrimaryAndFooterColorUnit = () => {
                   />
                   {form.watch('warna_admin')}
                 </div>
-
-                {/*<div className="flex items-center gap-1.5">*/}
-                {/*  <TextInput*/}
-                {/*    name={'warna_halaman_utama'}*/}
-                {/*    form={form}*/}
-                {/*    label={'Warna Halaman Utama'}*/}
-                {/*    type={'color'}*/}
-                {/*    inputClassName={'w-[50px]'}*/}
-                {/*    isRow*/}
-                {/*  />*/}
-                {/*  {form.watch('warna_halaman_utama')}*/}
-                {/*</div>*/}
-
-                {/*<div className="flex items-center gap-1.5">*/}
-                {/*  <TextInput*/}
-                {/*    name={'warna_background_footer'}*/}
-                {/*    form={form}*/}
-                {/*    label={'Warna Background Footer'}*/}
-                {/*    type={'color'}*/}
-                {/*    inputClassName={'w-[50px]'}*/}
-                {/*    isRow*/}
-                {/*  />*/}
-                {/*  {form.watch('warna_background_footer')}*/}
-                {/*</div>*/}
 
                 <ButtonTitleGroup
                   label={''}

@@ -51,6 +51,7 @@ export const CreatedCollaborationUnit = () => {
       <Form {...form}>
         <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(HandleSave)}>
           <ButtonTitleGroup
+            isBack
             label={'Tambah Daftar Kerjasama'}
             buttonGroup={[
               { type: 'cancel', label: 'Batal', onClick: () => navigate(-1) },

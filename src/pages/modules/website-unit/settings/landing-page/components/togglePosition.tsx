@@ -1,5 +1,4 @@
 import { Switch } from '@/components/ui/switch.tsx'
-import { useEffect, useState } from 'react'
 import type { IUnitLandingPage } from '../data/types'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
@@ -12,14 +11,6 @@ interface IProps {
 
 export const TogglePosition = (props: IProps) => {
   const { data, name } = props
-
-  const [status, setStatus] = useState(false)
-
-  useEffect(() => {
-    if (data) {
-      setStatus(data[name])
-    }
-  }, [data])
 
   const queryClient = useQueryClient()
 
@@ -41,7 +32,7 @@ export const TogglePosition = (props: IProps) => {
       {data?.is_content_website_utama ? (
         <p>Hanya Bisa Dilakukan di Admin Website Utama</p>
       ) : (
-        <Switch checked={status} onCheckedChange={handleCheckedChange} />
+        <Switch checked={data?.[name]} onCheckedChange={handleCheckedChange} />
       )}
     </>
   )

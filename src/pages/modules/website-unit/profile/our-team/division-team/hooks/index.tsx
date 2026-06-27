@@ -1,25 +1,22 @@
-import { useEffect, useState } from 'react'
 import type { IDivisionTeam } from '@/pages/modules/website-unit/profile/our-team/division-team/data/types.tsx'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { BasicProps } from '@/utils/globalType.ts'
 
-interface props extends BasicProps {
+interface Props extends BasicProps {
   id: string
 }
 
-export const UseGetDivisionTeam = (props?: props) => {
+export const UseGetDivisionTeam = (props?: Props) => {
   const { id, page, limit, search } = props ?? {}
-  const [divisionTeam, setDivisionTeam] = useState<IDivisionTeam[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   const params = new URLSearchParams()
   if (page) params.append('page', page.toString() ?? '1')
   if (limit) params.append('limit', limit.toString() ?? '10')
   if (search) params.append('search', search ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: IDivisionTeam[]; meta: Meta }>({
     queryKey: ['division-team', id, params.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -28,12 +25,5 @@ export const UseGetDivisionTeam = (props?: props) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setDivisionTeam(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { divisionTeam, loading, meta }
+  return { divisionTeam: data?.data ?? [], loading, meta: data?.meta }
 }

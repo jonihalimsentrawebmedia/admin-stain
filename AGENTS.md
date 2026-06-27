@@ -210,3 +210,49 @@ Removed `useState` + `useEffect` that merely copied `useQuery` data into local s
 | `publication-hki/book/publisher/hooks/index.tsx` | `UseGetBookPublisher` |
 | `publication-hki/book/media/hooks/index.tsx` | `UseGetBookPublisher` |
 | `publication-hki/book/book-center/hooks/index.tsx` | `UseGetPublicationCenter` |
+
+### 12. Redundant State / Derived State Anti-Pattern Fix — Website Unit Module (38 files, 69 hooks)
+
+Removed `useState` + `useEffect` that merely copied `useQuery` data into local state. Added type parameters to `useQuery<T>` (no `any`). `UseGetTotalVisitorUnit` status → `useMemo`. `UseGetTrentVisitorUnit` → interface + direct return. Fixed `interface props` → `interface Props` (PascalCase). Fixed `interface colorPrimary` → `IColorPrimary`. Fixed `interface notification` → `INotification`. Fixed `metta` typo → `meta`. Removed dead `totalVisitor` state. Removed unused `Params` dead code in template-web. Added proper log interfaces (`ILogNews`, `ILogAnnouncement`, `ILogAgenda`, `ILogFacilities`) replacing `any[]`. TS check clean (exit code 0).
+
+| File | Hooks Fixed |
+|---|---|
+| `hooks/index.tsx` | `UseGetSessionUnit` |
+| `dashboard/hooks/index.tsx` | `UseGetTotalVisitorUnit` (useState+useEffect→useMemo), `UseGetApprovedListUnit`, `UseGetTrentVisitorUnit` (added interface, direct return) |
+| `settings/template-web/hooks/index.tsx` | `UseGetTemplateUnit`, `UseGetTemplateDetail` |
+| `settings/landing-page/hooks/index.tsx` | `UseGetUnitLandingPage` |
+| `settings/color/hooks/index.tsx` | `UseGetUnitPrimary` |
+| `settings/background/hooks/index.tsx` | `UseGetUnitBackground` |
+| `profile/hooks/index.tsx` | `UseGetProfileUnit` |
+| `profile/about/hooks/index.tsx` | `UseGetAboutUnit` |
+| `profile/vission/hooks/index.tsx` | `UseGetVisionMissionUnit` |
+| `profile/task-purpose/hooks/index.tsx` | `UseGetTaskPurpose` |
+| `profile/our-team/hooks/index.tsx` | `UseGetDivisionUnit`, `UseGetDivisionDetail` |
+| `profile/our-team/division-team/hooks/index.tsx` | `UseGetDivisionTeam` |
+| `profile/collaboration/hooks/index.tsx` | `UseGetUnitCollaboration`, `UseGetUnitCollaborationDetail`, `UseGetAreaCollaboration`, `UseGetTypeCollaboration`, `UseGetCategoryCollaboration`, `UseGetSubCategoryCollaboration` |
+| `profile/organization-structure/hooks/index.tsx` | `UseGetOrganizationStructure` |
+| `profile/history/hooks/index.tsx` | `UseGetHistoryUnit` |
+| `profile/achievement/hooks/index.tsx` | `UseGetCategoryAchievement`, `UseGetAchievementDetail` |
+| `profile/achievement/reward/hooks/index.tsx` | `UseGetReward` |
+| `public-content/news/hooks/index.tsx` | `UseGetUnitNews`, `UseGetUnitNewsDetail`, `UseGetUnitNewsStatus`, `UseGetLogNewsUnit`, `UseGetNewsYear` |
+| `public-content/announcement/hooks/index.tsx` | `UseGetUnitAnnouncement`, `UseGetUnitAnnouncementDetail`, `UseGetUnitAnnouncementStatus`, `UseGetLogAnnouncementUnit`, `UseGetAnnouncementYear` |
+| `public-content/agenda/hooks/index.tsx` | `UseGetAgendaUnit`, `UseGetAgendaUnitDetail`, `UseGetAgendaUnitStatus`, `UseGetLogAgendaUnit`, `UseGetAgendaYear` |
+| `public-content/Download/hooks/index.tsx` | `UseGetCategoryDownloadUnit`, `UseGetDownloadUnit`, `UseGetDownloadUnitDetail` |
+| `public-content/Facilities/hooks/index.tsx` | `UseGetFacilitiesUnit`, `UseGetFacilitiesUnitDetail`, `UseGetFacilitiesUnitStatus`, `UseGetLogFacilitiesUnit` |
+| `collection/hooks/index.tsx` | `UseGetUnitCollection`, `UseGetUnitCollectionDetail` |
+| `collection/listCollection/hooks/index.tsx` | `UseGetCollectionCategory` |
+| `components/layout/notification/hooks/index.tsx` | `UseGetNotificationUnit` |
+| `data-unit/hooks/index.tsx` | `UseGetDetailDataUnit` |
+| `floor-plan/hooks/index.tsx` | `UseGetFloorPlan` |
+| `gallery/album/hooks/index.tsx` | `UseGetGalleryAlbumUnit`, `UseGetGalleryAlbumUnitById`, `UseGetGalleryAlbumUnitLog` |
+| `gallery/photo/hooks/index.tsx` | `UseGetPhotoAlbumUnit` |
+| `gallery/video/hooks/index.tsx` | `UseGetGalleryVideoUnit` |
+| `question/inbox/hooks/index.tsx` | `UseGetInboxUnit` |
+| `question/FAQ/hooks/index.tsx` | `UseGetListFAQUnit` |
+| `question/FAQ/category/hooks/index.tsx` | `UseGetFaqCategoryUnit` |
+| `select-unit/hook/index.tsx` | `UseGetUnitList` |
+| `services/category/hooks/index.tsx` | `UseGetListServices`, `UseGetDetailServices` |
+| `services/header-footer/hooks/index.tsx` | `UseGetHeaderFooterService` |
+| `services/list/hooks/index.tsx` | `UseGetListService` |
+| `services/main/hooks/index.tsx` | `UseGetMainListService` |
+| `services/operational-hour/hooks/index.tsx` | `UseGetOperationalHour` |

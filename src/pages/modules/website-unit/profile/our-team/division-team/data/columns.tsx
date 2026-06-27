@@ -45,7 +45,12 @@ export const ColumnsDivisionTeam = (rootData: IUnitTeamGroup) => {
       accessorKey: 'is_email_verified',
       header: 'Kepala Unit?',
       cell: ({ row }) => {
-        return <Switch checked={row?.original?.is_kepala_unit ?? false} />
+        return (
+          <>
+            <Switch checked={row?.original?.is_kepala_unit ?? false} />
+            {/*<SwitchStatus status={} url={} name={} />*/}
+          </>
+        )
       },
     },
     {

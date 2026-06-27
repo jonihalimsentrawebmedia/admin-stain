@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
@@ -16,15 +15,12 @@ import type { BasicProps } from '@/utils/globalType.ts'
 export const UseGetUnitCollaboration = (props: BasicProps) => {
   const { page, limit, search } = props ?? {}
 
-  const [unitCollaboration, setUnitCollaboration] = useState<ICollaborationList[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const ParamsSearch = new URLSearchParams()
   if (page) ParamsSearch.append('page', page.toString() ?? '1')
   if (limit) ParamsSearch.append('limit', limit.toString() ?? '10')
   if (search) ParamsSearch.append('search', search ?? '')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: ICollaborationList[]; meta: Meta }>({
     queryKey: ['unit-collaboration', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -33,20 +29,11 @@ export const UseGetUnitCollaboration = (props: BasicProps) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setUnitCollaboration(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { unitCollaboration, loading, meta }
+  return { unitCollaboration: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export const UseGetUnitCollaborationDetail = (id: string) => {
-  const [unitCollaboration, setUnitCollaboration] = useState<ICollaborationList>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<ICollaborationList>({
     queryKey: ['unit-collaboration-detail', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/unit/profil/kerjasama/${id}`).then((res) => res.data?.data),
@@ -54,19 +41,11 @@ export const UseGetUnitCollaborationDetail = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setUnitCollaboration(data)
-    }
-  }, [data])
-
-  return { unitCollaboration, loading }
+  return { unitCollaboration: data, loading }
 }
 
 export const UseGetAreaCollaboration = (props?: PropsAction) => {
   const { isGetAll, page, search, limit } = props ?? {}
-  const [areaCollaboration, setAreaCollaboration] = useState<IAreaCollaboration[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   let ParamsSearch: URLSearchParams
 
@@ -80,7 +59,7 @@ export const UseGetAreaCollaboration = (props?: PropsAction) => {
     if (search) ParamsSearch.append('search', search)
   }
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: IAreaCollaboration[]; meta: Meta }>({
     queryKey: ['area-collaboration', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -91,20 +70,11 @@ export const UseGetAreaCollaboration = (props?: PropsAction) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setAreaCollaboration(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { areaCollaboration, loading, meta }
+  return { areaCollaboration: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export const UseGetTypeCollaboration = (props: PropsAction) => {
   const { isGetAll, page, search, limit } = props ?? {}
-  const [typeCollaboration, setTypeCollaboration] = useState<ITypeCollaboration[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   let ParamsSearch = new URLSearchParams()
 
@@ -117,7 +87,7 @@ export const UseGetTypeCollaboration = (props: PropsAction) => {
     if (limit) ParamsSearch.append('limit', limit ?? '10')
   }
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: ITypeCollaboration[]; meta: Meta }>({
     queryKey: ['type-collaboration', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -128,20 +98,11 @@ export const UseGetTypeCollaboration = (props: PropsAction) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setTypeCollaboration(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { typeCollaboration, loading, meta }
+  return { typeCollaboration: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export const UseGetCategoryCollaboration = (props: PropsAction) => {
   const { isGetAll, page, search, limit } = props ?? {}
-  const [categoryCollaboration, setCategoryCollaboration] = useState<ICategoryCollaboration[]>([])
-  const [meta, setMeta] = useState<Meta>()
 
   let ParamsSearch = new URLSearchParams()
 
@@ -154,7 +115,7 @@ export const UseGetCategoryCollaboration = (props: PropsAction) => {
     if (limit) ParamsSearch.append('limit', limit ?? '10')
   }
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: ICategoryCollaboration[]; meta: Meta }>({
     queryKey: ['category-collaboration', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -165,22 +126,11 @@ export const UseGetCategoryCollaboration = (props: PropsAction) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setCategoryCollaboration(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { categoryCollaboration, loading, meta }
+  return { categoryCollaboration: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export const UseGetSubCategoryCollaboration = (props: ISubPropsAction) => {
   const { categoryId, isGetAll, page, search, limit } = props ?? {}
-  const [subCategoryCollaboration, setSubCategoryCollaboration] = useState<
-    ISubCategoryCollaboration[]
-  >([])
-  const [meta, setMeta] = useState<Meta>()
 
   let ParamsSearch = new URLSearchParams()
 
@@ -195,7 +145,7 @@ export const UseGetSubCategoryCollaboration = (props: ISubPropsAction) => {
     if (limit) ParamsSearch.append('limit', limit ?? '10')
   }
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: ISubCategoryCollaboration[]; meta: Meta }>({
     queryKey: ['sub-category-collaboration', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -206,12 +156,5 @@ export const UseGetSubCategoryCollaboration = (props: ISubPropsAction) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setSubCategoryCollaboration(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { subCategoryCollaboration, loading, meta }
+  return { subCategoryCollaboration: data?.data ?? [], loading, meta: data?.meta }
 }

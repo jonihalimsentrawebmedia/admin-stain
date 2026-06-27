@@ -1,27 +1,29 @@
-import { useEffect, useState } from 'react'
 import type { ICategoryCollection } from '@/pages/modules/website-unit/collection/listCollection/data/types.ts'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
+import type { BasicProps } from '@/utils/globalType.ts'
 
-export const UseGetCollectionCategory = (id: string) => {
-  const [collection, setCollection] = useState<ICategoryCollection[]>([])
-  const [meta, setMeta] = useState<Meta>()
+interface Props extends BasicProps {
+  id: string
+}
 
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['collection-category', id],
+export const UseGetCollectionCategory = (props: Props) => {
+  const { id, page, limit, search } = props
+
+  const ParamsSearch = new URLSearchParams()
+  if (page) ParamsSearch.set('page', page.toString() ?? '1')
+  if (limit) ParamsSearch.set('limit', limit.toString() ?? '10')
+  if (search) ParamsSearch.set('search', search ?? '')
+
+  const { data, isLoading, isFetching } = useQuery<{ data: ICategoryCollection[]; meta: Meta }>({
+    queryKey: ['collection-category', id, ParamsSearch.toString()],
     refetchOnWindowFocus: false,
-    queryFn: () => AxiosClient.get(`/unit/unit-koleksi/${id}/koleksi`).then((res) => res.data),
+    queryFn: () =>
+      AxiosClient.get(`/unit/unit-koleksi/${id}/koleksi?${ParamsSearch}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setCollection(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { collection, loading, meta }
+  return { collection: data?.data ?? [], loading, meta: data?.meta }
 }

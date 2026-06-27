@@ -153,7 +153,7 @@ export default function DashboardAdminUnit() {
           <CardContent className="h-80">
             <SelectBasic
               className={'mb-2'}
-              label={'Data Bersadarkan'}
+              label={'Data Berdasarkan'}
               data={listMode}
               value={mode}
               onChange={setMode}
@@ -163,7 +163,7 @@ export default function DashboardAdminUnit() {
               <BarChart data={chartData ?? []} margin={{ bottom: 60 }}>
                 <XAxis
                   dataKey="name"
-                  angle={mode === 'harian' ? -75 : mode == 'bulanan' ? -45 : 0}
+                  angle={mode === 'harian' ? -75 : mode === 'bulanan' ? -45 : 0}
                   textAnchor="end"
                   interval={0}
                   height={60}

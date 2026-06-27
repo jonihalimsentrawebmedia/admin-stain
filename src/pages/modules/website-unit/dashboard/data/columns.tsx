@@ -9,7 +9,7 @@ import { RenderUrl } from '@/pages/modules/website-utama/beranda/hooks/renderUrl
 export const ColumnsApprovalUnit = () => {
   const { pathname } = useLocation()
   const name = pathname.split('/')[2]
-  const culumns: ColumnDef<IContent>[] = [
+  const columns: ColumnDef<IContent>[] = [
     {
       accessorKey: 'no',
       header: 'No',
@@ -66,5 +66,5 @@ export const ColumnsApprovalUnit = () => {
     },
   ]
 
-  return culumns
+  return columns
 }

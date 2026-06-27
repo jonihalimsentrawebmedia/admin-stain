@@ -31,6 +31,7 @@ export const CategoryDownloadProdiPage = () => {
             },
           ]}
           isBack
+          link={'/modules/website-unit/public-content/download'}
         />
 
         <TableCustom

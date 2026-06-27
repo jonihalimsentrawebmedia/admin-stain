@@ -29,7 +29,7 @@ export const ButtonEditCategoryFaqUnit = (data: ICategoryFAQ) => {
   }, [data])
 
   const HandleSave = async (value: any) => {
-    setLoading(!loading)
+    setLoading(true)
     await AxiosClient.put(`/unit/kategori-faq/${data?.id_kategori_faq}`, value)
       .then((res) => {
         if (res.data.status) {
@@ -59,7 +59,7 @@ export const ButtonEditCategoryFaqUnit = (data: ICategoryFAQ) => {
       <DialogCustom
         open={open}
         setOpen={setOpen}
-        title={'Tambah Kategori'}
+        title={'Edit Kategori'}
         className={'max-w-2xl rounded'}
       >
         <Form {...form}>

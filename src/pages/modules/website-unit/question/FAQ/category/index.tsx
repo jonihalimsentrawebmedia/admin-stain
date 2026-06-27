@@ -16,8 +16,9 @@ export const CategoryFAQUnitPage = () => {
         <ButtonTitleGroup
           label={'Kategori F.A.Q'}
           isBack
+          link={'/modules/website-unit/question/faq'}
           buttonGroup={[
-             {
+            {
               type: 'custom',
               element: (
                 <ButtonGoToGuide

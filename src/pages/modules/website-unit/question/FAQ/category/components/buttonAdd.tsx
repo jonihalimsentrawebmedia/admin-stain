@@ -19,7 +19,7 @@ export const ButtonAddCategoryFAQUnit = () => {
   const queryClient = useQueryClient()
 
   const HandleSave = async (value: any) => {
-    setLoading(!loading)
+    setLoading(true)
     await AxiosClient.post('/unit/kategori-faq', value)
       .then((res) => {
         if (res.data.status) {

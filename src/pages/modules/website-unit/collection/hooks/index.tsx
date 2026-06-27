@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import type { IUnitCollection } from '@/pages/modules/website-unit/collection/data/types.tsx'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import { useQuery } from '@tanstack/react-query'
@@ -8,15 +7,12 @@ import type { BasicProps } from '@/utils/globalType.ts'
 export const UseGetUnitCollection = (props?: BasicProps) => {
   const { search, page, limit } = props ?? {}
 
-  const [collection, setCollection] = useState<IUnitCollection[]>([])
-  const [meta, setMeta] = useState<Meta>()
-
   const ParamsSearch = new URLSearchParams()
   if (search) ParamsSearch.set('search', search ?? '')
   if (page) ParamsSearch.set('page', page.toString() ?? '1')
   if (limit) ParamsSearch.set('limit', limit.toString() ?? '10')
 
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<{ data: IUnitCollection[]; meta: Meta }>({
     queryKey: ['unit-collection', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -25,20 +21,11 @@ export const UseGetUnitCollection = (props?: BasicProps) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setCollection(data.data)
-      setMeta(data.meta)
-    }
-  }, [data])
-
-  return { collection, loading, meta }
+  return { collection: data?.data ?? [], loading, meta: data?.meta }
 }
 
 export const UseGetUnitCollectionDetail = (id: string) => {
-  const [collection, setCollection] = useState<IUnitCollection>()
-
-  const { data, isLoading, isFetching } = useQuery({
+  const { data, isLoading, isFetching } = useQuery<IUnitCollection>({
     queryKey: ['unit-collection-detail', id],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get(`/unit/kategori-koleksi/${id}`).then((res) => res.data?.data),
@@ -46,11 +33,5 @@ export const UseGetUnitCollectionDetail = (id: string) => {
 
   const loading = isLoading || isFetching
 
-  useEffect(() => {
-    if (data) {
-      setCollection(data)
-    }
-  }, [data])
-
-  return { collection, loading }
+  return { collection: data, loading }
 }

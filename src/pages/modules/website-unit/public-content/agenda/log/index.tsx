@@ -16,7 +16,7 @@ export const LogActivityAgendaUnitPage = () => {
       <ButtonTitleGroup label={'Log Data'} buttonGroup={[]} isBack />
 
       <div className={'flex items-start gap-x-8 mt-5'}>
-        <img src={detail?.gambar} className={'w-[320px] h-[240px] object-contain'} alt="imgae" />
+        <img src={detail?.gambar} className={'w-[320px] h-[240px] object-contain'} alt="image" />
         <div className={'flex flex-col gap-y-2 text-sm'}>
           <p className="text-gray-500">Judul Agenda</p>
           <p>{detail?.judul}</p>
