@@ -5,6 +5,7 @@ import { Trash2Icon, X } from 'lucide-react'
 import { useState } from 'react'
 import type { SatuanOrganisasiList } from '../../model'
 import useDeleteSatuanOrganisasi from '../../controller/useDeleteSatuanOrganisasi'
+
 interface Props {
   data: SatuanOrganisasiList
 }
@@ -27,7 +28,7 @@ const ButtonDelete = ({ data }: Props) => {
         className="max-w-2xl! w-full!"
         open={open}
         setOpen={setOpen}
-        title={<p className="text-2xl text-red-500">Hapus Data Prodi?</p>}
+        title={<p className="text-2xl text-red-500">Hapus Data Fakultas?</p>}
       >
         <p>
           Anda akan menghapus fakultas “{data.nama}”. Apakah Anda yakin untuk menghapus fakultas
