@@ -35,9 +35,12 @@ const UnitDetailViewModel = () => {
       label: 'Kelompok',
       name: 'kelompok',
     },
-
     {
-      label: 'Nama Program Studi',
+      label: 'Nama Universitas',
+      name: 'nama_parent_satuan_organisasi',
+    },
+    {
+      label: 'Nama Unit',
       name: 'nama',
     },
     {
