@@ -35,7 +35,10 @@ const InstitutionDetailViewModel = () => {
       label: 'Kelompok',
       name: 'kelompok',
     },
-
+    {
+      label: 'Nama Universitas',
+      name: 'nama_parent_satuan_organisasi',
+    },
     {
       label: 'Nama Lembaga',
       name: 'nama',
