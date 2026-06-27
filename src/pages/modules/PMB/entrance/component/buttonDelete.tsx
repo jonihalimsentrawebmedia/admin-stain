@@ -49,7 +49,7 @@ const ButtonDeleteEntrancePMB = (props: props) => {
       </button>
 
       <DialogBasic
-        title={'Tambah Jalur Masuk'}
+        title={'Hapus Jalur Masuk'}
         open={open}
         setOpen={setOpen}
         className={'min-w-3xl'}
