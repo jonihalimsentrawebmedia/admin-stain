@@ -4,8 +4,12 @@ import { useForm } from 'react-hook-form'
 import type { LogActivity } from '../model'
 import { formatDateTime } from '@/utils/date'
 import useGetUsersDetail from '../../users/controller/useGetUsersDetail'
+import { useSearchParams } from 'react-router-dom'
 
 const HistoryLoginDetailViewModel = () => {
+  const [searchParams] = useSearchParams()
+  const page = Number(searchParams.get('page') || 1)
+  const limit = Number(searchParams.get('limit') || 10)
   const form = useForm()
   const { user } = useGetUsersDetail({})
   const [fieldsConfig, setFieldConfig] = useState<
@@ -15,13 +19,11 @@ const HistoryLoginDetailViewModel = () => {
     }[]
   >([])
   const columns: ColumnDef<LogActivity>[] = [
-    // ✅ Nomor (#)
     {
       accessorKey: 'no',
       header: '#',
-      cell: (row) => {
-        // Menggunakan index + 1 untuk nomor urut
-        return <div>{row.row.index + 1}</div>
+      cell: ({ row }) => {
+        return <div className="">{(page - 1) * limit + row.index + 1}</div>
       },
     },
 
@@ -53,8 +55,6 @@ const HistoryLoginDetailViewModel = () => {
 
   useEffect(() => {
     if (user) {
-      
-    
       setFieldConfig([
         {
           name: 'nama_lengkap',
@@ -82,7 +82,7 @@ const HistoryLoginDetailViewModel = () => {
       })
     }
   }, [user])
- 
+
   return {
     columns,
     fieldsConfig,
