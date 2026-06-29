@@ -1,6 +1,6 @@
 import { UseGetEmployee, UseGetReFUnit } from '@/pages/modules/website-utama/lecturer-staff/hooks'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import { ColumnsSetUnit } from './data/columns.tsx'
 import { TableBasic } from '@/components/common/table/tableBasic.tsx'
 import { useState } from 'react'
@@ -28,7 +28,7 @@ const SetUnitEmployeePage = () => {
   const columns = ColumnsSetUnit({
     unit: workUnit,
   })
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   return (
     <>
@@ -44,11 +44,11 @@ const SetUnitEmployeePage = () => {
                 />
               ),
             },
-            {
-              type: 'add',
-              label: 'Tambah Data',
-              onClick: () => navigate('add'),
-            },
+            // {
+            //   type: 'add',
+            //   label: 'Tambah Data',
+            //   onClick: () => navigate('add'),
+            // },
           ]}
           label="Data Dosen dan Staff"
         />

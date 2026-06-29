@@ -16,10 +16,11 @@ interface Props {
   HandleSave: (e: TopSliderType) => void
   position?: string
   is_website_main?: boolean
+  label?: string
 }
 
 export const FormCreateSliderOnTop = (props: Props) => {
-  const { form, HandleSave, position = 'Atas', is_website_main } = props
+  const { label, form, HandleSave, position = 'Atas', is_website_main } = props
   const navigate = useNavigate()
   const { treeNodes } = UseGetTreeData()
 
@@ -29,7 +30,7 @@ export const FormCreateSliderOnTop = (props: Props) => {
         <Form {...form}>
           <form className="flex flex-col gap-5" onSubmit={form.handleSubmit(HandleSave)}>
             <ButtonTitleGroup
-              label={`Tambah Slider ${position}`}
+              label={`${label ?? 'Tambah Slider'} ${position}`}
               buttonGroup={[
                 {
                   label: 'Batal',

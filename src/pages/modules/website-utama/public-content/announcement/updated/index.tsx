@@ -5,12 +5,14 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect, useState } from 'react'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { UseGetAnnouncementDetail } from '@/pages/modules/website-utama/public-content/announcement/hooks'
 
 export const UpdatedAnnouncementPage = () => {
-  const [loading, setLoading] = useState(false)
   const { id } = useParams()
+  const [searchParams] = useSearchParams()
+  const from = searchParams.get('from')
+  const [loading, setLoading] = useState(false)
   const { detailAnnouncement } = UseGetAnnouncementDetail(id ?? '')
 
   useEffect(() => {
@@ -41,7 +43,11 @@ export const UpdatedAnnouncementPage = () => {
         if (res.data.status) {
           toast.success(res.data.message || 'Success Pengajuan tambah data pengumuman')
           setLoading(false)
-          navigate('/modules/website-utama/public-content/announcement')
+          if (from === 'detail') {
+            navigate(`/modules/website-utama/public-content/announcement/detail/${id}`)
+          } else {
+            navigate('/modules/website-utama/public-content/announcement')
+          }
         }
       })
       .catch((err) => {

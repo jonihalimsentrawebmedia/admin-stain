@@ -70,7 +70,7 @@ export const ButtonEditLevelUkt = (props: props) => {
       </button>
 
       <DialogBasic
-        title={'Tambah Tingkat UKT'}
+        title={'Edit Tingkat UKT'}
         open={open}
         setOpen={setOpen}
         className={'lg:min-w-2xl'}

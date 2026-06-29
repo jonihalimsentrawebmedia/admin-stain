@@ -49,10 +49,13 @@ const ContentEditView = () => {
   useEffect(() => {
     if (contentList) {
       form.reset({
-        ...contentList,
+        isi: contentList?.isi,
+        urutan: contentList?.urutan,
+        judul: contentList?.judul,
       })
     }
   }, [contentList])
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
@@ -65,7 +68,7 @@ const ContentEditView = () => {
               element: <ButtonForm loading={loading} />,
             },
           ]}
-          label="Konten"
+          label="Edit Konten"
         />
         <ContentForm form={form} />
         <ButtonForm loading={loading} />

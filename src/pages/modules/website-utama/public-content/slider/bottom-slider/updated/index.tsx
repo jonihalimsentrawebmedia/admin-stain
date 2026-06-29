@@ -53,6 +53,7 @@ export const UpdatedBottomSlider = () => {
     <>
       <div className={'flex flex-col gap-5'}>
         <FormCreateSliderOnTop
+          label={'Edit Slider'}
           is_website_main
           position={'Bawah'}
           form={form}

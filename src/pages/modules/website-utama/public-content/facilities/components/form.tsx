@@ -11,10 +11,11 @@ interface props {
   loading: boolean
   form: UseFormReturn<FacilitiesType>
   HandleSave: (e: FacilitiesType) => void
+  label?: string
 }
 
 export const FormFacilities = (props: props) => {
-  const { form, HandleSave, loading } = props
+  const { form, label, HandleSave, loading } = props
   const navigate = useNavigate()
 
   return (
@@ -22,7 +23,7 @@ export const FormFacilities = (props: props) => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(HandleSave)} className={'flex flex-col gap-5 py-5'}>
           <ButtonTitleGroup
-            label={'Tambah Fasilitas'}
+            label={label ?? 'Tambah Fasilitas'}
             buttonGroup={[
               {
                 label: 'Batal',

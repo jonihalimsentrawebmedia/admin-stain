@@ -30,7 +30,8 @@ export const PublicationLecturerPage = () => {
           placeholder={'Tahun Publikasi'}
           name={'year'}
           label={'Tahun Publikasi'}
-          className={'max-w-sm'}
+          className={'max-w-sm z-[50]'}
+          selectClassName={'z-[50]'}
           data={
             year?.map((row: string | number) => ({
               label: row.toString(),

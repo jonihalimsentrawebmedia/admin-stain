@@ -33,6 +33,7 @@ const StatisticViewModel = () => {
           })
 
           setLoadingSave(false)
+          setIsEdit(false)
           setImageStatisticTemp(imageStatisticTemp)
           toast.success(res.data.message || 'Success Pengajuan tambah data berita')
         }

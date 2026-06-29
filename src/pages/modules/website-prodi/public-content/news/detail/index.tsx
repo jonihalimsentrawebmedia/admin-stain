@@ -47,7 +47,7 @@ export const DetailNewsProdiPage = () => {
                   <Button
                     onClick={() =>
                       navigate(
-                        `/modules/website-prodi/public-content/news/edit/${detail?.id_berita}`
+                        `/modules/website-prodi/public-content/news/edit/${detail?.id_berita}?from=detail`
                       )
                     }
                     className={'border-primary text-primary hover:text-primary'}

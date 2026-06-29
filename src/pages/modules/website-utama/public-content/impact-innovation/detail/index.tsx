@@ -34,7 +34,7 @@ export const DetailImpactInnovationPage = () => {
   return (
     <>
       <ButtonTitleGroup
-        label={'Detail Berita'}
+        label={'Detail Inovasi Berdampak'}
         buttonGroup={[
           {
             type: 'custom',
@@ -47,7 +47,7 @@ export const DetailImpactInnovationPage = () => {
                 <Button
                   onClick={() =>
                     navigate(
-                      `/modules/website-utama/public-content/impact-innovation/edit/${detail?.id_inovasi_berdampak}`
+                      `/modules/website-utama/public-content/impact-innovation/edit/${detail?.id_inovasi_berdampak}?from=detail`
                     )
                   }
                   className={'border-primary text-primary hover:text-primary'}

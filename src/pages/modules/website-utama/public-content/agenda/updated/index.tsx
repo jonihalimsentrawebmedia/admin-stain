@@ -5,13 +5,15 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { AgendaResolver, type AgendaType } from '../data/resolver'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { UseGetAgendaDetail } from '@/pages/modules/website-utama/public-content/agenda/hooks'
 import { format } from 'date-fns'
 
 export const UpdatedAgendaPage = () => {
-  const [loading, setLoading] = useState(false)
   const { id } = useParams()
+  const [searchParams] = useSearchParams()
+  const from = searchParams.get('from')
+  const [loading, setLoading] = useState(false)
   const { detailAgenda } = UseGetAgendaDetail(id ?? '')
 
   useEffect(() => {
@@ -52,7 +54,11 @@ export const UpdatedAgendaPage = () => {
         if (res.data.status) {
           toast.success(res.data.message || 'Success Pengajuan tambah data agenda')
           setLoading(false)
-          navigate('/modules/website-utama/public-content/agenda')
+          if (from === 'detail') {
+            navigate(`/modules/website-utama/public-content/agenda/detail/${id}`)
+          } else {
+            navigate('/modules/website-utama/public-content/agenda')
+          }
         }
       })
       .catch((err) => {
@@ -63,7 +69,13 @@ export const UpdatedAgendaPage = () => {
 
   return (
     <>
-      <AgendaForm is_website_main form={form} HandleSave={HandleSave} loading={loading} />
+      <AgendaForm
+        label={'Edit Agenda'}
+        is_website_main
+        form={form}
+        HandleSave={HandleSave}
+        loading={loading}
+      />
     </>
   )
 }

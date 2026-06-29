@@ -5,11 +5,13 @@ import { type IResolverPromotionType, ResolverPromotion } from '../data/resolver
 import { zodResolver } from '@hookform/resolvers/zod'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { UseGetPromotionProdiDetail } from '@/pages/modules/website-prodi/public-content/promotion/hooks'
 
 export const UpdatedPromotionProdi = () => {
   const { id } = useParams()
+  const [searchParams] = useSearchParams()
+  const from = searchParams.get('from')
   const { promotionDetail: detail } = UseGetPromotionProdiDetail(id ?? '')
 
   const form = useForm<IResolverPromotionType>({
@@ -17,7 +19,6 @@ export const UpdatedPromotionProdi = () => {
   })
 
   const [loading, setLoading] = useState(false)
-
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -41,7 +42,11 @@ export const UpdatedPromotionProdi = () => {
         if (res.data.status) {
           setLoading(false)
           toast.success(res.data.message || 'Success Pengajuan tambah data promosi')
-          navigate('/modules/website-prodi/public-content/promotion')
+          if (from === 'detail') {
+            navigate(`/modules/website-prodi/public-content/promotion/detail/${id}`)
+          } else {
+            navigate('/modules/website-prodi/public-content/promotion')
+          }
         }
       })
       .catch((err) => {
@@ -52,7 +57,12 @@ export const UpdatedPromotionProdi = () => {
 
   return (
     <>
-      <FormPromotionProdi form={form} HandleSave={HandleSave} loading={loading} />
+      <FormPromotionProdi
+        label={'Edit Promosi'}
+        form={form}
+        HandleSave={HandleSave}
+        loading={loading}
+      />
     </>
   )
 }

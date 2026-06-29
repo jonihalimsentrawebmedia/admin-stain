@@ -11,10 +11,11 @@ interface Props {
   form: UseFormReturn<IRegisterPath>
   handleSave: (value: IRegisterPath) => void
   loading: boolean
+  label?: string
 }
 
 export const RegistrationPathForm = (props: Props) => {
-  const { form, handleSave, loading } = props
+  const { form, handleSave, loading, label } = props
   const navigate = useNavigate()
   return (
     <>
@@ -37,7 +38,7 @@ export const RegistrationPathForm = (props: Props) => {
                 label: 'Simpan',
               },
             ]}
-            label="Jalur Pendaftaran"
+            label={label ?? 'Tambah Jalur Pendaftaran'}
           />
 
           <TextInput

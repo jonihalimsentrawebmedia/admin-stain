@@ -5,8 +5,11 @@ import {
   createContext,
   forwardRef,
   isValidElement,
+  useCallback,
   useContext,
+  useEffect,
   useMemo,
+  useRef,
   useState,
   version,
 } from "react"
@@ -21,7 +24,6 @@ import {
   useDismiss,
   useRole,
   useInteractions,
-  useMergeRefs,
   FloatingPortal,
   type Placement,
   type UseFloatingReturn,
@@ -79,12 +81,8 @@ function useTooltip({
   const open = controlledOpen ?? uncontrolledOpen
   const setOpen = setControlledOpen ?? setUncontrolledOpen
 
-  const data = useFloating({
-    placement,
-    open,
-    onOpenChange: setOpen,
-    whileElementsMounted: autoUpdate,
-    middleware: [
+  const middleware = useMemo(
+    () => [
       offset(4),
       flip({
         crossAxis: placement.includes("-"),
@@ -93,6 +91,15 @@ function useTooltip({
       }),
       shift({ padding: 4 }),
     ],
+    [placement]
+  )
+
+  const data = useFloating({
+    placement,
+    open,
+    onOpenChange: setOpen,
+    whileElementsMounted: autoUpdate,
+    middleware,
   })
 
   const context = data.context
@@ -170,7 +177,36 @@ export const TooltipTrigger = forwardRef<HTMLElement, TooltipTriggerProps>(
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (children as any).ref
       : undefined
-    const ref = useMergeRefs([context.refs.setReference, propRef, childrenRef])
+
+    const buttonRef = useRef<HTMLElement | null>(null)
+
+    const ref = useCallback(
+      (node: HTMLElement | null) => {
+        buttonRef.current = node
+
+        if (typeof propRef === "function") {
+          propRef(node)
+        } else if (propRef) {
+          ;(propRef as React.MutableRefObject<HTMLElement | null>).current = node
+        }
+
+        if (typeof childrenRef === "function") {
+          childrenRef(node)
+        } else if (childrenRef) {
+          ;(childrenRef as React.MutableRefObject<HTMLElement | null>).current = node
+        }
+      },
+      [propRef, childrenRef]
+    )
+
+    useEffect(() => {
+      if (buttonRef.current) {
+        context.refs.setReference(buttonRef.current)
+      }
+      return () => {
+        context.refs.setReference(null)
+      }
+    }, [context.refs.setReference])
 
     if (asChild && isValidElement(children)) {
       const dataAttributes = {
@@ -206,7 +242,30 @@ export const TooltipContent = forwardRef<HTMLDivElement, TooltipContentProps>(
     propRef
   ) {
     const context = useTooltipContext()
-    const ref = useMergeRefs([context.refs.setFloating, propRef])
+
+    const floatingElRef = useRef<HTMLDivElement | null>(null)
+
+    const ref = useCallback(
+      (node: HTMLDivElement | null) => {
+        floatingElRef.current = node
+
+        if (typeof propRef === "function") {
+          propRef(node)
+        } else if (propRef) {
+          ;(propRef as React.MutableRefObject<HTMLDivElement | null>).current = node
+        }
+      },
+      [propRef]
+    )
+
+    useEffect(() => {
+      if (floatingElRef.current) {
+        context.refs.setFloating(floatingElRef.current)
+      }
+      return () => {
+        context.refs.setFloating(null)
+      }
+    }, [context.refs.setFloating])
 
     if (!context.open) return null
 

@@ -16,10 +16,11 @@ interface props {
   form: UseFormReturn<AgendaType>
   HandleSave: (e: AgendaType) => void
   is_website_main?: boolean
+  label?: string
 }
 
 export const AgendaForm = (props: props) => {
-  const { form, HandleSave, loading, is_website_main } = props
+  const { form, label, HandleSave, loading, is_website_main } = props
   const { treeNodes } = UseGetTreeData()
 
   const navigate = useNavigate()
@@ -29,7 +30,7 @@ export const AgendaForm = (props: props) => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(HandleSave)} className={'flex flex-col gap-5 py-5'}>
           <ButtonTitleGroup
-            label={'Tulis Agenda'}
+            label={label ?? 'Tulis Agenda'}
             buttonGroup={[
               {
                 label: 'Batal',

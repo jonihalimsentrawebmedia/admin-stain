@@ -1,6 +1,6 @@
 import { AnnouncementForm } from '@/pages/modules/website-utama/public-content/announcement/components/form.tsx'
 import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import {
   AnnouncementResolver,
@@ -12,9 +12,10 @@ import { toast } from 'react-toastify'
 import { UseGetAnnouncementDetail } from '@/pages/modules/website-utama/public-content/announcement/hooks'
 
 export const UpdatedAnnouncementProdi = () => {
-  const [loading, setLoading] = useState(false)
-
   const { id } = useParams()
+  const [searchParams] = useSearchParams()
+  const from = searchParams.get('from')
+  const [loading, setLoading] = useState(false)
   const { detailAnnouncement: detail } = UseGetAnnouncementDetail(id ?? '')
   const navigate = useNavigate()
 
@@ -40,7 +41,11 @@ export const UpdatedAnnouncementProdi = () => {
         if (res.data.status) {
           setLoading(false)
           navigate('/modules/website-prodi/public-content/announcement')
-          toast.success(res.data.message || 'Pengumuman berhasil dibuat')
+          if (from === 'detail') {
+            navigate(`/modules/website-prodi/public-content/announcement/detail/${id}`)
+          } else {
+            toast.success(res.data.message || 'Pengumuman berhasil dibuat')
+          }
         }
       })
       .catch((err) => {

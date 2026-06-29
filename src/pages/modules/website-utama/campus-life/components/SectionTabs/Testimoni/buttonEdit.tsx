@@ -79,7 +79,7 @@ export const ButtonEditTestimonial = (props: props) => {
       <DialogCustom
         open={open}
         setOpen={setOpen}
-        title={'Tambah Testimoni'}
+        title={'Edit Testimoni'}
         className={'rounded lg:max-w-2xl'}
       >
         <Form {...form}>
