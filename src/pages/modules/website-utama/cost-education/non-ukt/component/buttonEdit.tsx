@@ -79,7 +79,7 @@ export const ButtonEditEntranceNonUkt = (props: props) => {
         <HiPencil />
       </button>
 
-      <DialogBasic title={'Tambah Jalur Masuk'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Edit Jalur Masuk'} open={open} setOpen={setOpen}>
         <FormEntranceProdiNonUkt
           form={form}
           open={open}

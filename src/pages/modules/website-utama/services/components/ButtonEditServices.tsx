@@ -77,7 +77,7 @@ const ButtonEditServices = ({ data }: Props) => {
         width="50%"
         className={'rounded lg:min-w-2xl'}
         setOpen={setOpen}
-        title={'Edit Menu'}
+        title={'Edit Layanan'}
       >
         <ServiceForm
           form={form}

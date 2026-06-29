@@ -22,8 +22,8 @@ export const FormEntranceUkt = (props: props) => {
           <TextInput
             name={'nama_jalur_masuk'}
             form={form}
-            label={'Nama Tingkatan UKT'}
-            placeholder={'Masukkan Nama Tingkatan UKT'}
+            label={'Nama Jalur Masuk UKT'}
+            placeholder={'Masukkan Jalur Masuk UKT'}
             htmlFor={'nama_tingkatan_ukt'}
             isRow
             isRequired

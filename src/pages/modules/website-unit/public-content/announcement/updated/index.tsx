@@ -1,6 +1,6 @@
 import { AnnouncementForm } from '@/pages/modules/website-utama/public-content/announcement/components/form.tsx'
 import { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import {
   AnnouncementResolver,
@@ -15,6 +15,8 @@ export const UpdatedAnnouncementUnit = () => {
   const [loading, setLoading] = useState(false)
 
   const { id } = useParams()
+  const [searchParams] = useSearchParams()
+  const from = searchParams.get('from')
   const { detailAnnouncement: detail } = UseGetAnnouncementDetail(id ?? '')
   const navigate = useNavigate()
 
@@ -39,8 +41,12 @@ export const UpdatedAnnouncementUnit = () => {
       .then((res) => {
         if (res.data.status) {
           setLoading(false)
-          navigate('/modules/website-unit/public-content/announcement')
           toast.success(res.data.message || 'Pengumuman berhasil dibuat')
+          if (from === 'detail') {
+            navigate(`/modules/website-unit/public-content/announcement/detail/${id}`)
+          } else {
+            navigate('/modules/website-unit/public-content/announcement')
+          }
         }
       })
       .catch((err) => {
@@ -51,7 +57,12 @@ export const UpdatedAnnouncementUnit = () => {
 
   return (
     <>
-      <AnnouncementForm form={form} HandleSave={HandleSave} loading={loading} />
+      <AnnouncementForm
+        label={'Edit Pengumuman'}
+        form={form}
+        HandleSave={HandleSave}
+        loading={loading}
+      />
     </>
   )
 }

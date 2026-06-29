@@ -76,6 +76,8 @@ const LogActivityVideoPage = lazy(() => import('@/pages/modules/website-utama/pu
 const LogActivityGalleryAlbum = lazy(() => import('@/pages/modules/website-utama/public-content/gallery/Foto/log').then(m => ({ default: m.LogActivityGalleryAlbum })))
 const LogActivityGalleryAlbumPhoto = lazy(() => import('@/pages/modules/website-utama/public-content/gallery/Foto/data-album/log').then(m => ({ default: m.LogActivityGalleryAlbumPhoto })))
 const DownloadFilePage = lazy(() => import('@/pages/modules/website-utama/public-content/download'))
+const CategoryDownloadPage = lazy(() => import('@/pages/modules/website-utama/public-content/download/category').then(m => ({ default: m.CategoryDownloadPage })))
+const CategoryDownloadLanguage = lazy(() => import('@/pages/modules/website-utama/public-content/download/category/language').then(m => ({ default: m.CategoryDownloadLanguage })))
 const AddDownloadPage = lazy(() => import('@/pages/modules/website-utama/public-content/download/components/addPage.tsx').then(m => ({ default: m.AddDownloadPage })))
 const EditDownloadPage = lazy(() => import('@/pages/modules/website-utama/public-content/download/components/editPage.tsx').then(m => ({ default: m.EditDownloadPage })))
 const OfficialMusicPage = lazy(() => import('@/pages/modules/website-utama/public-content/musik-resmi').then(m => ({ default: m.OfficialMusicPage })))
@@ -596,6 +598,19 @@ export const MainWebsiteRouter = [
           {
             index: true,
             element: <DownloadFilePage />,
+          },
+          {
+            path: 'category',
+            children: [
+              {
+                index: true,
+                element: <CategoryDownloadPage />,
+              },
+              {
+                path: 'language/:id',
+                element: <CategoryDownloadLanguage />,
+              },
+            ],
           },
           {
             path: 'category-language/:id',

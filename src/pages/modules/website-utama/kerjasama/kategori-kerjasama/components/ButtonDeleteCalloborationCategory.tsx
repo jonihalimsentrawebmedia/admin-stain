@@ -68,7 +68,7 @@ const ButtonDeleteCalloborationCategory = ({ data }: Props) => {
         className={'rounded min-w-xs lg:min-w-2xl'}
         setOpen={setOpen}
         width="50%"
-        title={<p className="text-2xl text-red-500">Hapus Kategori Bersama</p>}
+        title={<p className="text-2xl text-red-500">Hapus Kategori Kerjasama</p>}
         description={'Anda yakin ingin menghapus kategori bersama ini?'}
       >
         <DetailField data={field} form={form} />

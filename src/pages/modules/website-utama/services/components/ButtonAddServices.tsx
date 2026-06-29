@@ -62,7 +62,7 @@ const ButtonAddServices = () => {
         open={open}
         className={'rounded lg:max-w-4xl'}
         setOpen={setOpen}
-        title={'Tambah Menu'}
+        title={'Tambah Layanan'}
       >
         <ServiceForm
           form={form}

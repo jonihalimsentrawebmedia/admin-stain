@@ -1,5 +1,4 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { ButtonAddCategory } from '@/pages/modules/website-utama/public-content/download/components/buttonAdd.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import { useNavigate } from 'react-router-dom'
 import {
@@ -9,6 +8,8 @@ import {
 import { DownloadFileColumns } from '@/pages/modules/website-utama/public-content/download/types/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import ButtonGoToGuide from '../../panduan/components/ButtonGoToGuide'
+import { Button } from '@/components/ui/button.tsx'
+import { IoList } from 'react-icons/io5'
 
 const DownloadFilePage = () => {
   const navigate = useNavigate()
@@ -21,13 +22,26 @@ const DownloadFilePage = () => {
       <div className="flex flex-col gap-5">
         <ButtonTitleGroup
           buttonGroup={[
-             {
+            {
               type: 'custom',
-              element: <ButtonGoToGuide titleGuide='Download' valueGuide="WEBSITE_UTAMA_DOWNLOADS" />,
+              element: (
+                <ButtonGoToGuide titleGuide="Download" valueGuide="WEBSITE_UTAMA_DOWNLOADS" />
+              ),
             },
             {
               type: 'custom',
-              element: <ButtonAddCategory />,
+              // element: <ButtonAddCategory />,
+              element: (
+                <>
+                  <Button
+                    onClick={() => navigate('category')}
+                    variant={'outline'}
+                    className={'border-primary text-primary hover:text-primary'}
+                  >
+                    <IoList /> Tambah Kategori ({categoryDownload?.length || 0} )
+                  </Button>
+                </>
+              ),
             },
             {
               type: 'add',

@@ -45,7 +45,9 @@ export const DetailNewsUnitPage = () => {
                 </p>
                 <Button
                   onClick={() =>
-                    navigate(`/modules/website-unit/public-content/news/edit/${detail?.id_berita}`)
+                    navigate(
+                      `/modules/website-unit/public-content/news/edit/${detail?.id_berita}?from=detail`
+                    )
                   }
                   className={'border-primary text-primary hover:text-primary'}
                   variant={'outline'}

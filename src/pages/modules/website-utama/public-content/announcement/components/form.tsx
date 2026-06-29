@@ -16,10 +16,11 @@ interface props {
   HandleSave: (e: AnnouncementType) => void
   loading: boolean
   is_website_main?: boolean
+  label?: string
 }
 
 export const AnnouncementForm = (props: props) => {
-  const { form, HandleSave, is_website_main } = props
+  const { label, form, HandleSave, is_website_main } = props
   const { treeNodes } = UseGetTreeData()
 
   const navigate = useNavigate()
@@ -28,7 +29,7 @@ export const AnnouncementForm = (props: props) => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(HandleSave)} className={'flex flex-col gap-5 py-5'}>
           <ButtonTitleGroup
-            label={'Tulis Pengumuman'}
+            label={label ?? 'Tulis Pengumuman'}
             buttonGroup={[
               {
                 label: 'Batal',
