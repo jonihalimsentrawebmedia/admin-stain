@@ -64,7 +64,7 @@ export const DetailPromotionPage = () => {
                     variant={'outline'}
                     onClick={() =>
                       navigate(
-                        `/modules/website-prodi/public-content/promotion/edit/${detail?.id_promosi}`
+                        `/modules/website-prodi/public-content/promotion/edit/${detail?.id_promosi}?from=detail`
                       )
                     }
                   >

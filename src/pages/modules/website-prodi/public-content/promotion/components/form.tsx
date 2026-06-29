@@ -14,17 +14,19 @@ interface Props {
   loading: boolean
   HandleSave: (e: IResolverPromotionType) => void
   form: UseFormReturn<IResolverPromotionType>
+  label?: string
 }
 
 export const FormPromotionProdi = (props: Props) => {
-  const { loading, form, HandleSave } = props
+  const { loading, form, HandleSave, label } = props
   const navigate = useNavigate()
   return (
     <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(HandleSave)} className="space-y-4">
           <ButtonTitleGroup
-            label={'Tulis Promosi'}
+            isBack
+            label={label ?? 'Tulis Promosi'}
             buttonGroup={[
               {
                 type: 'custom',
