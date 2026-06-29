@@ -125,8 +125,12 @@ export const UseGetTrentVisitor = (mode: Mode) => {
   const loading = isLoading || isFetching
 
   const trentVisitor = data?.tren_kunjungan
-  const visitor = data ? { baru: data.baru?.length, kembali: data.kembali?.length } : undefined
-  const device = data ? { desktop: data.desktop?.length, mobile: data.mobile?.length } : undefined
+  const visitor = data
+    ? { baru: data.jenis_pengunjung.baru, kembali: data.jenis_pengunjung.kembali }
+    : undefined
+  const device = data
+    ? { desktop: data.perangkat.desktop, mobile: data.perangkat.mobile }
+    : undefined
 
   return { trentVisitor, loading, visitor, device }
 }

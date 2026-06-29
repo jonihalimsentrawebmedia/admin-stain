@@ -47,7 +47,7 @@ const ButtonDeleteEmployeeStatus = (props: Props) => {
         <FaTrash />
       </button>
 
-      <DialogBasic title={'Edit Status Employee'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Hapus Status Karyawan'} open={open} setOpen={setOpen}>
         <div className={'grid grid-cols-2 gap-5'}>
           <p className="text-gray-500">Kode</p>
           <p>{data?.kode_status}</p>

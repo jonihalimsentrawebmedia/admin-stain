@@ -47,7 +47,7 @@ const ButtonAddEmployeeStatus = () => {
         Tambah Data
       </Button>
 
-      <DialogBasic title={'Tambah Status Employee'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Tambah Status Karyawan'} open={open} setOpen={setOpen}>
         <FormEmployeeStatus
           form={form}
           open={open}

@@ -64,7 +64,7 @@ const ButtonEditEmployeeStatus = (props: Props) => {
         <HiPencil />
       </button>
 
-      <DialogBasic title={'Edit Status Employee'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Edit Status Karyawan'} open={open} setOpen={setOpen}>
         <FormEmployeeStatus
           form={form}
           open={open}

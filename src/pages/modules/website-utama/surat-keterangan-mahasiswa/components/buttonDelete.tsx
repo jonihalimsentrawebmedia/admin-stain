@@ -50,7 +50,7 @@ export const ButtonDeleteLetter = (props: props) => {
       <DialogCustom
         open={open}
         setOpen={setOpen}
-        title={<p className={'text-red-500'}>Hapus Surat Ketrarangan Mahasiswa ?</p>}
+        title={<p className={'text-red-500'}>Hapus Surat Keterangan Mahasiswa ?</p>}
         description={'Apakah anda yakin ingin menghapus surat ketrarangan mahasiswa ini?'}
         className={'lg:max-w-2xl rounded'}
       >

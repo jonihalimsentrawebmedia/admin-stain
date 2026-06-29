@@ -50,7 +50,7 @@ export const ButtonDeleteCategoryFAQ = (props: Props) => {
       <DialogCustom
         open={open}
         setOpen={setOpen}
-        title={'Edit Kategori'}
+        title={'Hapus Kategori'}
         className={'max-w-2xl rounded'}
       >
         <div className={'grid grid-cols-[12rem_1fr]'}>

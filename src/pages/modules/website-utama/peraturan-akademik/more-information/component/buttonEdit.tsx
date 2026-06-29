@@ -71,7 +71,7 @@ const ButtonEditMoreInformation = (props: props) => {
         <HiPencil />
       </button>
 
-      <DialogBasic title={'Tambah Informasi'} open={open} setOpen={setOpen} className={'min-w-5xl'}>
+      <DialogBasic title={'Edit Informasi'} open={open} setOpen={setOpen} className={'min-w-5xl'}>
         <FormMoreInformation
           form={form}
           open={open}

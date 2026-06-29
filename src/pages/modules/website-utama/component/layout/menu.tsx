@@ -144,7 +144,7 @@ export const MENULIST = [
       },
       {
         id: 5,
-        name: 'Qoutes',
+        name: 'Quotes',
         path: `${baseDomain}/pengaturan-menu/quotes`,
       },
     ],
