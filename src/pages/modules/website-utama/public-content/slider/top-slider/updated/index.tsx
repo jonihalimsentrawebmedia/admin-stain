@@ -52,7 +52,12 @@ export const UpdatedTopSliderPage = () => {
   return (
     <>
       <div className={'flex flex-col gap-5'}>
-        <FormCreateSliderOnTop is_website_main form={form} HandleSave={HandlerSubmit} />
+        <FormCreateSliderOnTop
+          label={'Edit Slider'}
+          is_website_main
+          form={form}
+          HandleSave={HandlerSubmit}
+        />
       </div>
     </>
   )

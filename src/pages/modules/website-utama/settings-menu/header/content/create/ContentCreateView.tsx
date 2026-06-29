@@ -32,10 +32,10 @@ const ContentCreateView = () => {
           queryClient.invalidateQueries({
             queryKey: ['list-contents'],
           })
-      
+
           setLoading(false)
           toast.success(res.data.message || 'Success Pengajuan tambah data konten')
-              navigate(-1)
+          navigate(-1)
         }
       })
       .catch((err) => {
@@ -55,7 +55,7 @@ const ContentCreateView = () => {
               element: <ButtonForm loading={loading} />,
             },
           ]}
-          label="Konten"
+          label="Tambah Konten"
         />
         <ContentForm form={form} />
         <ButtonForm loading={loading} />

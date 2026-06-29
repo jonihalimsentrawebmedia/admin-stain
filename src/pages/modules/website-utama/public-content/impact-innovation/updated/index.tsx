@@ -5,10 +5,12 @@ import { ImpactInnovationResolver, type ImpactInnovationType } from '../data/res
 import { zodResolver } from '@hookform/resolvers/zod'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { UseGetImpactInnovationDetail } from '@/pages/modules/website-utama/public-content/impact-innovation/hooks'
 
 export const UpdatedImpactInnovationPage = () => {
+  const [searchParams] = useSearchParams()
+  const from = searchParams.get('from')
   const [loading, setLoading] = useState(false)
   const form = useForm<ImpactInnovationType>({
     resolver: zodResolver(ImpactInnovationResolver),
@@ -39,7 +41,11 @@ export const UpdatedImpactInnovationPage = () => {
       .then((res) => {
         if (res.data.status) {
           setLoading(false)
-          navigate('/modules/website-utama/public-content/impact-innovation')
+          if (from === 'detail') {
+            navigate('/modules/website-utama/public-content/impact-innovation/detail/' + id)
+          } else {
+            navigate('/modules/website-utama/public-content/impact-innovation')
+          }
           toast.success(res.data.message || 'Success Pengajuan tambah data inovasi berdampak')
         }
       })
@@ -51,7 +57,12 @@ export const UpdatedImpactInnovationPage = () => {
 
   return (
     <>
-      <ImpactInnovationForm loading={loading} form={form} HandleSave={HandleSave} />
+      <ImpactInnovationForm
+        label={'Edit Inovasi Berdampak'}
+        loading={loading}
+        form={form}
+        HandleSave={HandleSave}
+      />
     </>
   )
 }

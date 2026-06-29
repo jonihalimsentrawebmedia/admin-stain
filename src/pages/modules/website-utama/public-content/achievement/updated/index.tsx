@@ -3,13 +3,15 @@ import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { AchievementResolver, type AchievementType } from '../data/resolver'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UseGetAchievementDetail } from '@/pages/modules/website-utama/public-content/achievement/hooks'
 
 export const UpdatedAchievementPage = () => {
   const { id } = useParams()
+  const [searchParams] = useSearchParams()
+  const from = searchParams.get('from')
   const { detailAchievement: detail } = UseGetAchievementDetail(id ?? '')
 
   const [loading, setLoading] = useState(false)
@@ -40,7 +42,11 @@ export const UpdatedAchievementPage = () => {
         if (res.data.status) {
           setLoading(false)
           toast.success(res.data.message || 'Success Pengajuan tambah data prestasi')
-          navigate('/modules/website-utama/public-content/achievement')
+          if (from === 'detail') {
+            navigate(`/modules/website-utama/public-content/achievement/${id}`)
+          } else {
+            navigate('/modules/website-utama/public-content/achievement')
+          }
         }
       })
       .catch((err) => {
@@ -51,7 +57,12 @@ export const UpdatedAchievementPage = () => {
 
   return (
     <>
-      <FormAchievement loading={loading} form={form} HandleSave={HandleSave} />
+      <FormAchievement
+        label={'Edit Konten Prestasi'}
+        loading={loading}
+        form={form}
+        HandleSave={HandleSave}
+      />
     </>
   )
 }

@@ -104,7 +104,7 @@ export const QuotesPage = () => {
             buttonGroup={[
               {
                 type: 'edit',
-                label: 'Edit Data',
+                label: 'Edit Konten',
                 onClick: () => setIsEdit(!isEdit),
               },
             ]}

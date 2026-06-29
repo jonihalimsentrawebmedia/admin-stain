@@ -54,7 +54,12 @@ export const EditPageRegisterPath = () => {
 
   return (
     <>
-      <RegistrationPathForm form={form} handleSave={handleSave} loading={loading} />
+      <RegistrationPathForm
+        label={'Edit Jalur Pendaftaran'}
+        form={form}
+        handleSave={handleSave}
+        loading={loading}
+      />
     </>
   )
 }

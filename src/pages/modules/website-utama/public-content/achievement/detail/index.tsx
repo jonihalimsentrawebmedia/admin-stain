@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button.tsx'
 import { HiPencil } from 'react-icons/hi'
 import { Separator } from '@/components/ui/separator.tsx'
-import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel'
+import { Carousel, type CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import { useEffect, useState } from 'react'
 import { format } from 'date-fns'
 import { UseGetAchievementDetail } from '../hooks/index'
@@ -46,7 +46,7 @@ export const DetailAchievementPage = () => {
                 <Button
                   onClick={() =>
                     navigate(
-                      `/modules/website-utama/public-content/achievement/edit/${detail?.id_prestasi}`
+                      `/modules/website-utama/public-content/achievement/edit/${detail?.id_prestasi}?from=detail`
                     )
                   }
                   className={'border-primary text-primary hover:text-primary'}

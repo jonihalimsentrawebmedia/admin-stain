@@ -23,6 +23,8 @@ const AcademicResourcePage = () => {
     <>
       <div className={'space-y-5'}>
         <ButtonTitleGroup
+          isBack
+          link={'/modules/website-utama/services'}
           label={'Academic Resource'}
           buttonGroup={[
             {

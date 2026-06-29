@@ -5,13 +5,14 @@ import { FacilitiesResolver, type FacilitiesType } from '../data/resolver'
 import { zodResolver } from '@hookform/resolvers/zod'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { UseGetFacilitiesDetail } from '@/pages/modules/website-utama/public-content/facilities/hooks'
 
 export const UpdatedFacilitiesPage = () => {
-  const [loading, setLoading] = useState(false)
-
   const { id } = useParams()
+  const [searchParams] = useSearchParams()
+  const from = searchParams.get('from')
+  const [loading, setLoading] = useState(false)
   const { detailFacilities } = UseGetFacilitiesDetail(id ?? '')
 
   useEffect(() => {
@@ -42,7 +43,11 @@ export const UpdatedFacilitiesPage = () => {
         if (res.data.status) {
           setLoading(false)
           toast.success(res.data.message || 'Success Pengajuan tambah data fasilitas')
-          navigate('/modules/website-utama/public-content/facilities')
+          if (from === 'detail') {
+            navigate(`/modules/website-utama/public-content/facilities/detail/${id}`)
+          } else {
+            navigate('/modules/website-utama/public-content/facilities')
+          }
         }
       })
       .catch((err) => {
@@ -53,7 +58,12 @@ export const UpdatedFacilitiesPage = () => {
 
   return (
     <>
-      <FormFacilities loading={loading} form={form} HandleSave={HandleSave} />
+      <FormFacilities
+        label={'Edit Fasilitas'}
+        loading={loading}
+        form={form}
+        HandleSave={HandleSave}
+      />
     </>
   )
 }

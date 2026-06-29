@@ -47,7 +47,7 @@ export const DetailNewsPage = () => {
                 <Button
                   onClick={() =>
                     navigate(
-                      `/modules/website-utama/public-content/news/edit/${detailNews?.id_berita}`
+                      `/modules/website-utama/public-content/news/edit/${detailNews?.id_berita}?from=detail`
                     )
                   }
                   className={'border-primary text-primary hover:text-primary'}

@@ -15,10 +15,11 @@ interface Props {
   form: UseFormReturn<ImpactInnovationType>
   loading: boolean
   HandleSave: (e: any) => void
+  label?: string
 }
 
 export const ImpactInnovationForm = (props: Props) => {
-  const { form, loading, HandleSave } = props
+  const { form, loading, HandleSave, label } = props
   const navigate = useNavigate()
   const { impactInnovation } = useGetImpactInnovation({ isGetAll: true })
 
@@ -27,7 +28,7 @@ export const ImpactInnovationForm = (props: Props) => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(HandleSave)} className={'flex flex-col gap-5 py-5'}>
           <ButtonTitleGroup
-            label={'Tulis Inovasi Berdampak'}
+            label={label ?? 'Tulis Inovasi Berdampak'}
             buttonGroup={[
               {
                 label: 'Batal',

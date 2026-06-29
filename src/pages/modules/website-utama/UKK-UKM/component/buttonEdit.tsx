@@ -66,7 +66,7 @@ const ButtonEditUkkUkm = (props: props) => {
         <HiPencil />
       </button>
 
-      <DialogBasic title={'Tambah UKK UKM'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Edit UKK UKM'} open={open} setOpen={setOpen}>
         <FormUkkUkm
           form={form}
           open={open}

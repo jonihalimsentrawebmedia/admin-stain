@@ -86,7 +86,8 @@ export const UpdateAccreditation = () => {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(HandleSave)} className={'flex flex-col gap-5 p-5'}>
             <ButtonTitleGroup
-              label={'Tambah Data Akreditasi'}
+              isBack
+              label={'Edit Data Akreditasi'}
               buttonGroup={[
                 {
                   type: 'cancel',

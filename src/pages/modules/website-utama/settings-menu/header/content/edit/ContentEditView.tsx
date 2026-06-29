@@ -68,7 +68,7 @@ const ContentEditView = () => {
               element: <ButtonForm loading={loading} />,
             },
           ]}
-          label="Konten"
+          label="Edit Konten"
         />
         <ContentForm form={form} />
         <ButtonForm loading={loading} />

@@ -19,10 +19,11 @@ interface Props {
   HandleSave: (e: any) => void
   loading: boolean
   is_website_main?: boolean
+  label?: string
 }
 
 export const FormNewsContent = (props: Props) => {
-  const { form, HandleSave, loading, is_website_main } = props
+  const { label, form, HandleSave, loading, is_website_main } = props
   const { newsCategory, loading: laod1 } = useGetNewsCategory({ isGetAll: true })
   const { treeNodes } = UseGetTreeData()
 
@@ -33,7 +34,7 @@ export const FormNewsContent = (props: Props) => {
       <Form {...form}>
         <form className={'flex flex-col gap-5 p-5'} onSubmit={form.handleSubmit(HandleSave)}>
           <ButtonTitleGroup
-            label={'Tulis Berita'}
+            label={label ?? 'Tulis Berita'}
             buttonGroup={[
               {
                 type: 'cancel',

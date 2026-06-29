@@ -13,17 +13,18 @@ interface Props {
   loading: boolean
   form: UseFormReturn<AchievementType>
   HandleSave: (e: AchievementType) => void
+  label?: string
 }
 
 export const FormAchievement = (props: Props) => {
-  const { form, HandleSave, loading } = props
+  const { form, HandleSave, loading, label } = props
   const navigate = useNavigate()
   return (
     <>
       <Form {...form}>
         <form className={'flex flex-col gap-5 py-5'} onSubmit={form.handleSubmit(HandleSave)}>
           <ButtonTitleGroup
-            label={'Tulis Konten Prestasi'}
+            label={label ?? 'Tulis Konten Prestasi'}
             buttonGroup={[
               {
                 label: 'Batal',

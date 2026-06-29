@@ -44,6 +44,7 @@ export const AddDownloadPage = () => {
         <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(HandleSubmit)}>
           <ButtonTitleGroup
             label={'Tambah Download'}
+            isBack
             buttonGroup={[
               {
                 label: 'Batal',

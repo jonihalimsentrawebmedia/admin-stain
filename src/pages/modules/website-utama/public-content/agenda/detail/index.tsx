@@ -30,7 +30,7 @@ export const DetailAgendaPage = () => {
                   <Button
                     onClick={() =>
                       navigate(
-                        `/modules/website-utama/public-content/agenda/edit/${detail?.id_agenda}`
+                        `/modules/website-utama/public-content/agenda/edit/${detail?.id_agenda}?from=detail`
                       )
                     }
                     className={'border-primary text-primary hover:text-primary'}

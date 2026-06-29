@@ -53,7 +53,7 @@ export const EditOfficialMusicPage = () => {
       <Form {...form}>
         <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(HandleSave)}>
           <ButtonTitleGroup
-            label={'Tambah Musik Resmi'}
+            label={'Edit Musik Resmi'}
             isBack
             buttonGroup={[
               {
