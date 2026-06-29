@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { TimeStampLocal } from '@/utils/helper.tsx'
 import {
   AgendaResolver,
@@ -21,6 +21,8 @@ export const UpdatedAgendaUnitPage = () => {
   })
 
   const { id } = useParams()
+  const [searchParams] = useSearchParams()
+  const from = searchParams.get('from')
   const { agendaUnitDetail: detail } = UseGetAgendaUnitDetail(id ?? '')
   const navigate = useNavigate()
 
@@ -50,7 +52,11 @@ export const UpdatedAgendaUnitPage = () => {
         if (res.data.status) {
           toast.success(res.data.message || 'Success Pengajuan tambah data agenda')
           setLoading(false)
-          navigate('/modules/website-unit/public-content/agenda')
+          if (from === 'detail') {
+            navigate(`/modules/website-unit/public-content/agenda/detail/${id}`)
+          } else {
+            navigate('/modules/website-unit/public-content/agenda')
+          }
         }
       })
       .catch((err) => {
@@ -61,7 +67,7 @@ export const UpdatedAgendaUnitPage = () => {
 
   return (
     <>
-      <AgendaForm form={form} HandleSave={HandleSave} loading={loading} />
+      <AgendaForm label={'Edit Agenda'} form={form} HandleSave={HandleSave} loading={loading} />
     </>
   )
 }

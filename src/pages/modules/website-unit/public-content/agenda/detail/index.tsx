@@ -32,7 +32,7 @@ export const AgendaUnitDetailPage = () => {
                       size={'sm'}
                       onClick={() =>
                         navigate(
-                          `/modules/website-prodi/public-content/agenda/edit/${detail?.id_agenda}`
+                          `/modules/website-unit/public-content/agenda/edit/${detail?.id_agenda}?from=detail`
                         )
                       }
                       className={'border-primary text-primary hover:text-primary'}

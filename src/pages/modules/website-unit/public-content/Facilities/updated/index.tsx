@@ -5,15 +5,16 @@ import { FacilitiesUnitResolver, type FacilitiesUnitResolverType } from '../data
 import { zodResolver } from '@hookform/resolvers/zod'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { UseGetFacilitiesUnitDetail } from '@/pages/modules/website-unit/public-content/Facilities/hooks'
 
 export const UpdatedFacilitiesUnit = () => {
   const { id } = useParams()
+  const [searchParams] = useSearchParams()
+  const from = searchParams.get('from')
   const { facilitiesUnitDetail: detail } = UseGetFacilitiesUnitDetail(id ?? '')
 
   const navigate = useNavigate()
-
   const form = useForm<FacilitiesUnitResolverType>({
     resolver: zodResolver(FacilitiesUnitResolver),
   })
@@ -39,7 +40,11 @@ export const UpdatedFacilitiesUnit = () => {
         if (res.data.status) {
           setLoading(false)
           toast.success(res.data.message || 'Success tambah data fasilitas')
-          navigate('/modules/website-unit/public-content/facilities-unit')
+          if (from === 'detail') {
+            navigate(`/modules/website-unit/public-content/facilities-unit/detail/${id}`)
+          } else {
+            navigate('/modules/website-unit/public-content/facilities-unit')
+          }
         }
       })
       .catch((err) => {
@@ -50,7 +55,12 @@ export const UpdatedFacilitiesUnit = () => {
 
   return (
     <>
-      <FormFacilitiesUnit form={form} HandleSave={HandleSave} loading={loading} />
+      <FormFacilitiesUnit
+        label={'Edit Fasilitas '}
+        form={form}
+        HandleSave={HandleSave}
+        loading={loading}
+      />
     </>
   )
 }

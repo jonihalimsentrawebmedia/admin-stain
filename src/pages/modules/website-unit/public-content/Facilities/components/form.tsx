@@ -13,17 +13,18 @@ interface Props {
   form: UseFormReturn<FacilitiesUnitResolverType>
   loading: boolean
   HandleSave: (e: FacilitiesUnitResolverType) => void
+  label?: string
 }
 
 export const FormFacilitiesUnit = (props: Props) => {
-  const { form, loading, HandleSave } = props
+  const { label, form, loading, HandleSave } = props
   const navigate = useNavigate()
   return (
     <>
       <Form {...form}>
         <form className={'flex flex-col gap-5'} onSubmit={form.handleSubmit(HandleSave)}>
           <ButtonTitleGroup
-            label={'Tambah Fasilitas Unit'}
+            label={label ?? 'Tambah Fasilitas'}
             buttonGroup={[
               {
                 type: 'cancel',

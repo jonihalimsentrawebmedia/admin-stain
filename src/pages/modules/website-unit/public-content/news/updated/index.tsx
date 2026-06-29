@@ -8,12 +8,14 @@ import {
 import { zodResolver } from '@hookform/resolvers/zod'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { UseGetUnitNewsDetail } from '../hooks/index.tsx'
 import { formatDate } from 'date-fns'
 
 export const NewsUnitUpdated = () => {
   const { id } = useParams()
+  const [searchParams] = useSearchParams()
+  const from = searchParams.get('from')
   const { unitNewsDetail } = UseGetUnitNewsDetail(id ?? '')
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
@@ -54,7 +56,11 @@ export const NewsUnitUpdated = () => {
         if (res.data.status) {
           toast.success(res.data.message || 'Berita berhasil dibuat')
           setLoading(false)
-          navigate('/modules/website-unit/public-content/news')
+          if (from === 'detail') {
+            navigate(`/modules/website-unit/public-content/news/detail/${id}`)
+          } else {
+            navigate('/modules/website-unit/public-content/news')
+          }
         }
       })
       .catch((err) => {
@@ -65,7 +71,12 @@ export const NewsUnitUpdated = () => {
 
   return (
     <>
-      <FormNewsContent loading={loading} form={form} HandleSave={HandleSubmit} />
+      <FormNewsContent
+        label={'Edit Berita'}
+        loading={loading}
+        form={form}
+        HandleSave={HandleSubmit}
+      />
     </>
   )
 }
