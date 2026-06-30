@@ -87,3 +87,17 @@ export const UseGetLetterAssigmentDetailSPPD = (id: string, id_sppd: string) => 
 
   return { detail: data, loading }
 }
+
+export const UseGetLetterAssignmentYear = () => {
+  const { data, isLoading, isFetching } = useQuery<number[]>({
+    queryKey: ['letter-assignment-year'],
+    queryFn: () => AxiosClient.get(`/eoffice/mail-surat-tugas/tahun`).then((res) => res.data.data),
+    refetchOnWindowFocus: false,
+  })
+
+  console.log(data)
+
+  const loading = isLoading || isFetching
+
+  return { year: data ?? [], loading }
+}

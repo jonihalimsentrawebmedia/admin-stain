@@ -16,7 +16,7 @@ interface props {
   HandleSave: (e: TEmployeeSchema[]) => void
 }
 
-const requiredFields = ['nama_lengkap', 'nik', 'nip', 'alamat', 'hp', 'jabatan_pegawai'] as const
+const requiredFields = ['nama_lengkap', 'nik', 'alamat', 'hp', 'jabatan_pegawai'] as const
 
 const FormAssignmentManual = (props: props) => {
   const { HandleSave } = props
@@ -80,7 +80,6 @@ const FormAssignmentManual = (props: props) => {
             htmlFor={'nip'}
             type={'number'}
             isRow
-            isRequired
           />
           <TextInput
             form={form}
@@ -89,7 +88,6 @@ const FormAssignmentManual = (props: props) => {
             placeholder={'Satuan Kerja'}
             htmlFor={'satuan_kerja'}
             isRow
-            isRequired
           />
           <TextInput
             form={form}
@@ -148,7 +146,7 @@ const FormAssignmentManual = (props: props) => {
         </div>
       ))}
 
-      <div className="flex justify-end items-center">
+      <div className="flex justify-end items-center mt-4">
         <Button
           onClick={(e) => {
             e.preventDefault()

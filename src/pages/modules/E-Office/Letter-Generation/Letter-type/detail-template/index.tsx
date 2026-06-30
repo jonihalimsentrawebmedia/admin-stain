@@ -2,7 +2,7 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { UseGetDetailTypeTemplateLetter } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail/hooks'
 import { useParams, useSearchParams } from 'react-router-dom'
 import ButtonAddTemplateLetterType from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail-template/component/buttonAdd.tsx'
-import { UseGetTypeTemplateLetter } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail-template/hooks'
+import { UseGetTemplateLetter } from './hooks/index.tsx'
 import { IMailTemplateTypeColumns } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail-template/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 
@@ -14,7 +14,7 @@ const ListTemplateLetterType = () => {
   const search = searchParams.get('search') ?? ''
 
   const { typeTemplate } = UseGetDetailTypeTemplateLetter(id_template as string)
-  const { templateLetter, loading, meta } = UseGetTypeTemplateLetter({
+  const { templateLetter, loading, meta } = UseGetTemplateLetter({
     page,
     limit,
     search,
@@ -27,7 +27,7 @@ const ListTemplateLetterType = () => {
       <div className={'space-y-5'}>
         <ButtonTitleGroup
           isBack
-          label={`Daftar Template ${typeTemplate?.nama_jenis_template}`}
+          label={`Daftar Jenis Template ${typeTemplate?.nama_jenis_template}`}
           buttonGroup={[
             {
               type: 'custom',

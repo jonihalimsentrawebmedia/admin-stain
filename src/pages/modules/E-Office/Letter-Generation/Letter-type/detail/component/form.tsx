@@ -3,6 +3,7 @@ import type { TResolverTypeTemplateLetter } from '../data/resolver.tsx'
 import { Form } from '@/components/ui/form.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
+import { SwitchInput } from '@/components/common/form/switchInput.tsx'
 
 interface props {
   form: UseFormReturn<TResolverTypeTemplateLetter>
@@ -21,9 +22,25 @@ const FormTypeTemplate = (props: props) => {
           <TextInput
             form={form}
             name={'nama_jenis_template'}
-            label={'Nama Jenis Template'}
+            label={'Nama Jenis Surat'}
             htmlFor={'nama_jeni_template'}
-            placeholder={'Nama Jenis Template'}
+            placeholder={'Nama Jenis Surat'}
+            isRequired
+          />
+          <TextInput
+            name={'kode_template'}
+            form={form}
+            label={'Kode Template'}
+            placeholder={'Kode Template'}
+            htmlFor={'kode_template'}
+            isRequired
+          />
+          <SwitchInput
+            label={'Is Existing Template'}
+            htmlFor={'is'}
+            form={form}
+            name={'is_existing_template'}
+            isRow
             isRequired
           />
           <TextInput

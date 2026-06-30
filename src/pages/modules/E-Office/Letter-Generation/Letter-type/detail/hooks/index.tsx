@@ -5,7 +5,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import type { ITypeTemplateLetter } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail/data/types.ts'
 
 interface props extends BasicProps {
-  id_jenis_surat: string
+  id_jenis_surat?: string
 }
 
 export const UseGetTypeTemplateLetter = (props?: props) => {

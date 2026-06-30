@@ -8,7 +8,6 @@ import { toast } from 'react-toastify'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import { Form } from '@/components/ui/form.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
-import { RichText } from '@/components/common/richtext'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import { useParams } from 'react-router-dom'
 import type { IMailTypeLetterTemplate } from '../data/types.ts'
@@ -80,6 +79,13 @@ const ButtonEditTemplateLetterType = (props: props) => {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(HandleSave)} className="space-y-5">
             <TextInput
+              form={form}
+              name={'uraian'}
+              label={'Nama Jenis Template'}
+              placeholder={'Nama Jenis Template'}
+              isRequired
+            />
+            <TextInput
               name={'urutan'}
               form={form}
               label={'Urutan'}
@@ -88,14 +94,7 @@ const ButtonEditTemplateLetterType = (props: props) => {
               isRequired
               isNumber
             />
-            <RichText
-              form={form}
-              name={'uraian'}
-              isRow={false}
-              label={'Uraian'}
-              showLabel={true}
-              required
-            />
+
             <ButtonForm loading={loading} onCancel={() => setOpen(!open)} />
           </form>
         </Form>

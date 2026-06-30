@@ -43,10 +43,10 @@ const ButtonAddLetterType = () => {
     <>
       <Button className={'rounded-full text-white'} onClick={() => setOpen(!open)}>
         <FaCirclePlus />
-        Tambah Jenis Surat
+        Tambah Kelompok Surat
       </Button>
 
-      <DialogBasic title={'Tambah Jenis Surat'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Tambah Kelompok Surat'} open={open} setOpen={setOpen}>
         <FormLetterTpeCode
           form={form}
           loading={loading}

@@ -51,7 +51,7 @@ const ButtonAddTypeTemplate = () => {
         Tambah Jenis Surat
       </Button>
 
-      <DialogBasic title={'Tambah Jenis Template'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Tambah Jenis Surat'} open={open} setOpen={setOpen}>
         <FormTypeTemplate
           form={form}
           loading={loading}

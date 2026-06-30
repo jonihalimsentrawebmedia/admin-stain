@@ -1,5 +1,6 @@
 export interface IMailTypeLetter {
   id_mail_jenis_surat: string
+  jumlah_template: number
   id_satuan_organisasi: string
   nama_jenis_surat: string
   kategori_jenis_surat: 'DOSEN' | 'PEGAWAI' | 'MAHASISWA' | 'UMUM' | 'LAINNYA'

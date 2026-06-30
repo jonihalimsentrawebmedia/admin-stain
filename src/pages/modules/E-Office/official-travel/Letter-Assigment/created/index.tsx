@@ -43,6 +43,8 @@ const CreatedLetterAssigment = () => {
     }
   }
 
+  console.log(form.formState.errors)
+
   return (
     <div className="space-y-5">
       <ButtonTitleGroup label={'Buat Surat Tugas / SPD'} buttonGroup={[]} />

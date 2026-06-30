@@ -21,7 +21,7 @@ const LetterTypePage = () => {
     <>
       <div className="space-y-5">
         <ButtonTitleGroup
-          label={'Jenis Surat'}
+          label={'Kelompok Surat'}
           buttonGroup={[{ type: 'custom', element: <ButtonAddLetterType /> }]}
         />
         <TableCustom

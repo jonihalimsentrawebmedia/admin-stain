@@ -1,11 +1,9 @@
 import { Link, useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
 import type { ITypeTemplateLetter } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail/data/types.ts'
-import { MdInfo } from 'react-icons/md'
-import ButtonEditTypeTemplate from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail/component/buttonEdit.tsx'
-import ButtonDeleteTemplateType from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail/component/buttonDelete.tsx'
+import { Button } from '@/components/ui/button.tsx'
 
-const ColumnsTypeTemplate = () => {
+const ColumnsCreateLetter = () => {
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') ?? '1')
   const limit = Number(searchParams.get('limit') ?? '10')
@@ -23,10 +21,6 @@ const ColumnsTypeTemplate = () => {
       header: 'Nama Jenis Surat',
     },
     {
-      accessorKey: 'urutan',
-      header: 'Urutan',
-    },
-    {
       accessorKey: 'action',
       header: '',
       cell: ({ row }) => {
@@ -34,14 +28,13 @@ const ColumnsTypeTemplate = () => {
         return (
           <>
             <div className="flex gap-1.5 items-center justify-center">
-              <Link
-                to={`detail/${data?.id_mail_jenis_template_surat}`}
-                className={'p-1.5 rounded bg-blue-500 text-white hover:bg-blue-600'}
-              >
-                <MdInfo />
-              </Link>
-              <ButtonEditTypeTemplate data={data} />
-              <ButtonDeleteTemplateType data={data} />
+              {data?.is_existing_template ? (
+                <Link to={`add/${data.id_mail_jenis_template_surat}`}>
+                  <Button className={'text-white'}>Buat Surat</Button>
+                </Link>
+              ) : (
+                <Button className={'text-white bg-blue-500 hover:bg-blue-600'}>Coming soon</Button>
+              )}
             </div>
           </>
         )
@@ -52,4 +45,4 @@ const ColumnsTypeTemplate = () => {
   return { columns }
 }
 
-export default ColumnsTypeTemplate
+export default ColumnsCreateLetter

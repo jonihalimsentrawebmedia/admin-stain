@@ -3,10 +3,10 @@ import { z } from 'zod'
 export const EmployeeSchema = z.object({
   id_sdm: z.string().nullable().optional(),
   metode_tambah: z.enum(['MANUAL', 'DOSEN_STAFF'], { error: 'Metode tambah wajib dipilih' }),
-  nama_lengkap: z.string().min(1, 'Nama lengkap wajib diisi'),
-  satuan_kerja: z.string().optional().nullable(),
-  nik: z.string().optional().nullable(),
+  nama_lengkap: z.string().optional().nullable(),
+  nik: z.string().length(16, 'NIK harus 16 karakter'),
   nip: z.string().optional().nullable(),
+  satuan_kerja: z.string().optional().nullable(),
   hp: z.string().optional().nullable(),
   alamat: z.string().optional().nullable(),
   jabatan_pegawai: z.string().optional().nullable(),

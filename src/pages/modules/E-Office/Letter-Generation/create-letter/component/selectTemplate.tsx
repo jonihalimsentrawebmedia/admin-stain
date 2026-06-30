@@ -1,17 +1,17 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button.tsx'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
-import { UseGetTypeLetters } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/hooks'
 import { SelectBasic } from '@/components/common/select/basic.tsx'
 import Search from '@/components/common/table/Search.tsx'
-import { UseGetTypeTemplateLetter } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail/hooks'
-import ColumnsTypeTemplate from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail/data/columns.tsx'
 import { useParams } from 'react-router-dom'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
-import type { ColumnDef } from '@tanstack/react-table'
-import type { ITypeTemplateLetter } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail/data/types.ts'
-import DialogSelectText from '@/pages/modules/E-Office/Letter-Generation/create-letter/component/selectText.tsx'
 import type { UseFormReturn } from 'react-hook-form'
+import { UseGetTemplateLetter } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail-template/hooks'
+import { UseGetTypeTemplateLetter } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail/hooks'
+import type { ColumnDef } from '@tanstack/react-table'
+import type { IMailTypeLetterTemplate } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail-template/data/types.ts'
+import { UseGetIsiTemplateSurat } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail-template/isi-template/hooks'
+import DialogSelectText from '@/pages/modules/E-Office/Letter-Generation/create-letter/component/selectText.tsx'
 
 interface Props {
   form: UseFormReturn<any>
@@ -23,48 +23,64 @@ const SelectTemplateText = (props: Props) => {
   const [open, setOpen] = useState(false)
   const [open2, setOpen2] = useState(false)
   const [idTemplate, setIdTemplate] = useState('')
-  const { id } = useParams()
+  const { id_mail, id } = useParams()
   const [filter, setFilter] = useState({
     search: '',
     page: '1',
-    id_selected: id as string,
+    id_selected: id_mail as string,
   })
 
-  const { letterType } = UseGetTypeLetters({
+  const { typeTemplate, loading } = UseGetTypeTemplateLetter({
     page: '0',
     limit: '0',
+    id_jenis_surat: id as string,
   })
-  const finding = letterType?.find((row) => row?.id_mail_jenis_surat === filter.id_selected)
-  const { typeTemplate, loading } = UseGetTypeTemplateLetter({
-    page: filter.page,
-    limit: '10',
-    id_jenis_surat: filter.id_selected,
-    search: filter.search,
-  })
-  const finding2 = typeTemplate?.find((row) => row?.id_mail_jenis_template_surat === idTemplate)
 
-  const { columns } = ColumnsTypeTemplate()
-  const columns2: ColumnDef<ITypeTemplateLetter>[] = [
-    ...columns,
+  const finding = typeTemplate?.find(
+    (row) => row?.id_mail_jenis_template_surat === filter.id_selected
+  )
+
+  const { templateLetter } = UseGetTemplateLetter({
+    page: '0',
+    limit: '0',
+    id_jenis_template_surat: finding?.id_mail_jenis_template_surat as string,
+  })
+
+  const { isiTemplate, loading: loadingIsi } = UseGetIsiTemplateSurat({
+    page: '0',
+    limit: '0',
+    id_template_surat: idTemplate,
+  })
+
+  const columns: ColumnDef<IMailTypeLetterTemplate>[] = [
     {
-      accessorKey: 'detail',
+      accessorKey: '#',
+      header: '#',
+      cell: ({ row }) => {
+        return <>{row.index + 1}</>
+      },
+    },
+    {
+      accessorKey: 'uraian',
+      header: 'Nama',
+    },
+    {
+      accessorKey: 'action-sex',
       header: 'Aksi',
       cell: ({ row }) => {
-        const data = row?.original
+        const item = row.original
         return (
-          <>
-            <Button
-              variant={'outline'}
-              className={'border-primary text-primary'}
-              onClick={() => {
-                setOpen2(true)
-                setOpen(false)
-                setIdTemplate(data?.id_mail_jenis_template_surat)
-              }}
-            >
-              Lihat Template
-            </Button>
-          </>
+          <Button
+            variant={'outline'}
+            className={'border-primary text-primary'}
+            onClick={() => {
+              setOpen2(true)
+              setOpen(false)
+              setIdTemplate(item?.id_mail_template_surat)
+            }}
+          >
+            Lihat Isi Template
+          </Button>
         )
       },
     },
@@ -83,7 +99,7 @@ const SelectTemplateText = (props: Props) => {
       </Button>
 
       <DialogBasic
-        title={`Pilih Template ${finding?.nama_jenis_surat} ( ${finding?.kategori_jenis_surat} )`}
+        title={''}
         open={open}
         setOpen={setOpen}
         className={'lg:min-w-4xl rounded'}
@@ -101,9 +117,9 @@ const SelectTemplateText = (props: Props) => {
               })
             }}
             data={
-              letterType?.map((row) => ({
-                label: row?.nama_jenis_surat + ` ( ${row?.kategori_jenis_surat} )`,
-                value: row?.id_mail_jenis_surat,
+              typeTemplate?.map((row) => ({
+                label: row?.nama_jenis_surat + ` ( ${row?.nama_jenis_template} )`,
+                value: row?.id_mail_jenis_template_surat,
               })) ?? []
             }
           />
@@ -123,20 +139,20 @@ const SelectTemplateText = (props: Props) => {
           columnsName={['action', 'urutan']}
           isShowFilter={false}
           isShowPagination={false}
-          columns={columns2}
-          data={typeTemplate}
+          columns={columns}
+          data={templateLetter}
           loading={loading}
         />
       </DialogBasic>
 
       <DialogSelectText
-        id_template={idTemplate}
         open={open2}
         setOpen={setOpen2}
         rootData={finding}
-        data={finding2}
+        data={isiTemplate ?? []}
         form={form}
         name={name}
+        loading={loadingIsi}
         back={() => {
           setOpen(true)
           setOpen2(false)

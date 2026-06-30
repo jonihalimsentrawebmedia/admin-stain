@@ -368,7 +368,7 @@ export const GeneratePDFFrontV2 = (
               {
                 text: `${namaJabatanUtama || 'Pejabat Pembuat Komitmen'},`,
                 bold: true,
-                margin: [0, 0, 0, 50] as [number, number, number, number],
+                margin: [0, 0, 0, 40] as [number, number, number, number],
               },
               { text: namaPenandatangan, bold: true },
               nipPenandatangan.trim()

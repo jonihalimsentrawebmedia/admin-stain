@@ -1,8 +1,9 @@
-import { useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
 import type { IMailTypeLetterTemplate } from '../data/types.ts'
 import ButtonEditTemplateLetterType from '../component/buttonEdit.tsx'
 import ButtonDeleteTemplateLetterType from '../component/buttonDelete.tsx'
+import { MdInfo } from 'react-icons/md'
 
 export const IMailTemplateTypeColumns = () => {
   const [searchParams] = useSearchParams()
@@ -37,6 +38,11 @@ export const IMailTemplateTypeColumns = () => {
         return (
           <>
             <div className="flex items-center gap-1.5 justify-center">
+              <Link to={`isi/${data?.id_mail_template_surat}`}>
+                <button className={'p-1.5 bg-blue-500 rounded text-white'}>
+                  <MdInfo />
+                </button>
+              </Link>
               <ButtonEditTemplateLetterType data={data} />
               <ButtonDeleteTemplateLetterType data={data} />
             </div>

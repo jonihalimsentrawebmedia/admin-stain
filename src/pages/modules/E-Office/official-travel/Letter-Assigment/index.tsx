@@ -2,9 +2,13 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button.tsx'
 import { FaCirclePlus } from 'react-icons/fa6'
-import { UseGetLetterAssigment } from '@/pages/modules/E-Office/official-travel/Letter-Assigment/hooks'
+import {
+  UseGetLetterAssigment,
+  UseGetLetterAssignmentYear,
+} from '@/pages/modules/E-Office/official-travel/Letter-Assigment/hooks'
 import { ColumnsLetterAssigment } from '@/pages/modules/E-Office/official-travel/Letter-Assigment/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 
 const LetterOfAssigment = () => {
   const [searchParams] = useSearchParams()
@@ -14,6 +18,7 @@ const LetterOfAssigment = () => {
   const tahun = searchParams.get('tahun') ?? ''
   const bulan = searchParams.get('bulan') ?? ''
 
+  const { year } = UseGetLetterAssignmentYear()
   const { letterAssignment, loading, meta } = UseGetLetterAssigment({
     page,
     limit,
@@ -45,6 +50,18 @@ const LetterOfAssigment = () => {
         />
 
         <TableCustom
+          addFilter={
+            <SelectFilter
+              label={'Tahun'}
+              name={'tahun'}
+              options={
+                year?.map((row) => ({
+                  label: row.toString(),
+                  value: row?.toString(),
+                })) ?? []
+              }
+            />
+          }
           className={'border'}
           thClassName={'border-none! bg-primary text-white'}
           tdClassName={'border-none!'}

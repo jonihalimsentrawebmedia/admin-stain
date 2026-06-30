@@ -6,7 +6,7 @@ import ButtonEditDocumentation from '@/pages/modules/E-Office/event-activity/eve
 import { ButtonDeleteDocumentation } from '@/pages/modules/E-Office/event-activity/event-data/detail/component/documentation/buttonDelete.tsx'
 import { Check } from 'lucide-react'
 import { cn } from '@/lib/utils.ts'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button.tsx'
 import type { IEvent } from '@/pages/modules/E-Office/event-activity/event-data/data/types.ts'
 import ButtonUploadMultiple from '@/pages/modules/E-Office/event-activity/event-data/detail/component/documentation/UploadMultiple'
@@ -17,6 +17,15 @@ import { useQueryClient } from '@tanstack/react-query'
 import { MdPrint } from 'react-icons/md'
 import { generateDocumentationPdf } from '@/pages/modules/E-Office/event-activity/event-data/detail/component/documentation/printImage'
 import pdfMake from '@/utils/pdfmake.ts'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
+import {
+  Carousel,
+  type CarouselApi,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from '@/components/ui/carousel.tsx'
 
 interface props {
   detail?: IEvent
@@ -34,6 +43,31 @@ const DocumentationEventActivity = (props: props) => {
     search,
   })
   const [idSelected, setIdSelected] = useState<string[]>([])
+  const [open, setOpen] = useState(false)
+
+  const [current, setCurrent] = useState(0)
+  const [mainApi, setMainApi] = useState<CarouselApi>()
+  const [thumbApi, setThumbApi] = useState<CarouselApi>()
+
+  useEffect(() => {
+    if (!mainApi || !thumbApi) return
+
+    const onSelect = () => {
+      const index = mainApi.selectedScrollSnap()
+
+      setCurrent(index)
+
+      thumbApi.scrollTo(index)
+    }
+
+    onSelect()
+
+    mainApi.on('select', onSelect)
+
+    return () => {
+      mainApi.off('select', onSelect)
+    }
+  }, [mainApi, thumbApi])
 
   const allIds = file.map((row) => row.id_acara_dokumentasi)
 
@@ -156,17 +190,18 @@ const DocumentationEventActivity = (props: props) => {
             {file.map((row, k) => (
               <div
                 key={k}
+                onClick={() => setOpen(true)}
                 className={
                   'relative border rounded-lg shadow overflow-hidden w-full cursor-pointer'
                 }
-                onClick={() => HandleToggleSelect(row.id_acara_dokumentasi)}
               >
                 <div className="top-0 right-0 absolute flex gap-1.5 w-full">
                   <div className="flex items-center justify-between w-full p-2">
                     <div
+                      onClick={() => HandleToggleSelect(row.id_acara_dokumentasi)}
                       className={cn(
                         'w-5 h-5 size-5 rounded-full bg-gray-100',
-                        'flex items-center justify-center',
+                        'flex items-center justify-center shadow border border-primary',
                         idSelected.includes(row?.id_acara_dokumentasi) && 'bg-blue-500'
                       )}
                     >
@@ -194,6 +229,67 @@ const DocumentationEventActivity = (props: props) => {
           </div>
         </CardContent>
       </Card>
+
+      <DialogBasic className="min-w-6xl" title="Preview Dokumentasi" open={open} setOpen={setOpen}>
+        <div className="space-y-5">
+          <Carousel
+            setApi={setMainApi}
+            opts={{
+              align: 'center',
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent>
+              {file.slice(1).map((row, index) => (
+                <CarouselItem key={index}>
+                  <div className="flex justify-center">
+                    <img
+                      alt={'gambar'}
+                      src={row.url_file}
+                      className="w-full h-[450px] object-contain"
+                    />
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+
+            <CarouselPrevious className="left-4" />
+            <CarouselNext className="right-4" />
+          </Carousel>
+
+          <Carousel
+            setApi={setThumbApi}
+            opts={{
+              align: 'start',
+              dragFree: true,
+              containScroll: 'keepSnaps',
+            }}
+            className="w-full"
+          >
+            <CarouselContent>
+              {file.slice(1).map((row, index) => (
+                <CarouselItem key={index} className="basis-1/12">
+                  <img
+                    src={row.url_file}
+                    alt={'gambar'}
+                    onClick={() => mainApi?.scrollTo(index)}
+                    className={`h-[50px] w-full rounded-md object-cover cursor-pointer border-2 transition-all
+                    ${
+                      current === index
+                        ? 'border-primary opacity-100'
+                        : 'border-transparent opacity-60 hover:opacity-100'
+                    }`}
+                  />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+
+            <CarouselPrevious className={'left-0'} />
+            <CarouselNext className={'right-0'} />
+          </Carousel>
+        </div>
+      </DialogBasic>
     </>
   )
 }

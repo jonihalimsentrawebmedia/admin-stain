@@ -54,6 +54,7 @@ const DropdownPrint = (props: Props) => {
 
   const handlePrintFont = async () => {
     if (!detail) return
+    console.log(DetailSPPD)
     const headerRes = await AxiosClient.get(`/eoffice/kop-surat/detail/${DetailSPPD?.id_kop_surat}`)
     const letterHeader: ILetterHeader = headerRes.data?.data
     const logoBase64 = await GetBase64FromUrl(letterHeader.url_logo)

@@ -80,7 +80,6 @@ const ListLetterGeneratePage = () => {
 
   return (
     <div className="space-y-4">
-      {/* Header */}
       <ButtonTitleGroup
         label="Data Surat"
         buttonGroup={[
@@ -185,7 +184,6 @@ const ListLetterGeneratePage = () => {
               />
             </div>
 
-            {/* Pagination */}
             {meta && (
               <div className="mt-3">
                 <TablePaginate

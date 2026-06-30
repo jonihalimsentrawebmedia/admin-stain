@@ -4,15 +4,24 @@ import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { IMailTypeLetter } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/data/types.ts'
 
-export const UseGetTypeLetters = (props?: BasicProps) => {
-  const { page, search, limit } = props ?? {}
+interface props extends BasicProps {
+  category?: string
+}
+
+export const UseGetTypeLetters = (props?: props) => {
+  const { page, search, limit, category } = props ?? {}
 
   const params = new URLSearchParams()
   if (page) params.append('page', page ?? '1')
   if (limit) params.append('limit', limit ?? '10')
   if (search) params.append('search', search ?? '')
+  if (category) params.append('kategori_jenis_surat', category ?? '')
 
-  const { data: queryData, isLoading, isFetching } = useQuery<{ data: IMailTypeLetter[]; meta: Meta }>({
+  const {
+    data: queryData,
+    isLoading,
+    isFetching,
+  } = useQuery<{ data: IMailTypeLetter[]; meta: Meta }>({
     queryKey: ['code-letter-type', params.toString()],
     refetchOnWindowFocus: false,
     queryFn: () => AxiosClient.get('/eoffice/mail-jenis-surat?' + params).then((res) => res.data),

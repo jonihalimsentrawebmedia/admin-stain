@@ -32,6 +32,8 @@ const ButtonEditTypeTemplate = (props: props) => {
         id_jenis_surat: data.id_jenis_surat,
         urutan: data.urutan,
         nama_jenis_template: data?.nama_jenis_template,
+        is_existing_template: data?.is_existing_template,
+        kode_template: data?.kode_template,
       })
     }
   }, [data])
@@ -72,7 +74,7 @@ const ButtonEditTypeTemplate = (props: props) => {
         <HiPencil />
       </button>
 
-      <DialogBasic title={'Tambah Jenis Template'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Edit Jenis Surat'} open={open} setOpen={setOpen}>
         <FormTypeTemplate
           form={form}
           loading={loading}

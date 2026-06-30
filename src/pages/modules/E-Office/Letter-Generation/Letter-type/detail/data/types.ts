@@ -11,4 +11,6 @@ export interface ITypeTemplateLetter {
   nama_user_created: string
   nama_user_updated: string
   nama_jenis_surat: string
+  is_existing_template: boolean
+  kode_template: string
 }
