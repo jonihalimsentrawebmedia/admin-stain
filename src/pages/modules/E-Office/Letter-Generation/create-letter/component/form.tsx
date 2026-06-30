@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useFieldArray, type UseFormReturn } from 'react-hook-form'
 import { Form } from '@/components/ui/form.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Card, CardContent, CardTitle } from '@/components/ui/card.tsx'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import { UseGetLetterHeaderRef } from '@/pages/modules/E-Office/settings/letter-header/hooks'
@@ -20,6 +20,8 @@ import { FaRegFileAlt, FaTrash } from 'react-icons/fa'
 import { Button } from '@/components/ui/button.tsx'
 import { UseGetHumanResource } from '@/pages/modules/E-Office/reference/human-resource/hooks.tsx'
 import { FiHash } from 'react-icons/fi'
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import { UseGetDetailTypeTemplateLetter } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail/hooks'
 
 interface props {
   form: UseFormReturn<TLetterInvitationSchema>
@@ -29,13 +31,17 @@ interface props {
 
 const FormCreateLetterCustomize = (props: props) => {
   const { form, loading, HandleSave } = props
+  const { id_mail, id } = useParams()
   const navigate = useNavigate()
   const { letterHeader } = UseGetLetterHeaderRef()
+  const { typeTemplate } = UseGetDetailTypeTemplateLetter(id_mail as string)
   const { humanResource } = UseGetHumanResource()
   const { letterNumber } = UseGetLetterNumberAutomatic({
     page: '0',
     limit: '0',
   })
+
+  console.log(typeTemplate)
 
   const { fields, append, remove } = useFieldArray({
     control: form.control,
@@ -59,6 +65,22 @@ const FormCreateLetterCustomize = (props: props) => {
     <>
       <Form {...form}>
         <form className={'space-y-5'} onSubmit={form.handleSubmit(HandleSave)}>
+          <ButtonTitleGroup
+            label={`Surat ${typeTemplate?.nama_jenis_template}`}
+            isBack
+            buttonGroup={[
+              {
+                type: 'cancel',
+                label: 'Batal',
+                onClick: () =>
+                  navigate(`/modules/e-office/letter-generation/create-letter/create/${id}`),
+              },
+              {
+                type: 'save',
+                label: 'Simpan',
+              },
+            ]}
+          />
           <Card className={'p-2'}>
             <CardContent className={'p-2 space-y-4'}>
               <CardTitle className={'text-xl flex items-center gap-1.5'}>

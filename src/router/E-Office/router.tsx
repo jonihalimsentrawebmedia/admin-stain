@@ -40,19 +40,7 @@ const ListLetterClassification = lazy(
   () => import('@/pages/modules/E-Office/reference/letter-classification')
 )
 const ListReminderAgenda = lazy(() => import('@/pages/modules/E-Office/reference/reminder-agenda'))
-// const ListTemplateSurat = lazy(() => import('@/pages/modules/E-Office/reference/template-surat'))
-// const CreateTemplateSurat = lazy(
-//   () => import('@/pages/modules/E-Office/reference/template-surat/create')
-// )
-// const UpdateTemplateSurat = lazy(
-//   () => import('@/pages/modules/E-Office/reference/template-surat/update')
-// )
-// const DetailTemplateSurat = lazy(
-//   () => import('@/pages/modules/E-Office/reference/template-surat/detail')
-// )
-// const GenerateSuratView = lazy(
-//   () => import('@/pages/modules/E-Office/reference/template-surat/generate')
-// )
+
 const TypeServiceListPage = lazy(() => import('@/pages/modules/E-Office/services/type-service'))
 const RegistrationInbox = lazy(() =>
   import('@/pages/modules/E-Office/inbox/registration-inbox').then((m) => ({
@@ -310,14 +298,14 @@ export const E_OFFICE_ROUTE = [
                 index: true,
                 element: <DetailLetterType />,
               },
-          {
-            path: 'detail/:id_template',
-            element: <ListTemplateLetterType />,
-          },
-          {
-            path: 'detail/:id_template/isi/:id_template_surat',
-            element: <ListIsiTemplateSurat />,
-          },
+              {
+                path: 'detail/:id_template',
+                element: <ListTemplateLetterType />,
+              },
+              {
+                path: 'detail/:id_template/isi/:id_template_surat',
+                element: <ListIsiTemplateSurat />,
+              },
             ],
           },
         ],
