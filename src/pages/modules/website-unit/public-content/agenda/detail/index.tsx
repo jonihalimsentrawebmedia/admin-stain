@@ -57,6 +57,7 @@ export const AgendaUnitDetailPage = () => {
             },
           ]}
           isBack={true}
+          link={'/modules/website-unit/public-content/agenda'}
         />
         <Separator className={'my-5'} />
 

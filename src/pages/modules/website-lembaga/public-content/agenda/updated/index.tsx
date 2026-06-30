@@ -5,14 +5,16 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { AgendaResolver, type AgendaType } from '../data/resolver'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { UseGetAgendaDetail } from '../hooks/index'
 import { format, parseISO } from 'date-fns'
 import { TimeStampLocal } from '@/utils/helper.tsx'
 
 export const UpdatedAgendaPage = () => {
-  const [loading, setLoading] = useState(false)
   const { id } = useParams()
+  const [searchParams] = useSearchParams()
+  const from = searchParams.get('from')
+  const [loading, setLoading] = useState(false)
   const { detailAgenda } = UseGetAgendaDetail(id ?? '')
 
   useEffect(() => {
@@ -38,7 +40,7 @@ export const UpdatedAgendaPage = () => {
 
   const HandleSave = async (e: AgendaType) => {
     setLoading(true)
-    await AxiosClient.put(`/website-utama/agenda/${detailAgenda?.id_agenda}`, {
+    await AxiosClient.put(`/lembaga/agenda/${detailAgenda?.id_agenda}`, {
       ...e,
       waktu_mulai: TimeStampLocal(e?.waktu_mulai),
       waktu_selesai: e?.waktu_selesai ? TimeStampLocal(e?.waktu_selesai) : null,
@@ -47,7 +49,11 @@ export const UpdatedAgendaPage = () => {
         if (res.data.status) {
           toast.success(res.data.message || 'Success Pengajuan tambah data agenda')
           setLoading(false)
-          navigate('/modules/website-utama/public-content/agenda')
+          if (from === 'detail') {
+            navigate(`/modules/website-lembaga/public-content/agenda/detail/${id}`)
+          } else {
+            navigate('/modules/website-lembaga/public-content/agenda')
+          }
         }
       })
       .catch((err) => {
@@ -58,7 +64,7 @@ export const UpdatedAgendaPage = () => {
 
   return (
     <>
-      <AgendaForm form={form} HandleSave={HandleSave} loading={loading} />
+      <AgendaForm label={'Edit Agenda'} form={form} HandleSave={HandleSave} loading={loading} />
     </>
   )
 }

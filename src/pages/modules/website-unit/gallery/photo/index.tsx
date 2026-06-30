@@ -44,6 +44,7 @@ export const GalleryPhotoUnitPage = () => {
             },
           ]}
           isBack
+          link={'/modules/website-unit/gallery/photo'}
         />
 
         <div className="flex flex-col gap-5 mt-5">

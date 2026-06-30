@@ -72,6 +72,7 @@ export const DetailNewsUnitPage = () => {
           },
         ]}
         isBack={true}
+        link={'/modules/website-unit/public-content/news'}
       />
       <Separator className={'my-5'} />
 

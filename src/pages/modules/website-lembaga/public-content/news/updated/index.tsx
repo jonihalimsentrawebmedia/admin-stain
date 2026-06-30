@@ -5,12 +5,14 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useEffect, useState } from 'react'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { UseGetNewsDetail } from '../hooks/index'
 import { format } from 'date-fns'
 
 export const UpdatedNewsPage = () => {
   const { id } = useParams()
+  const [searchParams] = useSearchParams()
+  const from = searchParams.get('from')
   const { detailNews } = UseGetNewsDetail(id ?? '')
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
@@ -51,9 +53,13 @@ export const UpdatedNewsPage = () => {
     })
       .then((res) => {
         if (res.data.status) {
-          navigate('/modules/website-lembaga/public-content/news')
           setLoading(false)
           toast.success(res.data.message || 'Success Pengajuan tambah data berita')
+          if (from === 'detail') {
+            navigate(`/modules/website-lembaga/public-content/news/detail/${id}`)
+          } else {
+            navigate('/modules/website-lembaga/public-content/news')
+          }
         }
       })
       .catch((err) => {
@@ -64,7 +70,12 @@ export const UpdatedNewsPage = () => {
 
   return (
     <>
-      <FormNewsContent loading={loading} form={form} HandleSave={HandleSubmit} />
+      <FormNewsContent
+        label={'Edit Berita'}
+        loading={loading}
+        form={form}
+        HandleSave={HandleSubmit}
+      />
     </>
   )
 }

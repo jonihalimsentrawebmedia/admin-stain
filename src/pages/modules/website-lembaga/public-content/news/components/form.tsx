@@ -15,10 +15,11 @@ interface Props {
   form: UseFormReturn<INewsTypeForm>
   HandleSave: (e: any) => void
   loading: boolean
+  label?: string
 }
 
 export const FormNewsContent = (props: Props) => {
-  const { form, HandleSave, loading } = props
+  const { form, HandleSave, loading, label } = props
   const { newsCategory, loading: laod1 } = useGetNewsCategory({ isGetAll: true })
 
   const navigate = useNavigate()
@@ -28,7 +29,7 @@ export const FormNewsContent = (props: Props) => {
       <Form {...form}>
         <form className={'flex flex-col gap-5 p-5'} onSubmit={form.handleSubmit(HandleSave)}>
           <ButtonTitleGroup
-            label={'Tulis Berita'}
+            label={label ?? 'Tulis Berita'}
             buttonGroup={[
               {
                 type: 'cancel',
