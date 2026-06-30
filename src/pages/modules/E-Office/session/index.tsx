@@ -11,16 +11,18 @@ import { toast } from 'react-toastify'
 import { UseGetUniversityDomainExist } from '@/pages/modules/website-utama/select-university/hooks'
 import { useQueryClient } from '@tanstack/react-query'
 import type { SatuanOrganisasiList } from '@/pages/modules/settings/model'
+import { useState } from 'react'
 
 export const SelectSessionEOffice = () => {
   const [searchParams] = useSearchParams()
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
   const { satuanOrganisasi: university, loading: load1 } = UseGetUniversityDomainExist({
     kelompok: 'UNIVERSITAS',
   })
 
-  const loading = load1
+  const loadings = load1
 
   const form = useForm<{
     id_satuan_organisasi: string
@@ -28,6 +30,7 @@ export const SelectSessionEOffice = () => {
 
   const queryClient = useQueryClient()
   const HandleSaveSession = async (value: { id_satuan_organisasi: string }) => {
+    setLoading(true)
     await AxiosClient.post('/eoffice/user-session', {
       id_satuan_organisasi: value?.id_satuan_organisasi,
     })
@@ -43,6 +46,7 @@ export const SelectSessionEOffice = () => {
       })
       .catch((err) => {
         toast.error(err?.response?.data?.message || 'Gagal membuat session')
+        setLoading(false)
       })
   }
 
@@ -70,7 +74,7 @@ export const SelectSessionEOffice = () => {
                     <SelectBasicInput
                       form={form}
                       name={'id_satuan_organisasi'}
-                      isDisabled={loading}
+                      isDisabled={loadings}
                       placeholder={'Pilih Universitas digunakan'}
                       selectClassName={'z-50'}
                       data={
@@ -81,7 +85,7 @@ export const SelectSessionEOffice = () => {
                       }
                     />
                     <div className="flex justify-center">
-                      <Button>Lanjutkan</Button>
+                      <Button disabled={loading}>Lanjutkan</Button>
                     </div>
                   </form>
                 </Form>

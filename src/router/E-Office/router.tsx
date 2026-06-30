@@ -5,8 +5,8 @@ import LetterTypePage from '@/pages/modules/E-Office/Letter-Generation/Letter-ty
 import UpdatedCodeLetterGenerated from '@/pages/modules/E-Office/Letter-Generation/code-letter/updated'
 import DetailLetterType from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail'
 import ListTemplateLetterType from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail-template'
+import ListIsiTemplateSurat from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail-template/isi-template'
 import CreateLetterByTypePage from '@/pages/modules/E-Office/Letter-Generation/create-letter'
-import CreateLetterByTemplate from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate'
 import ListLetterGeneratePage from '@/pages/modules/E-Office/Letter-Generation/letter-list'
 import UpdatedLetterByTemplate from '@/pages/modules/E-Office/Letter-Generation/letter-list/update'
 import DetailLetterTemplate from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail'
@@ -20,6 +20,8 @@ import LupSumUpdated from '@/pages/modules/E-Office/official-travel/Letter-Assig
 import ListPejabat from '@/pages/modules/E-Office/official-travel/pejabat'
 import ReportLetterSPPDAssignment from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/report'
 import DocumentationLetterAssigment from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/documentation'
+import ListDetailGroupLetter from '@/pages/modules/E-Office/Letter-Generation/create-letter/detail-list'
+import CreateLetterByTemplate from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate'
 
 const UserProfilePage = lazy(() =>
   import('@/pages/modules/website-utama/user-profile').then((m) => ({ default: m.UserProfilePage }))
@@ -38,19 +40,7 @@ const ListLetterClassification = lazy(
   () => import('@/pages/modules/E-Office/reference/letter-classification')
 )
 const ListReminderAgenda = lazy(() => import('@/pages/modules/E-Office/reference/reminder-agenda'))
-// const ListTemplateSurat = lazy(() => import('@/pages/modules/E-Office/reference/template-surat'))
-// const CreateTemplateSurat = lazy(
-//   () => import('@/pages/modules/E-Office/reference/template-surat/create')
-// )
-// const UpdateTemplateSurat = lazy(
-//   () => import('@/pages/modules/E-Office/reference/template-surat/update')
-// )
-// const DetailTemplateSurat = lazy(
-//   () => import('@/pages/modules/E-Office/reference/template-surat/detail')
-// )
-// const GenerateSuratView = lazy(
-//   () => import('@/pages/modules/E-Office/reference/template-surat/generate')
-// )
+
 const TypeServiceListPage = lazy(() => import('@/pages/modules/E-Office/services/type-service'))
 const RegistrationInbox = lazy(() =>
   import('@/pages/modules/E-Office/inbox/registration-inbox').then((m) => ({
@@ -151,18 +141,10 @@ const DashboardEOfficePage = lazy(() => import('@/pages/modules/E-Office/dashboa
 const ListAdmissionProcess = lazy(
   () => import('@/pages/modules/E-Office/students/admission-process')
 )
-const ListStudentStatus = lazy(
-  () => import('@/pages/modules/E-Office/students/student-status')
-)
-const ListReligion = lazy(
-  () => import('@/pages/modules/E-Office/students/religion')
-)
-const ListStudyProgram = lazy(
-  () => import('@/pages/modules/E-Office/students/study-program')
-)
-const ListStudentData = lazy(
-  () => import('@/pages/modules/E-Office/students/student-data')
-)
+const ListStudentStatus = lazy(() => import('@/pages/modules/E-Office/students/student-status'))
+const ListReligion = lazy(() => import('@/pages/modules/E-Office/students/religion'))
+const ListStudyProgram = lazy(() => import('@/pages/modules/E-Office/students/study-program'))
+const ListStudentData = lazy(() => import('@/pages/modules/E-Office/students/student-data'))
 const CreateStudentData = lazy(
   () => import('@/pages/modules/E-Office/students/student-data/create')
 )
@@ -320,6 +302,10 @@ export const E_OFFICE_ROUTE = [
                 path: 'detail/:id_template',
                 element: <ListTemplateLetterType />,
               },
+              {
+                path: 'detail/:id_template/isi/:id_template_surat',
+                element: <ListIsiTemplateSurat />,
+              },
             ],
           },
         ],
@@ -333,7 +319,17 @@ export const E_OFFICE_ROUTE = [
           },
           {
             path: 'create/:id',
-            element: <CreateLetterByTemplate />,
+            // element: <ListDetailGroupLetter />,
+            children: [
+              {
+                index: true,
+                element: <ListDetailGroupLetter />,
+              },
+              {
+                path: `add/:id_mail`,
+                element: <CreateLetterByTemplate />,
+              },
+            ],
           },
         ],
       },

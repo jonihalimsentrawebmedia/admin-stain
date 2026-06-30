@@ -104,7 +104,6 @@ const ButtonEditFileSupport = (props: Props) => {
                 name={'dokumen'}
                 keyname={'key_dokumen'}
                 label={'Upload File'}
-                accept={'application/pdf'}
                 required
               />
             ) : (

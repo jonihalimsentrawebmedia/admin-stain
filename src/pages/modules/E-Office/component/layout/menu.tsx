@@ -88,7 +88,7 @@ export const GenerateMenu = () => {
         },
         {
           id: 102,
-          name: 'Jenis Surat',
+          name: 'Kelompok Surat',
           path: `${baseDomain}/letter-generation/letter-type`,
         },
         {

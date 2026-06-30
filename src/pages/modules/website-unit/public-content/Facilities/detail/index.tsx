@@ -56,6 +56,7 @@ export const DetailFacilitiesUnitPage = () => {
             },
           ]}
           isBack={true}
+          link={'/modules/website-unit/public-content/facilities-unit'}
         />
 
         <Separator />

@@ -32,7 +32,7 @@ export const DialogBasic = (props: Props) => {
     <>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent
-          className={clsx(className, 'overflow-y-auto')}
+          className={clsx(className, 'overflow-y-auto w-full')}
           onInteractOutside={(event) => {
             if (disableOutsideDialog) {
               event.preventDefault()

@@ -10,7 +10,6 @@ import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import { FaCirclePlus } from 'react-icons/fa6'
 import { Form } from '@/components/ui/form.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
-import { RichText } from '@/components/common/richtext'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import { useParams } from 'react-router-dom'
 
@@ -55,13 +54,20 @@ const ButtonAddTemplateLetterType = () => {
       </Button>
 
       <DialogBasic
-        title={'Tambah Template'}
+        title={'Tambah Nama Jenis Template'}
         className={'lg:min-w-5xl'}
         open={open}
         setOpen={setOpen}
       >
         <Form {...form}>
           <form onSubmit={form.handleSubmit(HandleSave)} className="space-y-5">
+            <TextInput
+              form={form}
+              name={'uraian'}
+              label={'Nama Jenis Template'}
+              placeholder={'Nama Jenis Template'}
+              isRequired
+            />
             <TextInput
               name={'urutan'}
               form={form}
@@ -71,14 +77,7 @@ const ButtonAddTemplateLetterType = () => {
               isRequired
               isNumber
             />
-            <RichText
-              form={form}
-              name={'uraian'}
-              isRow={false}
-              label={'Uraian'}
-              showLabel={true}
-              required
-            />
+
             <ButtonForm loading={loading} onCancel={() => setOpen(!open)} />
           </form>
         </Form>

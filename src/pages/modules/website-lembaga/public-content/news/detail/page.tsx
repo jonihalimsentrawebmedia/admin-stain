@@ -48,7 +48,7 @@ export const DetailNewsPage = () => {
                   <Button
                     onClick={() =>
                       navigate(
-                        `/modules/website-lembaga/public-content/news/edit/${detailNews?.id_berita}`
+                        `/modules/website-lembaga/public-content/news/edit/${detailNews?.id_berita}?from=detail`
                       )
                     }
                     className={'border-primary text-primary hover:text-primary'}
@@ -73,6 +73,7 @@ export const DetailNewsPage = () => {
           },
         ]}
         isBack={true}
+        link={'/modules/website-lembaga/public-content/news'}
       />
       <Separator className={'my-5'} />
 
@@ -93,9 +94,7 @@ export const DetailNewsPage = () => {
                   <div className="size-3.5 rounded-full bg-yellow-500" />
                   <p>{detailNews?.nama_kategori_berita}</p>
                 </div>
-                <p className={'text-3xl font-semibold text-white'}>
-                  {detailNews?.judul ?? ''}
-                </p>
+                <p className={'text-3xl font-semibold text-white'}>{detailNews?.judul ?? ''}</p>
                 <div className="flex items-center justify-between gap-5 w-full">
                   <div>
                     <p className="text-white">Tanggal Terbit</p>

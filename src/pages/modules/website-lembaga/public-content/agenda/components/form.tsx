@@ -12,17 +12,18 @@ interface Props {
   loading: boolean
   form: UseFormReturn<AgendaType>
   HandleSave: (e: AgendaType) => void
+  label?: string
 }
 
 export const AgendaForm = (props: Props) => {
-  const { form, HandleSave, loading } = props
+  const { label, form, HandleSave, loading } = props
   const navigate = useNavigate()
   return (
     <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(HandleSave)} className={'flex flex-col gap-5 py-5'}>
           <ButtonTitleGroup
-            label={'Tulis Agenda'}
+            label={label ?? 'Tulis Agenda'}
             buttonGroup={[
               {
                 label: 'Batal',

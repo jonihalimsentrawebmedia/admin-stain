@@ -31,7 +31,7 @@ export const DetailAgendaPage = () => {
                     <Button
                       onClick={() =>
                         navigate(
-                          `/modules/website-lembaga/public-content/agenda/edit/${detail?.id_agenda}`
+                          `/modules/website-lembaga/public-content/agenda/edit/${detail?.id_agenda}?from=detail`
                         )
                       }
                       className={'border-primary text-primary hover:text-primary'}
@@ -56,6 +56,7 @@ export const DetailAgendaPage = () => {
             },
           ]}
           isBack={true}
+          link={'/modules/website-lembaga/public-content/agenda'}
         />
         <Separator className={'my-5'} />
 

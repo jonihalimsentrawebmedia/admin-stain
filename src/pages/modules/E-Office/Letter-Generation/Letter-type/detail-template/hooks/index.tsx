@@ -8,7 +8,7 @@ interface props extends BasicProps {
   id_jenis_template_surat: string
 }
 
-export const UseGetTypeTemplateLetter = (props: props) => {
+export const UseGetTemplateLetter = (props: props) => {
   const { page, search, limit, id_jenis_template_surat } = props
 
   const params = new URLSearchParams()

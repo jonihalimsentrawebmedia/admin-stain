@@ -20,7 +20,7 @@ const ColumnsTypeTemplate = () => {
     },
     {
       accessorKey: 'nama_jenis_template',
-      header: 'Nama Jenis Template',
+      header: 'Nama Jenis Surat',
     },
     {
       accessorKey: 'urutan',

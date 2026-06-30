@@ -83,6 +83,7 @@ export const DetailPromotionPage = () => {
             },
           ]}
           isBack
+          link={'modules/website-prodi/public-content/promotion'}
         />
         <Separator />
 

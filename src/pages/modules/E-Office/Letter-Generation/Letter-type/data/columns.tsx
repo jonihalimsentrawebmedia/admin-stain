@@ -20,11 +20,11 @@ export const LetterTypeCode = () => {
     },
     {
       accessorKey: 'nama_jenis_surat',
-      header: 'Nama Jenis Surat',
+      header: 'Nama Kelompok Surat',
     },
     {
       accessorKey: 'kategori_jenis_surat',
-      header: 'Kategori Jenis Surat',
+      header: 'Kategori Kelompok Surat',
     },
     {
       accessorKey: 'kode_surat',

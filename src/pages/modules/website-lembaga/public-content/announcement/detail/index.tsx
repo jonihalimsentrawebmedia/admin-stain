@@ -47,7 +47,7 @@ export const AnnouncementDetailPage = () => {
                     <Button
                       onClick={() =>
                         navigate(
-                          `/modules/website-utama/public-content/announcement/edit/${detail?.id_pengumuman}`
+                          `/modules/website-lembaga/public-content/announcement/edit/${detail?.id_pengumuman}?from=detail`
                         )
                       }
                       className={'border-primary text-primary hover:text-primary'}
@@ -72,6 +72,7 @@ export const AnnouncementDetailPage = () => {
             },
           ]}
           isBack={true}
+          link={'/modules/website-lembaga/public-content/announcement'}
         />
         <Separator className={'my-5'} />
 

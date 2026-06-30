@@ -74,6 +74,7 @@ export const AnnouncementProdiDetailPage = () => {
             },
           ]}
           isBack={true}
+          link={'/modules/website-prodi/public-content/announcement'}
         />
         <Separator className={'my-5'} />
 

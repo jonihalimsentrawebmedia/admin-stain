@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
@@ -11,18 +11,36 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import {
   Table,
-  TableHeader,
   TableBody,
-  TableRow,
-  TableHead,
   TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
 } from '@/components/ui/table'
+import ButtonDataProdi from '@/pages/modules/E-Office/students/student-data/import/buttonSumberData/buttonProdi.tsx'
+import ButtonAdmission from '@/pages/modules/E-Office/students/student-data/import/buttonSumberData/buttonAdmission.tsx'
+import ButtonDataReligion from '@/pages/modules/E-Office/students/student-data/import/buttonSumberData/ButtonDataReligion.tsx'
+import ButtonDataStatus from '@/pages/modules/E-Office/students/student-data/import/buttonSumberData/ButtonDataStatus.tsx'
 
 const COLUMNS = [
-  'ID_PRODI', 'NIM', 'NAMA', 'TEMPAT_LAHIR', 'TANGGAL_LAHIR',
-  'ANGKATAN', 'ID_JALUR_MASUK', 'SEMESTER_MASUK', 'ID_STATUS',
-  'NIK', 'JENIS_KELAMIN', 'ID_AGAMA', 'HP', 'EMAIL', 'ALAMAT',
-  'NAMA_AYAH', 'NAMA_IBU', 'NAMA_WALI',
+  'ID_PRODI',
+  'NIM',
+  'NAMA',
+  'TEMPAT_LAHIR',
+  'TANGGAL_LAHIR',
+  'ANGKATAN',
+  'ID_JALUR_MASUK',
+  'SEMESTER_MASUK',
+  'ID_STATUS',
+  'NIK',
+  'JENIS_KELAMIN',
+  'ID_AGAMA',
+  'HP',
+  'EMAIL',
+  'ALAMAT',
+  'NAMA_AYAH',
+  'NAMA_IBU',
+  'NAMA_WALI',
 ]
 
 const ImportStudentData = () => {
@@ -34,7 +52,6 @@ const ImportStudentData = () => {
   const [originalFile, setOriginalFile] = useState<File | null>(null)
   const fileRef = useRef<HTMLInputElement>(null)
 
-  // Parse Excel file to JSON
   const HandleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
@@ -87,10 +104,7 @@ const ImportStudentData = () => {
           {
             type: 'custom',
             element: (
-              <Button
-                onClick={HandleSave}
-                disabled={loading || dataExcel.length === 0}
-              >
+              <Button onClick={HandleSave} disabled={loading || dataExcel.length === 0}>
                 {loading && <BiLoader className="animate-spin mr-1" />}
                 Import Data
               </Button>
@@ -102,8 +116,8 @@ const ImportStudentData = () => {
       {/* Download Template */}
       <div className="border-primary border-2 p-4 rounded-lg bg-gray-200">
         <p>
-          Agar proses import data berjalan lancar, harap menggunakan format
-          excel yang telah disiapkan.
+          Agar proses import data berjalan lancar, harap menggunakan format excel yang telah
+          disiapkan.
         </p>
         <a href="/example-students.xlsx" download className="text-primary">
           <Button className="text-white">
@@ -111,6 +125,16 @@ const ImportStudentData = () => {
             Download Template
           </Button>
         </a>
+      </div>
+
+      <div className={'border-primary border-2 p-4 rounded-lg bg-gray-200"'}>
+        <p className="text-2xl font-semibold">Sumber Data</p>
+        <div className="grid grid-cols-4 gap-4 mt-4">
+          <ButtonDataProdi />
+          <ButtonAdmission />
+          <ButtonDataReligion />
+          <ButtonDataStatus />
+        </div>
       </div>
 
       <div>
@@ -135,8 +159,7 @@ const ImportStudentData = () => {
       {dataExcel.length > 0 && (
         <div>
           <p className="text-sm text-muted-foreground mb-2">
-            Preview: <span className="font-semibold">{dataExcel.length}</span> data
-            ditemukan
+            Preview: <span className="font-semibold">{dataExcel.length}</span> data ditemukan
             {fileName && (
               <span className="ml-1">
                 dari <span className="font-semibold">{fileName}</span>
@@ -148,10 +171,7 @@ const ImportStudentData = () => {
               <TableHeader>
                 <TableRow className="bg-primary hover:bg-primary">
                   {COLUMNS.map((col) => (
-                    <TableHead
-                      key={col}
-                      className="text-white whitespace-nowrap"
-                    >
+                    <TableHead key={col} className="text-white whitespace-nowrap">
                       {col}
                     </TableHead>
                   ))}
@@ -181,10 +201,7 @@ const ImportStudentData = () => {
         >
           Batal
         </Button>
-        <Button
-          onClick={HandleSave}
-          disabled={loading || dataExcel.length === 0}
-        >
+        <Button onClick={HandleSave} disabled={loading || dataExcel.length === 0}>
           {loading && <BiLoader className="animate-spin mr-1" />}
           Import Data
         </Button>

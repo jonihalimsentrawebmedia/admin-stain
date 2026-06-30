@@ -167,7 +167,10 @@ export default function DashboardAdmin() {
               <BarChart data={chartData ?? []} margin={{ bottom: 60 }}>
                 <XAxis
                   dataKey="name"
-                  angle={mode === 'harian' ? -75 : mode == 'bulanan' ? -45 : 0}
+                  tick={{
+                    fontSize: '12px',
+                  }}
+                  angle={mode === 'harian' ? -70 : mode == 'bulanan' ? -45 : 0}
                   textAnchor="end"
                   interval={0}
                   height={60}

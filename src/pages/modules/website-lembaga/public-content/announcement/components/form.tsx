@@ -12,17 +12,18 @@ interface Props {
   form: UseFormReturn<AnnouncementType>
   HandleSave: (e: AnnouncementType) => void
   loading: boolean
+  label?: string
 }
 
 export const AnnouncementForm = (props: Props) => {
-  const { form, HandleSave } = props
+  const { form, HandleSave, loading, label } = props
   const navigate = useNavigate()
   return (
     <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(HandleSave)} className={'flex flex-col gap-5 py-5'}>
           <ButtonTitleGroup
-            label={'Tulis Pengumuman'}
+            label={label ?? 'Tulis Pengumuman'}
             buttonGroup={[
               {
                 label: 'Batal',
@@ -67,7 +68,7 @@ export const AnnouncementForm = (props: Props) => {
                   navigate(-1)
                 },
               },
-              { label: 'Simpan', type: 'save', onClick: () => {} },
+              { label: 'Simpan', type: 'save', onClick: () => {}, isDisabled: loading },
             ]}
           />
         </form>

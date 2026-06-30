@@ -22,15 +22,15 @@ const FormLetterTpeCode = (props: props) => {
           <TextInput
             form={form}
             name={'nama_jenis_surat'}
-            label={'Nama Jenis Surat'}
-            placeholder={'Nama Jenis Surat'}
+            label={'Nama Kelompok Surat'}
+            placeholder={'Nama Kelompok Surat'}
             htmlFor={'nama_jenis_surat'}
             isRequired
           />
           <SelectBasicInput
             form={form}
-            label={'Kategori Jenis Surat'}
-            placeholder={'Kategori Jenis Surat'}
+            label={'Kategori Kelompok Surat'}
+            placeholder={'Kategori Kelompok Surat'}
             name={'kategori_jenis_surat'}
             data={['DOSEN', 'PEGAWAI', 'MAHASISWA', 'UMUM', 'LAINNYA']?.map((row) => ({
               label: row?.toUpperCase(),

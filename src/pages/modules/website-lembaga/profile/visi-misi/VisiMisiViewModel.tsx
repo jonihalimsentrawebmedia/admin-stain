@@ -45,7 +45,7 @@ const VisiMisiViewModel = () => {
     // ✅ Aksi (Ikon Edit dan Hapus)
     {
       accessorKey: 'aksi',
-      header: 'Lihat Demo',
+      header: '',
       cell: ({ row }) => {
         const values = row.original
         return (

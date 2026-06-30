@@ -69,7 +69,6 @@ export const FormExpenditure = (props: props) => {
             keyname={'key_url_file_pengeluaran'}
             label={'Upload Bukti Pembayaran'}
             accept={'image/*'}
-            required
           />
 
           <ButtonForm loading={loading} onCancel={() => setOpen(!open)} />

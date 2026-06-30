@@ -91,9 +91,9 @@ export const GenerateExpenditurePdf = (props: props): TDocumentDefinitions => {
 
   return {
     pageSize: 'A4',
-    pageOrientation: cetak_config.hasil_cetak === 'LANDSCAPE' ? 'landscape' : 'portrait',
-
+    pageOrientation: 'landscape',
     pageMargins: [30, 30, 30, 40],
+    // pageOrientation: cetak_config.hasil_cetak === 'LANDSCAPE' ? 'landscape' : 'portrait',
 
     footer: (currentPage, pageCount) => ({
       margin: [30, 5],

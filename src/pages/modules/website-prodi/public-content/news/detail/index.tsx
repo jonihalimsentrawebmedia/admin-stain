@@ -73,7 +73,8 @@ export const DetailNewsProdiPage = () => {
               ),
           },
         ]}
-        isBack={true}
+        isBack
+        link={'/modules/website-prodi/public-content/news'}
       />
       <Separator className={'my-5'} />
 

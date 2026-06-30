@@ -56,7 +56,7 @@ const ButtonCancelStatus = (props: props) => {
           <p className="text-gray-500">Nomor Surat</p>
           <p>{data?.nomor_surat}</p>
           <p className="text-gray-500">Jenis Surat</p>
-          <p>{data?.nama_jenis_surat.trim() || '-'}</p>
+          <p>{data?.nama_jenis_surat || '-'}</p>
           <p className="text-gray-500">Perihal Surat</p>
           <p>{data?.perihal ?? '-'}</p>
           <p className="text-gray-500">Tanggal Surat</p>
