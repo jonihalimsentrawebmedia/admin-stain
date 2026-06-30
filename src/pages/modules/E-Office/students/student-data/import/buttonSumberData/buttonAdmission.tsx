@@ -5,6 +5,8 @@ import TableCustom from '@/components/common/table/TableCustom.tsx'
 import type { ColumnDef } from '@tanstack/react-table'
 import { UseGetAdmissionProcess } from '@/pages/modules/E-Office/students/admission-process/hooks'
 import type { IAdmissionProcess } from '@/pages/modules/E-Office/students/admission-process/data/types.ts'
+import { FaCopy } from 'react-icons/fa'
+import { toast } from 'react-toastify'
 
 const ButtonAdmission = () => {
   const [open, setOpen] = useState(false)
@@ -17,6 +19,28 @@ const ButtonAdmission = () => {
     {
       accessorKey: 'id_mahasiswa_jalur_masuk',
       header: 'ID Data',
+      cell: ({ row }) => {
+        const data = row?.original
+        return (
+          <>
+            <div className="flex items-center justify-between">
+              <p>{data?.id_mahasiswa_jalur_masuk}</p>
+              <button
+                onClick={async () => {
+                  try {
+                    await navigator.clipboard.writeText(data.id_mahasiswa_jalur_masuk)
+                    toast.success('Berhasil disalin ke clipboard')
+                  } catch {
+                    toast.error('Gagal menyalin')
+                  }
+                }}
+              >
+                <FaCopy />
+              </button>
+            </div>
+          </>
+        )
+      },
     },
     {
       accessorKey: 'nama',

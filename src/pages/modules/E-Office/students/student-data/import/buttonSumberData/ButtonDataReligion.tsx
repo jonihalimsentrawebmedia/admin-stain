@@ -5,6 +5,8 @@ import TableCustom from '@/components/common/table/TableCustom.tsx'
 import type { ColumnDef } from '@tanstack/react-table'
 import { UseGetReligion } from '@/pages/modules/E-Office/students/religion/hooks'
 import type { IReligion } from '@/pages/modules/E-Office/students/religion/data/types.ts'
+import { toast } from 'react-toastify'
+import { FaCopy } from 'react-icons/fa'
 
 const ButtonDataReligion = () => {
   const [open, setOpen] = useState(false)
@@ -17,6 +19,28 @@ const ButtonDataReligion = () => {
     {
       accessorKey: 'id_mahasiswa_agama',
       header: 'ID Data',
+      cell: ({ row }) => {
+        const data = row?.original
+        return (
+          <>
+            <div className="flex items-center justify-between">
+              <p>{data?.id_mahasiswa_agama}</p>
+              <button
+                onClick={async () => {
+                  try {
+                    await navigator.clipboard.writeText(data.id_mahasiswa_agama)
+                    toast.success('Berhasil disalin ke clipboard')
+                  } catch {
+                    toast.error('Gagal menyalin')
+                  }
+                }}
+              >
+                <FaCopy />
+              </button>
+            </div>
+          </>
+        )
+      },
     },
     {
       accessorKey: 'nama',
