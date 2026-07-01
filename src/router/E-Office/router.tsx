@@ -22,6 +22,8 @@ import ReportLetterSPPDAssignment from '@/pages/modules/E-Office/official-travel
 import DocumentationLetterAssigment from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/documentation'
 import ListDetailGroupLetter from '@/pages/modules/E-Office/Letter-Generation/create-letter/detail-list'
 import CreateLetterByTemplate from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate'
+import EReceiptPage from '@/pages/modules/E-Office/E-Receipt'
+import InvoiceEReceiptPage from '@/pages/modules/E-Office/E-Receipt/invoice'
 
 const UserProfilePage = lazy(() =>
   import('@/pages/modules/website-utama/user-profile').then((m) => ({ default: m.UserProfilePage }))
@@ -618,6 +620,19 @@ export const E_OFFICE_ROUTE = [
             element: <ImportStudentData />,
           },
         ],
+      },
+    ],
+  },
+  {
+    path: 'e-receipt',
+    children: [
+      {
+        index: true,
+        element: <EReceiptPage />,
+      },
+      {
+        path: `invoice/:id`,
+        element: <InvoiceEReceiptPage />,
       },
     ],
   },

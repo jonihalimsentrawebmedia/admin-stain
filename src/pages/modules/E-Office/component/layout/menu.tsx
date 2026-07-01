@@ -1,5 +1,5 @@
 import { MdDashboard, MdOutgoingMail, MdRoomPreferences } from 'react-icons/md'
-import { FaArchive, FaListUl, FaRegCalendarAlt } from 'react-icons/fa'
+import { FaArchive, FaListUl, FaReceipt, FaRegCalendarAlt } from 'react-icons/fa'
 import { IoMailUnread } from 'react-icons/io5'
 import { FaGear, FaUsers } from 'react-icons/fa6'
 import { RiMailAiFill } from 'react-icons/ri'
@@ -232,6 +232,12 @@ export const GenerateMenu = () => {
           path: `${baseDomain}/event-activity/report`,
         },
       ],
+    },
+    {
+      id: 13,
+      name: 'E-Kwintasi',
+      path: `${baseDomain}/e-receipt`,
+      icon: <FaReceipt />,
     },
     {
       id: 9,
