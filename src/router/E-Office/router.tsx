@@ -24,6 +24,9 @@ import ListDetailGroupLetter from '@/pages/modules/E-Office/Letter-Generation/cr
 import CreateLetterByTemplate from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate'
 import EReceiptPage from '@/pages/modules/E-Office/E-Receipt'
 import InvoiceEReceiptPage from '@/pages/modules/E-Office/E-Receipt/invoice'
+import SuratKeteranganAktifMahasiswaPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifMahasiswa'
+import SuratKeteranganCutiAkademikPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganCutiAkademik'
+import SuratPengantarPenelitianPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPengantarPenelitian'
 
 const UserProfilePage = lazy(() =>
   import('@/pages/modules/website-utama/user-profile').then((m) => ({ default: m.UserProfilePage }))
@@ -328,8 +331,20 @@ export const E_OFFICE_ROUTE = [
                 element: <ListDetailGroupLetter />,
               },
               {
-                path: `add/:id_mail`,
+                path: `U-1`,
                 element: <CreateLetterByTemplate />,
+              },
+              {
+                path: 'SKAM-1',
+                element: <SuratKeteranganAktifMahasiswaPage />,
+              },
+              {
+                path: 'SKCA-1',
+                element: <SuratKeteranganCutiAkademikPage />,
+              },
+              {
+                path: 'SPP-1',
+                element: <SuratPengantarPenelitianPage />,
               },
             ],
           },

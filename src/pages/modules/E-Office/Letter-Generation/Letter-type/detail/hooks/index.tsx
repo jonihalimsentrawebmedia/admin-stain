@@ -17,7 +17,11 @@ export const UseGetTypeTemplateLetter = (props?: props) => {
   if (search) params.append('search', search ?? '')
   if (id_jenis_surat) params.append('id_jenis_surat', id_jenis_surat)
 
-  const { data: queryData, isLoading, isFetching } = useQuery<{ data: ITypeTemplateLetter[]; meta: Meta }>({
+  const {
+    data: queryData,
+    isLoading,
+    isFetching,
+  } = useQuery<{ data: ITypeTemplateLetter[]; meta: Meta }>({
     queryKey: ['type-template', params.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
@@ -40,4 +44,20 @@ export const UseGetDetailTypeTemplateLetter = (id_template: string) => {
   })
   const loading = isLoading || isFetching
   return { typeTemplate: data, loading }
+}
+
+export const UseGetInvitationLetter = (id_template: string) => {
+  const Params = new URLSearchParams()
+  Params.append('id_mail_jenis_template_surat', id_template)
+
+  const { data, isLoading, isFetching } = useQuery<ITypeTemplateLetter>({
+    queryKey: ['type-template-invitation', Params.toString()],
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get(`/eoffice/mail-surat-undangan?${Params}`).then((res) => res.data.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  return { invitationLetter: data, loading }
 }

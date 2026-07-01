@@ -2,6 +2,7 @@ export interface IEreceipt {
   id_kwitansi: string
   id_satuan_organisasi: string
   no_kwitansi: string
+  is_status: boolean
   tanggal: string
   nama_penerima: string
   nama_penyetor: string

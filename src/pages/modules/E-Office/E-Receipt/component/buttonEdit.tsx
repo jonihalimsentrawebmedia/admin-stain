@@ -46,7 +46,6 @@ const ButtonEditEreceipt = (props: props) => {
     setLoading(true)
     await AxiosClient.put(`/eoffice/kwitansi/${data?.id_kwitansi}`, {
       ...value,
-      jumlah: value?.jumlah.toString(),
       tanggal: new Date(value?.tanggal).toISOString(),
     })
       .then((res) => {

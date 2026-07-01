@@ -26,7 +26,6 @@ const ButtonAddEreceipt = () => {
     setLoading(true)
     await AxiosClient.post('/eoffice/kwitansi', {
       ...value,
-      jumlah: value?.jumlah.toString(),
       tanggal: new Date(value?.tanggal).toISOString(),
     })
       .then((res) => {

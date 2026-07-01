@@ -2,8 +2,9 @@ import { z } from 'zod'
 
 export const LetterInvitationSchema = z.object({
   id_kop_surat: z.string({ error: 'Kop Surat Wajib Dipilih' }).min(1, 'Kop surat wajib dipilih'),
-  id_nomor_surat_otomatis: z.string().optional().default(''),
-  id_jenis_surat: z.string().optional().default(''),
+  id_nomor_surat_otomatis: z.string().optional(),
+  id_jenis_surat: z.string().optional(),
+  id_jenis_template_surat: z.string().optional(),
   nomor_urut_manual: z.string().optional().nullable(),
   tempat_surat: z.string({ error: 'Tempat surat wajib diisi' }),
   tanggal_surat: z.string({ error: 'Tanggal surat wajib diisi' }),

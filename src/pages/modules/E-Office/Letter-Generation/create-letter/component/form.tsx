@@ -21,27 +21,25 @@ import { Button } from '@/components/ui/button.tsx'
 import { UseGetHumanResource } from '@/pages/modules/E-Office/reference/human-resource/hooks.tsx'
 import { FiHash } from 'react-icons/fi'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { UseGetDetailTypeTemplateLetter } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail/hooks'
+import type { ILetterTemplateType } from '@/pages/modules/E-Office/Letter-Generation/create-letter/hook'
 
 interface props {
   form: UseFormReturn<TLetterInvitationSchema>
   loading: boolean
   HandleSave: (value: TLetterInvitationSchema) => void
+  template?: ILetterTemplateType
 }
 
 const FormCreateLetterCustomize = (props: props) => {
-  const { form, loading, HandleSave } = props
-  const { id_mail, id } = useParams()
+  const { form, loading, HandleSave, template } = props
+  const { id } = useParams()
   const navigate = useNavigate()
   const { letterHeader } = UseGetLetterHeaderRef()
-  const { typeTemplate } = UseGetDetailTypeTemplateLetter(id_mail as string)
   const { humanResource } = UseGetHumanResource()
   const { letterNumber } = UseGetLetterNumberAutomatic({
     page: '0',
     limit: '0',
   })
-
-  console.log(typeTemplate)
 
   const { fields, append, remove } = useFieldArray({
     control: form.control,
@@ -66,7 +64,7 @@ const FormCreateLetterCustomize = (props: props) => {
       <Form {...form}>
         <form className={'space-y-5'} onSubmit={form.handleSubmit(HandleSave)}>
           <ButtonTitleGroup
-            label={`Surat ${typeTemplate?.nama_jenis_template}`}
+            label={`Surat ${template?.nama_jenis_template}`}
             isBack
             buttonGroup={[
               {
@@ -81,6 +79,7 @@ const FormCreateLetterCustomize = (props: props) => {
               },
             ]}
           />
+
           <Card className={'p-2'}>
             <CardContent className={'p-2 space-y-4'}>
               <CardTitle className={'text-xl flex items-center gap-1.5'}>
@@ -155,7 +154,7 @@ const FormCreateLetterCustomize = (props: props) => {
                 form={form}
                 date={form.watch('tanggal_surat')}
                 name={'nomor_urut_manual'}
-                id={form.watch('id_nomor_surat_otomatis')}
+                id={form.watch('id_nomor_surat_otomatis') ?? ''}
               />
             </CardContent>
           </Card>
@@ -264,7 +263,7 @@ const FormCreateLetterCustomize = (props: props) => {
                 isRow
               />
               <div className="relative">
-                <SelectTemplateText form={form} name={'pembuka'} />
+                <SelectTemplateText kode={'U-1'} form={form} name={'pembuka'} />
                 <RichText
                   form={form}
                   name={'pembuka'}
@@ -389,7 +388,7 @@ const FormCreateLetterCustomize = (props: props) => {
             <CardContent className={'p-2 space-y-4'}>
               <CardTitle>3. Penutup</CardTitle>
               <div className="relative">
-                <SelectTemplateText form={form} name={'penutup'} />
+                <SelectTemplateText kode={'U-1'} form={form} name={'penutup'} />
                 <RichText
                   form={form}
                   name={'penutup'}

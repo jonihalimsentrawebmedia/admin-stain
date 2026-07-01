@@ -17,6 +17,8 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
+import TableCustom from '@/components/common/table/TableCustom.tsx'
+import { ColumnsItemFaktur } from '@/pages/modules/E-Office/E-Receipt/invoice/data/columns.tsx'
 
 const InvoiceEReceiptPage = () => {
   const { id } = useParams()
@@ -49,7 +51,7 @@ const InvoiceEReceiptPage = () => {
     })
   }
 
-  console.log(form.getValues())
+  const columns = ColumnsItemFaktur()
 
   return (
     <>
@@ -78,8 +80,18 @@ const InvoiceEReceiptPage = () => {
                 minimumFractionDigits: 0,
               }).format(Number(reconciliation?.kwitansi?.jumlah))}
             </p>
-            <Progress value={33} className={'bg-white'} />
-            <p className={'text-white text-end'}>33%</p>
+            <Progress
+              value={
+                ((reconciliation?.total_faktur ?? 0) / (reconciliation?.kwitansi?.jumlah ?? 0)) *
+                100
+              }
+              className={'bg-white'}
+            />
+            <p className={'text-white text-end'}>
+              {((reconciliation?.total_faktur ?? 0) / (reconciliation?.kwitansi?.jumlah ?? 0)) *
+                100}
+              %
+            </p>
           </div>
         </div>
         <div className={'bg-white p-5 grid grid-cols-3 gap-4'}>
@@ -185,6 +197,10 @@ const InvoiceEReceiptPage = () => {
           </form>
         </Form>
       </div>
+
+      {reconciliation?.items && reconciliation?.items?.length > 0 && (
+        <TableCustom data={reconciliation?.items} columns={columns} />
+      )}
     </>
   )
 }

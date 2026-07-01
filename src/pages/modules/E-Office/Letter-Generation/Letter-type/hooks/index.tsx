@@ -42,3 +42,18 @@ export const UseGetDetailTypeLetter = (id: string) => {
   const loading = isLoading || isFetching
   return { letter: data, loading }
 }
+
+export const UseGetCodeAvailableLetter = () => {
+  const { data, isLoading, isFetching } = useQuery<{ data: string[] }>({
+    queryKey: ['code-letter-available'],
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get('/eoffice/mail-jenis-template-surat/kode-template').then(
+        (res) => res.data?.data
+      ),
+  })
+
+  const loading = isLoading || isFetching
+
+  return { codeAvailable: data, loading }
+}

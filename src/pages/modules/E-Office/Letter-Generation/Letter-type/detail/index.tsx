@@ -1,9 +1,10 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { UseGetDetailTypeLetter } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/hooks'
-import ButtonAddTypeTemplate from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail/component/buttonAdd.tsx'
 import { UseGetTypeTemplateLetter } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail/hooks'
 import ColumnsTypeTemplate from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail/data/columns.tsx'
+import ButtonCodeTemplateAvailable from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail/component/showTemplate.tsx'
+import ButtonAddTypeTemplate from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail/component/buttonAdd.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 
 const DetailLetterType = () => {
@@ -30,10 +31,20 @@ const DetailLetterType = () => {
           buttonGroup={[
             {
               type: 'custom',
+              element: <ButtonCodeTemplateAvailable />,
+            },
+            {
+              type: 'custom',
               element: <ButtonAddTypeTemplate />,
             },
           ]}
         />
+
+        <p className="text-blue-500">
+          NB: Sebelum menambahkan Jenis Surat, pastikan Kode Jenis Surat telah tersedia. Gunakan
+          kode yang sudah terdaftar untuk menjaga konsistensi data.
+        </p>
+
         <TableCustom data={typeTemplate} columns={columns} loading={loading} meta={meta} />
       </div>
     </>

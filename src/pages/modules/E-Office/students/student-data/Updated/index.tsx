@@ -23,7 +23,7 @@ const UpdatedStudentData = () => {
     if (studentData) {
       form.reset({
         nim: studentData.nim,
-        nama_mahasiswa: studentData.nama_mahasiswa,
+        nama_mahasiswa: studentData?.nama_mahasiswa,
         id_mahasiswa_unit: studentData.id_mahasiswa_unit,
         id_mahasiswa_status: studentData.id_mahasiswa_status,
         angkatan: studentData.angkatan,

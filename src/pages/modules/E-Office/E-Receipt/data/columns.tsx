@@ -32,7 +32,9 @@ export const ColumnsEreceipt = () => {
           <>
             <div className="grid grid-cols-[8rem_1fr] gap-2">
               <p>Status</p>
-              <p className={'font-semibold'}></p>
+              <p className={`font-semibold ${data?.is_status ? 'text-green-500' : 'text-red-500'}`}>
+                {data?.is_status ? 'Selesai' : 'Belum Selesai'}
+              </p>
               <p>No Kwitansi</p>
               <p className={'font-semibold'}>{data?.no_kwitansi}</p>
               <p>Tanggal Dibuat</p>

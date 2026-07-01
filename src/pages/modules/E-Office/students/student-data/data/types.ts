@@ -13,6 +13,8 @@ export interface IStudentData {
   nik: string
   jenis_kelamin: 'LAKI_LAKI' | 'PEREMPUAN' | string
   id_mahasiswa_agama: string
+  nama_jenjang_pendidikan: string
+  kode_jenjang_pendidikan: string
   tempat_lahir: string
   tanggal_lahir: string
   no_hp: string
@@ -35,4 +37,6 @@ export interface IStudentData {
   nama_jalur_masuk: string
   nama_agama: string
   semester_masuk_label: string
+  nama_fakultas: string
+  semester: string
 }
