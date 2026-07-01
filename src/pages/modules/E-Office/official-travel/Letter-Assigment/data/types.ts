@@ -91,7 +91,7 @@ export interface ILetterAssignmentEmployee {
 
   tanggal_berangkat: string
   tanggal_pulang: string
-
+  tanggal_lahir?: string
   no_spd: string | null
   urutan: number
 

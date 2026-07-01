@@ -12,6 +12,7 @@ import { GetBase64FromUrl } from '@/pages/modules/E-Office/settings/letter-heade
 import pdfmake from '@/utils/pdfmake.ts'
 import { Link, useParams } from 'react-router-dom'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
+import { UseGetTemplateByCodeLetter } from '@/pages/modules/E-Office/Letter-Generation/create-letter/hook'
 
 const CreateLetterByTemplate = () => {
   const { id } = useParams()
@@ -20,6 +21,7 @@ const CreateLetterByTemplate = () => {
   const [pdfUrl, setPdfUrl] = useState<string | null>(null)
   const [createdId, setCreatedId] = useState<string | null>(null)
   const pdfUrlRef = useRef<string | null>(null)
+  const { template } = UseGetTemplateByCodeLetter('U-1')
 
   const form = useForm<TLetterInvitationSchema>({
     resolver: zodResolver(LetterInvitationSchema) as any,
@@ -29,7 +31,6 @@ const CreateLetterByTemplate = () => {
     },
   })
 
-  // Cleanup blob URL saat dialog ditutup atau component unmount
   const cleanupPdfUrl = () => {
     if (pdfUrlRef.current) {
       URL.revokeObjectURL(pdfUrlRef.current)
@@ -42,7 +43,13 @@ const CreateLetterByTemplate = () => {
     return () => {
       cleanupPdfUrl()
     }
-  }, [])
+  }, [template])
+
+  useEffect(() => {
+    if (template) {
+      form.setValue('id_jenis_template_surat', template.id_mail_jenis_template_surat)
+    }
+  }, [template])
 
   const HandleSave = async (value: TLetterInvitationSchema) => {
     setLoading(true)
@@ -111,7 +118,12 @@ const CreateLetterByTemplate = () => {
   return (
     <>
       <div>
-        <FormCreateLetterCustomize form={form} loading={loading} HandleSave={HandleSave} />
+        <FormCreateLetterCustomize
+          template={template}
+          form={form}
+          loading={loading}
+          HandleSave={HandleSave}
+        />
       </div>
 
       <DialogBasic

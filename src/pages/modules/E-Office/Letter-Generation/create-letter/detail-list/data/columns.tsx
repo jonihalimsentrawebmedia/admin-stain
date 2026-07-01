@@ -29,7 +29,7 @@ const ColumnsCreateLetter = () => {
           <>
             <div className="flex gap-1.5 items-center justify-center">
               {data?.is_existing_template ? (
-                <Link to={`add/${data.id_mail_jenis_template_surat}`}>
+                <Link to={`${data.kode_template}`}>
                   <Button className={'text-white'}>Buat Surat</Button>
                 </Link>
               ) : (

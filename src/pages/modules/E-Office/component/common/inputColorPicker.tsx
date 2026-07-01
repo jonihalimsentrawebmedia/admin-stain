@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-const colors = [
+const colorsDef = [
   { value: '#FFC570', label: 'Orange' }, // Kuning/orange
   { value: '#9BD49E', label: 'Green' }, // Hijau
   { value: '#F88078', label: 'Red' }, // Merah
@@ -15,9 +15,11 @@ interface ColorPickerProps {
   value?: string
   onChange?: (color: string) => void
   label: string
+  colors?: { value: string; label: string }[]
 }
 
-export default function ColorPicker({ value, onChange, label }: ColorPickerProps) {
+export default function ColorPicker({ value, onChange, label, colors }: ColorPickerProps) {
+  const ColorsUse = colors ?? colorsDef
   const [selectedColor, setSelectedColor] = useState(value)
 
   const handleSelect = (color: string) => {
@@ -30,7 +32,7 @@ export default function ColorPicker({ value, onChange, label }: ColorPickerProps
       {label && <label className="text-sm font-medium text-gray-700 block">{label}</label>}
 
       <div className="flex items-center gap-3">
-        {colors.map((color) => (
+        {ColorsUse.map((color) => (
           <button
             key={color.value}
             type="button"

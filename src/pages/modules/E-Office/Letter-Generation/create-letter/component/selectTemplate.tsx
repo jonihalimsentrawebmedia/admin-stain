@@ -16,18 +16,19 @@ import DialogSelectText from '@/pages/modules/E-Office/Letter-Generation/create-
 interface Props {
   form: UseFormReturn<any>
   name: string
+  kode?: string
 }
 
 const SelectTemplateText = (props: Props) => {
-  const { form, name } = props
+  const { form, name, kode } = props
   const [open, setOpen] = useState(false)
   const [open2, setOpen2] = useState(false)
   const [idTemplate, setIdTemplate] = useState('')
-  const { id_mail, id } = useParams()
+  const { id } = useParams()
   const [filter, setFilter] = useState({
     search: '',
     page: '1',
-    id_selected: id_mail as string,
+    kode_template: kode as string,
   })
 
   const { typeTemplate, loading } = UseGetTypeTemplateLetter({
@@ -36,9 +37,7 @@ const SelectTemplateText = (props: Props) => {
     id_jenis_surat: id as string,
   })
 
-  const finding = typeTemplate?.find(
-    (row) => row?.id_mail_jenis_template_surat === filter.id_selected
-  )
+  const finding = typeTemplate?.find((row) => row?.kode_template === filter.kode_template)
 
   const { templateLetter } = UseGetTemplateLetter({
     page: '0',
@@ -98,28 +97,23 @@ const SelectTemplateText = (props: Props) => {
         Pilih Template
       </Button>
 
-      <DialogBasic
-        title={''}
-        open={open}
-        setOpen={setOpen}
-        className={'lg:min-w-4xl rounded'}
-      >
+      <DialogBasic title={''} open={open} setOpen={setOpen} className={'lg:min-w-4xl rounded'}>
         <div className="flex items-end gap-1.5 w-full">
           <SelectBasic
             label={'Jenis Surat'}
             placeholder={'Pilih Jenis Surat'}
             className={'flex flex-col gap-1 items-start justify-start'}
-            value={filter.id_selected}
+            value={filter.kode_template}
             onChange={(e) => {
               setFilter({
                 ...filter,
-                id_selected: e,
+                kode_template: e,
               })
             }}
             data={
               typeTemplate?.map((row) => ({
                 label: row?.nama_jenis_surat + ` ( ${row?.nama_jenis_template} )`,
-                value: row?.id_mail_jenis_template_surat,
+                value: row?.kode_template,
               })) ?? []
             }
           />

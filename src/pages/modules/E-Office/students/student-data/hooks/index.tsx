@@ -7,20 +7,12 @@ import type { IStudentData } from '../data/types.ts'
 interface props extends BasicProps {
   angkatan?: string
   id_jalur_masuk?: string
-  id_fakultas: string
-  id_prodi: string
+  id_fakultas?: string
+  id_prodi?: string
 }
 
 export const UseGetStudentData = (props?: props) => {
-  const {
-    search,
-    limit,
-    page,
-    angkatan,
-    id_jalur_masuk,
-    id_fakultas,
-    id_prodi,
-  } = props ?? {}
+  const { search, limit, page, angkatan, id_jalur_masuk, id_fakultas, id_prodi } = props ?? {}
 
   const Params = new URLSearchParams()
   if (page) Params.append('page', page ?? '1')
@@ -31,7 +23,11 @@ export const UseGetStudentData = (props?: props) => {
   if (id_fakultas) Params.append('id_fakultas', id_fakultas ?? '')
   if (id_prodi) Params.append('id_prodi', id_prodi ?? '')
 
-  const { data: queryData, isLoading, isFetching } = useQuery<{
+  const {
+    data: queryData,
+    isLoading,
+    isFetching,
+  } = useQuery<{
     data: IStudentData[]
     meta: Meta
   }>({
@@ -46,12 +42,15 @@ export const UseGetStudentData = (props?: props) => {
 }
 
 export const UseGetDetailStudentData = (id: string) => {
-  const { data: queryData, isLoading, isFetching } = useQuery<IStudentData>({
+  const {
+    data: queryData,
+    isLoading,
+    isFetching,
+  } = useQuery<IStudentData>({
     queryKey: ['student-data-detail', id],
     refetchOnWindowFocus: false,
     enabled: !!id,
-    queryFn: () =>
-      AxiosClient.get(`/eoffice/mahasiswa/${id}`).then((res) => res.data.data),
+    queryFn: () => AxiosClient.get(`/eoffice/mahasiswa/${id}`).then((res) => res.data.data),
   })
 
   const loading = isLoading || isFetching
@@ -60,13 +59,15 @@ export const UseGetDetailStudentData = (id: string) => {
 }
 
 export const UseGetYearLevel = () => {
-  const { data: queryData, isLoading, isFetching } = useQuery<number[]>({
+  const {
+    data: queryData,
+    isLoading,
+    isFetching,
+  } = useQuery<number[]>({
     queryKey: ['year-level'],
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get('/eoffice/mahasiswa/filter-tahun-angkatan').then(
-        (res) => res.data.data,
-      ),
+      AxiosClient.get('/eoffice/mahasiswa/filter-tahun-angkatan').then((res) => res.data.data),
   })
 
   const loading = isLoading || isFetching

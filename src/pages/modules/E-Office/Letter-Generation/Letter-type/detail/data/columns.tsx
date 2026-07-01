@@ -23,6 +23,22 @@ const ColumnsTypeTemplate = () => {
       header: 'Nama Jenis Surat',
     },
     {
+      accessorKey: 'kode_template',
+      header: 'Kode Template',
+    },
+    {
+      accessorKey: 'status',
+      header: 'Status Fitur',
+      cell: ({ row }) => {
+        const data = row?.original
+        return (
+          <p className={data?.is_existing_template ? 'text-green-500' : 'text-blue-500'}>
+            {data?.is_existing_template ? 'Tersedia' : 'Coming soon'}
+          </p>
+        )
+      },
+    },
+    {
       accessorKey: 'urutan',
       header: 'Urutan',
     },

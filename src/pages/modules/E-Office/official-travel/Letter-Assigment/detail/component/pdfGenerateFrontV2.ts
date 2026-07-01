@@ -42,17 +42,54 @@ export const GeneratePDFFrontV2 = (
     ? { margin: [40, 20, 40, 20] as [number, number, number, number], stack: kopContent }
     : undefined
 
-  // ─── Pengikut rows (row 8) ───
+  // ─── Pengikut rows (row 8) — maks 4 orang ───
   const pengikutRows = pegawaiList
-    .slice(1)
+    .slice(1, 5)
     .map((peg, i) => [
       '',
       `${String.fromCharCode(97 + i)}. ${peg.nama_lengkap}`,
-      '-',
+      peg.tanggal_lahir ? fmt(peg.tanggal_lahir) : '-',
       peg.jabatan_pegawai || '',
     ])
 
   const hasPengikut = pengikutRows.length > 0
+  const extraPengikut = pegawaiList.slice(5)
+  const hasLampiran = extraPengikut.length > 0
+
+  // ─── TTD Stack (reusable untuk halaman depan & lampiran) ───
+  const ttdStack = [
+    {
+      table: {
+        widths: ['40%', '60%'],
+        body: [
+          ['Dikeluarkan di', `: ${namaKabupaten}`],
+          ['Pada Tanggal', `: ${fmt(detail.tanggal_surat)}`],
+        ],
+      },
+      layout: 'noBorders' as const,
+      fontSize: 8.5,
+      margin: [0, 0, 0, 0] as [number, number, number, number],
+    },
+    ...(namaJabatanUtama
+      ? [
+          {
+            text: `an. ${namaJabatanUtama}`,
+            bold: true,
+            fontSize: 8.5,
+            margin: [0, 0, 0, 0] as [number, number, number, number],
+          },
+        ]
+      : []),
+    {
+      text: `${namaJabatanUtama || 'Pejabat Pembuat Komitmen'},`,
+      bold: true,
+      margin: [0, 0, 0, 40] as [number, number, number, number],
+    },
+    { text: namaPenandatangan, bold: true },
+    ...(nipPenandatangan.trim()
+      ? [{ text: `NIP. ${nipPenandatangan}`, alignment: 'left' as const }]
+      : []),
+  ]
 
   // ─── Single page content ───
   const page: any = {
@@ -344,37 +381,7 @@ export const GeneratePDFFrontV2 = (
           { width: '*', text: '' },
           {
             width: '50%',
-            stack: [
-              {
-                table: {
-                  widths: ['40%', '60%'],
-                  body: [
-                    ['Dikeluarkan di', `: ${namaKabupaten}`],
-                    ['Pada Tanggal', `: ${fmt(detail.tanggal_surat)}`],
-                  ],
-                },
-                layout: 'noBorders' as const,
-                fontSize: 8.5,
-                margin: [0, 0, 0, 0] as [number, number, number, number],
-              },
-              namaJabatanUtama
-                ? {
-                    text: `an. ${namaJabatanUtama}`,
-                    bold: true,
-                    fontSize: 8.5,
-                    margin: [0, 0, 0, 0] as [number, number, number, number],
-                  }
-                : {},
-              {
-                text: `${namaJabatanUtama || 'Pejabat Pembuat Komitmen'},`,
-                bold: true,
-                margin: [0, 0, 0, 40] as [number, number, number, number],
-              },
-              { text: namaPenandatangan, bold: true },
-              nipPenandatangan.trim()
-                ? { text: `NIP. ${nipPenandatangan}`, alignment: 'left' as const }
-                : {},
-            ],
+            stack: ttdStack,
             fontSize: 8.5,
           },
         ],
@@ -386,7 +393,112 @@ export const GeneratePDFFrontV2 = (
   return {
     pageSize: 'A4',
     header,
-    content: [page],
+
+    // ─── content: halaman depan + lampiran (jika ada) ───
+    content: hasLampiran
+      ? [
+          page,
+          {
+            stack: [
+              {
+                pageBreak: 'before' as const,
+                table: {
+                  widths: ['auto', '*'],
+                  body: [
+                    ['Lampiran SPPD Nomor', `: ${detail.nomor_surat ?? '-'}`],
+                    ['Tanggal ', `: ${fmt(detail.tanggal_surat)}`],
+                  ],
+                },
+                layout: 'noBorders' as const,
+                bold: true,
+                fontSize: 12,
+                margin: [0, 0, 0, 20] as [number, number, number, number],
+              },
+              {
+                table: {
+                  widths: ['8%', '23%', '30%', '22%', '17%'],
+                  body: [
+                    [
+                      { text: 'No', bold: true, alignment: 'center' as const },
+                      { text: 'NIP', bold: true, alignment: 'center' as const },
+                      { text: 'Nama', bold: true, alignment: 'center' as const },
+                      { text: 'Tanggal Lahir', bold: true, alignment: 'center' as const },
+                      { text: 'Jabatan', bold: true, alignment: 'center' as const },
+                    ],
+                    ...extraPengikut.map((peg, i) => [
+                      { text: `${i + 1}`, alignment: 'center' as const },
+                      peg.nip?.trim() || '-',
+                      peg.nama_lengkap,
+                      peg.tanggal_lahir ? fmt(peg.tanggal_lahir) : '-',
+                      peg.jabatan_pegawai || '-',
+                    ]),
+                  ],
+                },
+                layout: {
+                  hLineWidth: () => 0.5,
+                  vLineWidth: () => 0.5,
+                  hLineColor: () => 'black' as const,
+                  vLineColor: () => 'black' as const,
+                  paddingLeft: () => 4,
+                  paddingRight: () => 4,
+                  paddingTop: () => 3,
+                  paddingBottom: () => 3,
+                },
+                fontSize: 8.5,
+                margin: [0, 0, 0, 30] as [number, number, number, number],
+              },
+              {
+                table: {
+                  widths: ['*', '50%'],
+                  body: [
+                    [
+                      '',
+                      {
+                        stack: [
+                          {
+                            table: {
+                              widths: ['40%', '60%'],
+                              body: [
+                                ['Dikeluarkan di', `: ${namaKabupaten}`],
+                                ['Pada Tanggal', `: ${fmt(detail.tanggal_surat)}`],
+                              ],
+                            },
+                            layout: 'noBorders' as const,
+                            fontSize: 8.5,
+                            margin: [0, 0, 0, 0] as [number, number, number, number],
+                          },
+                          ...(namaJabatanUtama
+                            ? [
+                                {
+                                  text: `an. ${namaJabatanUtama}`,
+                                  bold: true,
+                                  fontSize: 8.5,
+                                  margin: [0, 0, 0, 0] as [number, number, number, number],
+                                },
+                              ]
+                            : []),
+                          {
+                            text: `${namaJabatanUtama || 'Pejabat Pembuat Komitmen'},`,
+                            bold: true,
+                            margin: [0, 0, 0, 40] as [number, number, number, number],
+                          },
+                          { text: namaPenandatangan, bold: true },
+                          ...(nipPenandatangan.trim()
+                            ? [{ text: `NIP. ${nipPenandatangan}` }]
+                            : []),
+                        ],
+                        fontSize: 8.5,
+                      },
+                    ],
+                  ],
+                },
+                layout: 'noBorders' as const,
+                margin: [0, 30, 0, 0] as [number, number, number, number],
+              },
+            ],
+          },
+        ]
+      : [page],
     pageMargins: [40, 120, 40, 40],
     defaultStyle: {
       fontSize: 9,

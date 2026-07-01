@@ -32,15 +32,7 @@ interface Props<T extends FieldValues> {
   isNumber?: boolean
   min?: number | string
   max?: number | string
-
-  /**
-   * Alpha HEXA
-   * FF = 100%
-   * CC = 80%
-   * 80 = 50%
-   * 40 = 25%
-   */
-  // alphaColor?: string
+  fx?: (e: any) => void
 }
 
 function TextInput<T extends FieldValues>({
@@ -56,30 +48,16 @@ function TextInput<T extends FieldValues>({
   isRequired,
   accept,
   inputClassName,
+  fx,
   isNumber,
   isDisabled,
   isRow = false,
-  // alphaColor = 'FF',
 }: Props<T>) {
   const [showPassword, setShowPassword] = useState(false)
 
   const isPassword = type === 'password'
 
   const { isMobile } = useMobile()
-
-  /**
-   * HEX -> HEXA
-   * #2563EB => #2563EBFF
-   */
-  // const hexToHexa = (hex: string) => {
-  //   const cleanHex = hex.slice(0, 7).toUpperCase()
-  //   return `${cleanHex}${alphaColor}`
-  // }
-
-  /**
-   * HEXA -> HEX
-   * #2563EBFF => #2563EB
-   */
   const hexaToHex = (hexa?: string) => {
     if (!hexa) return '#000000'
 
@@ -132,10 +110,6 @@ function TextInput<T extends FieldValues>({
                 }
                 onChange={(e) => {
                   let value: any = e.target.value
-
-                  /**
-                   * Color => HEXA
-                   */
                   if (type === 'color') {
                     field.onChange(hexaToHex(value))
                     return
@@ -143,7 +117,9 @@ function TextInput<T extends FieldValues>({
                   if (isNumber) {
                     value = value === '' ? '' : Number(value)
                   }
-
+                  if (fx) {
+                    fx(value)
+                  }
                   field.onChange(value)
                 }}
               />
