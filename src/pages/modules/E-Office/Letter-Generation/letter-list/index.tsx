@@ -14,6 +14,8 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { Button } from '@/components/ui/button.tsx'
+import { UseGetCodeAvailableLetter } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/hooks'
+import FilterSelect from '@/components/common/filter/filterBasic.tsx'
 
 const TABS_STATUS = [
   { value: 'MENUNGGU', label: 'Menunggu' },
@@ -30,17 +32,21 @@ const ListLetterGeneratePage = () => {
   const limit = searchParams.get('limit') ?? '10'
   const search = searchParams.get('search') ?? ''
   const status = searchParams.get('status') ?? 'MENUNGGU'
+  const id_template = searchParams.get('id_template') ?? ''
 
   const [selected, setSelected] = useState<string[]>([])
+  const { codeAvailable } = UseGetCodeAvailableLetter({
+    is_existing: true,
+  })
   const { letterTypeGenerate, meta, loading } = UseGetListLetterGenerate({
     page,
     limit,
     search,
     status: status as any,
+    id_template: id_template,
   })
 
   const columns = ColumnsLetterGenerate()
-
   const updateParams = (updates: Record<string, string>) => {
     const params = new URLSearchParams(searchParams)
     Object.entries(updates).forEach(([key, value]) => {
@@ -59,7 +65,7 @@ const ListLetterGeneratePage = () => {
 
   const queryClient = useQueryClient()
   const HandleStatusBulks = async (value: string) => {
-    await AxiosClient.patch('/eoffice/mail-surat-undangan/status', {
+    await AxiosClient.patch('/eoffice/mail-surat/status', {
       ids: [...selected],
       status: value,
     })
@@ -91,7 +97,6 @@ const ListLetterGeneratePage = () => {
         ]}
       />
 
-      {/* Status tabs */}
       <Tabs value={status} onValueChange={(e) => updateParams({ status: e, page: '1' })}>
         <TabsList className="w-full h-full bg-white rounded-none">
           {TABS_STATUS.map((item) => (
@@ -126,12 +131,26 @@ const ListLetterGeneratePage = () => {
                 />
                 <span className="text-sm text-gray-600">Data</span>
               </div>
-              <Search
-                className="w-72"
-                innerClassName="p-1.5 text-sm w-full bg-white focus:outline-none"
-                position="end"
-                onSearch={(e) => updateParams({ search: e })}
-              />
+              <div className="flex items-center gap-4">
+                <FilterSelect
+                  placeholder={'Pilih Jenis Surat'}
+                  className={'w-[250px]'}
+                  selectClassName={'w-[250px]'}
+                  data={
+                    codeAvailable?.map((row) => ({
+                      label: row.nama,
+                      value: row.id_mail_jenis_template_surat,
+                    })) ?? []
+                  }
+                  name={'id_template'}
+                />
+                <Search
+                  className="w-72"
+                  innerClassName="p-1.5 text-sm w-full bg-white focus:outline-none"
+                  position="end"
+                  onSearch={(e) => updateParams({ search: e })}
+                />
+              </div>
             </div>
 
             <div className="flex items-center justify-end mb-4 gap-2">
@@ -169,29 +188,39 @@ const ListLetterGeneratePage = () => {
             </div>
 
             {/* Table */}
-            <div className="bg-white rounded-md border overflow-hidden">
-              <TableBasicState
-                rowIdKey={'id_mail_surat_undangan'}
-                selected={selected}
-                onSelectedRowsChange={(e) => {
-                  setSelected(e)
-                }}
-                columns={columns}
-                data={letterTypeGenerate}
-                loading={loading}
-                thClassName="bg-primary text-white font-semibold text-sm"
-                tdClassName="py-3"
-              />
-            </div>
+            {id_template ? (
+              <>
+                <div className="bg-white rounded-md border overflow-hidden">
+                  <TableBasicState
+                    rowIdKey={'id'}
+                    selected={selected}
+                    onSelectedRowsChange={(e) => {
+                      setSelected(e)
+                    }}
+                    columns={columns}
+                    data={letterTypeGenerate}
+                    loading={loading}
+                    thClassName="bg-primary text-white font-semibold text-sm"
+                    tdClassName="py-3"
+                  />
+                </div>
 
-            {meta && (
-              <div className="mt-3">
-                <TablePaginate
-                  length={meta?.total}
-                  meta={meta}
-                  setPage={(e) => updateParams({ page: e })}
-                />
-              </div>
+                {meta && (
+                  <div className="mt-3">
+                    <TablePaginate
+                      length={meta?.total}
+                      meta={meta}
+                      setPage={(e) => updateParams({ page: e })}
+                    />
+                  </div>
+                )}
+              </>
+            ) : (
+              <>
+                <p className="text-blue-500 text-lg font-semibold">
+                  Pilih Jenis Surat untuk melihat data
+                </p>
+              </>
             )}
           </TabsContent>
         ))}

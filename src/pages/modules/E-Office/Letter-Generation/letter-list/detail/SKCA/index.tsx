@@ -1,12 +1,12 @@
 import { useParams } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 import AxiosClient from '@/provider/axios.tsx'
-import { GenerateLetterPdfDefinition } from '@/pages/modules/E-Office/Letter-Generation/create-letter/component/pdfconfig.ts'
+import { UseLetterDetailSKCA } from './hooks.tsx'
+import { GenerateLetterSKCA } from './pdfgenerate.ts'
 import type { ILetterHeader } from '@/pages/modules/E-Office/settings/letter-header/data/types.ts'
-import type { IMailInvitationLetter } from '@/pages/modules/E-Office/Letter-Generation/create-letter/data/types.ts'
+import type { ISKCALetter } from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKCA/types.ts'
 import { GetBase64FromUrl } from '@/pages/modules/E-Office/settings/letter-header/hooks'
 import pdfmake from '@/utils/pdfmake.ts'
-import { UseGetDetailLetterGenerate } from '@/pages/modules/E-Office/Letter-Generation/letter-list/hooks'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card.tsx'
 import { Button } from '@/components/ui/button.tsx'
@@ -18,18 +18,17 @@ import { toast } from 'react-toastify'
 import ButtonStatusOnce from '@/pages/modules/E-Office/Letter-Generation/letter-list/component/buttonStatus.tsx'
 import ButtonCancelStatus from '@/pages/modules/E-Office/Letter-Generation/letter-list/component/buttonCancel.tsx'
 
-const DetailLetterTemplate = () => {
-  const { id } = useParams<{ id: string }>()
-  const { letter, loading } = UseGetDetailLetterGenerate(id as string)
+const DetailDataSKCA = () => {
+  const { id } = useParams()
+  const { letter, loading } = UseLetterDetailSKCA(id as string)
 
   const [pdfUrl, setPdfUrl] = useState<string | null>(null)
   const [pdfLoading, setPdfLoading] = useState(false)
   const [downloadLoading, setDownloadLoading] = useState(false)
-  const [letterData, setLetterData] = useState<IMailInvitationLetter | null>(null)
+  const [letterData, setLetterData] = useState<ISKCALetter | null>(null)
   const [letterHeader, setLetterHeader] = useState<ILetterHeader | null>(null)
   const pdfUrlRef = useRef<string | null>(null)
 
-  // Cleanup blob URL
   const cleanupPdfUrl = () => {
     if (pdfUrlRef.current) {
       URL.revokeObjectURL(pdfUrlRef.current)
@@ -44,13 +43,11 @@ const DetailLetterTemplate = () => {
     }
   }, [])
 
-  // Generate PDF ketika data letter berubah
-  const generatePdf = async (data: IMailInvitationLetter) => {
+  const generatePdf = async (data: ISKCALetter) => {
     setPdfLoading(true)
     try {
       let headerData = letterHeader
 
-      // Fetch header jika belum ada
       if (!headerData && data?.id_satuan_organisasi) {
         const headerRes = await AxiosClient.get(`/eoffice/kop-surat/${data.id_satuan_organisasi}`)
         headerData = headerRes.data?.data
@@ -66,31 +63,33 @@ const DetailLetterTemplate = () => {
             logoBase64 = await GetBase64FromUrl(headerData.url_logo)
           }
         } catch (e) {
-          console.warn('[Detail] Gagal konversi logo ke base64:', e)
+          console.warn('[Detail SKCA] Gagal konversi logo ke base64:', e)
         }
 
         cleanupPdfUrl()
 
-        // logoBase64 dari GetBase64FromUrl sudah berupa data URL lengkap → pakai langsung
-        const pdfDefinition = GenerateLetterPdfDefinition(data, headerData, logoBase64)
+        const pdfDefinition = GenerateLetterSKCA({
+          data,
+          header: headerData,
+          logo: logoBase64,
+        })
         // @ts-ignore
         const blob = await pdfmake.createPdf(pdfDefinition).getBlob()
         const url = URL.createObjectURL(blob)
         pdfUrlRef.current = url
         setPdfUrl(url)
       } else {
-        console.warn('[Detail] Header kopsurat tidak ditemukan')
+        console.warn('[Detail SKCA] Header kopsurat tidak ditemukan')
         toast.warning('Header kopsurat tidak ditemukan')
       }
     } catch (err) {
-      console.error('[Detail] Gagal generate PDF:', err)
+      console.error('[Detail SKCA] Gagal generate PDF:', err)
       toast.error('Gagal generate PDF')
     } finally {
       setPdfLoading(false)
     }
   }
 
-  // Generate ulang ketika data letter siap
   useEffect(() => {
     if (letter && !letterData) {
       setLetterData(letter)
@@ -111,10 +110,14 @@ const DetailLetterTemplate = () => {
           logoBase64 = await GetBase64FromUrl(letterHeader.url_logo)
         }
       } catch (e) {
-        console.warn('[Download] Gagal konversi logo:', e)
+        console.warn('[Download SKCA] Gagal konversi logo:', e)
       }
 
-      const pdfDefinition = GenerateLetterPdfDefinition(letterData, letterHeader, logoBase64)
+      const pdfDefinition = GenerateLetterSKCA({
+        data: letterData,
+        header: letterHeader,
+        logo: logoBase64,
+      })
       // @ts-ignore
       const blob = await pdfmake.createPdf(pdfDefinition).getBlob()
       const link = document.createElement('a')
@@ -126,7 +129,7 @@ const DetailLetterTemplate = () => {
       URL.revokeObjectURL(link.href)
       toast.success('PDF berhasil di-download')
     } catch (err) {
-      console.error('[Download] Gagal download PDF:', err)
+      console.error('[Download SKCA] Gagal download PDF:', err)
       toast.error('Gagal download PDF')
     } finally {
       setDownloadLoading(false)
@@ -147,7 +150,7 @@ const DetailLetterTemplate = () => {
   if (loading) {
     return (
       <div className="space-y-5">
-        <ButtonTitleGroup isBack label={'Detail Surat Undangan'} buttonGroup={[]} />
+        <ButtonTitleGroup isBack label={`Detail ${letter?.nama_jenis_surat}`} buttonGroup={[]} />
         <Card>
           <CardHeader>
             <Skeleton className="h-6 w-48" />
@@ -178,7 +181,7 @@ const DetailLetterTemplate = () => {
   if (!letter) {
     return (
       <div className="space-y-5">
-        <ButtonTitleGroup isBack label={'Detail Surat Undangan'} buttonGroup={[]} />
+        <ButtonTitleGroup isBack label={'Detail Surat Keterangan Cuti Akademik'} buttonGroup={[]} />
         <Card>
           <CardContent className="py-10">
             <p className="text-center text-gray-500">Data surat tidak ditemukan</p>
@@ -207,7 +210,7 @@ const DetailLetterTemplate = () => {
     <div className="space-y-5">
       <ButtonTitleGroup
         isBack
-        label={'Detail Surat Undangan'}
+        label={'Detail Surat Keterangan Cuti Akademik'}
         buttonGroup={[
           {
             type: 'custom',
@@ -282,9 +285,6 @@ const DetailLetterTemplate = () => {
             <p className="text-gray-500">Jenis Surat</p>
             <p>{letter.nama_jenis_surat || '-'}</p>
 
-            <p className="text-gray-500">Perihal</p>
-            <p>{letter.perihal || '-'}</p>
-
             <p className="text-gray-500">Status</p>
             <p>
               <span
@@ -297,22 +297,14 @@ const DetailLetterTemplate = () => {
             <p className="text-gray-500">Tanggal Surat</p>
             <p>
               {letter.tanggal_surat
-                ? format(new Date(letter.tanggal_surat), 'dd MMMM yyyy', { locale: localeId })
+                ? format(new Date(letter.tanggal_surat), 'dd MMMM yyyy', {
+                    locale: localeId,
+                  })
                 : '-'}
             </p>
 
             <p className="text-gray-500">Tempat Surat</p>
             <p>{letter.tempat_surat || '-'}</p>
-
-            <p className="text-gray-500">Yang Terhormat</p>
-            <p
-              dangerouslySetInnerHTML={{
-                __html: letter.yang_terhormat || '-',
-              }}
-            />
-
-            <p className="text-gray-500">Di</p>
-            <p>{letter.di || '-'}</p>
 
             <p className="text-gray-500">Dibuat Oleh</p>
             <p>{letter.nama_user_created || '-'}</p>
@@ -323,21 +315,75 @@ const DetailLetterTemplate = () => {
             <p className="text-gray-500">Dibuat Pada</p>
             <p>
               {letter.created_at
-                ? format(new Date(letter.created_at), 'dd MMMM yyyy HH:mm', { locale: localeId })
+                ? format(new Date(letter.created_at), 'dd MMMM yyyy HH:mm', {
+                    locale: localeId,
+                  })
                 : '-'}
             </p>
 
             <p className="text-gray-500">Diupdate Pada</p>
             <p>
               {letter.updated_at
-                ? format(new Date(letter.updated_at), 'dd MMMM yyyy HH:mm', { locale: localeId })
+                ? format(new Date(letter.updated_at), 'dd MMMM yyyy HH:mm', {
+                    locale: localeId,
+                  })
                 : '-'}
             </p>
+          </div>
+
+          <hr className="my-4" />
+          <p className="text-gray-500 font-semibold mb-2">Data Penandatangan</p>
+          <div className="grid grid-cols-[12rem_1fr_12rem_1fr] gap-x-6 gap-y-3">
+            <p className="text-gray-500">Nama</p>
+            <p>{letter.nama_penandatangan || '-'}</p>
+
+            <p className="text-gray-500">NIP/NIDN</p>
+            <p>{letter.nip_penandatangan || '-'} / {letter.nidn_penandatangan || '-'}</p>
+
+            <p className="text-gray-500">Jabatan</p>
+            <p>{letter.jabatan_penandatangan || '-'}</p>
+
+            <p className="text-gray-500">Universitas</p>
+            <p>{letter.nama_satuan_kerja_penandatangan || '-'}</p>
+          </div>
+
+          <hr className="my-4" />
+          <p className="text-gray-500 font-semibold mb-2">Data Mahasiswa</p>
+          <div className="grid grid-cols-[12rem_1fr_12rem_1fr] gap-x-6 gap-y-3">
+            <p className="text-gray-500">Nama</p>
+            <p>{letter.nama_mahasiswa || '-'}</p>
+
+            <p className="text-gray-500">NPM/NIM</p>
+            <p>{letter.nim || '-'}</p>
+
+            <p className="text-gray-500">Program Studi</p>
+            <p>{letter.nama_prodi || '-'}</p>
+
+            <p className="text-gray-500">Fakultas</p>
+            <p>{letter.nama_fakultas || '-'}</p>
+
+            <p className="text-gray-500">Jenjang</p>
+            <p>{letter.nama_jenjang || '-'}</p>
+          </div>
+
+          <hr className="my-4" />
+          <p className="text-gray-500 font-semibold mb-2">Informasi Cuti</p>
+          <div className="grid grid-cols-[12rem_1fr_12rem_1fr] gap-x-6 gap-y-3">
+            <p className="text-gray-500">Semester</p>
+            <p>{letter.semester_cuti || '-'}</p>
+
+            <p className="text-gray-500">Tahun Akademik</p>
+            <p>{letter.tahun_akademik || '-'}</p>
+
+            <p className="text-gray-500">Periode</p>
+            <p>{letter.periode_cuti ? `${letter.periode_cuti} Semester` : '-'}</p>
+
+            <p className="text-gray-500">Alasan</p>
+            <p>{letter.alasan_cuti || '-'}</p>
           </div>
         </CardContent>
       </Card>
 
-      {/* Preview Surat */}
       <div className="flex items-start gap-4">
         <Card className="rounded w-1/2">
           <CardHeader className="flex flex-row items-center justify-between">
@@ -375,8 +421,8 @@ const DetailLetterTemplate = () => {
         </Card>
         <div>
           <p>
-            Surat Undangan akan ditulis berdasarkan data yang Anda masukkan. Harap periksa kembali
-            untuk menghindari kesalahan penulisan surat.
+            Surat Keterangan Cuti Akademik akan ditulis berdasarkan data yang Anda masukkan. Harap
+            periksa kembali untuk menghindari kesalahan penulisan surat.
           </p>
           <div className="flex items-center gap-2 mt-2">
             <ButtonStatusOnce from={'detail'} data={letter as any} />
@@ -388,4 +434,4 @@ const DetailLetterTemplate = () => {
   )
 }
 
-export default DetailLetterTemplate
+export default DetailDataSKCA

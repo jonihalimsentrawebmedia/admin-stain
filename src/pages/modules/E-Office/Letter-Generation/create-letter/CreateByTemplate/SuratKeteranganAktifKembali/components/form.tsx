@@ -14,20 +14,20 @@ import { UseGetLetterNumberAutomatic } from '@/pages/modules/E-Office/Letter-Gen
 import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan-unit/hooks.tsx'
 import DialogHumanResources from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifMahasiswa/components/selectSDM.tsx'
 import DialogSelectStudents from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifMahasiswa/components/selectStudent.tsx'
-import TextAreaInput from '@/components/common/form/textAreaInput.tsx'
 import SelectTemplateText from '@/pages/modules/E-Office/Letter-Generation/create-letter/component/selectTemplate.tsx'
 import { RichText } from '@/components/common/richtext'
-import type { TResolverSKAM } from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifMahasiswa/data/resolver.tsx'
+import { InputRadio } from '@/components/common/form/InputRadio.tsx'
+import type { TResolverSKAK } from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifKembali/data/resolver.tsx'
 import type { ILetterTemplateType } from '@/pages/modules/E-Office/Letter-Generation/create-letter/hook'
 
-interface props {
+interface Props {
   loading: boolean
-  HandleSave: (e: TResolverSKAM) => void
-  form: UseFormReturn<TResolverSKAM>
+  HandleSave: (e: TResolverSKAK) => void
+  form: UseFormReturn<TResolverSKAK>
   template?: ILetterTemplateType
 }
 
-const FormSuratKeteranganAktifMahasiswa = (props: props) => {
+const FormSuratKeteranganAktifKembali = (props: Props) => {
   const { id } = useParams()
   const { loading, HandleSave, form, template } = props
   const navigate = useNavigate()
@@ -40,7 +40,6 @@ const FormSuratKeteranganAktifMahasiswa = (props: props) => {
     page: '0',
     limit: '0',
   })
-  // const { humanResource } = UseGetHumanResource()
 
   return (
     <>
@@ -226,33 +225,34 @@ const FormSuratKeteranganAktifMahasiswa = (props: props) => {
                   <p>Semester *</p>
                   {form.watch('semester') ?? '-'}
                 </div>
-                <TextInput
-                  name={'tahun_akademik'}
-                  form={form}
-                  label={'Tahun Akademik'}
-                  placeholder={'Tahun Akademik'}
-                  htmlFor={'tahun_akademik'}
-                  isRow
-                  isRequired
-                />
               </CardContent>
             </Card>
 
             <Card className={'p-2'}>
-              <CardContent className={'p-2 space-y-4 w-full'}>
-                <CardTitle className={'text-xl flex items-center gap-1.5'}>
-                  3. Keperluan Surat
-                </CardTitle>
-
-                <TextAreaInput
-                  name={'keperluan_surat'}
-                  form={form}
-                  label={'Keperluan Surat'}
-                  placeholder={'Keperluan Surat'}
-                  htmlFor={'keperluan_surat'}
-                  isRow
-                  isRequired
-                />
+              <CardContent className={'p-2 space-y-4'}>
+                <CardTitle>3. Informasi Cuti</CardTitle>
+                <div className="space-y-4">
+                  <InputRadio
+                    form={form}
+                    name={'semester_cuti'}
+                    label={'Semester Cuti'}
+                    data={[
+                      { label: 'Ganjil', value: 'ganjil' },
+                      { label: 'Genap', value: 'genap' },
+                    ]}
+                    isRow
+                    isRequired
+                  />
+                  <TextInput
+                    name={'tahun_akademik'}
+                    form={form}
+                    label={'Tahun Akademik'}
+                    placeholder={'Tahun Akademik'}
+                    htmlFor={'tahun_akademik'}
+                    isRow
+                    isRequired
+                  />
+                </div>
               </CardContent>
             </Card>
 
@@ -262,7 +262,7 @@ const FormSuratKeteranganAktifMahasiswa = (props: props) => {
                 <div className="relative">
                   <SelectTemplateText
                     id_jenis_surat={template?.id_jenis_surat}
-                    kode={'SKAM-1'}
+                    kode={'SKAK-1'}
                     form={form}
                     name={'penutup'}
                   />
@@ -287,4 +287,4 @@ const FormSuratKeteranganAktifMahasiswa = (props: props) => {
   )
 }
 
-export default FormSuratKeteranganAktifMahasiswa
+export default FormSuratKeteranganAktifKembali

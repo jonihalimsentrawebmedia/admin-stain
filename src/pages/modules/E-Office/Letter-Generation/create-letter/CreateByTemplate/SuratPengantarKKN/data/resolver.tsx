@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const ResolverSPP = z.object({
+export const ResolverKKN = z.object({
   id_nomor_surat_otomatis: z.string({ error: 'Nomor Surat Otomatis harus diisi' }),
   nomor_urut_manual: z.string().nullable().optional(),
   tempat_surat: z.string({ error: 'Tempat Surat harus diisi' }),
@@ -8,37 +8,28 @@ export const ResolverSPP = z.object({
   id_kop_surat: z.string({ error: 'Kop Surat harus diisi' }),
   id_jenis_template_surat: z.string({ error: 'Jenis Template Surat harus diisi' }),
 
-  //
-  lampiran: z.number({ error: 'Jumlah Lampiran harus diisi' }),
-  perihal: z.string({ error: 'Perihal harus diisi' }),
+  lampiran: z.number({ error: 'Jumlah Lampiran harus diisi' }).min(1),
   detail_lampiran: z.array(z.string()),
-  instansi_pimpinan: z.string({ error: 'Instansi Pimpinan harus diisi' }),
+  perihal: z.string({ error: 'Perihal harus diisi' }),
+  nama_desa: z.string({ error: 'Nama Desa harus diisi' }),
+  kecamatan: z.string({ error: 'Kecamatan harus diisi' }),
+  kabupaten: z.string({ error: 'Kabupaten harus diisi' }),
   masukan_di: z.string({ error: 'Di Tempat harus diisi' }),
   pembuka: z.string({ error: 'Pembuka harus diisi' }),
 
-  //   mahasiswa
-  id_mahasiswa: z.string({ error: 'Mahasiswa harus diisi' }),
-  nama_mahasiswa: z.string().optional().nullable(),
-  nim: z.string().optional().nullable(),
-  prodi: z.string().optional().nullable(),
-  Fakultas: z.string().optional().nullable(),
-  jenjang: z.string().optional().nullable(),
-  semester: z.number().optional().nullable(),
+  id_mahasiswa: z.array(z.string(), { error: 'Mahasiswa harus diisi Minimal 1 Data' }),
 
-  //penelitian
-  judul_penelitian: z.string({ error: 'Judul Penelitian harus diisi' }),
-  lokasi_penelitian: z.string({ error: 'Lokasi Penelitian harus diisi' }),
-  lama_penelitian: z.string({ error: 'Lama Penelitian harus diisi' }),
-  metode_pengumpulan_data: z.array(z.enum(['observasi', 'wawancara', 'kuisioner', 'dokumentasi'])),
+  tanggal_mulai: z.string({ error: 'Tanggal Mulai harus diisi' }),
+  tanggal_selesai: z.string({ error: 'Tanggal Selesai harus diisi' }),
+  id_dpl: z.array(z.string(), { error: 'DPL harus diisi Minimal 1 Data' }),
 
   penutup: z.string({ error: 'Penutup harus diisi' }),
-
-  //penandatangan
   id_penandatangan: z.string({ error: 'Penandatangan harus diisi' }),
   nama_penandatangan: z.string({ error: 'Nama Penandatangan harus diisi' }),
+  nip_penandatangan: z.string().optional().nullable(),
   nidn_penandatangan: z.string().optional().nullable(),
   jabatan_penandatangan: z.string({ error: 'Jabatan Penandatangan harus diisi' }),
   id_satuan_kerja_penandatangan: z.string({ error: 'Satuan Kerja Penandatangan harus diisi' }),
 })
 
-export type TResolverSPP = z.infer<typeof ResolverSPP>
+export type TResolverKKN = z.infer<typeof ResolverKKN>

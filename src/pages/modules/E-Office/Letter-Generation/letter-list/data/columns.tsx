@@ -81,12 +81,12 @@ export const ColumnsLetterGenerate = () => {
         )
       },
       cell: ({ row }) => {
-        const { id_mail_surat_undangan } = row.original
+        const { id } = row.original
         return (
           <div className={'flex items-center gap-1.5'}>
             <input
               key={row.index}
-              disabled={!id_mail_surat_undangan}
+              disabled={!id}
               type="checkbox"
               checked={row.getIsSelected()}
               onChange={row.getToggleSelectedHandler()}
@@ -108,11 +108,11 @@ export const ColumnsLetterGenerate = () => {
     },
     {
       accessorKey: 'perihal',
-      header: 'Perihal',
+      header: 'Tempat Surat',
       cell: ({ row }) => {
         return (
           <span className="text-sm text-gray-700 line-clamp-2 max-w-[280px]">
-            {row.original.perihal}
+            {row.original.nama_kode_template}
           </span>
         )
       },
@@ -121,7 +121,7 @@ export const ColumnsLetterGenerate = () => {
       accessorKey: 'nama_jenis_surat',
       header: 'Jenis Surat',
       cell: ({ row }) => {
-        return <span className="text-sm text-gray-600">{row.original.nama_jenis_surat || '-'}</span>
+        return <span className="text-sm text-gray-600">{row.original.jenis_surat || '-'}</span>
       },
     },
     {
@@ -161,13 +161,13 @@ export const ColumnsLetterGenerate = () => {
         return (
           <div className="flex justify-end gap-2">
             <Link
-              to={`detail/${data?.id_mail_surat_undangan}`}
+              to={`detail/${data?.id}/${data.kode_template}`}
               className={'bg-blue-500 p-1.5 rounded text-white hover:bg-blue-600'}
             >
               <MdInfo />
             </Link>
             <Link
-              to={`edit/${data?.id_mail_surat_undangan}`}
+              to={`edit/${data?.id}/${data.kode_template}`}
               className={'bg-yellow-500 p-1.5 rounded text-white hover:bg-yellow-600'}
             >
               <HiPencil />

@@ -28,6 +28,16 @@ import SuratKeteranganAktifMahasiswaPage from '@/pages/modules/E-Office/Letter-G
 import SuratKeteranganCutiAkademikPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganCutiAkademik'
 import SuratPengantarPenelitianPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPengantarPenelitian'
 
+import UpdateSuratKeteranganAktifMahasiswaPage from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKAM/updated.tsx'
+import DetailSKCALetterPage from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKCA'
+import UpdateSuratKeteranganCutiAkademikPage from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKCA/update.tsx'
+import DetailDataSKAM from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKAM'
+import UpdateSuratPengantarPenelitianPage from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPP/update.tsx'
+import DetailLetterSPPPage from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPP'
+import SuratPermohonanMagangPKL from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPermohonanMagangPKL'
+import SuratPengantarKKN from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPengantarKKN'
+import SuratKeteranganAktifKembaliPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifKembali'
+
 const UserProfilePage = lazy(() =>
   import('@/pages/modules/website-utama/user-profile').then((m) => ({ default: m.UserProfilePage }))
 )
@@ -346,6 +356,18 @@ export const E_OFFICE_ROUTE = [
                 path: 'SPP-1',
                 element: <SuratPengantarPenelitianPage />,
               },
+              {
+                path: 'SPM-1',
+                element: <SuratPermohonanMagangPKL />,
+              },
+              {
+                path: 'SPK-1',
+                element: <SuratPengantarKKN />,
+              },
+              {
+                path: 'SKAK-1',
+                element: <SuratKeteranganAktifKembaliPage />,
+              },
             ],
           },
         ],
@@ -359,11 +381,45 @@ export const E_OFFICE_ROUTE = [
           },
           {
             path: 'detail/:id',
-            element: <DetailLetterTemplate />,
+            children: [
+              {
+                path: 'U-1',
+                element: <DetailLetterTemplate />,
+              },
+              {
+                path: 'SKAM-1',
+                element: <DetailDataSKAM />,
+              },
+              {
+                path: 'SKCA-1',
+                element: <DetailSKCALetterPage />,
+              },
+              {
+                path: 'SPP-1',
+                element: <DetailLetterSPPPage />,
+              },
+            ],
           },
           {
             path: 'edit/:id',
-            element: <UpdatedLetterByTemplate />,
+            children: [
+              {
+                path: 'U-1',
+                element: <UpdatedLetterByTemplate />,
+              },
+              {
+                path: 'SKAM-1',
+                element: <UpdateSuratKeteranganAktifMahasiswaPage />,
+              },
+              {
+                path: 'SKCA-1',
+                element: <UpdateSuratKeteranganCutiAkademikPage />,
+              },
+              {
+                path: 'SPP-1',
+                element: <UpdateSuratPengantarPenelitianPage />,
+              },
+            ],
           },
         ],
       },

@@ -9,22 +9,27 @@ import type { IMailInvitationLetter } from '@/pages/modules/E-Office/Letter-Gene
 
 interface Props extends BasicProps {
   status: 'MENUNGGU' | 'DIPROSES' | 'SELESAI' | 'DIBATALKAN' | 'DIHAPUS'
+  id_template: string
 }
 
 export const UseGetListLetterGenerate = (props: Props) => {
-  const { status, page, limit, search } = props
+  const { status, page, limit, search, id_template } = props
 
   const params = new URLSearchParams()
   if (page) params.append('page', page ?? '1')
   if (limit) params.append('limit', limit ?? '10')
   if (search) params.append('search', search ?? '')
   if (status) params.append('status', status ?? '')
+  if (id_template) params.append('id_jenis_template_surat', id_template ?? '')
 
-  const { data: queryData, isLoading, isFetching } = useQuery<{ data: IMailInvitationLetterList[]; meta: Meta }>({
+  const {
+    data: queryData,
+    isLoading,
+    isFetching,
+  } = useQuery<{ data: IMailInvitationLetterList[]; meta: Meta }>({
     queryKey: ['letter-generate', params.toString()],
     refetchOnWindowFocus: false,
-    queryFn: () =>
-      AxiosClient.get(`/eoffice/mail-surat-undangan?${params}`).then((res) => res.data),
+    queryFn: () => AxiosClient.get(`/eoffice/mail-surat?${params}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching

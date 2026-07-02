@@ -1,21 +1,22 @@
-import { useForm } from 'react-hook-form'
+import FormSuratPermohonanMagangPKL from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPermohonanMagangPKL/components/form.tsx'
 import { useEffect, useState } from 'react'
-import FormSuratKeteranganCutiAkademik from './components/form.tsx'
-import { ResolverSKCAM, type TResolverSKCAM } from './data/resolver.tsx'
+import { useForm } from 'react-hook-form'
+import {
+  ResolverLetterPKL,
+  type TResolverLetterPKL,
+} from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPermohonanMagangPKL/data/resolver.tsx'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { UseGetTemplateByCodeLetter } from '@/pages/modules/E-Office/Letter-Generation/create-letter/hook'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-import { UseGetTemplateByCodeLetter } from '@/pages/modules/E-Office/Letter-Generation/create-letter/hook'
 
-const SuratKeteranganCutiAkademikPage = () => {
+const SuratPermohonanMagangPKL = () => {
+  const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
-  const { template } = UseGetTemplateByCodeLetter('SKCA-1')
-  const form = useForm<TResolverSKCAM>({
-    resolver: zodResolver(ResolverSKCAM),
-    defaultValues: {
-      id_jenis_template_surat: template?.id_mail_jenis_template_surat,
-    },
+  const { template } = UseGetTemplateByCodeLetter('SPM-1')
+  const form = useForm<TResolverLetterPKL>({
+    resolver: zodResolver(ResolverLetterPKL),
   })
 
   useEffect(() => {
@@ -24,13 +25,13 @@ const SuratKeteranganCutiAkademikPage = () => {
     }
   }, [template])
 
-  const navigate = useNavigate()
-
-  const HandleSave = async (value: TResolverSKCAM) => {
+  const HandleSave = async (value: TResolverLetterPKL) => {
     setLoading(true)
-    await AxiosClient.post(`/eoffice/mail-surat-keterangan-cuti-akademik`, {
+    await AxiosClient.post(`/eoffice/mail-surat-permohonan-magang`, {
       ...value,
       tanggal_surat: new Date(value.tanggal_surat).toISOString(),
+      tanggal_mulai: new Date(value.tanggal_mulai).toISOString(),
+      tanggal_selesai: new Date(value.tanggal_selesai).toISOString(),
     })
       .then((res) => {
         if (res.data.status) {
@@ -50,14 +51,14 @@ const SuratKeteranganCutiAkademikPage = () => {
 
   return (
     <>
-      <FormSuratKeteranganCutiAkademik
+      <FormSuratPermohonanMagangPKL
         template={template}
-        form={form}
         loading={loading}
+        form={form}
         HandleSave={HandleSave}
       />
     </>
   )
 }
 
-export default SuratKeteranganCutiAkademikPage
+export default SuratPermohonanMagangPKL

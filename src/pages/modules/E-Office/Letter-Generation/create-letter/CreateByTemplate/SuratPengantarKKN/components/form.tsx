@@ -1,36 +1,39 @@
 import type { UseFormReturn } from 'react-hook-form'
 import type { ILetterTemplateType } from '@/pages/modules/E-Office/Letter-Generation/create-letter/hook'
-import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { Form } from '@/components/ui/form.tsx'
 import { useNavigate, useParams } from 'react-router-dom'
 import { UseGetLetterHeaderRef } from '@/pages/modules/E-Office/settings/letter-header/hooks'
 import { UseGetLetterNumberAutomatic } from '@/pages/modules/E-Office/Letter-Generation/code-letter/hooks'
 import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan-unit/hooks.tsx'
-import ButtonForm from '@/components/common/button/ButtonForm.tsx'
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Card, CardContent, CardTitle } from '@/components/ui/card.tsx'
-import SelectTemplateText from '@/pages/modules/E-Office/Letter-Generation/create-letter/component/selectTemplate.tsx'
-import { RichText } from '@/components/common/richtext'
-import DialogSelectStudents from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifMahasiswa/components/selectStudent.tsx'
-import TextInput from '@/components/common/form/TextInput.tsx'
-import DialogHumanResources from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifMahasiswa/components/selectSDM.tsx'
-import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import { FaRegFileAlt } from 'react-icons/fa'
+import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import { FiHash } from 'react-icons/fi'
+import TextInput from '@/components/common/form/TextInput.tsx'
 import { ReturnOrderData } from '@/pages/modules/E-Office/Letter-Generation/create-letter/component/formLetterNumber.tsx'
+import { RichText } from '@/components/common/richtext'
 import TextAreaInput from '@/components/common/form/textAreaInput.tsx'
-import { InputCheckbox } from '@/components/common/form/InputCheckbox.tsx'
-import type { TResolverSPP } from '../data/resolver.tsx'
+import SelectTemplateText from '@/pages/modules/E-Office/Letter-Generation/create-letter/component/selectTemplate.tsx'
+import { Form } from '@/components/ui/form.tsx'
+import DialogHumanResources from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifMahasiswa/components/selectSDM.tsx'
+import ButtonForm from '@/components/common/button/ButtonForm.tsx'
+import type { TResolverKKN } from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPengantarKKN/data/resolver.tsx'
+import SelectMultiStudent
+  from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPermohonanMagangPKL/components/SelectMultiStudent.tsx'
+import SelectMultiDosen
+  from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPengantarKKN/components/SelectMultiDosen.tsx'
 
 interface props {
   loading: boolean
-  HandleSave: (e: TResolverSPP) => void
-  form: UseFormReturn<TResolverSPP>
+  HandleSave: (e: TResolverKKN) => void
+  form: UseFormReturn<TResolverKKN>
   template?: ILetterTemplateType
 }
 
-const FormSuratPengantarPenelitian = (props: props) => {
+const FormSuratPengantarKKN = (props: props) => {
   const { id } = useParams()
   const { loading, HandleSave, form, template } = props
+
   const navigate = useNavigate()
   const { letterHeader } = UseGetLetterHeaderRef()
   const { letterNumber } = UseGetLetterNumberAutomatic({
@@ -191,12 +194,33 @@ const FormSuratPengantarPenelitian = (props: props) => {
                 />
                 <TextInput
                   form={form}
-                  name={'instansi_pimpinan'}
-                  label={'Instansi Pimpinan'}
-                  placeholder={'Instansi Pimpinan'}
-                  htmlFor={'Instansi Pimpinan'}
+                  name={'nama_desa'}
+                  label={'Nama Desa'}
+                  placeholder={'Nama Desa'}
+                  htmlFor={'nama_desa'}
                   inputClassName={'rounded'}
-                  className={'w-1/2'}
+                  isRow
+                  isRequired
+                />
+
+                <TextInput
+                  form={form}
+                  name={'kecamatan'}
+                  label={'Kecamatan'}
+                  placeholder={'Nama Kecamatan'}
+                  htmlFor={'kecamatan'}
+                  inputClassName={'rounded'}
+                  isRow
+                  isRequired
+                />
+
+                <TextInput
+                  form={form}
+                  name={'kabupaten'}
+                  label={'Kabupaten/Kota'}
+                  placeholder={'Nama Kabupaten/Kota'}
+                  htmlFor={'kabupaten_kota'}
+                  inputClassName={'rounded'}
                   isRow
                   isRequired
                 />
@@ -212,7 +236,7 @@ const FormSuratPengantarPenelitian = (props: props) => {
                   isRow
                 />
                 <div className="relative">
-                  <SelectTemplateText kode={'SPP-1'} form={form} name={'pembuka'} />
+                  <SelectTemplateText kode={'SPK-1'} form={form} name={'pembuka'} />
                   <RichText
                     form={form}
                     name={'pembuka'}
@@ -227,70 +251,38 @@ const FormSuratPengantarPenelitian = (props: props) => {
             </Card>
 
             <Card className={'p-2'}>
-              <CardContent className={'p-2 space-y-4 w-full'}>
-                <CardTitle className={'text-xl flex items-center gap-1.5'}>2. Mahasiswa</CardTitle>
-                <DialogSelectStudents form={form} />
-                <div className="grid grid-cols-[12rem_1fr] gap-5">
-                  <p>Nama *</p>
-                  {form.watch('nama_mahasiswa') ?? '-'}
-                  <p>NPM/NIM *</p>
-                  {form.watch('nim') ?? '-'}
-                  <p>Program Studi *</p>
-                  {form.watch('prodi') ?? '-'}
-                  <p>Fakultas *</p>
-                  {form.watch('Fakultas') ?? '-'}
-                  <p>Jenjang *</p>
-                  {form.watch('jenjang') ?? '-'}
-                </div>
+              <CardContent className={'p-2 space-y-4'}>
+                <CardTitle>2. Mahasiswa</CardTitle>
+                <SelectMultiStudent form={form} />
               </CardContent>
             </Card>
 
             <Card className={'p-2'}>
               <CardContent className={'p-2 space-y-4'}>
-                <CardTitle>3. Informasi Penelitian</CardTitle>
-                <div className="space-y-5">
+                <CardTitle>3. Informasi KKN</CardTitle>
+                <div className="grid grid-cols-2 gap-5 mt-5">
                   <TextInput
-                    name={'judul_penelitian'}
+                    name={'tanggal_mulai'}
                     form={form}
-                    label={'Judul Penelitian'}
-                    htmlFor={'judul_penelitian'}
-                    placeholder={'Judul Penelitian'}
+                    label={'Tanggal Mulai'}
+                    htmlFor={'tanggal_mulai'}
+                    type={'date'}
                     isRequired
                     isRow
                   />
                   <TextInput
-                    name={'lokasi_penelitian'}
+                    min={form.watch('tanggal_mulai')}
+                    name={'tanggal_selesai'}
                     form={form}
-                    label={'Lokasi Penelitian'}
-                    htmlFor={'lokasi_penelitian'}
-                    placeholder={'Lokasi Penelitian'}
+                    label={'Tanggal Selesai'}
+                    htmlFor={'tanggal_selesai'}
+                    type={'date'}
                     isRequired
                     isRow
-                  />
-                  <TextInput
-                    name={'lama_penelitian'}
-                    form={form}
-                    label={'Periode Penelitian'}
-                    htmlFor={'periode_penelitian'}
-                    placeholder={'Periode Penelitian'}
-                    isRequired
-                    isRow
-                  />
-
-                  <InputCheckbox
-                    form={form}
-                    name={'metode_pengumpulan_data'}
-                    label={'Metode Pengumpulan Data'}
-                    isRequired
-                    isRow
-                    data={[
-                      { label: 'Observasi', value: 'observasi' },
-                      { label: 'Wawancara', value: 'wawancara' },
-                      { label: 'Kuisioner', value: 'kuisioner' },
-                      { label: 'Dokumentasi', value: 'dokumentasi' },
-                    ]}
                   />
                 </div>
+
+                <SelectMultiDosen form={form} />
               </CardContent>
             </Card>
 
@@ -298,7 +290,7 @@ const FormSuratPengantarPenelitian = (props: props) => {
               <CardContent className={'p-2 space-y-4'}>
                 <CardTitle>4. Penutup</CardTitle>
                 <div className="relative">
-                  <SelectTemplateText kode={'SPP-1'} form={form} name={'penutup'} />
+                  <SelectTemplateText kode={'SPK-1'} form={form} name={'penutup'} />
                   <RichText
                     form={form}
                     name={'penutup'}
@@ -376,4 +368,4 @@ const FormSuratPengantarPenelitian = (props: props) => {
   )
 }
 
-export default FormSuratPengantarPenelitian
+export default FormSuratPengantarKKN

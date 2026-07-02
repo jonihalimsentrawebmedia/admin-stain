@@ -17,10 +17,12 @@ import {
 import { UseGetDetailLetterGenerate } from '@/pages/modules/E-Office/Letter-Generation/letter-list/hooks'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import { format } from 'date-fns'
+import { UseGetTemplateByCodeLetter } from '@/pages/modules/E-Office/Letter-Generation/create-letter/hook'
 
 const UpdatedLetterByTemplate = () => {
   const { id } = useParams()
   const { letter } = UseGetDetailLetterGenerate(id as string)
+  const { template } = UseGetTemplateByCodeLetter('U-1')
 
   const [loading, setLoading] = useState(false)
   const [openPdfDialog, setOpenPdfDialog] = useState(false)
@@ -124,7 +126,12 @@ const UpdatedLetterByTemplate = () => {
   return (
     <>
       <div>
-        <FormCreateLetterCustomize form={form} loading={loading} HandleSave={HandleSave} />
+        <FormCreateLetterCustomize
+          template={template}
+          form={form}
+          loading={loading}
+          HandleSave={HandleSave}
+        />
       </div>
 
       <DialogBasic

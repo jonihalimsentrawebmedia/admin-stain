@@ -9,20 +9,24 @@ import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import { format } from 'date-fns'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { IoIosCheckbox } from 'react-icons/io'
+import { useParams } from 'react-router-dom'
 
 interface props {
   data: IMailInvitationLetterList
+  from?: 'detail'
 }
 
 const ButtonStatusOnce = (props: props) => {
-  const { data } = props
+  const { data, from } = props
+  const { id } = useParams()
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
   const queryClient = useQueryClient()
   const HandleSave = async (value: string) => {
     setLoading(true)
-    await AxiosClient.patch(`/eoffice/mail-surat-undangan/${data?.id_mail_surat_undangan}/status`, {
+    const useId = from === 'detail' ? (id as string) : data.id
+    await AxiosClient.patch(`/eoffice/mail-surat/${useId}/status`, {
       status: value,
     })
       .then((res) => {
@@ -61,9 +65,9 @@ const ButtonStatusOnce = (props: props) => {
             <p className="text-gray-500">Nomor Surat</p>
             <p>{data?.nomor_surat}</p>
             <p className="text-gray-500">Jenis Surat</p>
-            <p>{data?.nama_jenis_surat || '-'}</p>
-            <p className="text-gray-500">Perihal Surat</p>
-            <p>{data?.perihal ?? '-'}</p>
+            <p>{data?.jenis_surat || '-'}</p>
+            <p className="text-gray-500">Nama Template</p>
+            <p>{data?.nama_kode_template ?? '-'}</p>
             <p className="text-gray-500">Tanggal Surat</p>
             <p>{data?.tanggal_surat ? format(data?.tanggal_surat, 'dd-MMMM-yyyy') : ''}</p>
             <p className="text-gray-500">Pembuat Surat</p>
@@ -115,9 +119,9 @@ const ButtonStatusOnce = (props: props) => {
             <p className="text-gray-500">Nomor Surat</p>
             <p>{data?.nomor_surat}</p>
             <p className="text-gray-500">Jenis Surat</p>
-            <p>{data?.nama_jenis_surat || '-'}</p>
-            <p className="text-gray-500">Perihal Surat</p>
-            <p>{data?.perihal ?? '-'}</p>
+            <p>{data?.jenis_surat || '-'}</p>
+            <p className="text-gray-500">Nama Template</p>
+            <p>{data?.nama_kode_template ?? '-'}</p>
             <p className="text-gray-500">Tanggal Surat</p>
             <p>{data?.tanggal_surat ? format(data?.tanggal_surat, 'dd-MMMM-yyyy') : ''}</p>
             <p className="text-gray-500">Pembuat Surat</p>

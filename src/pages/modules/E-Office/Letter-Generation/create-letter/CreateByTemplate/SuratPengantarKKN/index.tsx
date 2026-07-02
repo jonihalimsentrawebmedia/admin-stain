@@ -1,21 +1,20 @@
-import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
-import FormSuratKeteranganCutiAkademik from './components/form.tsx'
-import { ResolverSKCAM, type TResolverSKCAM } from './data/resolver.tsx'
+import { UseGetTemplateByCodeLetter } from '@/pages/modules/E-Office/Letter-Generation/create-letter/hook'
+import { useForm } from 'react-hook-form'
+import FormSuratPengantarKKN from './components/form.tsx'
+import { ResolverKKN, type TResolverKKN } from './data/resolver.tsx'
 import { zodResolver } from '@hookform/resolvers/zod'
 import AxiosClient from '@/provider/axios.tsx'
-import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-import { UseGetTemplateByCodeLetter } from '@/pages/modules/E-Office/Letter-Generation/create-letter/hook'
+import { toast } from 'react-toastify'
 
-const SuratKeteranganCutiAkademikPage = () => {
+const SuratPengantarKKN = () => {
+  const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
-  const { template } = UseGetTemplateByCodeLetter('SKCA-1')
-  const form = useForm<TResolverSKCAM>({
-    resolver: zodResolver(ResolverSKCAM),
-    defaultValues: {
-      id_jenis_template_surat: template?.id_mail_jenis_template_surat,
-    },
+  const { template } = UseGetTemplateByCodeLetter('SPK-1')
+
+  const form = useForm<TResolverKKN>({
+    resolver: zodResolver(ResolverKKN),
   })
 
   useEffect(() => {
@@ -24,19 +23,19 @@ const SuratKeteranganCutiAkademikPage = () => {
     }
   }, [template])
 
-  const navigate = useNavigate()
-
-  const HandleSave = async (value: TResolverSKCAM) => {
+  const HandleSave = async (value: TResolverKKN) => {
     setLoading(true)
-    await AxiosClient.post(`/eoffice/mail-surat-keterangan-cuti-akademik`, {
+    await AxiosClient.post(`/eoffice/mail-surat-pengantar-kkn`, {
       ...value,
       tanggal_surat: new Date(value.tanggal_surat).toISOString(),
+      tanggal_mulai: new Date(value.tanggal_mulai).toISOString(),
+      tanggal_selesai: new Date(value.tanggal_selesai).toISOString(),
     })
       .then((res) => {
-        if (res.data.status) {
+        if (res?.data.status) {
           setLoading(false)
-          form.reset()
           toast.success(res.data.message || 'Success')
+          form.reset()
           navigate(
             `/modules/e-office/letter-generation/letter-list?id_template=${template?.id_mail_jenis_template_surat}`
           )
@@ -50,14 +49,14 @@ const SuratKeteranganCutiAkademikPage = () => {
 
   return (
     <>
-      <FormSuratKeteranganCutiAkademik
-        template={template}
+      <FormSuratPengantarKKN
         form={form}
         loading={loading}
         HandleSave={HandleSave}
+        template={template}
       />
     </>
   )
 }
 
-export default SuratKeteranganCutiAkademikPage
+export default SuratPengantarKKN

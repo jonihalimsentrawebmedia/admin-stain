@@ -37,7 +37,11 @@ const DialogHumanResources = (props: Props) => {
   return (
     <>
       <Button
-        onClick={() => setOpen(!open)}
+        type={'button'}
+        onClick={(e) => {
+          e.preventDefault()
+          setOpen(!open)
+        }}
         variant={'outline'}
         className={'border-primary rounded-full text-primary hover:bg-primary hover:text-white'}
       >
