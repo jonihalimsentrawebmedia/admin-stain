@@ -43,12 +43,27 @@ export const UseGetDetailTypeLetter = (id: string) => {
   return { letter: data, loading }
 }
 
-export const UseGetCodeAvailableLetter = () => {
-  const { data, isLoading, isFetching } = useQuery<{ data: string[] }>({
-    queryKey: ['code-letter-available'],
+interface propsCode {
+  is_existing?: boolean
+}
+
+export const UseGetCodeAvailableLetter = (props?: propsCode) => {
+  const { is_existing } = props ?? {}
+
+  const Params = new URLSearchParams()
+  if (is_existing) Params.append('is_existing', is_existing.toString())
+
+  const { data, isLoading, isFetching } = useQuery<
+    Array<{
+      kode: string
+      nama: string
+      id_mail_jenis_template_surat: string
+    }>
+  >({
+    queryKey: ['code-letter-available', Params.toString()],
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient.get('/eoffice/mail-jenis-template-surat/kode-template').then(
+      AxiosClient.get(`/eoffice/mail-jenis-template-surat/kode-template?${Params}`).then(
         (res) => res.data?.data
       ),
   })

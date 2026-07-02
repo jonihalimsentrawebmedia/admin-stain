@@ -1,12 +1,17 @@
 export interface IMailInvitationLetterList {
-  id_mail_surat_undangan: string
+  id: string
+  jenis_surat: string
   nomor_surat: string
-  perihal: string
+  tempat_surat: string
   tanggal_surat: string
-  created_at: string
+  id_kop_surat: string
+  id_jenis_template_surat: string
   status: TMailStatus
-  id_jenis_surat: string
-  nama_jenis_surat: string
+  nama_jenis_template: string
+  kode_template: string
+  kategori_jenis_surat: string
+  nama_kode_template: string
+  created_at: string
   nama_user_created: string
 }
 

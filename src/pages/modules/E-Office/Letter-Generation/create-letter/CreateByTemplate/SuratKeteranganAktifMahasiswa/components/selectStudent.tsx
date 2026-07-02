@@ -37,7 +37,11 @@ const DialogSelectStudents = (props: Props) => {
   return (
     <>
       <Button
-        onClick={() => setOpen(!open)}
+        type={'button'}
+        onClick={(e) => {
+          e.preventDefault()
+          setOpen(!open)
+        }}
         variant={'outline'}
         className={'border-primary rounded-full text-primary hover:bg-primary hover:text-white'}
       >
@@ -129,7 +133,7 @@ const ReturnColumns = ({
       },
     },
     {
-      accessorKey: 'semester',
+      accessorKey: 'semester_masuk',
       header: 'Semester',
     },
     {
@@ -147,7 +151,7 @@ const ReturnColumns = ({
                 form.setValue('prodi', data?.nama_prodi ?? '')
                 form.setValue('Fakultas', data?.nama_fakultas??'')
                 form.setValue('jenjang', data?.nama_jenjang_pendidikan??'')
-                form.setValue('semester', data?.semester??'')
+                form.setValue('semester', data?.semester_masuk??'')
                 setOpen(!open)
               }}
               className={'text-white'}

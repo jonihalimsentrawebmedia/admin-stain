@@ -130,6 +130,7 @@ const CreateLetterByTemplate = () => {
         title="Preview Surat"
         open={openPdfDialog}
         setOpen={handleCloseDialog}
+        disableOutsideDialog={true}
         className={'min-w-5xl'}
       >
         <div className="w-full h-[80vh]">
@@ -139,7 +140,7 @@ const CreateLetterByTemplate = () => {
         </div>
         <Link
           className={'w-full flex items-center justify-end'}
-          to={`/modules/e-office/letter-generation/letter-list/detail/${createdId}`}
+          to={`/modules/e-office/letter-generation/letter-list/detail/${createdId}/U-1`}
         >
           <div className={'text-white rounded p-1.5 bg-primary'}>Lanjutkan</div>
         </Link>

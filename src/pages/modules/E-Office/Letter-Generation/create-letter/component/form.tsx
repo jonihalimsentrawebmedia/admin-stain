@@ -263,7 +263,12 @@ const FormCreateLetterCustomize = (props: props) => {
                 isRow
               />
               <div className="relative">
-                <SelectTemplateText kode={'U-1'} form={form} name={'pembuka'} />
+                <SelectTemplateText
+                  id_jenis_surat={template?.id_jenis_surat}
+                  kode={'U-1'}
+                  form={form}
+                  name={'pembuka'}
+                />
                 <RichText
                   form={form}
                   name={'pembuka'}

@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/button.tsx'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import { SelectBasic } from '@/components/common/select/basic.tsx'
 import Search from '@/components/common/table/Search.tsx'
-import { useParams } from 'react-router-dom'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import type { UseFormReturn } from 'react-hook-form'
 import { UseGetTemplateLetter } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail-template/hooks'
@@ -17,14 +16,14 @@ interface Props {
   form: UseFormReturn<any>
   name: string
   kode?: string
+  id_jenis_surat?: string
 }
 
 const SelectTemplateText = (props: Props) => {
-  const { form, name, kode } = props
+  const { form, name, kode, id_jenis_surat } = props
   const [open, setOpen] = useState(false)
   const [open2, setOpen2] = useState(false)
   const [idTemplate, setIdTemplate] = useState('')
-  const { id } = useParams()
   const [filter, setFilter] = useState({
     search: '',
     page: '1',
@@ -34,7 +33,7 @@ const SelectTemplateText = (props: Props) => {
   const { typeTemplate, loading } = UseGetTypeTemplateLetter({
     page: '0',
     limit: '0',
-    id_jenis_surat: id as string,
+    id_jenis_surat: id_jenis_surat as string,
   })
 
   const finding = typeTemplate?.find((row) => row?.kode_template === filter.kode_template)

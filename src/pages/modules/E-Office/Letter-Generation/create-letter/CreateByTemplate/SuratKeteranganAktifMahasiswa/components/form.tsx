@@ -260,7 +260,12 @@ const FormSuratKeteranganAktifMahasiswa = (props: props) => {
               <CardContent className={'p-2 space-y-4'}>
                 <CardTitle>4. Penutup</CardTitle>
                 <div className="relative">
-                  <SelectTemplateText kode={'SKAM-1'} form={form} name={'penutup'} />
+                  <SelectTemplateText
+                    id_jenis_surat={template?.id_jenis_surat}
+                    kode={'SKAM-1'}
+                    form={form}
+                    name={'penutup'}
+                  />
                   <RichText
                     form={form}
                     name={'penutup'}

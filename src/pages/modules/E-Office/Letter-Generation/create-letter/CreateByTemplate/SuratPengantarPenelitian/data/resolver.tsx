@@ -13,7 +13,7 @@ export const ResolverSPP = z.object({
   perihal: z.string({ error: 'Perihal harus diisi' }),
   detail_lampiran: z.array(z.string()),
   instansi_pimpinan: z.string({ error: 'Instansi Pimpinan harus diisi' }),
-  di_tempat: z.string({ error: 'Di Tempat harus diisi' }),
+  masukan_di: z.string({ error: 'Di Tempat harus diisi' }),
   pembuka: z.string({ error: 'Pembuka harus diisi' }),
 
   //   mahasiswa

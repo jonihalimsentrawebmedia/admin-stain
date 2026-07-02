@@ -23,7 +23,7 @@ const ButtonDeleteLetterGenerate = (props: props) => {
 
   const HandleSave = async () => {
     setLoading(true)
-    await AxiosClient.delete(`/eoffice/mail-surat-undangan/${data?.id_mail_surat_undangan}`)
+    await AxiosClient.delete(`/eoffice/mail-surat/${data?.id}`)
       .then((res) => {
         if (res.data.status) {
           setLoading(false)
@@ -54,10 +54,10 @@ const ButtonDeleteLetterGenerate = (props: props) => {
         <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
           <p className="text-gray-500">Nomor Surat</p>
           <p>{data?.nomor_surat || '-'}</p>
-          <p className="text-gray-500">Perihal</p>
-          <p>{data?.perihal || '-'}</p>
           <p className="text-gray-500">Jenis Surat</p>
-          <p>{data?.nama_jenis_surat || '-'}</p>
+          <p>{data?.jenis_surat || '-'}</p>
+          <p className="text-gray-500">Nama Template Surat</p>
+          <p>{data?.nama_kode_template || '-'}</p>
           <p className="text-gray-500">Tanggal Surat</p>
           <p>
             {data?.tanggal_surat

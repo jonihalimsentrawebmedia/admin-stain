@@ -202,7 +202,7 @@ const FormSuratPengantarPenelitian = (props: props) => {
                 />
 
                 <TextInput
-                  name={'di_tempat'}
+                  name={'masukan_di'}
                   form={form}
                   label={'Di '}
                   placeholder={'Cth: Ditempat'}
@@ -298,7 +298,7 @@ const FormSuratPengantarPenelitian = (props: props) => {
               <CardContent className={'p-2 space-y-4'}>
                 <CardTitle>4. Penutup</CardTitle>
                 <div className="relative">
-                  <SelectTemplateText kode={'SKCA-1'} form={form} name={'penutup'} />
+                  <SelectTemplateText kode={'SPP-1'} form={form} name={'penutup'} />
                   <RichText
                     form={form}
                     name={'penutup'}
