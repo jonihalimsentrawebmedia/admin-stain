@@ -27,12 +27,13 @@ import InvoiceEReceiptPage from '@/pages/modules/E-Office/E-Receipt/invoice'
 import SuratKeteranganAktifMahasiswaPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifMahasiswa'
 import SuratKeteranganCutiAkademikPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganCutiAkademik'
 import SuratPengantarPenelitianPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPengantarPenelitian'
-import DetailDataSKAM from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKAM'
+
 import UpdateSuratKeteranganAktifMahasiswaPage from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKAM/updated.tsx'
 import DetailSKCALetterPage from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKCA'
 import UpdateSuratKeteranganCutiAkademikPage from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKCA/update.tsx'
-import DetailLetterSPPPage from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPP'
+import DetailDataSKAM from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKAM'
 import UpdateSuratPengantarPenelitianPage from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPP/update.tsx'
+import DetailLetterSPPPage from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPP'
 
 const UserProfilePage = lazy(() =>
   import('@/pages/modules/website-utama/user-profile').then((m) => ({ default: m.UserProfilePage }))

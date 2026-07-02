@@ -17,7 +17,7 @@ import { toast } from 'react-toastify'
 import ButtonStatusOnce from '@/pages/modules/E-Office/Letter-Generation/letter-list/component/buttonStatus.tsx'
 import ButtonCancelStatus from '@/pages/modules/E-Office/Letter-Generation/letter-list/component/buttonCancel.tsx'
 
-const DetailDataSPP = () => {
+const DetailLetterSPPPage = () => {
   const { id } = useParams()
   const { letter, loading } = UseLetterDetailSPP(id as string)
 
@@ -436,4 +436,4 @@ const DetailDataSPP = () => {
   )
 }
 
-export default DetailDataSPP
+export default DetailLetterSPPPage
