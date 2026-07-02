@@ -40,7 +40,9 @@ const SuratKeteranganAktifMahasiswaPage = () => {
           setLoading(false)
           toast.success(res.data.message || 'Success')
           form.reset()
-          navigate('/modules/e-office/letter-generation/letter-list')
+          navigate(
+            `/modules/e-office/letter-generation/letter-list?id_template=${template?.id_mail_jenis_template_surat}`
+          )
         }
       })
       .catch((err) => {

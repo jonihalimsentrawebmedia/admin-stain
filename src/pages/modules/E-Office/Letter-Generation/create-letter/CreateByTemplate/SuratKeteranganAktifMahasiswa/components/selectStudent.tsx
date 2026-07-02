@@ -105,7 +105,7 @@ const ReturnColumns = ({
       },
     },
     {
-      accessorKey: 'nama',
+      accessorKey: 'nama_mahasiswa',
       header: 'Nama Mahasiswa',
     },
     {

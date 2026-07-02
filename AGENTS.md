@@ -256,3 +256,15 @@ Removed `useState` + `useEffect` that merely copied `useQuery` data into local s
 | `services/list/hooks/index.tsx` | `UseGetListService` |
 | `services/main/hooks/index.tsx` | `UseGetMainListService` |
 | `services/operational-hour/hooks/index.tsx` | `UseGetOperationalHour` |
+
+### 13. CreateByTemplate Letter Generation Pattern — SKAK Completion + Skill
+
+Completed **SuratKeteranganAktifKembali** (SKAK) following the established pattern from SKAM, SKCA, SPK, SPP, SPM:
+- `data/resolver.tsx` — added missing student display fields (`nama_mahasiswa`, `nim`, `prodi`, `Fakultas`, `jenjang`, `semester`)
+- `components/form.tsx` — new form with: Kop Surat, Penomoran Surat, Penandatangan (section 1), Mahasiswa (section 2, single-select via `DialogSelectStudents`), Informasi Cuti (section 3), Penutup (section 4)
+- `index.tsx` — new page component with template code `SKAK-1`, API endpoint `/eoffice/mail-surat-keterangan-aktif-kembali`
+
+Created `.opencode/skills/create-letter-template-pattern/SKILL.md` documenting the full pattern including:
+- Common 3-file structure (index.tsx, data/resolver.tsx, components/form.tsx)
+- Sub-pattern A (Academic Letters: SKAM/SKCA/SKAK — Penandatangan first) vs Sub-pattern B (Service Letters: SPP/SPK/SPM — Pembuka first, Penandatangan last)
+- Reusable shared components and template codes table

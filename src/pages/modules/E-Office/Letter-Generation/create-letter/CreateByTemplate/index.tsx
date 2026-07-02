@@ -19,7 +19,7 @@ const CreateLetterByTemplate = () => {
   const [loading, setLoading] = useState(false)
   const [openPdfDialog, setOpenPdfDialog] = useState(false)
   const [pdfUrl, setPdfUrl] = useState<string | null>(null)
-  const [createdId, setCreatedId] = useState<string | null>(null)
+  const [_, setCreatedId] = useState<string | null>(null)
   const pdfUrlRef = useRef<string | null>(null)
   const { template } = UseGetTemplateByCodeLetter('U-1')
 
@@ -86,15 +86,12 @@ const CreateLetterByTemplate = () => {
             // @ts-ignore
             const blob = await pdfmake.createPdf(pdfDefinition).getBlob()
             const url = URL.createObjectURL(blob)
-
-            // Cleanup URL sebelumnya jika ada
             cleanupPdfUrl()
 
             pdfUrlRef.current = url
             setPdfUrl(url)
             setOpenPdfDialog(true)
           } else {
-            console.warn('[HandleSave] Header kopsurat tidak ditemukan')
             toast.warning('Header kopsurat tidak ditemukan, PDF tidak dapat di-generate')
           }
         }
@@ -140,7 +137,8 @@ const CreateLetterByTemplate = () => {
         </div>
         <Link
           className={'w-full flex items-center justify-end'}
-          to={`/modules/e-office/letter-generation/letter-list/detail/${createdId}/U-1`}
+          to={`/modules/e-office/letter-generation/letter-list?id_template=${template?.id_mail_jenis_template_surat}`}
+          // to={`/modules/e-office/letter-generation/letter-list/detail/${createdId}/U-1`}
         >
           <div className={'text-white rounded p-1.5 bg-primary'}>Lanjutkan</div>
         </Link>
