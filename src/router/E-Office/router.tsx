@@ -40,6 +40,7 @@ import SuratKeteranganAktifKembaliPage from '@/pages/modules/E-Office/Letter-Gen
 import SuratBebasPustakaPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratBebasPustaka'
 import SuratKeteranganBebasKeuanganPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganBebasKeuangan'
 import SuratKeteranganBebasAkademikPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganBebasAkademik'
+import UpdatedSuratPermohonanMagangPKL from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPM/updated.tsx'
 
 const UserProfilePage = lazy(() =>
   import('@/pages/modules/website-utama/user-profile').then((m) => ({ default: m.UserProfilePage }))
@@ -337,7 +338,6 @@ export const E_OFFICE_ROUTE = [
           },
           {
             path: 'create/:id',
-            // element: <ListDetailGroupLetter />,
             children: [
               {
                 index: true,
@@ -433,6 +433,10 @@ export const E_OFFICE_ROUTE = [
               {
                 path: 'SPP-1',
                 element: <UpdateSuratPengantarPenelitianPage />,
+              },
+              {
+                path: 'SPM-1',
+                element: <UpdatedSuratPermohonanMagangPKL />,
               },
             ],
           },

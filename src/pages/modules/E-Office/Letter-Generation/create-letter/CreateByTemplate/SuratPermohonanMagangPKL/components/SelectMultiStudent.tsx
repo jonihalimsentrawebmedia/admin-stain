@@ -1,5 +1,5 @@
 import { useFieldArray, type UseFormReturn } from 'react-hook-form'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { UseGetStudentData } from '@/pages/modules/E-Office/students/student-data/hooks'
 import { MdDelete, MdSearch } from 'react-icons/md'
 import { Button } from '@/components/ui/button.tsx'
@@ -8,15 +8,24 @@ import PaginationState from '@/components/common/paginationState'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import type { ColumnDef } from '@tanstack/react-table'
 import type { IStudentData } from '@/pages/modules/E-Office/students/student-data/data/types.ts'
+import type { IDetailStudent } from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPM/types.ts'
 
 interface Props {
   form: UseFormReturn<any>
+  defaultStudents?: IDetailStudent[]
 }
 
 const SelectMultiStudent = (props: Props) => {
-  const { form } = props
+  const { form, defaultStudents } = props
   const [open, setOpen] = useState(false)
-  const [selectedStudents, setSelectedStudents] = useState<IStudentData[]>([])
+  const [selectedStudents, setSelectedStudents] = useState<IDetailStudent[]>([])
+
+  useEffect(() => {
+    if (defaultStudents && defaultStudents.length > 0) {
+      setSelectedStudents(defaultStudents ?? [])
+    }
+  }, [defaultStudents])
+
   const Stundet = useFieldArray({
     control: form.control,
     name: 'id_mahasiswa',
@@ -24,9 +33,7 @@ const SelectMultiStudent = (props: Props) => {
 
   const handleSelect = useCallback(
     (student: IStudentData) => {
-      const alreadySelected = selectedStudents.some(
-        (s) => s.id_mahasiswa === student.id_mahasiswa
-      )
+      const alreadySelected = selectedStudents.some((s) => s.id_mahasiswa === student.id_mahasiswa)
       if (alreadySelected) return
       Stundet.append(student.id_mahasiswa)
       setSelectedStudents((prev) => [...prev, student])
