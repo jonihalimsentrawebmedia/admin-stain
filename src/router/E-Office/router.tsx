@@ -37,6 +37,10 @@ import DetailLetterSPPPage from '@/pages/modules/E-Office/Letter-Generation/lett
 import SuratPermohonanMagangPKL from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPermohonanMagangPKL'
 import SuratPengantarKKN from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPengantarKKN'
 import SuratKeteranganAktifKembaliPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifKembali'
+import SuratBebasPustakaPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratBebasPustaka'
+import SuratKeteranganBebasKeuanganPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganBebasKeuangan'
+import SuratKeteranganBebasAkademikPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganBebasAkademik'
+import UpdatedSuratPermohonanMagangPKL from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPM/updated.tsx'
 
 const UserProfilePage = lazy(() =>
   import('@/pages/modules/website-utama/user-profile').then((m) => ({ default: m.UserProfilePage }))
@@ -334,7 +338,6 @@ export const E_OFFICE_ROUTE = [
           },
           {
             path: 'create/:id',
-            // element: <ListDetailGroupLetter />,
             children: [
               {
                 index: true,
@@ -367,6 +370,18 @@ export const E_OFFICE_ROUTE = [
               {
                 path: 'SKAK-1',
                 element: <SuratKeteranganAktifKembaliPage />,
+              },
+              {
+                path: 'SKBP-1',
+                element: <SuratBebasPustakaPage />,
+              },
+              {
+                path: 'SKBK-1',
+                element: <SuratKeteranganBebasKeuanganPage />,
+              },
+              {
+                path: 'SKBA-1',
+                element: <SuratKeteranganBebasAkademikPage />,
               },
             ],
           },
@@ -418,6 +433,10 @@ export const E_OFFICE_ROUTE = [
               {
                 path: 'SPP-1',
                 element: <UpdateSuratPengantarPenelitianPage />,
+              },
+              {
+                path: 'SPM-1',
+                element: <UpdatedSuratPermohonanMagangPKL />,
               },
             ],
           },
