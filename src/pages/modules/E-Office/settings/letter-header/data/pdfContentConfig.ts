@@ -244,21 +244,24 @@ export const buildKopSuratContent = (
     0,
   )
 
+  // Build first column stack separately to narrow imageUrl type
+  const firstColStack: Content[] = imageUrl
+    ? [
+        {
+          image: imageUrl,
+          fit: [logoSize, logoSize] as [number, number],
+          alignment: 'center',
+          margin: [0, logoTopMargin, 0, 0],
+        },
+      ]
+    : []
+
   // Columns: logo + text
   const headerColumns: Content = {
     columns: [
       {
         width: imageUrl ? logoColumnWidth : 0,
-        stack: imageUrl
-          ? [
-              {
-                image: imageUrl,
-                fit: [logoSize, logoSize] as [number, number],
-                alignment: 'center',
-                margin: [0, logoTopMargin, 0, 0],
-              },
-            ]
-          : [],
+        stack: firstColStack,
       },
       {
         width: '*',

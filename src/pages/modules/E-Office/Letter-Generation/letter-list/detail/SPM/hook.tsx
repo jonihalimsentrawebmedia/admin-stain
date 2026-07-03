@@ -4,7 +4,7 @@ import type { ISPMLetter } from './types.ts'
 
 export const UseLetterDetailSPM = (id: string) => {
   const { data, isLoading, isFetching } = useQuery<ISPMLetter>({
-    queryKey: ['letter-detail-spm'],
+    queryKey: ['letter-detail-spm', id],
     refetchOnWindowFocus: false,
     queryFn: () =>
       AxiosClient.get(`/eoffice/mail-surat-permohonan-magang/${id}`).then((res) => res.data.data),

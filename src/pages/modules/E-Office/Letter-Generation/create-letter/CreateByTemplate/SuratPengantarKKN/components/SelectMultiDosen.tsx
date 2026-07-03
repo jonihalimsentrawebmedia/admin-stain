@@ -1,5 +1,5 @@
 import { useFieldArray, type UseFormReturn } from 'react-hook-form'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import {
   type IHumanResource,
   UseGetHumanResource,
@@ -23,6 +23,15 @@ const SelectMultiDosen = (props: Props) => {
     control: form.control,
     name: 'id_dpl',
   }) as any
+
+  const Lecturer = form.watch('id_dpl')
+
+  useEffect(() => {
+    if (Lecturer){
+      const selectedDosen = humanResource.filter(dosen => Lecturer.includes(dosen.id_sdm))
+      setSelectedDosen(selectedDosen)
+    }
+  }, [Lecturer])
 
   const handleSelect = useCallback(
     (dosen: IHumanResource) => {
