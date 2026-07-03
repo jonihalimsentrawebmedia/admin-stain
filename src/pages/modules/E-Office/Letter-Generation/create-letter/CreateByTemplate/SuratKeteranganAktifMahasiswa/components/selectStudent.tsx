@@ -10,6 +10,10 @@ import PaginationState from '@/components/common/paginationState'
 import type { UseFormReturn } from 'react-hook-form'
 import { UseGetStudentStatusLetter } from '@/pages/modules/E-Office/reference/studentStatusLetter/hook.tsx'
 import type { IStudentDataStatus } from '@/pages/modules/E-Office/reference/studentStatusLetter/types.ts'
+import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan-unit/hooks.tsx'
+import { UseGetYearLevel } from '@/pages/modules/E-Office/students/student-data/hooks'
+import { UseGetAdmissionProcess } from '@/pages/modules/E-Office/students/admission-process/hooks'
+import { SelectBasic } from '@/components/common/select/basic.tsx'
 
 interface Props {
   form: UseFormReturn<any>
@@ -22,13 +26,31 @@ const DialogSelectStudents = (props: Props) => {
     page: '1',
     limit: '10',
     search: '',
+    id_fakultas: '',
+    id_prodi: '',
+    angkatan: '',
+    jalur_masuk: '',
   })
+  const { institution } = UseGetUnitInstitution({
+    kelompok: 'FAKULTAS',
+  })
+  const { institution: prodi } = UseGetUnitInstitution({
+    kelompok: 'PRODI',
+    parent_id: filter.id_fakultas ?? '',
+  })
+  const { yearLevel } = UseGetYearLevel()
+  const { admissionProcess } = UseGetAdmissionProcess({ page: '0', limit: '0' })
+
   const { student, meta } = UseGetStudentStatusLetter({
     page: filter.page,
     limit: filter.limit,
     search: filter.search,
-    tanggal_mulai: form.watch('tanggal_mulai') ?? '',
-    tanggal_selesai: form.watch('tanggal_selesai') ?? '',
+    tanggal_mulai: form.getValues('tanggal_mulai') ?? '',
+    tanggal_selesai: form.getValues('tanggal_selesai') ?? '',
+    id_fakultas: filter.id_fakultas ?? '',
+    id_prodi: filter.id_prodi ?? '',
+    angkatan: filter.angkatan ?? '',
+    jalur_masuk: filter.jalur_masuk ?? '',
   })
   const Columns = ReturnColumns({
     form,
@@ -52,6 +74,93 @@ const DialogSelectStudents = (props: Props) => {
       </Button>
 
       <DialogBasic title={'Pilih Mahasiswa'} open={open} setOpen={setOpen} className={'min-w-5xl'}>
+        <div className="grid grid-cols-2 gap-4">
+          <SelectBasic
+            showReset
+            value={filter.id_fakultas}
+            onChange={(e) => {
+              console.log(e)
+              setFilter((prev) => ({
+                ...prev,
+                id_fakultas: e,
+              }))
+            }}
+            className={'grid grid-cols-[7rem_1fr] items-center gap-2 w-full'}
+            innerClassName={'w-full'}
+            isRow
+            label={'Fakultas'}
+            placeholder={'Pilih Fakultas'}
+            data={
+              institution?.map((row) => ({
+                label: row.nama,
+                value: row.id_satuan_organisasi,
+              })) ?? []
+            }
+          />
+          <SelectBasic
+            showReset
+            value={filter.id_prodi}
+            className={'grid grid-cols-[7rem_1fr] items-center gap-2 w-full'}
+            innerClassName={'w-full'}
+            onChange={(e) => {
+              setFilter((prev) => ({
+                ...prev,
+                id_prodi: e,
+              }))
+            }}
+            isRow
+            label={'Prodi'}
+            placeholder={'Pilih Prodi'}
+            data={
+              prodi?.map((row) => ({
+                label: row.nama,
+                value: row.id_satuan_organisasi,
+              })) ?? []
+            }
+          />
+          <SelectBasic
+            showReset
+            value={filter.angkatan}
+            className={'grid grid-cols-[7rem_1fr] items-center gap-2 w-full'}
+            innerClassName={'w-full'}
+            onChange={(e) => {
+              setFilter((prev) => ({
+                ...prev,
+                angkatan: e,
+              }))
+            }}
+            isRow
+            label={'angkatan'}
+            placeholder={'Pilih angkatan'}
+            data={
+              yearLevel?.map((row) => ({
+                label: row.toString(),
+                value: row.toString(),
+              })) ?? []
+            }
+          />
+          <SelectBasic
+            showReset
+            value={filter.jalur_masuk}
+            className={'grid grid-cols-[7rem_1fr] items-center gap-2 w-full'}
+            innerClassName={'w-full'}
+            onChange={(e) => {
+              setFilter((prev) => ({
+                ...prev,
+                jalur_masuk: e,
+              }))
+            }}
+            isRow
+            label={'Jalur Masuk'}
+            placeholder={'Pilih Jalur Masuk'}
+            data={[
+              ...(admissionProcess?.map((row) => ({
+                label: row.nama,
+                value: row.id_mahasiswa_jalur_masuk,
+              })) ?? []),
+            ]}
+          />
+        </div>
         <div>
           <TableCustom
             columns={Columns}

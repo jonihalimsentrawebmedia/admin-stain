@@ -121,7 +121,7 @@ const ReturnColumns = ({
       header: 'Jabatan',
     },
     {
-      accessorKey: 'Satuan Kerja',
+      accessorKey: 'nama_unit_kerja',
       header: 'Satuan Kerja',
     },
     {
@@ -138,7 +138,7 @@ const ReturnColumns = ({
                 form.setValue('nip_penandatangan', data?.nip ?? '')
                 form.setValue('nidn_penandatangan', data?.nidn ?? '')
                 form.setValue('jabatan_penandatangan', data?.jabatan?.[0] ?? '')
-                form.setValue('satuan_kerja_penandatangan', data?.id_satuan_kerja ?? '')
+                form.setValue('id_satuan_kerja_penandatangan', data?.id_unit_kerja ?? '')
                 setOpen(!open)
               }}
               className={'text-white'}

@@ -7,10 +7,23 @@ import type { Meta } from '@/components/common/paginationState'
 interface Props extends BasicProps {
   tanggal_mulai?: string
   tanggal_selesai?: string
+  id_fakultas?: string
+  id_prodi?: string
+  angkatan?: string
+  jalur_masuk?: string
 }
 
 export const UseGetStudentStatusLetter = (props?: Props) => {
-  const { page, limit, search, tanggal_selesai, tanggal_mulai } = props ?? {}
+  const {
+    page,
+    limit,
+    search,
+    tanggal_selesai,
+    tanggal_mulai,
+    id_prodi,
+    id_fakultas,
+    jalur_masuk,
+  } = props ?? {}
 
   const Params = new URLSearchParams()
   if (page) Params.append('page', page ?? '1')
@@ -18,6 +31,9 @@ export const UseGetStudentStatusLetter = (props?: Props) => {
   if (search) Params.append('search', search ?? '')
   if (tanggal_mulai) Params.append('tanggal_mulai', tanggal_mulai ?? '')
   if (tanggal_selesai) Params.append('tanggal_selesai', tanggal_selesai ?? '')
+  if (id_prodi) Params.append('id_prodi', id_prodi ?? '')
+  if (id_fakultas) Params.append('id_fakultas', id_fakultas ?? '')
+  if (jalur_masuk) Params.append('id_jalur_masuk', jalur_masuk ?? '')
 
   const { data, isLoading, isFetching } = useQuery<{
     data: IStudentDataStatus[]

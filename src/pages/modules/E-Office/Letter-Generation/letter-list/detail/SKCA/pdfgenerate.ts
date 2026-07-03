@@ -147,7 +147,7 @@ export const GenerateLetterSKCA = ({
       },
 
       {
-        margin: [5, 0, 0, 5],
+        margin: [15, 0, 0, 5],
         ul: [
           {
             columns: [

@@ -97,7 +97,13 @@ const ListLetterGeneratePage = () => {
         ]}
       />
 
-      <Tabs value={status} onValueChange={(e) => updateParams({ status: e, page: '1' })}>
+      <Tabs
+        value={status}
+        onValueChange={(e) => {
+          updateParams({ status: e, page: '1' })
+          setSelected([])
+        }}
+      >
         <TabsList className="w-full h-full bg-white rounded-none">
           {TABS_STATUS.map((item) => (
             <TabsTrigger
