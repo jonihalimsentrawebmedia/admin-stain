@@ -15,6 +15,7 @@ export interface IHumanResource {
   nidn: string
   id_satuan_kerja: string
   tanggal_lahir: string
+  id_unit_kerja: string
 }
 
 export const UseGetHumanResource = (props?: BasicProps) => {

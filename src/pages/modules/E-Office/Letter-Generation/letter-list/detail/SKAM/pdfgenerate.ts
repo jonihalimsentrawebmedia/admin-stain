@@ -29,7 +29,7 @@ const buildPenutup = (penutup: string | undefined | null) => {
       {
         text: 'Demikian surat keterangan ini dibuat agar dapat dipergunakan sebagaimana mestinya.',
         alignment: 'justify' as const,
-        margin: [0, 15, 0, 30] as [number, number, number, number],
+        margin: [0, 5, 0, 10] as [number, number, number, number],
       },
     ]
   }
@@ -55,13 +55,13 @@ export const GenerateLetterSKAM = ({
 
   return {
     pageSize: 'A4',
-    pageMargins: [20, 30, 30, 20],
+    pageMargins: [40, 20, 40, 20],
 
     defaultStyle: {
       font: 'Times New Roman',
       fontSize: 12,
       alignment: 'justify',
-      lineHeight: 1.35,
+      lineHeight: 1.2,
     },
 
     content: [
@@ -79,17 +79,17 @@ export const GenerateLetterSKAM = ({
         text: `Nomor : ${data.nomor_surat}`,
         alignment: 'center',
         bold: false,
-        margin: [0, 0, 0, 10],
+        margin: [0, 0, 0, 5],
       },
 
       {
         text: 'Yang bertanda tangan di bawah ini:',
-        margin: [0, 0, 0, 10],
+        margin: [0, 0, 0, 5],
       },
 
       {
         table: {
-          widths: [95, 10, '*'],
+          widths: [80, 5, '*'],
           body: [
             [{ text: 'Nama', bold: true }, ':', data.nama_penandatangan],
             [
@@ -110,12 +110,12 @@ export const GenerateLetterSKAM = ({
 
       {
         text: 'Dengan ini menerangkan bahwa:',
-        margin: [0, 15, 0, 10],
+        margin: [0, 5, 0, 5],
       },
 
       {
         table: {
-          widths: [95, 10, '*'],
+          widths: [80, 5, '*'],
           body: [
             [{ text: 'Nama', bold: true }, ':', data.nama_mahasiswa],
             [{ text: 'NPM/NIM', bold: true }, ':', data.nim],
@@ -146,7 +146,7 @@ export const GenerateLetterSKAM = ({
       },
 
       {
-        margin: [0, 12, 0, 0],
+        margin: [0, 5, 0, 0],
         alignment: 'justify',
         text: [
           'Adalah benar mahasiswa ',
@@ -166,7 +166,7 @@ export const GenerateLetterSKAM = ({
       {
         text: `Surat keterangan ini dibuat untuk keperluan : ${data.keperluan_surat}.`,
         alignment: 'justify',
-        margin: [0, 10, 0, 0],
+        margin: [0, 5, 0, 0],
       },
 
       ...buildPenutup(data.penutup),

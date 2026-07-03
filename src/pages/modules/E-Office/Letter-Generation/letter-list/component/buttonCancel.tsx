@@ -55,7 +55,7 @@ const ButtonCancelStatus = (props: props) => {
         Batalkan Surat
       </Button>
 
-      <DialogBasic title={'Selesaikan Surat'} open={open} setOpen={setOpen}>
+      <DialogBasic title={'Batalkan Surat'} open={open} setOpen={setOpen}>
         <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
           <p className="text-gray-500">Nomor Surat</p>
           <p>{data?.nomor_surat}</p>
