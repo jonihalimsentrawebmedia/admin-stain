@@ -1,28 +1,34 @@
-import FormSuratPermohonanMagangPKL from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPermohonanMagangPKL/components/form.tsx'
 import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
-import {
-  ResolverLetterPKL,
-  type TResolverLetterPKL,
-} from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPermohonanMagangPKL/data/resolver.tsx'
-import { zodResolver } from '@hookform/resolvers/zod'
 import { UseGetTemplateByCodeLetter } from '@/pages/modules/E-Office/Letter-Generation/create-letter/hook'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import AxiosClient from '@/provider/axios.tsx'
-import { toast } from 'react-toastify'
 import { useNavigate, useParams } from 'react-router-dom'
-import { UseLetterDetailSPM } from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPM/hook.tsx'
+import { toast } from 'react-toastify'
+import FormSuratPengantarKKN from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPengantarKKN/components/form.tsx'
+import {
+  ResolverKKN,
+  type TResolverKKN,
+} from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPengantarKKN/data/resolver.tsx'
+import { UseLetterDetailSPK } from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPK/hook.tsx'
 import { format } from 'date-fns'
 
-const UpdatedSuratPermohonanMagangPKL = () => {
+const UpdatedSuratPengantarKKN = () => {
   const { id } = useParams()
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
 
-  const { letter } = UseLetterDetailSPM(id as string)
-  const { template } = UseGetTemplateByCodeLetter('SPM-1')
-  const form = useForm<TResolverLetterPKL>({
-    resolver: zodResolver(ResolverLetterPKL),
+  const { letter } = UseLetterDetailSPK(id as string)
+  const { template } = UseGetTemplateByCodeLetter('SPK-1')
+  const form = useForm<TResolverKKN>({
+    resolver: zodResolver(ResolverKKN),
   })
+
+  useEffect(() => {
+    if (template) {
+      form.setValue('id_jenis_template_surat', template?.id_mail_jenis_template_surat)
+    }
+  }, [template])
 
   useEffect(() => {
     if (letter) {
@@ -32,20 +38,15 @@ const UpdatedSuratPermohonanMagangPKL = () => {
         tanggal_mulai: format(letter?.tanggal_mulai, 'yyyy-MM-dd'),
         tanggal_selesai: format(letter?.tanggal_selesai, 'yyyy-MM-dd'),
         id_mahasiswa: letter?.id_mahasiswa ?? [],
+        id_dpl: letter?.id_dpl ?? [],
       })
     }
   }, [letter])
 
-  useEffect(() => {
-    if (template) {
-      form.setValue('id_jenis_template_surat', template?.id_mail_jenis_template_surat)
-    }
-  }, [template])
-
-  const HandleSave = async (value: TResolverLetterPKL) => {
+  const HandleSave = async (value: TResolverKKN) => {
     setLoading(true)
     await AxiosClient.put(
-      `/eoffice/mail-surat-permohonan-magang/${letter?.id_mail_surat_permohonan_magang}`,
+      `/eoffice/mail-surat-pengantar-kkn/${letter?.id_mail_surat_pengantar_kkn}`,
       {
         ...value,
         tanggal_surat: new Date(value.tanggal_surat).toISOString(),
@@ -54,10 +55,10 @@ const UpdatedSuratPermohonanMagangPKL = () => {
       }
     )
       .then((res) => {
-        if (res.data.status) {
+        if (res?.data.status) {
           setLoading(false)
-          form.reset()
           toast.success(res.data.message || 'Success')
+          form.reset()
           navigate(
             `/modules/e-office/letter-generation/letter-list?id_template=${template?.id_mail_jenis_template_surat}`
           )
@@ -71,14 +72,14 @@ const UpdatedSuratPermohonanMagangPKL = () => {
 
   return (
     <>
-      <FormSuratPermohonanMagangPKL
-        template={template}
-        loading={loading}
+      <FormSuratPengantarKKN
         form={form}
+        loading={loading}
         HandleSave={HandleSave}
+        template={template}
       />
     </>
   )
 }
 
-export default UpdatedSuratPermohonanMagangPKL
+export default UpdatedSuratPengantarKKN

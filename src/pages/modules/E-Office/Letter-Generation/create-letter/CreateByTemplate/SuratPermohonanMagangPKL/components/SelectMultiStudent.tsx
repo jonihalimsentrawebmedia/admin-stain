@@ -1,75 +1,90 @@
 import { useFieldArray, type UseFormReturn } from 'react-hook-form'
-import { useCallback, useEffect, useState } from 'react'
-import { UseGetStudentData } from '@/pages/modules/E-Office/students/student-data/hooks'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { MdDelete, MdSearch } from 'react-icons/md'
 import { Button } from '@/components/ui/button.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import PaginationState from '@/components/common/paginationState'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import type { ColumnDef } from '@tanstack/react-table'
-import type { IStudentData } from '@/pages/modules/E-Office/students/student-data/data/types.ts'
-import type { IDetailStudent } from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPM/types.ts'
+import { UseGetStudentStatusLetter } from '@/pages/modules/E-Office/reference/studentStatusLetter/hook.tsx'
+import type { IStudentDataStatus } from '@/pages/modules/E-Office/reference/studentStatusLetter/types.ts'
 
 interface Props {
   form: UseFormReturn<any>
-  defaultStudents?: IDetailStudent[]
 }
 
 const SelectMultiStudent = (props: Props) => {
-  const { form, defaultStudents } = props
+  const { form } = props
   const [open, setOpen] = useState(false)
-  const [selectedStudents, setSelectedStudents] = useState<IDetailStudent[]>([])
-
-  useEffect(() => {
-    if (defaultStudents && defaultStudents.length > 0) {
-      setSelectedStudents(defaultStudents ?? [])
-    }
-  }, [defaultStudents])
-
-  const Stundet = useFieldArray({
-    control: form.control,
-    name: 'id_mahasiswa',
-  }) as any
-
-  const handleSelect = useCallback(
-    (student: IStudentData) => {
-      const alreadySelected = selectedStudents.some((s) => s.id_mahasiswa === student.id_mahasiswa)
-      if (alreadySelected) return
-      Stundet.append(student.id_mahasiswa)
-      setSelectedStudents((prev) => [...prev, student])
-    },
-    [Stundet, selectedStudents]
-  )
-
-  const handleDelete = useCallback(
-    (index: number) => {
-      Stundet.remove(index)
-      setSelectedStudents((prev) => prev.filter((_, i) => i !== index))
-    },
-    [Stundet]
-  )
-
-  const selectedIds = selectedStudents.map((s) => s.id_mahasiswa)
-
-  const dialogColumns = ReturnDialogColumns({
-    onSelect: handleSelect,
-    selectedIds,
-  })
-
-  const selectedColumns = ReturnSelectedColumns({
-    onDelete: handleDelete,
-  })
-
+  const [selectedStudents, setSelectedStudents] = useState<IStudentDataStatus[]>([])
   const [filter, setFilter] = useState({
     page: '1',
     limit: '10',
     search: '',
   })
-  const { studentData, meta } = UseGetStudentData({
+
+  const Stundent = useFieldArray({
+    control: form.control,
+    name: 'id_mahasiswa',
+  }) as any
+  const Stundents = form.watch('id_mahasiswa')
+
+  console.log(form.watch('tanggal_mulai'))
+  console.log(form.watch('tanggal_selesai'))
+
+  const { student, meta } = UseGetStudentStatusLetter({
     page: filter.page,
     limit: filter.limit,
     search: filter.search,
+    tanggal_mulai: form.getValues('tanggal_mulai') ?? '',
+    tanggal_selesai: form.getValues('tanggal_selesai') ?? '',
   })
+
+  useEffect(() => {
+    if (Stundents?.length && student?.length) {
+      const filtered = student.filter((student) => Stundents.includes(student.id_mahasiswa))
+      setSelectedStudents((prev) => {
+        if (
+          prev.length === filtered.length &&
+          prev.every((s, i) => s.id_mahasiswa === filtered[i]?.id_mahasiswa)
+        ) {
+          return prev
+        }
+        return filtered
+      })
+    }
+  }, [Stundents])
+
+  const handleSelect = useCallback(
+    (student: IStudentDataStatus) => {
+      Stundent.append(student.id_mahasiswa)
+      setSelectedStudents((prev) => {
+        if (prev.some((s) => s.id_mahasiswa === student.id_mahasiswa)) return prev
+        return [...prev, student]
+      })
+    },
+    [Stundent]
+  )
+
+  const handleDelete = useCallback(
+    (index: number) => {
+      Stundent.remove(index)
+      setSelectedStudents((prev) => prev.filter((_, i) => i !== index))
+    },
+    [Stundent]
+  )
+
+  const selectedIds = useMemo(() => selectedStudents.map((s) => s.id_mahasiswa), [selectedStudents])
+
+  const dialogColumns = useMemo(
+    () => ReturnDialogColumns({ onSelect: handleSelect, selectedIds }),
+    [handleSelect, selectedIds]
+  )
+
+  const selectedColumns = useMemo(
+    () => ReturnSelectedColumns({ onDelete: handleDelete }),
+    [handleDelete]
+  )
 
   return (
     <>
@@ -106,7 +121,7 @@ const SelectMultiStudent = (props: Props) => {
             meta={meta}
             columnsName={['']}
             thClassName={'bg-primary text-white'}
-            data={studentData}
+            data={student}
             isShowPagination={false}
             isShowFilter={false}
           />
@@ -137,10 +152,10 @@ const ReturnDialogColumns = ({
   onSelect,
   selectedIds,
 }: {
-  onSelect: (student: IStudentData) => void
+  onSelect: (student: IStudentDataStatus) => void
   selectedIds: string[]
 }) => {
-  const Columns: ColumnDef<IStudentData>[] = [
+  const Columns: ColumnDef<IStudentDataStatus>[] = [
     {
       accessorKey: 'order',
       header: '#',
@@ -185,7 +200,7 @@ const ReturnDialogColumns = ({
       header: '',
       cell: ({ row }) => {
         const data = row.original
-        const isSelected = selectedIds.includes(data.id_mahasiswa)
+        const isSelected = selectedIds.includes(data.id_mahasiswa) || !data.is_available_kkn_magang
         return (
           <>
             <Button onClick={() => onSelect(data)} disabled={isSelected} className={'text-white'}>
@@ -200,7 +215,7 @@ const ReturnDialogColumns = ({
 }
 
 const ReturnSelectedColumns = ({ onDelete }: { onDelete: (index: number) => void }) => {
-  const Columns: ColumnDef<IStudentData>[] = [
+  const Columns: ColumnDef<IStudentDataStatus>[] = [
     {
       accessorKey: 'order',
       header: '#',

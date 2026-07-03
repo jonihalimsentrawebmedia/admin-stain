@@ -41,6 +41,17 @@ import SuratBebasPustakaPage from '@/pages/modules/E-Office/Letter-Generation/cr
 import SuratKeteranganBebasKeuanganPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganBebasKeuangan'
 import SuratKeteranganBebasAkademikPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganBebasAkademik'
 import UpdatedSuratPermohonanMagangPKL from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPM/updated.tsx'
+import UpdatedSuratPengantarKKN from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPK/updated.tsx'
+import UpdatedSuratKeteranganAktifKembaliPage from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKAK/updated.tsx'
+import UpdatedSuratBebasPustakaPage from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKBP/updated.tsx'
+import UpdatedSuratKeteranganBebasKeuanganPage from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKBK/updated.tsx'
+import UpdatedSuratKeteranganBebasAkademikPage from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKBA/updated.tsx'
+import DetailSuratPermohonanMagang from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPM'
+import DetailSuratPengantarKKN from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPK'
+import DetailDataSKAK from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKAK'
+import DetailDataSKBP from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKBP'
+import DetailDataSKBK from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKBK'
+import DetailDataSKBA from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKBA'
 
 const UserProfilePage = lazy(() =>
   import('@/pages/modules/website-utama/user-profile').then((m) => ({ default: m.UserProfilePage }))
@@ -413,6 +424,30 @@ export const E_OFFICE_ROUTE = [
                 path: 'SPP-1',
                 element: <DetailLetterSPPPage />,
               },
+              {
+                path: 'SPM-1',
+                element: <DetailSuratPermohonanMagang />,
+              },
+              {
+                path: 'SPK-1',
+                element: <DetailSuratPengantarKKN />,
+              },
+              {
+                path: 'SKAK-1',
+                element: <DetailDataSKAK />,
+              },
+              {
+                path: 'SKBP-1',
+                element: <DetailDataSKBP />,
+              },
+              {
+                path: 'SKBK-1',
+                element: <DetailDataSKBK />,
+              },
+              {
+                path: 'SKBA-1',
+                element: <DetailDataSKBA />,
+              },
             ],
           },
           {
@@ -437,6 +472,26 @@ export const E_OFFICE_ROUTE = [
               {
                 path: 'SPM-1',
                 element: <UpdatedSuratPermohonanMagangPKL />,
+              },
+              {
+                path: 'SPK-1',
+                element: <UpdatedSuratPengantarKKN />,
+              },
+              {
+                path: 'SKAK-1',
+                element: <UpdatedSuratKeteranganAktifKembaliPage />,
+              },
+              {
+                path: 'SKBP-1',
+                element: <UpdatedSuratBebasPustakaPage />,
+              },
+              {
+                path: 'SKBK-1',
+                element: <UpdatedSuratKeteranganBebasKeuanganPage />,
+              },
+              {
+                path: 'SKBA-1',
+                element: <UpdatedSuratKeteranganBebasAkademikPage />,
               },
             ],
           },

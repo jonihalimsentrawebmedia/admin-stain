@@ -4,7 +4,7 @@ import type { ISKCALetter } from './types.ts'
 
 export const UseLetterDetailSKCA = (id: string) => {
   const { data, isLoading, isFetching } = useQuery<ISKCALetter>({
-    queryKey: ['letter-detail-skca'],
+    queryKey: ['letter-detail-skca',id],
     refetchOnWindowFocus: false,
     queryFn: () =>
       AxiosClient.get(`/eoffice/mail-surat-keterangan-cuti-akademik/${id}`).then(

@@ -8,8 +8,8 @@ import type { ColumnDef } from '@tanstack/react-table'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import PaginationState from '@/components/common/paginationState'
 import type { UseFormReturn } from 'react-hook-form'
-import { UseGetStudentData } from '@/pages/modules/E-Office/students/student-data/hooks'
-import type { IStudentData } from '@/pages/modules/E-Office/students/student-data/data/types.ts'
+import { UseGetStudentStatusLetter } from '@/pages/modules/E-Office/reference/studentStatusLetter/hook.tsx'
+import type { IStudentDataStatus } from '@/pages/modules/E-Office/reference/studentStatusLetter/types.ts'
 
 interface Props {
   form: UseFormReturn<any>
@@ -23,10 +23,12 @@ const DialogSelectStudents = (props: Props) => {
     limit: '10',
     search: '',
   })
-  const { studentData, meta } = UseGetStudentData({
+  const { student, meta } = UseGetStudentStatusLetter({
     page: filter.page,
     limit: filter.limit,
     search: filter.search,
+    tanggal_mulai: form.watch('tanggal_mulai') ?? '',
+    tanggal_selesai: form.watch('tanggal_selesai') ?? '',
   })
   const Columns = ReturnColumns({
     form,
@@ -49,19 +51,14 @@ const DialogSelectStudents = (props: Props) => {
         Pilih Mahasiswa
       </Button>
 
-      <DialogBasic
-        title={'Pilih Mahasiswa'}
-        open={open}
-        setOpen={setOpen}
-        className={'min-w-5xl'}
-      >
+      <DialogBasic title={'Pilih Mahasiswa'} open={open} setOpen={setOpen} className={'min-w-5xl'}>
         <div>
           <TableCustom
             columns={Columns}
             meta={meta}
             columnsName={['']}
             thClassName={'bg-primary text-white'}
-            data={studentData}
+            data={student}
             isShowPagination={false}
             isShowFilter={false}
           />
@@ -96,7 +93,7 @@ const ReturnColumns = ({
   open: boolean
   setOpen: Dispatch<SetStateAction<boolean>>
 }) => {
-  const Columns: ColumnDef<IStudentData>[] = [
+  const Columns: ColumnDef<IStudentDataStatus>[] = [
     {
       accessorKey: 'order',
       header: '#',
@@ -144,14 +141,15 @@ const ReturnColumns = ({
         return (
           <>
             <Button
+              disabled={!data?.is_available_kkn_magang}
               onClick={() => {
                 form.setValue('id_mahasiswa', data.id_mahasiswa ?? '')
                 form.setValue('nama_mahasiswa', data.nama_mahasiswa ?? '')
                 form.setValue('nim', data?.nim ?? '')
                 form.setValue('prodi', data?.nama_prodi ?? '')
-                form.setValue('Fakultas', data?.nama_fakultas??'')
-                form.setValue('jenjang', data?.nama_jenjang_pendidikan??'')
-                form.setValue('semester', data?.semester_masuk??'')
+                form.setValue('Fakultas', data?.nama_fakultas ?? '')
+                form.setValue('jenjang', data?.nama_jenjang_pendidikan ?? '')
+                form.setValue('semester', data?.semester_masuk ?? '')
                 setOpen(!open)
               }}
               className={'text-white'}

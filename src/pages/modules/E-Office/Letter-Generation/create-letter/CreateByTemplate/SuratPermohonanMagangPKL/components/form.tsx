@@ -20,19 +20,17 @@ import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import TextAreaInput from '@/components/common/form/textAreaInput.tsx'
 import SelectMultiStudent from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPermohonanMagangPKL/components/SelectMultiStudent.tsx'
 import { addMonths, differenceInCalendarDays, differenceInMonths, parseISO } from 'date-fns'
-import type { IDetailStudent } from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPM/types.ts'
 
 interface props {
   loading: boolean
   HandleSave: (e: TResolverLetterPKL) => void
   form: UseFormReturn<TResolverLetterPKL>
   template?: ILetterTemplateType
-  studentList?: IDetailStudent[]
 }
 
 const FormSuratPermohonanMagangPKL = (props: props) => {
   const { id } = useParams()
-  const { loading, HandleSave, form, template, studentList } = props
+  const { loading, HandleSave, form, template } = props
   const navigate = useNavigate()
   const { letterHeader } = UseGetLetterHeaderRef()
   const { letterNumber } = UseGetLetterNumberAutomatic({
@@ -257,14 +255,7 @@ const FormSuratPermohonanMagangPKL = (props: props) => {
 
             <Card className={'p-2'}>
               <CardContent className={'p-2 space-y-4'}>
-                <CardTitle>2. Mahasiswa</CardTitle>
-                <SelectMultiStudent form={form} defaultStudents={studentList} />
-              </CardContent>
-            </Card>
-
-            <Card className={'p-2'}>
-              <CardContent className={'p-2 space-y-4'}>
-                <CardTitle>3. Informasi Kegiatan</CardTitle>
+                <CardTitle>2. Informasi Kegiatan</CardTitle>
                 <div className="grid grid-cols-2 gap-5 mt-5">
                   <TextInput
                     name={'tanggal_mulai'}
@@ -290,6 +281,13 @@ const FormSuratPermohonanMagangPKL = (props: props) => {
                     <p>: {getDuration()}</p>
                   </div>
                 </div>
+              </CardContent>
+            </Card>
+
+            <Card className={'p-2'}>
+              <CardContent className={'p-2 space-y-4'}>
+                <CardTitle>3. Mahasiswa</CardTitle>
+                <SelectMultiStudent form={form} />
               </CardContent>
             </Card>
 

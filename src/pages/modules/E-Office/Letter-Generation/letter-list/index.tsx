@@ -134,8 +134,8 @@ const ListLetterGeneratePage = () => {
               <div className="flex items-center gap-4">
                 <FilterSelect
                   placeholder={'Pilih Jenis Surat'}
-                  className={'w-[250px]'}
-                  selectClassName={'w-[250px]'}
+                  className={'w-[300px]'}
+                  selectClassName={'w-[300px]'}
                   data={
                     codeAvailable?.map((row) => ({
                       label: row.nama,

@@ -1,29 +1,31 @@
+import FormSuratKeteranganBebasAkademik from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganBebasAkademik/components/form.tsx'
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
+import {
+  ResolverSKBA,
+  type TResolverSKBA,
+} from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganBebasAkademik/data/resolver.tsx'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { UseGetTemplateByCodeLetter } from '@/pages/modules/E-Office/Letter-Generation/create-letter/hook'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useNavigate, useParams } from 'react-router-dom'
-import { format } from 'date-fns'
-import { UseLetterDetailSKCA } from './hooks.tsx'
-import {
-  ResolverSKCAM,
-  type TResolverSKCAM,
-} from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganCutiAkademik/data/resolver.tsx'
-import FormSuratKeteranganCutiAkademik from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganCutiAkademik/components/form.tsx'
+import { UseLetterDetailSKBA } from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKBA/hook.tsx'
 
-const UpdateSuratKeteranganCutiAkademikPage = () => {
-  const [loading, setLoading] = useState(false)
-  const { template } = UseGetTemplateByCodeLetter('SKCA-1')
-  const navigate = useNavigate()
+const UpdatedSuratKeteranganBebasAkademikPage = () => {
   const { id } = useParams()
-  const { letter } = UseLetterDetailSKCA(id as string)
+  const { letter } = UseLetterDetailSKBA(id as string)
 
-  const form = useForm<TResolverSKCAM>({
-    resolver: zodResolver(ResolverSKCAM),
+  const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
+  const { template } = UseGetTemplateByCodeLetter('SKBA-1')
+
+  const form = useForm<TResolverSKBA>({
+    resolver: zodResolver(ResolverSKBA),
     defaultValues: {
       id_jenis_template_surat: template?.id_mail_jenis_template_surat,
+      daftar_kewajiban_akademik: [''],
+      tujuan_pembuatan_surat: [''],
     },
   })
 
@@ -31,7 +33,7 @@ const UpdateSuratKeteranganCutiAkademikPage = () => {
     if (letter) {
       form.reset({
         ...letter,
-        tanggal_surat: format(letter?.tanggal_surat, 'yyyy-MM-dd'),
+        tanggal_surat: new Date(letter?.tanggal_surat).toISOString(),
         prodi: letter?.nama_prodi,
         Fakultas: letter?.nama_fakultas,
         jenjang: letter?.nama_jenjang,
@@ -46,10 +48,10 @@ const UpdateSuratKeteranganCutiAkademikPage = () => {
     }
   }, [template])
 
-  const HandleSave = async (value: TResolverSKCAM) => {
+  const HandleSave = async (value: TResolverSKBA) => {
     setLoading(true)
     await AxiosClient.put(
-      `/eoffice/mail-surat-keterangan-aktif-mahasiswa/${letter?.id_mail_surat_keterangan_cuti_akademik}`,
+      `/eoffice/mail-surat-bebas-akademik/${letter?.id_mail_surat_bebas_akademik}`,
       {
         ...value,
         tanggal_surat: new Date(value.tanggal_surat).toISOString(),
@@ -73,7 +75,7 @@ const UpdateSuratKeteranganCutiAkademikPage = () => {
 
   return (
     <>
-      <FormSuratKeteranganCutiAkademik
+      <FormSuratKeteranganBebasAkademik
         template={template}
         form={form}
         loading={loading}
@@ -83,4 +85,4 @@ const UpdateSuratKeteranganCutiAkademikPage = () => {
   )
 }
 
-export default UpdateSuratKeteranganCutiAkademikPage
+export default UpdatedSuratKeteranganBebasAkademikPage
