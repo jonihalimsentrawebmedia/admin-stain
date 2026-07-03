@@ -137,7 +137,7 @@ const ReturnColumns = ({
                 form.setValue('nama_penandatangan', data.nama ?? '')
                 form.setValue('nip_penandatangan', data?.nip ?? '')
                 form.setValue('nidn_penandatangan', data?.nidn ?? '')
-                form.setValue('jabatan_penandatangan', data?.jabatan ?? '')
+                form.setValue('jabatan_penandatangan', data?.jabatan?.[0] ?? '')
                 form.setValue('satuan_kerja_penandatangan', data?.id_satuan_kerja ?? '')
                 setOpen(!open)
               }}
