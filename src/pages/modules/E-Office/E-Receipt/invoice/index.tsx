@@ -19,6 +19,8 @@ import { useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { ColumnsItemFaktur } from '@/pages/modules/E-Office/E-Receipt/invoice/data/columns.tsx'
+import { GeneratePdfInvoice } from '@/pages/modules/E-Office/E-Receipt/invoice/component/pdfGenerateInvoice.tsx'
+import { FaEye } from 'react-icons/fa'
 
 const InvoiceEReceiptPage = () => {
   const { id } = useParams()
@@ -55,7 +57,27 @@ const InvoiceEReceiptPage = () => {
 
   return (
     <>
-      <ButtonTitleGroup label={'Lihat Faktur'} buttonGroup={[]} isBack />
+      <ButtonTitleGroup
+        label={'Lihat Faktur'}
+        buttonGroup={[
+          {
+            type: 'custom',
+            element: (
+              <Button
+                className={'text-white'}
+                disabled={!reconciliation || Number(reconciliation.sisa) !== 0}
+                onClick={() => {
+                  if (reconciliation) GeneratePdfInvoice(reconciliation).open()
+                }}
+              >
+                <FaEye className={'mr-2 size-3'} />
+                Preview Invoice
+              </Button>
+            ),
+          },
+        ]}
+        isBack
+      />
       <p className="mt-5 text-blue-500">
         Rincikan komponen faktur tanpa menlebihi total e-kwitansi
       </p>

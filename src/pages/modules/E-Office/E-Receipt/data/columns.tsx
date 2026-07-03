@@ -3,6 +3,7 @@ import type { ColumnDef } from '@tanstack/react-table'
 import type { IEreceipt } from '@/pages/modules/E-Office/E-Receipt/data/types.ts'
 import ButtonEditEreceipt from '@/pages/modules/E-Office/E-Receipt/component/buttonEdit.tsx'
 import ButtonDeleteEreceipt from '@/pages/modules/E-Office/E-Receipt/component/buttonDelete.tsx'
+import ButtonPreviewEreceipt from '@/pages/modules/E-Office/E-Receipt/component/buttonPreview.tsx'
 import { format } from 'date-fns'
 import { Button } from '@/components/ui/button.tsx'
 
@@ -94,6 +95,7 @@ export const ColumnsEreceipt = () => {
         const data = row?.original
         return (
           <div className="flex items-center justify-center gap-1.5">
+            <ButtonPreviewEreceipt data={data} />
             <ButtonEditEreceipt data={data} />
             <ButtonDeleteEreceipt data={data} />
           </div>
