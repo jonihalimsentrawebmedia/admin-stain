@@ -15,7 +15,7 @@ import FormSuratKeteranganCutiAkademik from '@/pages/modules/E-Office/Letter-Gen
 
 const UpdateSuratKeteranganCutiAkademikPage = () => {
   const [loading, setLoading] = useState(false)
-  const { template } = UseGetTemplateByCodeLetter('SKAM-1')
+  const { template } = UseGetTemplateByCodeLetter('SKCA-1')
   const navigate = useNavigate()
   const { id } = useParams()
   const { letter } = UseLetterDetailSKCA(id as string)
