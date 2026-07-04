@@ -3,6 +3,7 @@ import type { ColumnDef } from '@tanstack/react-table'
 import type { IEventReport } from '@/pages/modules/E-Office/event-activity/report/data/types.ts'
 import { format } from 'date-fns'
 import { Button } from '@/components/ui/button.tsx'
+import { id } from 'date-fns/locale'
 
 export const ColumnsEventReport = () => {
   const [searchParams] = useSearchParams()
@@ -26,7 +27,11 @@ export const ColumnsEventReport = () => {
           <>
             <p className="text-primary font-semibold text-lg">{data?.nama_kegiatan}</p>
             <p>
-              {data?.tanggal_kegiatan ? format(data?.tanggal_kegiatan, 'EEEE, dd-MM-yyyy') : ''}
+              {data?.tanggal_kegiatan
+                ? format(data?.tanggal_kegiatan, 'EEEE, dd-MM-yyyy', {
+                    locale: id,
+                  })
+                : ''}
             </p>
             <p>{data?.waktu}</p>
             <p>{data?.tempat}</p>

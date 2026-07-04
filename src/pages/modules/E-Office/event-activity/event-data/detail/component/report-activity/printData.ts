@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import pdfMake from 'pdfmake/build/pdfmake'
 import pdfFonts from 'pdfmake/build/vfs_fonts'
 import htmlToPdfmake from 'html-to-pdfmake'
@@ -15,9 +16,20 @@ import type {
 } from '@/pages/modules/E-Office/event-activity/event-data/detail/component/report-activity/data/types.ts'
 import { buildKopSuratContent } from '@/pages/modules/E-Office/settings/letter-header/data/pdfContentConfig'
 
-;(pdfMake as any).vfs = (pdfFonts as any).vfs
+(pdfMake as any).vfs = (pdfFonts as any).vfs
 
-// ─── Types ───────────────────────────────────────────────────────────────────
+// ─── Constants ──────────────────────────────────────────────────────────────
+
+const PRIMARY_COLOR = '#1F3A5F'
+const SECONDARY_COLOR = '#2F5597'
+const BORDER_COLOR = '#D7DEE8'
+const LIGHT_BG_COLOR = '#F4F7FB'
+const MUTED_COLOR = '#64748B'
+const FILE_ICON_COLOR = '#475569'
+
+const IMAGE_EXTENSIONS = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg']
+
+// ─── Types ──────────────────────────────────────────────────────────────────
 
 interface GenerateReportPdfProps {
   event: IEvent
@@ -25,7 +37,7 @@ interface GenerateReportPdfProps {
   imageUrl?: string
 }
 
-// ─── Format currency (IDR) ───────────────────────────────────────────────────
+// ─── Format currency (IDR) ──────────────────────────────────────────────────
 
 const formatCurrency = (value: string | number): string => {
   const num = Number(value) || 0
@@ -38,7 +50,7 @@ const formatCurrency = (value: string | number): string => {
   }).format(num)
 }
 
-// ─── MIME type from filename ─────────────────────────────────────────────────
+// ─── MIME type from filename ────────────────────────────────────────────────
 
 const getImageMimeType = (filename?: string): string => {
   if (!filename) return 'image/jpeg'
@@ -56,7 +68,7 @@ const getImageMimeType = (filename?: string): string => {
   return map[ext] || 'image/jpeg'
 }
 
-// ─── Convert base64 string to data URL ───────────────────────────────────────
+// ─── Convert base64 string to data URL ──────────────────────────────────────
 
 const toDataUrl = (base64: string | null, filename?: string): string | null => {
   if (!base64) return null
@@ -66,17 +78,129 @@ const toDataUrl = (base64: string | null, filename?: string): string | null => {
   return `data:${mime};base64,${base64}`
 }
 
-// ─── Check if a filename/path is an image ────────────────────────────────────
+// ─── Check if a filename/path is an image ───────────────────────────────────
 
 const isImageFile = (filename?: string): boolean => {
   if (!filename) return false
 
   const ext = filename.split('.').pop()?.toLowerCase() || ''
 
-  return ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg'].includes(ext)
+  return IMAGE_EXTENSIONS.includes(ext)
 }
 
-// ─── Find report by context in laporan_list ──────────────────────────────────
+// ─── Resolve document item with preview ─────────────────────────────────────
+
+async function resolveDocumentItem(item: IDocument) {
+  const url = item.url_file
+
+  if (item.jenis_file === 'GAMBAR' || isImageFile(item.url_file)) {
+    try {
+      const imageDataUrl = toDataUrl(item.dokumen, item.url_file)
+
+      if (imageDataUrl) {
+        return {
+          ...item,
+          url,
+          previewType: 'image' as const,
+          previewDataUrl: imageDataUrl,
+        }
+      }
+    } catch {
+      // fall through
+    }
+  }
+
+  return { ...item, url, previewType: 'link' as const }
+}
+
+// ─── File icon for document list ────────────────────────────────────────────
+
+function buildFileIcon(size = 16) {
+  return {
+    canvas: [
+      {
+        type: 'rect',
+        x: 1,
+        y: 1,
+        w: size - 3,
+        h: size + 2,
+        r: 1.5,
+        lineColor: FILE_ICON_COLOR,
+        lineWidth: 0.8,
+      },
+      {
+        type: 'polyline',
+        points: [
+          { x: size - 6, y: 1 },
+          { x: size - 6, y: 6 },
+          { x: size - 1, y: 6 },
+        ],
+        lineColor: FILE_ICON_COLOR,
+        lineWidth: 0.8,
+      },
+      {
+        type: 'line',
+        x1: 4,
+        y1: 10,
+        x2: size - 4,
+        y2: 10,
+        lineColor: FILE_ICON_COLOR,
+        lineWidth: 0.6,
+      },
+      {
+        type: 'line',
+        x1: 4,
+        y1: 13,
+        x2: size - 4,
+        y2: 13,
+        lineColor: FILE_ICON_COLOR,
+        lineWidth: 0.6,
+      },
+    ],
+    width: size + 2,
+    height: size + 4,
+  }
+}
+
+function buildLinkedFileName(title: string, url?: string) {
+  return {
+    columns: [
+      { ...buildFileIcon(), width: 22 },
+      {
+        text: title || '-',
+        link: url || undefined,
+        decoration: url ? 'underline' : undefined,
+        color: url ? SECONDARY_COLOR : '#1F2937',
+        style: 'tableCell',
+        margin: [0, 1, 0, 0],
+      },
+    ],
+    columnGap: 4,
+  }
+}
+
+// ─── Empty text placeholder ─────────────────────────────────────────────────
+
+const emptyText = (label = 'Belum diisi') => ({
+  text: label,
+  italics: true,
+  color: MUTED_COLOR,
+})
+
+// ─── Formal table layout ────────────────────────────────────────────────────
+
+const formalTableLayout = {
+  hLineColor: () => BORDER_COLOR,
+  vLineColor: () => BORDER_COLOR,
+  hLineWidth: () => 0.6,
+  vLineWidth: () => 0.6,
+  paddingLeft: () => 7,
+  paddingRight: () => 7,
+  paddingTop: () => 6,
+  paddingBottom: () => 6,
+}
+
+// ─── Find report by context in laporan_list ─────────────────────────────────
 
 const getReportByContext = (reports: IActivityReport[], context: string): string | undefined => {
   return reports.find((r) => r.context === context)?.laporan
@@ -84,123 +208,182 @@ const getReportByContext = (reports: IActivityReport[], context: string): string
 
 // ─── HTML → pdfmake content ─────────────────────────────────────────────────
 
-const htmlContentToPdfmake = (html: string | undefined): any => {
+function applyJustifyToHtmlContent(content: any): any {
+  if (Array.isArray(content)) {
+    return content.map((item) => applyJustifyToHtmlContent(item))
+  }
+
+  if (!content || typeof content !== 'object') {
+    return content
+  }
+
+  const result = { ...content }
+
+  if (typeof result.text === 'string' && !result.alignment) {
+    result.alignment = 'justify'
+  }
+
+  if (result.stack) result.stack = applyJustifyToHtmlContent(result.stack)
+  if (result.columns) result.columns = applyJustifyToHtmlContent(result.columns)
+  if (result.ul) result.ul = applyJustifyToHtmlContent(result.ul)
+  if (result.ol) result.ol = applyJustifyToHtmlContent(result.ol)
+  if (result.text && Array.isArray(result.text)) {
+    result.text = applyJustifyToHtmlContent(result.text)
+  }
+
+  return result
+}
+
+function htmlContentToPdfmake(html: string | undefined): any {
   if (!html || html.trim() === '' || html === '<p><br></p>') {
-    return { text: 'Belum diisi', italics: true, color: '#888888' }
+    return emptyText()
   }
 
   try {
     const cleaned = html.replace(/<p><br><\/p>/g, '').trim()
 
     if (!cleaned) {
-      return { text: 'Belum diisi', italics: true, color: '#888888' }
+      return emptyText()
     }
 
-    return htmlToPdfmake(cleaned, {
+    const pdfmakeContent = htmlToPdfmake(cleaned, {
       defaultStyles: {
         b: { bold: true },
         strong: { bold: true },
         i: { italics: true },
         em: { italics: true },
         u: { decoration: 'underline' },
-        p: { fontSize: 10, margin: [0, 2, 0, 6], lineHeight: 1.4 },
-        ul: { fontSize: 10, margin: [16, 4, 0, 8] },
-        ol: { fontSize: 10, margin: [16, 4, 0, 8] },
-        li: { fontSize: 10, margin: [0, 2, 0, 2] },
-        h1: { fontSize: 14, bold: true, margin: [0, 8, 0, 4] },
-        h2: { fontSize: 12, bold: true, margin: [0, 6, 0, 4] },
-        h3: { fontSize: 11, bold: true, margin: [0, 4, 0, 2] },
+        p: {
+          fontSize: 10,
+          margin: [0, 1, 0, 3],
+          lineHeight: 1.15,
+          alignment: 'justify',
+        },
+        ul: { fontSize: 10, margin: [16, 2, 0, 4] },
+        ol: { fontSize: 10, margin: [16, 2, 0, 4] },
+        li: {
+          fontSize: 10,
+          margin: [0, 1, 0, 1],
+          lineHeight: 1.15,
+          alignment: 'justify',
+        },
+        h1: { fontSize: 14, bold: true, margin: [0, 5, 0, 3] },
+        h2: { fontSize: 12, bold: true, margin: [0, 4, 0, 2] },
+        h3: { fontSize: 11, bold: true, margin: [0, 3, 0, 2] },
       },
     })
+
+    return applyJustifyToHtmlContent(pdfmakeContent)
   } catch {
     const div = html.replace(/<[^>]*>/g, '\n').replace(/&nbsp;/g, ' ')
 
-    return { text: div.trim(), fontSize: 10, lineHeight: 1.4 }
+    return {
+      text: div.trim(),
+      fontSize: 10,
+      lineHeight: 1.15,
+      alignment: 'justify',
+    }
   }
 }
 
-// ─── Ringkasan Kegiatan ──────────────────────────────────────────────────────
+function sanitizeHtmlParagraphs(htmlStr: string | undefined) {
+  if (!htmlStr) return ''
 
-const buildRingkasanKegiatan = (event: IEvent) => ({
-  stack: [
-    {
-      text: 'Ringkasan Kegiatan',
-      style: 'sectionTitle' as const,
-      alignment: 'left' as const,
-      margin: [0, 0, 0, 12] as [number, number, number, number],
-    },
-    {
-      table: {
-        widths: ['auto', '*'],
-        body: [
-          [
-            { text: 'Nama Kegiatan', fontSize: 10, bold: true },
-            { text: `: ${event?.nama_kegiatan || '-'}`, fontSize: 10 },
-          ],
-          [
-            { text: 'Tanggal Mulai', fontSize: 10, bold: true },
-            {
-              text: `: ${
-                event?.tanggal_mulai
-                  ? format(new Date(event.tanggal_mulai), 'dd MMMM yyyy', { locale: id })
-                  : '-'
-              }`,
-              fontSize: 10,
-            },
-          ],
-          [
-            { text: 'Tanggal Selesai', fontSize: 10, bold: true },
-            {
-              text: `: ${
-                event?.tanggal_selesai
-                  ? format(new Date(event.tanggal_selesai), 'dd MMMM yyyy', { locale: id })
-                  : '-'
-              }`,
-              fontSize: 10,
-            },
-          ],
-          [
-            { text: 'Waktu Pelaksanaan', fontSize: 10, bold: true },
-            { text: `: ${event?.waktu || '-'}`, fontSize: 10 },
-          ],
-          [
-            { text: 'Tempat', fontSize: 10, bold: true },
-            { text: `: ${event?.tempat || '-'}`, fontSize: 10 },
-          ],
-          [
-            { text: 'Penyelenggara', fontSize: 10, bold: true },
-            { text: `: ${event?.penyelenggara || '-'}`, fontSize: 10 },
-          ],
-        ],
+  return htmlStr.replace(/<\/p>\s*<p>/g, ' ').replace(/\s*<br\s*\/?>\s*/g, '</p><p>')
+}
+
+// ─── Ringkasan Kegiatan ────────────────────────────────────────────────────
+
+function buildRingkasanKegiatan(event: IEvent) {
+  const rows = [
+    ['Nama Kegiatan', event?.nama_kegiatan || '-'],
+    [
+      'Tanggal Mulai',
+      event?.tanggal_mulai
+        ? format(new Date(event.tanggal_mulai), 'dd MMMM yyyy', { locale: id })
+        : '-',
+    ],
+    [
+      'Tanggal Selesai',
+      event?.tanggal_selesai
+        ? format(new Date(event.tanggal_selesai), 'dd MMMM yyyy', { locale: id })
+        : '-',
+    ],
+    ['Waktu Pelaksanaan', event?.waktu || '-'],
+    ['Tempat', event?.tempat || '-'],
+    ['Penyelenggara', event?.penyelenggara || '-'],
+  ]
+
+  return {
+    stack: [
+      {
+        id: 'ringkasan-kegiatan',
+        text: 'RINGKASAN KEGIATAN',
+        style: 'sectionTitle' as const,
+        alignment: 'center' as const,
+        margin: [0, 0, 0, 16] as [number, number, number, number],
       },
-      layout: 'noBorders',
-      margin: [0, 0, 0, 0] as [number, number, number, number],
-    },
-  ],
-})
+      {
+        table: {
+          widths: [150, '*'],
+          body: rows.map(([label, value]) => [
+            {
+              text: label,
+              style: 'summaryLabel',
+              fillColor: LIGHT_BG_COLOR,
+            },
+            { text: value, style: 'summaryValue' },
+          ]),
+        },
+        layout: formalTableLayout,
+      },
+    ],
+  }
+}
 
-// ─── Daftar Isi ──────────────────────────────────────────────────────────────
+// ─── Daftar Isi ────────────────────────────────────────────────────────────
 
-const buildDaftarIsi = () => {
+function buildDaftarIsi() {
   const items = [
-    { label: 'Cover', page: 1 },
-    { label: 'Ringkasan Kegiatan', page: 2 },
-    { label: 'Pendahuluan', page: 3 },
-    { label: 'Dasar Kegiatan', page: '-' },
-    { label: 'Nama Kegiatan', page: '-' },
-    { label: 'Tujuan Kegiatan', page: '-' },
-    { label: 'Materi', page: '-' },
-    { label: 'Kesimpulan', page: '-' },
-    { label: 'Tindak Lanjut', page: '-' },
+    { label: 'Cover', ref: 'cover' },
+    { label: 'Ringkasan Kegiatan', ref: 'ringkasan-kegiatan' },
+    { label: 'Pendahuluan', ref: 'pendahuluan' },
+    { label: 'Dasar Kegiatan', ref: 'dasar-kegiatan' },
+    { label: 'Nama Kegiatan', ref: 'nama-kegiatan' },
+    { label: 'Tujuan Kegiatan', ref: 'tujuan-kegiatan' },
+    { label: 'Materi', ref: 'materi' },
+    { label: 'Kesimpulan', ref: 'kesimpulan' },
+    { label: 'Tindak Lanjut', ref: 'tindak-lanjut' },
   ]
 
   const lampiranItems = [
-    { label: 'Lampiran 1. Dokumen/File Pendukung', page: '-' },
-    { label: 'Lampiran 2. Daftar Hadir', page: '-' },
-    { label: 'Lampiran 3. Dokumentasi', page: '-' },
-    { label: 'Lampiran 4. Notulen', page: '-' },
-    { label: 'Lampiran 5. Pengeluaran Anggaran', page: '-' },
+    { label: 'Lampiran 1. Dokumen/File Pendukung', ref: 'lampiran-file' },
+    { label: 'Lampiran 2. Daftar Hadir', ref: 'lampiran-daftar-hadir' },
+    { label: 'Lampiran 3. Dokumentasi', ref: 'lampiran-dokumentasi' },
+    { label: 'Lampiran 4. Notulen', ref: 'lampiran-notulen' },
+    { label: 'Lampiran 5. Pengeluaran Anggaran', ref: 'lampiran-pengeluaran' },
   ]
+
+  const tocRow = (label: string, ref: string) => ({
+    columns: [
+      { text: label, fontSize: 10, width: 'auto' as const },
+      {
+        text: '................................................................................................',
+        fontSize: 9,
+        color: '#B7C0CC',
+        width: '*' as const,
+        margin: [6, 2, 6, 0] as [number, number, number, number],
+      },
+      {
+        text: '',
+        pageReference: ref,
+        fontSize: 10,
+        alignment: 'right' as const,
+        width: 35,
+      },
+    ],
+    margin: [0, 3, 0, 3] as [number, number, number, number],
+  })
 
   return {
     stack: [
@@ -208,187 +391,130 @@ const buildDaftarIsi = () => {
         text: 'DAFTAR ISI',
         style: 'sectionTitle' as const,
         alignment: 'center' as const,
-        margin: [0, 0, 0, 16] as [number, number, number, number],
+        margin: [0, 0, 0, 20] as [number, number, number, number],
       },
-      ...items.map((item, idx) => ({
-        columns: [
-          { text: `${idx + 1}. ${item.label}`, fontSize: 10 },
-          { text: item.page, fontSize: 10, alignment: 'right' as const },
-        ],
-        margin: [0, 2, 0, 2] as [number, number, number, number],
-      })),
+      ...items.map((item, idx) => tocRow(`${idx + 1}. ${item.label}`, item.ref)),
       {
-        text: 'Lampiran',
-        style: 'sectionTitle' as const,
-        margin: [0, 16, 0, 8] as [number, number, number, number],
+        text: 'LAMPIRAN',
+        style: 'subSectionTitle' as const,
+        margin: [0, 18, 0, 8] as [number, number, number, number],
       },
-      ...lampiranItems.map((item) => ({
-        columns: [
-          { text: item.label, fontSize: 10 },
-          { text: item.page, fontSize: 10, alignment: 'right' as const },
-        ],
-        margin: [0, 2, 0, 2] as [number, number, number, number],
-      })),
+      ...lampiranItems.map((item) => tocRow(item.label, item.ref)),
     ],
   }
 }
 
-// ─── Content section builder ─────────────────────────────────────────────────
+// ─── Content section builder ────────────────────────────────────────────────
 
-const buildContentSection = (title: string, html: string | undefined) => ({
-  stack: [
-    {
-      text: title,
-      style: 'sectionTitle' as const,
-      margin: [0, 0, 0, 8] as [number, number, number, number],
+function buildContentSection(title: string, html: string | undefined, sectionId: string) {
+  return {
+    table: {
+      widths: ['100%'],
+      body: [
+        [
+          {
+            stack: [
+              {
+                id: sectionId,
+                text: title,
+                style: 'sectionTitle' as const,
+                margin: [0, 0, 0, 5] as [number, number, number, number],
+              },
+              {
+                canvas: [
+                  {
+                    type: 'line',
+                    x1: 0,
+                    y1: 0,
+                    x2: 515,
+                    y2: 0,
+                    lineWidth: 0.6,
+                    lineColor: BORDER_COLOR,
+                  },
+                ],
+                margin: [0, 0, 0, 8] as [number, number, number, number],
+              },
+              htmlContentToPdfmake(html),
+            ],
+          },
+        ],
+      ],
     },
-    htmlContentToPdfmake(html),
-  ],
-  margin: [0, 0, 0, 16] as [number, number, number, number],
-  unbreakable: false,
-})
+    layout: {
+      hLineWidth: () => 0,
+      vLineWidth: () => 0,
+    },
+    margin: [0, 0, 0, 18] as [number, number, number, number],
+    unbreakable: false,
+  }
+}
 
-// ─── Lampiran 1: File Pendukung ──────────────────────────────────────────────
+// ─── Lampiran 1: File Pendukung ─────────────────────────────────────────────
 
-const buildLampiranFilePendukung = (documents: IDocument[]) => {
+async function buildLampiranFilePendukung(documents: IDocument[]) {
   if (!documents || documents.length === 0) {
     return {
       text: 'Tidak ada file pendukung.',
       italics: true,
-      color: '#888888',
+      color: MUTED_COLOR,
       margin: [0, 8, 0, 0] as [number, number, number, number],
     }
   }
 
-  const imageItems = documents.filter(
-    (item) => item.jenis_file === 'GAMBAR' || isImageFile(item.url_file)
-  )
-  const nonImageItems = documents.filter(
-    (item) => !(item.jenis_file === 'GAMBAR' || isImageFile(item.url_file))
-  )
-
-  const imageRows: any[] = []
-
-  if (imageItems.length > 0) {
-    for (let i = 0; i < imageItems.length; i += 2) {
-      const row: any[] = []
-
-      for (let j = i; j < i + 2 && j < imageItems.length; j++) {
-        const item = imageItems[j]
-        const imageDataUrl = toDataUrl(item.dokumen, item.url_file)
-
-        if (!imageDataUrl) continue
-
-        row.push({
-          stack: [
-            {
-              image: imageDataUrl,
-              width: 240,
-              alignment: 'center' as const,
-              margin: [0, 0, 0, 4] as [number, number, number, number],
-            },
-            {
-              text: item.judul || '',
-              fontSize: 8,
-              alignment: 'center' as const,
-              color: '#555555',
-              italics: true,
-            },
-          ],
-        })
-      }
-
-      if (row.length > 0) {
-        imageRows.push({
-          columns: row,
-          columnGap: 20,
-          margin: [0, 0, 0, 16] as [number, number, number, number],
-        })
-      }
-    }
-  }
-
-  const nonImageTable =
-    nonImageItems.length > 0
-      ? {
-          table: {
-            headerRows: 1,
-            widths: ['auto', '*', 'auto'] as (string | number)[],
-            body: [
-              [
-                {
-                  text: 'No.',
-                  style: 'tableHeader' as const,
-                  alignment: 'center' as const,
-                },
-                { text: 'Judul Dokumen', style: 'tableHeader' as const },
-                {
-                  text: 'Jenis',
-                  style: 'tableHeader' as const,
-                  alignment: 'center' as const,
-                },
-              ],
-              ...nonImageItems.map((item, idx) => [
-                {
-                  text: String(idx + 1),
-                  alignment: 'center' as const,
-                  style: 'tableCell' as const,
-                },
-                {
-                  text: item.judul || '-',
-                  style: 'tableCell' as const,
-                  link: item.url_file,
-                  color: '#292D8B',
-                  decoration: 'underline',
-                },
-                {
-                  text: item.jenis_file === 'url' ? 'URL' : 'Dokumen',
-                  alignment: 'center' as const,
-                  style: 'tableCell' as const,
-                },
-              ]),
-            ],
-          },
-          layout: {
-            hLineWidth: () => 0.5,
-            vLineWidth: () => 0.5,
-            paddingLeft: () => 6,
-            paddingRight: () => 6,
-            paddingTop: () => 6,
-            paddingBottom: () => 6,
-          },
-        }
-      : null
+  const resolvedData = await Promise.all(documents.map((item) => resolveDocumentItem(item)))
 
   return {
-    stack: [
-      ...(imageRows.length > 0 ? imageRows : []),
-      ...(nonImageTable
-        ? [
-            ...(imageRows.length > 0
-              ? [
-                  {
-                    text: 'Dokumen/File Non-Gambar',
-                    style: 'sectionTitle' as const,
-                    margin: [0, 16, 0, 12] as [number, number, number, number],
-                  },
-                ]
-              : []),
-            nonImageTable,
+    table: {
+      headerRows: 1,
+      widths: ['auto', '*', 'auto'] as (string | number)[],
+      body: [
+        [
+          { text: 'No.', style: 'tableHeader' as const, alignment: 'center' as const },
+          { text: 'Judul Dokumen', style: 'tableHeader' as const },
+          { text: 'Jenis', style: 'tableHeader' as const, alignment: 'center' as const },
+        ],
+        ...resolvedData.map((item, idx) => {
+          const title = item?.judul || '-'
+          const typeLabel = item?.jenis_file === 'url' ? 'URL' : 'Dokumen'
+          const documentCell =
+            item.previewType === 'image' && item.previewDataUrl
+              ? {
+                  stack: [
+                    {
+                      image: item.previewDataUrl,
+                      width: 220,
+                      alignment: 'center' as const,
+                      margin: [0, 0, 0, 6] as [number, number, number, number],
+                    },
+                    buildLinkedFileName(title, item.url),
+                  ],
+                }
+              : buildLinkedFileName(title, item.url)
+
+          return [
+            { text: String(idx + 1), alignment: 'center' as const, style: 'tableCell' as const },
+            documentCell,
+            {
+              text: typeLabel,
+              alignment: 'center' as const,
+              style: 'tableCell' as const,
+            },
           ]
-        : []),
-    ],
+        }),
+      ],
+    },
+    layout: formalTableLayout,
   }
 }
 
-// ─── Lampiran 2: Daftar Hadir ────────────────────────────────────────────────
+// ─── Lampiran 2: Daftar Hadir ──────────────────────────────────────────────
 
-const buildLampiranDaftarHadir = (attendance: IAttendance[]) => {
+function buildLampiranDaftarHadir(attendance: IAttendance[]) {
   if (!attendance || attendance.length === 0) {
     return {
       text: 'Tidak ada data tamu.',
       italics: true,
-      color: '#888888',
+      color: MUTED_COLOR,
       margin: [0, 8, 0, 0] as [number, number, number, number],
     }
   }
@@ -399,21 +525,13 @@ const buildLampiranDaftarHadir = (attendance: IAttendance[]) => {
       widths: ['auto', '*', 'auto', 'auto'] as (string | number)[],
       body: [
         [
-          {
-            text: 'No.',
-            style: 'tableHeader' as const,
-            alignment: 'center' as const,
-          },
+          { text: 'No.', style: 'tableHeader' as const, alignment: 'center' as const },
           { text: 'Nama Peserta', style: 'tableHeader' as const },
           { text: 'Instansi/Alamat', style: 'tableHeader' as const },
           { text: 'Jabatan', style: 'tableHeader' as const },
         ],
         ...attendance.map((item, idx) => [
-          {
-            text: String(idx + 1),
-            alignment: 'center' as const,
-            style: 'tableCell' as const,
-          },
+          { text: String(idx + 1), alignment: 'center' as const, style: 'tableCell' as const },
           { text: item.nama_lengkap || '-', style: 'tableCell' as const },
           {
             text: item.nama_unit_kerja || item.nama_unit || '-',
@@ -423,30 +541,18 @@ const buildLampiranDaftarHadir = (attendance: IAttendance[]) => {
         ]),
       ],
     },
-    layout: {
-      hLineWidth: () => 0.5,
-      vLineWidth: () => 0.5,
-      paddingLeft: () => 6,
-      paddingRight: () => 6,
-      paddingTop: () => 6,
-      paddingBottom: () => 6,
-    },
+    layout: formalTableLayout,
   }
 }
 
-// ─── Lampiran 3: Dokumentasi ─────────────────────────────────────────────────
+// ─── Lampiran 3: Dokumentasi ───────────────────────────────────────────────
 
-interface DocImageItem {
-  imageDataUrl: string
-  keterangan: string
-}
-
-const buildLampiranDokumentasi = (images: DocImageItem[]) => {
+function buildLampiranDokumentasi(images: DocImageItem[]) {
   if (!images || images.length === 0) {
     return {
       text: 'Tidak ada dokumentasi.',
       italics: true,
-      color: '#888888',
+      color: MUTED_COLOR,
       margin: [0, 8, 0, 0] as [number, number, number, number],
     }
   }
@@ -463,7 +569,7 @@ const buildLampiranDokumentasi = (images: DocImageItem[]) => {
         stack: [
           {
             image: item.imageDataUrl,
-            fit: [240, 170] as [number, number],
+            width: 240,
             alignment: 'center' as const,
             margin: [0, 0, 0, 4] as [number, number, number, number],
           },
@@ -491,7 +597,7 @@ const buildLampiranDokumentasi = (images: DocImageItem[]) => {
     return {
       text: 'Tidak ada dokumentasi.',
       italics: true,
-      color: '#888888',
+      color: MUTED_COLOR,
       margin: [0, 8, 0, 0] as [number, number, number, number],
     }
   }
@@ -499,14 +605,14 @@ const buildLampiranDokumentasi = (images: DocImageItem[]) => {
   return { stack: imageRows }
 }
 
-// ─── Lampiran 4: Notulen ─────────────────────────────────────────────────────
+// ─── Lampiran 4: Notulen ───────────────────────────────────────────────────
 
-const buildLampiranNotulen = (notulen: INotulen[]) => {
+function buildLampiranNotulen(notulen: INotulen[]) {
   if (!notulen || notulen.length === 0) {
     return {
       text: 'Tidak ada data notulen.',
       italics: true,
-      color: '#888888',
+      color: MUTED_COLOR,
       margin: [0, 8, 0, 0] as [number, number, number, number],
     }
   }
@@ -517,44 +623,29 @@ const buildLampiranNotulen = (notulen: INotulen[]) => {
       widths: ['auto', 'auto', '*'] as (string | number)[],
       body: [
         [
-          {
-            text: 'No.',
-            style: 'tableHeader' as const,
-            alignment: 'center' as const,
-          },
+          { text: 'No.', style: 'tableHeader' as const, alignment: 'center' as const },
           { text: 'Nama Peserta', style: 'tableHeader' as const },
           { text: 'Isi Notulen', style: 'tableHeader' as const },
         ],
         ...notulen.map((item, idx) => [
-          {
-            text: String(idx + 1),
-            alignment: 'center' as const,
-            style: 'tableCell' as const,
-          },
+          { text: String(idx + 1), alignment: 'center' as const, style: 'tableCell' as const },
           { text: item.nama_lengkap || '-', style: 'tableCell' as const },
           { text: item.isi_notulen || '-', style: 'tableCell' as const },
         ]),
       ],
     },
-    layout: {
-      hLineWidth: () => 0.5,
-      vLineWidth: () => 0.5,
-      paddingLeft: () => 6,
-      paddingRight: () => 6,
-      paddingTop: () => 6,
-      paddingBottom: () => 6,
-    },
+    layout: formalTableLayout,
   }
 }
 
-// ─── Lampiran 5: Pengeluaran Anggaran ────────────────────────────────────────
+// ─── Lampiran 5: Pengeluaran Anggaran ──────────────────────────────────────
 
-const buildLampiranPengeluaran = (expenditures: IExpenditure[]) => {
+function buildLampiranPengeluaran(expenditures: IExpenditure[]) {
   if (!expenditures || expenditures.length === 0) {
     return {
       text: 'Tidak ada data pengeluaran.',
       italics: true,
-      color: '#888888',
+      color: MUTED_COLOR,
       margin: [0, 8, 0, 0] as [number, number, number, number],
     }
   }
@@ -571,35 +662,16 @@ const buildLampiranPengeluaran = (expenditures: IExpenditure[]) => {
       widths: ['auto', '*', 'auto', 'auto', 'auto', 'auto'] as (string | number)[],
       body: [
         [
-          {
-            text: 'No.',
-            style: 'tableHeader' as const,
-            alignment: 'center' as const,
-          },
+          { text: 'No.', style: 'tableHeader' as const, alignment: 'center' as const },
           { text: 'Uraian', style: 'tableHeader' as const },
-          {
-            text: 'Tanggal',
-            style: 'tableHeader' as const,
-            alignment: 'center' as const,
-          },
+          { text: 'Tanggal', style: 'tableHeader' as const, alignment: 'center' as const },
           { text: 'Dibayarkan Oleh', style: 'tableHeader' as const },
           { text: 'Penerima', style: 'tableHeader' as const },
-          {
-            text: 'Jumlah',
-            style: 'tableHeader' as const,
-            alignment: 'right' as const,
-          },
+          { text: 'Jumlah', style: 'tableHeader' as const, alignment: 'right' as const },
         ],
         ...expenditures.map((item, idx) => [
-          {
-            text: String(idx + 1),
-            alignment: 'center' as const,
-            style: 'tableCell' as const,
-          },
-          {
-            text: item.uraian_pengeluaran || '-',
-            style: 'tableCell' as const,
-          },
+          { text: String(idx + 1), alignment: 'center' as const, style: 'tableCell' as const },
+          { text: item.uraian_pengeluaran || '-', style: 'tableCell' as const },
           {
             text: item.tanggal_pengeluaran
               ? format(new Date(item.tanggal_pengeluaran), 'dd-MM-yyyy', { locale: id })
@@ -638,30 +710,47 @@ const buildLampiranPengeluaran = (expenditures: IExpenditure[]) => {
         ],
       ],
     },
-    layout: {
-      hLineWidth: () => 0.5,
-      vLineWidth: () => 0.5,
-      paddingLeft: () => 6,
-      paddingRight: () => 6,
-      paddingTop: () => 6,
-      paddingBottom: () => 6,
-    },
+    layout: formalTableLayout,
   }
 }
 
-// ─── Lampiran section wrapper with page break ────────────────────────────────
+// ─── Lampiran section wrapper with page break ──────────────────────────────
 
-const buildLampiranSection = (title: string, content: any) => ({
-  stack: [
-    {
-      text: title,
-      style: 'sectionTitle' as const,
-      margin: [0, 0, 0, 12] as [number, number, number, number],
-    },
-    content,
-  ],
-  pageBreak: 'before' as const,
-})
+function buildLampiranSection(title: string, content: any, sectionId: string) {
+  return {
+    stack: [
+      {
+        id: sectionId,
+        text: title.toUpperCase(),
+        style: 'sectionTitle' as const,
+        margin: [0, 0, 0, 5] as [number, number, number, number],
+      },
+      {
+        canvas: [
+          {
+            type: 'line',
+            x1: 0,
+            y1: 0,
+            x2: 515,
+            y2: 0,
+            lineWidth: 0.6,
+            lineColor: BORDER_COLOR,
+          },
+        ],
+        margin: [0, 0, 0, 12] as [number, number, number, number],
+      },
+      content,
+    ],
+    pageBreak: 'before' as const,
+  }
+}
+
+// ─── Documentation image item type ──────────────────────────────────────────
+
+interface DocImageItem {
+  imageDataUrl: string
+  keterangan: string
+}
 
 // ═══════════════════════════════════════════════════════════════════════════════
 //  MAIN FUNCTION
@@ -682,19 +771,46 @@ export const generatePdfLaporanKegiatan = async ({
     ? format(new Date(event.tanggal_mulai), 'yyyy')
     : format(new Date(), 'yyyy')
 
-  // Resolve image URL (prefer passed imageUrl, fallback to inline data URL from header)
   const resolvedImageUrl =
     imageUrl || (kop_surat?.url_logo?.startsWith('data:') ? kop_surat.url_logo : undefined)
 
   // ─── Content sections from laporan_list ──────────────────────────────────
   const contentSections = [
-    { title: 'I. PENDAHULUAN', html: getReportByContext(laporan_list, 'PENDAHULUAN') },
-    { title: 'II. DASAR KEGIATAN', html: getReportByContext(laporan_list, 'DASAR_KEGIATAN') },
-    { title: 'III. NAMA KEGIATAN', html: getReportByContext(laporan_list, 'NAMA_KEGIATAN') },
-    { title: 'IV. TUJUAN KEGIATAN', html: getReportByContext(laporan_list, 'TUJUAN_KEGIATAN') },
-    { title: 'V. MATERI', html: getReportByContext(laporan_list, 'MATERI_RANGKAIAN_KEGIATAN') },
-    { title: 'VI. KESIMPULAN', html: getReportByContext(laporan_list, 'KESIMPULAN') },
-    { title: 'VII. TINDAK LANJUT', html: getReportByContext(laporan_list, 'TINDAK_LANJUT') },
+    {
+      id: 'pendahuluan',
+      title: 'I. PENDAHULUAN',
+      html: sanitizeHtmlParagraphs(getReportByContext(laporan_list, 'PENDAHULUAN')),
+    },
+    {
+      id: 'dasar-kegiatan',
+      title: 'II. DASAR KEGIATAN',
+      html: sanitizeHtmlParagraphs(getReportByContext(laporan_list, 'DASAR_KEGIATAN')),
+    },
+    {
+      id: 'nama-kegiatan',
+      title: 'III. NAMA KEGIATAN',
+      html: sanitizeHtmlParagraphs(getReportByContext(laporan_list, 'NAMA_KEGIATAN')),
+    },
+    {
+      id: 'tujuan-kegiatan',
+      title: 'IV. TUJUAN KEGIATAN',
+      html: sanitizeHtmlParagraphs(getReportByContext(laporan_list, 'TUJUAN_KEGIATAN')),
+    },
+    {
+      id: 'materi',
+      title: 'V. MATERI',
+      html: sanitizeHtmlParagraphs(getReportByContext(laporan_list, 'MATERI_RANGKAIAN_KEGIATAN')),
+    },
+    {
+      id: 'kesimpulan',
+      title: 'VI. KESIMPULAN',
+      html: sanitizeHtmlParagraphs(getReportByContext(laporan_list, 'KESIMPULAN')),
+    },
+    {
+      id: 'tindak-lanjut',
+      title: 'VII. TINDAK LANJUT',
+      html: sanitizeHtmlParagraphs(getReportByContext(laporan_list, 'TINDAK_LANJUT')),
+    },
   ]
 
   // ─── Pre-fetch dokumentasi images via GetBase64FromUrl ───────────────────
@@ -711,20 +827,39 @@ export const generatePdfLaporanKegiatan = async ({
     )
   ).filter(Boolean) as DocImageItem[]
 
+  // ─── Build file pendukung lampiran (async) ──────────────────────────────
+  const lampiranFilePendukung = await buildLampiranFilePendukung(dokumen)
+
   // ─── Lampiran sections ──────────────────────────────────────────────────
   const lampiranSections = [
-    buildLampiranSection('Lampiran 1. Dokumen/File Pendukung', buildLampiranFilePendukung(dokumen)),
-    buildLampiranSection('Lampiran 2. Daftar Hadir', buildLampiranDaftarHadir(daftar_hadir)),
-    buildLampiranSection('Lampiran 3. Dokumentasi', buildLampiranDokumentasi(docImages)),
-    buildLampiranSection('Lampiran 4. Notulen', buildLampiranNotulen(notulen)),
-    buildLampiranSection('Lampiran 5. Pengeluaran Anggaran', buildLampiranPengeluaran(pengeluaran)),
+    buildLampiranSection(
+      'Lampiran 1. Dokumen/File Pendukung',
+      lampiranFilePendukung,
+      'lampiran-file'
+    ),
+    buildLampiranSection(
+      'Lampiran 2. Daftar Hadir',
+      buildLampiranDaftarHadir(daftar_hadir),
+      'lampiran-daftar-hadir'
+    ),
+    buildLampiranSection(
+      'Lampiran 3. Dokumentasi',
+      buildLampiranDokumentasi(docImages),
+      'lampiran-dokumentasi'
+    ),
+    buildLampiranSection('Lampiran 4. Notulen', buildLampiranNotulen(notulen), 'lampiran-notulen'),
+    buildLampiranSection(
+      'Lampiran 5. Pengeluaran Anggaran',
+      buildLampiranPengeluaran(pengeluaran),
+      'lampiran-pengeluaran'
+    ),
   ]
 
   // ─── Assemble document definition ───────────────────────────────────────
   const docDefinition: any = {
     pageSize: 'A4',
     pageOrientation: 'portrait',
-    pageMargins: [40, 210, 40, 30] as [number, number, number, number],
+    pageMargins: [40, 160, 40, 50] as [number, number, number, number],
 
     // ── Repeating header (skip halaman 1 = cover) ─────────────────────────
     header: (currentPage: number) => {
@@ -733,7 +868,7 @@ export const generatePdfLaporanKegiatan = async ({
       const kopContent = buildKopSuratContent(kop_surat as any, resolvedImageUrl)
 
       return {
-        margin: [40, 30, 40, 12] as [number, number, number, number],
+        margin: [40, 40, 40, 0] as [number, number, number, number],
         stack: kopContent ?? [],
       }
     },
@@ -743,51 +878,77 @@ export const generatePdfLaporanKegiatan = async ({
       // ═══════════ COVER PAGE ═══════════
       {
         stack: [
-          { text: '', margin: [0, 60, 0, 0] as [number, number, number, number] },
+          {
+            text: '',
+            margin: [0, 36, 0, 0] as [number, number, number, number],
+          },
           ...(resolvedImageUrl
             ? [
                 {
                   image: resolvedImageUrl,
-                  width: 120,
-                  height: 120,
+                  width: 96,
+                  height: 96,
                   alignment: 'center' as const,
-                  margin: [0, 0, 0, 24] as [number, number, number, number],
+                  margin: [0, 0, 0, 28] as [number, number, number, number],
                 },
               ]
             : []),
           {
+            id: 'cover',
             text: 'LAPORAN KEGIATAN',
             style: 'coverTitle' as const,
             alignment: 'center' as const,
-            margin: [0, 0, 0, 24] as [number, number, number, number],
+            margin: [0, 0, 0, 10] as [number, number, number, number],
+          },
+          {
+            canvas: [
+              {
+                type: 'line',
+                x1: 175,
+                y1: 0,
+                x2: 340,
+                y2: 0,
+                lineWidth: 1,
+                lineColor: SECONDARY_COLOR,
+              },
+            ],
+            margin: [0, 0, 0, 26] as [number, number, number, number],
           },
           {
             text: nama_acara.toUpperCase(),
             alignment: 'center' as const,
             bold: true,
             fontSize: 16,
-            margin: [0, 0, 0, 8] as [number, number, number, number],
+            lineHeight: 1.25,
+            color: PRIMARY_COLOR,
+            margin: [30, 0, 30, 10] as [number, number, number, number],
           },
           {
             text: `TAHUN ${tahun}`,
             alignment: 'center' as const,
             bold: true,
-            fontSize: 14,
-            color: '#444444',
+            fontSize: 13,
+            color: MUTED_COLOR,
           },
         ],
         pageBreak: 'after' as const,
       },
 
       // ═══════════ RINGKASAN KEGIATAN ═══════════
-      { stack: [buildRingkasanKegiatan(event)], pageBreak: 'after' as const },
+      {
+        stack: [buildRingkasanKegiatan(event)],
+        pageBreak: 'after' as const,
+      },
 
       // ═══════════ DAFTAR ISI ═══════════
-      { stack: [buildDaftarIsi()], pageBreak: 'after' as const },
+      {
+        stack: [buildDaftarIsi()],
+        pageBreak: 'after' as const,
+      },
 
       // ═══════════ CONTENT SECTIONS ═══════════
       ...contentSections.map((section) => ({
-        stack: [buildContentSection(section.title, section.html)],
+        stack: [buildContentSection(section.title, section.html, section.id)],
       })),
 
       // ═══════════ LAMPIRAN ═══════════
@@ -799,19 +960,37 @@ export const generatePdfLaporanKegiatan = async ({
       if (currentPage === 1) return null
 
       return {
-        margin: [40, 10, 40, 10] as [number, number, number, number],
-        columns: [
+        margin: [40, 8, 40, 10] as [number, number, number, number],
+        stack: [
           {
-            text: `Dicetak pada ${format(new Date(), 'dd MMMM yyyy HH:mm', { locale: id })}`,
-            fontSize: 8,
-            color: '#666666',
+            canvas: [
+              {
+                type: 'line',
+                x1: 0,
+                y1: 0,
+                x2: 515,
+                y2: 0,
+                lineWidth: 0.5,
+                lineColor: BORDER_COLOR,
+              },
+            ],
+            margin: [0, 0, 0, 5] as [number, number, number, number],
           },
           {
-            text: `Halaman ${currentPage} dari ${pageCount}`,
-            alignment: 'right' as const,
-            fontSize: 8,
-            bold: true,
-            color: '#666666',
+            columns: [
+              {
+                text: `Dicetak pada ${format(new Date(), 'dd MMMM yyyy HH:mm', { locale: id })}`,
+                fontSize: 8,
+                color: MUTED_COLOR,
+              },
+              {
+                text: `Halaman ${currentPage} dari ${pageCount}`,
+                alignment: 'right' as const,
+                fontSize: 8,
+                bold: true,
+                color: MUTED_COLOR,
+              },
+            ],
           },
         ],
       }
@@ -822,26 +1001,45 @@ export const generatePdfLaporanKegiatan = async ({
       coverTitle: {
         fontSize: 24,
         bold: true,
-        color: '#161646',
+        color: PRIMARY_COLOR,
         characterSpacing: 2,
       },
       sectionTitle: {
         fontSize: 12,
         bold: true,
-        color: '#161646',
+        color: PRIMARY_COLOR,
+        characterSpacing: 0.3,
+      },
+      subSectionTitle: {
+        fontSize: 11,
+        bold: true,
+        color: SECONDARY_COLOR,
+      },
+      summaryLabel: {
+        fontSize: 10,
+        bold: true,
+        color: PRIMARY_COLOR,
+      },
+      summaryValue: {
+        fontSize: 10,
+        color: '#1F2937',
       },
       tableHeader: {
         bold: true,
         fontSize: 9,
-        color: '#333333',
+        color: '#FFFFFF',
+        fillColor: PRIMARY_COLOR,
       },
       tableCell: {
         fontSize: 9,
+        color: '#1F2937',
       },
     },
 
     defaultStyle: {
       fontSize: 10,
+      color: '#1F2937',
+      lineHeight: 1.25,
     },
   }
 
