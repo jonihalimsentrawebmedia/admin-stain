@@ -11,6 +11,7 @@ interface Props extends BasicProps {
   id_prodi?: string
   angkatan?: string
   jalur_masuk?: string
+  is_active?: string
 }
 
 export const UseGetStudentStatusLetter = (props?: Props) => {
@@ -23,6 +24,7 @@ export const UseGetStudentStatusLetter = (props?: Props) => {
     id_prodi,
     id_fakultas,
     jalur_masuk,
+    is_active,
   } = props ?? {}
 
   const Params = new URLSearchParams()
@@ -34,6 +36,7 @@ export const UseGetStudentStatusLetter = (props?: Props) => {
   if (id_prodi) Params.append('id_prodi', id_prodi ?? '')
   if (id_fakultas) Params.append('id_fakultas', id_fakultas ?? '')
   if (jalur_masuk) Params.append('id_jalur_masuk', jalur_masuk ?? '')
+  if (is_active) Params.append('is_aktif', is_active === '1' ? 'true' : 'false')
 
   const { data, isLoading, isFetching } = useQuery<{
     data: IStudentDataStatus[]

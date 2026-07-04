@@ -210,7 +210,7 @@ const FormSuratKeteranganAktifKembali = (props: Props) => {
             <Card className={'p-2'}>
               <CardContent className={'p-2 space-y-4 w-full'}>
                 <CardTitle className={'text-xl flex items-center gap-1.5'}>2. Mahasiswa</CardTitle>
-                <DialogSelectStudents form={form} />
+                <DialogSelectStudents form={form} is_active={'1'} />
                 <div className="grid grid-cols-[12rem_1fr] gap-5">
                   <p>Nama *</p>
                   {form.watch('nama_mahasiswa') ?? '-'}

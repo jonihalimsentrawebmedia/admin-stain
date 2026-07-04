@@ -17,10 +17,11 @@ import { SelectBasic } from '@/components/common/select/basic.tsx'
 
 interface Props {
   form: UseFormReturn<any>
+  is_active?: string
 }
 
 const DialogSelectStudents = (props: Props) => {
-  const { form } = props
+  const { form, is_active } = props
   const [open, setOpen] = useState(false)
   const [filter, setFilter] = useState({
     page: '1',
@@ -51,6 +52,7 @@ const DialogSelectStudents = (props: Props) => {
     id_prodi: filter.id_prodi ?? '',
     angkatan: filter.angkatan ?? '',
     jalur_masuk: filter.jalur_masuk ?? '',
+    is_active: is_active ?? '1',
   })
   const Columns = ReturnColumns({
     form,
