@@ -250,14 +250,7 @@ const FormSuratPengantarKKN = (props: props) => {
 
             <Card className={'p-2'}>
               <CardContent className={'p-2 space-y-4'}>
-                <CardTitle>2. Mahasiswa</CardTitle>
-                <SelectMultiStudent form={form} />
-              </CardContent>
-            </Card>
-
-            <Card className={'p-2'}>
-              <CardContent className={'p-2 space-y-4'}>
-                <CardTitle>3. Informasi KKN</CardTitle>
+                <CardTitle>2. Informasi KKN</CardTitle>
                 <div className="grid grid-cols-2 gap-5 mt-5">
                   <TextInput
                     name={'tanggal_mulai'}
@@ -281,6 +274,13 @@ const FormSuratPengantarKKN = (props: props) => {
                 </div>
 
                 <SelectMultiDosen form={form} />
+              </CardContent>
+            </Card>
+
+            <Card className={'p-2'}>
+              <CardContent className={'p-2 space-y-4'}>
+                <CardTitle>3. Mahasiswa</CardTitle>
+                <SelectMultiStudent form={form} />
               </CardContent>
             </Card>
 

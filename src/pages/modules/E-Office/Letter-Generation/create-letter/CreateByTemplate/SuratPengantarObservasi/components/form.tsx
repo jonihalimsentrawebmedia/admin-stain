@@ -1,35 +1,34 @@
-import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import type { UseFormReturn } from 'react-hook-form'
+import type { ILetterTemplateType } from '@/pages/modules/E-Office/Letter-Generation/create-letter/hook'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Form } from '@/components/ui/form.tsx'
-import ButtonForm from '@/components/common/button/ButtonForm.tsx'
+import { UseGetLetterHeaderRef } from '@/pages/modules/E-Office/settings/letter-header/hooks'
+import { UseGetLetterNumberAutomatic } from '@/pages/modules/E-Office/Letter-Generation/code-letter/hooks'
+import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan-unit/hooks.tsx'
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Card, CardContent, CardTitle } from '@/components/ui/card.tsx'
 import { FaRegFileAlt } from 'react-icons/fa'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import { FiHash } from 'react-icons/fi'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import { ReturnOrderData } from '@/pages/modules/E-Office/Letter-Generation/create-letter/component/formLetterNumber.tsx'
-import { UseGetLetterHeaderRef } from '@/pages/modules/E-Office/settings/letter-header/hooks'
-import { UseGetLetterNumberAutomatic } from '@/pages/modules/E-Office/Letter-Generation/code-letter/hooks'
-import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan-unit/hooks.tsx'
-import DialogHumanResources from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifMahasiswa/components/selectSDM.tsx'
-import DialogSelectStudents from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifMahasiswa/components/selectStudent.tsx'
+import { Form } from '@/components/ui/form.tsx'
 import SelectTemplateText from '@/pages/modules/E-Office/Letter-Generation/create-letter/component/selectTemplate.tsx'
 import { RichText } from '@/components/common/richtext'
-import { InputRadio } from '@/components/common/form/InputRadio.tsx'
-import type { TResolverSKAK } from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifKembali/data/resolver.tsx'
-import type { ILetterTemplateType } from '@/pages/modules/E-Office/Letter-Generation/create-letter/hook'
+import DialogHumanResources from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifMahasiswa/components/selectSDM.tsx'
+import ButtonForm from '@/components/common/button/ButtonForm.tsx'
+import SelectMultiStudent from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPermohonanMagangPKL/components/SelectMultiStudent.tsx'
+import type { TResolverSPO } from '../data/resolver.tsx'
 
-interface Props {
+interface props {
   loading: boolean
-  HandleSave: (e: TResolverSKAK) => void
-  form: UseFormReturn<TResolverSKAK>
+  HandleSave: (e: TResolverSPO) => void
+  form: UseFormReturn<TResolverSPO>
   template?: ILetterTemplateType
 }
 
-const FormSuratKeteranganAktifKembali = (props: Props) => {
-  const { id } = useParams()
+const FormSuratPengantarObservasi = (props: props) => {
   const { loading, HandleSave, form, template } = props
+  const { id } = useParams()
   const navigate = useNavigate()
   const { letterHeader } = UseGetLetterHeaderRef()
   const { letterNumber } = UseGetLetterNumberAutomatic({
@@ -39,6 +38,17 @@ const FormSuratKeteranganAktifKembali = (props: Props) => {
   const { institution } = UseGetUnitInstitution({
     page: '0',
     limit: '0',
+  })
+  const { institution: Faculty } = UseGetUnitInstitution({
+    page: '0',
+    limit: '0',
+    kelompok: 'FAKULTAS',
+  })
+  const { institution: prodi } = UseGetUnitInstitution({
+    page: '0',
+    limit: '0',
+    kelompok: 'PRODI',
+    parent_id: form.watch('id_fakultas'),
   })
 
   return (
@@ -143,9 +153,115 @@ const FormSuratKeteranganAktifKembali = (props: Props) => {
             </Card>
 
             <Card className={'p-2'}>
+              <CardContent className={'p-2 space-y-4'}>
+                <CardTitle>1. Mahasiswa</CardTitle>
+                <SelectMultiStudent form={form} />
+              </CardContent>
+            </Card>
+
+            <Card className={'p-2'}>
+              <CardContent className={'p-2 space-y-4'}>
+                <CardTitle>2. Prodi & Fakultas</CardTitle>
+                <div className="flex flex-col gap-5">
+                  <SelectBasicInput
+                    name={'id_fakultas'}
+                    form={form}
+                    placeholder={'Pilih Fakultas'}
+                    label={'Fakultas'}
+                    usePortal
+                    isRow
+                    isRequired
+                    data={
+                      Faculty?.map((row) => ({
+                        label: row?.nama,
+                        value: row?.id_satuan_organisasi,
+                      })) ?? []
+                    }
+                  />
+                  <SelectBasicInput
+                    name={'id_prodi'}
+                    form={form}
+                    placeholder={'Pilih Program studi'}
+                    label={'Program studi'}
+                    isDisabled={!form.watch('id_fakultas')}
+                    usePortal
+                    isRow
+                    isRequired
+                    data={
+                      prodi?.map((row) => ({
+                        label: row?.nama,
+                        value: row?.id_satuan_organisasi,
+                      })) ?? []
+                    }
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className={'p-2'}>
+              <CardContent className={'p-2 space-y-4'}>
+                <CardTitle>3. Informasi Pelaksanaan Observasi</CardTitle>
+                <TextInput
+                  name={'tanggal_observasi'}
+                  form={form}
+                  label={'Tanggal Observasi'}
+                  type={'date'}
+                  htmlFor={'tanggal_observasi'}
+                  isRequired
+                  isRow
+                />
+                <TextInput
+                  name={'waktu_observasi'}
+                  form={form}
+                  label={'Waktu Observasi'}
+                  placeholder={'Contoh: 08.00 - 10.00'}
+                  htmlFor={'Waktu_observasi'}
+                  isRequired
+                  isRow
+                />
+                <TextInput
+                  name={'tempat_observasi'}
+                  form={form}
+                  label={'Tempat Observasi'}
+                  placeholder={'Tempat Observasi'}
+                  htmlFor={'Tempat_observasi'}
+                  isRequired
+                  isRow
+                />
+                <TextInput
+                  name={'topik_observasi'}
+                  form={form}
+                  label={'Topik Observasi'}
+                  placeholder={'Topik Observasi'}
+                  htmlFor={'topik_observasi'}
+                  isRequired
+                  isRow
+                />
+              </CardContent>
+            </Card>
+
+            <Card className={'p-2'}>
+              <CardContent className={'p-2 space-y-4'}>
+                <CardTitle>4. Penutup</CardTitle>
+                <div className="relative">
+                  <SelectTemplateText kode={'SPO-1'} form={form} name={'penutup'} />
+                  <RichText
+                    form={form}
+                    name={'penutup'}
+                    label={'Penutup'}
+                    placeholder={'Tuliskan Penutup'}
+                    showLabel={true}
+                    required
+                    isRow
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className={'p-2'}>
               <CardContent className={'p-2 space-y-4 w-full'}>
                 <CardTitle className={'text-xl flex items-center gap-1.5'}>
-                  1. Penandatangan
+                  5. Penandatangan
                 </CardTitle>
                 <DialogHumanResources form={form} />
                 <div className="space-y-4">
@@ -153,18 +269,8 @@ const FormSuratKeteranganAktifKembali = (props: Props) => {
                     name={'nama_penandatangan'}
                     form={form}
                     label={'Nama'}
-                    placeholder={`Nama Penaandatangan ${template?.nama_jenis_template}`}
+                    placeholder={`Nama Penaandatangan ${template?.nama_jenis_template ?? ''}`}
                     htmlFor={'nama_penandatangan'}
-                    isRow
-                    isRequired
-                  />
-                  <TextInput
-                    name={'nip_penandatangan'}
-                    form={form}
-                    label={'NIP'}
-                    placeholder={`NIP Penaandatangan ${template?.nama_jenis_template}`}
-                    htmlFor={'nip'}
-                    type={'number'}
                     isRow
                     isRequired
                   />
@@ -172,7 +278,7 @@ const FormSuratKeteranganAktifKembali = (props: Props) => {
                     name={'nidn_penandatangan'}
                     form={form}
                     label={'NIDN'}
-                    placeholder={`NIDN Penaandatangan ${template?.nama_jenis_template}`}
+                    placeholder={`NIDN Penaandatangan ${template?.nama_jenis_template ?? ''}`}
                     htmlFor={'NIDN'}
                     type={'number'}
                     isRow
@@ -183,7 +289,7 @@ const FormSuratKeteranganAktifKembali = (props: Props) => {
                     name={'jabatan_penandatangan'}
                     form={form}
                     label={'Jabatan'}
-                    placeholder={`jabatan Penaandatangan ${template?.nama_jenis_template}`}
+                    placeholder={`jabatan Penaandatangan ${template?.nama_jenis_template ?? ''}`}
                     htmlFor={'jabatan'}
                     isRow
                     isRequired
@@ -192,8 +298,9 @@ const FormSuratKeteranganAktifKembali = (props: Props) => {
                   <SelectBasicInput
                     name={'id_satuan_kerja_penandatangan'}
                     form={form}
-                    placeholder={`Pilih Satuan Kerja ${template?.nama_jenis_template}`}
+                    placeholder={`Pilih Satuan Kerja ${template?.nama_jenis_template ?? ''}`}
                     label={'Satuan Kerja'}
+                    usePortal
                     data={
                       institution?.map((row) => ({
                         label: row?.nama,
@@ -201,78 +308,6 @@ const FormSuratKeteranganAktifKembali = (props: Props) => {
                       })) ?? []
                     }
                     isRequired
-                    isRow
-                  />
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className={'p-2'}>
-              <CardContent className={'p-2 space-y-4 w-full'}>
-                <CardTitle className={'text-xl flex items-center gap-1.5'}>2. Mahasiswa</CardTitle>
-                <DialogSelectStudents form={form} is_active={'1'} />
-                <div className="grid grid-cols-[12rem_1fr] gap-5">
-                  <p>Nama *</p>
-                  {form.watch('nama_mahasiswa') ?? '-'}
-                  <p>NPM/NIM *</p>
-                  {form.watch('nim') ?? '-'}
-                  <p>Program Studi *</p>
-                  {form.watch('prodi') ?? '-'}
-                  <p>Fakultas *</p>
-                  {form.watch('Fakultas') ?? '-'}
-                  <p>Jenjang *</p>
-                  {form.watch('jenjang') ?? '-'}
-                  <p>Semester *</p>
-                  {form.watch('semester') ?? '-'}
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className={'p-2'}>
-              <CardContent className={'p-2 space-y-4'}>
-                <CardTitle>3. Informasi Cuti</CardTitle>
-                <div className="space-y-4">
-                  <InputRadio
-                    form={form}
-                    name={'semester_cuti'}
-                    label={'Semester Cuti'}
-                    data={[
-                      { label: 'Ganjil', value: 'ganjil' },
-                      { label: 'Genap', value: 'genap' },
-                    ]}
-                    isRow
-                    isRequired
-                  />
-                  <TextInput
-                    name={'tahun_akademik'}
-                    form={form}
-                    label={'Tahun Akademik'}
-                    placeholder={'Tahun Akademik'}
-                    htmlFor={'tahun_akademik'}
-                    isRow
-                    isRequired
-                  />
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className={'p-2'}>
-              <CardContent className={'p-2 space-y-4'}>
-                <CardTitle>4. Penutup</CardTitle>
-                <div className="relative">
-                  <SelectTemplateText
-                    id_jenis_surat={template?.id_jenis_surat}
-                    kode={'SKAK-1'}
-                    form={form}
-                    name={'penutup'}
-                  />
-                  <RichText
-                    form={form}
-                    name={'penutup'}
-                    label={'Penutup'}
-                    placeholder={'Tuliskan Penutup'}
-                    showLabel={true}
-                    required
                     isRow
                   />
                 </div>
@@ -287,4 +322,4 @@ const FormSuratKeteranganAktifKembali = (props: Props) => {
   )
 }
 
-export default FormSuratKeteranganAktifKembali
+export default FormSuratPengantarObservasi

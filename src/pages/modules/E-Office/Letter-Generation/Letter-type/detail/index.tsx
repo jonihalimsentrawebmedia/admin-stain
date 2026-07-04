@@ -31,7 +31,7 @@ const DetailLetterType = () => {
           buttonGroup={[
             {
               type: 'custom',
-              element: <ButtonCodeTemplateAvailable />,
+              element: <ButtonCodeTemplateAvailable type={letter?.kategori_jenis_surat} />,
             },
             {
               type: 'custom',

@@ -45,13 +45,15 @@ export const UseGetDetailTypeLetter = (id: string) => {
 
 interface propsCode {
   is_existing?: boolean
+  type?: string
 }
 
 export const UseGetCodeAvailableLetter = (props?: propsCode) => {
-  const { is_existing } = props ?? {}
+  const { is_existing, type } = props ?? {}
 
   const Params = new URLSearchParams()
   if (is_existing) Params.append('is_existing', is_existing.toString())
+  if (type) Params.append('kategori_jenis_surat', type ?? '')
 
   const { data, isLoading, isFetching } = useQuery<
     Array<{
