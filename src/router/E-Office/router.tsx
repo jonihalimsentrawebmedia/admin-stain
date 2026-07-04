@@ -52,6 +52,12 @@ import DetailDataSKAK from '@/pages/modules/E-Office/Letter-Generation/letter-li
 import DetailDataSKBP from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKBP'
 import DetailDataSKBK from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKBK'
 import DetailDataSKBA from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKBA'
+import SuratRekomendasiBeasiswaPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratRekomendasiBeasiswa'
+import DetailDataSRB from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SRB'
+import UpdateSuratRekomendasiBeasiswaPage from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SRB/update.tsx'
+import SuratPengantarObservasiPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPengantarObservasi'
+import UpdatedSuratPengantarObservasiPage from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPO/updated.tsx'
+import DetailDataSPO from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPO'
 
 const UserProfilePage = lazy(() =>
   import('@/pages/modules/website-utama/user-profile').then((m) => ({ default: m.UserProfilePage }))
@@ -394,6 +400,14 @@ export const E_OFFICE_ROUTE = [
                 path: 'SKBA-1',
                 element: <SuratKeteranganBebasAkademikPage />,
               },
+              {
+                path: 'SRB-1',
+                element: <SuratRekomendasiBeasiswaPage />,
+              },
+              {
+                path: 'SPO-1',
+                element: <SuratPengantarObservasiPage />,
+              },
             ],
           },
         ],
@@ -448,6 +462,14 @@ export const E_OFFICE_ROUTE = [
                 path: 'SKBA-1',
                 element: <DetailDataSKBA />,
               },
+              {
+                path: 'SRB-1',
+                element: <DetailDataSRB />,
+              },
+              {
+                path: 'SPO-1',
+                element: <DetailDataSPO />,
+              },
             ],
           },
           {
@@ -492,6 +514,14 @@ export const E_OFFICE_ROUTE = [
               {
                 path: 'SKBA-1',
                 element: <UpdatedSuratKeteranganBebasAkademikPage />,
+              },
+              {
+                path: 'SRB-1',
+                element: <UpdateSuratRekomendasiBeasiswaPage />,
+              },
+              {
+                path: 'SPO-1',
+                element: <UpdatedSuratPengantarObservasiPage />,
               },
             ],
           },

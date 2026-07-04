@@ -9,9 +9,16 @@ import { FaCopy } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 import { UseGetCodeAvailableLetter } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/hooks'
 
-const ButtonCodeTemplateAvailable = () => {
+interface Props {
+  type?: string
+}
+
+const ButtonCodeTemplateAvailable = (props: Props) => {
+  const { type } = props
   const [open, setOpen] = useState(false)
-  const { codeAvailable } = UseGetCodeAvailableLetter()
+  const { codeAvailable } = UseGetCodeAvailableLetter({
+    type: type,
+  })
 
   const columns: ColumnDef<any>[] = [
     {
