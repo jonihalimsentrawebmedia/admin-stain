@@ -44,6 +44,7 @@ interface Props {
   setPage?: (value: any) => void
   setLimit?: (value: any) => void
   setSearch?: (value: any) => void
+  rowClassName?: (row: any) => string
 }
 const TableCustom = (props: Props) => {
   const {
@@ -76,6 +77,7 @@ const TableCustom = (props: Props) => {
       'uraian',
       'lembaga_penilaian',
     ],
+    rowClassName,
   } = props
   const table = useReactTable({
     data: data ?? [],
@@ -197,7 +199,7 @@ const TableCustom = (props: Props) => {
                 </TableRow>
               ))
             : table.getRowModel()?.rows?.map((row) => (
-                <TableRow key={row.id}>
+                <TableRow key={row.id} className={rowClassName?.(row.original)}>
                   {row.getVisibleCells()?.map((cell: any, k) => (
                     <TableCell
                       className={`whitespace-pre-wrap border ${tdClassName + ' text-[#3E3E3E]'} ${columnChecked.includes(cell.column.columnDef.accessorKey) ? '' : 'hidden'}`}

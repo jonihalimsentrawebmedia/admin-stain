@@ -196,7 +196,7 @@ const FormSuratKeteranganCutiAkademik = (props: Props) => {
                     name={'nama_penandatangan'}
                     form={form}
                     label={'Nama'}
-                    placeholder={`Nama Penaandatangan ${template?.nama_jenis_template ?? ''}`}
+                    placeholder={`Nama Penandatangan ${template?.nama_jenis_template ?? ''}`}
                     htmlFor={'nama_penandatangan'}
                     isRow
                     isRequired
@@ -205,7 +205,7 @@ const FormSuratKeteranganCutiAkademik = (props: Props) => {
                     name={'nip_penandatangan'}
                     form={form}
                     label={'NIP'}
-                    placeholder={`NIP Penaandatangan ${template?.nama_jenis_template ?? ''}`}
+                    placeholder={`NIP Penandatangan ${template?.nama_jenis_template ?? ''}`}
                     htmlFor={'nip'}
                     type={'number'}
                     isRow
@@ -215,7 +215,7 @@ const FormSuratKeteranganCutiAkademik = (props: Props) => {
                     name={'nidn_penandatangan'}
                     form={form}
                     label={'NIDN'}
-                    placeholder={`NIDN Penaandatangan ${template?.nama_jenis_template ?? ''}`}
+                    placeholder={`NIDN Penandatangan ${template?.nama_jenis_template ?? ''}`}
                     htmlFor={'NIDN'}
                     type={'number'}
                     isRow
@@ -226,7 +226,7 @@ const FormSuratKeteranganCutiAkademik = (props: Props) => {
                     name={'jabatan_penandatangan'}
                     form={form}
                     label={'Jabatan'}
-                    placeholder={`jabatan Penaandatangan ${template?.nama_jenis_template ?? ''}`}
+                    placeholder={`jabatan Penandatangan ${template?.nama_jenis_template ?? ''}`}
                     htmlFor={'jabatan'}
                     isRow
                     isRequired
@@ -235,7 +235,7 @@ const FormSuratKeteranganCutiAkademik = (props: Props) => {
                   <SelectBasicInput
                     name={'id_satuan_kerja_penandatangan'}
                     form={form}
-                    placeholder={`Pilih Satuan Kerja ${template?.nama_jenis_template ?? ''}`}
+                    placeholder={`Satuan Kerja Penandatangan ${template?.nama_jenis_template ?? ''}`}
                     label={'Satuan Kerja'}
                     data={
                       institution?.map((row) => ({

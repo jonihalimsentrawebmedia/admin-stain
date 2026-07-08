@@ -254,7 +254,7 @@ const FormSuratBebasPustaka = (props: Props) => {
                   <SelectBasicInput
                     name={'id_satuan_kerja_penandatangan'}
                     form={form}
-                    placeholder={`Pilih Satuan Kerja ${template?.nama_jenis_template}`}
+                    placeholder={`Satuan Kerja Penandatangan ${template?.nama_jenis_template}`}
                     label={'Satuan Kerja'}
                     data={
                       institution?.map((row) => ({
