@@ -1,5 +1,5 @@
 import FormSuratPermohonanMagangPKL from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPermohonanMagangPKL/components/form.tsx'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import {
   ResolverLetterPKL,
@@ -10,13 +10,28 @@ import { UseGetTemplateByCodeLetter } from '@/pages/modules/E-Office/Letter-Gene
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
+import { generateSPMLetter } from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPM/pdfgenerate.ts'
+import type { ISPMLetter } from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPM/types.ts'
+import { GetBase64FromUrl, UseGetLetterHeaderRef } from '@/pages/modules/E-Office/settings/letter-header/hooks'
+import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan-unit/hooks.tsx'
+import type { ILetterHeader } from '@/pages/modules/E-Office/settings/letter-header/data/types.ts'
+import type { IStudentDataStatus } from '@/pages/modules/E-Office/reference/studentStatusLetter/types.ts'
+import pdfmake from '@/utils/pdfmake.ts'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 const SuratPermohonanMagangPKL = () => {
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
+  const [openPdfDialog, setOpenPdfDialog] = useState(false)
+  const [pdfUrl, setPdfUrl] = useState<string | null>(null)
+  const pdfUrlRef = useRef<string | null>(null)
   const { template } = UseGetTemplateByCodeLetter('SPM-1')
+  const { letterHeader } = UseGetLetterHeaderRef()
+  const { institution } = UseGetUnitInstitution({ page: '0', limit: '0' })
+
   const form = useForm<TResolverLetterPKL>({
     resolver: zodResolver(ResolverLetterPKL),
+    mode: 'onChange',
   })
 
   useEffect(() => {
@@ -24,6 +39,87 @@ const SuratPermohonanMagangPKL = () => {
       form.setValue('id_jenis_template_surat', template?.id_mail_jenis_template_surat)
     }
   }, [template])
+
+  const cleanupPdfUrl = () => {
+    if (pdfUrlRef.current) {
+      URL.revokeObjectURL(pdfUrlRef.current)
+      pdfUrlRef.current = null
+    }
+    setPdfUrl(null)
+  }
+
+  useEffect(() => {
+    return () => {
+      cleanupPdfUrl()
+    }
+  }, [])
+
+  const HandlePreview = async (value: TResolverLetterPKL) => {
+    setLoading(true)
+    try {
+      const selectedHeader = (letterHeader ?? []).find(h => h.id_kop_surat === value.id_kop_surat)
+
+      let logoBase64 = ''
+      try {
+        if (selectedHeader?.url_logo) {
+          logoBase64 = await GetBase64FromUrl(selectedHeader.url_logo)
+        }
+      } catch (e) {
+        console.warn('[HandlePreview] Gagal konversi logo ke base64:', e)
+      }
+
+      const selectedInstitution = (institution ?? []).find(
+        i => i.id_satuan_organisasi === value.id_satuan_kerja_penandatangan
+      )
+
+      const studentRes = await AxiosClient.get('/eoffice/ref/mahasiswa-status-kkn-magang?limit=9999')
+      const allStudents: IStudentDataStatus[] = studentRes.data?.data ?? []
+      const selectedStudents = allStudents.filter((s: IStudentDataStatus) => value.id_mahasiswa?.includes(s.id_mahasiswa))
+      const mahasiswa_list = selectedStudents.map((s: IStudentDataStatus) => ({
+        id_mahasiswa: s.id_mahasiswa,
+        nim: s.nim,
+        nama_mahasiswa: s.nama_mahasiswa,
+        nama_prodi: s.nama_prodi,
+        nama_fakultas: s.nama_fakultas,
+        nama_agama: '',
+        angkatan: '',
+        semester_masuk: s.semester_masuk,
+        kode_jenjang_pendidikan: s.kode_jenjang_pendidikan,
+        nama_jenjang_pendidikan: s.nama_jenjang_pendidikan,
+      }))
+
+      const data = {
+        ...value,
+        nomor_surat: value.id_nomor_surat_otomatis,
+        nama_satuan_kerja_penandatangan: selectedInstitution?.nama ?? '',
+        nim: '',
+        nama_mahasiswa: '',
+        nama_prodi: '',
+        nama_fakultas: '',
+        nama_agama: '',
+        angkatan: '',
+        semester_masuk: 0,
+        kode_jenjang_pendidikan: '',
+        nama_jenjang_pendidikan: '',
+        mahasiswa_list,
+        kop_surat: selectedHeader ?? ({} as ILetterHeader),
+      } as unknown as ISPMLetter
+
+      const pdfDefinition = generateSPMLetter(data, logoBase64)
+      const blob = await pdfmake.createPdf(pdfDefinition).getBlob()
+      const url = URL.createObjectURL(blob)
+      cleanupPdfUrl()
+
+      pdfUrlRef.current = url
+      setPdfUrl(url)
+      setOpenPdfDialog(true)
+      toast.success('Preview berhasil dibuat')
+    } catch (err: any) {
+      toast.error(err?.message || 'Error')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const HandleSave = async (value: TResolverLetterPKL) => {
     setLoading(true)
@@ -49,6 +145,13 @@ const SuratPermohonanMagangPKL = () => {
       })
   }
 
+  const handleCloseDialog = (open: boolean) => {
+    if (!open) {
+      cleanupPdfUrl()
+    }
+    setOpenPdfDialog(open)
+  }
+
   return (
     <>
       <FormSuratPermohonanMagangPKL
@@ -56,7 +159,22 @@ const SuratPermohonanMagangPKL = () => {
         loading={loading}
         form={form}
         HandleSave={HandleSave}
+        HandlePreview={HandlePreview}
       />
+
+      <DialogBasic
+        title="Preview Surat"
+        open={openPdfDialog}
+        setOpen={handleCloseDialog}
+        disableOutsideDialog
+        className={'min-w-5xl'}
+      >
+        <div className="w-full h-[80vh]">
+          {pdfUrl && (
+            <iframe src={pdfUrl} className="w-full h-full border-0" title="Preview Surat PDF" />
+          )}
+        </div>
+      </DialogBasic>
     </>
   )
 }

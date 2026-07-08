@@ -230,6 +230,9 @@ const SelectMultiStudent = (props: Props) => {
             data={student}
             isShowPagination={false}
             isShowFilter={false}
+            rowClassName={(row: IStudentDataStatus) =>
+              selectedIds.includes(row.id_mahasiswa) || !row.is_available_kkn_magang ? 'bg-gray-200' : ''
+            }
           />
           <div className="flex justify-end">
             {meta && (

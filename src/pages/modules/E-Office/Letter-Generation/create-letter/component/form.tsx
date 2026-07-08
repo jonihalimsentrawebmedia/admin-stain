@@ -64,7 +64,7 @@ const FormCreateLetterCustomize = (props: props) => {
       <Form {...form}>
         <form className={'space-y-5'} onSubmit={form.handleSubmit(HandleSave)}>
           <ButtonTitleGroup
-            label={`Surat ${template?.nama_jenis_template}`}
+            label={`${template?.nama_jenis_template}`}
             isBack
             buttonGroup={[
               {

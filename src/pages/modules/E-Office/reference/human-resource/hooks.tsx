@@ -18,13 +18,18 @@ export interface IHumanResource {
   id_unit_kerja: string
 }
 
-export const UseGetHumanResource = (props?: BasicProps) => {
-  const { page, limit, search } = props ?? {}
+interface Props extends BasicProps {
+  id_unit_kerja?: string
+}
+
+export const UseGetHumanResource = (props?: Props) => {
+  const { id_unit_kerja, page, limit, search } = props ?? {}
 
   const Params = new URLSearchParams()
   if (page) Params.append('page', page ?? '1')
   if (limit) Params.append('limit', limit ?? '10')
   if (search) Params.append('search', search ?? '')
+  if (id_unit_kerja) Params.append('id_unit_kerja', id_unit_kerja ?? '')
 
   const { data, isLoading, isFetching } = useQuery<{ data: IHumanResource[]; meta: Meta }>({
     refetchOnWindowFocus: false,

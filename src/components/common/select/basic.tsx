@@ -37,7 +37,7 @@ export const SelectBasic = (props: Props) => {
         className={`flex flex-col gap-2 ${isRow ? 'flex-row' : 'flex-col'} items-center ${className}`}
       >
         <Label>{label}</Label>
-        <div className="flex items-center gap-1.5">
+        <div className="flex items-center gap-1.5 w-full">
           <Select value={value} onValueChange={onChange}>
             <SelectTrigger className={`${innerClassName} lg:min-w-[12rem]`}>
               <SelectValue placeholder={placeholder} />

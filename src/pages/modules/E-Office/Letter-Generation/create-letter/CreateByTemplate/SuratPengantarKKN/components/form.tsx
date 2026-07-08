@@ -5,8 +5,9 @@ import { UseGetLetterHeaderRef } from '@/pages/modules/E-Office/settings/letter-
 import { UseGetLetterNumberAutomatic } from '@/pages/modules/E-Office/Letter-Generation/code-letter/hooks'
 import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan-unit/hooks.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import { Button } from '@/components/ui/button.tsx'
 import { Card, CardContent, CardTitle } from '@/components/ui/card.tsx'
-import { FaRegFileAlt } from 'react-icons/fa'
+import { FaRegEye, FaRegFileAlt } from 'react-icons/fa'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import { FiHash } from 'react-icons/fi'
 import TextInput from '@/components/common/form/TextInput.tsx'
@@ -16,23 +17,48 @@ import TextAreaInput from '@/components/common/form/textAreaInput.tsx'
 import SelectTemplateText from '@/pages/modules/E-Office/Letter-Generation/create-letter/component/selectTemplate.tsx'
 import { Form } from '@/components/ui/form.tsx'
 import DialogHumanResources from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifMahasiswa/components/selectSDM.tsx'
-import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import type { TResolverKKN } from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPengantarKKN/data/resolver.tsx'
 import SelectMultiStudent from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPermohonanMagangPKL/components/SelectMultiStudent.tsx'
 import SelectMultiDosen from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPengantarKKN/components/SelectMultiDosen.tsx'
 
-interface props {
+interface Props {
   loading: boolean
   HandleSave: (e: TResolverKKN) => void
+  HandlePreview?: (e: TResolverKKN) => void
   form: UseFormReturn<TResolverKKN>
   template?: ILetterTemplateType
 }
 
-const FormSuratPengantarKKN = (props: props) => {
+const FormSuratPengantarKKN = (props: Props) => {
   const { id } = useParams()
-  const { loading, HandleSave, form, template } = props
-
+  const { loading, HandleSave, HandlePreview, form, template } = props
   const navigate = useNavigate()
+  const formValues = form.watch()
+  const isValid = !!(
+    formValues.id_nomor_surat_otomatis &&
+    formValues.tempat_surat &&
+    formValues.tanggal_surat &&
+    formValues.id_kop_surat &&
+    formValues.id_jenis_template_surat &&
+    formValues.lampiran !== undefined &&
+    formValues.lampiran !== null &&
+    String(formValues.lampiran) !== '' &&
+    formValues.perihal &&
+    formValues.nama_desa &&
+    formValues.kecamatan &&
+    formValues.kabupaten &&
+    formValues.masukan_di &&
+    formValues.pembuka &&
+    formValues.id_mahasiswa?.length &&
+    formValues.tanggal_mulai &&
+    formValues.tanggal_selesai &&
+    formValues.id_dpl?.length &&
+    formValues.penutup &&
+    formValues.id_penandatangan &&
+    formValues.nama_penandatangan &&
+    formValues.jabatan_penandatangan &&
+    formValues.id_satuan_kerja_penandatangan
+  )
   const { letterHeader } = UseGetLetterHeaderRef()
   const { letterNumber } = UseGetLetterNumberAutomatic({
     page: '0',
@@ -57,9 +83,30 @@ const FormSuratPengantarKKN = (props: props) => {
                 onClick: () =>
                   navigate(`/modules/e-office/letter-generation/create-letter/create/${id}`),
               },
+              ...(HandlePreview
+                ? [
+                    {
+                      type: 'custom' as const,
+                      element: (
+                        <Button
+                          key="preview"
+                          type="button"
+                          disabled={!isValid}
+                          onClick={form.handleSubmit(HandlePreview)}
+                          variant={'outline'}
+                          className="border-primary text-primary bg-white hover:text-primary"
+                        >
+                          <FaRegEye />
+                          Preview
+                        </Button>
+                      ),
+                    },
+                  ]
+                : []),
               {
                 type: 'save',
                 label: 'Simpan',
+                isDisabled: loading,
               },
             ]}
           />
@@ -273,6 +320,7 @@ const FormSuratPengantarKKN = (props: props) => {
                   />
                 </div>
 
+                <p className="text-lg font-semibold">Dosen Pembimbing Lapanga (DPL)</p>
                 <SelectMultiDosen form={form} />
               </CardContent>
             </Card>
@@ -313,7 +361,7 @@ const FormSuratPengantarKKN = (props: props) => {
                     name={'nama_penandatangan'}
                     form={form}
                     label={'Nama'}
-                    placeholder={`Nama Penaandatangan ${template?.nama_jenis_template ?? ''}`}
+                    placeholder={`Nama Penandatangan ${template?.nama_jenis_template ?? ''}`}
                     htmlFor={'nama_penandatangan'}
                     isRow
                     isRequired
@@ -322,7 +370,7 @@ const FormSuratPengantarKKN = (props: props) => {
                     name={'nidn_penandatangan'}
                     form={form}
                     label={'NIDN'}
-                    placeholder={`NIDN Penaandatangan ${template?.nama_jenis_template ?? ''}`}
+                    placeholder={`NIDN Penandatangan ${template?.nama_jenis_template ?? ''}`}
                     htmlFor={'NIDN'}
                     type={'number'}
                     isRow
@@ -333,7 +381,7 @@ const FormSuratPengantarKKN = (props: props) => {
                     name={'jabatan_penandatangan'}
                     form={form}
                     label={'Jabatan'}
-                    placeholder={`jabatan Penaandatangan ${template?.nama_jenis_template ?? ''}`}
+                    placeholder={`jabatan Penandatangan ${template?.nama_jenis_template ?? ''}`}
                     htmlFor={'jabatan'}
                     isRow
                     isRequired
@@ -342,7 +390,7 @@ const FormSuratPengantarKKN = (props: props) => {
                   <SelectBasicInput
                     name={'id_satuan_kerja_penandatangan'}
                     form={form}
-                    placeholder={`Pilih Satuan Kerja ${template?.nama_jenis_template ?? ''}`}
+                    placeholder={`Satuan Kerja Penandatangan ${template?.nama_jenis_template ?? ''}`}
                     label={'Satuan Kerja'}
                     usePortal
                     data={
@@ -359,7 +407,42 @@ const FormSuratPengantarKKN = (props: props) => {
             </Card>
           </div>
 
-          <ButtonForm loading={loading} />
+          <ButtonTitleGroup
+            label={``}
+            buttonGroup={[
+              {
+                type: 'cancel',
+                label: 'Batal',
+                onClick: () =>
+                  navigate(`/modules/e-office/letter-generation/create-letter/create/${id}`),
+              },
+              ...(HandlePreview
+                ? [
+                    {
+                      type: 'custom' as const,
+                      element: (
+                        <Button
+                          key="preview"
+                          type="button"
+                          disabled={!isValid}
+                          onClick={form.handleSubmit(HandlePreview)}
+                          variant={'outline'}
+                          className="border-primary text-primary bg-white hover:text-primary"
+                        >
+                          <FaRegEye />
+                          Preview
+                        </Button>
+                      ),
+                    },
+                  ]
+                : []),
+              {
+                type: 'save',
+                label: 'Simpan',
+                isDisabled: loading,
+              },
+            ]}
+          />
         </form>
       </Form>
     </>

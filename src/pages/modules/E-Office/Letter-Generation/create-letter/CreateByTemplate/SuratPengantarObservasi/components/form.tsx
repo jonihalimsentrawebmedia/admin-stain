@@ -6,7 +6,8 @@ import { UseGetLetterNumberAutomatic } from '@/pages/modules/E-Office/Letter-Gen
 import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan-unit/hooks.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Card, CardContent, CardTitle } from '@/components/ui/card.tsx'
-import { FaRegFileAlt } from 'react-icons/fa'
+import { FaRegEye, FaRegFileAlt } from 'react-icons/fa'
+import { Button } from '@/components/ui/button.tsx'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import { FiHash } from 'react-icons/fi'
 import TextInput from '@/components/common/form/TextInput.tsx'
@@ -15,21 +16,41 @@ import { Form } from '@/components/ui/form.tsx'
 import SelectTemplateText from '@/pages/modules/E-Office/Letter-Generation/create-letter/component/selectTemplate.tsx'
 import { RichText } from '@/components/common/richtext'
 import DialogHumanResources from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifMahasiswa/components/selectSDM.tsx'
-import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import SelectMultiStudent from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPermohonanMagangPKL/components/SelectMultiStudent.tsx'
 import type { TResolverSPO } from '../data/resolver.tsx'
 
 interface props {
   loading: boolean
   HandleSave: (e: TResolverSPO) => void
+  HandlePreview?: (e: TResolverSPO) => void
   form: UseFormReturn<TResolverSPO>
   template?: ILetterTemplateType
 }
 
 const FormSuratPengantarObservasi = (props: props) => {
-  const { loading, HandleSave, form, template } = props
+  const { loading, HandleSave, HandlePreview, form, template } = props
   const { id } = useParams()
   const navigate = useNavigate()
+  const formValues = form.watch()
+  const isValid = !!(
+    formValues.id_nomor_surat_otomatis &&
+    formValues.tempat_surat &&
+    formValues.tanggal_surat &&
+    formValues.id_kop_surat &&
+    formValues.id_jenis_template_surat &&
+    formValues.id_mahasiswa?.length &&
+    formValues.id_fakultas &&
+    formValues.id_prodi &&
+    formValues.tanggal_observasi &&
+    formValues.waktu_observasi &&
+    formValues.tempat_observasi &&
+    formValues.topik_observasi &&
+    formValues.penutup &&
+    formValues.id_penandatangan &&
+    formValues.nama_penandatangan &&
+    formValues.jabatan_penandatangan &&
+    formValues.id_satuan_kerja_penandatangan
+  )
   const { letterHeader } = UseGetLetterHeaderRef()
   const { letterNumber } = UseGetLetterNumberAutomatic({
     page: '0',
@@ -65,6 +86,26 @@ const FormSuratPengantarObservasi = (props: props) => {
                 onClick: () =>
                   navigate(`/modules/e-office/letter-generation/create-letter/create/${id}`),
               },
+              ...(HandlePreview
+                ? [
+                    {
+                      type: 'custom' as const,
+                      element: (
+                        <Button
+                          key="preview"
+                          type="button"
+                          disabled={!isValid}
+                          onClick={form.handleSubmit(HandlePreview)}
+                          variant={'outline'}
+                          className="border-primary text-primary bg-white hover:text-primary"
+                        >
+                          <FaRegEye />
+                          Preview
+                        </Button>
+                      ),
+                    },
+                  ]
+                : []),
               {
                 type: 'save',
                 label: 'Simpan',
@@ -269,7 +310,7 @@ const FormSuratPengantarObservasi = (props: props) => {
                     name={'nama_penandatangan'}
                     form={form}
                     label={'Nama'}
-                    placeholder={`Nama Penaandatangan ${template?.nama_jenis_template ?? ''}`}
+                    placeholder={`Nama Penandatangan ${template?.nama_jenis_template ?? ''}`}
                     htmlFor={'nama_penandatangan'}
                     isRow
                     isRequired
@@ -278,7 +319,7 @@ const FormSuratPengantarObservasi = (props: props) => {
                     name={'nidn_penandatangan'}
                     form={form}
                     label={'NIDN'}
-                    placeholder={`NIDN Penaandatangan ${template?.nama_jenis_template ?? ''}`}
+                    placeholder={`NIDN Penandatangan ${template?.nama_jenis_template ?? ''}`}
                     htmlFor={'NIDN'}
                     type={'number'}
                     isRow
@@ -289,7 +330,7 @@ const FormSuratPengantarObservasi = (props: props) => {
                     name={'jabatan_penandatangan'}
                     form={form}
                     label={'Jabatan'}
-                    placeholder={`jabatan Penaandatangan ${template?.nama_jenis_template ?? ''}`}
+                    placeholder={`jabatan Penandatangan ${template?.nama_jenis_template ?? ''}`}
                     htmlFor={'jabatan'}
                     isRow
                     isRequired
@@ -298,7 +339,7 @@ const FormSuratPengantarObservasi = (props: props) => {
                   <SelectBasicInput
                     name={'id_satuan_kerja_penandatangan'}
                     form={form}
-                    placeholder={`Pilih Satuan Kerja ${template?.nama_jenis_template ?? ''}`}
+                    placeholder={`Satuan Kerja Penandatangan ${template?.nama_jenis_template ?? ''}`}
                     label={'Satuan Kerja'}
                     usePortal
                     data={
@@ -315,7 +356,42 @@ const FormSuratPengantarObservasi = (props: props) => {
             </Card>
           </div>
 
-          <ButtonForm loading={loading} />
+          <ButtonTitleGroup
+            label={``}
+            buttonGroup={[
+              {
+                type: 'cancel',
+                label: 'Batal',
+                onClick: () =>
+                  navigate(`/modules/e-office/letter-generation/create-letter/create/${id}`),
+              },
+              ...(HandlePreview
+                ? [
+                    {
+                      type: 'custom' as const,
+                      element: (
+                        <Button
+                          key="preview"
+                          type="button"
+                          disabled={!isValid}
+                          onClick={form.handleSubmit(HandlePreview)}
+                          variant={'outline'}
+                          className="border-primary text-primary bg-white hover:text-primary"
+                        >
+                          <FaRegEye />
+                          Preview
+                        </Button>
+                      ),
+                    },
+                  ]
+                : []),
+              {
+                type: 'save',
+                label: 'Simpan',
+                isDisabled: loading,
+              },
+            ]}
+          />
         </form>
       </Form>
     </>

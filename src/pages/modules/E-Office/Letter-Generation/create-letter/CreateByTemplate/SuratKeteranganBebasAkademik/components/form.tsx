@@ -3,8 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Card, CardContent, CardTitle } from '@/components/ui/card.tsx'
 import { Form } from '@/components/ui/form.tsx'
-import ButtonForm from '@/components/common/button/ButtonForm.tsx'
-import { FaRegFileAlt, FaTrash } from 'react-icons/fa'
+import { FaRegEye, FaRegFileAlt, FaTrash } from 'react-icons/fa'
 import { FiHash } from 'react-icons/fi'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
@@ -25,14 +24,29 @@ import type { ILetterTemplateType } from '@/pages/modules/E-Office/Letter-Genera
 interface Props {
   loading: boolean
   HandleSave: (e: TResolverSKBA) => void
+  HandlePreview?: (e: TResolverSKBA) => void
   form: UseFormReturn<TResolverSKBA>
   template?: ILetterTemplateType
 }
 
 const FormSuratKeteranganBebasAkademik = (props: Props) => {
   const { id } = useParams()
-  const { loading, HandleSave, form, template } = props
+  const { loading, HandleSave, HandlePreview, form, template } = props
   const navigate = useNavigate()
+  const formValues = form.watch()
+  const isValid = !!(
+    formValues.id_nomor_surat_otomatis &&
+    formValues.tempat_surat &&
+    formValues.tanggal_surat &&
+    formValues.id_kop_surat &&
+    formValues.id_jenis_template_surat &&
+    formValues.id_mahasiswa &&
+    formValues.penutup &&
+    formValues.id_penandatangan &&
+    formValues.nama_penandatangan &&
+    formValues.jabatan_penandatangan &&
+    formValues.id_satuan_kerja_penandatangan
+  )
   const { letterHeader } = UseGetLetterHeaderRef()
   const { letterNumber } = UseGetLetterNumberAutomatic({
     page: '0',
@@ -84,9 +98,30 @@ const FormSuratKeteranganBebasAkademik = (props: Props) => {
                 onClick: () =>
                   navigate(`/modules/e-office/letter-generation/create-letter/create/${id}`),
               },
+              ...(HandlePreview
+                ? [
+                    {
+                      type: 'custom' as const,
+                      element: (
+                        <Button
+                          key="preview"
+                          type="button"
+                          disabled={!isValid}
+                          onClick={form.handleSubmit(HandlePreview)}
+                          variant={'outline'}
+                          className="border-primary text-primary bg-white hover:text-primary"
+                        >
+                          <FaRegEye />
+                          Preview
+                        </Button>
+                      ),
+                    },
+                  ]
+                : []),
               {
                 type: 'save',
                 label: 'Simpan',
+                isDisabled: loading,
               },
             ]}
           />
@@ -369,7 +404,42 @@ const FormSuratKeteranganBebasAkademik = (props: Props) => {
             </Card>
           </div>
 
-          <ButtonForm loading={loading} />
+          <ButtonTitleGroup
+            label={``}
+            buttonGroup={[
+              {
+                type: 'cancel',
+                label: 'Batal',
+                onClick: () =>
+                  navigate(`/modules/e-office/letter-generation/create-letter/create/${id}`),
+              },
+              ...(HandlePreview
+                ? [
+                    {
+                      type: 'custom' as const,
+                      element: (
+                        <Button
+                          key="preview"
+                          type="button"
+                          disabled={!isValid}
+                          onClick={form.handleSubmit(HandlePreview)}
+                          variant={'outline'}
+                          className="border-primary text-primary bg-white hover:text-primary"
+                        >
+                          <FaRegEye />
+                          Preview
+                        </Button>
+                      ),
+                    },
+                  ]
+                : []),
+              {
+                type: 'save',
+                label: 'Simpan',
+                isDisabled: loading,
+              },
+            ]}
+          />
         </form>
       </Form>
     </>
