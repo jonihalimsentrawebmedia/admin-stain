@@ -10,6 +10,9 @@ import type { ColumnDef } from '@tanstack/react-table'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import PaginationState from '@/components/common/paginationState'
 import type { UseFormReturn } from 'react-hook-form'
+import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan-unit/hooks.tsx'
+import { SelectBasic } from '@/components/common/select/basic.tsx'
+import Search from '@/components/common/table/Search.tsx'
 
 interface Props {
   form: UseFormReturn<any>
@@ -22,11 +25,14 @@ const DialogHumanResources = (props: Props) => {
     page: '1',
     limit: '10',
     search: '',
+    id_unit_kerja: '',
   })
+  const { institution } = UseGetUnitInstitution()
   const { humanResource, meta } = UseGetHumanResource({
     page: filter.page,
     limit: filter.limit,
     search: filter.search,
+    id_unit_kerja: filter.id_unit_kerja ?? '',
   })
   const Columns = ReturnColumns({
     form,
@@ -55,10 +61,45 @@ const DialogHumanResources = (props: Props) => {
         setOpen={setOpen}
         className={'min-w-5xl'}
       >
+        <div className={'flex items-center gap-4 justify-between w-full'}>
+          <SelectBasic
+            showReset
+            label={'Satuan Kerja'}
+            placeholder={'Pilih Satuan Kerja'}
+            isRow
+            className={'w-full! flex whitespace-nowrap'}
+            innerClassName={'w-full!'}
+            value={filter.id_unit_kerja}
+            data={
+              institution?.map((row) => ({
+                label: row.nama,
+                value: row.id_satuan_organisasi,
+              })) ?? []
+            }
+            onChange={(e) => {
+              setFilter((prev) => ({
+                ...prev,
+                id_unit_kerja: e,
+              }))
+            }}
+          />
+          <Search
+            innerClassName={'p-1.5'}
+            className={'p-1.5'}
+            position={'end'}
+            onSearch={(e) => {
+              setFilter((prev) => ({
+                ...prev,
+                search: e,
+              }))
+            }}
+          />
+        </div>
         <div>
           <TableCustom
             columns={Columns}
             meta={meta}
+            tdClassName={'text-xs'}
             columnsName={['']}
             thClassName={'bg-primary text-white'}
             data={humanResource}
