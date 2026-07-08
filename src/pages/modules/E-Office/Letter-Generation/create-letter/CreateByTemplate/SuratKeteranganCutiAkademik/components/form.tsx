@@ -1,7 +1,8 @@
 import type { UseFormReturn } from 'react-hook-form'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import { Button } from '@/components/ui/button.tsx'
 import { Card, CardContent, CardTitle } from '@/components/ui/card.tsx'
-import { FaRegFileAlt } from 'react-icons/fa'
+import { FaRegEye, FaRegFileAlt } from 'react-icons/fa'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import { FiHash } from 'react-icons/fi'
 import TextInput from '@/components/common/form/TextInput.tsx'
@@ -10,7 +11,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { UseGetLetterHeaderRef } from '@/pages/modules/E-Office/settings/letter-header/hooks'
 import { UseGetLetterNumberAutomatic } from '@/pages/modules/E-Office/Letter-Generation/code-letter/hooks'
 import { Form } from '@/components/ui/form.tsx'
-import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import DialogHumanResources from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifMahasiswa/components/selectSDM.tsx'
 import DialogSelectStudents from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifMahasiswa/components/selectStudent.tsx'
 import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan-unit/hooks.tsx'
@@ -21,17 +21,38 @@ import { InputRadio } from '@/components/common/form/InputRadio.tsx'
 import TextAreaInput from '@/components/common/form/textAreaInput.tsx'
 import type { ILetterTemplateType } from '@/pages/modules/E-Office/Letter-Generation/create-letter/hook'
 
-interface props {
+interface Props {
   loading: boolean
   HandleSave: (e: TResolverSKCAM) => void
+  HandlePreview?: (e: TResolverSKCAM) => void
   form: UseFormReturn<TResolverSKCAM>
   template?: ILetterTemplateType
 }
 
-const FormSuratKeteranganCutiAkademik = (props: props) => {
+const FormSuratKeteranganCutiAkademik = (props: Props) => {
   const { id } = useParams()
-  const { loading, HandleSave, form, template } = props
+  const { loading, HandleSave, HandlePreview, form, template } = props
   const navigate = useNavigate()
+  const formValues = form.watch()
+  const isValid = !!(
+    formValues.id_nomor_surat_otomatis &&
+    formValues.tempat_surat &&
+    formValues.tanggal_surat &&
+    formValues.id_kop_surat &&
+    formValues.id_jenis_template_surat &&
+    formValues.id_mahasiswa &&
+    formValues.semester_cuti &&
+    formValues.tahun_akademik &&
+    formValues.periode_cuti !== undefined &&
+    formValues.periode_cuti !== null &&
+    String(formValues.periode_cuti) !== '' &&
+    formValues.alasan_cuti &&
+    formValues.penutup &&
+    formValues.id_penandatangan &&
+    formValues.nama_penandatangan &&
+    formValues.jabatan_penandatangan &&
+    formValues.id_satuan_kerja_penandatangan
+  )
   const { letterHeader } = UseGetLetterHeaderRef()
   const { letterNumber } = UseGetLetterNumberAutomatic({
     page: '0',
@@ -56,9 +77,30 @@ const FormSuratKeteranganCutiAkademik = (props: props) => {
                 onClick: () =>
                   navigate(`/modules/e-office/letter-generation/create-letter/create/${id}`),
               },
+              ...(HandlePreview
+                ? [
+                    {
+                      type: 'custom' as const,
+                      element: (
+                        <Button
+                          key="preview"
+                          type="button"
+                          disabled={!isValid}
+                          onClick={form.handleSubmit(HandlePreview)}
+                          variant={'outline'}
+                          className="border-primary text-primary bg-white hover:text-primary"
+                        >
+                          <FaRegEye />
+                          Preview
+                        </Button>
+                      ),
+                    },
+                  ]
+                : []),
               {
                 type: 'save',
                 label: 'Simpan',
+                isDisabled: loading,
               },
             ]}
           />
@@ -310,7 +352,42 @@ const FormSuratKeteranganCutiAkademik = (props: props) => {
             </Card>
           </div>
 
-          <ButtonForm loading={loading} />
+          <ButtonTitleGroup
+            label={''}
+            buttonGroup={[
+              {
+                type: 'cancel',
+                label: 'Batal',
+                onClick: () =>
+                  navigate(`/modules/e-office/letter-generation/create-letter/create/${id}`),
+              },
+              ...(HandlePreview
+                ? [
+                    {
+                      type: 'custom' as const,
+                      element: (
+                        <Button
+                          key="preview"
+                          type="button"
+                          disabled={!isValid}
+                          onClick={form.handleSubmit(HandlePreview)}
+                          variant={'outline'}
+                          className="border-primary text-primary bg-white hover:text-primary"
+                        >
+                          <FaRegEye />
+                          Preview
+                        </Button>
+                      ),
+                    },
+                  ]
+                : []),
+              {
+                type: 'save',
+                label: 'Simpan',
+                isDisabled: loading,
+              },
+            ]}
+          />
         </form>
       </Form>
     </>

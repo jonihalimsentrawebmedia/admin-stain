@@ -6,12 +6,12 @@ import { UseGetLetterNumberAutomatic } from '@/pages/modules/E-Office/Letter-Gen
 import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan-unit/hooks.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Card, CardContent, CardTitle } from '@/components/ui/card.tsx'
-import { FaRegFileAlt } from 'react-icons/fa'
+import { FaRegEye, FaRegFileAlt } from 'react-icons/fa'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
+import { Button } from '@/components/ui/button.tsx'
 import { FiHash } from 'react-icons/fi'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import { ReturnOrderData } from '@/pages/modules/E-Office/Letter-Generation/create-letter/component/formLetterNumber.tsx'
-import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import { Form } from '@/components/ui/form.tsx'
 import DialogSelectStudents from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifMahasiswa/components/selectStudent.tsx'
 import DialogHumanResources from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifMahasiswa/components/selectSDM.tsx'
@@ -22,14 +22,30 @@ import type { TResolverSRB } from '../data/resolver.tsx'
 interface Props {
   loading: boolean
   HandleSave: (value: TResolverSRB) => void
+  HandlePreview?: (e: TResolverSRB) => void
   template?: ILetterTemplateType
   form: UseFormReturn<TResolverSRB>
 }
 
 const FormSuratRekomendasiBeasiswa = (props: Props) => {
   const { id } = useParams()
-  const { loading, HandleSave, template, form } = props
+  const { loading, HandleSave, HandlePreview, template, form } = props
   const navigate = useNavigate()
+  const formValues = form.watch()
+  const isValid = !!(
+    formValues.id_nomor_surat_otomatis &&
+    formValues.tempat_surat &&
+    formValues.tanggal_surat &&
+    formValues.id_kop_surat &&
+    formValues.id_jenis_template_surat &&
+    formValues.id_mahasiswa &&
+    formValues.ipk &&
+    formValues.penutup &&
+    formValues.id_penandatangan &&
+    formValues.nama_penandatangan &&
+    formValues.jabatan_penandatangan &&
+    formValues.id_satuan_kerja_penandatangan
+  )
   const { letterHeader } = UseGetLetterHeaderRef()
   const { letterNumber } = UseGetLetterNumberAutomatic({
     page: '0',
@@ -54,9 +70,30 @@ const FormSuratRekomendasiBeasiswa = (props: Props) => {
                 onClick: () =>
                   navigate(`/modules/e-office/letter-generation/create-letter/create/${id}`),
               },
+              ...(HandlePreview
+                ? [
+                    {
+                      type: 'custom' as const,
+                      element: (
+                        <Button
+                          key="preview"
+                          type="button"
+                          disabled={!isValid}
+                          onClick={form.handleSubmit(HandlePreview)}
+                          variant={'outline'}
+                          className="border-primary text-primary bg-white hover:text-primary"
+                        >
+                          <FaRegEye />
+                          Preview
+                        </Button>
+                      ),
+                    },
+                  ]
+                : []),
               {
                 type: 'save',
                 label: 'Simpan',
+                isDisabled: loading,
               },
             ]}
           />
@@ -259,7 +296,43 @@ const FormSuratRekomendasiBeasiswa = (props: Props) => {
               </CardContent>
             </Card>
           </div>
-          <ButtonForm loading={loading} />
+
+          <ButtonTitleGroup
+            label={``}
+            buttonGroup={[
+              {
+                type: 'cancel',
+                label: 'Batal',
+                onClick: () =>
+                  navigate(`/modules/e-office/letter-generation/create-letter/create/${id}`),
+              },
+              ...(HandlePreview
+                ? [
+                    {
+                      type: 'custom' as const,
+                      element: (
+                        <Button
+                          key="preview"
+                          type="button"
+                          disabled={!isValid}
+                          onClick={form.handleSubmit(HandlePreview)}
+                          variant={'outline'}
+                          className="border-primary text-primary bg-white hover:text-primary"
+                        >
+                          <FaRegEye />
+                          Preview
+                        </Button>
+                      ),
+                    },
+                  ]
+                : []),
+              {
+                type: 'save',
+                label: 'Simpan',
+                isDisabled: loading,
+              },
+            ]}
+          />
         </form>
       </Form>
     </>
