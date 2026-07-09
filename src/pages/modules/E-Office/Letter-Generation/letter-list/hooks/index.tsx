@@ -48,3 +48,38 @@ export const UseGetDetailLetterGenerate = (id: string) => {
   const loading = isLoading || isFetching
   return { letter: data, loading }
 }
+
+interface countProps extends BasicProps {
+  status?: string
+  id_jenis_template_surat?: string
+}
+
+export interface ILetterStatusCount {
+  DIBATALKAN: number
+  DIHAPUS: number
+  DIPROSES: number
+  MENUNGGU: number
+  SELESAI: number
+}
+
+export const UseGetCountLetter = (props?: countProps) => {
+  const { status, id_jenis_template_surat, page, limit, search } = props ?? {}
+
+  const params = new URLSearchParams()
+  if (page) params.append('page', page ?? '1')
+  if (limit) params.append('limit', limit ?? '10')
+  if (search) params.append('search', search ?? '')
+  if (status) params.append('status', status ?? '')
+  if (id_jenis_template_surat)
+    params.append('id_jenis_template_surat', id_jenis_template_surat ?? '')
+
+  const { data, isLoading, isFetching } = useQuery<ILetterStatusCount>({
+    queryKey: ['letter-generate-count', params.toString()],
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get(`/eoffice/mail-surat/status-count?${params}`).then((res) => res.data?.data),
+  })
+
+  const loading = isLoading || isFetching
+  return { count: data, loading }
+}

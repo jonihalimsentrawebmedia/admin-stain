@@ -251,7 +251,7 @@ const FormSuratPengantarPenelitian = (props: Props) => {
                 <TextInput
                   name={'masukan_di'}
                   form={form}
-                  label={'Di '}
+                  label={'Di'}
                   placeholder={'Cth: Ditempat'}
                   htmlFor={'di'}
                   className={'w-1/2'}
@@ -331,10 +331,10 @@ const FormSuratPengantarPenelitian = (props: Props) => {
                     isRequired
                     isRow
                     data={[
-                      { label: 'Observasi', value: 'observasi' },
-                      { label: 'Wawancara', value: 'wawancara' },
-                      { label: 'Kuisioner', value: 'kuisioner' },
-                      { label: 'Dokumentasi', value: 'dokumentasi' },
+                      { label: 'Observasi', value: 'Observasi' },
+                      { label: 'Wawancara', value: 'Wawancara' },
+                      { label: 'Kuisioner', value: 'Kuisioner' },
+                      { label: 'Dokumentasi', value: 'Dokumentasi' },
                     ]}
                   />
                 </div>

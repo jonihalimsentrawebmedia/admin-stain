@@ -67,7 +67,7 @@ export const GenerateLetterSKCA = ({
     content: [
       ...(kopContent ?? []),
       {
-        text: 'Surat Keterangan Cuti Akademik',
+        text: data?.nama_jenis_template.toUpperCase() || 'SURAT KETERANGAN CUTI AKADEMIK',
         alignment: 'center',
         bold: true,
         fontSize: 15,
@@ -97,11 +97,7 @@ export const GenerateLetterSKCA = ({
               `${data.nip_penandatangan || '-'} / ${data.nidn_penandatangan || '-'}`,
             ],
             [{ text: 'Jabatan', bold: true }, ':', data.jabatan_penandatangan],
-            [
-              { text: 'Universitas', bold: true },
-              ':',
-              data.nama_satuan_kerja_penandatangan,
-            ],
+            [{ text: 'Universitas', bold: true }, ':', data.nama_satuan_kerja_penandatangan],
           ],
         },
         layout: 'noBorders',
@@ -118,16 +114,8 @@ export const GenerateLetterSKCA = ({
           body: [
             [{ text: 'Nama', bold: true }, ':', data.nama_mahasiswa],
             [{ text: 'NPM/NIM', bold: true }, ':', data.nim],
-            [
-              { text: 'Program Studi', bold: true },
-              ':',
-              data.nama_prodi || '-',
-            ],
-            [
-              { text: 'Fakultas', bold: true },
-              ':',
-              data.nama_fakultas || '-',
-            ],
+            [{ text: 'Program Studi', bold: true }, ':', data.nama_prodi || '-'],
+            [{ text: 'Fakultas', bold: true }, ':', data.nama_fakultas || '-'],
             [{ text: 'Jenjang', bold: true }, ':', data.nama_jenjang || '-'],
           ],
         },
@@ -192,7 +180,7 @@ export const GenerateLetterSKCA = ({
 
       {
         table: {
-          widths: ['*', 200],
+          widths: ['*', 250],
           body: [
             [
               '',
@@ -203,16 +191,14 @@ export const GenerateLetterSKCA = ({
                   },
                   {
                     text: data.jabatan_penandatangan,
-                    bold: true,
                     margin: [0, 0, 0, 50],
                   },
                   {
                     text: data.nama_penandatangan,
-                    bold: true,
                   },
                   {
-                    text: `NIP/NIDN.\n${data.nip_penandatangan || '-'} / ${data.nidn_penandatangan || '-'}`,
-                    bold: true,
+                    text: `${data?.nip_penandatangan ? 'NIP' : 'NIDN'}.${data?.nip_penandatangan ?? data?.nidn_penandatangan}`,
+                    // text: `NIP/NIDN.${data.nip_penandatangan || '-'} / ${data.nidn_penandatangan || '-'}`,
                   },
                 ],
               },

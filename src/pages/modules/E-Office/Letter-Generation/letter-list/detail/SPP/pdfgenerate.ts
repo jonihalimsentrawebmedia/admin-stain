@@ -23,9 +23,20 @@ interface IGenerateLetterSPP {
 }
 
 const infoRow = (label: string, value: string | number | null) => [
-  { text: label, bold: true, border: [false, false, false, false] as [boolean, boolean, boolean, boolean] },
-  { text: ':', border: [false, false, false, false] as [boolean, boolean, boolean, boolean], alignment: 'center' as const },
-  { text: value ? String(value) : '-', border: [false, false, false, false] as [boolean, boolean, boolean, boolean] },
+  {
+    text: label,
+    bold: true,
+    border: [false, false, false, false] as [boolean, boolean, boolean, boolean],
+  },
+  {
+    text: ':',
+    border: [false, false, false, false] as [boolean, boolean, boolean, boolean],
+    alignment: 'center' as const,
+  },
+  {
+    text: value ? String(value) : '-',
+    border: [false, false, false, false] as [boolean, boolean, boolean, boolean],
+  },
 ]
 
 const buildPembuka = (pembuka: string | undefined | null) => {
@@ -34,7 +45,7 @@ const buildPembuka = (pembuka: string | undefined | null) => {
     return [
       {
         text: 'Dengan hormat,',
-        margin: [0, 0, 0, 5] as [number, number, number, number],
+        margin: [80, 0, 0, 0] as [number, number, number, number],
       },
     ]
   }
@@ -46,7 +57,7 @@ const buildPembuka = (pembuka: string | undefined | null) => {
     ...item,
     fontSize: 12,
     alignment: 'justify' as const,
-    margin: [0, 0, 0, 5] as [number, number, number, number],
+    margin: [80, 0, 0, 0] as [number, number, number, number],
   }))
 }
 
@@ -57,7 +68,7 @@ const buildPenutup = (penutup: string | undefined | null) => {
       {
         text: 'Demikian surat pengantar ini kami sampaikan. Atas perhatian dan kerja sama yang baik, kami ucapkan terima kasih.',
         alignment: 'justify' as const,
-        margin: [0, 0, 0, 10] as [number, number, number, number],
+        margin: [80, 0, 0, 5] as [number, number, number, number],
       },
     ]
   }
@@ -67,9 +78,9 @@ const buildPenutup = (penutup: string | undefined | null) => {
 
   return items.map((item: any) => ({
     ...item,
-    fontSize: 12,
+    fontSize: 11,
     alignment: 'justify' as const,
-    margin: [0, 0, 0, 10] as [number, number, number, number],
+    margin: [80, 0, 0, 5] as [number, number, number, number],
   }))
 }
 
@@ -83,11 +94,18 @@ export const GenerateLetterSKPP = ({
 
   const metadataSection = {
     table: {
-      widths: [70, 10, '*'],
+      widths: [65, 5, '*'],
       body: [
         [
-          { text: 'Lampiran', border: [false, false, false, false] as [boolean, boolean, boolean, boolean] },
-          { text: ':', border: [false, false, false, false] as [boolean, boolean, boolean, boolean], alignment: 'center' as const },
+          {
+            text: 'Lampiran',
+            border: [false, false, false, false] as [boolean, boolean, boolean, boolean],
+          },
+          {
+            text: ':',
+            border: [false, false, false, false] as [boolean, boolean, boolean, boolean],
+            alignment: 'center' as const,
+          },
           {
             text:
               data.detail_lampiran.length > 0
@@ -97,9 +115,19 @@ export const GenerateLetterSKPP = ({
           },
         ],
         [
-          { text: 'Perihal', border: [false, false, false, false] as [boolean, boolean, boolean, boolean] },
-          { text: ':', border: [false, false, false, false] as [boolean, boolean, boolean, boolean], alignment: 'center' as const },
-          { text: data.perihal, border: [false, false, false, false] as [boolean, boolean, boolean, boolean] },
+          {
+            text: 'Perihal',
+            border: [false, false, false, false] as [boolean, boolean, boolean, boolean],
+          },
+          {
+            text: ':',
+            border: [false, false, false, false] as [boolean, boolean, boolean, boolean],
+            alignment: 'center' as const,
+          },
+          {
+            text: data.perihal,
+            border: [false, false, false, false] as [boolean, boolean, boolean, boolean],
+          },
         ],
       ],
     },
@@ -151,11 +179,11 @@ export const GenerateLetterSKPP = ({
 
   return {
     pageSize: 'A4',
-    pageMargins: [30, 20, 30, 20],
+    pageMargins: [40, 20, 40, 20],
 
     defaultStyle: {
       font: 'Times New Roman',
-      fontSize: 12,
+      fontSize: 11,
       lineHeight: 1.1,
       alignment: 'justify' as const,
     },
@@ -164,7 +192,7 @@ export const GenerateLetterSKPP = ({
       ...(kopContent ?? []),
 
       {
-        text: 'Surat Pengantar Penelitian',
+        text: data?.nama_jenis_template.toUpperCase(),
         bold: true,
         alignment: 'center',
         fontSize: 15,
@@ -181,7 +209,7 @@ export const GenerateLetterSKPP = ({
         text: 'Kepada Yth.',
       },
       {
-        margin: [90, 5, 0, 10] as [number, number, number, number],
+        margin: [80, 5, 0, 5] as [number, number, number, number],
         stack: [
           { text: data.instansi_pimpinan, bold: true },
           { text: 'Di' },
@@ -194,12 +222,12 @@ export const GenerateLetterSKPP = ({
       {
         text: 'Sehubungan dengan pelaksanaan penelitian dalam rangka penyusunan Skripsi/Tesis/Disertasi, kami mohon kesediaan Bapak/Ibu untuk memberikan izin kepada mahasiswa berikut:',
         alignment: 'justify',
-        margin: [0, 0, 0, 5] as [number, number, number, number],
+        margin: [80, 0, 0, 5] as [number, number, number, number],
       },
 
       {
         table: {
-          widths: [120, 10, '*'],
+          widths: [100, 10, '*'],
           body: [
             infoRow('Nama', data.nama_mahasiswa),
             infoRow('NPM/NIM', data.nim),
@@ -209,7 +237,7 @@ export const GenerateLetterSKPP = ({
           ],
         },
         layout: 'noBorders' as const,
-        margin: [0, 0, 0, 10] as [number, number, number, number],
+        margin: [80, 0, 0, 5] as [number, number, number, number],
       },
 
       {
@@ -219,13 +247,13 @@ export const GenerateLetterSKPP = ({
           '. Adapun pelaksanaan penelitian direncanakan pada:',
         ],
         alignment: 'justify',
-        margin: [0, 0, 0, 10] as [number, number, number, number],
+        margin: [80, 0, 0, 5] as [number, number, number, number],
       },
 
       {
-        margin: [0, 0, 0, 10] as [number, number, number, number],
+        margin: [90, 0, 0, 5] as [number, number, number, number],
         table: {
-          widths: [160, 10, '*'],
+          widths: [140, 10, '*'],
           body: [
             infoRow('a. Lokasi Penelitian', data.lokasi_penelitian),
             infoRow('b. Periode Penelitian', data.lama_penelitian),
@@ -238,23 +266,33 @@ export const GenerateLetterSKPP = ({
       {
         text: 'Kami berharap Bapak/Ibu berkenan memberikan izin serta bantuan yang diperlukan selama proses penelitian berlangsung. Seluruh data yang diperoleh akan digunakan semata-mata untuk kepentingan akademik dan dijaga kerahasiaannya sesuai dengan ketentuan yang berlaku.',
         alignment: 'justify',
-        margin: [0, 0, 0, 5] as [number, number, number, number],
+        margin: [80, 0, 0, 5] as [number, number, number, number],
       },
 
       ...buildPenutup(data.penutup),
 
       {
         table: {
-          widths: ['*', 200],
+          widths: ['*', 250],
           body: [
             [
               '',
               {
                 stack: [
-                  { text: tempatTanggal },
-                  { text: data.jabatan_penandatangan, bold: true, margin: [0, 0, 0, 45] as [number, number, number, number] },
-                  { text: data.nama_penandatangan, bold: true },
-                  { text: `NIP/NIDN.\n${data.nidn_penandatangan || '-'}`, bold: true },
+                  {
+                    text: tempatTanggal,
+                  },
+                  {
+                    text: data.jabatan_penandatangan,
+                    margin: [0, 0, 0, 50],
+                  },
+                  {
+                    text: data.nama_penandatangan,
+                  },
+                  {
+                    text: `${data?.nip_penandatangan ? 'NIP' : 'NIDN'}.${data?.nip_penandatangan ?? data?.nidn_penandatangan}`,
+                    // text: `NIP/NIDN.${data.nip_penandatangan || '-'} / ${data.nidn_penandatangan || '-'}`,
+                  },
                 ],
               },
             ],

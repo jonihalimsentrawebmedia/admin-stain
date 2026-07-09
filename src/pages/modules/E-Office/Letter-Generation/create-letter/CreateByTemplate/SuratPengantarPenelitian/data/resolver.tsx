@@ -23,13 +23,14 @@ export const ResolverSPP = z.object({
   prodi: z.string().optional().nullable(),
   Fakultas: z.string().optional().nullable(),
   jenjang: z.string().optional().nullable(),
+  kode_jenjang: z.string().optional().nullable(),
   semester: z.number().optional().nullable(),
 
   //penelitian
   judul_penelitian: z.string({ error: 'Judul Penelitian harus diisi' }),
   lokasi_penelitian: z.string({ error: 'Lokasi Penelitian harus diisi' }),
   lama_penelitian: z.string({ error: 'Lama Penelitian harus diisi' }),
-  metode_pengumpulan_data: z.array(z.enum(['observasi', 'wawancara', 'kuisioner', 'dokumentasi'])),
+  metode_pengumpulan_data: z.array(z.enum(['Observasi', 'Wawancara', 'Kuisioner', 'Dokumentasi'])),
 
   penutup: z.string({ error: 'Penutup harus diisi' }),
 

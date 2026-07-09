@@ -2,6 +2,7 @@ import { useFieldArray, type UseFormReturn } from 'react-hook-form'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { MdDelete, MdSearch } from 'react-icons/md'
 import { Button } from '@/components/ui/button.tsx'
+import { Checkbox } from '@/components/ui/checkbox.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import PaginationState from '@/components/common/paginationState'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
@@ -12,6 +13,10 @@ import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan
 import { SelectBasic } from '@/components/common/select/basic.tsx'
 import { UseGetYearLevel } from '@/pages/modules/E-Office/students/student-data/hooks'
 import { UseGetAdmissionProcess } from '@/pages/modules/E-Office/students/admission-process/hooks'
+import LimitState from '@/components/common/table/limitState.tsx'
+import Search from '@/components/common/table/Search.tsx'
+import { TableBasicState } from '@/components/common/table/tableUsestate.tsx'
+import { FaSave } from 'react-icons/fa'
 
 interface Props {
   form: UseFormReturn<any>
@@ -22,6 +27,7 @@ const SelectMultiStudent = (props: Props) => {
 
   const [open, setOpen] = useState(false)
   const [selectedStudents, setSelectedStudents] = useState<IStudentDataStatus[]>([])
+  const [checkedIds, setCheckedIds] = useState<string[]>([])
   const [filter, setFilter] = useState({
     page: '1',
     limit: '10',
@@ -60,30 +66,58 @@ const SelectMultiStudent = (props: Props) => {
   })
 
   useEffect(() => {
-    if (Stundents?.length && student?.length) {
-      const filtered = student.filter((student) => Stundents.includes(student.id_mahasiswa))
+    if (open) {
+      setCheckedIds(Stundents ?? [])
+    }
+  }, [open])
+
+  useEffect(() => {
+    if (open && Stundents?.length && student?.length) {
+      const filtered = student.filter((s) => Stundents.includes(s.id_mahasiswa))
       setSelectedStudents((prev) => {
-        if (
-          prev.length === filtered.length &&
-          prev.every((s, i) => s.id_mahasiswa === filtered[i]?.id_mahasiswa)
-        ) {
-          return prev
-        }
-        return filtered
+        const existingIds = new Set(prev.map((s) => s.id_mahasiswa))
+        const newStudents = filtered.filter((s) => !existingIds.has(s.id_mahasiswa))
+        if (newStudents.length === 0) return prev
+        return [...prev, ...newStudents]
       })
     }
-  }, [Stundents])
+  }, [open, student])
 
-  const handleSelect = useCallback(
-    (student: IStudentDataStatus) => {
-      Stundent.append(student.id_mahasiswa)
-      setSelectedStudents((prev) => {
-        if (prev.some((s) => s.id_mahasiswa === student.id_mahasiswa)) return prev
-        return [...prev, student]
-      })
-    },
-    [Stundent]
-  )
+  const handleToggleCheck = useCallback((student: IStudentDataStatus) => {
+    setCheckedIds((prev) =>
+      prev.includes(student.id_mahasiswa)
+        ? prev.filter((v) => v !== student.id_mahasiswa)
+        : [...prev, student.id_mahasiswa]
+    )
+    setSelectedStudents((prev) =>
+      prev.some((s) => s.id_mahasiswa === student.id_mahasiswa)
+        ? prev.filter((s) => s.id_mahasiswa !== student.id_mahasiswa)
+        : [...prev, student]
+    )
+  }, [])
+
+  const handleToggleAll = useCallback(() => {
+    const available = student?.filter((s) => s.is_available_kkn_magang) ?? []
+    const availableIds = available.map((s) => s.id_mahasiswa)
+
+    setCheckedIds((prev) => {
+      const allChecked = availableIds.every((id) => prev.includes(id))
+      if (allChecked) {
+        return prev.filter((id) => !availableIds.includes(id))
+      }
+      return [...new Set([...prev, ...availableIds])]
+    })
+
+    setSelectedStudents((prev) => {
+      const allChecked = available.every((s) => prev.some((ps) => ps.id_mahasiswa === s.id_mahasiswa))
+      if (allChecked) {
+        return prev.filter((ps) => !available.some((s) => s.id_mahasiswa === ps.id_mahasiswa))
+      }
+      const existingIds = new Set(prev.map((s) => s.id_mahasiswa))
+      const newStudents = available.filter((s) => !existingIds.has(s.id_mahasiswa))
+      return [...prev, ...newStudents]
+    })
+  }, [student])
 
   const handleDelete = useCallback(
     (index: number) => {
@@ -93,11 +127,14 @@ const SelectMultiStudent = (props: Props) => {
     [Stundent]
   )
 
-  const selectedIds = useMemo(() => selectedStudents.map((s) => s.id_mahasiswa), [selectedStudents])
+  const handleSave = useCallback(() => {
+    Stundent.replace(checkedIds)
+    setOpen(false)
+  }, [checkedIds, Stundent])
 
   const dialogColumns = useMemo(
-    () => ReturnDialogColumns({ onSelect: handleSelect, selectedIds }),
-    [handleSelect, selectedIds]
+    () => ReturnDialogColumns({ checkedIds, onToggle: handleToggleCheck, onToggleAll: handleToggleAll, student }),
+    [checkedIds, handleToggleCheck, handleToggleAll, student]
   )
 
   const selectedColumns = useMemo(
@@ -134,7 +171,7 @@ const SelectMultiStudent = (props: Props) => {
       )}
 
       <DialogBasic title={'Pilih Mahasiswa'} open={open} setOpen={setOpen} className={'min-w-5xl'}>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-2 gap-x-4">
           <SelectBasic
             showReset
             value={filter.id_fakultas}
@@ -220,20 +257,41 @@ const SelectMultiStudent = (props: Props) => {
               })) ?? []),
             ]}
           />
+          <LimitState
+            value={Number(filter.limit)}
+            setLimit={(e) => {
+              setFilter((prev) => ({
+                ...prev,
+                limit: e.toString(),
+              }))
+            }}
+          />
+          <Search
+            className={'p-1.5'}
+            innerClassName={'p-1.5 text-sm'}
+            position={'end'}
+            onSearch={(e) => {
+              setFilter((prev) => ({
+                ...prev,
+                search: e,
+              }))
+            }}
+          />
         </div>
         <div>
-          <TableCustom
-            columns={dialogColumns}
-            meta={meta}
-            columnsName={['']}
-            thClassName={'bg-primary text-white'}
-            data={student}
-            isShowPagination={false}
-            isShowFilter={false}
-            rowClassName={(row: IStudentDataStatus) =>
-              selectedIds.includes(row.id_mahasiswa) || !row.is_available_kkn_magang ? 'bg-gray-200' : ''
-            }
-          />
+          <div className="max-h-[500px] overflow-y-scroll">
+            <TableBasicState
+              columns={dialogColumns}
+              thClassName={'bg-primary text-white'}
+              tdClassName={'text-xs p-1'}
+              data={student}
+              rowClassName={(row: IStudentDataStatus) =>
+                checkedIds.includes(row.id_mahasiswa) || !row.is_available_kkn_magang
+                  ? 'bg-gray-200'
+                  : ''
+              }
+            />
+          </div>
           <div className="flex justify-end">
             {meta && (
               <PaginationState
@@ -249,6 +307,12 @@ const SelectMultiStudent = (props: Props) => {
               />
             )}
           </div>
+          <div className="flex items-center justify-end mt-2">
+            <Button className={'text-white'} onClick={handleSave}>
+              <FaSave />
+              Simpan
+            </Button>
+          </div>
         </div>
       </DialogBasic>
     </>
@@ -258,13 +322,41 @@ const SelectMultiStudent = (props: Props) => {
 export default SelectMultiStudent
 
 const ReturnDialogColumns = ({
-  onSelect,
-  selectedIds,
+  checkedIds,
+  onToggle,
+  onToggleAll,
+  student,
 }: {
-  onSelect: (student: IStudentDataStatus) => void
-  selectedIds: string[]
+  checkedIds: string[]
+  onToggle: (student: IStudentDataStatus) => void
+  onToggleAll: () => void
+  student?: IStudentDataStatus[]
 }) => {
+  const availableIds = student?.filter((s) => s.is_available_kkn_magang).map((s) => s.id_mahasiswa) ?? []
+  const allChecked = availableIds.length > 0 && availableIds.every((id) => checkedIds.includes(id))
+  const someChecked = availableIds.some((id) => checkedIds.includes(id))
+
   const Columns: ColumnDef<IStudentDataStatus>[] = [
+    {
+      accessorKey: 'pilih',
+      header: () => (
+        <Checkbox
+          checked={allChecked ? true : someChecked ? 'indeterminate' : false}
+          onCheckedChange={onToggleAll}
+        />
+      ),
+      cell: ({ row }) => {
+        const data = row.original
+        const disabled = !data.is_available_kkn_magang
+        return (
+          <Checkbox
+            checked={checkedIds.includes(data.id_mahasiswa)}
+            disabled={disabled}
+            onCheckedChange={() => onToggle(data)}
+          />
+        )
+      },
+    },
     {
       accessorKey: 'order',
       header: '#',
@@ -303,21 +395,6 @@ const ReturnDialogColumns = ({
     {
       accessorKey: 'semester_masuk',
       header: 'Semester',
-    },
-    {
-      accessorKey: 'action',
-      header: '',
-      cell: ({ row }) => {
-        const data = row.original
-        const isSelected = selectedIds.includes(data.id_mahasiswa) || !data.is_available_kkn_magang
-        return (
-          <>
-            <Button onClick={() => onSelect(data)} disabled={isSelected} className={'text-white'}>
-              {isSelected ? 'Dipilih' : 'Pilih'}
-            </Button>
-          </>
-        )
-      },
     },
   ]
   return Columns

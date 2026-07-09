@@ -268,12 +268,12 @@ const FormSuratKeteranganAktifKembali = (props: Props) => {
 
             <Card className={'p-2'}>
               <CardContent className={'p-2 space-y-4'}>
-                <CardTitle>3. Informasi Cuti</CardTitle>
+                <CardTitle>3. Informasi Mulai Aktif Kembali</CardTitle>
                 <div className="space-y-4">
                   <InputRadio
                     form={form}
                     name={'semester_cuti'}
-                    label={'Semester Cuti'}
+                    label={'Semester'}
                     data={[
                       { label: 'Ganjil', value: 'ganjil' },
                       { label: 'Genap', value: 'genap' },

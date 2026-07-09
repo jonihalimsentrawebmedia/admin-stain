@@ -75,7 +75,7 @@ export const GenerateSKBPLetter = ({
       // =========================
 
       {
-        text: 'Surat Keterangan Bebas Pustaka',
+        text: data?.nama_jenis_template.toUpperCase(),
         alignment: 'center',
         bold: true,
         fontSize: 15,
@@ -193,46 +193,36 @@ export const GenerateSKBPLetter = ({
       // =========================
       // TANDA TANGAN
       // =========================
-
       {
-        margin: [310, 20, 0, 0],
-        width: 200,
-        stack: [
-          {
-            text: tempatTanggal,
-            bold: true,
-            alignment: 'left',
-          },
-          {
-            margin: [0, 10, 0, 0],
+        table: {
+          widths: ['*', 250],
+          body: [
+            [
+              '',
+              {
+                stack: [
+                  {
+                    text: tempatTanggal,
+                  },
+                  {
+                    text: data.jabatan_penandatangan,
+                    margin: [0, 0, 0, 50],
+                  },
+                  {
+                    text: data.nama_penandatangan,
+                  },
+                  {
+                    text: `${data?.nip_penandatangan ? 'NIP' : 'NIDN'}.${data?.nip_penandatangan ?? data?.nidn_penandatangan}`,
+                    // text: `NIP/NIDN.${data.nip_penandatangan || '-'} / ${data.nidn_penandatangan || '-'}`,
+                  },
+                ],
+              },
+            ],
+          ],
+        },
 
-            text: data.jabatan_penandatangan,
-            bold: true,
-            alignment: 'left',
-          },
-
-          {
-            text: data.nama_satuan_kerja_penandatangan,
-            alignment: 'left',
-          },
-
-          {
-            text: '\n\n\n',
-          },
-
-          {
-            text: data.nama_penandatangan,
-            bold: true,
-            decoration: 'underline',
-            alignment: 'left',
-          },
-
-          {
-            text: `NIP/NIDN\n${data.nip_penandatangan || '-'} / ${data.nidn_penandatangan || '-'}`,
-            bold: true,
-            alignment: 'left',
-          },
-        ],
+        layout: 'noBorders',
+        margin: [0, 20, 0, 0],
       },
     ],
   }

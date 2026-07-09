@@ -4,6 +4,7 @@ import { HeaderEOffice } from './header'
 import { SideNavEOffice } from './sideNav'
 
 export default function MainLayoutEOffice() {
+  // test comment
   const [collapsed, setCollapsed] = useState(false)
 
   return (

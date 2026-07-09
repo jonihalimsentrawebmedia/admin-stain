@@ -212,7 +212,7 @@ const FormSuratRekomendasiBeasiswa = (props: Props) => {
 
             <Card className={'p-2'}>
               <CardContent className={'p-2 space-y-4'}>
-                <CardTitle>4. Penutup</CardTitle>
+                <CardTitle>2. Penutup</CardTitle>
                 <div className="relative">
                   <SelectTemplateText
                     id_jenis_surat={template?.id_jenis_surat}
@@ -236,7 +236,7 @@ const FormSuratRekomendasiBeasiswa = (props: Props) => {
             <Card className={'p-2'}>
               <CardContent className={'p-2 space-y-4 w-full'}>
                 <CardTitle className={'text-xl flex items-center gap-1.5'}>
-                  5. Penandatangan
+                  3. Penandatangan
                 </CardTitle>
                 <DialogHumanResources form={form} />
                 <div className="space-y-4">

@@ -68,7 +68,7 @@ export const GenerateLetterSKAM = ({
       ...(kopContent ?? []),
 
       {
-        text: 'Surat Keterangan Aktif Kuliah',
+        text: data?.nama_jenis_template?.toUpperCase() || 'SURAT KETERANGAN AKTIF MAHASISWA',
         alignment: 'center',
         bold: true,
         fontSize: 15,
@@ -89,7 +89,7 @@ export const GenerateLetterSKAM = ({
 
       {
         table: {
-          widths: [80, 5, '*'],
+          widths: [90, 5, '*'],
           body: [
             [{ text: 'Nama', bold: true }, ':', data.nama_penandatangan],
             [
@@ -98,11 +98,7 @@ export const GenerateLetterSKAM = ({
               `${data.nip_penandatangan || '-'} / ${data.nidn_penandatangan || '-'}`,
             ],
             [{ text: 'Jabatan', bold: true }, ':', data.jabatan_penandatangan],
-            [
-              { text: 'Universitas', bold: true },
-              ':',
-              data.nama_satuan_kerja_penandatangan,
-            ],
+            [{ text: 'Universitas', bold: true }, ':', data.nama_satuan_kerja_penandatangan],
           ],
         },
         layout: 'noBorders',
@@ -115,31 +111,23 @@ export const GenerateLetterSKAM = ({
 
       {
         table: {
-          widths: [80, 5, '*'],
+          widths: [90, 5, '*'],
           body: [
             [{ text: 'Nama', bold: true }, ':', data.nama_mahasiswa],
             [{ text: 'NPM/NIM', bold: true }, ':', data.nim],
+            [{ text: 'Program Studi', bold: true }, ':', data.nama_prodi || '-'],
+            [{ text: 'Fakultas', bold: true }, ':', data.nama_fakultas || '-'],
             [
-              { text: 'Program Studi', bold: true },
+              { text: 'Jenjang', bold: true },
               ':',
-              data.nama_prodi || '-',
+              `${data?.kode_jenjang} - ${data.nama_jenjang || '-'}`,
             ],
-            [
-              { text: 'Fakultas', bold: true },
-              ':',
-              data.nama_fakultas || '-',
-            ],
-            [{ text: 'Jenjang', bold: true }, ':', data.nama_jenjang || '-'],
             [
               { text: 'Semester', bold: true },
               ':',
               data.semester_masuk_label || String(data.semester_masuk),
             ],
-            [
-              { text: 'Tahun Akademik', bold: true },
-              ':',
-              data.tahun_akademik,
-            ],
+            [{ text: 'Tahun Akademik', bold: true }, ':', data.tahun_akademik],
           ],
         },
         layout: 'noBorders',
@@ -173,7 +161,7 @@ export const GenerateLetterSKAM = ({
 
       {
         table: {
-          widths: ['*', 200],
+          widths: ['*', 250],
           body: [
             [
               '',
@@ -184,16 +172,14 @@ export const GenerateLetterSKAM = ({
                   },
                   {
                     text: data.jabatan_penandatangan,
-                    bold: true,
                     margin: [0, 0, 0, 50],
                   },
                   {
                     text: data.nama_penandatangan,
-                    bold: true,
                   },
                   {
-                    text: `NIP/NIDN.\n${data.nip_penandatangan || '-'} / ${data.nidn_penandatangan || '-'}`,
-                    bold: true,
+                    text: `${data?.nip_penandatangan ? 'NIP' : 'NIDN'}.${data?.nip_penandatangan ?? data?.nidn_penandatangan}`,
+                    // text: `NIP/NIDN.${data.nip_penandatangan || '-'} / ${data.nidn_penandatangan || '-'}`,
                   },
                 ],
               },

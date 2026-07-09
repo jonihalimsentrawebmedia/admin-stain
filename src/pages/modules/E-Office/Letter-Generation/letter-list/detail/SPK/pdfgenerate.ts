@@ -198,7 +198,7 @@ export const generateSPKLetter = (data: ISPKLetter, logoBase64?: string): TDocum
       // =========================
 
       {
-        margin: [80, 0, 0, 0],
+        margin: [90, 0, 0, 0],
         ul: [
           {
             text: [
@@ -226,11 +226,16 @@ export const generateSPKLetter = (data: ISPKLetter, logoBase64?: string): TDocum
                 bold: true,
               },
             ],
+            margin: [0, 0, 0, 0],
           },
-          ...data.dpl_detail.map((dpl, i) => ({
-            text: `${String.fromCharCode(97 + i)}. ${dpl.nama}`,
-          })),
         ],
+      },
+      {
+        margin: [110, 0, 0, 0],
+        type: 'lower-alpha',
+        ol: data.dpl_detail.map((dpl) => ({
+          text: dpl.nama,
+        })),
       },
 
       // =========================
@@ -250,46 +255,25 @@ export const generateSPKLetter = (data: ISPKLetter, logoBase64?: string): TDocum
 
       {
         table: {
-          widths: ['*', 220],
-
+          widths: ['*', 250],
           body: [
             [
               '',
-
               {
                 stack: [
                   {
-                    text: 'Hormat Kami',
-                    alignment: 'left',
+                    text: `${data?.tempat_surat}, ${format(new Date(data.tanggal_surat), 'dd MMMM yyyy', { locale: id })}`,
                   },
-
                   {
-                    margin: [0, 12, 0, 0],
-
                     text: data.jabatan_penandatangan,
-                    bold: true,
-                    alignment: 'left',
+                    margin: [0, 0, 0, 50],
                   },
-
-                  {
-                    text: data.nama_satuan_kerja_penandatangan,
-                    alignment: 'left',
-                  },
-
-                  {
-                    text: '\n\n\n',
-                  },
-
                   {
                     text: data.nama_penandatangan,
-                    bold: true,
-                    decoration: 'underline',
-                    alignment: 'left',
                   },
-
                   {
-                    text: `NIP/NIDN\n${data.nip_penandatangan}/${data.nidn_penandatangan}`,
-                    alignment: 'left',
+                    text: `${data?.nip_penandatangan ? 'NIP' : 'NIDN'}.${data?.nip_penandatangan ?? data?.nidn_penandatangan}`,
+                    // text: `NIP/NIDN.${data.nip_penandatangan || '-'} / ${data.nidn_penandatangan || '-'}`,
                   },
                 ],
               },

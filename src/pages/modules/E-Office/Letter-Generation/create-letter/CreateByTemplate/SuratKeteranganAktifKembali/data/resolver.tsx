@@ -14,6 +14,7 @@ export const ResolverSKAK = z.object({
   prodi: z.string().optional().nullable(),
   Fakultas: z.string().optional().nullable(),
   jenjang: z.string().optional().nullable(),
+  kode_jenjang: z.string().optional().nullable(),
   semester: z.number().optional().nullable(),
 
   semester_cuti: z.enum(['genap', 'ganjil'], { error: 'Semester Cuti harus Dipilih' }),

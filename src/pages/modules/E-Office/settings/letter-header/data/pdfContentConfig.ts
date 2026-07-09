@@ -270,7 +270,7 @@ export const buildKopSuratContent = (
       },
     ],
     columnGap: colGap,
-    margin: [0, 0, 0, 10],
+    margin: [0, 0, 0, 5],
   }
 
   // Separator: double-line (garis tebal + tipis)

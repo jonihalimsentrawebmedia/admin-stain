@@ -68,7 +68,7 @@ export const GenerateLetterSPO = ({
       ...(kopContent ?? []),
 
       {
-        text: 'Surat Pengantar Observasi',
+        text: data?.nama_jenis_template.toUpperCase(),
         alignment: 'center',
         bold: true,
         fontSize: 15,
@@ -101,16 +101,8 @@ export const GenerateLetterSPO = ({
               ':',
               `${data.nip_penandatangan || '-'} / ${data.nidn_penandatangan || '-'}`,
             ],
-            [
-              { text: 'Jabatan', bold: true },
-              ':',
-              data.jabatan_penandatangan,
-            ],
-            [
-              { text: 'Perguruan Tinggi', bold: true },
-              ':',
-              data.nama_satuan_kerja_penandatangan,
-            ],
+            [{ text: 'Jabatan', bold: true }, ':', data.jabatan_penandatangan],
+            [{ text: 'Perguruan Tinggi', bold: true }, ':', data.nama_satuan_kerja_penandatangan],
           ],
         },
         layout: 'noBorders',
@@ -194,31 +186,20 @@ export const GenerateLetterSPO = ({
             text: [
               { text: 'Hari/Tanggal', bold: true },
               {
-                text: ` : ${format(
-                  new Date(data.tanggal_observasi),
-                  'EEEE, dd MMMM yyyy',
-                  { locale: id }
-                )}`,
+                text: ` : ${format(new Date(data.tanggal_observasi), 'EEEE, dd MMMM yyyy', {
+                  locale: id,
+                })}`,
               },
             ],
           },
           {
-            text: [
-              { text: 'Waktu', bold: true },
-              { text: ` : ${data.waktu_observasi}` },
-            ],
+            text: [{ text: 'Waktu', bold: true }, { text: ` : ${data.waktu_observasi}` }],
           },
           {
-            text: [
-              { text: 'Tempat', bold: true },
-              { text: ` : ${data.tempat_observasi}` },
-            ],
+            text: [{ text: 'Tempat', bold: true }, { text: ` : ${data.tempat_observasi}` }],
           },
           {
-            text: [
-              { text: 'Topik Observasi', bold: true },
-              { text: ` : ${data.topik_observasi}` },
-            ],
+            text: [{ text: 'Topik Observasi', bold: true }, { text: ` : ${data.topik_observasi}` }],
           },
         ],
       },
@@ -235,7 +216,7 @@ export const GenerateLetterSPO = ({
 
       {
         table: {
-          widths: ['*', 200],
+          widths: ['*', 250],
           body: [
             [
               '',
@@ -246,16 +227,14 @@ export const GenerateLetterSPO = ({
                   },
                   {
                     text: data.jabatan_penandatangan,
-                    bold: true,
                     margin: [0, 0, 0, 50],
                   },
                   {
                     text: data.nama_penandatangan,
-                    bold: true,
                   },
                   {
-                    text: `NIP/NIDN.\n${data.nip_penandatangan || '-'} / ${data.nidn_penandatangan || '-'}`,
-                    bold: true,
+                    text: `${data?.nip_penandatangan ? 'NIP' : 'NIDN'}.${data?.nip_penandatangan ?? data?.nidn_penandatangan}`,
+                    // text: `NIP/NIDN.${data.nip_penandatangan || '-'} / ${data.nidn_penandatangan || '-'}`,
                   },
                 ],
               },

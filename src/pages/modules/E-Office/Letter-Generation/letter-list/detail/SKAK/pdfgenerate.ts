@@ -55,23 +55,23 @@ export const GenerateLetterSKAK = ({
 
   return {
     pageSize: 'A4',
-    pageMargins: [20, 30, 30, 20],
+    pageMargins: [40, 20, 40, 20],
 
     defaultStyle: {
       font: 'Times New Roman',
       fontSize: 12,
       alignment: 'justify',
-      lineHeight: 1.35,
+      lineHeight: 1.2,
     },
 
     content: [
       ...(kopContent ?? []),
 
       {
-        text: 'Surat Keterangan Aktif Kembali',
+        text: data?.nama_jenis_template.toUpperCase(),
         alignment: 'center',
         bold: true,
-        fontSize: 15,
+        fontSize: 12,
         margin: [0, 0, 0, 5],
       },
 
@@ -79,12 +79,12 @@ export const GenerateLetterSKAK = ({
         text: `Nomor : ${data.nomor_surat}`,
         alignment: 'center',
         bold: false,
-        margin: [0, 0, 0, 10],
+        margin: [0, 0, 0, 5],
       },
 
       {
         text: 'Yang bertanda tangan di bawah ini menerangkan bahwa:',
-        margin: [0, 0, 0, 10],
+        margin: [0, 0, 0, 5],
       },
 
       {
@@ -93,25 +93,13 @@ export const GenerateLetterSKAK = ({
           body: [
             [{ text: 'Nama', bold: true }, ':', data.nama_mahasiswa],
             [{ text: 'NPM/NIM', bold: true }, ':', data.nim],
-            [
-              { text: 'Program Studi', bold: true },
-              ':',
-              data.nama_prodi || '-',
-            ],
-            [
-              { text: 'Fakultas', bold: true },
-              ':',
-              data.nama_fakultas || '-',
-            ],
-            [
-              { text: 'Jenjang', bold: true },
-              ':',
-              `${data.kode_jenjang} - ${data.nama_jenjang}`,
-            ],
+            [{ text: 'Program Studi', bold: true }, ':', data.nama_prodi || '-'],
+            [{ text: 'Fakultas', bold: true }, ':', data.nama_fakultas || '-'],
+            [{ text: 'Jenjang', bold: true }, ':', `${data.kode_jenjang} - ${data.nama_jenjang}`],
           ],
         },
         layout: 'noBorders',
-        margin: [0, 0, 0, 15],
+        margin: [0, 0, 0, 5],
       },
 
       {
@@ -129,7 +117,7 @@ export const GenerateLetterSKAK = ({
 
       {
         table: {
-          widths: ['*', 200],
+          widths: ['*', 250],
           body: [
             [
               '',
@@ -140,16 +128,14 @@ export const GenerateLetterSKAK = ({
                   },
                   {
                     text: data.jabatan_penandatangan,
-                    bold: true,
                     margin: [0, 0, 0, 50],
                   },
                   {
                     text: data.nama_penandatangan,
-                    bold: true,
                   },
                   {
-                    text: `NIP/NIDN.\n${data.nip_penandatangan || '-'} / ${data.nidn_penandatangan || '-'}`,
-                    bold: true,
+                    text: `${data?.nip_penandatangan ? 'NIP' : 'NIDN'}.${data?.nip_penandatangan ?? data?.nidn_penandatangan}`,
+                    // text: `NIP/NIDN.${data.nip_penandatangan || '-'} / ${data.nidn_penandatangan || '-'}`,
                   },
                 ],
               },
