@@ -116,7 +116,7 @@ const UpdateSuratKeteranganCutiAkademikPage = () => {
         nama_prodi: value.prodi ?? null,
         nama_fakultas: value.Fakultas ?? null,
         nama_jenjang: value.jenjang ?? null,
-        kode_jenjang: null,
+        kode_jenjang: letter?.kode_jenjang ?? null,
         semester_masuk: value.semester ?? 0,
         semester_masuk_label: value.semester ? `Semester ${value.semester}` : '',
         kop_surat: selectedHeader ?? ({} as ILetterHeader),

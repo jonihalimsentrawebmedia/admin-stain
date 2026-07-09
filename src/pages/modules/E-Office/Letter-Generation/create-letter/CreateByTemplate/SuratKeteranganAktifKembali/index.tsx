@@ -98,7 +98,7 @@ const SuratKeteranganAktifKembaliPage = () => {
         nama_prodi: value.prodi ?? '',
         nama_fakultas: value.Fakultas ?? '',
         nama_jenjang: value.jenjang ?? '',
-        kode_jenjang: '',
+        kode_jenjang: value.kode_jenjang ?? '',
         semester_masuk: value.semester ?? 0,
         kop_surat: selectedHeader ?? ({} as ILetterHeader),
       } as unknown as ISKAKLetter

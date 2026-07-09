@@ -14,6 +14,7 @@ export const ResolverSRB = z.object({
   prodi: z.string().optional().nullable(),
   Fakultas: z.string().optional().nullable(),
   jenjang: z.string().optional().nullable(),
+  kode_jenjang: z.string().optional().nullable(),
   semester: z.number().optional().nullable(),
   ipk: z.number({ error: 'IPK harus diisi' }).max(4, { message: 'IPK harus kurang dari 4' }),
   penutup: z.string({ error: 'Penutup harus diisi' }),

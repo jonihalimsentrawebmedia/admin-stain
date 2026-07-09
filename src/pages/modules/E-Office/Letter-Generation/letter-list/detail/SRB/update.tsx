@@ -114,7 +114,7 @@ const UpdateSuratRekomendasiBeasiswaPage = () => {
         nama_prodi: value.prodi ?? null,
         nama_fakultas: value.Fakultas ?? null,
         nama_jenjang: value.jenjang ?? null,
-        kode_jenjang: null,
+        kode_jenjang: letter?.kode_jenjang ?? '',
         semester_masuk: value.semester ?? 0,
         angkatan: '',
         ipk: value.ipk,

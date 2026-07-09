@@ -136,7 +136,7 @@ const UpdatedSuratPengantarObservasiPage = () => {
         nama_prodi: selectedProdi?.nama ?? null,
         nama_fakultas: selectedFaculty?.nama ?? null,
         nama_jenjang: null,
-        kode_jenjang: null,
+        kode_jenjang: letter?.kode_jenjang ?? '',
         semester_masuk: 0,
         semester_masuk_label: '',
         nim: '',

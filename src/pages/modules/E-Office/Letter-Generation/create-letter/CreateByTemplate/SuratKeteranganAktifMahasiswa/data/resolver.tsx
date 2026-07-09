@@ -23,6 +23,7 @@ export const ResolverSKAM = z.object({
   prodi: z.string().optional().nullable(),
   Fakultas: z.string().optional().nullable(),
   jenjang: z.string().optional().nullable(),
+  kode_jenjang: z.string().optional().nullable(),
   semester: z.number().optional().nullable(),
 
   tahun_akademik: z.string({ error: 'Tahun Akademik harus diisi' }),
