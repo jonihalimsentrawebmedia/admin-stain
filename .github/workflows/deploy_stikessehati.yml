@@ -1,0 +1,91 @@
+name: Deploy Admin Vite to STIKES Sehati VPS
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v6
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: yarn
+
+      - name: 🧶 Setup Yarn
+        run: npm install -g yarn@1
+
+      - name: Validate required secrets
+        env:
+          RAW_VPS_HOST: ${{ secrets.STIKESSEHATI_VPS_HOST }}
+          RAW_VPS_USER: ${{ secrets.STIKESSEHATI_VPS_USER }}
+          RAW_DEPLOY_DOMAIN: ${{ secrets.STIKESSEHATI_DEPLOY_DOMAIN }}
+          RAW_VITE_API_URL: ${{ secrets.STIKESSEHATI_VITE_API_URL }}
+          RAW_VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
+          RAW_VITE_AUTH_DOMAIN: ${{ secrets.VITE_AUTH_DOMAIN }}
+          RAW_VITE_PROJECT_ID: ${{ secrets.VITE_PROJECT_ID }}
+          RAW_VITE_STORAGE_BUCKET: ${{ secrets.VITE_STORAGE_BUCKET }}
+          RAW_VITE_MESSAGING_SENDER_ID: ${{ secrets.VITE_MESSAGING_SENDER_ID }}
+          RAW_VITE_APP_ID: ${{ secrets.VITE_APP_ID }}
+          RAW_VITE_MEASUREMENT_ID: ${{ secrets.VITE_MEASUREMENT_ID }}
+        run: |
+          set -euo pipefail
+          for name in \
+            RAW_VPS_HOST \
+            RAW_VPS_USER \
+            RAW_DEPLOY_DOMAIN \
+            RAW_VITE_API_URL \
+            RAW_VITE_FIREBASE_API_KEY \
+            RAW_VITE_AUTH_DOMAIN \
+            RAW_VITE_PROJECT_ID \
+            RAW_VITE_STORAGE_BUCKET \
+            RAW_VITE_MESSAGING_SENDER_ID \
+            RAW_VITE_APP_ID \
+            RAW_VITE_MEASUREMENT_ID; do
+            value="$(printf '%s' "${!name}" | xargs)"
+            if [ -z "$value" ]; then
+              echo "Missing required secret: $name" >&2
+              exit 1
+            fi
+          done
+
+      - name: 📦 Install dependencies
+        run: yarn install
+
+      - name: 🏗 Build Vite
+        run: yarn build
+        env:
+          VITE_APP_TITLE: Admin Website STIKES Sehati
+          VITE_API_URL: ${{ secrets.STIKESSEHATI_VITE_API_URL }}
+          VITE_FIREBASE_API_KEY: ${{ secrets.VITE_FIREBASE_API_KEY }}
+          VITE_AUTH_DOMAIN: ${{ secrets.VITE_AUTH_DOMAIN }}
+          VITE_PROJECT_ID: ${{ secrets.VITE_PROJECT_ID }}
+          VITE_STORAGE_BUCKET: ${{ secrets.VITE_STORAGE_BUCKET }}
+          VITE_MESSAGING_SENDER_ID: ${{ secrets.VITE_MESSAGING_SENDER_ID }}
+          VITE_APP_ID: ${{ secrets.VITE_APP_ID }}
+          VITE_MEASUREMENT_ID: ${{ secrets.VITE_MEASUREMENT_ID }}
+
+      - name: 🔐 Setup SSH agent
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.STIKESSEHATI_VPS_SSH_KEY }}
+
+      - name: 🗝️ Add VPS to known_hosts
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh
+          ssh-keyscan -H "${{ secrets.STIKESSEHATI_VPS_HOST }}" 2>/dev/null >> ~/.ssh/known_hosts
+
+      - name: 🚀 Deploy dist to VPS
+        run: |
+          set -euo pipefail
+          rsync -avz --delete \
+            dist/ \
+            ${{ secrets.STIKESSEHATI_VPS_USER }}@${{ secrets.STIKESSEHATI_VPS_HOST }}:/var/www/${{ secrets.STIKESSEHATI_DEPLOY_DOMAIN }}/
