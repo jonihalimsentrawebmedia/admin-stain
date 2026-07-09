@@ -21,6 +21,7 @@ import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import { GenerateLetterCodeNumber } from '@/pages/modules/E-Office/Letter-Generation/code-letter/component/exampleView.tsx'
 import { UseGetDetailLetterNumberAutomatic } from '@/pages/modules/E-Office/Letter-Generation/code-letter/hooks'
 
+
 const UpdatedSuratKeteranganBebasKeuanganPage = () => {
   const { id } = useParams()
   const navigate = useNavigate()
@@ -33,6 +34,7 @@ const UpdatedSuratKeteranganBebasKeuanganPage = () => {
   const { template } = UseGetTemplateByCodeLetter('SKBK-1')
   const { letterHeader } = UseGetLetterHeaderRef()
   const { institution } = UseGetUnitInstitution({ page: '0', limit: '0' })
+
 
   const form = useForm<TResolverSKBK>({
     resolver: zodResolver(ResolverSKBK),
@@ -118,7 +120,7 @@ const UpdatedSuratKeteranganBebasKeuanganPage = () => {
         nama_prodi: value.prodi ?? null,
         nama_fakultas: value.Fakultas ?? null,
         nama_jenjang: value.jenjang ?? null,
-        kode_jenjang: null,
+        kode_jenjang: '',
         semester_masuk: value.semester ?? 0,
         kop_surat: selectedHeader ?? ({} as ILetterHeader),
       } as unknown as ISKBKLetter

@@ -226,11 +226,16 @@ export const generateSPKLetter = (data: ISPKLetter, logoBase64?: string): TDocum
                 bold: true,
               },
             ],
+            margin: [0, 0, 0, 0],
           },
-          ...data.dpl_detail.map((dpl, i) => ({
-            text: `${String.fromCharCode(97 + i)}. ${dpl.nama}`,
-          })),
         ],
+      },
+      {
+        margin: [110, 0, 0, 0],
+        type: 'lower-alpha',
+        ol: data.dpl_detail.map((dpl) => ({
+          text: dpl.nama,
+        })),
       },
 
       // =========================
