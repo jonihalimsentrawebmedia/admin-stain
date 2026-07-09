@@ -198,7 +198,7 @@ export const generateSPKLetter = (data: ISPKLetter, logoBase64?: string): TDocum
       // =========================
 
       {
-        margin: [80, 0, 0, 0],
+        margin: [90, 0, 0, 0],
         ul: [
           {
             text: [
