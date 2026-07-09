@@ -18,6 +18,9 @@ import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan
 import type { ILetterHeader } from '@/pages/modules/E-Office/settings/letter-header/data/types.ts'
 import pdfmake from '@/utils/pdfmake.ts'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
+import { GenerateLetterCodeNumber } from '@/pages/modules/E-Office/Letter-Generation/code-letter/component/exampleView.tsx'
+import { UseGetDetailLetterNumberAutomatic } from '@/pages/modules/E-Office/Letter-Generation/code-letter/hooks'
+
 
 const UpdatedSuratKeteranganBebasKeuanganPage = () => {
   const { id } = useParams()
@@ -32,6 +35,7 @@ const UpdatedSuratKeteranganBebasKeuanganPage = () => {
   const { letterHeader } = UseGetLetterHeaderRef()
   const { institution } = UseGetUnitInstitution({ page: '0', limit: '0' })
 
+
   const form = useForm<TResolverSKBK>({
     resolver: zodResolver(ResolverSKBK),
     mode: 'onChange',
@@ -41,6 +45,8 @@ const UpdatedSuratKeteranganBebasKeuanganPage = () => {
       tujuan_pembuatan_surat: [''],
     },
   })
+
+  const { letterNumber } = UseGetDetailLetterNumberAutomatic(form.watch('id_nomor_surat_otomatis') ?? '')
 
   useEffect(() => {
     if (letter) {
@@ -93,14 +99,28 @@ const UpdatedSuratKeteranganBebasKeuanganPage = () => {
         i => i.id_satuan_organisasi === value.id_satuan_kerja_penandatangan
       )
 
+      const generatedNumber = GenerateLetterCodeNumber({
+        kode_depan: letterNumber?.kode_depan ?? '',
+        kode_belakang: letterNumber?.kode_belakang ?? '',
+        urutan_tahun: letterNumber?.urutan_tahun ?? 5,
+        urutan_bulan: letterNumber?.urutan_bulan ?? 4,
+        urutan_kode_depan: letterNumber?.urutan_kode_depan ?? 1,
+        urutan_kode_belakang: letterNumber?.urutan_kode_belakang ?? 2,
+        urutan_nomor_surat: letterNumber?.urutan_posisi_utama_no_surat ?? 3,
+        is_bulan: letterNumber?.is_perlu_bulan ?? false,
+        is_bulan_romawi: letterNumber?.is_bulan_romawi ?? false,
+        is_tahun: letterNumber?.is_perlu_tahun ?? false,
+        date: value.tanggal_surat,
+      }, value.nomor_urut_manual ?? '0001')
+
       const data = {
         ...value,
-        nomor_surat: value.id_nomor_surat_otomatis,
+        nomor_surat: generatedNumber.replace(/<[^>]*>/g, ''),
         nama_satuan_kerja_penandatangan: selectedInstitution?.nama ?? '',
         nama_prodi: value.prodi ?? null,
         nama_fakultas: value.Fakultas ?? null,
         nama_jenjang: value.jenjang ?? null,
-        kode_jenjang: null,
+        kode_jenjang: '',
         semester_masuk: value.semester ?? 0,
         kop_surat: selectedHeader ?? ({} as ILetterHeader),
       } as unknown as ISKBKLetter

@@ -89,7 +89,7 @@ export const GenerateLetterSKAM = ({
 
       {
         table: {
-          widths: [80, 5, '*'],
+          widths: [90, 5, '*'],
           body: [
             [{ text: 'Nama', bold: true }, ':', data.nama_penandatangan],
             [
@@ -98,11 +98,7 @@ export const GenerateLetterSKAM = ({
               `${data.nip_penandatangan || '-'} / ${data.nidn_penandatangan || '-'}`,
             ],
             [{ text: 'Jabatan', bold: true }, ':', data.jabatan_penandatangan],
-            [
-              { text: 'Universitas', bold: true },
-              ':',
-              data.nama_satuan_kerja_penandatangan,
-            ],
+            [{ text: 'Universitas', bold: true }, ':', data.nama_satuan_kerja_penandatangan],
           ],
         },
         layout: 'noBorders',
@@ -115,31 +111,23 @@ export const GenerateLetterSKAM = ({
 
       {
         table: {
-          widths: [80, 5, '*'],
+          widths: [90, 5, '*'],
           body: [
             [{ text: 'Nama', bold: true }, ':', data.nama_mahasiswa],
             [{ text: 'NPM/NIM', bold: true }, ':', data.nim],
+            [{ text: 'Program Studi', bold: true }, ':', data.nama_prodi || '-'],
+            [{ text: 'Fakultas', bold: true }, ':', data.nama_fakultas || '-'],
             [
-              { text: 'Program Studi', bold: true },
+              { text: 'Jenjang', bold: true },
               ':',
-              data.nama_prodi || '-',
+              `${data?.kode_jenjang} - ${data.nama_jenjang || '-'}`,
             ],
-            [
-              { text: 'Fakultas', bold: true },
-              ':',
-              data.nama_fakultas || '-',
-            ],
-            [{ text: 'Jenjang', bold: true }, ':', data.nama_jenjang || '-'],
             [
               { text: 'Semester', bold: true },
               ':',
               data.semester_masuk_label || String(data.semester_masuk),
             ],
-            [
-              { text: 'Tahun Akademik', bold: true },
-              ':',
-              data.tahun_akademik,
-            ],
+            [{ text: 'Tahun Akademik', bold: true }, ':', data.tahun_akademik],
           ],
         },
         layout: 'noBorders',

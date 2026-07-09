@@ -15,6 +15,7 @@ export const ResolverSKCAM = z.object({
   prodi: z.string().optional().nullable(),
   Fakultas: z.string().optional().nullable(),
   jenjang: z.string().optional().nullable(),
+  kode_jenjang: z.string().optional().nullable(),
   semester: z.number().optional().nullable(),
 
   // periode cuti
