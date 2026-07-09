@@ -52,6 +52,6 @@ jobs:
       - name: 🚀 Deploy dist to VPS
         run: |
           set -euo pipefail
-          rsync -avz --delete \
+          rsync -avz --delete --omit-dir-times \
             dist/ \
-            ${{ secrets.STIKESSEHATI_VPS_USER }}@${{ secrets.STIKESSEHATI_VPS_HOST }}:/var/www/${{ secrets.STIKESSEHATI_DEPLOY_DOMAIN }}/
+            "${{ secrets.STIKESSEHATI_VPS_USER }}@${{ secrets.STIKESSEHATI_VPS_HOST }}:/var/www/admin-website.stikessehati.ac.id/"
