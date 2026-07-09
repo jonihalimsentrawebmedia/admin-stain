@@ -12,6 +12,10 @@ import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan
 import { SelectBasic } from '@/components/common/select/basic.tsx'
 import { UseGetYearLevel } from '@/pages/modules/E-Office/students/student-data/hooks'
 import { UseGetAdmissionProcess } from '@/pages/modules/E-Office/students/admission-process/hooks'
+import LimitState from '@/components/common/table/limitState.tsx'
+import Search from '@/components/common/table/Search.tsx'
+import { TableBasicState } from '@/components/common/table/tableUsestate.tsx'
+import { FaSave } from 'react-icons/fa'
 
 interface Props {
   form: UseFormReturn<any>
@@ -134,7 +138,7 @@ const SelectMultiStudent = (props: Props) => {
       )}
 
       <DialogBasic title={'Pilih Mahasiswa'} open={open} setOpen={setOpen} className={'min-w-5xl'}>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-2 gap-x-4">
           <SelectBasic
             showReset
             value={filter.id_fakultas}
@@ -220,20 +224,41 @@ const SelectMultiStudent = (props: Props) => {
               })) ?? []),
             ]}
           />
+          <LimitState
+            value={Number(filter.limit)}
+            setLimit={(e) => {
+              setFilter((prev) => ({
+                ...prev,
+                limit: e.toString(),
+              }))
+            }}
+          />
+          <Search
+            className={'p-1.5'}
+            innerClassName={'p-1.5 text-sm'}
+            position={'end'}
+            onSearch={(e) => {
+              setFilter((prev) => ({
+                ...prev,
+                search: e,
+              }))
+            }}
+          />
         </div>
         <div>
-          <TableCustom
-            columns={dialogColumns}
-            meta={meta}
-            columnsName={['']}
-            thClassName={'bg-primary text-white'}
-            data={student}
-            isShowPagination={false}
-            isShowFilter={false}
-            rowClassName={(row: IStudentDataStatus) =>
-              selectedIds.includes(row.id_mahasiswa) || !row.is_available_kkn_magang ? 'bg-gray-200' : ''
-            }
-          />
+          <div className="max-h-[500px] overflow-y-scroll">
+            <TableBasicState
+              columns={dialogColumns}
+              thClassName={'bg-primary text-white'}
+              tdClassName={'text-xs p-1'}
+              data={student}
+              rowClassName={(row: IStudentDataStatus) =>
+                selectedIds.includes(row.id_mahasiswa) || !row.is_available_kkn_magang
+                  ? 'bg-gray-200'
+                  : ''
+              }
+            />
+          </div>
           <div className="flex justify-end">
             {meta && (
               <PaginationState
@@ -248,6 +273,12 @@ const SelectMultiStudent = (props: Props) => {
                 }
               />
             )}
+          </div>
+          <div className="flex items-center justify-end mt-2">
+            <Button className={'text-white'}>
+              <FaSave />
+              Simpan
+            </Button>
           </div>
         </div>
       </DialogBasic>

@@ -23,6 +23,7 @@ interface DataTableProps<TData, TValue> {
   rowIdKey?: keyof TData
   selected?: string[]
   onSelectedRowsChange?: (selectedIds: string[]) => void
+  rowClassName?: (row: any) => string
 }
 
 export function TableBasicState<TData, TValue>({
@@ -35,6 +36,7 @@ export function TableBasicState<TData, TValue>({
   rowIdKey = 'id' as keyof TData,
   selected = [],
   onSelectedRowsChange,
+  rowClassName,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = useState<Record<string, boolean>>({})
 
@@ -76,9 +78,9 @@ export function TableBasicState<TData, TValue>({
     <div className={clsx('overflow-hidden rounded-md border', className)}>
       <Table>
         <TableHeader>
-          {table.getHeaderGroups().map((headerGroup,k) => (
+          {table.getHeaderGroups().map((headerGroup, k) => (
             <TableRow key={k}>
-              {headerGroup.headers.map((header,l) => (
+              {headerGroup.headers.map((header, l) => (
                 <TableHead key={l} className={thClassName}>
                   {flexRender(header.column.columnDef.header, header.getContext())}
                 </TableHead>
@@ -99,9 +101,13 @@ export function TableBasicState<TData, TValue>({
               </TableRow>
             ))
           ) : table.getRowModel().rows.length ? (
-            table.getRowModel().rows.map((row,m) => (
-              <TableRow key={m} data-state={row.getIsSelected() && 'selected'}>
-                {row.getVisibleCells().map((cell,n) => (
+            table.getRowModel().rows.map((row, m) => (
+              <TableRow
+                key={m}
+                data-state={row.getIsSelected() && 'selected'}
+                className={rowClassName?.(row.original)}
+              >
+                {row.getVisibleCells().map((cell, n) => (
                   <TableCell key={n} className={tdClassName}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>

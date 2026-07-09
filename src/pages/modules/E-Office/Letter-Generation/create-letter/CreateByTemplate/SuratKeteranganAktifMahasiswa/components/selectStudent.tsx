@@ -14,6 +14,8 @@ import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan
 import { UseGetYearLevel } from '@/pages/modules/E-Office/students/student-data/hooks'
 import { UseGetAdmissionProcess } from '@/pages/modules/E-Office/students/admission-process/hooks'
 import { SelectBasic } from '@/components/common/select/basic.tsx'
+import LimitState from '@/components/common/table/limitState.tsx'
+import Search from '@/components/common/table/Search.tsx'
 
 interface Props {
   form: UseFormReturn<any>
@@ -52,7 +54,7 @@ const DialogSelectStudents = (props: Props) => {
     id_prodi: filter.id_prodi ?? '',
     angkatan: filter.angkatan ?? '',
     jalur_masuk: filter.jalur_masuk ?? '',
-    is_active: is_active ?? '1',
+    is_active: is_active ?? '0',
   })
   const Columns = ReturnColumns({
     form,
@@ -76,12 +78,11 @@ const DialogSelectStudents = (props: Props) => {
       </Button>
 
       <DialogBasic title={'Pilih Mahasiswa'} open={open} setOpen={setOpen} className={'min-w-5xl'}>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-2 gap-x-4">
           <SelectBasic
             showReset
             value={filter.id_fakultas}
             onChange={(e) => {
-              console.log(e)
               setFilter((prev) => ({
                 ...prev,
                 id_fakultas: e,
@@ -162,17 +163,40 @@ const DialogSelectStudents = (props: Props) => {
               })) ?? []),
             ]}
           />
+          <LimitState
+            value={Number(filter.limit)}
+            setLimit={(e) => {
+              setFilter((prev) => ({
+                ...prev,
+                limit: e.toString(),
+              }))
+            }}
+          />
+          <Search
+            className={'p-1.5'}
+            innerClassName={'p-1.5 text-sm'}
+            position={'end'}
+            onSearch={(e) => {
+              setFilter((prev) => ({
+                ...prev,
+                search: e,
+              }))
+            }}
+          />
         </div>
         <div>
-          <TableCustom
-            columns={Columns}
-            meta={meta}
-            columnsName={['']}
-            thClassName={'bg-primary text-white'}
-            data={student}
-            isShowPagination={false}
-            isShowFilter={false}
-          />
+          <div className={'max-h-[500px] overflow-y-auto'}>
+            <TableCustom
+              columns={Columns}
+              meta={meta}
+              columnsName={['']}
+              thClassName={'bg-primary text-white'}
+              tdClassName={'text-xs! p-1'}
+              data={student}
+              isShowPagination={false}
+              isShowFilter={false}
+            />
+          </div>
           <div className="flex justify-end">
             {meta && (
               <PaginationState
