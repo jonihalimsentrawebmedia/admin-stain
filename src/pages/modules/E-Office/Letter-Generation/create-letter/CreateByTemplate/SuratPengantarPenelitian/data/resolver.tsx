@@ -13,7 +13,7 @@ export const ResolverSPP = z.object({
   perihal: z.string({ error: 'Perihal harus diisi' }),
   detail_lampiran: z.array(z.string()),
   instansi_pimpinan: z.string({ error: 'Instansi Pimpinan harus diisi' }),
-  masukan_di: z.string({ error: 'Di Tempat harus diisi' }),
+  di_tempat: z.string({ error: 'Di Tempat harus diisi' }),
   pembuka: z.string({ error: 'Pembuka harus diisi' }),
 
   //   mahasiswa
@@ -30,7 +30,7 @@ export const ResolverSPP = z.object({
   judul_penelitian: z.string({ error: 'Judul Penelitian harus diisi' }),
   lokasi_penelitian: z.string({ error: 'Lokasi Penelitian harus diisi' }),
   lama_penelitian: z.string({ error: 'Lama Penelitian harus diisi' }),
-  metode_pengumpulan_data: z.array(z.enum(['observasi', 'wawancara', 'kuisioner', 'dokumentasi'])),
+  metode_pengumpulan_data: z.array(z.enum(['Observasi', 'Wawancara', 'Kuisioner', 'Dokumentasi'])),
 
   penutup: z.string({ error: 'Penutup harus diisi' }),
 

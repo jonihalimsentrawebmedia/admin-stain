@@ -45,7 +45,7 @@ const FormSuratPengantarPenelitian = (props: Props) => {
     String(formValues.lampiran) !== '' &&
     formValues.perihal &&
     formValues.instansi_pimpinan &&
-    formValues.masukan_di &&
+    formValues.di_tempat &&
     formValues.pembuka &&
     formValues.id_mahasiswa &&
     formValues.judul_penelitian &&
@@ -249,9 +249,9 @@ const FormSuratPengantarPenelitian = (props: Props) => {
                 />
 
                 <TextInput
-                  name={'masukan_di'}
+                  name={'di_tempat'}
                   form={form}
-                  label={'Di '}
+                  label={'Di'}
                   placeholder={'Cth: Ditempat'}
                   htmlFor={'di'}
                   className={'w-1/2'}
@@ -331,10 +331,10 @@ const FormSuratPengantarPenelitian = (props: Props) => {
                     isRequired
                     isRow
                     data={[
-                      { label: 'Observasi', value: 'observasi' },
-                      { label: 'Wawancara', value: 'wawancara' },
-                      { label: 'Kuisioner', value: 'kuisioner' },
-                      { label: 'Dokumentasi', value: 'dokumentasi' },
+                      { label: 'Observasi', value: 'Observasi' },
+                      { label: 'Wawancara', value: 'Wawancara' },
+                      { label: 'Kuisioner', value: 'Kuisioner' },
+                      { label: 'Dokumentasi', value: 'Dokumentasi' },
                     ]}
                   />
                 </div>

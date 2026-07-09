@@ -289,8 +289,8 @@ const FormSuratKeteranganCutiAkademik = (props: Props) => {
                     name={'semester_cuti'}
                     label={'Semester Cuti'}
                     data={[
-                      { label: 'Ganjil', value: 'ganjil' },
-                      { label: 'Genap', value: 'genap' },
+                      { label: 'Ganjil', value: 'Ganjil' },
+                      { label: 'Genap', value: 'Genap' },
                     ]}
                     isRow
                     isRequired

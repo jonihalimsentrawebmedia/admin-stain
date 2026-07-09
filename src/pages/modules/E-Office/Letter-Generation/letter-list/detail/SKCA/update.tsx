@@ -141,7 +141,7 @@ const UpdateSuratKeteranganCutiAkademikPage = () => {
   const HandleSave = async (value: TResolverSKCAM) => {
     setLoading(true)
     await AxiosClient.put(
-      `/eoffice/mail-surat-keterangan-aktif-mahasiswa/${letter?.id_mail_surat_keterangan_cuti_akademik}`,
+      `/eoffice/mail-surat-keterangan-cuti-akademik/${letter?.id_mail_surat_keterangan_cuti_akademik}`,
       {
         ...value,
         tanggal_surat: new Date(value.tanggal_surat).toISOString(),
