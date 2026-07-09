@@ -11,7 +11,7 @@ import { clsx } from 'clsx'
 interface Props {
   children: ReactNode
   title: string | ReactNode
-  description?: string
+  description?: string | ReactNode
   open: boolean
   setOpen: Dispatch<SetStateAction<boolean>> | any
   className?: string

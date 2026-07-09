@@ -38,6 +38,9 @@ const ListLetterGeneratePage = () => {
   const { codeAvailable } = UseGetCodeAvailableLetter({
     is_existing: true,
   })
+
+  const name = codeAvailable?.find((row) => row.id_mail_jenis_template_surat === id_template)?.nama
+
   const { letterTypeGenerate, meta, loading } = UseGetListLetterGenerate({
     page,
     limit,
@@ -46,7 +49,7 @@ const ListLetterGeneratePage = () => {
     id_template: id_template,
   })
 
-  const columns = ColumnsLetterGenerate()
+  const columns = ColumnsLetterGenerate(name)
   const updateParams = (updates: Record<string, string>) => {
     const params = new URLSearchParams(searchParams)
     Object.entries(updates).forEach(([key, value]) => {

@@ -50,7 +50,7 @@ const StatusBadge = ({ status }: { status: TMailStatus }) => {
   )
 }
 
-export const ColumnsLetterGenerate = () => {
+export const ColumnsLetterGenerate = (name?: string) => {
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') ?? '1')
   const limit = Number(searchParams.get('limit') ?? '10')
@@ -172,7 +172,7 @@ export const ColumnsLetterGenerate = () => {
             >
               <HiPencil />
             </Link>
-            {data?.status !== 'DIHAPUS' && <ButtonDeleteLetterGenerate data={data} />}
+            {data?.status !== 'DIHAPUS' && <ButtonDeleteLetterGenerate data={data} name={name} />}
           </div>
         )
       },

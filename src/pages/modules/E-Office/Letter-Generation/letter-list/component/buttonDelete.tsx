@@ -12,10 +12,11 @@ import type { IMailInvitationLetterList } from '@/pages/modules/E-Office/Letter-
 
 interface props {
   data: IMailInvitationLetterList
+  name?: string
 }
 
 const ButtonDeleteLetterGenerate = (props: props) => {
-  const { data } = props
+  const { data, name } = props
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -50,7 +51,16 @@ const ButtonDeleteLetterGenerate = (props: props) => {
         <FaTrash />
       </button>
 
-      <DialogBasic title={'Hapus Surat Undangan'} open={open} setOpen={setOpen}>
+      <DialogBasic
+        title={`Hapus Surat ${name}`}
+        description={
+          <p className="text-red-600 text-sm mt-4">
+            Apakah Anda yakin ingin menghapus surat ini? Tindakan ini tidak dapat dibatalkan.
+          </p>
+        }
+        open={open}
+        setOpen={setOpen}
+      >
         <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
           <p className="text-gray-500">Nomor Surat</p>
           <p>{data?.nomor_surat || '-'}</p>
@@ -69,10 +79,6 @@ const ButtonDeleteLetterGenerate = (props: props) => {
           <p className="text-gray-500">Status</p>
           <p>{data?.status || '-'}</p>
         </div>
-
-        <p className="text-red-600 text-sm mt-4">
-          Apakah Anda yakin ingin menghapus surat ini? Tindakan ini tidak dapat dibatalkan.
-        </p>
 
         <ButtonTitleGroup
           label={''}
