@@ -1,5 +1,8 @@
 import { useNavigate, useSearchParams } from 'react-router-dom'
-import { UseGetListLetterGenerate } from '@/pages/modules/E-Office/Letter-Generation/letter-list/hooks'
+import {
+  UseGetCountLetter,
+  UseGetListLetterGenerate,
+} from '@/pages/modules/E-Office/Letter-Generation/letter-list/hooks'
 import { ColumnsLetterGenerate } from '@/pages/modules/E-Office/Letter-Generation/letter-list/data/columns.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs.tsx'
@@ -17,14 +20,6 @@ import { Button } from '@/components/ui/button.tsx'
 import { UseGetCodeAvailableLetter } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/hooks'
 import FilterSelect from '@/components/common/filter/filterBasic.tsx'
 
-const TABS_STATUS = [
-  { value: 'MENUNGGU', label: 'Menunggu' },
-  { value: 'DIPROSES', label: 'Diproses' },
-  { value: 'SELESAI', label: 'Selesai' },
-  { value: 'DIBATALKAN', label: 'Dibatalkan' },
-  { value: 'DIHAPUS', label: 'Dihapus' },
-] as const
-
 const ListLetterGeneratePage = () => {
   const navigate = useNavigate()
   const [searchParams, setSearchParams] = useSearchParams()
@@ -38,6 +33,21 @@ const ListLetterGeneratePage = () => {
   const { codeAvailable } = UseGetCodeAvailableLetter({
     is_existing: true,
   })
+  const { count } = UseGetCountLetter({
+    page: page,
+    limit: limit,
+    search: search,
+    status: status,
+    id_jenis_template_surat: id_template,
+  })
+
+  const TABS_STATUS = [
+    { value: 'MENUNGGU', label: 'Menunggu', count: count?.MENUNGGU ?? '0' },
+    { value: 'DIPROSES', label: 'Diproses', count: count?.DIPROSES ?? '0' },
+    { value: 'SELESAI', label: 'Selesai', count: count?.SELESAI ?? '0' },
+    { value: 'DIBATALKAN', label: 'Dibatalkan', count: count?.DIBATALKAN ?? '0' },
+    { value: 'DIHAPUS', label: 'Dihapus', count: count?.DIHAPUS ?? '0' },
+  ] as const
 
   const name = codeAvailable?.find((row) => row.id_mail_jenis_template_surat === id_template)?.nama
 
@@ -117,7 +127,7 @@ const ListLetterGeneratePage = () => {
                 'rounded-b-none'
               )}
             >
-              {item.label}
+              {item.label} ({item?.count})
             </TabsTrigger>
           ))}
         </TabsList>

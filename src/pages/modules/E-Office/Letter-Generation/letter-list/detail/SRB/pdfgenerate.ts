@@ -72,7 +72,7 @@ export const GenerateSRBLetter = ({
       // =========================
 
       {
-        text: 'Surat Rekomendasi Beasiswa',
+        text: data?.nama_jenis_template?.toUpperCase(),
         alignment: 'center',
         bold: true,
         fontSize: 15,
@@ -164,7 +164,7 @@ export const GenerateSRBLetter = ({
 
       {
         table: {
-          widths: ['*', 200],
+          widths: ['*', 250],
           body: [
             [
               '',
@@ -173,21 +173,16 @@ export const GenerateSRBLetter = ({
                   {
                     text: tempatTanggal,
                   },
-
                   {
-                    text: 'Yang Memberikan Rekomendasi,',
-                    bold: true,
+                    text: data.jabatan_penandatangan,
                     margin: [0, 0, 0, 50],
                   },
-
                   {
                     text: data.nama_penandatangan,
-                    bold: true,
                   },
-
                   {
-                    text: `NIP/NIDN.\n${data.nip_penandatangan || '-'} / ${data.nidn_penandatangan || '-'}`,
-                    bold: true,
+                    text: `${data?.nip_penandatangan ? 'NIP' : 'NIDN'}.${data?.nip_penandatangan ?? data?.nidn_penandatangan}`,
+                    // text: `NIP/NIDN.${data.nip_penandatangan || '-'} / ${data.nidn_penandatangan || '-'}`,
                   },
                 ],
               },

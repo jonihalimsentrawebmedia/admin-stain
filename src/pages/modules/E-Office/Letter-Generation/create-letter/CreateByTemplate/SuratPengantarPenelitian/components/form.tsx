@@ -45,7 +45,7 @@ const FormSuratPengantarPenelitian = (props: Props) => {
     String(formValues.lampiran) !== '' &&
     formValues.perihal &&
     formValues.instansi_pimpinan &&
-    formValues.di_tempat &&
+    formValues.masukan_di &&
     formValues.pembuka &&
     formValues.id_mahasiswa &&
     formValues.judul_penelitian &&
@@ -249,7 +249,7 @@ const FormSuratPengantarPenelitian = (props: Props) => {
                 />
 
                 <TextInput
-                  name={'di_tempat'}
+                  name={'masukan_di'}
                   form={form}
                   label={'Di'}
                   placeholder={'Cth: Ditempat'}

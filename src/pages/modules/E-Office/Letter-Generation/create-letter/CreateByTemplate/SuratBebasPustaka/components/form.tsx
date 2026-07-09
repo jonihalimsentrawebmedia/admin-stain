@@ -20,6 +20,7 @@ import { Label } from '@/components/ui/label.tsx'
 import type { TResolverSBP } from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratBebasPustaka/data/resolver.tsx'
 import type { ILetterTemplateType } from '@/pages/modules/E-Office/Letter-Generation/create-letter/hook'
 import { useEffect } from 'react'
+import TextAreaInput from '@/components/common/form/textAreaInput.tsx'
 
 interface Props {
   loading: boolean
@@ -298,7 +299,7 @@ const FormSuratBebasPustaka = (props: Props) => {
                   <div className="flex flex-col gap-2 w-full">
                     {ketentuanFields.map((field, index) => (
                       <div key={field.id} className="flex items-center gap-2 w-full">
-                        <TextInput
+                        <TextAreaInput
                           name={`ketentuan_bebas_pustaka.${index}`}
                           form={form}
                           placeholder={`Ketentuan ${index + 1}`}
@@ -345,7 +346,7 @@ const FormSuratBebasPustaka = (props: Props) => {
                   <div className="flex flex-col gap-2 w-full">
                     {tujuanFields.map((field, index) => (
                       <div key={field.id} className="flex items-center gap-2 w-full">
-                        <TextInput
+                        <TextAreaInput
                           name={`tujuan_pembuatan_surat.${index}`}
                           form={form}
                           placeholder={`Tujuan ${index + 1}`}

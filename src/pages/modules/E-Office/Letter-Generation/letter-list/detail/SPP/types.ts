@@ -50,6 +50,7 @@ export interface ISPPLetter {
   id_mahasiswa: string
   id_penandatangan: string
   nama_penandatangan: string
+  nip_penandatangan: string
   nidn_penandatangan: string
   jabatan_penandatangan: string
   id_satuan_kerja_penandatangan: string

@@ -23,9 +23,20 @@ interface IGenerateLetterSPP {
 }
 
 const infoRow = (label: string, value: string | number | null) => [
-  { text: label, bold: true, border: [false, false, false, false] as [boolean, boolean, boolean, boolean] },
-  { text: ':', border: [false, false, false, false] as [boolean, boolean, boolean, boolean], alignment: 'center' as const },
-  { text: value ? String(value) : '-', border: [false, false, false, false] as [boolean, boolean, boolean, boolean] },
+  {
+    text: label,
+    bold: true,
+    border: [false, false, false, false] as [boolean, boolean, boolean, boolean],
+  },
+  {
+    text: ':',
+    border: [false, false, false, false] as [boolean, boolean, boolean, boolean],
+    alignment: 'center' as const,
+  },
+  {
+    text: value ? String(value) : '-',
+    border: [false, false, false, false] as [boolean, boolean, boolean, boolean],
+  },
 ]
 
 const buildPembuka = (pembuka: string | undefined | null) => {
@@ -86,8 +97,15 @@ export const GenerateLetterSKPP = ({
       widths: [65, 5, '*'],
       body: [
         [
-          { text: 'Lampiran', border: [false, false, false, false] as [boolean, boolean, boolean, boolean] },
-          { text: ':', border: [false, false, false, false] as [boolean, boolean, boolean, boolean], alignment: 'center' as const },
+          {
+            text: 'Lampiran',
+            border: [false, false, false, false] as [boolean, boolean, boolean, boolean],
+          },
+          {
+            text: ':',
+            border: [false, false, false, false] as [boolean, boolean, boolean, boolean],
+            alignment: 'center' as const,
+          },
           {
             text:
               data.detail_lampiran.length > 0
@@ -97,9 +115,19 @@ export const GenerateLetterSKPP = ({
           },
         ],
         [
-          { text: 'Perihal', border: [false, false, false, false] as [boolean, boolean, boolean, boolean] },
-          { text: ':', border: [false, false, false, false] as [boolean, boolean, boolean, boolean], alignment: 'center' as const },
-          { text: data.perihal, border: [false, false, false, false] as [boolean, boolean, boolean, boolean] },
+          {
+            text: 'Perihal',
+            border: [false, false, false, false] as [boolean, boolean, boolean, boolean],
+          },
+          {
+            text: ':',
+            border: [false, false, false, false] as [boolean, boolean, boolean, boolean],
+            alignment: 'center' as const,
+          },
+          {
+            text: data.perihal,
+            border: [false, false, false, false] as [boolean, boolean, boolean, boolean],
+          },
         ],
       ],
     },
@@ -164,7 +192,7 @@ export const GenerateLetterSKPP = ({
       ...(kopContent ?? []),
 
       {
-        text: 'Surat Pengantar Penelitian',
+        text: data?.nama_jenis_template.toUpperCase(),
         bold: true,
         alignment: 'center',
         fontSize: 15,
@@ -245,16 +273,26 @@ export const GenerateLetterSKPP = ({
 
       {
         table: {
-          widths: ['*', 200],
+          widths: ['*', 250],
           body: [
             [
               '',
               {
                 stack: [
-                  { text: tempatTanggal },
-                  { text: data.jabatan_penandatangan, bold: true, margin: [0, 0, 0, 45] as [number, number, number, number] },
-                  { text: data.nama_penandatangan, bold: true },
-                  { text: `NIP/NIDN.\n${data.nidn_penandatangan || '-'}`, bold: true },
+                  {
+                    text: tempatTanggal,
+                  },
+                  {
+                    text: data.jabatan_penandatangan,
+                    margin: [0, 0, 0, 50],
+                  },
+                  {
+                    text: data.nama_penandatangan,
+                  },
+                  {
+                    text: `${data?.nip_penandatangan ? 'NIP' : 'NIDN'}.${data?.nip_penandatangan ?? data?.nidn_penandatangan}`,
+                    // text: `NIP/NIDN.${data.nip_penandatangan || '-'} / ${data.nidn_penandatangan || '-'}`,
+                  },
                 ],
               },
             ],

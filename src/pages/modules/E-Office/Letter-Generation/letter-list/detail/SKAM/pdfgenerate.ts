@@ -68,7 +68,7 @@ export const GenerateLetterSKAM = ({
       ...(kopContent ?? []),
 
       {
-        text: 'Surat Keterangan Aktif Kuliah',
+        text: data?.nama_jenis_template?.toUpperCase() || 'SURAT KETERANGAN AKTIF MAHASISWA',
         alignment: 'center',
         bold: true,
         fontSize: 15,
@@ -161,7 +161,7 @@ export const GenerateLetterSKAM = ({
 
       {
         table: {
-          widths: ['*', 200],
+          widths: ['*', 250],
           body: [
             [
               '',
@@ -172,16 +172,14 @@ export const GenerateLetterSKAM = ({
                   },
                   {
                     text: data.jabatan_penandatangan,
-                    bold: true,
                     margin: [0, 0, 0, 50],
                   },
                   {
                     text: data.nama_penandatangan,
-                    bold: true,
                   },
                   {
-                    text: `NIP/NIDN.\n${data.nip_penandatangan || '-'} / ${data.nidn_penandatangan || '-'}`,
-                    bold: true,
+                    text: `${data?.nip_penandatangan ? 'NIP' : 'NIDN'}.${data?.nip_penandatangan ?? data?.nidn_penandatangan}`,
+                    // text: `NIP/NIDN.${data.nip_penandatangan || '-'} / ${data.nidn_penandatangan || '-'}`,
                   },
                 ],
               },

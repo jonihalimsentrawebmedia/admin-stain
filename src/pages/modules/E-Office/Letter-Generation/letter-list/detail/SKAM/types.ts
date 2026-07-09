@@ -47,6 +47,7 @@ export interface ISKAMLettter {
   nama_mahasiswa: string
   nama_prodi: string | null
   nama_status_mahasiswa: string
+  nama_jenis_template: string
   nama_jalur_masuk: string
   nama_agama: string
   angkatan: string
