@@ -58,7 +58,6 @@ import { LinkIcon } from '@/components/tiptap-icons/link-icon'
 
 // --- Hooks ---
 import { useIsBreakpoint } from '@/hooks/use-is-breakpoint'
-import { useWindowSize } from '@/hooks/use-window-size'
 import { useCursorVisibility } from '@/hooks/use-cursor-visibility'
 // --- Lib ---
 import { handleImageUpload, MAX_FILE_SIZE } from '@/lib/tiptap-utils'
@@ -184,7 +183,6 @@ export function SimpleEditor(props: props) {
   const { value, onchange, name, placeholder } = props
 
   const isMobile = useIsBreakpoint()
-  const { height } = useWindowSize()
   const [mobileView, setMobileView] = useState<'main' | 'highlighter' | 'link'>('main')
   const toolbarRef = useRef<HTMLDivElement>(null)
 
@@ -292,7 +290,7 @@ export function SimpleEditor(props: props) {
     if (!editor) return
 
     const placeholderExt = editor.extensionManager.extensions.find(
-      (ext: any) => ext.name === 'placeholder',
+      (ext: any) => ext.name === 'placeholder'
     )
     if (placeholderExt) {
       placeholderExt.options['placeholder'] = placeholder || ''
@@ -301,7 +299,7 @@ export function SimpleEditor(props: props) {
     }
   }, [placeholder, editor])
 
-  const rect = useCursorVisibility({
+  useCursorVisibility({
     editor,
     overlayHeight: toolbarRef.current?.getBoundingClientRect().height ?? 0,
   })
@@ -315,10 +313,7 @@ export function SimpleEditor(props: props) {
   return (
     <div className="simple-editor-wrapper">
       <EditorContext.Provider value={{ editor }}>
-        <Toolbar
-          ref={toolbarRef}
-          style={isMobile ? { bottom: `calc(100% - ${height - rect.y}px)` } : undefined}
-        >
+        <Toolbar ref={toolbarRef}>
           {mobileView === 'main' ? (
             <>
               <MainToolbarContent

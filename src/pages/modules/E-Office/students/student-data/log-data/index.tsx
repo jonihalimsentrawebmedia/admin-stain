@@ -21,42 +21,44 @@ const LogDataStudent = () => {
             <div className="grid grid-cols-2 gap-4">
               <div className="col-span-2">
                 <TitleLine
-                  className={'text-2xl font-semibold text-primary'}
+                  className={'text-xl sm:text-2xl font-semibold text-primary'}
                   title={'Detail Mahasiswa'}
                 />
               </div>
-              <div className="col-span-2 flex gap-6">
-                {studentData?.url_foto_mahasiswa ? (
-                  <img
-                    src={studentData.url_foto_mahasiswa}
-                    alt="Foto Mahasiswa"
-                    className="max-w-[120px] w-full aspect-[3/4] object-cover rounded-lg border"
-                  />
-                ) : (
-                  <div className="max-w-[120px] w-full aspect-[3/4] bg-gray-100 rounded-lg border flex items-center justify-center text-gray-400 shrink-0">
-                    <p className="text-xs">No Photo</p>
-                  </div>
-                )}
-                <div className="grid grid-cols-[180px_1fr] gap-y-3 gap-x-4 flex-1">
-                  <span className="text-gray-500">NIM</span>
-                  <span className="font-medium">{studentData?.nim ?? '-'}</span>
+              <div className="col-span-2 flex flex-col sm:flex-row gap-4 sm:gap-6">
+                <div className="flex justify-center sm:block">
+                  {studentData?.url_foto_mahasiswa ? (
+                    <img
+                      src={studentData.url_foto_mahasiswa}
+                      alt="Foto Mahasiswa"
+                      className="max-w-[100px] sm:max-w-[120px] w-full aspect-[3/4] object-cover rounded-lg border"
+                    />
+                  ) : (
+                    <div className="max-w-[100px] sm:max-w-[120px] w-full aspect-[3/4] bg-gray-100 rounded-lg border flex items-center justify-center text-gray-400 shrink-0">
+                      <p className="text-xs">No Photo</p>
+                    </div>
+                  )}
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-y-3 gap-x-4 flex-1">
+                  <span className="text-gray-500 text-sm sm:text-base">NIM</span>
+                  <span className="font-medium break-words">{studentData?.nim ?? '-'}</span>
 
-                  <span className="text-gray-500">Nama Mahasiswa</span>
-                  <span className="font-medium">{studentData?.nama_mahasiswa ?? '-'}</span>
+                  <span className="text-gray-500 text-sm sm:text-base">Nama Mahasiswa</span>
+                  <span className="font-medium break-words">{studentData?.nama_mahasiswa ?? '-'}</span>
 
-                  <span className="text-gray-500">Program Studi</span>
-                  <span className="font-medium">{studentData?.nama_prodi ?? '-'}</span>
+                  <span className="text-gray-500 text-sm sm:text-base">Program Studi</span>
+                  <span className="font-medium break-words">{studentData?.nama_prodi ?? '-'}</span>
 
-                  <span className="text-gray-500">Fakultas</span>
-                  <span className="font-medium">{studentData?.nama_fakultas ?? '-'}</span>
+                  <span className="text-gray-500 text-sm sm:text-base">Fakultas</span>
+                  <span className="font-medium break-words">{studentData?.nama_fakultas ?? '-'}</span>
 
-                  <span className="text-gray-500">Status Saat Ini</span>
+                  <span className="text-gray-500 text-sm sm:text-base">Status Saat Ini</span>
                   <span className="font-medium">
                     <Badge variant="outline">{studentData?.nama_status_mahasiswa ?? '-'}</Badge>
                   </span>
 
-                  <span className="text-gray-500">Angkatan</span>
-                  <span className="font-medium">{studentData?.angkatan ?? '-'}</span>
+                  <span className="text-gray-500 text-sm sm:text-base">Angkatan</span>
+                  <span className="font-medium break-words">{studentData?.angkatan ?? '-'}</span>
                 </div>
               </div>
             </div>
@@ -64,7 +66,7 @@ const LogDataStudent = () => {
             <div className="grid grid-cols-2 gap-4">
               <div className="col-span-2">
                 <TitleLine
-                  className={'text-2xl font-semibold text-primary'}
+                  className={'text-xl sm:text-2xl font-semibold text-primary'}
                   title={'Riwayat Status'}
                 />
               </div>
@@ -82,9 +84,9 @@ const LogDataStudent = () => {
                         className="border-l-4 border-l-primary"
                       >
                         <CardContent className="py-4">
-                          <div className="grid grid-cols-[160px_1fr] gap-y-2 gap-x-4 text-sm">
+                          <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-y-2 gap-x-4 text-sm">
                             <span className="text-gray-500">Tanggal</span>
-                            <span className="font-medium">
+                            <span className="font-medium break-words">
                               {log.changed_at
                                 ? format(new Date(log.changed_at), 'dd/MM/yyyy HH:mm')
                                 : '-'}
@@ -105,14 +107,14 @@ const LogDataStudent = () => {
                             {log.old_tahun_lulus && (
                               <>
                                 <span className="text-gray-500">Tahun Lulus (Lama)</span>
-                                <span className="font-medium">{log.old_tahun_lulus}</span>
+                                <span className="font-medium break-words">{log.old_tahun_lulus}</span>
                               </>
                             )}
 
                             {log.new_tahun_lulus && (
                               <>
                                 <span className="text-gray-500">Tahun Lulus (Baru)</span>
-                                <span className="font-medium">{log.new_tahun_lulus}</span>
+                                <span className="font-medium break-words">{log.new_tahun_lulus}</span>
                               </>
                             )}
 
@@ -137,12 +139,12 @@ const LogDataStudent = () => {
                             {log.alasan && (
                               <>
                                 <span className="text-gray-500">Alasan</span>
-                                <span className="font-medium">{log.alasan}</span>
+                                <span className="font-medium break-words">{log.alasan}</span>
                               </>
                             )}
 
                             <span className="text-gray-500">Diubah Oleh</span>
-                            <span className="font-medium">{log.nama_changed_user ?? '-'}</span>
+                            <span className="font-medium break-words">{log.nama_changed_user ?? '-'}</span>
                           </div>
                         </CardContent>
                       </Card>

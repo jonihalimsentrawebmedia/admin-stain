@@ -91,7 +91,7 @@ const SelectTemplateText = (props: Props) => {
           e.preventDefault()
           setOpen(true)
         }}
-        className={'absolute left-0 top-8 text-white'}
+        className={'lg:absolute left-0 top-8 text-white'}
       >
         Pilih Template
       </Button>

@@ -77,8 +77,8 @@ const DialogSelectStudents = (props: Props) => {
         Pilih Mahasiswa
       </Button>
 
-      <DialogBasic title={'Pilih Mahasiswa'} open={open} setOpen={setOpen} className={'min-w-5xl'}>
-        <div className="grid grid-cols-2 gap-2 gap-x-4">
+      <DialogBasic title={'Pilih Mahasiswa'} open={open} setOpen={setOpen} className={'sm:min-w-5xl'}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 gap-x-4">
           <SelectBasic
             showReset
             value={filter.id_fakultas}
@@ -88,7 +88,7 @@ const DialogSelectStudents = (props: Props) => {
                 id_fakultas: e,
               }))
             }}
-            className={'grid grid-cols-[7rem_1fr] items-center gap-2 w-full'}
+            className={'flex flex-col sm:grid sm:grid-cols-[7rem_1fr] items-start sm:items-center gap-1 sm:gap-2 w-full'}
             innerClassName={'w-full'}
             isRow
             label={'Fakultas'}
@@ -103,7 +103,7 @@ const DialogSelectStudents = (props: Props) => {
           <SelectBasic
             showReset
             value={filter.id_prodi}
-            className={'grid grid-cols-[7rem_1fr] items-center gap-2 w-full'}
+            className={'flex flex-col sm:grid sm:grid-cols-[7rem_1fr] items-start sm:items-center gap-1 sm:gap-2 w-full'}
             innerClassName={'w-full'}
             onChange={(e) => {
               setFilter((prev) => ({
@@ -124,7 +124,7 @@ const DialogSelectStudents = (props: Props) => {
           <SelectBasic
             showReset
             value={filter.angkatan}
-            className={'grid grid-cols-[7rem_1fr] items-center gap-2 w-full'}
+            className={'flex flex-col sm:grid sm:grid-cols-[7rem_1fr] items-start sm:items-center gap-1 sm:gap-2 w-full'}
             innerClassName={'w-full'}
             onChange={(e) => {
               setFilter((prev) => ({
@@ -145,7 +145,7 @@ const DialogSelectStudents = (props: Props) => {
           <SelectBasic
             showReset
             value={filter.jalur_masuk}
-            className={'grid grid-cols-[7rem_1fr] items-center gap-2 w-full'}
+            className={'flex flex-col sm:grid sm:grid-cols-[7rem_1fr] items-start sm:items-center gap-1 sm:gap-2 w-full'}
             innerClassName={'w-full'}
             onChange={(e) => {
               setFilter((prev) => ({
@@ -163,29 +163,31 @@ const DialogSelectStudents = (props: Props) => {
               })) ?? []),
             ]}
           />
-          <LimitState
-            value={Number(filter.limit)}
-            setLimit={(e) => {
-              setFilter((prev) => ({
-                ...prev,
-                limit: e.toString(),
-              }))
-            }}
-          />
-          <Search
-            className={'p-1.5'}
-            innerClassName={'p-1.5 text-sm'}
-            position={'end'}
-            onSearch={(e) => {
-              setFilter((prev) => ({
-                ...prev,
-                search: e,
-              }))
-            }}
-          />
+          <div className="col-span-1 sm:col-span-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-4">
+            <LimitState
+              value={Number(filter.limit)}
+              setLimit={(e) => {
+                setFilter((prev) => ({
+                  ...prev,
+                  limit: e.toString(),
+                }))
+              }}
+            />
+            <Search
+              className={'p-1.5 w-full sm:w-auto'}
+              innerClassName={'p-1.5 text-sm'}
+              position={'end'}
+              onSearch={(e) => {
+                setFilter((prev) => ({
+                  ...prev,
+                  search: e,
+                }))
+              }}
+            />
+          </div>
         </div>
-        <div>
-          <div className={'max-h-[500px] overflow-y-auto'}>
+        <div className={'overflow-x-auto'}>
+          <div className={'max-h-[500px] overflow-y-auto min-w-[640px] sm:min-w-0'}>
             <TableCustom
               columns={Columns}
               meta={meta}
@@ -197,7 +199,7 @@ const DialogSelectStudents = (props: Props) => {
               isShowFilter={false}
             />
           </div>
-          <div className="flex justify-end">
+          <div className="flex justify-end mt-3">
             {meta && (
               <PaginationState
                 meta={meta}

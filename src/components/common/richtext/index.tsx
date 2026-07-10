@@ -42,7 +42,7 @@ export const RichText = <T extends FieldValues>(props: Props<T>) => {
 
   return (
     <div
-      className={`${isRow ? 'grid grid-cols-[12rem_1fr]' : 'flex flex-col w-full'} w-full gap-5 items-start ${className}`}
+      className={`${isRow ? 'grid grid-cols-1 sm:grid-cols-[12rem_1fr]' : 'flex flex-col w-full'} w-full gap-3 sm:gap-5 items-start min-w-0 ${className}`}
     >
       {showLabel && (
         <label className={`${error ? 'text-red-500' : ''} ${labelClassName}`}>
@@ -51,7 +51,7 @@ export const RichText = <T extends FieldValues>(props: Props<T>) => {
         </label>
       )}
 
-      <div className={'w-full'}>
+      <div className={'w-full min-w-0'}>
         <SimpleEditor
           name={name}
           value={fieldValue ?? ''}
