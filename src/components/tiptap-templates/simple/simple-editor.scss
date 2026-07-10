@@ -58,22 +58,55 @@ body,
 .simple-editor-wrapper {
   overflow: auto;
   border: 1px solid var(--tt-border-color);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .simple-editor-content {
   max-height: 300px;
   margin: 0 auto;
+  width: 100%;
+  min-width: 0;
 }
 
 .simple-editor-content .tiptap.ProseMirror.simple-editor {
   flex: 1;
   padding: 1rem;
-  //padding: 3rem 3rem 30vh;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
-@media screen and (max-width: 480px) {
+.simple-editor-content .tiptap.ProseMirror img {
+  max-width: 100%;
+  height: auto;
+}
+
+.simple-editor-content .tiptap.ProseMirror table {
+  width: 100% !important;
+  overflow-x: auto;
+  display: block;
+}
+
+@media screen and (max-width: 768px) {
+  .simple-editor-wrapper {
+    border-radius: 0;
+  }
+
+  .simple-editor-content {
+    max-height: 260px;
+  }
+
   .simple-editor-content .tiptap.ProseMirror.simple-editor {
-    //padding: 1rem 1.5rem 30vh;
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .simple-editor-content .tiptap.ProseMirror.simple-editor {
+    padding: 0.75rem 1rem;
   }
 }
 

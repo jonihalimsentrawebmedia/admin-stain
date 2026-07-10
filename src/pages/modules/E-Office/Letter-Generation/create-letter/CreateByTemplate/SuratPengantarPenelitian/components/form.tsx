@@ -124,7 +124,7 @@ const FormSuratPengantarPenelitian = (props: Props) => {
                   name={'id_kop_surat'}
                   label={'Pilih Kop Surat'}
                   placeholder={'Pilih Kop Surat'}
-                  className={'w-1/2'}
+                  className={'w-full md:w-1/2'}
                   usePortal
                   data={
                     letterHeader?.map((row) => ({
@@ -145,7 +145,7 @@ const FormSuratPengantarPenelitian = (props: Props) => {
                   </div>
                   Penomoran Surat
                 </CardTitle>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <SelectBasicInput
                     form={form}
                     name={'id_nomor_surat_otomatis'}
@@ -198,7 +198,7 @@ const FormSuratPengantarPenelitian = (props: Props) => {
                     form={form}
                     label={'Lampiran'}
                     placeholder={'Jumlah Lampiran'}
-                    className={'w-1/2'}
+                    className={'w-full md:w-1/2'}
                     htmlFor={'lampiran'}
                     name={'lampiran'}
                     type={'number'}
@@ -243,7 +243,7 @@ const FormSuratPengantarPenelitian = (props: Props) => {
                   placeholder={'Instansi Pimpinan'}
                   htmlFor={'Instansi Pimpinan'}
                   inputClassName={'rounded'}
-                  className={'w-1/2'}
+                  className={'w-full md:w-1/2'}
                   isRow
                   isRequired
                 />
@@ -254,7 +254,7 @@ const FormSuratPengantarPenelitian = (props: Props) => {
                   label={'Di'}
                   placeholder={'Cth: Ditempat'}
                   htmlFor={'di'}
-                  className={'w-1/2'}
+                  className={'w-full md:w-1/2'}
                   isRequired
                   isRow
                 />

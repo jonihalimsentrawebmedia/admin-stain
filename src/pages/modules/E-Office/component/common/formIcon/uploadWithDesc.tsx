@@ -48,16 +48,16 @@ export const UploadDocWithDescription = <T extends FieldValues>(props: Props<T>)
 
   return (
     <>
-      <div className="grid grid-cols-[12rem_1fr] gap-5 items-start">
-        <Label className={'text-gray-500'}>
+      <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-2 sm:gap-5 items-start">
+        <Label className={'text-gray-500 text-sm sm:text-base'}>
           {label} {required && <span className={'text-red-500'}> *</span>}
         </Label>
         <div className="flex flex-col gap-5 w-full">
-          <div className={'flex items-stretch gap-2 w-full'}>
+          <div className={'flex flex-col sm:flex-row items-stretch gap-2 w-full'}>
             <div
               className={cn(
                 'border rounded border-primary text-primary hover:text-primary p-4',
-                'flex items-center gap-4 justify-center max-w-[350px] cursor-pointer'
+                'flex items-center gap-4 justify-center sm:max-w-[350px] cursor-pointer w-full'
               )}
               onClick={(e) => {
                 e.preventDefault()
@@ -66,17 +66,17 @@ export const UploadDocWithDescription = <T extends FieldValues>(props: Props<T>)
             >
               <MdOutlineFileUpload className={'size-8'} />
               <div className={'space-y-1.5'}>
-                <p>Upload Dokumen</p>
-                <p className={'text-xs'}>Kilik Atau Seret File Ke sini Untuk Mengunggah</p>
+                <p className="text-sm sm:text-base">Upload Dokumen</p>
+                <p className={'text-xs'}>Klik Atau Seret File Ke sini Untuk Mengunggah</p>
               </div>
             </div>
             <div className={'border rounded border-primary p-2'}>
               <div className={'flex items-start gap-2'}>
-                <MdInfo className={'text-primary size-8'} />
+                <MdInfo className={'text-primary size-8 shrink-0'} />
                 <div className={'space-y-1.5'}>
-                  <p className="text-primary font-semibold">Bisa Lebih Dari 1 File</p>
+                  <p className="text-primary font-semibold text-sm sm:text-base">Bisa Lebih Dari 1 File</p>
                   <p className={'text-gray-500 text-xs'}>
-                    Format Yang Didukung : PDF, DOC , DOCX, XLS, XLSX,
+                    Format Yang Didukung : PDF, DOC, DOCX, XLS, XLSX
                   </p>
                   <p className={'text-gray-500 text-xs'}>Maksimal Ukuran File : 10MB Per file</p>
                 </div>
@@ -95,11 +95,11 @@ export const UploadDocWithDescription = <T extends FieldValues>(props: Props<T>)
           <ul className={'flex flex-col gap-2'}>
             {documents.map((doc, index) => (
               <li key={index}>
-                <div
-                  className={
-                    'p-2 border border-primary flex justify-between items-center rounded text-sm w-full max-w-xs text-primary'
-                  }
-                >
+                  <div
+                    className={
+                      'p-2 border border-primary flex justify-between items-center rounded text-sm w-full max-w-xs sm:max-w-sm text-primary'
+                    }
+                  >
                   <Link to={doc?.url ?? '#'} target="_blank">
                     {index + 1}. {doc?.nama_lampiran}
                   </Link>

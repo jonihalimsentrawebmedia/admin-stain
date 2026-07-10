@@ -60,14 +60,14 @@ const ButtonDeleteNumberLetterAutomatic = (props: props) => {
         <FaTrash />
       </button>
 
-      <DialogBasic title={'Hapus Klasifikasi Suret'} open={open} setOpen={setOpen}>
-        <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
-          <p className="text-gray-500">Nama Kode Surat</p>
-          <p>{data?.nama_nomor_surat}</p>
-          <p className="text-gray-500">Satuan Keja</p>
-          <p>{data?.nama_satuan_organisasi}</p>
-          <p className="text-gray-500">Format Surat</p>
-          <div dangerouslySetInnerHTML={{ __html: result ?? '' }} />
+      <DialogBasic title={'Hapus Klasifikasi Surat'} open={open} setOpen={setOpen}>
+        <div className={'grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-4'}>
+          <p className="text-gray-500 text-sm">Nama Kode Surat</p>
+          <p className="text-sm sm:text-base">{data?.nama_nomor_surat}</p>
+          <p className="text-gray-500 text-sm">Satuan Kerja</p>
+          <p className="text-sm sm:text-base">{data?.nama_satuan_organisasi}</p>
+          <p className="text-gray-500 text-sm">Format Surat</p>
+          <div className="text-sm sm:text-base" dangerouslySetInnerHTML={{ __html: result ?? '' }} />
         </div>
         <ButtonTitleGroup
           label={''}

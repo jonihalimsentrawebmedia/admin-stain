@@ -35,3 +35,14 @@ export const ResolverStudentData = z.object({
 })
 
 export type TResolverStudentData = z.infer<typeof ResolverStudentData>
+
+export const ResolverFormStatus = z.object({
+  id_mahasiswa_status: z
+    .string({ error: 'Status Mahasiswa harus dipilih' })
+    .min(1, 'Status Mahasiswa harus dipilih'),
+  tahun_lulus: z.string().optional().nullable(),
+  tanggal_lulus: z.string().optional().nullable(),
+  periode_lulus: z.string().optional().nullable(),
+})
+
+export type TResolverFormStatus = z.infer<typeof ResolverFormStatus>

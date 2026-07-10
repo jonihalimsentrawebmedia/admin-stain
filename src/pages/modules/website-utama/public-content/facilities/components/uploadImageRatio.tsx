@@ -69,6 +69,7 @@ export const UploadImageRatio = <T extends FieldValues>(props: props<T>) => {
             type="file"
             hidden
             ref={refButton}
+            accept="image/png, image/jpeg, image/jpg"
             onChange={(e) => HandleUpload(e.target.files)}
           />
           {form.watch(name) ? (

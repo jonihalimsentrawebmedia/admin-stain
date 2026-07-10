@@ -22,7 +22,10 @@ export const ButtonCancelApproval = () => {
           toast.success(res.data.message)
           setLoading(false)
           queryClient.invalidateQueries({
-            queryKey: ['data-carrier','data-pusilkom'],
+            queryKey: ['data-carrier'],
+          })
+          queryClient.invalidateQueries({
+            queryKey: ['data-pusilkom'],
           })
         }
       })

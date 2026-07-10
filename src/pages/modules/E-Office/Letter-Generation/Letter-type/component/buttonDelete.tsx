@@ -47,14 +47,14 @@ const ButtonDeleteLetterType = (props: props) => {
         <FaTrash />
       </button>
 
-      <DialogBasic title={'Hapus Klasifikasi Suret'} open={open} setOpen={setOpen}>
-        <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
-          <p className="text-gray-500">Nama Jenis Surat</p>
-          <p>{data?.nama_jenis_surat}</p>
-          <p className="text-gray-500">Kategori Jenis Surat</p>
-          <p>{data?.kategori_jenis_surat}</p>
-          <p className="text-gray-500">Kode Surat</p>
-          <p>{data?.kode_surat}</p>
+      <DialogBasic title={'Hapus Kelompok Surat'} open={open} setOpen={setOpen}>
+        <div className={'grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-4'}>
+          <p className="text-gray-500 text-sm">Nama Jenis Surat</p>
+          <p className="text-sm sm:text-base">{data?.nama_jenis_surat}</p>
+          <p className="text-gray-500 text-sm">Kategori Jenis Surat</p>
+          <p className="text-sm sm:text-base">{data?.kategori_jenis_surat}</p>
+          <p className="text-gray-500 text-sm">Kode Surat</p>
+          <p className="text-sm sm:text-base">{data?.kode_surat}</p>
         </div>
         <ButtonTitleGroup
           label={''}

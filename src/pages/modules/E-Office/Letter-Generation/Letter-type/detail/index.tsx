@@ -26,6 +26,7 @@ const DetailLetterType = () => {
     <>
       <div className={'space-y-5'}>
         <ButtonTitleGroup
+          rootButtonClassName={'flex flex-col lg:flex-row gap-2'}
           isBack
           label={`Detail ${letter?.nama_jenis_surat} - (${letter?.kategori_jenis_surat})`}
           buttonGroup={[
@@ -40,7 +41,7 @@ const DetailLetterType = () => {
           ]}
         />
 
-        <p className="text-blue-500">
+        <p className="text-blue-500 text-xs lg:text-base">
           NB: Sebelum menambahkan Jenis Surat, pastikan Kode Jenis Surat telah tersedia. Gunakan
           kode yang sudah terdaftar untuk menjaga konsistensi data.
         </p>

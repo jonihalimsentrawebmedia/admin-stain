@@ -55,21 +55,21 @@ const ButtonDeleteInbox = (props: props) => {
         open={open}
         setOpen={setOpen}
       >
-        <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
-          <p className="text-gray-500">Tanggal</p>
-          <p>{data?.tanggal_surat ? format(data?.tanggal_surat, 'dd/MM/yyyy') : '-'}</p>
-          <p className="text-gray-500">Nomor Surat</p>
-          <p>{data?.nomor_surat}</p>
-          <p className="text-gray-500">Jenis Surat</p>
-          <p>{data?.nama_jenis_surat}</p>
-          <p className="text-gray-500">Perihal</p>
-          <p>{data?.perihal}</p>
-          <p className="text-gray-500">Asal Surat</p>
-          <p>{data?.nama_asal_surat}</p>
-          <p className="text-gray-500">Penerima</p>
-          <p>{data?.penerima_surat}</p>
-          <p className="text-gray-500">Disposisi</p>
-          <p>{data?.list_disposisi?.map((row) => row)}</p>
+        <div className={'grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-4'}>
+          <p className="text-gray-500 text-sm">Tanggal</p>
+          <p className="text-sm sm:text-base">{data?.tanggal_surat ? format(data?.tanggal_surat, 'dd/MM/yyyy') : '-'}</p>
+          <p className="text-gray-500 text-sm">Nomor Surat</p>
+          <p className="text-sm sm:text-base break-all">{data?.nomor_surat}</p>
+          <p className="text-gray-500 text-sm">Jenis Surat</p>
+          <p className="text-sm sm:text-base">{data?.nama_jenis_surat}</p>
+          <p className="text-gray-500 text-sm">Perihal</p>
+          <p className="text-sm sm:text-base">{data?.perihal}</p>
+          <p className="text-gray-500 text-sm">Asal Surat</p>
+          <p className="text-sm sm:text-base">{data?.nama_asal_surat}</p>
+          <p className="text-gray-500 text-sm">Penerima</p>
+          <p className="text-sm sm:text-base">{data?.penerima_surat}</p>
+          <p className="text-gray-500 text-sm">Disposisi</p>
+          <p className="text-sm sm:text-base">{data?.list_disposisi?.map((row) => row)}</p>
         </div>
         <ButtonTitleGroup
           label={''}

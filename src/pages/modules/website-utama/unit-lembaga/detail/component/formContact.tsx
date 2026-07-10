@@ -76,7 +76,7 @@ const ContactUsForm = () => {
       label: 'Email',
       name: 'email',
     },
-      {
+    {
       label: 'Iframe Embed Google Maps',
       name: 'iframe',
       component: (
@@ -101,7 +101,10 @@ const ContactUsForm = () => {
         <div className="flex justify-between items-center">
           <div className="text-primary text-2xl font-medium">Hubungi Kami</div>
           <div className="flex gap-4 items-center">
-            <ButtonGoToGuide titleGuide='Hubungi Kami' valueGuide="WEBSITE_UTAMA_SATUAN_ORGANISASI_HUBUNGI_KAMI" />
+            <ButtonGoToGuide
+              titleGuide="Hubungi Kami"
+              valueGuide="WEBSITE_UTAMA_SATUAN_ORGANISASI_HUBUNGI_KAMI"
+            />
             {isEdit ? (
               <ButtonForm
                 loading={loading}
@@ -129,16 +132,46 @@ const ContactUsForm = () => {
         <CardInput title="Hubungi Kami">
           {isEdit ? (
             <div className="flex flex-col gap-4">
-              <TextInput form={form} name="alamat" label="Alamat" isRow />
+              <TextInput
+                form={form}
+                name="alamat"
+                label="Alamat"
+                placeholder={'Alamat'}
+                isRequired
+                isRow
+              />
               <TextInput
                 form={form}
                 name="link_google_map"
                 type="url"
                 label="Link Google Maps"
+                placeholder={'Alamat'}
+                isRow
+                isRequired
+              />
+              <TextInput
+                form={form}
+                name="no_telepon"
+                label="Telepon"
+                placeholder={'No Telepon UNit'}
                 isRow
               />
-              <TextInput form={form} name="no_telepon" label="Telepon" isRow />
-              <TextInput form={form} name="email" type="email" label="Email" isRow />
+              <TextInput
+                form={form}
+                name="email"
+                type="email"
+                label="Email"
+                placeholder={'Email'}
+                isRow
+              />
+              <TextInput
+                form={form}
+                name="iframe"
+                type="text"
+                label="Link Iframe Google Map"
+                placeholder={'Link Iframe Google Map'}
+                isRow
+              />
             </div>
           ) : (
             <DetailField data={field} form={form} />

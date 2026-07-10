@@ -5,12 +5,32 @@ import { HiPencil } from 'react-icons/hi'
 import { FiEye } from 'react-icons/fi'
 import ButtonDeleteStudentData from '../component/buttonDelete.tsx'
 
+
 export const ColumnsStudentData = () => {
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') ?? '1')
   const limit = Number(searchParams.get('limit') ?? '10')
 
   const columns: ColumnDef<IStudentData>[] = [
+    {
+      id: 'select',
+      header: ({ table }) => (
+        <input
+          type="checkbox"
+          checked={table.getIsAllRowsSelected()}
+          onChange={table.getToggleAllRowsSelectedHandler()}
+        />
+      ),
+      cell: ({ row }) => (
+        <input
+          type="checkbox"
+          checked={row.getIsSelected()}
+          onChange={row.getToggleSelectedHandler()}
+        />
+      ),
+      enableSorting: false,
+      enableHiding: false,
+    },
     {
       accessorKey: 'order',
       header: '#',

@@ -41,7 +41,7 @@ const ButtonTitleGroup = (props: Props) => {
             <IconBackTitle />
           </button>
         )}
-        <p className="text-3xl font-semibold text-neutral">{label}</p>
+        <p className="text-sm lg:text-2xl font-semibold text-neutral">{label}</p>
       </div>
       <div className={clsx(rootButtonClassName, `flex gap-4 items-start`)}>
         {buttonGroup.map((row, K) => {

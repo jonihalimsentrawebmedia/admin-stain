@@ -61,83 +61,83 @@ export const DetailInboxRegistration = () => {
 
             <hr className={'my-2 border-green-400'} />
 
-            <div className="grid grid-cols-2 w-fit gap-5 gap-y-4">
-              <div className={'flex items-center gap-2.5 col-span-2'}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+              <div className={'flex items-center gap-2.5 col-span-1 sm:col-span-2'}>
                 <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
                   <RiBuildingLine className={'size-5 text-primary'} />
                 </div>
-                <div className="flex flex-col col-span-2">
-                  <p className="text-gray-500">Satuan Kerja: </p>
-                  <p>{detailInbox?.nama_unit}</p>
+                <div className="flex flex-col min-w-0">
+                  <p className="text-gray-500 text-sm">Satuan Kerja: </p>
+                  <p className="truncate">{detailInbox?.nama_unit}</p>
                 </div>
               </div>
 
               <div className={'flex items-center gap-2.5 col-span-1'}>
-                <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                   <IoShieldCheckmarkSharp className={'size-5 text-primary'} />
                 </div>
-                <div className="flex flex-col ">
-                  <p className="text-gray-500">Sifat Surat: </p>
-                  <p>{detailInbox?.nama_sifat_surat}</p>
+                <div className="flex flex-col min-w-0">
+                  <p className="text-gray-500 text-sm">Sifat Surat: </p>
+                  <p className="truncate">{detailInbox?.nama_sifat_surat}</p>
                 </div>
               </div>
 
               <div className={'flex items-center gap-2.5 col-span-1'}>
-                <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                   <FaRegFileAlt className={'size-5 text-primary'} />
                 </div>
-                <div className="flex flex-col">
-                  <p className="text-gray-500">Jenis Surat: </p>
-                  <p>{detailInbox?.nama_jenis_surat}</p>
+                <div className="flex flex-col min-w-0">
+                  <p className="text-gray-500 text-sm">Jenis Surat: </p>
+                  <p className="truncate">{detailInbox?.nama_jenis_surat}</p>
                 </div>
               </div>
 
               <div className={'flex items-center gap-2.5 col-span-1'}>
-                <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                   <GoLaw className={'size-5 text-primary'} />
                 </div>
-                <div className="flex flex-col">
-                  <p className="text-gray-500">Klasifikasi Surat: </p>
-                  <p>{detailInbox?.nama_klasifikasi_surat}</p>
+                <div className="flex flex-col min-w-0">
+                  <p className="text-gray-500 text-sm">Klasifikasi Surat: </p>
+                  <p className="truncate">{detailInbox?.nama_klasifikasi_surat}</p>
                 </div>
               </div>
 
               <div className={'flex items-center gap-2.5 col-span-1'}>
-                <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                   <RiBuildingLine className={'size-5 text-primary'} />
                 </div>
-                <div className="flex flex-col">
-                  <p className="text-gray-500">Asal Surat: </p>
-                  <p>{detailInbox?.nama_asal_surat}</p>
+                <div className="flex flex-col min-w-0">
+                  <p className="text-gray-500 text-sm">Asal Surat: </p>
+                  <p className="truncate">{detailInbox?.nama_asal_surat}</p>
                 </div>
               </div>
 
               <div className={'flex items-center gap-2.5 col-span-1'}>
-                <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                   <FaRegUser className={'size-5 text-primary'} />
                 </div>
-                <div className="flex flex-col">
-                  <p className="text-gray-500">Kepada: </p>
-                  <p>{detailInbox?.penerima_surat}</p>
+                <div className="flex flex-col min-w-0">
+                  <p className="text-gray-500 text-sm">Kepada: </p>
+                  <p className="truncate">{detailInbox?.penerima_surat}</p>
                 </div>
               </div>
 
               <div className={'flex items-center gap-2.5 col-span-1'}>
-                <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                   <FaHashtag className={'size-5 text-primary'} />
                 </div>
-                <div className="flex flex-col">
-                  <p className="text-gray-500">Nomor Surat: </p>
-                  <p>{detailInbox?.nomor_surat}</p>
+                <div className="flex flex-col min-w-0">
+                  <p className="text-gray-500 text-sm">Nomor Surat: </p>
+                  <p className="truncate">{detailInbox?.nomor_surat}</p>
                 </div>
               </div>
 
               <div className={'flex items-center gap-2.5 col-span-1'}>
-                <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                   <FaRegCalendarAlt className={'size-5 text-primary'} />
                 </div>
-                <div className="flex flex-col">
-                  <p className="text-gray-500">Tanggal: </p>
+                <div className="flex flex-col min-w-0">
+                  <p className="text-gray-500 text-sm">Tanggal: </p>
                   <p>
                     {detailInbox?.tanggal_surat
                       ? format(detailInbox?.tanggal_surat, 'dd/MM/yyyy')
@@ -147,41 +147,41 @@ export const DetailInboxRegistration = () => {
               </div>
 
               <div className={'flex items-center gap-2.5 col-span-1'}>
-                <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                   <LuClipboard className={'size-5 text-primary'} />
                 </div>
-                <div className="flex flex-col">
-                  <p className="text-gray-500">Nomor Agenda: </p>
+                <div className="flex flex-col min-w-0">
+                  <p className="text-gray-500 text-sm">Nomor Agenda: </p>
                   <p>{detailInbox?.nomor_agenda ?? '-'}</p>
                 </div>
               </div>
 
-              <div className={'flex items-center gap-2.5 col-span-2'}>
-                <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+              <div className={'flex items-center gap-2.5 col-span-1 sm:col-span-2'}>
+                <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                   <BsTag className={'size-5 text-primary'} />
                 </div>
-                <div className="flex flex-col col-span-2">
-                  <p className="text-gray-500">Perihal: </p>
+                <div className="flex flex-col min-w-0">
+                  <p className="text-gray-500 text-sm">Perihal: </p>
                   <p>{detailInbox?.perihal ?? '-'}</p>
                 </div>
               </div>
 
-              <div className={'flex items-center gap-2.5 col-span-2'}>
-                <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+              <div className={'flex items-center gap-2.5 col-span-1 sm:col-span-2'}>
+                <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                   <TbShare3 className={'size-5 text-primary'} />
                 </div>
-                <div className="flex flex-col gap-1.5 col-span-2">
-                  <p className="text-gray-500">Tebusan: </p>
+                <div className="flex flex-col gap-1.5 min-w-0">
+                  <p className="text-gray-500 text-sm">Tembusan: </p>
                   <p>{detailInbox?.tembusan ?? '-'}</p>
                 </div>
               </div>
 
-              <div className={'flex items-center gap-2.5 col-span-2'}>
-                <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+              <div className={'flex items-center gap-2.5 col-span-1 sm:col-span-2'}>
+                <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                   <FaRegFileLines className={'size-5 text-primary'} />
                 </div>
-                <div className="flex flex-col gap-1.5 col-span-2">
-                  <p className="text-gray-500">Ringkasan Surat: </p>
+                <div className="flex flex-col gap-1.5 min-w-0">
+                  <p className="text-gray-500 text-sm">Ringkasan Surat: </p>
                   <p>{detailInbox?.ringkasan ?? '-'}</p>
                 </div>
               </div>
@@ -204,33 +204,33 @@ export const DetailInboxRegistration = () => {
 
               <hr className={'my-2 border-green-400'} />
 
-              <div className="grid grid-cols-4 w-fit gap-5 gap-y-4">
-                <div className={'flex items-center gap-2.5 col-span-2'}>
-                  <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+              <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 sm:gap-5">
+                <div className={'flex items-center gap-2.5 col-span-1 sm:col-span-2'}>
+                  <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                     <FaRegFileAlt className={'size-5 text-primary'} />
                   </div>
-                  <div className="flex flex-col col-span-4">
-                    <p className="text-gray-500">Nama Kegiatan: </p>
+                  <div className="flex flex-col min-w-0">
+                    <p className="text-gray-500 text-sm">Nama Kegiatan: </p>
                     <p>{detailInbox?.nama_kegiatan}</p>
                   </div>
                 </div>
 
-                <div className={'flex items-center gap-2.5 col-span-2'}>
-                  <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                <div className={'flex items-center gap-2.5 col-span-1 sm:col-span-2'}>
+                  <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                     <IoChatboxOutline className={'size-5 text-primary'} />
                   </div>
-                  <div className="flex flex-col col-span-4">
-                    <p className="text-gray-500">Keterangan: </p>
+                  <div className="flex flex-col min-w-0">
+                    <p className="text-gray-500 text-sm">Keterangan: </p>
                     <p>{detailInbox?.keterangan_agenda ?? '-'}</p>
                   </div>
                 </div>
 
                 <div className={'flex items-center gap-2.5 col-span-1'}>
-                  <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                  <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                     <FaRegCalendarAlt className={'size-5 text-primary'} />
                   </div>
-                  <div className="flex flex-col col-span-1">
-                    <p className="text-gray-500">Tanggal Mulai: </p>
+                  <div className="flex flex-col min-w-0">
+                    <p className="text-gray-500 text-sm">Tanggal Mulai: </p>
                     <p>
                       {detailInbox?.tanggal_mulai
                         ? format(detailInbox?.tanggal_mulai, 'dd/MM/yyyy')
@@ -240,11 +240,11 @@ export const DetailInboxRegistration = () => {
                 </div>
 
                 <div className={'flex items-center gap-2.5 col-span-1'}>
-                  <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                  <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                     <FaRegClock className={'size-5 text-primary'} />
                   </div>
-                  <div className="flex flex-col col-span-1">
-                    <p className="text-gray-500">Jam Mulai: </p>
+                  <div className="flex flex-col min-w-0">
+                    <p className="text-gray-500 text-sm">Jam Mulai: </p>
                     <p>
                       {detailInbox?.tanggal_mulai
                         ? format(detailInbox?.tanggal_mulai, 'HH:mm')
@@ -254,11 +254,11 @@ export const DetailInboxRegistration = () => {
                 </div>
 
                 <div className={'flex items-center gap-2.5 col-span-1'}>
-                  <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                  <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                     <FaRegCalendarAlt className={'size-5 text-primary'} />
                   </div>
-                  <div className="flex flex-col col-span-1">
-                    <p className="text-gray-500">Tanggal Selesai: </p>
+                  <div className="flex flex-col min-w-0">
+                    <p className="text-gray-500 text-sm">Tanggal Selesai: </p>
                     <p>
                       {detailInbox?.tanggal_selesai
                         ? format(detailInbox?.tanggal_selesai, 'dd/MM/yyyy')
@@ -268,11 +268,11 @@ export const DetailInboxRegistration = () => {
                 </div>
 
                 <div className={'flex items-center gap-2.5 col-span-1'}>
-                  <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                  <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                     <FaRegClock className={'size-5 text-primary'} />
                   </div>
-                  <div className="flex flex-col col-span-1">
-                    <p className="text-gray-500">Jam Mulai: </p>
+                  <div className="flex flex-col min-w-0">
+                    <p className="text-gray-500 text-sm">Jam Selesai: </p>
                     <p>
                       {detailInbox?.tanggal_selesai
                         ? format(detailInbox?.tanggal_selesai, 'HH:mm')
@@ -281,22 +281,22 @@ export const DetailInboxRegistration = () => {
                   </div>
                 </div>
 
-                <div className={'flex items-center gap-2.5 col-span-4'}>
-                  <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                <div className={'flex items-center gap-2.5 col-span-1 sm:col-span-4'}>
+                  <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                     <GrLocation className={'size-5 text-primary'} />
                   </div>
-                  <div className="flex flex-col col-span-1">
-                    <p className="text-gray-500">Tempat / Lokasi: </p>
+                  <div className="flex flex-col min-w-0">
+                    <p className="text-gray-500 text-sm">Tempat / Lokasi: </p>
                     <p>{detailInbox?.tempat}</p>
                   </div>
                 </div>
 
-                <div className={'flex items-center gap-2.5 col-span-4'}>
-                  <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                <div className={'flex items-center gap-2.5 col-span-1 sm:col-span-4'}>
+                  <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                     <BsBell className={'size-5 text-primary'} />
                   </div>
-                  <div className="flex flex-col col-span-4">
-                    <p className="text-gray-500">Pengingat: </p>
+                  <div className="flex flex-col min-w-0">
+                    <p className="text-gray-500 text-sm">Pengingat: </p>
                     <p>{detailInbox?.nama_waktu_pengingat_agenda} Menit</p>
                   </div>
                 </div>
@@ -320,7 +320,7 @@ export const DetailInboxRegistration = () => {
 
               <hr className={'my-2 border-green-400'} />
 
-              <div className="grid grid-cols-3 gap-5 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 mt-4">
                 {detailInbox?.lampiran?.map((item, index) => (
                   <Link
                     target="_blank"
@@ -365,7 +365,7 @@ export const DetailInboxRegistration = () => {
               <div className={'flex flex-col gap-1.5'}>
                 {detailInbox?.pejabat?.map((row, index) => (
                   <Fragment key={index}>
-                    <div className="flex items-start gap-4">
+                    <div className="flex flex-col sm:flex-row items-start gap-4">
                       <div className={'flex flex-col p-4 border w-full rounded-lg'}>
                         <div className="flex items-center justify-between gap-2">
                           <div className="flex items-center gap-1.5">
@@ -387,11 +387,11 @@ export const DetailInboxRegistration = () => {
                           <img
                             src={row?.gambar_sdm ?? '/img/noimg.png'}
                             alt={row?.nama_sdm}
-                            className={'w-16 h-16 rounded-full object-cover'}
+                            className={'w-12 sm:w-16 h-12 sm:h-16 rounded-full object-cover shrink-0'}
                           />
-                          <div>
-                            <p className="text-lg font-semibold">{row?.nama_sdm}</p>
-                            <p className={'text-primary'}>{row?.status?.split('_').join(' ')}</p>
+                          <div className="min-w-0">
+                            <p className="text-sm sm:text-lg font-semibold truncate">{row?.nama_sdm}</p>
+                            <p className={'text-primary text-xs sm:text-sm'}>{row?.status?.split('_').join(' ')}</p>
                           </div>
                         </div>
                       </div>

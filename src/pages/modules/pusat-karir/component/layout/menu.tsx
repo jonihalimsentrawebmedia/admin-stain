@@ -100,7 +100,7 @@ export const GenerateMenu = () => {
         },
         {
           id: 52,
-          name: 'lowongan Magang',
+          name: 'Lowongan Magang',
           path: `${baseDomain}/service/internship-vacancy`,
         },
         {

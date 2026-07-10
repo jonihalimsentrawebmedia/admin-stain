@@ -127,7 +127,7 @@ const FormSuratPengantarObservasi = (props: props) => {
                   name={'id_kop_surat'}
                   label={'Pilih Kop Surat'}
                   placeholder={'Pilih Kop Surat'}
-                  className={'w-1/2'}
+                  className={'w-full md:w-1/2'}
                   usePortal
                   data={
                     letterHeader?.map((row) => ({
@@ -148,7 +148,7 @@ const FormSuratPengantarObservasi = (props: props) => {
                   </div>
                   Penomoran Surat
                 </CardTitle>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <SelectBasicInput
                     form={form}
                     name={'id_nomor_surat_otomatis'}

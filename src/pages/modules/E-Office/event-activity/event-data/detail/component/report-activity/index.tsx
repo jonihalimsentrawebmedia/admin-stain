@@ -42,6 +42,13 @@ const ReportActivity = (props: Props) => {
 
   const { base64 } = ConvertUrlToBase64(listReport?.cetak_config?.kop_surat?.url_logo ?? '')
 
+  const isDataComplete =
+    !!listReport &&
+    !!listReport.daftar_hadir?.length &&
+    !!listReport.dokumentasi?.length &&
+    !!listReport.laporan_list?.length &&
+    listReport.laporan_list.every((l) => l.laporan?.trim())
+
   const HandlePrint = useCallback(async () => {
     if (!detail || !listReport) return
 
@@ -123,10 +130,10 @@ const ReportActivity = (props: Props) => {
                   <Button
                     onClick={() => HandlePrint()}
                     className={'text-white'}
-                    disabled={isPrinting}
+                    disabled={isPrinting || !isDataComplete}
                   >
                     <IoPrintSharp className={isPrinting ? 'animate-spin' : ''} />
-                    {isPrinting ? 'Menyiapkan...' : 'Cetak'}
+                    {isPrinting ? 'Menyiapkan...' : !isDataComplete ? 'Data Belum Lengkap' : 'Cetak'}
                   </Button>
                 ),
               },

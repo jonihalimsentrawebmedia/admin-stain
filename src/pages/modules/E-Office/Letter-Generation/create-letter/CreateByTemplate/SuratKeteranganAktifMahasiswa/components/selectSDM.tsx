@@ -59,15 +59,15 @@ const DialogHumanResources = (props: Props) => {
         title={'Pilih Penandatangan'}
         open={open}
         setOpen={setOpen}
-        className={'min-w-5xl'}
+        className={'sm:min-w-5xl'}
       >
-        <div className={'flex items-center gap-4 justify-between w-full'}>
+        <div className={'flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 w-full'}>
           <SelectBasic
             showReset
             label={'Satuan Kerja'}
             placeholder={'Pilih Satuan Kerja'}
             isRow
-            className={'w-full! flex whitespace-nowrap'}
+            className={'w-full! flex flex-col sm:flex-row whitespace-nowrap'}
             innerClassName={'w-full!'}
             value={filter.id_unit_kerja}
             data={
@@ -85,7 +85,7 @@ const DialogHumanResources = (props: Props) => {
           />
           <Search
             innerClassName={'p-1.5'}
-            className={'p-1.5'}
+            className={'p-1.5 w-full sm:w-auto'}
             position={'end'}
             onSearch={(e) => {
               setFilter((prev) => ({
@@ -95,7 +95,7 @@ const DialogHumanResources = (props: Props) => {
             }}
           />
         </div>
-        <div>
+        <div className={'overflow-x-auto'}>
           <TableCustom
             columns={Columns}
             meta={meta}
@@ -106,7 +106,7 @@ const DialogHumanResources = (props: Props) => {
             isShowPagination={false}
             isShowFilter={false}
           />
-          <div className="flex justify-end">
+          <div className="flex justify-end mt-3">
             {meta && (
               <PaginationState
                 meta={meta}
