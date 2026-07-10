@@ -31,8 +31,6 @@ const CreateLetterByTemplate = () => {
     },
   })
 
-  // comment
-
   const cleanupPdfUrl = () => {
     if (pdfUrlRef.current) {
       URL.revokeObjectURL(pdfUrlRef.current)
