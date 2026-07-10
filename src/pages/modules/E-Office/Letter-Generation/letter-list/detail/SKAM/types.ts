@@ -52,6 +52,7 @@ export interface ISKAMLettter {
   nama_agama: string
   angkatan: string
   semester_masuk: number
+  semester: number
   nama_fakultas: string | null
   nama_jenjang: string | null
   kode_jenjang: string | null

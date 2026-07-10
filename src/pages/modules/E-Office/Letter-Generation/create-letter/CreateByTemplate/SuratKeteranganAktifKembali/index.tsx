@@ -12,7 +12,10 @@ import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import { GenerateLetterSKAK } from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKAK/pdfgenerate.ts'
 import type { ISKAKLetter } from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKAK/types.ts'
-import { GetBase64FromUrl, UseGetLetterHeaderRef } from '@/pages/modules/E-Office/settings/letter-header/hooks'
+import {
+  GetBase64FromUrl,
+  UseGetLetterHeaderRef,
+} from '@/pages/modules/E-Office/settings/letter-header/hooks'
 import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan-unit/hooks.tsx'
 import type { ILetterHeader } from '@/pages/modules/E-Office/settings/letter-header/data/types.ts'
 import pdfmake from '@/utils/pdfmake.ts'
@@ -37,7 +40,9 @@ const SuratKeteranganAktifKembaliPage = () => {
       id_jenis_template_surat: template?.id_mail_jenis_template_surat,
     },
   })
-  const { letterNumber } = UseGetDetailLetterNumberAutomatic(form.watch('id_nomor_surat_otomatis') ?? '')
+  const { letterNumber } = UseGetDetailLetterNumberAutomatic(
+    form.watch('id_nomor_surat_otomatis') ?? ''
+  )
 
   useEffect(() => {
     if (template) {
@@ -62,7 +67,7 @@ const SuratKeteranganAktifKembaliPage = () => {
   const HandlePreview = async (value: TResolverSKAK) => {
     setLoading(true)
     try {
-      const selectedHeader = (letterHeader ?? []).find(h => h.id_kop_surat === value.id_kop_surat)
+      const selectedHeader = (letterHeader ?? []).find((h) => h.id_kop_surat === value.id_kop_surat)
 
       let logoBase64 = ''
       try {
@@ -74,22 +79,25 @@ const SuratKeteranganAktifKembaliPage = () => {
       }
 
       const selectedInstitution = (institution ?? []).find(
-        i => i.id_satuan_organisasi === value.id_satuan_kerja_penandatangan
+        (i) => i.id_satuan_organisasi === value.id_satuan_kerja_penandatangan
       )
 
-      const generatedNumber = GenerateLetterCodeNumber({
-        kode_depan: letterNumber?.kode_depan ?? '',
-        kode_belakang: letterNumber?.kode_belakang ?? '',
-        urutan_tahun: letterNumber?.urutan_tahun ?? 5,
-        urutan_bulan: letterNumber?.urutan_bulan ?? 4,
-        urutan_kode_depan: letterNumber?.urutan_kode_depan ?? 1,
-        urutan_kode_belakang: letterNumber?.urutan_kode_belakang ?? 2,
-        urutan_nomor_surat: letterNumber?.urutan_posisi_utama_no_surat ?? 3,
-        is_bulan: letterNumber?.is_perlu_bulan ?? false,
-        is_bulan_romawi: letterNumber?.is_bulan_romawi ?? false,
-        is_tahun: letterNumber?.is_perlu_tahun ?? false,
-        date: value.tanggal_surat,
-      }, value.nomor_urut_manual ?? '0001')
+      const generatedNumber = GenerateLetterCodeNumber(
+        {
+          kode_depan: letterNumber?.kode_depan ?? '',
+          kode_belakang: letterNumber?.kode_belakang ?? '',
+          urutan_tahun: letterNumber?.urutan_tahun ?? 5,
+          urutan_bulan: letterNumber?.urutan_bulan ?? 4,
+          urutan_kode_depan: letterNumber?.urutan_kode_depan ?? 1,
+          urutan_kode_belakang: letterNumber?.urutan_kode_belakang ?? 2,
+          urutan_nomor_surat: letterNumber?.urutan_posisi_utama_no_surat ?? 3,
+          is_bulan: letterNumber?.is_perlu_bulan ?? false,
+          is_bulan_romawi: letterNumber?.is_bulan_romawi ?? false,
+          is_tahun: letterNumber?.is_perlu_tahun ?? false,
+          date: value.tanggal_surat,
+        },
+        value.nomor_urut_manual ?? '0001'
+      )
 
       const data = {
         ...value,
@@ -101,9 +109,14 @@ const SuratKeteranganAktifKembaliPage = () => {
         kode_jenjang: value.kode_jenjang ?? '',
         semester_masuk: value.semester ?? 0,
         kop_surat: selectedHeader ?? ({} as ILetterHeader),
+        nama_jenis_template: template?.nama_jenis_template,
       } as unknown as ISKAKLetter
 
-      const pdfDefinition = GenerateLetterSKAK({ logo: logoBase64, data, header: selectedHeader ?? ({} as ILetterHeader) })
+      const pdfDefinition = GenerateLetterSKAK({
+        logo: logoBase64,
+        data,
+        header: selectedHeader ?? ({} as ILetterHeader),
+      })
       const blob = await pdfmake.createPdf(pdfDefinition).getBlob()
       const url = URL.createObjectURL(blob)
       cleanupPdfUrl()

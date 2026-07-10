@@ -19,7 +19,11 @@ import { RichText } from '@/components/common/richtext'
 import type { TResolverSKCAM } from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganCutiAkademik/data/resolver.tsx'
 import { InputRadio } from '@/components/common/form/InputRadio.tsx'
 import TextAreaInput from '@/components/common/form/textAreaInput.tsx'
-import type { ILetterTemplateType } from '@/pages/modules/E-Office/Letter-Generation/create-letter/hook'
+import {
+  type ILetterTemplateType,
+  UseGetPeriodeCuti,
+} from '@/pages/modules/E-Office/Letter-Generation/create-letter/hook'
+import { useEffect } from 'react'
 
 interface Props {
   loading: boolean
@@ -54,6 +58,11 @@ const FormSuratKeteranganCutiAkademik = (props: Props) => {
     formValues.id_satuan_kerja_penandatangan
   )
   const { letterHeader } = UseGetLetterHeaderRef()
+  const { periode } = UseGetPeriodeCuti({
+    periode: form.watch('periode_cuti') ? form.watch('periode_cuti').toString() : '',
+    semester_cuti: form.watch('semester_cuti'),
+    tahun_pengajuan: form.watch('tahun_pengajuan'),
+  })
   const { letterNumber } = UseGetLetterNumberAutomatic({
     page: '0',
     limit: '0',
@@ -62,6 +71,16 @@ const FormSuratKeteranganCutiAkademik = (props: Props) => {
     page: '0',
     limit: '0',
   })
+
+  useEffect(() => {
+    if (periode) {
+      console.log(periode)
+      form.setValue(
+        'tahun_akademik',
+        `${periode.tahun_akademik_mulai} s.d ${periode.tahun_akademik_selesai}`
+      )
+    }
+  }, [periode])
 
   return (
     <>
@@ -265,18 +284,7 @@ const FormSuratKeteranganCutiAkademik = (props: Props) => {
                   {form.watch('Fakultas') ?? '-'}
                   <p>Jenjang *</p>
                   {form.watch('jenjang') ?? '-'}
-                  <p>Semester *</p>
-                  {form.watch('semester') ?? '-'}
                 </div>
-                <TextInput
-                  name={'tahun_akademik'}
-                  form={form}
-                  label={'Tahun Akademik'}
-                  placeholder={'Tahun Akademik'}
-                  htmlFor={'tahun_akademik'}
-                  isRow
-                  isRequired
-                />
               </CardContent>
             </Card>
 
@@ -284,6 +292,16 @@ const FormSuratKeteranganCutiAkademik = (props: Props) => {
               <CardContent className={'p-2 space-y-4'}>
                 <CardTitle>3. Informasi Cuti</CardTitle>
                 <div className="space-y-4">
+                  <TextInput
+                    name={'tahun_pengajuan'}
+                    form={form}
+                    className={'w-1/2'}
+                    label={'Tahun Pengajuan'}
+                    placeholder={'Tahun Pengajuan'}
+                    type={'number'}
+                    isRow
+                    isRequired
+                  />
                   <InputRadio
                     form={form}
                     name={'semester_cuti'}
@@ -295,16 +313,6 @@ const FormSuratKeteranganCutiAkademik = (props: Props) => {
                     isRow
                     isRequired
                   />
-                  <TextInput
-                    form={form}
-                    name={'tahun_akademik'}
-                    label={'Tahun Akademik'}
-                    placeholder={'Tahun Akademik'}
-                    htmlFor={'tahun_akademik'}
-                    isRequired
-                    isRow
-                  />
-
                   <div className={'flex items-center gap-2'}>
                     <TextInput
                       name={'periode_cuti'}
@@ -320,6 +328,25 @@ const FormSuratKeteranganCutiAkademik = (props: Props) => {
                     />
                     <p>Semester</p>
                   </div>
+                  <TextInput
+                    form={form}
+                    isDisabled
+                    name={'tahun_akademik'}
+                    label={'Tahun Akademik'}
+                    placeholder={'Tahun Akademik'}
+                    htmlFor={'tahun_akademik'}
+                    isRequired
+                    isRow
+                  />
+                  <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
+                    <div />
+                    <div className={'flex items-center gap-2 text-sm text-gray-500'}>
+                      {periode &&
+                        periode?.semester_list &&
+                        periode?.semester_list?.map((row, k) => <p key={k}>{row?.label}</p>)}
+                    </div>
+                  </div>
+
                   <TextAreaInput
                     form={form}
                     name={'alasan_cuti'}

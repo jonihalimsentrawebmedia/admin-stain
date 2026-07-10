@@ -285,7 +285,7 @@ const ReturnColumns = ({
                 form.setValue('Fakultas', data?.nama_fakultas ?? '')
                 form.setValue('jenjang', data?.nama_jenjang_pendidikan ?? '')
                 form.setValue('kode_jenjang', data?.kode_jenjang_pendidikan ?? '')
-                form.setValue('semester', data?.semester_masuk ?? '')
+                // form.setValue('semester', data?.semester_masuk ?? '')
                 setOpen(!open)
               }}
               className={'text-white'}

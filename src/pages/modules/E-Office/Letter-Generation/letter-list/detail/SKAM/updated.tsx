@@ -52,7 +52,7 @@ const UpdateSuratKeteranganAktifMahasiswaPage = () => {
         prodi: letter?.nama_prodi,
         Fakultas: letter?.nama_fakultas,
         jenjang: letter?.nama_jenjang,
-        semester: letter?.semester_masuk,
+        semester: letter?.semester,
       })
     }
   }, [letter])

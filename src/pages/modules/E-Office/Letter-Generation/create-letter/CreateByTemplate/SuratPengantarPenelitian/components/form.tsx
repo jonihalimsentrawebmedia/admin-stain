@@ -10,7 +10,6 @@ import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan
 import { Card, CardContent, CardTitle } from '@/components/ui/card.tsx'
 import SelectTemplateText from '@/pages/modules/E-Office/Letter-Generation/create-letter/component/selectTemplate.tsx'
 import { RichText } from '@/components/common/richtext'
-import DialogSelectStudents from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifMahasiswa/components/selectStudent.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import DialogHumanResources from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifMahasiswa/components/selectSDM.tsx'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
@@ -20,6 +19,7 @@ import { ReturnOrderData } from '@/pages/modules/E-Office/Letter-Generation/crea
 import TextAreaInput from '@/components/common/form/textAreaInput.tsx'
 import { InputCheckbox } from '@/components/common/form/InputCheckbox.tsx'
 import type { TResolverSPP } from '../data/resolver.tsx'
+import SelectMultiStudent from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPermohonanMagangPKL/components/SelectMultiStudent.tsx'
 
 interface Props {
   loading: boolean
@@ -276,19 +276,20 @@ const FormSuratPengantarPenelitian = (props: Props) => {
             <Card className={'p-2'}>
               <CardContent className={'p-2 space-y-4 w-full'}>
                 <CardTitle className={'text-xl flex items-center gap-1.5'}>2. Mahasiswa</CardTitle>
-                <DialogSelectStudents form={form} />
-                <div className="grid grid-cols-[12rem_1fr] gap-5">
-                  <p>Nama *</p>
-                  {form.watch('nama_mahasiswa') ?? '-'}
-                  <p>NPM/NIM *</p>
-                  {form.watch('nim') ?? '-'}
-                  <p>Program Studi *</p>
-                  {form.watch('prodi') ?? '-'}
-                  <p>Fakultas *</p>
-                  {form.watch('Fakultas') ?? '-'}
-                  <p>Jenjang *</p>
-                  {form.watch('jenjang') ?? '-'}
-                </div>
+                <SelectMultiStudent form={form} />
+                {/*<DialogSelectStudents form={form} />*/}
+                {/*<div className="grid grid-cols-[12rem_1fr] gap-5">*/}
+                {/*  <p>Nama *</p>*/}
+                {/*  {form.watch('nama_mahasiswa') ?? '-'}*/}
+                {/*  <p>NPM/NIM *</p>*/}
+                {/*  {form.watch('nim') ?? '-'}*/}
+                {/*  <p>Program Studi *</p>*/}
+                {/*  {form.watch('prodi') ?? '-'}*/}
+                {/*  <p>Fakultas *</p>*/}
+                {/*  {form.watch('Fakultas') ?? '-'}*/}
+                {/*  <p>Jenjang *</p>*/}
+                {/*  {form.watch('jenjang') ?? '-'}*/}
+                {/*</div>*/}
               </CardContent>
             </Card>
 

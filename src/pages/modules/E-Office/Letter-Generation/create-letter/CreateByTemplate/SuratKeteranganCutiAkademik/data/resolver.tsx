@@ -19,6 +19,7 @@ export const ResolverSKCAM = z.object({
   semester: z.number().optional().nullable(),
 
   // periode cuti
+  tahun_pengajuan: z.string({ error: 'Tahun Pengajuan harus diisi' }),
   semester_cuti: z.string({ error: 'Semester Cuti harus diisi' }),
   tahun_akademik: z.string({ error: 'Tahun Akademik harus diisi' }),
   periode_cuti: z.number({ error: 'Periode Cuti harus diisi' }),

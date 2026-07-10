@@ -74,3 +74,29 @@ export const UseGetYearLevel = () => {
 
   return { yearLevel: queryData ?? [], loading }
 }
+
+interface ActiveProps {
+  tahun: string
+  semester: number
+  semester_aktif: number
+  label: string
+}
+
+export const UseGetStudentActiveSemester = (id_student?: string) => {
+  const { data, isLoading, isFetching } = useQuery<ActiveProps[]>({
+    queryKey: ['student-active-semester', id_student],
+    enabled: !!id_student,
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get(`/eoffice/mahasiswa/mahasiswa-list-semester-aktif/${id_student}`).then(
+        (res) => res.data.data
+      ),
+  })
+
+  const loading = isLoading || isFetching
+
+  return {
+    ActiveSemester: data,
+    loading,
+  }
+}

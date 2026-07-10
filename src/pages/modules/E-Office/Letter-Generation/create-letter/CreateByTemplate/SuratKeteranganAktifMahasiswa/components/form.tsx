@@ -19,6 +19,7 @@ import SelectTemplateText from '@/pages/modules/E-Office/Letter-Generation/creat
 import { RichText } from '@/components/common/richtext'
 import type { TResolverSKAM } from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifMahasiswa/data/resolver.tsx'
 import type { ILetterTemplateType } from '@/pages/modules/E-Office/Letter-Generation/create-letter/hook'
+import { UseGetStudentActiveSemester } from '@/pages/modules/E-Office/students/student-data/hooks'
 
 interface Props {
   loading: boolean
@@ -49,6 +50,7 @@ const FormSuratKeteranganAktifMahasiswa = (props: Props) => {
     formValues.id_satuan_kerja_penandatangan
   )
   const { letterHeader } = UseGetLetterHeaderRef()
+  const { ActiveSemester } = UseGetStudentActiveSemester(form.watch('id_mahasiswa'))
   const { letterNumber } = UseGetLetterNumberAutomatic({
     page: '0',
     limit: '0',
@@ -261,18 +263,30 @@ const FormSuratKeteranganAktifMahasiswa = (props: Props) => {
                   {form.watch('Fakultas') ?? '-'}
                   <p>Jenjang *</p>
                   {form.watch('jenjang') ?? '-'}
-                  <p>Semester *</p>
-                  {form.watch('semester') ?? '-'}
                 </div>
-                <TextInput
-                  name={'tahun_akademik'}
+                <SelectBasicInput
                   form={form}
+                  name={'tahun_akademik'}
                   label={'Tahun Akademik'}
+                  isDisabled={!form.watch('id_mahasiswa')}
                   placeholder={'Tahun Akademik'}
-                  htmlFor={'tahun_akademik'}
+                  data={
+                    ActiveSemester?.map((row) => ({
+                      label: row?.label,
+                      value: row?.label,
+                    })) ?? []
+                  }
+                  fx={(e) => {
+                    const find = ActiveSemester?.find((row) => row?.label === e.value)
+                    form.setValue('semester', Number(find?.semester_aktif))
+                  }}
                   isRow
                   isRequired
                 />
+                <div className="grid grid-cols-[12rem_1fr] gap-5">
+                  <p>Semester *</p>
+                  <p>{form.watch('semester') ?? '-'}</p>
+                </div>
               </CardContent>
             </Card>
 

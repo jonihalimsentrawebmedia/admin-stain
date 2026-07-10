@@ -222,8 +222,8 @@ const FormSuratKeteranganBebasKeuangan = (props: Props) => {
                   {form.watch('Fakultas') ?? '-'}
                   <p>Jenjang *</p>
                   {form.watch('jenjang') ?? '-'}
-                  <p>Semester *</p>
-                  {form.watch('semester') ?? '-'}
+                  {/*<p>Semester *</p>*/}
+                  {/*{form.watch('semester') ?? '-'}*/}
                 </div>
               </CardContent>
             </Card>

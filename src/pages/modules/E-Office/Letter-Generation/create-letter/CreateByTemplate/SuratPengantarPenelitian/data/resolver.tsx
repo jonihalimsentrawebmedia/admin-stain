@@ -17,14 +17,7 @@ export const ResolverSPP = z.object({
   pembuka: z.string({ error: 'Pembuka harus diisi' }),
 
   //   mahasiswa
-  id_mahasiswa: z.string({ error: 'Mahasiswa harus diisi' }),
-  nama_mahasiswa: z.string().optional().nullable(),
-  nim: z.string().optional().nullable(),
-  prodi: z.string().optional().nullable(),
-  Fakultas: z.string().optional().nullable(),
-  jenjang: z.string().optional().nullable(),
-  kode_jenjang: z.string().optional().nullable(),
-  semester: z.number().optional().nullable(),
+  id_mahasiswa: z.array(z.string({ error: 'Mahasiswa harus diisi' })),
 
   //penelitian
   judul_penelitian: z.string({ error: 'Judul Penelitian harus diisi' }),
