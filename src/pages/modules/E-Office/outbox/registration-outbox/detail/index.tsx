@@ -59,83 +59,83 @@ export const DetailOutboxRegistration = () => {
 
             <hr className={'my-2 border-green-400'} />
 
-            <div className="grid grid-cols-2 w-fit gap-5 gap-y-4">
-              <div className={'flex items-center gap-2.5 col-span-2'}>
-                <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+              <div className={'flex items-center gap-2.5 col-span-1 sm:col-span-2'}>
+                <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                   <RiBuildingLine className={'size-5 text-primary'} />
                 </div>
-                <div className="flex flex-col col-span-2">
-                  <p className="text-gray-500">Satuan Kerja: </p>
-                  <p>{detailOutbox?.nama_unit}</p>
+                <div className="flex flex-col min-w-0">
+                  <p className="text-gray-500 text-sm">Satuan Kerja: </p>
+                  <p className="truncate">{detailOutbox?.nama_unit}</p>
                 </div>
               </div>
 
               <div className={'flex items-center gap-2.5 col-span-1'}>
-                <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                   <IoShieldCheckmarkSharp className={'size-5 text-primary'} />
                 </div>
-                <div className="flex flex-col">
-                  <p className="text-gray-500">Sifat Surat: </p>
-                  <p>{detailOutbox?.nama_sifat_surat}</p>
+                <div className="flex flex-col min-w-0">
+                  <p className="text-gray-500 text-sm">Sifat Surat: </p>
+                  <p className="truncate">{detailOutbox?.nama_sifat_surat}</p>
                 </div>
               </div>
 
               <div className={'flex items-center gap-2.5 col-span-1'}>
-                <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                   <FaRegFileAlt className={'size-5 text-primary'} />
                 </div>
-                <div className="flex flex-col">
-                  <p className="text-gray-500">Jenis Surat: </p>
-                  <p>{detailOutbox?.nama_jenis_surat}</p>
+                <div className="flex flex-col min-w-0">
+                  <p className="text-gray-500 text-sm">Jenis Surat: </p>
+                  <p className="truncate">{detailOutbox?.nama_jenis_surat}</p>
                 </div>
               </div>
 
               <div className={'flex items-center gap-2.5 col-span-1'}>
-                <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                   <GoLaw className={'size-5 text-primary'} />
                 </div>
-                <div className="flex flex-col">
-                  <p className="text-gray-500">Klasifikasi Surat: </p>
-                  <p>{detailOutbox?.nama_klasifikasi_surat}</p>
+                <div className="flex flex-col min-w-0">
+                  <p className="text-gray-500 text-sm">Klasifikasi Surat: </p>
+                  <p className="truncate">{detailOutbox?.nama_klasifikasi_surat}</p>
                 </div>
               </div>
 
               <div className={'flex items-center gap-2.5 col-span-1'}>
-                <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                   <FaRegUser className={'size-5 text-primary'} />
                 </div>
-                <div className="flex flex-col">
-                  <p className="text-gray-500">Penandatangan Surat: </p>
-                  <p>{detailOutbox?.nama_penandatangan}</p>
+                <div className="flex flex-col min-w-0">
+                  <p className="text-gray-500 text-sm">Penandatangan Surat: </p>
+                  <p className="truncate">{detailOutbox?.nama_penandatangan}</p>
                 </div>
               </div>
 
               <div className={'flex items-center gap-2.5 col-span-1'}>
-                <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                   <MdMailOutline className={'size-5 text-primary'} />
                 </div>
-                <div className="flex flex-col">
-                  <p className="text-gray-500">Kepada: </p>
-                  <p>{detailOutbox?.surat_kepada}</p>
+                <div className="flex flex-col min-w-0">
+                  <p className="text-gray-500 text-sm">Kepada: </p>
+                  <p className="truncate">{detailOutbox?.surat_kepada}</p>
                 </div>
               </div>
 
               <div className={'flex items-center gap-2.5 col-span-1'}>
-                <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                   <FaHashtag className={'size-5 text-primary'} />
                 </div>
-                <div className="flex flex-col">
-                  <p className="text-gray-500">Nomor Surat: </p>
-                  <p>{detailOutbox?.nomor_surat}</p>
+                <div className="flex flex-col min-w-0">
+                  <p className="text-gray-500 text-sm">Nomor Surat: </p>
+                  <p className="truncate">{detailOutbox?.nomor_surat}</p>
                 </div>
               </div>
 
               <div className={'flex items-center gap-2.5 col-span-1'}>
-                <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                   <FaRegCalendarAlt className={'size-5 text-primary'} />
                 </div>
-                <div className="flex flex-col">
-                  <p className="text-gray-500">Tanggal: </p>
+                <div className="flex flex-col min-w-0">
+                  <p className="text-gray-500 text-sm">Tanggal: </p>
                   <p>
                     {detailOutbox?.tanggal_surat
                       ? format(detailOutbox?.tanggal_surat, 'dd/MM/yyyy')
@@ -145,41 +145,41 @@ export const DetailOutboxRegistration = () => {
               </div>
 
               <div className={'flex items-center gap-2.5 col-span-1'}>
-                <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                   <LuClipboard className={'size-5 text-primary'} />
                 </div>
-                <div className="flex flex-col">
-                  <p className="text-gray-500">Nomor Agenda: </p>
+                <div className="flex flex-col min-w-0">
+                  <p className="text-gray-500 text-sm">Nomor Agenda: </p>
                   <p>{detailOutbox?.nomor_agenda ?? '-'}</p>
                 </div>
               </div>
 
-              <div className={'flex items-center gap-2.5 col-span-2'}>
-                <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+              <div className={'flex items-center gap-2.5 col-span-1 sm:col-span-2'}>
+                <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                   <BsTag className={'size-5 text-primary'} />
                 </div>
-                <div className="flex flex-col col-span-2">
-                  <p className="text-gray-500">Perihal: </p>
+                <div className="flex flex-col min-w-0">
+                  <p className="text-gray-500 text-sm">Perihal: </p>
                   <p>{detailOutbox?.perihal ?? '-'}</p>
                 </div>
               </div>
 
-              <div className={'flex items-center gap-2.5 col-span-2'}>
-                <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+              <div className={'flex items-center gap-2.5 col-span-1 sm:col-span-2'}>
+                <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                   <TbShare3 className={'size-5 text-primary'} />
                 </div>
-                <div className="flex flex-col gap-1.5 col-span-2">
-                  <p className="text-gray-500">Tebusan: </p>
+                <div className="flex flex-col gap-1.5 min-w-0">
+                  <p className="text-gray-500 text-sm">Tembusan: </p>
                   <p>{detailOutbox?.tembusan ?? '-'}</p>
                 </div>
               </div>
 
-              <div className={'flex items-center gap-2.5 col-span-2'}>
-                <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+              <div className={'flex items-center gap-2.5 col-span-1 sm:col-span-2'}>
+                <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                   <FaRegFileLines className={'size-5 text-primary'} />
                 </div>
-                <div className="flex flex-col gap-1.5 col-span-2">
-                  <p className="text-gray-500">Ringkasan Surat: </p>
+                <div className="flex flex-col gap-1.5 min-w-0">
+                  <p className="text-gray-500 text-sm">Ringkasan Surat: </p>
                   <p>{detailOutbox?.ringkasan ?? '-'}</p>
                 </div>
               </div>
@@ -202,33 +202,33 @@ export const DetailOutboxRegistration = () => {
 
               <hr className={'my-2 border-green-400'} />
 
-              <div className="grid grid-cols-4 w-fit gap-5 gap-y-4">
-                <div className={'flex items-center gap-2.5 col-span-2'}>
-                  <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+              <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 sm:gap-5">
+                <div className={'flex items-center gap-2.5 col-span-1 sm:col-span-2'}>
+                  <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                     <FaRegFileAlt className={'size-5 text-primary'} />
                   </div>
-                  <div className="flex flex-col col-span-4">
-                    <p className="text-gray-500">Nama Kegiatan: </p>
+                  <div className="flex flex-col min-w-0">
+                    <p className="text-gray-500 text-sm">Nama Kegiatan: </p>
                     <p>{detailOutbox?.nama_kegiatan}</p>
                   </div>
                 </div>
 
-                <div className={'flex items-center gap-2.5 col-span-2'}>
-                  <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                <div className={'flex items-center gap-2.5 col-span-1 sm:col-span-2'}>
+                  <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                     <IoChatboxOutline className={'size-5 text-primary'} />
                   </div>
-                  <div className="flex flex-col col-span-4">
-                    <p className="text-gray-500">Keterangan: </p>
+                  <div className="flex flex-col min-w-0">
+                    <p className="text-gray-500 text-sm">Keterangan: </p>
                     <p>{detailOutbox?.keterangan_agenda ?? '-'}</p>
                   </div>
                 </div>
 
                 <div className={'flex items-center gap-2.5 col-span-1'}>
-                  <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                  <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                     <FaRegCalendarAlt className={'size-5 text-primary'} />
                   </div>
-                  <div className="flex flex-col col-span-1">
-                    <p className="text-gray-500">Tanggal Mulai: </p>
+                  <div className="flex flex-col min-w-0">
+                    <p className="text-gray-500 text-sm">Tanggal Mulai: </p>
                     <p>
                       {detailOutbox?.tanggal_mulai
                         ? format(detailOutbox?.tanggal_mulai, 'dd/MM/yyyy')
@@ -238,11 +238,11 @@ export const DetailOutboxRegistration = () => {
                 </div>
 
                 <div className={'flex items-center gap-2.5 col-span-1'}>
-                  <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                  <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                     <FaRegClock className={'size-5 text-primary'} />
                   </div>
-                  <div className="flex flex-col col-span-1">
-                    <p className="text-gray-500">Jam Mulai: </p>
+                  <div className="flex flex-col min-w-0">
+                    <p className="text-gray-500 text-sm">Jam Mulai: </p>
                     <p>
                       {detailOutbox?.tanggal_mulai
                         ? format(detailOutbox?.tanggal_mulai, 'HH:mm')
@@ -252,11 +252,11 @@ export const DetailOutboxRegistration = () => {
                 </div>
 
                 <div className={'flex items-center gap-2.5 col-span-1'}>
-                  <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                  <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                     <FaRegCalendarAlt className={'size-5 text-primary'} />
                   </div>
-                  <div className="flex flex-col col-span-1">
-                    <p className="text-gray-500">Tanggal Selesai: </p>
+                  <div className="flex flex-col min-w-0">
+                    <p className="text-gray-500 text-sm">Tanggal Selesai: </p>
                     <p>
                       {detailOutbox?.tanggal_selesai
                         ? format(detailOutbox?.tanggal_selesai, 'dd/MM/yyyy')
@@ -266,11 +266,11 @@ export const DetailOutboxRegistration = () => {
                 </div>
 
                 <div className={'flex items-center gap-2.5 col-span-1'}>
-                  <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                  <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                     <FaRegClock className={'size-5 text-primary'} />
                   </div>
-                  <div className="flex flex-col col-span-1">
-                    <p className="text-gray-500">Jam Selesai: </p>
+                  <div className="flex flex-col min-w-0">
+                    <p className="text-gray-500 text-sm">Jam Selesai: </p>
                     <p>
                       {detailOutbox?.tanggal_selesai
                         ? format(detailOutbox?.tanggal_selesai, 'HH:mm')
@@ -279,22 +279,22 @@ export const DetailOutboxRegistration = () => {
                   </div>
                 </div>
 
-                <div className={'flex items-center gap-2.5 col-span-4'}>
-                  <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                <div className={'flex items-center gap-2.5 col-span-1 sm:col-span-4'}>
+                  <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                     <GrLocation className={'size-5 text-primary'} />
                   </div>
-                  <div className="flex flex-col">
-                    <p className="text-gray-500">Tempat / Lokasi: </p>
+                  <div className="flex flex-col min-w-0">
+                    <p className="text-gray-500 text-sm">Tempat / Lokasi: </p>
                     <p>{detailOutbox?.tempat}</p>
                   </div>
                 </div>
 
-                <div className={'flex items-center gap-2.5 col-span-4'}>
-                  <div className={'bg-blue-200 p-2 rounded-lg w-fit'}>
+                <div className={'flex items-center gap-2.5 col-span-1 sm:col-span-4'}>
+                  <div className={'bg-blue-200 p-2 rounded-lg w-fit shrink-0'}>
                     <BsBell className={'size-5 text-primary'} />
                   </div>
-                  <div className="flex flex-col col-span-4">
-                    <p className="text-gray-500">Pengingat: </p>
+                  <div className="flex flex-col min-w-0">
+                    <p className="text-gray-500 text-sm">Pengingat: </p>
                     <p>{detailOutbox?.nama_waktu_pengingat_agenda} Menit</p>
                   </div>
                 </div>
@@ -318,16 +318,16 @@ export const DetailOutboxRegistration = () => {
 
               <hr className={'my-2 border-green-400'} />
 
-              <div className="grid grid-cols-3 gap-5 mt-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5 mt-4">
                 {detailOutbox?.lampiran?.map((item, index) => (
                   <Link
                     target={'_blank'}
                     to={item?.lampiran_url}
                     key={index}
-                    className="flex items-center gap-1.5 border p-2 rounded-md bg-blue-200 hover:bg-primary hover:text-white"
+                    className="flex items-center gap-1.5 border p-2 rounded-md bg-blue-200 hover:bg-primary hover:text-white truncate"
                   >
-                    <FaFile />
-                    {item?.nama_lampiran}
+                    <FaFile className="shrink-0" />
+                    <span className="truncate">{item?.nama_lampiran}</span>
                   </Link>
                 ))}
               </div>
@@ -363,14 +363,14 @@ export const DetailOutboxRegistration = () => {
               <div className={'flex flex-col gap-1.5'}>
                 {detailOutbox?.pejabat?.map((row, index) => (
                   <Fragment key={index}>
-                    <div className="flex items-start gap-4">
-                      <div className={'flex flex-col p-4 border w-full rounded-lg'}>
+                    <div className="flex flex-col sm:flex-row items-start gap-4">
+                      <div className={'flex flex-col p-3 sm:p-4 border w-full rounded-lg'}>
                         <div className="flex items-center justify-between gap-2">
                           <div className="flex items-center gap-1.5">
                             <div className={'rounded-full p-2 bg-blue-200'}>
                               <MdMailOutline />
                             </div>
-                            <p className="text-sm">{row?.status?.split('_').join(' ')}</p>
+                            <p className="text-xs sm:text-sm">{row?.status?.split('_').join(' ')}</p>
                           </div>
                           <div
                             className={
@@ -381,26 +381,26 @@ export const DetailOutboxRegistration = () => {
                           </div>
                         </div>
 
-                        <div className="bg-blue-100 p-4 border-primary mt-4 rounded border flex items-center gap-2.5">
+                        <div className="bg-blue-100 p-3 sm:p-4 border-primary mt-4 rounded border flex items-center gap-2.5">
                           <img
                             src={row?.gambar_sdm ?? '/img/noimg.png'}
                             alt={row?.nama_sdm}
-                            className={'w-16 h-16 rounded-full object-cover'}
+                            className={'w-12 sm:w-16 h-12 sm:h-16 rounded-full object-cover shrink-0'}
                           />
-                          <div>
-                            <p className="text-lg font-semibold">{row?.nama_sdm}</p>
-                            <p className={'text-primary'}>{row?.status?.split('_').join(' ')}</p>
+                          <div className="min-w-0">
+                            <p className="text-sm sm:text-lg font-semibold truncate">{row?.nama_sdm}</p>
+                            <p className={'text-primary text-xs sm:text-sm'}>{row?.status?.split('_').join(' ')}</p>
                           </div>
                         </div>
                       </div>
 
-                      <div className={'flex flex-col p-4 border w-full rounded-lg'}>
+                      <div className={'flex flex-col p-3 sm:p-4 border w-full rounded-lg'}>
                         <div className="flex items-center justify-between gap-2">
                           <div className="flex items-center gap-1.5">
                             <div className={'rounded-full p-2 bg-blue-200'}>
                               <FaCheck className={'size-3'} />
                             </div>
-                            <p className="text-sm">Dibaca</p>
+                            <p className="text-xs sm:text-sm">Dibaca</p>
                           </div>
                           <div
                             className={
@@ -410,14 +410,14 @@ export const DetailOutboxRegistration = () => {
                             0 Orang
                           </div>
                         </div>
-                        <div className="bg-blue-100 p-4 border-primary mt-4 rounded border flex items-center gap-2.5">
+                        <div className="bg-blue-100 p-3 sm:p-4 border-primary mt-4 rounded border flex items-center gap-2.5">
                           {row?.komentar ? (
                             <></>
                           ) : (
                             <>
                               <div className="flex flex-col">
-                                <IoFileTrayOutline className={'size-10'} />
-                                <p className="text-gray-500">Belum Ada Yang Baca</p>
+                                <IoFileTrayOutline className={'size-8 sm:size-10'} />
+                                <p className="text-gray-500 text-sm">Belum Ada Yang Baca</p>
                               </div>
                             </>
                           )}

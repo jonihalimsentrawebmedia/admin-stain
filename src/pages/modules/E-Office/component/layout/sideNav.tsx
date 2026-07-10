@@ -89,7 +89,7 @@ export function SideNavEOffice({ collapsed }: Props) {
     <aside
       className={cn(
         'bg-primary text-white h-full transition-all duration-300',
-        'absolute z-50 lg:relative',
+        'absolute z-[100] lg:relative',
         collapsed ? 'w-0 hidden lg:block lg:w-14' : 'w-72',
         collapsed ? '' : 'pl-5 pr-2',
         'pt-4 pb-3 flex flex-col'

@@ -32,7 +32,7 @@ export const DialogBasic = (props: Props) => {
     <>
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent
-          className={clsx(className, 'overflow-y-auto w-full')}
+          className={clsx(className, 'overflow-y-auto w-full max-h-[85dvh] p-4 sm:p-6')}
           onInteractOutside={(event) => {
             if (disableOutsideDialog) {
               event.preventDefault()
@@ -40,7 +40,7 @@ export const DialogBasic = (props: Props) => {
           }}
         >
           <DialogHeader>
-            <DialogTitle>{title}</DialogTitle>
+            <DialogTitle className="text-base sm:text-lg">{title}</DialogTitle>
             <DialogDescription>{description}</DialogDescription>
           </DialogHeader>
           {children}

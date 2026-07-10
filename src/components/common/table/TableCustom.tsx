@@ -115,7 +115,7 @@ const TableCustom = (props: Props) => {
   return (
     <div className="flex flex-col w-full gap-4 ">
       {isShowFilter && (
-        <div className="flex flex-col gap-4 md:flex-row md:items-center  justify-between">
+        <div className="flex flex-col gap-4 md:flex-row md:items-center justify-between">
           <div className={`flex w-full items-end gap-4 ${addFilter ? '' : 'justify-between'}`}>
             {addFilter}
             <Search
@@ -162,6 +162,7 @@ const TableCustom = (props: Props) => {
         </div>
       )}
 
+      <div className="overflow-x-auto">
       <Table className={`${className}`}>
         <TableHeader>
           {table?.getHeaderGroups()?.map((headerGroup) => (
@@ -235,8 +236,9 @@ const TableCustom = (props: Props) => {
           isShowFooterTable && footerContent && <>{footerContent}</>
         )}
       </Table>
+      </div>
       {isShowPagination && (
-        <div className="flex gap-4 items-center justify-between">
+        <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
           <div>
             {isShowLimit ? (
               <SetLimitList

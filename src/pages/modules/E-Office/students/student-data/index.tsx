@@ -4,10 +4,13 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { BiPlus } from 'react-icons/bi'
 import { UseGetStudentData, UseGetYearLevel } from './hooks'
 import { ColumnsStudentData } from './data/columns'
-import TableCustom from '@/components/common/table/TableCustom.tsx'
 import FilterSelect from '@/components/common/filter/filterBasic.tsx'
 import { UseGetAdmissionProcess } from '@/pages/modules/E-Office/students/admission-process/hooks'
 import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan-unit/hooks.tsx'
+import { ButtonStatus } from '@/pages/modules/E-Office/students/student-data/component/ButtonStatus.tsx'
+import { TableBasicState } from '@/components/common/table/tableUsestate.tsx'
+import TablePaginate from '@/components/common/table/TablePagination.tsx'
+import { useState } from 'react'
 
 const ListStudentData = () => {
   const [searchParams] = useSearchParams()
@@ -22,6 +25,7 @@ const ListStudentData = () => {
   const columns = ColumnsStudentData()
   const navigate = useNavigate()
   const { yearLevel } = UseGetYearLevel()
+  const [id_student, setId_student] = useState<string[]>([])
   const { admissionProcess } = UseGetAdmissionProcess({ page: '0', limit: '0' })
   const { loading, studentData, meta } = UseGetStudentData({
     limit,
@@ -39,6 +43,8 @@ const ListStudentData = () => {
     kelompok: 'PRODI',
     parent_id: id_fakultas,
   })
+
+  console.log(id_student)
 
   return (
     <>
@@ -116,14 +122,26 @@ const ListStudentData = () => {
           />
         </div>
 
-        <TableCustom
+        <div className="flex items-center justify-end">
+          <ButtonStatus list_id={id_student} />
+        </div>
+
+        <TableBasicState
           tdClassName={'bg-white'}
           thClassName={'bg-primary text-white'}
           data={studentData}
           columns={columns}
           loading={loading}
-          meta={meta}
+          rowIdKey={'id_mahasiswa'}
+          selected={id_student}
+          onSelectedRowsChange={(e) => {
+            setId_student(e)
+          }}
         />
+
+        <div className="flex items-center justify-end">
+          {meta && <TablePaginate length={meta?.total} meta={meta} />}
+        </div>
       </div>
     </>
   )

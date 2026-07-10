@@ -40,3 +40,35 @@ export interface IStudentData {
   nama_fakultas: string
   semester: string
 }
+
+export interface ILogStudentHistory {
+  id_mahasiswa_status_history: string;
+  id_mahasiswa: string;
+  id_satuan_organisasi: string;
+
+  // Status Lama
+  old_id_mahasiswa_status: string;
+  old_nama_status_mahasiswa: string;
+  old_tanggal_lulus: string | null;
+  old_semester_lulus: number | null;
+  old_tahun_lulus: string | null;
+
+  // Status Baru
+  new_id_mahasiswa_status: string;
+  new_nama_status_mahasiswa: string;
+  new_tanggal_lulus: string | null;
+  new_semester_lulus: number | null;
+  new_tahun_lulus: string | null;
+
+  // Informasi Perubahan
+  alasan: string | null;
+  changed_at: string;
+  changed_user: string;
+  nama_changed_user: string;
+
+  // Audit Trail
+  created_at: string;
+  created_user: string;
+  updated_at: string;
+  updated_user: string;
+}

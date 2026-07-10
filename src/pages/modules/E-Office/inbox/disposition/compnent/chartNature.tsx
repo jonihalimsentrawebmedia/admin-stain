@@ -39,7 +39,7 @@ export default function ChartNature({ data }: Props) {
 
   return (
     <Card className=" bg-white rounded">
-      <CardContent className="flex items-center gap-8 p-2">
+      <CardContent className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8 p-2">
         {/* Chart */}
         <ChartContainer
           config={{

@@ -138,7 +138,7 @@ const FormSuratPermohonanMagangPKL = (props: Props) => {
                   name={'id_kop_surat'}
                   label={'Pilih Kop Surat'}
                   placeholder={'Pilih Kop Surat'}
-                  className={'w-1/2'}
+                  className={'w-full md:w-1/2'}
                   usePortal
                   data={
                     letterHeader?.map((row) => ({
@@ -159,7 +159,7 @@ const FormSuratPermohonanMagangPKL = (props: Props) => {
                   </div>
                   Penomoran Surat
                 </CardTitle>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <SelectBasicInput
                     form={form}
                     name={'id_nomor_surat_otomatis'}
@@ -212,7 +212,7 @@ const FormSuratPermohonanMagangPKL = (props: Props) => {
                     form={form}
                     label={'Lampiran'}
                     placeholder={'Jumlah Lampiran'}
-                    className={'w-1/2'}
+                    className={'w-full md:w-1/2'}
                     htmlFor={'lampiran'}
                     name={'lampiran'}
                     type={'number'}
@@ -257,7 +257,7 @@ const FormSuratPermohonanMagangPKL = (props: Props) => {
                   placeholder={'Instansi Pimpinan'}
                   htmlFor={'Instansi Pimpinan'}
                   inputClassName={'rounded'}
-                  className={'w-1/2'}
+                  className={'w-full md:w-1/2'}
                   isRow
                   isRequired
                 />
@@ -269,7 +269,7 @@ const FormSuratPermohonanMagangPKL = (props: Props) => {
                   placeholder={'Alamat Instansi '}
                   htmlFor={'Alamat'}
                   inputClassName={'rounded'}
-                  className={'w-1/2'}
+                  className={'w-full md:w-1/2'}
                   isRow
                   isRequired
                 />
@@ -280,7 +280,7 @@ const FormSuratPermohonanMagangPKL = (props: Props) => {
                   label={'Di '}
                   placeholder={'Cth: Ditempat'}
                   htmlFor={'di'}
-                  className={'w-1/2'}
+                  className={'w-full md:w-1/2'}
                   isRequired
                   isRow
                 />
@@ -302,7 +302,7 @@ const FormSuratPermohonanMagangPKL = (props: Props) => {
             <Card className={'p-2'}>
               <CardContent className={'p-2 space-y-4'}>
                 <CardTitle>2. Informasi Kegiatan</CardTitle>
-                <div className="grid grid-cols-2 gap-5 mt-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5 mt-5">
                   <TextInput
                     name={'tanggal_mulai'}
                     form={form}
@@ -322,7 +322,7 @@ const FormSuratPermohonanMagangPKL = (props: Props) => {
                     isRequired
                     isRow
                   />
-                  <div className="text-sm font-medium grid grid-cols-[12rem_1fr] gap-5">
+                  <div className="text-sm font-medium grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-5">
                     <p>Lama</p>
                     <p>: {getDuration()}</p>
                   </div>

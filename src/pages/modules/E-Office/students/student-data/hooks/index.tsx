@@ -2,7 +2,7 @@ import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import type { BasicProps } from '@/utils/globalType.ts'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
-import type { IStudentData } from '../data/types.ts'
+import type { ILogStudentHistory, IStudentData } from '../data/types.ts'
 
 interface props extends BasicProps {
   angkatan?: string
@@ -97,6 +97,24 @@ export const UseGetStudentActiveSemester = (id_student?: string) => {
 
   return {
     ActiveSemester: data,
+    loading,
+  }
+}
+
+export const UseGetStudentLogStatusActive = (id_mahasiswa: string) => {
+  const { data, isLoading, isFetching } = useQuery<ILogStudentHistory[]>({
+    queryKey: ['student-log-status'],
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient.get(`eoffice/mahasiswa/${id_mahasiswa}/status-history`).then(
+        (res) => res.data.data
+      ),
+  })
+
+  const loading = isLoading || isFetching
+
+  return {
+    logStatus: data,
     loading,
   }
 }

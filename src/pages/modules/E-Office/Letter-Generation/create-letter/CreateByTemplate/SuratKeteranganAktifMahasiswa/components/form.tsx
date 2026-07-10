@@ -117,7 +117,7 @@ const FormSuratKeteranganAktifMahasiswa = (props: Props) => {
                   name={'id_kop_surat'}
                   label={'Pilih Kop Surat'}
                   placeholder={'Pilih Kop Surat'}
-                  className={'w-1/2'}
+                  className={'w-full md:w-1/2'}
                   usePortal
                   data={
                     letterHeader?.map((row) => ({
@@ -138,7 +138,7 @@ const FormSuratKeteranganAktifMahasiswa = (props: Props) => {
                   </div>
                   Penomoran Surat
                 </CardTitle>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <SelectBasicInput
                     form={form}
                     name={'id_nomor_surat_otomatis'}
@@ -252,7 +252,7 @@ const FormSuratKeteranganAktifMahasiswa = (props: Props) => {
               <CardContent className={'p-2 space-y-4 w-full'}>
                 <CardTitle className={'text-xl flex items-center gap-1.5'}>2. Mahasiswa</CardTitle>
                 <DialogSelectStudents form={form} />
-                <div className="grid grid-cols-[12rem_1fr] gap-5">
+                <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-5">
                   <p>Nama *</p>
                   {form.watch('nama_mahasiswa') ?? '-'}
                   <p>NPM/NIM *</p>
@@ -283,7 +283,7 @@ const FormSuratKeteranganAktifMahasiswa = (props: Props) => {
                   isRow
                   isRequired
                 />
-                <div className="grid grid-cols-[12rem_1fr] gap-5">
+                <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-5">
                   <p>Semester *</p>
                   <p>{form.watch('semester') ?? '-'}</p>
                 </div>

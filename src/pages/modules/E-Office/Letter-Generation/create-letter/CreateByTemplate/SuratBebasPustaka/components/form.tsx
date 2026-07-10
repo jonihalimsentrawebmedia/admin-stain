@@ -141,7 +141,7 @@ const FormSuratBebasPustaka = (props: Props) => {
                   name={'id_kop_surat'}
                   label={'Pilih Kop Surat'}
                   placeholder={'Pilih Kop Surat'}
-                  className={'w-1/2'}
+                  className={'w-full md:w-1/2'}
                   usePortal
                   data={
                     letterHeader?.map((row) => ({
@@ -162,7 +162,7 @@ const FormSuratBebasPustaka = (props: Props) => {
                   </div>
                   Penomoran Surat
                 </CardTitle>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <SelectBasicInput
                     form={form}
                     name={'id_nomor_surat_otomatis'}
@@ -274,7 +274,7 @@ const FormSuratBebasPustaka = (props: Props) => {
               <CardContent className={'p-2 space-y-4 w-full'}>
                 <CardTitle className={'text-xl flex items-center gap-1.5'}>2. Mahasiswa</CardTitle>
                 <DialogSelectStudents form={form} />
-                <div className="grid grid-cols-[12rem_1fr] gap-5">
+                <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-5">
                   <p>Nama *</p>
                   {form.watch('nama_mahasiswa') ?? '-'}
                   <p>NPM/NIM *</p>
@@ -294,7 +294,7 @@ const FormSuratBebasPustaka = (props: Props) => {
             <Card className={'p-2'}>
               <CardContent className={'p-2 space-y-4'}>
                 <CardTitle>3. Ketentuan Bebas Pustaka</CardTitle>
-                <div className="grid grid-cols-[12rem_1fr] items-start gap-5 w-full">
+                <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] items-start gap-3 sm:gap-5 w-full">
                   <Label>Ketentuan</Label>
                   <div className="flex flex-col gap-2 w-full">
                     {ketentuanFields.map((field, index) => (
@@ -322,7 +322,7 @@ const FormSuratBebasPustaka = (props: Props) => {
                       </div>
                     ))}
                   </div>
-                  <p className="text-red-500 text-xs col-span-2 ml-[212px]">
+                  <p className="text-red-500 text-xs col-span-2 ">
                     NB: Isi Ketentuan untuk menambah list Ketentuan
                   </p>
                   <div>
@@ -341,7 +341,7 @@ const FormSuratBebasPustaka = (props: Props) => {
             <Card className={'p-2'}>
               <CardContent className={'p-2 space-y-4'}>
                 <CardTitle>4. Tujuan Pembuatan Surat</CardTitle>
-                <div className="grid grid-cols-[12rem_1fr] items-start gap-5 w-full">
+                <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] items-start gap-3 sm:gap-5 w-full">
                   <Label>Tujuan</Label>
                   <div className="flex flex-col gap-2 w-full">
                     {tujuanFields.map((field, index) => (
@@ -369,7 +369,7 @@ const FormSuratBebasPustaka = (props: Props) => {
                       </div>
                     ))}
                   </div>
-                  <p className="text-red-500 text-xs col-span-2 ml-[212px]">
+                  <p className="text-red-500 text-xs col-span-2 ">
                     NB: Isi Tujuan untuk menambah list Tujuan
                   </p>
                   <div>

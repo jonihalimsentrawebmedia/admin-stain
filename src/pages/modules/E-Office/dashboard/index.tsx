@@ -90,35 +90,35 @@ const DashboardEOfficePage = () => {
   return (
     <>
       <div className={'grid grid-cols-12 gap-4'}>
-        <div className="col-span-9">
-          <p className="text-2xl text-primary font-semibold">
+        <div className="col-span-12 lg:col-span-9">
+          <p className="text-xl sm:text-2xl text-primary font-semibold">
             Selamat Datang, {profileUser?.nama_lengkap} 👋
           </p>
-          <p>Berikut Ringkatan Aktivitas sis E-office Hari ini</p>
-          <div className="mt-4 grid grid-cols-4 gap-4">
+          <p>Berikut Ringkasan Aktivitas E-office Hari ini</p>
+          <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-4">
             {counts?.items?.map((row, k) => (
-              <div key={k} className={'bg-white shadow rounded p-4 space-y-1.5'}>
-                <div className="flex items-start gap-4">
+              <div key={k} className={'bg-white shadow rounded p-3 sm:p-4 space-y-1.5'}>
+                <div className="flex items-start gap-3 sm:gap-4">
                   {row?.label.includes('Surat Masuk') ? (
-                    <div className={'p-3 rounded w-fit bg-blue-100'}>
-                      <MdMailOutline className={'size-5 text-blue-500'} />
+                    <div className={'p-2 sm:p-3 rounded w-fit bg-blue-100'}>
+                      <MdMailOutline className={'size-4 sm:size-5 text-blue-500'} />
                     </div>
                   ) : row?.label.includes('Surat Keluar') ? (
-                    <div className={'p-3 rounded w-fit bg-green-100'}>
-                      <PiTelegramLogo className={'size-5 text-green-500'} />
+                    <div className={'p-2 sm:p-3 rounded w-fit bg-green-100'}>
+                      <PiTelegramLogo className={'size-4 sm:size-5 text-green-500'} />
                     </div>
                   ) : row?.label.includes('Buku Tamu') ? (
-                    <div className={'p-3 rounded w-fit bg-purple-100'}>
-                      <LuUsers className={'size-5 text-purple-500'} />
+                    <div className={'p-2 sm:p-3 rounded w-fit bg-purple-100'}>
+                      <LuUsers className={'size-4 sm:size-5 text-purple-500'} />
                     </div>
                   ) : (
-                    <div className={'p-3 rounded w-fit bg-orange-100'}>
-                      <FaRegCalendarAlt className={'size-5 text-orange-500'} />
+                    <div className={'p-2 sm:p-3 rounded w-fit bg-orange-100'}>
+                      <FaRegCalendarAlt className={'size-4 sm:size-5 text-orange-500'} />
                     </div>
                   )}
-                  <div>
-                    <p className={'font-semibold'}>{row?.label}</p>
-                    <p className={'text-2xl font-semibold'}>{row?.this_month}</p>
+                  <div className="min-w-0">
+                    <p className={'font-semibold text-sm sm:text-base truncate'}>{row?.label}</p>
+                    <p className={'text-xl sm:text-2xl font-semibold'}>{row?.this_month}</p>
                   </div>
                 </div>
                 <p
@@ -146,33 +146,35 @@ const DashboardEOfficePage = () => {
           </div>
 
           <p className={'text-2xl font-semibold mt-4'}>Akses Cepat</p>
-          <div className="mt-4 grid grid-cols-5 gap-5">
+          <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-5">
             {fastAccess?.map((row, k) => (
               <Link to={row?.link} key={k}>
-                <div
-                  className={cn(
-                    'rounded-lg flex items-center gap-1.5 bg-white p-4 text-start',
-                    'w-full border-primary text-primary hover:text-primary border'
-                  )}
-                  key={k}
-                >
-                  {row?.icon}
-                  {row?.name}
-                </div>
+                  <div
+                    className={cn(
+                      'rounded-lg flex items-center gap-1.5 bg-white p-3 sm:p-4 text-start text-sm sm:text-base',
+                      'w-full border-primary text-primary hover:text-primary border'
+                    )}
+                    key={k}
+                  >
+                    {row?.icon}
+                    {row?.name}
+                  </div>
               </Link>
             ))}
           </div>
 
-          <div className="bg-white shadow rounded p-4 border mt-5">
-            <p className="text-2xl font-semibold">Surat Masuk Terbaru</p>
-            <TableCustom
-              className={'mt-4'}
-              data={inboxDashboard}
-              columns={columns}
-              isShowPagination={false}
-              isShowFilter={false}
-              isShowLimit={false}
-            />
+          <div className="bg-white shadow rounded p-4 border mt-5 overflow-x-auto">
+            <p className="text-lg sm:text-2xl font-semibold">Surat Masuk Terbaru</p>
+            <div className="min-w-[640px]">
+              <TableCustom
+                className={'mt-4'}
+                data={inboxDashboard}
+                columns={columns}
+                isShowPagination={false}
+                isShowFilter={false}
+                isShowLimit={false}
+              />
+            </div>
           </div>
 
           {statisticTime && statisticTime?.items?.length > 0 && (
@@ -185,7 +187,7 @@ const DashboardEOfficePage = () => {
             />
           )}
         </div>
-        <div className="col-span-3">
+        <div className="col-span-12 lg:col-span-3">
           <Calendar
             mode="single"
             selected={date}
@@ -193,34 +195,34 @@ const DashboardEOfficePage = () => {
             className="rounded-lg border w-full"
           />
           <div className="bg-white p-4 rounded shadow mt-4">
-            <p className="text-lg text-primary font-semibold">Agenda Hari ini</p>
+            <p className="text-base sm:text-lg text-primary font-semibold">Agenda Hari ini</p>
             <ul className={'text-primary mt-2 space-y-2.5'}>
               {todayAgenda?.map((row, k) => (
                 <li key={k} className={'flex items-start gap-2.5'}>
-                  <div className={'w-fit flex items-center gap-1.5'}>
+                  <div className={'w-fit flex items-center gap-1.5 shrink-0'}>
                     <div
                       style={{ backgroundColor: row?.warna_sifat_surat }}
                       className="p-1.5 w-fit rounded-full"
                     />
-                    <p>{format(row?.tanggal_mulai, 'HH:mm')}</p>
+                    <p className="text-xs sm:text-sm">{format(row?.tanggal_mulai, 'HH:mm')}</p>
                   </div>
-                  <div>
-                    <p className={'text-sm font-semibold'}>{row?.nama_kegiatan}</p>
-                    <p className={'text-gray-500 text-xs'}>{row?.tempat}</p>
+                  <div className="min-w-0">
+                    <p className={'text-sm font-semibold truncate'}>{row?.nama_kegiatan}</p>
+                    <p className={'text-gray-500 text-xs truncate'}>{row?.tempat}</p>
                   </div>
                 </li>
               ))}
             </ul>
           </div>
           <div className="bg-white p-4 shadow mt-4">
-            <p className="text-2xl font-semibold">Informasi Penting</p>
+            <p className="text-lg sm:text-2xl font-semibold">Informasi Penting</p>
             <ul className={'space-y-4 mt-4'}>
               {urgentData?.map((row, k) => (
-                <div key={k} className={cn(row.clasName, 'p-4')}>
-                  <p className={'text-lg font-semibold'}>
+                <div key={k} className={cn(row.clasName, 'p-3 sm:p-4')}>
+                  <p className={'text-base sm:text-lg font-semibold'}>
                     {row.total} {row?.text}
                   </p>
-                  <p className={'text-gray-500'}>{row?.desc}</p>
+                  <p className={'text-gray-500 text-sm sm:text-base'}>{row?.desc}</p>
                 </div>
               ))}
             </ul>

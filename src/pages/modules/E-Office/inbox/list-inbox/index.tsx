@@ -44,7 +44,7 @@ export const ListInbox = () => {
           ]}
         />
 
-        <div className="flex items-center gap-4 justify-between">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
           <FilterSelect
             className={'w-full'}
             label={'Tahun'}

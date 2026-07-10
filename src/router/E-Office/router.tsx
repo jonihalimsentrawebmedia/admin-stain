@@ -58,6 +58,7 @@ import UpdateSuratRekomendasiBeasiswaPage from '@/pages/modules/E-Office/Letter-
 import SuratPengantarObservasiPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPengantarObservasi'
 import UpdatedSuratPengantarObservasiPage from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPO/updated.tsx'
 import DetailDataSPO from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPO'
+import LogDataStudent from '@/pages/modules/E-Office/students/student-data/log-data'
 
 const UserProfilePage = lazy(() =>
   import('@/pages/modules/website-utama/user-profile').then((m) => ({ default: m.UserProfilePage }))
@@ -789,6 +790,10 @@ export const E_OFFICE_ROUTE = [
           {
             path: 'edit/:id',
             element: <UpdatedStudentData />,
+          },
+          {
+            path: 'log/:id',
+            element: <LogDataStudent />,
           },
           {
             path: 'import',

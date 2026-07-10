@@ -46,27 +46,27 @@ const DispositionListPage = () => {
           }
         />
 
-        <div className="grid grid-cols-4 gap-5">
-          <div className={'space-y-2 p-4 bg-white shadow drop-shadow rounded'}>
-            <div className="flex items-center justify-center bg-blue-100 size-10 rounded-full">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-5">
+          <div className={'space-y-2 p-3 sm:p-4 bg-white shadow drop-shadow rounded'}>
+            <div className="flex items-center justify-center bg-blue-100 size-8 sm:size-10 rounded-full text-sm sm:text-base">
               <p>👀</p>
             </div>
-            <p>Belum Dibaca</p>
-            <p className={'text-2xl text-primary font-semibold'}>{count?.belum_dibaca}</p>
+            <p className="text-sm sm:text-base">Belum Dibaca</p>
+            <p className={'text-xl sm:text-2xl text-primary font-semibold'}>{count?.belum_dibaca}</p>
           </div>
-          <div className={'space-y-2 p-4 bg-white shadow drop-shadow rounded'}>
-            <div className="flex items-center justify-center bg-blue-100 size-10 rounded-full">
+          <div className={'space-y-2 p-3 sm:p-4 bg-white shadow drop-shadow rounded'}>
+            <div className="flex items-center justify-center bg-blue-100 size-8 sm:size-10 rounded-full text-sm sm:text-base">
               <p>🤔</p>
             </div>
-            <p>Belum Diresponse</p>
-            <p className={'text-2xl text-primary font-semibold'}>{count?.belum_direspon}</p>
+            <p className="text-sm sm:text-base">Belum Diresponse</p>
+            <p className={'text-xl sm:text-2xl text-primary font-semibold'}>{count?.belum_direspon}</p>
           </div>
-          <div className={'space-y-2 p-4 bg-white shadow drop-shadow rounded'}>
-            <div className="flex items-center justify-center bg-blue-100 size-10 rounded-full">
+          <div className={'space-y-2 p-3 sm:p-4 bg-white shadow drop-shadow rounded'}>
+            <div className="flex items-center justify-center bg-blue-100 size-8 sm:size-10 rounded-full text-sm sm:text-base">
               <p>✅</p>
             </div>
-            <p>Sudah Diresponse</p>
-            <p className={'text-2xl text-primary font-semibold'}>{count?.sudah_direspon}</p>
+            <p className="text-sm sm:text-base">Sudah Diresponse</p>
+            <p className={'text-xl sm:text-2xl text-primary font-semibold'}>{count?.sudah_direspon}</p>
           </div>
           <ChartNature data={nature} />
         </div>

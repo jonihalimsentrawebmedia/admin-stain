@@ -138,7 +138,7 @@ const FormSuratKeteranganCutiAkademik = (props: Props) => {
                   name={'id_kop_surat'}
                   label={'Pilih Kop Surat'}
                   placeholder={'Pilih Kop Surat'}
-                  className={'w-1/2'}
+                  className={'w-full md:w-1/2'}
                   usePortal
                   data={
                     letterHeader?.map((row) => ({
@@ -159,7 +159,7 @@ const FormSuratKeteranganCutiAkademik = (props: Props) => {
                   </div>
                   Penomoran Surat
                 </CardTitle>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <SelectBasicInput
                     form={form}
                     name={'id_nomor_surat_otomatis'}
@@ -273,7 +273,7 @@ const FormSuratKeteranganCutiAkademik = (props: Props) => {
               <CardContent className={'p-2 space-y-4 w-full'}>
                 <CardTitle className={'text-xl flex items-center gap-1.5'}>2. Mahasiswa</CardTitle>
                 <DialogSelectStudents form={form} />
-                <div className="grid grid-cols-[12rem_1fr] gap-5">
+                <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-5">
                   <p>Nama *</p>
                   {form.watch('nama_mahasiswa') ?? '-'}
                   <p>NPM/NIM *</p>
@@ -295,7 +295,7 @@ const FormSuratKeteranganCutiAkademik = (props: Props) => {
                   <TextInput
                     name={'tahun_pengajuan'}
                     form={form}
-                    className={'w-1/2'}
+                    className={'w-full md:w-1/2'}
                     label={'Tahun Pengajuan'}
                     placeholder={'Tahun Pengajuan'}
                     type={'number'}
@@ -319,7 +319,7 @@ const FormSuratKeteranganCutiAkademik = (props: Props) => {
                       form={form}
                       label={'Periode Cuti'}
                       type={'number'}
-                      className={'w-[360px]'}
+                      className={'w-full md:w-[360px]'}
                       placeholder={'Periode Cuti'}
                       htmlFor={'periode_cuti'}
                       isNumber
@@ -338,7 +338,7 @@ const FormSuratKeteranganCutiAkademik = (props: Props) => {
                     isRequired
                     isRow
                   />
-                  <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
+                  <div className={'grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-5'}>
                     <div />
                     <div className={'flex items-center gap-2 text-sm text-gray-500'}>
                       {periode &&

@@ -141,18 +141,18 @@ export const FormRegistrationInbox = (props: IProps) => {
     <>
       <Form {...form}>
         <form className={'space-y-5'} onSubmit={form.handleSubmit(HandleSave)}>
-          <div className={'grid grid-cols-2 gap-5 bg-white p-5 rounded border'}>
-            <div className="flex items-center gap-2 col-span-2">
+          <div className={'grid grid-cols-1 md:grid-cols-2 gap-5 bg-white p-4 sm:p-5 rounded border'}>
+            <div className="flex items-center gap-2 col-span-1 md:col-span-2">
               <div className="bg-primary w-fit text-white rounded-lg p-2">
                 <IoMdMailOpen className={'size-5'} />
               </div>
               <div className="flex flex-col">
-                <p className="text-lg font-semibold">Data Surat Masuk</p>
-                <p className="text-gray-500 text-sm">Informasi Lengkap Mengenai Surat Masuk</p>
+                <p className="text-base sm:text-lg font-semibold">Data Surat Masuk</p>
+                <p className="text-gray-500 text-xs sm:text-sm">Informasi Lengkap Mengenai Surat Masuk</p>
               </div>
             </div>
 
-            <div className="col-span-2">
+            <div className="col-span-1 md:col-span-2">
               <hr className={'border-green-400'} />
             </div>
 
@@ -163,7 +163,7 @@ export const FormRegistrationInbox = (props: IProps) => {
               placeholder={'Satuan kerja'}
               name={'id_unit'}
               isRequired
-              className={'col-span-2 z-[50]!'}
+              className={'col-span-1 md:col-span-2 z-[50]!'}
               data={
                 institution?.map((row) => ({
                   label: row?.nama,
@@ -208,7 +208,7 @@ export const FormRegistrationInbox = (props: IProps) => {
               placeholder={'klasifikasi surat'}
               name={'id_klasifikasi_surat'}
               isRequired
-              className={'col-span-2 z-[30]!'}
+              className={'col-span-1 md:col-span-2 z-[30]!'}
               data={
                 letterClassification?.map((row) => ({
                   label: row?.nama,
@@ -217,14 +217,16 @@ export const FormRegistrationInbox = (props: IProps) => {
               }
             />
 
-            <DialogSender
-              icon={<RiBuildingLine className={'size-5 text-primary'} />}
-              letterOrigin={letterOrigin}
-              value={form.watch('id_asal_surat')}
-              HandlerSave={(e) => {
-                form.setValue('id_asal_surat', e)
-              }}
-            />
+            <div className="col-span-1 md:col-span-2">
+              <DialogSender
+                icon={<RiBuildingLine className={'size-5 text-primary'} />}
+                letterOrigin={letterOrigin}
+                value={form.watch('id_asal_surat')}
+                HandlerSave={(e) => {
+                  form.setValue('id_asal_surat', e)
+                }}
+              />
+            </div>
 
             <TextInputIcon
               icon={<FaRegUser className={'size-5 text-primary'} />}
@@ -233,7 +235,7 @@ export const FormRegistrationInbox = (props: IProps) => {
               label={'Penerima Surat'}
               placeholder={'Penerima surat'}
               htmlFor={'penerima_surat'}
-              className={'col-span-2'}
+              className={'col-span-1 md:col-span-2'}
               isRequired
             />
 
@@ -272,7 +274,7 @@ export const FormRegistrationInbox = (props: IProps) => {
               isRequired
             />
 
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 col-span-1">
               <Label>
                 Otomatis <span className={'text-red-500'}>*</span>
               </Label>
@@ -295,7 +297,7 @@ export const FormRegistrationInbox = (props: IProps) => {
               label={'Perihal'}
               placeholder={'Perihal'}
               htmlFor={'perihal'}
-              className={'col-span-2'}
+              className={'col-span-1 md:col-span-2'}
               isRequired
             />
 
@@ -306,7 +308,7 @@ export const FormRegistrationInbox = (props: IProps) => {
               label={'Tembusan'}
               placeholder={'Tembusan'}
               htmlFor={'tembusan'}
-              className={'col-span-2'}
+              className={'col-span-1 md:col-span-2'}
               isRequired
             />
 
@@ -316,26 +318,26 @@ export const FormRegistrationInbox = (props: IProps) => {
               label={'Ringkasan Surat'}
               placeholder={'Ringkasan Surat'}
               htmlFor={'ringkasan'}
-              className={'col-span-2'}
+              className={'col-span-1 md:col-span-2'}
               isRequired
             />
           </div>
 
-          <div className="border p-5 rounded grid grid-cols-2 gap-5 bg-white">
-            <div className="col-span-2">
-              <div className="flex items-center gap-2 col-span-2">
+          <div className="border p-4 sm:p-5 rounded grid grid-cols-1 md:grid-cols-2 gap-5 bg-white">
+            <div className="col-span-1 md:col-span-2">
+              <div className="flex items-center gap-2">
                 <div className="bg-primary w-fit text-white rounded-lg p-2">
                   <FaRegCalendarAlt className={'size-5'} />
                 </div>
                 <div className="flex flex-col">
-                  <p className="text-lg font-semibold">Data Agenda</p>
-                  <p className="text-gray-500 text-sm">Informasi Lengkap Mengenai Agenda</p>
+                  <p className="text-base sm:text-lg font-semibold">Data Agenda</p>
+                  <p className="text-gray-500 text-xs sm:text-sm">Informasi Lengkap Mengenai Agenda</p>
                 </div>
               </div>
               <hr className={'my-2 border-green-400'} />
             </div>
 
-            <div className="col-span-2">
+            <div className="col-span-1 md:col-span-2">
               <CheckboxInputBasic
                 name={'is_agenda'}
                 form={form}
@@ -345,14 +347,14 @@ export const FormRegistrationInbox = (props: IProps) => {
             </div>
             {form.watch('is_agenda') === true && (
               <>
-                <div className="flex items-center gap-4 w-full col-span-2">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full col-span-1 md:col-span-2">
                   <TextInputIcon
                     icon={<FaRegFileAlt className={'size-5 text-primary'} />}
                     name={'nama_kegiatan'}
                     form={form}
                     label={'Nama Kegiatan'}
                     htmlFor={'nama_kegiatan'}
-                    className={'col-span-1 w-full'}
+                    className={'w-full'}
                     placeholder={'Nama kegiatan'}
                     isRequired
                   />
@@ -360,7 +362,7 @@ export const FormRegistrationInbox = (props: IProps) => {
                     name={'is_samakan_dengan_surat'}
                     form={form}
                     label={'Samakan dengan perihal surat'}
-                    className={'whitespace-nowrap mt-4'}
+                    className={'whitespace-nowrap sm:mt-4'}
                     fx={(e) => {
                       if (e) {
                         const same = form.getValues('perihal')
@@ -376,7 +378,7 @@ export const FormRegistrationInbox = (props: IProps) => {
                   form={form}
                   label={'Keterangan Agenda (opsional)'}
                   htmlFor={'keterangan_agenda'}
-                  className={'col-span-2'}
+                  className={'col-span-1 md:col-span-2'}
                   placeholder={'Keterangan agenda'}
                 />
 
@@ -406,7 +408,7 @@ export const FormRegistrationInbox = (props: IProps) => {
                   label={'Tempat / Lokasi'}
                   htmlFor={'address'}
                   form={form}
-                  className={'col-span-2'}
+                  className={'col-span-1 md:col-span-2'}
                   placeholder={'Tempat / Lokasi'}
                   isRequired
                 />
@@ -417,7 +419,7 @@ export const FormRegistrationInbox = (props: IProps) => {
                   form={form}
                   placeholder={'Pilih waktu pengingat agenda'}
                   label={'Waktu Pengingat Agenda'}
-                  className={'col-span-2'}
+                  className={'col-span-1 md:col-span-2'}
                   isRequired
                   data={
                     reminderAgenda?.map((row) => ({
@@ -437,21 +439,21 @@ export const FormRegistrationInbox = (props: IProps) => {
             )}
           </div>
 
-          <div className="border p-5 rounded grid grid-cols-2 gap-5 bg-white">
-            <div className="col-span-2">
-              <div className="flex items-center gap-2 col-span-2">
+          <div className="border p-4 sm:p-5 rounded grid grid-cols-1 md:grid-cols-2 gap-5 bg-white">
+            <div className="col-span-1 md:col-span-2">
+              <div className="flex items-center gap-2">
                 <div className="bg-primary w-fit text-white rounded-lg p-2">
                   <FaRegFileArchive className={'size-5'} />
                 </div>
                 <div className="flex flex-col">
-                  <p className="text-lg font-semibold">Data Lampiran</p>
-                  <p className="text-gray-500 text-sm">Informasi Lengkap Mengenai Data Lampiran</p>
+                  <p className="text-base sm:text-lg font-semibold">Data Lampiran</p>
+                  <p className="text-gray-500 text-xs sm:text-sm">Informasi Lengkap Mengenai Data Lampiran</p>
                 </div>
               </div>
               <hr className={'my-2 border-green-400'} />
             </div>
 
-            <div className="col-span-2">
+            <div className="col-span-1 md:col-span-2">
               <CheckboxInputBasic
                 name={'is_lampiran'}
                 form={form}
@@ -461,7 +463,7 @@ export const FormRegistrationInbox = (props: IProps) => {
             </div>
 
             {form?.watch('is_lampiran') === true && (
-              <div className={'col-span-2'}>
+              <div className={'col-span-1 md:col-span-2'}>
                 <UploadDocWithDescription
                   form={form}
                   label={'Upload Lampiran'}
@@ -472,15 +474,15 @@ export const FormRegistrationInbox = (props: IProps) => {
             )}
           </div>
 
-          <div className="border p-5 rounded grid grid-cols-2 gap-5 bg-white">
-            <div className="col-span-2">
-              <div className="flex items-center gap-2 col-span-2">
+          <div className="border p-4 sm:p-5 rounded grid grid-cols-1 md:grid-cols-2 gap-5 bg-white">
+            <div className="col-span-1 md:col-span-2">
+              <div className="flex items-center gap-2">
                 <div className="bg-primary w-fit text-white rounded-lg p-2">
                   <FaRegFileArchive className={'size-5'} />
                 </div>
                 <div className="flex flex-col">
-                  <p className="text-lg font-semibold">Disposisi</p>
-                  <p className="text-gray-500 text-sm">
+                  <p className="text-base sm:text-lg font-semibold">Disposisi</p>
+                  <p className="text-gray-500 text-xs sm:text-sm">
                     Atur Disposisi Dan Pihak Yang Akan Menerima Surat
                   </p>
                 </div>
@@ -488,7 +490,7 @@ export const FormRegistrationInbox = (props: IProps) => {
               <hr className={'my-2 border-green-400'} />
             </div>
 
-            <div className="col-span-2">
+            <div className="col-span-1 md:col-span-2">
               <CheckboxInputBasic
                 name={'is_disposisi'}
                 form={form}
@@ -514,7 +516,7 @@ export const FormRegistrationInbox = (props: IProps) => {
                   }))}
                 />
 
-                <div className="col-span-2">
+                <div className="col-span-1 md:col-span-2">
                   <SelectUseRoleData
                     form={form}
                     name={'list_id_sdm'}
