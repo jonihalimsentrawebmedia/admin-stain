@@ -17,7 +17,7 @@ export const ButtonSyncLecturer = () => {
 
   const HandleSave = async () => {
     setLoading(true)
-    const token = window.localStorage.getItem('token_fcm')
+    const token = window.localStorage.getItem('token_fcm') ?? 'mock-fcm-token-dev'
     await AxiosClient.post('/fcm/subscribe', {
       token: token,
       topik: 'fcm_sync_sdm_dosen',
