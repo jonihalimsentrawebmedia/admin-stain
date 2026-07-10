@@ -348,21 +348,38 @@ const DetailLetterSPPPage = () => {
 
           <hr className="my-4" />
           <p className="text-gray-500 font-semibold mb-2">Data Mahasiswa</p>
-          <div className="grid grid-cols-[12rem_1fr_12rem_1fr] gap-x-6 gap-y-3">
-            <p className="text-gray-500">Nama</p>
-            <p>{letter.nama_mahasiswa || '-'}</p>
-
-            <p className="text-gray-500">NPM/NIM</p>
-            <p>{letter.nim || '-'}</p>
-
-            <p className="text-gray-500">Program Studi</p>
-            <p>{letter.nama_prodi || '-'}</p>
-
-            <p className="text-gray-500">Fakultas</p>
-            <p>{letter.nama_fakultas || '-'}</p>
-
-            <p className="text-gray-500">Jenjang</p>
-            <p>{letter.nama_jenjang || '-'}</p>
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-sm">
+              <thead>
+                <tr className="border-b">
+                  <th className="text-left py-2 px-3 text-gray-500">No</th>
+                  <th className="text-left py-2 px-3 text-gray-500">Nama</th>
+                  <th className="text-left py-2 px-3 text-gray-500">NIM</th>
+                  <th className="text-left py-2 px-3 text-gray-500">Program Studi</th>
+                  <th className="text-left py-2 px-3 text-gray-500">Fakultas</th>
+                  <th className="text-left py-2 px-3 text-gray-500">Jenjang</th>
+                </tr>
+              </thead>
+              <tbody>
+                {letter.mahasiswa_list?.map((mhs, index) => (
+                  <tr key={mhs.id_mahasiswa} className="border-b last:border-0">
+                    <td className="py-2 px-3">{index + 1}</td>
+                    <td className="py-2 px-3">{mhs.nama_mahasiswa}</td>
+                    <td className="py-2 px-3">{mhs.nim}</td>
+                    <td className="py-2 px-3">{mhs.nama_prodi}</td>
+                    <td className="py-2 px-3">{mhs.nama_fakultas}</td>
+                    <td className="py-2 px-3">{mhs.nama_jenjang_pendidikan}</td>
+                  </tr>
+                ))}
+                {(!letter.mahasiswa_list || letter.mahasiswa_list.length === 0) && (
+                  <tr>
+                    <td colSpan={6} className="py-2 px-3 text-center text-gray-400">
+                      Tidak ada data mahasiswa
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           </div>
 
           <hr className="my-4" />

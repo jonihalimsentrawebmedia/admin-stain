@@ -19,6 +19,7 @@ import { RichText } from '@/components/common/richtext'
 import { InputRadio } from '@/components/common/form/InputRadio.tsx'
 import type { TResolverSKAK } from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifKembali/data/resolver.tsx'
 import type { ILetterTemplateType } from '@/pages/modules/E-Office/Letter-Generation/create-letter/hook'
+import { UseGetStudentActiveSemester } from '@/pages/modules/E-Office/students/student-data/hooks'
 
 interface Props {
   loading: boolean
@@ -53,10 +54,20 @@ const FormSuratKeteranganAktifKembali = (props: Props) => {
     page: '0',
     limit: '0',
   })
+  const { ActiveSemester } = UseGetStudentActiveSemester(form.watch('id_mahasiswa'))
   const { institution } = UseGetUnitInstitution({
     page: '0',
     limit: '0',
   })
+  const semester = form.watch('semester_cuti')
+  const options = ActiveSemester?.filter((row) => {
+    if (semester === 'ganjil') return row.semester === 1
+    if (semester === 'genap') return row.semester === 2
+    return true
+  }).map((row) => ({
+    label: row.label,
+    value: row.tahun,
+  }))
 
   return (
     <>
@@ -260,8 +271,8 @@ const FormSuratKeteranganAktifKembali = (props: Props) => {
                   {form.watch('Fakultas') ?? '-'}
                   <p>Jenjang *</p>
                   {form.watch('jenjang') ?? '-'}
-                  <p>Semester *</p>
-                  {form.watch('semester') ?? '-'}
+                  {/*<p>Semester *</p>*/}
+                  {/*{form.watch('semester') ?? '-'}*/}
                 </div>
               </CardContent>
             </Card>
@@ -281,12 +292,13 @@ const FormSuratKeteranganAktifKembali = (props: Props) => {
                     isRow
                     isRequired
                   />
-                  <TextInput
+                  <SelectBasicInput
                     name={'tahun_akademik'}
                     form={form}
                     label={'Tahun Akademik'}
                     placeholder={'Tahun Akademik'}
-                    htmlFor={'tahun_akademik'}
+                    data={options ?? []}
+                    isDisabled={!form.watch('id_mahasiswa')}
                     isRow
                     isRequired
                   />

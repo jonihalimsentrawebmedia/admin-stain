@@ -227,16 +227,31 @@ export const GenerateLetterSKPP = ({
 
       {
         table: {
-          widths: [100, 10, '*'],
+          widths: [15, 60, '*', '*', 30],
+          headerRows: 1,
           body: [
-            infoRow('Nama', data.nama_mahasiswa),
-            infoRow('NPM/NIM', data.nim),
-            infoRow('Program Studi', data.nama_prodi),
-            infoRow('Fakultas', data.nama_fakultas),
-            infoRow('Jenjang', `${data.kode_jenjang} - ${data.nama_jenjang}`),
+            [
+              { text: 'No', bold: true, alignment: 'center' as const },
+              { text: 'NIM', bold: true, alignment: 'center' as const },
+              { text: 'Nama', bold: true, alignment: 'center' as const },
+              { text: 'Program Studi', bold: true, alignment: 'center' as const },
+              { text: 'Jenjang', bold: true, alignment: 'center' as const },
+            ],
+            ...(data.mahasiswa_list?.length
+              ? data.mahasiswa_list.map((mhs, idx) => [
+                  { text: String(idx + 1), alignment: 'center' as const },
+                  { text: mhs.nim },
+                  { text: mhs.nama_mahasiswa },
+                  { text: mhs.nama_prodi },
+                  { text: mhs.kode_jenjang_pendidikan, alignment: 'center' as const },
+                ])
+              : [[
+                  { text: 'Tidak ada data mahasiswa', colSpan: 5, alignment: 'center' as const },
+                  {}, {}, {}, {},
+                ]]
+            ),
           ],
         },
-        layout: 'noBorders' as const,
         margin: [80, 0, 0, 5] as [number, number, number, number],
       },
 
@@ -290,7 +305,7 @@ export const GenerateLetterSKPP = ({
                     text: data.nama_penandatangan,
                   },
                   {
-                    text: `${data?.nip_penandatangan ? 'NIP' : 'NIDN'}.${data?.nip_penandatangan ?? data?.nidn_penandatangan}`,
+                    text: `${data?.nidn_penandatangan ? 'NIP' : 'NIDN'}.${data?.nidn_penandatangan ?? data?.nidn_penandatangan}`,
                     // text: `NIP/NIDN.${data.nip_penandatangan || '-'} / ${data.nidn_penandatangan || '-'}`,
                   },
                 ],

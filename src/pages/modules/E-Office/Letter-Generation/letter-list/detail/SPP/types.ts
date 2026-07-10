@@ -1,4 +1,4 @@
-interface ILetterHeaderSettings {
+export interface ILetterHeaderSettings {
   isi: string
   jenis_font: string
   gaya_font: string
@@ -6,7 +6,7 @@ interface ILetterHeaderSettings {
   warna: string
 }
 
-interface ILtterHeader {
+export interface ILetterHeader {
   id_kop_surat: string
   id_satuan_organisasi: string
   id_unit: string
@@ -22,54 +22,61 @@ interface ILtterHeader {
   nama_user_updated: string
 }
 
+export interface IResearchStudent {
+  id_mahasiswa: string
+  nim: string
+  nama_mahasiswa: string
+  nama_prodi: string
+  nama_fakultas: string
+  nama_agama: string
+  angkatan: string
+  semester_masuk: number
+  kode_jenjang_pendidikan: string
+  nama_jenjang_pendidikan: string
+}
+
 export interface ISPPLetter {
   id_mail_surat_pengantar_penelitian: string
   id_nomor_surat_otomatis: string
   nomor_surat: string
   nomor_urut_manual: string | null
+
   tempat_surat: string
   tanggal_surat: string
+
   id_kop_surat: string
   id_jenis_template_surat: string
   id_satuan_organisasi: string
 
-  // Data khusus penelitian
+  // Penelitian
   judul_penelitian: string
   lokasi_penelitian: string
   lama_penelitian: string
   instansi_pimpinan: string
   masukan_di: string
+
   metode_pengumpulan_data: string[]
+
   pembuka: string
   penutup: string
+
   lampiran: number
   perihal: string
   detail_lampiran: string[]
 
-  // Data mahasiswa & penandatangan
-  id_mahasiswa: string
+  // Mahasiswa
+  id_mahasiswa: string[]
+  mahasiswa_list: IResearchStudent[]
+
+  // Penandatangan
   id_penandatangan: string
   nama_penandatangan: string
-  nip_penandatangan: string
   nidn_penandatangan: string
   jabatan_penandatangan: string
   id_satuan_kerja_penandatangan: string
   nama_satuan_kerja_penandatangan: string
 
-  nim: string
-  nama_mahasiswa: string
-  nama_prodi: string
-  nama_status_mahasiswa: string
-  nama_jalur_masuk: string
-  nama_agama: string
-  angkatan: string
-  semester_masuk: number
-  nama_fakultas: string
-  nama_jenjang: string
-  kode_jenjang: string
-  semester_masuk_label: string
-
-  // Status surat
+  // Status
   status: string
   diproses_at: string | null
   diproses_user: string | null
@@ -77,21 +84,25 @@ export interface ISPPLetter {
   selesai_user: string | null
   dibatalkan_at: string | null
   dibatalkan_user: string | null
+
   nama_diproses_user: string | null
   nama_selesai_user: string | null
   nama_dibatalkan_user: string | null
 
+  // Audit
   created_at: string
   created_user: string
   updated_at: string
   updated_user: string
 
-  kop_surat: ILtterHeader
+  // Relasi
+  kop_surat: ILetterHeader
 
-  // Info tambahan
+  // Template
   nama_jenis_template: string
   kode_template: string
   nama_jenis_surat: string
+
   nama_user_created: string
   nama_user_updated: string
 }
