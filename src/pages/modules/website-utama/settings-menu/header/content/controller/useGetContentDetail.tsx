@@ -15,7 +15,7 @@ const useGetContentDetail = () => {
 
   const loading = isLoading || isFetching
 
-  return { contentList: data?.data ?? [], loading }
+  return { contentList: data?.data ?? null, loading }
 }
 
 export default useGetContentDetail

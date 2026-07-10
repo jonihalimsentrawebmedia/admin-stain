@@ -15,7 +15,7 @@ interface Props<T extends FieldValues> {
   placeholder?: string
 }
 
-export const RichText = <T extends FieldValues>(props: Props<T>) => {
+export function RichText<T extends FieldValues>(props: Props<T>) {
   const {
     form,
     name,
