@@ -62,7 +62,7 @@ export const ButtonAddLandingUnit = () => {
               <UploadImageRatio
                 name={'gambar_url'}
                 form={form}
-                label={'Gambar(Ukuran 4:2)'}
+                label={'Gambar(Ukuran 1250px X 720px)'}
                 maxWidthClassName={'max-w-[400px] mx-auto'}
                 aspectRatioWidth={4}
                 aspectRatioHeight={2}

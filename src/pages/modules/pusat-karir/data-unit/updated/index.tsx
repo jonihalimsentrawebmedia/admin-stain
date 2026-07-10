@@ -32,12 +32,16 @@ export const UpdatedDataCarrierCenter = () => {
   const handleSave = async (e: SatuanOrganisasiType) => {
     await AxiosClient.post('/pusat-karir/profil/draft', {
       ...e,
-    }).then((res) => {
-      if (res.data.status) {
-        toast.success(res.data.message || 'Success Pengajuan update data universitas')
-        navigate('/modules/pusat-karir/data-unit')
-      }
     })
+      .then((res) => {
+        if (res.data.status) {
+          toast.success(res.data.message || 'Success Pengajuan update data universitas')
+          navigate('/modules/pusat-karir/data-unit')
+        }
+      })
+      .catch((err) => {
+        toast.error(err?.response?.data?.message || 'Gagal mengirim data')
+      })
   }
 
   return (
