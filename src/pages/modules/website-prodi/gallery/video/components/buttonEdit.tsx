@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import { FormGalleyVideo } from '@/pages/modules/website-utama/public-content/gallery/video/components/form.tsx'
 import {
   VideoResolver,
@@ -68,7 +68,7 @@ export const ButtonAddVideoProdi = (props: Props) => {
         <HiPencil />
       </button>
 
-      <DialogCustom
+      <DialogBasic
         open={open}
         setOpen={setOpen}
         title={'Edit Galeri Video'}
@@ -81,7 +81,7 @@ export const ButtonAddVideoProdi = (props: Props) => {
           loading={loading}
           HandleSave={HandlerDelete}
         />
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

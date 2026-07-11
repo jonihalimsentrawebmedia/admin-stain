@@ -38,7 +38,7 @@ export const NewsManagementEditorUpdated = () => {
         isi_berita: managementEditorNewsDetail?.isi_berita,
         keterangan_gambar: managementEditorNewsDetail?.keterangan_gambar,
         penulis: managementEditorNewsDetail?.penulis,
-        tanggal_berita: format(managementEditorNewsDetail?.tanggal_berita,'yyyy-MM-dd'),
+        tanggal_berita: format(managementEditorNewsDetail?.tanggal_berita, 'yyyy-MM-dd'),
         berita_gambar_tambahan: temp,
       })
     }
@@ -65,7 +65,12 @@ export const NewsManagementEditorUpdated = () => {
 
   return (
     <>
-      <FormNewsContent loading={loading} form={form} HandleSave={HandleSubmit} />
+      <FormNewsContent
+        url_ai={'/editor/berita/generate'}
+        loading={loading}
+        form={form}
+        HandleSave={HandleSubmit}
+      />
     </>
   )
 }

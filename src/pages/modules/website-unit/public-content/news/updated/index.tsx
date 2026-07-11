@@ -72,6 +72,7 @@ export const NewsUnitUpdated = () => {
   return (
     <>
       <FormNewsContent
+        url_ai={'/unit/berita/generate'}
         label={'Edit Berita'}
         loading={loading}
         form={form}

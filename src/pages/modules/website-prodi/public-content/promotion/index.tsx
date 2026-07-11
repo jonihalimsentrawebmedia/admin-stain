@@ -126,16 +126,18 @@ export const PromotionProdiPage = () => {
           ]}
         />
 
-        <TabsListCustom
-          triggerClassName={
-            'border-black rounded-none data-[state=active]:bg-black data-[state=active]:text-white text-black'
-          }
-          value={statusParams ?? 'DRAFT'}
-          onChange={(e) => {
-            setSearchParams({ status: e })
-          }}
-          data={DataTabs}
-        />
+        <div className="overflow-x-auto pb-1">
+          <TabsListCustom
+            triggerClassName={
+              'border-black rounded-none data-[state=active]:bg-black data-[state=active]:text-white text-black'
+            }
+            value={statusParams ?? 'DRAFT'}
+            onChange={(e) => {
+              setSearchParams({ status: e })
+            }}
+            data={DataTabs}
+          />
+        </div>
       </div>
     </>
   )

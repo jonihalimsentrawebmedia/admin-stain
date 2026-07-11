@@ -28,12 +28,12 @@ export const TabsListCustom = (props: Props) => {
       onValueChange={(val) => onChange?.(val)}
       className="w-full flex flex-col gap-5"
     >
-      <TabsList className="bg-transparent shadow-none rounded-none w-full">
+      <TabsList className="bg-transparent shadow-none rounded-none w-full overflow-x-auto flex-nowrap sm:flex-wrap pb-1 justify-start">
         {data.map((item) => (
           <TabsTrigger
             key={item.id}
             value={item.value}
-            className={`border p-2.5 ${triggerClassName}`}
+            className={`border p-2.5 shrink-0 whitespace-nowrap ${triggerClassName}`}
           >
             {item.name}
           </TabsTrigger>

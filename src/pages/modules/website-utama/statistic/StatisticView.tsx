@@ -129,14 +129,14 @@ const StatisticView = () => {
         </CardInput>
         <CardInput title="Tanggal Berdiri">
           {isEdit ? (
-            <div className="flex gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <SelectBasicInput
                 data={dateOptions}
                 form={form}
                 name="tanggal"
                 placeholder="Pilih"
                 label="Tanggal"
-                selectClassName="min-w-[150px]"
+                selectClassName="w-full"
               />
               <SelectBasicInput
                 data={monthOptions}
@@ -144,7 +144,7 @@ const StatisticView = () => {
                 name="bulan"
                 placeholder="Pilih"
                 label="Bulan"
-                selectClassName="min-w-[150px]"
+                selectClassName="w-full"
               />
               <SelectBasicInput
                 data={generateYearData(1940)}
@@ -152,7 +152,7 @@ const StatisticView = () => {
                 name="tahun"
                 placeholder="Pilih"
                 label="Tahun"
-                selectClassName="min-w-[150px]"
+                selectClassName="w-full"
               />
             </div>
           ) : (

@@ -6,7 +6,7 @@ import { Separator } from '@/components/ui/separator.tsx'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { format } from 'date-fns'
 import Select from 'react-select'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { UseGetProdiAnnouncementDetail } from '../hooks/index'
 import { ButtonSubmissionAnnouncementProdi } from '@/pages/modules/website-prodi/public-content/announcement/components/buttonSubmission.tsx'
 import type { IAnnouncement } from '@/pages/modules/website-utama/public-content/announcement/data'
@@ -22,13 +22,8 @@ export const AnnouncementProdiDetailPage = () => {
       label: `Dokumen ${index + 1}`,
     })) ?? []
 
-  const [document, setDocument] = useState<any>(options[0] ?? null)
-
-  useEffect(() => {
-    if (options.length > 0 && !document) {
-      setDocument(options[0])
-    }
-  }, [options])
+  const [document, setDocument] = useState<any>(null)
+  const doc = document ?? options[0]
 
   return (
     <>
@@ -78,11 +73,11 @@ export const AnnouncementProdiDetailPage = () => {
         />
         <Separator className={'my-5'} />
 
-        <div className={'flex items-start gap-x-8 px-5'}>
-          <div className="w-7/12">
-            <p className="text-2xl font-semibold">{detail?.judul_pengumuman}</p>
+        <div className={'flex flex-col lg:flex-row items-start gap-6 lg:gap-x-8 px-2 lg:px-0'}>
+          <div className="w-full lg:w-7/12">
+            <p className="lg:text-2xl font-semibold">{detail?.judul_pengumuman}</p>
 
-            <div className="my-5 grid grid-cols-2 gap-5">
+            <div className="my-5 grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
                 <p className="text-gray-500">Tanggal Terbit</p>
                 <p className="text-primary">
@@ -124,24 +119,31 @@ export const AnnouncementProdiDetailPage = () => {
             </div>
           </div>
 
-          <div className={'w-5/12'}>
-            <div className="flex items-center my-5 gap-2">
-              Tampilkan
+          <div className={'w-full lg:w-5/12'}>
+            <div className="flex flex-col sm:flex-row items-start sm:items-center my-5 gap-2">
+              <span className="text-nowrap">Tampilkan</span>
               <Select
                 className={'w-full'}
                 placeholder={'Pilih Dokumen'}
                 options={options}
                 onChange={(e) => setDocument(e as any)}
-                value={document}
+                value={doc}
               />
             </div>
 
-            <iframe
-              src={document?.value ?? ''}
-              width="100%"
-              height="950px"
-              style={{ border: 'none' }}
-            />
+            {doc?.value ? (
+              <iframe
+                src={doc.value}
+                width="100%"
+                height="950px"
+                className="max-lg:h-[500px]"
+                style={{ border: 'none' }}
+              />
+            ) : (
+              <div className="flex items-center justify-center h-[300px] lg:h-[950px] bg-gray-50 rounded border">
+                <p className="text-gray-400">Belum ada dokumen</p>
+              </div>
+            )}
           </div>
         </div>
       </div>

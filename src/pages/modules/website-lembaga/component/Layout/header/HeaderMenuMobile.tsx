@@ -3,7 +3,9 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
+  DrawerDescription,
   DrawerHeader,
+  DrawerTitle,
   DrawerTrigger,
 } from '@/components/ui/drawer'
 import { ChevronRightIcon, Menu, X } from 'lucide-react'
@@ -45,15 +47,14 @@ const HeaderMenuMobile = () => {
 
     // Jika tidak punya anak, render Link biasa
     return (
-      <Button
-        key={item.link}
-        variant="ghost"
-        size="sm"
-        asChild
-        className="w-full justify-start gap-2 font-normal"
-      >
-        <Link to={item.link}>{item.label}</Link>
-      </Button>
+      <DrawerClose asChild key={item.link}>
+        <Link
+          to={item.link}
+          className="flex w-full items-center justify-start gap-2 px-4 py-2 text-sm font-normal hover:bg-accent rounded-md"
+        >
+          {item.label}
+        </Link>
+      </DrawerClose>
     )
   }
   return (
@@ -66,6 +67,8 @@ const HeaderMenuMobile = () => {
         </DrawerTrigger>
         <DrawerContent>
           <DrawerHeader>
+            <DrawerTitle className="sr-only">Menu Navigasi</DrawerTitle>
+            <DrawerDescription className="sr-only">Menu navigasi website lembaga</DrawerDescription>
             <DrawerClose asChild>
               <Button variant="ghost" className="w-fit ml-auto p-0!">
                 <X />

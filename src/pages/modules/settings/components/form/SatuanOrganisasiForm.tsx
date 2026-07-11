@@ -11,6 +11,7 @@ import { useSearchParams } from 'react-router-dom'
 import useGetEducationalLevel from '../../reference/educational-level/controller/useGetEducationalLevel'
 import useGetListDikti from '../../controller/useGetListDikti'
 import CheckboxInputBasic from '@/components/common/form/checkbox.tsx'
+import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 
 interface Props {
   form: UseFormReturn<any>
@@ -172,7 +173,7 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
             placeholder={placeHolderName}
           />
           <InputText
-            className={'w-full'}
+            className={'w-fit'}
             form={form}
             name={'ukuran_title'}
             isRow
@@ -205,7 +206,7 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
             />
             <InputText
               form={form}
-              className={'w-full'}
+              className={'w-fit'}
               name={'ukuran_singkatan'}
               isRow
               label="Ukuran Singkatan"
@@ -386,31 +387,71 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
       </CardInput>
       {kelompok == 'UNIVERSITAS' ? (
         <>
-          <CardInput title="API KEY DIKTI">
-            <InputText
-              form={form}
-              name="api_dikti_id_pengguna"
-              isRow
-              label="API DIKTI ID PENGGUNA"
-              placeholder="Masukkan API DIKTI ID PENGGUNA"
-              //   inputClassName="lg:max-w-[300px]"
-            />
+          <div className="flex flex-col gap-5">
+            <CardInput title="API KEY DIKTI">
+              <InputText
+                form={form}
+                name="api_dikti_id_pengguna"
+                isRow
+                label="API DIKTI ID PENGGUNA"
+                placeholder="Masukkan API DIKTI ID PENGGUNA"
+                //   inputClassName="lg:max-w-[300px]"
+              />
 
-            <InputText
-              form={form}
-              name="api_dikti_username"
-              isRow
-              label="API DIKTI USERNAME"
-              placeholder="Masukan API DIKTI USERNAME"
-            />
-            <InputText
-              form={form}
-              name="api_dikti_password"
-              isRow
-              label="API DIKTI PASSWORD"
-              placeholder="Masukkan API DIKTI PASSWORD"
-            />
-          </CardInput>
+              <InputText
+                form={form}
+                name="api_dikti_username"
+                isRow
+                label="API DIKTI USERNAME"
+                placeholder="Masukan API DIKTI USERNAME"
+              />
+              <InputText
+                form={form}
+                name="api_dikti_password"
+                isRow
+                label="API DIKTI PASSWORD"
+                placeholder="Masukkan API DIKTI PASSWORD"
+              />
+            </CardInput>
+            <CardInput title="API KEY AI Agent">
+              <SelectBasicInput
+                name={'api_key_provider'}
+                form={form}
+                placeholder={'API API Provider'}
+                label={'AI PROVIDER'}
+                isRow
+                data={
+                  ['CUSTOM', 'GEMINI', 'CHATGPT', 'DEEPSEEK']?.map((row) => ({
+                    label: row,
+                    value: row,
+                  })) ?? []
+                }
+              />
+              {form.watch('api_key_provider') === 'CUSTOM' && (
+                <InputText
+                  form={form}
+                  name="ai_api_url"
+                  placeholder={'AI API URL Jika Custom'}
+                  label={'AI API URL '}
+                  isRow
+                />
+              )}
+              <InputText
+                form={form}
+                name="ai_api_key"
+                placeholder={'AI API Key'}
+                label={'AI API KEY'}
+                isRow
+              />
+              <InputText
+                form={form}
+                name="ai_model"
+                isRow
+                label={'AI MODEL'}
+                placeholder="AI Model"
+              />
+            </CardInput>
+          </div>
         </>
       ) : (
         <CardInput title="Unit Kerja Dikti">

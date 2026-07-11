@@ -7,6 +7,8 @@ import { MENULIST } from '@/pages/modules/website-utama/component/layout/menu.ts
 
 interface Props {
   collapsed: boolean
+  isMobile: boolean
+  setCollapsed: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 type MenuItem = {
@@ -22,7 +24,7 @@ type MenuItem = {
  * - collectOpenGroups akan menandai semua parent groupId yang punya child aktif.
  */
 
-export function SidebarProdi({ collapsed }: Props) {
+export function SidebarProdi({ collapsed, isMobile, setCollapsed }: Props) {
   const location = useLocation()
   const pathname = location.pathname
 
@@ -167,6 +169,8 @@ export function SidebarProdi({ collapsed }: Props) {
                         toggleGroup={toggleGroup}
                         isActivePath={isActivePath}
                         collapsed={collapsed}
+                        isMobile={isMobile}
+                        setCollapsed={setCollapsed}
                       />
                     ))}
                   </ul>
@@ -190,7 +194,7 @@ export function SidebarProdi({ collapsed }: Props) {
           )
 
           return row.path ? (
-            <Link key={groupId} to={row.path}>
+            <Link key={groupId} to={row.path} onClick={() => isMobile && setCollapsed(true)}>
               {content}
             </Link>
           ) : (
@@ -218,6 +222,8 @@ function TreeNodeWrapper({
   isActivePath,
   collapsed,
   length,
+  isMobile,
+  setCollapsed,
 }: any) {
   const groupId = makeGroupId(parentGroupId, index, item.name)
   return (
@@ -237,6 +243,8 @@ function TreeNodeWrapper({
         toggleGroup={toggleGroup}
         isActivePath={isActivePath}
         collapsed={collapsed}
+        isMobile={isMobile}
+        setCollapsed={setCollapsed}
       />
     </div>
   )
@@ -255,6 +263,8 @@ function TreeNode({
   toggleGroup,
   isActivePath,
   collapsed,
+  isMobile,
+  setCollapsed,
 }: any) {
   const hasChildren = !!item.child && item.child.length > 0
   const isOpen = groups[groupId] ?? false
@@ -300,6 +310,8 @@ function TreeNode({
                 isActivePath={isActivePath}
                 collapsed={collapsed}
                 length={item.child!.length}
+                isMobile={isMobile}
+                setCollapsed={setCollapsed}
               />
             ))}
           </ul>
@@ -322,7 +334,7 @@ function TreeNode({
     </div>
   )
 
-  return <li>{item.path ? <Link to={item.path}>{itemContent}</Link> : itemContent}</li>
+  return <li>{item.path ? <Link to={item.path} onClick={() => isMobile && setCollapsed(true)}>{itemContent}</Link> : itemContent}</li>
 }
 
 /* ---------------------------

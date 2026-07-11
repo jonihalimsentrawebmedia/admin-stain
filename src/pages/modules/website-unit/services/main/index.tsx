@@ -22,17 +22,17 @@ export const MainServiceList = () => {
             },
           ]}
         />
-        <div className="bg-blue-100 border-blue-500 p-1.5 border rounded-full flex items-center gap-1.5 text-blue-500 w-fit px-3 text-sm">
-          <MdInfo />
+        <div className="bg-blue-100 border-blue-500 p-2 sm:p-1.5 border rounded-lg sm:rounded-full flex items-center gap-1.5 text-blue-500 w-full sm:w-fit px-3 text-xs sm:text-sm">
+          <MdInfo className="shrink-0" />
           Layanan utama adalah layanan yang ditampilkan di beranda website. Maksimal 4 Layanan
         </div>
 
-        <div className="grid grid-cols-4 gap-5 w-fit">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 justify-items-center">
           {mainService?.map((item, index) => (
-            <div key={index} className={'flex-col flex items-center gap-1.5'}>
-              <div className="flex flex-col justify-center border-gray-300 rounded border p-5 items-center gap-1 size-[250px]">
-                <img src={item?.gambar_layanan} alt="asd" className={'size-24 object-contain'} />
-                <p className={'text-green-500 line-clamp-1'}>{item?.nama_layanan}</p>
+            <div key={index} className={'flex-col flex items-center gap-1.5 w-full max-w-[280px]'}>
+              <div className="flex flex-col justify-center border-gray-300 rounded border p-4 sm:p-5 items-center gap-1 w-full h-[250px]">
+                <img src={item?.gambar_layanan} alt="asd" className={'size-20 sm:size-24 object-contain'} />
+                <p className={'text-green-500 line-clamp-1 text-center'}>{item?.nama_layanan}</p>
                 <p className={'line-clamp-3 text-center text-gray-500 text-sm'}>
                   {item?.uraian_layanan}
                 </p>

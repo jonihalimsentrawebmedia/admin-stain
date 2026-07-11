@@ -13,8 +13,8 @@ export const NewsPublishedProfile = () => {
   return (
     <>
       <div className={'space-y-5'}>
-        <div className="flex gap-4 items-center justify-between">
-          <p className="text-2xl text-primary font-semibold">Berita</p>
+        <div className="flex flex-col sm:flex-row gap-2 items-start sm:items-center justify-between">
+          <p className="text-xl sm:text-2xl text-primary font-semibold">Berita</p>
 
           <ButtonGoToGuide titleGuide='Berita' valueGuide="PRODI_PROFIL_BERITA" />
         </div>

@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'react-toastify'
 import { Button } from '@/components/ui/button.tsx'
 import { BiPlus } from 'react-icons/bi'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import { Form } from '@/components/ui/form.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
@@ -56,7 +56,7 @@ export const ButtonAddAlbumProdi = () => {
         Tambah Album
       </Button>
 
-      <DialogCustom
+      <DialogBasic
         className={'rounded lg:max-w-xl'}
         open={open}
         setOpen={setOpen}
@@ -95,7 +95,7 @@ export const ButtonAddAlbumProdi = () => {
             </form>
           </Form>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

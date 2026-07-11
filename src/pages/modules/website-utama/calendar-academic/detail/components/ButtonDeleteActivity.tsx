@@ -71,9 +71,8 @@ const ButtonDeleteActivity = ({ data }: Props) => {
 
       <DialogCustom
         open={open}
-        className={'rounded min-w-sm sm:min-w-2xl'}
+        className={'rounded min-w-xs sm:min-w-2xl'}
         setOpen={setOpen}
-        width="50%"
         title={<p className="text-2xl text-red-500">Hapus Kegiatan Akademik</p>}
         description={'Anda yakin ingin menghapus kegiatan akademik ini?'}
       >

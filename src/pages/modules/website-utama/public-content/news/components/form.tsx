@@ -13,6 +13,8 @@ import { useNavigate } from 'react-router-dom'
 import { Separator } from '@/components/ui/separator.tsx'
 import { TreeCheckboxController } from '@/pages/modules/website-utama/public-content/component/TreeCheckbox.tsx'
 import { UseGetTreeData } from '@/pages/modules/website-utama/public-content/component/hooks.tsx'
+import ButtonGenerateNewsAI from '@/components/common/button/buttonGenerateAI.tsx'
+import { format } from 'date-fns'
 
 interface Props {
   form: UseFormReturn<INewsTypeForm>
@@ -20,19 +22,19 @@ interface Props {
   loading: boolean
   is_website_main?: boolean
   label?: string
+  url_ai: string
 }
 
 export const FormNewsContent = (props: Props) => {
-  const { label, form, HandleSave, loading, is_website_main } = props
+  const { label, form, HandleSave, loading, is_website_main, url_ai } = props
   const { newsCategory, loading: laod1 } = useGetNewsCategory({ isGetAll: true })
   const { treeNodes } = UseGetTreeData()
-
   const navigate = useNavigate()
 
   return (
     <>
       <Form {...form}>
-        <form className={'flex flex-col gap-5 p-5'} onSubmit={form.handleSubmit(HandleSave)}>
+        <form className={'flex flex-col gap-5 p-3 sm:p-5'} onSubmit={form.handleSubmit(HandleSave)}>
           <ButtonTitleGroup
             label={label ?? 'Tulis Berita'}
             buttonGroup={[
@@ -73,7 +75,7 @@ export const FormNewsContent = (props: Props) => {
           />
 
           <SelectBasicInput
-            selectClassName={'w-1/2'}
+            selectClassName={'w-full sm:w-1/2'}
             form={form}
             label={'Kategori Berita'}
             isRow
@@ -88,7 +90,20 @@ export const FormNewsContent = (props: Props) => {
             }
           />
 
-          <RichText form={form} name={'isi_berita'} label={'Isi Berita'} required />
+          <ButtonGenerateNewsAI
+            urL={url_ai}
+            form={form}
+            judul={form.watch('judul') ?? ''}
+            tanggal={format(new Date(), 'yyyy-MM-dd')}
+          />
+          <RichText
+            form={form}
+            name={'isi_berita'}
+            label={'Isi Berita'}
+            placeholder={'Isi Berita'}
+            isRow
+            required
+          />
 
           <TextInput
             form={form}
@@ -105,7 +120,7 @@ export const FormNewsContent = (props: Props) => {
             name={'tanggal_berita'}
             label={'Tanggal Berita'}
             type={'date'}
-            inputClassName={'bg-white w-1/2'}
+            inputClassName={'bg-white w-full sm:w-1/2'}
             isRequired
             isRow
           />
@@ -123,7 +138,7 @@ export const FormNewsContent = (props: Props) => {
             <>
               <Separator />
               <div className="p-4 bg-white w-full space-y-4">
-                <p className="text-2xl font-semibold text-primary">Unit Kerja Terkait</p>
+                <p className="text-lg sm:text-2xl font-semibold text-primary">Unit Kerja Terkait</p>
                 <TreeCheckboxController
                   name="list_unit"
                   control={form.control}

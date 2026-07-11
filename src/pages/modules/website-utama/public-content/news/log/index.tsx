@@ -18,10 +18,14 @@ export const LogActivityNewsPage = () => {
     <>
       <ButtonTitleGroup label={'Log Data'} buttonGroup={[]} isBack />
 
-      <div className={'flex items-start gap-x-8 mt-5'}>
-        <img src={detailNews?.gambar} className={'w-[320px] h-[240px] object-cover'} alt="imgae" />
+      <div className={'flex flex-col sm:flex-row items-start gap-4 sm:gap-x-8 mt-5'}>
+        <img
+          src={detailNews?.gambar}
+          className={'w-full sm:w-[320px] h-48 sm:h-[240px] object-cover rounded-lg'}
+          alt="imgae"
+        />
 
-        <div className={'flex flex-col gap-y-2 text-sm'}>
+        <div className={'flex flex-col gap-y-2 text-sm w-full'}>
           <p className="text-gray-500">Judul</p>
           <p dangerouslySetInnerHTML={{ __html: detailNews?.judul ?? '-' }} />
           <p className="text-gray-500">Kategori Berita</p>

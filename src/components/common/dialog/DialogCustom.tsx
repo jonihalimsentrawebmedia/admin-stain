@@ -56,6 +56,7 @@ export function DialogCustom({
         className={cn('bg-white p-6 pointer-events-auto', className)}
         style={{
           width: isAuto ? 'auto' : width || '70%',
+          maxWidth: 'calc(100vw - 2rem)',
           height: height || 'auto',
           maxHeight: '90vh',
           overflowY: 'auto',

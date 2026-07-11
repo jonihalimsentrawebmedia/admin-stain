@@ -59,7 +59,6 @@ export const ButtonDraftProdi = (data: INewsDetail) => {
 
       <DialogCustom
         open={open}
-        isAuto
         className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
         title={'Kembali Ke Draft'}

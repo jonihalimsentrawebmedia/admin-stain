@@ -30,8 +30,8 @@ export const GalleryProfileDetail = () => {
   return (
     <>
       <div className="flex flex-col gap-5">
-        <div className="flex gap-4 items-center justify-between">
-          <p className="text-2xl font-semibold">Gallery</p>
+        <div className="flex flex-col sm:flex-row gap-2 items-start sm:items-center justify-between">
+          <p className="text-xl sm:text-2xl font-semibold">Gallery</p>
 
           <ButtonGoToGuide titleGuide='Gallery' valueGuide="PRODI_PROFIL_GALERI_FOTO" />
         </div>

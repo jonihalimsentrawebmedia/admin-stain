@@ -116,8 +116,8 @@ const TableCustom = (props: Props) => {
     <div className="flex flex-col w-full gap-4 ">
       {isShowFilter && (
         <div className="flex flex-col gap-4 md:flex-row md:items-center justify-between">
-          <div className={`flex w-full items-end gap-4 ${addFilter ? '' : 'justify-between'}`}>
-            {addFilter}
+          <div className={`flex flex-col sm:flex-row w-full items-start sm:items-end gap-3 sm:gap-4 ${addFilter ? '' : 'justify-between'}`}>
+            {addFilter && <div className="w-full sm:w-auto">{addFilter}</div>}
             <Search
               onSearch={handleSearch}
               innerClassName={classNameSearch}

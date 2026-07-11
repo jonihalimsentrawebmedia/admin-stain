@@ -146,47 +146,50 @@ export default function DashboardLayout() {
   const module: IModulesList = JSON.parse(localStorage || '{}')
 
   return (
-    <div className="flex flex-col h-screen overflow-hidden! bg-gray-100">
+    <div className="flex flex-col h-dvh bg-gray-100">
       {/* Header */}
-      <header className="flex items-center justify-between bg-green-50 px-4 sm:px-6 py-3 border-b border-green-100">
-        <div className="flex items-center gap-4">
+      <header className="flex items-center justify-between bg-green-50 px-3 sm:px-6 py-2 sm:py-3 border-b border-green-100 shrink-0">
+        <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+          <button
+            className="text-green-700 sm:hidden shrink-0"
+            onClick={() => setSidebarOpen(!sidebarOpen)}
+          >
+            <Menu className="size-6" />
+          </button>
           <IconSettings />
-          <div>
-            <h1 className="text-xs sm:text-sm text-green-700 font-medium">
+          <div className="min-w-0">
+            <h1 className="text-[10px] sm:text-sm text-green-700 font-medium truncate">
               Manajemen Pengelolaan Website
             </h1>
-            <h2 className="text-base sm:text-lg font-semibold text-green-900">Pengaturan</h2>
+            <h2 className="text-sm sm:text-lg font-semibold text-green-900 truncate">Pengaturan</h2>
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           <Link to={'/modules'}>
             <IconModules />
           </Link>
-          <button className="text-green-700 sm:hidden" onClick={() => setSidebarOpen(!sidebarOpen)}>
-            <Menu className="w-6 h-6" />
-          </button>
           <ButtonProfile profileUser={profileUser} module={module} />
           <button
-            className="text-green-700 hidden sm:block"
+            className="text-green-700 hidden sm:block shrink-0"
             onClick={() => setSideBarSmall(!sidebarSmall)}
           >
-            <Menu className="w-6 h-6" />
+            <Menu className="size-6" />
           </button>
         </div>
       </header>
 
       {/* Body */}
-      <div className="flex flex-1 overflow-hidden!">
+      <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}
         <aside
-          className={`fixed sm:static z-50  top-0 left-0 h-full overflow-y-auto sm:h-auto border border-green-700 bg-green-700 text-white flex flex-col justify-between
-    ${sidebarSmall ? 'w-16' : 'w-64'}
+          className={`fixed sm:static z-40 top-0 left-0 h-full overflow-y-auto sm:h-auto border-r border-green-700 bg-green-700 text-white flex flex-col justify-between
+    ${sidebarSmall ? 'w-16' : 'w-60'}
     transform transition-all duration-300 ease-in-out
     ${sidebarOpen ? 'translate-x-0' : '-translate-x-full sm:translate-x-0'}
   `}
         >
-          <div className=" space-y-1 overflow-y-auto pb-8 pt-8 sm:mt-0">
+          <div className="space-y-1 overflow-y-auto pb-4 sm:pb-6 pt-16 sm:pt-4 px-2 sm:px-3">
             {menu.map((item, index) => (
               <SidebarItem
                 icon={item.icon}
@@ -198,37 +201,46 @@ export default function DashboardLayout() {
                 path={pathname}
                 children={item.children}
                 dropdown={item.children.length !== 0}
+                onNavigate={() => setSidebarOpen(false)}
               />
             ))}
           </div>
         </aside>
 
-        {/* Overlay untuk mobile */}
+        {/* Overlay untuk mobile — geser sidebar agar tidak nutup header */}
         {sidebarOpen && (
           <div
-            className="fixed inset-0 bg-black/40 sm:hidden"
+            className="fixed inset-0 bg-black/40 z-30 sm:hidden"
             onClick={() => setSidebarOpen(false)}
-          ></div>
+          />
         )}
 
         {/* Main Content */}
-        <main className="flex-1  bg-white p-4 sm:p-6 overflow-y-auto rounded-tr-lg">
-          <div className="h-full  rounded-lg pb-32  text-gray-400">
-            <div className=" pb-20">
-              <Outlet />
-            </div>
+        <main className="flex-1 bg-white p-3 sm:p-6 overflow-y-auto">
+          <div className="min-h-full pb-24">
+            <Outlet />
           </div>
         </main>
       </div>
 
-      <footer className="text-center bg-white w-full text-primary text-xs z-50 fixed bottom-0  py-2 border-t border-green-400">
+      <footer className="text-center bg-white w-full text-primary text-[10px] sm:text-xs z-50 fixed bottom-0 py-1.5 sm:py-2 border-t border-green-400 shrink-0">
         Admin Website © 2025
       </footer>
     </div>
   )
 }
 
-function SidebarItem({ icon, label, active, dropdown, link, hiddenLabel, children, path }: any) {
+function SidebarItem({
+  icon,
+  label,
+  active,
+  dropdown,
+  link,
+  hiddenLabel,
+  children,
+  path,
+  onNavigate,
+}: any) {
   const [open, setOpen] = useState(false)
   const isActive = active || open
   useEffect(() => {
@@ -243,55 +255,51 @@ function SidebarItem({ icon, label, active, dropdown, link, hiddenLabel, childre
       {children.length == 0 ? (
         <Link
           to={link}
-          className={`flex items-center gap-2 px-3 py-2 cursor-pointer text-sm font-medium
-      ${active ? 'border-l-white bg-[#F5FFFA] text-primary' : 'hover:bg-green-600 text-green-50'}`}
+          onClick={onNavigate}
+          className={`flex items-center gap-2 px-2 sm:px-3 py-2 cursor-pointer text-xs sm:text-sm font-medium rounded-md
+      ${active ? 'bg-[#F5FFFA] text-primary' : 'hover:bg-green-600 text-green-50'}`}
         >
-          <div className="flex items-center gap-2 flex-1">
+          <div className="flex items-center gap-2 flex-1 min-w-0">
             {icon}
-            {!hiddenLabel && <span>{label}</span>}
+            {!hiddenLabel && <span className="truncate">{label}</span>}
           </div>
-          {dropdown && <ChevronDown size={14} className="opacity-70" />}
+          {dropdown && <ChevronDown size={14} className="opacity-70 shrink-0" />}
         </Link>
       ) : (
         <div
-          className={`flex flex-col  gap-2 px-3  cursor-pointer text-sm font-medium
-      ${isActive ? 'border-l-white bg-[#F5FFFA] text-primary' : ' text-green-50'}`}
+          className={`flex flex-col gap-1 px-2 sm:px-3 py-1.5 cursor-pointer text-xs sm:text-sm font-medium rounded-md
+      ${isActive ? 'bg-[#F5FFFA] text-primary' : 'text-green-50'}`}
         >
           <div
-            onClick={() => {
-              setOpen(!open)
-            }}
-            className="flex py-2   gap-4 justify-between"
+            onClick={() => setOpen(!open)}
+            className="flex py-1.5 gap-2 justify-between items-center"
           >
-            <div className="flex  items-center gap-2 flex-1">
+            <div className="flex items-center gap-2 flex-1 min-w-0">
               {icon}
-              {!hiddenLabel && <span>{label}</span>}
+              {!hiddenLabel && <span className="truncate">{label}</span>}
             </div>
-            {dropdown && <ChevronDown size={14} className="opacity-70" />}
+            {dropdown && (
+              <ChevronDown
+                size={14}
+                className={`opacity-70 shrink-0 transition-transform ${open ? 'rotate-180' : ''}`}
+              />
+            )}
           </div>
           {open && (
-            <div
-              className={`   mb-4 transition-all ease-in-out duration-500  flex ml-6 flex-col gap-2 border-l ${
-                isActive ? 'border-l-primary' : 'border-l-white '
-              }`}
-            >
+            <div className="mb-2 flex ml-5 flex-col gap-1 border-l border-green-500 pl-2">
               {children.map((row: any, index: number) => (
-                <div key={row.link + index} className="flex  items-end gap-1">
-                  <div className={`w-2 h-px  ${isActive ? 'bg-primary' : 'bg-white'}`}></div>
-                  <Link
-                    to={row.link}
-                    key={row.link}
-                    className={`flex gap-2 relative top-2 w-full   items-end ${
-                      isActive
-                        ? `border-l-white bg-[#F5FFFA] ${
-                            path.includes(row.link) ? 'text-primary' : 'text-gray-500'
-                          } hover:text-primary `
-                        : 'hover:text-primary'
-                    }`}
-                  >
-                    <div className="">{row.label}</div>
-                  </Link>
-                </div>
+                <Link
+                  key={index}
+                  to={row.link}
+                  onClick={onNavigate}
+                  className={`block px-2 py-1.5 rounded text-xs ${
+                    path.includes(row.link)
+                      ? 'text-primary font-medium'
+                      : 'text-green-200 hover:text-white'
+                  }`}
+                >
+                  {row.label}
+                </Link>
               ))}
             </div>
           )}

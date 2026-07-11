@@ -58,95 +58,88 @@ export const SelectProdi = () => {
   }
 
   return (
-    <div className={'w-screen h-screen relative flex items-center justify-center'}>
-      <img
-        src={publicIdentity?.background ?? BG}
-        className={'w-screen h-screen absolute object-cover z-10'}
-      />
-      <div className="flex items-center justify-between relative z-20">
-        <Card className={'bg-white/30'}>
-          <CardContent>
-            <div className="w-xl bg-white p-5 rounded">
-              <Link to={'/modules'} className={'flex items-center gap-2 text-primary text-sm'}>
-                <ArrowLeft className={'text-primary'} />
-                Kembali
-              </Link>
-              <p className="text-xl mt-5 font-semibold">Pilih Data Prodi yang akan digunakan</p>
-              <Form {...form}>
-                <form
-                  onSubmit={form.handleSubmit(HandlerSubmit)}
-                  className={'flex flex-col gap-4 mt-5'}
-                >
-                  <SelectBasicInput
-                    form={form}
-                    name={'id_university'}
-                    isDisabled={loading}
-                    placeholder={'Pilih Universitas digunakan'}
-                    selectClassName={'z-50'}
-                    data={
-                      university?.map((row) => ({
-                        label: row?.nama,
-                        value: row?.id_satuan_organisasi,
-                      })) ?? []
-                    }
-                    fx={() => {
-                      if (form.watch('id_university')) {
-                        setParentId({
-                          ...parentId,
-                          id_university: form.watch('id_university'),
-                        })
-                      }
-                      form.setValue('id_faculty', '')
-                      form.setValue('id_prodi', '')
-                    }}
-                  />
+    <div
+      className="relative min-h-screen w-full bg-cover bg-center overflow-y-auto flex items-center justify-center p-3 sm:p-5"
+      style={{ backgroundImage: `url(${publicIdentity?.background ?? BG})` }}
+    >
+      <Card className="w-full max-w-lg backdrop-blur-md bg-white/80 shadow-xl border-0 rounded-2xl">
+        <CardContent className="p-5 sm:p-6 flex flex-col gap-5">
+          <Link to={'/modules'} className="flex items-center gap-2 text-primary text-sm w-fit">
+            <ArrowLeft className="size-4" />
+            Kembali
+          </Link>
+          <p className="text-base sm:text-xl font-semibold text-gray-800">Pilih Data Prodi yang akan digunakan</p>
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(HandlerSubmit)}
+              className="flex flex-col gap-4"
+            >
+              <SelectBasicInput
+                form={form}
+                name={'id_university'}
+                isDisabled={loading}
+                placeholder={'Pilih Universitas digunakan'}
+                selectClassName={'z-50'}
+                data={
+                  university?.map((row) => ({
+                    label: row?.nama,
+                    value: row?.id_satuan_organisasi,
+                  })) ?? []
+                }
+                fx={() => {
+                  if (form.watch('id_university')) {
+                    setParentId({
+                      ...parentId,
+                      id_university: form.watch('id_university'),
+                    })
+                  }
+                  form.setValue('id_faculty', '')
+                  form.setValue('id_prodi', '')
+                }}
+              />
 
-                  <SelectBasicInput
-                    form={form}
-                    name={'id_faculty'}
-                    placeholder={'Pilih Fakultas'}
-                    selectClassName={'z-40'}
-                    isDisabled={loading}
-                    data={
-                      faculty?.map((row) => ({
-                        label: row?.nama,
-                        value: row?.id_satuan_organisasi,
-                      })) ?? []
-                    }
-                    fx={() => {
-                      if (form.watch('id_faculty')) {
-                        setParentId({
-                          ...parentId,
-                          id_faculty: form.watch('id_faculty'),
-                        })
-                      }
-                      form.setValue('id_prodi', '')
-                    }}
-                  />
+              <SelectBasicInput
+                form={form}
+                name={'id_faculty'}
+                placeholder={'Pilih Fakultas'}
+                selectClassName={'z-40'}
+                isDisabled={loading}
+                data={
+                  faculty?.map((row) => ({
+                    label: row?.nama,
+                    value: row?.id_satuan_organisasi,
+                  })) ?? []
+                }
+                fx={() => {
+                  if (form.watch('id_faculty')) {
+                    setParentId({
+                      ...parentId,
+                      id_faculty: form.watch('id_faculty'),
+                    })
+                  }
+                  form.setValue('id_prodi', '')
+                }}
+              />
 
-                  <SelectBasicInput
-                    form={form}
-                    name={'id_prodi'}
-                    selectClassName={'z-30'}
-                    isDisabled={loading}
-                    placeholder={'Pilih Program Studi'}
-                    data={
-                      prodi?.map((row) => ({
-                        label: row?.nama,
-                        value: row?.id_satuan_organisasi,
-                      })) ?? []
-                    }
-                  />
+              <SelectBasicInput
+                form={form}
+                name={'id_prodi'}
+                selectClassName={'z-30'}
+                isDisabled={loading}
+                placeholder={'Pilih Program Studi'}
+                data={
+                  prodi?.map((row) => ({
+                    label: row?.nama,
+                    value: row?.id_satuan_organisasi,
+                  })) ?? []
+                }
+              />
 
-                  <div className="flex justify-center">
-                    <Button>Lanjutkan</Button>
-                  </div>
-                </form>
-              </Form>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+              <Button className="w-full sm:w-fit sm:mx-auto">Lanjutkan</Button>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
     </div>
   )
 }

@@ -6,6 +6,7 @@ import { ChevronRight } from 'lucide-react'
 
 interface Props {
   collapsed: boolean
+  setCollapsed: (value: boolean) => void
 }
 
 type MenuItem = {
@@ -21,7 +22,7 @@ type MenuItem = {
  * - collectOpenGroups akan menandai semua parent groupId yang punya child aktif.
  */
 
-export function SideNavUnit({ collapsed }: Props) {
+export function SideNavUnit({ collapsed, setCollapsed }: Props) {
   const location = useLocation()
   const pathname = location.pathname
 
@@ -171,6 +172,7 @@ export function SideNavUnit({ collapsed }: Props) {
                         toggleGroup={toggleGroup}
                         isActivePath={isActivePath}
                         collapsed={collapsed}
+                        setCollapsed={setCollapsed}
                       />
                     ))}
                   </ul>
@@ -194,7 +196,7 @@ export function SideNavUnit({ collapsed }: Props) {
           )
 
           return row.path ? (
-            <Link key={groupId} to={row.path}>
+            <Link key={groupId} to={row.path} onClick={() => setCollapsed(true)}>
               {content}
             </Link>
           ) : (
@@ -221,6 +223,7 @@ function TreeNodeWrapper({
   toggleGroup,
   isActivePath,
   collapsed,
+  setCollapsed,
   length,
 }: any) {
   const groupId = makeGroupId(parentGroupId, index, item.name)
@@ -241,6 +244,7 @@ function TreeNodeWrapper({
         toggleGroup={toggleGroup}
         isActivePath={isActivePath}
         collapsed={collapsed}
+        setCollapsed={setCollapsed}
       />
     </div>
   )
@@ -259,6 +263,7 @@ function TreeNode({
   toggleGroup,
   isActivePath,
   collapsed,
+  setCollapsed,
 }: any) {
   const hasChildren = !!item.child && item.child.length > 0
   const isOpen = groups[groupId] ?? false
@@ -303,6 +308,7 @@ function TreeNode({
                 toggleGroup={toggleGroup}
                 isActivePath={isActivePath}
                 collapsed={collapsed}
+                setCollapsed={setCollapsed}
                 length={item.child!.length}
               />
             ))}
@@ -326,7 +332,17 @@ function TreeNode({
     </div>
   )
 
-  return <li>{item.path ? <Link to={item.path}>{itemContent}</Link> : itemContent}</li>
+  return (
+    <li>
+      {item.path ? (
+        <Link to={item.path} onClick={() => setCollapsed(true)}>
+          {itemContent}
+        </Link>
+      ) : (
+        itemContent
+      )}
+    </li>
+  )
 }
 
 /* ---------------------------

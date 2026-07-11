@@ -100,8 +100,8 @@ const ContactUsProfilePage = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
-        <div className="flex justify-between items-center">
-          <div className="text-primary text-2xl font-medium">Hubungi Kami</div>
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+          <div className="text-primary text-xl sm:text-2xl font-medium">Hubungi Kami</div>
           <div className="flex gap-4 items-center">
             <ButtonGoToGuide titleGuide="Hubungi Kami" valueGuide="PRODI_PROFIL_HUBUNGI_KAMI" />
             {isEdit ? (

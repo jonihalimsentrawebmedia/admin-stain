@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { Bar, BarChart, Tooltip, XAxis, YAxis } from 'recharts'
 import { Plus } from 'lucide-react'
 import {
   UseGetApprovedList,
@@ -124,7 +124,7 @@ export default function DashboardAdmin() {
       {/* Konten & Akses */}
       <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
         <div className={isEditor ? 'xl:col-span-4' : 'xl:col-span-3'}>
-          <p className="text-primary font-semibold text-2xl">Konten Yang Diajukan</p>
+          <p className="text-primary font-semibold text-lg sm:text-2xl mb-3">Konten Yang Diajukan</p>
           <TabsListCustom data={TabsList} value={tabsName} onChange={setTabsName} />
         </div>
 
@@ -151,101 +151,80 @@ export default function DashboardAdmin() {
 
       <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
         <Card className={isEditor ? 'xl:col-span-4' : 'xl:col-span-3'}>
-          <CardHeader>
-            <CardTitle className={'text-primary'}>Tren Kunjungan Website</CardTitle>
+          <CardHeader className="p-4 sm:p-6">
+            <CardTitle className="text-primary text-base sm:text-lg">Tren Kunjungan Website</CardTitle>
           </CardHeader>
-          <CardContent className="h-80">
+          <CardContent className="p-2 sm:p-6">
             <SelectBasic
-              className={'mb-2'}
-              label={'Data Bersadarkan'}
+              className="mb-2 sm:mb-4"
+              label="Data Berdasarkan"
               data={listMode}
               value={mode}
               onChange={setMode}
               isRow
             />
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={chartData ?? []} margin={{ bottom: 60 }}>
-                <XAxis
-                  dataKey="name"
-                  tick={{
-                    fontSize: '12px',
-                  }}
-                  angle={mode === 'harian' ? -70 : mode == 'bulanan' ? -45 : 0}
-                  textAnchor="end"
-                  interval={0}
-                  height={60}
-                />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="value" fill="#8884d8" />
-              </BarChart>
-            </ResponsiveContainer>
+            <div className="overflow-x-auto">
+              <div style={{ width: Math.max(chartData?.length * 55, 700) }} className="h-[300px] sm:h-[400px]">
+                <BarChart
+                  width={Math.max(chartData?.length * 55, 700)}
+                  height={400}
+                  data={chartData ?? []}
+                  margin={{ bottom: 60, left: 0, right: 8 }}
+                >
+                  <XAxis
+                    dataKey="name"
+                    tick={{ fontSize: 12, fontWeight: 500 }}
+                    angle={mode === 'harian' ? -40 : mode === 'bulanan' ? -20 : 0}
+                    textAnchor="end"
+                    interval={0}
+                    height={100}
+                  />
+                  <YAxis tick={{ fontSize: 12 }} width={45} />
+                  <Tooltip />
+                  <Bar dataKey="value" fill="#8884d8" radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </div>
+            </div>
           </CardContent>
         </Card>
 
         {!isEditor && (
-          <div className="space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-1 gap-4">
             <Card>
-              <CardHeader>
-                <CardTitle>Jenis Pengunjung</CardTitle>
+              <CardHeader className="p-3 sm:p-6">
+                <CardTitle className="text-sm sm:text-base">Jenis Pengunjung</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-2">
-                <div className="flex justify-between">
-                  <span>Pengunjung Baru</span>
-                  <span>
-                    {visitor?.baru} (
-                    {(
-                      ((visitor?.baru ?? 0) /
-                        ((visitor?.baru ?? 0) + (visitor?.kembali ?? 0) || 1)) *
-                      100
-                    ).toFixed(2)}
-                    %)
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Pengunjung Kembali</span>
-                  <span>
-                    {visitor?.kembali} (
-                    {(
-                      ((visitor?.kembali ?? 0) /
-                        ((visitor?.baru ?? 0) + (visitor?.kembali ?? 0) || 1)) *
-                      100
-                    ).toFixed(2)}
-                    %)
-                  </span>
-                </div>
+              <CardContent className="space-y-2 p-3 sm:p-6 pt-0">
+                {[
+                  { label: 'Pengunjung Baru', value: visitor?.baru ?? 0, total: (visitor?.baru ?? 0) + (visitor?.kembali ?? 0) },
+                  { label: 'Pengunjung Kembali', value: visitor?.kembali ?? 0, total: (visitor?.baru ?? 0) + (visitor?.kembali ?? 0) },
+                ].map((item) => (
+                  <div key={item.label} className="flex items-center justify-between gap-3 p-2 bg-gray-50 rounded-lg">
+                    <span className="text-xs sm:text-sm text-gray-600">{item.label}</span>
+                    <span className="text-xs sm:text-sm font-semibold whitespace-nowrap">
+                      {item.value} ({item.total > 0 ? ((item.value / item.total) * 100).toFixed(2) : '0.00'}%)
+                    </span>
+                  </div>
+                ))}
               </CardContent>
             </Card>
 
             <Card>
-              <CardHeader>
-                <CardTitle>Perangkat</CardTitle>
+              <CardHeader className="p-3 sm:p-6">
+                <CardTitle className="text-sm sm:text-base">Perangkat</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-2">
-                <div className="flex justify-between">
-                  <span>Desktop</span>
-                  <span>
-                    {device?.desktop} (
-                    {(
-                      ((device?.desktop ?? 0) /
-                        ((device?.mobile ?? 0) + (device?.desktop ?? 0) || 1)) *
-                      100
-                    ).toFixed(2)}
-                    %)
-                  </span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Mobile</span>
-                  <span>
-                    {device?.mobile} (
-                    {(
-                      ((device?.mobile ?? 0) /
-                        ((device?.mobile ?? 0) + (device?.desktop ?? 0) || 1)) *
-                      100
-                    ).toFixed(2)}
-                    %)
-                  </span>
-                </div>
+              <CardContent className="space-y-2 p-3 sm:p-6 pt-0">
+                {[
+                  { label: 'Desktop', value: device?.desktop ?? 0, total: (device?.desktop ?? 0) + (device?.mobile ?? 0) },
+                  { label: 'Mobile', value: device?.mobile ?? 0, total: (device?.desktop ?? 0) + (device?.mobile ?? 0) },
+                ].map((item) => (
+                  <div key={item.label} className="flex items-center justify-between gap-3 p-2 bg-gray-50 rounded-lg">
+                    <span className="text-xs sm:text-sm text-gray-600">{item.label}</span>
+                    <span className="text-xs sm:text-sm font-semibold whitespace-nowrap">
+                      {item.value} ({item.total > 0 ? ((item.value / item.total) * 100).toFixed(2) : '0.00'}%)
+                    </span>
+                  </div>
+                ))}
               </CardContent>
             </Card>
           </div>

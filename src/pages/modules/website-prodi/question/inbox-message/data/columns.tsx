@@ -22,7 +22,7 @@ export const ColumnsMessageProdi = () => {
       header: 'Pengirim',
       cell: ({ row }) => {
         return (
-          <div className={'grid grid-cols-2 gap-4 text-sm '}>
+          <div className={'grid lg:grid-cols-2 gap-4 text-sm '}>
             <p className="text-gray-500">Nama</p>
             <p>{row?.original?.nama}</p>
             <p className="text-gray-500">Email</p>

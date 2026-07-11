@@ -9,12 +9,12 @@ export const SideMenuProfile = () => {
     <>
       <Card className={'rounded py-5 h-fit'}>
         <CardContent className={'px-5'}>
-          <ul className={'flex flex-col gap-2.5'}>
+          <ul className={'flex lg:flex-col gap-2.5 lg:w-full w-max'}>
             {MENUPROFILE?.map((item, index) => (
               <Link to={item?.path} key={index}>
                 <li
-                  className={`flex items-center text-gray-400 gap-1.5 p-1.5 rounded
-                   ${pathname.includes(item?.path) && 'bg-[#CCE6D9] border border-primary text-gray-900'}
+                  className={`flex items-center text-gray-400 gap-1.5 p-1.5 rounded whitespace-nowrap
+                   ${pathname.includes(item?.path) ? 'bg-[#CCE6D9] border border-primary text-gray-900' : ''}
                    `}
                 >
                   <IconTitleText className={pathname.includes(item.path)?'fill-gray-900':'fill-gray-400'} />

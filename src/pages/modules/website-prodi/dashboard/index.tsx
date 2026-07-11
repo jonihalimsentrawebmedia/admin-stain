@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { Bar, BarChart, Tooltip, XAxis, YAxis } from 'recharts'
 import { Plus } from 'lucide-react'
 import { TabsListCustom } from '@/pages/modules/website-utama/public-content/slider/components/tabsList.tsx'
 import { useState } from 'react'
@@ -80,8 +80,8 @@ export default function DashboardAdminProdi() {
 
   return (
     <div className="min-h-screen space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+        <h1 className="text-xl sm:text-2xl font-semibold">
           Selamat Datang <span className="text-primary">{profileUser?.nama_lengkap}</span>
         </h1>
         <Link
@@ -93,7 +93,7 @@ export default function DashboardAdminProdi() {
             <FiExternalLink />
             Buka Website
           </Button>
-          <p className="text-primary text-sm">{session?.domain}</p>
+          <p className="text-primary text-xs sm:text-sm truncate max-w-[200px]">{session?.domain}</p>
         </Link>
       </div>
 
@@ -146,7 +146,7 @@ export default function DashboardAdminProdi() {
           <CardHeader>
             <CardTitle className={'text-primary'}>Tren Kunjungan Website</CardTitle>
           </CardHeader>
-          <CardContent className="h-80">
+          <CardContent className="p-2 sm:p-6">
             <SelectBasic
               className={'mb-2'}
               label={'Data Bersadarkan'}
@@ -155,20 +155,28 @@ export default function DashboardAdminProdi() {
               onChange={setMode}
               isRow
             />
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={chartData ?? []} margin={{ bottom: 60 }}>
-                <XAxis
-                  dataKey="name"
-                  angle={mode === 'harian' ? -75 : mode == 'bulanan' ? -45 : 0}
-                  textAnchor="end"
-                  interval={0}
-                  height={60}
-                />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="value" fill="#8884d8" />
-              </BarChart>
-            </ResponsiveContainer>
+            <div className="overflow-x-auto">
+              <div style={{ width: Math.max(chartData?.length * 55, 600) }} className="h-[300px] sm:h-[400px]">
+                <BarChart
+                  width={Math.max(chartData?.length * 55, 600)}
+                  height={400}
+                  data={chartData ?? []}
+                  margin={{ bottom: 60 }}
+                >
+                  <XAxis
+                    dataKey="name"
+                    tick={{ fontSize: 12, fontWeight: 500 }}
+                    angle={mode === 'harian' ? -40 : mode === 'bulanan' ? -20 : 0}
+                    textAnchor="end"
+                    interval={0}
+                    height={100}
+                  />
+                  <YAxis tick={{ fontSize: 12 }} width={45} />
+                  <Tooltip />
+                  <Bar dataKey="value" fill="#8884d8" radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </div>
+            </div>
           </CardContent>
         </Card>
 

@@ -23,31 +23,32 @@ export function HeaderProdi(props: Props) {
   const { session } = UseGetProdiSession()
 
   return (
-    <header className="py-4 px-5 bg-[#E9FFF1] border-b border-green-200 flex items-center justify-between w-full">
+    <header className="p-2 lg:py-4 lg:px-5 bg-[#E9FFF1] border-b border-green-200 flex items-center justify-between w-full">
       <div className="flex items-center gap-4">
         <Link to={'/modules'} className={'p-2'}>
           <img src={module?.gambar} alt="gambar" className="size-10" />
         </Link>
         <div className="flex flex-col">
-          <p className="text-sm font-semibold text-primary">Manajemen Pengelolaan Website</p>
-          <p className="text-2xl font-semibold">Prodi - {session?.nama_prodi}</p>
+          <p className="text-xs lg:text-sm font-semibold text-primary">Manajemen Pengelolaan Website</p>
+          <p className="text-sm lg:text-2xl font-semibold">Prodi - {session?.nama_prodi}</p>
         </div>
       </div>
-      <div className="flex items-center gap-5">
-        <div className="flex items-center gap-4">
+
+      <div className="flex items-center gap-2 lg:gap-5">
+        <div className="hidden lg:flex items-center gap-4">
           <div className="text-sm text-gray-600">Ganti Data:</div>
           <ButtonSessionProdi session={session} />
         </div>
         <Link to={'/modules'}>
           <IconModules />
         </Link>
-        <div className="flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-4">
           <NotificationListProdi />
           <ButtonProfile module={module} profileUser={profileUser} />
-          <button onClick={() => setCollapsed(!collapsed)}>
-            <RiMenuLine />
-          </button>
         </div>
+        <button onClick={() => setCollapsed(!collapsed)}>
+          <RiMenuLine className={'lg:size-5'} />
+        </button>
       </div>
     </header>
   )

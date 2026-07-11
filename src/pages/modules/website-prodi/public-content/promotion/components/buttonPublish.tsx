@@ -12,7 +12,7 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import type { IPromotion } from '@/pages/modules/website-prodi/public-content/promotion/data/types.tsx'
 
 export const ButtonPublishPromotionProdi = (data: IPromotion) => {
@@ -57,9 +57,8 @@ export const ButtonPublishPromotionProdi = (data: IPromotion) => {
         Publish Sekarang
       </Button>
 
-      <DialogCustom
+      <DialogBasic
         open={open}
-        isAuto
         className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
         title={'Ajukan Ke Editor'}
@@ -115,7 +114,7 @@ export const ButtonPublishPromotionProdi = (data: IPromotion) => {
             />
           </div>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

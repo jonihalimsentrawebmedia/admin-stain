@@ -23,12 +23,12 @@ const BackupDataView = () => {
     <div className="flex flex-col gap-4">
       <ButtonTitleGroup buttonGroup={[]} label="Backup Data" />
       <DetailField data={field} form={form} />
-      <div className="flex gap-2 items-center">
+      <div className="flex flex-col sm:flex-row gap-2 sm:items-center">
         <Button
           variant={'outline'}
           disabled={loading || loadingDownload}
           onClick={handleCreateBackup}
-          className="border-primary text-primary hover:text-primary"
+          className="border-primary text-primary hover:text-primary w-full sm:w-fit"
         >
           Buat Backup
         </Button>
@@ -36,7 +36,7 @@ const BackupDataView = () => {
           variant={'outline'}
           disabled={loading || loadingDownload}
           onClick={handleDownloadBackup}
-          className="border-primary text-primary hover:text-primary"
+          className="border-primary text-primary hover:text-primary w-full sm:w-fit"
         >
           Download
         </Button>

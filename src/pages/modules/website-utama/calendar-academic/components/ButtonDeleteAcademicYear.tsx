@@ -4,11 +4,11 @@ import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import DetailField from '@/components/common/field/DetailField'
 import { Button } from '@/components/ui/button'
 import { Trash2, X } from 'lucide-react'
 import { FaTrash } from 'react-icons/fa'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 interface Props {
   data: AcademicYearList
@@ -60,12 +60,11 @@ const ButtonDeleteAcademicYear = ({ data }: Props) => {
         <FaTrash />
       </button>
 
-      <DialogCustom
+      <DialogBasic
         open={open}
         className={'rounded lg:min-w-2xl'}
         setOpen={setOpen}
-        width="50%"
-        title={<p className="text-2xl text-red-500">Hapus Kalender Akademik</p>}
+        title={<p className="lg:text-2xl text-red-500">Hapus Kalender Akademik</p>}
         description={'Anda yakin ingin menghapus kalender akademik ini?'}
       >
         <DetailField data={field} form={form} />
@@ -86,7 +85,7 @@ const ButtonDeleteAcademicYear = ({ data }: Props) => {
             Hapus
           </Button>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

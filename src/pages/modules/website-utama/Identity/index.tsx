@@ -69,7 +69,7 @@ export const PageIdentity = () => {
           ]}
         >
           <AccordionCustom name={'pengantar'} title={'Pengantar'}>
-            <div className="grid grid-cols-[12rem_1fr] gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-[12rem_1fr] gap-2 md:gap-5">
               <p className="text-gray-500">Teks Pengantar</p>
               <div
                 className={'tiptap ProseMirror simple-editor'}
@@ -89,7 +89,7 @@ export const PageIdentity = () => {
           </AccordionCustom>
 
           <AccordionCustom name={'nama'} title={'Nama'}>
-            <div className="grid grid-cols-[12rem_1fr] gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-[12rem_1fr] gap-2 md:gap-5">
               <p className="text-gray-500">Nama</p>
               <div
                 className={'tiptap ProseMirror simple-editor'}
@@ -99,7 +99,7 @@ export const PageIdentity = () => {
           </AccordionCustom>
 
           <AccordionCustom name={'kedudukan'} title={'Kedudukan'}>
-            <div className="grid grid-cols-[12rem_1fr] gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-[12rem_1fr] gap-2 md:gap-5">
               <p className="text-gray-500">Kedudukan</p>
               <div
                 className={'tiptap ProseMirror simple-editor'}
@@ -109,7 +109,7 @@ export const PageIdentity = () => {
           </AccordionCustom>
 
           <AccordionCustom name={'berdiri'} title={'Berdiri'}>
-            <div className="grid grid-cols-[12rem_1fr] gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-[12rem_1fr] gap-2 md:gap-5">
               <p className="text-gray-500">Berdiri</p>
               <div
                 className={'tiptap ProseMirror simple-editor'}
@@ -119,7 +119,7 @@ export const PageIdentity = () => {
           </AccordionCustom>
 
           <AccordionCustom name={'busana'} title={'Busana Akademik'}>
-            <div className="grid grid-cols-[12rem_1fr] gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-[12rem_1fr] gap-2 md:gap-5">
               <p className="text-gray-500">Busana Akademik</p>
               <div
                 className={'tiptap ProseMirror simple-editor'}
@@ -129,7 +129,7 @@ export const PageIdentity = () => {
           </AccordionCustom>
 
           <AccordionCustom name={'lambang'} title={'Lambang'}>
-            <div className="grid grid-cols-[12rem_1fr] gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-[12rem_1fr] gap-2 md:gap-5">
               <p className="text-gray-500">Gambar</p>
               <div>
                 <img
@@ -147,7 +147,7 @@ export const PageIdentity = () => {
           </AccordionCustom>
 
           <AccordionCustom name={'bendera'} title={'Bendera'}>
-            <div className="grid grid-cols-[12rem_1fr] gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-[12rem_1fr] gap-2 md:gap-5">
               <p className="text-gray-500">Gambar</p>
               <div>
                 <img
@@ -165,7 +165,7 @@ export const PageIdentity = () => {
           </AccordionCustom>
 
           <AccordionCustom name={'mars'} title={'Mars & Hymne'}>
-            <div className="grid grid-cols-[12rem_1fr] gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-[12rem_1fr] gap-2 md:gap-5">
               <p className="text-gray-500">Mars & Hymne</p>
               <div
                 className={'tiptap ProseMirror simple-editor'}

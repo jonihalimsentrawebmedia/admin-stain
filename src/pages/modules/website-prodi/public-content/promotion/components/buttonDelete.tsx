@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { FaTrash } from 'react-icons/fa'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import {
   Carousel,
   CarouselContent,
@@ -56,9 +56,8 @@ export const ButtonDeletePromotionProdi = (data: IPromotion) => {
         <FaTrash />
       </button>
 
-      <DialogCustom
+      <DialogBasic
         open={open}
-        isAuto
         className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
         title={<p className={'text-red-500'}>Hapus Data Promosi?</p>}
@@ -128,7 +127,7 @@ export const ButtonDeletePromotionProdi = (data: IPromotion) => {
             />
           </div>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }
