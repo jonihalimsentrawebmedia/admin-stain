@@ -52,8 +52,8 @@ const ProfileVisionMissionPage = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
-        <div className="flex justify-between items-center">
-          <p className="text-2xl font-medium">Visi, Misi, Dan Tujuan</p>
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+          <p className="text-xl sm:text-2xl font-medium">Visi, Misi, Dan Tujuan</p>
           <div className="flex gap-4 items-center">
             <ButtonGoToGuide titleGuide='Visi, Misi, Dan Tujuan' valueGuide="PRODI_PROFIL_VISI_MISI" />
 

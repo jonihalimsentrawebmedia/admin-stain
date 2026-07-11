@@ -81,7 +81,7 @@ export const AcademicRegulation = () => {
           defaultValue={['pengantar', 'isi', 'penutup', 'dokumen']}
         >
           <AccordionCustom name={'pengantar'} title={'Pengantar'}>
-            <div className="grid grid-cols-[12rem_1fr] gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-[12rem_1fr] gap-2 md:gap-5">
               <p className="text-gray-500">Pengantar</p>
               <div
                 className={'tiptap ProseMirror simple-editor'}
@@ -90,7 +90,7 @@ export const AcademicRegulation = () => {
             </div>
           </AccordionCustom>
           <AccordionCustom name={'isi'} title={'Isi'}>
-            <div className="grid grid-cols-[12rem_1fr] gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-[12rem_1fr] gap-2 md:gap-5">
               <p className="text-gray-500">Isi</p>
               <div
                 className={'tiptap ProseMirror simple-editor'}
@@ -99,7 +99,7 @@ export const AcademicRegulation = () => {
             </div>
           </AccordionCustom>
           <AccordionCustom name={'penutup'} title={'Penutup'}>
-            <div className="grid grid-cols-[12rem_1fr] gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-[12rem_1fr] gap-2 md:gap-5">
               <p className="text-gray-500">Penutup</p>
               <div
                 className={'tiptap ProseMirror simple-editor'}
@@ -108,7 +108,7 @@ export const AcademicRegulation = () => {
             </div>
           </AccordionCustom>
           <AccordionCustom name={'dokumen'} title={'Dokumen'}>
-            <div className="grid grid-cols-[12rem_1fr] gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-[12rem_1fr] gap-2 md:gap-5">
               <p className="text-gray-500">Isi Pengantar</p>
               <div
                 className={'tiptap ProseMirror simple-editor'}

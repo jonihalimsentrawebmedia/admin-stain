@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import { Form } from '@/components/ui/form.tsx'
 import { UploadImageRatio } from '@/pages/modules/website-utama/public-content/facilities/components/uploadImageRatio.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
@@ -68,7 +68,7 @@ export const ButtonEditPhotoProdi = (data: IGalleryPhoto) => {
         <HiPencil />
       </button>
 
-      <DialogCustom
+      <DialogBasic
         open={open}
         setOpen={setOpen}
         title={'Ubah Data Foto'}
@@ -109,7 +109,7 @@ export const ButtonEditPhotoProdi = (data: IGalleryPhoto) => {
             </form>
           </Form>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

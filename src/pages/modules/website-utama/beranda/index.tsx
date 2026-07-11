@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { Bar, BarChart, Tooltip, XAxis, YAxis } from 'recharts'
 import { Plus } from 'lucide-react'
 import {
   UseGetApprovedList,
@@ -164,22 +164,25 @@ export default function DashboardAdmin() {
               isRow
             />
             <div className="overflow-x-auto">
-              <div className="min-w-[700px] sm:min-w-[900px] h-[300px] sm:h-[400px]">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={chartData ?? []} margin={{ bottom: 60, left: 0, right: 8 }}>
-                    <XAxis
-                      dataKey="name"
-                      tick={{ fontSize: 11 }}
-                      angle={mode === 'harian' ? -60 : mode === 'bulanan' ? -35 : 0}
-                      textAnchor="end"
-                      interval={0}
-                      height={80}
-                    />
-                    <YAxis tick={{ fontSize: 12 }} width={45} />
-                    <Tooltip />
-                    <Bar dataKey="value" fill="#8884d8" radius={[4, 4, 0, 0]} />
-                  </BarChart>
-                </ResponsiveContainer>
+              <div style={{ width: Math.max(chartData?.length * 55, 700) }} className="h-[300px] sm:h-[400px]">
+                <BarChart
+                  width={Math.max(chartData?.length * 55, 700)}
+                  height={400}
+                  data={chartData ?? []}
+                  margin={{ bottom: 60, left: 0, right: 8 }}
+                >
+                  <XAxis
+                    dataKey="name"
+                    tick={{ fontSize: 12, fontWeight: 500 }}
+                    angle={mode === 'harian' ? -40 : mode === 'bulanan' ? -20 : 0}
+                    textAnchor="end"
+                    interval={0}
+                    height={100}
+                  />
+                  <YAxis tick={{ fontSize: 12 }} width={45} />
+                  <Tooltip />
+                  <Bar dataKey="value" fill="#8884d8" radius={[4, 4, 0, 0]} />
+                </BarChart>
               </div>
             </div>
           </CardContent>

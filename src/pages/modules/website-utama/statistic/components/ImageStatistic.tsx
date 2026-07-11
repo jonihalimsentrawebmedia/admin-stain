@@ -109,7 +109,7 @@ const ImageStatistic = ({
   return (
     <div className="flex flex-col gap-2">
       <div
-        className={`w-full relative flex items-center flex-col justify-center  h-80 ${isEdit ? 'border border-primary bg-[#F5FFFA]' : 'bg-[#E9E9E9]'}`}
+        className={`w-full relative flex items-center flex-col justify-center  h-48 sm:h-80 ${isEdit ? 'border border-primary bg-[#F5FFFA]' : 'bg-[#E9E9E9]'}`}
       >
         {preview !== '' ? (
           <img src={preview ?? ''} className="h-full w-full object-center object-cover" alt="" />

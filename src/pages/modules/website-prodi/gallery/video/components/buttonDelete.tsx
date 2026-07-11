@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import type { IGalleryVideo } from '@/pages/modules/website-utama/public-content/gallery/video/data'
 import { Link } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
@@ -40,14 +40,14 @@ export const ButtonDeleteVideoProdi = (data: IGalleryVideo) => {
         <FaTrash />
       </button>
 
-      <DialogCustom
+      <DialogBasic
         open={open}
         setOpen={setOpen}
         title={<p className={'text-red-500'}>Hapus Galeri Video</p>}
         description={'Apakah anda yakin untuk menghapus galeri video yang dipilih?'}
         className={'rounded lg:max-w-2xl'}
       >
-        <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
+        <div className={'grid lg:grid-cols-[12rem_1fr] gap-4'}>
           <p className="text-gray-500">Judul Gallery</p>
           <p>{data?.judul}</p>
           <p className="text-gray-500">Link Video</p>
@@ -77,7 +77,7 @@ export const ButtonDeleteVideoProdi = (data: IGalleryVideo) => {
             },
           ]}
         />
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

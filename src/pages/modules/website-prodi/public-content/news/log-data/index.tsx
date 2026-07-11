@@ -18,8 +18,8 @@ export const LogActivityNewsProdiPage = () => {
     <>
       <ButtonTitleGroup label={'Log Data'} buttonGroup={[]} isBack />
 
-      <div className={'flex items-start gap-x-8 mt-5'}>
-        <img src={detail?.gambar} className={'w-[320px] h-[240px] object-cover'} alt="imgae" />
+      <div className={'flex flex-col lg:flex-row items-start gap-6 lg:gap-x-8 mt-5'}>
+        <img src={detail?.gambar} className={'w-full lg:w-[320px] h-[240px] object-cover'} alt="imgae" />
 
         <div className={'flex flex-col gap-y-2 text-sm'}>
           <p className="text-gray-500">Judul</p>

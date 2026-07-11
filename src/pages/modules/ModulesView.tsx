@@ -70,7 +70,7 @@ const ModulesView = () => {
           <div className="rounded-lg gap-4 grid grid-cols-12">
             <div className="col-span-12 lg:col-span-8 flex flex-col gap-4 p-4 lg:p-5 rounded-lg bg-white">
               <div className="font-bold text-neutral text-lg lg:text-xl">Daftar Modul</div>
-              <div className="grid w-full text-center grid-cols-2 gap-3 md:gap-4 md:grid-cols-3 lg:grid-cols-5 max-h-[420px] overflow-auto">
+              <div className="grid w-full text-center grid-cols-2 gap-3 md:gap-4 md:grid-cols-3 lg:grid-cols-5 max-h-[420px] overflow-auto p-1">
                 {modules.map((item, k) => (
                   <div
                     key={k}
@@ -98,9 +98,9 @@ const ModulesView = () => {
                     }}
                     to={GetModuleUrl(moduleSelect)}
                   >
-                    <Card className="hover:shadow-md transition-shadow duration-200">
-                      <CardContent className="p-3 lg:p-4">
-                        <div className="text-[#295AA3] text-sm lg:text-base">Admin {moduleSelect.nama_module}</div>
+                    <Card className="hover:shadow-md transition-shadow duration-200 p-2">
+                      <CardContent className="p-3 lg:p-2">
+                        <div className="text-[#295AA3] text-sm lg:text-xl">Admin {moduleSelect.nama_module}</div>
                       </CardContent>
                     </Card>
                   </Link>

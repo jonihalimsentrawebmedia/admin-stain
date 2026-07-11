@@ -23,29 +23,31 @@ export function Header(props: Props) {
   const { session } = UseGetSessionEditor()
 
   return (
-    <header className="py-4 px-28 bg-[#E9FFF1] border-b border-green-200 flex items-center justify-between w-full">
-      <div className="flex items-center gap-4">
-        <Link to={'/modules'} className={'p-2'}>
-          <img src={module?.gambar} alt="gambar" className="size-10" />
+    <header className="py-3 px-3 sm:py-4 sm:px-28 bg-[#E9FFF1] border-b border-green-200 flex items-center justify-between w-full gap-2">
+      <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+        <Link to={'/modules'} className={'p-1.5 sm:p-2 shrink-0'}>
+          <img src={module?.gambar} alt="gambar" className="size-8 sm:size-10" />
         </Link>
-        <div className="flex flex-col">
-          <p className="text-sm font-semibold text-primary">Manajemen Editor</p>
-          <p className="text-2xl font-semibold">{session?.nama_universitas}</p>
+        <div className="flex flex-col min-w-0">
+          <p className="text-xs sm:text-sm font-semibold text-primary truncate">Manajemen Editor</p>
+          <p className="text-base sm:text-2xl font-semibold truncate">{session?.nama_universitas}</p>
         </div>
       </div>
-      <div className="flex items-center gap-5">
-        <div className="flex items-center gap-4">
-          <div className="text-sm text-gray-600">Ganti Data:</div>
+      <div className="flex items-center gap-1 sm:gap-5 shrink-0">
+        <div className="hidden sm:flex items-center gap-4">
+          <div className="text-sm text-gray-600 whitespace-nowrap">Ganti Data:</div>
           <ButtonSessionEditor />
         </div>
-        <a href={'/modules'}>
+        <a href={'/modules'} className="hidden sm:block">
           <IconModules />
         </a>
-        <div className="flex items-center gap-4">
-          <IoMdNotificationsOutline className="text-xl text-green-700 cursor-pointer" />
-          <ButtonProfile module={module} profileUser={profileUser} />
-          <button onClick={() => setCollapsed(!collapsed)}>
-            <RiMenuLine />
+        <div className="flex items-center gap-1 sm:gap-4">
+          <IoMdNotificationsOutline className="text-lg sm:text-xl text-green-700 cursor-pointer" />
+          <div className="hidden sm:block">
+            <ButtonProfile module={module} profileUser={profileUser} />
+          </div>
+          <button onClick={() => setCollapsed(!collapsed)} className="p-1.5">
+            <RiMenuLine className="size-5 sm:size-6" />
           </button>
         </div>
       </div>

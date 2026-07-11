@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import type { IGaleriAlbum } from '@/pages/modules/website-utama/public-content/gallery/Foto/data'
 import { FaTrash } from 'react-icons/fa'
@@ -39,7 +39,7 @@ export const ButtonDeleteAlbumPhotoProdi = (data: IGaleriAlbum) => {
         <FaTrash />
       </button>
 
-      <DialogCustom
+      <DialogBasic
         className={'rounded lg:max-w-xl'}
         open={open}
         setOpen={setOpen}
@@ -47,7 +47,7 @@ export const ButtonDeleteAlbumPhotoProdi = (data: IGaleriAlbum) => {
         description={'Apakah anda yakin untuk menghapus foto yang dipilih?'}
       >
         <div className={'flex flex-col gap-4'}>
-          <div className="grid grid-cols-[15rem_1fr]">
+          <div className="grid lg:grid-cols-[15rem_1fr]">
             <p className="text-gray-500">Judul</p>
             <p>{data?.judul}</p>
           </div>
@@ -77,7 +77,7 @@ export const ButtonDeleteAlbumPhotoProdi = (data: IGaleriAlbum) => {
             ]}
           />
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

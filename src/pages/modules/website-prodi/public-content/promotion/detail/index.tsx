@@ -83,16 +83,16 @@ export const DetailPromotionPage = () => {
             },
           ]}
           isBack
-          link={'modules/website-prodi/public-content/promotion'}
+          link={'/modules/website-prodi/public-content/promotion'}
         />
         <Separator />
 
         {/* CARD */}
         <Card className={'bg-[#F5F8FF]'}>
           <CardContent>
-            <div className="flex items-center gap-5">
+            <div className="flex flex-col lg:flex-row items-center lg:items-start gap-5">
               {/* LEFT CONTENT */}
-              <div className="w-8/12">
+              <div className="w-full lg:w-8/12">
                 {loading ? (
                   <>
                     <Skeleton className="h-8 w-3/4 mb-4" />
@@ -106,7 +106,7 @@ export const DetailPromotionPage = () => {
                 ) : (
                   <>
                     <p className="text-2xl font-semibold">{detail?.judul}</p>
-                    <div className="grid-cols-[12rem_1fr] items-center mt-4 grid gap-y-2.5">
+                    <div className="grid-cols-1 sm:grid-cols-[12rem_1fr] items-center mt-4 grid gap-y-2.5">
                       <p className={'flex items-center gap-1.5 text-blue-800'}>
                         <FaRegCalendarAlt /> Diupload
                       </p>
@@ -125,7 +125,7 @@ export const DetailPromotionPage = () => {
               </div>
 
               {/* RIGHT IMAGE / CAROUSEL */}
-              <div className={'w-4/12'}>
+              <div className={'w-full lg:w-4/12'}>
                 {loading ? (
                   <>
                     <Skeleton className="h-[320px] w-full rounded-lg" />

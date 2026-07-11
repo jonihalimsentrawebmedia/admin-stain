@@ -11,8 +11,8 @@ export const ManagementUnitPage = () => {
   return (
     <>
       <div className="flex flex-col gap-4">
-        <div className="flex justify-between items-center">
-          <p className="text-2xl font-medium">Unit Pengelola</p>
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+          <p className="text-xl sm:text-2xl font-medium">Unit Pengelola</p>
           <div className="flex gap-4 items-center">
             <ButtonGoToGuide titleGuide='Unit Pengelola' valueGuide="PRODI_PROFIL_UNIT_PENGELOLA" />
             <ButtonAddManagementUnit />

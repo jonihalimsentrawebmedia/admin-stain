@@ -19,7 +19,7 @@ export default function MainLayout() {
         <Header collapsed={collapsed} setCollapsed={setCollapsed} />
 
         <div className="flex flex-1 overflow-hidden">
-          <Sidebar collapsed={collapsed} />
+          <Sidebar collapsed={collapsed} isMobile={isMobile} setCollapsed={setCollapsed} />
 
           <main className="flex-1 overflow-auto">
             <div className="p-4 min-h-[calc(100vh-135px)]">

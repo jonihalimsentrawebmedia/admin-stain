@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { IGalleryPhoto } from '@/pages/modules/website-utama/public-content/gallery/Foto/data-album/data'
 import { FaTrash } from 'react-icons/fa'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
@@ -45,7 +45,7 @@ export const ButtonDeletePhotoProdi = (props: IProps) => {
         <FaTrash />
       </button>
 
-      <DialogCustom
+      <DialogBasic
         open={open}
         setOpen={setOpen}
         title={<p className={'text-red-500'}>Hapus Foto</p>}
@@ -59,7 +59,7 @@ export const ButtonDeletePhotoProdi = (props: IProps) => {
             className={'w-[320px] h-[240px] object-cover mx-auto rounded'}
           />
 
-          <div className="grid grid-cols-[12rem_1fr]">
+          <div className="grid lg:grid-cols-[12rem_1fr]">
             <p className="text-gray-500">Judul Gallery</p>
             <p>{title}</p>
             <p className="text-gray-500">Keterangan</p>
@@ -88,7 +88,7 @@ export const ButtonDeletePhotoProdi = (props: IProps) => {
             ]}
           />
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

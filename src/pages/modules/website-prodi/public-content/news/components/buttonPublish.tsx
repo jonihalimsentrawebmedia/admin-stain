@@ -5,15 +5,9 @@ import AxiosClient from '@/provider/axios.tsx'
 import type { INewsDetail } from '@/pages/modules/website-utama/public-content/news/data'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel.tsx'
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, } from '@/components/ui/carousel.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonPublishNewsProdi = (data: INewsDetail) => {
   const [open, setOpen] = useState(false)
@@ -57,9 +51,8 @@ export const ButtonPublishNewsProdi = (data: INewsDetail) => {
         Publish Sekarang
       </Button>
 
-      <DialogCustom
+      <DialogBasic
         open={open}
-        isAuto
         className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
         title={'Ajukan Ke Editor'}
@@ -117,7 +110,7 @@ export const ButtonPublishNewsProdi = (data: INewsDetail) => {
             />
           </div>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

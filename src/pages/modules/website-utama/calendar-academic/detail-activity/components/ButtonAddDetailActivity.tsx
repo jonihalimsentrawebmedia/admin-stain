@@ -75,7 +75,6 @@ const ButtonAddDetailActivity = ({ data }: Props) => {
         open={open}
         className={'rounded lg:min-w-2xl'}
         setOpen={setOpen}
-        width="50%"
         title={'Tambah Kegiatan Akademik'}
       >
         <ActivityDetailForm

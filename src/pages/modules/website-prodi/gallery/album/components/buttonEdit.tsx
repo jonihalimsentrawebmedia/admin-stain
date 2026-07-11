@@ -4,7 +4,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'react-toastify'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import { Form } from '@/components/ui/form.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
@@ -69,7 +69,7 @@ export const ButtonEditAlbumProdi = (props: Props) => {
         <HiPencil />
       </button>
 
-      <DialogCustom
+      <DialogBasic
         className={'rounded lg:max-w-xl'}
         open={open}
         setOpen={setOpen}
@@ -108,7 +108,7 @@ export const ButtonEditAlbumProdi = (props: Props) => {
             </form>
           </Form>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

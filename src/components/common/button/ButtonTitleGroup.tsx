@@ -43,7 +43,7 @@ const ButtonTitleGroup = (props: Props) => {
         )}
         <p className="text-sm lg:text-2xl font-semibold text-neutral">{label}</p>
       </div>
-      <div className={clsx(rootButtonClassName, `flex gap-4 items-start`)}>
+      <div className={clsx(rootButtonClassName, `flex flex-wrap gap-4 items-start`)}>
         {buttonGroup.map((row, K) => {
           if (row.element) {
             return <Fragment key={K}>{row.element}</Fragment>

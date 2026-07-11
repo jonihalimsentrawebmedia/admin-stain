@@ -62,7 +62,7 @@ export const DetailProfileUnit = () => {
           />
           {dataUnit?.status_publish == 'DIAJUKAN_EDITOR' && (
             <div
-              className={'border border-blue-500 rounded flex p-2 w-fit items-center gap-1.5 mt-5'}
+              className={'border border-blue-500 rounded flex flex-col sm:flex-row p-2 w-full sm:w-fit items-start sm:items-center gap-1.5 mt-5 text-sm'}
             >
               <MdInfo className={'size-5 text-blue-500'} />
               {realData
@@ -74,17 +74,17 @@ export const DetailProfileUnit = () => {
             </div>
           )}
 
-          <div className="flex items-start gap-5 mt-5">
+          <div className="flex flex-col sm:flex-row items-start gap-5 mt-5">
             <div className="flex flex-col gap-1">
               <p>Logo</p>
-              <div className="border border-[#70F2B1] bg-[#F5FFFA] p-5 rounded">
-                <img src={dataUnit?.logo} className="size-40 object-contain" />
+              <div className="border border-[#70F2B1] bg-[#F5FFFA] p-3 sm:p-5 rounded">
+                <img alt={'image'} src={dataUnit?.logo} className="size-32 sm:size-40 object-contain" />
               </div>
             </div>
             <div className="flex flex-col gap-1">
               <p>Favicon</p>
-              <div className="border border-[#70F2B1] bg-[#F5FFFA] p-5 rounded">
-                <img src={dataUnit?.favicon} className="size-15 object-contain" />
+              <div className="border border-[#70F2B1] bg-[#F5FFFA] p-3 sm:p-5 rounded">
+                <img alt={'image'} src={dataUnit?.favicon} className="size-12 sm:size-15 object-contain" />
               </div>
             </div>
           </div>
@@ -95,56 +95,56 @@ export const DetailProfileUnit = () => {
             className={'mt-5 flex flex-col gap-5'}
           >
             <AccordionCustom name={'identity'} title={'Identitas Institusi'}>
-              <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
+              <div className={'grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-2 sm:gap-5'}>
                 <p className="text-gray-500">Kelompok</p>
-                <p>{dataUnit?.kelompok ?? '-'}</p>
+                <p className="break-words">{dataUnit?.kelompok ?? '-'}</p>
                 <p className="text-gray-500">Nama Unit</p>
-                <p>{dataUnit?.nama ?? '-'}</p>
+                <p className="break-words">{dataUnit?.nama ?? '-'}</p>
                 <p className="text-gray-500">Keyword</p>
-                <p>{dataUnit?.keyword ?? '-'}</p>
+                <p className="break-words">{dataUnit?.keyword ?? '-'}</p>
               </div>
             </AccordionCustom>
 
             <AccordionCustom name={'address'} title={'Alamat Lengkap'}>
-              <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
+              <div className={'grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-2 sm:gap-5'}>
                 <p className="text-gray-500">Alamat</p>
-                <p>{dataUnit?.alamat ?? '-'}</p>
+                <p className="break-words">{dataUnit?.alamat ?? '-'}</p>
                 <p className="text-gray-500">Provinsi</p>
-                <p>{dataUnit?.provinsi ?? '-'}</p>
+                <p className="break-words">{dataUnit?.provinsi ?? '-'}</p>
                 <p className="text-gray-500">Kabupaten Kota</p>
-                <p>{dataUnit?.kabupaten_kota ?? '-'}</p>
+                <p className="break-words">{dataUnit?.kabupaten_kota ?? '-'}</p>
                 <p className="text-gray-500">Kecamatan</p>
-                <p>{dataUnit?.kecamatan ?? '-'}</p>
+                <p className="break-words">{dataUnit?.kecamatan ?? '-'}</p>
                 <p className="text-gray-500">Kelurahan/Desa</p>
-                <p>{dataUnit?.kelurahan ?? '-'}</p>
+                <p className="break-words">{dataUnit?.kelurahan ?? '-'}</p>
                 <p className="text-gray-500">Kode Pos</p>
-                <p>{dataUnit?.kode_pos ?? '-'}</p>
+                <p className="break-words">{dataUnit?.kode_pos ?? '-'}</p>
                 <p className="text-gray-500">Link Google Map</p>
-                <p>{dataUnit?.link_google_map ?? '-'}</p>
+                <p className="break-words">{dataUnit?.link_google_map ?? '-'}</p>
               </div>
             </AccordionCustom>
 
             <AccordionCustom name={'contact'} title={'Kontak Resmi'}>
-              <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
+              <div className={'grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-2 sm:gap-5'}>
                 <p className="text-gray-500">Telepon</p>
-                <p>{dataUnit?.telepon ?? '-'}</p>
+                <p className="break-words">{dataUnit?.telepon ?? '-'}</p>
                 <p className="text-gray-500">Fax</p>
-                <p>{dataUnit?.fax ?? '-'}</p>
+                <p className="break-words">{dataUnit?.fax ?? '-'}</p>
                 <p className="text-gray-500">Email</p>
-                <p>{dataUnit?.email ?? '-'}</p>
+                <p className="break-words">{dataUnit?.email ?? '-'}</p>
               </div>
             </AccordionCustom>
 
             <AccordionCustom name={'media'} title={'Media Sosial'}>
-              <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
+              <div className={'grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-2 sm:gap-5'}>
                 <p className="text-gray-500">Facebook</p>
-                <p>{dataUnit?.facebook ?? '-'}</p>
+                <p className="break-words">{dataUnit?.facebook ?? '-'}</p>
                 <p className="text-gray-500">Twitter</p>
-                <p>{dataUnit?.twitter ?? '-'}</p>
+                <p className="break-words">{dataUnit?.twitter ?? '-'}</p>
                 <p className="text-gray-500">Instagram</p>
-                <p>{dataUnit?.instagram ?? '-'}</p>
+                <p className="break-words">{dataUnit?.instagram ?? '-'}</p>
                 <p className="text-gray-500">Youtube</p>
-                <p>{dataUnit?.youtube ?? '-'}</p>
+                <p className="break-words">{dataUnit?.youtube ?? '-'}</p>
               </div>
             </AccordionCustom>
           </Accordion>

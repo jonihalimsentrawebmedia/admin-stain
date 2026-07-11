@@ -29,7 +29,7 @@ export const ColumnsVideoProdi = () => {
             <img
               src={row.original.thumbnail}
               alt={row.original.judul}
-              className={'w-[200px] h-[150px] object-cover'}
+              className={'w-[200px] min-w-[200px] h-[150px] object-cover'}
             />
           </div>
         )

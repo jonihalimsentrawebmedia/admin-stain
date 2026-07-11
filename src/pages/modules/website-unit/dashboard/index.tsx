@@ -84,8 +84,8 @@ export default function DashboardAdminUnit() {
 
   return (
     <div className="min-h-screen space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <h1 className="text-xl sm:text-2xl font-semibold">
           Selamat Datang <span className="text-primary">{profileUser?.nama_lengkap}</span>
         </h1>
         <Link
@@ -159,20 +159,24 @@ export default function DashboardAdminUnit() {
               onChange={setMode}
               isRow
             />
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={chartData ?? []} margin={{ bottom: 60 }}>
-                <XAxis
-                  dataKey="name"
-                  angle={mode === 'harian' ? -75 : mode === 'bulanan' ? -45 : 0}
-                  textAnchor="end"
-                  interval={0}
-                  height={60}
-                />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="value" fill="#8884d8" />
-              </BarChart>
-            </ResponsiveContainer>
+            <div className="overflow-x-auto">
+              <div className="min-w-[500px] h-[240px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={chartData ?? []} margin={{ bottom: 60 }}>
+                    <XAxis
+                      dataKey="name"
+                      angle={mode === 'harian' ? -75 : mode === 'bulanan' ? -45 : 0}
+                      textAnchor="end"
+                      interval={0}
+                      height={60}
+                    />
+                    <YAxis />
+                    <Tooltip />
+                    <Bar dataKey="value" fill="#8884d8" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
           </CardContent>
         </Card>
 

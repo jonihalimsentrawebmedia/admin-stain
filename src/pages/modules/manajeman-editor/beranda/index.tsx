@@ -151,8 +151,8 @@ export default function DashboardAdminEditor() {
 
   return (
     <div className="min-h-screen space-y-6">
-      <div className="flex gap-4 justify-between items-center">
-        <h1 className="text-2xl font-semibold">
+      <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-between items-start sm:items-center">
+        <h1 className="text-xl sm:text-2xl font-semibold">
           Selamat Datang <span className="text-green-500">{profileUser?.nama_lengkap}</span>
         </h1>
 
@@ -183,16 +183,18 @@ export default function DashboardAdminEditor() {
       <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
         <div className={isEditor ? 'xl:col-span-4' : 'xl:col-span-3'}>
           <p className="text-primary font-semibold text-2xl">Konten Yang Diajukan</p>
-          <TabsListCustom
-            data={TabsList}
-            value={tabsName}
-            onChange={(e) => {
-              setTabsName(e as status)
-              const ParamsSearch = new URLSearchParams()
-              ParamsSearch.set('page', '1')
-              setSearchParams(ParamsSearch)
-            }}
-          />
+          <div className="overflow-x-auto pb-1">
+            <TabsListCustom
+              data={TabsList}
+              value={tabsName}
+              onChange={(e) => {
+                setTabsName(e as status)
+                const ParamsSearch = new URLSearchParams()
+                ParamsSearch.set('page', '1')
+                setSearchParams(ParamsSearch)
+              }}
+            />
+          </div>
         </div>
 
         {!isEditor && (
@@ -221,7 +223,7 @@ export default function DashboardAdminEditor() {
           <CardHeader>
             <CardTitle className={'text-primary'}>Tren Kunjungan Website</CardTitle>
           </CardHeader>
-          <CardContent className="h-80">
+          <CardContent>
             <SelectBasic
               className={'mb-2'}
               label={'Data Bersadarkan'}
@@ -230,21 +232,23 @@ export default function DashboardAdminEditor() {
               onChange={setMode}
               isRow
             />
-            <div className="w-full h-80">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={chartData ?? []} margin={{ bottom: 60 }}>
-                  <XAxis
-                    dataKey="name"
-                    angle={mode === 'harian' ? -75 : mode == 'bulanan' ? -45 : 0}
-                    textAnchor="end"
-                    interval={0}
-                    height={60}
-                  />
-                  <YAxis />
-                  <Tooltip />
-                  <Bar dataKey="value" fill="#8884d8" />
-                </BarChart>
-              </ResponsiveContainer>
+            <div className="overflow-x-auto">
+              <div className="min-w-[500px] h-[260px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={chartData ?? []} margin={{ bottom: 60 }}>
+                    <XAxis
+                      dataKey="name"
+                      angle={mode === 'harian' ? -75 : mode == 'bulanan' ? -45 : 0}
+                      textAnchor="end"
+                      interval={0}
+                      height={60}
+                    />
+                    <YAxis />
+                    <Tooltip />
+                    <Bar dataKey="value" fill="#8884d8" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
             </div>
           </CardContent>
         </Card>

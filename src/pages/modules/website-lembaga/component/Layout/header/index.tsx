@@ -31,33 +31,35 @@ export const HeaderLayoutInstitution = () => {
         <div
           className={`w-full mx-auto max-w-[1920px] px-4 py-2 bg-[url(/Background.png)] bg-cover bg-center`}
         >
-          <div className="w-full flex gap-4 items-center justify-between  max-w-7xl mx-auto">
-            <div className="flex items-center gap-2">
+          <div className="w-full flex gap-2 sm:gap-4 items-center justify-between max-w-7xl mx-auto">
+            <div className="flex items-center gap-2 min-w-0">
               <img
                 src={module?.gambar}
                 alt="gambar"
-                className={'size-20 w-20 object-cover rounded-full'}
+                className={'size-12 sm:size-20 sm:w-20 object-cover rounded-full shrink-0'}
               />
-              <div className={'flex flex-col'}>
-                <p className="text-2xl font-semibold text-white">{session?.nama_lembaga}</p>
-                <p className="text-white text-xs">{session?.nama_universitas}</p>
+              <div className={'flex flex-col min-w-0'}>
+                <p className="text-base sm:text-2xl font-semibold text-white truncate">
+                  {session?.nama_lembaga}
+                </p>
+                <p className="text-white text-xs truncate">{session?.nama_universitas}</p>
               </div>
             </div>
 
-            <div className="flex gap-4 items-center">
+            <div className="flex gap-1 sm:gap-4 items-center shrink-0">
               <HeaderMenuMobile />
               
-              <Link to={'/modules'}>
+              <Link to={'/modules'} className={'hidden sm:block'}>
                 <IconModules />
               </Link>
 
               {loading ? (
-                <Skeleton className="w-32 h-[50px]" />
+                <Skeleton className="w-8 sm:w-32 h-[40px] sm:h-[50px]" />
               ) : (
                 <Popover>
                   <PopoverTrigger asChild>
-                    <div className="bg-white px-3 py-1.5 rounded-lg flex gap-2 items-center">
-                      <Avatar className={'size-7'}>
+                    <div className="bg-white px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg flex gap-1 sm:gap-2 items-center">
+                      <Avatar className={'size-6 sm:size-7'}>
                         <AvatarImage
                           src={profile?.gambar}
                           alt="@shadcn"
@@ -67,7 +69,7 @@ export const HeaderLayoutInstitution = () => {
                           <User2 className="text-gray-300" />
                         </AvatarFallback>
                       </Avatar>
-                      <div className={'flex flex-col gap-1'}>
+                      <div className={'flex-col gap-1 hidden sm:flex'}>
                         <p className={'text-xs whitespace-nowrap'}>{profile?.nama_lengkap}</p>
                         <div className="text-primary text-xs">{profile?.jabatan}</div>
                       </div>

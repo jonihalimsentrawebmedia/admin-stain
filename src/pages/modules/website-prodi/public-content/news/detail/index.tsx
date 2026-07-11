@@ -78,14 +78,14 @@ export const DetailNewsProdiPage = () => {
       />
       <Separator className={'my-5'} />
 
-      <div className="p-5">
-        <div className="bg-gradient-to-r p-8 from-[#3FA936] to-[#0C6939] rounded-lg shadow">
+      <div className="p-3 sm:p-5">
+        <div className="bg-gradient-to-r p-4 sm:p-8 from-[#3FA936] to-[#0C6939] rounded-lg shadow">
           <div
             className={
-              'bg-white/12 rounded-lg shadow p-10 flex items- h-full gap-x-12 justify-between'
+              'bg-white/12 rounded-lg shadow p-4 sm:p-10 flex flex-col lg:flex-row items-start gap-6 lg:gap-x-12'
             }
           >
-            <div className="flex items-start gap-2 w-8/12 h-full">
+            <div className="flex items-start gap-2 w-full lg:w-8/12">
               <div className="flex gap-5 flex-col justify-between items-start h-full">
                 <div
                   className={
@@ -95,7 +95,7 @@ export const DetailNewsProdiPage = () => {
                   <div className="size-3.5 rounded-full bg-yellow-500" />
                   <p>{detail?.nama_kategori_berita}</p>
                 </div>
-                <p className={'text-3xl font-semibold text-white'}>{detail?.judul}</p>
+                <p className={'text-xl sm:text-3xl font-semibold text-white'}>{detail?.judul}</p>
                 <div className="flex items-center justify-between gap-5 w-full">
                   <div>
                     <p className="text-white">Tanggal Terbit</p>
@@ -113,7 +113,7 @@ export const DetailNewsProdiPage = () => {
               </div>
             </div>
 
-            <div className="w-4/12 mx-auto">
+            <div className="w-full lg:w-4/12 mx-auto">
               {/* CAROUSEL */}
               <Carousel setApi={setApi} className="w-full">
                 <CarouselContent className="pr-0">
@@ -122,7 +122,7 @@ export const DetailNewsProdiPage = () => {
                       <img
                         src={item}
                         alt={item}
-                        className="h-[345px] w-full object-cover rounded-lg"
+                        className="h-48 sm:h-[345px] w-full object-cover rounded-lg"
                       />
                     </CarouselItem>
                   ))}

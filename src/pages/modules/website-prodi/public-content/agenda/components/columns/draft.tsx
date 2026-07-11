@@ -29,7 +29,7 @@ export const DraftStatusColumns = () => {
         <img
           src={row?.original?.gambar}
           alt="gambar"
-          className={'w-[150px] object-cover h-[200px] rounded'}
+          className={'w-[160px] min-w-[160px] object-cover h-[120px] lg:h-[120px] rounded'}
         />
       ),
     },
@@ -48,12 +48,12 @@ export const DraftStatusColumns = () => {
         const start_time = row?.original?.waktu_mulai
         const end_time = row?.original?.waktu_selesai
         return (
-          <div className="flex flex-col gap-1.5 text-center">
-            <p>{start_time ? format(new Date(start_time), 'dd-MM-yyyy, HH:mm:ss') : '-'}</p>
+          <div className="flex gap-1.5 text-center flex-nowrap">
+            <p className={'whitespace-nowrap'}>{start_time ? format(new Date(start_time), 'dd-MM-yyyy, HH:mm:ss') : '-'}</p>
             {end_time && (
               <>
                 <p className="text-gray-500">s/d</p>
-                <p>{end_time ? format(new Date(end_time), 'dd-MM-yyyy, HH:mm:ss') : '-'}</p>
+                <p className={'whitespace-nowrap'}>{end_time ? format(new Date(end_time), 'dd-MM-yyyy, HH:mm:ss') : '-'}</p>
               </>
             )}
           </div>

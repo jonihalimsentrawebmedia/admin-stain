@@ -61,7 +61,7 @@ export const DataProdiProfile = () => {
           />
           {dataProdi?.status_publish == 'DIAJUKAN_EDITOR' && (
             <div
-              className={'border border-blue-500 rounded flex p-2 w-fit items-center gap-1.5 mt-5'}
+              className={'border border-blue-500 rounded flex flex-col sm:flex-row p-2 w-full sm:w-fit items-start sm:items-center gap-1.5 mt-5'}
             >
               <MdInfo className={'size-5 text-blue-500'} />
               {realData
@@ -73,17 +73,17 @@ export const DataProdiProfile = () => {
             </div>
           )}
 
-          <div className="flex items-start gap-5 mt-5">
+          <div className="flex flex-col sm:flex-row items-start gap-5 mt-5">
             <div className="flex flex-col gap-1">
               <p>Logo</p>
               <div className="border border-[#70F2B1] bg-[#F5FFFA] p-5 rounded">
-                <img src={dataProdi?.logo} className="size-40 object-contain" />
+                <img  alt={'image'} src={dataProdi?.logo} className="size-40 object-contain" />
               </div>
             </div>
             <div className="flex flex-col gap-1">
               <p>Favicon</p>
               <div className="border border-[#70F2B1] bg-[#F5FFFA] p-5 rounded">
-                <img src={dataProdi?.favicon} className="size-15 object-contain" />
+                <img alt={'image'} src={dataProdi?.favicon} className="size-15 object-contain" />
               </div>
             </div>
           </div>
@@ -94,7 +94,7 @@ export const DataProdiProfile = () => {
             className={'mt-5 flex flex-col gap-5'}
           >
             <AccordionCustom name={'identity'} title={'Identitas Institusi'}>
-              <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
+              <div className={'grid grid-cols-1 md:grid-cols-[12rem_1fr] gap-2 md:gap-5'}>
                 <p className="text-gray-500">Kelompok</p>
                 <p>{dataProdi?.kelompok ?? '-'}</p>
                 <p className="text-gray-500">Nama Prodi</p>
@@ -105,7 +105,7 @@ export const DataProdiProfile = () => {
             </AccordionCustom>
 
             <AccordionCustom name={'address'} title={'Alamat Lengkap'}>
-              <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
+              <div className={'grid grid-cols-1 md:grid-cols-[12rem_1fr] gap-2 md:gap-5'}>
                 <p className="text-gray-500">Alamat</p>
                 <p>{dataProdi?.alamat ?? '-'}</p>
                 <p className="text-gray-500">Provinsi</p>
@@ -124,7 +124,7 @@ export const DataProdiProfile = () => {
             </AccordionCustom>
 
             <AccordionCustom name={'contact'} title={'Kontak Resmi'}>
-              <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
+              <div className={'grid grid-cols-1 md:grid-cols-[12rem_1fr] gap-2 md:gap-5'}>
                 <p className="text-gray-500">Telepon</p>
                 <p>{dataProdi?.telepon ?? '-'}</p>
                 <p className="text-gray-500">Fax</p>
@@ -135,7 +135,7 @@ export const DataProdiProfile = () => {
             </AccordionCustom>
 
             <AccordionCustom name={'media'} title={'Media Sosial'}>
-              <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
+              <div className={'grid grid-cols-1 md:grid-cols-[12rem_1fr] gap-2 md:gap-5'}>
                 <p className="text-gray-500">Facebook</p>
                 <p>{dataProdi?.facebook ?? '-'}</p>
                 <p className="text-gray-500">Twitter</p>

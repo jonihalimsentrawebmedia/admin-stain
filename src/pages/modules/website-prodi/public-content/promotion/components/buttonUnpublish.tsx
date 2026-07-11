@@ -11,7 +11,7 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import { MdCancel } from 'react-icons/md'
 import type { IPromotion } from '@/pages/modules/website-prodi/public-content/promotion/data/types.tsx'
 
@@ -57,9 +57,8 @@ export const ButtonUnpublishPromotionProdi = (data: IPromotion) => {
         Unpublish Berita
       </Button>
 
-      <DialogCustom
+      <DialogBasic
         open={open}
-        isAuto
         className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
         title={'Unpublish Promosi'}
@@ -115,7 +114,7 @@ export const ButtonUnpublishPromotionProdi = (data: IPromotion) => {
             />
           </div>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

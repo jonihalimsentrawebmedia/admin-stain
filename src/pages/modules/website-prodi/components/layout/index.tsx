@@ -1,10 +1,17 @@
 import { Outlet } from 'react-router-dom'
 import { HeaderProdi } from './header'
 import { SidebarProdi } from './sidebar.tsx'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useMobile } from '@/utils/useMobile.tsx'
 
 export default function MainLayoutProdi() {
+  const { isMobile } = useMobile()
   const [collapsed, setCollapsed] = useState(false)
+
+  useEffect(() => {
+    if (isMobile) setCollapsed(true)
+    else setCollapsed(false)
+  }, [isMobile])
 
   return (
     <>
@@ -12,7 +19,7 @@ export default function MainLayoutProdi() {
         <HeaderProdi collapsed={collapsed} setCollapsed={setCollapsed} />
 
         <div className="flex flex-1 overflow-hidden">
-          <SidebarProdi collapsed={collapsed} />
+          <SidebarProdi collapsed={collapsed} isMobile={isMobile} setCollapsed={setCollapsed} />
 
           <main className="flex-1 overflow-auto">
             <div className="p-4 min-h-[calc(100vh-135px)]">

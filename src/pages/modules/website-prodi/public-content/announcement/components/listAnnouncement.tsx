@@ -34,7 +34,7 @@ export const TableDataListAnnouncement = (props: Props) => {
     <>
       <TableCustom
         addFilter={
-          <div className={'flex items-center gap-1.5'}>
+          <div className={'flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-1.5'}>
             <SelectFilter
               selectClassName={'min-w-[8rem]'}
               label="Tampilkan"

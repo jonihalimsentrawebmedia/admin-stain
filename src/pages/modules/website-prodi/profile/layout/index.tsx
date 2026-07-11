@@ -16,7 +16,7 @@ export const ProfileProdiLayout = () => {
           <p className="text-2xl font-semibold text-primary">{profileProdi?.nama}</p>
         </div>
 
-        <div className="grid grid-cols-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2">
           <div className={'flex flex-col gap-1'}>
             <p className="text-gray-500 text-sm">Fakultas Asal</p>
             <p className="text-base">{session?.nama_fakultas}</p>
@@ -31,8 +31,10 @@ export const ProfileProdiLayout = () => {
 
         <div className={'w-full border border-dashed'} />
 
-        <div className="grid grid-cols-[15rem_1fr] gap-x-6">
-          <SideMenuProfile />
+        <div className="grid grid-cols-1 lg:grid-cols-[15rem_1fr] gap-6">
+          <div className="overflow-x-auto no-scrollbar">
+            <SideMenuProfile />
+          </div>
           <Outlet />
         </div>
       </div>
