@@ -37,9 +37,9 @@ const ChangePasswordProfileView = () => {
 
           <Button
             disabled={loading || isDisabled}
-            className="bg-primary w-fit mx-auto text-white   "
+            className="bg-primary w-full sm:w-fit sm:mx-auto text-white"
           >
-            Simpan
+            {loading ? 'Menyimpan...' : 'Simpan'}
           </Button>
           <div className="mt-5 text-sm">
             <p className="font-medium text-neutral">Ketentuan Password</p>

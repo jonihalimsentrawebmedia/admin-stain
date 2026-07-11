@@ -41,8 +41,8 @@ const ButtonSettingLevelUser = ({ data, levelUser, satuanOrganisasi }: Props) =>
             data.level_users[0]
           ) : (
             <ul className="ml-2 pl-2 list-outside list-disc">
-              {data.level_users.map((item) => (
-                <li key={data.id_user + item}>{item}</li>
+              {data.level_users.map((item, i) => (
+                <li key={data.id_user + item + i}>{item}</li>
               ))}
             </ul>
           )}

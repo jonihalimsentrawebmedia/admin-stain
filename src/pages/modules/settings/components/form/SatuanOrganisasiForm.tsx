@@ -162,25 +162,29 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
           />
         )}
 
-        <div className="flex items-center gap-5">
-          <InputText
-            form={form}
-            className={'w-full'}
-            name="nama"
-            isRow
-            label={labelName}
-            placeholder={placeHolderName}
-          />
-          <InputText
-            className={'w-full'}
-            form={form}
-            name={'ukuran_title'}
-            isRow
-            label="Ukuran Title"
-            placeholder="Ukuran Title"
-            type="number"
-          />
-          <CheckboxInputBasic name={'show_title'} form={form} label={'Tampilkan'} />
+        <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-5">
+          <div className="flex-1 min-w-0">
+            <InputText
+              form={form}
+              name="nama"
+              isRow
+              label={labelName}
+              placeholder={placeHolderName}
+            />
+          </div>
+          <div className="w-full sm:w-28 shrink-0">
+            <InputText
+              form={form}
+              name={'ukuran_title'}
+              isRow
+              label="Ukuran Title"
+              placeholder="Ukuran Title"
+              type="number"
+            />
+          </div>
+          <div className="shrink-0 pt-1">
+            <CheckboxInputBasic name={'show_title'} form={form} label={'Tampilkan'} />
+          </div>
         </div>
         {kelompok == 'PRODI' && (
           <SelectCustom
@@ -194,25 +198,29 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
           />
         )}
         {kelompok !== 'PRODI' && kelompok !== 'UNIT' && (
-          <div className={'flex items-center gap-5'}>
-            <InputText
-              className={'w-full'}
-              form={form}
-              name="singkatan"
-              isRow
-              label="Singkatan "
-              placeholder="Singkatan Nama Universitas / Perguruan Tinggi"
-            />
-            <InputText
-              form={form}
-              className={'w-full'}
-              name={'ukuran_singkatan'}
-              isRow
-              label="Ukuran Singkatan"
-              placeholder="Ukuran Singkatan"
-              type="number"
-            />
-            <CheckboxInputBasic name={'show_singkatan'} form={form} label={'Tampilkan'} />
+          <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-5">
+            <div className="flex-1 min-w-0">
+              <InputText
+                form={form}
+                name="singkatan"
+                isRow
+                label="Singkatan "
+                placeholder="Singkatan Nama Universitas / Perguruan Tinggi"
+              />
+            </div>
+            <div className="w-full sm:w-28 shrink-0">
+              <InputText
+                form={form}
+                name={'ukuran_singkatan'}
+                isRow
+                label="Ukuran Singkatan"
+                placeholder="Ukuran Singkatan"
+                type="number"
+              />
+            </div>
+            <div className="shrink-0 pt-1">
+              <CheckboxInputBasic name={'show_singkatan'} form={form} label={'Tampilkan'} />
+            </div>
           </div>
         )}
 

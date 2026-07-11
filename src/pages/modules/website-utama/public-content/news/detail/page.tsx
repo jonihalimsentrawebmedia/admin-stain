@@ -39,9 +39,9 @@ export const DetailNewsPage = () => {
             label: 'Edit Data',
             onClick: () => {},
             element: (
-              <div className={'flex items-center gap-2'}>
-                Status :{' '}
-                <p className="text-blue-600 font-semibold">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="text-sm">Status :</span>
+                <p className="text-blue-600 font-semibold text-sm capitalize">
                   {detailNews?.status_publish?.split('_').join(' ')}
                 </p>
                 <Button
@@ -52,6 +52,7 @@ export const DetailNewsPage = () => {
                   }
                   className={'border-primary text-primary hover:text-primary'}
                   variant={'outline'}
+                  size={'sm'}
                 >
                   <HiPencil /> Edit Data
                 </Button>
@@ -74,51 +75,47 @@ export const DetailNewsPage = () => {
       />
       <Separator className={'my-5'} />
 
-      <div className="p-5">
-        <div className="bg-gradient-to-r p-8 from-[#3FA936] to-[#0C6939] rounded-lg shadow">
-          <div
-            className={
-              'bg-white/12 rounded-lg shadow p-10 flex items- h-full gap-x-12 justify-between'
-            }
-          >
-            <div className="flex items-start gap-2 w-1/2 h-full">
-              <div className="flex gap-5 flex-col justify-between items-start h-full">
-                <div
-                  className={
-                    'bg-white p-2 rounded-full text-primary flex items-center px-4 gap-1.5 text-sm'
-                  }
-                >
-                  <div className="size-3.5 rounded-full bg-yellow-500" />
+      <div className="p-3 sm:p-5">
+        <div className="bg-gradient-to-r p-4 sm:p-8 from-[#3FA936] to-[#0C6939] rounded-lg shadow">
+          <div className="bg-white/12 rounded-lg shadow p-4 sm:p-10 flex flex-col lg:flex-row items-start gap-6 lg:gap-x-12 lg:justify-between">
+            <div className="flex items-start gap-2 w-full lg:w-1/2">
+              <div className="flex gap-4 sm:gap-5 flex-col justify-between items-start w-full">
+                <div className="bg-white p-2 rounded-full text-primary flex items-center px-4 gap-1.5 text-xs sm:text-sm">
+                  <div className="size-3 rounded-full bg-yellow-500" />
                   <p>{detailNews?.nama_kategori_berita}</p>
                 </div>
-                <p className={'text-3xl font-semibold text-white'}>{detailNews?.judul ?? ''}</p>
-                <div className="flex items-center justify-between gap-5 w-full">
+                <p className="text-xl sm:text-3xl font-semibold text-white leading-tight">
+                  {detailNews?.judul ?? ''}
+                </p>
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-5 w-full">
                   <div>
-                    <p className="text-white">Tanggal Terbit</p>
-                    <p className={'text-white'}>
+                    <p className="text-white/80 text-xs sm:text-sm">Tanggal Terbit</p>
+                    <p className="text-white text-sm sm:text-base font-medium">
                       {detailNews?.diterbitkan_at
                         ? format(detailNews?.diterbitkan_at, 'dd MMMM yyyy')
                         : '--:--:--'}
                     </p>
                   </div>
                   <div>
-                    <p className="text-white">Ditulis Oleh</p>
-                    <p className={'text-white'}>{detailNews?.penulis ?? ''}</p>
+                    <p className="text-white/80 text-xs sm:text-sm">Ditulis Oleh</p>
+                    <p className="text-white text-sm sm:text-base font-medium">
+                      {detailNews?.penulis ?? ''}
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="w-[484px] mx-auto">
+            <div className="w-full max-w-[484px] mx-auto">
               {/* CAROUSEL */}
-              <Carousel setApi={setApi} className="w-[484px]">
+              <Carousel setApi={setApi} className="w-full">
                 <CarouselContent className="pr-0">
                   {images.map((item, index) => (
                     <CarouselItem key={index} className="pr-0">
                       <img
                         src={item.gambar}
                         alt={item.keterangan}
-                        className="h-[345px] w-full object-cover rounded-lg"
+                        className="h-48 sm:h-[345px] w-full object-cover rounded-lg"
                       />
                     </CarouselItem>
                   ))}
@@ -126,14 +123,14 @@ export const DetailNewsPage = () => {
               </Carousel>
 
               {/* DOTS */}
-              <div className="flex justify-center mt-4 gap-2">
+              <div className="flex justify-center mt-3 sm:mt-4 gap-2">
                 {images.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => api?.scrollTo(index)}
                     className={[
-                      'h-3 rounded-full transition-all',
-                      current === index ? 'bg-green-600 w-3' : 'bg-gray-400 w-3',
+                      'h-2.5 sm:h-3 rounded-full transition-all',
+                      current === index ? 'bg-green-600 w-2.5 sm:w-3' : 'bg-gray-400 w-2.5 sm:w-3',
                     ].join(' ')}
                   />
                 ))}

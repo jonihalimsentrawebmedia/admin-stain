@@ -38,41 +38,37 @@ export const SelectUniversity = () => {
   }
 
   return (
-    <div className={'w-screen h-screen relative flex items-center justify-center'}>
-      <img src={publicIdentity?.background ?? BG} className={'w-screen h-screen absolute object-cover z-10'}/>
-      <div className="flex items-center justify-between relative z-20">
-        <Card className={'bg-white/30'}>
-          <CardContent>
-            <div className="w-xl bg-white p-5 rounded">
-              <Link to={'/modules'} className={'flex items-center gap-2 text-primary text-sm'}>
-                <ArrowLeft className={'text-primary'}/>
-                Kembali
-              </Link>
-              <p className="text-xl mt-5 font-semibold"></p>
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(HandlerSubmit)}>
-                  <SelectCustom
-                    form={form}
-                    name={'id_university'}
-                    placeholder={'Pilih Universitas digunakan'}
-                    data={
-                      satuanOrganisasi?.map((row: SatuanOrganisasiList) => ({
-                        label: row?.nama,
-                        value: row?.id_satuan_organisasi,
-                      })) ?? []
-                    }
-                    level1
-                  />
+    <div
+      className="relative min-h-screen w-full bg-cover bg-center overflow-y-auto flex items-center justify-center p-3 sm:p-5"
+      style={{ backgroundImage: `url(${publicIdentity?.background ?? BG})` }}
+    >
+      <Card className="w-full max-w-lg backdrop-blur-md bg-white/80 shadow-xl border-0 rounded-2xl">
+        <CardContent className="p-5 sm:p-6 flex flex-col gap-5">
+          <Link to={'/modules'} className="flex items-center gap-2 text-primary text-sm w-fit">
+            <ArrowLeft className="size-4" />
+            Kembali
+          </Link>
+          <p className="text-base sm:text-xl font-semibold text-gray-800"></p>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(HandlerSubmit)} className="flex flex-col gap-4">
+              <SelectCustom
+                form={form}
+                name={'id_university'}
+                placeholder={'Pilih Universitas digunakan'}
+                data={
+                  satuanOrganisasi?.map((row: SatuanOrganisasiList) => ({
+                    label: row?.nama,
+                    value: row?.id_satuan_organisasi,
+                  })) ?? []
+                }
+                level1
+              />
 
-                  <div className="mt-5 flex justify-center">
-                    <Button>Lanjutkan</Button>
-                  </div>
-                </form>
-              </Form>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+              <Button className="w-full sm:w-fit sm:mx-auto">Lanjutkan</Button>
+            </form>
+          </Form>
+        </CardContent>
+      </Card>
     </div>
   )
 }

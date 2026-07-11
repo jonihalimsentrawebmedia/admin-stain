@@ -32,7 +32,7 @@ export const FormNewsContent = (props: Props) => {
   return (
     <>
       <Form {...form}>
-        <form className={'flex flex-col gap-5 p-5'} onSubmit={form.handleSubmit(HandleSave)}>
+        <form className={'flex flex-col gap-5 p-3 sm:p-5'} onSubmit={form.handleSubmit(HandleSave)}>
           <ButtonTitleGroup
             label={label ?? 'Tulis Berita'}
             buttonGroup={[
@@ -73,7 +73,7 @@ export const FormNewsContent = (props: Props) => {
           />
 
           <SelectBasicInput
-            selectClassName={'w-1/2'}
+            selectClassName={'w-full sm:w-1/2'}
             form={form}
             label={'Kategori Berita'}
             isRow
@@ -105,7 +105,7 @@ export const FormNewsContent = (props: Props) => {
             name={'tanggal_berita'}
             label={'Tanggal Berita'}
             type={'date'}
-            inputClassName={'bg-white w-1/2'}
+            inputClassName={'bg-white w-full sm:w-1/2'}
             isRequired
             isRow
           />
@@ -123,7 +123,7 @@ export const FormNewsContent = (props: Props) => {
             <>
               <Separator />
               <div className="p-4 bg-white w-full space-y-4">
-                <p className="text-2xl font-semibold text-primary">Unit Kerja Terkait</p>
+                <p className="text-lg sm:text-2xl font-semibold text-primary">Unit Kerja Terkait</p>
                 <TreeCheckboxController
                   name="list_unit"
                   control={form.control}

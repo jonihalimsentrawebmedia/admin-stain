@@ -27,37 +27,37 @@ const ModulesView = () => {
       style={{
         backgroundImage: `url(${publicIdentity?.background})`,
       }}
-      className={`w-screen min-h-screen bg-cover lg:bg-fixed relative flex justify-center lg:items-center items-start lg:py-6 overflow-y-auto`}
+      className="w-full h-screen lg:min-h-screen bg-cover lg:bg-fixed relative flex justify-center lg:items-center items-start lg:py-6 overflow-y-auto"
     >
-      <Card className="max-w-6xl w-full backdrop-blur-md bg-white/40">
-        <CardContent className="flex flex-col gap-4">
+      <Card className="max-w-6xl w-full mx-0 sm:mx-4 lg:mx-auto bg-white/80 lg:bg-white/40 lg:backdrop-blur-md">
+        <CardContent className="flex flex-col gap-4 p-3 sm:p-4 md:p-6">
           <div className="bg-green-800 rounded-lg overflow-hidden">
             <div
               style={{
                 backgroundImage: `url(${PATERN})`,
               }}
-              className=" p-4 rounded-lg bg-cover object-cover flex flex-col lg:flex-row w-full justify-between items-center"
+              className="p-4 rounded-lg bg-cover object-cover flex flex-col lg:flex-row w-full justify-between items-center gap-3"
             >
-              <div className="flex gap-2 items-center overflow-auto h-full">
-                <div className="w-[100px] bg-white h-[100px] rounded-xl flex justify-center items-center">
+              <div className="flex gap-2 items-center w-full lg:w-auto">
+                <div className="size-[80px] lg:size-[100px] bg-white rounded-xl flex-shrink-0 flex justify-center items-center">
                   <img src={publicIdentity?.logo} alt="logo" width={52} height={52} />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <div className="text-white text-sm lg:text-base">
                     Manajemen Pengelolaan Website
                   </div>
-                  <div className="text-base lg:text-2xl font-bold text-white">
+                  <div className="text-base lg:text-2xl font-bold text-white break-words">
                     {publicIdentity?.nama}
                   </div>
                 </div>
               </div>
-              <div className="flex lg:flex-col gap-4 mt-4">
+              <div className="flex flex-col gap-2 w-full lg:w-auto">
                 <Button
                   size={'sm'}
                   onClick={() => {
                     goToProfile()
                   }}
-                  className="text-neutral bg-white hover:bg-white/90 text-start justify-start"
+                  className="text-neutral bg-white hover:bg-white/90 text-start justify-start w-full"
                 >
                   <FaUser className="text-blue-600" />
                   Halaman Profile
@@ -67,43 +67,47 @@ const ModulesView = () => {
             </div>
           </div>
 
-          <div className="rounded-lg gap-4 md:gap-0 grid grid-cols-12">
-            <div className="col-span-12 lg:col-span-8 flex flex-col gap-4 p-4 rounded-lg lg:rounded-none lg:rounded-l-lg bg-white">
-              <div className="font-bold text-neutral text-xl">Daftar Modul</div>
-              <div className="grid w-full text-center grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5 lg:h-full max-h-[400px] overflow-auto">
+          <div className="rounded-lg gap-4 grid grid-cols-12">
+            <div className="col-span-12 lg:col-span-8 flex flex-col gap-4 p-4 lg:p-5 rounded-lg bg-white">
+              <div className="font-bold text-neutral text-lg lg:text-xl">Daftar Modul</div>
+              <div className="grid w-full text-center grid-cols-2 gap-3 md:gap-4 md:grid-cols-3 lg:grid-cols-5 max-h-[420px] overflow-auto">
                 {modules.map((item, k) => (
                   <div
                     key={k}
                     onClick={() => {
                       setModuleSelect(item)
                     }}
-                    className={`shadow ${moduleSelect?.id_module === item.id_module ? 'bg-[#CCE6D9]' : 'bg-[#E9E9E9]'} border-[#E9E9E9] text-center border rounded-lg p-4 flex flex-col items-center justify-center`}
+                    className={`shadow-sm cursor-pointer transition-all duration-200 ${moduleSelect?.id_module === item.id_module ? 'bg-[#CCE6D9] ring-2 ring-green-600' : 'bg-[#E9E9E9] hover:bg-gray-200'} border border-gray-200 text-center rounded-lg p-3 lg:p-4 flex flex-col items-center justify-center`}
                   >
-                    <div className="mx-auto mb-2">
-                      <img src={item?.gambar} className={'size-10 object-contain'} />
+                    <div className="mx-auto mb-1.5 lg:mb-2">
+                      <img alt={'image'} src={item?.gambar} className={'size-9 lg:size-10 object-contain'} />
                     </div>
-                    <div className="text-[12px]">{item.nama_module}</div>
+                    <div className="text-[11px] lg:text-[12px] leading-tight">{item.nama_module}</div>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="bg-[#E9E9E9] p-4 col-span-12 rounded-lg lg:rounded-none lg:rounded-r-lg lg:col-span-4 ">
-              {moduleSelect && (
+            <div className="bg-[#E9E9E9] p-4 lg:p-5 col-span-12 rounded-lg lg:col-span-4 min-h-[180px]">
+              {moduleSelect ? (
                 <div className="flex flex-col gap-4">
-                  <div className="font-bold text-black text-xl">Daftar Role</div>
-                  <div className="font-medium">{moduleSelect.nama_module}</div>
+                  <div className="font-bold text-black text-lg lg:text-xl">Daftar Role</div>
+                  <div className="font-medium text-sm lg:text-base">{moduleSelect.nama_module}</div>
                   <Link
                     onClick={() => {
                       window.localStorage.setItem('module', JSON.stringify(moduleSelect))
                     }}
                     to={GetModuleUrl(moduleSelect)}
                   >
-                    <Card>
-                      <CardContent>
-                        <div className="text-[#295AA3]">Admin {moduleSelect.nama_module}</div>
+                    <Card className="hover:shadow-md transition-shadow duration-200">
+                      <CardContent className="p-3 lg:p-4">
+                        <div className="text-[#295AA3] text-sm lg:text-base">Admin {moduleSelect.nama_module}</div>
                       </CardContent>
                     </Card>
                   </Link>
+                </div>
+              ) : (
+                <div className="flex items-center justify-center h-full text-gray-400 text-sm">
+                  Pilih modul untuk melihat role
                 </div>
               )}
             </div>

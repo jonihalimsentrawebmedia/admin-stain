@@ -28,7 +28,7 @@ export const UploadImageWitAlt = <T extends FieldValues>(props: Props<T>) => {
     form,
     uploadUrl,
     alt,
-    width = 'w-[512px]',
+    width = 'w-full sm:w-[512px]',
     height = 'h-[191.2px]',
   } = props
 
@@ -73,8 +73,8 @@ export const UploadImageWitAlt = <T extends FieldValues>(props: Props<T>) => {
           {label}
           {required && <span className="text-red-500">*</span>}
         </label>
-        <div className="flex items-start gap-5 mt-2">
-          <div>
+        <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-5 mt-2">
+          <div className="w-full sm:w-auto">
             <input
               type="file"
               hidden
@@ -84,7 +84,7 @@ export const UploadImageWitAlt = <T extends FieldValues>(props: Props<T>) => {
             />
 
             {imageUrl ? (
-              <div className="relative">
+              <div className="relative w-full sm:w-auto">
                 <div className={`${width} ${height} rounded overflow-hidden border`}>
                   <img src={imageUrl} alt="Uploaded image" className="w-full h-full object-cover" />
                   <div className="absolute flex items-center gap-1 top-2 right-2">
@@ -115,12 +115,14 @@ export const UploadImageWitAlt = <T extends FieldValues>(props: Props<T>) => {
               </div>
             )}
           </div>
-          <InputText
-            inputClassName={''}
-            form={form}
-            name={alt}
-            placeholder={'Keterangan gambar'}
-          />
+          <div className="w-full sm:max-w-xs">
+            <InputText
+              inputClassName={''}
+              form={form}
+              name={alt}
+              placeholder={'Keterangan gambar'}
+            />
+          </div>
         </div>
       </div>
     </>

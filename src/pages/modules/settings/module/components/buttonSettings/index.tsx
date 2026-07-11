@@ -74,19 +74,21 @@ export const ButtonSettings = (props: Props) => {
         <FaGear />
       </button>
 
-      <DialogCustom open={open} setOpen={setOpen} title={'Settings'} className={'rounded max-w-5xl'}>
+      <DialogCustom open={open} setOpen={setOpen} title={'Settings'} className={'rounded max-w-5xl w-[95%]! sm:w-[85%]!'}>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(HandleSave)} className="grid grid-cols-2 gap-5">
-            {satuanOrganisasi.map((item, k) => (
-              <InputCheckbox
-                form={form}
-                key={k}
-                name={'id'}
-                data={[{ value: item.id_satuan_organisasi, label: item.nama }]}
-              />
-            ))}
+          <form onSubmit={form.handleSubmit(HandleSave)} className="flex flex-col gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 overflow-y-auto max-h-[55vh] pr-1">
+              {satuanOrganisasi.map((item, k) => (
+                <InputCheckbox
+                  form={form}
+                  key={k}
+                  name={'id'}
+                  data={[{ value: item.id_satuan_organisasi, label: item.nama }]}
+                />
+              ))}
+            </div>
 
-            <div className="col-span-2 flex justify-end gap-2 mt-5">
+            <div className="flex justify-end gap-2 pt-2">
               <ButtonForm loading={loading} onCancel={() => setOpen(false)} />
             </div>
           </form>
