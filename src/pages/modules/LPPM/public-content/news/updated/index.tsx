@@ -9,7 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useNavigate, useParams } from 'react-router-dom'
-import { UseGetLppmNewsDetail, } from '../hooks/index.tsx'
+import { UseGetLppmNewsDetail } from '../hooks/index.tsx'
 import { formatDate } from 'date-fns'
 
 export const NewsLppmUpdated = () => {
@@ -65,7 +65,13 @@ export const NewsLppmUpdated = () => {
 
   return (
     <>
-      <FormNewsContent loading={loading} form={form} HandleSave={HandleSubmit} />
+      <FormNewsContent
+        url_ai={'/lppm/berita/generate'}
+        label={'Edit Berita'}
+        loading={loading}
+        form={form}
+        HandleSave={HandleSubmit}
+      />
     </>
   )
 }

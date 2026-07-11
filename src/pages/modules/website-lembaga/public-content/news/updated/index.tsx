@@ -71,6 +71,7 @@ export const UpdatedNewsPage = () => {
   return (
     <>
       <FormNewsContent
+        url_ai={'/lembaga/berita/generate'}
         label={'Edit Berita'}
         loading={loading}
         form={form}

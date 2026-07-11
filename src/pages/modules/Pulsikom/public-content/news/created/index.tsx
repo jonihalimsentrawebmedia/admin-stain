@@ -38,7 +38,12 @@ export const NewsPusilkomCreated = () => {
 
   return (
     <>
-      <FormNewsContent loading={loading} form={form} HandleSave={HandleSubmit} />
+      <FormNewsContent
+        url_ai={'/pusilkom/berita/generate'}
+        loading={loading}
+        form={form}
+        HandleSave={HandleSubmit}
+      />
     </>
   )
 }

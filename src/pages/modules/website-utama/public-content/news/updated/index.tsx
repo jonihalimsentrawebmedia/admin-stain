@@ -73,6 +73,7 @@ export const UpdatedNewsPage = () => {
   return (
     <>
       <FormNewsContent
+        url_ai={'/website-utama/berita/generate'}
         label={'Edit Berita'}
         is_website_main
         loading={loading}

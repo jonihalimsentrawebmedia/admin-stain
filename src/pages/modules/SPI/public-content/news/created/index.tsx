@@ -38,7 +38,12 @@ export const CreateNewsSPI = () => {
 
   return (
     <>
-      <FormNewsContent loading={loading} form={form} HandleSave={HandleSubmit} />
+      <FormNewsContent
+        url_ai={'/spi/berita/generate'}
+        loading={loading}
+        form={form}
+        HandleSave={HandleSubmit}
+      />
     </>
   )
 }

@@ -37,7 +37,13 @@ export const CreatedNewsPage = () => {
 
   return (
     <>
-      <FormNewsContent is_website_main loading={loading} form={form} HandleSave={HandleSubmit} />
+      <FormNewsContent
+        url_ai={'/website-utama/berita/generate'}
+        is_website_main
+        loading={loading}
+        form={form}
+        HandleSave={HandleSubmit}
+      />
     </>
   )
 }

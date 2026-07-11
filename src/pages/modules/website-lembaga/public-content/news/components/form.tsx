@@ -10,16 +10,19 @@ import TextInput from '@/components/common/form/TextInput.tsx'
 import { UploadMultipleImages } from '@/pages/modules/website-utama/public-content/news/components/multipleUploadImg.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { useNavigate } from 'react-router-dom'
+import { format } from 'date-fns'
+import ButtonGenerateNewsAI from '@/components/common/button/buttonGenerateAI.tsx'
 
 interface Props {
   form: UseFormReturn<INewsTypeForm>
   HandleSave: (e: any) => void
   loading: boolean
   label?: string
+  url_ai: string
 }
 
 export const FormNewsContent = (props: Props) => {
-  const { form, HandleSave, loading, label } = props
+  const { form, HandleSave, loading, label, url_ai } = props
   const { newsCategory, loading: laod1 } = useGetNewsCategory({ isGetAll: true })
 
   const navigate = useNavigate()
@@ -83,7 +86,19 @@ export const FormNewsContent = (props: Props) => {
             }
           />
 
-          <RichText form={form} name={'isi_berita'} label={'Isi Berita'} required />
+          <ButtonGenerateNewsAI
+            urL={url_ai}
+            form={form}
+            judul={form.watch('judul') ?? ''}
+            tanggal={format(new Date(), 'yyyy-MM-dd')}
+          />
+          <RichText
+            form={form}
+            name={'isi_berita'}
+            label={'Isi Berita'}
+            placeholder={'Isi Berita'}
+            required
+          />
 
           <TextInput
             form={form}

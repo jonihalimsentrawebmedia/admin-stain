@@ -45,6 +45,11 @@ export const SatuanOrganisasiResolver = z.object({
   show_singkatan: z.boolean().optional().nullable(),
   ukuran_title: z.string().optional().nullable(),
   show_title: z.boolean().optional().nullable(),
+
+  api_key_provider: z.enum(['CUSTOM', 'GEMINI', 'CHATGPT', 'DEEPSEEK']).optional().nullable(),
+  ai_api_url: z.url().optional().nullable(),
+  ai_api_key: z.string().optional().nullable(),
+  ai_model: z.string().optional().nullable(),
 })
 
 /**

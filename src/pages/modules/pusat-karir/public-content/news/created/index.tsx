@@ -38,7 +38,12 @@ export const NewsCarrierCreated = () => {
 
   return (
     <>
-      <FormNewsContent loading={loading} form={form} HandleSave={HandleSubmit} />
+      <FormNewsContent
+        url_ai={'/pusat-karir/berita/generate'}
+        loading={loading}
+        form={form}
+        HandleSave={HandleSubmit}
+      />
     </>
   )
 }
