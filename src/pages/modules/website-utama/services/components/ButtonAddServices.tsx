@@ -1,4 +1,3 @@
-import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import { Button } from '@/components/ui/button'
 import { useQueryClient } from '@tanstack/react-query'
 import { Plus } from 'lucide-react'
@@ -10,6 +9,7 @@ import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
 import { type IServicesTypeForm, ServicesResolver } from '../model/resolver'
 import ServiceForm from './ServiceForm'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 const ButtonAddServices = () => {
   const form = useForm<IServicesTypeForm>({
@@ -58,9 +58,9 @@ const ButtonAddServices = () => {
         Tambah
       </Button>
 
-      <DialogCustom
+      <DialogBasic
         open={open}
-        className={'rounded lg:max-w-4xl'}
+        className={'rounded lg:min-w-4xl'}
         setOpen={setOpen}
         title={'Tambah Layanan'}
       >
@@ -72,7 +72,7 @@ const ButtonAddServices = () => {
             setOpen(false)
           }}
         />
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

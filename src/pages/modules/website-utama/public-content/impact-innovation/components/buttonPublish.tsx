@@ -12,8 +12,8 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import type { IImpactInnovationList } from '../data/index'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonPublishImpactInnovation = (data: IImpactInnovationList) => {
   const [open, setOpen] = useState(false)
@@ -23,9 +23,12 @@ export const ButtonPublishImpactInnovation = (data: IImpactInnovationList) => {
 
   const HandleApprove = async () => {
     setLoading(true)
-    await AxiosClient.patch(`/website-utama/inovasi-berdampak/${data?.id_inovasi_berdampak}/status-publish`, {
-      status_publish: 'PUBLISHED',
-    })
+    await AxiosClient.patch(
+      `/website-utama/inovasi-berdampak/${data?.id_inovasi_berdampak}/status-publish`,
+      {
+        status_publish: 'PUBLISHED',
+      }
+    )
       .then((res) => {
         if (res?.data?.status) {
           queryClient.invalidateQueries({
@@ -57,10 +60,9 @@ export const ButtonPublishImpactInnovation = (data: IImpactInnovationList) => {
         Publish Sekarang
       </Button>
 
-      <DialogCustom
+      <DialogBasic
+        className={'rounded lg:max-w-2xl'}
         open={open}
-        isAuto
-        className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
         title={'Ajukan Ke Editor'}
         description={'Apakah anda yakin untuk mengajukan berita yang dipilih ke editor?'}
@@ -117,7 +119,7 @@ export const ButtonPublishImpactInnovation = (data: IImpactInnovationList) => {
             />
           </div>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

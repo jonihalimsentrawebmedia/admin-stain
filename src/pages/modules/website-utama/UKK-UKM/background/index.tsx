@@ -9,7 +9,7 @@ export const UkkUKMBackgroundPage = () => {
     <>
       <div className="flex flex-col gap-4">
         <ButtonTitleGroup buttonGroup={[]} label="Gambar Background - UKK UKM" isBack />
-        <div className="px-4 py 2 border border-[#2769CD] rounded-lg bg-[#F5F9FF] py-2">
+        <div className="px-4 py-2 border border-[#2769CD] rounded-lg bg-[#F5F9FF]">
           <ul className="list-outside text-[#464646] list-disc pl-4 ml-4">
             <li>Minimal ada 1 gambar</li>
             <li>

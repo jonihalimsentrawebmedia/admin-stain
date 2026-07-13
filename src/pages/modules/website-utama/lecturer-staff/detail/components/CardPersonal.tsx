@@ -33,10 +33,10 @@ const CardPersonal = ({ form }: Props) => {
   return (
     <div className="flex gap-4 flex-col">
       <div className="text-2xl text-primary font-medium">Informasi Pribadi</div>
-      <div className="flex gap-4">
+      <div className="flex flex-col lg:flex-row gap-4">
         <img
           src={form.watch('gambar_url') ?? '/noimg.png'}
-          className="w-[228px] rounded h-[304px] object-cover"
+          className="w-full lg:w-[228px] rounded h-auto lg:h-[304px] object-cover"
           alt=""
         />
         <DetailField data={field} form={form} />

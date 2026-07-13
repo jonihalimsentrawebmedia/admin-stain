@@ -72,7 +72,7 @@ const ButtonEditAcademicResource = (props: Props) => {
         title={'Ubah Academic Resource'}
         open={open}
         setOpen={setOpen}
-        className="min-w-2xl"
+        className="lg:min-w-2xl"
       >
         <FormAcademicResource
           form={form}

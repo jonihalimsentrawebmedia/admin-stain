@@ -3,10 +3,10 @@ import type { IFacilitiesDetail } from '@/pages/modules/website-utama/public-con
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { BiX } from 'react-icons/bi'
 import { MdCancel } from 'react-icons/md'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonUnpublishFacilities = (data: IFacilitiesDetail) => {
   const [open, setOpen] = useState(false)
@@ -48,10 +48,10 @@ export const ButtonUnpublishFacilities = (data: IFacilitiesDetail) => {
         Unpublish
       </Button>
 
-      <DialogCustom
+      <DialogBasic
+        className={'rounded lg:max-w-2xl'}
         open={open}
         setOpen={setOpen}
-        className={'rounded lg:max-w-2xl'}
         title={'Unpublish Fasilitas'}
         description={'Apakah anda yakin untuk Unpublish Inovasi Berdampak yang dipilih?'}
       >
@@ -84,7 +84,7 @@ export const ButtonUnpublishFacilities = (data: IFacilitiesDetail) => {
             Unpublish
           </Button>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

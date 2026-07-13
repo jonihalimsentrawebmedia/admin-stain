@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
@@ -8,6 +7,7 @@ import { BiX } from 'react-icons/bi'
 import { FaTrash } from 'react-icons/fa'
 import type { IRegistrationPath } from '@/pages/modules/website-utama/jalur-pendaftaran/data/types.ts'
 import { Switch } from '@/components/ui/switch.tsx'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 interface Props {
   data: IRegistrationPath
@@ -48,7 +48,7 @@ export const ButtonDeleteRegistrationPath = (props: Props) => {
         <FaTrash />
       </button>
 
-      <DialogCustom
+      <DialogBasic
         open={open}
         setOpen={setOpen}
         title={<p className={'text-red-500 text-2xl'}>Hapus Jalur Pendaftaran</p>}
@@ -56,7 +56,7 @@ export const ButtonDeleteRegistrationPath = (props: Props) => {
         description={'Apakah Anda yakin ingin menghapus Jalur Pendaftaran ini?'}
         disableOutsideDialog
       >
-        <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
+        <div className={'grid lg:grid-cols-[12rem_1fr] gap-5'}>
           <p className={'text-gray-500'}>Jalur Pendaftaran</p>
           <p>{data?.nama_jalur_pendaftaran}</p>
           <p className={'text-gray-500'}>Deskripsi</p>
@@ -86,7 +86,7 @@ export const ButtonDeleteRegistrationPath = (props: Props) => {
             Hapus
           </Button>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

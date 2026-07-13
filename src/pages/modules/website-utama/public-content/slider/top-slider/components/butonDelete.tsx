@@ -1,6 +1,5 @@
 import { FaTrash } from 'react-icons/fa'
 import { useState } from 'react'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import type { IListSlider } from '@/pages/modules/website-utama/public-content/slider/top-slider/create/data'
 import { Button } from '@/components/ui/button.tsx'
 import AxiosClient from '@/provider/axios.tsx'
@@ -9,6 +8,7 @@ import { toast } from 'react-toastify'
 import { Form } from '@/components/ui/form.tsx'
 import { useForm } from 'react-hook-form'
 import TextInput from '@/components/common/form/TextInput.tsx'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 interface Props {
   data: IListSlider
@@ -53,9 +53,8 @@ export const ButonDeleteTopSlider = (props: Props) => {
       >
         <FaTrash />
       </button>
-      <DialogCustom
-        isAuto
-        className={'rounded lg:max-w-2xl'}
+      <DialogBasic
+        className={'rounded lg:min-w-2xl'}
         open={open}
         setOpen={setOpen}
         title={<p className={'text-red-500'}>Hapus Data Slider Atas?</p>}
@@ -101,7 +100,7 @@ export const ButonDeleteTopSlider = (props: Props) => {
             Hapus
           </Button>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

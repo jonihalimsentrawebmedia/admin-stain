@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import type { IGalleryVideo } from '@/pages/modules/website-utama/public-content/gallery/video/data'
 import { Link } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
@@ -11,6 +10,7 @@ import { Button } from '@/components/ui/button.tsx'
 import { useForm } from 'react-hook-form'
 import { Form } from '@/components/ui/form.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonDeleteVideo = (data: IGalleryVideo) => {
   const [open, setOpen] = useState(false)
@@ -44,14 +44,14 @@ export const ButtonDeleteVideo = (data: IGalleryVideo) => {
         <FaTrash />
       </button>
 
-      <DialogCustom
+      <DialogBasic
         open={open}
         setOpen={setOpen}
         title={<p className={'text-red-500'}>Hapus Galeri Video</p>}
         description={'Apakah anda yakin untuk menghapus galeri video yang dipilih?'}
-        className={'rounded lg:max-w-2xl'}
+        className={'rounded lg:min-w-2xl'}
       >
-        <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
+        <div className={'grid lg:grid-cols-[12rem_1fr] gap-4'}>
           <p className="text-gray-500">Judul Gallery</p>
           <p>{data?.judul}</p>
           <p className="text-gray-500">Link Video</p>
@@ -100,7 +100,7 @@ export const ButtonDeleteVideo = (data: IGalleryVideo) => {
             },
           ]}
         />
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

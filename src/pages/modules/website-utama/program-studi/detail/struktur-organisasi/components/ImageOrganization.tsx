@@ -158,7 +158,7 @@ const ImageOrganization = (props: Props) => {
           onDragOver={(e) => e.preventDefault()}
           onDrop={onDrop}
           onClick={() => fileRef.current?.click()}
-          className="flex justify-center rounded border border-primary flex-col h-[600px] bg-[#F5FFFA] text-center items-center w-full"
+          className="flex justify-center rounded border border-primary flex-col h-[300px] lg:h-[600px] bg-[#F5FFFA] text-center items-center w-full"
         >
           <MdAddPhotoAlternate className="text-primary size-16" />
           <p>

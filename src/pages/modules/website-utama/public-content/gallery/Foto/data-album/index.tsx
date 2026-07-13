@@ -44,7 +44,7 @@ export const DataAlbumListPage = () => {
       />
 
       <div className="flex flex-col gap-5 mt-5">
-        <p className="text-2xl font-semibold text-primary">{detail?.judul}</p>
+        <p className="text-xl sm:text-2xl font-semibold text-primary">{detail?.judul}</p>
         <Search
           innerClassName={'p-1.5 pl-9'}
           position={'start'}
@@ -54,12 +54,12 @@ export const DataAlbumListPage = () => {
         />
         {detail?.jumlah_foto === 0 && <p className="text-red-500">belum ada foto ditambahkan</p>}
 
-        <div className="grid grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {galleryAlbum.length > 0 &&
             galleryAlbum.map((item, index) => (
               <div key={index}>
                 <div className="relative w-full">
-                  <div className="absolute gap-1.5 flex items-center justify-end w-full p-1.5">
+                  <div className="absolute gap-1.5 flex items-center justify-end w-full p-1.5 flex-wrap">
                     <Link to={`${item?.id_galeri_foto}`}>
                       <button className={'bg-primary p-1.5 rounded text-white'}>
                         <IoLanguage />
@@ -71,7 +71,7 @@ export const DataAlbumListPage = () => {
                   <img
                     src={item?.link_foto}
                     alt="image"
-                    className={'w-full h-[300px] object-cover rounded-md'}
+                    className={'w-full h-48 sm:h-[300px] object-cover rounded-md'}
                   />
                 </div>
                 <p className="px-1">{item?.judul}</p>

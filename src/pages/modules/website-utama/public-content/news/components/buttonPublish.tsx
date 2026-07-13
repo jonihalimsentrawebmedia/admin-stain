@@ -13,7 +13,7 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonPublishNews = (data: INewsDetail) => {
   const [open, setOpen] = useState(false)
@@ -57,10 +57,9 @@ export const ButtonPublishNews = (data: INewsDetail) => {
         Publish Sekarang
       </Button>
 
-      <DialogCustom
+      <DialogBasic
+        className={'rounded lg:min-w-2xl'}
         open={open}
-        isAuto
-        className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
         title={'Ajukan Ke Editor'}
         description={'Apakah anda yakin untuk mengajukan berita yang dipilih ke editor?'}
@@ -117,7 +116,7 @@ export const ButtonPublishNews = (data: INewsDetail) => {
             />
           </div>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

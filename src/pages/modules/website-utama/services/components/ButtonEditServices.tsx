@@ -1,14 +1,14 @@
 import { useForm } from 'react-hook-form'
 import type { ServicesList } from '../model'
-import { ServicesResolver, type IServicesTypeForm } from '../model/resolver'
+import { type IServicesTypeForm, ServicesResolver } from '../model/resolver'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import ServiceForm from './ServiceForm'
 import { HiPencil } from 'react-icons/hi'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 interface Props {
   data: ServicesList
@@ -72,9 +72,8 @@ const ButtonEditServices = ({ data }: Props) => {
         <HiPencil />
       </button>
 
-      <DialogCustom
+      <DialogBasic
         open={open}
-        width="50%"
         className={'rounded lg:min-w-2xl'}
         setOpen={setOpen}
         title={'Edit Layanan'}
@@ -87,7 +86,7 @@ const ButtonEditServices = ({ data }: Props) => {
             setOpen(false)
           }}
         />
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

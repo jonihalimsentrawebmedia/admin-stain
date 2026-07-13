@@ -159,10 +159,10 @@ export default function TabsPublication() {
   return (
     <div className="w-full space-y-4">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-wrap">
         <h2 className="text-xl font-medium text-primary">Publikasi</h2>
 
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap">
           <ButtonSyncLecturerDetail
             link={`/website-utama/sdm/${id}/publikasi/sync`}
             topik="fcm_sync_sdm_publikasi"

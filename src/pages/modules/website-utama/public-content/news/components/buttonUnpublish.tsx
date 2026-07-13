@@ -12,8 +12,8 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { MdCancel } from 'react-icons/md'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonUnpublishNews = (data: INewsDetail) => {
   const [open, setOpen] = useState(false)
@@ -57,10 +57,9 @@ export const ButtonUnpublishNews = (data: INewsDetail) => {
         Unpublish Berita
       </Button>
 
-      <DialogCustom
+      <DialogBasic
+        className={'rounded lg:min-w-2xl'}
         open={open}
-        isAuto
-        className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
         title={'Unpublish Berita'}
         description={'Apakah anda yakin untuk mempublish berita yang dipilih?'}
@@ -117,7 +116,7 @@ export const ButtonUnpublishNews = (data: INewsDetail) => {
             />
           </div>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

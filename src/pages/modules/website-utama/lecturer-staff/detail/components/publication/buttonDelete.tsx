@@ -54,7 +54,7 @@ export const ButtonDeletePublication = (props: Props) => {
         setOpen={setOpen}
         className={'lg:min-w-3xl'}
       >
-        <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
+        <div className={'grid grid-cols-1 lg:grid-cols-[12rem_1fr] gap-4'}>
           <p className="text-gray-500">Judul Publiaksi</p>
           <p>{data?.judul_publikasi}</p>
           <p className="text-gray-500">Jenis Publiaksi</p>

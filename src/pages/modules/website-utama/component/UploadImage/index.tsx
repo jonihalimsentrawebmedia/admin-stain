@@ -73,7 +73,7 @@ export const UploadImageBasic = <T extends FieldValues>({
       {/* IMAGE PREVIEW / UPLOAD AREA */}
       {imageUrl ? (
         <div className="space-y-2 mt-2">
-          <div className="w-[512px] h-[191.2px] rounded overflow-hidden border">
+          <div className="lg:w-[512px] h-[191.2px] rounded overflow-hidden border">
             <img src={imageUrl} alt="Uploaded image" className="w-full h-full object-cover" />
           </div>
 

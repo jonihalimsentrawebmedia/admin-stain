@@ -43,7 +43,7 @@ export const ColumnsAcademicResource = () => {
           <Link
             to={row.original.url_layanan}
             target="_blank"
-            className="border px-4 py-2 w-fit border-[#2769CD] text-[#2769CD] rounded-lg flex gap-2 items-center"
+            className="border whitespace-nowrap px-4 py-2 w-fit border-[#2769CD] text-[#2769CD] rounded-lg flex gap-2 items-center"
           >
             <FiExternalLink className={'size-5'} />
             Buka URL
@@ -65,7 +65,7 @@ export const ColumnsAcademicResource = () => {
             <Link
               to={`log/${data?.id_academic_resources}`}
               className={
-                'flex gap-2 items-center border border-primary text-primary px-4 py-2 rounded w-fit'
+                'flex gap-2 whitespace-nowrap items-center border border-primary text-primary px-4 py-2 rounded w-fit'
               }
             >
               <LuHistory className={'size-5'} />

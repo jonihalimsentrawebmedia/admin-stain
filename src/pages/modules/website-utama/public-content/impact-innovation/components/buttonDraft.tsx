@@ -10,10 +10,10 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { useQueryClient } from '@tanstack/react-query'
 import { IconCancel } from '@/components/common/icon'
 import type { IImpactInnovationList } from '../data/index'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonDraftImpactInnovation = (data: IImpactInnovationList) => {
   const [open, setOpen] = useState(false)
@@ -23,9 +23,12 @@ export const ButtonDraftImpactInnovation = (data: IImpactInnovationList) => {
 
   const HandleSubmission = async () => {
     setLoading(true)
-    await AxiosClient.patch(`/website-utama/inovasi-berdampak/${data?.id_inovasi_berdampak}/status-publish`, {
-      status_publish: 'DRAFT',
-    })
+    await AxiosClient.patch(
+      `/website-utama/inovasi-berdampak/${data?.id_inovasi_berdampak}/status-publish`,
+      {
+        status_publish: 'DRAFT',
+      }
+    )
       .then((res) => {
         if (res?.data?.status) {
           setOpen(false)
@@ -57,10 +60,9 @@ export const ButtonDraftImpactInnovation = (data: IImpactInnovationList) => {
         Kembali Ke Draft
       </Button>
 
-      <DialogCustom
+      <DialogBasic
+        className={'rounded lg:max-w-2xl'}
         open={open}
-        isAuto
-        className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
         title={'Kembali Ke Draft'}
         description={'Apakah anda yakin untuk mengembalikan berita yang diajukan ke draft?'}
@@ -117,7 +119,7 @@ export const ButtonDraftImpactInnovation = (data: IImpactInnovationList) => {
             />
           </div>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

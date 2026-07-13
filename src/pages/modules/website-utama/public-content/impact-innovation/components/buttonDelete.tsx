@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { FaTrash } from 'react-icons/fa'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import {
   Carousel,
   CarouselContent,
@@ -17,6 +16,7 @@ import type { IImpactInnovationList } from '../data/index'
 import { useForm } from 'react-hook-form'
 import { Form } from '@/components/ui/form.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonDeleteImpactInnovation = (data: IImpactInnovationList) => {
   const [open, setOpen] = useState(false)
@@ -56,10 +56,9 @@ export const ButtonDeleteImpactInnovation = (data: IImpactInnovationList) => {
         <FaTrash />
       </button>
 
-      <DialogCustom
+      <DialogBasic
+        className={'rounded lg:max-w-2xl'}
         open={open}
-        isAuto
-        className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
         title={<p className={'text-red-500'}>Hapus Inovasi Berdampak?</p>}
         description={'Apakah anda yakin untuk menghapus Inovasi Berdampak yang ditulis?'}
@@ -130,7 +129,7 @@ export const ButtonDeleteImpactInnovation = (data: IImpactInnovationList) => {
             />
           </div>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

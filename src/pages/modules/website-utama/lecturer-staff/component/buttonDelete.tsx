@@ -48,8 +48,13 @@ const ButtonDeleteEmployee = (props: Props) => {
         <FaTrash />
       </button>
 
-      <DialogBasic title={'Hapus Dosen / Staff'} open={open} setOpen={setOpen}>
-        <div className={'grid grid-cols-2 gap-5'}>
+      <DialogBasic
+        title={'Hapus Dosen / Staff'}
+        className={'lg:min-w-2xl'}
+        open={open}
+        setOpen={setOpen}
+      >
+        <div className={'grid lg:grid-cols-2 gap-5'}>
           <p className="text-gray-500">Nama</p>
           <p>{data?.nama}</p>
           <p className="text-gray-500">NIK</p>

@@ -4,12 +4,12 @@ import type { IFacilitiesDetail } from '@/pages/modules/website-utama/public-con
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { BiX } from 'react-icons/bi'
 import { useForm } from 'react-hook-form'
 import { Form } from '@/components/ui/form.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonDeleteFacilities = (data: IFacilitiesDetail) => {
   const [open, setOpen] = useState(false)
@@ -48,10 +48,10 @@ export const ButtonDeleteFacilities = (data: IFacilitiesDetail) => {
         <FaTrash />
       </button>
 
-      <DialogCustom
+      <DialogBasic
+        className={'rounded lg:max-w-2xl'}
         open={open}
         setOpen={setOpen}
-        className={'rounded lg:max-w-2xl'}
         title={<p className={'text-2xl text-red-500'}>Hapus Fasilitas</p>}
         description={'Apakah anda yakin untuk menghapus Fasilitas yang ditulis?'}
       >
@@ -101,7 +101,7 @@ export const ButtonDeleteFacilities = (data: IFacilitiesDetail) => {
             Hapus
           </Button>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

@@ -153,10 +153,10 @@ export default function TabsHKI(props: props) {
   return (
     <div className="w-full space-y-4">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-wrap">
         <h2 className="text-lg font-semibold text-primary">HKI/PATEN</h2>
 
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap">
           {show && (
             <ButtonSyncLecturerDetail
               link={`/website-utama/sdm/${id}/hki-paten/sync`}

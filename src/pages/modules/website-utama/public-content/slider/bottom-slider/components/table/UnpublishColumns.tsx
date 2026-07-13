@@ -29,7 +29,7 @@ const UnpublishedColumnsBottom = () => {
       header: 'Gambar',
       cell: ({ row }) => {
         const img = row?.original?.gambar
-        return <img src={img} alt="img" className="w-[290px] h-[174px] rounded object-cover" />
+        return <img src={img} alt="img" className="min-w-[150px] w-[290px] lg:h-[174px] rounded object-cover" />
       },
     },
     {

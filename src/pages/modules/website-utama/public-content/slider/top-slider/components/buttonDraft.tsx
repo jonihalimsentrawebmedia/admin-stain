@@ -5,7 +5,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import type { IListSlider } from '@/pages/modules/website-utama/public-content/slider/top-slider/create/data'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 interface Props {
   data: IListSlider
@@ -54,11 +54,10 @@ export const ButtonDraft = (props: Props) => {
         Kembali Ke Draft
       </Button>
 
-      <DialogCustom
-        open={open}
-        isAuto
-        setOpen={setOpen}
+      <DialogBasic
         className={'rounded lg:min-w-2xl'}
+        open={open}
+        setOpen={setOpen}
         title={'Kembali Ke Draft'}
         description={'Apakah anda yakin untuk mengembalikan berita yang diajukan ke draft?'}
       >
@@ -89,7 +88,7 @@ export const ButtonDraft = (props: Props) => {
             Kembalikan Ke Draft
           </Button>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

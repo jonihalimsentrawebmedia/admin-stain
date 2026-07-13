@@ -45,7 +45,7 @@ const ServicesViewModel = () => {
           <Link
             to={row.original.url_layanan}
             target="_blank"
-            className="border px-4 py-2 border-[#2769CD] text-[#2769CD] rounded-lg flex gap-2 items-center"
+            className="border whitespace-nowrap px-4 py-2 border-[#2769CD] text-[#2769CD] rounded-lg flex gap-2 items-center"
           >
             <MdOpenInNew className="text-[#2769CD] size-6" />
             Buka URL

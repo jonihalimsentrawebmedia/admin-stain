@@ -1,14 +1,14 @@
 import { useForm } from 'react-hook-form'
 import type { Menu } from '../model'
-import { SettingMenuResolver, type ISettingMenuTypeForm } from '../model/resolver'
+import { type ISettingMenuTypeForm, SettingMenuResolver } from '../model/resolver'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import MenuForm from './MenuForm'
 import { HiPencil } from 'react-icons/hi'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 interface Props {
   data: Menu
@@ -57,10 +57,9 @@ const ButtonEdit = ({ data }: Props) => {
         <HiPencil />
       </button>
 
-      <DialogCustom
-        width="50%"
+      <DialogBasic
         open={open}
-        className={'rounded'}
+        className={'rounded lg:min-w-2xl'}
         setOpen={setOpen}
         title={'Edit Menu'}
       >
@@ -72,7 +71,7 @@ const ButtonEdit = ({ data }: Props) => {
             setOpen(false)
           }}
         />
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

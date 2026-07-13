@@ -35,13 +35,13 @@ export const RejectColumnsImpactInnovation = () => {
         return (
           <div>
             {row?.original?.gambar_tambahan.length > 0 ? (
-              <Carousel className={'w-[300px]'}>
+              <Carousel className={'w-[150px] lg:w-[300px]'}>
                 <CarouselContent className={'w-fit'}>
                   {row?.original?.gambar_tambahan.map((item, index) => (
                     <CarouselItem key={index}>
                       <img
                         src={item?.gambar}
-                        className={'w-[300px] h-[225px] object-cover'}
+                        className={'max-w-[150px] lg:w-[300px] lg:h-[225px] object-cover'}
                         alt={item?.keterangan}
                       />
                     </CarouselItem>

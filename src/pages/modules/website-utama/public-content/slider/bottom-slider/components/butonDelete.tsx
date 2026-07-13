@@ -1,6 +1,5 @@
 import { FaTrash } from 'react-icons/fa'
 import { useState } from 'react'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import type { IListBottomSlider } from '@/pages/modules/website-utama/public-content/slider/top-slider/create/data'
 import { Button } from '@/components/ui/button.tsx'
 import AxiosClient from '@/provider/axios.tsx'
@@ -9,6 +8,7 @@ import { toast } from 'react-toastify'
 import { useForm } from 'react-hook-form'
 import { Form } from '@/components/ui/form.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 interface Props {
   data: IListBottomSlider
@@ -53,10 +53,9 @@ export const ButonDeleteBottomSlider = (props: Props) => {
       >
         <FaTrash />
       </button>
-      <DialogCustom
-        className={'rounded'}
+      <DialogBasic
+        className={'rounded lg:min-w-2xl'}
         open={open}
-        isAuto
         setOpen={setOpen}
         title={<p className={'text-red-500'}>Hapus Data Slider Bawah?</p>}
         description={'Apakah anda yakin untuk menghapus sldier yang dipilih?'}
@@ -101,7 +100,7 @@ export const ButonDeleteBottomSlider = (props: Props) => {
             Hapus
           </Button>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

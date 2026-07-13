@@ -5,11 +5,11 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import DetailField from '@/components/common/field/DetailField'
 import { Button } from '@/components/ui/button'
 import { Trash2, X } from 'lucide-react'
 import { FaTrash } from 'react-icons/fa'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 interface Props {
   data: ServicesList
@@ -71,9 +71,8 @@ const ButtonDeleteServices = ({ data }: Props) => {
         <FaTrash />
       </button>
 
-      <DialogCustom
+      <DialogBasic
         open={open}
-        width="50%"
         className={'rounded lg:min-w-2xl'}
         setOpen={setOpen}
         title={<p className="text-2xl text-red-500">Hapus Layanan?</p>}
@@ -97,7 +96,7 @@ const ButtonDeleteServices = ({ data }: Props) => {
             Hapus
           </Button>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

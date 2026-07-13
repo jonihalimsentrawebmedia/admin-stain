@@ -19,9 +19,9 @@ const DetailField = ({ data, form, isRow = true, isRowParent, classNameParent, i
       className={`${isGrid ? 'grid grid-cols-1 md:grid-cols-2' : 'flex'} ${isRowParent ? 'flex-row' : 'flex-col'} gap-4 ${classNameParent}
     `}
     >
-      {data.map((item) => (
+      {data.map((item, index) => (
         <div
-          key={item.name + item.label}
+          key={item.name + item.label + index}
           className={`flex ${isRow ? 'flex-col lg:flex-row' : 'flex-col'} ${item.isHidden ? 'hidden' : ''} gap-2
     `}
         >

@@ -29,7 +29,7 @@ const GalleryProgramStudyViewModel = () => {
       accessorKey: 'thumbnail',
       header: 'Thumbnail',
       cell: ({ row }) => {
-        return <img src={row.original.thumbnail} className="w-[250px] h-[180px] rounded" />
+        return <img src={row.original.thumbnail} className="w-full max-w-[250px] h-auto aspect-[4/3] rounded object-cover" />
       },
     },
     {
@@ -73,7 +73,7 @@ const GalleryProgramStudyViewModel = () => {
       accessorKey: 'thumbnail',
       header: 'Thumbnail',
       cell: ({ row }) => {
-        return <img src={row.original.thumbnail} className="w-[250px] h-[180px] rounded" />
+        return <img src={row.original.thumbnail} className="w-full max-w-[250px] h-auto aspect-[4/3] rounded object-cover" />
       },
     },
     {

@@ -73,11 +73,11 @@ export const AnnouncementDetailPage = () => {
         />
         <Separator className={'my-5'} />
 
-        <div className={'flex items-start gap-x-8 px-5'}>
-          <div className="w-7/12">
-            <p className="text-2xl font-semibold">{detail?.judul_pengumuman}</p>
+        <div className={'flex flex-col lg:flex-row items-start gap-x-8 px-5'}>
+          <div className="w-full lg:w-7/12">
+            <p className="text-xl sm:text-2xl font-semibold">{detail?.judul_pengumuman}</p>
 
-            <div className="my-5 grid grid-cols-2 gap-5">
+            <div className="my-5 grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
                 <p className="text-gray-500">Tanggal Terbit</p>
                 <p className="text-primary">
@@ -119,7 +119,7 @@ export const AnnouncementDetailPage = () => {
             </div>
           </div>
 
-          <div className={'w-5/12'}>
+          <div className={'w-full lg:w-5/12'}>
             <div className="flex items-center my-5 gap-2">
               Tampilkan
               <Select
@@ -135,6 +135,7 @@ export const AnnouncementDetailPage = () => {
               src={document?.value ?? ''}
               width="100%"
               height="950px"
+              className="h-[500px] sm:h-[950px]"
               style={{ border: 'none' }}
             />
           </div>

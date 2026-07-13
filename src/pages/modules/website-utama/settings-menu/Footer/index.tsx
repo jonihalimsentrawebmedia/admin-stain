@@ -115,7 +115,7 @@ export const FooterContent = () => {
             </Form>
           </div>
         ) : (
-          <div className={'grid grid-cols-[12rem_1fr] gap-5 mt-5'}>
+          <div className={'grid lg:grid-cols-[12rem_1fr] gap-5 mt-5'}>
             <p className="text-gray-500">Text Footer</p>
             <p>{textFooter?.text_footer}</p>
           </div>

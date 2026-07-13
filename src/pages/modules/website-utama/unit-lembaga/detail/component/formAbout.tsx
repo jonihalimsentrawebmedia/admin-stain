@@ -73,10 +73,10 @@ export const FormAbout = (props: Props) => {
     <Form {...form}>
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-4">
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
             <div className="text-primary text-2xl font-medium">Tentang {detail?.nama}</div>
 
-          <div className='flex gap-4 items-center'>
+          <div className='flex gap-4 items-center flex-wrap'>
             <ButtonGoToGuide titleGuide='Tentang' valueGuide="WEBSITE_UTAMA_SATUAN_ORGANISASI_TENTANG" />
               {isEditContent ? (
               <ButtonForm loading={loading} onCancel={() => setIsEditContent(false)} />

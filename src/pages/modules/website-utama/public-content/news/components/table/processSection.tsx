@@ -15,7 +15,7 @@ export const ProcessSection = () => {
       <TableCustom
         tdClassName={'border'}
         addFilter={
-          <div className={'flex items-center gap-1.5'}>
+          <div className={'flex flex-wrap items-center gap-1.5'}>
             <SelectFilter
               selectClassName={'min-w-[8rem]'}
               label="Tampilkan"

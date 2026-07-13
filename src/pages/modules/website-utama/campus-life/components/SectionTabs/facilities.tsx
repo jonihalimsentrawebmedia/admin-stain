@@ -46,7 +46,7 @@ export const FacilitiesSection = () => {
             <FormFacilities isEdit={isEdit} setIsEdit={setIsEdit} data={campusFacilities} />
           ) : (
             <AccordionCustom name={'fasilitas'} title={'Isi'}>
-              <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
+              <div className={'grid grid-cols-1 lg:grid-cols-[12rem_1fr] gap-5'}>
                 <p className="text-gray-500">Warna Background</p>
                 <div>
                   {campusFacilities?.is_warna_background ? (

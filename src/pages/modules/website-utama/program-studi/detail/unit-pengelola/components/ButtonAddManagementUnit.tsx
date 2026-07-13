@@ -139,8 +139,8 @@ const ButtonAddManagementUnit = () => {
               />
             )}
 
-            <div className="grid grid-cols-[12rem_1fr] gap-5">
-              <div />
+            <div className="grid grid-cols-1 lg:grid-cols-[12rem_1fr] gap-5">
+              <div className="hidden lg:block" />
               <UploadPasPhoto
                 label={'Foto Profil (4x6)'}
                 name={'gambar_url'}

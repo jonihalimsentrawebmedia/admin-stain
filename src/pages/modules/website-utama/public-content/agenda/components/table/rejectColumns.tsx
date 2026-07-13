@@ -28,7 +28,7 @@ export const RejectColumnsAgenda = () => {
         <img
           src={row?.original?.gambar}
           alt="gambar"
-          className={'w-[150px] object-cover h-[200px] rounded'}
+          className={'max-w-[120px] lg:w-[150px] object-cover lg:h-[200px] rounded'}
         />
       ),
     },

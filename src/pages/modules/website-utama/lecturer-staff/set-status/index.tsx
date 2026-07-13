@@ -108,7 +108,7 @@ const SetStatusEmployeePage = () => {
           rowIdKey={'id_sdm'}
         />
 
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between">
           <div>
             Tampilkan {limit ?? '10'} dari {meta?.total ?? 10} Data
           </div>

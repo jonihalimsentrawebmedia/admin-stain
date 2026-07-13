@@ -38,13 +38,13 @@ const DetailUnitInstitution = () => {
         <Separator />
 
         <Tabs
-          className={'w-full h-full bg-white flex-row!'}
+          className={'w-full h-full bg-white flex-col lg:flex-row'}
           value={tabsValue}
           onValueChange={setTabsValue}
         >
           <TabsList
             className={
-              'w-full h-full! flex flex-col! gap-2 max-w-[200px]! bg-white border p-4 rounded'
+              'w-full lg:w-auto h-auto lg:h-full flex flex-col gap-2 lg:max-w-[200px] bg-white border p-4 rounded'
             }
           >
             {TabsData.map((row, k) => (

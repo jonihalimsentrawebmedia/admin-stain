@@ -48,7 +48,7 @@ const ButtonDeleteUkkUkm = (props: props) => {
       </button>
 
       <DialogBasic title={'Hapus UKK UKM'} open={open} setOpen={setOpen}>
-        <div className={'grid grid-cols-2 gap-5'}>
+        <div className={'grid grid-cols-1 sm:grid-cols-2 gap-5'}>
           <p className="text-gray-500">Nama UKK & UKM</p>
           <p>{data?.nama_ukk_ukm}</p>
           <p className="text-gray-500">Urutan</p>

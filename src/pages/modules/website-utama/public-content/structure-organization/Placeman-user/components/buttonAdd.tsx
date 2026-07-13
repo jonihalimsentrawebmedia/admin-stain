@@ -3,7 +3,6 @@ import { useQueryClient } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
 import { Button } from '@/components/ui/button.tsx'
 import { BiPlus } from 'react-icons/bi'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import {
   PlacemanResolver,
   type PlacemanType,
@@ -13,6 +12,7 @@ import { FormPlacemanUser } from '@/pages/modules/website-utama/public-content/s
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useParams } from 'react-router-dom'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonAddPlaceman = () => {
   const { id } = useParams()
@@ -68,8 +68,8 @@ export const ButtonAddPlaceman = () => {
         Tambah Pejabat
       </Button>
 
-      <DialogCustom
-        className={'rounded max-w-5xl'}
+      <DialogBasic
+        className={'rounded lg:max-w-5xl'}
         open={open}
         setOpen={setOpen}
         title={'Tambah Pejabat'}
@@ -81,7 +81,7 @@ export const ButtonAddPlaceman = () => {
           HandleSave={HandleSave}
           loading={loading}
         />
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

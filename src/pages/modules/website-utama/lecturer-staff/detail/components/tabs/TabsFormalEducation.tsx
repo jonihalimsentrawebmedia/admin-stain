@@ -159,9 +159,9 @@ export default function TabsFormalEducation(props: props) {
 
   return (
     <div className=" rounded-md space-y-4 bg-white">
-      <div className="flex gap-4 items-center justify-between">
+      <div className="flex gap-4 items-center justify-between flex-wrap">
         <div className="text-xl text-primary font-medium">Pendidikan Formal</div>
-        <div className="flex gap-4 items-center">
+        <div className="flex flex-wrap gap-4 items-center">
           {show && (
             <ButtonSyncLecturerDetail
               link={`/website-utama/sdm/${id}/pendidikan-formal/sync`}

@@ -57,11 +57,11 @@ export const DetailAgendaPage = () => {
         />
         <Separator className={'my-5'} />
 
-        <div className={'flex items-start gap-x-8 px-5'}>
-          <div className="w-7/12">
-            <p className="text-2xl font-semibold">{detail?.judul}</p>
-            <div className="my-5 grid grid-cols-2 gap-5">
-              <div>
+        <div className={'flex flex-col lg:flex-row items-start gap-x-8 px-5'}>
+          <div className="w-full lg:w-7/12">
+            <p className="text-xl sm:text-2xl font-semibold">{detail?.judul}</p>
+            <div className="my-5 lg:grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div className={'whitespace-nowrap'}>
                 <p className="text-gray-500">Waktu</p>
                 <div className={'flex gap-1.5 items-center text-primary font-semibold'}>
                   <p>
@@ -89,8 +89,8 @@ export const DetailAgendaPage = () => {
             </div>
           </div>
 
-          <div className="w-5/12">
-            <img src={detail?.gambar} alt="image" className="w-full h-[640px] object-contain" />
+          <div className="w-full lg:w-5/12">
+            <img src={detail?.gambar} alt="image" className="w-full h-[320px] sm:h-[640px] object-contain" />
           </div>
         </div>
       </div>

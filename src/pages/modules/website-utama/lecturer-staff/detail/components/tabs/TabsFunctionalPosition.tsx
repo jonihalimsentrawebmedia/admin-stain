@@ -147,9 +147,9 @@ export default function TabsFunctionalPosition(props: props) {
   }, [functionalPosition])
   return (
     <div className="space-y-4 rounded-md bg-white">
-      <div className="flex gap-4 items-center justify-between">
+      <div className="flex gap-4 items-center justify-between flex-wrap">
         <div className="text-xl text-primary font-medium">Jabatan Fungsional</div>
-        <div className="flex gap-4 items-center">
+        <div className="flex gap-4 items-center flex-wrap">
           {show && (
             <ButtonSyncLecturerDetail
               link={`/website-utama/sdm/${id}/jabatan-fungsional/sync`}

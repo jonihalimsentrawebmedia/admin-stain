@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import type { IPlacemanUser } from '../data/index'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
@@ -10,6 +9,7 @@ import { FaTrash } from 'react-icons/fa'
 import { useForm } from 'react-hook-form'
 import { Form } from '@/components/ui/form.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonDeletePlaceman = (data: IPlacemanUser) => {
   const [open, setOpen] = useState(false)
@@ -46,20 +46,20 @@ export const ButtonDeletePlaceman = (data: IPlacemanUser) => {
         <FaTrash />
       </button>
 
-      <DialogCustom
-        className={'rounded min-w-4xl'}
+      <DialogBasic
+        className={'rounded lg:min-w-4xl'}
         open={open}
         setOpen={setOpen}
         title={<p className={'text-2xl text-red-500'}>Hapus Pejabat</p>}
         description={'Apakah anda yakin untuk menghapus pejabat yang dipilih?'}
       >
-        <div className="flex items-start gap-x-5">
+        <div className="flex flex-col lg:flex-row items-start gap-2 gap-x-5">
           <img
             src={data?.gambar}
             alt={data?.nama_lengkap}
             className={'w-[10rem] h-[200px] object-cover rounded'}
           />
-          <div className={'grid grid-cols-[15rem_1fr] gap-5'}>
+          <div className={'space-y-2 lg:grid lg:grid-cols-[15rem_1fr] gap-5'}>
             <p className={'text-gray-500'}>Nama</p>
             <p>{data?.nama_lengkap}</p>
             <p className={'text-gray-500'}>Jabatan</p>
@@ -111,7 +111,7 @@ export const ButtonDeletePlaceman = (data: IPlacemanUser) => {
             Hapus
           </Button>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

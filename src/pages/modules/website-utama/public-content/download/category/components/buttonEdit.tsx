@@ -4,13 +4,13 @@ import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { Button } from '@/components/ui/button.tsx'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { Form } from '@/components/ui/form.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import { BiX } from 'react-icons/bi'
 import { FaSave } from 'react-icons/fa'
 import type { ICategoryDownload } from '@/pages/modules/website-utama/public-content/download/types'
 import { HiPencil } from 'react-icons/hi'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonEditCategoryDownload = (data?: ICategoryDownload) => {
   const [open, setOpen] = useState(false)
@@ -55,9 +55,8 @@ export const ButtonEditCategoryDownload = (data?: ICategoryDownload) => {
         <HiPencil />
       </button>
 
-      <DialogCustom
-        className={'rounded-md min-w-2xl'}
-        width={'450px'}
+      <DialogBasic
+        className={'rounded lg:max-w-2xl'}
         open={open}
         setOpen={setOpen}
         title={'Edit Kategori Berkas'}
@@ -94,7 +93,7 @@ export const ButtonEditCategoryDownload = (data?: ICategoryDownload) => {
             </form>
           </Form>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }
