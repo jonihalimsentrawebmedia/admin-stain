@@ -113,7 +113,7 @@ export const GenerateMenu = () => {
         {
           id: 73,
           name: 'Poli',
-          path: `${baseDomain}/reference/clinic`,
+          path: `${baseDomain}/reference/poli`,
         },
         {
           id: 74,
@@ -122,7 +122,7 @@ export const GenerateMenu = () => {
         },
         {
           id: 75,
-          name: 'Spesialis Dokter',
+          name: 'Spesialisasi Dokter',
           path: `${baseDomain}/reference/specialist`,
         },
         {
