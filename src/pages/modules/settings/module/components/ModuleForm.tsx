@@ -54,6 +54,10 @@ const ModuleForm = ({ form }: Props) => {
       label: 'LAPORAN STATISTIK',
       value: 'LAPORAN_STATISTIK',
     },
+    {
+      value: 'SIMRS',
+      label: 'SIMRS',
+    },
   ]
 
   return (

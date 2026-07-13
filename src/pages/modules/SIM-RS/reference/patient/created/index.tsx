@@ -1,0 +1,48 @@
+import { useForm } from 'react-hook-form'
+import { useState } from 'react'
+import { ResolverPatient, type TResolverPatient } from '../data/resolver'
+import { zodResolver } from '@hookform/resolvers/zod'
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import FormPatient from '../components/forms'
+import AxiosClient from '@/provider/axios.tsx'
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
+
+const CreatePatient = () => {
+  const [loading, setLoading] = useState(false)
+
+  const form = useForm<TResolverPatient>({
+    resolver: zodResolver(ResolverPatient),
+  })
+
+  const navigate = useNavigate()
+  const HandleSave = async (value: TResolverPatient) => {
+    setLoading(true)
+    await AxiosClient.post('/', {
+      ...value,
+      tanggal_lahir: new Date(value.tanggal_lahir).toISOString(),
+    })
+      .then((res) => {
+        if (res?.data?.status) {
+          setLoading(false)
+          toast.success(res?.data?.message || 'Success')
+          navigate('/modules/sim-rs/reference/patient')
+        }
+      })
+      .catch((err) => {
+        setLoading(false)
+        toast.error(err?.response?.data?.message || 'Error')
+      })
+  }
+
+  return (
+    <>
+      <div>
+        <ButtonTitleGroup isBack label={'Tambah Data Pasien'} buttonGroup={[]} />
+        <FormPatient loading={loading} form={form} HandleSave={HandleSave} />
+      </div>
+    </>
+  )
+}
+
+export default CreatePatient

@@ -1,10 +1,9 @@
 import path from 'path'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
-import { defineConfig } from 'vite'
 import type { PluginOption } from 'vite'
+import { defineConfig } from 'vite'
 
-// https://vite.dev/config/
 export default defineConfig({
   base: '/',
   plugins: [react(), tailwindcss()] as PluginOption[],
@@ -22,7 +21,6 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          react: ['react', 'react-dom'],
           tiptap: ['@tiptap/react', '@tiptap/core', '@tiptap/starter-kit'],
           pdf: ['pdfmake', 'html-to-pdfmake'],
           firebase: ['firebase/app', 'firebase/messaging'],

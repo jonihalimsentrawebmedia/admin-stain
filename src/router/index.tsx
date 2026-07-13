@@ -9,52 +9,6 @@ import ForgetPasswordView from '@/pages/forget-password/ForgetPasswordView'
 import OtpView from '@/pages/forget-password/otp/OtpView'
 import ChangePasswordView from '@/pages/forget-password/change-password/ChangePasswordView'
 import SuccessView from '@/pages/forget-password/success/SuccessView'
-
-// ── Lazy: semua komponen modules ──
-const ModulesView = lazy(() => import('@/pages/modules/ModulesView'))
-const LayoutSetting = lazy(() => import('@/pages/modules/settings/components/layout/LayoutSetting'))
-const SelectUniversity = lazy(() => import('@/pages/modules/website-utama/select-university').then(m => ({ default: m.SelectUniversity })))
-const MainLayout = lazy(() => import('@/pages/modules/website-utama/component/layout'))
-const ModuleProfileView = lazy(() => import('@/pages/modules/profile/ModuleProfileView'))
-const MainLayoutProdi = lazy(() => import('@/pages/modules/website-prodi/components/layout'))
-const SelectProdi = lazy(() => import('@/pages/modules/website-prodi/select-prodi').then(m => ({ default: m.SelectProdi })))
-const ProdiWebTheme = lazy(() => import('@/pages/modules/website-prodi/components/layout/theme'))
-const DefaultTheme = lazy(() => import('@/components/common/theme/default'))
-const MainLayoutEditor = lazy(() => import('@/pages/modules/manajeman-editor/components/layout'))
-const SelectUnitUniversity = lazy(() => import('@/pages/modules/website-unit/select-unit').then(m => ({ default: m.SelectUnitUniversity })))
-const MainLayoutUnit = lazy(() => import('@/pages/modules/website-unit/components/layout'))
-const SelectUniversityEditor = lazy(() => import('@/pages/modules/manajeman-editor/select-university').then(m => ({ default: m.SelectUniversityEditor })))
-const UnitWebTheme = lazy(() => import('@/pages/modules/website-unit/components/layout/theme'))
-const SelectInstitutionUniversity = lazy(() => import('@/pages/modules/website-lembaga/select-institution').then(m => ({ default: m.SelectInstitutionUniversity })))
-const LayoutWebsiteInstitution = lazy(() => import('@/pages/modules/website-lembaga/component/Layout').then(m => ({ default: m.LayoutWebsiteInstitution })))
-const InstitutionWebTheme = lazy(() => import('@/pages/modules/website-lembaga/component/Layout/theme'))
-const PPIDWebTheme = lazy(() => import('@/pages/modules/ppid/component/Layout/theme'))
-const LayoutWebsitePPID = lazy(() => import('@/pages/modules/ppid/component/Layout').then(m => ({ default: m.LayoutWebsitePPID })))
-const SelectPPID = lazy(() => import('@/pages/modules/ppid/select-ppid').then(m => ({ default: m.SelectPPID })))
-const SelectSessionLPPM = lazy(() => import('@/pages/modules/LPPM/select-lppm').then(m => ({ default: m.SelectSessionLPPM })))
-const LPPMWebTheme = lazy(() => import('@/pages/modules/LPPM/components/layout/theme'))
-const MainLayoutLPPM = lazy(() => import('@/pages/modules/LPPM/components/layout'))
-const ThemeSettings = lazy(() => import('@/pages/modules/settings/components/layout/thema'))
-const ProviderLPPM = lazy(() => import('@/pages/modules/LPPM/components/context').then(m => ({ default: m.ProviderLPPM })))
-const MainLayoutCarrierCenter = lazy(() => import('@/pages/modules/pusat-karir/component/layout'))
-const SelectSessionCarrierCenter = lazy(() => import('@/pages/modules/pusat-karir/component/select-session').then(m => ({ default: m.SelectSessionCarrierCenter })))
-const CarrierWebTheme = lazy(() => import('@/pages/modules/pusat-karir/component/layout/theme'))
-const FacultyWebTheme = lazy(() => import('@/pages/modules/website-fakultas/component/layout/theme'))
-const MainLayoutFaculty = lazy(() => import('@/pages/modules/website-fakultas/component/layout'))
-const SelectSessionFaculty = lazy(() => import('@/pages/modules/website-fakultas/component/select-session').then(m => ({ default: m.SelectSessionFaculty })))
-const MainLayoutPulsikom = lazy(() => import('@/pages/modules/Pulsikom/component/layout'))
-const SelectSessionPusilkom = lazy(() => import('@/pages/modules/Pulsikom/component/select-session').then(m => ({ default: m.SelectSessionPusilkom })))
-const PulsikomThema = lazy(() => import('@/pages/modules/Pulsikom/component/layout/theme'))
-const SelectSessionSPI = lazy(() => import('@/pages/modules/SPI/component/select-session').then(m => ({ default: m.SelectSessionSPI })))
-const MainLayoutSPI = lazy(() => import('@/pages/modules/SPI/layout'))
-const SPIThema = lazy(() => import('@/pages/modules/SPI/layout/theme'))
-const MainLayoutPMB = lazy(() => import('@/pages/modules/PMB/component/layout'))
-const SelectSessionPMB = lazy(() => import('@/pages/modules/PMB/session').then(m => ({ default: m.SelectSessionPMB })))
-const PMBThema = lazy(() => import('@/pages/modules/PMB/component/layout/thema'))
-const SelectSessionEOffice = lazy(() => import('@/pages/modules/E-Office/session').then(m => ({ default: m.SelectSessionEOffice })))
-const MainLayoutEOffice = lazy(() => import('@/pages/modules/E-Office/component/layout'))
-const EOfficeThema = lazy(() => import('@/pages/modules/E-Office/component/layout/theme'))
-
 // ── Eager: router arrays (ringan, hanya config objects) ──
 // Komponen VIEW di dalamnya akan di-lazy loading di masing-masing file router
 import { MainWebsiteRouter } from '@/router/main-website/router'
@@ -71,6 +25,108 @@ import { PusilkomRoutes } from '@/router/pusilkom'
 import { SPI_ROUTES } from '@/router/SPI'
 import { PMB_ROUTES } from '@/router/pmb'
 import { E_OFFICE_ROUTE } from '@/router/E-Office'
+import { SIMRSROUTES } from '@/router/SIM-RS'
+import MainLayoutSIMRS from '@/pages/modules/SIM-RS/component/layout'
+import { SelectSessionSIMRS } from '@/pages/modules/SIM-RS/select-session'
+
+// ── Lazy: semua komponen modules ──
+const ModulesView = lazy(() => import('@/pages/modules/ModulesView'))
+const LayoutSetting = lazy(() => import('@/pages/modules/settings/components/layout/LayoutSetting'))
+const SelectUniversity = lazy(() =>
+  import('@/pages/modules/website-utama/select-university').then((m) => ({
+    default: m.SelectUniversity,
+  }))
+)
+const MainLayout = lazy(() => import('@/pages/modules/website-utama/component/layout'))
+const ModuleProfileView = lazy(() => import('@/pages/modules/profile/ModuleProfileView'))
+const MainLayoutProdi = lazy(() => import('@/pages/modules/website-prodi/components/layout'))
+const SelectProdi = lazy(() =>
+  import('@/pages/modules/website-prodi/select-prodi').then((m) => ({ default: m.SelectProdi }))
+)
+const ProdiWebTheme = lazy(() => import('@/pages/modules/website-prodi/components/layout/theme'))
+const DefaultTheme = lazy(() => import('@/components/common/theme/default'))
+const MainLayoutEditor = lazy(() => import('@/pages/modules/manajeman-editor/components/layout'))
+const SelectUnitUniversity = lazy(() =>
+  import('@/pages/modules/website-unit/select-unit').then((m) => ({
+    default: m.SelectUnitUniversity,
+  }))
+)
+const MainLayoutUnit = lazy(() => import('@/pages/modules/website-unit/components/layout'))
+const SelectUniversityEditor = lazy(() =>
+  import('@/pages/modules/manajeman-editor/select-university').then((m) => ({
+    default: m.SelectUniversityEditor,
+  }))
+)
+const UnitWebTheme = lazy(() => import('@/pages/modules/website-unit/components/layout/theme'))
+const SelectInstitutionUniversity = lazy(() =>
+  import('@/pages/modules/website-lembaga/select-institution').then((m) => ({
+    default: m.SelectInstitutionUniversity,
+  }))
+)
+const LayoutWebsiteInstitution = lazy(() =>
+  import('@/pages/modules/website-lembaga/component/Layout').then((m) => ({
+    default: m.LayoutWebsiteInstitution,
+  }))
+)
+const InstitutionWebTheme = lazy(
+  () => import('@/pages/modules/website-lembaga/component/Layout/theme')
+)
+const PPIDWebTheme = lazy(() => import('@/pages/modules/ppid/component/Layout/theme'))
+const LayoutWebsitePPID = lazy(() =>
+  import('@/pages/modules/ppid/component/Layout').then((m) => ({ default: m.LayoutWebsitePPID }))
+)
+const SelectPPID = lazy(() =>
+  import('@/pages/modules/ppid/select-ppid').then((m) => ({ default: m.SelectPPID }))
+)
+const SelectSessionLPPM = lazy(() =>
+  import('@/pages/modules/LPPM/select-lppm').then((m) => ({ default: m.SelectSessionLPPM }))
+)
+const LPPMWebTheme = lazy(() => import('@/pages/modules/LPPM/components/layout/theme'))
+const MainLayoutLPPM = lazy(() => import('@/pages/modules/LPPM/components/layout'))
+const ThemeSettings = lazy(() => import('@/pages/modules/settings/components/layout/thema'))
+const ProviderLPPM = lazy(() =>
+  import('@/pages/modules/LPPM/components/context').then((m) => ({ default: m.ProviderLPPM }))
+)
+const MainLayoutCarrierCenter = lazy(() => import('@/pages/modules/pusat-karir/component/layout'))
+const SelectSessionCarrierCenter = lazy(() =>
+  import('@/pages/modules/pusat-karir/component/select-session').then((m) => ({
+    default: m.SelectSessionCarrierCenter,
+  }))
+)
+const CarrierWebTheme = lazy(() => import('@/pages/modules/pusat-karir/component/layout/theme'))
+const FacultyWebTheme = lazy(
+  () => import('@/pages/modules/website-fakultas/component/layout/theme')
+)
+const MainLayoutFaculty = lazy(() => import('@/pages/modules/website-fakultas/component/layout'))
+const SelectSessionFaculty = lazy(() =>
+  import('@/pages/modules/website-fakultas/component/select-session').then((m) => ({
+    default: m.SelectSessionFaculty,
+  }))
+)
+const MainLayoutPulsikom = lazy(() => import('@/pages/modules/Pulsikom/component/layout'))
+const SelectSessionPusilkom = lazy(() =>
+  import('@/pages/modules/Pulsikom/component/select-session').then((m) => ({
+    default: m.SelectSessionPusilkom,
+  }))
+)
+const PulsikomThema = lazy(() => import('@/pages/modules/Pulsikom/component/layout/theme'))
+const SelectSessionSPI = lazy(() =>
+  import('@/pages/modules/SPI/component/select-session').then((m) => ({
+    default: m.SelectSessionSPI,
+  }))
+)
+const MainLayoutSPI = lazy(() => import('@/pages/modules/SPI/layout'))
+const SPIThema = lazy(() => import('@/pages/modules/SPI/layout/theme'))
+const MainLayoutPMB = lazy(() => import('@/pages/modules/PMB/component/layout'))
+const SelectSessionPMB = lazy(() =>
+  import('@/pages/modules/PMB/session').then((m) => ({ default: m.SelectSessionPMB }))
+)
+const PMBThema = lazy(() => import('@/pages/modules/PMB/component/layout/thema'))
+const SelectSessionEOffice = lazy(() =>
+  import('@/pages/modules/E-Office/session').then((m) => ({ default: m.SelectSessionEOffice }))
+)
+const MainLayoutEOffice = lazy(() => import('@/pages/modules/E-Office/component/layout'))
+const EOfficeThema = lazy(() => import('@/pages/modules/E-Office/component/layout/theme'))
 
 export const Router = createBrowserRouter([
   {
@@ -126,6 +182,7 @@ export const Router = createBrowserRouter([
       { path: 'session-spi', element: <SelectSessionSPI /> },
       { path: 'session-pmb', element: <SelectSessionPMB /> },
       { path: 'session-e-office', element: <SelectSessionEOffice /> },
+      { path: 'session-sim-rs', element: <SelectSessionSIMRS /> },
 
       // ── Settings ──
       {
@@ -281,6 +338,11 @@ export const Router = createBrowserRouter([
           </EOfficeThema>
         ),
         children: [...E_OFFICE_ROUTE],
+      },
+      {
+        path: 'sim-rs',
+        element: <MainLayoutSIMRS />,
+        children: [...SIMRSROUTES],
       },
     ],
   },
