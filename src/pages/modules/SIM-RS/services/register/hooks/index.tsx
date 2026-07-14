@@ -3,12 +3,13 @@ import AxiosClient from '@/provider/axios.tsx'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
 import type { IRegistration, IStatusCount } from '../data/types.ts'
 
-
 export interface RegistrationProps {
   page?: string
   limit?: string
   search?: string
   status?: string
+  is_inap?: string
+  status_rawat_inap?: string
 }
 
 export const UseGetRegistrationStatusCount = () => {
@@ -25,13 +26,16 @@ export const UseGetRegistrationStatusCount = () => {
 }
 
 export const UseGetRegistration = (props?: RegistrationProps) => {
-  const { page, search, limit, status } = props ?? {}
+  const { page, search, limit, status, is_inap, status_rawat_inap } = props ?? {}
 
   const ParamsSearch = new URLSearchParams()
   if (page) ParamsSearch.append('page', page ?? '0')
   if (search) ParamsSearch.append('search', search ?? '')
   if (limit) ParamsSearch.append('limit', limit ?? '0')
   if (status) ParamsSearch.append('status', status ?? '')
+  if (is_inap) ParamsSearch.append('is_inap', is_inap ?? 'false')
+  if (status_rawat_inap)
+    ParamsSearch.append('status_rawat_inap', status_rawat_inap ?? 'MENUNGGU_RUANGAN')
 
   const { data, isLoading, isFetching } = useQuery<{ data: IRegistration[]; meta: Meta }>({
     queryKey: ['registration', ParamsSearch.toString()],
@@ -50,9 +54,7 @@ export const UseGetNomorPendaftaran = () => {
     queryKey: ['nomor-pendaftaran'],
     refetchOnWindowFocus: false,
     queryFn: () =>
-      AxiosClient('/simrs/pelayanan/pendaftaran/nomor-pendaftaran').then(
-        (res) => res.data?.data
-      ),
+      AxiosClient('/simrs/pelayanan/pendaftaran/nomor-pendaftaran').then((res) => res.data?.data),
   })
 
   const loading = isLoading || isFetching
@@ -64,8 +66,7 @@ export const UseGetDetailRegistration = (id: string) => {
   const { data, isLoading, isFetching } = useQuery<IRegistration>({
     queryKey: ['detail-registration', id],
     refetchOnWindowFocus: false,
-    queryFn: () =>
-      AxiosClient(`/simrs/pelayanan/pendaftaran/${id}`).then((res) => res.data?.data),
+    queryFn: () => AxiosClient(`/simrs/pelayanan/pendaftaran/${id}`).then((res) => res.data?.data),
   })
 
   const loading = isLoading || isFetching

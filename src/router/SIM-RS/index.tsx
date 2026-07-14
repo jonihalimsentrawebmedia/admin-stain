@@ -25,6 +25,11 @@ import CreateRegistration from '@/pages/modules/SIM-RS/services/register/created
 import UpdateRegistration from '@/pages/modules/SIM-RS/services/register/updated'
 import DetailRegistration from '@/pages/modules/SIM-RS/services/register/detail'
 import DiagnosisPage from '@/pages/modules/SIM-RS/services/register/diagnosis'
+import { OutpatientPage } from '@/pages/modules/SIM-RS/services/outpatient'
+import DetailOutpatient from '@/pages/modules/SIM-RS/services/outpatient/detail'
+import EditPemeriksaan from '@/pages/modules/SIM-RS/services/outpatient/detail/edit-pemeriksaan'
+import { InpatientPage } from '@/pages/modules/SIM-RS/services/inpatient'
+import DetailInpatient from '@/pages/modules/SIM-RS/services/inpatient/detail'
 
 const UserProfilePage = lazy(() =>
   import('@/pages/modules/website-utama/user-profile').then((m) => ({ default: m.UserProfilePage }))
@@ -207,6 +212,36 @@ export const SIMRSROUTES = [
           {
             path: 'edit/:id',
             element: <UpdateRegistration />,
+          },
+        ],
+      },
+      {
+        path: 'outpatient',
+        children: [
+          {
+            index: true,
+            element: <OutpatientPage />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailOutpatient />,
+          },
+          {
+            path: 'detail/:id/edit-pemeriksaan',
+            element: <EditPemeriksaan />,
+          },
+        ],
+      },
+      {
+        path: 'inpatient',
+        children: [
+          {
+            index: true,
+            element: <InpatientPage />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailInpatient />,
           },
         ],
       },

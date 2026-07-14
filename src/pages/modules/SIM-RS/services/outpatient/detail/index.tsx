@@ -1,11 +1,10 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { UseGetDetailRegistration } from '../hooks/index.tsx'
-import { ButtonCall } from '../components/ButtonCall.tsx'
-import { UseGetPemeriksaan } from '../diagnosis/hooks/index.tsx'
+import { UseGetDetailRegistration } from '../../register/hooks/index.tsx'
+import { UseGetPemeriksaan } from '../../register/diagnosis/hooks/index.tsx'
 import { format } from 'date-fns'
 
-const DetailRegistration = () => {
+const DetailOutpatient = () => {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const { detail, loading } = UseGetDetailRegistration(id ?? '')
@@ -52,19 +51,17 @@ const DetailRegistration = () => {
     <div className="space-y-5">
       <ButtonTitleGroup
         isBack
-        label="Detail Pendaftaran"
+        label="Detail Rawat Jalan"
         buttonGroup={[
-          {
-            type: 'edit',
-            label: 'Edit',
-            onClick: () =>
-              navigate(`/modules/sim-rs/services/registration/edit/${detail.id_pendaftaran}`),
-          },
-          ...(detail.status === 'MENUNGGU' || detail.status === 'DIPANGGIL'
+          ...(pemeriksaan
             ? [
                 {
-                  type: 'custom' as const,
-                  element: <ButtonCall data={detail} />,
+                  type: 'edit' as const,
+                  label: 'Edit Pemeriksaan',
+                  onClick: () =>
+                    navigate(
+                      `/modules/sim-rs/services/outpatient/detail/${detail.id_pendaftaran}/edit-pemeriksaan`
+                    ),
                 },
               ]
             : []),
@@ -137,15 +134,23 @@ const DetailRegistration = () => {
 
       {pemeriksaan && (
         <div className="bg-white rounded-lg border p-6">
-          <p className="text-lg font-semibold text-primary mb-4">Data Pemeriksaan</p>
+          <div className="flex items-center justify-between mb-4">
+            <p className="text-lg font-semibold text-primary">Data Pemeriksaan</p>
+            <button
+              onClick={() =>
+                navigate(
+                  `/modules/sim-rs/services/outpatient/detail/${detail.id_pendaftaran}/edit-pemeriksaan`
+                )
+              }
+              className="text-sm text-primary hover:underline font-medium"
+            >
+              Edit
+            </button>
+          </div>
           <div className="grid grid-cols-2 gap-6">
-            <div>
+            <div className="col-span-2">
               <p className="text-sm text-gray-500">No. Pemeriksaan</p>
               <p className="text-base font-medium">{pemeriksaan.no_pemeriksaan}</p>
-            </div>
-            <div>
-              <p className="text-sm text-gray-500">Status</p>
-              <p className="text-base font-medium">{pemeriksaan.status}</p>
             </div>
             <div className="col-span-2">
               <p className="text-sm text-gray-500">Keluhan Utama</p>
@@ -182,34 +187,8 @@ const DetailRegistration = () => {
           </div>
         </div>
       )}
-
-      <div className="bg-white rounded-lg border p-6">
-        <p className="text-lg font-semibold text-primary mb-4">Informasi Sistem</p>
-        <div className="grid grid-cols-2 gap-6">
-          <div>
-            <p className="text-sm text-gray-500">Diregistrasi Oleh</p>
-            <p className="text-base font-medium">{detail.nama_user_created}</p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-500">Tanggal Registrasi</p>
-            <p className="text-base font-medium">
-              {format(new Date(detail.tanggal_registrasi), 'dd-MM-yyyy HH:mm')}
-            </p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-500">Terakhir Update</p>
-            <p className="text-base font-medium">
-              {format(new Date(detail.updated_at), 'dd-MM-yyyy HH:mm')}
-            </p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-500">Diupdate Oleh</p>
-            <p className="text-base font-medium">{detail.nama_user_updated}</p>
-          </div>
-        </div>
-      </div>
     </div>
   )
 }
 
-export default DetailRegistration
+export default DetailOutpatient
