@@ -1,0 +1,30 @@
+export interface IPatient {
+  id_pasien: string
+  nama_lengkap: string
+  nik: string
+  tempat_lahir: string
+  tanggal_lahir: string
+  jenis_kelamin: string
+  golongan_darah: string
+  agama: string
+  status_perkawinan: string
+  pekerjaan: string
+  alamat: string
+  no_telepon: string
+  email: string
+  id_negara: string
+  id_provinsi: string
+  id_kabupaten: string
+  kontak_darurat_nama: string
+  telepon_kontak_darurat: string
+  email_kontak_darurat: string
+  is_status: boolean
+  created_at: string
+  created_user: string
+  updated_at: string
+  updated_user: string
+  nama_user_created: string
+  nama_user_updated: string
+  no_rekam_medis: string
+  tanggal_registrasi: string
+}

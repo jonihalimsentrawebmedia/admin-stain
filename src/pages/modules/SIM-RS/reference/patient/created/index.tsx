@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ResolverPatient, type TResolverPatient } from '../data/resolver'
 import { zodResolver } from '@hookform/resolvers/zod'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
@@ -7,18 +7,31 @@ import FormPatient from '../components/forms'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
+import { UseGetMedicalNumber } from '@/pages/modules/SIM-RS/reference/patient/hooks'
 
 const CreatePatient = () => {
   const [loading, setLoading] = useState(false)
 
   const form = useForm<TResolverPatient>({
     resolver: zodResolver(ResolverPatient),
+    defaultValues: {
+      is_status: true,
+    },
   })
+  const { medicalNumber } = UseGetMedicalNumber()
+
+  useEffect(() => {
+    if (medicalNumber) {
+      form.reset({
+        medical_record_number: medicalNumber,
+      })
+    }
+  }, [medicalNumber])
 
   const navigate = useNavigate()
   const HandleSave = async (value: TResolverPatient) => {
     setLoading(true)
-    await AxiosClient.post('/', {
+    await AxiosClient.post('/simrs/referensi/pasien', {
       ...value,
       tanggal_lahir: new Date(value.tanggal_lahir).toISOString(),
     })
@@ -34,6 +47,8 @@ const CreatePatient = () => {
         toast.error(err?.response?.data?.message || 'Error')
       })
   }
+
+  console.log(form.formState.errors)
 
   return (
     <>

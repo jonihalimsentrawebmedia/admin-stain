@@ -40,6 +40,7 @@ const DetailPoli = () => {
         />
 
         <div className="bg-white rounded-lg border p-6">
+          <p className="text-lg font-semibold text-primary mb-4">Informasi Poli</p>
           <div className="grid grid-cols-2 gap-6">
             <div>
               <p className="text-sm text-gray-500">Nama Poli</p>
@@ -65,12 +66,30 @@ const DetailPoli = () => {
               <p className="text-sm text-gray-500">Tanggal & Waktu</p>
               <p className="text-base font-medium">{detail.tanggal}</p>
             </div>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-lg border p-6">
+          <p className="text-lg font-semibold text-primary mb-4">Informasi Sistem</p>
+          <div className="grid grid-cols-2 gap-6">
             <div>
-              <p className="text-sm text-gray-500">Dibuat Oleh</p>
+              <p className="text-sm text-gray-500">Tanggal Registrasi</p>
+              <p className="text-base font-medium">
+                {new Date(detail.tanggal_registrasi).toLocaleDateString('id-ID')}
+              </p>
+            </div>
+            <div>
+              <p className="text-sm text-gray-500">Diregistrasi Oleh</p>
               <p className="text-base font-medium">{detail.nama_user_created}</p>
             </div>
             <div>
-              <p className="text-sm text-gray-500">Diperbarui Oleh</p>
+              <p className="text-sm text-gray-500">Terakhir Edit</p>
+              <p className="text-base font-medium">
+                {new Date(detail.updated_at).toLocaleDateString('id-ID')}
+              </p>
+            </div>
+            <div>
+              <p className="text-sm text-gray-500">Diedit Oleh</p>
               <p className="text-base font-medium">{detail.nama_user_updated}</p>
             </div>
           </div>

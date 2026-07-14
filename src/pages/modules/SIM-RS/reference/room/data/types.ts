@@ -14,4 +14,5 @@ export interface IRoom {
   updated_user: string
   nama_user_created: string
   nama_user_updated: string
+  tanggal_registrasi: string
 }

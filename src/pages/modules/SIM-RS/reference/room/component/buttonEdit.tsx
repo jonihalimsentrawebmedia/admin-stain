@@ -1,22 +1,14 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useQueryClient } from '@tanstack/react-query'
-import { type TResolverRoomUpdate, ResolverRoomUpdate } from '../data/resolver.tsx'
+import { ResolverRoomUpdate, type TResolverRoomUpdate } from '../data/resolver.tsx'
 import { zodResolver } from '@hookform/resolvers/zod'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import type { IRoom } from '../data/types.ts'
 import { useNavigate } from 'react-router-dom'
 import { FormRoomUpdate } from './forms.tsx'
-
-const toLocalDateTimeString = (date: Date) => {
-  const y = date.getFullYear()
-  const m = String(date.getMonth() + 1).padStart(2, '0')
-  const d = String(date.getDate()).padStart(2, '0')
-  const h = String(date.getHours()).padStart(2, '0')
-  const min = String(date.getMinutes()).padStart(2, '0')
-  return `${y}-${m}-${d}T${h}:${min}`
-}
+import { format, parseISO } from 'date-fns'
 
 interface Props {
   data: IRoom
@@ -30,8 +22,6 @@ export const FormEditRoom = (props: Props) => {
     resolver: zodResolver(ResolverRoomUpdate),
   })
 
-  const now = toLocalDateTimeString(new Date())
-
   useEffect(() => {
     if (data) {
       form.reset({
@@ -41,7 +31,7 @@ export const FormEditRoom = (props: Props) => {
         jumlah_kasur: data.jumlah_kasur,
         lokasi: data.lokasi,
         is_status: String(data.is_status),
-        tanggal: now,
+        tanggal: format(parseISO(data.tanggal_registrasi), "yyyy-MM-dd'T'HH:mm"),
       })
     }
   }, [data])
@@ -72,11 +62,7 @@ export const FormEditRoom = (props: Props) => {
 
   return (
     <>
-      <FormRoomUpdate
-        HandleSave={HandleSave}
-        form={form}
-        loading={loading}
-      />
+      <FormRoomUpdate HandleSave={HandleSave} form={form} loading={loading} />
     </>
   )
 }
