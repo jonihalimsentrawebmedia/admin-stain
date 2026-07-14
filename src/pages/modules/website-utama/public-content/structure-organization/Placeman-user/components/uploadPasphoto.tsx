@@ -64,7 +64,7 @@ export const UploadPasPhoto = (props: Props) => {
             <img
               src={form?.watch(name)}
               alt="gambar"
-              className="w-[160px] h-[200px] object-cover rounded"
+              className="w-28 sm:w-[160px] h-36 sm:h-[200px] object-cover rounded"
             />
             {canUpload && (
               <div className="flex items-center gap-1.5">
@@ -91,7 +91,7 @@ export const UploadPasPhoto = (props: Props) => {
               canUpload && refButton.current.click()
             }}
             className={
-              'border border-primary rounded p-2 flex flex-col gap-1 items-center justify-center h-[200px] w-[160px]'
+              'border border-primary rounded p-2 flex flex-col gap-1 items-center justify-center h-36 sm:h-[200px] w-28 sm:w-[160px]'
             }
           >
             <BiSolidImageAdd className="text-primary size-8" />

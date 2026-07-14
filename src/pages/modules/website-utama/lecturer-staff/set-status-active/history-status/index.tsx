@@ -25,14 +25,14 @@ export const HistoryStatusPage = () => {
           buttonGroup={[]}
         />
         <p className="text-xl font-semibold text-green-500">Informasi Dosen / Staff</p>
-        <div className="flex items-start gap-4">
+        <div className="flex flex-col lg:flex-row items-start gap-4">
           <img
             src={employee?.gambar_url}
             alt="image user"
-            className={'w-[180px] h-[240px] object-cover'}
+            className={'w-full lg:w-[180px] h-auto lg:h-[240px] object-cover'}
           />
 
-          <div className="grid grid-cols-[12rem_1fr] gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-[12rem_1fr] gap-4">
             <p className="text-gray-500">Nama</p>
             <p>{employee?.nama}</p>
             <p className="text-gray-500">NIK</p>

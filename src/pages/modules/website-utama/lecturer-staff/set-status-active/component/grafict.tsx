@@ -2,6 +2,7 @@
 
 import { TrendingUp } from 'lucide-react'
 import { Bar, BarChart, LabelList, XAxis, YAxis } from 'recharts'
+import { useWindowSize } from '@/hooks/use-window-size'
 
 import {
   Card,
@@ -37,7 +38,51 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
+function CustomTick({ x, y, payload }: { x?: number; y?: number; payload?: { value: string } }) {
+  if (!payload || x == null || y == null) return null
+
+  const label = payload.value
+  const maxWidth = 140
+  const words = label.split(' ')
+  const lines: string[] = []
+  let currentLine = ''
+
+  for (const word of words) {
+    const testLine = currentLine ? `${currentLine} ${word}` : word
+    if (testLine.length * 7 > maxWidth && currentLine) {
+      lines.push(currentLine)
+      currentLine = word
+    } else {
+      currentLine = testLine
+    }
+  }
+  if (currentLine) lines.push(currentLine)
+
+  const lineHeight = 16
+
+  return (
+    <g transform={`translate(${x},${y})`}>
+      {lines.map((line, i) => (
+        <text
+          key={i}
+          x={-10}
+          y={lineHeight / 2 + i * lineHeight - ((lines.length - 1) * lineHeight) / 2}
+          textAnchor="end"
+          dominantBaseline="central"
+          className="fill-foreground text-xs"
+          fontSize={12}
+        >
+          {line}
+        </text>
+      ))}
+    </g>
+  )
+}
+
 export function ChartStatusActive({ data }: Props) {
+  const { width: windowWidth } = useWindowSize()
+  const isMobile = windowWidth < 640
+
   const chartData = data.map((item) => ({
     status: item.nama_status,
     jumlah: item.jumlah,
@@ -46,6 +91,13 @@ export function ChartStatusActive({ data }: Props) {
 
   const total = data.reduce((acc, item) => acc + item.jumlah, 0)
 
+  const barHeight = 40
+  const chartMinHeight = Math.max(220, data.length * barHeight + 50)
+
+  const yAxisWidth = isMobile ? 150 : 180
+  const leftMargin = isMobile ? 10 : 20
+  const rightMargin = isMobile ? 15 : 30
+
   return (
     <Card>
       <CardHeader>
@@ -53,8 +105,8 @@ export function ChartStatusActive({ data }: Props) {
         <CardDescription>Data jumlah berdasarkan status</CardDescription>
       </CardHeader>
 
-      <CardContent>
-        <ChartContainer config={chartConfig} className="h-[220px] w-full">
+      <CardContent className="overflow-x-auto">
+        <ChartContainer config={chartConfig} className="w-full" style={{ height: chartMinHeight, minWidth: isMobile ? 350 : undefined }}>
           <BarChart
             accessibilityLayer
             data={chartData}
@@ -62,8 +114,8 @@ export function ChartStatusActive({ data }: Props) {
             barCategoryGap={12}
             margin={{
               top: 10,
-              right: 30,
-              left: 10,
+              right: rightMargin,
+              left: leftMargin,
               bottom: 10,
             }}
           >
@@ -75,7 +127,8 @@ export function ChartStatusActive({ data }: Props) {
               tickLine={false}
               tickMargin={10}
               axisLine={false}
-              width={130}
+              width={yAxisWidth}
+              tick={<CustomTick />}
             />
 
             <ChartTooltip

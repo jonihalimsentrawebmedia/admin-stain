@@ -1,14 +1,14 @@
-import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import { Button } from '@/components/ui/button'
 import { useQueryClient } from '@tanstack/react-query'
 import { Plus } from 'lucide-react'
 import { useState } from 'react'
 import MenuForm from './MenuForm'
 import { useForm } from 'react-hook-form'
-import { SettingMenuResolver, type ISettingMenuTypeForm } from '../model/resolver'
+import { type ISettingMenuTypeForm, SettingMenuResolver } from '../model/resolver'
 import { zodResolver } from '@hookform/resolvers/zod'
 import AxiosClient from '@/provider/axios'
 import { toast } from 'react-toastify'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 const ButtonAdd = () => {
   const form = useForm<ISettingMenuTypeForm>({
@@ -55,10 +55,9 @@ const ButtonAdd = () => {
         Tambah Menu
       </Button>
 
-      <DialogCustom
-        width="50%"
+      <DialogBasic
+        className={'rounded lg:min-w-2xl'}
         open={open}
-        className={'rounded'}
         setOpen={setOpen}
         title={'Tambah Menu'}
       >
@@ -70,7 +69,7 @@ const ButtonAdd = () => {
             setOpen(false)
           }}
         />
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

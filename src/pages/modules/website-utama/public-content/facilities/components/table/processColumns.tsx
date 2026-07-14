@@ -24,7 +24,7 @@ export const ProcessColumnsFacilities = () => {
         <img
           src={row.original.gambar}
           alt="gambar"
-          className={'w-[180px] h-[135px] object-cover'}
+          className={'min-w-[180px] lg:h-[135px] object-cover'}
         />
       ),
     },

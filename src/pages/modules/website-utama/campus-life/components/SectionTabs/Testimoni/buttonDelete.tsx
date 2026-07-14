@@ -76,9 +76,9 @@ export const ButtonDeleteTestimonial = (props: props) => {
         title={'Tambah Testimoni'}
         className={'rounded lg:max-w-2xl'}
       >
-        <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
-          <div className="col-span-2">
-            <img src={data?.foto_url} alt="imag" className={'w-[180px] object-contain'} />
+        <div className={'grid grid-cols-1 lg:grid-cols-[12rem_1fr] gap-5'}>
+          <div className="lg:col-span-2">
+            <img src={data?.foto_url} alt="imag" className={'w-full lg:w-[180px] object-contain'} />
           </div>
           <p className="text-gray-500">Nama Lengkap</p>
           <p>{data?.nama_lengkap}</p>

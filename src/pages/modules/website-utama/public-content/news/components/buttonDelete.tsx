@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { FaTrash } from 'react-icons/fa'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import type { INewsDetail } from '@/pages/modules/website-utama/public-content/news/data'
 import {
   Carousel,
@@ -17,6 +16,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
 import { Form } from '@/components/ui/form.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonDeleteNews = (data: INewsDetail) => {
   const [open, setOpen] = useState(false)
@@ -57,10 +57,9 @@ export const ButtonDeleteNews = (data: INewsDetail) => {
         <FaTrash />
       </button>
 
-      <DialogCustom
+      <DialogBasic
+        className={'rounded lg:min-w-2xl'}
         open={open}
-        isAuto
-        className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
         title={<p className={'text-red-500'}>Hapus Data Berita?</p>}
         description={'Apakah anda yakin untuk menghapus data Berita ini?'}
@@ -131,7 +130,7 @@ export const ButtonDeleteNews = (data: INewsDetail) => {
             />
           </div>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

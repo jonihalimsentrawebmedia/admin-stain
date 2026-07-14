@@ -1,7 +1,6 @@
 import { FaTrash } from 'react-icons/fa'
 import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import type { IGroupOrganization } from '../data/index'
 import { Button } from '@/components/ui/button.tsx'
 import { BiX } from 'react-icons/bi'
@@ -10,6 +9,7 @@ import { toast } from 'react-toastify'
 import { useForm } from 'react-hook-form'
 import { Form } from '@/components/ui/form.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonDeleteStructureOrganization = (data: IGroupOrganization) => {
   const [open, setOpen] = useState(false)
@@ -46,14 +46,14 @@ export const ButtonDeleteStructureOrganization = (data: IGroupOrganization) => {
         <FaTrash />
       </button>
 
-      <DialogCustom
-        className={'rounded lg:max-w-2xl'}
+      <DialogBasic
+        className={'rounded lg:min-w-2xl'}
         open={open}
         setOpen={setOpen}
         title={<p className={'text-red-500'}>Hapus Kelompok</p>}
         description={'Apakah anda yakin untuk menghapus kelompok ini?'}
       >
-        <div className={'grid grid-cols-[15rem_1fr] gap-5'}>
+        <div className={'grid lg:grid-cols-[15rem_1fr] gap-5'}>
           <p className="text-gray-500">Kelompok</p>
           <p>{data?.kelompok}</p>
           <p className="text-gray-500">Nama Kelompok</p>
@@ -93,7 +93,7 @@ export const ButtonDeleteStructureOrganization = (data: IGroupOrganization) => {
             </Button>
           </div>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

@@ -47,7 +47,7 @@ const ButtonAddUkkUkm = () => {
       <Button
         variant={'outline'}
         onClick={() => setOpen(!open)}
-        className="border border-primary hover:text-primay text-primary"
+        className="border border-primary hover:text-primary text-primary"
       >
         <BiPlus />
         Tambah Data

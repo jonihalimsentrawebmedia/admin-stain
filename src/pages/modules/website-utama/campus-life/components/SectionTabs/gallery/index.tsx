@@ -14,7 +14,7 @@ export const GallerySection = () => {
 
   return (
     <>
-      <div className="flex pb-5  items-center gap-4 justify-between">
+      <div className="flex flex-col sm:flex-row pb-5 items-center gap-4 justify-between">
         <p className={'text-2xl font-semibold capitalize'}>Gallery - {tabsActive}</p>
 
         <ButtonGoToGuide

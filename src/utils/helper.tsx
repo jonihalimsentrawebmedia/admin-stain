@@ -94,6 +94,9 @@ export const GetModuleUrl = (moduleSelect: {
     case 'e-office': {
       return `/modules/session-e-office?url=e-office&id=${moduleSelect?.id_module}`
     }
+    case 'sim-rs': {
+      return `/modules/session-sim-rs?url=sim-rs&id=${moduleSelect?.id_module}`
+    }
 
     default:
       return `/modules/${urlStringEncode(moduleSelect?.controller ?? '')}/dashboard`

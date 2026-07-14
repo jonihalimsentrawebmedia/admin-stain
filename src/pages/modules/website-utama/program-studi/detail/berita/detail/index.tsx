@@ -82,10 +82,10 @@ export const DetailNewsProdiPage = () => {
         <div className="bg-linear-to-r p-8 from-[#3FA936] to-[#0C6939] rounded-lg shadow">
           <div
             className={
-              'bg-white/12 rounded-lg shadow p-10 flex items- h-full gap-x-12 justify-between'
+              'bg-white/12 rounded-lg shadow p-4 lg:p-10 flex flex-col lg:flex-row items-start h-full gap-6 lg:gap-x-12 justify-between'
             }
           >
-            <div className="flex items-start gap-2 w-1/2 h-full">
+            <div className="flex items-start gap-2 w-full lg:w-1/2 h-full">
               <div className="flex gap-5 flex-col justify-between items-start h-full">
                 <div
                   className={
@@ -95,8 +95,8 @@ export const DetailNewsProdiPage = () => {
                   <div className="size-3.5 rounded-full bg-yellow-500" />
                   <p>{detailNews?.nama_kategori_berita}</p>
                 </div>
-                <p className={'text-3xl font-semibold text-white'}>{detailNews?.judul}</p>
-                <div className="flex items-center justify-between gap-5 w-full">
+                <p className={'text-xl lg:text-3xl font-semibold text-white'}>{detailNews?.judul}</p>
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-5 w-full">
                   <div>
                     <p className="text-white">Tanggal Terbit</p>
                     <p className={'text-white'}>
@@ -113,16 +113,16 @@ export const DetailNewsProdiPage = () => {
               </div>
             </div>
 
-            <div className="w-[484px] mx-auto">
+            <div className="w-full max-w-[484px] mx-auto">
               {/* CAROUSEL */}
-              <Carousel setApi={setApi} className="w-[484px]">
+              <Carousel setApi={setApi} className="w-full max-w-[484px]">
                 <CarouselContent className="pr-0">
                   {images.map((item: any, index: number) => (
                     <CarouselItem key={index} className="pr-0">
                       <img
                         src={item.gambar}
                         alt={item.keterangan}
-                        className="h-[345px] w-full object-cover rounded-lg"
+                        className="h-48 lg:h-[345px] w-full object-cover rounded-lg"
                       />
                     </CarouselItem>
                   ))}
@@ -130,14 +130,14 @@ export const DetailNewsProdiPage = () => {
               </Carousel>
 
               {/* DOTS */}
-              <div className="flex justify-center mt-4 gap-2">
+              <div className="flex justify-center mt-3 lg:mt-4 gap-2">
                 {images.map((_: any, index: number) => (
                   <button
                     key={index}
                     onClick={() => api?.scrollTo(index)}
                     className={[
-                      'h-3 rounded-full transition-all',
-                      current === index ? 'bg-green-600 w-3' : 'bg-gray-400 w-3',
+                      'h-2.5 lg:h-3 rounded-full transition-all',
+                      current === index ? 'bg-green-600 w-2.5 lg:w-3' : 'bg-gray-400 w-2.5 lg:w-3',
                     ].join(' ')}
                   />
                 ))}

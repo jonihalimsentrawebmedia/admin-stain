@@ -10,13 +10,13 @@ export const PhotoSection = () => {
     <>
       <p className="text-blue-500">Pilih 3 konten yang akan ditampilkan</p>
 
-      <div className={'grid grid-cols-3 gap-8 mt-5'}>
+      <div className={'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-5'}>
         {photoSelected.map((item: any, k: number) => (
           <div key={k} className="">
             <img
               src={item?.link_foto}
               alt="thumbaik"
-              className={'rounded w-full h-[240px] bg-primary-foreground'}
+              className={'rounded w-full h-48 sm:h-[240px] bg-primary-foreground'}
             />
             <p>{item?.judul}</p>
             <div className="flex items-center justify-center gap-2">

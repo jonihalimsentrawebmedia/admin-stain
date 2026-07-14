@@ -3,10 +3,10 @@ import type { IFacilitiesDetail } from '@/pages/modules/website-utama/public-con
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { BiX } from 'react-icons/bi'
 import { MdSend } from 'react-icons/md'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonSubmissionFacilities = (data: IFacilitiesDetail) => {
   const [open, setOpen] = useState(false)
@@ -48,9 +48,9 @@ export const ButtonSubmissionFacilities = (data: IFacilitiesDetail) => {
         Ajukan ke Editor
       </Button>
 
-      <DialogCustom
-        open={open}
+      <DialogBasic
         className={'rounded lg:max-w-2xl'}
+        open={open}
         setOpen={setOpen}
         title={<p className={'text-2xl text-blue-600'}>Ajukan ke Editor</p>}
         description={'Apakah anda yakin untuk mengajukan Fasilitas yang ditulis ke editor?'}
@@ -84,7 +84,7 @@ export const ButtonSubmissionFacilities = (data: IFacilitiesDetail) => {
             Ajukan
           </Button>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

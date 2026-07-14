@@ -1,11 +1,11 @@
 import { Button } from '@/components/ui/button.tsx'
 import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import type { IListBottomSlider } from '@/pages/modules/website-utama/public-content/slider/top-slider/create/data'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { MdCancel } from 'react-icons/md'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 interface Props {
   data: IListBottomSlider
@@ -55,11 +55,10 @@ export const ButtonUnPublishedBottom = (props: Props) => {
         Unpublish
       </Button>
 
-      <DialogCustom
+      <DialogBasic
+        className={'rounded lg:min-w-2xl'}
         open={open}
-        isAuto
         setOpen={setOpen}
-        className={'rounded'}
         title={'Unpublish Slider'}
         description={'Apakah anda yakin untuk Unpublish slider yang dipilih?'}
       >
@@ -90,7 +89,7 @@ export const ButtonUnPublishedBottom = (props: Props) => {
             <MdCancel /> Unpublish Slider
           </Button>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

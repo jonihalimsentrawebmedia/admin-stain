@@ -3,10 +3,10 @@ import type { IFacilitiesDetail } from '@/pages/modules/website-utama/public-con
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { BiX } from 'react-icons/bi'
 import { Check } from 'lucide-react'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonPublishFacilities = (data: IFacilitiesDetail) => {
   const [open, setOpen] = useState(false)
@@ -48,7 +48,8 @@ export const ButtonPublishFacilities = (data: IFacilitiesDetail) => {
         Publish Sekarang
       </Button>
 
-      <DialogCustom
+      <DialogBasic
+        className={'rounded lg:max-w-2xl'}
         open={open}
         setOpen={setOpen}
         title={'Publish Fasilitas'}
@@ -83,7 +84,7 @@ export const ButtonPublishFacilities = (data: IFacilitiesDetail) => {
             Publish Sekarang
           </Button>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

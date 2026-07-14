@@ -113,7 +113,7 @@ export const FormPlacemanUser = (props: Props) => {
             />
           )}
 
-          <div className="grid grid-cols-[12rem_1fr] gap-5">
+          <div className="grid lg:grid-cols-[12rem_1fr] gap-5">
             <div />
             <UploadPasPhoto
               label={'Foto Profil (4x6)'}
@@ -177,7 +177,7 @@ export const FormPlacemanUser = (props: Props) => {
             </>
           )}
 
-          <div className="flex items-center gap-1.5">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1.5">
             <TextInput
               name={'email'}
               form={form}
@@ -188,7 +188,7 @@ export const FormPlacemanUser = (props: Props) => {
             />
             <Checkbox name={'show_email_public'} label={'Tampilkan ke public'} form={form} />
           </div>
-          <div className="flex items-center gap-1.5">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-1.5">
             <TextInput
               name={'no_hp'}
               form={form}

@@ -72,7 +72,7 @@ export const QuotesPage = () => {
                 placeholder={'Gambar Background'}
                 aspectRatioWidth={16}
                 aspectRatioHeight={9}
-                maxWidthClassName={'w-[500px]'}
+                maxWidthClassName={'lg:w-[500px]'}
                 required
                 isRow
               />
@@ -116,7 +116,7 @@ export const QuotesPage = () => {
             className="w-[400px] object-contain h-[250px]"
           />
 
-          <div className="grid grid-cols-[12rem_1fr] gap-4">
+          <div className="grid lg:grid-cols-[12rem_1fr] gap-4">
             <p className="text-gray-500">Isi</p>
             <p>{quotes?.isi}</p>
             <p className="text-gray-500">Pengarang</p>

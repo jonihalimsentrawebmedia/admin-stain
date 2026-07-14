@@ -55,7 +55,7 @@ const ButtonDeleteHistory = (props: props) => {
         setOpen={setOpen}
         className={'min-w-3xl'}
       >
-        <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
+        <div className={'grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-4'}>
           <p className="text-gray-500">Status Aktif</p>
           <p>{data?.nama_status_aktif}</p>
           <p className="text-gray-500">Sejak</p>

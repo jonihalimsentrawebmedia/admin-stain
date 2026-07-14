@@ -101,7 +101,7 @@ export const PerformanceForm = (props: props) => {
                 isRequired
               />
             ) : (
-              <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
+              <div className={'grid grid-cols-1 lg:grid-cols-[12rem_1fr] gap-5'}>
                 <p>Isi Background</p>
                 <p>Tidak Ada</p>
               </div>

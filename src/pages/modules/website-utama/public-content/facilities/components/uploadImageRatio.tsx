@@ -6,6 +6,7 @@ import { HiPencil } from 'react-icons/hi'
 import { FaTrash } from 'react-icons/fa'
 import type { FieldValues, Path, UseFormReturn } from 'react-hook-form'
 import { AspectRatio } from '@/components/ui/aspect-ratio.tsx'
+import { useMobile } from '@/utils/useMobile.tsx'
 
 interface props<T extends FieldValues> {
   placeholder?: string
@@ -31,6 +32,8 @@ export const UploadImageRatio = <T extends FieldValues>(props: props<T>) => {
     aspectRatioHeight = 3,
     isRow,
   } = props
+
+  const { isMobile } = useMobile()
 
   const refButton = useRef<any | null>(null)
 
@@ -60,7 +63,9 @@ export const UploadImageRatio = <T extends FieldValues>(props: props<T>) => {
 
   return (
     <>
-      <div className={`${isRow ? 'grid grid-cols-[12rem_1fr] gap-5' : 'flex flex-col gap-1.5'}`}>
+      <div
+        className={`${isRow && !isMobile ? 'grid grid-cols-[12rem_1fr] gap-5' : 'flex flex-col gap-1.5'}`}
+      >
         <label>
           {label} {required && <span className={'text-red-500'}>*</span>}
         </label>

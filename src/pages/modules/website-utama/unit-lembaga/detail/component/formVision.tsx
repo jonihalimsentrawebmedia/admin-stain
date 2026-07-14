@@ -54,9 +54,9 @@ const VisionMissionForm = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
           <div className="text-primary">Visi, Misi, & Tujuan</div>
-          <div className="flex gap-4 items-center">
+          <div className="flex gap-4 items-center flex-wrap">
             <ButtonGoToGuide titleGuide='Visi, Misi, & Tujuan' valueGuide="WEBSITE_UTAMA_SATUAN_ORGANISASI_VISI_MISI" />
             {isEdit ? (
               <ButtonForm

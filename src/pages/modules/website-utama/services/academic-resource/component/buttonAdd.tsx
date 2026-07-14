@@ -50,7 +50,7 @@ const ButtonAddAcademicResource = () => {
         Tambah
       </Button>
 
-      <DialogBasic title={'Tambah Academic Resource'} open={open} setOpen={setOpen} className="min-w-2xl">
+      <DialogBasic title={'Tambah Academic Resource'} open={open} setOpen={setOpen} className="lg:min-w-2xl">
         <FormAcademicResource
           form={form}
           open={open}

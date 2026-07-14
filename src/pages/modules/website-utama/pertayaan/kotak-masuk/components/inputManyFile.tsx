@@ -55,7 +55,7 @@ export const InputManyFile = <T extends FieldValues>(props: Props<T>) => {
 
   return (
     <>
-      <div className="grid grid-cols-[12rem_1fr] gap-5 items-start text-sm">
+      <div className="grid lg:grid-cols-[12rem_1fr] gap-5 items-start text-sm">
         <label>{label}</label>
         <div className={'flex flex-col gap-1.5'}>
           <Button

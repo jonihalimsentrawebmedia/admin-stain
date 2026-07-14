@@ -28,7 +28,7 @@ export const ButtonSearch = (props: Props) => {
             setOpen(!open)
           }}
           className={
-            'w-full h-[350px] rounded flex flex-col justify-center items-center border-primary text-primary bg-primary-foreground border'
+            'w-full h-48 sm:h-[350px] rounded flex flex-col justify-center items-center border-primary text-primary bg-primary-foreground border'
           }
         >
           <IoSearch />

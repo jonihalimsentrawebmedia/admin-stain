@@ -74,9 +74,9 @@ const DosenProgramStudyView = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-wrap justify-between items-center">
         <div className="text-primary text-2xl font-medium">Dosen</div>
-        <div className="flex gap-4 items-center">
+        <div className="flex flex-wrap gap-4 items-center">
           <ButtonGoToGuide titleGuide='Dosen' valueGuide="WEBSITE_UTAMA_SATUAN_ORGANISASI_DOSEN" />
           <Button
             variant={'outline'}

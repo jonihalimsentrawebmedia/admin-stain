@@ -22,8 +22,8 @@ export const ProdiNewsColumns = () => {
       header: 'Gambar',
       cell: ({ row }) => {
         return (
-          <div className={'w-[250px]'}>
-            <img src={row.original.gambar} className="w-[250px] h-[180px] rounded object-cover" />
+          <div className={'w-full max-w-[250px]'}>
+            <img src={row.original.gambar} className="w-full max-w-[250px] h-auto aspect-[4/3] rounded object-cover" />
           </div>
         )
       },

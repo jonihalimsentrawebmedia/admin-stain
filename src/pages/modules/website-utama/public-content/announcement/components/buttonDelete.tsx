@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { FaTrash } from 'react-icons/fa'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import AxiosClient from '@/provider/axios.tsx'
@@ -10,6 +9,7 @@ import type { IAnnouncement } from '@/pages/modules/website-utama/public-content
 import { useForm } from 'react-hook-form'
 import { Form } from '@/components/ui/form.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonDeleteAnnouncement = (data: IAnnouncement) => {
   const [open, setOpen] = useState(false)
@@ -49,10 +49,9 @@ export const ButtonDeleteAnnouncement = (data: IAnnouncement) => {
         <FaTrash />
       </button>
 
-      <DialogCustom
+      <DialogBasic
+        className={'rounded lg:min-w-2xl'}
         open={open}
-        isAuto
-        className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
         title={<p className={'text-red-500'}>Hapus Pengumuman?</p>}
         description={'Apakah anda yakin untuk menghapus Pengumuman yang ditulis?'}
@@ -101,7 +100,7 @@ export const ButtonDeleteAnnouncement = (data: IAnnouncement) => {
             />
           </div>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

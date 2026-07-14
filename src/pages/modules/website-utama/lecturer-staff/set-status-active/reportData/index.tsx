@@ -14,7 +14,7 @@ export const ReportData = () => {
         <ButtonTitleGroup isBack label="Laporan Status Aktif" buttonGroup={[]} />
 
         <Tabs className={'w-full h-full'} defaultValue={'table'}>
-          <TabsList className={'w-fit h-full bg-white rounded-none flex gap-2 items-center'}>
+          <TabsList className={'w-full sm:w-fit h-full bg-white rounded-none flex gap-2 items-center overflow-x-auto'}>
             <p>Tampilkan</p>
             <TabsTrigger
               value="table"

@@ -3,12 +3,12 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { Button } from '@/components/ui/button.tsx'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 
 import { BiX } from 'react-icons/bi'
 import { FaTrash } from 'react-icons/fa'
 import type { IStudentLetter } from '../types/index'
 import { Link } from 'react-router-dom'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 interface props {
   data?: IStudentLetter
@@ -47,14 +47,14 @@ export const ButtonDeleteLetter = (props: props) => {
         <FaTrash />
       </button>
 
-      <DialogCustom
+      <DialogBasic
         open={open}
         setOpen={setOpen}
         title={<p className={'text-red-500'}>Hapus Surat Keterangan Mahasiswa ?</p>}
         description={'Apakah anda yakin ingin menghapus surat ketrarangan mahasiswa ini?'}
         className={'lg:max-w-2xl rounded'}
       >
-        <div className="grid grid-cols-[12rem_1fr] gap-5">
+        <div className="grid lg:grid-cols-[12rem_1fr] gap-5">
           <p className="text-gray-500">Judul Surat</p>
           <p>{data?.judul_surat}</p>
           <p className="text-gray-500">Keterangan</p>
@@ -86,7 +86,7 @@ export const ButtonDeleteLetter = (props: props) => {
             Simpan
           </Button>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

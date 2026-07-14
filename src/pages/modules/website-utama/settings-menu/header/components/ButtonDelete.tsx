@@ -1,4 +1,3 @@
-import { DialogCustom } from '@/components/common/dialog/DialogCustom'
 import AxiosClient from '@/provider/axios'
 import { useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
@@ -9,6 +8,7 @@ import DetailField from '@/components/common/field/DetailField'
 import { Button } from '@/components/ui/button'
 import { Trash2, X } from 'lucide-react'
 import { FaTrash } from 'react-icons/fa'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 interface Props {
   isSubMenu?: boolean
@@ -109,10 +109,9 @@ const ButtonDelete = ({ data, isSubMenu, menu_parent_name }: Props) => {
         <FaTrash />
       </button>
 
-      <DialogCustom
+      <DialogBasic
         open={open}
-        width="50%"
-        className={'rounded'}
+        className={'rounded lg:min-w-2xl'}
         setOpen={setOpen}
         title={<p className="text-2xl text-red-500">Hapus Menu</p>}
         description={'Apakah anda yakin untuk menghapus data ini?'}
@@ -135,7 +134,7 @@ const ButtonDelete = ({ data, isSubMenu, menu_parent_name }: Props) => {
             Hapus
           </Button>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

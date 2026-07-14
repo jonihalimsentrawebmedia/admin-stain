@@ -83,7 +83,7 @@ export const FormCreateSliderOnTop = (props: Props) => {
               form={form}
               label={'Aktif Sampai Pada'}
               type={'date'}
-              inputClassName={'w-1/2 bg-white'}
+              inputClassName={'w-full lg:w-1/2 bg-white'}
               isRow
             />
 

@@ -3,10 +3,10 @@ import type { IFacilitiesDetail } from '@/pages/modules/website-utama/public-con
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { BiX } from 'react-icons/bi'
 import { IconCancel } from '@/components/common/icon'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonDraftFacilities = (data: IFacilitiesDetail) => {
   const [open, setOpen] = useState(false)
@@ -48,7 +48,8 @@ export const ButtonDraftFacilities = (data: IFacilitiesDetail) => {
         Kembali Ke Draft
       </Button>
 
-      <DialogCustom
+      <DialogBasic
+        className={'rounded lg:max-w-2xl'}
         open={open}
         setOpen={setOpen}
         title={'Kembali Ke Draft'}
@@ -83,7 +84,7 @@ export const ButtonDraftFacilities = (data: IFacilitiesDetail) => {
             Kembalikan Ke Draft
           </Button>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

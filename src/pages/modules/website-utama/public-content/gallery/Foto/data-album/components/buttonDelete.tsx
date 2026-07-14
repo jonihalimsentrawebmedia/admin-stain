@@ -63,7 +63,7 @@ export const ButtonDeletePhotoAlbum = (props: IProps) => {
             className={'w-[320px] h-[240px] object-cover mx-auto rounded'}
           />
 
-          <div className="grid grid-cols-[12rem_1fr]">
+          <div className="grid lg:grid-cols-[12rem_1fr] gap-1.5">
             <p className="text-gray-500">Judul Gallery</p>
             <p>{title}</p>
             <p className="text-gray-500">Keterangan</p>

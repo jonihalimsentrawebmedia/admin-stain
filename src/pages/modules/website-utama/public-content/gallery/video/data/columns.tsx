@@ -34,7 +34,7 @@ export const ColumnsVideo = () => {
             to={row.original.link_video}
             target={'_blank'}
             className={
-              'flex items-center gap-1 border p-2 border-primary text-primary rounded w-fit'
+              'flex items-center whitespace-nowrap flex-nowrap gap-1 border p-2 border-primary text-primary rounded w-fit'
             }
           >
             <TbExternalLink />

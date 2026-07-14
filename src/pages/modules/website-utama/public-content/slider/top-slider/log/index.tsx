@@ -15,13 +15,13 @@ export const LogActivityPage = () => {
     <>
       <ButtonTitleGroup label={'Log Data'} buttonGroup={[]} isBack />
 
-      <div className={'flex items-start gap-x-8'}>
+      <div className={'flex flex-col lg:flex-row items-start gap-x-8'}>
         <img
           src={detailSlider?.gambar}
-          className={'w-[320px] h-[240px] object-cover'}
+          className={'w-full lg:w-[320px] h-[240px] object-cover'}
           alt="imgae"
         />
- 
+  
         <div className={'flex flex-col gap-y-2 text-sm'}>
           <p className="text-gray-500">Keterangan</p>
           <p dangerouslySetInnerHTML={{ __html: detailSlider?.keterangan ?? '-' }} />

@@ -10,9 +10,9 @@ const StaffProgramStudyView = () => {
   const { columns } = StaffProgramStudyViewModel()
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-wrap justify-between items-center">
         <div className="text-primary text-2xl font-medium">Staff</div>
-        <div className="flex gap-4 items-center">
+        <div className="flex flex-wrap gap-4 items-center">
           <ButtonGoToGuide titleGuide='Staff' valueGuide="WEBSITE_UTAMA_SATUAN_ORGANISASI_STAFF" />
           <Button
             variant={'outline'}

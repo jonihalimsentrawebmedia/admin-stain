@@ -103,17 +103,17 @@ export default function ImageUplaod<T extends FieldValues>({
           ${className}`}
           >
             <FormControl>
-              <div className="flex gap-4 items-center">
+              <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
                 <div>
                   {form.watch(name) ? (
                     <img
                       src={form.watch(name)}
-                      className="w-[120px] h-40 object-center object-cover"
+                      className="w-full sm:w-[120px] h-40 object-center object-cover"
                       alt=""
                     />
                   ) : (
                     <div className="flex flex-wrap gap-2 items-center">
-                      <div className="border w-[120px] h-40 text-primary px-4 py-2   rounded border-[#70F2B1] flex justify-between items-center bg-[#F5FFFA]">
+                      <div className="border w-full sm:w-[120px] h-40 text-primary px-4 py-2   rounded border-[#70F2B1] flex justify-between items-center bg-[#F5FFFA]">
                         <BiPhotoAlbum className="text-primary" size={16} />
                         Upload Foto
                       </div>

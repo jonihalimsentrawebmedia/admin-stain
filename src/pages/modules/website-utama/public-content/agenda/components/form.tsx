@@ -11,7 +11,7 @@ import { Separator } from '@/components/ui/separator.tsx'
 import { TreeCheckboxController } from '@/pages/modules/website-utama/public-content/component/TreeCheckbox.tsx'
 import { UseGetTreeData } from '@/pages/modules/website-utama/public-content/component/hooks.tsx'
 
-interface props {
+interface Props {
   loading: boolean
   form: UseFormReturn<AgendaType>
   HandleSave: (e: AgendaType) => void
@@ -19,7 +19,7 @@ interface props {
   label?: string
 }
 
-export const AgendaForm = (props: props) => {
+export const AgendaForm = (props: Props) => {
   const { form, label, HandleSave, loading, is_website_main } = props
   const { treeNodes } = UseGetTreeData()
 
@@ -110,7 +110,7 @@ export const AgendaForm = (props: props) => {
             <>
               <Separator />
               <div className="p-4 bg-white w-full space-y-4">
-                <p className="text-2xl font-semibold text-primary">Unit Kerja Terkait</p>
+                <p className="text-lg sm:text-2xl font-semibold text-primary">Unit Kerja Terkait</p>
                 <TreeCheckboxController
                   name="list_unit"
                   control={form.control}

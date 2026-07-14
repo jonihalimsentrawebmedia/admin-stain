@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { FaTrash } from 'react-icons/fa'
 import type { IMarsMusic } from '@/pages/modules/website-utama/public-content/musik-resmi/types'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { AspectRatio } from '@radix-ui/react-aspect-ratio'
 import { Button } from '@/components/ui/button.tsx'
 import { BiX } from 'react-icons/bi'
@@ -11,6 +10,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
 import { Form } from '@/components/ui/form.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 interface props {
   data: IMarsMusic
@@ -44,8 +44,8 @@ export const ButtonDeleteOfficialMusic = (props: props) => {
         <FaTrash />
       </button>
 
-      <DialogCustom
-        className={'lg:max-w-2xl'}
+      <DialogBasic
+        className={'lg:min-w-2xl'}
         open={open}
         setOpen={setOpen}
         title={<p className={'text-2xl text-red-500'}>Hapus Musik Resmi</p>}
@@ -95,7 +95,7 @@ export const ButtonDeleteOfficialMusic = (props: props) => {
             </Button>
           </div>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

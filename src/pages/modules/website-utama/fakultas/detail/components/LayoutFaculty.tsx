@@ -22,7 +22,7 @@ const LayoutFaculty = (props: Props) => {
           </div>
         </div>
       </div>
-      <div className="flex gap-4 h-full relative w-full">
+      <div className="flex flex-col lg:flex-row gap-4 h-full relative w-full">
         <Menu />
         <div className="w-full">
           <Outlet />

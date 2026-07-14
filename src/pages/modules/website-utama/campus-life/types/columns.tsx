@@ -63,7 +63,7 @@ export const TestimonialColumns = () => {
       header: '',
       cell: ({ row }) => {
         return (
-          <div className={'flex gap-2 items-center'}>
+          <div className={'flex gap-2 items-center flex-wrap'}>
             <Link
               to={`testimoni/language/${row?.original?.id_kehidupan_kampus_testimoni}`}
               className={'bg-primary text-white p-1.5 rounded'}

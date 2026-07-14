@@ -2,11 +2,11 @@ import { Send } from 'lucide-react'
 import { Button } from '@/components/ui/button.tsx'
 import { useState } from 'react'
 import { useQueryClient } from '@tanstack/react-query'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import type { IListSlider } from '@/pages/modules/website-utama/public-content/slider/top-slider/create/data'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { MdSend } from 'react-icons/md'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 interface Props {
   data: IListSlider
@@ -56,11 +56,10 @@ export const ButtonApproved = (props: Props) => {
         Ajukan Ke Editor
       </Button>
 
-      <DialogCustom
+      <DialogBasic
+        className={'rounded lg:min-w-2xl'}
         open={open}
         setOpen={setOpen}
-        isAuto
-        className={'rounded lg:max-w-2xl'}
         title={'Ajukan Ke Editor?'}
         description={'Apakah anda yakin untuk mengajukan slider ini ke editor?'}
       >
@@ -90,7 +89,7 @@ export const ButtonApproved = (props: Props) => {
             <MdSend /> Ajukan
           </Button>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

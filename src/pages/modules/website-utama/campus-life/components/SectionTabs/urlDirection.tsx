@@ -48,7 +48,7 @@ export const UrlDirectionSection = () => {
             <FormUrlDirection isEdit={isEdit} setIsEdit={setIsEdit} data={urlDirection} />
           ) : (
             <AccordionCustom name={'url'} title={'Isi'}>
-              <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
+              <div className={'grid grid-cols-1 lg:grid-cols-[12rem_1fr] gap-5'}>
                 <p className="text-gray-500">Warna Background</p>
                 <div>
                   {urlDirection?.is_warna_background ? (

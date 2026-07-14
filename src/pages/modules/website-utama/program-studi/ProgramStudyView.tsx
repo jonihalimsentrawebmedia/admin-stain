@@ -46,7 +46,7 @@ const ProgramStudyView = () => {
       />
       <TableCustom
         addFilter={
-          <div className="flex gap-4">
+          <div className="flex gap-4 flex-wrap">
             <SelectFilter
               selectClassName={'min-w-[8rem]'}
               label="Tampilkan"
