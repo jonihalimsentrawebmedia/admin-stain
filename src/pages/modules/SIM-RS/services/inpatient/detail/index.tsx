@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -28,6 +28,7 @@ type TResolverRoom = z.infer<typeof ResolverRoom>
 
 const DetailInpatient = () => {
   const { id } = useParams<{ id: string }>()
+  const navigate = useNavigate()
   const queryClient = useQueryClient()
   const { detail, loading } = UseGetDetailRegistration(id ?? '')
   const { pemeriksaan } = UseGetPemeriksaan(id ?? '')
@@ -134,7 +135,11 @@ const DetailInpatient = () => {
 
   const jkLabel = detail.jenis_kelamin_pasien === 'L' ? 'Laki-laki' : 'Perempuan'
   const tglLahir = format(new Date(detail.tanggal_lahir_pasien), 'dd-MM-yyyy')
+  const isPulang = detail.status_rawat_inap === 'PULANG'
   const activeRoom = detail.riwayat_ruangan?.find((r) => r.status === 'AKTIF')
+  const pulangRoom = isPulang
+    ? [...(detail.riwayat_ruangan ?? [])].reverse().find((r) => r.tanggal_keluar)
+    : null
 
   return (
     <div className="space-y-5">
@@ -142,15 +147,23 @@ const DetailInpatient = () => {
         isBack
         label="Detail Rawat Inap"
         buttonGroup={
-          !isEdit
+          isPulang
             ? [
                 {
                   type: 'edit' as const,
-                  label: 'Edit Ruangan',
-                  onClick: () => setIsEdit(true),
+                  label: 'Edit Rawat Inap',
+                  onClick: () => navigate(`/modules/sim-rs/services/inpatient/edit/${id}`),
                 },
               ]
-            : []
+            : !isEdit
+              ? [
+                  {
+                    type: 'edit' as const,
+                    label: 'Edit Ruangan',
+                    onClick: () => setIsEdit(true),
+                  },
+                ]
+              : []
         }
       />
 
@@ -287,6 +300,52 @@ const DetailInpatient = () => {
                 <p className="text-sm text-gray-500">Catatan</p>
                 <p className="text-base font-medium">{activeRoom.catatan}</p>
               </div>
+            )}
+            {isPulang && pulangRoom && (
+              <>
+                <div>
+                  <p className="text-sm text-gray-500">Tanggal Masuk</p>
+                  <p className="text-base font-medium">
+                    {format(new Date(pulangRoom.tanggal_masuk), 'dd-MM-yyyy HH:mm')}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500">Tanggal Keluar / Pulang</p>
+                  <p className="text-base font-medium">
+                    {pulangRoom.tanggal_keluar
+                      ? format(new Date(pulangRoom.tanggal_keluar), 'dd-MM-yyyy HH:mm')
+                      : '-'}
+                  </p>
+                </div>
+                {pulangRoom.catatan && (
+                  <div className="col-span-2">
+                    <p className="text-sm text-gray-500">Catatan</p>
+                    <p className="text-base font-medium">{pulangRoom.catatan}</p>
+                  </div>
+                )}
+                {pulangRoom.catatan_kepulangan && (
+                  <div className="col-span-2">
+                    <p className="text-sm text-gray-500">Catatan Kepulangan</p>
+                    <p className="text-base font-medium">{pulangRoom.catatan_kepulangan}</p>
+                  </div>
+                )}
+                {pulangRoom.status_kondisi && (
+                  <div>
+                    <p className="text-sm text-gray-500">Kondisi Pulang</p>
+                    <p className="text-base font-medium">
+                      {pulangRoom.status_kondisi === 'MEMBAIK'
+                        ? 'Membaik'
+                        : pulangRoom.status_kondisi === 'BELUM_SEMBUH'
+                          ? 'Belum Sembuh'
+                          : pulangRoom.status_kondisi === 'DIRUJUK'
+                            ? 'Dirujuk'
+                            : pulangRoom.status_kondisi === 'MENINGGAL'
+                              ? 'Meninggal'
+                              : pulangRoom.status_kondisi}
+                    </p>
+                  </div>
+                )}
+              </>
             )}
           </div>
         )}

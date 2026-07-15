@@ -30,6 +30,8 @@ import DetailOutpatient from '@/pages/modules/SIM-RS/services/outpatient/detail'
 import EditPemeriksaan from '@/pages/modules/SIM-RS/services/outpatient/detail/edit-pemeriksaan'
 import { InpatientPage } from '@/pages/modules/SIM-RS/services/inpatient'
 import DetailInpatient from '@/pages/modules/SIM-RS/services/inpatient/detail'
+import BackHomeInpatient from '@/pages/modules/SIM-RS/services/inpatient/back-home'
+import UpdatedInpatient from '@/pages/modules/SIM-RS/services/inpatient/updated'
 
 const UserProfilePage = lazy(() =>
   import('@/pages/modules/website-utama/user-profile').then((m) => ({ default: m.UserProfilePage }))
@@ -242,6 +244,14 @@ export const SIMRSROUTES = [
           {
             path: 'detail/:id',
             element: <DetailInpatient />,
+          },
+          {
+            path: 'back-home/:id',
+            element: <BackHomeInpatient />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdatedInpatient />,
           },
         ],
       },

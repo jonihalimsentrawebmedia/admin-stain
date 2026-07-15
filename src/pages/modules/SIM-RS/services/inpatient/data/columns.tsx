@@ -2,8 +2,9 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
 import type { IRegistration } from '@/pages/modules/SIM-RS/services/register/data/types.ts'
 import { format } from 'date-fns'
-import { MdInfo } from 'react-icons/md'
+import { MdInfo, MdLogout } from 'react-icons/md'
 import { ButtonRoom } from '../components/ButtonRoom.tsx'
+import { HiPencil } from 'react-icons/hi'
 
 export const ColumnsInpatient = () => {
   const [searchParams] = useSearchParams()
@@ -52,31 +53,33 @@ export const ColumnsInpatient = () => {
       header: 'Status',
       cell: ({ row }) => {
         const data = row.original
+        const inap = data.status_rawat_inap
 
-        if (data.status_rawat_inap === 'MENUNGGU_RUANGAN') {
+        if (inap === 'MENUNGGU_RUANGAN') {
           return <ButtonRoom data={data} />
         }
 
-        const status = data.status
-        const badgeColor =
-          status === 'MENUNGGU'
-            ? 'bg-yellow-100 text-yellow-700'
-            : status === 'DIPANGGIL'
-              ? 'bg-blue-100 text-blue-700'
-              : status === 'SELESAI'
-                ? 'bg-green-100 text-green-700'
-                : 'bg-red-100 text-red-700'
-        const label =
-          status === 'MENUNGGU'
-            ? 'Menunggu'
-            : status === 'DIPANGGIL'
-              ? 'Dipanggil'
-              : status === 'SELESAI'
-                ? 'Selesai'
-                : 'Dibatalkan'
+        if (inap === 'DIRAWAT') {
+          return (
+            <button
+              onClick={() =>
+                navigate(`/modules/sim-rs/services/inpatient/back-home/${data.id_pendaftaran}`)
+              }
+              className="bg-teal-500 text-white hover:bg-teal-600 px-3 py-1 rounded text-xs font-medium flex items-center gap-1"
+            >
+              <MdLogout className="size-3.5" />
+              Pasien Pulang
+            </button>
+          )
+        }
+
+        if (inap === 'PULANG') {
+          return <>{inap}</>
+        }
+
         return (
-          <span className={`px-2 py-1 rounded-full text-xs font-medium ${badgeColor}`}>
-            {label}
+          <span className="px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-700">
+            {inap ?? '-'}
           </span>
         )
       },
@@ -85,15 +88,21 @@ export const ColumnsInpatient = () => {
       accessorKey: 'action',
       header: '',
       cell: ({ row }) => (
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center gap-1.5">
           <button
-            onClick={() =>
-              navigate(`/modules/sim-rs/services/inpatient/detail/${row.original.id_pendaftaran}`)
-            }
+            onClick={() => navigate(`detail/${row.original.id_pendaftaran}`)}
             className="bg-blue-500 text-white hover:bg-blue-600 p-1.5 rounded"
           >
             <MdInfo className="size-4" />
           </button>
+          {row?.original?.status_rawat_inap === 'PULANG' && (
+            <button
+              onClick={() => navigate(`edit/${row.original.id_pendaftaran}`)}
+              className="bg-yellow-500 text-white hover:bg-yellow-600 p-1.5 rounded"
+            >
+              <HiPencil className="size-4" />
+            </button>
+          )}
         </div>
       ),
     },
