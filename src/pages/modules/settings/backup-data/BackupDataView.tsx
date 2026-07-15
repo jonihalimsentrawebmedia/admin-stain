@@ -14,6 +14,8 @@ const BackupDataView = () => {
     form,
     progress,
     loadingDownload,
+    isBackingUp,
+    backupProgress,
   } = BackupDataViewModel()
   if (loadingBackup) {
     return <Skeleton className="h-[200px]" />
@@ -26,7 +28,7 @@ const BackupDataView = () => {
       <div className="flex flex-col sm:flex-row gap-2 sm:items-center">
         <Button
           variant={'outline'}
-          disabled={loading || loadingDownload}
+          disabled={loading || loadingDownload || isBackingUp}
           onClick={handleCreateBackup}
           className="border-primary text-primary hover:text-primary w-full sm:w-fit"
         >
@@ -34,13 +36,25 @@ const BackupDataView = () => {
         </Button>
         <Button
           variant={'outline'}
-          disabled={loading || loadingDownload}
+          disabled={loading || loadingDownload || isBackingUp}
           onClick={handleDownloadBackup}
           className="border-primary text-primary hover:text-primary w-full sm:w-fit"
         >
           Download
         </Button>
       </div>
+      {isBackingUp && (
+        <div>
+          Proses Backup Data
+          <div className="w-full bg-gray-200 rounded-full h-3 mt-3">
+            <div
+              className="bg-primary h-3 rounded-full transition-all duration-300"
+              style={{ width: `${backupProgress}%` }}
+            />
+          </div>
+          <p className="text-sm text-gray-500 mt-1">{backupProgress}%</p>
+        </div>
+      )}
       {loadingDownload && (
         <div>
           File Sedang Proses Download
