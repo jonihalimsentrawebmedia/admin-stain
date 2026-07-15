@@ -26,7 +26,7 @@ export const FormJadwal = (props: Props) => {
 
   return (
     <Form {...form}>
-      <form className={'mt-5 w-full flex flex-col gap-6'} onSubmit={form.handleSubmit(HandleSave)}>
+      <form className={'w-full flex flex-col gap-6'} onSubmit={form.handleSubmit(HandleSave)}>
         <div className="grid grid-cols-2 gap-4">
           <SelectBasicInput
             name={'hari'}
