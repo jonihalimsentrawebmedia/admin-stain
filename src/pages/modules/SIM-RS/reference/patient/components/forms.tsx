@@ -10,16 +10,18 @@ import { TitleLine } from '@/pages/modules/pusat-karir/component/common/titleLin
 import useGetCountry from '@/pages/modules/settings/reference/country/controller/useGetCountry'
 import useGetProvince from '@/pages/modules/settings/reference/province/controller/useGetProvince'
 import useGetRegency from '@/pages/modules/settings/reference/regency/controller/useGetRegency'
+import { SwitchInput } from '@/components/common/form/switchInput.tsx'
 
 interface Props {
   loading: boolean
   form: UseFormReturn<TResolverPatient>
   HandleSave: (e: TResolverPatient) => void
+  isEdit?: boolean
 }
 
 const jenisKelaminData = [
-  { label: 'Laki-laki', value: 'LAKI_LAKI' },
-  { label: 'Perempuan', value: 'PEREMPUAN' },
+  { label: 'Laki-laki', value: 'L' },
+  { label: 'Perempuan', value: 'P' },
 ]
 
 const golonganDarahData = [
@@ -48,7 +50,7 @@ const statusPerkawinanData = [
 ]
 
 const FormPatient = (props: Props) => {
-  const { loading, form, HandleSave } = props
+  const { loading, form, HandleSave, isEdit } = props
   const navigate = useNavigate()
 
   const idNegara = form.watch('id_negara')
@@ -75,15 +77,17 @@ const FormPatient = (props: Props) => {
             </div>
 
             <TextInput
-              name={'no_rekam_medis'}
+              name={'medical_record_number'}
               form={form}
-              label={'No Rekam Medis'}
-              placeholder={'Masukkan No Rekam Medis'}
-              htmlFor={'no_rekam_medis'}
+              label={'No. Rekam Medis (otomatis)'}
+              placeholder={'Masukkan No. Rekam Medis (otomatis)'}
+              htmlFor={'medical_record_number'}
               className={'col-span-1'}
               inputClassName={'bg-white'}
+              isDisabled
               isRequired
             />
+
             <TextInput
               name={'nik'}
               form={form}
@@ -136,7 +140,7 @@ const FormPatient = (props: Props) => {
               isRequired
             />
             <SelectBasicInput
-              name={'id_golongan_darah'}
+              name={'golongan_darah'}
               form={form}
               label={'Golongan Darah'}
               placeholder={'Pilih Golongan Darah'}
@@ -146,7 +150,7 @@ const FormPatient = (props: Props) => {
               isRequired
             />
             <SelectBasicInput
-              name={'id_agama'}
+              name={'agama'}
               form={form}
               label={'Agama'}
               placeholder={'Pilih Agama'}
@@ -156,7 +160,7 @@ const FormPatient = (props: Props) => {
               isRequired
             />
             <SelectBasicInput
-              name={'id_status_perkawinan'}
+              name={'status_perkawinan'}
               form={form}
               label={'Status Perkawinan'}
               placeholder={'Pilih Status Perkawinan'}
@@ -175,6 +179,13 @@ const FormPatient = (props: Props) => {
               inputClassName={'bg-white'}
               isRequired
             />
+            {/*<SwitchInput*/}
+            {/*  name={'is_status'}*/}
+            {/*  form={form}*/}
+            {/*  label={'Status Aktif'}*/}
+            {/*  htmlFor={'is_status'}*/}
+            {/*  className={'col-span-1'}*/}
+            {/*/>*/}
           </div>
 
           {/* Kelompok 2: Alamat & Kontak */}
@@ -206,7 +217,9 @@ const FormPatient = (props: Props) => {
               label={'Provinsi'}
               placeholder={'Pilih Provinsi'}
               isDisabled={!idNegara}
-              data={province?.map((row) => ({ label: row.nama_provinsi, value: row.id_provinsi })) ?? []}
+              data={
+                province?.map((row) => ({ label: row.nama_provinsi, value: row.id_provinsi })) ?? []
+              }
               className={'col-span-1'}
               usePortal
               isRequired
@@ -220,28 +233,31 @@ const FormPatient = (props: Props) => {
               label={'Kabupaten'}
               placeholder={'Pilih Kabupaten'}
               isDisabled={!idProvinsi}
-              data={regency?.map((row) => ({ label: row.nama_kabupaten, value: row.id_kabupaten })) ?? []}
+              data={
+                regency?.map((row) => ({ label: row.nama_kabupaten, value: row.id_kabupaten })) ??
+                []
+              }
               className={'col-span-1'}
               usePortal
               isRequired
             />
             <TextInput
-              name={'telepon'}
+              name={'no_telepon'}
               form={form}
-              label={'Telepon'}
+              label={'No Telepon'}
               type={'tel'}
-              placeholder={'Masukkan Telepon'}
-              htmlFor={'telepon'}
+              placeholder={'Masukkan No Telepon'}
+              htmlFor={'no_telepon'}
               className={'col-span-1'}
               inputClassName={'bg-white'}
               isRequired
             />
             <TextAreaInput
-              name={'alamat_lengkap'}
+              name={'alamat'}
               form={form}
-              label={'Alamat Lengkap'}
-              placeholder={'Masukkan Alamat Lengkap'}
-              htmlFor={'alamat_lengkap'}
+              label={'Alamat'}
+              placeholder={'Masukkan Alamat'}
+              htmlFor={'alamat'}
               className={'col-span-2'}
               inputClassName={'bg-white'}
               isRequired
@@ -269,11 +285,11 @@ const FormPatient = (props: Props) => {
             </div>
 
             <TextInput
-              name={'nama_kontak_darurat'}
+              name={'kontak_darurat_nama'}
               form={form}
               label={'Nama Kontak Darurat'}
               placeholder={'Masukkan Nama Kontak Darurat'}
-              htmlFor={'nama_kontak_darurat'}
+              htmlFor={'kontak_darurat_nama'}
               className={'col-span-1'}
               inputClassName={'bg-white'}
               isRequired
@@ -301,6 +317,37 @@ const FormPatient = (props: Props) => {
               isRequired
             />
           </div>
+
+          {isEdit && (
+            <div className="grid grid-cols-2 gap-4">
+              <div className="col-span-2">
+                <TitleLine
+                  className={'text-2xl font-semibold text-primary'}
+                  title={'Informasi Sistem'}
+                />
+              </div>
+              <SwitchInput
+                isRequired
+                isRow
+                name={'is_status'}
+                form={form}
+                label={'Status Aktif'}
+                htmlFor={'is_status'}
+                className={'col-span-1'}
+              />
+              <TextInput
+                name={'tanggal_registrasi'}
+                form={form}
+                type={'datetime-local'}
+                label={'Tanggal Registrasi'}
+                htmlFor={'tanggal_registrasi'}
+                className={'col-span-1'}
+                inputClassName={'bg-white'}
+                isRequired
+                isDisabled
+              />
+            </div>
+          )}
 
           <ButtonForm loading={loading} onCancel={() => navigate(-1)} />
         </form>

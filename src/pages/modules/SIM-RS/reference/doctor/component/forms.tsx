@@ -36,15 +36,17 @@ export const FormDoctorCreate = (props: PropsCreate) => {
   const { specialist } = UseGetSpecialist({ limit: '100' })
   const { poli } = UseGetPoli({ limit: '100' })
 
-  const specialistData = specialist?.map((row) => ({
-    label: row.nama,
-    value: row.id_spesialis,
-  })) ?? []
+  const specialistData =
+    specialist?.map((row) => ({
+      label: row.nama,
+      value: row.id_spesialis,
+    })) ?? []
 
-  const poliData = poli?.map((row) => ({
-    label: row.nama,
-    value: row.id_poli,
-  })) ?? []
+  const poliData =
+    poli?.map((row) => ({
+      label: row.nama,
+      value: row.id_poli,
+    })) ?? []
 
   return (
     <Form {...form}>
@@ -137,15 +139,17 @@ export const FormDoctorUpdate = (props: PropsUpdate) => {
   const { specialist } = UseGetSpecialist({ limit: '100' })
   const { poli } = UseGetPoli({ limit: '100' })
 
-  const specialistData = specialist?.map((row) => ({
-    label: row.nama,
-    value: row.id_spesialis,
-  })) ?? []
+  const specialistData =
+    specialist?.map((row) => ({
+      label: row.nama,
+      value: row.id_spesialis,
+    })) ?? []
 
-  const poliData = poli?.map((row) => ({
-    label: row.nama,
-    value: row.id_poli,
-  })) ?? []
+  const poliData =
+    poli?.map((row) => ({
+      label: row.nama,
+      value: row.id_poli,
+    })) ?? []
 
   return (
     <Form {...form}>
@@ -212,10 +216,7 @@ export const FormDoctorUpdate = (props: PropsUpdate) => {
 
         <div className="grid grid-cols-2 gap-4">
           <div className="col-span-2">
-            <TitleLine
-              className={'text-2xl font-semibold text-primary'}
-              title={'2. Kontak'}
-            />
+            <TitleLine className={'text-2xl font-semibold text-primary'} title={'2. Kontak'} />
           </div>
           <TextInput
             name={'telepon'}
@@ -260,7 +261,7 @@ export const FormDoctorUpdate = (props: PropsUpdate) => {
           <TextInput
             name={'tanggal'}
             form={form}
-            label={'Tanggal & Waktu'}
+            label={'Tanggal Registrasi'}
             type={'datetime-local'}
             htmlFor={'tanggal'}
             className={'col-span-1'}

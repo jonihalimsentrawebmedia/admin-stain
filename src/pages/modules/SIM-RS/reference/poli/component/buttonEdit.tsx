@@ -9,18 +9,10 @@ import { FormPoliUpdate } from './forms.tsx'
 import type { IPoli } from '../data/types.ts'
 import { HiPencil } from 'react-icons/hi'
 import { useNavigate } from 'react-router-dom'
+import { format, parseISO } from 'date-fns'
 
 interface Props {
   data: IPoli
-}
-
-const toLocalDateTimeString = (date: Date) => {
-  const y = date.getFullYear()
-  const m = String(date.getMonth() + 1).padStart(2, '0')
-  const d = String(date.getDate()).padStart(2, '0')
-  const h = String(date.getHours()).padStart(2, '0')
-  const min = String(date.getMinutes()).padStart(2, '0')
-  return `${y}-${m}-${d}T${h}:${min}`
 }
 
 export const ButtonEditPoli = (props: Props) => {
@@ -47,15 +39,13 @@ export const FormEditPoli = (props: Props) => {
     resolver: zodResolver(ResolverPoliUpdate),
   })
 
-  const now = toLocalDateTimeString(new Date())
-
   useEffect(() => {
     if (data) {
       form.reset({
         nama: data.nama,
         lokasi: data.lokasi,
         is_status: String(data.is_status),
-        tanggal: now,
+        tanggal: format(parseISO(data.tanggal_registrasi), "yyyy-MM-dd'T'HH:mm"),
       })
     }
   }, [data])

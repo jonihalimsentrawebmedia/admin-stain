@@ -1,7 +1,7 @@
 import AxiosClient from '@/provider/axios'
 import { useQueryClient } from '@tanstack/react-query'
 import { format } from 'date-fns'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { toast } from 'react-toastify'
 import { useGetStatusBackupData } from './hooks'
 import { useForm } from 'react-hook-form'
@@ -11,7 +11,10 @@ const BackupDataViewModel = () => {
   const { loading: loadingBackup, session } = useGetStatusBackupData()
   const [loading, setLoading] = useState(false)
   const [loadingDownload, setLoadingDownload] = useState(false)
+  const [isBackingUp, setIsBackingUp] = useState(false)
+  const [backupProgress, setBackupProgress] = useState(0)
   const [progress, setProgress] = useState(0)
+  const pollingRef = useRef<ReturnType<typeof setInterval> | undefined>(undefined)
   const field = [
     {
       name: 'status',
@@ -37,16 +40,46 @@ const BackupDataViewModel = () => {
     },
   ]
   const queryClient = useQueryClient()
+
+  const stopPolling = () => {
+    if (pollingRef.current) {
+      clearInterval(pollingRef.current)
+      pollingRef.current = undefined
+    }
+  }
+
+  const startPolling = () => {
+    stopPolling()
+    pollingRef.current = setInterval(async () => {
+      try {
+        const res = await AxiosClient.get('/pengaturan/backup/status')
+        const data = res.data?.data
+        if (data) {
+          setBackupProgress(data.percentage)
+          if (data.status === 'success' || data.percentage >= 100) {
+            stopPolling()
+            setIsBackingUp(false)
+            await queryClient.invalidateQueries({ queryKey: ['backup-data'] })
+            toast.success('Backup berhasil dibuat')
+          }
+        }
+      } catch {
+        stopPolling()
+        setIsBackingUp(false)
+        toast.error('Terjadi kesalahan saat memproses backup')
+      }
+    }, 3000)
+  }
+
   async function handleCreateBackup() {
     setLoading(true)
     try {
       const res = await AxiosClient.post(`/pengaturan/backup/create`)
 
       if (res.data.status) {
-        await queryClient.invalidateQueries({
-          queryKey: ['backup-data'],
-        })
-        toast.success(res.data.message)
+        setIsBackingUp(true)
+        setBackupProgress(0)
+        startPolling()
       }
     } catch (err: any) {
       toast.error(err?.response?.data?.message || 'Terjadi kesalahan, silakan coba lagi.')
@@ -131,6 +164,10 @@ const BackupDataViewModel = () => {
       })
     }
   }, [session])
+  useEffect(() => {
+    return () => stopPolling()
+  }, [])
+
   return {
     handleCreateBackup,
     handleDownloadBackup,
@@ -140,6 +177,8 @@ const BackupDataViewModel = () => {
     form,
     progress,
     loadingDownload,
+    isBackingUp,
+    backupProgress,
   }
 }
 

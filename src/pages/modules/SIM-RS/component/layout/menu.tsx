@@ -37,8 +37,8 @@ export const GenerateMenu = () => {
         },
         {
           id: 32,
-          name: 'Pemeriksaan',
-          path: `${baseDomain}/services/examination`,
+          name: 'Rawat Jalan',
+          path: `${baseDomain}/services/outpatient`,
         },
         {
           id: 33,
@@ -129,6 +129,16 @@ export const GenerateMenu = () => {
           id: 76,
           name: 'Jenis Ruangan',
           path: `${baseDomain}/reference/room-type`,
+        },
+        {
+          id: 77,
+          name: 'Diagnosis (ICD-10)',
+          path: `${baseDomain}/reference/diagnosis`,
+        },
+        {
+          id: 78,
+          name: 'Tindakan (ICD-9-CM)',
+          path: `${baseDomain}/reference/procedure`,
         },
       ],
     },

@@ -7,4 +7,5 @@ export interface IBackupData {
   download_at: string
   nama_backup_user: string
   nama_download_user: string
+  percentage: number
 }

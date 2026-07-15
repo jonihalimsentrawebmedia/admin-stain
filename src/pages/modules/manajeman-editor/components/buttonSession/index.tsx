@@ -1,24 +1,24 @@
-import {useEffect, useState} from 'react'
-import {FaGear} from 'react-icons/fa6'
-import {Button} from '@/components/ui/button.tsx'
-import {DialogCustom} from '@/components/common/dialog/DialogCustom.tsx'
-import {SelectCustom} from '@/components/common/form/SelectCustom.tsx'
-import {Form} from '@/components/ui/form.tsx'
-import {useForm} from 'react-hook-form'
+import { useEffect, useState } from 'react'
+import { FaGear } from 'react-icons/fa6'
+import { Button } from '@/components/ui/button.tsx'
+import { SelectCustom } from '@/components/common/form/SelectCustom.tsx'
+import { Form } from '@/components/ui/form.tsx'
+import { useForm } from 'react-hook-form'
 import AxiosClient from '@/provider/axios.tsx'
-import {toast} from 'react-toastify'
-import {UseGetSessionEditor} from '../../session/index'
-import {UseGetUniversityDomainExist} from '@/pages/modules/website-utama/select-university/hooks'
+import { toast } from 'react-toastify'
+import { UseGetSessionEditor } from '../../session/index'
+import { UseGetUniversityDomainExist } from '@/pages/modules/website-utama/select-university/hooks'
 import type { SatuanOrganisasiList } from '@/pages/modules/settings/model'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonSessionEditor = () => {
   const [open, setOpen] = useState(false)
 
   const form = useForm()
 
-  const {satuanOrganisasi} = UseGetUniversityDomainExist({kelompok: 'UNIVERSITAS'})
+  const { satuanOrganisasi } = UseGetUniversityDomainExist({ kelompok: 'UNIVERSITAS' })
 
-  const {session} = UseGetSessionEditor()
+  const { session } = UseGetSessionEditor()
 
   useEffect(() => {
     if (session) form.setValue('id_university', session?.id_universitas)
@@ -45,11 +45,11 @@ export const ButtonSessionEditor = () => {
         className={'text-primary border-primary hover:text-primary'}
       >
         {session?.singkatan_universitas}
-        <FaGear/>
+        <FaGear />
       </Button>
 
-      <DialogCustom
-        className={'lg:max-w-2xl rounded'}
+      <DialogBasic
+        className={'lg:min-w-2xl rounded'}
         open={open}
         setOpen={setOpen}
         description={''}
@@ -77,7 +77,7 @@ export const ButtonSessionEditor = () => {
             </form>
           </Form>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

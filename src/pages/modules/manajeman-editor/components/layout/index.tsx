@@ -1,7 +1,6 @@
 import { Outlet } from 'react-router-dom'
 import { Header } from './header'
 import { useState } from 'react'
-import { Sidebar } from './sidebar'
 
 export default function MainLayoutEditor() {
   const [collapsed, setCollapsed] = useState(false)
@@ -18,9 +17,10 @@ export default function MainLayoutEditor() {
               onClick={() => setCollapsed(true)}
             />
           )}
-          <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
 
-          <main className="flex-1 overflow-auto p-3 sm:p-4 sm:px-28">
+          {/*<Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />*/}
+
+          <main className="flex-1 overflow-auto p-3 sm:p-4 container mx-auto">
             <Outlet />
           </main>
         </div>
