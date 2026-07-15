@@ -14,7 +14,7 @@ const BackupDataViewModel = () => {
   const [isBackingUp, setIsBackingUp] = useState(false)
   const [backupProgress, setBackupProgress] = useState(0)
   const [progress, setProgress] = useState(0)
-  const pollingRef = useRef<ReturnType<typeof setInterval>>()
+  const pollingRef = useRef<ReturnType<typeof setInterval> | undefined>(undefined)
   const field = [
     {
       name: 'status',
