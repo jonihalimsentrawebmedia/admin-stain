@@ -46,7 +46,7 @@ export const UpdatedDataProdi = () => {
 
   return (
     <>
-      <div className={'flex flex-col gap-4'}>
+      <div className="flex flex-col gap-4 p-3 sm:p-5 max-w-7xl mx-auto w-full">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
             <ButtonTitleGroup

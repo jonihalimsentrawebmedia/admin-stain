@@ -163,7 +163,7 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
           />
         )}
 
-        <div className="flex items-center gap-5">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
           <InputText
             form={form}
             className={'w-full'}
@@ -173,7 +173,7 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
             placeholder={placeHolderName}
           />
           <InputText
-            className={'w-fit'}
+            className={'w-full sm:w-fit'}
             form={form}
             name={'ukuran_title'}
             isRow
@@ -195,7 +195,7 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
           />
         )}
         {kelompok !== 'PRODI' && kelompok !== 'UNIT' && (
-          <div className={'flex items-center gap-5'}>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-5">
             <InputText
               className={'w-full'}
               form={form}
@@ -206,7 +206,7 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
             />
             <InputText
               form={form}
-              className={'w-fit'}
+              className={'w-full sm:w-fit'}
               name={'ukuran_singkatan'}
               isRow
               label="Ukuran Singkatan"
@@ -227,7 +227,7 @@ const SatuanOrganisasiForm = ({ form, kelompok }: Props) => {
       </CardInput>
       <CardInput title="Alamat Lengkap">
         {kelompok !== 'UNIVERSITAS' && (
-          <div className="flex items-center gap-3">
+          <div className="flex items-start sm:items-center gap-3">
             <Checkbox
               checked={form.watch('is_alamat_sama_parent')}
               disabled={!form.watch('parent_id')}
