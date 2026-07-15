@@ -32,6 +32,9 @@ import { InpatientPage } from '@/pages/modules/SIM-RS/services/inpatient'
 import DetailInpatient from '@/pages/modules/SIM-RS/services/inpatient/detail'
 import BackHomeInpatient from '@/pages/modules/SIM-RS/services/inpatient/back-home'
 import UpdatedInpatient from '@/pages/modules/SIM-RS/services/inpatient/updated'
+import Dashboard from '@/pages/modules/SIM-RS/services/dashboard'
+import { DoctorSchedulePage } from '@/pages/modules/SIM-RS/schedule'
+import DetailJadwalDokter from '@/pages/modules/SIM-RS/schedule/detail'
 
 const UserProfilePage = lazy(() =>
   import('@/pages/modules/website-utama/user-profile').then((m) => ({ default: m.UserProfilePage }))
@@ -48,7 +51,7 @@ export const SIMRSROUTES = [
     children: [
       {
         index: true,
-        element: <></>,
+        element: <Dashboard />,
       },
       {
         path: 'user-profile',
@@ -254,6 +257,19 @@ export const SIMRSROUTES = [
             element: <UpdatedInpatient />,
           },
         ],
+      },
+    ],
+  },
+  {
+    path: 'schedule',
+    children: [
+      {
+        index: true,
+        element: <DoctorSchedulePage />,
+      },
+      {
+        path: ':id',
+        element: <DetailJadwalDokter />,
       },
     ],
   },

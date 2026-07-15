@@ -24,31 +24,37 @@ export function Header(props: Props) {
 
   return (
     <header className="py-3 px-3 sm:py-4 sm:px-28 bg-[#E9FFF1] border-b border-green-200 flex items-center justify-between w-full gap-2">
-      <div className="flex items-center gap-2 sm:gap-4 min-w-0">
-        <Link to={'/modules'} className={'p-1.5 sm:p-2 shrink-0'}>
-          <img src={module?.gambar} alt="gambar" className="size-8 sm:size-10" />
-        </Link>
-        <div className="flex flex-col min-w-0">
-          <p className="text-xs sm:text-sm font-semibold text-primary truncate">Manajemen Editor</p>
-          <p className="text-base sm:text-2xl font-semibold truncate">{session?.nama_universitas}</p>
-        </div>
-      </div>
-      <div className="flex items-center gap-1 sm:gap-5 shrink-0">
-        <div className="hidden sm:flex items-center gap-4">
-          <div className="text-sm text-gray-600 whitespace-nowrap">Ganti Data:</div>
-          <ButtonSessionEditor />
-        </div>
-        <a href={'/modules'} className="hidden sm:block">
-          <IconModules />
-        </a>
-        <div className="flex items-center gap-1 sm:gap-4">
-          <IoMdNotificationsOutline className="text-lg sm:text-xl text-green-700 cursor-pointer" />
-          <div className="hidden sm:block">
-            <ButtonProfile module={module} profileUser={profileUser} />
+      <div className="container flex items-center justify-between mx-auto">
+        <div className="flex items-center gap-2">
+          <Link to={'/modules'} className={'p-1.5 sm:p-2 shrink-0'}>
+            <img src={module?.gambar} alt="gambar" className="size-8 sm:size-10" />
+          </Link>
+          <div className="flex flex-col min-w-0">
+            <p className="text-xs sm:text-sm font-semibold text-primary truncate">
+              Manajemen Editor
+            </p>
+            <p className="text-base sm:text-2xl font-semibold truncate">
+              {session?.nama_universitas}
+            </p>
           </div>
-          <button onClick={() => setCollapsed(!collapsed)} className="p-1.5">
-            <RiMenuLine className="size-5 sm:size-6" />
-          </button>
+        </div>
+        <div className="flex items-center gap-1 sm:gap-5 shrink-0">
+          <div className="hidden sm:flex items-center gap-4">
+            <div className="text-sm text-gray-600 whitespace-nowrap">Ganti Data:</div>
+            <ButtonSessionEditor />
+          </div>
+          <a href={'/modules'} className="hidden sm:block">
+            <IconModules />
+          </a>
+          <div className="flex items-center gap-1 sm:gap-4">
+            <IoMdNotificationsOutline className="text-lg sm:text-xl text-green-700 cursor-pointer" />
+            <div className="hidden sm:block">
+              <ButtonProfile module={module} profileUser={profileUser} />
+            </div>
+            <button onClick={() => setCollapsed(!collapsed)} className="p-1.5">
+              <RiMenuLine className="size-5 sm:size-6" />
+            </button>
+          </div>
         </div>
       </div>
     </header>
