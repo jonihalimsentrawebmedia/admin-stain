@@ -40,7 +40,7 @@ export const FormRegistration = ({ loading, form, HandleSave, isEdit }: Props) =
   return (
     <Form {...form}>
       <form className="mt-5 w-full flex flex-col gap-6" onSubmit={form.handleSubmit(HandleSave)}>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="col-span-2">
             <TitleLine className="text-2xl font-semibold text-primary" title="1. Informasi Pendaftaran" />
           </div>
@@ -83,7 +83,7 @@ export const FormRegistration = ({ loading, form, HandleSave, isEdit }: Props) =
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="col-span-2">
             <TitleLine className="text-2xl font-semibold text-primary" title="2. Informasi Pasien" />
           </div>
@@ -93,7 +93,7 @@ export const FormRegistration = ({ loading, form, HandleSave, isEdit }: Props) =
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="col-span-2">
             <TitleLine className="text-2xl font-semibold text-primary" title="3. Tujuan Pelayanan" />
           </div>

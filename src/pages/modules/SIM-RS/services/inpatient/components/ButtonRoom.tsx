@@ -106,7 +106,7 @@ export const ButtonRoom = ({ data }: Props) => {
         <div className="flex flex-col gap-6">
           <div>
             <TitleLine className="text-lg font-semibold text-primary" title="1. Informasi Pasien" />
-            <div className="grid grid-cols-2 gap-4 mt-3">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-3">
               <div>
                 <p className="text-sm text-gray-500">No. Pendaftaran</p>
                 <p className="text-base font-medium">{data.no_pendaftaran}</p>
@@ -143,7 +143,7 @@ export const ButtonRoom = ({ data }: Props) => {
                   className="text-lg font-semibold text-primary"
                   title="2. Informasi Rawat Inap"
                 />
-                <div className="grid grid-cols-2 gap-4 mt-3">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-3">
                   <SelectBasicInput
                     name="id_jenis_ruangan"
                     form={form}

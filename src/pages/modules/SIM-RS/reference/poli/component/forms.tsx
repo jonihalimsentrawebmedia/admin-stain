@@ -28,7 +28,7 @@ export const FormPoliCreate = (props: PropsCreate) => {
   return (
     <Form {...form}>
       <form className={'mt-5 w-full flex flex-col gap-6'} onSubmit={form.handleSubmit(HandleSave)}>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <TextInput
             name={'nama'}
             form={form}
@@ -63,7 +63,7 @@ export const FormPoliUpdate = (props: PropsUpdate) => {
   return (
     <Form {...form}>
       <form className={'mt-5 w-full flex flex-col gap-6'} onSubmit={form.handleSubmit(HandleSave)}>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <TextInput
             name={'nama'}
             form={form}

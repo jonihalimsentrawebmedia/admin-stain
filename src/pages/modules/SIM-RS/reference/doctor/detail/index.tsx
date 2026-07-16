@@ -43,7 +43,7 @@ const DetailDoctor = () => {
 
         <div className="bg-white rounded-lg border p-6">
           <p className="text-lg font-semibold text-primary mb-4">Informasi Dokter</p>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div>
               <p className="text-sm text-gray-500">Nama Dokter</p>
               <p className="text-base font-medium">{detail.nama}</p>
@@ -91,7 +91,7 @@ const DetailDoctor = () => {
 
         <div className="bg-white rounded-lg border p-6">
           <p className="text-lg font-semibold text-primary mb-4">Informasi Sistem</p>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div>
               <p className="text-sm text-gray-500">Tanggal Registrasi</p>
               <p className="text-base font-medium">

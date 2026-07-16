@@ -53,7 +53,7 @@ export const ButtonCall = ({ data }: Props) => {
         setOpen={setOpen}
         title={data.status === 'MENUNGGU' ? 'Panggil Pasien' : 'Selesaikan Pelayanan'}
       >
-        <div className="grid grid-cols-[12rem_1fr] gap-3 mb-4 text-sm">
+        <div className="grid grid-cols-1 lg:grid-cols-[12rem_1fr] gap-3 mb-4 text-sm">
           <p className="font-medium">No. Pendaftaran</p>
           <p>{data.no_pendaftaran}</p>
           <p className="font-medium">Nama Pasien</p>

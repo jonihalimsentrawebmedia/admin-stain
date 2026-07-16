@@ -68,7 +68,7 @@ const FormPatient = (props: Props) => {
           onSubmit={form.handleSubmit(HandleSave)}
         >
           {/* Kelompok 1: Informasi Pasien */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div className="col-span-2">
               <TitleLine
                 className={'text-2xl font-semibold text-primary'}
@@ -189,7 +189,7 @@ const FormPatient = (props: Props) => {
           </div>
 
           {/* Kelompok 2: Alamat & Kontak */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div className="col-span-2">
               <TitleLine
                 className={'text-2xl font-semibold text-primary'}
@@ -276,7 +276,7 @@ const FormPatient = (props: Props) => {
           </div>
 
           {/* Kelompok 3: Kontak Darurat */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div className="col-span-2">
               <TitleLine
                 className={'text-2xl font-semibold text-primary'}
@@ -319,7 +319,7 @@ const FormPatient = (props: Props) => {
           </div>
 
           {isEdit && (
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               <div className="col-span-2">
                 <TitleLine
                   className={'text-2xl font-semibold text-primary'}

@@ -30,7 +30,7 @@ const FormProfileHospital = (props: Props) => {
         />
         <div className="mt-5">
           <TitleLine title="Informasi Rumah Sakit" />
-          <div className={'grid grid-cols-2 gap-4 mt-5'}>
+          <div className={'lg:grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5 space-y-2'}>
             <TextInput
               name={'nama'}
               form={form}

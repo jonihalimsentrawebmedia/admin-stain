@@ -28,6 +28,7 @@ import { E_OFFICE_ROUTE } from '@/router/E-Office'
 import { SIMRSROUTES } from '@/router/SIM-RS'
 import MainLayoutSIMRS from '@/pages/modules/SIM-RS/component/layout'
 import { SelectSessionSIMRS } from '@/pages/modules/SIM-RS/select-session'
+import SimRSColor from '@/pages/modules/SIM-RS/component/layout/thema.tsx'
 
 // ── Lazy: semua komponen modules ──
 const ModulesView = lazy(() => import('@/pages/modules/ModulesView'))
@@ -341,7 +342,11 @@ export const Router = createBrowserRouter([
       },
       {
         path: 'sim-rs',
-        element: <MainLayoutSIMRS />,
+        element: (
+          <SimRSColor>
+            <MainLayoutSIMRS />
+          </SimRSColor>
+        ),
         children: [...SIMRSROUTES],
       },
     ],

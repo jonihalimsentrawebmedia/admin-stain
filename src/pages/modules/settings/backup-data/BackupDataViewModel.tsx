@@ -36,7 +36,9 @@ const BackupDataViewModel = () => {
     {
       name: 'download_at',
       label: 'Tanggal Download',
-      component: <div>{session ? format(session.download_at, 'dd:MM:yyyy, hh:mm') : '-'}</div>,
+      component: (
+        <div>{session?.download_at ? format(session?.download_at, 'dd:MM:yyyy, hh:mm') : '-'}</div>
+      ),
     },
   ]
   const queryClient = useQueryClient()
@@ -56,11 +58,17 @@ const BackupDataViewModel = () => {
         const data = res.data?.data
         if (data) {
           setBackupProgress(data.percentage)
-          if (data.status === 'success' || data.percentage >= 100) {
+          if (data.status === 'success') {
             stopPolling()
             setIsBackingUp(false)
             await queryClient.invalidateQueries({ queryKey: ['backup-data'] })
             toast.success('Backup berhasil dibuat')
+          }
+          if (data.status === 'error' || data.status === 'failed') {
+            stopPolling()
+            setIsBackingUp(false)
+            await queryClient.invalidateQueries({ queryKey: ['backup-data'] })
+            toast.error(data.error_message || 'Backup gagal')
           }
         }
       } catch {
@@ -162,6 +170,11 @@ const BackupDataViewModel = () => {
       form.reset({
         ...session,
       })
+      if (session.status === 'compressing' || session.status === 'processing') {
+        setIsBackingUp(true)
+        setBackupProgress(session.percentage || 0)
+        startPolling()
+      }
     }
   }, [session])
   useEffect(() => {

@@ -80,7 +80,6 @@ export const PatientReportPage = () => {
       </section>
 
       <ButtonTitleGroup label={'Laporan Pasien'} buttonGroup={[]} />
-
       <TableCustom data={list} columns={columns} loading={loading} meta={meta} />
     </div>
   )

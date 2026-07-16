@@ -88,22 +88,22 @@ const ProfileHospitalPage = () => {
             ]}
           />
 
-          <div className="p-6 bg-white rounded-lg border space-y-4">
+          <div className="p-4 sm:p-6 bg-white rounded-lg border space-y-4">
             <TitleLine title="Logo" />
             {profile?.url_logo ? (
               <img
                 src={profile.url_logo}
                 alt="Logo Rumah Sakit"
-                className="w-32 h-32 object-contain rounded border"
+                className="w-24 h-24 sm:w-32 sm:h-32 object-contain rounded border"
               />
             ) : (
               <p className="text-gray-400">Belum ada logo</p>
             )}
           </div>
 
-          <div className="p-6 bg-white rounded-lg border space-y-4">
+          <div className="p-4 sm:p-6 bg-white rounded-lg border space-y-4">
             <TitleLine title="Identitas Rumah Sakit" />
-            <div className="grid grid-cols-[12rem_1fr] gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-[12rem_1fr] gap-4">
               <p className="font-medium text-gray-600">Nama Rumah Sakit</p>
               <p>{profile?.nama ?? '-'}</p>
               <p className="font-medium text-gray-600">Alamat</p>

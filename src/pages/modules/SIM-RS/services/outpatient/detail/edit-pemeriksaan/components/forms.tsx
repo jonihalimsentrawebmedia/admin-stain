@@ -65,7 +65,7 @@ export const FormEditPemeriksaan = ({ loading, form, HandleSave, registration }:
             className="text-2xl font-semibold text-primary"
             title="1. Informasi Registrasi"
           />
-          <div className="grid grid-cols-2 gap-6 mt-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-4">
             <div>
               <p className="text-sm text-gray-500">No. Pendaftaran</p>
               <p className="text-base font-medium">{registration.no_pendaftaran}</p>
@@ -101,7 +101,7 @@ export const FormEditPemeriksaan = ({ loading, form, HandleSave, registration }:
 
         <div className="bg-white rounded-lg border p-6">
           <TitleLine className="text-2xl font-semibold text-primary" title="2. Hasil Pemeriksaan" />
-          <div className="grid grid-cols-2 gap-4 mt-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
             <TextAreaInput
               name={'keluhan_utama'}
               form={form}

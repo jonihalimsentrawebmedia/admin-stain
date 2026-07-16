@@ -43,7 +43,7 @@ const DetailPatient = () => {
 
         <div className="bg-white rounded-lg border p-6">
           <p className="text-lg font-semibold text-primary mb-4">Informasi Pasien</p>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div>
               <p className="text-sm text-gray-500">No Rekam Medis</p>
               <p className="text-base font-medium">{detail.no_rekam_medis}</p>
@@ -89,7 +89,7 @@ const DetailPatient = () => {
 
         <div className="bg-white rounded-lg border p-6">
           <p className="text-lg font-semibold text-primary mb-4">Alamat & Kontak</p>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div>
               <p className="text-sm text-gray-500">Alamat</p>
               <p className="text-base font-medium">{detail.alamat}</p>
@@ -107,7 +107,7 @@ const DetailPatient = () => {
 
         <div className="bg-white rounded-lg border p-6">
           <p className="text-lg font-semibold text-primary mb-4">Kontak Darurat</p>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div>
               <p className="text-sm text-gray-500">Nama Kontak Darurat</p>
               <p className="text-base font-medium">{detail.kontak_darurat_nama}</p>
@@ -125,7 +125,7 @@ const DetailPatient = () => {
 
         <div className="bg-white rounded-lg border p-6">
           <p className="text-lg font-semibold text-primary mb-4">Informasi Sistem</p>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div>
               <p className="text-sm text-gray-500">Status</p>
               <span

@@ -3,9 +3,11 @@ import { Link, useLocation } from 'react-router-dom'
 import { GenerateMenu } from './menu.tsx'
 import { cn } from '@/lib/utils.ts'
 import { ChevronRight } from 'lucide-react'
+import { useMobile } from '@/utils/useMobile'
 
 interface Props {
   collapsed: boolean
+  setCollapsed: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 type MenuItem = {
@@ -15,7 +17,8 @@ type MenuItem = {
   child?: MenuItem[]
 }
 
-export function SideNavSIMRS({ collapsed }: Props) {
+export function SideNavSIMRS({ collapsed, setCollapsed }: Props) {
+  const { isMobile } = useMobile()
   const location = useLocation()
   const pathname = location.pathname
 
@@ -155,6 +158,8 @@ export function SideNavSIMRS({ collapsed }: Props) {
                         toggleGroup={toggleGroup}
                         isActivePath={isActivePath}
                         collapsed={collapsed}
+                        setCollapsed={setCollapsed}
+                        isMobile={isMobile}
                       />
                     ))}
                   </ul>
@@ -178,7 +183,7 @@ export function SideNavSIMRS({ collapsed }: Props) {
           )
 
           return row.path ? (
-            <Link key={groupId} to={row.path}>
+            <Link key={groupId} to={row.path} onClick={() => isMobile && setCollapsed(true)}>
               {content}
             </Link>
           ) : (
@@ -201,6 +206,8 @@ function TreeNodeWrapper({
   isActivePath,
   collapsed,
   length,
+  setCollapsed,
+  isMobile,
 }: any) {
   const groupId = makeGroupId(parentGroupId, index, item.name)
   return (
@@ -220,6 +227,8 @@ function TreeNodeWrapper({
         toggleGroup={toggleGroup}
         isActivePath={isActivePath}
         collapsed={collapsed}
+        setCollapsed={setCollapsed}
+        isMobile={isMobile}
       />
     </div>
   )
@@ -234,6 +243,8 @@ function TreeNode({
   toggleGroup,
   isActivePath,
   collapsed,
+  setCollapsed,
+  isMobile,
 }: any) {
   const hasChildren = !!item.child && item.child.length > 0
   const isOpen = groups[groupId] ?? false
@@ -279,6 +290,8 @@ function TreeNode({
                 isActivePath={isActivePath}
                 collapsed={collapsed}
                 length={item.child!.length}
+                setCollapsed={setCollapsed}
+                isMobile={isMobile}
               />
             ))}
           </ul>
@@ -301,7 +314,7 @@ function TreeNode({
     </div>
   )
 
-  return <li>{item.path ? <Link to={item.path}>{itemContent}</Link> : itemContent}</li>
+  return <li>{item.path ? <Link to={item.path} onClick={() => isMobile && setCollapsed(true)}>{itemContent}</Link> : itemContent}</li>
 }
 
 export function isActiveTree(item: MenuItem, pathname: string): boolean {

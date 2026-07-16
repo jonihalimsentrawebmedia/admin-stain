@@ -51,7 +51,7 @@ export const FormDoctorCreate = (props: PropsCreate) => {
   return (
     <Form {...form}>
       <form className={'mt-5 w-full flex flex-col gap-6'} onSubmit={form.handleSubmit(HandleSave)}>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <TextInput
             name={'nama'}
             form={form}
@@ -154,7 +154,7 @@ export const FormDoctorUpdate = (props: PropsUpdate) => {
   return (
     <Form {...form}>
       <form className={'mt-5 w-full flex flex-col gap-6'} onSubmit={form.handleSubmit(HandleSave)}>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="col-span-2">
             <TitleLine
               className={'text-2xl font-semibold text-primary'}
@@ -214,7 +214,7 @@ export const FormDoctorUpdate = (props: PropsUpdate) => {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="col-span-2">
             <TitleLine className={'text-2xl font-semibold text-primary'} title={'2. Kontak'} />
           </div>
@@ -241,7 +241,7 @@ export const FormDoctorUpdate = (props: PropsUpdate) => {
           />
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="col-span-2">
             <TitleLine
               className={'text-2xl font-semibold text-primary'}
