@@ -2,6 +2,7 @@ import { useSearchParams, useNavigate } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
 import type { IUserList } from './types.ts'
 import { HiPencil } from 'react-icons/hi'
+import { MdInfo } from 'react-icons/md'
 import { format } from 'date-fns'
 import { ButtonDeleteUser } from '../component/buttonDelete.tsx'
 
@@ -69,6 +70,14 @@ export const ColumnsUserList = () => {
       header: '',
       cell: ({ row }) => (
         <div className={'flex justify-center items-center gap-2'}>
+          <button
+            onClick={() =>
+              navigate(`/modules/sim-rs/user-management/user-list/detail/${row.original.id_user}`)
+            }
+            className={'bg-blue-500 text-white hover:bg-blue-600 p-1.5 rounded'}
+          >
+            <MdInfo />
+          </button>
           <button
             onClick={() =>
               navigate(`/modules/sim-rs/user-management/user-list/edit/${row.original.id_user}`)
