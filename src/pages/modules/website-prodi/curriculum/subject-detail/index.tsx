@@ -17,10 +17,10 @@ export const CurriculumSubjectDetail = () => {
           isBack
         />
 
-        <div className="grid grid-cols-2 gap-5">
-          <div className="flex flex-col gap-1.5 col-span-2">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          <div className="flex flex-col gap-1.5 col-span-1 lg:col-span-2">
             <p className="text-sm text-gray-500">Program Studi</p>
-            <p className="text-2xl text-green-700 font-semibold">
+            <p className="text-xl lg:text-2xl text-green-700 font-semibold">
               {detailCurriculum?.nama_satuan_organisasi}
             </p>
           </div>

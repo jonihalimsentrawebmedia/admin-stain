@@ -38,12 +38,12 @@ export const BackgroundWebsiteSettings = () => {
         }}
         className="w-full"
       >
-        <TabsList className="w-full rounded bg-white border-b-black border border-t-0 border-l-0">
+        <TabsList className="w-full rounded bg-white border-b-black border border-t-0 border-l-0 overflow-x-auto flex-nowrap">
           {TAB_LIST.map((item) => (
             <TabsTrigger
               className={`
                   data-[state=active]:bg-black data-[state=active]:text-white
-                  rounded-t-lg rounded-b-none p-4
+                  rounded-t-lg rounded-b-none p-4 whitespace-nowrap
               `}
               key={item.value}
               value={item.value}

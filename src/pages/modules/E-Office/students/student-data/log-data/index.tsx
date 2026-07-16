@@ -5,6 +5,56 @@ import { Card, CardContent } from '@/components/ui/card.tsx'
 import { TitleLine } from '@/pages/modules/pusat-karir/component/common/titleLine.tsx'
 import { format } from 'date-fns'
 import { Badge } from '@/components/ui/badge.tsx'
+import TableCustom from '@/components/common/table/TableCustom.tsx'
+import type { ColumnDef } from '@tanstack/react-table'
+import type { ILogStudentHistory } from '../data/types.ts'
+
+const LogColumns = (): ColumnDef<ILogStudentHistory>[] => [
+  {
+    accessorKey: 'order',
+    header: '#',
+    cell: ({ row }) => <p className="text-sm font-medium">{row.index + 1}</p>,
+  },
+  {
+    accessorKey: 'changed_at',
+    header: 'Tanggal',
+    cell: ({ row }) => {
+      const log = row.original
+      return log.changed_at ? format(new Date(log.changed_at), 'dd/MM/yyyy HH:mm') : '-'
+    },
+  },
+  {
+    accessorKey: 'old_nama_status_mahasiswa',
+    header: 'Status Lama',
+    cell: ({ row }) => (
+      <Badge variant="secondary">{row.original.old_nama_status_mahasiswa ?? '-'}</Badge>
+    ),
+  },
+  {
+    accessorKey: 'new_nama_status_mahasiswa',
+    header: 'Status Baru',
+    cell: ({ row }) => <Badge>{row.original.new_nama_status_mahasiswa ?? '-'}</Badge>,
+  },
+  {
+    accessorKey: 'old_tahun_lulus',
+    header: 'Tahun Lulus (Lama)',
+    cell: ({ row }) => row.original.old_tahun_lulus ?? '-',
+  },
+  {
+    accessorKey: 'new_tahun_lulus',
+    header: 'Tahun Lulus (Baru)',
+    cell: ({ row }) => row.original.new_tahun_lulus ?? '-',
+  },
+  {
+    accessorKey: 'alasan',
+    header: 'Alasan',
+    cell: ({ row }) => row.original.alasan ?? '-',
+  },
+  {
+    accessorKey: 'nama_changed_user',
+    header: 'Diubah Oleh',
+  },
+]
 
 const LogDataStudent = () => {
   const { id } = useParams()
@@ -31,11 +81,11 @@ const LogDataStudent = () => {
                     <img
                       src={studentData.url_foto_mahasiswa}
                       alt="Foto Mahasiswa"
-                      className="max-w-[100px] sm:max-w-[120px] w-full aspect-[3/4] object-cover rounded-lg border"
+                      className="max-w-[150px] sm:max-w-[150px] w-full aspect-[3/4] object-cover rounded-lg border"
                     />
                   ) : (
-                    <div className="max-w-[100px] sm:max-w-[120px] w-full aspect-[3/4] bg-gray-100 rounded-lg border flex items-center justify-center text-gray-400 shrink-0">
-                      <p className="text-xs">No Photo</p>
+                    <div className="w-[120px] p-4 aspect-[3/4] bg-gray-100 rounded-lg border flex items-center justify-center text-gray-400">
+                      <p className="text-xs text-center">No Photo </p>
                     </div>
                   )}
                 </div>
@@ -44,13 +94,17 @@ const LogDataStudent = () => {
                   <span className="font-medium break-words">{studentData?.nim ?? '-'}</span>
 
                   <span className="text-gray-500 text-sm sm:text-base">Nama Mahasiswa</span>
-                  <span className="font-medium break-words">{studentData?.nama_mahasiswa ?? '-'}</span>
+                  <span className="font-medium break-words">
+                    {studentData?.nama_mahasiswa ?? '-'}
+                  </span>
 
                   <span className="text-gray-500 text-sm sm:text-base">Program Studi</span>
                   <span className="font-medium break-words">{studentData?.nama_prodi ?? '-'}</span>
 
                   <span className="text-gray-500 text-sm sm:text-base">Fakultas</span>
-                  <span className="font-medium break-words">{studentData?.nama_fakultas ?? '-'}</span>
+                  <span className="font-medium break-words">
+                    {studentData?.nama_fakultas ?? '-'}
+                  </span>
 
                   <span className="text-gray-500 text-sm sm:text-base">Status Saat Ini</span>
                   <span className="font-medium">
@@ -72,85 +126,12 @@ const LogDataStudent = () => {
               </div>
 
               <div className="col-span-2">
-                {loading ? (
-                  <p className="text-gray-500">Memuat...</p>
-                ) : !logStatus || logStatus.length === 0 ? (
-                  <p className="text-gray-500">Belum ada riwayat perubahan status</p>
-                ) : (
-                  <div className="space-y-4">
-                    {logStatus.map((log) => (
-                      <Card
-                        key={log.id_mahasiswa_status_history}
-                        className="border-l-4 border-l-primary"
-                      >
-                        <CardContent className="py-4">
-                          <div className="grid grid-cols-1 sm:grid-cols-[140px_1fr] gap-y-2 gap-x-4 text-sm">
-                            <span className="text-gray-500">Tanggal</span>
-                            <span className="font-medium break-words">
-                              {log.changed_at
-                                ? format(new Date(log.changed_at), 'dd/MM/yyyy HH:mm')
-                                : '-'}
-                            </span>
-
-                            <span className="text-gray-500">Status Lama</span>
-                            <span>
-                              <Badge variant="secondary">
-                                {log.old_nama_status_mahasiswa ?? '-'}
-                              </Badge>
-                            </span>
-
-                            <span className="text-gray-500">Status Baru</span>
-                            <span>
-                              <Badge>{log.new_nama_status_mahasiswa ?? '-'}</Badge>
-                            </span>
-
-                            {log.old_tahun_lulus && (
-                              <>
-                                <span className="text-gray-500">Tahun Lulus (Lama)</span>
-                                <span className="font-medium break-words">{log.old_tahun_lulus}</span>
-                              </>
-                            )}
-
-                            {log.new_tahun_lulus && (
-                              <>
-                                <span className="text-gray-500">Tahun Lulus (Baru)</span>
-                                <span className="font-medium break-words">{log.new_tahun_lulus}</span>
-                              </>
-                            )}
-
-                            {log.old_semester_lulus && (
-                              <>
-                                <span className="text-gray-500">Semester Lulus (Lama)</span>
-                                <span className="font-medium">
-                                  {log.old_semester_lulus === 1 ? 'Ganjil' : 'Genap'}
-                                </span>
-                              </>
-                            )}
-
-                            {log.new_semester_lulus && (
-                              <>
-                                <span className="text-gray-500">Semester Lulus (Baru)</span>
-                                <span className="font-medium">
-                                  {log.new_semester_lulus === 1 ? 'Ganjil' : 'Genap'}
-                                </span>
-                              </>
-                            )}
-
-                            {log.alasan && (
-                              <>
-                                <span className="text-gray-500">Alasan</span>
-                                <span className="font-medium break-words">{log.alasan}</span>
-                              </>
-                            )}
-
-                            <span className="text-gray-500">Diubah Oleh</span>
-                            <span className="font-medium break-words">{log.nama_changed_user ?? '-'}</span>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                )}
+                <TableCustom
+                  isShowFilter={false}
+                  data={logStatus ?? []}
+                  columns={LogColumns()}
+                  loading={loading}
+                />
               </div>
             </div>
           </CardContent>
