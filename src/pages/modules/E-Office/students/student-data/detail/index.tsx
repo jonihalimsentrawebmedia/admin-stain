@@ -5,6 +5,8 @@ import { Card, CardContent } from '@/components/ui/card.tsx'
 import { TitleLine } from '@/pages/modules/pusat-karir/component/common/titleLine.tsx'
 import { format } from 'date-fns'
 import { Badge } from '@/components/ui/badge.tsx'
+import { Button } from '@/components/ui/button.tsx'
+import { History } from 'lucide-react'
 
 const DetailStudentData = () => {
   const { id } = useParams()
@@ -29,6 +31,23 @@ const DetailStudentData = () => {
               type: 'edit',
               label: 'Edit Data',
               onClick: () => navigate(`/modules/e-office/student/student-data/edit/${id}`),
+            },
+            {
+              type: 'custom',
+              element: (
+                <Button
+                  variant="outline"
+                  className="bg-white text-primary border-primary hover:text-primary"
+                  onClick={() =>
+                    navigate(
+                      `/modules/e-office/student/student-data/log/${studentData?.id_mahasiswa}`,
+                    )
+                  }
+                >
+                  <History />
+                  Log Status
+                </Button>
+              ),
             },
           ]}
         />
