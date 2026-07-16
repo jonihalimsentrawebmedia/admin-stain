@@ -3,14 +3,7 @@ import { createBrowserRouter, Navigate, Outlet } from 'react-router-dom'
 
 import { PageLoader } from '@/utils/lazyImport'
 
-// ── Eager: halaman login & forget-password (critical path) ──
-import LoginView from '@/pages/login/LoginView'
-import ForgetPasswordView from '@/pages/forget-password/ForgetPasswordView'
-import OtpView from '@/pages/forget-password/otp/OtpView'
-import ChangePasswordView from '@/pages/forget-password/change-password/ChangePasswordView'
-import SuccessView from '@/pages/forget-password/success/SuccessView'
-// ── Eager: router arrays (ringan, hanya config objects) ──
-// Komponen VIEW di dalamnya akan di-lazy loading di masing-masing file router
+// ── Router config arrays (ringan, hanya config objects) ──
 import { MainWebsiteRouter } from '@/router/main-website/router'
 import { SettingRouter } from '@/router/settings/router'
 import { WebsiteProdiRouter } from '@/router/website-prodi/router'
@@ -26,9 +19,17 @@ import { SPI_ROUTES } from '@/router/SPI'
 import { PMB_ROUTES } from '@/router/pmb'
 import { E_OFFICE_ROUTE } from '@/router/E-Office'
 import { SIMRSROUTES } from '@/router/SIM-RS'
-import MainLayoutSIMRS from '@/pages/modules/SIM-RS/component/layout'
-import { SelectSessionSIMRS } from '@/pages/modules/SIM-RS/select-session'
-import SimRSColor from '@/pages/modules/SIM-RS/component/layout/thema.tsx'
+
+const LoginView = lazy(() => import('@/pages/login/LoginView'))
+const ForgetPasswordView = lazy(() => import('@/pages/forget-password/ForgetPasswordView'))
+const OtpView = lazy(() => import('@/pages/forget-password/otp/OtpView'))
+const ChangePasswordView = lazy(() => import('@/pages/forget-password/change-password/ChangePasswordView'))
+const SuccessView = lazy(() => import('@/pages/forget-password/success/SuccessView'))
+const MainLayoutSIMRS = lazy(() => import('@/pages/modules/SIM-RS/component/layout'))
+const SelectSessionSIMRS = lazy(() =>
+  import('@/pages/modules/SIM-RS/select-session').then((m) => ({ default: m.SelectSessionSIMRS }))
+)
+const SimRSColor = lazy(() => import('@/pages/modules/SIM-RS/component/layout/thema.tsx'))
 
 // ── Lazy: semua komponen modules ──
 const ModulesView = lazy(() => import('@/pages/modules/ModulesView'))

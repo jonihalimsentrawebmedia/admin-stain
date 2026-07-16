@@ -1,53 +1,83 @@
 import { lazy } from 'react'
-import { PatientPage } from '@/pages/modules/SIM-RS/reference/patient'
-import CreatePatient from '@/pages/modules/SIM-RS/reference/patient/created'
-import UpdatePatient from '@/pages/modules/SIM-RS/reference/patient/updated'
-import DetailPatient from '@/pages/modules/SIM-RS/reference/patient/detail'
-import { PoliPage } from '@/pages/modules/SIM-RS/reference/poli'
-import CreatePoli from '@/pages/modules/SIM-RS/reference/poli/created'
-import UpdatePoli from '@/pages/modules/SIM-RS/reference/poli/updated'
-import DetailPoli from '@/pages/modules/SIM-RS/reference/poli/detail'
-import { RoomTypePage } from '@/pages/modules/SIM-RS/reference/room-type'
-import { RoomPage } from '@/pages/modules/SIM-RS/reference/room'
-import CreateRoom from '@/pages/modules/SIM-RS/reference/room/created'
-import UpdateRoom from '@/pages/modules/SIM-RS/reference/room/updated'
-import DetailRoom from '@/pages/modules/SIM-RS/reference/room/detail'
-import { SpecialistPage } from '@/pages/modules/SIM-RS/reference/specialist'
-import { DiagnosisRefPage } from '@/pages/modules/SIM-RS/reference/diagnosis'
-import { ProcedurePage } from '@/pages/modules/SIM-RS/reference/procedure'
-import { DoctorPage } from '@/pages/modules/SIM-RS/reference/doctor'
-import CreateDoctor from '@/pages/modules/SIM-RS/reference/doctor/created'
-import UpdateDoctor from '@/pages/modules/SIM-RS/reference/doctor/updated'
-import DetailDoctor from '@/pages/modules/SIM-RS/reference/doctor/detail'
-import ProfileHospitalPage from '@/pages/modules/SIM-RS/profile-rs'
-import { RegisterPage } from '@/pages/modules/SIM-RS/services/register'
-import CreateRegistration from '@/pages/modules/SIM-RS/services/register/created'
-import UpdateRegistration from '@/pages/modules/SIM-RS/services/register/updated'
-import DetailRegistration from '@/pages/modules/SIM-RS/services/register/detail'
-import DiagnosisPage from '@/pages/modules/SIM-RS/services/register/diagnosis'
-import { OutpatientPage } from '@/pages/modules/SIM-RS/services/outpatient'
-import DetailOutpatient from '@/pages/modules/SIM-RS/services/outpatient/detail'
-import EditPemeriksaan from '@/pages/modules/SIM-RS/services/outpatient/detail/edit-pemeriksaan'
-import { InpatientPage } from '@/pages/modules/SIM-RS/services/inpatient'
-import DetailInpatient from '@/pages/modules/SIM-RS/services/inpatient/detail'
-import BackHomeInpatient from '@/pages/modules/SIM-RS/services/inpatient/back-home'
-import UpdatedInpatient from '@/pages/modules/SIM-RS/services/inpatient/updated'
-import Dashboard from '@/pages/modules/SIM-RS/services/dashboard'
-import { DoctorSchedulePage } from '@/pages/modules/SIM-RS/schedule'
-import DetailJadwalDokter from '@/pages/modules/SIM-RS/schedule/detail'
-import { PatientReportPage } from '@/pages/modules/SIM-RS/report/patient-report'
-import { VisitReportPage } from '@/pages/modules/SIM-RS/report/visit-report'
-import { InpatientReportPage } from '@/pages/modules/SIM-RS/report/inpatient-report'
-import ColorSettingSIMRS from '@/pages/modules/SIM-RS/setting/color'
-import CodeSettingSIMRS from '@/pages/modules/SIM-RS/setting/code'
-import { RolePage } from '@/pages/modules/SIM-RS/user-management/role'
-import CreateRole from '@/pages/modules/SIM-RS/user-management/role/created'
-import UpdateRole from '@/pages/modules/SIM-RS/user-management/role/updated'
-import { UserListPage } from '@/pages/modules/SIM-RS/user-management/user-list'
-import CreateUser from '@/pages/modules/SIM-RS/user-management/user-list/created'
-import UpdateUser from '@/pages/modules/SIM-RS/user-management/user-list/updated'
-import DetailUser from '@/pages/modules/SIM-RS/user-management/user-list/detail'
 
+const PatientPage = lazy(() =>
+  import('@/pages/modules/SIM-RS/reference/patient').then((m) => ({ default: m.PatientPage }))
+)
+const CreatePatient = lazy(() => import('@/pages/modules/SIM-RS/reference/patient/created'))
+const UpdatePatient = lazy(() => import('@/pages/modules/SIM-RS/reference/patient/updated'))
+const DetailPatient = lazy(() => import('@/pages/modules/SIM-RS/reference/patient/detail'))
+const PoliPage = lazy(() =>
+  import('@/pages/modules/SIM-RS/reference/poli').then((m) => ({ default: m.PoliPage }))
+)
+const CreatePoli = lazy(() => import('@/pages/modules/SIM-RS/reference/poli/created'))
+const UpdatePoli = lazy(() => import('@/pages/modules/SIM-RS/reference/poli/updated'))
+const DetailPoli = lazy(() => import('@/pages/modules/SIM-RS/reference/poli/detail'))
+const RoomTypePage = lazy(() =>
+  import('@/pages/modules/SIM-RS/reference/room-type').then((m) => ({ default: m.RoomTypePage }))
+)
+const RoomPage = lazy(() =>
+  import('@/pages/modules/SIM-RS/reference/room').then((m) => ({ default: m.RoomPage }))
+)
+const CreateRoom = lazy(() => import('@/pages/modules/SIM-RS/reference/room/created'))
+const UpdateRoom = lazy(() => import('@/pages/modules/SIM-RS/reference/room/updated'))
+const DetailRoom = lazy(() => import('@/pages/modules/SIM-RS/reference/room/detail'))
+const SpecialistPage = lazy(() =>
+  import('@/pages/modules/SIM-RS/reference/specialist').then((m) => ({ default: m.SpecialistPage }))
+)
+const DiagnosisRefPage = lazy(() =>
+  import('@/pages/modules/SIM-RS/reference/diagnosis').then((m) => ({ default: m.DiagnosisRefPage }))
+)
+const ProcedurePage = lazy(() =>
+  import('@/pages/modules/SIM-RS/reference/procedure').then((m) => ({ default: m.ProcedurePage }))
+)
+const DoctorPage = lazy(() =>
+  import('@/pages/modules/SIM-RS/reference/doctor').then((m) => ({ default: m.DoctorPage }))
+)
+const CreateDoctor = lazy(() => import('@/pages/modules/SIM-RS/reference/doctor/created'))
+const UpdateDoctor = lazy(() => import('@/pages/modules/SIM-RS/reference/doctor/updated'))
+const DetailDoctor = lazy(() => import('@/pages/modules/SIM-RS/reference/doctor/detail'))
+const ProfileHospitalPage = lazy(() => import('@/pages/modules/SIM-RS/profile-rs'))
+const RegisterPage = lazy(() =>
+  import('@/pages/modules/SIM-RS/services/register').then((m) => ({ default: m.RegisterPage }))
+)
+const CreateRegistration = lazy(() => import('@/pages/modules/SIM-RS/services/register/created'))
+const UpdateRegistration = lazy(() => import('@/pages/modules/SIM-RS/services/register/updated'))
+const DetailRegistration = lazy(() => import('@/pages/modules/SIM-RS/services/register/detail'))
+const DiagnosisPage = lazy(() => import('@/pages/modules/SIM-RS/services/register/diagnosis'))
+const OutpatientPage = lazy(() => import('@/pages/modules/SIM-RS/services/outpatient'))
+const DetailOutpatient = lazy(() => import('@/pages/modules/SIM-RS/services/outpatient/detail'))
+const EditPemeriksaan = lazy(() => import('@/pages/modules/SIM-RS/services/outpatient/detail/edit-pemeriksaan'))
+const InpatientPage = lazy(() => import('@/pages/modules/SIM-RS/services/inpatient'))
+const DetailInpatient = lazy(() => import('@/pages/modules/SIM-RS/services/inpatient/detail'))
+const BackHomeInpatient = lazy(() => import('@/pages/modules/SIM-RS/services/inpatient/back-home'))
+const UpdatedInpatient = lazy(() => import('@/pages/modules/SIM-RS/services/inpatient/updated'))
+const Dashboard = lazy(() => import('@/pages/modules/SIM-RS/services/dashboard'))
+const DoctorSchedulePage = lazy(() =>
+  import('@/pages/modules/SIM-RS/schedule').then((m) => ({ default: m.DoctorSchedulePage }))
+)
+const DetailJadwalDokter = lazy(() => import('@/pages/modules/SIM-RS/schedule/detail'))
+const PatientReportPage = lazy(() =>
+  import('@/pages/modules/SIM-RS/report/patient-report').then((m) => ({ default: m.PatientReportPage }))
+)
+const VisitReportPage = lazy(() =>
+  import('@/pages/modules/SIM-RS/report/visit-report').then((m) => ({ default: m.VisitReportPage }))
+)
+const InpatientReportPage = lazy(() =>
+  import('@/pages/modules/SIM-RS/report/inpatient-report').then((m) => ({ default: m.InpatientReportPage }))
+)
+const ColorSettingSIMRS = lazy(() => import('@/pages/modules/SIM-RS/setting/color'))
+const CodeSettingSIMRS = lazy(() => import('@/pages/modules/SIM-RS/setting/code'))
+const RolePage = lazy(() =>
+  import('@/pages/modules/SIM-RS/user-management/role').then((m) => ({ default: m.RolePage }))
+)
+const CreateRole = lazy(() => import('@/pages/modules/SIM-RS/user-management/role/created'))
+const UpdateRole = lazy(() => import('@/pages/modules/SIM-RS/user-management/role/updated'))
+const UserListPage = lazy(() =>
+  import('@/pages/modules/SIM-RS/user-management/user-list').then((m) => ({ default: m.UserListPage }))
+)
+const CreateUser = lazy(() => import('@/pages/modules/SIM-RS/user-management/user-list/created'))
+const UpdateUser = lazy(() => import('@/pages/modules/SIM-RS/user-management/user-list/updated'))
+const DetailUser = lazy(() => import('@/pages/modules/SIM-RS/user-management/user-list/detail'))
 const UserProfilePage = lazy(() =>
   import('@/pages/modules/website-utama/user-profile').then((m) => ({ default: m.UserProfilePage }))
 )
