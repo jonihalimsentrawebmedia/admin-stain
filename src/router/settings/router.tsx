@@ -49,6 +49,7 @@ const RankedGroupCategoryLanguagePage = lazy(() => import('@/pages/modules/setti
 const RankedAcademicLanguagePage = lazy(() => import('@/pages/modules/settings/reference/academic-rank/language').then(m => ({ default: m.RankedAcademicLanguagePage })))
 const IdentityView = lazy(() => import('@/pages/modules/settings/identity/IdentityView'))
 const BackupDataView = lazy(() => import('@/pages/modules/settings/backup-data/BackupDataView'))
+const BackupHistoryView = lazy(() => import('@/pages/modules/settings/backup-data/history'))
 const EducationLevelLanguagePage = lazy(() => import('@/pages/modules/settings/reference/educational-level/language').then(m => ({ default: m.EducationLevelLanguagePage })))
 const MainDataUniversityLanguageView = lazy(() => import('@/pages/modules/settings/main-data-university/language/MainDataUniversityLanguageView'))
 const FacultyLanguageView = lazy(() => import('@/pages/modules/settings/faculty/language/FacultyLanguageView'))
@@ -360,6 +361,10 @@ export const SettingRouter = [
       {
         index: true,
         element: <BackupDataView />,
+      },
+      {
+        path: 'history',
+        element: <BackupHistoryView />,
       },
     ],
   },

@@ -36,6 +36,17 @@ import Dashboard from '@/pages/modules/SIM-RS/services/dashboard'
 import { DoctorSchedulePage } from '@/pages/modules/SIM-RS/schedule'
 import DetailJadwalDokter from '@/pages/modules/SIM-RS/schedule/detail'
 import { PatientReportPage } from '@/pages/modules/SIM-RS/report/patient-report'
+import { VisitReportPage } from '@/pages/modules/SIM-RS/report/visit-report'
+import { InpatientReportPage } from '@/pages/modules/SIM-RS/report/inpatient-report'
+import ColorSettingSIMRS from '@/pages/modules/SIM-RS/setting/color'
+import CodeSettingSIMRS from '@/pages/modules/SIM-RS/setting/code'
+import { RolePage } from '@/pages/modules/SIM-RS/user-management/role'
+import CreateRole from '@/pages/modules/SIM-RS/user-management/role/created'
+import UpdateRole from '@/pages/modules/SIM-RS/user-management/role/updated'
+import { UserListPage } from '@/pages/modules/SIM-RS/user-management/user-list'
+import CreateUser from '@/pages/modules/SIM-RS/user-management/user-list/created'
+import UpdateUser from '@/pages/modules/SIM-RS/user-management/user-list/updated'
+import DetailUser from '@/pages/modules/SIM-RS/user-management/user-list/detail'
 
 const UserProfilePage = lazy(() =>
   import('@/pages/modules/website-utama/user-profile').then((m) => ({ default: m.UserProfilePage }))
@@ -280,6 +291,70 @@ export const SIMRSROUTES = [
       {
         path: 'patient-report',
         element: <PatientReportPage />,
+      },
+      {
+        path: 'visit-report',
+        element: <VisitReportPage />,
+      },
+      {
+        path: 'inpatient-report',
+        element: <InpatientReportPage />,
+      },
+    ],
+  },
+  {
+    path: 'setting',
+    children: [
+      {
+        path: 'color',
+        element: <ColorSettingSIMRS />,
+      },
+      {
+        path: 'code',
+        element: <CodeSettingSIMRS />,
+      },
+    ],
+  },
+  {
+    path: 'user-management',
+    children: [
+      {
+        path: 'role',
+        children: [
+          {
+            index: true,
+            element: <RolePage />,
+          },
+          {
+            path: 'add',
+            element: <CreateRole />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdateRole />,
+          },
+        ],
+      },
+      {
+        path: 'user-list',
+        children: [
+          {
+            index: true,
+            element: <UserListPage />,
+          },
+          {
+            path: 'add',
+            element: <CreateUser />,
+          },
+          {
+            path: 'edit/:id',
+            element: <UpdateUser />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailUser />,
+          },
+        ],
       },
     ],
   },

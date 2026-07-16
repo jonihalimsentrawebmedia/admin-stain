@@ -12,13 +12,13 @@ export default function MainLayoutSIMRS() {
         <HeaderSIMRS collapsed={collapsed} setCollapsed={setCollapsed} />
 
         <div className="flex flex-1 overflow-hidden">
-          <SideNavSIMRS collapsed={collapsed} />
+          <SideNavSIMRS collapsed={collapsed} setCollapsed={setCollapsed} />
 
           <main className="flex-1 overflow-auto">
-            <div className="p-4 min-h-[calc(100vh-135px)]">
+            <div className="p-2 sm:p-4 min-h-[calc(100vh-135px)]">
               <Outlet/>
             </div>
-            <footer className={'bg-white shadow mt-5 text-center border'}>Admin SIM-RS © {new Date().getFullYear()}</footer>
+            <footer className={'bg-white shadow mt-5 text-center border text-xs sm:text-sm'}>Admin SIM-RS © {new Date().getFullYear()}</footer>
           </main>
         </div>
       </div>

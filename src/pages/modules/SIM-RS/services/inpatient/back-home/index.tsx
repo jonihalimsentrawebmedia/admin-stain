@@ -106,7 +106,7 @@ const BackHomeInpatient = () => {
 
       <div className="bg-white rounded-lg border p-6">
         <TitleLine className="text-lg font-semibold text-primary" title="1. Informasi Pasien" />
-        <div className="grid grid-cols-2 gap-4 mt-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
           <div>
             <p className="text-sm text-gray-500">No. Registrasi</p>
             <p className="text-base font-medium">{detail.no_pendaftaran}</p>
@@ -156,7 +156,7 @@ const BackHomeInpatient = () => {
         <TitleLine className="text-lg font-semibold text-primary" title="2. Informasi Kepulangan" />
         <Form {...form}>
           <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4 mt-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               <TextInput
                 name="tanggal_keluar"
                 form={form}

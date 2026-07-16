@@ -50,7 +50,7 @@ export const InpatientPage = () => {
     <div className="space-y-5">
       <ButtonTitleGroup label="Rawat Inap" buttonGroup={[]} />
       <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
-        <TabsList className="w-full flex flex-row items-start p-0 gap-0 bg-transparent border-b-2 border-[#CDA327] rounded-none h-auto">
+        <TabsList className="w-full justify-start flex flex-row items-start p-0 gap-0 bg-transparent border-b-2 border-[#CDA327] rounded-none h-auto overflow-x-auto flex-nowrap">
           {statusList.map((s) => (
             <TabsTrigger
               key={s.key}

@@ -169,7 +169,7 @@ const DetailInpatient = () => {
 
       <div className="bg-white rounded-lg border p-6">
         <p className="text-lg font-semibold text-primary mb-4">Informasi Pendaftaran</p>
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div>
             <p className="text-sm text-gray-500">No. Pendaftaran</p>
             <p className="text-base font-medium">{detail.no_pendaftaran}</p>
@@ -193,7 +193,7 @@ const DetailInpatient = () => {
 
       <div className="bg-white rounded-lg border p-6">
         <p className="text-lg font-semibold text-primary mb-4">Informasi Pasien</p>
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div>
             <p className="text-sm text-gray-500">No. Rekam Medis</p>
             <p className="text-base font-medium">{detail.no_rekam_medis_pasien}</p>
@@ -222,7 +222,7 @@ const DetailInpatient = () => {
         {isEdit ? (
           <Form {...form}>
             <form onSubmit={form.handleSubmit(HandleSave)} className="flex flex-col gap-4">
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                 <SelectBasicInput
                   name="id_jenis_ruangan"
                   form={form}
@@ -274,7 +274,7 @@ const DetailInpatient = () => {
             </form>
           </Form>
         ) : (
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div>
               <p className="text-sm text-gray-500">Jenis Ruangan</p>
               <p className="text-base font-medium">{detail.nama_jenis_ruangan_aktif ?? '-'}</p>
@@ -353,7 +353,7 @@ const DetailInpatient = () => {
 
       <div className="bg-white rounded-lg border p-6">
         <p className="text-lg font-semibold text-primary mb-4">Tujuan Pelayanan</p>
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div>
             <p className="text-sm text-gray-500">Poli</p>
             <p className="text-base font-medium">{detail.nama_poli}</p>
@@ -368,7 +368,7 @@ const DetailInpatient = () => {
       {pemeriksaan && (
         <div className="bg-white rounded-lg border p-6">
           <p className="text-lg font-semibold text-primary mb-4">Data Pemeriksaan</p>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div>
               <p className="text-sm text-gray-500">No. Pemeriksaan</p>
               <p className="text-base font-medium">{pemeriksaan.no_pemeriksaan}</p>

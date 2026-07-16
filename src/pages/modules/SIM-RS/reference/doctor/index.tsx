@@ -67,18 +67,18 @@ export const DoctorPage = () => {
 
         <TableCustom
           addFilter={
-            <div className="flex gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
               <SelectFilter
                 name="id_poli"
                 label="Poli"
                 options={poliData}
-                selectClassName="min-w-[200px]"
+                selectClassName="w-full sm:min-w-[200px]"
               />
               <SelectFilter
                 name="id_spesialis"
                 label="Spesialis"
                 options={specialistData}
-                selectClassName="min-w-[200px]"
+                selectClassName="w-full sm:min-w-[200px]"
               />
             </div>
           }

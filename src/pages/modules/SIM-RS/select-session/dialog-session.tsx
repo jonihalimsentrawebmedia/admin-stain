@@ -50,11 +50,12 @@ export const DialogSessionSIMRS = () => {
       <Button
         variant={'outline'}
         onClick={() => setOpen(!open)}
-        className={'border-primary text-primary hover:text-primary'}
+        className={'border-primary text-primary hover:text-primary max-w-[120px] sm:max-w-none'}
         disabled={loading}
       >
-        <FaGear />
-        {session?.nama_satuan_organisasi}
+        <FaGear className="shrink-0" />
+        <span className="truncate hidden sm:inline">{session?.nama_satuan_organisasi}</span>
+        <span className="truncate sm:hidden">Ganti</span>
       </Button>
 
       <DialogBasic title={'Ganti Session SIM-RS'} open={open} setOpen={setOpen}>

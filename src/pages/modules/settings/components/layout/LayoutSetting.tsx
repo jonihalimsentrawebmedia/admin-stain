@@ -268,7 +268,7 @@ function SidebarItem({
       ) : (
         <div
           className={`flex flex-col gap-1 px-2 sm:px-3 py-1.5 cursor-pointer text-xs sm:text-sm font-medium rounded-md
-      ${isActive ? 'bg-[#F5FFFA] text-primary' : 'text-green-50'}`}
+      ${isActive ? 'bg-[#F5FFFA] text-primary' : 'text-white'}`}
         >
           <div
             onClick={() => setOpen(!open)}
@@ -295,7 +295,7 @@ function SidebarItem({
                   className={`block px-2 py-1.5 rounded text-xs ${
                     path.includes(row.link)
                       ? 'text-primary font-medium'
-                      : 'text-green-200 hover:text-white'
+                      : 'text-green-700 hover:text-primary'
                   }`}
                 >
                   {row.label}

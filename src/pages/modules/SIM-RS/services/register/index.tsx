@@ -61,7 +61,7 @@ export const RegisterPage = () => {
         ]}
       />
       <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
-        <TabsList className="w-full flex flex-row items-start p-0 gap-0 bg-transparent border-b-2 border-[#CDA327] rounded-none h-auto">
+        <TabsList className="w-full flex flex-row items-start p-0 gap-0 bg-transparent border-b-2 border-[#CDA327] rounded-none h-auto overflow-x-auto flex-nowrap justify-start">
           {statusList.map((s) => (
             <TabsTrigger
               key={s.key}

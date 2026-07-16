@@ -1,8 +1,10 @@
+import { Link } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup'
 import BackupDataViewModel from './BackupDataViewModel'
 import DetailField from '@/components/common/field/DetailField'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Button } from '@/components/ui/button'
+import { History } from 'lucide-react'
 
 const BackupDataView = () => {
   const {
@@ -42,6 +44,11 @@ const BackupDataView = () => {
         >
           Download
         </Button>
+        <Link to="/modules/settings/backup-data/history">
+          <Button variant="outline" className="border-primary text-primary hover:text-primary w-full sm:w-fit">
+            <History /> Log Activity
+          </Button>
+        </Link>
       </div>
       {isBackingUp && (
         <div>

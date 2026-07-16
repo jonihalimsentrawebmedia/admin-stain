@@ -20,24 +20,24 @@ export function HeaderSIMRS(props: Props) {
   const { profileUser } = UseGetUserProfile()
 
   return (
-    <header className="py-4 px-5 bg-[#E9FFF1] border-b border-green-200 flex items-center justify-between w-full">
-      <div className="flex items-center gap-4">
+    <header className="py-2 sm:py-4 px-3 sm:px-5 bg-[#E9FFF1] border-b border-green-200 flex items-center justify-between w-full">
+      <div className="flex items-center gap-2 sm:gap-4 min-w-0">
         <Link to={'/modules'}>
-          <img src={module?.gambar} alt="gambar" className="size-14 object-cover" />
+          <img src={module?.gambar} alt="gambar" className="size-10 sm:size-14 object-cover shrink-0" />
         </Link>
-        <div className="flex flex-col">
-          <p className="text-sm font-semibold text-primary">Sistem Informasi Manajemen Rumah Sakit</p>
-          <p className="text-2xl font-semibold">SIM-RS</p>
+        <div className="flex flex-col min-w-0">
+          <p className="hidden sm:block text-xs sm:text-sm font-semibold text-primary truncate">Sistem Informasi Manajemen Rumah Sakit</p>
+          <p className="text-lg sm:text-2xl font-semibold truncate">SIM-RS</p>
         </div>
       </div>
-      <div className="flex items-center gap-5">
-        <Link to={'/modules'}>
+      <div className="flex items-center gap-2 sm:gap-5 shrink-0">
+        <Link to={'/modules'} className="hidden sm:block">
           <IconModules />
         </Link>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4">
           <DialogSessionSIMRS />
           <ButtonProfile module={module} profileUser={profileUser} />
-          <button onClick={() => setCollapsed(!collapsed)}>
+          <button onClick={() => setCollapsed(!collapsed)} className="text-xl sm:text-base">
             <RiMenuLine />
           </button>
         </div>

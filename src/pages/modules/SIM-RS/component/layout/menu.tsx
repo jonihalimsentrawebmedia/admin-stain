@@ -7,6 +7,7 @@ import {
 import { FaBriefcaseMedical } from 'react-icons/fa'
 import { IoStatsChart } from 'react-icons/io5'
 import { IoMdPeople } from 'react-icons/io'
+import { FaGear } from 'react-icons/fa6'
 
 const baseDomain = '/modules/sim-rs'
 
@@ -139,6 +140,24 @@ export const GenerateMenu = () => {
           id: 78,
           name: 'Tindakan (ICD-9-CM)',
           path: `${baseDomain}/reference/procedure`,
+        },
+      ],
+    },
+    {
+      id: 8,
+      name: 'Pengaturan',
+      path: `${baseDomain}/setting`,
+      icon: <FaGear className={'size-5'} />,
+      child: [
+        {
+          id: 81,
+          name: 'Pengaturan Warna',
+          path: `${baseDomain}/setting/color`,
+        },
+        {
+          id: 82,
+          name: 'Kode Rekam Medis',
+          path: `${baseDomain}/setting/code`,
         },
       ],
     },

@@ -34,7 +34,7 @@ const DetailJadwalDokter = () => {
 
         <div className="bg-white rounded-lg border p-6">
           <p className="text-lg font-semibold text-primary mb-4">Informasi Dokter</p>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div>
               <p className="text-sm text-gray-500">Nama</p>
               <p className="text-base font-medium">{detail.nama}</p>
@@ -56,7 +56,7 @@ const DetailJadwalDokter = () => {
 
         <div className="bg-white rounded-lg border p-6">
           <p className="text-lg font-semibold text-primary mb-4">Kontak</p>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div>
               <p className="text-sm text-gray-500">Telepon</p>
               <p className="text-base font-medium">{detail.telepon}</p>
@@ -74,7 +74,7 @@ const DetailJadwalDokter = () => {
             <ButtonAddJadwal id_dokter={detail.id_dokter} />
           </div>
 
-          <table className="w-full text-sm">
+          <div className="overflow-x-auto"><table className="w-full text-sm">
             <thead className={'bg-primary'}>
               <tr className="border-b text-left hover:bg-primary">
                 <th className="p-1.5 font-medium text-white w-12">#</th>
@@ -100,8 +100,8 @@ const DetailJadwalDokter = () => {
                 </tr>
               ))}
             </tbody>
-          </table>
-        </div>
+</table></div>
+      </div>
       </div>
     </>
   )

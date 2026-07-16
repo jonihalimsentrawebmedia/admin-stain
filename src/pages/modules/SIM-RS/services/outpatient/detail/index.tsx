@@ -70,7 +70,7 @@ const DetailOutpatient = () => {
 
       <div className="bg-white rounded-lg border p-6">
         <p className="text-lg font-semibold text-primary mb-4">Informasi Pendaftaran</p>
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div>
             <p className="text-sm text-gray-500">No. Pendaftaran</p>
             <p className="text-base font-medium">{detail.no_pendaftaran}</p>
@@ -94,7 +94,7 @@ const DetailOutpatient = () => {
 
       <div className="bg-white rounded-lg border p-6">
         <p className="text-lg font-semibold text-primary mb-4">Informasi Pasien</p>
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div>
             <p className="text-sm text-gray-500">No. Rekam Medis</p>
             <p className="text-base font-medium">{detail.no_rekam_medis_pasien}</p>
@@ -120,7 +120,7 @@ const DetailOutpatient = () => {
 
       <div className="bg-white rounded-lg border p-6">
         <p className="text-lg font-semibold text-primary mb-4">Tujuan Pelayanan</p>
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div>
             <p className="text-sm text-gray-500">Poli</p>
             <p className="text-base font-medium">{detail.nama_poli}</p>
@@ -147,7 +147,7 @@ const DetailOutpatient = () => {
               Edit
             </button>
           </div>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div className="col-span-2">
               <p className="text-sm text-gray-500">No. Pemeriksaan</p>
               <p className="text-base font-medium">{pemeriksaan.no_pemeriksaan}</p>

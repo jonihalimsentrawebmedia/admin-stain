@@ -148,7 +148,7 @@ const UpdatedInpatient = () => {
 
       <div className="bg-white rounded-lg border p-6">
         <TitleLine className="text-lg font-semibold text-primary" title="1. Informasi Pasien" />
-        <div className="grid grid-cols-2 gap-4 mt-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
           <div>
             <p className="text-sm text-gray-500">No. Registrasi</p>
             <p className="text-base font-medium">{detail.no_pendaftaran}</p>
@@ -174,7 +174,7 @@ const UpdatedInpatient = () => {
         <TitleLine className="text-lg font-semibold text-primary" title="2. Informasi Rawat Inap" />
         <Form {...form}>
           <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4 mt-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               <SelectBasicInput
                 name="id_jenis_ruangan"
                 form={form}
@@ -258,7 +258,7 @@ const UpdatedInpatient = () => {
               className="text-lg font-semibold text-primary"
               title="3. Hasil Pemeriksaan"
             />
-            <div className="grid grid-cols-2 gap-4 mt-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
               <div className="col-span-2">
                 <p className="text-sm text-gray-500">Keluhan</p>
                 <p className="text-base font-medium">{pemeriksaan.keluhan_utama}</p>
@@ -293,7 +293,7 @@ const UpdatedInpatient = () => {
               className="text-lg font-semibold text-primary"
               title="4. Keputusan Perawatan"
             />
-            <div className="grid grid-cols-2 gap-4 mt-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
               <div>
                 <p className="text-sm text-gray-500">Keputusan Yang Diberikan</p>
                 <p className="text-base font-medium">
