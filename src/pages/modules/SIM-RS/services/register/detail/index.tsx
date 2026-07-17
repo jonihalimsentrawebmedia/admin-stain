@@ -118,27 +118,27 @@ const DetailRegistration = () => {
 
       <div className="bg-white rounded-lg border p-6">
         <p className="text-lg font-semibold text-primary mb-4">Informasi Pasien</p>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div>
-            <p className="text-sm text-gray-500">No. Rekam Medis</p>
-            <p className="text-base font-medium">{detail.no_rekam_medis_pasien}</p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-500">Nama Pasien</p>
-            <p className="text-base font-medium">{detail.nama_pasien}</p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-500">Jenis Kelamin</p>
-            <p className="text-base font-medium">{jkLabel}</p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-500">Tempat Lahir</p>
-            <p className="text-base font-medium">{detail.tempat_lahir_pasien}</p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-500">Tanggal Lahir</p>
-            <p className="text-base font-medium">{tglLahir}</p>
-          </div>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className={'bg-primary'}>
+              <tr className="border-b bg-primay">
+                <th className="py-2.5 px-3 text-left font-medium text-white">No. Rekam Medis</th>
+                <th className="py-2.5 px-3 text-left font-medium text-white">Nama Pasien</th>
+                <th className="py-2.5 px-3 text-left font-medium text-white">Jenis Kelamin</th>
+                <th className="py-2.5 px-3 text-left font-medium text-white">Tempat Lahir</th>
+                <th className="py-2.5 px-3 text-left font-medium text-white">Tanggal Lahir</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="py-2.5 px-3 font-medium">{detail.no_rekam_medis_pasien}</td>
+                <td className="py-2.5 px-3">{detail.nama_pasien}</td>
+                <td className="py-2.5 px-3">{jkLabel}</td>
+                <td className="py-2.5 px-3">{detail.tempat_lahir_pasien}</td>
+                <td className="py-2.5 px-3">{tglLahir}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
