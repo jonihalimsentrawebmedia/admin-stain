@@ -12,9 +12,10 @@ import { Input } from '@/components/ui/input.tsx'
 
 interface Props {
   form: UseFormReturn<TResolverRegistration>
+  isDisabled?: boolean
 }
 
-export const DialogSelectPatient = ({ form }: Props) => {
+export const DialogSelectPatient = ({ form, isDisabled }: Props) => {
   const [open, setOpen] = useState(false)
   const [search, setSearch] = useState('')
   const [selectedPatient, setSelectedPatient] = useState<IPatient | null>(null)
@@ -111,7 +112,12 @@ export const DialogSelectPatient = ({ form }: Props) => {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="bg-primary text-white px-4 py-2 rounded text-sm hover:bg-primary/80"
+          disabled={isDisabled}
+          className={`px-4 py-2 rounded text-sm ${
+            isDisabled
+              ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+              : 'bg-primary text-white hover:bg-primary/80'
+          }`}
         >
           Pilih Pasien
         </button>
