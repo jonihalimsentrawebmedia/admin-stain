@@ -1,65 +1,64 @@
 import { lazy } from 'react'
-import NumberOfCodeLetterPage from '@/pages/modules/E-Office/Letter-Generation/code-letter'
-import CreatedCodeLetterGenerated from '@/pages/modules/E-Office/Letter-Generation/code-letter/created'
-import LetterTypePage from '@/pages/modules/E-Office/Letter-Generation/Letter-type'
-import UpdatedCodeLetterGenerated from '@/pages/modules/E-Office/Letter-Generation/code-letter/updated'
-import DetailLetterType from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail'
-import ListTemplateLetterType from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail-template'
-import ListIsiTemplateSurat from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail-template/isi-template'
-import CreateLetterByTypePage from '@/pages/modules/E-Office/Letter-Generation/create-letter'
-import ListLetterGeneratePage from '@/pages/modules/E-Office/Letter-Generation/letter-list'
-import UpdatedLetterByTemplate from '@/pages/modules/E-Office/Letter-Generation/letter-list/update'
-import DetailLetterTemplate from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail'
-import BudgetOfficialTravel from '@/pages/modules/E-Office/official-travel/budget'
-import LetterOfAssigment from '@/pages/modules/E-Office/official-travel/Letter-Assigment'
-import CreatedLetterAssigment from '@/pages/modules/E-Office/official-travel/Letter-Assigment/created'
-import UpdatedLetterAssigment from '@/pages/modules/E-Office/official-travel/Letter-Assigment/updated'
-import DetailLetterAssigment from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail'
-import LupSumAssignmentLetter from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/lupsum'
-import LupSumUpdated from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/lupsum/updated'
-import ListPejabat from '@/pages/modules/E-Office/official-travel/pejabat'
-import ReportLetterSPPDAssignment from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/report'
-import DocumentationLetterAssigment from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/documentation'
-import ListDetailGroupLetter from '@/pages/modules/E-Office/Letter-Generation/create-letter/detail-list'
-import CreateLetterByTemplate from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate'
-import EReceiptPage from '@/pages/modules/E-Office/E-Receipt'
-import InvoiceEReceiptPage from '@/pages/modules/E-Office/E-Receipt/invoice'
-import SuratKeteranganAktifMahasiswaPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifMahasiswa'
-import SuratKeteranganCutiAkademikPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganCutiAkademik'
-import SuratPengantarPenelitianPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPengantarPenelitian'
 
-import UpdateSuratKeteranganAktifMahasiswaPage from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKAM/updated.tsx'
-import DetailSKCALetterPage from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKCA'
-import UpdateSuratKeteranganCutiAkademikPage from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKCA/update.tsx'
-import DetailDataSKAM from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKAM'
-import UpdateSuratPengantarPenelitianPage from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPP/update.tsx'
-import DetailLetterSPPPage from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPP'
-import SuratPermohonanMagangPKL from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPermohonanMagangPKL'
-import SuratPengantarKKN from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPengantarKKN'
-import SuratKeteranganAktifKembaliPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifKembali'
-import SuratBebasPustakaPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratBebasPustaka'
-import SuratKeteranganBebasKeuanganPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganBebasKeuangan'
-import SuratKeteranganBebasAkademikPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganBebasAkademik'
-import UpdatedSuratPermohonanMagangPKL from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPM/updated.tsx'
-import UpdatedSuratPengantarKKN from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPK/updated.tsx'
-import UpdatedSuratKeteranganAktifKembaliPage from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKAK/updated.tsx'
-import UpdatedSuratBebasPustakaPage from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKBP/updated.tsx'
-import UpdatedSuratKeteranganBebasKeuanganPage from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKBK/updated.tsx'
-import UpdatedSuratKeteranganBebasAkademikPage from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKBA/updated.tsx'
-import DetailSuratPermohonanMagang from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPM'
-import DetailSuratPengantarKKN from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPK'
-import DetailDataSKAK from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKAK'
-import DetailDataSKBP from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKBP'
-import DetailDataSKBK from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKBK'
-import DetailDataSKBA from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKBA'
-import SuratRekomendasiBeasiswaPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratRekomendasiBeasiswa'
-import DetailDataSRB from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SRB'
-import UpdateSuratRekomendasiBeasiswaPage from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SRB/update.tsx'
-import SuratPengantarObservasiPage from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPengantarObservasi'
-import UpdatedSuratPengantarObservasiPage from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPO/updated.tsx'
-import DetailDataSPO from '@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPO'
-import LogDataStudent from '@/pages/modules/E-Office/students/student-data/log-data'
-
+const NumberOfCodeLetterPage = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/code-letter'))
+const CreatedCodeLetterGenerated = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/code-letter/created'))
+const LetterTypePage = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/Letter-type'))
+const UpdatedCodeLetterGenerated = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/code-letter/updated'))
+const DetailLetterType = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/Letter-type/detail'))
+const ListTemplateLetterType = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/Letter-type/detail-template'))
+const ListIsiTemplateSurat = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/Letter-type/detail-template/isi-template'))
+const CreateLetterByTypePage = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/create-letter'))
+const ListLetterGeneratePage = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/letter-list'))
+const UpdatedLetterByTemplate = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/letter-list/update'))
+const DetailLetterTemplate = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/letter-list/detail'))
+const BudgetOfficialTravel = lazy(() => import('@/pages/modules/E-Office/official-travel/budget'))
+const LetterOfAssigment = lazy(() => import('@/pages/modules/E-Office/official-travel/Letter-Assigment'))
+const CreatedLetterAssigment = lazy(() => import('@/pages/modules/E-Office/official-travel/Letter-Assigment/created'))
+const UpdatedLetterAssigment = lazy(() => import('@/pages/modules/E-Office/official-travel/Letter-Assigment/updated'))
+const DetailLetterAssigment = lazy(() => import('@/pages/modules/E-Office/official-travel/Letter-Assigment/detail'))
+const LupSumAssignmentLetter = lazy(() => import('@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/lupsum'))
+const LupSumUpdated = lazy(() => import('@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/lupsum/updated'))
+const ListPejabat = lazy(() => import('@/pages/modules/E-Office/official-travel/pejabat'))
+const ReportLetterSPPDAssignment = lazy(() => import('@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/report'))
+const DocumentationLetterAssigment = lazy(() => import('@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/documentation'))
+const ListDetailGroupLetter = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/create-letter/detail-list'))
+const CreateLetterByTemplate = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate'))
+const EReceiptPage = lazy(() => import('@/pages/modules/E-Office/E-Receipt'))
+const InvoiceEReceiptPage = lazy(() => import('@/pages/modules/E-Office/E-Receipt/invoice'))
+const SuratKeteranganAktifMahasiswaPage = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifMahasiswa'))
+const SuratKeteranganCutiAkademikPage = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganCutiAkademik'))
+const SuratPengantarPenelitianPage = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPengantarPenelitian'))
+const UpdateSuratKeteranganAktifMahasiswaPage = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKAM/updated.tsx'))
+const DetailSKCALetterPage = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKCA'))
+const UpdateSuratKeteranganCutiAkademikPage = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKCA/update.tsx'))
+const DetailDataSKAM = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKAM'))
+const UpdateSuratPengantarPenelitianPage = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPP/update.tsx'))
+const DetailLetterSPPPage = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPP'))
+const SuratPermohonanMagangPKL = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPermohonanMagangPKL'))
+const SuratPengantarKKN = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPengantarKKN'))
+const SuratKeteranganAktifKembaliPage = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifKembali'))
+const SuratBebasPustakaPage = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratBebasPustaka'))
+const SuratKeteranganBebasKeuanganPage = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganBebasKeuangan'))
+const SuratKeteranganBebasAkademikPage = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganBebasAkademik'))
+const UpdatedSuratPermohonanMagangPKL = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPM/updated.tsx'))
+const UpdatedSuratPengantarKKN = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPK/updated.tsx'))
+const UpdatedSuratKeteranganAktifKembaliPage = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKAK/updated.tsx'))
+const UpdatedSuratBebasPustakaPage = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKBP/updated.tsx'))
+const UpdatedSuratKeteranganBebasKeuanganPage = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKBK/updated.tsx'))
+const UpdatedSuratKeteranganBebasAkademikPage = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKBA/updated.tsx'))
+const DetailSuratPermohonanMagang = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPM'))
+const DetailSuratPengantarKKN = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPK'))
+const DetailDataSKAK = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKAK'))
+const DetailDataSKBP = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKBP'))
+const DetailDataSKBK = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKBK'))
+const DetailDataSKBA = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SKBA'))
+const SuratRekomendasiBeasiswaPage = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratRekomendasiBeasiswa'))
+const DetailDataSRB = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SRB'))
+const UpdateSuratRekomendasiBeasiswaPage = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SRB/update.tsx'))
+const SuratPengantarObservasiPage = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratPengantarObservasi'))
+const UpdatedSuratPengantarObservasiPage = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPO/updated.tsx'))
+const DetailDataSPO = lazy(() => import('@/pages/modules/E-Office/Letter-Generation/letter-list/detail/SPO'))
+const LogDataStudent = lazy(() => import('@/pages/modules/E-Office/students/student-data/log-data'))
 const UserProfilePage = lazy(() =>
   import('@/pages/modules/website-utama/user-profile').then((m) => ({ default: m.UserProfilePage }))
 )
@@ -77,7 +76,6 @@ const ListLetterClassification = lazy(
   () => import('@/pages/modules/E-Office/reference/letter-classification')
 )
 const ListReminderAgenda = lazy(() => import('@/pages/modules/E-Office/reference/reminder-agenda'))
-
 const TypeServiceListPage = lazy(() => import('@/pages/modules/E-Office/services/type-service'))
 const RegistrationInbox = lazy(() =>
   import('@/pages/modules/E-Office/inbox/registration-inbox').then((m) => ({
@@ -725,7 +723,6 @@ export const E_OFFICE_ROUTE = [
           },
           {
             path: 'detail/:id',
-            // element: <DetailLetterAssigment />,
             children: [
               {
                 index: true,

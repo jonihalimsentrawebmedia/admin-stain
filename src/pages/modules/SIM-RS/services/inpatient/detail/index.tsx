@@ -136,6 +136,7 @@ const DetailInpatient = () => {
   const jkLabel = detail.jenis_kelamin_pasien === 'L' ? 'Laki-laki' : 'Perempuan'
   const tglLahir = format(new Date(detail.tanggal_lahir_pasien), 'dd-MM-yyyy')
   const isPulang = detail.status_rawat_inap === 'PULANG'
+  const isMenungguRuangan = detail.status_rawat_inap === 'MENUNGGU_RUANGAN'
   const activeRoom = detail.riwayat_ruangan?.find((r) => r.status === 'AKTIF')
   const pulangRoom = isPulang
     ? [...(detail.riwayat_ruangan ?? [])].reverse().find((r) => r.tanggal_keluar)
@@ -157,10 +158,22 @@ const DetailInpatient = () => {
               ]
             : !isEdit
               ? [
+                  ...(isMenungguRuangan
+                    ? [
+                        {
+                          type: 'edit' as const,
+                          label: 'Tentukan Ruangan',
+                          onClick: () => setIsEdit(true),
+                        },
+                      ]
+                    : []),
                   {
                     type: 'edit' as const,
-                    label: 'Edit Ruangan',
-                    onClick: () => setIsEdit(true),
+                    label: 'Edit Data',
+                    onClick: () =>
+                      navigate(
+                        `/modules/sim-rs/services/outpatient/detail/${id}/edit-pemeriksaan`
+                      ),
                   },
                 ]
               : []

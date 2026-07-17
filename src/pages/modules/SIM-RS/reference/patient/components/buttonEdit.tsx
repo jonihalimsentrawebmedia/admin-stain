@@ -13,6 +13,7 @@ import { format, parseISO } from 'date-fns'
 
 interface Props {
   data: IPatient
+  label?: string
 }
 
 export const ButtonEditPatient = (props: Props) => {
@@ -30,7 +31,7 @@ export const ButtonEditPatient = (props: Props) => {
 }
 
 export const FormEditPatient = (props: Props) => {
-  const { data } = props
+  const { data, label } = props
   const [loading, setLoading] = useState(false)
 
   const form = useForm<TResolverPatient>({
@@ -89,5 +90,13 @@ export const FormEditPatient = (props: Props) => {
       })
   }
 
-  return <FormPatient isEdit={true} loading={loading} form={form} HandleSave={HandleSave} />
+  return (
+    <FormPatient
+      label={label}
+      isEdit={true}
+      loading={loading}
+      form={form}
+      HandleSave={HandleSave}
+    />
+  )
 }

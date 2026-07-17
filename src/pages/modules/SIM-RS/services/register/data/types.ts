@@ -32,6 +32,7 @@ export interface IRegistration {
   no_pendaftaran: string
   tanggal_pendaftaran: string
   status: string
+  keputusan?: string
   status_rawat_inap?: string
   jenis_pendaftaran?: string
   is_inap?: boolean

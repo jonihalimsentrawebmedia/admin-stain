@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { Save } from 'lucide-react'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { ResolverRegistration, type TResolverRegistration } from '../data/resolver.tsx'
 import { FormRegistration } from '../components/forms.tsx'
@@ -49,7 +50,30 @@ const CreateRegistration = () => {
 
   return (
     <div>
-      <ButtonTitleGroup isBack label={'Tambah Pendaftaran'} buttonGroup={[]} />
+      <ButtonTitleGroup
+        isBack
+        label={'Tambah Pendaftaran'}
+        buttonGroup={[
+          {
+            type: 'custom' as const,
+            element: (
+              <button
+                type="button"
+                disabled={loading}
+                onClick={form.handleSubmit(HandleSave)}
+                className="border-primary text-white bg-primary hover:bg-primary/80 px-4 py-2 rounded text-sm font-medium flex items-center gap-2 disabled:opacity-50"
+              >
+                <Save />
+                Simpan
+              </button>
+            ),
+          },
+          {
+            type: 'cancel',
+            onClick: () => navigate('/modules/sim-rs/services/registration'),
+          },
+        ]}
+      />
       <FormRegistration loading={loading} form={form} HandleSave={HandleSave} />
     </div>
   )

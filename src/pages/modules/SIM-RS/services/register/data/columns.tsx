@@ -6,7 +6,6 @@ import { HiPencil } from 'react-icons/hi'
 import { MdInfo } from 'react-icons/md'
 import { ButtonCall } from '../components/ButtonCall.tsx'
 import { ButtonCancel } from '../components/ButtonCancel.tsx'
-import { ButtonDelete } from '../components/ButtonDelete.tsx'
 
 export const ColumnsRegistration = () => {
   const [searchParams] = useSearchParams()
@@ -52,34 +51,21 @@ export const ColumnsRegistration = () => {
     },
     {
       accessorKey: 'status',
-      header: 'Status',
+      header: 'Keputusan Perawatan',
       cell: ({ row }) => {
         const data = row.original
         const status = data.status
 
-        const badgeColor =
-          status === 'MENUNGGU'
-            ? 'bg-yellow-100 text-yellow-700'
-            : status === 'DIPANGGIL'
-              ? 'bg-blue-100 text-blue-700'
-              : status === 'SELESAI'
-                ? 'bg-green-100 text-green-700'
-                : 'bg-red-100 text-red-700'
-
-        const label =
-          status === 'MENUNGGU'
-            ? 'Menunggu'
-            : status === 'DIPANGGIL'
-              ? 'Dipanggil'
-              : status === 'SELESAI'
-                ? 'Selesai'
-                : 'Dibatalkan'
+        if (status === 'SELESAI') {
+          return (
+            <span className="text-sm font-medium text-gray-700">
+              {data.keputusan === 'RAWAT_INAP' ? 'Rawat Inap' : 'Rawat Jalan'}
+            </span>
+          )
+        }
 
         return (
           <div className="flex items-center gap-2">
-            <span className={`px-2 py-1 rounded-full text-xs font-medium ${badgeColor}`}>
-              {label}
-            </span>
             {status === 'MENUNGGU' && <ButtonCall data={data} />}
             {status === 'DIPANGGIL' && (
               <button
@@ -113,9 +99,7 @@ export const ColumnsRegistration = () => {
           </button>
           <button
             onClick={() =>
-              navigate(
-                `/modules/sim-rs/services/registration/edit/${row.original.id_pendaftaran}`
-              )
+              navigate(`/modules/sim-rs/services/registration/edit/${row.original.id_pendaftaran}`)
             }
             className="bg-yellow-500 text-white hover:bg-yellow-600 p-1.5 rounded"
           >
@@ -124,7 +108,7 @@ export const ColumnsRegistration = () => {
           {(row.original.status === 'MENUNGGU' || row.original.status === 'DIPANGGIL') && (
             <ButtonCancel data={row.original} />
           )}
-          <ButtonDelete data={row.original} />
+          {/*<ButtonDelete data={row.original} />*/}
         </div>
       ),
     },

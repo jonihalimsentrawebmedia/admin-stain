@@ -3,10 +3,10 @@ import { Form } from '@/components/ui/form.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import TextAreaInput from '@/components/common/form/textAreaInput.tsx'
-import { UploadFileInput } from '@/components/common/form/uploadFileInput.tsx'
 import { TitleLine } from '@/pages/modules/pusat-karir/component/common/titleLine.tsx'
 import type { TResolverProfileHospital } from '../data/resolver.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import { UploadPhotoImage } from '@/pages/modules/pusat-karir/component/common/uploadPhoto.tsx'
 
 interface Props {
   loading: boolean
@@ -29,7 +29,16 @@ const FormProfileHospital = (props: Props) => {
           ]}
         />
         <div className="mt-5">
-          <TitleLine title="Informasi Rumah Sakit" />
+          <div className="col-span-2 mb-4">
+            <UploadPhotoImage
+              name={'url_logo'}
+              form={form}
+              label={'Logo Rumah Sakit'}
+              ratio_width={1}
+              ratio_height={1}
+            />
+          </div>
+          <TitleLine title="Identitas Rumah Sakit" />
           <div className={'lg:grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5 space-y-2'}>
             <TextInput
               name={'nama'}
@@ -58,29 +67,16 @@ const FormProfileHospital = (props: Props) => {
               inputClassName={'bg-white'}
               isRequired
             />
-            <div className="col-span-2">
-              <UploadFileInput
-                form={form}
-                name={'url_logo'}
-                keyname={'url_logo'}
-                label={'Logo Rumah Sakit'}
-                required
-              />
-            </div>
           </div>
-        </div>
-
-        <div>
-          <TitleLine title="Alamat" />
-          <div className={'mt-5'}>
-            <TextAreaInput
-              name={'alamat'}
-              form={form}
-              label={'Alamat'}
-              placeholder={'Masukkan Alamat'}
-              isRequired
-            />
-          </div>
+          <TextAreaInput
+            name={'alamat'}
+            form={form}
+            label={'Alamat'}
+            placeholder={'Masukkan Alamat'}
+            className={'mt-5'}
+            inputClassName={'bg-white'}
+            isRequired
+          />
         </div>
 
         <ButtonForm loading={loading} />

@@ -14,9 +14,11 @@ interface Props {
   form: UseFormReturn<TResolverRegistration>
   HandleSave: (e: TResolverRegistration) => void
   isEdit?: boolean
+  editStatus?: string
 }
 
-export const FormRegistration = ({ loading, form, HandleSave, isEdit }: Props) => {
+export const FormRegistration = ({ loading, form, HandleSave, isEdit, editStatus }: Props) => {
+  const isRestricted = isEdit && (editStatus === 'MENUNGGU' || editStatus === 'DIPANGGIL')
   const { poli } = UseGetPoli({ limit: '100' })
   const idPoli = form.watch('id_poli')
 
@@ -78,7 +80,7 @@ export const FormRegistration = ({ loading, form, HandleSave, isEdit }: Props) =
               ]}
               className={'col-span-1'}
               usePortal
-              isDisabled={!isEdit}
+              isDisabled={!isEdit || isRestricted}
             />
           </div>
         </div>
@@ -89,7 +91,7 @@ export const FormRegistration = ({ loading, form, HandleSave, isEdit }: Props) =
           </div>
           <div className="col-span-2">
             <label className="text-sm font-medium mb-1 block">Pasien *</label>
-            <DialogSelectPatient form={form} />
+            <DialogSelectPatient form={form} isDisabled={isRestricted} />
           </div>
         </div>
 

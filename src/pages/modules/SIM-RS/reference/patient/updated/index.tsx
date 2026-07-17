@@ -1,5 +1,4 @@
 import { useParams } from 'react-router-dom'
-import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { UseGetDetailPatient } from '../hooks/index.tsx'
 import { FormEditPatient } from '../components/buttonEdit.tsx'
 
@@ -26,8 +25,7 @@ const UpdatePatient = () => {
   return (
     <>
       <div>
-        <ButtonTitleGroup isBack label={'Edit Data Pasien'} buttonGroup={[]} />
-        <FormEditPatient data={detail} />
+        <FormEditPatient label={'Edit Data Pasien'} data={detail} />
       </div>
     </>
   )

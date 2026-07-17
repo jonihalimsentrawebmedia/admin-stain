@@ -29,7 +29,7 @@ export const ColumnsRole = () => {
       header: 'Hak Akses',
       cell: ({ row }) => (
         <div className="flex flex-wrap gap-1">
-          {row.original.hak_akses.map((item) => (
+          {(row.original.hak_akses ?? []).map((item) => (
             <span
               key={item}
               className="px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-700"
