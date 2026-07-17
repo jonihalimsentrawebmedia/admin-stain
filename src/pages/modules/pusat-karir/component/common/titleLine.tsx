@@ -11,7 +11,7 @@ export const TitleLine = (props: props) => {
     <>
       <div className={'flex items-center gap-1.5'}>
         <p className={cn('whitespace-nowrap text-primary text-lg', className)}>{title}</p>
-        <div className="bg-yellow-500 h-[1.5px] w-full" />
+        <div className="bg-yellow-500 h-[1.5px] w-full mt-2" />
       </div>
     </>
   )

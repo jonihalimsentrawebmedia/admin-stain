@@ -11,12 +11,14 @@ import useGetCountry from '@/pages/modules/settings/reference/country/controller
 import useGetProvince from '@/pages/modules/settings/reference/province/controller/useGetProvince'
 import useGetRegency from '@/pages/modules/settings/reference/regency/controller/useGetRegency'
 import { SwitchInput } from '@/components/common/form/switchInput.tsx'
+import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 
 interface Props {
   loading: boolean
   form: UseFormReturn<TResolverPatient>
   HandleSave: (e: TResolverPatient) => void
   isEdit?: boolean
+  label?: string
 }
 
 const jenisKelaminData = [
@@ -50,7 +52,7 @@ const statusPerkawinanData = [
 ]
 
 const FormPatient = (props: Props) => {
-  const { loading, form, HandleSave, isEdit } = props
+  const { loading, form, HandleSave, isEdit, label } = props
   const navigate = useNavigate()
 
   const idNegara = form.watch('id_negara')
@@ -67,6 +69,11 @@ const FormPatient = (props: Props) => {
           className={'mt-5 w-full flex flex-col gap-6'}
           onSubmit={form.handleSubmit(HandleSave)}
         >
+          <ButtonTitleGroup
+            isBack
+            label={label ?? 'Tambah Pasien'}
+            buttonGroup={[{ type: 'cancel' }, { type: 'save' }]}
+          />
           {/* Kelompok 1: Informasi Pasien */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <div className="col-span-2">

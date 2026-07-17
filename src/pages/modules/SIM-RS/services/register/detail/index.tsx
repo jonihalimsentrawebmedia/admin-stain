@@ -60,11 +60,32 @@ const DetailRegistration = () => {
             onClick: () =>
               navigate(`/modules/sim-rs/services/registration/edit/${detail.id_pendaftaran}`),
           },
-          ...(detail.status === 'MENUNGGU' || detail.status === 'DIPANGGIL'
+          ...(detail.status === 'MENUNGGU'
             ? [
                 {
                   type: 'custom' as const,
                   element: <ButtonCall data={detail} />,
+                },
+              ]
+            : []),
+          ...(detail.status === 'DIPANGGIL'
+            ? [
+                {
+                  type: 'custom' as const,
+                  label: 'Pemeriksaan',
+                  element: (
+                    <button
+                      type="button"
+                      onClick={() =>
+                        navigate(
+                          `/modules/sim-rs/services/registration/diagnosis/${detail.id_pendaftaran}`
+                        )
+                      }
+                      className="px-3 py-1 rounded text-xs font-medium bg-blue-500 text-white hover:bg-blue-600"
+                    >
+                      Pemeriksaan
+                    </button>
+                  ),
                 },
               ]
             : []),

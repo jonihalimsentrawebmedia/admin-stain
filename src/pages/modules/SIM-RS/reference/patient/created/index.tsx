@@ -2,7 +2,6 @@ import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
 import { ResolverPatient, type TResolverPatient } from '../data/resolver'
 import { zodResolver } from '@hookform/resolvers/zod'
-import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import FormPatient from '../components/forms'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
@@ -53,7 +52,6 @@ const CreatePatient = () => {
   return (
     <>
       <div>
-        <ButtonTitleGroup isBack label={'Tambah Data Pasien'} buttonGroup={[]} />
         <FormPatient loading={loading} form={form} HandleSave={HandleSave} />
       </div>
     </>
