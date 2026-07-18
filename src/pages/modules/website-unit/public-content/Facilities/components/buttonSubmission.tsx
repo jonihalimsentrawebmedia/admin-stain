@@ -4,9 +4,9 @@ import { Button } from '@/components/ui/button.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { useQueryClient } from '@tanstack/react-query'
 import type { IUnitFacilities } from '../data/types'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonSubmissionFacilitiesUnit = (data: IUnitFacilities) => {
   const [open, setOpen] = useState(false)
@@ -50,11 +50,10 @@ export const ButtonSubmissionFacilitiesUnit = (data: IUnitFacilities) => {
         Ajukan Ke Editor
       </Button>
 
-      <DialogCustom
+      <DialogBasic
+        className={'rounded-md lg:min-w-2xl'}
         open={open}
         setOpen={setOpen}
-        isAuto
-        className={'rounded lg:max-w-xl'}
         title={'Ajukan Ke Editor'}
         description={'Apakah anda yakin untuk mengajukan Fasilitas yang dipilih ke editor?'}
       >
@@ -94,7 +93,7 @@ export const ButtonSubmissionFacilitiesUnit = (data: IUnitFacilities) => {
             />
           </div>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

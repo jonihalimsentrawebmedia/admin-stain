@@ -3,10 +3,10 @@ import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { Button } from '@/components/ui/button.tsx'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { BiX } from 'react-icons/bi'
 import { FaTrash } from 'react-icons/fa'
 import type { ICategoryDownload } from '@/pages/modules/website-utama/public-content/download/types'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonDeleteCategoryDownloadUnit = (data?: ICategoryDownload) => {
   const [open, setOpen] = useState(false)
@@ -40,9 +40,8 @@ export const ButtonDeleteCategoryDownloadUnit = (data?: ICategoryDownload) => {
         <FaTrash />
       </button>
 
-      <DialogCustom
-        className={'rounded-md min-w-2xl'}
-        width={'450px'}
+      <DialogBasic
+        className={'rounded-md lg:min-w-2xl'}
         open={open}
         setOpen={setOpen}
         title={'Hapus Kategori Berkas?'}
@@ -70,7 +69,7 @@ export const ButtonDeleteCategoryDownloadUnit = (data?: ICategoryDownload) => {
             </Button>
           </div>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

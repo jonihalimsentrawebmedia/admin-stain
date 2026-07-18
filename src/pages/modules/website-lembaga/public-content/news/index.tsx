@@ -33,9 +33,9 @@ const NewsPublicContentPage = () => {
     {
       id: 1,
       name: (
-        <div className="p-2 flex items-center gap-1.5">
-          <p>Draft</p>
-          <div className="bg-red-500 size-4 text-white rounded-full text-xs">{status?.DRAFT}</div>
+        <div className="p-1 sm:p-2 flex items-center gap-1 sm:gap-1.5">
+          <p className="text-xs sm:text-sm">Draft</p>
+          <div className="bg-red-500 size-3.5 sm:size-4 text-white rounded-full text-[10px] sm:text-xs flex items-center justify-center">{status?.DRAFT}</div>
         </div>
       ),
       value: 'DRAFT',
@@ -44,9 +44,9 @@ const NewsPublicContentPage = () => {
     {
       id: 2,
       name: (
-        <div className="p-2 flex items-center gap-1.5">
-          <p>Diajukan Ke Editor</p>
-          <div className="bg-red-500 size-4 text-white rounded-full text-xs">
+        <div className="p-1 sm:p-2 flex items-center gap-1 sm:gap-1.5">
+          <p className="text-xs sm:text-sm">Diajukan<span className="hidden sm:inline"> Ke Editor</span></p>
+          <div className="bg-red-500 size-3.5 sm:size-4 text-white rounded-full text-[10px] sm:text-xs flex items-center justify-center">
             {status?.DIAJUKAN_EDITOR}
           </div>
         </div>
@@ -57,9 +57,9 @@ const NewsPublicContentPage = () => {
     {
       id: 3,
       name: (
-        <div className="p-2 flex items-center gap-1.5">
-          <p>Proses Editor</p>
-          <div className="bg-red-500 size-4 text-white rounded-full text-xs">
+        <div className="p-1 sm:p-2 flex items-center gap-1 sm:gap-1.5">
+          <p className="text-xs sm:text-sm">Proses<span className="hidden sm:inline"> Editor</span></p>
+          <div className="bg-red-500 size-3.5 sm:size-4 text-white rounded-full text-[10px] sm:text-xs flex items-center justify-center">
             {status?.PROSES_EDITOR}
           </div>
         </div>
@@ -70,9 +70,9 @@ const NewsPublicContentPage = () => {
     {
       id: 4,
       name: (
-        <div className="p-2 flex items-center gap-1.5">
-          <p>Ditolak Editor</p>
-          <div className="bg-red-500 size-4 text-white rounded-full text-xs">
+        <div className="p-1 sm:p-2 flex items-center gap-1 sm:gap-1.5">
+          <p className="text-xs sm:text-sm">Ditolak</p>
+          <div className="bg-red-500 size-3.5 sm:size-4 text-white rounded-full text-[10px] sm:text-xs flex items-center justify-center">
             {status?.TOLAK_EDITOR}
           </div>
         </div>
@@ -83,9 +83,9 @@ const NewsPublicContentPage = () => {
     {
       id: 5,
       name: (
-        <div className="p-2 flex items-center gap-1.5">
-          <p>Disetujui Editor</p>
-          <div className="bg-red-500 size-4 text-white rounded-full text-xs">
+        <div className="p-1 sm:p-2 flex items-center gap-1 sm:gap-1.5">
+          <p className="text-xs sm:text-sm">Disetujui</p>
+          <div className="bg-red-500 size-3.5 sm:size-4 text-white rounded-full text-[10px] sm:text-xs flex items-center justify-center">
             {status?.DISETUJUI_EDITOR}
           </div>
         </div>
@@ -96,9 +96,9 @@ const NewsPublicContentPage = () => {
     {
       id: 6,
       name: (
-        <div className="p-2 flex items-center gap-1.5">
-          <p>Publish</p>
-          <div className="bg-red-500 size-4 text-white rounded-full text-xs">
+        <div className="p-1 sm:p-2 flex items-center gap-1 sm:gap-1.5">
+          <p className="text-xs sm:text-sm">Publish</p>
+          <div className="bg-red-500 size-3.5 sm:size-4 text-white rounded-full text-[10px] sm:text-xs flex items-center justify-center">
             {status?.PUBLISHED}
           </div>
         </div>
@@ -109,9 +109,9 @@ const NewsPublicContentPage = () => {
     {
       id: 7,
       name: (
-        <div className="p-2 flex items-center gap-1.5">
-          <p>Unpublish</p>
-          <div className="bg-red-500 size-4 text-white rounded-full text-xs">
+        <div className="p-1 sm:p-2 flex items-center gap-1 sm:gap-1.5">
+          <p className="text-xs sm:text-sm">Unpublish</p>
+          <div className="bg-red-500 size-3.5 sm:size-4 text-white rounded-full text-[10px] sm:text-xs flex items-center justify-center">
             {status?.UNPUBLISH}
           </div>
         </div>
@@ -127,15 +127,15 @@ const NewsPublicContentPage = () => {
         <ButtonTitleGroup
           label={'Berita'}
           buttonGroup={[
-              {
-                  type: 'custom',
-                  element: (
-                    <ButtonGoToGuide
-                      titleGuide="Konten Publik - Berita"
-                      valueGuide="P2M_KONTEN_PUBLIK_BERITA"
-                    />
-                  ),
-                },
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide
+                  titleGuide="Konten Publik - Berita"
+                  valueGuide="P2M_KONTEN_PUBLIK_BERITA"
+                />
+              ),
+            },
             {
               label: 'Tulis Berita',
               type: 'add',
@@ -150,7 +150,7 @@ const NewsPublicContentPage = () => {
                     }
                   }}
                   variant={'outline'}
-                  className={'border-primary text-primary hover:text-primary'}
+                  className={'border-primary text-primary hover:text-primary text-xs sm:text-sm'}
                 >
                   <HiPencil />
                   Tulis Berita

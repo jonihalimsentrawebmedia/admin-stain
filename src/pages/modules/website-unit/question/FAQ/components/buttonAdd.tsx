@@ -7,11 +7,11 @@ import {
   type IFAQResolver,
 } from '@/pages/modules/website-utama/pertayaan/Faq/data/resolver.tsx'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { FormFAQDataProdi } from './form'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonAddFAQUnit = () => {
   const [open, setOpen] = useState(false)
@@ -54,11 +54,11 @@ export const ButtonAddFAQUnit = () => {
         Tambah F.A.Q
       </Button>
 
-      <DialogCustom
+      <DialogBasic
+        className={'rounded-md lg:min-w-4xl'}
         open={open}
         setOpen={setOpen}
         title={'Tambah F.A.Q'}
-        className={'rounded lg:max-w-7xl'}
         disableOutsideDialog
       >
         <FormFAQDataProdi
@@ -68,7 +68,7 @@ export const ButtonAddFAQUnit = () => {
           setOpen={setOpen}
           HandleSave={HandleSave}
         />
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

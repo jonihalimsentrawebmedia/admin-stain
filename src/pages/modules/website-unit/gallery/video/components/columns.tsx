@@ -29,7 +29,7 @@ export const ColumnsVideoUnit = () => {
             <img
               src={row.original.thumbnail}
               alt={row.original.judul}
-              className={'w-[200px] h-[150px] object-cover'}
+              className={'min-w-[150px] w-[200px] h-[150px] object-cover'}
             />
           </div>
         )
@@ -48,7 +48,7 @@ export const ColumnsVideoUnit = () => {
             to={row.original.link_video}
             target={'_blank'}
             className={
-              'flex items-center gap-1 border p-2 border-primary text-primary rounded w-fit'
+              'flex items-center gap-1 border p-2 border-primary text-primary rounded w-fit whitespace-nowrap'
             }
           >
             <TbExternalLink />

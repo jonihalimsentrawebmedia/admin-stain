@@ -53,11 +53,11 @@ export const ButtonDeleteCategoryFaqUnit = (props: Props) => {
         title={'Hapus Kategori'}
         className={'max-w-2xl rounded'}
       >
-        <div className={'grid grid-cols-[12rem_1fr]'}>
+        <div className={'grid lg:grid-cols-[12rem_1fr]'}>
           <p className="text-gray-500">Nama Kategori FAQ</p>
           <p>{data?.nama_kategori_faq}</p>
         </div>
-        <div className="flex justify-end gap-2">
+        <div className="flex justify-end gap-2 mt-4">
           <Button
             variant={'outline'}
             className={'text-primary hover:text-primary border-primary'}

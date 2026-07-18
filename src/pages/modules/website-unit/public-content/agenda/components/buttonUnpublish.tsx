@@ -3,11 +3,11 @@ import { Button } from '@/components/ui/button.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { useQueryClient } from '@tanstack/react-query'
 import type { IAgendaDetail } from '@/pages/modules/website-utama/public-content/agenda/data'
 import { format } from 'date-fns'
 import { MdCancel } from 'react-icons/md'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonUnpublishAgendaUnit = (data: IAgendaDetail) => {
   const [open, setOpen] = useState(false)
@@ -51,11 +51,10 @@ export const ButtonUnpublishAgendaUnit = (data: IAgendaDetail) => {
         Unpublish
       </Button>
 
-      <DialogCustom
+      <DialogBasic
+        className={'rounded lg:min-2w-xl'}
         open={open}
         setOpen={setOpen}
-        isAuto
-        className={'rounded lg:max-w-xl'}
         title={'Publish Agenda'}
         description={'Apakah anda yakin untuk mempublish Agenda yang dipilih?'}
       >
@@ -112,7 +111,7 @@ export const ButtonUnpublishAgendaUnit = (data: IAgendaDetail) => {
             />
           </div>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

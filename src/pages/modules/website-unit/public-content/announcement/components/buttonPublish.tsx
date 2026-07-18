@@ -3,10 +3,10 @@ import { Button } from '@/components/ui/button.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { useQueryClient } from '@tanstack/react-query'
 import type { IAnnouncement } from '@/pages/modules/website-utama/public-content/announcement/data'
 import { Check } from 'lucide-react'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonAnnouncementPublishUnit = (data: IAnnouncement) => {
   const [open, setOpen] = useState(false)
@@ -50,10 +50,9 @@ export const ButtonAnnouncementPublishUnit = (data: IAnnouncement) => {
         Publish Sekarang
       </Button>
 
-      <DialogCustom
+      <DialogBasic
+        className={'rounded lg:min-2w-xl'}
         open={open}
-        isAuto
-        className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
         title={'Publish Pengumuman'}
         description={'Apakah anda yakin untuk mempublish Pengumuman yang dipilih?'}
@@ -88,7 +87,7 @@ export const ButtonAnnouncementPublishUnit = (data: IAnnouncement) => {
             />
           </div>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

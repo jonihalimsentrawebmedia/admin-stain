@@ -47,8 +47,8 @@ export const GalleryPhotoUnitPage = () => {
           link={'/modules/website-unit/gallery/photo'}
         />
 
-        <div className="flex flex-col gap-5 mt-5">
-          <p className="text-2xl font-semibold text-primary">{detail?.judul}</p>
+        <div className="flex flex-col gap-4 sm:gap-5 mt-5">
+          <p className="text-xl sm:text-2xl font-semibold text-primary">{detail?.judul}</p>
           <Search
             innerClassName={'p-1.5 pl-9'}
             position={'start'}
@@ -58,22 +58,22 @@ export const GalleryPhotoUnitPage = () => {
           />
           {detail?.jumlah_foto === 0 && <p className="text-red-500">belum ada foto ditambahkan</p>}
 
-          <div className="grid grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5">
             {photoAlbumUnit.length > 0 &&
               photoAlbumUnit.map((item, index) => (
-                <div key={index}>
-                  <div className="relative w-full">
-                    <div className="absolute gap-1.5 flex items-center justify-end w-full p-1.5">
+                <div key={index} className="group">
+                  <div className="relative w-full overflow-hidden rounded-md">
+                    <div className="absolute gap-1.5 flex items-center justify-end w-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10">
                       <ButtonEditPhotoUnit {...item} />
                       <ButtonDeletePhotoUnit data={item} title={detail?.judul ?? ''} />
                     </div>
                     <img
                       src={item?.link_foto}
                       alt="image"
-                      className={'w-full h-[300px] object-cover rounded-md'}
+                      className="w-full h-[200px] sm:h-[250px] lg:h-[300px] object-cover rounded-md group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
-                  <p className="px-1">{item?.judul}</p>
+                  <p className="px-1 mt-1.5 text-sm sm:text-base font-medium truncate">{item?.judul}</p>
                 </div>
               ))}
           </div>

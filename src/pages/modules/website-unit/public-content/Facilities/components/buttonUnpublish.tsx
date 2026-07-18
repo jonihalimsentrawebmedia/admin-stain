@@ -3,10 +3,10 @@ import { Button } from '@/components/ui/button.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { useQueryClient } from '@tanstack/react-query'
 import { MdCancel } from 'react-icons/md'
 import type { IUnitFacilities } from '../data/types'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonUnpublishFacilitiesUnit = (data: IUnitFacilities) => {
   const [open, setOpen] = useState(false)
@@ -50,11 +50,10 @@ export const ButtonUnpublishFacilitiesUnit = (data: IUnitFacilities) => {
         Unpublish
       </Button>
 
-      <DialogCustom
+      <DialogBasic
+        className={'rounded-md lg:min-w-2xl'}
         open={open}
         setOpen={setOpen}
-        isAuto
-        className={'rounded lg:max-w-xl'}
         title={'Publish Fasilitas'}
         description={'Apakah anda yakin untuk mempublish Fasilitas yang dipilih?'}
       >
@@ -94,7 +93,7 @@ export const ButtonUnpublishFacilitiesUnit = (data: IUnitFacilities) => {
             />
           </div>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

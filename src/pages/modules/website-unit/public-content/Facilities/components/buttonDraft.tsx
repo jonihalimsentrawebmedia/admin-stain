@@ -3,10 +3,10 @@ import { Button } from '@/components/ui/button.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { useQueryClient } from '@tanstack/react-query'
 import { IconCancel } from '@/components/common/icon'
 import type { IUnitFacilities } from '../data/types'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonDraftFacilitiesUnit = (data: IUnitFacilities) => {
   const [open, setOpen] = useState(false)
@@ -50,11 +50,10 @@ export const ButtonDraftFacilitiesUnit = (data: IUnitFacilities) => {
         Kembali Ke Draft
       </Button>
 
-      <DialogCustom
+      <DialogBasic
+        className={'rounded-md lg:min-w-2xl'}
         open={open}
         setOpen={setOpen}
-        isAuto
-        className={'rounded lg:max-w-xl'}
         title={'Kembali Ke Draft'}
         description={'Apakah anda yakin untuk mengembalikan Fasilitas yang diajukan ke draft?'}
       >
@@ -94,7 +93,7 @@ export const ButtonDraftFacilitiesUnit = (data: IUnitFacilities) => {
             />
           </div>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

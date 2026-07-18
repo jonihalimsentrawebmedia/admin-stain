@@ -61,40 +61,44 @@ export const AgendaUnitDetailPage = () => {
         />
         <Separator className={'my-5'} />
 
-        <div className={'flex items-start gap-x-8 px-5'}>
-          <div className="w-7/12">
-            <p className="text-2xl font-semibold">{detail?.judul}</p>
-            <div className="my-5 grid grid-cols-2 gap-5">
+        <div className={'flex flex-col lg:flex-row items-start gap-6 lg:gap-x-8 px-4 sm:px-5'}>
+          <div className="w-full lg:w-7/12">
+            <p className="text-xl sm:text-2xl font-semibold">{detail?.judul}</p>
+            <div className="my-5 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
               <div>
-                <p className="text-gray-500">Waktu</p>
-                <div className={'flex gap-1.5 items-center text-primary font-semibold'}>
+                <p className="text-gray-500 text-sm">Waktu</p>
+                <div className={'flex flex-wrap gap-1.5 items-center text-primary font-semibold text-sm sm:text-base'}>
                   <p>
                     {detail?.waktu_mulai ? format(detail?.waktu_mulai, 'dd-MM-yyyy, HH:mm') : ''}
                   </p>
                   {detail?.waktu_selesai && (
                     <>
-                      <p>s.d</p>
+                      <p className="whitespace-nowrap">s.d</p>
                       <p>{format(detail?.waktu_selesai, 'dd-MM-yyyy, HH:mm')}</p>
                     </>
                   )}
                 </div>
               </div>
               <div>
-                <p className="text-gray-500">Lokasi Kegiatan</p>
-                <p className={'font-semibold text-primary'}>{detail?.lokasi_kegiatan}</p>
+                <p className="text-gray-500 text-sm">Lokasi Kegiatan</p>
+                <p className={'font-semibold text-primary text-sm sm:text-base'}>{detail?.lokasi_kegiatan}</p>
               </div>
-              <div className="col-span-2">
-                <p className="text-gray-500">Deskripsi</p>
+              <div className="sm:col-span-2">
+                <p className="text-gray-500 text-sm">Deskripsi</p>
                 <div
-                  className={'flex flex-col gap-4 mt-2'}
+                  className={'flex flex-col gap-4 mt-2 text-sm sm:text-base'}
                   dangerouslySetInnerHTML={{ __html: detail?.isi_agenda ?? '' }}
                 />
               </div>
             </div>
           </div>
 
-          <div className="w-5/12">
-            <img src={detail?.gambar} alt="image" className="w-full h-[640px] object-contain" />
+          <div className="w-full lg:w-5/12">
+            <img
+              src={detail?.gambar}
+              alt="image"
+              className="w-full h-[250px] sm:h-[400px] lg:h-[640px] object-contain rounded-lg"
+            />
           </div>
         </div>
       </div>

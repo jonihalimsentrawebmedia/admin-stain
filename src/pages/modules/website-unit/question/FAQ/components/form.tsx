@@ -26,7 +26,7 @@ export const FormFAQDataProdi = (props: Props) => {
   return (
     <>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(HandleSave)} className="flex flex-col gap-4">
+        <form onSubmit={form.handleSubmit(HandleSave)} className="flex flex-col gap-4 sm:gap-5">
           <SelectBasicInput
             name={'id_kategori_faq'}
             form={form}
@@ -54,10 +54,10 @@ export const FormFAQDataProdi = (props: Props) => {
 
           <InputManyFile form={form} name={'dokumens'} label={'Dokumen'} isRow />
 
-          <div className="flex justify-end gap-2 mt-5">
+          <div className="flex flex-col sm:flex-row justify-end gap-2 mt-5">
             <Button
               variant={'outline'}
-              className={'text-primary hover:text-primary border-primary'}
+              className={'text-primary hover:text-primary border-primary w-full sm:w-auto'}
               disabled={loading}
               onClick={(e) => {
                 e.preventDefault()
@@ -68,7 +68,7 @@ export const FormFAQDataProdi = (props: Props) => {
               Batal
             </Button>
 
-            <Button disabled={loading}>
+            <Button disabled={loading} className="w-full sm:w-auto">
               <FaSave />
               Simpan
             </Button>

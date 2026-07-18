@@ -3,10 +3,10 @@ import { Button } from '@/components/ui/button.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { useQueryClient } from '@tanstack/react-query'
 import type { IAnnouncement } from '@/pages/modules/website-utama/public-content/announcement/data'
 import { IconCancel } from '@/components/common/icon'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonDraftAnnouncementUnit = (data: IAnnouncement) => {
   const [open, setOpen] = useState(false)
@@ -50,10 +50,9 @@ export const ButtonDraftAnnouncementUnit = (data: IAnnouncement) => {
         Kembali Ke Draft
       </Button>
 
-      <DialogCustom
+      <DialogBasic
+        className={'rounded lg:min-2w-xl'}
         open={open}
-        isAuto
-        className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
         title={'Kembali Ke Draft'}
         description={'Apakah anda yakin untuk mengembalikan Pengumuman yang diajukan ke draft?'}
@@ -88,7 +87,7 @@ export const ButtonDraftAnnouncementUnit = (data: IAnnouncement) => {
             />
           </div>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

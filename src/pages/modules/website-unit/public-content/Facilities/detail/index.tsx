@@ -61,39 +61,42 @@ export const DetailFacilitiesUnitPage = () => {
 
         <Separator />
 
-        <p className="text-3xl font-semibold">{detail?.nama_fasilitas}</p>
-        <div className="flex items-start gap-5">
-          <div className="w-1/2">
-            <p className="text-green-500 underline underline-offset-8 decoration-yellow-600">
-              Deksripsi
-            </p>
-            <div
-              className={'tiptap ProseMirror simple-editor mt-4'}
-              dangerouslySetInnerHTML={{ __html: detail?.deskripsi ?? '' }}
-            />
-          </div>
-          <div className="w-1/2">
-            <img
-              src={detail?.gambar}
-              alt="gambar fasilitas"
-              className="w-full h-[400px] object-contain"
-            />
-          </div>
-        </div>
+        <div className="px-4 sm:px-5 space-y-6">
+          <p className="text-2xl sm:text-3xl font-semibold">{detail?.nama_fasilitas}</p>
 
-        <p className="text-green-500 underline underline-offset-8 decoration-yellow-600">
-          Galeri Fasilitas
-        </p>
-        <div className="grid grid-cols-5">
-          {detail?.unit_fasilitas_gambar_tambahan?.map((item, index) => (
-            <div key={index}>
-              <img
-                src={item?.gambar}
-                alt="gambar fasilitas"
-                className="w-[300px] h-[200px] object-cover"
+          <div className="flex flex-col lg:flex-row items-start gap-6 lg:gap-5">
+            <div className="w-full lg:w-1/2">
+              <p className="text-green-500 underline underline-offset-8 decoration-yellow-600 text-sm sm:text-base">
+                Deskripsi
+              </p>
+              <div
+                className={'tiptap ProseMirror simple-editor mt-4 text-sm sm:text-base'}
+                dangerouslySetInnerHTML={{ __html: detail?.deskripsi ?? '' }}
               />
             </div>
-          ))}
+            <div className="w-full lg:w-1/2">
+              <img
+                src={detail?.gambar}
+                alt="gambar fasilitas"
+                className="w-full h-[250px] sm:h-[350px] lg:h-[400px] object-contain rounded-lg"
+              />
+            </div>
+          </div>
+
+          <p className="text-green-500 underline underline-offset-8 decoration-yellow-600 text-sm sm:text-base">
+            Galeri Fasilitas
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4">
+            {detail?.unit_fasilitas_gambar_tambahan?.map((item, index) => (
+              <div key={index} className="overflow-hidden rounded-lg">
+                <img
+                  src={item?.gambar}
+                  alt="gambar fasilitas"
+                  className="w-full h-[180px] sm:h-[200px] object-cover hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>
