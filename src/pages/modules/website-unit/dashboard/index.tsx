@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { Bar, BarChart, Tooltip, XAxis, YAxis } from 'recharts'
 import { Plus } from 'lucide-react'
 import { TabsListCustom } from '@/pages/modules/website-utama/public-content/slider/components/tabsList.tsx'
 import { useState } from 'react'
@@ -150,9 +150,9 @@ export default function DashboardAdminUnit() {
           <CardHeader>
             <CardTitle className={'text-primary'}>Tren Kunjungan Website</CardTitle>
           </CardHeader>
-          <CardContent className="h-80">
+          <CardContent className="p-2 sm:p-6">
             <SelectBasic
-              className={'mb-2'}
+              className={'mb-2 sm:mb-4'}
               label={'Data Berdasarkan'}
               data={listMode}
               value={mode}
@@ -160,21 +160,25 @@ export default function DashboardAdminUnit() {
               isRow
             />
             <div className="overflow-x-auto">
-              <div className="min-w-[500px] h-[240px]">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={chartData ?? []} margin={{ bottom: 60 }}>
-                    <XAxis
-                      dataKey="name"
-                      angle={mode === 'harian' ? -75 : mode === 'bulanan' ? -45 : 0}
-                      textAnchor="end"
-                      interval={0}
-                      height={60}
-                    />
-                    <YAxis />
-                    <Tooltip />
-                    <Bar dataKey="value" fill="#8884d8" />
-                  </BarChart>
-                </ResponsiveContainer>
+              <div style={{ width: Math.max(chartData?.length * 55, 700) }} className="h-[300px] sm:h-[400px]">
+                <BarChart
+                  width={Math.max(chartData?.length * 55, 700)}
+                  height={400}
+                  data={chartData ?? []}
+                  margin={{ bottom: 60, left: 0, right: 8 }}
+                >
+                  <XAxis
+                    dataKey="name"
+                    tick={{ fontSize: 12, fontWeight: 500 }}
+                    angle={mode === 'harian' ? -40 : mode === 'bulanan' ? -20 : 0}
+                    textAnchor="end"
+                    interval={0}
+                    height={100}
+                  />
+                  <YAxis tick={{ fontSize: 12 }} width={45} />
+                  <Tooltip />
+                  <Bar dataKey="value" fill="#8884d8" radius={[4, 4, 0, 0]} />
+                </BarChart>
               </div>
             </div>
           </CardContent>

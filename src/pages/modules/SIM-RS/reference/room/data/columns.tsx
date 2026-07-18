@@ -36,6 +36,21 @@ export const ColumnsRoom = () => {
       header: 'Jumlah Kasur',
     },
     {
+      accessorKey: 'harga',
+      header: 'Harga / Hari',
+      cell: ({ row }) => {
+        return (
+          <>
+            {new Intl.NumberFormat('id-ID', {
+              style: 'currency',
+              currency: 'IDR',
+              maximumFractionDigits: 0,
+            }).format(row.original.harga)}
+          </>
+        )
+      },
+    },
+    {
       accessorKey: 'lokasi',
       header: 'Lokasi',
     },

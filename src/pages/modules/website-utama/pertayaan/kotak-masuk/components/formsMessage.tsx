@@ -22,7 +22,7 @@ export const FormsMessage = (props: Props) => {
   const { form, HandleSave, data, open, setOpen, loading } = props
   return (
     <Form {...form}>
-      <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
+      <form className={'flex flex-col gap-4 w-full'} onSubmit={form.handleSubmit(HandleSave)}>
         <div className="flex flex-col gap-1.5">
           <p className="text-gray-500">Pertayaan</p>
           <p className="text-lg">{data?.pesan}</p>

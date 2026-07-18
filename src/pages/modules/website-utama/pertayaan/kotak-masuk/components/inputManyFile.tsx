@@ -54,46 +54,43 @@ export const InputManyFile = <T extends FieldValues>(props: Props<T>) => {
   }
 
   return (
-    <>
-      <div className="grid lg:grid-cols-[12rem_1fr] gap-5 items-start text-sm">
-        <label>{label}</label>
-        <div className={'flex flex-col gap-1.5'}>
-          <Button
-            onClick={(e) => {
-              e.preventDefault()
-              refInput.current?.click()
-            }}
-            variant={'outline'}
-            className={`border border-primary text-primary hover:text-primary w-fit rounded`}
+    <div className="grid lg:grid-cols-[12rem_1fr] gap-3 sm:gap-5 items-start text-sm">
+      <label className="font-medium">{label}</label>
+      <div className="flex flex-col gap-2">
+        <Button
+          onClick={(e) => {
+            e.preventDefault()
+            refInput.current?.click()
+          }}
+          variant={'outline'}
+          className="border border-primary text-primary hover:text-primary w-fit rounded text-xs sm:text-sm"
+        >
+          <MdUpload className="text-sm sm:text-base" />
+          Upload Dokumen
+        </Button>
+
+        <p className="text-xs text-red-500">
+          {form.formState.errors?.[name]?.message?.toString()}
+        </p>
+
+        {listFileLink.map((row, index) => (
+          <Link
+            to={row}
+            target={'_blank'}
+            key={index}
+            className="bg-primary-foreground p-2.5 sm:p-2 w-full sm:w-[15rem] text-primary border border-primary rounded text-xs sm:text-sm truncate hover:bg-primary/5 transition-colors"
           >
-            Upload Dokumen
-            <MdUpload />
-          </Button>
-          <p className="text-xs text-red-500">
-            {form.formState.errors?.[name]?.message?.toString()}
-          </p>
+            {index + 1}. Dokumen {index + 1}
+          </Link>
+        ))}
 
-          {listFileLink.map((row, index) => (
-            <Link
-              to={row}
-              target={'_blank'}
-              key={index}
-              className={
-                'bg-primary-foreground p-2 w-[15rem] text-primary border border-primary rounded'
-              }
-            >
-              {index + 1}. Dokumen {index + 1}
-            </Link>
-          ))}
-
-          <input
-            type="file"
-            hidden
-            ref={refInput}
-            onChange={(e) => HandleUploadFile(e.target.files)}
-          />
-        </div>
+        <input
+          type="file"
+          hidden
+          ref={refInput}
+          onChange={(e) => HandleUploadFile(e.target.files)}
+        />
       </div>
-    </>
+    </div>
   )
 }

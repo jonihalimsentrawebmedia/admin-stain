@@ -11,9 +11,9 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { useQueryClient } from '@tanstack/react-query'
 import { IconCancel } from '@/components/common/icon'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonDraftUnit = (data: INewsDetail) => {
   const [open, setOpen] = useState(false)
@@ -57,10 +57,9 @@ export const ButtonDraftUnit = (data: INewsDetail) => {
         Kembali Ke Draft
       </Button>
 
-      <DialogCustom
+      <DialogBasic
+        className={'rounded lg:min-2w-xl'}
         open={open}
-        isAuto
-        className={'rounded lg:max-w-xl'}
         setOpen={setOpen}
         title={'Kembali Ke Draft'}
         description={'Apakah anda yakin untuk mengembalikan berita yang diajukan ke draft?'}
@@ -117,7 +116,7 @@ export const ButtonDraftUnit = (data: INewsDetail) => {
             />
           </div>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

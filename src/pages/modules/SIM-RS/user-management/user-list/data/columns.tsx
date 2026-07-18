@@ -5,6 +5,7 @@ import { HiPencil } from 'react-icons/hi'
 import { MdInfo } from 'react-icons/md'
 import { format } from 'date-fns'
 import { ButtonDeleteUser } from '../component/buttonDelete.tsx'
+import { ButtonResetPassword } from '../component/buttonResetPassword.tsx'
 
 export const ColumnsUserList = () => {
   const [searchParams] = useSearchParams()
@@ -26,7 +27,7 @@ export const ColumnsUserList = () => {
           onClick={() => navigate(`/modules/sim-rs/user-management/user-list/detail/${row.original.id_user}`)}
           className="text-primary hover:underline text-left"
         >
-          {row.original.nama}
+          {row.original.nama_lengkap}
         </button>
       ),
     },
@@ -35,7 +36,7 @@ export const ColumnsUserList = () => {
       header: 'Email',
     },
     {
-      accessorKey: 'nomor_telepon',
+      accessorKey: 'telepon',
       header: 'No. Telepon',
     },
     {
@@ -86,6 +87,7 @@ export const ColumnsUserList = () => {
           >
             <HiPencil />
           </button>
+          <ButtonResetPassword data={row.original} />
           <ButtonDeleteUser data={row.original} />
         </div>
       ),

@@ -16,7 +16,7 @@ interface Props {
 const DetailField = ({ data, form, isRow = true, isRowParent, classNameParent, isGrid }: Props) => {
   return (
     <div
-      className={`${isGrid ? 'grid grid-cols-1 md:grid-cols-2' : 'flex'} ${isRowParent ? 'flex-row' : 'flex-col'} gap-4 ${classNameParent}
+      className={`${isGrid ? 'grid grid-cols-1 md:grid-cols-2' : 'flex'} ${isRowParent ? 'flex-col lg:flex-row' : 'flex-col'} gap-4 ${classNameParent}
     `}
     >
       {data.map((item, index) => (
@@ -25,19 +25,19 @@ const DetailField = ({ data, form, isRow = true, isRowParent, classNameParent, i
           className={`flex ${isRow ? 'flex-col lg:flex-row' : 'flex-col'} ${item.isHidden ? 'hidden' : ''} gap-2
     `}
         >
-          <div className="min-w-[200px] max-w-[200px] w-full text-wrap text-[#999999]">
+          <div className="w-full lg:min-w-[200px] lg:max-w-[200px] text-wrap text-muted-foreground">
             {item.label}
           </div>
           {item.component ? (
             form.watch(item.name)!==undefined ? (
-              <div className="text-[#464646]">{item.component}</div>
+              <div className="text-foreground">{item.component}</div>
             ) : item.label != '' ? (
               '-'
             ) : (
               ''
             )
           ) : (
-            <div className="text-[#464646]">
+            <div className="text-foreground break-words">
               {item.label == '' ? '' : (form.watch(item.name) ?? '-')}
             </div>
           )}

@@ -30,6 +30,21 @@ export const ColumnsProcedure = () => {
       header: 'Deskripsi',
     },
     {
+      accessorKey: 'harga',
+      header: 'Harga',
+      cell: ({ row }) => {
+        return (
+          <>
+            {new Intl.NumberFormat('id-ID', {
+              style: 'currency',
+              currency: 'IDR',
+              maximumFractionDigits: 0,
+            }).format(row.original.harga)}
+          </>
+        )
+      },
+    },
+    {
       accessorKey: 'action',
       header: '',
       cell: ({ row }) => {

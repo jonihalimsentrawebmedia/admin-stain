@@ -2,6 +2,7 @@ import {
   MdDashboard,
   MdDatasetLinked,
   MdLocalHospital,
+  MdLocalPharmacy,
   MdPermContactCalendar,
 } from 'react-icons/md'
 import { FaBriefcaseMedical } from 'react-icons/fa'
@@ -45,6 +46,29 @@ export const GenerateMenu = () => {
           id: 33,
           name: 'Rawat Inap',
           path: `${baseDomain}/services/inpatient`,
+        },
+      ],
+    },
+    {
+      id: 9,
+      name: 'Farmasi',
+      path: `${baseDomain}/pharmacy`,
+      icon: <MdLocalPharmacy className={'size-5'} />,
+      child: [
+        {
+          id: 91,
+          name: 'Daftar Obat',
+          path: `${baseDomain}/pharmacy/medicine`,
+        },
+        {
+          id: 92,
+          name: 'Resep Obat',
+          path: `${baseDomain}/pharmacy/prescription`,
+        },
+        {
+          id: 93,
+          name: 'Riwayat Penyerahan Obat',
+          path: `${baseDomain}/pharmacy/medicine-delivery`,
         },
       ],
     },
@@ -140,6 +164,11 @@ export const GenerateMenu = () => {
           id: 78,
           name: 'Tindakan (ICD-9-CM)',
           path: `${baseDomain}/reference/procedure`,
+        },
+        {
+          id: 79,
+          name: 'Sumber Biaya Pengobatan',
+          path: `${baseDomain}/reference/source-medical-treatment`,
         },
       ],
     },

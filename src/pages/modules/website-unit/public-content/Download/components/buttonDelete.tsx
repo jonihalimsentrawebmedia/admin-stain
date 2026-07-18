@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { FaTrash } from 'react-icons/fa'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button.tsx'
 import { TbExternalLink } from 'react-icons/tb'
@@ -12,6 +11,7 @@ import type { IDownload } from '@/pages/modules/website-utama/public-content/dow
 import { useForm } from 'react-hook-form'
 import { Form } from '@/components/ui/form.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 interface props {
   data: IDownload
@@ -52,14 +52,14 @@ export const ButtonDeleteFileDownloadUnit = (props: props) => {
         <FaTrash />
       </button>
 
-      <DialogCustom
+      <DialogBasic
         open={open}
         setOpen={setOpen}
         title={<p className={'text-red-500 text-2xl'}>Hapus Download</p>}
         description={'Apakah anda yakin untuk menghapus download ini?'}
         className={'lg:max-w-2xl'}
       >
-        <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
+        <div className={'grid lg:grid-cols-[12rem_1fr] gap-4'}>
           <p>Nama Berkas</p>
           <p>{data?.nama_berkas}</p>
           <p>Kategori</p>
@@ -108,7 +108,7 @@ export const ButtonDeleteFileDownloadUnit = (props: props) => {
             </Button>
           </div>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

@@ -1,4 +1,4 @@
-import { useParams, useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { UseGetDetailUser } from '../hooks/index.tsx'
 import { format } from 'date-fns'
@@ -42,10 +42,20 @@ const DetailUser = () => {
 
         <div className="bg-white rounded-lg border p-6">
           <p className="text-lg font-semibold text-primary mb-4">Informasi User</p>
+          {detail.gambar && (
+            <div className="mb-4">
+              <p className="text-sm text-gray-500 mb-2">Foto Profil</p>
+              <img
+                alt={'image'}
+                src={detail.gambar}
+                className="size-32 object-contain rounded border"
+              />
+            </div>
+          )}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div>
               <p className="text-sm text-gray-500">Nama</p>
-              <p className="text-base font-medium">{detail.nama}</p>
+              <p className="text-base font-medium">{detail.nama_lengkap}</p>
             </div>
             <div>
               <p className="text-sm text-gray-500">Email</p>
@@ -53,7 +63,17 @@ const DetailUser = () => {
             </div>
             <div>
               <p className="text-sm text-gray-500">No. Telepon</p>
-              <p className="text-base font-medium">{detail.nomor_telepon}</p>
+              <p className="text-base font-medium">{detail.telepon ?? '-'}</p>
+            </div>
+            <div>
+              <p className="text-sm text-gray-500">Jenis Kelamin</p>
+              <p className="text-base font-medium">
+                {detail.jenis_kelamin === 'L'
+                  ? 'Laki-Laki'
+                  : detail.jenis_kelamin === 'P'
+                    ? 'Perempuan'
+                    : '-'}
+              </p>
             </div>
           </div>
         </div>
@@ -79,9 +99,7 @@ const DetailUser = () => {
               <p className="text-sm text-gray-500">Status</p>
               <span
                 className={`px-2 py-1 rounded-full text-xs font-medium ${
-                  detail.is_status
-                    ? 'bg-green-100 text-green-700'
-                    : 'bg-red-100 text-red-700'
+                  detail.is_status ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
                 }`}
               >
                 {detail.is_status ? 'Aktif' : 'Tidak Aktif'}

@@ -4,11 +4,11 @@ import { useQueryClient } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { Button } from '@/components/ui/button.tsx'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { Form } from '@/components/ui/form.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import { BiPlus, BiX } from 'react-icons/bi'
 import { FaSave } from 'react-icons/fa'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 export const ButtonAddCategoryDownloadUnit = () => {
   const [open, setOpen] = useState(false)
@@ -46,9 +46,8 @@ export const ButtonAddCategoryDownloadUnit = () => {
         <BiPlus /> Tambah Kategori
       </Button>
 
-      <DialogCustom
-        className={'rounded-md min-w-2xl'}
-        width={'450px'}
+      <DialogBasic
+        className={'rounded-md lg:min-w-2xl'}
         open={open}
         setOpen={setOpen}
         title={'Tambah Kategori Berkas'}
@@ -85,7 +84,7 @@ export const ButtonAddCategoryDownloadUnit = () => {
             </form>
           </Form>
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

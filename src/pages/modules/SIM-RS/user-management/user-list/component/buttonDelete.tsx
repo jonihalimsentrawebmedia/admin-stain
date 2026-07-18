@@ -53,11 +53,11 @@ export const ButtonDeleteUser = (props: Props) => {
       >
         <div className={'grid gap-5 grid-cols-[12rem_1fr]'}>
           <p className="text-gray-500">Nama</p>
-          <p>{data.nama}</p>
+          <p>{data.nama_lengkap}</p>
           <p className="text-gray-500">Email</p>
           <p>{data.email}</p>
           <p className="text-gray-500">No. Telepon</p>
-          <p>{data.nomor_telepon}</p>
+          <p>{data.telepon ?? '-'}</p>
           <p className="text-gray-500">Role</p>
           <p>{data.nama_role}</p>
         </div>

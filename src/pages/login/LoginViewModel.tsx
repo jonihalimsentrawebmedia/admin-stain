@@ -25,8 +25,8 @@ const LoginViewModel = () => {
         ...data
       }).then(res => {
         if (res?.data?.status) {
-          navigate('/modules')
           Cookies.set('token', res?.data?.data?.token, {expires: 1})
+          navigate('/modules')
         }
       }).catch(err => {
         console.log(err)

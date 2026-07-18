@@ -61,12 +61,17 @@ const LembagaView = () => {
         label="Data Lembaga"
       />
       {form.watch('status_publish') == 'DIAJUKAN_EDITOR' && (
-        <div className={'border border-blue-500 rounded flex p-2 w-fit items-center gap-1.5 mt-5'}>
-          <MdInfo className={'size-5 text-blue-500'} />
-          {realData
-            ? 'Data yang tampil adalah data yang asli. Untuk melihat data yang anda ajukan'
-            : 'Data yang tampil adalah data yang anda ajukan. Untuk melihat data asli'}
-          <button className={'text-blue-500'} onClick={() => setRealData(!realData)}>
+        <div className="border border-blue-500 rounded flex flex-wrap p-3 sm:p-2 w-full sm:w-fit items-center gap-2 mt-5 text-xs sm:text-sm">
+          <MdInfo className="size-5 text-blue-500 shrink-0" />
+          <span className="flex-1 min-w-0">
+            {realData
+              ? 'Data yang tampil adalah data yang asli. Untuk melihat data yang anda ajukan'
+              : 'Data yang tampil adalah data yang anda ajukan. Untuk melihat data asli'}
+          </span>
+          <button
+            className="text-blue-500 font-semibold whitespace-nowrap"
+            onClick={() => setRealData(!realData)}
+          >
             KLIK DISINI
           </button>
         </div>

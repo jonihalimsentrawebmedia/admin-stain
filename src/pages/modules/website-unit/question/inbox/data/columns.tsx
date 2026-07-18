@@ -22,11 +22,11 @@ export const ColumnsInboxUnit = () => {
       header: 'Pengirim',
       cell: ({ row }) => {
         return (
-          <div className={'grid grid-cols-2 gap-4 text-sm '}>
-            <p className="text-gray-500">Nama</p>
-            <p>{row?.original?.nama}</p>
-            <p className="text-gray-500">Email</p>
-            <p>{row?.original?.email}</p>
+          <div className={'grid lg:grid-cols-2 lg:gap-4 text-sm'}>
+            <p className="whitespace-nowrap text-gray-500">Nama</p>
+            <p className={'whitespace-nowrap'}>{row?.original?.nama}</p>
+            <p className="whitespace-nowrap text-gray-500">Email</p>
+            <p className={'whitespace-nowrap'}>{row?.original?.email}</p>
           </div>
         )
       },

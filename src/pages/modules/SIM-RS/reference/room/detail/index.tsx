@@ -59,6 +59,16 @@ const DetailRoom = () => {
               <p className="text-base font-medium">{detail.jumlah_kasur}</p>
             </div>
             <div>
+              <p className="text-sm text-gray-500">Harga / Hari</p>
+              <p className="text-base font-medium">
+                {new Intl.NumberFormat('id-ID', {
+                  style: 'currency',
+                  currency: 'IDR',
+                  maximumFractionDigits: 0,
+                }).format(detail.harga)}
+              </p>
+            </div>
+            <div>
               <p className="text-sm text-gray-500">Lokasi</p>
               <p className="text-base font-medium">{detail.lokasi}</p>
             </div>

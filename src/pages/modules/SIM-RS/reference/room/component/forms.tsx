@@ -6,6 +6,7 @@ import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import type { TResolverRoomCreate, TResolverRoomUpdate } from '../data/resolver.tsx'
 import { UseGetRoomType } from '@/pages/modules/SIM-RS/reference/room-type/hooks/index.tsx'
 import { TitleLine } from '@/pages/modules/pusat-karir/component/common/titleLine.tsx'
+import CurrencyInput from '@/components/common/form/InputCurrency.tsx'
 
 interface PropsCreate {
   loading: boolean
@@ -87,6 +88,14 @@ export const FormRoomCreate = (props: PropsCreate) => {
             isRequired
             isNumber
           />
+          <CurrencyInput
+            name={'harga'}
+            form={form}
+            label={'Harga / Hari'}
+            placeholder={'Masukkan Harga'}
+            className={'col-span-1'}
+            isRequired
+          />
           <TextInput
             name={'lokasi'}
             form={form}
@@ -165,6 +174,14 @@ export const FormRoomUpdate = (props: PropsUpdate) => {
             htmlFor={'jumlah_kasur'}
             className={'col-span-1'}
             inputClassName={'bg-white'}
+            isRequired
+          />
+          <CurrencyInput
+            name={'harga'}
+            form={form}
+            label={'Harga / Hari'}
+            placeholder={'Masukkan Harga'}
+            className={'col-span-1'}
             isRequired
           />
           <TextInput

@@ -1,0 +1,68 @@
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
+import { zodResolver } from '@hookform/resolvers/zod'
+import AxiosClient from '@/provider/axios.tsx'
+import { toast } from 'react-toastify'
+import Cookies from 'js-cookie'
+import {
+  ResetPasswordSIMRSResolver,
+  type ResetPasswordSIMRSType,
+} from './model'
+
+const ChangePasswordSIMRSViewModel = () => {
+  const navigate = useNavigate()
+  const form = useForm<ResetPasswordSIMRSType>({
+    resolver: zodResolver(ResetPasswordSIMRSResolver),
+  })
+
+  const [loading, setLoading] = useState(false)
+
+  async function handleSave(data: ResetPasswordSIMRSType) {
+    setLoading(true)
+
+    await AxiosClient.post('/simrs/auth/reset-password', {
+      password: data.password,
+      email: Cookies.get('email'),
+      token: Cookies.get('session'),
+    })
+      .then((res) => {
+        if (res?.data?.status) {
+          toast.success(res.data.message)
+          navigate('/sim-rs/forget-password/success')
+        }
+      })
+      .catch((err) => {
+        setLoading(false)
+        toast.error(err?.response?.data?.message || 'Terjadi Kesalahan')
+      })
+
+    setLoading(false)
+  }
+
+  const password = form.watch('password', '')
+
+  const validations = {
+    length: password.length >= 8,
+    upper: /[A-Z]/.test(password),
+    lower: /[a-z]/.test(password),
+    number: /\d/.test(password),
+    symbol: /[!@#$%^&*]/.test(password),
+  }
+
+  const getClass = (valid: boolean) =>
+    valid
+      ? 'text-green-600 flex gap-2 items-center'
+      : 'text-gray-400 flex gap-2 items-center'
+
+  const isDisabled =
+    !validations.length ||
+    !validations.upper ||
+    !validations.lower ||
+    !validations.number ||
+    !validations.symbol
+
+  return { loading, handleSave, form, validations, getClass, isDisabled }
+}
+
+export default ChangePasswordSIMRSViewModel

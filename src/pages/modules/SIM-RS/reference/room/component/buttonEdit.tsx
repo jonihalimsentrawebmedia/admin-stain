@@ -29,6 +29,7 @@ export const FormEditRoom = (props: Props) => {
         nomor: data.nomor,
         id_jenis_ruangan: data.id_jenis_ruangan,
         jumlah_kasur: data.jumlah_kasur,
+        harga: data.harga,
         lokasi: data.lokasi,
         is_status: String(data.is_status),
         tanggal: format(parseISO(data.tanggal_registrasi), "yyyy-MM-dd'T'HH:mm"),

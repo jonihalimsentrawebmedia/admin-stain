@@ -3,6 +3,7 @@ import { Form } from '@/components/ui/form.tsx'
 import type { IDiagnosisResolver } from '@/pages/modules/SIM-RS/reference/diagnosis/data/resolver.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
+import CurrencyInput from '@/components/common/form/InputCurrency.tsx'
 
 interface Props {
   loading: boolean
@@ -42,6 +43,15 @@ export const DiagnosisForm = (props: Props) => {
             form={form}
             placeholder={'Masukkan Deskripsi Diagnosis'}
             label={'Deskripsi'}
+            isRequired
+            isRow
+          />
+
+          <CurrencyInput
+            name={'harga'}
+            form={form}
+            label={'Harga'}
+            placeholder={'Masukkan Harga'}
             isRequired
             isRow
           />
