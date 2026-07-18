@@ -50,7 +50,7 @@ export const ColumnsRegistration = () => {
       header: 'Dokter',
     },
     {
-      accessorKey: 'status',
+      accessorKey: 'keputusan_perawatan',
       header: 'Keputusan Perawatan',
       cell: ({ row }) => {
         const data = row.original
@@ -59,7 +59,7 @@ export const ColumnsRegistration = () => {
         if (status === 'SELESAI') {
           return (
             <span className="text-sm font-medium text-gray-700">
-              {data.keputusan === 'RAWAT_INAP' ? 'Rawat Inap' : 'Rawat Jalan'}
+              {data.keputusan_perawatan === 'RAWAT_INAP' ? 'Rawat Inap' : 'Rawat Jalan'}
             </span>
           )
         }
