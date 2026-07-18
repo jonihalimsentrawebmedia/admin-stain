@@ -1,4 +1,5 @@
 import { lazy } from 'react'
+import { MedicinePage } from '@/pages/modules/SIM-RS/pharmacy/medicine'
 
 const UserSimRSProfilePage = lazy(() =>
   import('@/pages/modules/SIM-RS/component/updated-detail').then((m) => ({
@@ -412,6 +413,15 @@ export const SIMRSROUTES = [
             element: <DetailUser />,
           },
         ],
+      },
+    ],
+  },
+  {
+    path: 'pharmacy',
+    children: [
+      {
+        path: 'medicine',
+        element: <MedicinePage />,
       },
     ],
   },
