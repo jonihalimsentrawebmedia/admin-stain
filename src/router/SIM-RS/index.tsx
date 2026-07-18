@@ -1,6 +1,15 @@
 import { lazy } from 'react'
-import { UserSimRSProfilePage } from '@/pages/modules/SIM-RS/component/updated-detail'
-import { ChangePasswordSIMRS } from '@/pages/modules/SIM-RS/component/change-password'
+
+const UserSimRSProfilePage = lazy(() =>
+  import('@/pages/modules/SIM-RS/component/updated-detail').then((m) => ({
+    default: m.UserSimRSProfilePage,
+  }))
+)
+const ChangePasswordSIMRS = lazy(() =>
+  import('@/pages/modules/SIM-RS/component/change-password').then((m) => ({
+    default: m.ChangePasswordSIMRS,
+  }))
+)
 
 const PatientPage = lazy(() =>
   import('@/pages/modules/SIM-RS/reference/patient').then((m) => ({ default: m.PatientPage }))

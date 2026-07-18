@@ -19,11 +19,17 @@ import { SPI_ROUTES } from '@/router/SPI'
 import { PMB_ROUTES } from '@/router/pmb'
 import { E_OFFICE_ROUTE } from '@/router/E-Office'
 import { SIMRSROUTES } from '@/router/SIM-RS'
-import LoginSimRsView from '@/pages/modules/SIM-RS/component/login'
-import ForgetPasswordSIMRSView from '@/pages/modules/SIM-RS/component/login/forget-password/ForgetPasswordSIMRSView'
-import OtpSIMRSView from '@/pages/modules/SIM-RS/component/login/otp/OtpSIMRSView'
-import SuccessSIMRSView from '@/pages/modules/SIM-RS/component/login/success/SuccessSIMRSView'
-import ChangePasswordSIMRSView from '@/pages/modules/SIM-RS/component/login/change-password/ChangePasswordSIMRSView'
+const LoginSimRsView = lazy(() => import('@/pages/modules/SIM-RS/component/login'))
+const ForgetPasswordSIMRSView = lazy(() =>
+  import('@/pages/modules/SIM-RS/component/login/forget-password/ForgetPasswordSIMRSView')
+)
+const OtpSIMRSView = lazy(() => import('@/pages/modules/SIM-RS/component/login/otp/OtpSIMRSView'))
+const SuccessSIMRSView = lazy(() =>
+  import('@/pages/modules/SIM-RS/component/login/success/SuccessSIMRSView')
+)
+const ChangePasswordSIMRSView = lazy(() =>
+  import('@/pages/modules/SIM-RS/component/login/change-password/ChangePasswordSIMRSView')
+)
 
 const LoginView = lazy(() => import('@/pages/login/LoginView'))
 const ForgetPasswordView = lazy(() => import('@/pages/forget-password/ForgetPasswordView'))
