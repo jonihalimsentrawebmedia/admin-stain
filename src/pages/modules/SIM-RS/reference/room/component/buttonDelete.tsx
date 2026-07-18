@@ -60,6 +60,14 @@ export const ButtonDeleteRoom = (props: Props) => {
           <p>{data.nama_jenis_ruangan}</p>
           <p className="text-gray-500">Jumlah Kasur</p>
           <p>{data.jumlah_kasur}</p>
+          <p className="text-gray-500">Harga / Hari</p>
+          <p>
+            {new Intl.NumberFormat('id-ID', {
+              style: 'currency',
+              currency: 'IDR',
+              maximumFractionDigits: 0,
+            }).format(data.harga)}
+          </p>
           <p className="text-gray-500">Lokasi</p>
           <p>{data.lokasi}</p>
         </div>

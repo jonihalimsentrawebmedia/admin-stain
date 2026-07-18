@@ -1,9 +1,9 @@
 export interface IUserList {
   id_user: string
   id_satuan_organisasi: string
-  nama: string
+  nama_lengkap: string
   email: string
-  nomor_telepon: string
+  telepon: string | null
   id_role: string
   is_status: boolean
   tanggal_registrasi: string
@@ -17,4 +17,6 @@ export interface IUserList {
   nama_user_updated: string
   nama_role: string
   nama_registrasi: string
+  jenis_kelamin: string
+  gambar: string | null
 }

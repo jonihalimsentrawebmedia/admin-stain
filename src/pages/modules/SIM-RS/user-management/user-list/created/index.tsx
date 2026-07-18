@@ -12,6 +12,7 @@ import { UseGetRole } from '@/pages/modules/SIM-RS/user-management/role/hooks/in
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
+import { UploadPhotoImage } from '@/pages/modules/pusat-karir/component/common/uploadPhoto.tsx'
 
 const CreateUser = () => {
   const [loading, setLoading] = useState(false)
@@ -48,10 +49,20 @@ const CreateUser = () => {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(HandleSave)} className="space-y-6">
           <section className="space-y-4">
+            <TitleLine title="Foto Gambar User" />
+            <UploadPhotoImage
+              name={'gambar'}
+              form={form}
+              label={'Photo Profile'}
+              ratio_width={3}
+              ratio_height={4}
+              className={'max-w-[150px]'}
+            />
+
             <TitleLine title="Informasi User" />
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               <TextInput
-                name="nama"
+                name="nama_lengkap"
                 label="Nama"
                 placeholder="Masukkan nama"
                 form={form}
@@ -67,7 +78,7 @@ const CreateUser = () => {
                 inputClassName="bg-white"
               />
               <TextInput
-                name="nomor_telepon"
+                name="telepon"
                 label="No. Telepon"
                 placeholder="Masukkan nomor telepon"
                 type={'number'}
@@ -82,6 +93,18 @@ const CreateUser = () => {
                 form={form}
                 data={roleData}
                 usePortal
+                isRequired
+              />
+              <SelectBasicInput
+                form={form}
+                name={'jenis_kelamin'}
+                label={'Jenis Kelamin'}
+                placeholder={'Pilih jenis kelamin'}
+                usePortal
+                data={[
+                  { label: 'Laki-laki', value: 'L' },
+                  { label: 'Perempuan', value: 'P' },
+                ]}
                 isRequired
               />
             </div>

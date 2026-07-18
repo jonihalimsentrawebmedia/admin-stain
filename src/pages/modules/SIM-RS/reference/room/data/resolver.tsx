@@ -13,6 +13,7 @@ export const ResolverRoomCreate = z.object({
   jumlah_kasur: z
     .number({ error: 'Jumlah Kasur harus diisi' })
     .min(1, 'Jumlah Kasur minimal 1'),
+  harga: z.number({ error: 'Harga harus diisi' }),
   lokasi: z
     .string({ error: 'Lokasi harus diisi' })
     .min(1, 'Lokasi harus diisi'),
@@ -33,6 +34,7 @@ export const ResolverRoomUpdate = z.object({
   jumlah_kasur: z
     .number({ error: 'Jumlah Kasur harus diisi' })
     .min(1, 'Jumlah Kasur minimal 1'),
+  harga: z.number({ error: 'Harga harus diisi' }),
   lokasi: z
     .string({ error: 'Lokasi harus diisi' })
     .min(1, 'Lokasi harus diisi'),

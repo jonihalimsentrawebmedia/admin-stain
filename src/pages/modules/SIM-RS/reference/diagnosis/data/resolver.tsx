@@ -10,6 +10,7 @@ export const ResolverDiagnosis = z.object({
   deskripsi: z
     .string({ error: 'Deskripsi harus diisi' })
     .min(1, 'Deskripsi harus diisi'),
+  harga: z.number({ error: 'Harga harus diisi' }),
 })
 
 export type IDiagnosisResolver = z.infer<typeof ResolverDiagnosis>

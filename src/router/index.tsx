@@ -19,11 +19,18 @@ import { SPI_ROUTES } from '@/router/SPI'
 import { PMB_ROUTES } from '@/router/pmb'
 import { E_OFFICE_ROUTE } from '@/router/E-Office'
 import { SIMRSROUTES } from '@/router/SIM-RS'
+import LoginSimRsView from '@/pages/modules/SIM-RS/component/login'
+import ForgetPasswordSIMRSView from '@/pages/modules/SIM-RS/component/login/forget-password/ForgetPasswordSIMRSView'
+import OtpSIMRSView from '@/pages/modules/SIM-RS/component/login/otp/OtpSIMRSView'
+import SuccessSIMRSView from '@/pages/modules/SIM-RS/component/login/success/SuccessSIMRSView'
+import ChangePasswordSIMRSView from '@/pages/modules/SIM-RS/component/login/change-password/ChangePasswordSIMRSView'
 
 const LoginView = lazy(() => import('@/pages/login/LoginView'))
 const ForgetPasswordView = lazy(() => import('@/pages/forget-password/ForgetPasswordView'))
 const OtpView = lazy(() => import('@/pages/forget-password/otp/OtpView'))
-const ChangePasswordView = lazy(() => import('@/pages/forget-password/change-password/ChangePasswordView'))
+const ChangePasswordView = lazy(
+  () => import('@/pages/forget-password/change-password/ChangePasswordView')
+)
 const SuccessView = lazy(() => import('@/pages/forget-password/success/SuccessView'))
 const MainLayoutSIMRS = lazy(() => import('@/pages/modules/SIM-RS/component/layout'))
 const SelectSessionSIMRS = lazy(() =>
@@ -138,6 +145,28 @@ export const Router = createBrowserRouter([
   {
     path: 'login',
     element: <LoginView />,
+  },
+  {
+    path: 'e-office/login',
+    element: <></>,
+  },
+  {
+    path: 'sim-rs/login',
+    children: [
+      {
+        index: true,
+        element: <LoginSimRsView />,
+      },
+    ],
+  },
+  {
+    path: 'sim-rs/forget-password',
+    children: [
+      { index: true, element: <ForgetPasswordSIMRSView /> },
+      { path: 'otp', element: <OtpSIMRSView /> },
+      { path: 'change-password', element: <ChangePasswordSIMRSView /> },
+      { path: 'success', element: <SuccessSIMRSView /> },
+    ],
   },
   {
     path: 'forget-password',

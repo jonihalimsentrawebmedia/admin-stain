@@ -3,6 +3,7 @@ export interface IDiagnosis {
   kode: string
   nama: string
   deskripsi: string
+  harga: number
   created_at: string
   created_user: string
   updated_at: string

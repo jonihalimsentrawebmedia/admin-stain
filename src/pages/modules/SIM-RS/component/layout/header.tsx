@@ -1,10 +1,10 @@
 import type { IModulesList } from '@/pages/modules/interface'
 import { RiMenuLine } from 'react-icons/ri'
 import React from 'react'
-import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/hooks/getProfile.tsx'
 import ButtonProfile from '@/pages/modules/settings/components/button/ButtonProfile.tsx'
 import { Link } from 'react-router-dom'
 import { DialogSessionSIMRS } from '../../select-session/dialog-session'
+import { UseGetUserSIMRSProfile } from '@/pages/modules/SIM-RS/component/user-profile'
 
 interface Props {
   collapsed: boolean
@@ -17,16 +17,23 @@ export function HeaderSIMRS(props: Props) {
   const localStorage = window.localStorage.getItem('module')
   const module: IModulesList = JSON.parse(localStorage || '{}')
 
-  const { profileUser } = UseGetUserProfile()
+  const { profile } = UseGetUserSIMRSProfile()
+  console.log(profile)
 
   return (
     <header className="py-2 sm:py-4 px-3 sm:px-5 bg-[#E9FFF1] border-b border-green-200 flex items-center justify-between w-full">
       <div className="flex items-center gap-2 sm:gap-4 min-w-0">
         <Link to={'/modules'}>
-          <img src={module?.gambar} alt="gambar" className="size-10 sm:size-14 object-cover shrink-0" />
+          <img
+            src={module?.gambar}
+            alt="gambar"
+            className="size-10 sm:size-14 object-cover shrink-0"
+          />
         </Link>
         <div className="flex flex-col min-w-0">
-          <p className="hidden sm:block text-xs sm:text-sm font-semibold text-primary truncate">Sistem Informasi Manajemen Rumah Sakit</p>
+          <p className="hidden sm:block text-xs sm:text-sm font-semibold text-primary truncate">
+            Sistem Informasi Manajemen Rumah Sakit
+          </p>
           <p className="text-lg sm:text-2xl font-semibold truncate">SIM-RS</p>
         </div>
       </div>
@@ -36,7 +43,7 @@ export function HeaderSIMRS(props: Props) {
         </Link>
         <div className="flex items-center gap-2 sm:gap-4">
           <DialogSessionSIMRS />
-          <ButtonProfile module={module} profileUser={profileUser} />
+          <ButtonProfile module={module} profileUser={profile as any} />
           <button onClick={() => setCollapsed(!collapsed)} className="text-xl sm:text-base">
             <RiMenuLine />
           </button>

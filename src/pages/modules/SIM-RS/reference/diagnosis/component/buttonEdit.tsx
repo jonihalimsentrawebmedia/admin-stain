@@ -30,6 +30,7 @@ export const ButtonEditDiagnosis = (props: Props) => {
         kode: data.kode,
         nama: data.nama,
         deskripsi: data.deskripsi,
+        harga: data.harga,
       })
     }
   }, [data])

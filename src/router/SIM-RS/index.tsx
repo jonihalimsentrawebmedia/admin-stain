@@ -1,4 +1,6 @@
 import { lazy } from 'react'
+import { UserSimRSProfilePage } from '@/pages/modules/SIM-RS/component/updated-detail'
+import { ChangePasswordSIMRS } from '@/pages/modules/SIM-RS/component/change-password'
 
 const PatientPage = lazy(() =>
   import('@/pages/modules/SIM-RS/reference/patient').then((m) => ({ default: m.PatientPage }))
@@ -25,10 +27,17 @@ const SpecialistPage = lazy(() =>
   import('@/pages/modules/SIM-RS/reference/specialist').then((m) => ({ default: m.SpecialistPage }))
 )
 const DiagnosisRefPage = lazy(() =>
-  import('@/pages/modules/SIM-RS/reference/diagnosis').then((m) => ({ default: m.DiagnosisRefPage }))
+  import('@/pages/modules/SIM-RS/reference/diagnosis').then((m) => ({
+    default: m.DiagnosisRefPage,
+  }))
 )
 const ProcedurePage = lazy(() =>
   import('@/pages/modules/SIM-RS/reference/procedure').then((m) => ({ default: m.ProcedurePage }))
+)
+const SumberBiayaPage = lazy(() =>
+  import('@/pages/modules/SIM-RS/reference/source-medical-treatment').then((m) => ({
+    default: m.SumberBiayaPage,
+  }))
 )
 const DoctorPage = lazy(() =>
   import('@/pages/modules/SIM-RS/reference/doctor').then((m) => ({ default: m.DoctorPage }))
@@ -46,7 +55,9 @@ const DetailRegistration = lazy(() => import('@/pages/modules/SIM-RS/services/re
 const DiagnosisPage = lazy(() => import('@/pages/modules/SIM-RS/services/register/diagnosis'))
 const OutpatientPage = lazy(() => import('@/pages/modules/SIM-RS/services/outpatient'))
 const DetailOutpatient = lazy(() => import('@/pages/modules/SIM-RS/services/outpatient/detail'))
-const EditPemeriksaan = lazy(() => import('@/pages/modules/SIM-RS/services/outpatient/detail/edit-pemeriksaan'))
+const EditPemeriksaan = lazy(
+  () => import('@/pages/modules/SIM-RS/services/outpatient/detail/edit-pemeriksaan')
+)
 const InpatientPage = lazy(() => import('@/pages/modules/SIM-RS/services/inpatient'))
 const DetailInpatient = lazy(() => import('@/pages/modules/SIM-RS/services/inpatient/detail'))
 const BackHomeInpatient = lazy(() => import('@/pages/modules/SIM-RS/services/inpatient/back-home'))
@@ -57,13 +68,17 @@ const DoctorSchedulePage = lazy(() =>
 )
 const DetailJadwalDokter = lazy(() => import('@/pages/modules/SIM-RS/schedule/detail'))
 const PatientReportPage = lazy(() =>
-  import('@/pages/modules/SIM-RS/report/patient-report').then((m) => ({ default: m.PatientReportPage }))
+  import('@/pages/modules/SIM-RS/report/patient-report').then((m) => ({
+    default: m.PatientReportPage,
+  }))
 )
 const VisitReportPage = lazy(() =>
   import('@/pages/modules/SIM-RS/report/visit-report').then((m) => ({ default: m.VisitReportPage }))
 )
 const InpatientReportPage = lazy(() =>
-  import('@/pages/modules/SIM-RS/report/inpatient-report').then((m) => ({ default: m.InpatientReportPage }))
+  import('@/pages/modules/SIM-RS/report/inpatient-report').then((m) => ({
+    default: m.InpatientReportPage,
+  }))
 )
 const ColorSettingSIMRS = lazy(() => import('@/pages/modules/SIM-RS/setting/color'))
 const CodeSettingSIMRS = lazy(() => import('@/pages/modules/SIM-RS/setting/code'))
@@ -73,19 +88,13 @@ const RolePage = lazy(() =>
 const CreateRole = lazy(() => import('@/pages/modules/SIM-RS/user-management/role/created'))
 const UpdateRole = lazy(() => import('@/pages/modules/SIM-RS/user-management/role/updated'))
 const UserListPage = lazy(() =>
-  import('@/pages/modules/SIM-RS/user-management/user-list').then((m) => ({ default: m.UserListPage }))
+  import('@/pages/modules/SIM-RS/user-management/user-list').then((m) => ({
+    default: m.UserListPage,
+  }))
 )
 const CreateUser = lazy(() => import('@/pages/modules/SIM-RS/user-management/user-list/created'))
 const UpdateUser = lazy(() => import('@/pages/modules/SIM-RS/user-management/user-list/updated'))
 const DetailUser = lazy(() => import('@/pages/modules/SIM-RS/user-management/user-list/detail'))
-const UserProfilePage = lazy(() =>
-  import('@/pages/modules/website-utama/user-profile').then((m) => ({ default: m.UserProfilePage }))
-)
-const ChangePassword = lazy(() =>
-  import('@/pages/modules/website-utama/change-password').then((m) => ({
-    default: m.ChangePassword,
-  }))
-)
 
 export const SIMRSROUTES = [
   {
@@ -97,11 +106,11 @@ export const SIMRSROUTES = [
       },
       {
         path: 'user-profile',
-        element: <UserProfilePage />,
+        element: <UserSimRSProfilePage />,
       },
       {
         path: 'change-password',
-        element: <ChangePassword />,
+        element: <ChangePasswordSIMRS />,
       },
     ],
   },
@@ -208,6 +217,15 @@ export const SIMRSROUTES = [
           {
             index: true,
             element: <ProcedurePage />,
+          },
+        ],
+      },
+      {
+        path: 'source-medical-treatment',
+        children: [
+          {
+            index: true,
+            element: <SumberBiayaPage />,
           },
         ],
       },

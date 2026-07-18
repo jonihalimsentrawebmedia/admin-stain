@@ -4,6 +4,7 @@ export interface IRoom {
   nomor: string
   id_jenis_ruangan: string
   jumlah_kasur: number
+  harga: number
   lokasi: string
   nama_jenis_ruangan?: string
   is_status: boolean

@@ -13,6 +13,7 @@ import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import { useQueryClient } from '@tanstack/react-query'
 import type { IUserList } from '../data/types.ts'
+import { UploadPhotoImage } from '@/pages/modules/pusat-karir/component/common/uploadPhoto.tsx'
 
 interface Props {
   data: IUserList
@@ -32,10 +33,12 @@ export const FormEditUser = ({ data }: Props) => {
   useEffect(() => {
     if (data) {
       form.reset({
-        nama: data.nama,
+        nama_lengkap: data.nama_lengkap,
         email: data.email,
-        nomor_telepon: data.nomor_telepon,
+        telepon: data.telepon ?? '',
         id_role: data.id_role,
+        jenis_kelamin: (data?.jenis_kelamin as 'L' | 'P') || 'L',
+        gambar: data?.gambar,
       })
     }
   }, [data, form])
@@ -64,10 +67,19 @@ export const FormEditUser = ({ data }: Props) => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(HandleSave)} className="space-y-6">
         <section className="space-y-4">
+          <TitleLine title="Foto Gambar User" />
+          <UploadPhotoImage
+            name={'gambar'}
+            form={form}
+            label={'Photo Profile'}
+            ratio_width={3}
+            ratio_height={4}
+            className={'max-w-[150px]'}
+          />
           <TitleLine title="Informasi User" />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
             <TextInput
-              name="nama"
+              name="nama_lengkap"
               label="Nama"
               placeholder="Masukkan nama"
               form={form}
@@ -83,7 +95,7 @@ export const FormEditUser = ({ data }: Props) => {
               inputClassName="bg-white"
             />
             <TextInput
-              name="nomor_telepon"
+              name="telepon"
               label="No. Telepon"
               placeholder="Masukkan nomor telepon"
               form={form}
@@ -98,6 +110,18 @@ export const FormEditUser = ({ data }: Props) => {
               form={form}
               data={roleData}
               usePortal
+              isRequired
+            />
+            <SelectBasicInput
+              form={form}
+              name={'jenis_kelamin'}
+              label={'Jenis Kelamin'}
+              placeholder={'Pilih jenis kelamin'}
+              usePortal
+              data={[
+                { label: 'Laki-laki', value: 'L' },
+                { label: 'Perempuan', value: 'P' },
+              ]}
               isRequired
             />
           </div>

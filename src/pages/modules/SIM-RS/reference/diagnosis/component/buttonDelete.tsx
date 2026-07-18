@@ -58,6 +58,14 @@ export const ButtonDeleteDiagnosis = (props: Props) => {
           <p>{data.nama}</p>
           <p className="text-gray-500">Deskripsi</p>
           <p>{data.deskripsi}</p>
+          <p className="text-gray-500">Harga</p>
+          <p>
+            {new Intl.NumberFormat('id-ID', {
+              style: 'currency',
+              currency: 'IDR',
+              maximumFractionDigits: 0,
+            }).format(data.harga)}
+          </p>
         </div>
 
         <ButtonTitleGroup

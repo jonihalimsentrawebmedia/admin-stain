@@ -3,6 +3,7 @@ import { Form } from '@/components/ui/form.tsx'
 import type { IProcedureResolver } from '@/pages/modules/SIM-RS/reference/procedure/data/resolver.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
+import CurrencyInput from '@/components/common/form/InputCurrency.tsx'
 
 interface Props {
   loading: boolean
@@ -42,6 +43,15 @@ export const ProcedureForm = (props: Props) => {
             form={form}
             placeholder={'Masukkan Deskripsi Tindakan'}
             label={'Deskripsi'}
+            isRequired
+            isRow
+          />
+
+          <CurrencyInput
+            name={'harga'}
+            form={form}
+            label={'Harga'}
+            placeholder={'Masukkan Harga'}
             isRequired
             isRow
           />
