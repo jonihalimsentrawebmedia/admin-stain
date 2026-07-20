@@ -1,14 +1,57 @@
+import { useMemo } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { UseGetDetailRegistration } from '../../register/hooks/index.tsx'
-import { UseGetPemeriksaan } from '../../register/diagnosis/hooks/index.tsx'
+import { UseGetPemeriksaan, type IResepObatItem } from '../../register/diagnosis/hooks/index.tsx'
 import { format } from 'date-fns'
+import TableCustom from '@/components/common/table/TableCustom.tsx'
+import type { ColumnDef } from '@tanstack/react-table'
 
 const DetailOutpatient = () => {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const { detail, loading } = UseGetDetailRegistration(id ?? '')
   const { pemeriksaan } = UseGetPemeriksaan(id ?? '')
+
+  const resepObatColumns: ColumnDef<IResepObatItem>[] = useMemo(
+    () => [
+      {
+        accessorKey: 'order',
+        header: '#',
+        cell: ({ row }) => <>{row.index + 1}</>,
+      },
+      { accessorKey: 'nama_obat', header: 'Nama Obat' },
+      { accessorKey: 'satuan', header: 'Satuan' },
+      {
+        accessorKey: 'harga',
+        header: 'Harga',
+        cell: ({ row }) =>
+          new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(
+            row.original.harga
+          ),
+      },
+      {
+        accessorKey: 'frekuensi',
+        header: 'Frekuensi',
+        cell: ({ row }) => <>{row.original.frekuensi}x/hari</>,
+      },
+      {
+        accessorKey: 'durasi',
+        header: 'Durasi',
+        cell: ({ row }) => <>{row.original.durasi} hari</>,
+      },
+      { accessorKey: 'jumlah', header: 'Jumlah' },
+      {
+        accessorKey: 'total',
+        header: 'Harga Total',
+        cell: ({ row }) =>
+          new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(
+            row.original.harga * row.original.jumlah
+          ),
+      },
+    ],
+    []
+  )
 
   if (loading) {
     return (
@@ -185,6 +228,18 @@ const DetailOutpatient = () => {
               </p>
             </div>
           </div>
+
+          {(pemeriksaan.daftar_resep_obat?.length ?? 0) > 0 && (
+            <div className="mt-6">
+              <p className="text-sm font-semibold text-gray-700 mb-2">Daftar Resep Obat</p>
+              <TableCustom
+                data={pemeriksaan.daftar_resep_obat}
+                columns={resepObatColumns}
+                isShowFilter={false}
+                isShowPagination={false}
+              />
+            </div>
+          )}
         </div>
       )}
     </div>

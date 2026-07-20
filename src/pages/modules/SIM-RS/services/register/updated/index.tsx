@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { toast } from 'react-toastify'
-import { Save } from 'lucide-react'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { ResolverRegistration, type TResolverRegistration } from '../data/resolver.tsx'
 import { FormRegistration } from '../components/forms.tsx'
@@ -42,6 +41,7 @@ const UpdateRegistration = () => {
         id_pasien: detail.id_pasien,
         id_poli: detail.id_poli,
         id_dokter: detail.id_dokter,
+        sumber_biaya: detail.sumber_biaya ?? [],
       })
     }
   }, [detail, registrationForm, isSelesai])
@@ -54,6 +54,7 @@ const UpdateRegistration = () => {
         id_procedure: pemeriksaan.id_procedure ?? [],
         catatan: pemeriksaan.catatan ?? '',
         keputusan: pemeriksaan.keputusan,
+        daftar_resep_obat: pemeriksaan.daftar_resep_obat ?? [],
       })
     }
   }, [pemeriksaan, diagnosisForm, isSelesai])
@@ -116,26 +117,12 @@ const UpdateRegistration = () => {
         label={isSelesai ? 'Edit Hasil Pemeriksaan' : 'Edit Pendaftaran'}
         buttonGroup={[
           {
-            type: 'custom' as const,
-            element: (
-              <button
-                type="button"
-                disabled={loading}
-                onClick={
-                  isSelesai
-                    ? diagnosisForm.handleSubmit(HandleSavePemeriksaan)
-                    : registrationForm.handleSubmit(HandleSaveRegistration)
-                }
-                className="border-primary text-white bg-primary hover:bg-primary/80 px-4 py-2 rounded text-sm font-medium flex items-center gap-2 disabled:opacity-50"
-              >
-                <Save />
-                Simpan
-              </button>
-            ),
-          },
-          {
             type: 'cancel',
             onClick: () => navigate('/modules/sim-rs/services/registration'),
+          },
+          {
+            type: 'save',
+            label: 'Simpan',
           },
         ]}
       />
@@ -147,7 +134,13 @@ const UpdateRegistration = () => {
           registration={detail}
         />
       ) : (
-        <FormRegistration loading={loading} form={registrationForm} HandleSave={HandleSaveRegistration} isEdit editStatus={detail.status} />
+        <FormRegistration
+          loading={loading}
+          form={registrationForm}
+          HandleSave={HandleSaveRegistration}
+          isEdit
+          editStatus={detail.status}
+        />
       )}
     </div>
   )

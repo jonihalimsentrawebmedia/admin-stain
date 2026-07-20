@@ -74,6 +74,7 @@ export interface IRegistration {
   nomor_ruangan_aktif?: string
   nama_jenis_ruangan_aktif?: string
   riwayat_ruangan?: IRiwayatRuangan[]
+  sumber_biaya: PendaftaranSumberBiaya[]
 }
 
 export interface IStatusCount {
@@ -81,4 +82,18 @@ export interface IStatusCount {
   DIPANGGIL: number
   MENUNGGU: number
   SELESAI: number
+}
+
+interface PendaftaranSumberBiaya {
+  id_pendaftaran_sumber_biaya: string
+  id_satuan_organisasi: string
+  id_pendaftaran: string
+  id_pasien_sumber_pembiayaan: string
+  persentase: number
+  created_at: string
+  created_user: string
+  updated_at: string
+  updated_user: string
+  nama_sumber_biaya: string
+  kode_sumber_biaya: string
 }

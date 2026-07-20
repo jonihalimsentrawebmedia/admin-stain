@@ -166,7 +166,7 @@ const DetailRegistration = () => {
             </div>
             <div>
               <p className="text-sm text-gray-500">Status</p>
-              <p className="text-base font-medium">{pemeriksaan.status}</p>
+              <p className="text-base font-medium">{statusLabel}</p>
             </div>
             <div className="col-span-2">
               <p className="text-sm text-gray-500">Keluhan Utama</p>
@@ -201,6 +201,54 @@ const DetailRegistration = () => {
               </p>
             </div>
           </div>
+
+          {detail.status === 'SELESAI' &&
+            pemeriksaan.keputusan === 'RAWAT_JALAN' &&
+            (pemeriksaan.daftar_resep_obat?.length ?? 0) > 0 && (
+              <div className="mt-6">
+                <p className="text-sm font-semibold text-gray-700 mb-2">Daftar Resep Obat</p>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm border-collapse">
+                    <thead>
+                      <tr className="bg-gray-100">
+                        <th className="border px-3 py-2 text-left w-10">#</th>
+                        <th className="border px-3 py-2 text-left">Nama Obat</th>
+                        <th className="border px-3 py-2 text-left">Satuan</th>
+                        <th className="border px-3 py-2 text-right">Harga</th>
+                        <th className="border px-3 py-2 text-center">Frekuensi</th>
+                        <th className="border px-3 py-2 text-center">Durasi</th>
+                        <th className="border px-3 py-2 text-center">Jumlah</th>
+                        <th className="border px-3 py-2 text-right">Harga Total</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {pemeriksaan.daftar_resep_obat.map((item, idx) => (
+                        <tr key={item.id_obat} className="hover:bg-gray-50">
+                          <td className="border px-3 py-2">{idx + 1}</td>
+                          <td className="border px-3 py-2">{item.nama_obat}</td>
+                          <td className="border px-3 py-2">{item.satuan}</td>
+                          <td className="border px-3 py-2 text-right">
+                            {new Intl.NumberFormat('id-ID', {
+                              style: 'currency',
+                              currency: 'IDR',
+                            }).format(item.harga)}
+                          </td>
+                          <td className="border px-3 py-2 text-center">{item.frekuensi}x/hari</td>
+                          <td className="border px-3 py-2 text-center">{item.durasi} hari</td>
+                          <td className="border px-3 py-2 text-center">{item.jumlah}</td>
+                          <td className="border px-3 py-2 text-right font-medium">
+                            {new Intl.NumberFormat('id-ID', {
+                              style: 'currency',
+                              currency: 'IDR',
+                            }).format(item.harga * item.jumlah)}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            )}
         </div>
       )}
 

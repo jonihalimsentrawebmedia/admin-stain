@@ -3,7 +3,7 @@ import { UseGetPatientResourceTreatmentPrice } from '@/pages/modules/SIM-RS/refe
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import { FaTrash } from 'react-icons/fa'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
 interface Props {
   form: UseFormReturn<any>
@@ -20,8 +20,13 @@ export const SumberBiayaRegistrasi = ({ form, name = 'sumber_biaya', isDisabled 
     name,
   })
 
+  const prevIdPasien = useRef<string | undefined>(idPasien)
+
   useEffect(() => {
-    replace([])
+    if (prevIdPasien.current !== undefined && prevIdPasien.current !== idPasien) {
+      replace([])
+    }
+    prevIdPasien.current = idPasien
   }, [idPasien])
 
   const sumberBiayaData =
