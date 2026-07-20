@@ -4,6 +4,7 @@ import { UseGetRegistration, UseGetRegistrationStatusCount } from './hooks/index
 import { ColumnsRegistration } from './data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
 
 const statusList = [
   { key: 'MENUNGGU', label: 'Menunggu' },
@@ -15,6 +16,7 @@ const statusList = [
 export const RegisterPage = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const navigate = useNavigate()
+  const permision = GuardCrud({ keys: 'PENDAFTARAN' })
 
   const activeTab = searchParams.get('status') ?? 'MENUNGGU'
   const page = searchParams.get('page') ?? '1'
@@ -50,15 +52,19 @@ export const RegisterPage = () => {
     <div className="space-y-5">
       <ButtonTitleGroup
         label="Pendaftaran"
-        buttonGroup={[
-          {
-            type: 'add',
-            label: 'Tambah Pendaftaran',
-            onClick: () => {
-              navigate('add')
-            },
-          },
-        ]}
+        buttonGroup={
+          permision?.kelola
+            ? [
+                {
+                  type: 'add',
+                  label: 'Tambah Pendaftaran',
+                  onClick: () => {
+                    navigate('add')
+                  },
+                },
+              ]
+            : []
+        }
       />
       <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
         <TabsList className="w-full flex flex-row items-start p-0 gap-0 bg-transparent border-b-2 border-[#CDA327] rounded-none h-auto overflow-x-auto flex-nowrap justify-start">
@@ -77,7 +83,13 @@ export const RegisterPage = () => {
         </TabsList>
         {statusList.map((s) => (
           <TabsContent key={s.key} value={s.key}>
-            <TableCustom data={registration} columns={columns} loading={loading} meta={meta} />
+            <TableCustom
+              columnsName={permision?.kelola ? [''] : ['keputusan_perawatan']}
+              data={registration}
+              columns={columns}
+              loading={loading}
+              meta={meta}
+            />
           </TabsContent>
         ))}
       </Tabs>

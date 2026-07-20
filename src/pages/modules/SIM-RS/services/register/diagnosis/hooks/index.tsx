@@ -11,6 +11,16 @@ export interface IProcedureItem {
   nama_procedure: string
 }
 
+export interface IResepObatItem {
+  id_obat: string
+  nama_obat: string
+  satuan: string
+  frekuensi: number
+  durasi: number
+  jumlah: number
+  harga: number
+}
+
 export interface IPemeriksaan {
   id_pemeriksaan: string
   id_satuan_organisasi: string
@@ -25,6 +35,7 @@ export interface IPemeriksaan {
   id_procedure: string[]
   daftar_diagnosis: IDiagnosisItem[]
   daftar_procedure: IProcedureItem[]
+  daftar_resep_obat: IResepObatItem[]
   no_rekam_medis_pasien: string
   nama_pasien: string
   jenis_kelamin_pasien: string

@@ -10,11 +10,13 @@ import { useQueryClient } from '@tanstack/react-query'
 import FormProfileHospital from './component/forms.tsx'
 import { FaEdit } from 'react-icons/fa'
 import { TitleLine } from '@/pages/modules/pusat-karir/component/common/titleLine.tsx'
+import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
 
 const ProfileHospitalPage = () => {
   const { profile, loading: loadingProfile } = UseGetProfileHospital()
   const [isEdit, setIsEdit] = useState(false)
   const [loading, setLoading] = useState(false)
+  const permission = GuardCrud({ keys: 'PROFIL_RUMAH_SAKIT' })
 
   const form = useForm<TResolverProfileHospital>({
     resolver: zodResolver(ResolverProfileHospital),
@@ -77,12 +79,16 @@ const ProfileHospitalPage = () => {
               {
                 type: 'custom',
                 element: (
-                  <button
-                    onClick={() => setIsEdit(true)}
-                    className="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-1.5 rounded flex items-center gap-2"
-                  >
-                    <FaEdit /> Edit
-                  </button>
+                  <>
+                    {permission?.kelola && (
+                      <button
+                        onClick={() => setIsEdit(true)}
+                        className="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-1.5 rounded flex items-center gap-2"
+                      >
+                        <FaEdit /> Edit
+                      </button>
+                    )}
+                  </>
                 ),
               },
             ]}

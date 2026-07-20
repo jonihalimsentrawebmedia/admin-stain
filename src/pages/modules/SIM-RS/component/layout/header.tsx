@@ -18,7 +18,6 @@ export function HeaderSIMRS(props: Props) {
   const module: IModulesList = JSON.parse(localStorage || '{}')
 
   const { profile } = UseGetUserSIMRSProfile()
-  console.log(profile)
 
   return (
     <header className="py-2 sm:py-4 px-3 sm:px-5 bg-[#E9FFF1] border-b border-green-200 flex items-center justify-between w-full">

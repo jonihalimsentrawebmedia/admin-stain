@@ -7,6 +7,7 @@ import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import { UseGetPoli } from '@/pages/modules/SIM-RS/reference/poli/hooks/index.tsx'
 import { UseGetDoctor } from '@/pages/modules/SIM-RS/reference/doctor/hooks/index.tsx'
 import { DialogSelectPatient } from './DialogSelectPatient.tsx'
+import { SumberBiayaRegistrasi } from './SumberBiayaRegistrasi.tsx'
 import type { TResolverRegistration } from '../data/resolver.tsx'
 
 interface Props {
@@ -44,7 +45,10 @@ export const FormRegistration = ({ loading, form, HandleSave, isEdit, editStatus
       <form className="mt-5 w-full flex flex-col gap-6" onSubmit={form.handleSubmit(HandleSave)}>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="col-span-2">
-            <TitleLine className="text-2xl font-semibold text-primary" title="1. Informasi Pendaftaran" />
+            <TitleLine
+              className="text-2xl font-semibold text-primary"
+              title="1. Informasi Pendaftaran"
+            />
           </div>
           <TextInput
             name={'no_pendaftaran'}
@@ -87,7 +91,10 @@ export const FormRegistration = ({ loading, form, HandleSave, isEdit, editStatus
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="col-span-2">
-            <TitleLine className="text-2xl font-semibold text-primary" title="2. Informasi Pasien" />
+            <TitleLine
+              className="text-2xl font-semibold text-primary"
+              title="2. Informasi Pasien"
+            />
           </div>
           <div className="col-span-2">
             <label className="text-sm font-medium mb-1 block">Pasien *</label>
@@ -97,7 +104,10 @@ export const FormRegistration = ({ loading, form, HandleSave, isEdit, editStatus
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="col-span-2">
-            <TitleLine className="text-2xl font-semibold text-primary" title="3. Tujuan Pelayanan" />
+            <TitleLine
+              className="text-2xl font-semibold text-primary"
+              title="3. Tujuan Pelayanan"
+            />
           </div>
           <SelectBasicInput
             name={'id_poli'}
@@ -121,6 +131,16 @@ export const FormRegistration = ({ loading, form, HandleSave, isEdit, editStatus
             isRequired
             isDisabled={!idPoli}
           />
+        </div>
+
+        <div className="grid grid-cols-1 gap-4">
+          <div className="col-span-1">
+            <TitleLine
+              className="text-2xl font-semibold text-primary"
+              title="4. Sumber Biaya Pengobatan"
+            />
+          </div>
+          <SumberBiayaRegistrasi form={form} />
         </div>
 
         <ButtonForm loading={loading} onCancel={() => window.history.back()} />

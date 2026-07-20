@@ -11,6 +11,7 @@ import { format } from 'date-fns'
 import { UseGetDiagnosis } from '@/pages/modules/SIM-RS/reference/diagnosis/hooks/index.tsx'
 import { UseGetProcedure } from '@/pages/modules/SIM-RS/reference/procedure/hooks/index.tsx'
 import { BiX } from 'react-icons/bi'
+import { MedicineSelect } from './MedicineSelect.tsx'
 
 interface Props {
   loading: boolean
@@ -190,6 +191,16 @@ export const FormDiagnosis = ({ loading, form, HandleSave, registration }: Props
                 { value: 'RAWAT_INAP', label: 'Rawat Inap' },
               ]}
             />
+          </div>
+        </div>
+
+        <div className="bg-white rounded-lg border p-6">
+          <TitleLine
+            className="text-2xl font-semibold text-primary"
+            title="4. Daftar Resep Obat"
+          />
+          <div className="mt-4">
+            <MedicineSelect form={form} />
           </div>
         </div>
 

@@ -11,6 +11,7 @@ import { UseGetDiagnosis } from '@/pages/modules/SIM-RS/reference/diagnosis/hook
 import { UseGetProcedure } from '@/pages/modules/SIM-RS/reference/procedure/hooks/index.tsx'
 import { BiX } from 'react-icons/bi'
 import type { IRegistration } from '@/pages/modules/SIM-RS/services/register/data/types.ts'
+import { MedicineSelect } from '@/pages/modules/SIM-RS/services/register/diagnosis/components/MedicineSelect.tsx'
 
 interface Props {
   loading: boolean
@@ -196,6 +197,16 @@ export const FormEditPemeriksaan = ({ loading, form, HandleSave, registration }:
                 { value: 'RAWAT_INAP', label: 'Rawat Inap' },
               ]}
             />
+          </div>
+        </div>
+
+        <div className="bg-white rounded-lg border p-6">
+          <TitleLine
+            className="text-2xl font-semibold text-primary"
+            title="4. Daftar Resep Obat"
+          />
+          <div className="mt-4">
+            <MedicineSelect form={form} />
           </div>
         </div>
 

@@ -4,12 +4,15 @@ import './index.css'
 import App from './App.tsx'
 import Providers from '@/provider'
 import { HelmetProvider } from 'react-helmet-async'
+import { TooltipProvider } from '@/components/ui/tooltip.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Providers>
       <HelmetProvider>
-        <App />
+        <TooltipProvider>
+          <App />
+        </TooltipProvider>
       </HelmetProvider>
     </Providers>
   </StrictMode>

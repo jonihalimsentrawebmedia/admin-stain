@@ -12,6 +12,7 @@ import useGetProvince from '@/pages/modules/settings/reference/province/controll
 import useGetRegency from '@/pages/modules/settings/reference/regency/controller/useGetRegency'
 import { SwitchInput } from '@/components/common/form/switchInput.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import { SumberBiayaList } from '@/pages/modules/SIM-RS/reference/patient/components/SumberBiayaList.tsx'
 
 interface Props {
   loading: boolean
@@ -323,6 +324,17 @@ const FormPatient = (props: Props) => {
               inputClassName={'bg-white'}
               isRequired
             />
+          </div>
+
+          {/* Sumber Biaya Pengobatan */}
+          <div className="grid grid-cols-1 gap-4">
+            <div className="col-span-1">
+              <TitleLine
+                className={'text-2xl font-semibold text-primary'}
+                title={'Sumber Biaya Pengobatan'}
+              />
+            </div>
+            <SumberBiayaList form={form} name="sumber_biaya_pengobatan" showPersentase={false} />
           </div>
 
           {isEdit && (

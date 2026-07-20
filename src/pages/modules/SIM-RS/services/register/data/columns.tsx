@@ -6,12 +6,14 @@ import { HiPencil } from 'react-icons/hi'
 import { MdInfo } from 'react-icons/md'
 import { ButtonCall } from '../components/ButtonCall.tsx'
 import { ButtonCancel } from '../components/ButtonCancel.tsx'
+import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
 
 export const ColumnsRegistration = () => {
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') ?? 1)
   const limit = Number(searchParams.get('limit') ?? 10)
   const navigate = useNavigate()
+  const permision = GuardCrud({ keys: 'PENDAFTARAN' })
 
   const columns: ColumnDef<IRegistration>[] = [
     {
@@ -62,12 +64,13 @@ export const ColumnsRegistration = () => {
               {data.keputusan_perawatan === 'RAWAT_INAP' ? 'Rawat Inap' : 'Rawat Jalan'}
             </span>
           )
+        } else if (status === 'DIBATALKAN') {
+          return <>DIBATALKAN</>
         }
-
         return (
           <div className="flex items-center gap-2">
-            {status === 'MENUNGGU' && <ButtonCall data={data} />}
-            {status === 'DIPANGGIL' && (
+            {status === 'MENUNGGU' && permision?.kelola && <ButtonCall data={data} />}
+            {status === 'DIPANGGIL' && permision?.kelola && (
               <button
                 type="button"
                 onClick={() =>
@@ -85,32 +88,41 @@ export const ColumnsRegistration = () => {
     {
       accessorKey: 'action',
       header: '',
-      cell: ({ row }) => (
-        <div className="flex justify-center items-center gap-2">
-          <button
-            onClick={() =>
-              navigate(
-                `/modules/sim-rs/services/registration/detail/${row.original.id_pendaftaran}`
-              )
-            }
-            className="bg-blue-500 text-white hover:bg-blue-600 p-1.5 rounded"
-          >
-            <MdInfo className="size-4" />
-          </button>
-          <button
-            onClick={() =>
-              navigate(`/modules/sim-rs/services/registration/edit/${row.original.id_pendaftaran}`)
-            }
-            className="bg-yellow-500 text-white hover:bg-yellow-600 p-1.5 rounded"
-          >
-            <HiPencil className="size-4" />
-          </button>
-          {(row.original.status === 'MENUNGGU' || row.original.status === 'DIPANGGIL') && (
-            <ButtonCancel data={row.original} />
-          )}
-          {/*<ButtonDelete data={row.original} />*/}
-        </div>
-      ),
+      cell: ({ row }) => {
+        return (
+          <div className="flex justify-center items-center gap-2">
+            {permision?.melihat && (
+              <button
+                onClick={() =>
+                  navigate(
+                    `/modules/sim-rs/services/registration/detail/${row.original.id_pendaftaran}`
+                  )
+                }
+                className="bg-blue-500 text-white hover:bg-blue-600 p-1.5 rounded"
+              >
+                <MdInfo className="size-4" />
+              </button>
+            )}
+            {permision?.kelola && (
+              <>
+                <button
+                  onClick={() =>
+                    navigate(
+                      `/modules/sim-rs/services/registration/edit/${row.original.id_pendaftaran}`
+                    )
+                  }
+                  className="bg-yellow-500 text-white hover:bg-yellow-600 p-1.5 rounded"
+                >
+                  <HiPencil className="size-4" />
+                </button>
+                {(row.original.status === 'MENUNGGU' || row.original.status === 'DIPANGGIL') && (
+                  <ButtonCancel data={row.original} />
+                )}
+              </>
+            )}
+          </div>
+        )
+      },
     },
   ]
 

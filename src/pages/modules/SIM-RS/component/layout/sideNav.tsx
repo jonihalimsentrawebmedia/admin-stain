@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { GenerateMenu } from './menu.tsx'
+import { UseGetAuthRole } from '../auth/hooks/index.tsx'
+import { filterMenusByAuth } from '../auth/helper/index.tsx'
 import { cn } from '@/lib/utils.ts'
 import { ChevronRight } from 'lucide-react'
 import { useMobile } from '@/utils/useMobile'
@@ -24,7 +26,12 @@ export function SideNavSIMRS({ collapsed, setCollapsed }: Props) {
 
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({})
 
-  const MenuList = GenerateMenu()
+  const { menus } = UseGetAuthRole()
+
+  const MenuList = useMemo(() => {
+    const allMenus = GenerateMenu()
+    return filterMenusByAuth(allMenus, menus ?? [])
+  }, [menus])
 
   const makeGroupId = (parentId: string, index: number, name: string) =>
     `${parentId}-${index}-${name}`

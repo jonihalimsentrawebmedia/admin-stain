@@ -2,7 +2,7 @@ import type { BasicProps } from '@/utils/globalType.ts'
 import { useQuery } from '@tanstack/react-query'
 import AxiosClient from '@/provider/axios.tsx'
 import type { Meta } from '@/components/common/table/TablePagination.tsx'
-import type { IPatient } from '../data/types.ts'
+import type { IPatient, ISumberBiayaPengobatan } from '../data/types.ts'
 
 export const UseGetPatient = (props?: BasicProps) => {
   const { page, search, limit } = props ?? {}
@@ -15,8 +15,7 @@ export const UseGetPatient = (props?: BasicProps) => {
   const { data, isLoading, isFetching } = useQuery<{ data: IPatient[]; meta: Meta }>({
     queryKey: ['patient', ParamsSearch.toString()],
     refetchOnWindowFocus: false,
-    queryFn: () =>
-      AxiosClient(`/simrs/referensi/pasien?${ParamsSearch}`).then((res) => res.data),
+    queryFn: () => AxiosClient(`/simrs/referensi/pasien?${ParamsSearch}`).then((res) => res.data),
   })
 
   const loading = isLoading || isFetching
@@ -27,14 +26,28 @@ export const UseGetPatient = (props?: BasicProps) => {
 export const UseGetDetailPatient = (id: string) => {
   const { data, isLoading, isFetching } = useQuery<IPatient>({
     queryKey: ['detail-patient', id],
+    enabled: !!id,
     refetchOnWindowFocus: false,
-    queryFn: () =>
-      AxiosClient(`/simrs/referensi/pasien/${id}`).then((res) => res.data?.data),
+    queryFn: () => AxiosClient(`/simrs/referensi/pasien/${id}`).then((res) => res.data?.data),
   })
 
   const loading = isLoading || isFetching
 
   return { detail: data, loading }
+}
+
+export const UseGetPatientResourceTreatmentPrice = (idPasien: string) => {
+  const { data, isLoading, isFetching } = useQuery<ISumberBiayaPengobatan[]>({
+    queryKey: ['patient-resource-treatment-price', idPasien],
+    enabled: !!idPasien,
+    refetchOnWindowFocus: false,
+    queryFn: () =>
+      AxiosClient(`/simrs/referensi/pasien/${idPasien}/sumber-biaya`).then((res) => res.data?.data),
+  })
+
+  const loading = isLoading || isFetching
+
+  return { PriceTreatment: data ?? [], loading }
 }
 
 export const UseGetMedicalNumber = () => {

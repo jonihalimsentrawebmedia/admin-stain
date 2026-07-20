@@ -3,11 +3,13 @@ import type { ColumnDef } from '@tanstack/react-table'
 import type { IDokterJadwal } from '@/pages/modules/SIM-RS/schedule/data/types.ts'
 import { Button } from '@/components/ui/button'
 import { CalendarClock } from 'lucide-react'
+import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
 
 export const ColumnsDokterJadwal = () => {
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') ?? 1)
   const limit = Number(searchParams.get('limit') ?? 10)
+  const permision = GuardCrud({ keys: 'JADWAL_DOKTER' })
 
   const columns: ColumnDef<IDokterJadwal>[] = [
     {
@@ -71,16 +73,20 @@ export const ColumnsDokterJadwal = () => {
       cell: ({ row }) => {
         const data = row?.original
         return (
-          <Link to={`${data?.id_dokter}`}>
-            <Button
-              variant="outline"
-              size="sm"
-              className="border-[#278374] text-[#278374] hover:text-primary"
-            >
-              <CalendarClock className="mr-1 h-4 w-4" />
-              Kelola Jadwal
-            </Button>
-          </Link>
+          <>
+            {permision?.kelola && (
+              <Link to={`${data?.id_dokter}`}>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="border-[#278374] text-[#278374] hover:text-primary"
+                >
+                  <CalendarClock className="mr-1 h-4 w-4" />
+                  Kelola Jadwal
+                </Button>
+              </Link>
+            )}
+          </>
         )
       },
     },

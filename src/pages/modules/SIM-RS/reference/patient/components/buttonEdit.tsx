@@ -62,6 +62,7 @@ export const FormEditPatient = (props: Props) => {
         is_status: data.is_status,
         tanggal_registrasi: format(parseISO(data.tanggal_registrasi), "yyyy-MM-dd'T'HH:mm"),
         medical_record_number: data?.no_rekam_medis,
+        sumber_biaya_pengobatan: data?.sumber_biaya_pengobatan,
       })
     }
   }, [data])
