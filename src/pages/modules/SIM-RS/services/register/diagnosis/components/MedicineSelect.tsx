@@ -8,23 +8,24 @@ import { BiSearch } from 'react-icons/bi'
 import { FaTrash } from 'react-icons/fa'
 import { UseGetMedicine } from '@/pages/modules/SIM-RS/pharmacy/medicine/hooks/index.tsx'
 import type { IMedicine } from '@/pages/modules/SIM-RS/pharmacy/medicine/data/types.ts'
-import type { TResolverDiagnosis } from '../data/resolver.tsx'
+import type { TRResepObat } from '../data/resolver.tsx'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip.tsx'
 import { MdInfo } from 'react-icons/md'
 
 interface Props {
-  form: UseFormReturn<TResolverDiagnosis>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  form: UseFormReturn<any>
 }
 
 export const MedicineSelect = ({ form }: Props) => {
   const [open, setOpen] = useState(false)
   const [search, setSearch] = useState('')
-  const daftarResepObat = form.watch('daftar_resep_obat') ?? []
+  const daftarResepObat: TRResepObat[] = form.watch('daftar_resep_obat') ?? []
 
   const { medicine, loading } = UseGetMedicine({ page: '1', limit: '50', search })
 
   const handleAddMedicine = (item: IMedicine) => {
-    const exists = daftarResepObat.some((r) => r.id_obat === item.id_obat)
+    const exists = daftarResepObat.some((r: TRResepObat) => r.id_obat === item.id_obat)
     if (exists) return
     form.setValue('daftar_resep_obat', [
       ...daftarResepObat,
@@ -43,7 +44,7 @@ export const MedicineSelect = ({ form }: Props) => {
   }
 
   const handleRemove = (index: number) => {
-    const updated = daftarResepObat.filter((_, i) => i !== index)
+    const updated = daftarResepObat.filter((_: TRResepObat, i: number) => i !== index)
     form.setValue('daftar_resep_obat', updated)
   }
 
@@ -53,7 +54,7 @@ export const MedicineSelect = ({ form }: Props) => {
     value: string
   ) => {
     const num = parseInt(value) || 0
-    const updated = daftarResepObat.map((item, i) =>
+    const updated = daftarResepObat.map((item: TRResepObat, i: number) =>
       i === index ? { ...item, [field]: num } : item
     )
     form.setValue('daftar_resep_obat', updated)
@@ -157,7 +158,7 @@ export const MedicineSelect = ({ form }: Props) => {
                 </tr>
               </thead>
               <tbody>
-                {daftarResepObat.map((item, index) => (
+                {daftarResepObat.map((item: TRResepObat, index: number) => (
                   <tr key={item.id_obat} className="hover:bg-gray-50">
                     <td className="border px-3 py-2">{index + 1}</td>
                     <td className="border px-3 py-2">{item.nama_obat}</td>

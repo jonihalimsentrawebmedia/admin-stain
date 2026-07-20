@@ -16,7 +16,7 @@ export const ResolverDiagnosis = z.object({
   id_procedure: z.array(z.string()).min(1, 'Rencana Tindakan harus dipilih'),
   catatan: z.string().optional().nullable(),
   keputusan: z.string({ error: 'Keputusan harus dipilih' }),
-  daftar_resep_obat: z.array(ResepObatItem).optional(),
+  daftar_resep_obat: z.array(ResepObatItem).optional().nullable(),
 })
 
 export type TRResepObat = z.infer<typeof ResepObatItem>

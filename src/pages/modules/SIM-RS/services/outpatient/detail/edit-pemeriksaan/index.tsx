@@ -38,6 +38,7 @@ const EditPemeriksaan = () => {
         id_procedure: pemeriksaan.id_procedure ?? [],
         catatan: pemeriksaan.catatan ?? '',
         keputusan: pemeriksaan.keputusan ?? '',
+        daftar_resep_obat: pemeriksaan.daftar_resep_obat ?? [],
       })
     }
   }, [pemeriksaan, form])
@@ -66,7 +67,20 @@ const EditPemeriksaan = () => {
   const HandleConfirmSave = async () => {
     if (!pendingValues) return
     setLoading(true)
-    await AxiosClient.put(`/simrs/pelayanan/pemeriksaan/pendaftaran/${id}`, pendingValues)
+    const payload = {
+      keluhan_utama: pendingValues.keluhan_utama,
+      id_diagnosis: pendingValues.id_diagnosis,
+      id_procedure: pendingValues.id_procedure,
+      catatan: pendingValues.catatan,
+      keputusan: pendingValues.keputusan,
+      daftar_resep_obat: (pendingValues.daftar_resep_obat ?? []).map((item) => ({
+        id_obat: item.id_obat,
+        frekuensi: item.frekuensi,
+        durasi: item.durasi,
+        jumlah: item.jumlah,
+      })),
+    }
+    await AxiosClient.put(`/simrs/pelayanan/pemeriksaan/pendaftaran/${id}`, payload)
       .then((res) => {
         if (res?.data?.status) {
           setLoading(false)
@@ -146,6 +160,40 @@ const EditPemeriksaan = () => {
               <span className="text-gray-500 min-w-[160px]">Keputusan</span>
               <span className="text-gray-900">: {keputusanLabel}</span>
             </div>
+            {(pendingValues?.daftar_resep_obat?.length ?? 0) > 0 && (
+              <div className="flex flex-col gap-1 mt-2">
+                <span className="text-gray-500">Daftar Resep Obat</span>
+                <table className="text-sm border-collapse">
+                  <thead>
+                    <tr className="bg-gray-50">
+                      <th className="border px-2 py-1 text-left">#</th>
+                      <th className="border px-2 py-1 text-left">Nama Obat</th>
+                      <th className="border px-2 py-1 text-center">Frekuensi</th>
+                      <th className="border px-2 py-1 text-center">Durasi</th>
+                      <th className="border px-2 py-1 text-center">Jumlah</th>
+                      <th className="border px-2 py-1 text-right">Harga Total</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {pendingValues?.daftar_resep_obat?.map((item, idx) => (
+                      <tr key={item.id_obat}>
+                        <td className="border px-2 py-1">{idx + 1}</td>
+                        <td className="border px-2 py-1">{item.nama_obat}</td>
+                        <td className="border px-2 py-1 text-center">{item.frekuensi}x/hari</td>
+                        <td className="border px-2 py-1 text-center">{item.durasi} hari</td>
+                        <td className="border px-2 py-1 text-center">{item.jumlah}</td>
+                        <td className="border px-2 py-1 text-right">
+                          {new Intl.NumberFormat('id-ID', {
+                            style: 'currency',
+                            currency: 'IDR',
+                          }).format(item.harga * item.jumlah)}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
 
           <div className="flex justify-end gap-3 mt-2">
