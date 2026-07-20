@@ -68,6 +68,9 @@ const DetailOutpatient = lazy(() => import('@/pages/modules/SIM-RS/services/outp
 const EditPemeriksaan = lazy(
   () => import('@/pages/modules/SIM-RS/services/outpatient/detail/edit-pemeriksaan')
 )
+const InvoiceOutPatient = lazy(
+  () => import('@/pages/modules/SIM-RS/services/outpatient/invoice')
+)
 const InpatientPage = lazy(() => import('@/pages/modules/SIM-RS/services/inpatient'))
 const DetailInpatient = lazy(() => import('@/pages/modules/SIM-RS/services/inpatient/detail'))
 const BackHomeInpatient = lazy(() => import('@/pages/modules/SIM-RS/services/inpatient/back-home'))
@@ -304,6 +307,10 @@ export const SIMRSROUTES = [
           {
             path: 'detail/:id/edit-pemeriksaan',
             element: <EditPemeriksaan />,
+          },
+          {
+            path: 'invoice/:id',
+            element: <InvoiceOutPatient />,
           },
         ],
       },

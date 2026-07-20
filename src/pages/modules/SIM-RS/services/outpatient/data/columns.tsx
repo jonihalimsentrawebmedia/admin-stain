@@ -78,7 +78,7 @@ export const ColumnsOutpatient = () => {
       accessorKey: 'action',
       header: '',
       cell: ({ row }) => (
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center gap-2">
           <button
             onClick={() =>
               navigate(`/modules/sim-rs/services/outpatient/detail/${row.original.id_pendaftaran}`)
@@ -86,6 +86,14 @@ export const ColumnsOutpatient = () => {
             className="bg-blue-500 text-white hover:bg-blue-600 p-1.5 rounded"
           >
             <MdInfo className="size-4" />
+          </button>
+          <button
+            onClick={() =>
+              navigate(`/modules/sim-rs/services/outpatient/invoice/${row.original.id_pendaftaran}`)
+            }
+            className="bg-primary text-white hover:bg-primary/80 px-3 py-1.5 rounded text-xs font-medium"
+          >
+            Lihat Tagihan
           </button>
         </div>
       ),
