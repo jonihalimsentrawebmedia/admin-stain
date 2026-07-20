@@ -5,11 +5,13 @@ import { format } from 'date-fns'
 import { MdInfo, MdLogout } from 'react-icons/md'
 import { ButtonRoom } from '../components/ButtonRoom.tsx'
 import { HiPencil } from 'react-icons/hi'
+import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
 
 export const ColumnsInpatient = () => {
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') ?? 1)
   const limit = Number(searchParams.get('limit') ?? 10)
+  const permision = GuardCrud({ keys: 'RAWAT_INAP' })
   const navigate = useNavigate()
 
   const columns: ColumnDef<IRegistration>[] = [
@@ -55,11 +57,11 @@ export const ColumnsInpatient = () => {
         const data = row.original
         const inap = data.status_rawat_inap
 
-        if (inap === 'MENUNGGU_RUANGAN') {
+        if (inap === 'MENUNGGU_RUANGAN' && permision?.kelola) {
           return <ButtonRoom data={data} />
         }
 
-        if (inap === 'DIRAWAT') {
+        if (inap === 'DIRAWAT' && permision?.kelola) {
           return (
             <button
               onClick={() =>
@@ -95,7 +97,7 @@ export const ColumnsInpatient = () => {
           >
             <MdInfo className="size-4" />
           </button>
-          {row?.original?.status_rawat_inap === 'PULANG' && (
+          {row?.original?.status_rawat_inap === 'PULANG' && permision?.kelola && (
             <button
               onClick={() => navigate(`edit/${row.original.id_pendaftaran}`)}
               className="bg-yellow-500 text-white hover:bg-yellow-600 p-1.5 rounded"

@@ -3,11 +3,13 @@ import type { ColumnDef } from '@tanstack/react-table'
 import type { IMedicine } from '@/pages/modules/SIM-RS/pharmacy/medicine/data/types.ts'
 import { ButtonEditMedicine } from '@/pages/modules/SIM-RS/pharmacy/medicine/component/buttonEdit.tsx'
 import { ButtonDeleteMedicine } from '@/pages/modules/SIM-RS/pharmacy/medicine/component/buttonDelete.tsx'
+import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
 
 export const ColumnsMedicine = () => {
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') ?? 1)
   const limit = Number(searchParams.get('limit') ?? 10)
+  const permission = GuardCrud({ keys: 'OBAT' })
 
   const columns: ColumnDef<IMedicine>[] = [
     {
@@ -54,10 +56,12 @@ export const ColumnsMedicine = () => {
       cell: ({ row }) => {
         return (
           <>
-            <div className={'flex justify-center items-center gap-2'}>
-              <ButtonEditMedicine data={row.original} />
-              <ButtonDeleteMedicine data={row.original} />
-            </div>
+            {permission?.kelola && (
+              <div className={'flex justify-center items-center gap-2'}>
+                <ButtonEditMedicine data={row.original} />
+                <ButtonDeleteMedicine data={row.original} />
+              </div>
+            )}
           </>
         )
       },

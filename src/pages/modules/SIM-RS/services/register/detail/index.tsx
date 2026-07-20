@@ -4,12 +4,14 @@ import { UseGetDetailRegistration } from '../hooks/index.tsx'
 import { ButtonCall } from '../components/ButtonCall.tsx'
 import { UseGetPemeriksaan } from '../diagnosis/hooks/index.tsx'
 import { format } from 'date-fns'
+import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
 
 const DetailRegistration = () => {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const { detail, loading } = UseGetDetailRegistration(id ?? '')
   const { pemeriksaan } = UseGetPemeriksaan(id ?? '')
+  const permision = GuardCrud({ keys: 'PENDAFTARAN' })
 
   if (loading) {
     return (
@@ -53,43 +55,47 @@ const DetailRegistration = () => {
       <ButtonTitleGroup
         isBack
         label="Detail Pendaftaran"
-        buttonGroup={[
-          {
-            type: 'edit',
-            label: 'Edit',
-            onClick: () =>
-              navigate(`/modules/sim-rs/services/registration/edit/${detail.id_pendaftaran}`),
-          },
-          ...(detail.status === 'MENUNGGU'
+        buttonGroup={
+          permision?.kelola
             ? [
                 {
-                  type: 'custom' as const,
-                  element: <ButtonCall data={detail} />,
+                  type: 'edit',
+                  label: 'Edit',
+                  onClick: () =>
+                    navigate(`/modules/sim-rs/services/registration/edit/${detail.id_pendaftaran}`),
                 },
+                ...(detail.status === 'MENUNGGU'
+                  ? [
+                      {
+                        type: 'custom' as const,
+                        element: <ButtonCall data={detail} />,
+                      },
+                    ]
+                  : []),
+                ...(detail.status === 'DIPANGGIL'
+                  ? [
+                      {
+                        type: 'custom' as const,
+                        label: 'Pemeriksaan',
+                        element: (
+                          <button
+                            type="button"
+                            onClick={() =>
+                              navigate(
+                                `/modules/sim-rs/services/registration/diagnosis/${detail.id_pendaftaran}`
+                              )
+                            }
+                            className="px-3 py-1 rounded text-xs font-medium bg-blue-500 text-white hover:bg-blue-600"
+                          >
+                            Pemeriksaan
+                          </button>
+                        ),
+                      },
+                    ]
+                  : []),
               ]
-            : []),
-          ...(detail.status === 'DIPANGGIL'
-            ? [
-                {
-                  type: 'custom' as const,
-                  label: 'Pemeriksaan',
-                  element: (
-                    <button
-                      type="button"
-                      onClick={() =>
-                        navigate(
-                          `/modules/sim-rs/services/registration/diagnosis/${detail.id_pendaftaran}`
-                        )
-                      }
-                      className="px-3 py-1 rounded text-xs font-medium bg-blue-500 text-white hover:bg-blue-600"
-                    >
-                      Pemeriksaan
-                    </button>
-                  ),
-                },
-              ]
-            : []),
-        ]}
+            : []
+        }
       />
 
       <div className="bg-white rounded-lg border p-6">

@@ -3,12 +3,14 @@ import type { ColumnDef } from '@tanstack/react-table'
 import { format } from 'date-fns'
 import { MdInfo } from 'react-icons/md'
 import type { IRegistration } from '@/pages/modules/SIM-RS/services/register/data/types.ts'
+import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
 
 export const ColumnsOutpatient = () => {
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') ?? 1)
   const limit = Number(searchParams.get('limit') ?? 10)
   const navigate = useNavigate()
+  const permision = GuardCrud({ keys: 'RAWAT_JALAN' })
 
   const columns: ColumnDef<IRegistration>[] = [
     {
@@ -87,14 +89,18 @@ export const ColumnsOutpatient = () => {
           >
             <MdInfo className="size-4" />
           </button>
-          <button
-            onClick={() =>
-              navigate(`/modules/sim-rs/services/outpatient/invoice/${row.original.id_pendaftaran}`)
-            }
-            className="bg-primary text-white hover:bg-primary/80 px-3 py-1.5 rounded text-xs font-medium"
-          >
-            Lihat Tagihan
-          </button>
+          {permision?.kelola && (
+            <button
+              onClick={() =>
+                navigate(
+                  `/modules/sim-rs/services/outpatient/invoice/${row.original.id_pendaftaran}`
+                )
+              }
+              className="bg-primary text-white hover:bg-primary/80 px-3 py-1.5 rounded text-xs font-medium"
+            >
+              Lihat Tagihan
+            </button>
+          )}
         </div>
       ),
     },
