@@ -106,6 +106,34 @@ const DetailPatient = () => {
         </div>
 
         <div className="bg-white rounded-lg border p-6">
+          <p className="text-lg font-semibold text-primary mb-4">Sumber Biaya Pengobatan</p>
+          {detail.sumber_biaya_pengobatan.length === 0 ? (
+            <p className="text-sm text-gray-400">Belum ada sumber biaya</p>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b bg-gray-50">
+                    <th className="text-left py-3 px-4 font-medium text-gray-600">No</th>
+                    <th className="text-left py-3 px-4 font-medium text-gray-600">Sumber Biaya</th>
+                    <th className="text-left py-3 px-4 font-medium text-gray-600">No. Peserta</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {detail.sumber_biaya_pengobatan.map((item, index) => (
+                    <tr key={item.id_pasien_sumber_pembiayaan} className="border-b hover:bg-gray-50">
+                      <td className="py-3 px-4">{index + 1}</td>
+                      <td className="py-3 px-4">{item.nama_sumber_biaya}</td>
+                      <td className="py-3 px-4">{item.no_peserta ?? '-'}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+
+        <div className="bg-white rounded-lg border p-6">
           <p className="text-lg font-semibold text-primary mb-4">Kontak Darurat</p>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div>

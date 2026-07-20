@@ -7,6 +7,7 @@ import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import { UseGetPoli } from '@/pages/modules/SIM-RS/reference/poli/hooks/index.tsx'
 import { UseGetDoctor } from '@/pages/modules/SIM-RS/reference/doctor/hooks/index.tsx'
 import { DialogSelectPatient } from './DialogSelectPatient.tsx'
+import { SumberBiayaRegistrasi } from './SumberBiayaRegistrasi.tsx'
 import type { TResolverRegistration } from '../data/resolver.tsx'
 
 interface Props {
@@ -121,6 +122,13 @@ export const FormRegistration = ({ loading, form, HandleSave, isEdit, editStatus
             isRequired
             isDisabled={!idPoli}
           />
+        </div>
+
+        <div className="grid grid-cols-1 gap-4">
+          <div className="col-span-1">
+            <TitleLine className="text-2xl font-semibold text-primary" title="4. Sumber Biaya Pengobatan" />
+          </div>
+          <SumberBiayaRegistrasi form={form} isDisabled={isRestricted} />
         </div>
 
         <ButtonForm loading={loading} onCancel={() => window.history.back()} />

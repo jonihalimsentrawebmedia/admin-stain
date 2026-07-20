@@ -22,6 +22,14 @@ export const ResolverPatient = z.object({
   is_status: z.boolean().optional().nullable(),
   medical_record_number: z.string({ error: 'Nomor Rekam Medis harus diisi' }).optional().nullable(),
   tanggal_registrasi: z.string().optional().nullable(),
+  sumber_biaya_pengobatan: z
+    .array(
+      z.object({
+        id_sumber_biaya: z.string().min(1, 'Sumber biaya harus dipilih'),
+        no_peserta: z.string().optional().nullable(),
+      })
+    )
+    .optional(),
 })
 
 export type TResolverPatient = z.infer<typeof ResolverPatient>
