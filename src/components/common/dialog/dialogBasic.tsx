@@ -36,6 +36,17 @@ export const DialogBasic = (props: Props) => {
           onInteractOutside={(event) => {
             if (disableOutsideDialog) {
               event.preventDefault()
+              return
+            }
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const target = (event as any)?.detail?.originalEvent?.target as HTMLElement | undefined
+            if (target) {
+              const inNonDialogPortal = target.closest(
+                'body > div:not([data-slot="dialog-portal"])'
+              )
+              if (inNonDialogPortal) {
+                event.preventDefault()
+              }
             }
           }}
         >
