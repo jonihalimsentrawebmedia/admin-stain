@@ -11,7 +11,7 @@ import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 
 const statusOptions = [
   { label: 'Selesai', value: 'SELESAI' },
-  { label: 'Dalam Perawatan', value: 'DALAM_PERAWATAN' },
+  { label: 'Dalam Perawatan', value: 'DIPANGGIL' },
   { label: 'Menunggu', value: 'MENUNGGU' },
   { label: 'Dibatalkan', value: 'DIBATALKAN' },
 ]

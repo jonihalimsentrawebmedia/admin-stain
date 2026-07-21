@@ -11,7 +11,7 @@ import { ColumnsInpatientReport } from './data/columns.tsx'
 
 const statusOptions = [
   { label: 'Menunggu Ruangan', value: 'MENUNGGU_RUANGAN' },
-  { label: 'Dirawat', value: 'SEDANG_DIRAWAT' },
+  { label: 'Dirawat', value: 'DIRAWAT' },
   { label: 'Pulang', value: 'PULANG' },
 ]
 
