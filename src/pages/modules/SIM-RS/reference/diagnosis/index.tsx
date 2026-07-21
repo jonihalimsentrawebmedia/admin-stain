@@ -4,12 +4,14 @@ import { useSearchParams } from 'react-router-dom'
 import { UseGetDiagnosis } from './hooks/index.tsx'
 import { ColumnsDiagnosis } from './data/columns.tsx'
 import { ButtonAddDiagnosis } from './component/buttonAdd.tsx'
+import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
 
 export const DiagnosisRefPage = () => {
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
   const search = searchParams.get('search') ?? ''
+  const permission = GuardCrud({ keys: 'DIAGNOSIS' })
 
   const { diagnosis, loading, meta } = UseGetDiagnosis({
     page: page,
@@ -24,15 +26,25 @@ export const DiagnosisRefPage = () => {
       <div className={'space-y-5'}>
         <ButtonTitleGroup
           label={'Diagnosis (ICD-10)'}
-          buttonGroup={[
-            {
-              type: 'custom',
-              element: <ButtonAddDiagnosis />,
-            },
-          ]}
+          buttonGroup={
+            permission?.kelola
+              ? [
+                  {
+                    type: 'custom',
+                    element: <ButtonAddDiagnosis />,
+                  },
+                ]
+              : []
+          }
         />
 
-        <TableCustom data={diagnosis} columns={columns} loading={loading} meta={meta} />
+        <TableCustom
+          columnsName={permission?.kelola ? [''] : ['action']}
+          data={diagnosis}
+          columns={columns}
+          loading={loading}
+          meta={meta}
+        />
       </div>
     </>
   )

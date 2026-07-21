@@ -1,6 +1,6 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
-import { useSearchParams, useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { UseGetDoctor } from './hooks/index.tsx'
 import { UseGetPoli } from '@/pages/modules/SIM-RS/reference/poli/hooks/index.tsx'
 import { UseGetSpecialist } from '@/pages/modules/SIM-RS/reference/specialist/hooks/index.tsx'
@@ -8,6 +8,7 @@ import { ColumnsDoctor } from './data/columns.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { HiPlus } from 'react-icons/hi'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
+import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
 
 export const DoctorPage = () => {
   const [searchParams] = useSearchParams()
@@ -17,6 +18,7 @@ export const DoctorPage = () => {
   const id_poli = searchParams.get('id_poli') ?? ''
   const id_spesialis = searchParams.get('id_spesialis') ?? ''
   const navigate = useNavigate()
+  const permission = GuardCrud({ keys: 'DOKTER' })
 
   const { doctor, loading, meta } = UseGetDoctor({
     page: page,
@@ -48,21 +50,25 @@ export const DoctorPage = () => {
       <div className={'space-y-5'}>
         <ButtonTitleGroup
           label={'Data Dokter'}
-          buttonGroup={[
-            {
-              type: 'custom',
-              element: (
-                <Button
-                  onClick={() => navigate('/modules/sim-rs/reference/doctor/add')}
-                  className={'border-primary text-primary hover:text-primary'}
-                  variant={'outline'}
-                >
-                  <HiPlus />
-                  Tambah
-                </Button>
-              ),
-            },
-          ]}
+          buttonGroup={
+            permission?.kelola
+              ? [
+                  {
+                    type: 'custom',
+                    element: (
+                      <Button
+                        onClick={() => navigate('/modules/sim-rs/reference/doctor/add')}
+                        className={'border-primary text-primary hover:text-primary'}
+                        variant={'outline'}
+                      >
+                        <HiPlus />
+                        Tambah
+                      </Button>
+                    ),
+                  },
+                ]
+              : []
+          }
         />
 
         <TableCustom

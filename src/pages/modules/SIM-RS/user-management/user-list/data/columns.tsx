@@ -1,4 +1,4 @@
-import { useSearchParams, useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
 import type { IUserList } from './types.ts'
 import { HiPencil } from 'react-icons/hi'
@@ -6,12 +6,14 @@ import { MdInfo } from 'react-icons/md'
 import { format } from 'date-fns'
 import { ButtonDeleteUser } from '../component/buttonDelete.tsx'
 import { ButtonResetPassword } from '../component/buttonResetPassword.tsx'
+import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
 
 export const ColumnsUserList = () => {
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') ?? 1)
   const limit = Number(searchParams.get('limit') ?? 10)
   const navigate = useNavigate()
+  const permission = GuardCrud({ keys: 'DAFTAR_USER' })
 
   const columns: ColumnDef<IUserList>[] = [
     {
@@ -24,7 +26,9 @@ export const ColumnsUserList = () => {
       header: 'Nama',
       cell: ({ row }) => (
         <button
-          onClick={() => navigate(`/modules/sim-rs/user-management/user-list/detail/${row.original.id_user}`)}
+          onClick={() =>
+            navigate(`/modules/sim-rs/user-management/user-list/detail/${row.original.id_user}`)
+          }
           className="text-primary hover:underline text-left"
         >
           {row.original.nama_lengkap}
@@ -49,9 +53,7 @@ export const ColumnsUserList = () => {
       cell: ({ row }) => (
         <span
           className={`px-2 py-1 rounded-full text-xs font-medium ${
-            row.original.is_status
-              ? 'bg-green-100 text-green-700'
-              : 'bg-red-100 text-red-700'
+            row.original.is_status ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
           }`}
         >
           {row.original.is_status ? 'Aktif' : 'Tidak Aktif'}
@@ -71,24 +73,30 @@ export const ColumnsUserList = () => {
       header: '',
       cell: ({ row }) => (
         <div className={'flex justify-center items-center gap-2'}>
-          <button
-            onClick={() =>
-              navigate(`/modules/sim-rs/user-management/user-list/detail/${row.original.id_user}`)
-            }
-            className={'bg-blue-500 text-white hover:bg-blue-600 p-1.5 rounded'}
-          >
-            <MdInfo />
-          </button>
-          <button
-            onClick={() =>
-              navigate(`/modules/sim-rs/user-management/user-list/edit/${row.original.id_user}`)
-            }
-            className={'bg-yellow-500 text-white hover:bg-yellow-600 p-1.5 rounded'}
-          >
-            <HiPencil />
-          </button>
-          <ButtonResetPassword data={row.original} />
-          <ButtonDeleteUser data={row.original} />
+          {permission?.melihat && (
+            <button
+              onClick={() =>
+                navigate(`/modules/sim-rs/user-management/user-list/detail/${row.original.id_user}`)
+              }
+              className={'bg-blue-500 text-white hover:bg-blue-600 p-1.5 rounded'}
+            >
+              <MdInfo />
+            </button>
+          )}
+          {permission?.kelola && (
+            <>
+              <button
+                onClick={() =>
+                  navigate(`/modules/sim-rs/user-management/user-list/edit/${row.original.id_user}`)
+                }
+                className={'bg-yellow-500 text-white hover:bg-yellow-600 p-1.5 rounded'}
+              >
+                <HiPencil />
+              </button>
+              <ButtonResetPassword data={row.original} />
+              <ButtonDeleteUser data={row.original} />
+            </>
+          )}
         </div>
       ),
     },

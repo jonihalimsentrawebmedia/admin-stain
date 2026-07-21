@@ -4,12 +4,14 @@ import { useSearchParams } from 'react-router-dom'
 import { UseGetPoli } from './hooks/index.tsx'
 import { ColumnsPoli } from './data/columns.tsx'
 import { ButtonAddPoli } from './component/buttonAdd.tsx'
+import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
 
 export const PoliPage = () => {
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
   const search = searchParams.get('search') ?? ''
+  const permission = GuardCrud({ keys: 'POLI' })
 
   const { poli, loading, meta } = UseGetPoli({
     page: page,
@@ -24,12 +26,16 @@ export const PoliPage = () => {
       <div className={'space-y-5'}>
         <ButtonTitleGroup
           label={'Data Poli'}
-          buttonGroup={[
-            {
-              type: 'custom',
-              element: <ButtonAddPoli />,
-            },
-          ]}
+          buttonGroup={
+            permission?.kelola
+              ? [
+                  {
+                    type: 'custom',
+                    element: <ButtonAddPoli />,
+                  },
+                ]
+              : []
+          }
         />
 
         <TableCustom data={poli} columns={columns} loading={loading} meta={meta} />

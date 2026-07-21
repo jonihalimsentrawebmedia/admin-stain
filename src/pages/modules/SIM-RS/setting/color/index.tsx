@@ -9,10 +9,12 @@ import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { UseGetColorSIMRS } from './hooks/index.tsx'
 import { IoInformationCircle } from 'react-icons/io5'
+import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
 
 const ColorSettingSIMRS = () => {
   const [loading, setLoading] = useState(false)
   const { color } = UseGetColorSIMRS()
+  const permission = GuardCrud({ keys: 'PENGATURAN_WARNA' })
 
   const form = useForm()
 
@@ -60,9 +62,11 @@ const ColorSettingSIMRS = () => {
           />
 
           <div className="flex items-center gap-2">
-            <Button type="submit" disabled={loading} className={'text-white'}>
-              <Save /> Simpan
-            </Button>
+            {permission?.kelola && (
+              <Button type="submit" disabled={loading} className={'text-white'}>
+                <Save /> Simpan
+              </Button>
+            )}
           </div>
         </form>
       </Form>

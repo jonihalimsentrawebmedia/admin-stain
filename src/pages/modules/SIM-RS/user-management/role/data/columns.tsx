@@ -1,14 +1,16 @@
-import { useSearchParams, useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import type { ColumnDef } from '@tanstack/react-table'
 import type { IRole } from './types.ts'
 import { HiPencil } from 'react-icons/hi'
 import { ButtonDeleteRole } from '../component/buttonDelete.tsx'
+import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
 
 export const ColumnsRole = () => {
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') ?? 1)
   const limit = Number(searchParams.get('limit') ?? 10)
   const navigate = useNavigate()
+  const permission = GuardCrud({ keys: 'ROLE_USER' })
 
   const columns: ColumnDef<IRole>[] = [
     {
@@ -46,15 +48,19 @@ export const ColumnsRole = () => {
       cell: ({ row }) => {
         return (
           <div className={'flex justify-center items-center gap-2'}>
-            <button
-              onClick={() =>
-                navigate(`/modules/sim-rs/user-management/role/edit/${row.original.id_role}`)
-              }
-              className={'bg-yellow-500 text-white hover:bg-yellow-600 p-1.5 rounded'}
-            >
-              <HiPencil />
-            </button>
-            <ButtonDeleteRole data={row.original} />
+            {permission?.kelola && (
+              <>
+                <button
+                  onClick={() =>
+                    navigate(`/modules/sim-rs/user-management/role/edit/${row.original.id_role}`)
+                  }
+                  className={'bg-yellow-500 text-white hover:bg-yellow-600 p-1.5 rounded'}
+                >
+                  <HiPencil />
+                </button>
+                <ButtonDeleteRole data={row.original} />
+              </>
+            )}
           </div>
         )
       },
