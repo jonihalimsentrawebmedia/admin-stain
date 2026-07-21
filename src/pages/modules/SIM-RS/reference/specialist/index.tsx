@@ -4,12 +4,14 @@ import { useSearchParams } from 'react-router-dom'
 import { UseGetSpecialist } from './hooks/index.tsx'
 import { ColumnsSpecialist } from './data/columns.tsx'
 import { ButtonAddSpecialist } from './component/buttonAdd.tsx'
+import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
 
 export const SpecialistPage = () => {
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
   const search = searchParams.get('search') ?? ''
+  const permission = GuardCrud({ keys: 'SPESIALIS' })
 
   const { specialist, loading, meta } = UseGetSpecialist({
     page: page,
@@ -24,15 +26,25 @@ export const SpecialistPage = () => {
       <div className={'space-y-5'}>
         <ButtonTitleGroup
           label={'Spesialis Dokter'}
-          buttonGroup={[
-            {
-              type: 'custom',
-              element: <ButtonAddSpecialist />,
-            },
-          ]}
+          buttonGroup={
+            permission?.kelola
+              ? [
+                  {
+                    type: 'custom',
+                    element: <ButtonAddSpecialist />,
+                  },
+                ]
+              : []
+          }
         />
 
-        <TableCustom data={specialist} columns={columns} loading={loading} meta={meta} />
+        <TableCustom
+          columnsName={permission?.kelola ? [] : ['action']}
+          data={specialist}
+          columns={columns}
+          loading={loading}
+          meta={meta}
+        />
       </div>
     </>
   )

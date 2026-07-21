@@ -120,11 +120,12 @@ export function SelectCustom({
             <FormControl>
               <Select
                 menuPortalTarget={menuPortalTarget && document.body}
+                menuPosition={menuPortalTarget ? 'fixed' : 'absolute'}
                 {...field}
                 styles={{
                   menuPortal: (base) => ({
                     ...base,
-                    zIndex: menuPortalTarget ? 99 : base.zIndex,
+                    zIndex: menuPortalTarget ? 9999 : base.zIndex,
                      maxWidth:"500px",
                   }),
                   ...customStyles,

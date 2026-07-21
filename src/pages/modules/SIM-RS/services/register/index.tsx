@@ -67,12 +67,12 @@ export const RegisterPage = () => {
         }
       />
       <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
-        <TabsList className="w-full flex flex-row items-start p-0 gap-0 bg-transparent border-b-2 border-[#CDA327] rounded-none h-auto overflow-x-auto flex-nowrap justify-start">
+        <TabsList className="w-full flex flex-row items-start p-0 gap-0 bg-transparent border-b-2 border-primary rounded-none h-auto overflow-x-auto flex-nowrap justify-start">
           {statusList.map((s) => (
             <TabsTrigger
               key={s.key}
               value={s.key}
-              className="flex-1 flex items-center justify-center gap-2 px-4 py-2 h-10 rounded-none text-base font-medium border-0 shadow-none data-[state=active]:rounded-t-lg data-[state=active]:bg-[#278374] data-[state=active]:text-white data-[state=inactive]:text-[#252525] data-[state=inactive]:bg-transparent"
+              className="flex-1 flex items-center justify-center gap-2 px-4 py-2 h-10 rounded-none text-base font-medium border-0 shadow-none data-[state=active]:rounded-t-lg data-[state=active]:bg-primary data-[state=active]:text-white data-[state=inactive]:text-[#252525] data-[state=inactive]:bg-transparent"
             >
               <span>{s.label}</span>
               <span className="flex items-center justify-center w-6 h-6 bg-[#CD2738] text-white text-xs rounded-full">

@@ -3,11 +3,13 @@ import type { ColumnDef } from '@tanstack/react-table'
 import type { ISumberBiaya } from '@/pages/modules/SIM-RS/reference/source-medical-treatment/data/types.ts'
 import { ButtonEditSumberBiaya } from '@/pages/modules/SIM-RS/reference/source-medical-treatment/component/buttonEdit.tsx'
 import { ButtonDeleteSumberBiaya } from '@/pages/modules/SIM-RS/reference/source-medical-treatment/component/buttonDelete.tsx'
+import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
 
 export const ColumnsSumberBiaya = () => {
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') ?? 1)
   const limit = Number(searchParams.get('limit') ?? 10)
+  const permission = GuardCrud({ keys: 'SUMBER_BIAYA_PENGOBATAN' })
 
   const columns: ColumnDef<ISumberBiaya>[] = [
     {
@@ -39,8 +41,12 @@ export const ColumnsSumberBiaya = () => {
         return (
           <>
             <div className={'flex justify-center items-center gap-2'}>
-              <ButtonEditSumberBiaya data={row.original} />
-              <ButtonDeleteSumberBiaya data={row.original} />
+              {permission?.kelola && (
+                <>
+                  <ButtonEditSumberBiaya data={row.original} />
+                  <ButtonDeleteSumberBiaya data={row.original} />
+                </>
+              )}
             </div>
           </>
         )

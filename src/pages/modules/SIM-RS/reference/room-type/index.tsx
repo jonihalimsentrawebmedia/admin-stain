@@ -4,12 +4,14 @@ import { useSearchParams } from 'react-router-dom'
 import { UseGetRoomType } from './hooks/index.tsx'
 import { ColumnsRoomType } from './data/columns.tsx'
 import { ButtonAddRoomType } from './component/buttonAdd.tsx'
+import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
 
 export const RoomTypePage = () => {
   const [searchParams] = useSearchParams()
   const page = searchParams.get('page') ?? '1'
   const limit = searchParams.get('limit') ?? '10'
   const search = searchParams.get('search') ?? ''
+  const permission = GuardCrud({ keys: 'JENIS_RUANGAN' })
 
   const { roomType, loading, meta } = UseGetRoomType({
     page: page,
@@ -24,15 +26,25 @@ export const RoomTypePage = () => {
       <div className={'space-y-5'}>
         <ButtonTitleGroup
           label={'Jenis Ruangan'}
-          buttonGroup={[
-            {
-              type: 'custom',
-              element: <ButtonAddRoomType />,
-            },
-          ]}
+          buttonGroup={
+            permission?.kelola
+              ? [
+                  {
+                    type: 'custom',
+                    element: <ButtonAddRoomType />,
+                  },
+                ]
+              : []
+          }
         />
 
-        <TableCustom data={roomType} columns={columns} loading={loading} meta={meta} />
+        <TableCustom
+          columnsName={permission?.kelola ? [''] : ['action']}
+          data={roomType}
+          columns={columns}
+          loading={loading}
+          meta={meta}
+        />
       </div>
     </>
   )

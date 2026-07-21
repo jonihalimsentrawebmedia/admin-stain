@@ -5,6 +5,7 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { UseGetRole } from './hooks/index.tsx'
 import { ColumnsRole } from './data/columns.tsx'
+import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
 
 export const RolePage = () => {
   const [searchParams] = useSearchParams()
@@ -12,6 +13,7 @@ export const RolePage = () => {
   const limit = searchParams.get('limit') ?? '10'
   const search = searchParams.get('search') ?? ''
   const navigate = useNavigate()
+  const permission = GuardCrud({ keys: 'ROLE_USER' })
 
   const { role, meta, loading } = UseGetRole({ page, limit, search })
   const columns = ColumnsRole()
@@ -20,23 +22,33 @@ export const RolePage = () => {
     <div className={'space-y-5'}>
       <ButtonTitleGroup
         label={'Role User'}
-        buttonGroup={[
-          {
-            type: 'custom',
-            element: (
-              <Button
-                onClick={() => navigate('add')}
-                className={'border-primary text-primary hover:text-primary'}
-                variant={'outline'}
-              >
-                <HiPlus />
-                Tambah
-              </Button>
-            ),
-          },
-        ]}
+        buttonGroup={
+          permission?.kelola
+            ? [
+                {
+                  type: 'custom',
+                  element: (
+                    <Button
+                      onClick={() => navigate('add')}
+                      className={'border-primary text-primary hover:text-primary'}
+                      variant={'outline'}
+                    >
+                      <HiPlus />
+                      Tambah
+                    </Button>
+                  ),
+                },
+              ]
+            : []
+        }
       />
-      <TableCustom data={role} columns={columns} loading={loading} meta={meta} />
+      <TableCustom
+        columnsName={permission?.kelola ? [''] : ['action']}
+        data={role}
+        columns={columns}
+        loading={loading}
+        meta={meta}
+      />
     </div>
   )
 }

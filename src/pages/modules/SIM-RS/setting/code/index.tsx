@@ -9,11 +9,13 @@ import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { UseGetCodeSIMRS } from './hooks/index.tsx'
 import { IoInformationCircle } from 'react-icons/io5'
+import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
 
 const CodeSettingSIMRS = () => {
   const [isEdit, setIsEdit] = useState(false)
   const [loading, setLoading] = useState(false)
   const { code } = UseGetCodeSIMRS()
+  const permission = GuardCrud({ keys: 'PENOMORAN_REKAM_MEDIS' })
 
   const form = useForm()
 
@@ -58,7 +60,7 @@ const CodeSettingSIMRS = () => {
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <p className="text-xl sm:text-2xl text-[#444] font-medium">Pengaturan Kode Rekam Medis</p>
-        {!isEdit && (
+        {!isEdit && permission?.kelola && (
           <Button variant="outline" onClick={() => setIsEdit(true)}>
             <Edit /> Edit
           </Button>
@@ -115,7 +117,8 @@ const CodeSettingSIMRS = () => {
                 <p className="text-lg font-bold text-blue-900 mt-1">{contohKode}</p>
                 <p className="text-xs text-blue-500 mt-1">
                   Format: <span className="font-mono">{kode}</span> +{' '}
-                  <span className="font-mono">{String(1).padStart(Number(jumlahDigit), '0')}</span> = nomor urut dimulai dari 1
+                  <span className="font-mono">{String(1).padStart(Number(jumlahDigit), '0')}</span>{' '}
+                  = nomor urut dimulai dari 1
                 </p>
               </div>
             )}

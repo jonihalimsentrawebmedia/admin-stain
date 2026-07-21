@@ -3,11 +3,13 @@ import type { ColumnDef } from '@tanstack/react-table'
 import type { ISpecialist } from '@/pages/modules/SIM-RS/reference/specialist/data/types.ts'
 import { ButtonEditSpecialist } from '@/pages/modules/SIM-RS/reference/specialist/component/buttonEdit.tsx'
 import { ButtonDeleteSpecialist } from '@/pages/modules/SIM-RS/reference/specialist/component/buttonDelete.tsx'
+import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
 
 export const ColumnsSpecialist = () => {
   const [searchParams] = useSearchParams()
   const page = Number(searchParams.get('page') ?? 1)
   const limit = Number(searchParams.get('limit') ?? 10)
+  const permission = GuardCrud({ keys: 'SPESIALIS' })
 
   const columns: ColumnDef<ISpecialist>[] = [
     {
@@ -28,8 +30,12 @@ export const ColumnsSpecialist = () => {
         return (
           <>
             <div className={'flex justify-center items-center gap-2'}>
-              <ButtonEditSpecialist data={row.original} />
-              <ButtonDeleteSpecialist data={row.original} />
+              {permission?.kelola && (
+                <>
+                  <ButtonEditSpecialist data={row.original} />
+                  <ButtonDeleteSpecialist data={row.original} />
+                </>
+              )}
             </div>
           </>
         )

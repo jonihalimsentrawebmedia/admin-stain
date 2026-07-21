@@ -23,11 +23,11 @@ const DetailOutpatient = () => {
       { accessorKey: 'nama_obat', header: 'Nama Obat' },
       { accessorKey: 'satuan', header: 'Satuan' },
       {
-        accessorKey: 'harga',
+        accessorKey: 'harga_satuan',
         header: 'Harga',
         cell: ({ row }) =>
           new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(
-            row.original.harga
+            row.original.harga_satuan
           ),
       },
       {
@@ -46,7 +46,7 @@ const DetailOutpatient = () => {
         header: 'Harga Total',
         cell: ({ row }) =>
           new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(
-            row.original.harga * row.original.jumlah
+            row.original.harga_satuan * row.original.jumlah
           ),
       },
     ],

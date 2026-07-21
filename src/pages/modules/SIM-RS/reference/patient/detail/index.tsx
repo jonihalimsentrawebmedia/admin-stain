@@ -1,11 +1,13 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { UseGetDetailPatient } from '../hooks/index.tsx'
+import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
 
 const DetailPatient = () => {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const { detail, loading } = UseGetDetailPatient(id ?? '')
+  const permission = GuardCrud({ keys: 'PASIEN' })
 
   if (loading) {
     return (
@@ -32,13 +34,18 @@ const DetailPatient = () => {
         <ButtonTitleGroup
           isBack
           label={'Detail Pasien'}
-          buttonGroup={[
-            {
-              type: 'edit',
-              label: 'Edit',
-              onClick: () => navigate(`/modules/sim-rs/reference/patient/edit/${detail.id_pasien}`),
-            },
-          ]}
+          buttonGroup={
+            permission?.kelola
+              ? [
+                  {
+                    type: 'edit',
+                    label: 'Edit',
+                    onClick: () =>
+                      navigate(`/modules/sim-rs/reference/patient/edit/${detail.id_pasien}`),
+                  },
+                ]
+              : []
+          }
         />
 
         <div className="bg-white rounded-lg border p-6">
@@ -121,7 +128,10 @@ const DetailPatient = () => {
                 </thead>
                 <tbody>
                   {detail.sumber_biaya_pengobatan.map((item, index) => (
-                    <tr key={item.id_pasien_sumber_pembiayaan} className="border-b hover:bg-gray-50">
+                    <tr
+                      key={item.id_pasien_sumber_pembiayaan}
+                      className="border-b hover:bg-gray-50"
+                    >
                       <td className="py-3 px-4">{index + 1}</td>
                       <td className="py-3 px-4">{item.nama_sumber_biaya}</td>
                       <td className="py-3 px-4">{item.no_peserta ?? '-'}</td>

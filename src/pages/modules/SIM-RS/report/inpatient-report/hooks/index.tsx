@@ -32,7 +32,7 @@ export const UseGetInpatientReportList = (props?: Props) => {
   if (limit) ParamsSearch.append('limit', limit ?? '0')
   if (id_poli) ParamsSearch.append('id_poli', id_poli ?? '')
   if (id_dokter) ParamsSearch.append('id_dokter', id_dokter ?? '')
-  if (status) ParamsSearch.append('status', status ?? '')
+  if (status) ParamsSearch.append('status_rawat_inap', status ?? '')
 
   const { data, isLoading, isFetching } = useQuery<{
     data: IInpatientReportList[]

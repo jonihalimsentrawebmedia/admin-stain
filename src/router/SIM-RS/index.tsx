@@ -1,5 +1,4 @@
 import { lazy } from 'react'
-import { MedicinePage } from '@/pages/modules/SIM-RS/pharmacy/medicine'
 
 const UserSimRSProfilePage = lazy(() =>
   import('@/pages/modules/SIM-RS/component/updated-detail').then((m) => ({
@@ -75,6 +74,11 @@ const InpatientPage = lazy(() => import('@/pages/modules/SIM-RS/services/inpatie
 const DetailInpatient = lazy(() => import('@/pages/modules/SIM-RS/services/inpatient/detail'))
 const BackHomeInpatient = lazy(() => import('@/pages/modules/SIM-RS/services/inpatient/back-home'))
 const UpdatedInpatient = lazy(() => import('@/pages/modules/SIM-RS/services/inpatient/updated'))
+const CreateCPPT = lazy(() => import('@/pages/modules/SIM-RS/services/inpatient/detail/cppt/create'))
+const EditCPPT = lazy(() => import('@/pages/modules/SIM-RS/services/inpatient/detail/cppt/edit'))
+const InvoiceInPatient = lazy(
+  () => import('@/pages/modules/SIM-RS/services/inpatient/invoice')
+)
 const Dashboard = lazy(() => import('@/pages/modules/SIM-RS/services/dashboard'))
 const DoctorSchedulePage = lazy(() =>
   import('@/pages/modules/SIM-RS/schedule').then((m) => ({ default: m.DoctorSchedulePage }))
@@ -108,6 +112,9 @@ const UserListPage = lazy(() =>
 const CreateUser = lazy(() => import('@/pages/modules/SIM-RS/user-management/user-list/created'))
 const UpdateUser = lazy(() => import('@/pages/modules/SIM-RS/user-management/user-list/updated'))
 const DetailUser = lazy(() => import('@/pages/modules/SIM-RS/user-management/user-list/detail'))
+const MedicinePage = lazy(() =>
+  import('@/pages/modules/SIM-RS/pharmacy/medicine').then((m) => ({ default: m.MedicinePage }))
+)
 
 export const SIMRSROUTES = [
   {
@@ -326,12 +333,24 @@ export const SIMRSROUTES = [
             element: <DetailInpatient />,
           },
           {
+            path: 'detail/:id/cppt/create',
+            element: <CreateCPPT />,
+          },
+          {
+            path: 'detail/:id/cppt/edit/:idCppt',
+            element: <EditCPPT />,
+          },
+          {
             path: 'back-home/:id',
             element: <BackHomeInpatient />,
           },
           {
             path: 'edit/:id',
             element: <UpdatedInpatient />,
+          },
+          {
+            path: 'invoice/:id',
+            element: <InvoiceInPatient />,
           },
         ],
       },

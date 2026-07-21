@@ -2,11 +2,13 @@ import { useNavigate, useParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { UseGetDetailUser } from '../hooks/index.tsx'
 import { format } from 'date-fns'
+import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
 
 const DetailUser = () => {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const { detail, loading } = UseGetDetailUser(id ?? '')
+  const permission = GuardCrud({ keys: 'DAFTAR_USER' })
 
   if (loading) {
     return (
@@ -30,14 +32,18 @@ const DetailUser = () => {
         <ButtonTitleGroup
           isBack
           label={'Detail User'}
-          buttonGroup={[
-            {
-              type: 'edit',
-              label: 'Edit',
-              onClick: () =>
-                navigate(`/modules/sim-rs/user-management/user-list/edit/${detail.id_user}`),
-            },
-          ]}
+          buttonGroup={
+            permission?.kelola
+              ? [
+                  {
+                    type: 'edit',
+                    label: 'Edit',
+                    onClick: () =>
+                      navigate(`/modules/sim-rs/user-management/user-list/edit/${detail.id_user}`),
+                  },
+                ]
+              : []
+          }
         />
 
         <div className="bg-white rounded-lg border p-6">

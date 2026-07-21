@@ -237,7 +237,7 @@ const DetailRegistration = () => {
                             {new Intl.NumberFormat('id-ID', {
                               style: 'currency',
                               currency: 'IDR',
-                            }).format(item.harga)}
+                            }).format(item.harga_satuan)}
                           </td>
                           <td className="border px-3 py-2 text-center">{item.frekuensi}x/hari</td>
                           <td className="border px-3 py-2 text-center">{item.durasi} hari</td>
@@ -246,7 +246,7 @@ const DetailRegistration = () => {
                             {new Intl.NumberFormat('id-ID', {
                               style: 'currency',
                               currency: 'IDR',
-                            }).format(item.harga * item.jumlah)}
+                            }).format(item.harga_satuan * item.jumlah)}
                           </td>
                         </tr>
                       ))}

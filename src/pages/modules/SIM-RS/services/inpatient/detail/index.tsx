@@ -16,6 +16,8 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { format } from 'date-fns'
+import { ButtonMoveRoom } from '../components/ButtonMoveRoom.tsx'
+import SectionCPPT from './cppt/index.tsx'
 
 const ResolverRoom = z.object({
   id_ruangan: z.string().min(1, 'Ruangan harus dipilih'),
@@ -171,9 +173,7 @@ const DetailInpatient = () => {
                     type: 'edit' as const,
                     label: 'Edit Data',
                     onClick: () =>
-                      navigate(
-                        `/modules/sim-rs/services/outpatient/detail/${id}/edit-pemeriksaan`
-                      ),
+                      navigate(`/modules/sim-rs/services/outpatient/detail/${id}/edit-pemeriksaan`),
                   },
                 ]
               : []
@@ -377,7 +377,6 @@ const DetailInpatient = () => {
           </div>
         </div>
       </div>
-
       {pemeriksaan && (
         <div className="bg-white rounded-lg border p-6">
           <p className="text-lg font-semibold text-primary mb-4">Data Pemeriksaan</p>
@@ -428,17 +427,20 @@ const DetailInpatient = () => {
 
       {detail.riwayat_ruangan && detail.riwayat_ruangan.length > 0 && (
         <div className="bg-white rounded-lg border p-6">
-          <p className="text-lg font-semibold text-primary mb-4">Riwayat Ruangan</p>
+          <div className="flex items-center justify-between mb-4">
+            <p className="text-lg font-semibold text-primary">Riwayat Ruangan</p>
+            {detail.status_rawat_inap === 'DIRAWAT' && <ButtonMoveRoom data={detail} />}
+          </div>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
-              <thead>
+              <thead className={'bg-primary'}>
                 <tr className="border-b">
-                  <th className="text-left py-2 px-3 font-medium text-gray-600">Ruangan</th>
-                  <th className="text-left py-2 px-3 font-medium text-gray-600">Jenis</th>
-                  <th className="text-left py-2 px-3 font-medium text-gray-600">Tanggal Masuk</th>
-                  <th className="text-left py-2 px-3 font-medium text-gray-600">Tanggal Keluar</th>
-                  <th className="text-left py-2 px-3 font-medium text-gray-600">Status</th>
-                  <th className="text-left py-2 px-3 font-medium text-gray-600">Catatan</th>
+                  <th className="text-left py-2 px-3 font-medium text-white">Ruangan</th>
+                  <th className="text-left py-2 px-3 font-medium text-white">Jenis</th>
+                  <th className="text-left py-2 px-3 font-medium text-white">Tanggal Masuk</th>
+                  <th className="text-left py-2 px-3 font-medium text-white">Tanggal Keluar</th>
+                  <th className="text-left py-2 px-3 font-medium text-white">Status</th>
+                  <th className="text-left py-2 px-3 font-medium text-white">Catatan</th>
                 </tr>
               </thead>
               <tbody>
@@ -475,6 +477,8 @@ const DetailInpatient = () => {
           </div>
         </div>
       )}
+
+      <SectionCPPT detail={detail} detailId={id ?? ''} />
     </div>
   )
 }
