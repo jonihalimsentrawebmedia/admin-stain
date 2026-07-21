@@ -54,7 +54,15 @@ const UpdateRegistration = () => {
         id_procedure: pemeriksaan.id_procedure ?? [],
         catatan: pemeriksaan.catatan ?? '',
         keputusan: pemeriksaan.keputusan,
-        daftar_resep_obat: pemeriksaan.daftar_resep_obat ?? [],
+        daftar_resep_obat: (pemeriksaan.daftar_resep_obat ?? []).map((item) => ({
+          id_obat: item.id_obat,
+          nama_obat: item.nama_obat,
+          satuan: item.satuan,
+          harga: item.harga_satuan,
+          frekuensi: item.frekuensi,
+          durasi: item.durasi,
+          jumlah: item.jumlah,
+        })),
       })
     }
   }, [pemeriksaan, diagnosisForm, isSelesai])

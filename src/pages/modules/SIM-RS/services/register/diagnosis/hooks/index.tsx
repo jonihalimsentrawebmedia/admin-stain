@@ -18,7 +18,7 @@ export interface IResepObatItem {
   frekuensi: number
   durasi: number
   jumlah: number
-  harga: number
+  harga_satuan: number
 }
 
 export interface IPemeriksaan {

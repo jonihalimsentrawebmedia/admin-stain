@@ -105,6 +105,14 @@ export const ColumnsInpatient = () => {
               <HiPencil className="size-4" />
             </button>
           )}
+          {row?.original?.status_rawat_inap === 'PULANG' && permision?.kelola && (
+            <button
+              onClick={() => navigate(`invoice/${row.original.id_pendaftaran}`)}
+              className="bg-primary text-white hover:bg-primary/80 px-3 py-1.5 rounded text-xs font-medium"
+            >
+              Lihat Tagihan
+            </button>
+          )}
         </div>
       ),
     },
