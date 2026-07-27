@@ -67,11 +67,11 @@ export const GenerateMenu = () => {
           key: 'OBAT',
           path: `${baseDomain}/pharmacy/medicine`,
         },
-        // {
-        //   id: 92,
-        //   name: 'Resep Obat',
-        //   path: `${baseDomain}/pharmacy/prescription`,
-        // },
+        {
+          id: 92,
+          name: 'Resep Obat',
+          path: `${baseDomain}/pharmacy/prescription`,
+        },
         // {
         //   id: 93,
         //   name: 'Riwayat Penyerahan Obat',

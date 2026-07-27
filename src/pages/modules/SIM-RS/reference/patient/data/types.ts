@@ -3,6 +3,8 @@ export interface ISumberBiayaPengobatan {
   id_pasien: string
   id_sumber_biaya: string
   no_peserta: string | null
+  is_default: boolean
+  persentase: number
   nama_sumber_biaya: string
   kode: string
   nama: string

@@ -334,7 +334,7 @@ const FormPatient = (props: Props) => {
                 title={'Sumber Biaya Pengobatan'}
               />
             </div>
-            <SumberBiayaList form={form} name="sumber_biaya_pengobatan" showPersentase={false} />
+            <SumberBiayaList form={form} name="sumber_biaya_pengobatan" showPersentase={false} showIsDefault />
           </div>
 
           {isEdit && (

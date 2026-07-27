@@ -27,6 +27,7 @@ export const ResolverPatient = z.object({
       z.object({
         id_sumber_biaya: z.string().min(1, 'Sumber biaya harus dipilih'),
         no_peserta: z.string().optional().nullable(),
+        is_default: z.boolean().optional(),
       })
     )
     .optional(),

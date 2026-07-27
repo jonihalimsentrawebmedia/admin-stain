@@ -44,7 +44,7 @@ export const ButtonCall = ({ data }: Props) => {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className={`px-3 py-1 rounded text-xs font-medium ${nextColor}`}
+        className={`p-2.5 px-5 rounded text-xs font-medium ${nextColor}`}
       >
         {nextLabel}
       </button>

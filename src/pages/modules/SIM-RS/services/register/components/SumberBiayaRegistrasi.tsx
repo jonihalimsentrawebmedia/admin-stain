@@ -29,6 +29,18 @@ export const SumberBiayaRegistrasi = ({ form, name = 'sumber_biaya', isDisabled 
     prevIdPasien.current = idPasien
   }, [idPasien])
 
+  useEffect(() => {
+    if (PriceTreatment.length > 0 && fields.length === 0) {
+      const defaultItem = PriceTreatment.find((item) => item.is_default)
+      if (defaultItem) {
+        append({
+          id_pasien_sumber_pembiayaan: defaultItem.id_pasien_sumber_pembiayaan,
+          persentase: defaultItem.persentase ?? 0,
+        })
+      }
+    }
+  }, [PriceTreatment])
+
   const sumberBiayaData =
     PriceTreatment?.map((row) => ({
       label: row.nama,

@@ -2,7 +2,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { UseGetDetailRegistration } from '../hooks/index.tsx'
 import { ButtonCall } from '../components/ButtonCall.tsx'
-import { UseGetPemeriksaan } from '../diagnosis/hooks/index.tsx'
 import { format } from 'date-fns'
 import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
 
@@ -10,7 +9,6 @@ const DetailRegistration = () => {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
   const { detail, loading } = UseGetDetailRegistration(id ?? '')
-  const { pemeriksaan } = UseGetPemeriksaan(id ?? '')
   const permision = GuardCrud({ keys: 'PENDAFTARAN' })
 
   if (loading) {
@@ -162,99 +160,31 @@ const DetailRegistration = () => {
         </div>
       </div>
 
-      {pemeriksaan && (
+      {detail.sumber_biaya && detail.sumber_biaya.length > 0 && (
         <div className="bg-white rounded-lg border p-6">
-          <p className="text-lg font-semibold text-primary mb-4">Data Pemeriksaan</p>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <div>
-              <p className="text-sm text-gray-500">No. Pemeriksaan</p>
-              <p className="text-base font-medium">{pemeriksaan.no_pemeriksaan}</p>
-            </div>
-            <div>
-              <p className="text-sm text-gray-500">Status</p>
-              <p className="text-base font-medium">{statusLabel}</p>
-            </div>
-            <div className="col-span-2">
-              <p className="text-sm text-gray-500">Keluhan Utama</p>
-              <p className="text-base font-medium">{pemeriksaan.keluhan_utama}</p>
-            </div>
-            <div>
-              <p className="text-sm text-gray-500">Diagnosa</p>
-              <p className="text-base font-medium">
-                {pemeriksaan.daftar_diagnosis?.length > 0
-                  ? pemeriksaan.daftar_diagnosis.map((d) => d.nama_diagnosis).join(', ')
-                  : '-'}
-              </p>
-            </div>
-            <div>
-              <p className="text-sm text-gray-500">Rencana Tindakan</p>
-              <p className="text-base font-medium">
-                {pemeriksaan.daftar_procedure?.length > 0
-                  ? pemeriksaan.daftar_procedure.map((p) => p.nama_procedure).join(', ')
-                  : '-'}
-              </p>
-            </div>
-            {pemeriksaan.catatan && (
-              <div className="col-span-2">
-                <p className="text-sm text-gray-500">Catatan</p>
-                <p className="text-base font-medium">{pemeriksaan.catatan}</p>
-              </div>
-            )}
-            <div>
-              <p className="text-sm text-gray-500">Keputusan</p>
-              <p className="text-base font-medium">
-                {pemeriksaan.keputusan === 'RAWAT_JALAN' ? 'Rawat Jalan' : 'Rawat Inap'}
-              </p>
-            </div>
+          <p className="text-lg font-semibold text-primary mb-4">Data Sumber Biaya Pengobatan</p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm border-collapse">
+              <thead>
+                <tr className="bg-primary">
+                  <th className="border px-3 py-2 text-white text-left w-10">#</th>
+                  <th className="border px-3 py-2 text-white text-left">Kode</th>
+                  <th className="border px-3 py-2 text-white text-left">Nama Sumber Biaya</th>
+                  <th className="border px-3 py-2 text-white text-center">Persentase</th>
+                </tr>
+              </thead>
+              <tbody>
+                {detail.sumber_biaya.map((item, idx) => (
+                  <tr key={item.id_pendaftaran_sumber_biaya} className="hover:bg-gray-50">
+                    <td className="border px-3 py-2">{idx + 1}</td>
+                    <td className="border px-3 py-2">{item.kode_sumber_biaya}</td>
+                    <td className="border px-3 py-2">{item.nama_sumber_biaya}</td>
+                    <td className="border px-3 py-2 text-center">{item.persentase}%</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-
-          {detail.status === 'SELESAI' &&
-            pemeriksaan.keputusan === 'RAWAT_JALAN' &&
-            (pemeriksaan.daftar_resep_obat?.length ?? 0) > 0 && (
-              <div className="mt-6">
-                <p className="text-sm font-semibold text-gray-700 mb-2">Daftar Resep Obat</p>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-sm border-collapse">
-                    <thead>
-                      <tr className="bg-gray-100">
-                        <th className="border px-3 py-2 text-left w-10">#</th>
-                        <th className="border px-3 py-2 text-left">Nama Obat</th>
-                        <th className="border px-3 py-2 text-left">Satuan</th>
-                        <th className="border px-3 py-2 text-right">Harga</th>
-                        <th className="border px-3 py-2 text-center">Frekuensi</th>
-                        <th className="border px-3 py-2 text-center">Durasi</th>
-                        <th className="border px-3 py-2 text-center">Jumlah</th>
-                        <th className="border px-3 py-2 text-right">Harga Total</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {pemeriksaan.daftar_resep_obat.map((item, idx) => (
-                        <tr key={item.id_obat} className="hover:bg-gray-50">
-                          <td className="border px-3 py-2">{idx + 1}</td>
-                          <td className="border px-3 py-2">{item.nama_obat}</td>
-                          <td className="border px-3 py-2">{item.satuan}</td>
-                          <td className="border px-3 py-2 text-right">
-                            {new Intl.NumberFormat('id-ID', {
-                              style: 'currency',
-                              currency: 'IDR',
-                            }).format(item.harga_satuan)}
-                          </td>
-                          <td className="border px-3 py-2 text-center">{item.frekuensi}x/hari</td>
-                          <td className="border px-3 py-2 text-center">{item.durasi} hari</td>
-                          <td className="border px-3 py-2 text-center">{item.jumlah}</td>
-                          <td className="border px-3 py-2 text-right font-medium">
-                            {new Intl.NumberFormat('id-ID', {
-                              style: 'currency',
-                              currency: 'IDR',
-                            }).format(item.harga_satuan * item.jumlah)}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            )}
         </div>
       )}
 

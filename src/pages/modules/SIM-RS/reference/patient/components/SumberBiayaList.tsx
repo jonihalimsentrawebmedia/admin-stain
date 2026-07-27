@@ -2,15 +2,23 @@ import { useFieldArray, type UseFormReturn } from 'react-hook-form'
 import { UseGetSumberBiaya } from '@/pages/modules/SIM-RS/reference/source-medical-treatment/hooks'
 import { SelectBasicInput } from '@/components/common/form/selectBasicInput.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
+import { FormControl, FormField, FormItem, FormLabel } from '@/components/ui/form.tsx'
+import { Switch } from '@/components/ui/switch.tsx'
 import { FaTrash } from 'react-icons/fa'
 
 interface Props {
   form: UseFormReturn<any>
   name?: string
   showPersentase?: boolean
+  showIsDefault?: boolean
 }
 
-export const SumberBiayaList = ({ form, name = 'sumber_biaya', showPersentase = true }: Props) => {
+export const SumberBiayaList = ({
+  form,
+  name = 'sumber_biaya',
+  showPersentase = true,
+  showIsDefault = false,
+}: Props) => {
   const { sumberBiaya } = UseGetSumberBiaya({ limit: '100' })
 
   const { fields, append, remove } = useFieldArray({
@@ -24,27 +32,35 @@ export const SumberBiayaList = ({ form, name = 'sumber_biaya', showPersentase = 
       value: row.id_sumber_biaya,
     })) ?? []
 
+  const handleAdd = () => {
+    if (showPersentase) {
+      append({ id_sumber_biaya: '', persentase: 0, is_default: false })
+    } else {
+      append({ id_sumber_biaya: '', no_peserta: '', is_default: false })
+    }
+  }
+
+  const handleDefaultChange = (selectedIndex: number, checked: boolean) => {
+    if (!checked) {
+      form.setValue(`${name}.${selectedIndex}.is_default`, false)
+      return
+    }
+    fields.forEach((_, idx) => {
+      form.setValue(`${name}.${idx}.is_default`, idx === selectedIndex)
+    })
+  }
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <label className="text-sm font-medium">Sumber Biaya Pengobatan</label>
-        {showPersentase ? (
-          <button
-            type="button"
-            onClick={() => append({ id_sumber_biaya: '', persentase: 0 })}
-            className="px-3 py-1.5 text-sm rounded border border-primary text-primary hover:bg-primary hover:text-white transition-colors"
-          >
-            + Tambah
-          </button>
-        ) : (
-          <button
-            type="button"
-            onClick={() => append({ id_sumber_biaya: '', no_peserta: '' })}
-            className="px-3 py-1.5 text-sm rounded border border-primary text-primary hover:bg-primary hover:text-white transition-colors"
-          >
-            + Tambah
-          </button>
-        )}
+        <button
+          type="button"
+          onClick={handleAdd}
+          className="px-3 py-1.5 text-sm rounded border border-primary text-primary hover:bg-primary hover:text-white transition-colors"
+        >
+          + Tambah
+        </button>
       </div>
       {fields.length === 0 && (
         <p className="text-sm text-gray-400">Belum ada sumber biaya ditambahkan</p>
@@ -89,6 +105,28 @@ export const SumberBiayaList = ({ form, name = 'sumber_biaya', showPersentase = 
                 />
               )}
             </div>
+            {showIsDefault && (
+              <FormField
+                name={`${name}.${index}.is_default`}
+                control={form.control}
+                render={({ field: switchField }) => (
+                  <FormItem className="flex flex-col gap-2 pt-1">
+                    <FormLabel className="whitespace-pre-line text-gray-600 text-sm">
+                      Default
+                    </FormLabel>
+                    <FormControl>
+                      <Switch
+                        checked={switchField.value}
+                        onCheckedChange={(checked) => {
+                          switchField.onChange(checked)
+                          handleDefaultChange(index, checked)
+                        }}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            )}
             {fields.length > 1 && (
               <button
                 type="button"
