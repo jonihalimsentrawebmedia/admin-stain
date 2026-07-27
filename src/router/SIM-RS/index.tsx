@@ -115,6 +115,12 @@ const DetailUser = lazy(() => import('@/pages/modules/SIM-RS/user-management/use
 const MedicinePage = lazy(() =>
   import('@/pages/modules/SIM-RS/pharmacy/medicine').then((m) => ({ default: m.MedicinePage }))
 )
+const PrescriptionPage = lazy(() =>
+  import('@/pages/modules/SIM-RS/pharmacy/prescription').then((m) => ({ default: m.PrescriptionPage }))
+)
+const DetailPrescription = lazy(() =>
+  import('@/pages/modules/SIM-RS/pharmacy/prescription/detail')
+)
 
 export const SIMRSROUTES = [
   {
@@ -448,6 +454,19 @@ export const SIMRSROUTES = [
       {
         path: 'medicine',
         element: <MedicinePage />,
+      },
+      {
+        path: 'prescription',
+        children: [
+          {
+            index: true,
+            element: <PrescriptionPage />,
+          },
+          {
+            path: 'detail/:id',
+            element: <DetailPrescription />,
+          },
+        ],
       },
     ],
   },
