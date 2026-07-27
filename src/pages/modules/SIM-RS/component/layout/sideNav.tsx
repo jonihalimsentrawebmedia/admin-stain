@@ -62,7 +62,7 @@ export function SideNavSIMRS({ collapsed, setCollapsed }: Props) {
       collectOpenGroups(row, 'root', i, map)
     })
     return map
-  }, [pathname])
+  }, [pathname, MenuList])
 
   const groups = { ...defaultOpenGroups, ...openGroups }
 
@@ -79,7 +79,7 @@ export function SideNavSIMRS({ collapsed, setCollapsed }: Props) {
     if (!activeHasParentGroup) {
       setOpenGroups({})
     }
-  }, [pathname])
+  }, [pathname, MenuList])
 
   const toggleGroup = (groupId: string) => {
     setOpenGroups((prev) => {
