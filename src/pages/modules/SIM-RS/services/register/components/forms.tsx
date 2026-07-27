@@ -20,7 +20,7 @@ interface Props {
 
 export const FormRegistration = ({ loading, form, HandleSave, isEdit, editStatus }: Props) => {
   const isRestricted = isEdit && (editStatus === 'MENUNGGU' || editStatus === 'DIPANGGIL')
-  const { poli } = UseGetPoli({ limit: '100' })
+  const { poli } = UseGetPoli({ limit: '0', page: '0' })
   const idPoli = form.watch('id_poli')
 
   const { doctor } = UseGetDoctor({
