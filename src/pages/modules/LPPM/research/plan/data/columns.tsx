@@ -31,7 +31,7 @@ export const ColumnsResearchPlan = () => {
       cell: ({ row }) => (
         <Link
           to={`document/${row?.original?.id_rencana_induk_penelitian_kategori}`}
-          className={'p-1.5 rounded border border-primary text-primary hover:text-primary px-4'}
+          className={'p-1.5 flex items-center rounded border border-primary text-primary hover:text-primary px-4'}
         >
           Lihat Dokumen
         </Link>

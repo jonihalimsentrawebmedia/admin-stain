@@ -81,7 +81,7 @@ export const FormVisionMission = (props: props) => {
           />
 
           <p className="text-yellow-500">Visi</p>
-          <div className={'grid grid-cols-[240px_1fr] gap-4'}>
+          <div className={'grid grid-cols-1 sm:grid-cols-[240px_1fr] gap-4'}>
             <FormUploadImage form={form} name={'url_gambar_visi'} />
             <RichText
               form={form}
@@ -92,7 +92,7 @@ export const FormVisionMission = (props: props) => {
             />
           </div>
           <p className="text-yellow-500">Misi</p>
-          <div className={'grid grid-cols-[240px_1fr] gap-4'}>
+          <div className={'grid grid-cols-1 sm:grid-cols-[240px_1fr] gap-4'}>
             <FormUploadImage form={form} name={'url_gambar_misi'} />
             <RichText
               form={form}

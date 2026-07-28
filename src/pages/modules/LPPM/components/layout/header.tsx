@@ -31,13 +31,13 @@ export function HeaderUnit(props: Props) {
 
   return (
     <header className="py-4 px-5 bg-[#E9FFF1] border-b border-green-200 flex items-center justify-between w-full">
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 sm:gap-4">
         <Link to={'/modules'}>
-          <img src={module?.gambar} alt="gambar" className="size-14" />
+          <img src={module?.gambar} alt="gambar" className="size-10 sm:size-14" />
         </Link>
         <div className="flex flex-col">
-          <p className="text-sm font-semibold text-primary">Manajemen Pengelolaan Website</p>
-          <p className="text-2xl font-semibold">{session?.nama_lembaga}</p>
+          <p className="text-[10px] sm:text-sm font-semibold text-primary">Manajemen Pengelolaan Website</p>
+          <p className="text-xs sm:text-sm md:text-lg lg:text-2xl font-semibold truncate max-w-[120px] sm:max-w-[200px] md:max-w-[300px] lg:max-w-none">{session?.nama_lembaga}</p>
         </div>
       </div>
       <div className="flex items-center gap-5">

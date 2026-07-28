@@ -47,10 +47,10 @@ export const ButtonDeleteStaffLPPM = (data?: IGroupStaff) => {
         open={open}
         setOpen={setOpen}
       >
-        <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
-          <p className="text-gray-500">Nama Kelompok</p>
-          <p>{data?.nama_kelompok}</p>
-          <p className="text-gray-500">Urutan</p>
+        <div className={'grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-2 sm:gap-4'}>
+          <p className="text-gray-500 text-sm sm:text-base">Nama Kelompok</p>
+          <p className="break-words">{data?.nama_kelompok}</p>
+          <p className="text-gray-500 text-sm sm:text-base">Urutan</p>
           <p>{data?.urutan}</p>
         </div>
 

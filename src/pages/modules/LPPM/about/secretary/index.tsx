@@ -96,14 +96,14 @@ export const ProfileSecretaryPage = () => {
               <img
                 src={detailSecretary?.url_gambar}
                 alt={'leader'}
-                className={'size-[320px] w-[240px] object-cover'}
+                className={'w-full sm:w-[240px] h-auto sm:h-[320px] object-cover rounded max-w-[240px]'}
               />
             )}
 
-            <div className="grid grid-cols-[12rem_1fr] gap-4">
-              <p className="text-gray-500">Nama Sekertaris *</p>
-              <p>{detailSecretary?.nama_sekretaris}</p>
-              <p className="text-gray-500">Deskripsi *</p>
+            <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-2 sm:gap-4">
+              <p className="text-gray-500 text-sm sm:text-base">Nama Sekertaris *</p>
+              <p className="break-words">{detailSecretary?.nama_sekretaris}</p>
+              <p className="text-gray-500 text-sm sm:text-base">Deskripsi *</p>
               <RenderHTMLContent content={detailSecretary?.deskripsi ?? ''} />
             </div>
           </div>

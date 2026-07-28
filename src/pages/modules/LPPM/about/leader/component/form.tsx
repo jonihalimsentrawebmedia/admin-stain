@@ -62,7 +62,7 @@ export const FormProfileInformation = (props: FormProps) => {
             ]}
           />
 
-          <div className="w-fit">
+          <div className="w-full sm:w-fit">
             <FormUploadPhotoImage form={form} name={'url_gambar'} />
           </div>
 

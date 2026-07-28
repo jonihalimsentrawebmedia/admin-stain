@@ -37,24 +37,24 @@ export const VisionMissionAbout = () => {
 
             <div className="flex flex-col gap-5 mt-5">
               <p className="text-yellow-500">Visi</p>
-              <div className="flex items-start gap-x-5">
+              <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-x-5">
                 {visionMission?.url_gambar_visi && (
                   <img
                     src={visionMission?.url_gambar_visi}
                     alt="visi"
-                    className={'size-[240px] w-[240px]'}
+                    className={'w-full sm:w-[240px] h-auto sm:h-[240px] object-cover rounded'}
                   />
                 )}
                 <RenderHTMLContent content={visionMission?.visi ?? ''} />
               </div>
 
               <p className="text-yellow-500">Misi</p>
-              <div className="flex items-start gap-x-5">
+              <div className="flex flex-col sm:flex-row items-start gap-3 sm:gap-x-5">
                 {visionMission?.url_gambar_misi && (
                   <img
                     src={visionMission?.url_gambar_misi}
                     alt="visi"
-                    className={'size-[240px] w-[240px]'}
+                    className={'w-full sm:w-[240px] h-auto sm:h-[240px] object-cover rounded'}
                   />
                 )}
                 <RenderHTMLContent content={visionMission?.misi ?? ''} />

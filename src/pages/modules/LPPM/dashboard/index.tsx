@@ -77,8 +77,8 @@ export default function DashboardLPPM() {
 
   return (
     <div className=" mt-4 flex flex-col gap-4 ">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
+        <h1 className="text-lg sm:text-xl lg:text-2xl font-semibold">
           Selamat Datang <span className="text-primary">{profileUser?.nama_lengkap}</span>
         </h1>
         <Link
@@ -90,7 +90,7 @@ export default function DashboardLPPM() {
             <FiExternalLink />
             Buka Website
           </Button>
-          <p className="text-primary text-sm">{session?.domain}</p>
+          <p className="text-primary text-xs sm:text-sm truncate max-w-[200px] sm:max-w-none">{session?.domain}</p>
         </Link>
       </div>
 
@@ -136,7 +136,7 @@ export default function DashboardLPPM() {
         </Card>
       </div>
 
-      <div className="grid grid-cols-1  gap-6">
+      <div className="grid grid-cols-1 gap-6">
         <Card className={isEditor ? 'xl:col-span-4' : 'xl:col-span-3'}>
           <CardHeader>
             <CardTitle className={'text-primary'}>Tren Kunjungan Website</CardTitle>
@@ -150,20 +150,24 @@ export default function DashboardLPPM() {
               onChange={setMode}
               isRow
             />
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={chartData ?? []} margin={{ bottom: 60 }}>
-                <XAxis
-                  dataKey="name"
-                  angle={mode === 'harian' ? -75 : mode == 'bulanan' ? -45 : 0}
-                  textAnchor="end"
-                  interval={0}
-                  height={60}
-                />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="value" fill="#297D56" />
-              </BarChart>
-            </ResponsiveContainer>
+            <div className="overflow-x-auto">
+              <div className="min-w-[600px] h-[250px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={chartData ?? []} margin={{ bottom: 60 }}>
+                    <XAxis
+                      dataKey="name"
+                      angle={mode === 'harian' ? -75 : mode == 'bulanan' ? -45 : 0}
+                      textAnchor="end"
+                      interval={0}
+                      height={60}
+                    />
+                    <YAxis />
+                    <Tooltip />
+                    <Bar dataKey="value" fill="#297D56" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
           </CardContent>
         </Card>
       </div>
