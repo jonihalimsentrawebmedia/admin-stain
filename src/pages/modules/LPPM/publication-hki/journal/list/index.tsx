@@ -109,17 +109,17 @@ export const ListJournalPage = () => {
             ]}
           />
 
-          <div className="border rounded-full border-blue-500 w-fit text-sm flex items-center gap-1.5 px-4 p-1.5 text-blue-500 bg-blue-50">
-            <MdInfo />
-            Masukkan URL atau link publikasi atau jurnal perguruan tinggi anda.
+          <div className="border rounded-full border-blue-500 w-full sm:w-fit text-sm flex items-center gap-1.5 px-4 p-1.5 text-blue-500 bg-blue-50">
+            <MdInfo className="shrink-0" />
+            <span className="text-xs sm:text-sm">Masukkan URL atau link publikasi atau jurnal perguruan tinggi anda.</span>
           </div>
 
-          <div className="grid grid-cols-[12rem_1fr] gap-4">
-            <p className="text-gray-500">URL/Link</p>
+          <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-2 sm:gap-4">
+            <p className="text-gray-500 text-sm sm:text-base">URL/Link</p>
             <Link
               to={linkJournal?.url ?? '#'}
               target={'_blank'}
-              className={'underline underline-offset-4 decoration-blue-500 text-blue-500'}
+              className={'underline underline-offset-4 decoration-blue-500 text-blue-500 break-words'}
             >
               {linkJournal?.url}
             </Link>
