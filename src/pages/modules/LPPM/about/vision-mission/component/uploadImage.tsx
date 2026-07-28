@@ -45,9 +45,9 @@ export default function FormUploadImage<T extends FieldValues>({ form, name }: P
     <div className="w-full space-y-2">
       <div className={clsx('relative overflow-hidden space-y-2')}>
         {file ? (
-          <img src={file} alt="Preview" className="w-full h-60 object-cover rounded" />
+          <img src={file} alt="Preview" className="w-full h-40 sm:h-60 object-cover rounded" />
         ) : (
-          <div className="w-full h-60 bg-gray-100 flex items-center justify-center text-gray-400">
+          <div className="w-full h-40 sm:h-60 bg-gray-100 flex items-center justify-center text-gray-400">
             Belum ada gambar
           </div>
         )}

@@ -95,14 +95,14 @@ export const ProfileLeaderPage = () => {
               <img
                 src={profileLeader?.url_gambar}
                 alt={'leader'}
-                className={'size-[320px] w-[240px] object-cover'}
+                className={'w-full sm:w-[240px] h-auto sm:h-[320px] object-cover rounded max-w-[240px]'}
               />
             )}
 
-            <div className="grid grid-cols-[12rem_1fr] gap-4">
-              <p className="text-gray-500">Nama Ketua *</p>
-              <p>{profileLeader?.nama_ketua}</p>
-              <p className="text-gray-500">Deskripsi *</p>
+            <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-2 sm:gap-4">
+              <p className="text-gray-500 text-sm sm:text-base">Nama Ketua *</p>
+              <p className="break-words">{profileLeader?.nama_ketua}</p>
+              <p className="text-gray-500 text-sm sm:text-base">Deskripsi *</p>
               <RenderHTMLContent content={profileLeader?.deskripsi ?? ''} />
             </div>
           </div>

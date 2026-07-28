@@ -26,7 +26,7 @@ export const ColumnsMemberStaff = () => {
           <img
             src={row.original.url_gambar}
             alt="foto"
-            className={'w-[100px] rounded h-[140px] object-cover'}
+            className={'w-[60px] sm:w-[100px] rounded h-[84px] sm:h-[140px] object-cover'}
           />
         )
       },

@@ -134,8 +134,8 @@ export const FormMemberStaff = (props: FormProps) => {
             />
           )}
 
-          <div className="grid grid-cols-[12rem_1fr] gap-5">
-            <div />
+          <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-5">
+            <div className="hidden sm:block" />
             <UploadPasPhoto
               label={'Foto Profil (4x6)'}
               name={'url_gambar'}

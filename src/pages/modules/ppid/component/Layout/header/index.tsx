@@ -31,20 +31,20 @@ export const HeaderLayoutPPID = () => {
         <div
           className={`w-full mx-auto max-w-7xl px-4 py-2 bg-[url(/Background.png)] bg-cover bg-center`}
         >
-          <div className="w-full flex gap-4 items-center justify-between  max-w-7xl mx-auto">
+          <div className="w-full flex gap-2 sm:gap-4 items-center justify-between max-w-7xl mx-auto">
             <div className="flex items-center gap-2">
               <img
                 src={module?.gambar}
                 alt="gambar"
-                className={'size-20 w-20 object-cover rounded-full'}
+                className={'size-10 sm:size-14 lg:size-20 object-cover rounded-full'}
               />
               <div className={'flex flex-col'}>
-                <p className="text-2xl font-semibold text-white">{session?.nama_unit}</p>
-                <p className="text-white text-xs">{session?.nama_universitas}</p>
+                <p className="text-xs sm:text-sm lg:text-2xl font-semibold text-white truncate max-w-[120px] sm:max-w-[200px] lg:max-w-none">{session?.nama_unit}</p>
+                <p className="text-white text-[10px] sm:text-xs truncate max-w-[120px] sm:max-w-[200px] lg:max-w-none">{session?.nama_universitas}</p>
               </div>
             </div>
 
-            <div className="flex gap-4 items-center">
+            <div className="flex gap-1 sm:gap-4 items-center">
               <HeaderMenuMobile />
 
               <Link to={'/modules'}>
@@ -56,8 +56,8 @@ export const HeaderLayoutPPID = () => {
               ) : (
                 <Popover>
                   <PopoverTrigger asChild>
-                    <div className="bg-white px-3 py-1.5 rounded-lg flex gap-2 items-center">
-                      <Avatar className={'size-7'}>
+                    <div className="bg-white px-2 sm:px-3 py-1.5 rounded-lg flex gap-2 items-center">
+                      <Avatar className={'size-6 sm:size-7'}>
                         <AvatarImage
                           src={profile?.gambar}
                           alt="@shadcn"
@@ -67,7 +67,7 @@ export const HeaderLayoutPPID = () => {
                           <User2 className="text-gray-300" />
                         </AvatarFallback>
                       </Avatar>
-                      <div className={'flex flex-col gap-1'}>
+                      <div className={'hidden sm:flex flex-col gap-1'}>
                         <p className={'text-xs whitespace-nowrap'}>{profile?.nama_lengkap}</p>
                         <div className="text-primary text-xs">{profile?.jabatan}</div>
                       </div>
