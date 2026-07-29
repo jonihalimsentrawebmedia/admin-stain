@@ -21,11 +21,11 @@ export default function MainLayoutProdi() {
         <div className="flex flex-1 overflow-hidden">
           <SidebarProdi collapsed={collapsed} isMobile={isMobile} setCollapsed={setCollapsed} />
 
-          <main className="flex-1 overflow-auto">
-            <div className="p-4 min-h-[calc(100vh-135px)]">
+          <main className="flex-1 overflow-x-hidden overflow-auto">
+            <div className="p-4 min-h-[calc(100dvh-135px)]">
               <Outlet />
             </div>
-            <footer className={'bg-white shadow mt-5 text-center border'}>
+            <footer className={'bg-white shadow mt-5 text-center border p-2 text-xs lg:text-sm'}>
               Admin Website © {new Date().getFullYear()}
             </footer>
           </main>

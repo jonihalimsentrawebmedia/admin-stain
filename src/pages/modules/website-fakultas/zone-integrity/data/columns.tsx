@@ -31,7 +31,7 @@ const ColumnsZoneIntegrity = () => {
           <Link
             to={`detail/${row?.original?.id_zona_integritas_kategori}`}
             className={
-              'border-primary border p-1.5 w-fit rounded text-sm text-primary hover:text-primary flex items-center gap-1.5'
+              'border-primary whitespace-nowrap border p-1.5 w-fit rounded text-sm text-primary hover:text-primary flex items-center gap-1.5'
             }
           >
             <FaForward />

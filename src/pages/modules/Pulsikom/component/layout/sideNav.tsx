@@ -6,6 +6,7 @@ import { ChevronRight } from 'lucide-react'
 
 interface Props {
   collapsed: boolean
+  setCollapsed: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 type MenuItem = {
@@ -15,7 +16,7 @@ type MenuItem = {
   child?: MenuItem[]
 }
 
-export function SideNavPulsikom({ collapsed }: Props) {
+export function SideNavPulsikom({ collapsed, setCollapsed }: Props) {
   const location = useLocation()
   const pathname = location.pathname
 
@@ -95,13 +96,26 @@ export function SideNavPulsikom({ collapsed }: Props) {
     })
   }
 
+  const handleLinkClick = () => {
+    if (window.innerWidth < 1024) {
+      setCollapsed(true)
+    }
+  }
+
   return (
-    <div
-      className={cn(
-        `bg-primary text-white h-full transition-all duration-300 absolute z-50 lg:relative ${collapsed ? '' : 'pl-[20px] pr-2'}`,
-        collapsed ? 'w-0 hidden lg:block lg:w-14' : 'w-72'
+    <>
+      {!collapsed && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={() => setCollapsed(true)}
+        />
       )}
-    >
+      <div
+        className={cn(
+          `bg-primary text-white h-full transition-all duration-300 absolute z-50 lg:relative ${collapsed ? '' : 'pl-[20px] pr-2'}`,
+          collapsed ? 'w-0 hidden lg:block lg:w-14' : 'w-72'
+        )}
+      >
       <div className="space-y-2 overflow-y-auto py-4 overflow-auto h-[calc(100vh-110px)]">
         {MenuListFaculty.map((row, idx) => {
           const groupId = makeGroupId('root', idx, row.name)
@@ -151,19 +165,20 @@ export function SideNavPulsikom({ collapsed }: Props) {
                 {!collapsed && isGroupOpen && (
                   <ul className="border-white/30 pl-4 w-full">
                     {row.child.map((child, childIdx) => (
-                      <TreeNodeWrapper
-                        length={row?.child.length}
-                        key={makeGroupId(groupId, childIdx, child.name)}
-                        item={child}
-                        parentGroupId={groupId}
-                        index={childIdx}
-                        depth={1}
-                        makeGroupId={makeGroupId}
-                        groups={groups}
-                        toggleGroup={toggleGroup}
-                        isActivePath={isActivePath}
-                        collapsed={collapsed}
-                      />
+                      <div key={makeGroupId(groupId, childIdx, child.name)} onClick={handleLinkClick}>
+                        <TreeNodeWrapper
+                          length={row?.child.length}
+                          item={child}
+                          parentGroupId={groupId}
+                          index={childIdx}
+                          depth={1}
+                          makeGroupId={makeGroupId}
+                          groups={groups}
+                          toggleGroup={toggleGroup}
+                          isActivePath={isActivePath}
+                          collapsed={collapsed}
+                        />
+                      </div>
                     ))}
                   </ul>
                 )}
@@ -186,7 +201,7 @@ export function SideNavPulsikom({ collapsed }: Props) {
           )
 
           return row.path ? (
-            <Link key={groupId} to={row.path}>
+            <Link key={groupId} to={row.path} onClick={handleLinkClick}>
               {content}
             </Link>
           ) : (
@@ -194,7 +209,8 @@ export function SideNavPulsikom({ collapsed }: Props) {
           )
         })}
       </div>
-    </div>
+      </div>
+    </>
   )
 }
 

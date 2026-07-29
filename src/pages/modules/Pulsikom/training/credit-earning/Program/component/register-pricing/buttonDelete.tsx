@@ -56,7 +56,7 @@ export const ButtonDeleteRegisterPricing = (props: Props) => {
         open={open}
         setOpen={setOpen}
       >
-        <div className="grid grid-cols-[12rem_1fr] gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-5">
           <p className="text-gray-500">Judul</p>
           <p>{data?.nama_biaya}</p>
           <p className="text-gray-500">Urutan</p>

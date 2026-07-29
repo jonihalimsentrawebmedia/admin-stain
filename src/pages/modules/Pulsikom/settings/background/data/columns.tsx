@@ -29,7 +29,7 @@ export const ColumnsBackground = () => {
             <img
               src={data?.url_gambar}
               alt="gambar"
-              className={'w-[300px] h-[150px] object-cover'}
+              className={'w-full lg:w-[300px] h-[150px] object-cover'}
             />
           </>
         )
@@ -49,7 +49,7 @@ export const ColumnsBackground = () => {
       cell: ({ row }) => {
         const data = row?.original
         return (
-          <div className={'flex items-center gap-2 flex-col'}>
+          <div className={'flex items-center gap-2 flex-row lg:flex-col'}>
             <ButtonEditBackgroundUnit data={data} />
             <ButtonDeleteBackgroundUnit data={data} />
           </div>

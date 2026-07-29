@@ -70,7 +70,7 @@ const ButtonEditContentEntrance = (props: props) => {
         <HiPencil />
       </button>
 
-      <DialogBasic title={'Hapus Konten'} open={open} setOpen={setOpen} className={'min-w-5xl'}>
+      <DialogBasic title={'Edit Konten'} open={open} setOpen={setOpen} className={'w-full lg:min-w-5xl'}>
         <FormContentEntrance
           form={form}
           open={open}

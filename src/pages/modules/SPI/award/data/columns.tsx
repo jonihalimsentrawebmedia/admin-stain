@@ -26,7 +26,7 @@ export const ColumnsAward = () => {
           <img
             src={row?.original?.url_gambar}
             alt="gambar"
-            className="w-[360px] h-[255px] object-cover"
+            className="min-w-[360px] h-[255px] object-cover"
           />
         )
       },

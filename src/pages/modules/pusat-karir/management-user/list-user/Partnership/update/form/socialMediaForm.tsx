@@ -98,7 +98,7 @@ export const FormSocialMedia = (props: Props) => {
 
           <div
             className={
-              'text-blue-700 border border-blue-500 p-1.5 px-3 rounded-full w-fit flex gap-2 items-center'
+              'text-blue-700 border border-blue-500 p-1.5 px-3 rounded-full w-full sm:w-fit flex gap-2 items-center'
             }
           >
             <MdInfo className={'text-primary-500  size-4'} />
@@ -141,7 +141,7 @@ export const FormSocialMedia = (props: Props) => {
             />
           </div>
 
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
             <Button
               variant={'outline'}
               className={'border-primary text-primary hover:text-primary'}

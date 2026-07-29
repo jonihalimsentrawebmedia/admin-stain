@@ -64,7 +64,7 @@ export const ButtonDeleteBackgroundUnit = (props: props) => {
           <img
             src={data?.url_gambar}
             alt="img"
-            className={'lg:max-w-[400px] object-contain h-[200px] mx-auto'}
+            className={'w-full lg:max-w-[400px] object-contain h-auto max-h-[200px] mx-auto'}
           />
           <ButtonTitleGroup
             label={''}

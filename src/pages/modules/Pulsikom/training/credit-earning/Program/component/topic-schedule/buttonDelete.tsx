@@ -57,7 +57,7 @@ export const ButtonDeleteTopicSchedule = (props: Props) => {
         open={open}
         setOpen={setOpen}
       >
-        <div className="grid grid-cols-[12rem_1fr] gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-5">
           <p className="text-gray-500">Judul</p>
           <p>{data?.judul_topik_bahasan}</p>
           <p className="text-gray-500">Deskripsi</p>

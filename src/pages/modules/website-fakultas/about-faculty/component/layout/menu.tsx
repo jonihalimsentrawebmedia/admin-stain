@@ -73,7 +73,7 @@ const Menu = () => {
   ])
 
   return (
-    <div className="border w-[300px] p-2 flex shadow-lg flex-col gap-2">
+    <div className="border w-full md:w-[300px] p-2 flex shadow-lg flex-col gap-2 shrink-0">
       {data.map((item, index) => (
         <Link
           key={item.name + index}

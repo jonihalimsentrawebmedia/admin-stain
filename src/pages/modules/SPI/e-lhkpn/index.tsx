@@ -51,7 +51,7 @@ export const ELHKPNDetailPage = () => {
 
   return (
     <>
-      <div className="space-y-5 bg-white p-5">
+      <div className="space-y-5 bg-white p-3 sm:p-5">
         {isEdit ? (
           <Form {...form}>
             <form className={'flex flex-col gap-4'} onSubmit={form.handleSubmit(HandleSave)}>
@@ -101,11 +101,11 @@ export const ELHKPNDetailPage = () => {
               ]}
             />
 
-            <div className="flex items-start gap-x-5 bg-white">
+            <div className="flex flex-col lg:flex-row items-start gap-5 bg-white">
               <img
                 alt={'E-LHKPN'}
                 src={ELHKPN?.url_gambar ?? '#'}
-                className={'w-[480px] h-[360px] object-cover'}
+                className={'w-full lg:w-[480px] h-auto lg:h-[360px] object-cover'}
                 width={480}
                 height={360}
               />

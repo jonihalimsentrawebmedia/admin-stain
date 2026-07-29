@@ -53,7 +53,7 @@ export const SidenavSubjectCurriculum = (props: Props) => {
   }, [elements, tabValue, setSearchParams])
 
   return (
-    <div>
+    <div className="overflow-hidden">
       <Tabs
         value={tabValue}
         onValueChange={(value) => {
@@ -70,24 +70,22 @@ export const SidenavSubjectCurriculum = (props: Props) => {
             return params
           })
         }}
-        className="grid grid-cols-[15rem_1fr] gap-x-5 relative"
+        className="lg:grid lg:grid-cols-[15rem_1fr] gap-x-5 gap-y-4"
       >
-        <TabsList className="flex p-4 bg-white border shadow rounded flex-col gap-2.5 w-full h-fit">
-          {elements.map((item) => (
-            <TabsTrigger
-              className={`
-                w-full rounded data-[state=active]:border-black border
-                flex items-center justify-start p-2
-                
-              `}
-              key={item.id}
-              value={item.value}
-            >
-              <IconTitleText className={item.value === tabValue ? 'fill-black' : 'fill-gray-500'} />
-              {item.label}
-            </TabsTrigger>
-          ))}
-        </TabsList>
+        <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0 lg:mx-0 lg:px-0">
+          <TabsList className="flex p-4 bg-white border shadow rounded flex-row lg:flex-col gap-2.5 w-max lg:w-full lg:h-fit">
+            {elements.map((item) => (
+              <TabsTrigger
+                className="shrink-0 whitespace-nowrap rounded data-[state=active]:border-black border flex items-center justify-start p-2"
+                key={item.id}
+                value={item.value}
+              >
+                <IconTitleText className={item.value === tabValue ? 'fill-black' : 'fill-gray-500'} />
+                {item.label}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </div>
 
         {elements.map((item) => (
           <TabsContent key={item.id} value={item.value}>

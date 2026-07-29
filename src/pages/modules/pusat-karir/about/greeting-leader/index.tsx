@@ -94,11 +94,11 @@ export const ProfileGreetingLeaderPage = () => {
               <img
                 src={profileLeader?.url_photo}
                 alt={'leader'}
-                className={'size-[320px] w-[240px] object-cover'}
+                className={'w-[180px] sm:w-[240px] h-[240px] sm:h-[320px] object-cover'}
               />
             )}
 
-            <div className="grid grid-cols-[12rem_1fr] gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-4">
               <p className="text-gray-500">Nama *</p>
               <p>{profileLeader?.nama_lengkap}</p>
               <p className="text-gray-500">Deskripsi *</p>

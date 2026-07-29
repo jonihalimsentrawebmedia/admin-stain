@@ -74,7 +74,7 @@ export const FormAdvantage = (prop: Props) => {
               isRow
               isRequired
             />
-            <div className="grid grid-cols-[12rem_1fr] gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-5">
               <div />
               <p className="text-xs text-blue-500">
                 Maksimak 150 Karakter. Text ini akan muncul pada Dekripsi Keunggulan di halaman

@@ -52,7 +52,7 @@ export const CreatePartnership = () => {
   }, [TabsData])
   return (
     <>
-      <div className="w-full h-full bg-white p-5">
+      <div className="w-full h-full bg-white p-3 sm:p-5">
         <ButtonTitleGroup
           label={'Tambah User - Mitra Kerja'}
           buttonGroup={[
@@ -68,7 +68,7 @@ export const CreatePartnership = () => {
           ]}
         />
 
-        <div className="w-fit rounded-full mt-4 p-2 px-5 border border-blue-700 flex items-center gap-2">
+        <div className="w-full sm:w-fit rounded-full mt-4 p-2 px-5 border border-blue-700 flex items-start sm:items-center gap-2">
           <MdInfo className={'size-6 text-blue-700'} />
           <ul className={'list-disc pl-5 text-sm text-blue-700'}>
             <li>Pasitkan data yang anda isi benar.</li>
@@ -80,7 +80,7 @@ export const CreatePartnership = () => {
         </div>
 
         <Tabs className={'mt-5'} value={tabsActive} onValueChange={(e) => setTabsActive(e)}>
-          <TabsList className={'bg-white rounded w-fit h-full! flex gap-x-4'}>
+          <TabsList className={'bg-white rounded w-full! sm:w-fit h-full! flex overflow-x-auto'}>
             {TabsData?.map((row, k) => {
               const isLocked = k > lastCompletedIndex + 1
 
@@ -90,7 +90,7 @@ export const CreatePartnership = () => {
                   disabled={isLocked}
                   value={row?.value}
                   className={clsx(
-                    'shadow-none! border! border-primary rounded-full text-gray-400 p-1.5 px-3',
+                    'shadow-none! border! border-primary rounded-full text-gray-400 p-1.5 px-3 shrink-0 whitespace-nowrap',
                     'group data-[state=active]:text-primary',
                     row?.status ? 'text-primary' : ''
                   )}

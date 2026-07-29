@@ -84,9 +84,9 @@ const AboutProdiView = () => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(HandlerSave)}>
         <div className="flex flex-col gap-4">
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="text-primary text-2xl font-medium">Tentang Program Studi</div>
-            <div className="flex gap-4">
+            <div className="flex flex-wrap gap-3">
               <ButtonGoToGuide
                 titleGuide={'Tentang Program Studi'}
                 valueGuide="FAKULTAS_AKADEMIK_PROGRAM_STUDI_TENTANG"
@@ -132,7 +132,7 @@ const AboutProdiView = () => {
               <li>Jenis .jpg/.jpeg/.png</li>
               <li>Max 2 MB</li>
             </ul>
-            <div className="grid grid-cols-1 md:grid-cols-3 mt-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-4 gap-4">
               {image.map((item, index) => (
                 <ImageAbout
                   key={index}

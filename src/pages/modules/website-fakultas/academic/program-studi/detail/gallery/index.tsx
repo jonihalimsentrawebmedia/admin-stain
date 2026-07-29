@@ -51,7 +51,7 @@ export const ProdiGallery = () => {
   return (
     <>
       <div className={'space-y-5'}>
-        <div className="flex gap-4 items-center justify-between">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-2xl font-semibold text-primary">Galeri</p>
 
           <ButtonGoToGuide

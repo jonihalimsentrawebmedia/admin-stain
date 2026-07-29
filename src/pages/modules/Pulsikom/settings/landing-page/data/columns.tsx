@@ -29,7 +29,7 @@ export const UnitLandingPageColumns = () => {
             <img
               src={data?.gambar_url}
               alt="gambar"
-              className={'w-[300px] h-[150px] object-cover'}
+              className={'min-w-[300px] h-[150px] object-cover'}
             />
           </>
         )

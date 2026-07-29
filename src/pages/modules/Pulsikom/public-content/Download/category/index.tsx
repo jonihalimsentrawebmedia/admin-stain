@@ -45,7 +45,7 @@ export const CategoryDownloadPulsikom = () => {
               ]}
               zIndex={'z-10'}
               name={'limit'}
-              selectClassName={'w-[10rem]'}
+              selectClassName={'w-full lg:w-[10rem]'}
             />
           }
           data={categoryDownload}

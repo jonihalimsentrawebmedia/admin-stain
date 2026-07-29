@@ -28,7 +28,7 @@ export const ColumnsSpecialization = () => {
         return (
           <Link
             to={`${row?.original?.id_spesialisasi}/sub-specialization`}
-            className={'border border-primary text-primary p-1.5 w-fit rounded'}
+            className={'border border-primary flex items-center whitespace-nowrap text-primary p-1.5 w-fit rounded'}
           >
             Lihat Sub Spesialisasi
           </Link>

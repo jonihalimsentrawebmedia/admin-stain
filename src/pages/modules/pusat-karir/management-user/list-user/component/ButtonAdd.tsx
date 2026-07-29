@@ -25,7 +25,7 @@ export const BottonSelectTypeUser = () => {
       </Button>
 
       <DialogBasic
-        className={'rounded min-w-xl'}
+        className={'rounded max-w-2xl'}
         open={open}
         setOpen={setOpen}
         title={'Tambah User Sebagai'}

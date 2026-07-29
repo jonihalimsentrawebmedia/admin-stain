@@ -88,7 +88,7 @@ export const ButtonPublish = (props: Props) => {
         title={'Buka Pendaftaran'}
         className={'rounded min-w-2xl'}
       >
-        <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
+        <div className={'grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-4'}>
           <p className="text-gray-500">Nama Pelatihan</p>
           <p>{data?.nama_program}</p>
           <p className="text-gray-500">Min. Pendaftar</p>
@@ -123,7 +123,7 @@ export const ButtonPublish = (props: Props) => {
               isRow
               isRequired
             />
-            <div className="grid grid-cols-[12rem_1fr] gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-5">
               <div />
               <p className="text-sm text-blue-500">
                 Maksimal{' '}

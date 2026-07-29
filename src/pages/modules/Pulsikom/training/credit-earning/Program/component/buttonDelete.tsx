@@ -51,7 +51,7 @@ export const ButtonDeleteProgram = (props: props) => {
       </button>
 
       <DialogBasic title={'Hapus Data Training'} open={open} setOpen={setOpen}>
-        <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
+        <div className={'grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-4'}>
           <p className="text-gray-500">Nama Pelatihan</p>
           <p>{data?.nama_program}</p>
           <p className="text-gray-500">data?.status_pengisian Pengisian</p>

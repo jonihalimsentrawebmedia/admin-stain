@@ -22,25 +22,29 @@ export function HeaderFaculty(props: Props) {
   const { session } = UseGetSessionFaculty()
 
   return (
-    <header className="py-4 px-5 bg-[#E9FFF1] border-b border-green-200 flex items-center justify-between w-full">
-      <div className="flex items-center gap-4">
-        <Link to={'/modules'}>
-          <img src={module?.gambar} alt="gambar" className="size-14" />
+    <header className="py-3 px-3 sm:py-4 sm:px-5 bg-[#E9FFF1] border-b border-green-200 flex items-center justify-between w-full gap-2">
+      <div className="flex items-center gap-2 sm:gap-4 min-w-0">
+        <Link to={'/modules'} className={'p-1.5 sm:p-2 shrink-0'}>
+          <img src={module?.gambar} alt="gambar" className="size-8 sm:size-14" />
         </Link>
-        <div className="flex flex-col">
-          <p className="text-sm font-semibold text-primary">Manajemen Pengelolaan Website</p>
-          <p className="text-2xl font-semibold">{session?.nama_fakultas}</p>
+        <div className="flex flex-col min-w-0">
+          <p className="text-xs sm:text-sm font-semibold text-primary truncate">Manajemen Pengelolaan Website</p>
+          <p className="text-base sm:text-2xl font-semibold truncate">{session?.nama_fakultas}</p>
         </div>
       </div>
-      <div className="flex items-center gap-5">
-        <DialogSessionFaculty />
-        <Link to={'/modules'}>
+      <div className="flex items-center gap-2 sm:gap-5 shrink-0">
+        <div className="hidden sm:block">
+          <DialogSessionFaculty />
+        </div>
+        <Link to={'/modules'} className={'hidden sm:block'}>
           <IconModules />
         </Link>
-        <div className="flex items-center gap-4">
-          <ButtonProfile module={module} profileUser={profileUser} />
-          <button onClick={() => setCollapsed(!collapsed)}>
-            <RiMenuLine />
+        <div className="flex items-center gap-1 sm:gap-4">
+          <div className="hidden sm:block">
+            <ButtonProfile module={module} profileUser={profileUser} />
+          </div>
+          <button onClick={() => setCollapsed(!collapsed)} className="p-1.5">
+            <RiMenuLine className="size-5 sm:size-6" />
           </button>
         </div>
       </div>

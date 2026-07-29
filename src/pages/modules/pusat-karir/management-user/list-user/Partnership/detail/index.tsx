@@ -56,7 +56,7 @@ export const DetailProfilePartnership = () => {
             {
               type: 'custom',
               element: (
-                <div className={'flex items-center gap-2'}>
+                <div className={'flex flex-col sm:flex-row items-start sm:items-center gap-2'}>
                   <div className="flex items-center gap-2">
                     <div className="size-4 bg-green-500 rounded-full" />
                     Aktif
@@ -79,7 +79,7 @@ export const DetailProfilePartnership = () => {
 
         <div
           className={
-            'text-blue-700 border border-blue-500 p-1.5 px-3 rounded-full w-fit flex gap-2 items-center'
+            'text-blue-700 border border-blue-500 p-1.5 px-3 rounded-full w-full sm:w-fit flex gap-2 items-center'
           }
         >
           <MdInfo className={'text-primary-500  size-4'} />

@@ -28,8 +28,8 @@ export const CurriculumSubjectDetail = () => {
           isBack
         />
 
-        <div className="grid grid-cols-2 gap-5">
-          <div className="flex flex-col gap-1.5 col-span-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div className="flex flex-col gap-1.5 sm:col-span-2">
             <p className="text-sm text-gray-500">Prodi</p>
             <p className="text-2xl text-green-700 font-semibold">
               {curriculumDetail?.nama_satuan_organisasi}

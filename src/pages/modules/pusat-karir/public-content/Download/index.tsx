@@ -63,7 +63,7 @@ const DownloadFileCarrierPage = () => {
             })) || []
           }
           name={'category'}
-          selectClassName={'w-[20rem]'}
+          selectClassName={'w-full sm:w-[20rem]'}
         />
 
         <TableCustom

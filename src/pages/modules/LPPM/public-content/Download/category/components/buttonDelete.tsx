@@ -41,18 +41,18 @@ export const ButtonDeleteCategoryDownloadLppm = (data?: ICategoryDownload) => {
       </button>
 
       <DialogCustom
-        className={'rounded-md min-w-2xl'}
+        className={'rounded-md lg:min-w-2xl'}
         width={'450px'}
         open={open}
         setOpen={setOpen}
         title={'Hapus Kategori Berkas?'}
       >
         <div className={'mt-5'}>
-          <div className="grid grid-cols-[12rem_1fr] gap-5">
+          <div className="grid grid-cols-1 lg:grid-cols-[12rem_1fr] gap-5">
             <p className={'text-gray-500'}>Nama Kategori</p>
             <p>{data?.nama_kategori}</p>
           </div>
-          <div className="flex items-center justify-end gap-5">
+          <div className="flex flex-col-reverse sm:flex-row items-center justify-end gap-3 sm:gap-5">
             <Button
               onClick={(e) => {
                 e.preventDefault()

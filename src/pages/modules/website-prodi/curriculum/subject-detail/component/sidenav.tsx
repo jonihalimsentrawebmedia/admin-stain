@@ -70,9 +70,9 @@ export const SidenavSubjectCurriculum = (props: Props) => {
             return params
           })
         }}
-        className="grid grid-cols-1 lg:grid-cols-[15rem_1fr] gap-5 relative"
+        className="flex lg:grid grid-cols-1 justify-start lg:grid-cols-[15rem_1fr] gap-5 relative"
       >
-        <TabsList className="flex p-4 bg-white border shadow rounded flex-col gap-2.5 w-full h-fit">
+        <TabsList className="flex justify-start p-4 bg-white border shadow rounded flex-col gap-2.5 w-full h-fit">
           {elements.map((item) => (
             <TabsTrigger
               className={`

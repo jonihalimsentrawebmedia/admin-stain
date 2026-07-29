@@ -53,11 +53,11 @@ export const ButtonDeleteAdvantage = (props: Props) => {
         open={open}
         setOpen={setOpen}
       >
-        <div className="grid grid-cols-[12rem_1fr] gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-4">
           <img
             src={data?.url_gambar}
             alt={data?.key_gambar}
-            className={'h-[200px] object-contain col-span-2'}
+            className={'h-[200px] object-contain sm:col-span-2'}
           />
           <p className="text-gray-500">Nama Keunggulan</p>
           <p>{data?.nama_keunggulan}</p>

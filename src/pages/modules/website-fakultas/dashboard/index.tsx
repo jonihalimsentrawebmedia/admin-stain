@@ -75,9 +75,9 @@ export default function DashboardFaculty() {
   ]
 
   return (
-    <div className=" mt-4 flex flex-col gap-4 ">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold">
+    <div className="mt-4 flex flex-col gap-4">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <h1 className="text-xl sm:text-2xl font-semibold">
           Selamat Datang <span className="text-primary">{profileUser?.nama_lengkap}</span>
         </h1>
         <Link
@@ -89,19 +89,19 @@ export default function DashboardFaculty() {
             <FiExternalLink />
             Buka Website
           </Button>
-          <p className="text-primary text-sm">{session?.domain}</p>
+          <p className="text-primary text-xs sm:text-sm truncate max-w-[200px]">{session?.domain}</p>
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-6 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3 sm:gap-4">
         {status?.map((item, i) => (
           <Card
             key={i}
             className="bg-primary-foreground hover:bg-primary hover:text-white text-primary border-primary"
           >
-            <CardContent className="p-4 relative">
-              <p className="text-sm">{item.label}</p>
-              <p className="text-xl font-bold">
+            <CardContent className="p-3 sm:p-4 relative">
+              <p className="text-xs sm:text-sm">{item.label}</p>
+              <p className="text-lg sm:text-xl font-bold">
                 {new Intl.NumberFormat('id-ID').format(item.value ?? 0)}
               </p>
               {item?.icon}
@@ -110,9 +110,9 @@ export default function DashboardFaculty() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-4 gap-4 sm:gap-6">
         <div className={isEditor ? 'xl:col-span-4' : 'xl:col-span-3'}>
-          <p className="text-primary font-semibold text-2xl">Konten Yang Diajukan</p>
+          <p className="text-primary font-semibold text-xl sm:text-2xl">Konten Yang Diajukan</p>
           <TabsListCustom data={TabsList} value={tabsName} onChange={setTabsName} />
         </div>
 
@@ -135,12 +135,12 @@ export default function DashboardFaculty() {
         </Card>
       </div>
 
-      <div className="grid grid-cols-1  gap-6">
+      <div className="grid grid-cols-1 gap-4 sm:gap-6">
         <Card className={isEditor ? 'xl:col-span-4' : 'xl:col-span-3'}>
           <CardHeader>
             <CardTitle className={'text-primary'}>Tren Kunjungan Website</CardTitle>
           </CardHeader>
-          <CardContent className="h-80">
+          <CardContent className="h-80 p-4 sm:p-6">
             <SelectBasic
               className={'mb-2'}
               label={'Data Bersadarkan'}
@@ -149,20 +149,24 @@ export default function DashboardFaculty() {
               onChange={setMode}
               isRow
             />
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={chartData ?? []} margin={{ bottom: 60 }}>
-                <XAxis
-                  dataKey="name"
-                  angle={mode === 'harian' ? -75 : mode == 'bulanan' ? -45 : 0}
-                  textAnchor="end"
-                  interval={0}
-                  height={60}
-                />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="value" fill="#297D56" />
-              </BarChart>
-            </ResponsiveContainer>
+            <div className="h-[250px] overflow-x-auto">
+              <div className="min-w-[600px] h-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={chartData ?? []} margin={{ bottom: 60 }}>
+                    <XAxis
+                      dataKey="name"
+                      angle={mode === 'harian' ? -75 : mode == 'bulanan' ? -45 : 0}
+                      textAnchor="end"
+                      interval={0}
+                      height={60}
+                    />
+                    <YAxis />
+                    <Tooltip />
+                    <Bar dataKey="value" fill="#297D56" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
           </CardContent>
         </Card>
       </div>

@@ -46,8 +46,8 @@ export function HeaderProdi(props: Props) {
           <NotificationListProdi />
           <ButtonProfile module={module} profileUser={profileUser} />
         </div>
-        <button onClick={() => setCollapsed(!collapsed)}>
-          <RiMenuLine className={'lg:size-5'} />
+        <button onClick={() => setCollapsed(!collapsed)} className="p-1">
+          <RiMenuLine className={'size-6 lg:size-5'} />
         </button>
       </div>
     </header>

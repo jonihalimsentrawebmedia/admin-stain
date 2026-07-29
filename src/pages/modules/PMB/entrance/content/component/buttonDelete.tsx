@@ -9,11 +9,11 @@ import { FaTrash } from 'react-icons/fa'
 import type { IContentEntrance } from '@/pages/modules/PMB/entrance/content/data/types.ts'
 import RenderHTMLContent from '@/components/common/richtext/RenderHTMLContent.tsx'
 
-interface props {
+interface Props {
   data: IContentEntrance
 }
 
-const ButtonDeleteContentEntrance = (props: props) => {
+const ButtonDeleteContentEntrance = (props: Props) => {
   const { data } = props
 
   const [open, setOpen] = useState(false)
@@ -48,8 +48,8 @@ const ButtonDeleteContentEntrance = (props: props) => {
         <FaTrash />
       </button>
 
-      <DialogBasic title={'Hapus Konten'} open={open} setOpen={setOpen} className={'min-w-3xl'}>
-        <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
+      <DialogBasic title={'Hapus Konten'} open={open} setOpen={setOpen} className={'w-full lg:min-w-3xl'}>
+        <div className={'grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-4'}>
           <p className="text-gray-500">Judul</p>
           <p>{data?.judul_konten}</p>
           <p className="text-gray-500">Isi Konten</p>
@@ -62,7 +62,7 @@ const ButtonDeleteContentEntrance = (props: props) => {
         <ButtonTitleGroup
           label={''}
           buttonGroup={[
-            { type: 'cancel', onClick: () => setOpen(!Option) },
+            { type: 'cancel', onClick: () => setOpen(!open) },
             {
               type: 'custom',
               element: (

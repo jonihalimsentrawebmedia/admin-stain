@@ -56,7 +56,7 @@ const ButtonAddContentEntrance = () => {
         Tambah Konten
       </Button>
 
-      <DialogBasic title={'Tambah Konten'} open={open} setOpen={setOpen} className={'min-w-5xl'}>
+      <DialogBasic title={'Tambah Konten'} open={open} setOpen={setOpen} className={'w-full lg:min-w-5xl'}>
         <FormContentEntrance
           form={form}
           open={open}

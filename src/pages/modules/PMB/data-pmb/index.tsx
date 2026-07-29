@@ -62,29 +62,33 @@ export const DetailProfilePMB = () => {
 
           {carrierCenter?.status_publish == 'DIAJUKAN_EDITOR' && (
             <div
-              className={'border border-blue-500 rounded flex p-2 w-fit items-center gap-1.5 mt-5'}
+              className={'border border-blue-500 rounded flex flex-col sm:flex-row p-2 w-full sm:w-fit items-start sm:items-center gap-1.5 mt-5'}
             >
-              <MdInfo className={'size-5 text-blue-500'} />
-              {realData
-                ? 'Data yang tampil adalah data yang asli. Untuk melihat data yang anda ajukan'
-                : 'Data yang tampil adalah data yang anda ajukan. Untuk melihat data asli'}
-              <button className={'text-blue-500'} onClick={() => setRealData(!realData)}>
+              <div className="flex items-center gap-1.5">
+                <MdInfo className={'size-5 text-blue-500 shrink-0'} />
+                <span className="text-sm">
+                  {realData
+                    ? 'Data yang tampil adalah data yang asli. Untuk melihat data yang anda ajukan'
+                    : 'Data yang tampil adalah data yang anda ajukan. Untuk melihat data asli'}
+                </span>
+              </div>
+              <button className={'text-blue-500 text-sm font-semibold shrink-0'} onClick={() => setRealData(!realData)}>
                 KLIK DISINI
               </button>
             </div>
           )}
 
-          <div className="flex items-start gap-5 mt-5">
+          <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-5 mt-5">
             <div className="flex flex-col gap-1">
               <p>Logo</p>
-              <div className="border border-[#70F2B1] bg-[#F5FFFA] p-5 rounded">
-                <img src={carrierCenter?.logo} className="size-40 object-contain" />
+              <div className="border border-[#70F2B1] bg-[#F5FFFA] p-3 sm:p-5 rounded">
+                <img alt={'image'} src={carrierCenter?.logo} className="size-28 sm:size-40 object-contain" />
               </div>
             </div>
             <div className="flex flex-col gap-1">
               <p>Favicon</p>
-              <div className="border border-[#70F2B1] bg-[#F5FFFA] p-5 rounded">
-                <img src={carrierCenter?.favicon} className="size-15 object-contain" />
+              <div className="border border-[#70F2B1] bg-[#F5FFFA] p-3 sm:p-5 rounded">
+                <img alt={'image'} src={carrierCenter?.favicon} className="size-12 sm:size-15 object-contain" />
               </div>
             </div>
           </div>
@@ -95,7 +99,7 @@ export const DetailProfilePMB = () => {
             className={'mt-5 flex flex-col gap-5'}
           >
             <AccordionCustom name={'identity'} title={'Identitas Institusi'}>
-              <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
+              <div className={'grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-5'}>
                 <p className="text-gray-500">Kelompok</p>
                 <p>{carrierCenter?.kelompok ?? '-'}</p>
                 <p className="text-gray-500">Nama Unit</p>
@@ -106,7 +110,7 @@ export const DetailProfilePMB = () => {
             </AccordionCustom>
 
             <AccordionCustom name={'address'} title={'Alamat Lengkap'}>
-              <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
+              <div className={'grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-5'}>
                 <p className="text-gray-500">Alamat</p>
                 <p>{carrierCenter?.alamat ?? '-'}</p>
                 <p className="text-gray-500">Provinsi</p>
@@ -125,7 +129,7 @@ export const DetailProfilePMB = () => {
             </AccordionCustom>
 
             <AccordionCustom name={'contact'} title={'Kontak Resmi'}>
-              <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
+              <div className={'grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-5'}>
                 <p className="text-gray-500">Telepon</p>
                 <p>{carrierCenter?.telepon ?? '-'}</p>
                 <p className="text-gray-500">Fax</p>
@@ -136,7 +140,7 @@ export const DetailProfilePMB = () => {
             </AccordionCustom>
 
             <AccordionCustom name={'media'} title={'Media Sosial'}>
-              <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
+              <div className={'grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-5'}>
                 <p className="text-gray-500">Facebook</p>
                 <p>{carrierCenter?.facebook ?? '-'}</p>
                 <p className="text-gray-500">Twitter</p>

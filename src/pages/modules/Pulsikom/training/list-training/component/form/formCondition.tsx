@@ -72,8 +72,8 @@ export const FormCondition = (props: IProps) => {
   return (
     <>
       <Form {...form}>
-        <form className={'flex flex-col gap-4 mt-[55px]'} onSubmit={form.handleSubmit(HandleSave)}>
-          <div className="absolute w-full top-0 left-0 py-2 z-20">
+        <form className={'flex flex-col gap-4 mt-0 lg:mt-[55px]'} onSubmit={form.handleSubmit(HandleSave)}>
+          <div className="static lg:absolute w-full top-0 left-0 py-2 z-20">
             <ButtonTitleGroup
               label={title ?? ''}
               buttonGroup={[

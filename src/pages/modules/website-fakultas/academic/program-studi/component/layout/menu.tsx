@@ -74,12 +74,12 @@ const Menu = () => {
   ])
 
   return (
-    <div className="border w-[300px] p-2 flex shadow-lg flex-col gap-2">
+    <div className="border w-full lg:w-[300px] p-2 flex shadow-lg flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-x-visible">
       {data.map((item, index) => (
         <Link
           key={item.name + index}
           to={item.link}
-          className={`${item.link == pathname ? 'text-primary font-semibold bg-primary/20 border border-primary' : ''} rounded px-4 gap-2 py-2 flex items-center`}
+          className={`${item.link == pathname ? 'text-primary font-semibold bg-primary/20 border border-primary' : ''} rounded px-4 gap-2 py-2 flex items-center whitespace-nowrap shrink-0 lg:whitespace-normal lg:shrink`}
         >
           {IconFlower(item.link == pathname)}
           {item.name}

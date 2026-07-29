@@ -33,7 +33,7 @@ export const ColumnsUserManagement = (props: props) => {
         <img
           src={row.original.url_gambar}
           alt="Foto"
-          className="w-[144px] h-[192px] object-cover rounded-md"
+          className="min-w-[144px] h-[192px] object-cover rounded-md"
         />
       ),
     },
@@ -43,7 +43,7 @@ export const ColumnsUserManagement = (props: props) => {
       cell: ({ row }) => {
         const detail = row?.original
         return (
-          <div className={'grid grid-cols-[12rem_1fr] gap-x-3'}>
+          <div className={'grid lg:grid-cols-[12rem_1fr] gap-x-3'}>
             <p className="text-gray-500">Nama</p>
             <p>{detail?.nama}</p>
             <p className="text-gray-500">NIP</p>

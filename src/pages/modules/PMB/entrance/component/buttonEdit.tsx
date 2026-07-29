@@ -84,7 +84,7 @@ const ButtonEditEntrancePMB = (props: props) => {
         title={'Edit Jalur Masuk'}
         open={open}
         setOpen={setOpen}
-        className={'min-w-3xl'}
+        className={'max-w-3xl'}
       >
         <FormEntrance
           form={form}

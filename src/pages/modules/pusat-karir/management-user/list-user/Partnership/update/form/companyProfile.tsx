@@ -123,7 +123,7 @@ export const FormCompanyInformation = (prop: Props) => {
 
           <div
             className={
-              'text-blue-700 border border-blue-500 p-1.5 px-3 rounded-full w-fit flex gap-2 items-center'
+              'text-blue-700 border border-blue-500 p-1.5 px-3 rounded-full w-full sm:w-fit flex gap-2 items-center'
             }
           >
             <MdInfo className={'text-primary-500  size-4'} />

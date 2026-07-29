@@ -32,7 +32,7 @@ export const DetailSurvey = () => {
         <p className={'font-semibold text-2xl'}>{detailSurvey?.judul}</p>
         <p>{detailSurvey?.deskripsi}</p>
 
-        <div className="grid grid-cols-[250px_1fr] gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5">
           <ul
             className={clsx(
               'border rounded p-2.5 text-sm font-semibold',

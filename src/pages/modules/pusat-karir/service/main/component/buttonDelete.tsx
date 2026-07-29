@@ -57,8 +57,8 @@ export const ButtonDeleteService = (props: Props) => {
         title={'Hapus Layanan Utama?'}
         description={'Apakah Anda yakin ingin menghapus layanan utama ini?'}
       >
-        <div className={'grid grid-cols-[12rem_1fr] gap-5'}>
-          <img src={data?.url_gambar} alt="gambar" className={'size-10 object-cover col-span-2'} />
+        <div className={'grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-5'}>
+          <img src={data?.url_gambar} alt="gambar" className={'size-10 object-cover sm:col-span-2'} />
           <p className="text-gray-500">Nama Layanan</p>
           <p>{data?.nama_layanan}</p>
           <p className="text-gray-500">Uraian Singkat</p>

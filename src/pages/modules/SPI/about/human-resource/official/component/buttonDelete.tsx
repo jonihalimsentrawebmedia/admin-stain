@@ -52,11 +52,11 @@ export const ButtonDeleteOfficial = (props: Props) => {
         open={open}
         setOpen={setOpen}
       >
-        <div className="grid grid-cols-[12rem_1fr] gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-5">
           <img
             src={data?.url_gambar}
             alt="image"
-            className={'w-[150px] h-[200px] object-cover rounded col-span-2'}
+            className={'w-full sm:w-[150px] h-auto sm:h-[200px] object-cover rounded sm:col-span-2'}
           />
           <p className="text-gray-500">Nama Kelompok</p>
           <p>{data?.nama_kelompok_pimpinan}</p>

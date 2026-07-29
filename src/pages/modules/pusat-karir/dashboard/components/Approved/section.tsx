@@ -12,7 +12,7 @@ export const ApprovedSection = (props: Props) => {
 
   return (
     <>
-      <div className={'lg:max-h-[280px] overflow-y-auto border'}>
+      <div className={'max-h-[280px] overflow-auto border'}>
         <TableCustom
           isShowFilter={false}
           className={'text-start whitespace-pre-line'}

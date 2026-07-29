@@ -116,14 +116,14 @@ export const TracerStudyPage = () => {
 
             <div
               className={
-                'bg-blue-50 border-blue-500 p-2 text-sm text-blue-500 rounded-full flex items-center gap-2 w-fit border'
+                'bg-blue-50 border-blue-500 p-2 text-sm text-blue-500 rounded-full flex items-center gap-2 w-full sm:w-fit border'
               }
             >
               <MdInfo className={'size-5'} />
               Masukkan URL atau link tracer study perguruan tinggi anda.
             </div>
 
-            <div className="grid grid-cols-[12rem_1fr]">
+            <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-5">
               <p className="text-gray-500">URL/Link</p>
               <Link
                 to={tracerStudy?.link_url ?? '#'}

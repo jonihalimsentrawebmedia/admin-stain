@@ -66,7 +66,7 @@ export const NotificationListProdi = () => {
             )}
           </div>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-80 p-2 rounded shadow-lg border bg-white">
+        <DropdownMenuContent align="end" className="w-[90vw] lg:w-80 p-2 rounded shadow-lg border bg-white">
           <p className="text-sm font-semibold px-2 pb-2">Notifications</p>
           <div className="max-h-96 overflow-y-auto space-y-1">
             {notification?.map((row, k) => (

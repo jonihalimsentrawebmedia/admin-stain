@@ -48,7 +48,7 @@ export const ButtonDeleteCategoryDownload = (data?: ICategoryDownload) => {
         title={'Hapus Kategori Berkas?'}
       >
         <div className={'mt-5'}>
-          <div className="grid grid-cols-[12rem_1fr] gap-5">
+          <div className="grid grid-cols-1 lg:grid-cols-[12rem_1fr] gap-5">
             <p className={'text-gray-500'}>Nama Kategori</p>
             <p>{data?.nama_kategori}</p>
           </div>
