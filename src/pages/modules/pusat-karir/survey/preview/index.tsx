@@ -80,7 +80,7 @@ export const PreviewSurveyCreate = () => {
         <p className={'font-semibold text-2xl'}>{data?.judul}</p>
         <p>{data?.deskripsi}</p>
 
-        <div className="grid grid-cols-[250px_1fr] gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-5">
           <ul
             className={clsx(
               'border rounded p-2.5 text-sm font-semibold',

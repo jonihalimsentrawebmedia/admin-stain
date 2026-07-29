@@ -39,12 +39,12 @@ export const SettingsBackground = () => {
         }}
         className="w-full !shadow-none !drop-shadow-none p-0"
       >
-        <TabsList className="w-full rounded-none !shadow-none !drop-shadow-none bg-white border-b-black border border-t-0 border-l-0 p-0">
+        <TabsList className="w-full rounded-none justify-start !shadow-none !drop-shadow-none bg-white border-b-black border border-t-0 border-l-0 p-0 overflow-x-auto flex-nowrap">
           {SPIMENU.map((item) => (
             <TabsTrigger
               className={`
                   data-[state=active]:bg-black data-[state=active]:text-white
-                  rounded-t-lg rounded-b-none p-4 shadow-none drop-shadow-none
+                  rounded-t-lg rounded-b-none p-2 sm:p-4 shadow-none drop-shadow-none whitespace-nowrap text-xs sm:text-sm
               `}
               key={item.value}
               value={item.value}

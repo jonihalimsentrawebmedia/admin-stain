@@ -57,8 +57,8 @@ export const UploadPhotoImage = <T extends FieldValues>({
   }
 
   return (
-    <div className="flex items-center gap-4">
-      <div className={clsx('w-[200px]', className)}>
+    <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
+      <div className={clsx('w-full sm:w-[200px]', className)}>
         <AspectRatio ratio={ratio_width / ratio_height}>
           {form?.watch(name) ? (
             <img src={form.watch(name)} alt={'image'} className={'object-cover w-full h-full'} />

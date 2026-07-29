@@ -14,7 +14,7 @@ export const DetailJobVacancy = () => {
 
   return (
     <>
-      <div className="space-y-5 bg-white p-5">
+      <div className="space-y-5 bg-white p-3 sm:p-5">
         <ButtonTitleGroup
           label={'Detail Lowongan Pekerjaan'}
           isBack
@@ -40,7 +40,7 @@ export const DetailJobVacancy = () => {
           ]}
         />
 
-        <div className="grid grid-cols-[12rem_1fr] gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-5">
           <p className="text-gray-500">Pembuka Lowongan</p>
           <p>{jobVacancy?.nama_mitra_kerja}</p>
           <p className="text-gray-500">Jabatan</p>

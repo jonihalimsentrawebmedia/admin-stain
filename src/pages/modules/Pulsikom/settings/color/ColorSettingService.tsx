@@ -6,18 +6,18 @@ import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/Bu
 const ColorSettingPulsikom = () => {
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex gap-4 justify-between">
+      <div className="flex flex-col sm:flex-row gap-4 justify-between">
         <p className="text-2xl text-[#444] font-medium">Pengaturan Warna</p>
         <ButtonGoToGuide titleGuide={'Pengaturan Warna'} valueGuide="PUSILKOM_PENGATURAN_WARNA" />
       </div>
 
-      <div className="flex gap-2 items-center w-fit px-2 py-1 text-[#2769CD] border border-[#2769CD] rounded">
+      <div className="flex gap-2 items-center w-full sm:w-fit px-2 py-1 text-[#2769CD] border border-[#2769CD] rounded">
         <IoInformationCircle className="size-4" />
         <div>Silahkan pilih warna yang ingin anda gunakan</div>
       </div>
 
       <Tabs defaultValue="admin">
-        <TabsList className="flex w-full grid-cols-2 h-auto p-0 bg-white border border-blue-[#276CCD] rounded-full">
+        <TabsList className="flex w-full h-auto p-0 bg-white border border-blue-[#276CCD] rounded-full">
           <TabsTrigger
             value="admin"
             className="rounded-full py-2 px-4 data-[state=active]:bg-primary data-[state=active]:text-white text-primary font-medium transition-all"

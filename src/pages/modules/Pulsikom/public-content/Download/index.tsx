@@ -63,7 +63,7 @@ const DownloadFilePulsikom = () => {
             })) || []
           }
           name={'category'}
-          selectClassName={'w-[20rem]'}
+          selectClassName={'w-full lg:w-[20rem]'}
         />
 
         <TableCustom
@@ -80,7 +80,7 @@ const DownloadFilePulsikom = () => {
               ]}
               zIndex={'z-10'}
               name={'limit'}
-              selectClassName={'w-[10rem] border-primary'}
+              selectClassName={'w-full lg:w-[10rem] border-primary'}
             />
           }
           isShowLimit={true}

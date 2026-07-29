@@ -68,10 +68,10 @@ export const DetailProgramEarning = () => {
         <img
           src={detail?.program?.url_gambar}
           alt="gambar"
-          className={'w-[500px] h-[360px] object-cover'}
+          className={'w-full sm:w-[500px] h-auto sm:h-[360px] object-cover'}
         />
 
-        <div className="grid grid-cols-[12rem_1fr] gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-4">
           <p className="text-gray-500">Peserta Terkonfirmasi</p>
           <p className={'text-xl font-semibold text-primary'}>
             {`${detail?.program?.terkonfirmasi ?? 0}  Peserta` || '0 Peserta'}
@@ -91,7 +91,7 @@ export const DetailProgramEarning = () => {
         <TitleLine title={'Deskripsi'} />
         <RenderHTMLContent content={detail?.informasi.deskripsi ?? ''} />
 
-        <div className="grid grid-cols-[12rem_1fr] gap-2">
+        <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-2">
           <p className="text-gray-500">Periode Pendaftaran</p>
           <p>
             {detail?.program?.tgl_buka_pendaftaran
@@ -124,7 +124,7 @@ export const DetailProgramEarning = () => {
         <RenderHTMLContent content={detail?.persyaratan?.isi ?? ''} />
 
         <TitleLine title={'Biaya Pendaftaran'} />
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {detail?.biaya_pendaftaran?.map((row, k) => (
             <div key={k} className={'flex flex-col gap-2 border p-4 border-primary rounded'}>
               <p className="text-primary text-sm">urutan {row?.urutan}</p>
@@ -144,7 +144,7 @@ export const DetailProgramEarning = () => {
         </div>
 
         <TitleLine title={'Rekening Penerimaan'} />
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {detail?.rekening?.map((row, k) => (
             <div key={k} className={'flex flex-col gap-2 border p-4 border-primary rounded'}>
               <p className="text-gray-500">{row?.nama_rekening}</p>

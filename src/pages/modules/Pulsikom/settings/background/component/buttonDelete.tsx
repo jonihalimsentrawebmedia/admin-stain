@@ -10,11 +10,11 @@ import type { IBackground } from '../data/types'
 import { useSearchParams } from 'react-router-dom'
 import { PULSIKOMMENU } from '../data/constants'
 
-interface props {
+interface Props {
   data: IBackground
 }
 
-export const ButtonDeleteBackgroundUnit = (props: props) => {
+export const ButtonDeleteBackgroundUnit = (props: Props) => {
   const { data } = props
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)

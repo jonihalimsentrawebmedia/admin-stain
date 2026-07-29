@@ -17,7 +17,7 @@ export const ResultStatistic = () => {
 
   return (
     <>
-      <div className={'space-y-5 bg-white p-5'}>
+      <div className={'space-y-5 bg-white p-3 sm:p-5'}>
         <ButtonTitleGroup
           isBack
           label={'Hasil Survei'}
@@ -29,7 +29,7 @@ export const ResultStatistic = () => {
           ]}
         />
 
-        <div className="grid grid-cols-[12rem_1fr] gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-4">
           <p className="text-gray-500">Judul Survei</p>
           <p className={'text-xl font-semibold'}>{surveyResult?.judul}</p>
           <p className="text-gray-500">Periode</p>
@@ -51,7 +51,7 @@ export const ResultStatistic = () => {
         <p className="text-2xl font-semibold">{surveyResult?.judul}</p>
         <p>{surveyResult?.deskripsi}</p>
 
-        <div className="grid grid-cols-[280px_1fr] gap-x-5">
+        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-x-5">
           <div className="border p-4 border-primary rounded flex flex-col gap-2 bg-primary/10 h-fit">
             {surveyResult?.bagian?.map((row, k) => (
               <div

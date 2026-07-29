@@ -57,13 +57,13 @@ export const ManagementListUserPage = () => {
         />
 
         <Tabs value={type} onValueChange={(e) => HandleTabs(e)} className="w-full">
-          <TabsList className={'bg-white rounded w-full! h-full! flex gap-x-4'}>
+          <TabsList className={'bg-white rounded w-full! h-full! flex overflow-x-auto'}>
             {TabsData?.map((row, k) => (
               <TabsTrigger
                 key={k}
                 value={row?.value}
                 className={clsx(
-                  'rounded! shadow-none! border border-primary',
+                  'rounded! shadow-none! border border-primary shrink-0 whitespace-nowrap',
                   'data-[state=active]:bg-primary data-[state=active]:text-white p-2'
                 )}
               >

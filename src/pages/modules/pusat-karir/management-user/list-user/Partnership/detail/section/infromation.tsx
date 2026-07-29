@@ -10,7 +10,7 @@ export const CompanyInformation = () => {
   return (
     <>
       <TitleLine title={'Informasi Perusahaan'} />
-      <div className={'grid grid-cols-[12rem_1fr] gap-5 mt-5'}>
+      <div className={'grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-5 mt-5'}>
         <p className="text-gray-500">Nama Perusahaan</p>
         <p className="font-semibold">{information?.nama_perusahaan}</p>
         <p className="text-gray-500">Lokasi</p>

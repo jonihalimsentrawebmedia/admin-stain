@@ -83,7 +83,7 @@ export function InputRadio({
                       defaultValue={defaultValue?.value}
                       className="h-5 w-5 accent-primary"
                     />
-                    <p className="text-nowrap">{item?.label}</p>
+                    <p className="whitespace-pre-line lg:text-nowrap text-xs">{item?.label}</p>
                   </label>
                 </Fragment>
               ))}

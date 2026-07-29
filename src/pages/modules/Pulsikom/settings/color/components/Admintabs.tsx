@@ -65,8 +65,8 @@ const AdminTabs = () => {
     <>
       <Form {...form}>
         <form className="flex flex-col gap-4 p-4" onSubmit={form.handleSubmit(HandleSave)}>
-          <div className="flex md:justify-between gap-4">
-            <div className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row md:justify-between gap-4">
+            <div className="flex items-center gap-2 flex-wrap">
               <Button type="button" variant="outline" onClick={() => setReset(true)}>
                 Kembalikan ke Default
               </Button>

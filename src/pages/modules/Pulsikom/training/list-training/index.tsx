@@ -58,7 +58,7 @@ export const ListTraining = () => {
 
         <Tabs className={'bg-white p-0'} value={status} onValueChange={(e) => setStatus(e)}>
           <TabsList
-            className={'bg-white rounded-none w-full h-full border-b-2 border-b-primary p-0'}
+            className={'bg-white rounded-none w-full h-full border-b-2 border-b-primary p-0 overflow-x-auto'}
           >
             {TabsData?.map((row, k) => (
               <TabsTrigger

@@ -30,7 +30,7 @@ export const ColumnsService = () => {
           <Link
             to={row?.original?.url ?? "#"}
             target="_blank"
-            className="text-primary border border-primary rounded px-4 py-1.5"
+            className="text-primary flex items-center whitespace-nowrap border border-primary rounded px-4 py-1.5"
           >
             Buka URL
           </Link>

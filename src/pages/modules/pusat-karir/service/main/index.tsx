@@ -28,14 +28,14 @@ export const MainService = () => {
         />
         <div
           className={
-            'bg-blue-50 border-blue-500 p-2 text-sm text-blue-500 rounded-full flex items-center gap-2 w-fit border'
+            'bg-blue-50 border-blue-500 p-2 text-sm text-blue-500 rounded-full flex items-center gap-2 w-full sm:w-fit border'
           }
         >
           <MdInfo className={'size-5'} />
           Layanan utama adalah layanan yang ditampilkan di beranda website. Maksimal 4 Layanan
         </div>
 
-        <div className="grid-cols-4 grid gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {mainService.map((item, index) => (
             <div key={index} className={'flex flex-col gap-4'}>
               <div className="flex p-5 text-center gap-1.5 flex-col items-center justify-center w-full h-[255px] rounded-md border">

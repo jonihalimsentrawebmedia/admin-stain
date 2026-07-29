@@ -36,7 +36,7 @@ export const ColumnsGuideBook = () => {
               to={row?.original?.url ?? '#'}
               target={'_blank'}
               className={
-                'text-primary border-primary hover:text-primary rounded text-sm px-2 py-1 flex items-center gap-x-1 border w-fit'
+                'text-primary whitespace-nowrap border-primary hover:text-primary rounded text-sm px-2 py-1 flex items-center gap-x-1 border w-fit'
               }
             >
               <FiExternalLink className={'size-4'} />

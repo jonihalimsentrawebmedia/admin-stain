@@ -56,7 +56,7 @@ export const ButtonEditCategoryDownloadLppm = (data?: ICategoryDownload) => {
       </button>
 
       <DialogCustom
-        className={'rounded-md min-w-2xl'}
+        className={'rounded-md lg:min-w-2xl'}
         width={'450px'}
         open={open}
         setOpen={setOpen}
@@ -74,7 +74,7 @@ export const ButtonEditCategoryDownloadLppm = (data?: ICategoryDownload) => {
                 isRow
               />
 
-              <div className="flex items-center justify-end gap-5">
+              <div className="flex flex-col-reverse sm:flex-row items-center justify-end gap-3 sm:gap-5">
                 <Button
                   onClick={(e) => {
                     e.preventDefault()

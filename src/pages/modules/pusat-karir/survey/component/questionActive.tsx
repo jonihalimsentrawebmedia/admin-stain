@@ -99,7 +99,7 @@ export const QuestionActive = (props: Props) => {
             key={k}
             className={'flex flex-col items-start gap-1.5 border p-2.5 rounded bg-white'}
           >
-            <div className="flex items-center gap-1 w-full">
+            <div className="flex flex-col sm:flex-row items-start gap-1 w-full">
               <p>{k + 1}. </p>
 
               <Input
@@ -130,7 +130,7 @@ export const QuestionActive = (props: Props) => {
               />
               <select
                 value={row?.type}
-                className={'border rounded p-1.5 px-2 text-sm border-primary text-primary'}
+                className={'border rounded p-1.5 px-2 text-sm border-primary text-primary w-full sm:w-auto'}
                 onChange={(e) => {
                   if (!data) return
                   const newBagian = data.bagian.map((bagian, bagianIndex) => {
@@ -248,7 +248,7 @@ export const QuestionActive = (props: Props) => {
         )
       )}
 
-      <div className={'flex items-center justify-between'}>
+      <div className={'flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3'}>
         <Button onClick={HandleAddQuestion}>
           <BiPlus />
           Tambah Pertanyaan

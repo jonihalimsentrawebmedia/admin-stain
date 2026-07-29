@@ -22,14 +22,14 @@ export const DetailUserJobsSeekers = () => {
 
   return (
     <>
-      <div className={'space-y-5 w-full bg-white p-5'}>
+      <div className={'space-y-5 w-full bg-white p-3 sm:p-5'}>
         <ButtonTitleGroup
           label={'Detail User - Pencari Kerja'}
           buttonGroup={[
             {
               type: 'custom',
               element: (
-                <div className={'flex items-center gap-1.5'}>
+                <div className={'flex flex-col sm:flex-row items-start sm:items-center gap-1.5'}>
                   <div className={'size-4 rounded-full bg-green-500'} />
                   Aktif
                   <Button
@@ -53,12 +53,12 @@ export const DetailUserJobsSeekers = () => {
         <img
           src={detail?.data_diri?.url_foto_profil ?? '/noimg.png'}
           alt={detail?.data_diri?.nama_lengkap}
-          className={'w-[200px] h-[270px] rounded'}
+          className={'w-[150px] sm:w-[200px] h-[200px] sm:h-[270px] rounded'}
         />
 
         <TitleLine title={'Data Diri'} />
-        <div className="grid grid-cols-3 gap-5">
-          <div className="col-span-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+          <div className="sm:col-span-2 md:col-span-3">
             <DataItem label={'Nama Lengkap'} value={detail?.data_diri?.nama_lengkap ?? '-'} />
           </div>
           <DataItem label={'Tempat Lahir'} value={detail?.data_diri?.tempat_lahir ?? '-'} />
@@ -111,8 +111,8 @@ export const DetailUserJobsSeekers = () => {
         </div>
 
         <TitleLine title={'Alamat Domisili'} />
-        <div className="grid grid-cols-3 gap-5">
-          <div className="col-span-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+          <div className="sm:col-span-2 md:col-span-3">
             <DataItem label={'Alamat Lengkap'} value={detail?.alamat?.alamat_lengkap ?? '-'} />
           </div>
           <DataItem label={'Provinsi'} value={detail?.alamat?.nama_provinsi ?? '-'} />
@@ -121,8 +121,8 @@ export const DetailUserJobsSeekers = () => {
         </div>
 
         <TitleLine title={'Alamat KTP'} />
-        <div className="grid grid-cols-3 gap-5">
-          <div className="col-span-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+          <div className="sm:col-span-2 md:col-span-3">
             <DataItem label={'Alamat Lengkap'} value={detail?.alamat_ktp?.alamat_lengkap ?? '-'} />
           </div>
           <DataItem label={'Provinsi'} value={detail?.alamat_ktp?.nama_provinsi ?? '-'} />
@@ -131,8 +131,7 @@ export const DetailUserJobsSeekers = () => {
         </div>
 
         <TitleLine title={'Pendidikan Terakhir'} />
-        <div className="grid grid-cols-[12rem_1fr] gap-5">
-          <p className="text-gray-500">Universitas Asal*</p>
+        <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-5">
           <p className="font-semibold text-gray-800 capitalize">
             {detail?.pendidikan_terakhir?.universitas_asal?.split('_').join(' ').toLowerCase() ??
               ''}
@@ -158,7 +157,7 @@ export const DetailUserJobsSeekers = () => {
         </div>
 
         <TitleLine title={'Bidang / Spesialisasi Pekerjaan Yang Diminati'} />
-        <div className="grid grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
           {detail?.sub_spesialis?.map((row, index) => (
             <div className={'p-2 border border-primary rounded text-primary w-full'} key={index}>
               {row?.nama_sub_spesialis ?? ''}
@@ -173,8 +172,7 @@ export const DetailUserJobsSeekers = () => {
           <li>Max 2 MB</li>
         </ul>
 
-        <div className="grid grid-cols-[12rem_1fr] gap-5">
-          <p className="text-gray-500">CV/ Resume</p>
+        <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-5">
           <Link
             to={detail?.files?.url_cv ?? '#'}
             target={'_blank'}

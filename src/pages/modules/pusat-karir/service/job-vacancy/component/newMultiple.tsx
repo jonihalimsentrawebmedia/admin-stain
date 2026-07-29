@@ -60,11 +60,11 @@ export const NewMultipleSelectCategory = ({ form, name }: any) => {
 
   return (
     <>
-      <div className="grid grid-cols-[12rem_1fr] gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-5">
         <Label>Spesialisasi</Label>
 
         <div
-          className="border rounded p-2 flex flex-wrap gap-2 cursor-pointer bg-white"
+          className="border rounded p-2 flex flex-wrap gap-2 cursor-pointer bg-white min-h-[40px]"
           onClick={() => setOpen(true)}
         >
           {value?.length ? (
@@ -87,7 +87,7 @@ export const NewMultipleSelectCategory = ({ form, name }: any) => {
         </div>
       </div>
 
-      <DialogBasic className="min-w-5xl" open={open} setOpen={setOpen} title="Pilih Spesialisasi">
+      <DialogBasic className="min-w-full sm:min-w-5xl" open={open} setOpen={setOpen} title="Pilih Spesialisasi">
         <input
           placeholder="Cari spesialisasi..."
           className="border p-2 w-full mb-4 rounded"
@@ -95,7 +95,7 @@ export const NewMultipleSelectCategory = ({ form, name }: any) => {
           onChange={(e) => setSearch(e.target.value)}
         />
 
-        <div className="grid grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {specialization.map((cat: any, k: number) => (
             <CategoryItem
               key={k}

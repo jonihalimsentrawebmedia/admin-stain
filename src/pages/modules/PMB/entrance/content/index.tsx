@@ -39,14 +39,14 @@ export const ContentEntrancePMb = () => {
           ]}
         />
 
-        <div className="grid grid-cols-[12rem_1fr] gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-4">
           <p className="text-gray-500">Nama Jalur Masuk</p>
           <p>{entrance?.nama_jalur}</p>
           <p className="text-gray-500">URL Pendaftaran</p>
           <Link
             to={entrance?.url_pendaftaran ?? '#'}
             target={'_blank'}
-            className={'text-blue-500 underline decoration-blue-500'}
+            className={'text-blue-500 underline decoration-blue-500 break-all'}
           >
             {entrance?.nama_jalur}
           </Link>

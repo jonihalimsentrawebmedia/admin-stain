@@ -12,16 +12,16 @@ const LayoutStudyProgram = () => {
     <div className="space-y-8">
       <ButtonTitleGroup buttonGroup={[]} label="Detail Program Studi" isBack />
       <div className="flex gap-4 flex-col">
-        <div className={'grid grid-cols-2 gap-4'}>
-          <div className={'col-span-2'}>
+        <div className={'grid grid-cols-1 sm:grid-cols-2 gap-4'}>
+          <div className={'sm:col-span-2'}>
             <div className="text-[#999999] text-sm">Prodi</div>
             <div className="text-primary font-medium text-3xl">{satuanOrganisasi?.nama}</div>
           </div>
-          <div className={'col-span-1'}>
+          <div>
             <div className="text-[#999999] text-sm">Fakultas Asal</div>
             <div className="text-primary font-medium text-xl">{satuanOrganisasi?.nama_parent}</div>
           </div>
-          <div className={'col-span-1'}>
+          <div>
             <div className="text-[#999999] text-sm">Jenjang</div>
             <div className="text-primary font-medium text-xl">
               {satuanOrganisasi?.nama_jenjang_pendidikan}({satuanOrganisasi?.kode_jenjang})
@@ -29,7 +29,7 @@ const LayoutStudyProgram = () => {
           </div>
         </div>
       </div>
-      <div className="flex gap-4 h-full relative w-full">
+      <div className="flex flex-col lg:flex-row gap-4 h-full relative w-full">
         <Menu />
         <div className="w-full">
           <Outlet />

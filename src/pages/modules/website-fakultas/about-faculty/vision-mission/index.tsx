@@ -49,9 +49,9 @@ const VisionMissionFaculty = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSave)} className="flex flex-col gap-4">
-        <div className="flex justify-between items-center">
-          <div className="text-primary">Visi, Misi & Tujuan</div>
-          <div className="flex gap-4 items-center">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+          <div className="text-primary text-xl sm:text-2xl font-medium">Visi, Misi & Tujuan</div>
+          <div className="flex flex-wrap gap-3 sm:gap-4 items-center">
             <ButtonGoToGuide
               titleGuide={'Visi, Misi & Tujuan'}
               valueGuide="FAKULTAS_PROFIL_VISI_MISI"

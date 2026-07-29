@@ -19,7 +19,7 @@ export const SocialMedia = () => {
     <>
       <TitleLine title={'Media Sosial & Kontak Publik'} />
 
-      <div className={'grid grid-cols-2 gap-5 mt-5'}>
+      <div className={'grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5 mt-5'}>
         <ItemValue title={'LinkedIn'} value={mediaSocial?.url_linkedin ?? '-'} />
         <ItemValue title={'Instagram'} value={mediaSocial?.url_instagram ?? '-'} />
         <ItemValue title={'Email Recuitment'} value={mediaSocial?.email_recuitment ?? '-'} />

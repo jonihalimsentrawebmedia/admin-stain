@@ -12,15 +12,17 @@ export const ApprovedSection = (props: Props) => {
 
   return (
     <>
-      <div className={'lg:max-h-[280px] overflow-y-auto border'}>
-        <TableCustom
-          isShowFilter={false}
-          className={'text-start whitespace-pre-line'}
-          tdClassName={'whitespace-pre-line border'}
-          isShowPagination={false}
-          data={data}
-          columns={columns}
-        />
+      <div className={'lg:max-h-[280px] overflow-auto border'}>
+        <div className="min-w-[500px]">
+          <TableCustom
+            isShowFilter={false}
+            className={'text-start whitespace-pre-line'}
+            tdClassName={'whitespace-pre-line border'}
+            isShowPagination={false}
+            data={data}
+            columns={columns}
+          />
+        </div>
       </div>
     </>
   )

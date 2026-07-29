@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+import { Bar, BarChart, Tooltip, XAxis, YAxis } from 'recharts'
 import { Plus } from 'lucide-react'
 import { UseGetApprovedList, UseGetTotalVisitor, UseGetTrentVisitor } from './hooks/index.tsx'
 import { TabsListCustom } from '@/pages/modules/website-utama/public-content/slider/components/tabsList.tsx'
@@ -76,8 +76,8 @@ export default function DashboardCarrierCenter() {
 
   return (
     <div className=" mt-4 flex flex-col gap-4 ">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <h1 className="text-xl sm:text-2xl font-semibold">
           Selamat Datang <span className="text-primary">{profileUser?.nama_lengkap}</span>
         </h1>
         <Link
@@ -112,7 +112,7 @@ export default function DashboardCarrierCenter() {
 
       <div className="grid grid-cols-1 xl:grid-cols-4 gap-6">
         <div className={isEditor ? 'xl:col-span-4' : 'xl:col-span-3'}>
-          <p className="text-primary font-semibold text-2xl">Konten Yang Diajukan</p>
+          <p className="text-primary font-semibold text-xl sm:text-2xl">Konten Yang Diajukan</p>
           <TabsListCustom data={TabsList} value={tabsName} onChange={setTabsName} />
         </div>
 
@@ -135,34 +135,42 @@ export default function DashboardCarrierCenter() {
         </Card>
       </div>
 
-      <div className="grid grid-cols-1  gap-6">
+      <div className="grid grid-cols-1 gap-6">
         <Card className={isEditor ? 'xl:col-span-4' : 'xl:col-span-3'}>
-          <CardHeader>
-            <CardTitle className={'text-primary'}>Tren Kunjungan Website</CardTitle>
+          <CardHeader className="p-4 sm:p-6">
+            <CardTitle className="text-primary text-base sm:text-lg">Tren Kunjungan Website</CardTitle>
           </CardHeader>
-          <CardContent className="h-80">
+          <CardContent className="p-2 sm:p-6">
             <SelectBasic
-              className={'mb-2'}
-              label={'Data Bersadarkan'}
+              className="mb-2 sm:mb-4"
+              label="Data Berdasarkan"
               data={listMode}
               value={mode}
               onChange={setMode}
               isRow
             />
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={chartData ?? []} margin={{ bottom: 60 }}>
-                <XAxis
-                  dataKey="name"
-                  angle={mode === 'harian' ? -75 : mode == 'bulanan' ? -45 : 0}
-                  textAnchor="end"
-                  interval={0}
-                  height={60}
-                />
-                <YAxis />
-                <Tooltip />
-                <Bar dataKey="value" fill="#297D56" />
-              </BarChart>
-            </ResponsiveContainer>
+            <div className="overflow-x-auto">
+              <div style={{ width: Math.max(chartData?.length * 55, 700) }} className="h-[300px] sm:h-[400px]">
+                <BarChart
+                  width={Math.max(chartData?.length * 55, 700)}
+                  height={400}
+                  data={chartData ?? []}
+                  margin={{ bottom: 60, left: 0, right: 8 }}
+                >
+                  <XAxis
+                    dataKey="name"
+                    tick={{ fontSize: 12, fontWeight: 500 }}
+                    angle={mode === 'harian' ? -40 : mode === 'bulanan' ? -20 : 0}
+                    textAnchor="end"
+                    interval={0}
+                    height={100}
+                  />
+                  <YAxis tick={{ fontSize: 12 }} width={45} />
+                  <Tooltip />
+                  <Bar dataKey="value" fill="#297D56" radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </div>
+            </div>
           </CardContent>
         </Card>
       </div>

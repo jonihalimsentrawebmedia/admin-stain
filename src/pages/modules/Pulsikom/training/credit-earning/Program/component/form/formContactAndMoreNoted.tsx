@@ -93,8 +93,8 @@ export const FormContactAndMoreNoted = (props: IProps) => {
   return (
     <>
       <Form {...form}>
-        <form className={'flex flex-col gap-4 mt-[55px]'} onSubmit={form.handleSubmit(HandleSave)}>
-          <div className="absolute w-full top-0 left-0 py-2 z-20">
+        <form className={'flex flex-col gap-4 mt-0 lg:mt-[55px]'} onSubmit={form.handleSubmit(HandleSave)}>
+          <div className="static lg:absolute w-full top-0 left-0 py-2 z-20">
             <ButtonTitleGroup
               label={title ?? ''}
               buttonGroup={[
@@ -164,7 +164,7 @@ export const FormContactAndMoreNoted = (props: IProps) => {
             required
           />
 
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
             <Button
               variant={'outline'}
               className={'border-primary text-primary hover:text-primary'}

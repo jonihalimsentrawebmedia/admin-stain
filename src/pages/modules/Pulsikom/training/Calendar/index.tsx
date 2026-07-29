@@ -42,54 +42,56 @@ export const CalendarTrainingCollect = () => {
             },
           ]}
         />
-        <div className="bg-blue-50 border border-blue-500 text-blue-500 p-1.5 rounded-full flex items-center gap-1">
-          <MdInfo className={'size-4 text-blue-500'} />
+        <div className="bg-blue-50 border border-blue-500 text-blue-500 p-2 sm:p-1.5 rounded sm:rounded-full flex items-center gap-1 text-xs sm:text-sm">
+          <MdInfo className={'size-4 text-blue-500 shrink-0'} />
           Training yang muncul disini adalah training yang pendaftarannya sedang dibuka.
         </div>
 
-        <table className="w-full border-collapse">
-          {/* ✅ HEADER */}
-          <thead>
-            <tr className="bg-gray-200 text-sm">
-              <th className="border p-2 text-left w-[250px] border-primary">Topik Pembahasan</th>
-              {months?.map((m) => (
-                <th key={m.key} className="border p-2 text-center border-primary">
-                  {m.label}
-                </th>
-              ))}
-            </tr>
-          </thead>
-
-          {/* ✅ BODY */}
-          <tbody>
-            {data?.map((training) => (
-              <React.Fragment key={training?.nama_training}>
-                {/* 🔥 GROUP HEADER */}
-                <tr className="bg-green-700 text-white">
-                  <td
-                    colSpan={months?.length + 1}
-                    className="p-2 font-semibold border-primary border"
-                  >
-                    {training?.nama_training}
-                  </td>
-                </tr>
-
-                {/* 🔥 ROW DATA */}
-                {training?.rows?.map((row, i) => (
-                  <tr key={i} className="border-b">
-                    <td className="p-2 border border-primary">{row?.topik}</td>
-
-                    {months.map((m) => (
-                      <td key={m?.key} className="p-2 text-center border border-primary">
-                        {row[m?.key as keyof typeof row] || ''}
-                      </td>
-                    ))}
-                  </tr>
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse min-w-[700px]">
+            {/* ✅ HEADER */}
+            <thead>
+              <tr className="bg-gray-200 text-xs sm:text-sm">
+                <th className="border p-1 sm:p-2 text-left w-[150px] sm:w-[250px] border-primary">Topik Pembahasan</th>
+                {months?.map((m) => (
+                  <th key={m.key} className="border p-1 sm:p-2 text-center border-primary">
+                    {m.label}
+                  </th>
                 ))}
-              </React.Fragment>
-            ))}
-          </tbody>
-        </table>
+              </tr>
+            </thead>
+
+            {/* ✅ BODY */}
+            <tbody>
+              {data?.map((training) => (
+                <React.Fragment key={training?.nama_training}>
+                  {/* 🔥 GROUP HEADER */}
+                  <tr className="bg-green-700 text-white">
+                    <td
+                      colSpan={months?.length + 1}
+                      className="p-1 sm:p-2 font-semibold border-primary border text-xs sm:text-sm"
+                    >
+                      {training?.nama_training}
+                    </td>
+                  </tr>
+
+                  {/* 🔥 ROW DATA */}
+                  {training?.rows?.map((row, i) => (
+                    <tr key={i} className="border-b">
+                      <td className="p-1 sm:p-2 border border-primary text-xs sm:text-sm">{row?.topik}</td>
+
+                      {months.map((m) => (
+                        <td key={m?.key} className="p-1 sm:p-2 text-center border border-primary text-xs sm:text-sm">
+                          {row[m?.key as keyof typeof row] || ''}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
+                </React.Fragment>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </>
   )

@@ -86,7 +86,7 @@ export const SurveyListPage = () => {
             setSearchPrams(params)
           }}
         >
-          <TabsList className={'rounded-none! bg-white! shadow-none! w-full flex gap-x-2 h-full'}>
+          <TabsList className={'rounded-none! bg-white! shadow-none! w-full flex gap-x-2 h-full overflow-x-auto'}>
             {TabsData?.map((row, k) => (
               <TabsTrigger
                 key={k}

@@ -25,7 +25,7 @@ export const BottonSelectTypeVacancy = () => {
       </Button>
 
       <DialogBasic
-        className={'rounded min-w-xl'}
+        className={'rounded max-w-xl'}
         open={open}
         setOpen={setOpen}
         title={'Buka Lowongan Sebagai'}
@@ -51,7 +51,7 @@ export const BottonSelectTypeVacancy = () => {
           </div>
         </RadioGroup>
 
-        <div className="flex gap-2 items-center justify-end">
+        <div className="flex flex-col sm:flex-row gap-2 items-center justify-end">
           <Button
             onClick={() => setOpen(!open)}
             variant={'outline'}

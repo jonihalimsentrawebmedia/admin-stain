@@ -33,7 +33,7 @@ export const FormProduct = (props: Props) => {
 
           <UploadPhotoImage
             label={'Upload Gambar'}
-            className={'w-[420px]'}
+            className={'w-full sm:w-[420px]'}
             ratio_width={4}
             ratio_height={2}
             name={'url_gambar'}
@@ -55,7 +55,7 @@ export const FormProduct = (props: Props) => {
             label={'Urutan'}
             placeholder={'Urutan'}
             type={'number'}
-            inputClassName={'w-1/2 bg-white'}
+            inputClassName={'w-full sm:w-1/2 bg-white'}
             isNumber
             isRow
             isRequired
@@ -69,7 +69,7 @@ export const FormProduct = (props: Props) => {
               isRow
               required
             />
-            <p className="text-sm text-blue-500 pl-[212px]">
+            <p className="text-sm text-blue-500 sm:pl-[212px]">
               Jelaskan produk secara mendalam, termasuk tujuan, fitur, dan informasi teknis.
             </p>
           </div>

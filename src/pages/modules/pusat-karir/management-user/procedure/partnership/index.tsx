@@ -80,7 +80,7 @@ export const ProcedurePartnershipPage = () => {
         </>
       ) : (
         <>
-          <div className={'mt-5'}>
+          <div className={'mt-5 overflow-auto'}>
             <ButtonTitleGroup
               label={'Prosedur Pendaftaran - Mitra Kerja'}
               buttonGroup={[
@@ -101,7 +101,7 @@ export const ProcedurePartnershipPage = () => {
               ]}
             />
             <div
-              className={'tiptap ProseMirror simple-editor mt-5'}
+              className={'tiptap ProseMirror simple-editor mt-5 overflow-auto'}
               dangerouslySetInnerHTML={{ __html: procedure?.isi ?? '' }}
             />
           </div>

@@ -43,11 +43,11 @@ export const CreatedProgram = (props:Props) => {
         <Tabs
           value={step ?? 'is_informasi_pendaftaran'}
           onValueChange={(e) => HandleStep(e)}
-          className={'flex flex-row! items-start gap-x-5'}
+          className={'flex flex-col lg:flex-row! items-start gap-x-5'}
         >
           <TabsList
             className={
-              'flex flex-col gap-2 mt-[55px] h-full items-start min-w-[220px]! bg-white border p-3 rounded-none'
+              'flex justify-start flex-row lg:flex-col gap-2 mt-0 lg:mt-[55px] h-full items-start w-full lg:max-w-[220px]! bg-white border p-3 rounded-none overflow-x-scroll lg:overflow-x-visible'
             }
           >
             {TabsData?.map((item, k) => (
@@ -56,15 +56,15 @@ export const CreatedProgram = (props:Props) => {
                 key={k}
                 value={item?.value}
                 className={clsx(
-                  'rounded-none bg-white shadow-none! whitespace-pre-wrap text-start',
-                  'p-0 w-full'
+                  'rounded-none bg-white shadow-none! whitespace-nowrap lg:whitespace-pre-wrap text-start shrink-0',
+                  'p-0 w-auto lg:w-full'
                 )}
               >
                 <div className={'flex items-center gap-1.5 text-sm w-full'}>
                   <div
                     className={clsx(
                       'flex items-center justify-center',
-                      'size-8 min-w-8 h-8 rounded text-white',
+                      'size-6 min-w-6 h-6 rounded text-white text-xs',
                       item?.value === step
                         ? 'bg-primary'
                         : item?.status
@@ -74,7 +74,7 @@ export const CreatedProgram = (props:Props) => {
                   >
                     {k + 1}
                   </div>
-                  <p className={clsx(item?.value === step ? 'text-gray-800' : 'text-gray-400')}>
+                  <p className={clsx(item?.value === step ? 'text-gray-800' : 'text-gray-400', 'text-xs')}>
                     {item?.label}
                   </p>
                 </div>
@@ -82,7 +82,7 @@ export const CreatedProgram = (props:Props) => {
             ))}
           </TabsList>
           {TabsData?.map((row, k) => (
-            <TabsContent key={k} value={row?.value}>
+            <TabsContent key={k} value={row?.value} className={'w-full'}>
               {row?.element}
             </TabsContent>
           ))}

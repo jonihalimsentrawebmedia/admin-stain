@@ -12,11 +12,11 @@ import { PULSIKOMMENU } from '../data/constants'
 import { HiPencil } from 'react-icons/hi'
 import type { IBackground } from '../data/types'
 
-interface props {
+interface Props {
   data: IBackground
 }
 
-export const ButtonEditBackgroundUnit = (props: props) => {
+export const ButtonEditBackgroundUnit = (props: Props) => {
   const { data } = props
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)

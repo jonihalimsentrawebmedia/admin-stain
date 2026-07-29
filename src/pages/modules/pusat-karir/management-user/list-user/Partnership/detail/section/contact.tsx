@@ -9,7 +9,7 @@ export const CompanyContact = () => {
   return (
     <>
       <TitleLine title={'Informasi Kontak'} />
-      <div className={'grid grid-cols-[12rem_1fr] gap-5 mt-5'}>
+      <div className={'grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-5 mt-5'}>
         <p className="text-gray-500">Nama Lengkap</p>
         <p className="font-semibold">{contact?.nama_lengkap}</p>
         <p className="text-gray-500">Jabatan</p>

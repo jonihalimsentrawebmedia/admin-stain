@@ -85,7 +85,7 @@ export const MultipleSelectCategory = <T extends FieldValues>({ form, name }: Fo
 
   return (
     <>
-      <div className="grid grid-cols-[12rem_1fr] gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-5">
         <Label>Spesialisasi</Label>
 
         <div
@@ -112,8 +112,8 @@ export const MultipleSelectCategory = <T extends FieldValues>({ form, name }: Fo
         </div>
       </div>
 
-      <DialogBasic className="min-w-5xl" open={open} setOpen={setOpen} title="Pilih Spesialisasi">
-        <div className="grid grid-cols-3 gap-6">
+      <DialogBasic className="min-w-full sm:min-w-5xl" open={open} setOpen={setOpen} title="Pilih Spesialisasi">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {specialization.map((item) => (
             <CategoryItem
               key={item.id_spesialisasi}

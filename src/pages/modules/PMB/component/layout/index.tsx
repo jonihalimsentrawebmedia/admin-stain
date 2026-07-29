@@ -12,10 +12,10 @@ export default function MainLayoutPMB() {
         <HeaderPMB collapsed={collapsed} setCollapsed={setCollapsed} />
 
         <div className="flex flex-1 overflow-hidden">
-          <SideNavPMB collapsed={collapsed} />
+          <SideNavPMB collapsed={collapsed} setCollapsed={setCollapsed} />
 
           <main className="flex-1 overflow-auto">
-            <div className="p-4 min-h-[calc(100vh-135px)]">
+            <div className="p-2 sm:p-4 min-h-[calc(100vh-135px)]">
               <Outlet />
             </div>
             <footer className={'bg-white shadow mt-5 text-center border'}>

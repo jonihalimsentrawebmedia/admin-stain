@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import AxiosClient from '@/provider/axios.tsx'
 import { IoMdMail } from 'react-icons/io'
-import { DialogCustom } from '@/components/common/dialog/DialogCustom.tsx'
 import { FormsMessage } from '@/pages/modules/website-utama/pertayaan/kotak-masuk/components/formsMessage.tsx'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -13,6 +12,7 @@ import {
   MessageResolver,
 } from '@/pages/modules/website-utama/pertayaan/kotak-masuk/data/resolver.tsx'
 import { RiHistoryFill } from 'react-icons/ri'
+import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 
 interface Props {
   data: IInboxMessage
@@ -74,7 +74,7 @@ export const ButtonReplyInboxMessage = (props: Props) => {
         </>
       )}
 
-      <DialogCustom
+      <DialogBasic
         disableOutsideDialog={true}
         className={'rounded lg:max-w-5xl'}
         open={open}
@@ -91,7 +91,7 @@ export const ButtonReplyInboxMessage = (props: Props) => {
             HandleSave={HandleReply}
           />
         </div>
-      </DialogCustom>
+      </DialogBasic>
     </>
   )
 }

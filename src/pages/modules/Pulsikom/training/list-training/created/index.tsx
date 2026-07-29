@@ -43,11 +43,11 @@ export const CreatedTraining = (props: Props) => {
         <Tabs
           value={step ?? 'is_informasi_pendaftaran'}
           onValueChange={(e) => HandleStep(e)}
-          className={'flex flex-row! items-start gap-x-5'}
+          className={'flex flex-col lg:flex-row! items-start gap-x-5'}
         >
           <TabsList
             className={
-              'flex flex-col gap-2 mt-[55px] h-full items-start min-w-[180px]! bg-white border p-3 rounded-none'
+              'flex flex-row lg:flex-col gap-2 mt-0 lg:mt-[55px] h-full items-start w-full lg:max-w-[220px]! bg-white border p-3 rounded-none overflow-x-scroll lg:overflow-x-visible'
             }
           >
             {TabsData?.map((item, k) => (
@@ -56,8 +56,8 @@ export const CreatedTraining = (props: Props) => {
                 key={k}
                 value={item?.value}
                 className={clsx(
-                  'rounded-none bg-white shadow-none! whitespace-pre-wrap text-start',
-                  'p-0 w-full text-xs'
+                  'rounded-none bg-white shadow-none! whitespace-nowrap lg:whitespace-pre-wrap text-start shrink-0',
+                  'p-0 w-auto lg:w-full text-xs'
                 )}
               >
                 <div className={'flex items-center gap-1.5 text-sm w-full'}>

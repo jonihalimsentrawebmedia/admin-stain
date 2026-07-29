@@ -76,8 +76,8 @@ const ButtonDeleteUserFaculty = ({ data }: Props) => {
         title={<p className="text-2xl text-red-500">Hapus Unit Pengelola</p>}
         description={'Apakah anda yakin untuk menghapus data unit pengelola ini?'}
       >
-        <div className="flex gap-4">
-          <img src={data.gambar_url} className="w-[120px] h-40 object-cover object-center" alt="" />
+        <div className="flex flex-col sm:flex-row gap-4">
+          <img src={data.gambar_url} className="w-full sm:w-[120px] h-40 object-cover object-center" alt="" />
           <DetailField data={field} form={form} />
         </div>
         <div className="flex gap-4 items-center justify-end">

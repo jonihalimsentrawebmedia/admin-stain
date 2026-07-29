@@ -38,8 +38,8 @@ export const RegisterPricing = (props: Props) => {
 
   return (
     <>
-      <div className={'space-y-5 mt-[55px]'}>
-        <div className="absolute w-full top-0 left-0 py-2 z-20">
+      <div className={'space-y-5 mt-0 lg:mt-[55px]'}>
+        <div className="static lg:absolute w-full top-0 left-0 py-2 z-20">
           <ButtonTitleGroup
             label={title ?? ''}
             buttonGroup={[
@@ -97,7 +97,7 @@ export const RegisterPricing = (props: Props) => {
         )}
         <ButtonAddRegisterPricing />
 
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
           <Button
             variant={'outline'}
             className={'border-primary text-primary hover:text-primary'}

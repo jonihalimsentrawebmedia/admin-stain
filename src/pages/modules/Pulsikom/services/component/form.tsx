@@ -32,7 +32,7 @@ export const FormServicePulsikom = (props: Props) => {
           />
 
           <UploadPhotoImage
-            className={'w-[420px]'}
+            className={'w-full sm:w-[420px]'}
             label={'Upload Gambar'}
             ratio_width={4}
             ratio_height={2}
@@ -55,7 +55,7 @@ export const FormServicePulsikom = (props: Props) => {
             label={'Urutan'}
             placeholder={'Urutan'}
             type={'number'}
-            inputClassName={'w-1/2 bg-white'}
+            inputClassName={'w-full sm:w-1/2 bg-white'}
             isNumber
             isRow
             isRequired
@@ -69,7 +69,7 @@ export const FormServicePulsikom = (props: Props) => {
               isRow
               required
             />
-            <p className="text-sm text-blue-500 pl-[212px]">
+            <p className="text-sm text-blue-500 sm:pl-[212px]">
               Maksimal 150 karakter. Teks ini akan muncul pada kartu layanan di halaman depan. Fokus
               pada manfaat utama.
             </p>
@@ -83,7 +83,7 @@ export const FormServicePulsikom = (props: Props) => {
               isRow
               required
             />
-            <p className="text-sm text-blue-500 pl-[212px]">
+            <p className="text-sm text-blue-500 sm:pl-[212px]">
               Jelaskan layanan secara mendalam, termasuk prosedur, fitur, dan informasi teknis.
               Gunakan heading untuk kerapian.
             </p>

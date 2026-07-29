@@ -11,11 +11,17 @@ export default function MainLayoutFaculty() {
       <div className="h-screen flex flex-col bg-[#F8FFF9]">
         <HeaderFaculty collapsed={collapsed} setCollapsed={setCollapsed} />
 
-        <div className="flex flex-1 overflow-hidden">
-          <SideNavFaculty collapsed={collapsed} />
+        <div className="flex flex-1 overflow-hidden relative">
+          {!collapsed && (
+            <div
+              className="fixed inset-0 bg-black/40 z-40 lg:hidden"
+              onClick={() => setCollapsed(true)}
+            />
+          )}
+          <SideNavFaculty collapsed={collapsed} setCollapsed={setCollapsed} />
 
           <main className="flex-1 overflow-auto">
-            <div className="p-4 min-h-[calc(100vh-135px)]">
+            <div className="p-3 sm:p-4 min-h-[calc(100vh-135px)]">
               <Outlet/>
             </div>
             <footer className={'bg-white shadow mt-5 text-center border'}>Admin Website © {new Date().getFullYear()}</footer>

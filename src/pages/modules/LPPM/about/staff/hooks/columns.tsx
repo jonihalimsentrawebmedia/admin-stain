@@ -27,7 +27,7 @@ export const ColumnsStaff = () => {
       cell: ({ row }) => (
         <>
           <Link
-            className={'p-1.5 border border-primary text-primary flex items-center text-sm w-fit px-4 rounded'}
+            className={'p-1.5 border border-primary whitespace-nowrap text-primary flex items-center text-sm w-fit px-4 rounded'}
             to={`member/${row?.original.id_staff}`}
           >
             Lihat Daftar Anggota

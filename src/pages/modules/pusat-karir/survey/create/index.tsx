@@ -70,7 +70,7 @@ export const CreateSurveyData = () => {
           ]}
         />
 
-        <div className="grid grid-cols-[280px_1fr] gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-5">
           <SideSection
             data={data}
             setActiveIndex={setActiveIndex}

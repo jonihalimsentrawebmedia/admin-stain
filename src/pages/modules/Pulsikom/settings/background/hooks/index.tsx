@@ -11,11 +11,11 @@ export type Context =
   | 'INFORMASI'
   | 'HUBUNGI_KAMI'
 
-interface props extends BasicProps {
+interface Props extends BasicProps {
   context: Context
 }
 
-export const UseGetListBackground = (props: props) => {
+export const UseGetListBackground = (props: Props) => {
   const { context, search, page, limit } = props
 
   const ParamsSearch = new URLSearchParams()

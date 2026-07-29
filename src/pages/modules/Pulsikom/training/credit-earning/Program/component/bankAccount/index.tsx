@@ -80,8 +80,8 @@ const ListBankAccount = (props: Props) => {
 
   return (
     <>
-      <div className="flex flex-col gap-5 mt-[55px]">
-        <div className="absolute w-full top-0 left-0 py-2 z-20">
+      <div className="flex flex-col gap-5 mt-0 lg:mt-[55px]">
+        <div className="static lg:absolute w-full top-0 left-0 py-2 z-20">
           <ButtonTitleGroup
             label={title ?? ''}
             buttonGroup={[
@@ -121,7 +121,7 @@ const ListBankAccount = (props: Props) => {
           onRowSelectionChange={setRowSelection}
         />
 
-        <div className="flex items-center justify-between mt-4">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 mt-4">
           <Button
             variant={'outline'}
             className={'border-primary text-primary hover:text-primary'}

@@ -9,8 +9,8 @@ export const CompanyBranding = () => {
   return (
     <>
       <TitleLine title={'Branding'} />
-      <div className={'grid grid-cols-[12rem_1fr] gap-5 mt-5'}>
-        <div className="col-span-2">
+      <div className={'grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-5 mt-5'}>
+        <div className="sm:col-span-2">
           <img
             src={branding?.url_foto_profil ?? '/noimg.png'}
             className={'object-contain h-[158px] w-auto'}

@@ -6,6 +6,7 @@ import { ChevronRight } from 'lucide-react'
 
 interface Props {
   collapsed: boolean
+  setCollapsed: (v: boolean) => void
 }
 
 type MenuItem = {
@@ -15,7 +16,7 @@ type MenuItem = {
   child?: MenuItem[]
 }
 
-export function SideNavPMB({ collapsed }: Props) {
+export function SideNavPMB({ collapsed, setCollapsed }: Props) {
   const location = useLocation()
   const pathname = location.pathname
 
@@ -31,7 +32,6 @@ export function SideNavPMB({ collapsed }: Props) {
     return pathname === path || pathname.startsWith(path + '/')
   }
 
-  // recursive helper: collect groupIds yang harus di-open karena ada active descendant
   const collectOpenGroups = (
     item: MenuItem,
     parentGroupId: string,
@@ -62,13 +62,11 @@ export function SideNavPMB({ collapsed }: Props) {
   }, [collapsed])
 
   useEffect(() => {
-    // cek apakah path sekarang ada di menu yang punya parent children
     const activeHasParentGroup = MenuListFaculty.some((item) => {
       if (!item.child) return false
       return isActiveTree(item, pathname)
     })
 
-    // kalau yang aktif bukan dari group tree → tutup semua
     if (!activeHasParentGroup) {
       setOpenGroups({})
     }
@@ -78,123 +76,135 @@ export function SideNavPMB({ collapsed }: Props) {
     setOpenGroups((prev) => {
       const next = { ...prev }
 
-      // ambil parentId (semua sebelum "-index-name")
       const parentId = groupId.split('-').slice(0, -2).join('-')
 
-      // tutup semua group yang parent-nya sama
       Object.keys(next).forEach((key) => {
         if (key.startsWith(parentId + '-') && key !== groupId) {
           next[key] = false
         }
       })
 
-      // toggle group yg diklik
       next[groupId] = !prev[groupId]
 
       return next
     })
   }
 
-  return (
-    <div
-      className={cn(
-        `bg-primary text-white h-full transition-all duration-300 absolute z-50 lg:relative ${collapsed ? '' : 'pl-[20px] pr-2'}`,
-        collapsed ? 'w-0 hidden lg:block lg:w-14' : 'w-72'
-      )}
-    >
-      <div className="space-y-2 overflow-y-auto py-4 overflow-auto h-[calc(100vh-110px)]">
-        {MenuListFaculty.map((row, idx) => {
-          const groupId = makeGroupId('root', idx, row.name)
-          const isGroupOpen = groups[groupId] ?? false
-          const isRowActive = isActiveTree(row, pathname)
-          const labelVisible = !collapsed
+  const handleLinkClick = () => {
+    if (window.innerWidth < 1024) {
+      setCollapsed(true)
+    }
+  }
 
-          if (row.child && row.child.length > 0) {
-            return (
-              <div
-                key={groupId}
-                className={`text-base ${isRowActive || isGroupOpen ? 'bg-white' : ''}`}
-              >
-                <button
-                  onClick={() => !collapsed && toggleGroup(groupId)}
-                  className={cn(
-                    'flex w-full items-center gap-1.5 px-2 py-2 transition-colors',
-                    `focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${
-                      !isGroupOpen ? 'text-white' : 'text-black'
-                    }`,
-                    isRowActive ? 'text-black font-semibold' : '',
-                    collapsed ? 'justify-center' : 'justify-between'
-                  )}
+  return (
+    <>
+      {!collapsed && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={() => setCollapsed(true)}
+        />
+      )}
+      <div
+        className={cn(
+          `bg-primary text-white h-full transition-all duration-300 absolute z-50 lg:relative ${collapsed ? '' : 'pl-[20px] pr-2'}`,
+          collapsed ? 'w-0 hidden lg:block lg:w-14' : 'w-72'
+        )}
+      >
+        <div className="space-y-2 overflow-y-auto py-4 overflow-auto h-[calc(100vh-110px)]">
+          {MenuListFaculty.map((row, idx) => {
+            const groupId = makeGroupId('root', idx, row.name)
+            const isGroupOpen = groups[groupId] ?? false
+            const isRowActive = isActiveTree(row, pathname)
+            const labelVisible = !collapsed
+
+            if (row.child && row.child.length > 0) {
+              return (
+                <div
+                  key={groupId}
+                  className={`text-base ${isRowActive || isGroupOpen ? 'bg-white' : ''}`}
                 >
-                  <div
+                  <button
+                    onClick={() => !collapsed && toggleGroup(groupId)}
                     className={cn(
-                      'flex items-center gap-1.5 text-sm',
-                      collapsed && 'justify-center'
+                      'flex w-full items-center gap-1.5 px-2 py-2 transition-colors',
+                      `focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${
+                        !isGroupOpen ? 'text-white' : 'text-black'
+                      }`,
+                      isRowActive ? 'text-black font-semibold' : '',
+                      collapsed ? 'justify-center' : 'justify-between'
                     )}
                   >
-                    {row.icon}
-                    {labelVisible && <span>{row.name}</span>}
-                  </div>
-
-                  {labelVisible && (
-                    <span
+                    <div
                       className={cn(
-                        'ml-auto text-xs transition-transform',
-                        isGroupOpen ? 'rotate-90' : ''
+                        'flex items-center gap-1.5 text-sm',
+                        collapsed && 'justify-center'
                       )}
                     >
-                      <ChevronRight className={'size-4'} />
-                    </span>
-                  )}
-                </button>
+                      {row.icon}
+                      {labelVisible && <span>{row.name}</span>}
+                    </div>
 
-                {!collapsed && isGroupOpen && (
-                  <ul className="border-white/30 pl-4 w-full">
-                    {row.child.map((child, childIdx) => (
-                      <TreeNodeWrapper
-                        length={row?.child.length}
-                        key={makeGroupId(groupId, childIdx, child.name)}
-                        item={child}
-                        parentGroupId={groupId}
-                        index={childIdx}
-                        depth={1}
-                        makeGroupId={makeGroupId}
-                        groups={groups}
-                        toggleGroup={toggleGroup}
-                        isActivePath={isActivePath}
-                        collapsed={collapsed}
-                      />
-                    ))}
-                  </ul>
+                    {labelVisible && (
+                      <span
+                        className={cn(
+                          'ml-auto text-xs transition-transform',
+                          isGroupOpen ? 'rotate-90' : ''
+                        )}
+                      >
+                        <ChevronRight className={'size-4'} />
+                      </span>
+                    )}
+                  </button>
+
+                  {!collapsed && isGroupOpen && (
+                    <ul className="border-white/30 pl-4 w-full">
+                      {row.child.map((child, childIdx) => (
+                        <div key={makeGroupId(groupId, childIdx, child.name)} onClick={handleLinkClick}>
+                          <TreeNodeWrapper
+                            length={row?.child.length}
+                            item={child}
+                            parentGroupId={groupId}
+                            index={childIdx}
+                            depth={1}
+                            makeGroupId={makeGroupId}
+                            groups={groups}
+                            toggleGroup={toggleGroup}
+                            isActivePath={isActivePath}
+                            collapsed={collapsed}
+                          />
+                        </div>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              )
+            }
+
+            const content = (
+              <div
+                className={cn(
+                  'flex items-center gap-1.5 px-2 py-2 text-sm transition-colors my-1 text-white',
+                  'hover:bg-white hover:text-black',
+                  isRowActive ? 'text-black bg-white font-semibold' : '',
+                  collapsed && 'justify-center'
                 )}
+              >
+                {row.icon}
+                {labelVisible && <span>{row.name}</span>}
               </div>
             )
-          }
 
-          const content = (
-            <div
-              className={cn(
-                'flex items-center gap-1.5 px-2 py-2 text-sm transition-colors my-1 text-white',
-                'hover:bg-white hover:text-black',
-                isRowActive ? 'text-black bg-white font-semibold' : '',
-                collapsed && 'justify-center'
-              )}
-            >
-              {row.icon}
-              {labelVisible && <span>{row.name}</span>}
-            </div>
-          )
-
-          return row.path ? (
-            <Link key={groupId} to={row.path}>
-              {content}
-            </Link>
-          ) : (
-            <div key={groupId}>{content}</div>
-          )
-        })}
+            return row.path ? (
+              <Link key={groupId} to={row.path} onClick={handleLinkClick}>
+                {content}
+              </Link>
+            ) : (
+              <div key={groupId}>{content}</div>
+            )
+          })}
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
@@ -209,6 +219,7 @@ function TreeNodeWrapper({
   isActivePath,
   collapsed,
   length,
+  onNavigate,
 }: any) {
   const groupId = makeGroupId(parentGroupId, index, item.name)
   return (
@@ -228,6 +239,7 @@ function TreeNodeWrapper({
         toggleGroup={toggleGroup}
         isActivePath={isActivePath}
         collapsed={collapsed}
+        onNavigate={onNavigate}
       />
     </div>
   )
@@ -242,6 +254,7 @@ function TreeNode({
   toggleGroup,
   isActivePath,
   collapsed,
+  onNavigate,
 }: any) {
   const hasChildren = !!item.child && item.child.length > 0
   const isOpen = groups[groupId] ?? false
@@ -287,6 +300,7 @@ function TreeNode({
                 isActivePath={isActivePath}
                 collapsed={collapsed}
                 length={item.child!.length}
+                onNavigate={onNavigate}
               />
             ))}
           </ul>
@@ -309,7 +323,7 @@ function TreeNode({
     </div>
   )
 
-  return <li>{item.path ? <Link to={item.path}>{itemContent}</Link> : itemContent}</li>
+  return <li>{item.path ? <Link to={item.path} onClick={onNavigate}>{itemContent}</Link> : itemContent}</li>
 }
 
 export function isActiveTree(item: MenuItem, pathname: string): boolean {

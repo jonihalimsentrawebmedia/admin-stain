@@ -54,7 +54,7 @@ export const ButtonCloseProgram = (props: Props) => {
       </button>
 
       <DialogBasic title={'Tutup Pendaftaran'} open={open} setOpen={setOpen}>
-        <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
+        <div className={'grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-4'}>
           <p className="text-gray-500">Nama Pelatihan</p>
           <p>{data?.nama_program}</p>
           <p className="text-gray-500">Tanggal Terbit</p>
@@ -66,7 +66,7 @@ export const ButtonCloseProgram = (props: Props) => {
             {data?.tgl_tutup_pendaftaran ? format(data?.tgl_tutup_pendaftaran, 'dd-MM-yyyy') : ''}
           </p>
 
-          <p className="col-span-2 font-semibold text-primary">Pendaftar</p>
+          <p className="col-span-1 sm:col-span-2 font-semibold text-primary">Pendaftar</p>
           <p className="text-gray-500">Minimal</p>
           <p>{data?.minimal_pendaftar}</p>
           <p className="text-gray-500">Maksimal</p>

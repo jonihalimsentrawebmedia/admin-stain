@@ -21,21 +21,21 @@ export function HeaderCarrierCenter(props: Props) {
   const { session } = UseGetSessionCarrierCenter()
 
   return (
-    <header className="py-4 px-5 bg-[#E9FFF1] border-b border-green-200 flex items-center justify-between w-full">
-      <div className="flex items-center gap-4">
+    <header className="py-3 px-3 sm:py-4 sm:px-5 bg-[#E9FFF1] border-b border-green-200 flex items-center justify-between w-full gap-2">
+      <div className="flex items-center gap-2 sm:gap-4 min-w-0">
         <Link to={'/modules'}>
-          <img src={module?.gambar} alt="gambar" className="size-14" />
+          <img src={module?.gambar} alt="gambar" className="size-10 sm:size-14 shrink-0" />
         </Link>
-        <div className="flex flex-col">
-          <p className="text-sm font-semibold text-primary">Manajemen Pengelolaan Website</p>
-          <p className="text-2xl font-semibold">{session?.nama_unit}</p>
+        <div className="flex flex-col min-w-0">
+          <p className="text-xs sm:text-sm font-semibold text-primary truncate">Manajemen Pengelolaan Website</p>
+          <p className="text-base sm:text-2xl font-semibold truncate">{session?.nama_unit}</p>
         </div>
       </div>
-      <div className="flex items-center gap-5">
-        <Link to={'/modules'}>
+      <div className="flex items-center gap-3 sm:gap-5 shrink-0">
+        <Link to={'/modules'} className="hidden sm:block">
           <IconModules />
         </Link>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-4">
           <ButtonProfile module={module} profileUser={profileUser} />
           <button onClick={() => setCollapsed(!collapsed)}>
             <RiMenuLine />

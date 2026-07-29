@@ -12,7 +12,7 @@ export default function MainLayoutPulsikom() {
         <HeaderPulsikom collapsed={collapsed} setCollapsed={setCollapsed} />
 
         <div className="flex flex-1 overflow-hidden">
-          <SideNavPulsikom collapsed={collapsed} />
+          <SideNavPulsikom collapsed={collapsed} setCollapsed={setCollapsed} />
 
           <main className="flex-1 overflow-auto">
             <div className="p-4 min-h-[calc(100vh-135px)]">

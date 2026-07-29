@@ -105,10 +105,10 @@ const FormInformation = (props: IProps) => {
     <>
       <Form {...form}>
         <form
-          className={'flex flex-col gap-4 w-full mt-[55px]'}
+          className={'flex flex-col gap-4 w-full mt-0 lg:mt-[55px]'}
           onSubmit={form.handleSubmit(HandleSave)}
         >
-          <div className="absolute w-full top-0 left-0 py-2 z-20">
+          <div className="static lg:absolute w-full top-0 left-0 py-2 z-20">
             <ButtonTitleGroup
               label={title ?? ''}
               buttonGroup={[
@@ -145,7 +145,7 @@ const FormInformation = (props: IProps) => {
             name={'url_gambar'}
             ratio_width={4}
             ratio_height={3}
-            className={'w-[320px]'}
+            className={'w-full sm:w-[320px]'}
           />
           <TextInput
             name={'nama_training'}
@@ -157,7 +157,7 @@ const FormInformation = (props: IProps) => {
 
           <RichText form={form} name={'deskripsi'} label={'Deskripsi'} isRow={false} required />
 
-          <div className="flex items-start gap-4 w-full">
+          <div className="flex flex-col sm:flex-row items-start gap-4 w-full">
             <TextInput
               name={'minimal_pendaftar'}
               form={form}
@@ -204,7 +204,7 @@ const FormInformation = (props: IProps) => {
           </div>
 
           {status === 'DITERBITKAN' && (
-            <div className="flex items-start gap-4 w-full">
+            <div className="flex flex-col sm:flex-row items-start gap-4 w-full">
               <TextInput
                 name={'tgl_buka_pendaftaran'}
                 form={form}

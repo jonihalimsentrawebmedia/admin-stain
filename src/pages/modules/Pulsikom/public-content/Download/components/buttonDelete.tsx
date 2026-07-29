@@ -13,11 +13,11 @@ import { useForm } from 'react-hook-form'
 import { Form } from '@/components/ui/form.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
 
-interface props {
+interface Props {
   data: IDownload
 }
 
-export const ButtonDeleteFileDownload = (props: props) => {
+export const ButtonDeleteFileDownload = (props: Props) => {
   const { data } = props
 
   const [open, setOpen] = useState(false)
@@ -59,7 +59,7 @@ export const ButtonDeleteFileDownload = (props: props) => {
         description={'Apakah anda yakin untuk menghapus download ini?'}
         className={'lg:max-w-2xl'}
       >
-        <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
+        <div className={'grid grid-cols-1 lg:grid-cols-[12rem_1fr] gap-4'}>
           <p>Nama Berkas</p>
           <p>{data?.nama_berkas}</p>
           <p>Kategori</p>

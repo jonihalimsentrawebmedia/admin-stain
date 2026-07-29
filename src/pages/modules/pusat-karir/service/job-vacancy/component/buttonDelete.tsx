@@ -55,7 +55,7 @@ export const ButtonDeleteJobVacancy = (props: Props) => {
         title={'Hapus Lowongan Pekerjaan?'}
         description={'Apakah Anda yakin ingin menghapus lowongan pekerjaan ini?'}
       >
-        <div className="grid grid-cols-[12rem_1fr] gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-5">
           <p className="text-gray-500">Pembuka Lowongan</p>
           <p>{data?.nama_mitra_kerja}</p>
           <p className="text-gray-500">Jabatan</p>

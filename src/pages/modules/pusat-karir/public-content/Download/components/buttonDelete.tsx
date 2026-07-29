@@ -59,7 +59,7 @@ export const ButtonDeleteFileDownloadCarrier = (props: props) => {
         description={'Apakah anda yakin untuk menghapus download ini?'}
         className={'lg:max-w-2xl'}
       >
-        <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
+        <div className={'grid grid-cols-1 sm:grid-cols-[12rem_1fr] gap-3 sm:gap-4'}>
           <p>Nama Berkas</p>
           <p>{data?.nama_berkas}</p>
           <p>Kategori</p>
@@ -76,7 +76,7 @@ export const ButtonDeleteFileDownloadCarrier = (props: props) => {
           </Link>
 
           <Form {...form}>
-            <form className="my-2 col-span-2">
+            <form className="my-2 sm:col-span-2">
               <TextInput
                 form={form}
                 name={'validator'}
@@ -89,7 +89,7 @@ export const ButtonDeleteFileDownloadCarrier = (props: props) => {
             </form>
           </Form>
 
-          <div className="flex items-center justify-end col-span-2 gap-2">
+          <div className="flex items-center justify-end sm:col-span-2 gap-2">
             <Button
               className={'text-primary border border-primary hover:text-primary'}
               onClick={() => setOpen(!open)}

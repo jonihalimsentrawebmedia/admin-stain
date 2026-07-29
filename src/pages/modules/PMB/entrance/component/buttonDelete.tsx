@@ -52,7 +52,7 @@ const ButtonDeleteEntrancePMB = (props: props) => {
         title={'Hapus Jalur Masuk'}
         open={open}
         setOpen={setOpen}
-        className={'min-w-3xl'}
+        className={'max-w-3xl'}
       >
         <div className={'grid grid-cols-[12rem_1fr] gap-4'}>
           <p className="text-gray-500">Nama Jalur</p>

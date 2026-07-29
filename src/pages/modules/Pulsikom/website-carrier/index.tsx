@@ -86,7 +86,7 @@ export const WebsiteCarrierPage = () => {
                   name={'url'}
                   label={'Link URL'}
                   placeholder={'Link URL'}
-                  className={'w-1/2 bg-white'}
+                  className={'w-full lg:w-1/2 bg-white'}
                   isRow
                   isRequired
                   type={'url'}
@@ -123,7 +123,7 @@ export const WebsiteCarrierPage = () => {
               Masukkan URL atau link Webiste Karir perguruan tinggi anda.
             </div>
 
-            <div className="grid grid-cols-[12rem_1fr]">
+            <div className="grid grid-cols-1 lg:grid-cols-[12rem_1fr]">
               <p className="text-gray-500">URL/Link</p>
               <Link
                 target={'_blank'}

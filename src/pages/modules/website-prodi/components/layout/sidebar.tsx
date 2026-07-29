@@ -110,10 +110,10 @@ export function SidebarProdi({ collapsed, isMobile, setCollapsed }: Props) {
     <div
       className={cn(
         `bg-primary text-white h-full transition-all duration-300 absolute z-50 lg:relative ${collapsed ? '' : 'pl-[20px] pr-2'}`,
-        collapsed ? 'w-0 hidden lg:block lg:w-14' : 'w-72'
+        collapsed ? 'w-0 hidden lg:block lg:w-14' : 'w-72 max-w-[85vw]'
       )}
     >
-      <div className="space-y-2 overflow-y-auto py-4 overflow-auto h-[calc(100vh-110px)]">
+      <div className="space-y-2 overflow-y-auto py-4 h-[calc(100dvh-110px)]">
         {MENULISTPRODI.map((row, idx) => {
           const groupId = makeGroupId('root', idx, row.name)
           const isGroupOpen = groups[groupId] ?? false

@@ -76,7 +76,7 @@ export const AddDownloadPage = () => {
           <SelectBasicInput
             name={'id_kategori_berkas'}
             form={form}
-            selectClassName={'w-1/2'}
+            selectClassName={'w-full lg:w-1/2'}
             label={'Kategori Berkas'}
             placeholder={'Kategori Berkas'}
             isLoading={load1}
@@ -108,14 +108,14 @@ export const AddDownloadPage = () => {
               form={form}
               label={'Link Drive'}
               placeholder={'Link Drive'}
-              inputClassName={'w-1/2 bg-white'}
+              inputClassName={'w-full lg:w-1/2 bg-white'}
               isRow
               isRequired
             />
           ) : (
             <UploadFileInput
               form={form}
-              innerClassName={'w-1/2'}
+              innerClassName={'w-full lg:w-1/2'}
               name={'file_url'}
               label={'Link Berkas'}
               keyname={'key_name'}
