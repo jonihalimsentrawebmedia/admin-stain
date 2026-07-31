@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { UseGetDetailRoom } from '../hooks/index.tsx'
 import { FormEditRoom } from '../component/buttonEdit.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const UpdateRoom = () => {
   const { id } = useParams<{ id: string }>()
@@ -26,7 +27,7 @@ const UpdateRoom = () => {
   return (
     <>
       <div>
-        <ButtonTitleGroup isBack label={'Edit Data Ruangan'} buttonGroup={[]} />
+        <ButtonTitleGroup isBack label={'Edit Data Ruangan'} buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide="Panduan" valueGuide="SIM_RS_REFERENCE" /> }]} />
         <FormEditRoom data={detail} />
       </div>
     </>

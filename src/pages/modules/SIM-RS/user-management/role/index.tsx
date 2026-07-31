@@ -2,6 +2,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { HiPlus } from 'react-icons/hi'
 import { Button } from '@/components/ui/button.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { UseGetRole } from './hooks/index.tsx'
 import { ColumnsRole } from './data/columns.tsx'
@@ -22,8 +23,9 @@ export const RolePage = () => {
     <div className={'space-y-5'}>
       <ButtonTitleGroup
         label={'Role User'}
-        buttonGroup={
-          permission?.kelola
+        buttonGroup={[
+          { type: 'custom', element: <ButtonGoToGuide titleGuide={'Role User'} valueGuide="SIM_RS_USER_MANAGEMENT" /> },
+          ...(permission?.kelola
             ? [
                 {
                   type: 'custom',
@@ -39,8 +41,8 @@ export const RolePage = () => {
                   ),
                 },
               ]
-            : []
-        }
+            : []),
+        ]}
       />
       <TableCustom
         columnsName={permission?.kelola ? [''] : ['action']}

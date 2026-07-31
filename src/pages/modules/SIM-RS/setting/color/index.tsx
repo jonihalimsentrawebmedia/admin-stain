@@ -10,6 +10,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { UseGetColorSIMRS } from './hooks/index.tsx'
 import { IoInformationCircle } from 'react-icons/io5'
 import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const ColorSettingSIMRS = () => {
   const [loading, setLoading] = useState(false)
@@ -46,7 +47,10 @@ const ColorSettingSIMRS = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <p className="text-xl sm:text-2xl text-[#444] font-medium">Pengaturan Warna</p>
+      <div className="flex items-center justify-between">
+        <p className="text-xl sm:text-2xl text-[#444] font-medium">Pengaturan Warna</p>
+        <ButtonGoToGuide titleGuide={'Pengaturan Warna'} valueGuide="SIM_RS_SETTING" />
+      </div>
 
       <div className="flex gap-2 items-center w-fit px-2 py-1 text-[#2769CD] border border-[#2769CD] rounded text-sm">
         <IoInformationCircle className="size-4 shrink-0" />

@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { TemplateSuratSchema, type TTemplateSuratForm } from '../data/resolver'
 import { zodResolver } from '@hookform/resolvers/zod'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { FormTemplateSurat } from '@/pages/modules/E-Office/reference/template-surat/component/form.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
@@ -40,7 +41,7 @@ const CreateTemplateSurat = () => {
   return (
     <>
       <div className="space-y-5">
-        <ButtonTitleGroup isBack label={'Buat Template Surat'} buttonGroup={[]} />
+        <ButtonTitleGroup isBack label={'Buat Template Surat'} buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide valueGuide="E_OFFICE_REFERENCE" /> }]} />
         <FormTemplateSurat loading={loading} form={form} HandleSave={HandleSave} />
       </div>
     </>

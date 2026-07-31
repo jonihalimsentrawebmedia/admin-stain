@@ -1,3 +1,4 @@
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { Button } from '@/components/ui/button.tsx'
@@ -37,6 +38,7 @@ const LetterOfAssigment = () => {
         <ButtonTitleGroup
           label={'Surat Tugas / SPD'}
           buttonGroup={[
+            { type: 'custom', element: <ButtonGoToGuide titleGuide={'Surat Tugas / SPD'} valueGuide="E_OFFICE_OFFICIAL_TRAVEL" /> },
             {
               type: 'custom',
               element: (

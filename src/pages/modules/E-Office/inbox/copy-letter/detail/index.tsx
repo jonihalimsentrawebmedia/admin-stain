@@ -1,4 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Card, CardContent } from '@/components/ui/card.tsx'
 import { TitleLine } from '@/pages/modules/pusat-karir/component/common/titleLine.tsx'
@@ -18,6 +19,7 @@ export const DetailCopyLetterPage = () => {
           label={'Detail Surat Masuk'}
           isBack
           buttonGroup={[
+            { type: 'custom', element: <ButtonGoToGuide titleGuide={'Detail Tembusan Surat'} valueGuide="E_OFFICE_INBOX_COPY_LETTER" /> },
             {
               type: 'edit',
               label: 'Edit Data',

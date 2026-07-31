@@ -10,6 +10,7 @@ import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 import { format } from 'date-fns'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const EditCPPT = () => {
   const { id, idCppt } = useParams<{ id: string; idCppt: string }>()
@@ -114,7 +115,7 @@ const EditCPPT = () => {
       <ButtonTitleGroup
         isBack
         label="Edit Catatan CPPT"
-        buttonGroup={[]}
+        buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide="Panduan" valueGuide="SIM_RS_SERVICES" /> }]}
       />
 
       <div className="bg-white rounded-lg border p-6">

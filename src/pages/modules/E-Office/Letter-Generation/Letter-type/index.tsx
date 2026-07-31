@@ -1,4 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import ButtonAddLetterType from '@/pages/modules/E-Office/Letter-Generation/Letter-type/component/buttonAdd.tsx'
 import { UseGetTypeLetters } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/hooks'
 import { useSearchParams } from 'react-router-dom'
@@ -22,7 +23,10 @@ const LetterTypePage = () => {
       <div className="space-y-5">
         <ButtonTitleGroup
           label={'Kelompok Surat'}
-          buttonGroup={[{ type: 'custom', element: <ButtonAddLetterType /> }]}
+          buttonGroup={[
+            { type: 'custom', element: <ButtonGoToGuide titleGuide={'Kelompok Surat'} valueGuide="E_OFFICE_LETTER_TYPE" /> },
+            { type: 'custom', element: <ButtonAddLetterType /> },
+          ]}
         />
         <TableCustom
           tdClassName={'bg-white'}

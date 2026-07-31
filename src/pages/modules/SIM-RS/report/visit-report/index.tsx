@@ -2,6 +2,7 @@ import { Card } from '@/components/ui/card'
 import { BedDouble, CalendarCheck, CheckCircle, DoorOpen } from 'lucide-react'
 import { useSearchParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { UseGetVisitReportList, UseGetVisitReportStats } from './hooks/index.tsx'
 import { UseGetPoli } from '@/pages/modules/SIM-RS/reference/poli/hooks/index.tsx'
@@ -105,7 +106,7 @@ export const VisitReportPage = () => {
         ))}
       </section>
 
-      <ButtonTitleGroup label={'Laporan Kunjungan'} buttonGroup={[]} />
+      <ButtonTitleGroup label={'Laporan Kunjungan'} buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide={'Laporan Kunjungan'} valueGuide="SIM_RS_REPORT" /> }]} />
       <div className="flex flex-col sm:flex-row gap-4">
         <SelectFilter
           name="id_poli"

@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { UseGetDetailUser } from '../hooks/index.tsx'
 import { format } from 'date-fns'
 import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
@@ -32,8 +33,9 @@ const DetailUser = () => {
         <ButtonTitleGroup
           isBack
           label={'Detail User'}
-          buttonGroup={
-            permission?.kelola
+          buttonGroup={[
+            { type: 'custom', element: <ButtonGoToGuide titleGuide={'Detail User'} valueGuide="SIM_RS_USER_MANAGEMENT" /> },
+            ...(permission?.kelola
               ? [
                   {
                     type: 'edit',
@@ -42,8 +44,8 @@ const DetailUser = () => {
                       navigate(`/modules/sim-rs/user-management/user-list/edit/${detail.id_user}`),
                   },
                 ]
-              : []
-          }
+              : []),
+          ]}
         />
 
         <div className="bg-white rounded-lg border p-6">

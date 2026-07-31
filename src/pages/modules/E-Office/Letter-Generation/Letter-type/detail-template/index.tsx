@@ -1,4 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { UseGetDetailTypeTemplateLetter } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail/hooks'
 import { useParams, useSearchParams } from 'react-router-dom'
 import ButtonAddTemplateLetterType from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail-template/component/buttonAdd.tsx'
@@ -29,6 +30,7 @@ const ListTemplateLetterType = () => {
           isBack
           label={`Daftar Jenis Template ${typeTemplate?.nama_jenis_template}`}
           buttonGroup={[
+            { type: 'custom', element: <ButtonGoToGuide titleGuide={'Daftar Jenis Template'} valueGuide="E_OFFICE_LETTER_TYPE" /> },
             {
               type: 'custom',
               element: <ButtonAddTemplateLetterType />,

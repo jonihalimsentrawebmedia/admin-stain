@@ -14,6 +14,7 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { type Dispatch, type SetStateAction, useEffect, useState } from 'react'
 import type { IUserProfile } from '@/pages/modules/SIM-RS/component/user-profile'
 import AxiosClient from '@/provider/axios.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
 
@@ -73,6 +74,7 @@ export const FormUserProfileSIMRS = (props: Props) => {
           <ButtonTitleGroup
             isBack
             buttonGroup={[
+              { type: 'custom', element: <ButtonGoToGuide titleGuide="Panduan" valueGuide="SIM_RS_PROFILE" /> },
               { type: 'cancel', label: 'Batal', onClick: () => setEdit(!edit) },
               { type: 'save', label: 'Simpan', isDisabled: loading },
             ]}
@@ -156,6 +158,7 @@ export const FormUserProfileSIMRS = (props: Props) => {
 
           <ButtonTitleGroup
             buttonGroup={[
+              { type: 'custom', element: <ButtonGoToGuide titleGuide="Panduan" valueGuide="SIM_RS_PROFILE" /> },
               { type: 'cancel', label: 'Batal', onClick: () => setEdit(!edit) },
               { type: 'save', label: 'Simpan', isDisabled: loading },
             ]}

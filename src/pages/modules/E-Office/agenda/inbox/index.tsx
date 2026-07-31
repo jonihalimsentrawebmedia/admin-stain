@@ -1,4 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import {
   UseGetAgendaInboxPage,
   UseGetStatisticsAgendaInbox,
@@ -35,7 +36,7 @@ export const ListAgendaInboxPage = () => {
   return (
     <>
       <div className="space-y-5">
-        <ButtonTitleGroup label={'Agenda Surat Masuk'} buttonGroup={[]} />
+        <ButtonTitleGroup label={'Agenda Surat Masuk'} buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide={'Agenda Surat Masuk'} valueGuide="E_OFFICE_AGENDA" /> }]} />
         <SelectFilter
           name={'id_unit'}
           label={'Satuan Kerja'}

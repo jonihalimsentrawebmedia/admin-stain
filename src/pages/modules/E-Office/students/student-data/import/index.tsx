@@ -21,6 +21,7 @@ import ButtonDataProdi from '@/pages/modules/E-Office/students/student-data/impo
 import ButtonAdmission from '@/pages/modules/E-Office/students/student-data/import/buttonSumberData/buttonAdmission.tsx'
 import ButtonDataReligion from '@/pages/modules/E-Office/students/student-data/import/buttonSumberData/ButtonDataReligion.tsx'
 import ButtonDataStatus from '@/pages/modules/E-Office/students/student-data/import/buttonSumberData/ButtonDataStatus.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const COLUMNS = [
   'ID_PRODI',
@@ -109,6 +110,10 @@ const ImportStudentData = () => {
                 Import Data
               </Button>
             ),
+          },
+          {
+            type: 'custom',
+            element: <ButtonGoToGuide titleGuide={'Mahasiswa'} valueGuide="E_OFFICE_STUDENTS" />,
           },
         ]}
       />

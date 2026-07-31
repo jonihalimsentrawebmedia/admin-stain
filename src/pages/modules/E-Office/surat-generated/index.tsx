@@ -3,6 +3,7 @@ import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { UseGetSuratGenerated } from './hooks'
 import { ColumnsSuratGenerated } from './data/columns.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const ListSuratGenerated = () => {
   const [searchParams] = useSearchParams()
@@ -15,7 +16,15 @@ const ListSuratGenerated = () => {
 
   return (
     <div className="space-y-5">
-      <ButtonTitleGroup label={'Surat Generated'} buttonGroup={[]} />
+      <ButtonTitleGroup
+        label={'Surat Generated'}
+        buttonGroup={[
+          {
+            type: 'custom',
+            element: <ButtonGoToGuide valueGuide="E_OFFICE_SURAT_GENERATED" />,
+          },
+        ]}
+      />
       <TableCustom data={suratList} columns={columns} meta={meta} loading={loading} />
     </div>
   )

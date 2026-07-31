@@ -2,6 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { UseGetDetailPatient } from '../hooks/index.tsx'
 import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const DetailPatient = () => {
   const { id } = useParams<{ id: string }>()
@@ -37,6 +38,7 @@ const DetailPatient = () => {
           buttonGroup={
             permission?.kelola
               ? [
+                  { type: 'custom', element: <ButtonGoToGuide titleGuide="Panduan" valueGuide="SIM_RS_REFERENCE" /> },
                   {
                     type: 'edit',
                     label: 'Edit',

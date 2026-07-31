@@ -1,4 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { UseGetDetailTypeLetter } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/hooks'
 import { UseGetTypeTemplateLetter } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/detail/hooks'
@@ -30,6 +31,7 @@ const DetailLetterType = () => {
           isBack
           label={`Detail ${letter?.nama_jenis_surat} - (${letter?.kategori_jenis_surat})`}
           buttonGroup={[
+            { type: 'custom', element: <ButtonGoToGuide titleGuide={'Detail Kelompok Surat'} valueGuide="E_OFFICE_LETTER_TYPE" /> },
             {
               type: 'custom',
               element: <ButtonCodeTemplateAvailable type={letter?.kategori_jenis_surat} />,

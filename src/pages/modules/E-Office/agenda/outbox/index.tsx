@@ -1,4 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { UseGetAgendaOutboxPage, UseGetStatisticsAgendaOutbox } from './hooks/index'
 import { useSearchParams } from 'react-router-dom'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
@@ -32,7 +33,7 @@ export const ListAgendaOutboxPage = () => {
   return (
     <>
       <div className="space-y-5">
-        <ButtonTitleGroup label={'Agenda Surat Keluar'} buttonGroup={[]} />
+        <ButtonTitleGroup label={'Agenda Surat Keluar'} buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide={'Agenda Surat Keluar'} valueGuide="E_OFFICE_AGENDA" /> }]} />
         <SelectFilter
           name={'id_unit'}
           label={'Satuan Kerja'}

@@ -14,6 +14,7 @@ import { UseGetDetailRegistration } from '../../register/hooks/index.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useQueryClient } from '@tanstack/react-query'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const kondisiOptions = [
   { value: 'MEMBAIK', label: 'Membaik' },
@@ -102,7 +103,7 @@ const BackHomeInpatient = () => {
 
   return (
     <div className="space-y-5">
-      <ButtonTitleGroup isBack label="Pasien Pulang" buttonGroup={[]} />
+      <ButtonTitleGroup isBack label="Pasien Pulang" buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide="Panduan" valueGuide="SIM_RS_SERVICES" /> }]} />
 
       <div className="bg-white rounded-lg border p-6">
         <TitleLine className="text-lg font-semibold text-primary" title="1. Informasi Pasien" />

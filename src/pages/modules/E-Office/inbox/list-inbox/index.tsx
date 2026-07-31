@@ -1,4 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import {
   ListMonth,
@@ -36,6 +37,7 @@ export const ListInbox = () => {
         <ButtonTitleGroup
           label={'Daftar Surat Masuk'}
           buttonGroup={[
+            { type: 'custom', element: <ButtonGoToGuide titleGuide={'Daftar Surat Masuk'} valueGuide="E_OFFICE_INBOX" /> },
             {
               type: 'add',
               label: 'Tulis Surat',

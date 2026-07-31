@@ -2,6 +2,7 @@ import { UseGetDetailEventActivity } from '@/pages/modules/E-Office/event-activi
 import { useParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Card, CardContent } from '@/components/ui/card.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { format } from 'date-fns'
 import { id } from 'date-fns/locale'
 import MenuEvent from '@/pages/modules/E-Office/event-activity/event-data/detail/component/menu-event'
@@ -17,7 +18,7 @@ const DetailEventActivity = () => {
           link={'/modules/e-office/event-activity/event-data'}
           label={'Detail Acara'}
           isBack
-          buttonGroup={[]}
+          buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide={'Detail Acara'} valueGuide="E_OFFICE_EVENT_ACTIVITY" /> }]}
         />
         <Card>
           <CardContent className={'space-y-2.5'}>

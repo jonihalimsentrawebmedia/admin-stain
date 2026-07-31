@@ -4,6 +4,7 @@ import { UseGetTransportType } from '@/pages/modules/E-Office/reference/transpor
 import { useSearchParams } from 'react-router-dom'
 import { ColumnsTransportType } from '@/pages/modules/E-Office/reference/transport-type/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const ListTransportType = () => {
   const [searchParams] = useSearchParams()
@@ -19,7 +20,13 @@ const ListTransportType = () => {
       <div className="space-y-5">
         <ButtonTitleGroup
           label={'Jenis Transportasi'}
-          buttonGroup={[{ type: 'custom', element: <ButtonAddTransportType /> }]}
+          buttonGroup={[
+            { type: 'custom', element: <ButtonAddTransportType /> },
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide={'Referensi'} valueGuide="E_OFFICE_REFERENCE" />,
+            },
+          ]}
         />
         <TableCustom
           tdClassName={'bg-white'}

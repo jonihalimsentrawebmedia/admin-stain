@@ -4,6 +4,7 @@ import { UseGetBiayaType } from '@/pages/modules/E-Office/reference/costing-type
 import { useSearchParams } from 'react-router-dom'
 import { ColumnsBiayaType } from '@/pages/modules/E-Office/reference/costing-type/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const ListBiayaType = () => {
   const [searchParams] = useSearchParams()
@@ -27,6 +28,10 @@ const ListBiayaType = () => {
             {
               type: 'custom',
               element: <ButtonAddBiayaType />,
+            },
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide={'Referensi'} valueGuide="E_OFFICE_REFERENCE" />,
             },
           ]}
         />

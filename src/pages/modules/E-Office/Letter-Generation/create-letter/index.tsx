@@ -1,4 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { UseGetTypeLetters } from '@/pages/modules/E-Office/Letter-Generation/Letter-type/hooks'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
@@ -34,7 +35,7 @@ const CreateLetterByTypePage = () => {
   return (
     <>
       <div className="space-y-5">
-        <ButtonTitleGroup label={'Buat Surat'} buttonGroup={[]} />
+        <ButtonTitleGroup label={'Buat Surat'} buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide={'Buat Surat'} valueGuide="E_OFFICE_CREATE_LETTER" /> }]} />
         <FilterSelect
           className={'w-1/4'}
           placeholder={'Cari Kelompok Jenis Surat'}

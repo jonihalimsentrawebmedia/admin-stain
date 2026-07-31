@@ -3,6 +3,7 @@ import { format } from 'date-fns'
 import { Printer } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { UseGetInvoiceInPatient } from './hooks.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const InvoiceInPatient = () => {
   const { id } = useParams<{ id: string }>()
@@ -85,6 +86,7 @@ const InvoiceInPatient = () => {
         <p className="flex-1 text-[28px] font-semibold leading-9 text-neutral font-manrope">
           Lihat Tagihan
         </p>
+        <ButtonGoToGuide titleGuide={'Lihat Tagihan'} valueGuide="SIM_RS_SERVICES" />
         <Button
           variant="outline"
           className="bg-white text-primary border-primary hover:text-primary"

@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { UseGetDetailRole } from '../hooks/index.tsx'
 import { FormEditRole } from '../component/buttonEdit.tsx'
 
@@ -26,7 +27,7 @@ const UpdateRole = () => {
   return (
     <>
       <div>
-        <ButtonTitleGroup isBack label={'Edit Role'} buttonGroup={[]} />
+        <ButtonTitleGroup isBack label={'Edit Role'} buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide={'Edit Role'} valueGuide="SIM_RS_USER_MANAGEMENT" /> }]} />
         <FormEditRole data={detail} />
       </div>
     </>

@@ -1,4 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { UseGetTypeService } from '@/pages/modules/E-Office/services/type-service/hooks'
 import { useSearchParams } from 'react-router-dom'
 import { columnsTypeService } from '@/pages/modules/E-Office/services/type-service/data/columns.tsx'
@@ -23,6 +24,7 @@ const TypeServiceListPage = () => {
         <ButtonTitleGroup
           label={'Jenis Layanan'}
           buttonGroup={[
+            { type: 'custom', element: <ButtonGoToGuide titleGuide={'Jenis Layanan'} valueGuide="E_OFFICE_TYPE_SERVICE" /> },
             {
               type: 'custom',
               element: <ButtonAddTypeService />,

@@ -1,6 +1,7 @@
 import type { UseFormReturn } from 'react-hook-form'
 import type { ILetterTemplateType } from '@/pages/modules/E-Office/Letter-Generation/create-letter/hook'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { Button } from '@/components/ui/button.tsx'
 import { Form } from '@/components/ui/form.tsx'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -76,6 +77,10 @@ const FormSuratPengantarPenelitian = (props: Props) => {
             label={`${template?.nama_jenis_template}`}
             isBack
             buttonGroup={[
+              {
+                type: 'custom',
+                element: <ButtonGoToGuide titleGuide={'Buat Surat'} valueGuide="E_OFFICE_CREATE_LETTER" />,
+              },
               {
                 type: 'cancel',
                 label: 'Batal',
@@ -420,6 +425,7 @@ const FormSuratPengantarPenelitian = (props: Props) => {
           <ButtonTitleGroup
             label={``}
             buttonGroup={[
+              { type: 'custom', element: <ButtonGoToGuide titleGuide={'Buat Surat'} valueGuide="E_OFFICE_CREATE_LETTER" /> },
               {
                 type: 'cancel',
                 label: 'Batal',

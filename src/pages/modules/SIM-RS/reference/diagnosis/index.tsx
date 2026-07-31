@@ -5,6 +5,7 @@ import { UseGetDiagnosis } from './hooks/index.tsx'
 import { ColumnsDiagnosis } from './data/columns.tsx'
 import { ButtonAddDiagnosis } from './component/buttonAdd.tsx'
 import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const DiagnosisRefPage = () => {
   const [searchParams] = useSearchParams()
@@ -29,6 +30,7 @@ export const DiagnosisRefPage = () => {
           buttonGroup={
             permission?.kelola
               ? [
+                  { type: 'custom', element: <ButtonGoToGuide titleGuide="Panduan" valueGuide="SIM_RS_REFERENCE" /> },
                   {
                     type: 'custom',
                     element: <ButtonAddDiagnosis />,

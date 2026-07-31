@@ -5,6 +5,7 @@ import {
 } from '@/pages/modules/E-Office/Letter-Generation/letter-list/hooks'
 import { ColumnsLetterGenerate } from '@/pages/modules/E-Office/Letter-Generation/letter-list/data/columns.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs.tsx'
 import { cn } from '@/lib/utils.ts'
 import { TabsContent } from '@radix-ui/react-tabs'
@@ -102,6 +103,7 @@ const ListLetterGeneratePage = () => {
       <ButtonTitleGroup
         label="Data Surat"
         buttonGroup={[
+          { type: 'custom', element: <ButtonGoToGuide titleGuide={'Data Surat'} valueGuide="E_OFFICE_LETTER_LIST" /> },
           {
             type: 'add',
             label: 'Buat Surat',

@@ -2,6 +2,7 @@ import { UseGetEReceipt } from '@/pages/modules/E-Office/E-Receipt/hooks'
 import { useSearchParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import ButtonAddEreceipt from '@/pages/modules/E-Office/E-Receipt/component/buttonAdd.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { ColumnsEreceipt } from '@/pages/modules/E-Office/E-Receipt/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 
@@ -22,7 +23,7 @@ const EReceiptPage = () => {
       <div className="space-y-4">
         <ButtonTitleGroup
           label={'Kwitansi'}
-          buttonGroup={[{ type: 'custom', element: <ButtonAddEreceipt /> }]}
+          buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide={'Kwitansi'} valueGuide="E_OFFICE_E_RECEIPT" /> }, { type: 'custom', element: <ButtonAddEreceipt /> }]}
         />
         <TableCustom
           tdClassName={'bg-white'}

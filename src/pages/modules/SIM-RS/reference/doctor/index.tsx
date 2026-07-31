@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/button.tsx'
 import { HiPlus } from 'react-icons/hi'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const DoctorPage = () => {
   const [searchParams] = useSearchParams()
@@ -53,6 +54,7 @@ export const DoctorPage = () => {
           buttonGroup={
             permission?.kelola
               ? [
+                  { type: 'custom', element: <ButtonGoToGuide titleGuide="Panduan" valueGuide="SIM_RS_REFERENCE" /> },
                   {
                     type: 'custom',
                     element: (

@@ -6,6 +6,7 @@ import { Form } from '@/components/ui/form'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { TitleLine } from '@/pages/modules/pusat-karir/component/common/titleLine.tsx'
 import { UseGetRoleTree } from '../hooks/index.tsx'
 import AxiosClient from '@/provider/axios.tsx'
@@ -162,7 +163,7 @@ const CreateRole = () => {
 
   return (
     <div className="space-y-5">
-      <ButtonTitleGroup isBack label={'Tambah Role'} buttonGroup={[]} />
+      <ButtonTitleGroup isBack label={'Tambah Role'} buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide={'Tambah Role'} valueGuide="SIM_RS_USER_MANAGEMENT" /> }]} />
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(HandleSave)} className="space-y-6">

@@ -1,4 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan-unit/hooks.tsx'
 import {
@@ -33,7 +34,7 @@ const DispositionListPage = () => {
   return (
     <>
       <div className="space-y-5">
-        <ButtonTitleGroup label={'Disposisi Surat'} buttonGroup={[]} />
+        <ButtonTitleGroup label={'Disposisi Surat'} buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide={'Disposisi Surat'} valueGuide="E_OFFICE_INBOX_DISPOSITION" /> }]} />
 
         <SelectFilter
           name={'id_unit'}

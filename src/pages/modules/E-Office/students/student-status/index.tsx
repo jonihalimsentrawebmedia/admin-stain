@@ -4,6 +4,7 @@ import { UseGetStudentStatus } from './hooks'
 import { useSearchParams } from 'react-router-dom'
 import { ColumnsStudentStatus } from './data/columns'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const ListStudentStatus = () => {
   const [searchParams] = useSearchParams()
@@ -27,6 +28,10 @@ const ListStudentStatus = () => {
             {
               type: 'custom',
               element: <ButtonAddStudentStatus />,
+            },
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide={'Mahasiswa'} valueGuide="E_OFFICE_STUDENTS" />,
             },
           ]}
         />

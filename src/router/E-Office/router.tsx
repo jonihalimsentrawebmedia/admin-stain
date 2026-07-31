@@ -176,6 +176,7 @@ const DashboardEOfficePage = lazy(() => import('@/pages/modules/E-Office/dashboa
 const ListAdmissionProcess = lazy(
   () => import('@/pages/modules/E-Office/students/admission-process')
 )
+const GuideListView = lazy(() => import('@/pages/modules/website-utama/panduan/GuideListView'))
 const ListStudentStatus = lazy(() => import('@/pages/modules/E-Office/students/student-status'))
 const ListReligion = lazy(() => import('@/pages/modules/E-Office/students/religion'))
 const ListStudyProgram = lazy(() => import('@/pages/modules/E-Office/students/study-program'))
@@ -812,6 +813,10 @@ export const E_OFFICE_ROUTE = [
         element: <InvoiceEReceiptPage />,
       },
     ],
+  },
+  {
+    path: 'panduan',
+    element: <GuideListView />,
   },
   {
     path: '*',

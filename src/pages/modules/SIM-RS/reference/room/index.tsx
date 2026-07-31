@@ -6,6 +6,7 @@ import { ColumnsRoom } from './data/columns.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { HiPlus } from 'react-icons/hi'
 import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const RoomPage = () => {
   const [searchParams] = useSearchParams()
@@ -31,6 +32,7 @@ export const RoomPage = () => {
           buttonGroup={
             permission?.kelola
               ? [
+                  { type: 'custom', element: <ButtonGoToGuide titleGuide="Panduan" valueGuide="SIM_RS_REFERENCE" /> },
                   {
                     type: 'custom',
                     element: (

@@ -7,6 +7,7 @@ import { TitleLine } from '@/pages/modules/pusat-karir/component/common/titleLin
 import type { TResolverProfileHospital } from '../data/resolver.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { UploadPhotoImage } from '@/pages/modules/pusat-karir/component/common/uploadPhoto.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 interface Props {
   loading: boolean
@@ -24,6 +25,7 @@ const FormProfileHospital = (props: Props) => {
         <ButtonTitleGroup
           label={'Edit Profil Rumah Sakit'}
           buttonGroup={[
+            { type: 'custom', element: <ButtonGoToGuide titleGuide="Panduan" valueGuide="SIM_RS_PROFILE" /> },
             { type: 'cancel', label: 'Batal', onClick: () => setIsEdit(false) },
             { type: 'save', label: 'Simpan', onClick: () => {} },
           ]}

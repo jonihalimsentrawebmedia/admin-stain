@@ -1,3 +1,4 @@
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { UseGetReportAssignment } from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/report/hooks'
 import { useParams } from 'react-router-dom'
@@ -64,7 +65,9 @@ const ReportLetterSPPDAssignment = () => {
   return (
     <>
       <div className="space-y-5">
-        <ButtonTitleGroup label={'Laporan'} buttonGroup={[]} isBack />
+        <ButtonTitleGroup label={'Laporan'} buttonGroup={[
+          { type: 'custom', element: <ButtonGoToGuide titleGuide={'Laporan'} valueGuide="E_OFFICE_OFFICIAL_TRAVEL" /> },
+        ]} isBack />
 
         {letterAssignment && <DetailSuratTugasTable data={letterAssignment} />}
         {isEdit || !letterAssignment?.laporan ? (

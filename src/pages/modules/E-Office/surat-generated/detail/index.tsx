@@ -11,6 +11,7 @@ import { IoMdEye } from 'react-icons/io'
 import { generatePdfSurat, generatePdfBlobUrl } from '../utils/pdf'
 import { toast } from 'react-toastify'
 import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const DetailSuratGenerated = () => {
   const { id } = useParams<{ id: string }>()
@@ -116,6 +117,10 @@ const DetailSuratGenerated = () => {
                   {loadingPdf === 'download' ? 'Memproses...' : 'Download PDF'}
                 </Button>
               ),
+            },
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="E_OFFICE_SURAT_GENERATED" />,
             },
           ]}
         />

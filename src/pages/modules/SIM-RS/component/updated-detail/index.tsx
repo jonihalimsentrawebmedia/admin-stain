@@ -1,11 +1,10 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { Accordion } from '@/components/ui/accordion.tsx'
 import { AccordionCustom } from '@/components/common/accordion'
 import { FormUserProfileSIMRS } from '@/pages/modules/SIM-RS/component/updated-detail/components/form.tsx'
 import { UseGetUserSIMRSProfile } from '@/pages/modules/SIM-RS/component/user-profile'
 import { useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { IoInformationCircle } from 'react-icons/io5'
 
 export const UserSimRSProfilePage = () => {
   const { profile } = UseGetUserSIMRSProfile()
@@ -23,10 +22,7 @@ export const UserSimRSProfilePage = () => {
               {
                 type: 'custom',
                 element: (
-                  <Button variant={'outline'} className="text-primary border-primary">
-                    <IoInformationCircle />
-                    Panduan
-                  </Button>
+                  <ButtonGoToGuide titleGuide="Panduan" valueGuide="SIM_RS_PROFILE" />
                 ),
               },
               { type: 'edit', label: 'Edit Data', onClick: () => setEdit(!edit) },

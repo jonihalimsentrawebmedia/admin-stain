@@ -4,6 +4,7 @@ import { UseGetLetterType } from './hooks'
 import { useSearchParams } from 'react-router-dom'
 import { ColumnsLetterType } from './data/columns'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const ListLetterType = () => {
   const [searchParams] = useSearchParams()
@@ -27,6 +28,10 @@ const ListLetterType = () => {
             {
               type: 'custom',
               element: <ButtonAddLetterType />,
+            },
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide={'Referensi'} valueGuide="E_OFFICE_REFERENCE" />,
             },
           ]}
         />

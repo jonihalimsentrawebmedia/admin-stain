@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { QuestionnaireQualitative, type TQuestionnaireQualitative } from './data/resolver.tsx'
 import { zodResolver } from '@hookform/resolvers/zod'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
@@ -38,7 +39,9 @@ const CreateQualitativeQuestionnaire = () => {
   return (
     <>
       <div className="space-y-6 bgwhite">
-        <ButtonTitleGroup isBack label={'Buat Kuisioner Kualitatif'} buttonGroup={[]} />
+        <ButtonTitleGroup isBack label={'Buat Kuisioner Kualitatif'} buttonGroup={[
+          { type: 'custom', element: <ButtonGoToGuide titleGuide={'Buat Kuisioner Kualitatif'} valueGuide="E_OFFICE_QUESTIONNAIRE" /> },
+        ]} />
         <FormQualitativeQuestionnaire form={form} loading={loading} HandleSave={HandleSave} />
       </div>
     </>

@@ -3,6 +3,7 @@ import { UseGetRegistration } from '../register/hooks/index.tsx'
 import { ColumnsOutpatient } from './data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const OutpatientPage = () => {
   const [searchParams] = useSearchParams()
@@ -23,7 +24,7 @@ export const OutpatientPage = () => {
 
   return (
     <div className="space-y-5">
-      <ButtonTitleGroup label="Rawat Jalan" buttonGroup={[]} />
+      <ButtonTitleGroup label="Rawat Jalan" buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide="Panduan" valueGuide="SIM_RS_SERVICES" /> }]} />
       <TableCustom
         data={registration}
         columns={columns}

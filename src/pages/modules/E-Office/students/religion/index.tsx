@@ -4,6 +4,7 @@ import { UseGetReligion } from './hooks'
 import { useSearchParams } from 'react-router-dom'
 import { ColumnsReligion } from './data/columns'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const ListReligion = () => {
   const [searchParams] = useSearchParams()
@@ -27,6 +28,10 @@ const ListReligion = () => {
             {
               type: 'custom',
               element: <ButtonAddReligion />,
+            },
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide={'Mahasiswa'} valueGuide="E_OFFICE_STUDENTS" />,
             },
           ]}
         />

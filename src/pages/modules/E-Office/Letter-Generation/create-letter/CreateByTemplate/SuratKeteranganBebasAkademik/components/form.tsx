@@ -1,6 +1,7 @@
 import { useFieldArray, type UseFormReturn } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { Card, CardContent, CardTitle } from '@/components/ui/card.tsx'
 import { Form } from '@/components/ui/form.tsx'
 import { FaRegEye, FaRegFileAlt, FaTrash } from 'react-icons/fa'
@@ -92,6 +93,7 @@ const FormSuratKeteranganBebasAkademik = (props: Props) => {
             label={`${template?.nama_jenis_template}`}
             isBack
             buttonGroup={[
+              { type: 'custom', element: <ButtonGoToGuide titleGuide={'Buat Surat'} valueGuide="E_OFFICE_CREATE_LETTER" /> },
               {
                 type: 'cancel',
                 label: 'Batal',

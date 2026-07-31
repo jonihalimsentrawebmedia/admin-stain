@@ -4,6 +4,7 @@ import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { UseGetLetterOrigin } from './hooks'
 import { ColumnsLetterOrigin } from './data/columns.tsx'
 import ButtonAddLetterOrigin from './component/buttonAdd.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const ListLetterOrigin = () => {
   const [searchParams] = useSearchParams()
@@ -27,6 +28,10 @@ const ListLetterOrigin = () => {
             {
               type: 'custom',
               element: <ButtonAddLetterOrigin />,
+            },
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide={'Referensi'} valueGuide="E_OFFICE_REFERENCE" />,
             },
           ]}
         />

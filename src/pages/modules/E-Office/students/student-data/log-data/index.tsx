@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import type { ColumnDef } from '@tanstack/react-table'
 import type { ILogStudentHistory } from '../data/types.ts'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const LogColumns = (): ColumnDef<ILogStudentHistory>[] => [
   {
@@ -64,7 +65,16 @@ const LogDataStudent = () => {
   return (
     <>
       <div className="space-y-5">
-        <ButtonTitleGroup isBack label={'Log Data Mahasiswa'} buttonGroup={[]} />
+        <ButtonTitleGroup
+          isBack
+          label={'Log Data Mahasiswa'}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide={'Mahasiswa'} valueGuide="E_OFFICE_STUDENTS" />,
+            },
+          ]}
+        />
 
         <Card>
           <CardContent className="space-y-6">

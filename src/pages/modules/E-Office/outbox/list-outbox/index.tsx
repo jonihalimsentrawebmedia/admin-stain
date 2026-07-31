@@ -1,4 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { UseGetOutbox, UseGetOutboxYear } from './hooks/index'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
@@ -33,6 +34,10 @@ export const ListOutbox = () => {
         <ButtonTitleGroup
           label={'Daftar Surat Keluar'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide={'Daftar Surat Keluar'} valueGuide="E_OFFICE_OUTBOX" />,
+            },
             {
               type: 'add',
               label: 'Tulis Surat',

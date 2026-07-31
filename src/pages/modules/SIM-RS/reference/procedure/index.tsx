@@ -5,6 +5,7 @@ import { UseGetProcedure } from './hooks/index.tsx'
 import { ColumnsProcedure } from './data/columns.tsx'
 import { ButtonAddProcedure } from './component/buttonAdd.tsx'
 import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const ProcedurePage = () => {
   const [searchParams] = useSearchParams()
@@ -29,6 +30,7 @@ export const ProcedurePage = () => {
           buttonGroup={
             permission?.kelola
               ? [
+                  { type: 'custom', element: <ButtonGoToGuide titleGuide="Panduan" valueGuide="SIM_RS_REFERENCE" /> },
                   {
                     type: 'custom',
                     element: <ButtonAddProcedure />,

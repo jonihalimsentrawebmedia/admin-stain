@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { UseGetDocumentation } from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/documentation/hooks.tsx'
 import ButtonAddDocumentation from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/documentation/buttonAdd.tsx'
@@ -23,6 +24,7 @@ const DocumentationLetterAssigment = () => {
         isBack
         label={'Dokumentasi'}
         buttonGroup={[
+          { type: 'custom', element: <ButtonGoToGuide titleGuide={'Dokumentasi'} valueGuide="E_OFFICE_OFFICIAL_TRAVEL" /> },
           {
             type: 'custom',
             element: <ButtonAddDocumentation />,
