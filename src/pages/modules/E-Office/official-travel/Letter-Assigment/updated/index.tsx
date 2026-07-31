@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import FormLetterTask from '../component/form.tsx'
 import { ResolverLetterTask, type TResolverLetterTask } from '../data/resolver.tsx'
@@ -67,7 +68,9 @@ const UpdatedLetterAssigment = () => {
 
   return (
     <div className="space-y-5">
-      <ButtonTitleGroup label={'Edit Surat Tugas / SPD'} buttonGroup={[]} />
+      <ButtonTitleGroup label={'Edit Surat Tugas / SPD'} buttonGroup={[
+        { type: 'custom', element: <ButtonGoToGuide titleGuide={'Edit Surat Tugas / SPD'} valueGuide="E_OFFICE_OFFICIAL_TRAVEL" /> },
+      ]} />
       <FormLetterTask form={form} loading={loading} HandleSave={HandleSave} />
     </div>
   )

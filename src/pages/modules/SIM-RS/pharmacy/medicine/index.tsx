@@ -1,4 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { useSearchParams } from 'react-router-dom'
 import { UseGetMedicine } from './hooks/index.tsx'
@@ -26,16 +27,17 @@ export const MedicinePage = () => {
       <div className={'space-y-5'}>
         <ButtonTitleGroup
           label={'Obat'}
-          buttonGroup={
-            permission?.kelola
+          buttonGroup={[
+            { type: 'custom' as const, element: <ButtonGoToGuide titleGuide={'Obat'} valueGuide="SIM_RS_PHARMACY" /> },
+            ...(permission?.kelola
               ? [
                   {
-                    type: 'custom',
+                    type: 'custom' as const,
                     element: <ButtonAddMedicine />,
                   },
                 ]
-              : []
-          }
+              : []),
+          ]}
         />
 
         <TableCustom

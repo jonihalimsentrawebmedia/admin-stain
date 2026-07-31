@@ -1,4 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { useParams } from 'react-router-dom'
 import { UseGetReconciliation } from '@/pages/modules/E-Office/E-Receipt/invoice/hooks'
 import { Progress } from '@/components/ui/progress.tsx'
@@ -60,6 +61,7 @@ const InvoiceEReceiptPage = () => {
       <ButtonTitleGroup
         label={'Lihat Faktur'}
         buttonGroup={[
+          { type: 'custom', element: <ButtonGoToGuide titleGuide={'Kwitansi'} valueGuide="E_OFFICE_E_RECEIPT" /> },
           {
             type: 'custom',
             element: (

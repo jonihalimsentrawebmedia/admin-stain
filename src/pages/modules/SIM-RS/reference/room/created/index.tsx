@@ -7,6 +7,7 @@ import { FormRoomCreate } from '../component/forms.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const CreateRoom = () => {
   const [loading, setLoading] = useState(false)
@@ -35,7 +36,7 @@ const CreateRoom = () => {
   return (
     <>
       <div>
-        <ButtonTitleGroup isBack label={'Tambah Data Ruangan'} buttonGroup={[]} />
+        <ButtonTitleGroup isBack label={'Tambah Data Ruangan'} buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide="Panduan" valueGuide="SIM_RS_REFERENCE" /> }]} />
         <FormRoomCreate loading={loading} form={form} HandleSave={HandleSave} />
       </div>
     </>

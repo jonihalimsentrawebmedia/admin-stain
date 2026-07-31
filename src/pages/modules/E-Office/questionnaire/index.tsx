@@ -1,4 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { Button } from '@/components/ui/button.tsx'
 import { FaCirclePlus } from 'react-icons/fa6'
 import { useNavigate, useSearchParams } from 'react-router-dom'
@@ -25,6 +26,7 @@ const QuestionnairePage = () => {
         <ButtonTitleGroup
           label={'Kuisioner'}
           buttonGroup={[
+            { type: 'custom', element: <ButtonGoToGuide titleGuide={'Kuisioner'} valueGuide="E_OFFICE_QUESTIONNAIRE" /> },
             {
               type: 'custom',
               element: (

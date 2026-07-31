@@ -121,6 +121,7 @@ const PrescriptionPage = lazy(() =>
 const DetailPrescription = lazy(() =>
   import('@/pages/modules/SIM-RS/pharmacy/prescription/detail')
 )
+const GuideListView = lazy(() => import('@/pages/modules/website-utama/panduan/GuideListView'))
 
 export const SIMRSROUTES = [
   {
@@ -469,6 +470,10 @@ export const SIMRSROUTES = [
         ],
       },
     ],
+  },
+  {
+    path: 'panduan',
+    element: <GuideListView />,
   },
   {
     path: '*',

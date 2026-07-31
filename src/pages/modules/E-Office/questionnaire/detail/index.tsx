@@ -1,4 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { useNavigate, useParams } from 'react-router-dom'
 import {
   UseGetDetailQuestionnaire,
@@ -27,6 +28,7 @@ const DetailQuestionnaire = () => {
           isBack
           label={`Detail Kuisioner ${detail?.jenis_survei === 'KUALITATIF' ? 'Kualitatif' : 'Kuantitatif'}`}
           buttonGroup={[
+            { type: 'custom', element: <ButtonGoToGuide titleGuide={'Detail Kuisioner'} valueGuide="E_OFFICE_QUESTIONNAIRE" /> },
             {
               type: 'edit',
               label: 'Edit',

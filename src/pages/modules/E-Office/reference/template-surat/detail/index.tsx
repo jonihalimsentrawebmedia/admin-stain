@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { UseGetDetailTemplateSurat } from '@/pages/modules/E-Office/reference/template-surat/hooks'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { format } from 'date-fns'
@@ -29,7 +30,7 @@ const DetailTemplateSurat = () => {
   if (loading) {
     return (
       <div className="space-y-5">
-        <ButtonTitleGroup isBack label={'Detail Template Surat'} buttonGroup={[]} />
+        <ButtonTitleGroup isBack label={'Detail Template Surat'} buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide valueGuide="E_OFFICE_REFERENCE" /> }]} />
         <div className="text-center py-10">Memuat data...</div>
       </div>
     )
@@ -38,7 +39,7 @@ const DetailTemplateSurat = () => {
   if (!templateSurat) {
     return (
       <div className="space-y-5">
-        <ButtonTitleGroup isBack label={'Detail Template Surat'} buttonGroup={[]} />
+        <ButtonTitleGroup isBack label={'Detail Template Surat'} buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide valueGuide="E_OFFICE_REFERENCE" /> }]} />
         <div className="text-center py-10">Data tidak ditemukan</div>
       </div>
     )
@@ -55,6 +56,10 @@ const DetailTemplateSurat = () => {
           isBack
           label={'Detail Template Surat'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="E_OFFICE_REFERENCE" />,
+            },
             {
               type: 'custom',
               element: (

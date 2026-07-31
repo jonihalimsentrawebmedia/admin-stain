@@ -7,6 +7,7 @@ import { format } from 'date-fns'
 import { Badge } from '@/components/ui/badge.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { History } from 'lucide-react'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const DetailStudentData = () => {
   const { id } = useParams()
@@ -48,6 +49,10 @@ const DetailStudentData = () => {
                   Log Status
                 </Button>
               ),
+            },
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide={'Mahasiswa'} valueGuide="E_OFFICE_STUDENTS" />,
             },
           ]}
         />

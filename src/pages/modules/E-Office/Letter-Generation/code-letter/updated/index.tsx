@@ -1,4 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import FormCodeLetterGenerated from '@/pages/modules/E-Office/Letter-Generation/code-letter/component/form.tsx'
 import { useForm } from 'react-hook-form'
 import { useEffect, useState } from 'react'
@@ -47,7 +48,7 @@ const UpdatedCodeLetterGenerated = () => {
   return (
     <>
       <div className="bg-white space-y-5">
-        <ButtonTitleGroup label={'Tambah Kode Nomor Surat'} buttonGroup={[]} />
+        <ButtonTitleGroup label={'Tambah Kode Nomor Surat'} buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide={'Tambah Kode Nomor Surat'} valueGuide="E_OFFICE_CODE_LETTER" /> }]} />
         <FormCodeLetterGenerated form={form} loading={loading} HandleSave={HandleSave} />
       </div>
     </>

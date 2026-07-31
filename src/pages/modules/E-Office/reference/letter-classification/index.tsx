@@ -8,6 +8,7 @@ import { ColumnsLetterClassification } from './data/columns.tsx'
 import { DataTableRecursive } from '@/pages/modules/E-Office/component/common/tableRecursif.tsx'
 import TablePagination from '@/components/common/table/TablePagination.tsx'
 import SetLimitList from '@/components/common/table/SetLimitList.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const ListLetterClassification = () => {
   const [searchParams] = useSearchParams()
@@ -46,6 +47,10 @@ const ListLetterClassification = () => {
             {
               type: 'custom',
               element: <ButtonAddLetterClassification />,
+            },
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide={'Referensi'} valueGuide="E_OFFICE_REFERENCE" />,
             },
           ]}
         />

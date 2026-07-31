@@ -1,4 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { useParams, useSearchParams } from 'react-router-dom'
 import ButtonAddIsiTemplate from './component/buttonAdd.tsx'
 import { UseGetIsiTemplateSurat } from './hooks/index.tsx'
@@ -25,12 +26,13 @@ const ListIsiTemplateSurat = () => {
       <ButtonTitleGroup
         isBack
         label={'Daftar Isi Template Surat'}
-        buttonGroup={[
-          {
-            type: 'custom',
-            element: <ButtonAddIsiTemplate />,
-          },
-        ]}
+          buttonGroup={[
+            { type: 'custom', element: <ButtonGoToGuide titleGuide={'Daftar Isi Template Surat'} valueGuide="E_OFFICE_LETTER_TYPE" /> },
+            {
+              type: 'custom',
+              element: <ButtonAddIsiTemplate />,
+            },
+          ]}
       />
       <TableCustom
         columnsName={['']}

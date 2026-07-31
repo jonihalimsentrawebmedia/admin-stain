@@ -5,6 +5,7 @@ import { UseGetRoomType } from './hooks/index.tsx'
 import { ColumnsRoomType } from './data/columns.tsx'
 import { ButtonAddRoomType } from './component/buttonAdd.tsx'
 import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 export const RoomTypePage = () => {
   const [searchParams] = useSearchParams()
@@ -29,6 +30,7 @@ export const RoomTypePage = () => {
           buttonGroup={
             permission?.kelola
               ? [
+                  { type: 'custom', element: <ButtonGoToGuide titleGuide="Panduan" valueGuide="SIM_RS_REFERENCE" /> },
                   {
                     type: 'custom',
                     element: <ButtonAddRoomType />,

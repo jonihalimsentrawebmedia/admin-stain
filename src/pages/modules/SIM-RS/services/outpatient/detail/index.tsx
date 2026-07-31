@@ -6,6 +6,7 @@ import { UseGetPemeriksaan, type IResepObatItem } from '../../register/diagnosis
 import { format } from 'date-fns'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import type { ColumnDef } from '@tanstack/react-table'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const DetailOutpatient = () => {
   const { id } = useParams<{ id: string }>()
@@ -96,6 +97,7 @@ const DetailOutpatient = () => {
         isBack
         label="Detail Rawat Jalan"
         buttonGroup={[
+          { type: 'custom', element: <ButtonGoToGuide titleGuide="Panduan" valueGuide="SIM_RS_SERVICES" /> },
           ...(pemeriksaan
             ? [
                 {

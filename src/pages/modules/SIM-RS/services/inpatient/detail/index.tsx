@@ -18,6 +18,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { format } from 'date-fns'
 import { ButtonMoveRoom } from '../components/ButtonMoveRoom.tsx'
 import SectionCPPT from './cppt/index.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const ResolverRoom = z.object({
   id_ruangan: z.string().min(1, 'Ruangan harus dipilih'),
@@ -152,6 +153,7 @@ const DetailInpatient = () => {
         buttonGroup={
           isPulang
             ? [
+                { type: 'custom', element: <ButtonGoToGuide titleGuide="Panduan" valueGuide="SIM_RS_SERVICES" /> },
                 {
                   type: 'edit' as const,
                   label: 'Edit Rawat Inap',

@@ -20,6 +20,7 @@ import { RichText } from '@/components/common/richtext'
 import type { TResolverSKAM } from '@/pages/modules/E-Office/Letter-Generation/create-letter/CreateByTemplate/SuratKeteranganAktifMahasiswa/data/resolver.tsx'
 import type { ILetterTemplateType } from '@/pages/modules/E-Office/Letter-Generation/create-letter/hook'
 import { UseGetStudentActiveSemester } from '@/pages/modules/E-Office/students/student-data/hooks'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 interface Props {
   loading: boolean
@@ -69,6 +70,10 @@ const FormSuratKeteranganAktifMahasiswa = (props: Props) => {
             label={`${template?.nama_jenis_template}`}
             isBack
             buttonGroup={[
+              {
+                type: 'custom',
+                element: <ButtonGoToGuide titleGuide={'Buat Surat'} valueGuide="E_OFFICE_CREATE_LETTER" />,
+              },
               {
                 type: 'cancel',
                 label: 'Batal',
@@ -335,6 +340,7 @@ const FormSuratKeteranganAktifMahasiswa = (props: Props) => {
           <ButtonTitleGroup
             label={''}
             buttonGroup={[
+              { type: 'custom', element: <ButtonGoToGuide titleGuide={'Buat Surat'} valueGuide="E_OFFICE_CREATE_LETTER" /> },
               {
                 type: 'cancel',
                 label: 'Batal',

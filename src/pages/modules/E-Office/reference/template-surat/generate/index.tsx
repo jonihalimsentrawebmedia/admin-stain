@@ -4,6 +4,7 @@ import { useForm, useFieldArray } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import ButtonForm from '@/components/common/button/ButtonForm.tsx'
 import TextInput from '@/components/common/form/TextInput.tsx'
 import TextAreaInput from '@/components/common/form/textAreaInput.tsx'
@@ -321,7 +322,7 @@ const GenerateSuratView = () => {
   if (loadingDetail) {
     return (
       <div className="space-y-5">
-        <ButtonTitleGroup isBack label={'Generate Surat'} buttonGroup={[]} />
+        <ButtonTitleGroup isBack label={'Generate Surat'} buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide valueGuide="E_OFFICE_REFERENCE" /> }]} />
         <div className="text-center py-10">Memuat data template...</div>
       </div>
     )
@@ -330,7 +331,7 @@ const GenerateSuratView = () => {
   if (!templateSurat) {
     return (
       <div className="space-y-5">
-        <ButtonTitleGroup isBack label={'Generate Surat'} buttonGroup={[]} />
+        <ButtonTitleGroup isBack label={'Generate Surat'} buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide valueGuide="E_OFFICE_REFERENCE" /> }]} />
         <div className="text-center py-10">Template tidak ditemukan</div>
       </div>
     )
@@ -342,7 +343,7 @@ const GenerateSuratView = () => {
 
   return (
     <div className="space-y-5">
-      <ButtonTitleGroup isBack label={'Generate Surat'} buttonGroup={[]} />
+      <ButtonTitleGroup isBack label={'Generate Surat'} buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide valueGuide="E_OFFICE_REFERENCE" /> }]} />
 
       {/* Template Info */}
       <Card>

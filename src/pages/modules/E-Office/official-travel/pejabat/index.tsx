@@ -1,3 +1,4 @@
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import ButtonAddPejabat from '@/pages/modules/E-Office/official-travel/pejabat/component/buttonAdd.tsx'
 import { UseGetPejabat } from '@/pages/modules/E-Office/official-travel/pejabat/hooks'
@@ -24,6 +25,7 @@ const ListPejabat = () => {
         <ButtonTitleGroup
           label={'Pejabat'}
           buttonGroup={[
+            { type: 'custom', element: <ButtonGoToGuide titleGuide={'Pejabat'} valueGuide="E_OFFICE_OFFICIAL_TRAVEL" /> },
             {
               type: 'custom',
               element: <ButtonAddPejabat />,

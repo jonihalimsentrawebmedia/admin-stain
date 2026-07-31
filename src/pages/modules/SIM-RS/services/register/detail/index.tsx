@@ -4,6 +4,7 @@ import { UseGetDetailRegistration } from '../hooks/index.tsx'
 import { ButtonCall } from '../components/ButtonCall.tsx'
 import { format } from 'date-fns'
 import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const DetailRegistration = () => {
   const { id } = useParams<{ id: string }>()
@@ -56,6 +57,7 @@ const DetailRegistration = () => {
         buttonGroup={
           permision?.kelola
             ? [
+                { type: 'custom', element: <ButtonGoToGuide titleGuide="Panduan" valueGuide="SIM_RS_SERVICES" /> },
                 {
                   type: 'edit',
                   label: 'Edit',

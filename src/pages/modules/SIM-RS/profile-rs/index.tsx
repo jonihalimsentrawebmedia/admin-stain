@@ -1,4 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -76,6 +77,7 @@ const ProfileHospitalPage = () => {
           <ButtonTitleGroup
             label={'Profil Rumah Sakit'}
             buttonGroup={[
+              { type: 'custom', element: <ButtonGoToGuide titleGuide={'Profil RS'} valueGuide="SIM_RS_PROFILE" /> },
               {
                 type: 'custom',
                 element: (

@@ -2,6 +2,7 @@ import { Card } from '@/components/ui/card'
 import { BedDouble, DoorOpen, CheckCircle, Clock } from 'lucide-react'
 import { useSearchParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import SelectFilter from '@/components/common/filter/SelectFilter.tsx'
 import { UseGetInpatientReportList, UseGetInpatientReportStats } from './hooks/index.tsx'
@@ -97,7 +98,7 @@ export const InpatientReportPage = () => {
         ))}
       </section>
 
-      <ButtonTitleGroup label={'Laporan Rawat Inap'} buttonGroup={[]} />
+      <ButtonTitleGroup label={'Laporan Rawat Inap'} buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide={'Laporan Rawat Inap'} valueGuide="SIM_RS_REPORT" /> }]} />
       <TableCustom
         addFilter={
           <div className="flex flex-col sm:flex-row gap-4">

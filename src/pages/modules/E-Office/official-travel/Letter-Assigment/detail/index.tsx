@@ -4,6 +4,7 @@ import {
   UseGetLetterAssigmentDetail,
   UseGetLetterAssigmentDetailSPPD,
 } from '@/pages/modules/E-Office/official-travel/Letter-Assigment/hooks'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { Card, CardContent, CardTitle } from '@/components/ui/card.tsx'
 import { format } from 'date-fns'
@@ -268,6 +269,7 @@ const DetailLetterAssigment = () => {
         <ButtonTitleGroup
           label={'Detail Surat Tugas'}
           buttonGroup={[
+            { type: 'custom', element: <ButtonGoToGuide titleGuide={'Detail Surat Tugas'} valueGuide="E_OFFICE_OFFICIAL_TRAVEL" /> },
             {
               type: 'edit',
               label: 'Edit Surat Tugas',

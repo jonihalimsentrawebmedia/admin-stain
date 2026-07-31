@@ -7,6 +7,7 @@ import FormStudentData from '@/pages/modules/E-Office/students/student-data/comp
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const CreateStudentData = () => {
   const [loading, setLoading] = useState(false)
@@ -39,7 +40,16 @@ const CreateStudentData = () => {
   return (
     <>
       <div>
-        <ButtonTitleGroup isBack label={'Tambah Data Mahasiswa'} buttonGroup={[]} />
+        <ButtonTitleGroup
+          isBack
+          label={'Tambah Data Mahasiswa'}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide={'Mahasiswa'} valueGuide="E_OFFICE_STUDENTS" />,
+            },
+          ]}
+        />
         <FormStudentData loading={loading} form={form} HandleSave={HandleSave} />
       </div>
     </>

@@ -1,5 +1,6 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import ButtonAddEvent from '@/pages/modules/E-Office/event-activity/event-data/component/buttonAdd.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { UseGetEventActivity } from '@/pages/modules/E-Office/event-activity/event-data/hooks'
 import { useSearchParams } from 'react-router-dom'
 import { ColumnsEvent } from '@/pages/modules/E-Office/event-activity/event-data/data/columns.tsx'
@@ -22,7 +23,7 @@ const EventDataActivity = () => {
       <div className="space-y-5">
         <ButtonTitleGroup
           label={'Data Aktivitas'}
-          buttonGroup={[{ type: 'custom', element: <ButtonAddEvent /> }]}
+          buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide={'Data Aktivitas'} valueGuide="E_OFFICE_EVENT_ACTIVITY" /> }, { type: 'custom', element: <ButtonAddEvent /> }]}
         />
 
         <TableCustom

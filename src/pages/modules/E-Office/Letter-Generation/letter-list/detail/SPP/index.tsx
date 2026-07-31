@@ -16,6 +16,7 @@ import { FaDownload, FaFilePdf, FaPrint } from 'react-icons/fa'
 import { toast } from 'react-toastify'
 import ButtonStatusOnce from '@/pages/modules/E-Office/Letter-Generation/letter-list/component/buttonStatus.tsx'
 import ButtonCancelStatus from '@/pages/modules/E-Office/Letter-Generation/letter-list/component/buttonCancel.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const DetailLetterSPPPage = () => {
   const { id } = useParams()
@@ -146,7 +147,7 @@ const DetailLetterSPPPage = () => {
   if (loading) {
     return (
       <div className="space-y-5">
-        <ButtonTitleGroup isBack label={`Detail ${letter?.nama_jenis_surat}`} buttonGroup={[]} />
+        <ButtonTitleGroup isBack label={`Detail ${letter?.nama_jenis_surat}`} buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide={'Detail Surat'} valueGuide="E_OFFICE_LETTER_LIST" /> }]} />
         <Card>
           <CardHeader>
             <Skeleton className="h-6 w-48" />
@@ -177,7 +178,7 @@ const DetailLetterSPPPage = () => {
   if (!letter) {
     return (
       <div className="space-y-5">
-        <ButtonTitleGroup isBack label={'Detail Surat Pengantar Penelitian'} buttonGroup={[]} />
+        <ButtonTitleGroup isBack label={'Detail Surat Pengantar Penelitian'} buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide={'Detail Surat'} valueGuide="E_OFFICE_LETTER_LIST" /> }]} />
         <Card>
           <CardContent className="py-10">
             <p className="text-center text-gray-500">Data surat tidak ditemukan</p>

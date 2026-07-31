@@ -1,4 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { UseGetCopyLetter } from '@/pages/modules/E-Office/inbox/copy-letter/hooks'
 import ColumnsCopyLetter from '@/pages/modules/E-Office/inbox/copy-letter/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
@@ -19,7 +20,7 @@ export const CopyLetterPage = () => {
   return (
     <>
       <div className="space-y-5">
-        <ButtonTitleGroup label={'Tembusan Surat'} buttonGroup={[]} />
+        <ButtonTitleGroup label={'Tembusan Surat'} buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide={'Tembusan Surat'} valueGuide="E_OFFICE_INBOX_COPY_LETTER" /> }]} />
         <TableCustom
           tdClassName={'bg-white'}
           thClassName={'bg-primary text-white'}

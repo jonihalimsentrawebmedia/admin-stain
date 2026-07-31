@@ -9,6 +9,7 @@ import { toast } from 'react-toastify'
 import { useNavigate, useParams } from 'react-router-dom'
 import { UseGetDetailStudentData } from '@/pages/modules/E-Office/students/student-data/hooks'
 import { format } from 'date-fns'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const UpdatedStudentData = () => {
   const { id } = useParams()
@@ -71,7 +72,16 @@ const UpdatedStudentData = () => {
   return (
     <>
       <div>
-        <ButtonTitleGroup isBack label={'Edit Data Mahasiswa'} buttonGroup={[]} />
+        <ButtonTitleGroup
+          isBack
+          label={'Edit Data Mahasiswa'}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide={'Mahasiswa'} valueGuide="E_OFFICE_STUDENTS" />,
+            },
+          ]}
+        />
         <FormStudentData loading={loading} form={form} HandleSave={HandleSave} />
       </div>
     </>

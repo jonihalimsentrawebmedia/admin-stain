@@ -1,5 +1,6 @@
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { Button } from '@/components/ui/button.tsx'
 import { FaCirclePlus } from 'react-icons/fa6'
 import { UseGetLetterNumberAutomatic } from '@/pages/modules/E-Office/Letter-Generation/code-letter/hooks'
@@ -26,6 +27,7 @@ const NumberOfCodeLetterPage = () => {
         <ButtonTitleGroup
           label={'Kode Nomor Surat'}
           buttonGroup={[
+            { type: 'custom', element: <ButtonGoToGuide titleGuide={'Kode Nomor Surat'} valueGuide="E_OFFICE_CODE_LETTER" /> },
             {
               type: 'custom',
               element: (

@@ -13,6 +13,7 @@ import { DialogBasic } from '@/components/common/dialog/dialogBasic.tsx'
 import { BiCheck, BiX } from 'react-icons/bi'
 import { UseGetDiagnosis } from '@/pages/modules/SIM-RS/reference/diagnosis/hooks/index.tsx'
 import { UseGetProcedure } from '@/pages/modules/SIM-RS/reference/procedure/hooks/index.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const EditPemeriksaan = () => {
   const { id } = useParams<{ id: string }>()
@@ -127,7 +128,7 @@ const EditPemeriksaan = () => {
 
   return (
     <div>
-      <ButtonTitleGroup isBack label="Edit Hasil Pemeriksaan" buttonGroup={[]} />
+      <ButtonTitleGroup isBack label="Edit Hasil Pemeriksaan" buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide="Panduan" valueGuide="SIM_RS_SERVICES" /> }]} />
       <FormEditPemeriksaan
         loading={loading}
         form={form}

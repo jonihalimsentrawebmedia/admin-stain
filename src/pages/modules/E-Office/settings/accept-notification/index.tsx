@@ -1,4 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { ButtonAddNotification } from '@/pages/modules/E-Office/settings/accept-notification/component/buttonAdd.tsx'
 import { UseGetAcceptNotification } from '@/pages/modules/E-Office/settings/accept-notification/hooks'
 import { useSearchParams } from 'react-router-dom'
@@ -24,6 +25,7 @@ export const AcceptNotificationPage = () => {
         <ButtonTitleGroup
           label={'Penerima Notifikasi'}
           buttonGroup={[
+            { type: 'custom', element: <ButtonGoToGuide titleGuide={'Penerima Notifikasi'} valueGuide="E_OFFICE_ACCEPT_NOTIFICATION" /> },
             {
               type: 'custom',
               element: <ButtonAddNotification />,

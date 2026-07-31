@@ -11,6 +11,7 @@ import { UseGetPemeriksaan } from '../diagnosis/hooks/index.tsx'
 import { ResolverDiagnosis, type TResolverDiagnosis } from '../diagnosis/data/resolver.tsx'
 import { FormDiagnosis } from '../diagnosis/components/forms.tsx'
 import AxiosClient from '@/provider/axios.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const UpdateRegistration = () => {
   const { id } = useParams<{ id: string }>()
@@ -124,6 +125,7 @@ const UpdateRegistration = () => {
         isBack
         label={isSelesai ? 'Edit Hasil Pemeriksaan' : 'Edit Pendaftaran'}
         buttonGroup={[
+          { type: 'custom', element: <ButtonGoToGuide titleGuide="Panduan" valueGuide="SIM_RS_SERVICES" /> },
           {
             type: 'cancel',
             onClick: () => navigate('/modules/sim-rs/services/registration'),

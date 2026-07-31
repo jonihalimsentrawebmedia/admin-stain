@@ -1,4 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { UseGetUnitActive } from '@/pages/modules/E-Office/reference/satuan-unit/hooks.tsx'
 import { cn } from '@/lib/utils.ts'
 import { useEffect, useState } from 'react'
@@ -112,7 +113,9 @@ export const LetterHeader = () => {
   return (
     <>
       <div className="space-y-5">
-        <ButtonTitleGroup label={'Kop Surat'} buttonGroup={[]} />
+        <ButtonTitleGroup label={'Kop Surat'} buttonGroup={[
+          { type: 'custom', element: <ButtonGoToGuide titleGuide={'Kop Surat'} valueGuide="E_OFFICE_LETTER_HEADER" /> },
+        ]} />
 
         <div className="flex items-start gap-4 w-full">
           <ul className={'flex flex-col gap-2 max-w-80 border p-4 rounded bg-white shadow'}>

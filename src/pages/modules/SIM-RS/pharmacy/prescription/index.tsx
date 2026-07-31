@@ -4,6 +4,7 @@ import { UseGetPrescription, UseGetPrescriptionStatusCount } from './hooks/index
 import { ColumnsPrescription } from './data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const statusList = [
   { key: 'MENUNGGU', label: 'Menunggu' },
@@ -45,7 +46,7 @@ export const PrescriptionPage = () => {
 
   return (
     <div className="space-y-5">
-      <ButtonTitleGroup buttonGroup={[]} label="Resep" />
+      <ButtonTitleGroup buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide={'Resep'} valueGuide="SIM_RS_PHARMACY" /> }]} label="Resep" />
       <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
         <TabsList className="w-full flex flex-row items-start p-0 gap-0 bg-transparent border-b-2 border-primary rounded-none h-auto overflow-x-auto flex-nowrap justify-start">
           {statusList.map((s) => (

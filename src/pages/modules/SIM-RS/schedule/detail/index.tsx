@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { UseGetDoctorSchedule } from '../hooks/index.tsx'
 import { ButtonAddJadwal } from '../component/buttonAddJadwal.tsx'
 import { ButtonEditJadwal } from '../component/buttonEditJadwal.tsx'
@@ -30,7 +31,7 @@ const DetailJadwalDokter = () => {
   return (
     <>
       <div className="space-y-5">
-        <ButtonTitleGroup isBack label={'Detail Jadwal Dokter'} buttonGroup={[]} />
+        <ButtonTitleGroup isBack label={'Detail Jadwal Dokter'} buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide={'Detail Jadwal Dokter'} valueGuide="SIM_RS_SCHEDULE" /> }]} />
 
         <div className="bg-white rounded-lg border p-6">
           <p className="text-lg font-semibold text-primary mb-4">Informasi Dokter</p>

@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { ResolverGuestBook, type TResolverGuestBook } from '../data/resolver'
 import { zodResolver } from '@hookform/resolvers/zod'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import FormGustBook from '@/pages/modules/E-Office/gustbook/compnent/form.tsx'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
@@ -38,7 +39,9 @@ const CreateGustBook = () => {
   return (
     <>
       <div>
-        <ButtonTitleGroup isBack label={'Tambah Buku Tamu'} buttonGroup={[]} />
+        <ButtonTitleGroup isBack label={'Tambah Buku Tamu'} buttonGroup={[
+          { type: 'custom', element: <ButtonGoToGuide titleGuide={'Tambah Buku Tamu'} valueGuide="E_OFFICE_GUESTBOOK" /> },
+        ]} />
         <FormGustBook loading={loading} form={form} HandleSave={HandleSave} />
       </div>
     </>

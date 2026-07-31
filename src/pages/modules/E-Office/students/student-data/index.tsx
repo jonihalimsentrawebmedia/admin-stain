@@ -11,6 +11,7 @@ import { ButtonStatus } from '@/pages/modules/E-Office/students/student-data/com
 import { TableBasicState } from '@/components/common/table/tableUsestate.tsx'
 import TablePaginate from '@/components/common/table/TablePagination.tsx'
 import { useState } from 'react'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const ListStudentData = () => {
   const [searchParams] = useSearchParams()
@@ -71,6 +72,10 @@ const ListStudentData = () => {
                   Tambah Mahasiswa
                 </Button>
               ),
+            },
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide={'Mahasiswa'} valueGuide="E_OFFICE_STUDENTS" />,
             },
           ]}
         />

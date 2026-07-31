@@ -4,6 +4,7 @@ import { QuestionnaireQuantitative, type TQuestionnaireQuantitative } from '../d
 import { zodResolver } from '@hookform/resolvers/zod'
 import FormQuantitativeQuestionnaire from '@/pages/modules/E-Office/questionnaire/quantitative/component/form.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import AxiosClient from '@/provider/axios.tsx'
 import { toast } from 'react-toastify'
 import { useNavigate, useParams } from 'react-router-dom'
@@ -51,7 +52,9 @@ const UpdatedQuantitativeQuestionnaire = () => {
   return (
     <>
       <div className="space-y-6 bgwhite">
-        <ButtonTitleGroup isBack label={'Edit Data Kuisioner Kuantitatif'} buttonGroup={[]} />
+        <ButtonTitleGroup isBack label={'Edit Data Kuisioner Kuantitatif'} buttonGroup={[
+          { type: 'custom', element: <ButtonGoToGuide titleGuide={'Edit Data Kuisioner Kuantitatif'} valueGuide="E_OFFICE_QUESTIONNAIRE" /> },
+        ]} />
         <FormQuantitativeQuestionnaire form={form} loading={loading} HandleSave={HandleSave} />
       </div>
     </>

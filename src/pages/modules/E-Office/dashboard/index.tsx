@@ -22,6 +22,7 @@ import StatisticsChart from '@/pages/modules/E-Office/dashboard/component/lineCh
 import { useState } from 'react'
 import { Calendar } from '@/components/ui/calendar.tsx'
 import { format } from 'date-fns'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const DashboardEOfficePage = () => {
   const { counts } = UseGetDashboardCounts()
@@ -91,10 +92,15 @@ const DashboardEOfficePage = () => {
     <>
       <div className={'grid grid-cols-12 gap-4'}>
         <div className="col-span-12 lg:col-span-9">
-          <p className="text-xl sm:text-2xl text-primary font-semibold">
-            Selamat Datang, {profileUser?.nama_lengkap} 👋
-          </p>
-          <p>Berikut Ringkasan Aktivitas E-office Hari ini</p>
+          <div className="flex items-start justify-between">
+            <div>
+              <p className="text-xl sm:text-2xl text-primary font-semibold">
+                Selamat Datang, {profileUser?.nama_lengkap} 👋
+              </p>
+              <p>Berikut Ringkasan Aktivitas E-office Hari ini</p>
+            </div>
+            <ButtonGoToGuide titleGuide={'Dashboard'} valueGuide="E_OFFICE_DASHBOARD" />
+          </div>
           <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-4">
             {counts?.items?.map((row, k) => (
               <div key={k} className={'bg-white shadow rounded p-3 sm:p-4 space-y-1.5'}>

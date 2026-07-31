@@ -2,6 +2,7 @@ import { Card } from '@/components/ui/card'
 import { CalendarCheck, UserRound, Users, VenetianMask } from 'lucide-react'
 import { useSearchParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { UseGetPatientReportList, UseGetPatientReportStats } from './hooks/index.tsx'
 import { ColumnsPatientReport } from './data/columns.tsx'
@@ -79,7 +80,7 @@ export const PatientReportPage = () => {
         ))}
       </section>
 
-      <ButtonTitleGroup label={'Laporan Pasien'} buttonGroup={[]} />
+      <ButtonTitleGroup label={'Laporan Pasien'} buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide={'Laporan Pasien'} valueGuide="SIM_RS_REPORT" /> }]} />
       <TableCustom data={list} columns={columns} loading={loading} meta={meta} />
     </div>
   )

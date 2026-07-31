@@ -8,6 +8,7 @@ import { GetBase64FromUrl } from '@/pages/modules/E-Office/settings/letter-heade
 import pdfmake from '@/utils/pdfmake.ts'
 import { UseGetDetailLetterGenerate } from '@/pages/modules/E-Office/Letter-Generation/letter-list/hooks'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card.tsx'
 import { Button } from '@/components/ui/button.tsx'
 import { Skeleton } from '@/components/ui/skeleton.tsx'
@@ -209,6 +210,7 @@ const DetailLetterTemplate = () => {
         isBack
         label={'Detail Surat Undangan'}
         buttonGroup={[
+          { type: 'custom', element: <ButtonGoToGuide titleGuide={'Detail Surat Undangan'} valueGuide="E_OFFICE_LETTER_LIST" /> },
           {
             type: 'custom',
             element: (

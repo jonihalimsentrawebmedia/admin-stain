@@ -10,6 +10,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import { UseGetCodeSIMRS } from './hooks/index.tsx'
 import { IoInformationCircle } from 'react-icons/io5'
 import { GuardCrud } from '@/pages/modules/SIM-RS/component/auth/helper'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const CodeSettingSIMRS = () => {
   const [isEdit, setIsEdit] = useState(false)
@@ -60,11 +61,14 @@ const CodeSettingSIMRS = () => {
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
         <p className="text-xl sm:text-2xl text-[#444] font-medium">Pengaturan Kode Rekam Medis</p>
-        {!isEdit && permission?.kelola && (
-          <Button variant="outline" onClick={() => setIsEdit(true)}>
-            <Edit /> Edit
-          </Button>
-        )}
+        <div className="flex items-center gap-2">
+          <ButtonGoToGuide titleGuide={'Pengaturan Kode Rekam Medis'} valueGuide="SIM_RS_SETTING" />
+          {!isEdit && permission?.kelola && (
+            <Button variant="outline" onClick={() => setIsEdit(true)}>
+              <Edit /> Edit
+            </Button>
+          )}
+        </div>
       </div>
 
       <div className="flex gap-2 items-center w-fit px-2 py-1 text-[#2769CD] border border-[#2769CD] rounded text-sm">

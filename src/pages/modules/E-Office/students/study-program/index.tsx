@@ -3,6 +3,7 @@ import { UseGetStudyProgram } from './hooks'
 import { useSearchParams } from 'react-router-dom'
 import { ColumnsStudyProgram } from './data/columns'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const ListStudyProgram = () => {
   const [searchParams] = useSearchParams()
@@ -20,7 +21,15 @@ const ListStudyProgram = () => {
   return (
     <>
       <div className="space-y-5">
-        <ButtonTitleGroup label={'Program Studi'} buttonGroup={[]} />
+        <ButtonTitleGroup
+          label={'Program Studi'}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide={'Mahasiswa'} valueGuide="E_OFFICE_STUDENTS" />,
+            },
+          ]}
+        />
 
         <TableCustom
           tdClassName={'bg-white'}

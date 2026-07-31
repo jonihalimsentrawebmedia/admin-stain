@@ -1,3 +1,4 @@
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { UseGetLumpSumDetail } from '@/pages/modules/E-Office/official-travel/Letter-Assigment/detail/lupsum/hooks'
 import { useParams } from 'react-router-dom'
@@ -93,7 +94,9 @@ const LupSumUpdated = () => {
   return (
     <>
       <div className="space-y-4">
-        <ButtonTitleGroup label={'Detail Lumpsum'} buttonGroup={[]} isBack />
+        <ButtonTitleGroup label={'Detail Lumpsum'} buttonGroup={[
+          { type: 'custom', element: <ButtonGoToGuide titleGuide={'Detail Lumpsum'} valueGuide="E_OFFICE_OFFICIAL_TRAVEL" /> },
+        ]} isBack />
 
         <Card className={'shadow-none rounded-md'}>
           <CardContent className={'space-y-4'}>

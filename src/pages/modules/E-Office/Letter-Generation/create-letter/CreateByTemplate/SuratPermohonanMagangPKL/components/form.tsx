@@ -6,6 +6,7 @@ import { UseGetLetterHeaderRef } from '@/pages/modules/E-Office/settings/letter-
 import { UseGetLetterNumberAutomatic } from '@/pages/modules/E-Office/Letter-Generation/code-letter/hooks'
 import { UseGetUnitInstitution } from '@/pages/modules/E-Office/reference/satuan-unit/hooks.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { Button } from '@/components/ui/button.tsx'
 import { Card, CardContent, CardTitle } from '@/components/ui/card.tsx'
 import { FaRegEye, FaRegFileAlt } from 'react-icons/fa'
@@ -90,6 +91,7 @@ const FormSuratPermohonanMagangPKL = (props: Props) => {
             label={`${template?.nama_jenis_template}`}
             isBack
             buttonGroup={[
+              { type: 'custom', element: <ButtonGoToGuide titleGuide={'Buat Surat'} valueGuide="E_OFFICE_CREATE_LETTER" /> },
               {
                 type: 'cancel',
                 label: 'Batal',

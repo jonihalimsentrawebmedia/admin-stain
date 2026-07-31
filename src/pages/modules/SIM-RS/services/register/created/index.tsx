@@ -8,6 +8,7 @@ import { ResolverRegistration, type TResolverRegistration } from '../data/resolv
 import { FormRegistration } from '../components/forms.tsx'
 import { UseGetNomorPendaftaran } from '../hooks/index.tsx'
 import AxiosClient from '@/provider/axios.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const CreateRegistration = () => {
   const [loading, setLoading] = useState(false)
@@ -53,6 +54,7 @@ const CreateRegistration = () => {
         isBack
         label={'Tambah Pendaftaran'}
         buttonGroup={[
+          { type: 'custom', element: <ButtonGoToGuide titleGuide="Panduan" valueGuide="SIM_RS_SERVICES" /> },
           {
             type: 'cancel',
             onClick: () => navigate('/modules/sim-rs/services/registration'),

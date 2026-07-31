@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { UseGetDetailPrescription } from '../hooks/index.tsx'
 import { format, isValid, parseISO } from 'date-fns'
 import { ButtonStatusObat } from './ButtonStatusObat.tsx'
@@ -49,7 +50,7 @@ const DetailPrescription = () => {
 
   return (
     <div className="space-y-5">
-      <ButtonTitleGroup isBack label="Detail Resep" buttonGroup={[]} />
+      <ButtonTitleGroup isBack label="Detail Resep" buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide={'Detail Resep'} valueGuide="SIM_RS_PHARMACY" /> }]} />
 
       <div className="bg-white rounded-lg border p-6">
         <p className="text-lg font-semibold text-primary mb-4">Informasi Registrasi</p>

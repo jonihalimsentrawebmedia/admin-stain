@@ -1,4 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import { useSearchParams } from 'react-router-dom'
 import { UseGetDokterJadwal } from './hooks/index.tsx'
@@ -23,7 +24,7 @@ export const DoctorSchedulePage = () => {
   return (
     <>
       <div className={'space-y-5'}>
-        <ButtonTitleGroup label={'Jadwal Dokter'} buttonGroup={[]} />
+        <ButtonTitleGroup label={'Jadwal Dokter'} buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide={'Jadwal Dokter'} valueGuide="SIM_RS_SCHEDULE" /> }]} />
         {permision?.melihat && (
           <TableCustom
             columnsName={permision?.kelola ? [''] : ['action']}

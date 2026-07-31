@@ -1,4 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { UseGetDetailInbox } from '@/pages/modules/E-Office/inbox/registration-inbox/hooks'
 import { Card, CardContent } from '@/components/ui/card.tsx'
@@ -39,6 +40,7 @@ export const DetailInboxRegistration = () => {
           label={'Detail Surat Masuk'}
           isBack
           buttonGroup={[
+            { type: 'custom', element: <ButtonGoToGuide titleGuide={'Detail Surat Masuk'} valueGuide="E_OFFICE_INBOX" /> },
             {
               type: 'edit',
               label: 'Edit Data',

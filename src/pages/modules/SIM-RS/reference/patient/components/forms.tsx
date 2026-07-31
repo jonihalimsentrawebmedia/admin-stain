@@ -13,6 +13,7 @@ import useGetRegency from '@/pages/modules/settings/reference/regency/controller
 import { SwitchInput } from '@/components/common/form/switchInput.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { SumberBiayaList } from '@/pages/modules/SIM-RS/reference/patient/components/SumberBiayaList.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 interface Props {
   loading: boolean
@@ -73,7 +74,7 @@ const FormPatient = (props: Props) => {
           <ButtonTitleGroup
             isBack
             label={label ?? 'Tambah Pasien'}
-            buttonGroup={[{ type: 'cancel' }, { type: 'save' }]}
+            buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide="Panduan" valueGuide="SIM_RS_REFERENCE" /> }, { type: 'cancel' }, { type: 'save' }]}
           />
           {/* Kelompok 1: Informasi Pasien */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">

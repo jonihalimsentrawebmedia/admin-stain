@@ -4,6 +4,7 @@ import { UseGetAdmissionProcess } from './hooks'
 import { useSearchParams } from 'react-router-dom'
 import { ColumnsAdmissionProcess } from './data/columns'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const ListAdmissionProcess = () => {
   const [searchParams] = useSearchParams()
@@ -27,6 +28,10 @@ const ListAdmissionProcess = () => {
             {
               type: 'custom',
               element: <ButtonAddAdmissionProcess />,
+            },
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide={'Mahasiswa'} valueGuide="E_OFFICE_STUDENTS" />,
             },
           ]}
         />

@@ -4,6 +4,7 @@ import { UseGetLetterNature } from '@/pages/modules/E-Office/reference/letter-na
 import { useSearchParams } from 'react-router-dom'
 import { ColumnsLetterNature } from '@/pages/modules/E-Office/reference/letter-nature/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const ListLetterNature = () => {
   const [searchParams] = useSearchParams()
@@ -27,6 +28,10 @@ const ListLetterNature = () => {
             {
               type: 'custom',
               element: <ButtonAddLetterNature />,
+            },
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide={'Referensi'} valueGuide="E_OFFICE_REFERENCE" />,
             },
           ]}
         />

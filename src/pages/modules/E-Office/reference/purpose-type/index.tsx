@@ -4,6 +4,7 @@ import { UseGetPurposeType } from '@/pages/modules/E-Office/reference/purpose-ty
 import { useSearchParams } from 'react-router-dom'
 import { ColumnsPurposeType } from '@/pages/modules/E-Office/reference/purpose-type/data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const PurposeTypePage = () => {
   const [searchParams] = useSearchParams()
@@ -26,6 +27,10 @@ const PurposeTypePage = () => {
             {
               type: 'custom',
               element: <ButtonAddPurposeType />,
+            },
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide={'Referensi'} valueGuide="E_OFFICE_REFERENCE" />,
             },
           ]}
         />

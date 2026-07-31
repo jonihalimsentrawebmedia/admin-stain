@@ -4,6 +4,7 @@ import { UseGetReminderAgenda } from './hooks'
 import { useSearchParams } from 'react-router-dom'
 import { ColumnsReminderAgenda } from './data/columns'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const ListReminderAgenda = () => {
   const [searchParams] = useSearchParams()
@@ -27,6 +28,10 @@ const ListReminderAgenda = () => {
             {
               type: 'custom',
               element: <ButtonAddReminderAgenda />,
+            },
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide titleGuide={'Referensi'} valueGuide="E_OFFICE_REFERENCE" />,
             },
           ]}
         />

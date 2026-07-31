@@ -1,4 +1,5 @@
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { UseGetEventYear, UseGetReportEventActivity } from './hooks'
 import { useSearchParams } from 'react-router-dom'
 import FilterSelect from '@/components/common/filter/filterBasic.tsx'
@@ -23,7 +24,7 @@ const ReportEventActivity = () => {
   return (
     <>
       <div className="space-y-5">
-        <ButtonTitleGroup label={'Laporan'} buttonGroup={[]} />
+        <ButtonTitleGroup label={'Laporan'} buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide={'Laporan'} valueGuide="E_OFFICE_EVENT_ACTIVITY" /> }]} />
         <FilterSelect
           className={'w-1/3'}
           placeholder={'Tahun'}

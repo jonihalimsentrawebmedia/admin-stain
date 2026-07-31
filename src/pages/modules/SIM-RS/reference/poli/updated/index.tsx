@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import { UseGetDetailPoli } from '../hooks/index.tsx'
 import { FormEditPoli } from '../component/buttonEdit.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const UpdatePoli = () => {
   const { id } = useParams<{ id: string }>()
@@ -26,7 +27,7 @@ const UpdatePoli = () => {
   return (
     <>
       <div>
-        <ButtonTitleGroup isBack label={'Edit Data Poli'} buttonGroup={[]} />
+        <ButtonTitleGroup isBack label={'Edit Data Poli'} buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide="Panduan" valueGuide="SIM_RS_REFERENCE" /> }]} />
         <FormEditPoli data={detail} />
       </div>
     </>

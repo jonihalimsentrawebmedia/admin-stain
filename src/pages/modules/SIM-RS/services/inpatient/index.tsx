@@ -5,6 +5,7 @@ import { UseGetRegistrationStatusInapCount } from './data/types.tsx'
 import { ColumnsInpatient } from './data/columns.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 
 const statusList = [
   { key: 'MENUNGGU_RUANGAN', label: 'Menunggu Ruangan' },
@@ -48,7 +49,7 @@ export const InpatientPage = () => {
 
   return (
     <div className="space-y-5">
-      <ButtonTitleGroup label="Rawat Inap" buttonGroup={[]} />
+      <ButtonTitleGroup label="Rawat Inap" buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide="Panduan" valueGuide="SIM_RS_SERVICES" /> }]} />
       <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
         <TabsList className="w-full justify-start flex flex-row items-start p-0 gap-0 bg-transparent border-b-2 border-primary rounded-none h-auto overflow-x-auto flex-nowrap">
           {statusList.map((s) => (

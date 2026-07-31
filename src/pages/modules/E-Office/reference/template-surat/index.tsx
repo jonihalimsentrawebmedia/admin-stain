@@ -1,6 +1,7 @@
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import ButtonTitleGroup from '@/components/common/button/ButtonTitleGroup.tsx'
 import TableCustom from '@/components/common/table/TableCustom.tsx'
+import ButtonGoToGuide from '@/pages/modules/website-utama/panduan/components/ButtonGoToGuide'
 import { UseGetTemplateSurat } from './hooks'
 import { ColumnsTemplateSurat } from './data/columns.tsx'
 import { Button } from '@/components/ui/button.tsx'
@@ -26,6 +27,10 @@ const ListTemplateSurat = () => {
         <ButtonTitleGroup
           label={'Template Surat'}
           buttonGroup={[
+            {
+              type: 'custom',
+              element: <ButtonGoToGuide valueGuide="E_OFFICE_REFERENCE" />,
+            },
             {
               type: 'custom',
               element: (
