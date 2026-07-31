@@ -31,7 +31,18 @@ const DetailJadwalDokter = () => {
   return (
     <>
       <div className="space-y-5">
-        <ButtonTitleGroup isBack label={'Detail Jadwal Dokter'} buttonGroup={[{ type: 'custom', element: <ButtonGoToGuide titleGuide={'Detail Jadwal Dokter'} valueGuide="SIM_RS_SCHEDULE" /> }]} />
+        <ButtonTitleGroup
+          isBack
+          label={'Detail Jadwal Dokter'}
+          buttonGroup={[
+            {
+              type: 'custom',
+              element: (
+                <ButtonGoToGuide titleGuide={'Detail Jadwal Dokter'} valueGuide="SIM_RS_SCHEDULE" />
+              ),
+            },
+          ]}
+        />
 
         <div className="bg-white rounded-lg border p-6">
           <p className="text-lg font-semibold text-primary mb-4">Informasi Dokter</p>
@@ -75,34 +86,36 @@ const DetailJadwalDokter = () => {
             <ButtonAddJadwal id_dokter={detail.id_dokter} />
           </div>
 
-          <div className="overflow-x-auto"><table className="w-full text-sm">
-            <thead className={'bg-primary'}>
-              <tr className="border-b text-left hover:bg-primary">
-                <th className="p-1.5 font-medium text-white w-12">#</th>
-                <th className="p-1.5 font-medium text-white">Hari</th>
-                <th className="p-1.5 font-medium text-white">Jam Mulai</th>
-                <th className="p-1.5 font-medium text-white">Jam Selesai</th>
-                <th className="p-1.5 font-medium text-white w-24" />
-              </tr>
-            </thead>
-            <tbody>
-              {detail.jadwal_dokter?.map((item, index) => (
-                <tr key={item.id_jadwal_dokter} className="border-b last:border-b-0">
-                  <td className="p-2">{index + 1}</td>
-                  <td className="p-2">{item.nama_hari}</td>
-                  <td className="p-2">{item.jam_mulai}</td>
-                  <td className="p-2">{item.jam_selesai}</td>
-                  <td className="p-2">
-                    <div className="flex gap-2">
-                      <ButtonEditJadwal data={item} id_dokter={detail.id_dokter} />
-                      <ButtonDeleteJadwal data={item} id_dokter={detail.id_dokter} />
-                    </div>
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead className={'bg-primary'}>
+                <tr className="border-b text-left hover:bg-primary">
+                  <th className="p-1.5 font-medium text-white w-12">#</th>
+                  <th className="p-1.5 font-medium text-white">Hari</th>
+                  <th className="p-1.5 font-medium text-white">Jam Mulai</th>
+                  <th className="p-1.5 font-medium text-white">Jam Selesai</th>
+                  <th className="p-1.5 font-medium text-white w-24" />
                 </tr>
-              ))}
-            </tbody>
-</table></div>
-      </div>
+              </thead>
+              <tbody>
+                {detail.jadwal_dokter?.map((item, index) => (
+                  <tr key={item.id_jadwal_dokter} className="border-b last:border-b-0">
+                    <td className="p-2">{index + 1}</td>
+                    <td className="p-2">{item.nama_hari}</td>
+                    <td className="p-2">{item.jam_mulai}</td>
+                    <td className="p-2">{item.jam_selesai}</td>
+                    <td className="p-2">
+                      <div className="flex gap-2">
+                        <ButtonEditJadwal data={item} id_dokter={detail.id_dokter} />
+                        <ButtonDeleteJadwal data={item} id_dokter={detail.id_dokter} />
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </>
   )
