@@ -24,11 +24,11 @@ export const UserListPage = () => {
       <ButtonTitleGroup
         label={'Daftar User'}
         buttonGroup={[
-          { type: 'custom', element: <ButtonGoToGuide titleGuide={'Daftar User'} valueGuide="SIM_RS_USER_MANAGEMENT" /> },
+          { type: 'custom' as const, element: <ButtonGoToGuide titleGuide={'Daftar User'} valueGuide="SIM_RS_USER_MANAGEMENT" /> },
           ...(permission?.kelola
             ? [
                 {
-                  type: 'custom',
+                  type: 'custom' as const,
                   element: (
                     <Button
                       onClick={() => navigate('/modules/sim-rs/user-management/user-list/add')}

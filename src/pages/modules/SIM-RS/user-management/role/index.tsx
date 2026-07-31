@@ -24,11 +24,11 @@ export const RolePage = () => {
       <ButtonTitleGroup
         label={'Role User'}
         buttonGroup={[
-          { type: 'custom', element: <ButtonGoToGuide titleGuide={'Role User'} valueGuide="SIM_RS_USER_MANAGEMENT" /> },
+          { type: 'custom' as const, element: <ButtonGoToGuide titleGuide={'Role User'} valueGuide="SIM_RS_USER_MANAGEMENT" /> },
           ...(permission?.kelola
             ? [
                 {
-                  type: 'custom',
+                  type: 'custom' as const,
                   element: (
                     <Button
                       onClick={() => navigate('add')}

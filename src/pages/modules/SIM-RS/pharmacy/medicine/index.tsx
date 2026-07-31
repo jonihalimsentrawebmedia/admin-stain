@@ -28,11 +28,11 @@ export const MedicinePage = () => {
         <ButtonTitleGroup
           label={'Obat'}
           buttonGroup={[
-            { type: 'custom', element: <ButtonGoToGuide titleGuide={'Obat'} valueGuide="SIM_RS_PHARMACY" /> },
+            { type: 'custom' as const, element: <ButtonGoToGuide titleGuide={'Obat'} valueGuide="SIM_RS_PHARMACY" /> },
             ...(permission?.kelola
               ? [
                   {
-                    type: 'custom',
+                    type: 'custom' as const,
                     element: <ButtonAddMedicine />,
                   },
                 ]

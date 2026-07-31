@@ -34,11 +34,11 @@ const DetailUser = () => {
           isBack
           label={'Detail User'}
           buttonGroup={[
-            { type: 'custom', element: <ButtonGoToGuide titleGuide={'Detail User'} valueGuide="SIM_RS_USER_MANAGEMENT" /> },
+            { type: 'custom' as const, element: <ButtonGoToGuide titleGuide={'Detail User'} valueGuide="SIM_RS_USER_MANAGEMENT" /> },
             ...(permission?.kelola
               ? [
                   {
-                    type: 'edit',
+                    type: 'edit' as const,
                     label: 'Edit',
                     onClick: () =>
                       navigate(`/modules/sim-rs/user-management/user-list/edit/${detail.id_user}`),
