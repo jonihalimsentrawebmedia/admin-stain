@@ -15,9 +15,10 @@ import { FormSideMenu } from './form'
 interface Props {
   data: IMenu
   menu: IMenu[]
+  idModules: string
 }
 
-const ButtonEditSideMenu = ({ data, menu }: Props) => {
+const ButtonEditSideMenu = ({ data, menu, idModules }: Props) => {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -49,7 +50,8 @@ const ButtonEditSideMenu = ({ data, menu }: Props) => {
   async function handleSave(values: TMenuForm) {
     setLoading(true)
     try {
-      const res = await AxiosClient.put(`/pengaturan/menu/${data.id_menu}`, {
+      const moduleId = data.id_module ?? idModules
+      const res = await AxiosClient.put(`/pengaturan/menu/${moduleId}/${data.id_menu}`, {
         ...values,
         parent_id: values.parent_id || null,
         icon: values.icon || null,

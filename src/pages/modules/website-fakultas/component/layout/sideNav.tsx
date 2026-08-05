@@ -5,6 +5,7 @@ import { UseGetMenus } from '@/pages/modules/settings/components/layout/hooks/ge
 import type { IModulesList } from '@/pages/modules/interface'
 import { cn } from '@/lib/utils.ts'
 import { ChevronRight } from 'lucide-react'
+import { useMobile } from '@/utils/useMobile'
 import {
   MdBusiness,
   MdDashboard,
@@ -50,6 +51,12 @@ type MenuItem = {
 export function SideNavFaculty({ collapsed, setCollapsed }: Props) {
   const location = useLocation()
   const pathname = location.pathname
+
+  const { isMobile } = useMobile()
+
+  const handleCloseMobile = () => {
+    if (isMobile) setCollapsed?.(true)
+  }
 
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({})
 
@@ -229,7 +236,7 @@ export function SideNavFaculty({ collapsed, setCollapsed }: Props) {
           )
 
           return row.path ? (
-            <Link key={groupId} to={row.path} onClick={() => setCollapsed?.(true)}>
+            <Link key={groupId} to={row.path} onClick={handleCloseMobile}>
               {content}
             </Link>
           ) : (
@@ -295,6 +302,11 @@ function TreeNode({
   const isActive = isActiveTree(item, pathname)
   const labelVisible = !collapsed
 
+  const { isMobile } = useMobile()
+  const handleCloseMobile = () => {
+    if (isMobile) setCollapsed?.(true)
+  }
+
   if (hasChildren) {
     return (
       <li className={'w-full'}>
@@ -359,7 +371,7 @@ function TreeNode({
   return (
     <li>
       {item.path ? (
-        <Link to={item.path} onClick={() => setCollapsed?.(true)}>
+        <Link to={item.path} onClick={handleCloseMobile}>
           {itemContent}
         </Link>
       ) : (

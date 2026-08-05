@@ -12,7 +12,7 @@ const SideMenuView = () => {
   const { modules, loading: loadingModules } = UseGetListModule()
   const { menu, loading } = UseGetSideMenu(idModules)
   const [expanded, setExpanded] = useState<ExpandedState>({})
-  const columns = ColumnsSideMenu({ menu })
+  const columns = ColumnsSideMenu({ menu, idModules })
 
   return (
     <div className="space-y-5">

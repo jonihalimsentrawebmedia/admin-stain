@@ -9,7 +9,13 @@ import ButtonDeleteSideMenu from '../components/buttonDelete'
 
 const INDENT = 18
 
-export const ColumnsSideMenu = ({ menu }: { menu: IMenu[] }) =>
+export const ColumnsSideMenu = ({
+  menu,
+  idModules,
+}: {
+  menu: IMenu[]
+  idModules: string
+}) =>
   useMemo<ColumnDef<IMenu>[]>(
     () => [
       {
@@ -124,12 +130,12 @@ export const ColumnsSideMenu = ({ menu }: { menu: IMenu[] }) =>
           const parentRow = row.getParentRow()
           return (
             <div className="flex justify-end w-full gap-2">
-              <ButtonEditSideMenu data={data} menu={menu} />
+              <ButtonEditSideMenu data={data} menu={menu} idModules={idModules} />
               <ButtonDeleteSideMenu data={data} parentData={parentRow?.original} />
             </div>
           )
         },
       },
     ],
-    [menu]
+    [menu, idModules]
   )
