@@ -8,9 +8,11 @@ import ButtonProfile from '../button/ButtonProfile'
 import { IconModules } from '@/pages/modules/website-utama/component/layout/header'
 import type { IModulesList } from '@/pages/modules/interface'
 import { cn } from '@/lib/utils.ts'
+import { ICON_MAP } from '@/pages/modules/settings/Side-Menu/data/icons'
 
 type SideMenuItem = {
   name: string
+  icon?: React.ReactNode
   path?: string
   child?: SideMenuItem[]
 }
@@ -30,12 +32,15 @@ export default function DashboardLayout() {
     () =>
       (menu ?? []).map((item) => ({
         name: item.label,
+        icon: item.icon ? ICON_MAP[item.icon] : undefined,
         path: item.link,
         child: (item.children ?? []).map((child) => ({
           name: child.label,
+          icon: child.icon ? ICON_MAP[child.icon] : undefined,
           path: child.link,
           child: (child.children ?? []).map((subChild) => ({
             name: subChild.label,
+            icon: subChild.icon ? ICON_MAP[subChild.icon] : undefined,
             path: subChild.link,
           })),
         })),
@@ -197,6 +202,7 @@ export default function DashboardLayout() {
                           sidebarSmall && 'justify-center'
                         )}
                       >
+                        {row.icon && <span className="shrink-0">{row.icon}</span>}
                         {labelVisible && <span className="truncate">{row.name}</span>}
                       </span>
 
@@ -248,6 +254,7 @@ export default function DashboardLayout() {
                     sidebarSmall && 'justify-center'
                   )}
                 >
+                  {row.icon && <span className="shrink-0">{row.icon}</span>}
                   {labelVisible && <span className="truncate">{row.name}</span>}
                 </div>
               )
@@ -341,6 +348,7 @@ function TreeNode({
             isActive ? 'font-semibold text-primary' : 'text-green-50'
           )}
         >
+          {item.icon && <span className="shrink-0">{item.icon}</span>}
           {labelVisible && <span>{item.name}</span>}
           {labelVisible && (
             <span
@@ -383,6 +391,7 @@ function TreeNode({
       )}
       style={{ marginLeft: depth }}
     >
+      {item.icon && <span className="shrink-0">{item.icon}</span>}
       {labelVisible && <span>{item.name}</span>}
     </div>
   )
