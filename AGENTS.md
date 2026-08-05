@@ -141,6 +141,17 @@ Removed `useState` + `useEffect` that merely copied `useQuery` data into local s
 | `public-content/Download/hooks/index.tsx` | `UseGetCategoryDownloadCarrier`, `UseGetDownloadCarrier`, `UseGetDownloadCarrierDetail` |
 | `service/internship-vacancy/hooks/index.tsx` | `UseGetListInternshipVacancy`, `UseGetDetailInternshipVacancy` |
 
+### 13b. Skill Created — create-module-sidebar-nav
+
+Created `.opencode/skills/create-module-sidebar-nav/SKILL.md` documenting the module sidebar (side nav) pattern:
+- `UseGetMenus` hook wiring (`/pengaturan/menu/{idModules}`, idModule from localStorage)
+- Uniform open/close + active behavior across all modules (openGroups/defaultOpenGroups/toggleGroup/collectOpenGroups/isActiveTree + recursive TreeNodeWrapper/TreeNode)
+- API→MenuItem mapping (label→name, link→path, children→child, icon string→ICON_MAP component)
+- Base URL prefixing per module (settings: as-is; others: prefix `/modules/<module>`)
+- Pitfall: group parents without a valid link must get `path: undefined`, else the bare base URL becomes a prefix of every page and opens every group on every route
+- Pitfall: `makeGroupId` must be identical when building `defaultOpenGroups` and when rendering
+- Pitfall: reset `openGroups` on navigation so children are closed by default and only URL-matching groups open
+
 ### 10. Redundant State / Derived State Anti-Pattern Fix — PMB Module (10 files, 19 hooks)
 
 Removed `useState` + `useEffect` that merely copied `useQuery` data into local state. Added type parameters to `useQuery<T>` (no `any`). Converted `UseGetTotalVisitor` status to `useMemo`, `UseGetTrentVisitor` to interface + direct return.

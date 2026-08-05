@@ -1,8 +1,32 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { GenerateMenu } from './menu.tsx'
+import type { IMenuItem } from '@/pages/modules/settings/components/layout/hooks/getMenu.tsx'
+import { UseGetMenus } from '@/pages/modules/settings/components/layout/hooks/getMenu.tsx'
+import type { IModulesList } from '@/pages/modules/interface'
 import { cn } from '@/lib/utils.ts'
 import { ChevronRight } from 'lucide-react'
+import {
+  MdBusiness,
+  MdDashboard,
+  MdDataset,
+  MdInfo,
+  MdOutlineTrackChanges,
+  MdQuiz,
+} from 'react-icons/md'
+import { FaGraduationCap, FaUserFriends } from 'react-icons/fa'
+import { FaGears } from 'react-icons/fa6'
+
+const ICON_MAP: Record<string, React.ReactNode> = {
+  FaGears: <FaGears className="size-5" />,
+  FaGraduationCap: <FaGraduationCap className="size-5" />,
+  FaUserFriends: <FaUserFriends className="size-5" />,
+  MdBusiness: <MdBusiness className="size-5" />,
+  MdDashboard: <MdDashboard className="size-5" />,
+  MdDataset: <MdDataset className="size-5" />,
+  MdInfo: <MdInfo className="size-5" />,
+  MdOutlineTrackChanges: <MdOutlineTrackChanges className="size-5" />,
+  MdQuiz: <MdQuiz className="size-5" />,
+}
 
 interface Props {
   collapsed: boolean
@@ -22,7 +46,25 @@ export function SideNavUnit({ collapsed, setCollapsed }: Props) {
 
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({})
 
-  const MenuListLPPM = GenerateMenu()
+  const module: IModulesList = JSON.parse(window.localStorage.getItem('module') || '{}')
+  const { menu } = UseGetMenus(module.id_module)
+
+  const baseDomain = '/modules/pusat-karir'
+
+  const normalizePath = (link?: string) => {
+    if (!link || link === '/' || link === baseDomain) return undefined
+    return link.startsWith(baseDomain) ? link : `${baseDomain}${link}`
+  }
+
+  const mapMenu = (items: IMenuItem[]): MenuItem[] =>
+    items.map((item) => ({
+      name: item.label,
+      icon: item.icon ? ICON_MAP[item.icon] : undefined,
+      path: normalizePath(item.link),
+      child: item.children?.length ? mapMenu(item.children) : undefined,
+    }))
+
+  const MenuList = useMemo(() => (menu ? mapMenu(menu) : []), [menu])
 
   const makeGroupId = (parentId: string, index: number, name: string) =>
     `${parentId}-${index}-${name}`
@@ -50,11 +92,11 @@ export function SideNavUnit({ collapsed, setCollapsed }: Props) {
 
   const defaultOpenGroups = useMemo(() => {
     const map: Record<string, boolean> = {}
-    MenuListLPPM.forEach((row, i) => {
+    MenuList.forEach((row, i) => {
       collectOpenGroups(row, 'root', i, map)
     })
     return map
-  }, [pathname])
+  }, [pathname, MenuList])
 
   const groups = { ...defaultOpenGroups, ...openGroups }
 
@@ -64,7 +106,7 @@ export function SideNavUnit({ collapsed, setCollapsed }: Props) {
 
   useEffect(() => {
     // cek apakah path sekarang ada di menu yang punya parent children
-    const activeHasParentGroup = MenuListLPPM.some((item) => {
+    const activeHasParentGroup = MenuList.some((item) => {
       if (!item.child) return false
       return isActiveTree(item, pathname)
     })
@@ -117,7 +159,7 @@ export function SideNavUnit({ collapsed, setCollapsed }: Props) {
         )}
       >
         <div className="space-y-2 overflow-y-auto py-4 overflow-auto h-[calc(100vh-110px)]">
-          {MenuListLPPM.map((row, idx) => {
+          {MenuList.map((row, idx) => {
             const groupId = makeGroupId('root', idx, row.name)
             const isGroupOpen = groups[groupId] ?? false
             const isRowActive = isActiveTree(row, pathname)
@@ -167,7 +209,7 @@ export function SideNavUnit({ collapsed, setCollapsed }: Props) {
                       {row.child.map((child, childIdx) => (
                         <div key={makeGroupId(groupId, childIdx, child.name)} onClick={handleLinkClick}>
                           <TreeNodeWrapper
-                            length={row?.child.length}
+                            length={row?.child?.length}
                             item={child}
                             parentGroupId={groupId}
                             index={childIdx}

@@ -11,164 +11,42 @@ import {
 } from '@/components/ui/menubar.tsx'
 import { ChevronDown } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
+import { UseGetMenus } from '@/pages/modules/settings/components/layout/hooks/getMenu.tsx'
+import type { IMenuItem } from '@/pages/modules/settings/components/layout/hooks/getMenu.tsx'
+import type { IModulesList } from '@/pages/modules/interface'
+
 const baseUrl = '/modules/website-lembaga'
-export const Menus = [
-  {
-    label: 'Beranda',
-    link: `${baseUrl}/dashboard`,
-  },
-  {
-    label: 'Profile Lembaga',
-    link: `${baseUrl}/lembaga`,
-  },
-  {
-    label: 'Tentang Kami',
-    link: `${baseUrl}/profile`,
-    children: [
-      {
-        label: 'Selayang Pandang ',
-        link: `${baseUrl}/profile/selayang-pandang`,
-      },
-      {
-        label: 'Visi Misi',
-        link: `${baseUrl}/profile/visi-misi`,
-      },
-      {
-        label: 'Stuktur Organisasi',
-        link: `${baseUrl}/profile/struktur-organisasi`,
-      },
-      {
-        label: 'Program Kerja',
-        link: `${baseUrl}/profile/program-kerja`,
-      },
-      {
-        label: 'Prestasi',
-        link: `${baseUrl}/profile/prestasi`,
-      },
-      {
-        label: 'Sumber Daya Manusia',
-        link: `${baseUrl}/profile/sumber-daya-manusia`,
-      },
-    ],
-  },
-  {
-    label: 'Jaminan Mutu',
-    link: `${baseUrl}/jaminan-mutu`,
-    children: [
-      {
-        label: 'Sistem Dokumentasi',
-        link: `${baseUrl}/jaminan-mutu/sistem-dokumentasi`,
-      },
-      {
-        label: 'Manajemen Resiko',
-        link: `${baseUrl}/jaminan-mutu/manajemen-resiko`,
-      },
-      {
-        label: 'Audit Internal Mutu',
-        link: `${baseUrl}/jaminan-mutu/audit-internal`,
-      },
-      {
-        label: 'Tinjauan Manajemen Resiko',
-        link: `${baseUrl}/jaminan-mutu/tinjauan-manajemen`,
-      },
-    ],
-  },
-  {
-    label: 'Layanan',
-    link: `${baseUrl}/layanan`,
-    children: [
-      {
-        label: 'Sistem Penjaminan Mutu Internal (SPMI)',
-        link: `${baseUrl}/layanan/spmi`,
-        children: [
-          {
-            label: 'Dokumen Pendukung Akreditasi',
-            link: `${baseUrl}/layanan/spmi/dokumen-pendukung`,
-          },
-          {
-            label: 'Auditor Internal',
-            link: `${baseUrl}/layanan/spmi/auditor-internal`,
-          },
-          {
-            label: 'Reviewer',
-            link: `${baseUrl}/layanan/spmi/reviewer`,
-          },
-          {
-            label: 'Asesor',
-            link: `${baseUrl}/layanan/spmi/asesor`,
-          },
-          {
-            label: 'Laporan Benchmarking',
-            link: `${baseUrl}/layanan/spmi/laporan-benchmarking`,
-          },
-        ],
-      },
-      {
-        label: 'Audit Internal Mutu (AIM)',
-        link: `${baseUrl}/layanan/aim`,
-        children: [
-          {
-            label: 'Template AIM',
-            link: `${baseUrl}/layanan/aim/template`,
-          },
-        ],
-      },
-      {
-        label: 'Akreditasi',
-        link: `${baseUrl}/layanan/akreditasi`,
-      },
-      {
-        label: 'Layanan Publik',
-        link: `${baseUrl}/layanan/pelayanan-public`,
-      },
-    ],
-  },
-  {
-    label: 'Keluhan',
-    link: `${baseUrl}/keluhan`,
-  },
-  {
-    label: 'Konten Publik',
-    link: `${baseUrl}/public-content`,
-    children: [
-      {
-        label: 'Berita',
-        link: `${baseUrl}/public-content/news`,
-      },
-      {
-        label: 'Pengumuman',
-        link: `${baseUrl}/public-content/announcement`,
-      },
-      {
-        label: 'Agenda',
-        link: `${baseUrl}/public-content/agenda`,
-      },
-    ],
-  },
-  {
-    label: 'Pengaturan',
-    link: `${baseUrl}/pengaturan`,
-    children: [
-      {
-        label: 'Landing Page',
-        link: `${baseUrl}/pengaturan/landing-page`,
-      },
-      {
-        label: 'Pengaturan Warna',
-        link: `${baseUrl}/pengaturan/warna`,
-      },
-      {
-        label: 'Pengaturan Template',
-        link: `${baseUrl}/pengaturan/template`,
-      },
-    ],
-  },
-]
+
+export type MenuItem = {
+  label: string
+  link: string
+  children?: MenuItem[]
+}
+
+const normalizeLink = (link?: string) => {
+  if (!link || link === '/' || link === baseUrl) return ''
+  return link.startsWith(baseUrl) ? link : `${baseUrl}${link}`
+}
+
+const mapMenus = (items: IMenuItem[]): MenuItem[] =>
+  items.map((item) => ({
+    label: item.label,
+    link: normalizeLink(item.link),
+    children: item.children?.length ? mapMenus(item.children) : undefined,
+  }))
+
+export const useHeaderMenus = () => {
+  const module: IModulesList = JSON.parse(window.localStorage.getItem('module') || '{}')
+  const { menu } = UseGetMenus(module.id_module)
+  return menu ? mapMenus(menu) : []
+}
+
 export const HeaderMenu = () => {
   const location = useLocation()
   const pathname = location.pathname
+  const menus = useHeaderMenus()
   function isActive(link: string) {
-    if (pathname.includes(link)) {
+    if (link && pathname.includes(link)) {
       return 'border-b rounded-b-none border-white data-[state=open]:rounded-b-sm!'
     }
   }
@@ -177,7 +55,7 @@ export const HeaderMenu = () => {
       <div className="bg-white shadow drop-shadow py-1.5">
         <div className={'max-w-[1280px] px-4 mx-auto'}>
           <Menubar className={'border-none  group  hidden lg:flex bg-transparent shadow-none p-0'}>
-            {Menus.map((menu, i) => (
+            {menus.map((menu, i) => (
               <MenubarMenu key={i}>
                 {menu?.children ? (
                   <MenubarTrigger className={isActive(menu.link)}>

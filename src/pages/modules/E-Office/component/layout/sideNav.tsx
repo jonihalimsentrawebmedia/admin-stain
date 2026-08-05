@@ -2,12 +2,35 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { GenerateMenu } from './menu'
-import TreeNodeWrapper, {
-  isActiveTree,
-  makeGroupId,
-  type MenuItem,
-} from './TreeNode'
+import {
+  type IMenuItem,
+  UseGetMenus,
+} from '@/pages/modules/settings/components/layout/hooks/getMenu.tsx'
+import type { IModulesList } from '@/pages/modules/interface'
+import { MdDashboard, MdOutgoingMail, MdRoomPreferences } from 'react-icons/md'
+import { FaArchive, FaListUl, FaReceipt, FaRegCalendarAlt } from 'react-icons/fa'
+import { IoMailUnread } from 'react-icons/io5'
+import { FaGear, FaUsers } from 'react-icons/fa6'
+import { RiMailAiFill } from 'react-icons/ri'
+import { BiSolidPlaneAlt } from 'react-icons/bi'
+import { PiStudentFill } from 'react-icons/pi'
+import TreeNodeWrapper, { isActiveTree, makeGroupId, type MenuItem } from './TreeNode'
+
+const ICON_MAP: Record<string, React.ReactNode> = {
+  MdDashboard: <MdDashboard className="size-5" />,
+  MdOutgoingMail: <MdOutgoingMail className="size-5" />,
+  MdRoomPreferences: <MdRoomPreferences className="size-5" />,
+  FaArchive: <FaArchive className="size-5" />,
+  FaListUl: <FaListUl className="size-5" />,
+  FaReceipt: <FaReceipt className="size-5" />,
+  FaRegCalendarAlt: <FaRegCalendarAlt className="size-5" />,
+  IoMailUnread: <IoMailUnread className="size-5" />,
+  FaGear: <FaGear className="size-5" />,
+  FaUsers: <FaUsers className="size-5" />,
+  RiMailAiFill: <RiMailAiFill className="size-5" />,
+  BiSolidPlaneAlt: <BiSolidPlaneAlt className="size-5" />,
+  PiStudentFill: <PiStudentFill className="size-5" />,
+}
 
 interface Props {
   collapsed: boolean
@@ -19,7 +42,25 @@ export function SideNavEOffice({ collapsed }: Props) {
 
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({})
 
-  const menuList = GenerateMenu()
+  const module: IModulesList = JSON.parse(window.localStorage.getItem('module') || '{}')
+  const { menu } = UseGetMenus(module.id_module)
+
+  const baseDomain = '/modules/e-office'
+
+  const normalizePath = (link?: string) => {
+    if (!link || link === '/' || link === baseDomain) return undefined
+    return link.startsWith(baseDomain) ? link : `${baseDomain}${link}`
+  }
+
+  const mapMenu = (items: IMenuItem[]): MenuItem[] =>
+    items.map((item) => ({
+      name: item.label,
+      icon: item.icon ? ICON_MAP[item.icon] : undefined,
+      path: normalizePath(item.link),
+      child: item.children?.length ? mapMenu(item.children) : undefined,
+    }))
+
+  const menuList = useMemo(() => (menu ? mapMenu(menu) : []), [menu])
 
   const isActivePath = (path?: string) => {
     if (!path) return false
@@ -49,7 +90,7 @@ export function SideNavEOffice({ collapsed }: Props) {
       collectOpenGroups(row, 'root', i, map)
     })
     return map
-  }, [pathname])
+  }, [pathname, menuList])
 
   const groups = { ...defaultOpenGroups, ...openGroups }
 
@@ -121,12 +162,7 @@ export function SideNavEOffice({ collapsed }: Props) {
                     collapsed ? 'justify-center' : 'justify-between'
                   )}
                 >
-                  <div
-                    className={cn(
-                      'flex items-center gap-2',
-                      collapsed && 'justify-center'
-                    )}
-                  >
+                  <div className={cn('flex items-center gap-2', collapsed && 'justify-center')}>
                     {row.icon}
                     {labelVisible && <span>{row.name}</span>}
                   </div>
@@ -145,7 +181,7 @@ export function SideNavEOffice({ collapsed }: Props) {
 
                 {!collapsed && isGroupOpen && (
                   <ul className="border-l border-white/20 ml-4 pl-2 w-[calc(100%-1rem)]">
-                    {row.child.map((child, childIdx) => (
+                    {row?.child?.map((child, childIdx) => (
                       <TreeNodeWrapper
                         key={makeGroupId(groupId, childIdx, child.name)}
                         item={child}
@@ -157,7 +193,7 @@ export function SideNavEOffice({ collapsed }: Props) {
                         toggleGroup={toggleGroup}
                         isActivePath={isActivePath}
                         collapsed={collapsed}
-                        length={row.child.length}
+                        length={row?.child?.length ?? 0}
                       />
                     ))}
                   </ul>

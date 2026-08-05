@@ -1,11 +1,33 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { GenerateMenu } from './menu.tsx'
-import { UseGetAuthRole } from '../auth/hooks/index.tsx'
-import { filterMenusByAuth } from '../auth/helper/index.tsx'
+import { UseGetMenus, type IMenuItem } from '@/pages/modules/settings/components/layout/hooks/getMenu.tsx'
+import type { IModulesList } from '@/pages/modules/interface'
 import { cn } from '@/lib/utils.ts'
 import { ChevronRight } from 'lucide-react'
 import { useMobile } from '@/utils/useMobile'
+import {
+  MdDashboard,
+  MdDatasetLinked,
+  MdLocalHospital,
+  MdLocalPharmacy,
+  MdPermContactCalendar,
+} from 'react-icons/md'
+import { FaBriefcaseMedical } from 'react-icons/fa'
+import { IoStatsChart } from 'react-icons/io5'
+import { IoMdPeople } from 'react-icons/io'
+import { FaGear } from 'react-icons/fa6'
+
+const ICON_MAP: Record<string, React.ReactNode> = {
+  MdDashboard: <MdDashboard className="size-5" />,
+  MdDatasetLinked: <MdDatasetLinked className="size-5" />,
+  MdLocalHospital: <MdLocalHospital className="size-5" />,
+  MdLocalPharmacy: <MdLocalPharmacy className="size-5" />,
+  MdPermContactCalendar: <MdPermContactCalendar className="size-5" />,
+  FaBriefcaseMedical: <FaBriefcaseMedical className="size-5" />,
+  IoStatsChart: <IoStatsChart className="size-5" />,
+  IoMdPeople: <IoMdPeople className="size-5" />,
+  FaGear: <FaGear className="size-5" />,
+}
 
 interface Props {
   collapsed: boolean
@@ -26,12 +48,25 @@ export function SideNavSIMRS({ collapsed, setCollapsed }: Props) {
 
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({})
 
-  const { menus } = UseGetAuthRole()
+  const module: IModulesList = JSON.parse(window.localStorage.getItem('module') || '{}')
+  const { menu } = UseGetMenus(module.id_module)
 
-  const MenuList = useMemo(() => {
-    const allMenus = GenerateMenu()
-    return filterMenusByAuth(allMenus, menus ?? [])
-  }, [menus])
+  const baseDomain = '/modules/sim-rs'
+
+  const normalizePath = (link?: string) => {
+    if (!link || link === '/' || link === baseDomain) return undefined
+    return link.startsWith(baseDomain) ? link : `${baseDomain}${link}`
+  }
+
+  const mapMenu = (items: IMenuItem[]): MenuItem[] =>
+    items.map((item) => ({
+      name: item.label,
+      icon: item.icon ? ICON_MAP[item.icon] : undefined,
+      path: normalizePath(item.link),
+      child: item.children?.length ? mapMenu(item.children) : undefined,
+    }))
+
+  const MenuList = useMemo(() => (menu ? mapMenu(menu) : []), [menu])
 
   const makeGroupId = (parentId: string, index: number, name: string) =>
     `${parentId}-${index}-${name}`
@@ -152,9 +187,9 @@ export function SideNavSIMRS({ collapsed, setCollapsed }: Props) {
 
                 {!collapsed && isGroupOpen && (
                   <ul className="border-white/30 pl-4 w-full">
-                    {row.child.map((child, childIdx) => (
+                    {row?.child?.map((child, childIdx) => (
                       <TreeNodeWrapper
-                        length={row?.child.length}
+                        length={row?.child?.length}
                         key={makeGroupId(groupId, childIdx, child.name)}
                         item={child}
                         parentGroupId={groupId}
