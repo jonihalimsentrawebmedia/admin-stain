@@ -21,7 +21,7 @@ const ButtonDeleteSideMenu = ({ data, parentData }: Props) => {
   async function handleDelete() {
     setLoading(true)
     try {
-      const res = await AxiosClient.delete(`/pengaturan/menu/${data.id_menu}`)
+      const res = await AxiosClient.delete(`/pengaturan/menu/${data.id_module}/${data.id_menu}`)
 
       if (res.data.status) {
         toast.success(res.data.message)

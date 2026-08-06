@@ -8,6 +8,7 @@ import { SwitchInput } from '@/components/common/form/switchInput'
 import ButtonForm from '@/components/common/button/ButtonForm'
 import type { ResReferensiType } from '@/interface/select'
 import { ICON_OPTIONS } from '../data/icons'
+import TextInput from '@/components/common/form/TextInput.tsx'
 
 interface Props {
   loading: boolean
@@ -59,7 +60,9 @@ export const FormSideMenu = (props: Props) => {
             </div>
           )}
         />
-        <InputText
+        <TextInput
+          inputClassName={'py-2.5! h-[40px]!'}
+          isNumber
           form={form}
           type="number"
           name="urutan"
