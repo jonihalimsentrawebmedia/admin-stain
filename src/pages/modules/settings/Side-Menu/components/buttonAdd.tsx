@@ -38,9 +38,8 @@ const ButtonAddSideMenu = ({ menu, idModules }: { menu: IMenu[]; idModules: stri
   async function handleSave(values: TMenuForm) {
     setLoading(true)
     try {
-      const res = await AxiosClient.post('/pengaturan/menu', {
+      const res = await AxiosClient.post(`/pengaturan/menu/${idModules}`, {
         ...values,
-        id_module: idModules,
         parent_id: values.parent_id || null,
         icon: values.icon || null,
         link: values.link || '',

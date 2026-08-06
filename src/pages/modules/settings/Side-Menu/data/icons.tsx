@@ -124,4 +124,5 @@ export const ICON_MAP: Record<string, React.ReactNode> = {
 export const ICON_OPTIONS: ResReferensiType[] = Object.keys(ICON_MAP).map((key) => ({
   value: key,
   label: key,
+  icon: ICON_MAP[key],
 }))

@@ -51,7 +51,13 @@ export const FormSideMenu = (props: Props) => {
           placeholder="Pilih Icon"
           form={form}
           isRow
-          level1
+          level2
+          formatOptionLabel={(option: ResReferensiType) => (
+            <div className="flex items-center gap-2">
+              <span className="text-base leading-none">{option.icon}</span>
+              <span>{option.label}</span>
+            </div>
+          )}
         />
         <InputText
           form={form}
