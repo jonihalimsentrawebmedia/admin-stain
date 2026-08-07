@@ -39,6 +39,7 @@ interface inputProps {
   fx?: (selectedOption: ResReferensiType) => void;
   zindex?: number;
   bgColor?: string;
+  formatOptionLabel?: any;
 }
 
 export function SelectCustom({
@@ -65,6 +66,7 @@ export function SelectCustom({
   inputClassNameParent,
   zindex,
   bgColor,
+  formatOptionLabel,
 }: inputProps) {
   const [searchParams, setSearchParams] = useSearchParams();
   const { isMobile } = useMobile();
@@ -121,6 +123,7 @@ export function SelectCustom({
               <Select
                 menuPortalTarget={menuPortalTarget && document.body}
                 menuPosition={menuPortalTarget ? 'fixed' : 'absolute'}
+                formatOptionLabel={formatOptionLabel}
                 {...field}
                 styles={{
                   menuPortal: (base) => ({

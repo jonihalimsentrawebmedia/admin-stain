@@ -58,6 +58,7 @@ const UnitLanguageView = lazy(() => import('@/pages/modules/settings/unit/langua
 const InstitutionLanguageView = lazy(() => import('@/pages/modules/settings/institution/language/InstitutionLanguageView'))
 const StructuralOfficialPage = lazy(() => import('@/pages/modules/settings/reference/structural-official'))
 const StructuralOfficialLanguagePage = lazy(() => import('@/pages/modules/settings/reference/structural-official/language').then(m => ({ default: m.StructuralOfficialLanguagePage })))
+const SideMenuView = lazy(() => import('@/pages/modules/settings/Side-Menu'))
 
 export const SettingRouter = [
   {
@@ -343,6 +344,15 @@ export const SettingRouter = [
       {
         index: true,
         element: <DomainView />,
+      },
+    ],
+  },
+  {
+    path: 'side-menu',
+    children: [
+      {
+        index: true,
+        element: <SideMenuView />,
       },
     ],
   },

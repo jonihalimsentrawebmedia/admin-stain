@@ -1,19 +1,226 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "instructions": ["AGENTS.md"],
-  "agent": {
-    "build": {
-      "model": "deepseek/deepseek-chat"
-    },
-    "plan": {
-      "model": "opencode/mimo-v2.5-free"
+  "provider": {
+    "9router": {
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "http://127.0.0.1:20128/v1",
+        "apiKey": "sk-c1493f1292357a57-tcf21u-32580e96"
+      },
+      "models": {
+        "my-combo": {
+          "name": "my-combo",
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "mmf/mimo-auto": {
+          "name": "mmf/mimo-auto",
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "oc/big-pickle": {
+          "name": "oc/big-pickle",
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "oc/deepseek-v4-flash-free": {
+          "name": "oc/deepseek-v4-flash-free",
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "oc/laguna-s-2.1-free": {
+          "name": "oc/laguna-s-2.1-free",
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "oc/ling-3.0-flash-free": {
+          "name": "oc/ling-3.0-flash-free",
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "oc/mimo-v2.5-free": {
+          "name": "oc/mimo-v2.5-free",
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "oc/nemotron-3-ultra-free": {
+          "name": "oc/nemotron-3-ultra-free",
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "oc/north-mini-code-free": {
+          "name": "oc/north-mini-code-free",
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "openrouter/google/gemma-4-26b-a4b-it:free": {
+          "name": "openrouter/google/gemma-4-26b-a4b-it:free",
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "openrouter/google/gemma-4-31b-it:free": {
+          "name": "openrouter/google/gemma-4-31b-it:free",
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "openrouter/nvidia/nemotron-3-nano-30b-a3b:free": {
+          "name": "openrouter/nvidia/nemotron-3-nano-30b-a3b:free",
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free": {
+          "name": "openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "openrouter/nvidia/nemotron-3-super-120b-a12b:free": {
+          "name": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free": {
+          "name": "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "openrouter/openrouter/free": {
+          "name": "openrouter/openrouter/free",
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        },
+        "openrouter/poolside/laguna-s-2.1:free": {
+          "name": "openrouter/poolside/laguna-s-2.1:free",
+          "modalities": {
+            "input": [
+              "text",
+              "image"
+            ],
+            "output": [
+              "text"
+            ]
+          }
+        }
+      }
     }
   },
-  "plugin": [
-    "opencode-agent-memory"
-  ],
-  "compaction": {
-    "auto": true,
-    "tail_turns": 15
+  "model": "9router/my-combo",
+  "agent": {
+    "explorer": {
+      "description": "Fast explorer subagent for codebase exploration",
+      "mode": "subagent",
+      "model": "9router/mmf/mimo-auto"
+    }
   }
 }

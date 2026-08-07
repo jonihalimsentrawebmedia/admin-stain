@@ -7,21 +7,18 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer'
 import { ChevronRightIcon, Menu, X } from 'lucide-react'
-import { Menus } from './HeaderMenu'
+import { useHeaderMenus } from './HeaderMenu'
+import type { MenuItem } from './HeaderMenu'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
 import { Link } from 'react-router-dom'
-interface MenuItem {
-  label: string
-  link: string
-  children?: MenuItem[]
-}
 const HeaderMenuMobile = () => {
+  const menus = useHeaderMenus()
   const renderMenuItem = (item: MenuItem) => {
     const hasChildren = item.children && item.children.length > 0
 
     if (hasChildren) {
       return (
-        <Collapsible key={item.link} className="w-full">
+        <Collapsible key={item.link || item.label} className="w-full">
           <CollapsibleTrigger asChild>
             <Button
               variant="ghost"
@@ -46,7 +43,7 @@ const HeaderMenuMobile = () => {
     // Jika tidak punya anak, render Link biasa
     return (
       <Button
-        key={item.link}
+        key={item.link || item.label}
         variant="ghost"
         size="sm"
         asChild
@@ -73,7 +70,7 @@ const HeaderMenuMobile = () => {
             </DrawerClose>
           </DrawerHeader>
           <div className="no-scrollbar overflow-y-auto px-4">
-            {Menus.map((item) => renderMenuItem(item))}
+            {menus.map((item) => renderMenuItem(item))}
           </div>
         </DrawerContent>
       </Drawer>

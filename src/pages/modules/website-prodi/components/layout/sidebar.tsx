@@ -1,9 +1,34 @@
-import { useState, useMemo, useEffect } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { MENULISTPRODI } from './menu'
+import type { IMenuItem } from '@/pages/modules/settings/components/layout/hooks/getMenu.tsx'
+import { UseGetMenus } from '@/pages/modules/settings/components/layout/hooks/getMenu.tsx'
+import type { IModulesList } from '@/pages/modules/interface'
 import { cn } from '@/lib/utils'
 import { ChevronRight } from 'lucide-react'
-import { MENULIST } from '@/pages/modules/website-utama/component/layout/menu.tsx'
+import {
+  MdBook,
+  MdBusiness,
+  MdDashboard,
+  MdInfo,
+  MdMiscellaneousServices,
+  MdQuestionAnswer,
+} from 'react-icons/md'
+import { FaGraduationCap, FaImage } from 'react-icons/fa'
+import { PiCertificateFill } from 'react-icons/pi'
+import { FaGear } from 'react-icons/fa6'
+
+const ICON_MAP: Record<string, React.ReactNode> = {
+  FaGear: <FaGear className="size-5" />,
+  FaGraduationCap: <FaGraduationCap className="size-5" />,
+  FaImage: <FaImage className="size-5" />,
+  MdBook: <MdBook className="size-5" />,
+  MdBusiness: <MdBusiness className="size-5" />,
+  MdDashboard: <MdDashboard className="size-5" />,
+  MdInfo: <MdInfo className="size-5" />,
+  MdMiscellaneousServices: <MdMiscellaneousServices className="size-5" />,
+  MdQuestionAnswer: <MdQuestionAnswer className="size-5" />,
+  PiCertificateFill: <PiCertificateFill className="size-5" />,
+}
 
 interface Props {
   collapsed: boolean
@@ -29,6 +54,26 @@ export function SidebarProdi({ collapsed, isMobile, setCollapsed }: Props) {
   const pathname = location.pathname
 
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({})
+
+  const module: IModulesList = JSON.parse(window.localStorage.getItem('module') || '{}')
+  const { menu } = UseGetMenus(module.id_module)
+
+  const baseDomain = '/modules/website-prodi'
+
+  const normalizePath = (link?: string) => {
+    if (!link || link === '/' || link === baseDomain) return undefined
+    return link.startsWith(baseDomain) ? link : `${baseDomain}${link}`
+  }
+
+  const mapMenu = (items: IMenuItem[]): MenuItem[] =>
+    items.map((item) => ({
+      name: item.label,
+      icon: item.icon ? ICON_MAP[item.icon] : undefined,
+      path: normalizePath(item.link),
+      child: item.children?.length ? mapMenu(item.children) : undefined,
+    }))
+
+  const MenuList = useMemo(() => (menu ? mapMenu(menu) : []), [menu])
 
   const makeGroupId = (parentId: string, index: number, name: string) =>
     `${parentId}-${index}-${name}`
@@ -56,52 +101,44 @@ export function SidebarProdi({ collapsed, isMobile, setCollapsed }: Props) {
 
   const defaultOpenGroups = useMemo(() => {
     const map: Record<string, boolean> = {}
-    MENULISTPRODI.forEach((row, i) => {
+    MenuList.forEach((row, i) => {
       collectOpenGroups(row, 'root', i, map)
     })
     return map
-  }, [pathname])
+  }, [pathname, MenuList])
 
   const groups = { ...defaultOpenGroups, ...openGroups }
 
   // const toggleGroup = (groupId: string) => {
   //   setOpenGroups((prev) => ({ ...prev, [groupId]: !prev[groupId] }))
   // }
-  
+
   useEffect(() => {
     if (collapsed) setOpenGroups({})
   }, [collapsed])
-  
+
   useEffect(() => {
-    // cek apakah path sekarang ada di menu yang punya parent children
-    const activeHasParentGroup = MENULIST.some(item => {
-      if (!item.child) return false
-      return isActiveTree(item, pathname)
-    })
-    
-    // kalau yang aktif bukan dari group tree → tutup semua
-    if (!activeHasParentGroup) {
-      setOpenGroups({})
-    }
+    // by default children tertutup; hanya group yang url-nya match pathname yang terbuka (via defaultOpenGroups)
+    setOpenGroups({})
   }, [pathname])
-  
+
   const toggleGroup = (groupId: string) => {
     setOpenGroups((prev) => {
       const next = { ...prev }
-      
+
       // ambil parentId (semua sebelum "-index-name")
       const parentId = groupId.split('-').slice(0, -2).join('-')
-      
+
       // tutup semua group yang parent-nya sama
       Object.keys(next).forEach((key) => {
         if (key.startsWith(parentId + '-') && key !== groupId) {
           next[key] = false
         }
       })
-      
+
       // toggle group yg diklik
       next[groupId] = !prev[groupId]
-      
+
       return next
     })
   }
@@ -114,7 +151,7 @@ export function SidebarProdi({ collapsed, isMobile, setCollapsed }: Props) {
       )}
     >
       <div className="space-y-2 overflow-y-auto py-4 h-[calc(100dvh-110px)]">
-        {MENULISTPRODI.map((row, idx) => {
+        {MenuList.map((row, idx) => {
           const groupId = makeGroupId('root', idx, row.name)
           const isGroupOpen = groups[groupId] ?? false
           const isRowActive = isActiveTree(row, pathname)
@@ -137,7 +174,12 @@ export function SidebarProdi({ collapsed, isMobile, setCollapsed }: Props) {
                     collapsed ? 'justify-center' : 'justify-between'
                   )}
                 >
-                  <div className={cn('flex items-center gap-1.5 text-sm', collapsed && 'justify-center')}>
+                  <div
+                    className={cn(
+                      'flex items-center gap-1.5 text-sm',
+                      collapsed && 'justify-center'
+                    )}
+                  >
                     {row.icon}
                     {labelVisible && <span>{row.name}</span>}
                   </div>
@@ -158,7 +200,7 @@ export function SidebarProdi({ collapsed, isMobile, setCollapsed }: Props) {
                   <ul className="border-white/30 pl-4 w-full">
                     {row.child.map((child, childIdx) => (
                       <TreeNodeWrapper
-                        length={row?.child.length}
+                        length={row?.child?.length}
                         key={makeGroupId(groupId, childIdx, child.name)}
                         item={child}
                         parentGroupId={groupId}
@@ -334,7 +376,17 @@ function TreeNode({
     </div>
   )
 
-  return <li>{item.path ? <Link to={item.path} onClick={() => isMobile && setCollapsed(true)}>{itemContent}</Link> : itemContent}</li>
+  return (
+    <li>
+      {item.path ? (
+        <Link to={item.path} onClick={() => isMobile && setCollapsed(true)}>
+          {itemContent}
+        </Link>
+      ) : (
+        itemContent
+      )}
+    </li>
+  )
 }
 
 /* ---------------------------

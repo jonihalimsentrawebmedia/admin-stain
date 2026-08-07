@@ -46,6 +46,7 @@ export const customStyles: StylesConfig = {
 export type ResReferensiType = {
   value?: any;
   label?: string;
+  icon?: React.ReactNode;
 };
 
 export type ResReferensiNameType = {

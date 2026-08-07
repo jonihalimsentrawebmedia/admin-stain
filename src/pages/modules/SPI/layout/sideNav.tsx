@@ -1,8 +1,38 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { GenerateMenu } from './menu.tsx'
+import {
+  type IMenuItem,
+  UseGetMenus,
+} from '@/pages/modules/settings/components/layout/hooks/getMenu.tsx'
+import type { IModulesList } from '@/pages/modules/interface'
 import { cn } from '@/lib/utils.ts'
 import { ChevronRight } from 'lucide-react'
+import {
+  MdBusiness,
+  MdChat,
+  MdDashboard,
+  MdDatasetLinked,
+  MdInfo,
+  MdInventory,
+  MdMiscellaneousServices,
+  MdStars,
+} from 'react-icons/md'
+import { FaGear, FaGears } from 'react-icons/fa6'
+import { IoMdSchool } from 'react-icons/io'
+
+const ICON_MAP: Record<string, React.ReactNode> = {
+  MdBusiness: <MdBusiness className="size-5" />,
+  MdChat: <MdChat className="size-5" />,
+  MdDashboard: <MdDashboard className="size-5" />,
+  MdDatasetLinked: <MdDatasetLinked className="size-5" />,
+  MdInfo: <MdInfo className="size-5" />,
+  MdInventory: <MdInventory className="size-5" />,
+  MdMiscellaneousServices: <MdMiscellaneousServices className="size-5" />,
+  MdStars: <MdStars className="size-5" />,
+  FaGear: <FaGear className="size-5" />,
+  FaGears: <FaGears className="size-5" />,
+  IoMdSchool: <IoMdSchool className="size-5" />,
+}
 
 interface Props {
   collapsed: boolean
@@ -22,7 +52,25 @@ export function SideNavSPI({ collapsed, setCollapsed }: Props) {
 
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({})
 
-  const MenuListFaculty = GenerateMenu()
+  const module: IModulesList = JSON.parse(window.localStorage.getItem('module') || '{}')
+  const { menu } = UseGetMenus(module.id_module)
+
+  const baseDomain = '/modules/spi'
+
+  const normalizePath = (link?: string) => {
+    if (!link || link === '/' || link === baseDomain) return undefined
+    return link.startsWith(baseDomain) ? link : `${baseDomain}${link}`
+  }
+
+  const mapMenu = (items: IMenuItem[]): MenuItem[] =>
+    items.map((item) => ({
+      name: item.label,
+      icon: item.icon ? ICON_MAP[item.icon] : undefined,
+      path: normalizePath(item.link),
+      child: item.children?.length ? mapMenu(item.children) : undefined,
+    }))
+
+  const menuSPI = useMemo(() => (menu ? mapMenu(menu) : []), [menu])
 
   const makeGroupId = (parentId: string, index: number, name: string) =>
     `${parentId}-${index}-${name}`
@@ -49,11 +97,11 @@ export function SideNavSPI({ collapsed, setCollapsed }: Props) {
 
   const defaultOpenGroups = useMemo(() => {
     const map: Record<string, boolean> = {}
-    MenuListFaculty.forEach((row, i) => {
+    menuSPI.forEach((row, i) => {
       collectOpenGroups(row, 'root', i, map)
     })
     return map
-  }, [pathname])
+  }, [pathname, menuSPI])
 
   const groups = { ...defaultOpenGroups, ...openGroups }
 
@@ -62,7 +110,7 @@ export function SideNavSPI({ collapsed, setCollapsed }: Props) {
   }, [collapsed])
 
   useEffect(() => {
-    const activeHasParentGroup = MenuListFaculty.some((item) => {
+    const activeHasParentGroup = menuSPI.some((item) => {
       if (!item.child) return false
       return isActiveTree(item, pathname)
     })
@@ -111,7 +159,7 @@ export function SideNavSPI({ collapsed, setCollapsed }: Props) {
         )}
       >
         <div className="space-y-2 overflow-y-auto py-4 overflow-auto h-[calc(100vh-110px)]">
-          {MenuListFaculty.map((row, idx) => {
+          {menuSPI.map((row, idx) => {
             const groupId = makeGroupId('root', idx, row.name)
             const isGroupOpen = groups[groupId] ?? false
             const isRowActive = isActiveTree(row, pathname)
@@ -158,10 +206,13 @@ export function SideNavSPI({ collapsed, setCollapsed }: Props) {
 
                   {!collapsed && isGroupOpen && (
                     <ul className="border-white/30 pl-4 w-full">
-                      {row.child.map((child, childIdx) => (
-                        <div key={makeGroupId(groupId, childIdx, child.name)} onClick={handleLinkClick}>
+                      {row?.child?.map((child, childIdx) => (
+                        <div
+                          key={makeGroupId(groupId, childIdx, child.name)}
+                          onClick={handleLinkClick}
+                        >
                           <TreeNodeWrapper
-                            length={row?.child.length}
+                            length={row?.child?.length}
                             item={child}
                             parentGroupId={groupId}
                             index={childIdx}
@@ -323,7 +374,17 @@ function TreeNode({
     </div>
   )
 
-  return <li>{item.path ? <Link to={item.path} onClick={onNavigate}>{itemContent}</Link> : itemContent}</li>
+  return (
+    <li>
+      {item.path ? (
+        <Link to={item.path} onClick={onNavigate}>
+          {itemContent}
+        </Link>
+      ) : (
+        itemContent
+      )}
+    </li>
+  )
 }
 
 export function isActiveTree(item: MenuItem, pathname: string): boolean {

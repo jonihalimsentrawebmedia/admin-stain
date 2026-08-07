@@ -1,8 +1,36 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { GenerateMenu } from './menu.tsx'
+import type { IMenuItem } from '@/pages/modules/settings/components/layout/hooks/getMenu.tsx'
+import { UseGetMenus } from '@/pages/modules/settings/components/layout/hooks/getMenu.tsx'
+import type { IModulesList } from '@/pages/modules/interface'
 import { cn } from '@/lib/utils.ts'
 import { ChevronRight } from 'lucide-react'
+import {
+  MdBusiness,
+  MdDashboard,
+  MdDataset,
+  MdHomeRepairService,
+  MdInfo,
+  MdScience,
+} from 'react-icons/md'
+import { FaGraduationCap, FaNewspaper } from 'react-icons/fa'
+import { IoMdSettings } from 'react-icons/io'
+import { GiWorld } from 'react-icons/gi'
+import { FaGears } from 'react-icons/fa6'
+
+const ICON_MAP: Record<string, React.ReactNode> = {
+  FaGears: <FaGears className="size-5" />,
+  FaGraduationCap: <FaGraduationCap className="size-5" />,
+  FaNewspaper: <FaNewspaper className="size-5" />,
+  GiWorld: <GiWorld className="size-5" />,
+  IoMdSettings: <IoMdSettings className="size-5" />,
+  MdBusiness: <MdBusiness className="size-5" />,
+  MdDashboard: <MdDashboard className="size-5" />,
+  MdDataset: <MdDataset className="size-5" />,
+  MdHomeRepairService: <MdHomeRepairService className="size-5" />,
+  MdInfo: <MdInfo className="size-5" />,
+  MdScience: <MdScience className="size-5" />,
+}
 
 interface Props {
   collapsed: boolean
@@ -21,7 +49,25 @@ export function SideNavUnit({ collapsed }: Props) {
 
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({})
 
-  const MenuListLPPM = GenerateMenu()
+  const module: IModulesList = JSON.parse(window.localStorage.getItem('module') || '{}')
+  const { menu } = UseGetMenus(module.id_module)
+
+  const baseDomain = '/modules/lppm'
+
+  const normalizePath = (link?: string) => {
+    if (!link || link === '/' || link === baseDomain) return undefined
+    return link.startsWith(baseDomain) ? link : `${baseDomain}${link}`
+  }
+
+  const mapMenu = (items: IMenuItem[]): MenuItem[] =>
+    items.map((item) => ({
+      name: item.label,
+      icon: item.icon ? ICON_MAP[item.icon] : undefined,
+      path: normalizePath(item.link),
+      child: item.children?.length ? mapMenu(item.children) : undefined,
+    }))
+
+  const MenuList = useMemo(() => (menu ? mapMenu(menu) : []), [menu])
 
   const makeGroupId = (parentId: string, index: number, name: string) =>
     `${parentId}-${index}-${name}`
@@ -49,11 +95,11 @@ export function SideNavUnit({ collapsed }: Props) {
 
   const defaultOpenGroups = useMemo(() => {
     const map: Record<string, boolean> = {}
-    MenuListLPPM.forEach((row, i) => {
+    MenuList.forEach((row, i) => {
       collectOpenGroups(row, 'root', i, map)
     })
     return map
-  }, [pathname])
+  }, [pathname, MenuList])
 
   const groups = { ...defaultOpenGroups, ...openGroups }
 
@@ -62,16 +108,8 @@ export function SideNavUnit({ collapsed }: Props) {
   }, [collapsed])
 
   useEffect(() => {
-    // cek apakah path sekarang ada di menu yang punya parent children
-    const activeHasParentGroup = MenuListLPPM.some((item) => {
-      if (!item.child) return false
-      return isActiveTree(item, pathname)
-    })
-
-    // kalau yang aktif bukan dari group tree → tutup semua
-    if (!activeHasParentGroup) {
-      setOpenGroups({})
-    }
+    // by default children tertutup; hanya group yang url-nya match pathname yang terbuka (via defaultOpenGroups)
+    setOpenGroups({})
   }, [pathname])
 
   const toggleGroup = (groupId: string) => {
@@ -103,7 +141,7 @@ export function SideNavUnit({ collapsed }: Props) {
       )}
     >
       <div className="space-y-2 overflow-y-auto py-4 overflow-auto h-[calc(100vh-110px)]">
-        {MenuListLPPM.map((row, idx) => {
+        {MenuList.map((row, idx) => {
           const groupId = makeGroupId('root', idx, row.name)
           const isGroupOpen = groups[groupId] ?? false
           const isRowActive = isActiveTree(row, pathname)
@@ -152,7 +190,7 @@ export function SideNavUnit({ collapsed }: Props) {
                   <ul className="border-white/30 pl-4 w-full">
                     {row.child.map((child, childIdx) => (
                       <TreeNodeWrapper
-                        length={row?.child.length}
+                        length={row?.child?.length}
                         key={makeGroupId(groupId, childIdx, child.name)}
                         item={child}
                         parentGroupId={groupId}

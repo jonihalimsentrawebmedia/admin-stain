@@ -1,8 +1,40 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { GenerateMenu } from './menu.tsx'
+import type { IMenuItem } from '@/pages/modules/settings/components/layout/hooks/getMenu.tsx'
+import { UseGetMenus } from '@/pages/modules/settings/components/layout/hooks/getMenu.tsx'
+import type { IModulesList } from '@/pages/modules/interface'
 import { cn } from '@/lib/utils.ts'
 import { ChevronRight } from 'lucide-react'
+import { useMobile } from '@/utils/useMobile'
+import {
+  MdBusiness,
+  MdDashboard,
+  MdEmojiPeople,
+  MdHomeRepairService,
+  MdInfo,
+  MdMenuBook,
+  MdMiscellaneousServices,
+  MdScience,
+} from 'react-icons/md'
+import { IoMdImage, IoMdSchool } from 'react-icons/io'
+import { IoPeople } from 'react-icons/io5'
+import { FaGear, FaGears } from 'react-icons/fa6'
+
+const ICON_MAP: Record<string, React.ReactNode> = {
+  FaGear: <FaGear className="size-5" />,
+  FaGears: <FaGears className="size-5" />,
+  IoMdImage: <IoMdImage className="size-5" />,
+  IoMdSchool: <IoMdSchool className="size-5" />,
+  IoPeople: <IoPeople className="size-5" />,
+  MdBusiness: <MdBusiness className="size-5" />,
+  MdDashboard: <MdDashboard className="size-5" />,
+  MdEmojiPeople: <MdEmojiPeople className="size-5" />,
+  MdHomeRepairService: <MdHomeRepairService className="size-5" />,
+  MdInfo: <MdInfo className="size-5" />,
+  MdMenuBook: <MdMenuBook className="size-5" />,
+  MdMiscellaneousServices: <MdMiscellaneousServices className="size-5" />,
+  MdScience: <MdScience className="size-5" />,
+}
 
 interface Props {
   collapsed: boolean
@@ -20,9 +52,33 @@ export function SideNavFaculty({ collapsed, setCollapsed }: Props) {
   const location = useLocation()
   const pathname = location.pathname
 
+  const { isMobile } = useMobile()
+
+  const handleCloseMobile = () => {
+    if (isMobile) setCollapsed?.(true)
+  }
+
   const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({})
 
-  const MenuListFaculty = GenerateMenu()
+  const module: IModulesList = JSON.parse(window.localStorage.getItem('module') || '{}')
+  const { menu } = UseGetMenus(module.id_module)
+
+  const baseDomain = '/modules/website-fakultas'
+
+  const normalizePath = (link?: string) => {
+    if (!link || link === '/' || link === baseDomain) return undefined
+    return link.startsWith(baseDomain) ? link : `${baseDomain}${link}`
+  }
+
+  const mapMenu = (items: IMenuItem[]): MenuItem[] =>
+    items.map((item) => ({
+      name: item.label,
+      icon: item.icon ? ICON_MAP[item.icon] : undefined,
+      path: normalizePath(item.link),
+      child: item.children?.length ? mapMenu(item.children) : undefined,
+    }))
+
+  const MenuList = useMemo(() => (menu ? mapMenu(menu) : []), [menu])
 
   const makeGroupId = (parentId: string, index: number, name: string) =>
     `${parentId}-${index}-${name}`
@@ -50,11 +106,11 @@ export function SideNavFaculty({ collapsed, setCollapsed }: Props) {
 
   const defaultOpenGroups = useMemo(() => {
     const map: Record<string, boolean> = {}
-    MenuListFaculty.forEach((row, i) => {
+    MenuList.forEach((row, i) => {
       collectOpenGroups(row, 'root', i, map)
     })
     return map
-  }, [pathname])
+  }, [pathname, MenuList])
 
   const groups = { ...defaultOpenGroups, ...openGroups }
 
@@ -63,16 +119,8 @@ export function SideNavFaculty({ collapsed, setCollapsed }: Props) {
   }, [collapsed])
 
   useEffect(() => {
-    // cek apakah path sekarang ada di menu yang punya parent children
-    const activeHasParentGroup = MenuListFaculty.some((item) => {
-      if (!item.child) return false
-      return isActiveTree(item, pathname)
-    })
-
-    // kalau yang aktif bukan dari group tree → tutup semua
-    if (!activeHasParentGroup) {
-      setOpenGroups({})
-    }
+    // by default children tertutup; hanya group yang url-nya match pathname yang terbuka (via defaultOpenGroups)
+    setOpenGroups({})
   }, [pathname])
 
   const toggleGroup = (groupId: string) => {
@@ -104,7 +152,7 @@ export function SideNavFaculty({ collapsed, setCollapsed }: Props) {
       )}
     >
       <div className="space-y-2 overflow-y-auto py-4 overflow-auto h-[calc(100vh-110px)]">
-        {MenuListFaculty.map((row, idx) => {
+        {MenuList.map((row, idx) => {
           const groupId = makeGroupId('root', idx, row.name)
           const isGroupOpen = groups[groupId] ?? false
           const isRowActive = isActiveTree(row, pathname)
@@ -151,9 +199,9 @@ export function SideNavFaculty({ collapsed, setCollapsed }: Props) {
 
                 {!collapsed && isGroupOpen && (
                   <ul className="border-white/30 pl-4 w-full">
-                    {row.child.map((child, childIdx) => (
+                    {row?.child?.map((child, childIdx) => (
                       <TreeNodeWrapper
-                        length={row?.child.length}
+                        length={row?.child?.length}
                         key={makeGroupId(groupId, childIdx, child.name)}
                         item={child}
                         parentGroupId={groupId}
@@ -188,7 +236,7 @@ export function SideNavFaculty({ collapsed, setCollapsed }: Props) {
           )
 
           return row.path ? (
-            <Link key={groupId} to={row.path} onClick={() => setCollapsed?.(true)}>
+            <Link key={groupId} to={row.path} onClick={handleCloseMobile}>
               {content}
             </Link>
           ) : (
@@ -254,6 +302,11 @@ function TreeNode({
   const isActive = isActiveTree(item, pathname)
   const labelVisible = !collapsed
 
+  const { isMobile } = useMobile()
+  const handleCloseMobile = () => {
+    if (isMobile) setCollapsed?.(true)
+  }
+
   if (hasChildren) {
     return (
       <li className={'w-full'}>
@@ -315,7 +368,17 @@ function TreeNode({
     </div>
   )
 
-  return <li>{item.path ? <Link to={item.path} onClick={() => setCollapsed?.(true)}>{itemContent}</Link> : itemContent}</li>
+  return (
+    <li>
+      {item.path ? (
+        <Link to={item.path} onClick={handleCloseMobile}>
+          {itemContent}
+        </Link>
+      ) : (
+        itemContent
+      )}
+    </li>
+  )
 }
 
 export function isActiveTree(item: MenuItem, pathname: string): boolean {

@@ -1,149 +1,122 @@
-import React, { useEffect, useState } from 'react'
-import { Book, ChevronDown, Menu } from 'lucide-react'
+import { useEffect, useMemo, useState } from 'react'
+import { ChevronRight, Menu } from 'lucide-react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
-import { CiGrid42 } from 'react-icons/ci'
-import { IoSchool } from 'react-icons/io5'
-import { MdBackup, MdBusiness, MdBusinessCenter, MdPeople, MdRoomPreferences } from 'react-icons/md'
 import { IconSettings } from '../icon'
-import { FaGear } from 'react-icons/fa6'
 import { UseGetUserProfile } from '@/pages/modules/settings/components/layout/hooks/getProfile.tsx'
+import { UseGetMenus } from '@/pages/modules/settings/components/layout/hooks/getMenu.tsx'
 import ButtonProfile from '../button/ButtonProfile'
 import { IconModules } from '@/pages/modules/website-utama/component/layout/header'
 import type { IModulesList } from '@/pages/modules/interface'
+import { cn } from '@/lib/utils.ts'
+import { ICON_MAP } from '@/pages/modules/settings/Side-Menu/data/icons'
+
+type SideMenuItem = {
+  name: string
+  icon?: React.ReactNode
+  path?: string
+  child?: SideMenuItem[]
+}
 
 export default function DashboardLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [sidebarSmall, setSideBarSmall] = useState(false)
   const location = useLocation()
   const { pathname } = location
-  const menu = [
-    {
-      link: '/modules/settings/dashboard',
-      label: 'Dashboard',
-      icon: <CiGrid42 size={24} />,
-      children: [],
-    },
-    {
-      link: '/modules/settings/module',
-      label: 'Modul',
-      icon: <Book size={24} />,
-      children: [],
-    },
-    {
-      link: '/modules/settings/domain',
-      label: 'Pengaturan Domain',
-      icon: <FaGear size={24} />,
-      children: [],
-    },
-    {
-      link: '/modules/settings/main-data-university',
-      label: 'Data Utama Universitas',
-      icon: <IoSchool size={24} />,
-      children: [],
-    },
-    {
-      link: '/modules/settings/faculty',
-      label: 'Data Fakultas',
-      icon: <MdBusiness size={24} />,
-      children: [],
-    },
-    {
-      link: '/modules/settings/prodi',
-      label: 'Data Prodi',
-      icon: <MdBusiness size={24} />,
-      children: [],
-    },
-    {
-      link: '/modules/settings/unit',
-      label: 'Data Unit',
-      icon: <MdBusinessCenter size={24} />,
-      children: [],
-    },
-    {
-      link: '/modules/settings/institution',
-      label: 'Data Lembaga',
-      icon: <MdBusinessCenter size={24} />,
-      children: [],
-    },
-    {
-      link: '/modules/settings/management-users',
-      label: 'Manajemen User',
-      icon: <MdPeople size={24} />,
-      children: [
-        {
-          link: '/modules/settings/management-users/level',
-          label: 'Level User',
-        },
-        {
-          link: '/modules/settings/management-users/users',
-          label: 'Data User',
-        },
-        {
-          link: '/modules/settings/management-users/history',
-          label: 'Histori Login',
-        },
-      ],
-    },
-    {
-      link: '/modules/settings/reference',
-      label: 'Tabel Referensi',
-      icon: <MdRoomPreferences size={24} />,
-      children: [
-        {
-          link: '/modules/settings/reference/news-category',
-          label: 'Kategori Berita',
-        },
-        {
-          link: '/modules/settings/reference/impact-innovation',
-          label: 'Kategori Inovasi Berdampak',
-        },
-        {
-          link: '/modules/settings/reference/group-rank',
-          label: 'Pangkat Golongan',
-        },
-        {
-          link: '/modules/settings/reference/academic-rank',
-          label: 'Pangkat Akademik',
-        },
-        {
-          link: '/modules/settings/reference/structural-official',
-          label: 'Jabatan Struktural',
-        },
-        {
-          link: '/modules/settings/reference/educational-level',
-          label: 'Jenjang Pendidikan',
-        },
-        {
-          link: '/modules/settings/reference/countries',
-          label: 'Negara',
-        },
-        {
-          link: '/modules/settings/reference/province',
-          label: 'Provinsi',
-        },
-        {
-          link: '/modules/settings/reference/regency',
-          label: 'Kabupaten',
-        },
-      ],
-    },
-    {
-      link: '/modules/settings/identity-menu',
-      label: 'Menu Identitas',
-      icon: <MdBusinessCenter size={24} />,
-      children: [],
-    },
-    {
-      link: '/modules/settings/backup-data',
-      label: 'Backup Data',
-      icon: <MdBackup size={24} />,
-      children: [],
-    },
-  ]
 
   const { profileUser } = UseGetUserProfile()
-  const localStorage = window.localStorage.getItem('module')
-  const module: IModulesList = JSON.parse(localStorage || '{}')
+  const module: IModulesList = JSON.parse(window.localStorage.getItem('module') || '{}')
+
+  const { menu } = UseGetMenus(module.id_module)
+
+  const MenuList = useMemo(
+    () =>
+      (menu ?? []).map((item) => ({
+        name: item.label,
+        icon: item.icon ? ICON_MAP[item.icon] : undefined,
+        path: item.link,
+        child: (item.children ?? []).map((child) => ({
+          name: child.label,
+          icon: child.icon ? ICON_MAP[child.icon] : undefined,
+          path: child.link,
+          child: (child.children ?? []).map((subChild) => ({
+            name: subChild.label,
+            icon: subChild.icon ? ICON_MAP[subChild.icon] : undefined,
+            path: subChild.link,
+          })),
+        })),
+      })),
+    [menu]
+  )
+
+  const makeGroupId = (parentId: string, index: number, name: string) =>
+    `${parentId}-${index}-${name}`
+
+  const [openGroups, setOpenGroups] = useState<Record<string, boolean>>({})
+
+  const isActivePath = (path?: string) => {
+    if (!path) return false
+    return pathname === path || pathname.startsWith(path + '/')
+  }
+
+  const collectOpenGroups = (
+    item: SideMenuItem,
+    parentGroupId: string,
+    index: number,
+    map: Record<string, boolean>
+  ) => {
+    const id = makeGroupId(parentGroupId, index, item.name)
+    if (isActiveTree(item, pathname)) {
+      map[id] = true
+    }
+    if (item.child) {
+      item.child.forEach((child, idx) => collectOpenGroups(child, id, idx, map))
+    }
+  }
+
+  const defaultOpenGroups = useMemo(() => {
+    const map: Record<string, boolean> = {}
+    MenuList.forEach((row, i) => {
+      collectOpenGroups(row, 'root', i, map)
+    })
+    return map
+  }, [pathname, MenuList])
+
+  const groups = { ...defaultOpenGroups, ...openGroups }
+
+  useEffect(() => {
+    if (sidebarSmall) setOpenGroups({})
+  }, [sidebarSmall])
+
+  useEffect(() => {
+    const activeHasParentGroup = MenuList.some((item) => {
+      if (!item.child || item.child.length === 0) return false
+      return isActiveTree(item, pathname)
+    })
+
+    if (!activeHasParentGroup) {
+      setOpenGroups({})
+    }
+  }, [pathname])
+
+  const toggleGroup = (groupId: string) => {
+    setOpenGroups((prev) => {
+      const next = { ...prev }
+
+      const parentId = groupId.split('-').slice(0, -2).join('-')
+
+      Object.keys(next).forEach((key) => {
+        if (key.startsWith(parentId + '-') && key !== groupId) {
+          next[key] = false
+        }
+      })
+
+      next[groupId] = !prev[groupId]
+
+      return next
+    })
+  }
+
+  const handleNavigate = () => setSidebarOpen(false)
 
   return (
     <div className="flex flex-col h-dvh bg-gray-100">
@@ -181,32 +154,6 @@ export default function DashboardLayout() {
 
       {/* Body */}
       <div className="flex flex-1 overflow-hidden">
-        {/* Sidebar */}
-        <aside
-          className={`fixed sm:static z-40 top-0 left-0 h-full overflow-y-auto sm:h-auto border-r border-green-700 bg-green-700 text-white flex flex-col justify-between
-    ${sidebarSmall ? 'w-16' : 'w-60'}
-    transform transition-all duration-300 ease-in-out
-    ${sidebarOpen ? 'translate-x-0' : '-translate-x-full sm:translate-x-0'}
-  `}
-        >
-          <div className="space-y-1 overflow-y-auto pb-4 sm:pb-6 pt-16 sm:pt-4 px-2 sm:px-3">
-            {menu.map((item, index) => (
-              <SidebarItem
-                icon={item.icon}
-                label={item.label}
-                link={item.link}
-                key={item.link + index}
-                active={pathname.includes(item.link)}
-                hiddenLabel={sidebarSmall}
-                path={pathname}
-                children={item.children}
-                dropdown={item.children.length !== 0}
-                onNavigate={() => setSidebarOpen(false)}
-              />
-            ))}
-          </div>
-        </aside>
-
         {/* Overlay untuk mobile — geser sidebar agar tidak nutup header */}
         {sidebarOpen && (
           <div
@@ -214,6 +161,114 @@ export default function DashboardLayout() {
             onClick={() => setSidebarOpen(false)}
           />
         )}
+
+        {/* Sidebar */}
+        <aside
+          className={cn(
+            'fixed sm:static z-40 top-0 left-0 h-full overflow-y-auto sm:h-auto border-r border-green-700 bg-green-700 text-white flex flex-col justify-between',
+            'transform transition-all duration-300 ease-in-out',
+            sidebarSmall ? 'w-16' : 'w-60',
+            sidebarOpen ? 'translate-x-0' : '-translate-x-full sm:translate-x-0'
+          )}
+        >
+          <div className="space-y-1 overflow-y-auto pb-4 sm:pb-6 pt-16 sm:pt-4 px-2 sm:px-3">
+            {MenuList.map((row, idx) => {
+              const groupId = makeGroupId('root', idx, row.name)
+              const isGroupOpen = groups[groupId] ?? false
+              const isRowActive = isActiveTree(row, pathname)
+              const labelVisible = !sidebarSmall
+
+              if (row.child && row.child.length > 0) {
+                return (
+                  <div
+                    key={groupId}
+                    className={cn(
+                      'text-sm',
+                      (isRowActive || isGroupOpen) && 'bg-[#F5FFFA] text-primary rounded-md'
+                    )}
+                  >
+                    <button
+                      onClick={() => !sidebarSmall && toggleGroup(groupId)}
+                      className={cn(
+                        'flex w-full items-center gap-2 px-2 py-2 transition-colors',
+                        'focus:outline-none focus-visible:ring-2 focus-visible:ring-white/40',
+                        isRowActive || isGroupOpen ? 'text-primary font-medium' : 'text-green-50',
+                        sidebarSmall ? 'justify-center' : 'justify-between'
+                      )}
+                    >
+                      <span
+                        className={cn(
+                          'flex items-center gap-2 text-xs sm:text-sm',
+                          sidebarSmall && 'justify-center'
+                        )}
+                      >
+                        {row.icon && <span className="shrink-0">{row.icon}</span>}
+                        {labelVisible && <span className="truncate">{row.name}</span>}
+                      </span>
+
+                      {labelVisible && (
+                        <span
+                          className={cn(
+                            'ml-auto text-xs transition-transform',
+                            isGroupOpen ? 'rotate-90' : ''
+                          )}
+                        >
+                          <ChevronRight className="size-4" />
+                        </span>
+                      )}
+                    </button>
+
+                    {!sidebarSmall && isGroupOpen && (
+                      <ul className="border-green-500/30 pl-4 w-full">
+                        {row.child.map((child, childIdx) => (
+                          <div
+                            key={makeGroupId(groupId, childIdx, child.name)}
+                            onClick={handleNavigate}
+                          >
+                            <TreeNodeWrapper
+                              length={row.child!.length}
+                              item={child}
+                              parentGroupId={groupId}
+                              index={childIdx}
+                              depth={1}
+                              makeGroupId={makeGroupId}
+                              groups={groups}
+                              toggleGroup={toggleGroup}
+                              isActivePath={isActivePath}
+                              collapsed={sidebarSmall}
+                            />
+                          </div>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                )
+              }
+
+              const content = (
+                <div
+                  className={cn(
+                    'flex items-center gap-2 px-2 py-2 text-xs sm:text-sm transition-colors my-1 text-green-50',
+                    'hover:bg-green-600 hover:text-white',
+                    isRowActive && 'text-primary bg-[#F5FFFA] font-medium rounded-md',
+                    sidebarSmall && 'justify-center'
+                  )}
+                >
+                  {row.icon && <span className="shrink-0">{row.icon}</span>}
+                  {labelVisible && <span className="truncate">{row.name}</span>}
+                </div>
+              )
+
+              return row.path ? (
+                <Link key={groupId} to={row.path} onClick={handleNavigate}>
+                  {content}
+                </Link>
+              ) : (
+                <div key={groupId}>{content}</div>
+              )
+            })}
+          </div>
+        </aside>
 
         {/* Main Content */}
         <main className="flex-1 bg-white p-3 sm:p-6 overflow-y-auto">
@@ -230,81 +285,126 @@ export default function DashboardLayout() {
   )
 }
 
-function SidebarItem({
-  icon,
-  label,
-  active,
-  dropdown,
-  link,
-  hiddenLabel,
-  children,
-  path,
-  onNavigate,
+function TreeNodeWrapper({
+  item,
+  parentGroupId,
+  index,
+  depth,
+  makeGroupId,
+  groups,
+  toggleGroup,
+  isActivePath,
+  collapsed,
+  length,
 }: any) {
-  const [open, setOpen] = useState(false)
-  const isActive = active || open
-  useEffect(() => {
-    if (active) {
-      setOpen(true)
-    } else {
-      setOpen(false)
-    }
-  }, [path])
+  const groupId = makeGroupId(parentGroupId, index, item.name)
   return (
-    <React.Fragment key={link + label}>
-      {children.length == 0 ? (
-        <Link
-          to={link}
-          onClick={onNavigate}
-          className={`flex items-center gap-2 px-2 sm:px-3 py-2 cursor-pointer text-xs sm:text-sm font-medium rounded-md
-      ${active ? 'bg-[#F5FFFA] text-primary' : 'hover:bg-green-600 text-green-50'}`}
-        >
-          <div className="flex items-center gap-2 flex-1 min-w-0">
-            {icon}
-            {!hiddenLabel && <span className="truncate">{label}</span>}
-          </div>
-          {dropdown && <ChevronDown size={14} className="opacity-70 shrink-0" />}
-        </Link>
-      ) : (
-        <div
-          className={`flex flex-col gap-1 px-2 sm:px-3 py-1.5 cursor-pointer text-xs sm:text-sm font-medium rounded-md
-      ${isActive ? 'bg-[#F5FFFA] text-primary' : 'text-white'}`}
-        >
-          <div
-            onClick={() => setOpen(!open)}
-            className="flex py-1.5 gap-2 justify-between items-center"
-          >
-            <div className="flex items-center gap-2 flex-1 min-w-0">
-              {icon}
-              {!hiddenLabel && <span className="truncate">{label}</span>}
-            </div>
-            {dropdown && (
-              <ChevronDown
-                size={14}
-                className={`opacity-70 shrink-0 transition-transform ${open ? 'rotate-180' : ''}`}
-              />
-            )}
-          </div>
-          {open && (
-            <div className="mb-2 flex ml-5 flex-col gap-1 border-l border-green-500 pl-2">
-              {children.map((row: any, index: number) => (
-                <Link
-                  key={index}
-                  to={row.link}
-                  onClick={onNavigate}
-                  className={`block px-2 py-1.5 rounded text-xs ${
-                    path.includes(row.link)
-                      ? 'text-primary font-medium'
-                      : 'text-green-700 hover:text-primary'
-                  }`}
-                >
-                  {row.label}
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
-      )}
-    </React.Fragment>
+    <div className="relative pl-2 py-1 w-full" key={groupId}>
+      <div
+        className={`absolute w-px bg-green-500 left-0 top-0 ${index === length - 1 ? 'h-1/2' : 'h-full'}`}
+      />
+      <div className="absolute w-2 h-px bg-green-500 left-0 top-5" />
+      <TreeNode
+        item={item}
+        depth={depth}
+        parentGroupId={parentGroupId}
+        index={index}
+        groupId={groupId}
+        makeGroupId={makeGroupId}
+        groups={groups}
+        toggleGroup={toggleGroup}
+        isActivePath={isActivePath}
+        collapsed={collapsed}
+      />
+    </div>
   )
+}
+
+function TreeNode({
+  item,
+  depth,
+  groupId,
+  makeGroupId,
+  groups,
+  toggleGroup,
+  isActivePath,
+  collapsed,
+}: any) {
+  const hasChildren = !!item.child && item.child.length > 0
+  const isOpen = groups[groupId] ?? false
+  const pathname = useLocation().pathname
+  const isActive = isActiveTree(item, pathname)
+  const labelVisible = !collapsed
+
+  if (hasChildren) {
+    return (
+      <li className="w-full">
+        <button
+          type="button"
+          onClick={() => toggleGroup(groupId)}
+          className={cn(
+            'flex w-full items-center gap-1.5 px-1.5 py-1.5 text-xs sm:text-sm transition-colors',
+            'hover:bg-green-600 hover:text-white',
+            isActive ? 'font-semibold text-primary' : 'text-green-50'
+          )}
+        >
+          {item.icon && <span className="shrink-0">{item.icon}</span>}
+          {labelVisible && <span>{item.name}</span>}
+          {labelVisible && (
+            <span
+              className={cn('ml-auto text-[10px] transition-transform', isOpen ? 'rotate-90' : '')}
+            >
+              <ChevronRight className="size-4" />
+            </span>
+          )}
+        </button>
+
+        {labelVisible && isOpen && (
+          <ul className="border-green-500/30 pl-3 w-full">
+            {item.child!.map((child: SideMenuItem, childIdx: number) => (
+              <TreeNodeWrapper
+                key={makeGroupId(groupId, childIdx, child.name)}
+                item={child}
+                parentGroupId={groupId}
+                index={childIdx}
+                depth={depth + 1}
+                makeGroupId={makeGroupId}
+                groups={groups}
+                toggleGroup={toggleGroup}
+                isActivePath={isActivePath}
+                collapsed={collapsed}
+                length={item.child!.length}
+              />
+            ))}
+          </ul>
+        )}
+      </li>
+    )
+  }
+
+  const itemContent = (
+    <div
+      className={cn(
+        'flex items-center gap-1.5 rounded px-1.5 py-1.5 text-xs sm:text-sm transition-colors text-primary',
+        'hover:bg-green-600 hover:text-white',
+        isActive || isActivePath(item.path) ? 'bg-[#F5FFFA] font-medium' : 'text-primary'
+      )}
+      style={{ marginLeft: depth }}
+    >
+      {item.icon && <span className="shrink-0">{item.icon}</span>}
+      {labelVisible && <span>{item.name}</span>}
+    </div>
+  )
+
+  return <li>{item.path ? <Link to={item.path}>{itemContent}</Link> : itemContent}</li>
+}
+
+export function isActiveTree(item: SideMenuItem, pathname: string): boolean {
+  if (item.path && (pathname === item.path || pathname.startsWith(item.path + '/'))) {
+    return true
+  }
+  if (item.child) {
+    return item.child.some((child) => isActiveTree(child, pathname))
+  }
+  return false
 }

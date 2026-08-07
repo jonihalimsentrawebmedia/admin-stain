@@ -8,178 +8,42 @@ import {
 } from '@/components/ui/menubar.tsx'
 import { ChevronDown } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
+import { UseGetMenus } from '@/pages/modules/settings/components/layout/hooks/getMenu.tsx'
+import type { IMenuItem } from '@/pages/modules/settings/components/layout/hooks/getMenu.tsx'
+import type { IModulesList } from '@/pages/modules/interface'
+
 const baseUrl = '/modules/ppid'
-export const Menus = [
-  {
-    label: 'Beranda',
-    link: `${baseUrl}/dashboard`,
-  },
-  {
-    label: 'Data Unit',
-    link: `${baseUrl}/unit`,
-  },
-  {
-    label: 'Profil',
-    link: `${baseUrl}/profile`,
-    children: [
-      {
-        label: 'Gambaran Singkat Pembentukan',
-        link: `${baseUrl}/profile/short-description`,
-      },
-      {
-        label: 'Visi Misi',
-        link: `${baseUrl}/profile/visi-misi`,
-      },
-      {
-        label: 'Stuktur Organisasi',
-        link: `${baseUrl}/profile/structure-organization`,
-      },
-      {
-        label: 'Tugas, Fungsi, & Tanggung Jawab',
-        link: `${baseUrl}/profile/work-responsibilities`,
-      },
-      {
-        label: 'Maklumat Layanan',
-        link: `${baseUrl}/profile/service-commitment`,
-      },
-    ],
-  },
-  {
-    label: 'Informasi Publik',
-    link: `${baseUrl}/information-public`,
-    children: [
-      {
-        label: 'Informasi Berkala',
-        link: `${baseUrl}/information-public/information-regular`,
-      },
-      {
-        label: 'Informasi Tersedia',
-        link: `${baseUrl}/information-public/information-available`,
-      },
-      {
-        label: 'Informasi Serta Merta',
-        link: `${baseUrl}/information-public/information-immediately`,
-      },
-      {
-        label: 'Standard Pelayanan Informasi Publik',
-        link: `${baseUrl}/information-public/standard-service`,
-      },
-      {
-        label: 'Daftar Informasi Publik',
-        link: `${baseUrl}/information-public/register`,
-      },
-    ],
-  },
-  {
-    label: 'Regulasi',
-    link: `${baseUrl}/regulation`,
-    children: [
-      {
-        label: 'Regulasi Terkait',
-        link: `${baseUrl}/regulation/public`,
-        children: [],
-      },
-      {
-        label: 'Regulasi Lingkungan',
-        link: `${baseUrl}/regulation/enviroment`,
-        children: [],
-      },
-    ],
-  },
-  {
-    label: 'Permohonan Masuk',
-    link: `${baseUrl}/admission-application`,
-    children: [
-      {
-        label: 'Permohonan Informasi Publik',
-        link: `${baseUrl}/admission-application/information-public`,
-        children: [],
-      },
-      {
-        label: 'Permohonan Objection Informasi Publik',
-        link: `${baseUrl}/admission-application/objections-public`,
-        children: [],
-      },
-    ],
-  },
-  {
-    label: 'Konten Publik',
-    link: `${baseUrl}/public-content`,
-    children: [
-      {
-        label: 'Berita',
-        link: `${baseUrl}/public-content/news`,
-      },
-      {
-        label: 'Infografis',
-        link: `${baseUrl}/public-content/infographics`,
-      },
-      {
-        label: 'Pintasan',
-        link: `${baseUrl}/public-content/shortcut`,
-      },
-      {
-        label: 'Tata Cara Permohonan',
-        link: `${baseUrl}/public-content/application-procedures`,
-      },
-    ],
-  },
-  {
-    label: 'Laporan',
-    link: `${baseUrl}/reports`,
-    children: [
-      {
-        label: 'Laporan Akses Informasi Publik',
-        link: `${baseUrl}/reports/access`,
 
-        children: [],
-      },
-      {
-        label: 'Laporan Layanan Informasi Publik',
-        link: `${baseUrl}/reports/services`,
+export type MenuItem = {
+  label: string
+  link: string
+  children?: MenuItem[]
+}
 
-        children: [],
-      },
-      {
-        label: 'Laporan Survei Layanan Informasi Publik',
-        link: `${baseUrl}/reports/survey`,
+const normalizeLink = (link?: string) => {
+  if (!link || link === '/' || link === baseUrl) return ''
+  return link.startsWith(baseUrl) ? link : `${baseUrl}${link}`
+}
 
-        children: [],
-      },
-    ],
-  },
-  {
-    label: 'Pengaturan',
-    link: `${baseUrl}/settings`,
-    children: [
-      {
-        label: 'Landing Page',
-        link: `${baseUrl}/settings/landing-page`,
-      },
-      {
-        label: 'Video',
-        link: `${baseUrl}/settings/video`,
-      },
-      {
-        label: 'Pengaturan Warna',
-        link: `${baseUrl}/settings/warna`,
-      },
-      {
-        label: 'Pengaturan Template',
-        link: `${baseUrl}/settings/template`,
-      },
-      {
-        label: 'Pengaturan Background',
-        link: `${baseUrl}/settings/background`,
-      },
-    ],
-  },
-]
+const mapMenus = (items: IMenuItem[]): MenuItem[] =>
+  items.map((item) => ({
+    label: item.label,
+    link: normalizeLink(item.link),
+    children: item.children?.length ? mapMenus(item.children) : undefined,
+  }))
+
+export const useHeaderMenus = () => {
+  const module: IModulesList = JSON.parse(window.localStorage.getItem('module') || '{}')
+  const { menu } = UseGetMenus(module.id_module)
+  return menu ? mapMenus(menu) : []
+}
+
 export const HeaderMenu = () => {
   const location = useLocation()
   const pathname = location.pathname
+  const menus = useHeaderMenus()
   function isActive(link: string) {
-    if (pathname.includes(link)) {
+    if (link && pathname.includes(link)) {
       return 'border-b rounded-b-none border-white data-[state=open]:rounded-b-sm!'
     }
   }
@@ -188,7 +52,7 @@ export const HeaderMenu = () => {
       <div className="bg-white shadow drop-shadow py-1.5">
         <div className={'max-w-7xl px-4 mx-auto'}>
           <Menubar className={'border-none  group  hidden lg:flex bg-transparent shadow-none p-0'}>
-            {Menus.map((menu, i) => (
+            {menus.map((menu, i) => (
               <MenubarMenu key={i}>
                 {menu?.children ? (
                   <MenubarTrigger className={isActive(menu.link)}>
