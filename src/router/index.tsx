@@ -19,16 +19,17 @@ import { SPI_ROUTES } from '@/router/SPI'
 import { PMB_ROUTES } from '@/router/pmb'
 import { E_OFFICE_ROUTE } from '@/router/E-Office'
 import { SIMRSROUTES } from '@/router/SIM-RS'
+
 const LoginSimRsView = lazy(() => import('@/pages/modules/SIM-RS/component/login'))
-const ForgetPasswordSIMRSView = lazy(() =>
-  import('@/pages/modules/SIM-RS/component/login/forget-password/ForgetPasswordSIMRSView')
+const ForgetPasswordSIMRSView = lazy(
+  () => import('@/pages/modules/SIM-RS/component/login/forget-password/ForgetPasswordSIMRSView')
 )
 const OtpSIMRSView = lazy(() => import('@/pages/modules/SIM-RS/component/login/otp/OtpSIMRSView'))
-const SuccessSIMRSView = lazy(() =>
-  import('@/pages/modules/SIM-RS/component/login/success/SuccessSIMRSView')
+const SuccessSIMRSView = lazy(
+  () => import('@/pages/modules/SIM-RS/component/login/success/SuccessSIMRSView')
 )
-const ChangePasswordSIMRSView = lazy(() =>
-  import('@/pages/modules/SIM-RS/component/login/change-password/ChangePasswordSIMRSView')
+const ChangePasswordSIMRSView = lazy(
+  () => import('@/pages/modules/SIM-RS/component/login/change-password/ChangePasswordSIMRSView')
 )
 
 const LoginView = lazy(() => import('@/pages/login/LoginView'))
@@ -46,6 +47,7 @@ const SimRSColor = lazy(() => import('@/pages/modules/SIM-RS/component/layout/th
 
 // ── Lazy: semua komponen modules ──
 const ModulesView = lazy(() => import('@/pages/modules/ModulesView'))
+const MaintenancePage = lazy(() => import('@/pages/modules/MaintenancePage'))
 const LayoutSetting = lazy(() => import('@/pages/modules/settings/components/layout/LayoutSetting'))
 const SelectUniversity = lazy(() =>
   import('@/pages/modules/website-utama/select-university').then((m) => ({
@@ -384,6 +386,11 @@ export const Router = createBrowserRouter([
           </SimRSColor>
         ),
         children: [...SIMRSROUTES],
+      },
+
+      {
+        path: '*',
+        element: <MaintenancePage />,
       },
     ],
   },
