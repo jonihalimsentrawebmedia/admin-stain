@@ -28,7 +28,7 @@ const FacultyView = () => {
         meta={meta}
         isShowChoiceColumn
         tdClassName='whitespace-pre-line'
-        thClassName='whitespace-pre-line'
+        thClassName='whitespace-no-wrap lg:whitespace-pre-line'
       />
     </div>
   );

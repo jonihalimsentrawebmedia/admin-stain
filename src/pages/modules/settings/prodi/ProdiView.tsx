@@ -11,7 +11,7 @@ const ProdiView = () => {
   })
   const { satuanOrganisasi: fakultas } = useGetSatuanOrganisasi({
     kelompok: 'FAKULTAS',
-    isFilter:true
+    isFilter: true,
   })
   return (
     <div className="flex flex-col gap-4">
@@ -44,8 +44,8 @@ const ProdiView = () => {
         loading={loading}
         meta={meta}
         isShowChoiceColumn
-        tdClassName='whitespace-pre-line'
-        thClassName='whitespace-pre-line'
+        tdClassName="lg:whitespace-pre-line whitespace-no-wrap"
+        thClassName="whitespace-pre-line"
       />
     </div>
   )
